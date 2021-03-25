@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<directory order="11">
+  <name lang="en">Experimental</name>
+  <name lang="zh">实验性</name>
+  <name lang="ru">экспериментальный</name>
+  <name lang="de">Experimentell</name>
+  <summary lang="en">The folder "Experimental" contains templates that show components in experimental state.</summary>
+  <summary lang="zh">文件夹“实验”包含显示处于实验状态的组件的模板。</summary>
+  <summary lang="ru">В папке «Experimental» содержатся шаблоны, показывающие компоненты в экспериментальном состоянии.</summary>
+  <summary lang="de">Das Verzeichnis "Experimentell" enthält Vorlagen mit Komponenten im experimentellen Stadium.</summary>
+  <icon file="dir.png" />
+</directory>

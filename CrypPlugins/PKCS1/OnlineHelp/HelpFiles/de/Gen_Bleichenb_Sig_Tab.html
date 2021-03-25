@@ -1,0 +1,44 @@
+﻿<h2>Bleichenbacher-Signatur generieren</h2>
+In diesem Tab wird eine gefälschte Signatur generiert, die in ver- und entschlüsselter Form dargestellt wird. 
+Eine Signatur, die von fehlerhaften Implementierungen als valide erkannt wird, hat folgende Struktur: 
+'00' '01' PS '00' HI HD GG. </br>
+Im Einzelnen bedeutet dies:
+<ul>
+<li>
+<strong>'00'</strong> 
+Einleitender Nullblock (8 Bit). Dadurch wird gewährleistet dass, der numerische Wert der Signatur kleiner ist als das 
+<a href="help://KeyGen_ModulusSize">RSA-Modul.</a>
+</li>
+<li>
+<strong>'01'</strong>
+Block Type. Dieser Block gibt an, ob es sich um eine Operation mit dem privaten oder öffentlichen Schlüssel handelt. 
+Da bei Signaturerzeugung der private Schlüssel benutzt wird, ist dieser Wert '01' (hexadezimale Darstellung: 0x01).
+</li>
+<li>
+<strong>PS</strong>
+Paddingstring. Der Paddingstring besteht aus einer Anzahl von Blöcken mit dem Wert 'FF' (hexadezimal 0xff). Bei einer
+gefälschten Signatur nach der Bleichenbacher Methode, ist die Länge des Paddingstring kürzer als bei korrekt generierten 
+PKCS#1-Signaturen. Die Position des Datenblocks und damit die Länge des Paddingstring kann in diesem Tab variiert werden,
+indem in der ComboBox "Bitposition des Datenblocks" die Startposition (in Bit) gewählt wird.
+</li>
+<li>
+<strong>'00'</strong>
+Nullblock. Dieser Block markiert das Ende des Paddingstrings und den Anfang des Datenblocks.
+</li>
+<li>
+<strong>HI</strong>
+Hash-Identifier. Der erste Teil des <a href="help://Gen_Datablock_Tab">Datenblock</a>. Hier sind Informationen wie z.B. der verwendete 
+Hashfunktion in ASN.1-codierter Form enthalten.
+</li>
+<li>
+<strong>HD</strong>
+Hashdigest (Hashwert). In dem zweiten Teil des <a href="help://Gen_Datablock_Tab">Datenblock</a> ist der generierte Hashwert enthalten.
+</li>
+<li>
+<strong>GG</strong>
+Garbage. In dem letzten Block der gefälschten Signatur steht "Datenmüll". Dies ist nötig, damit die Länge der gefälschten
+Signatur der einer korrekt generierten Signatur entspricht. Dieser "Datenmüll" wird so berechnet, dass die dritte Wurzel
+gezogen werden kann.
+</li>
+
+</ul>

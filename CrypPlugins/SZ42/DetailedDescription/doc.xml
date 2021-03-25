@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+  </introduction>
+
+  <introduction lang="de-DE">
+  </introduction>
+
+  <usage lang="en">
+  </usage>
+
+  <usage lang="de-DE">
+  </usage>
+
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Lorenz_cipher" lang="en" />
+      <caption lang="en">Lorenz in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Lorenz-Schl%C3%BCsselmaschine" lang="de-DE" />
+      <caption lang="de-DE">Lorenz in Wikipedia</caption>
+    </linkReference>
+  </references>
+  
+</documentation>

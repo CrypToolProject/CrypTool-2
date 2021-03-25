@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Текст ввода</value>
+  </data>
+  <data name="InputTextDescription" xml:space="preserve">
+    <value>Введите строку, обрабатываемую машиной Fialka.</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Текст вывода</value>
+  </data>
+  <data name="OutputTextDescription" xml:space="preserve">
+    <value>Выведите строку, обрабатываемую машиной Fialka.</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Fialka</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Полиалафитная роторно-шифровая машина</value>
+  </data>
+  <data name="RotorCoreOffsetSelection" xml:space="preserve">
+    <value>Корректные смещения</value>
+  </data>
+  <data name="RotorCoreSelection" xml:space="preserve">
+    <value>Основной порядок</value>
+  </data>
+  <data name="RotorCoreSideSelection" xml:space="preserve">
+    <value>Боковые стороны</value>
+  </data>
+  <data name="RotorOffsetSelection" xml:space="preserve">
+    <value>Смещение ротора</value>
+  </data>
+  <data name="RotorOrderSelection" xml:space="preserve">
+    <value>Порядок ротора</value>
+  </data>
+  <data name="SelectMachineCountryLayoutCaption" xml:space="preserve">
+    <value>План страны</value>
+  </data>
+  <data name="SelectMachineCountryLayoutTooltip" xml:space="preserve">
+    <value>Выберите макет страны.</value>
+  </data>
+  <data name="SelectMachineKeyboardMappingCaption" xml:space="preserve">
+    <value>Отображение клавиатуры</value>
+  </data>
+  <data name="SelectMachineKeyboardMappingTooltip" xml:space="preserve">
+    <value>Выберите отображение клавиатуры.</value>
+  </data>
+  <data name="SelectMachineModelCaption" xml:space="preserve">
+    <value>Fialka model</value>
+  </data>
+  <data name="SelectMachineModelTooltip" xml:space="preserve">
+    <value>Выберите тип модели машины.</value>
+  </data>
+  <data name="SelectMachineNumLockTypeCaption" xml:space="preserve">
+    <value>NumLock</value>
+  </data>
+  <data name="SelectMachineNumLockTypeTooltip" xml:space="preserve">
+    <value>Выберите тип NumLock.</value>
+  </data>
+  <data name="SelectMachineOperationModeCaption" xml:space="preserve">
+    <value>Режим работы</value>
+  </data>
+  <data name="SelectMachineOperationModeTooltip" xml:space="preserve">
+    <value>Выберите режим работы.</value>
+  </data>
+  <data name="SelectMachinePrintHeadMappingCaption" xml:space="preserve">
+    <value>Отображение печатающей головки</value>
+  </data>
+  <data name="SelectMachinePrintHeadMappingTooltip" xml:space="preserve">
+    <value>Выберите отображение печатающей головки.</value>
+  </data>
+  <data name="SelectRotorSeriesCaption" xml:space="preserve">
+    <value>Серия роторов</value>
+  </data>
+  <data name="SelectRotorSeriesTooltip" xml:space="preserve">
+    <value>Выберите серийный роторный ряд.</value>
+  </data>
+  <data name="SelectRotorTypesCaption" xml:space="preserve">
+    <value>Тип ротора</value>
+  </data>
+  <data name="SelectRotorTypesTooltip" xml:space="preserve">
+    <value>Выберите тип ротора.</value>
+  </data>
+  <data name="PunchCard" xml:space="preserve">
+    <value>Перфокарта</value>
+  </data>
+  <data name="RotorRingOffsetSelection" xml:space="preserve">
+    <value>Кольцевые смещения</value>
+  </data>
+  <data name="MachineSettings" xml:space="preserve">
+    <value>Настройки машины Fialka</value>
+  </data>
+  <data name="SelectMachineTxtOpModeCaption" xml:space="preserve">
+    <value>Режим работы текста</value>
+  </data>
+  <data name="SelectMachineTxtOpModeTooltip" xml:space="preserve">
+    <value>Выберите режим работы текста для машины M-125-3.</value>
+  </data>
+  <data name="SettingsRestoreCaption" xml:space="preserve">
+    <value>Восстановить начальный ключ</value>
+  </data>
+  <data name="SettingsRestoreTooltip" xml:space="preserve">
+    <value>Когда в рабочем процессе будет восстановлен исходный ключ (установленный до шифрования).</value>
+  </data>
+  <data name="Rotor1Caption" xml:space="preserve">
+    <value>R01</value>
+  </data>
+  <data name="SelectRotor1OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 1.</value>
+  </data>
+  <data name="SelectRotor1OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положение 1.</value>
+  </data>
+  <data name="SelectRotorCore1Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 1 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor1CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону ядра 1.</value>
+  </data>
+  <data name="SelectRotor1CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение сердечника 1.</value>
+  </data>
+  <data name="RotorRing1OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 1.</value>
+  </data>
+  <data name="Rotor2Caption" xml:space="preserve">
+    <value>R02</value>
+  </data>
+  <data name="SelectRotor2OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 2.</value>
+  </data>
+  <data name="SelectRotor2OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 2.</value>
+  </data>
+  <data name="SelectRotorCore2Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 2 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor2CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону сердечника 2.</value>
+  </data>
+  <data name="SelectRotor2CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение сердечника 2.</value>
+  </data>
+  <data name="RotorRing2OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 2.</value>
+  </data>
+  <data name="Rotor3Caption" xml:space="preserve">
+    <value>R03</value>
+  </data>
+  <data name="SelectRotor3OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 3.</value>
+  </data>
+  <data name="SelectRotor3OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 3.</value>
+  </data>
+  <data name="SelectRotorCore3Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 3 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor3CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону сердечника 3.</value>
+  </data>
+  <data name="SelectRotor3CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение сердечника 3.</value>
+  </data>
+  <data name="RotorRing3OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 3.</value>
+  </data>
+  <data name="Rotor4Caption" xml:space="preserve">
+    <value>R04</value>
+  </data>
+  <data name="SelectRotor4OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 4.</value>
+  </data>
+  <data name="SelectRotor4OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 4.</value>
+  </data>
+  <data name="SelectRotorCore4Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 4 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor4CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону ядра 4.</value>
+  </data>
+  <data name="SelectRotor4CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ядра 4.</value>
+  </data>
+  <data name="RotorRing4OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 4.</value>
+  </data>
+  <data name="Rotor5Caption" xml:space="preserve">
+    <value>R05</value>
+  </data>
+  <data name="SelectRotor5OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 5.</value>
+  </data>
+  <data name="SelectRotor5OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 5.</value>
+  </data>
+  <data name="SelectRotorCore5Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 5 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor5CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону сердечника 5.</value>
+  </data>
+  <data name="SelectRotor5CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение сердечника 5.</value>
+  </data>
+  <data name="RotorRing5OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 5.</value>
+  </data>
+  <data name="Rotor6Caption" xml:space="preserve">
+    <value>R06</value>
+  </data>
+  <data name="SelectRotor6OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 6.</value>
+  </data>
+  <data name="SelectRotor6OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 6.</value>
+  </data>
+  <data name="SelectRotorCore6Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 6 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor6CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону ядра 6.</value>
+  </data>
+  <data name="SelectRotor6CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ядра 6.</value>
+  </data>
+  <data name="RotorRing6OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 6.</value>
+  </data>
+  <data name="Rotor7Caption" xml:space="preserve">
+    <value>R07</value>
+  </data>
+  <data name="SelectRotor7OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 7.</value>
+  </data>
+  <data name="SelectRotor7OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положение 7.</value>
+  </data>
+  <data name="SelectRotorCore7Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 7 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor7CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону ядра 7.</value>
+  </data>
+  <data name="SelectRotor7CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ядра 7.</value>
+  </data>
+  <data name="RotorRing7OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 7.</value>
+  </data>
+  <data name="Rotor8Caption" xml:space="preserve">
+    <value>R08</value>
+  </data>
+  <data name="SelectRotor8OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 8.</value>
+  </data>
+  <data name="SelectRotor8OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 8.</value>
+  </data>
+  <data name="SelectRotorCore8Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 8 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor8CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону сердечника 8.</value>
+  </data>
+  <data name="SelectRotor8CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ядра 8.</value>
+  </data>
+  <data name="RotorRing8OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 8.</value>
+  </data>
+  <data name="Rotor9Caption" xml:space="preserve">
+    <value>R09</value>
+  </data>
+  <data name="SelectRotor9OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 9.</value>
+  </data>
+  <data name="SelectRotor9OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 9.</value>
+  </data>
+  <data name="SelectRotorCore9Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 9 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor9CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону ядра 9.</value>
+  </data>
+  <data name="SelectRotor9CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ядра 9.</value>
+  </data>
+  <data name="RotorRing9OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 9.</value>
+  </data>
+  <data name="Rotor10Caption" xml:space="preserve">
+    <value>R10</value>
+  </data>
+  <data name="SelectRotor10OrderTooltip" xml:space="preserve">
+    <value>Выберите порядок (положение в барабане слева) ротора 10.</value>
+  </data>
+  <data name="SelectRotor10OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ротора в положении 10.</value>
+  </data>
+  <data name="SelectRotorCore10Tooltip" xml:space="preserve">
+    <value>Выберите положение сердечника 10 (положение в роторах в барабане).</value>
+  </data>
+  <data name="SelectRotor10CoreSideTooltip" xml:space="preserve">
+    <value>Выберите сторону ядра 10.</value>
+  </data>
+  <data name="SelectRotor10CoreOffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение ядра 10.</value>
+  </data>
+  <data name="RotorRing10OffsetTooltip" xml:space="preserve">
+    <value>Выберите смещение кольца ротора в положении 10.</value>
+  </data>
+  <data name="PunchCard1Caption" xml:space="preserve">
+    <value>01</value>
+  </data>
+  <data name="PunchCard1Tooltip" xml:space="preserve">
+    <value>Перфорирование карты контакта 1.</value>
+  </data>
+  <data name="PunchCard2Caption" xml:space="preserve">
+    <value>02</value>
+  </data>
+  <data name="PunchCard2Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 2.</value>
+  </data>
+  <data name="PunchCard3Caption" xml:space="preserve">
+    <value>03</value>
+  </data>
+  <data name="PunchCard3Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 3.</value>
+  </data>
+  <data name="PunchCard4Caption" xml:space="preserve">
+    <value>04</value>
+  </data>
+  <data name="PunchCard4Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 4.</value>
+  </data>
+  <data name="PunchCard5Caption" xml:space="preserve">
+    <value>05</value>
+  </data>
+  <data name="PunchCard5Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 5.</value>
+  </data>
+  <data name="PunchCard6Caption" xml:space="preserve">
+    <value>06</value>
+  </data>
+  <data name="PunchCard6Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 6.</value>
+  </data>
+  <data name="PunchCard7Caption" xml:space="preserve">
+    <value>07</value>
+  </data>
+  <data name="PunchCard7Tooltip" xml:space="preserve">
+    <value>Перфорирование карты контакта 7.</value>
+  </data>
+  <data name="PunchCard8Caption" xml:space="preserve">
+    <value>08</value>
+  </data>
+  <data name="PunchCard8Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 8.</value>
+  </data>
+  <data name="PunchCard9Caption" xml:space="preserve">
+    <value>09</value>
+  </data>
+  <data name="PunchCard9Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 9.</value>
+  </data>
+  <data name="PunchCard10Caption" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="PunchCard10Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 10.</value>
+  </data>
+  <data name="PunchCard11Caption" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="PunchCard11Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 11.</value>
+  </data>
+  <data name="PunchCard12Caption" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="PunchCard12Tooltip" xml:space="preserve">
+    <value>Перфорирование карты контакта 12.</value>
+  </data>
+  <data name="PunchCard13Caption" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="PunchCard13Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 13.</value>
+  </data>
+  <data name="PunchCard14Caption" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="PunchCard14Tooltip" xml:space="preserve">
+    <value>Перфорирование карты контакта 14.</value>
+  </data>
+  <data name="PunchCard15Caption" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="PunchCard15Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 15.</value>
+  </data>
+  <data name="PunchCard16Caption" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="PunchCard16Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 16.</value>
+  </data>
+  <data name="PunchCard17Caption" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="PunchCard17Tooltip" xml:space="preserve">
+    <value>Перфорирование карты контакта 17.</value>
+  </data>
+  <data name="PunchCard18Caption" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="PunchCard18Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 18.</value>
+  </data>
+  <data name="PunchCard19Caption" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="PunchCard19Tooltip" xml:space="preserve">
+    <value>Отображение перфокарты контакта 19.</value>
+  </data>
+  <data name="PunchCard20Caption" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="PunchCard20Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 20.</value>
+  </data>
+  <data name="PunchCard21Caption" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="PunchCard21Tooltip" xml:space="preserve">
+    <value>Отображение перфокарты контакта 21.</value>
+  </data>
+  <data name="PunchCard22Caption" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="PunchCard22Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 22.</value>
+  </data>
+  <data name="PunchCard23Caption" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="PunchCard23Tooltip" xml:space="preserve">
+    <value>Перфорирование карты контакта 23.</value>
+  </data>
+  <data name="PunchCard24Caption" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="PunchCard24Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 24.</value>
+  </data>
+  <data name="PunchCard25Caption" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="PunchCard25Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 25.</value>
+  </data>
+  <data name="PunchCard26Caption" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="PunchCard26Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 26.</value>
+  </data>
+  <data name="PunchCard27Caption" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="PunchCard27Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 27.</value>
+  </data>
+  <data name="PunchCard28Caption" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="PunchCard28Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 28.</value>
+  </data>
+  <data name="PunchCard29Caption" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="PunchCard29Tooltip" xml:space="preserve">
+    <value>Отображение карты перфорации контакта 29.</value>
+  </data>
+  <data name="PunchCard30Caption" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="PunchCard30Tooltip" xml:space="preserve">
+    <value>Перфорирование карты контакта 30.</value>
+  </data>
+  <data name="ResetPunchCardCaption" xml:space="preserve">
+    <value>Установить личность</value>
+  </data>
+  <data name="ResetPunchCardTooltip" xml:space="preserve">
+    <value>Сбросьте замену перфокарты на личность (установите треугольник).</value>
+  </data>
+  <data name="ResetRotorCoreOffsetCaption" xml:space="preserve">
+    <value>Нулевые смещения</value>
+  </data>
+  <data name="ResetRotorCoreOffsetTooltip" xml:space="preserve">
+    <value>Установите смещения сердечника ротора на 0.</value>
+  </data>
+  <data name="ResetRotorCoreOrderCaption" xml:space="preserve">
+    <value>Базовые позиции</value>
+  </data>
+  <data name="ResetRotorCoreOrderTooltip" xml:space="preserve">
+    <value>Закажите сердечники в базовые положения.</value>
+  </data>
+  <data name="ResetRotorCoreSidesCaption" xml:space="preserve">
+    <value>Глубокие боковые стороны</value>
+  </data>
+  <data name="ResetRotorCoreSidesTooltip" xml:space="preserve">
+    <value>Установите для сторон ядра значения по умолчанию (сторона 1).</value>
+  </data>
+  <data name="ResetRotorOffsetBaseCaption" xml:space="preserve">
+    <value>Базовые позиции</value>
+  </data>
+  <data name="ResetRotorOffsetBaseTooltip" xml:space="preserve">
+    <value>Установите смещения ротора в базовое положение.</value>
+  </data>
+  <data name="ResetRotorOffsetNullCaption" xml:space="preserve">
+    <value>Нулевые смещения</value>
+  </data>
+  <data name="ResetRotorOffsetNullTooltip" xml:space="preserve">
+    <value>Установите смещения ротора на 0.</value>
+  </data>
+  <data name="ResetRotorOrderCaption" xml:space="preserve">
+    <value>Базовые позиции</value>
+  </data>
+  <data name="ResetRotorOrderTooltip" xml:space="preserve">
+    <value>Закажите роторы в базовые положения.</value>
+  </data>
+  <data name="SettingsInputhandlerCaption" xml:space="preserve">
+    <value>Обработка ввода</value>
+  </data>
+  <data name="SettingsInputhandlerTooltip" xml:space="preserve">
+    <value>Как будет обрабатываться недопустимый ввод?</value>
+  </data>
+  <data name="SettingsOutputUpdateCaption" xml:space="preserve">
+    <value>Обновление вывода</value>
+  </data>
+  <data name="SettingsOutputUpdateTooltip" xml:space="preserve">
+    <value>Выберите, когда выход будет обновлен.</value>
+  </data>
+  <data name="VisibilityCaption" xml:space="preserve">
+    <value>Скрыть настройки</value>
+  </data>
+  <data name="VisibilityTooltip" xml:space="preserve">
+    <value>Показать / скрыть элементы в этой группе.</value>
+  </data>
+  <data name="OutputKeyCaption" xml:space="preserve">
+    <value>ключ</value>
+  </data>
+  <data name="OutputKeyDescription" xml:space="preserve">
+    <value>Настройки ключа перед завершением шифрования.</value>
+  </data>
+  <data name="CountryLayoutList1" xml:space="preserve">
+    <value>Польша</value>
+  </data>
+  <data name="CountryLayoutList2" xml:space="preserve">
+    <value>ГДР</value>
+  </data>
+  <data name="CountryLayoutList3" xml:space="preserve">
+    <value>Чехословакия</value>
+  </data>
+  <data name="OperationModeList1" xml:space="preserve">
+    <value>Обычная (O)</value>
+  </data>
+  <data name="OperationModeList2" xml:space="preserve">
+    <value>Шифрование (3)</value>
+  </data>
+  <data name="OperationModeList3" xml:space="preserve">
+    <value>Расшифровать (P)</value>
+  </data>
+  <data name="PrintHeadMappingList1" xml:space="preserve">
+    <value>Кириллица (PУC)</value>
+  </data>
+  <data name="PrintHeadMappingList2" xml:space="preserve">
+    <value>Латинский (ЛАТ)</value>
+  </data>
+  <data name="SettingsInputhandlerList1" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="SettingsInputhandlerList2" xml:space="preserve">
+    <value>Отметьте с помощью @</value>
+  </data>
+  <data name="SettingsInputhandlerList3" xml:space="preserve">
+    <value>Не менять</value>
+  </data>
+  <data name="SettingsRestoreList1" xml:space="preserve">
+    <value>После выполнения</value>
+  </data>
+  <data name="SettingsRestoreList2" xml:space="preserve">
+    <value>Стоп нажат</value>
+  </data>
+  <data name="SettingsRestoreList3" xml:space="preserve">
+    <value>Вход изменен</value>
+  </data>
+  <data name="SettingsRestoreList4" xml:space="preserve">
+    <value>Никогда</value>
+  </data>
+  <data name="TextOperationModeList1" xml:space="preserve">
+    <value>Письма (Б)</value>
+  </data>
+  <data name="TextOperationModeList2" xml:space="preserve">
+    <value>Смешанный (C)</value>
+  </data>
+  <data name="TextOperationModeList3" xml:space="preserve">
+    <value>Числа (Ц)</value>
+  </data>
+</root>

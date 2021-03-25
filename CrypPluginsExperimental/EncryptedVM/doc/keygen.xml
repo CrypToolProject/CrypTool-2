@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    A virtual machine, which allows to execute encrypted software, qualifies for secret program execution.<newline />
+    If a user wants to get his program executed by a third party without revealing the input, output or the program itself, he can achieve that by encrypting his program (this only works for batch programs without later user interaction). The requirement of not knowing the input or output is not a mandatory one.
+    In both cases the third party receives the encrypted program, which can be executed using the virtual machine. The encrypted result will then be returned to the user.<newline />
+    To be able to execute an encrypted program, homomorphic encryption is used.<newline />
+    The process of executing a program can be described as follows:
+    <enum><item><b>Generate keys</b></item><item>Assemble and encrypt program code into machine code <!-- (<docRef item="CrypTool.Plugins.EncryptedVMAssembler"/>) --></item><item>Execute the machine code  <!-- (<docRef item="CrypTool.Plugins.EncryptedVMMachine"/>) --></item><item>Decrypt and interpret the result  <!-- (<docRef item="CrypTool.Plugins.EncryptedVMMemoryDisplay"/>) --></item></enum>
+	All these steps are available by using plugins in <i>CrypTool 2</i>.<newline />
+	The used virtual machine is based on <i>ShapeCPU</i> and works in conjunction with <i>SEAL</i> (Simple Encrypted Arithmetic Library), which implements the Fan-Vercauteren homomorphic cryptosystem.
+	
+	<section headline="Key Generator">
+	  The <i>Key Generator</i> generates the public, the private and the evaluation keys. The public key is used to encrypt a program, the evaluation keys to evaluate a program and the secret key to decrypt the result of a program.
+	  It also supplies the encryption parameters.
+	</section></introduction>
+  <introduction lang="zh-CN">允许执行加密软件的虚拟机有资格执行秘密程序。如果用户希望在不泄露输入，输出或程序本身的情况下让第三方执行其程序，则可以通过对其程序进行加密来实现这一点（这仅适用于批处理程序，而无需以后的用户交互）。不知道输入或输出的要求不是强制性的。在这两种情况下，第三方都会接收加密的程序，该程序可以使用虚拟机执行。然后，加密的结果将返回给用户。为了能够执行加密程序，使用了同态加密。执行程序的过程如下：生成密钥将程序代码组装并加密为机器代码执行机器代码解密并解释结果所有这些步骤都可以通过使用CrypTool 2中的插件来使用。使用的虚拟机基于ShapeCPU并与SEAL（简单加密算法库）配合使用，后者实现了Fan-Vercauteren同态密码系统。密钥生成器生成公用密钥，专用密钥和评估密钥。公共密钥用于加密程序，评估密钥用于评估程序，秘密密钥用于解密程序的结果。它还提供加密参数。</introduction>
+  <introduction lang="ru">Виртуальная машина, которая позволяет выполнять зашифрованное программное обеспечение, подходит для выполнения секретной программы. Если пользователь хочет получить свою программу, выполненную третьей стороной, не раскрывая ввод, вывод или сама программа, он может добиться этого, зашифровав свою программу (это работает только для пакетных программ без последующего взаимодействия с пользователем). Требование не знать ввод или вывод не является обязательным. В обоих случаях третья сторона получает зашифрованную программу, которая может быть выполнена с использованием виртуальной машины. Зашифрованный результат будет затем возвращен пользователю. Для выполнения зашифрованной программы используется гомоморфное шифрование. Процесс выполнения программы можно описать следующим образом: Генерировать ключиАссортировать и шифровать программный код в машинный код Выполнять машинный код Расшифровывать и интерпретировать результат Все эти шаги доступны с помощью плагинов в CrypTool 2. Используемая виртуальная машина основана на ShapeCPU и работает совместно с SEAL (простая зашифрованная арифметическая библиотека), которая реализует гомоморфную криптосистему Fan-Vercauteren. Генератор ключей генерирует общедоступные, частные и оценочные ключи. Открытый ключ используется для шифрования программы, оценочных ключей для оценки программы и секретного ключа для дешифрования результата программы. Он также предоставляет параметры шифрования.</introduction>
+  <introduction lang="de-DE">
+    Eine verschlüsselt arbeitende virtuelle Maschine erlaubt es, das auszuführende Programm zu verbergen.<newline />
+    Möchte ein Nutzer sein Programm von einer dritten Partei ausführen lassen, ohne dass diese die Eingabe, den Algorithmus oder auch die Ausgabe kennt, so kann er dies durch die Verschlüsselung seines Programms samt Daten erreichen (dies geht nur für Batchprogramme ohne spätere User-Interaktion). Die Forderung nach der Unkenntlichmachung der Eingabe/Ausgabe kann aber auch entfallen.
+    In beiden Fällen erhält die dritte Partei das verschlüsselte Programm und führt es mittels der virtuellen Maschine aus. Das verschlüsselte Ergebnis wird danach an den Nutzer zurückübermittelt.<newline />
+    Die Möglichkeit, ein verschlüsseltes Programm auszuführen, wird durch die Nutzung eines homomorphen Kryptosystems erreicht.<newline />
+    Der Ablauf beim Ausführen eines verschlüsselten Programms sieht wie folgt aus:
+    <enum><item><b>Schlüsselgenerierung</b></item><item>Assemblierung und Verschlüsselung des Programmcodes in Maschinencode <!-- (<docRef item="CrypTool.Plugins.EncryptedVMAssembler"/>) --></item><item>Ausführen des Maschinencodes <!-- (<docRef item="CrypTool.Plugins.EncryptedVMMachine"/>) --></item><item>Entschlüsselung und Interpretation des Ergebnisses <!-- (<docRef item="CrypTool.Plugins.EncryptedVMMemoryDisplay"/>) --></item></enum>
+    Alle diese Schritte sind einzeln als Plugins im <i>CrypTool 2</i> verfügbar.<newline />
+    Die verschlüsselt arbeitende virtuelle Maschine basiert auf <i>ShapeCPU</i> und wird in Kombination mit der Kryptobibliothek <i>SEAL</i> (Simple Encrypted Arithmetic Library), welche die homomorphe Verschlüsselung nach <i>Fan-Vercauteren</i> umsetzt, genutzt.
+
+    <section headline="Schlüsselgenerator">
+	  Der <i>Schlüsselgenerator</i> generiert einen öffentlichen, einen privaten und die Berechnungs-schlüssel. Der öffentliche Schlüssel dient zum Verschlüsseln eines Programms, die Berechnungsschlüssel zur effizienten Verarbeitung eines Programms und der private Schlüssel zum Entschlüsseln des Ergebnisses des Programmes.
+	  Neben den Schlüsseln werden auch die dazugehörigen Verschlüsselungsparamter generiert.
+	</section></introduction>
+  <usage lang="en">
+    <section headline="Output">
+	  The output's are the public, private and evaluation keys as well as the encryption parameters.
+    </section>
+    <section headline="Power of Poly Modulus (Keysize)">
+	  This setting specifies the key size to use for generating the keys.
+    </section>
+    <section headline="Progress bar">
+      <list>
+        <item>0%: Start of the plugin.</item>
+        <item>50%: The optimal encryption parameters have been determined using the key size.</item>
+        <item>100%: The keys are generated.</item>
+      </list>
+    </section>
+  </usage>
+  <usage lang="zh-CN">输出是公共，私有和评估密钥以及加密参数。此设置指定用于生成密钥的密钥大小。 0％：插件启动。50％：使用密钥大小确定了最佳加密参数。100％：生成了密钥。</usage>
+  <usage lang="ru">Результатами являются публичные, частные и оценочные ключи, а также параметры шифрования. Этот параметр указывает размер ключа, который будет использоваться для генерации ключей. 0%: начало плагина.50%: оптимальные параметры шифрования определены с использованием размера ключа.100%: сгенерированы ключи.</usage>
+  <usage lang="de-DE">
+    <section headline="Ausgabe">
+	  Die Ausgabe besteht aus dem generierten Schlüsselpaar (ein öffentlicher und ein privater Schlüssel) sowie den Berechnungs-schlüsseln und den Verschlüsselungsparametern.
+    </section>
+    <section headline="Grad des Poly-Modulos (Schlüsselgröße)">
+	  Gibt die Schlüsselgröße zum Generieren der Schlüssel an.
+    </section>
+    <section headline="Fortschrittsanzeige">
+      <list>
+        <item>0%: Start des Plugins.</item>
+        <item>50%: Die optimalen Verschlüsselungsparamter wurden bestimmt.</item>
+        <item>100%: Die Schlüsselgenerierung ist abgeschlossen.</item>
+      </list>
+    </section>
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://en.wikipedia.org/wiki/Homomorphic_encryption" lang="en" />
+      <caption lang="en">Homomorphic encryption (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Homomorphe_Verschlüsselung" lang="de-DE" />
+      <caption lang="de-DE">Homomorphe Verschlüsselung (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://shapecpu.de/shape-cpu/" />
+      <caption lang="en">ShapeCPU</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://sealcrypto.codeplex.com/" />
+      <caption lang="en">Simple Encrypted Arithmetic Library (SEAL)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://eprint.iacr.org/2012/144" />
+      <caption lang="en">Somewhat Practical Fully Homomorphic Encryption (Fan-Vercauteren)</caption>
+    </linkReference>
+  </references>
+</documentation>

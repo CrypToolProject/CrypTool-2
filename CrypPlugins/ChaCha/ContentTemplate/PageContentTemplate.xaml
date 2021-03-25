@@ -1,0 +1,42 @@
+﻿<ResourceDictionary x:Class="CrypTool.Plugins.ChaCha.ContentTemplate.PageContentTemplate"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:conv="clr-namespace:CrypTool.Plugins.ChaCha.Helper.Converter">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="..\Styles\Index.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <BooleanToVisibilityConverter x:Key="FalseToCollapsed" />
+    <conv:SubtractOne x:Key="SubtractOne" />
+    <ControlTemplate x:Key="PageContentTemplate" TargetType="{x:Type ContentControl}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90*" />
+                <RowDefinition Height="5*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <ContentPresenter />
+            </Grid>
+            <Grid Grid.Row="1">
+                <Viewbox Style="{StaticResource UniformViewbox}">
+                    <StackPanel  Orientation="Horizontal" Visibility="{Binding HasActions, Converter={StaticResource FalseToCollapsed}, FallbackValue={x:Static Visibility.Collapsed}}">
+                        <Button Command="{Binding PrevActionCommand}" Style="{StaticResource PrevButton}" />
+                        <Slider
+                            Margin="3,0,3,0"
+                            VerticalAlignment="Center"
+                            Minimum="0"
+                            Maximum="{Binding TotalActions, Converter={StaticResource SubtractOne}}"
+                            Width="1200"
+                            Value="{Binding CurrentActionIndex, Mode=OneWay}"
+                            Name="ActionSlider"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True" />
+                        <Button Command="{Binding NextActionCommand}" Style="{StaticResource NextButton}" />
+                        <TextBox Name="ActionInputTextBox" Style="{StaticResource Input}" Width="{Binding ElementName=TotalActionsText, Path=ActualWidth}" />
+                        <TextBox Style="{StaticResource Text}" Text="/" />
+                        <TextBox Name="TotalActionsText"  Style="{StaticResource Text}" Text="{Binding TotalActions, Mode=OneWay, Converter={StaticResource SubtractOne}}" />
+                    </StackPanel>
+                </Viewbox>
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>

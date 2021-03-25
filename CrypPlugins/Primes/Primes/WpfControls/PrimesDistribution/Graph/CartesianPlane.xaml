@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Primes.WpfControls.PrimesDistribution.Graph.CartesianPlane"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components" VerticalContentAlignment="Stretch">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="tooltiptemplate" x:Name="tooltiptemplatename" TargetType="{x:Type ToolTip}">
+            <Border Name="Border"
+                    BorderThickness="1" CornerRadius="2"
+                    TextBlock.Foreground="Black" TextBlock.TextAlignment="Left" Padding="3"
+                    HorizontalAlignment="Stretch" Background="Red">
+                <ContentPresenter RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+            </Border>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Canvas Name="PaintArea">
+        <Line Name="Ordinate" X1="100" X2="100" Y1="0" Y2="100" Stroke="Black" StrokeThickness="1" />
+        <Line Name="Abscissa" X1="0" X2="200" Y1="50" Y2="50" Stroke="Black" StrokeThickness="1" />
+        <SelectableTextBlock Canvas.Left="47.678" Canvas.Top="0" x:Name="lblOrdinateText">Y</SelectableTextBlock>
+        <SelectableTextBlock Canvas.Left="47.678" Canvas.Top="0" x:Name="lblAbscissaText">X</SelectableTextBlock>
+    </Canvas>
+
+</UserControl>

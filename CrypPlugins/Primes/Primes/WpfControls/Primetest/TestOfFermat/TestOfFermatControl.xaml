@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primetest.TestOfFermat.TestOfFermatControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Name="test">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="7">
+            <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+                <RadioButton Name="rbSingleTest" Margin="5" IsChecked="True" Click="rbTest_Click">Einmaliger Test</RadioButton>
+                <RadioButton Name="rbSystmaticTest" Margin="5" Click="rbTest_Click">Systematischer Test</RadioButton>
+            </DockPanel>
+            <Grid Name="pnlSingle">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Top" Grid.Column="0" Grid.Row="0">a=</Label>
+                <comps:InputSingleControl x:Name="iscA" Grid.Column="1" Grid.Row="0" ShowButtons="False" InputRangeControlType="Horizontal" ShowCalcInput="False" Margin="0,4,0,0" />
+            </Grid>
+            <DockPanel Name="pnlSystematic" Visibility="Collapsed">
+                <SelectableTextBlock Margin="0,5,0,0">Wahl der Basis</SelectableTextBlock>
+                <comps:InputRangeControl x:Name="ircSystematic" ShowButtons="False" InputRangeControlType="Horizontal" ShowCalcInput="False" Title="" />
+            </DockPanel>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Name="lblA" Grid.Column="0" Grid.RowSpan="2">a
+                </Label>
+                <SelectableTextBlock Grid.Column="1" Grid.Row="0" x:Name="lblExp">p-1</SelectableTextBlock>
+                <Label Name="lblMod" Grid.Column="2" Grid.RowSpan="2">mod
+                </Label>
+                <Label Name="lblP" Grid.Column="3" Grid.RowSpan="2">p
+                </Label>
+                <Label Name="lblEquals" Grid.Column="4" Grid.RowSpan="2">=
+                </Label>
+                <SelectableTextBlock Grid.Column="5" Grid.RowSpan="2" VerticalAlignment="Center" x:Name="lblCalc"></SelectableTextBlock>
+            </Grid>
+        </ScrollViewer>
+
+        <TabControl Grid.Row="2" Name="tcStats">
+            <TabItem Name="tabItemGraphic" Header="Grafik">
+                <Grid>
+                    <Canvas Name="PaintArea" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    </Canvas>
+                    <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Canvas.Top="0" Canvas.Left="0" Name="CircleArea" />
+                    <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" Canvas.Top="0" Canvas.Left="0" Name="ArrowArea" />
+                </Grid>
+            </TabItem>
+            <TabItem Name="tabItemLog" Header="Fortschritt">
+                <comps:LogControl x:Name="log" Title="" />
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+
+</UserControl>

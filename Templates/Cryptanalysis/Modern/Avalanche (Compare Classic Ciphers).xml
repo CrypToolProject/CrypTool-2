@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Avalanche (Compare Classic Ciphers)</title>
+  <title lang="zh">雪崩（比较经典密码）</title>
+  <title lang="ru">Лавина (сравните классические шифры)</title>
+  <summary lang="en">This template demonstrates the avalanche effect in two different classic ciphers at the same time.</summary>
+  <summary lang="zh">该模板同时展示了两种不同经典密码的雪崩效应。</summary>
+  <summary lang="ru">Этот шаблон демонстрирует эффект лавины в двух разных классических шифрах одновременно.</summary>
+  <description lang="en">This template shows how the Avalanche Visualization component can be used to demonstrate the avalanche effect of two different classic ciphers at the same time.</description>
+  <description lang="zh">该模板显示了雪崩可视化组件如何可用于同时演示两种不同经典密码的雪崩效应。</description>
+  <description lang="ru">Этот шаблон показывает, как компонент визуализации лавины можно использовать для одновременного демонстрации лавинного эффекта двух разных классических шифров.</description>
+  <keywords>Avalanche, Analysis, compare classic</keywords>
+  <keywords lang="zh">雪崩，分析，比较经典</keywords>
+  <keywords lang="ru">Лавина, анализ, сравнение классических</keywords>
+  <title lang="de">Avalanche (Vergleich klassischer Verschlüsselungsverfahren)</title>
+  <summary lang="de">Diese Vorlage demonstriert den Avalanche-Effekt beim Vergleich von zwei unterschiedlichen klassischen Verschlüsselungsverfahren.</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man mit der Komponente 'Avalanche-Visualisierung' den Avalanche-Effekt beim Vergleich von zwei unterschiedlichen klassischen Verschlüsselungsverfahren demonstrieren kann.</description>
+  <keywords lang="de">Avalanche, Analyse, Vergleich klassisch</keywords>
+  <icon file="Avalanche.PNG" />
+  <relevantPlugins>
+    <plugin name="AvalancheVisualization" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Avalanche Visualization$" value="Avalanche-Visualisierung" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Spanish Strip Cipher$" value="Spanische Strip-Chiffre" />
+    <replacement key="$Generated Data$" value="Generierte Daten" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$Memo$" value="Diese Vorlage zeigt den Avalanche-Effekt von zwei unterschiedlichen klassischen Verschlüsselungsverfahren.\line\line Nach dem Drücken von “Starten” drücken Sie zunächst auf “Weiter” in jeder der zwei AV-Komponenten. Anschließend können Sie Veränderungen an der Klartext- und/oder der Schlüssel-Komponente vornehmen. Die Unterschiede zwischen beiden Geheimtexten hinsichtlich des Avalanche-Effekts und die dazugehörigen statistischen Daten werden durch die entsprechenden AV-Komponenten gezeigt.\line Anmerkung: In dieser Vorlage benutzt die Spanische Strip-Chiffre das deterministische Verfahren Round Robin, um die Homophone auszuwählen." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Avalanche Visualization$" value="雪崩可视化" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Spanish Strip Cipher$" value="西班牙带状密码" />
+    <replacement key="$Generated Data$" value="产生的数据" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$Memo$" value="此模板显示了两种不同的经典加密方法的雪崩效果：\Line \line在按下“开始”之后，首先在两个AV组件的每一个中都按下“下一步”。然后，您可以更改纯文本和/或关键组件。两个雪文在雪崩效应和相关统计数据方面的差异由相应的AV分量表示。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Avalanche Visualization$" value="Avalanche визуализация" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Spanish Strip Cipher$" value="Испанский шифр" />
+    <replacement key="$Generated Data$" value="Сгенерированные данные" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$Memo$" value="Этот шаблон показывает эффект лавины двух разных классических методов шифрования. \Line \line После нажатия «Пуск» сначала нажмите «Далее» в каждом из двух компонентов AV. Затем вы можете вносить изменения в обычный текст и / или ключевой компонент. Различия между двумя скрытыми текстами относительно лавинного эффекта и связанных с ним статистических данных показаны соответствующими AV-компонентами. \Line Note: В этом шаблоне испанский строчный шифр использует детерминированный метод Round Robin для выбора гомофонов." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Avalanche Visualization$" value="Avalanche Visualization" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Spanish Strip Cipher$" value="Spanish Strip Cipher" />
+    <replacement key="$Generated Data$" value="Generated Data" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$Memo$" value="This template shows the avalanche effect of two different classic ciphers at the same time.\line\line After pressing “Play” press the “Continue” button in each of the two AV components. Modify the plaintext and/or key components. Afterwards the differences between the two ciphertexts regarding the avalanche effect and the corresponding statistical data can be independently observed on both AV components.\line Remark: In this template the Spanish Strip Cipher uses the deterministic method Round Robin in order to select the homophones." />
+  </replacements>
+</sample>

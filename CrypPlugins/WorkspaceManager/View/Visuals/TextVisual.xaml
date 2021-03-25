@@ -1,0 +1,273 @@
+﻿<UserControl x:Class="WorkspaceManager.View.Visuals.TextVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:bin="clr-namespace:WorkspaceManager.View.Visuals"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+    <UserControl.RenderTransform>
+        <TranslateTransform X="{Binding Path=Position.X}" Y="{Binding Path=Position.Y}"></TranslateTransform>
+    </UserControl.RenderTransform>
+    <UserControl.Resources>
+
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBoxBase}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#666"></Setter>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <DockPanel x:Name="Root" LastChildFill="True">
+                            <Rectangle DockPanel.Dock="Left" x:Name="Border" Visibility="Hidden" Fill="#888" Width="2" Height="auto"></Rectangle>
+                            <Rectangle DockPanel.Dock="Top" x:Name="Border2" Visibility="Hidden" Fill="#888" Height="2" Width="auto"></Rectangle>
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="False">
+                                <Setter Property="Visibility" Value="Hidden" TargetName="Border"></Setter>
+                                <Setter Property="Visibility" Value="Hidden" TargetName="Border2"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border"></Setter>
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border2"></Setter>
+                                <!--<Setter Property="Background" Value="#fff" TargetName="Root"></Setter>-->
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border"></Setter>
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border2"></Setter>
+                                <!--<Setter Property="Background" Value="#fff" TargetName="Root"></Setter>-->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Thumb}" x:Key="InvisibleThumbStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid Background="Transparent"></Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Thumb}" x:Key="ScaleThumb">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsLocked}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=mainRTB, Path=ComputedVerticalScrollBarVisibility}" Value="Visible">
+                    <Setter Property="Margin" Value="5,5,20,5"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="13"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate x:Name="TemplateBtn" TargetType="Thumb">
+                        <Grid Background="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="2" Grid.Row="0" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="1" Grid.Row="1" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="2" Grid.Row="1" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="0" Grid.Row="2" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="1" Grid.Row="2" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="2" Grid.Row="2" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ControlTemplate x:Key="CtrlTemplate" TargetType="{x:Type Button}">
+            <Border x:Name="Border" BorderThickness="1" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" VerticalAlignment="Center">
+                <ContentPresenter Content="{TemplateBinding Tag}" VerticalAlignment="Center"></ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#55222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#aa222222" TargetName="Border" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <!--<Style TargetType="{x:Type Button}" x:Key="OperationLockStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsLocked, Mode=OneWay}" Value="True">
+                    <Setter Property="ToolTip" Value="{Loc Lock}"></Setter>
+                    <Setter Property="Tag">
+                        <Setter.Value>
+                            <Image Source="/WorkspaceManager;component/View/Image/lock.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Tag">
+                <Setter.Value>
+                    <Image Source="/WorkspaceManager;component/View/Image/unlock.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTip" Value="{Loc Unlock}"></Setter>
+            <Setter Property="Height" Value="12"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>-->
+
+        <Style x:Key="ImageStyle" TargetType="{x:Type Image}">
+            <Setter Property="Source" Value="{Binding Path=Source}"></Setter>
+        </Style>
+
+        <Style x:Key="WindowStyle" TargetType="{x:Type Border}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="false">
+                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                    <Setter Property="BorderBrush" Value="#9ada7e"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="{Binding Path=WindowHeight}"></Setter>
+            <Setter Property="Width" Value="{Binding Path=WindowWidth}"></Setter>
+            <Setter Property="MinHeight" Value="100"></Setter>
+            <Setter Property="MinWidth" Value="150"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderBrush" Value="#9ada7e"></Setter>
+            <Setter Property="BorderThickness" Value="5"></Setter>
+            <Setter Property="CornerRadius" Value="5,5,0,0"></Setter>
+        </Style>
+        <Style x:Key="OpStyle" TargetType="{x:Type Border}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="false">
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                    <Setter Property="Background" Value="#9ada7e"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="OperationBasicStyle">
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Path x:Key="Cross" Stroke="Red" StrokeThickness="3" HorizontalAlignment="Right" Opacity="0.5">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure StartPoint="0,0">
+                            <LineSegment Point="10,10"/>
+                        </PathFigure>
+                        <PathFigure StartPoint="0,10">
+                            <LineSegment Point="10,0"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+
+        <x:Array Type="{x:Type Button}" x:Key="Operations">
+
+            <Button Style="{StaticResource ResourceKey=OperationBasicStyle}" Tag="{StaticResource ResourceKey=Cross}" Click="CloseClick">
+            </Button>
+        </x:Array>
+
+    </UserControl.Resources>
+
+    <!--##########Window##########-->
+    <Border Style="{StaticResource ResourceKey=WindowStyle}">
+        <Grid>
+            <!--##########Definitions##########-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <!--<RowDefinition Height="16"></RowDefinition>-->
+            </Grid.RowDefinitions>
+            <!--##########/Definitions##########-->
+            <Border Style="{StaticResource ResourceKey=OpStyle}"></Border>
+            
+            <Thumb x:Name="ContentThumb" Style="{StaticResource ResourceKey=InvisibleThumbStyle}"
+                        DragDelta="PositionDragDeltaHandler"></Thumb>
+            <Border>
+                <ItemsControl x:Name="OperationsItemsControl" ItemsSource="{StaticResource ResourceKey=Operations}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+            <Border ClipToBounds="True" Grid.Column="0" Grid.Row="1">
+                <!--##########Content##########-->
+                <Grid>
+                    <RichTextBox x:Name="mainRTB" Foreground="Black" AcceptsTab="True" TextChanged="TextChangedHandler" BorderBrush="Transparent"
+                            VerticalScrollBarVisibility="Auto" Background="{Binding Path=Color}">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
+
+                    
+                    <!--<Thumb x:Name="ContentThumb" Style="{StaticResource ResourceKey=InvisibleThumbStyle}"
+                        DragDelta="PositionDragDeltaHandler"></Thumb>-->
+
+                    <Thumb x:Name="ScaleThumb" Style="{StaticResource ResourceKey=ScaleThumb}" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        Cursor="SizeNWSE" DragDelta="ScaleDragDeltaHandler">
+                    </Thumb>
+
+
+                </Grid>
+
+                <!--<Grid Grid.Column="0" Grid.Row="1">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="{Binding Path=Source}" Stretch="UniformToFill"></ImageBrush>
+                    </Grid.Background>
+
+
+                </Grid>-->
+                <!--##########/Content##########-->
+            </Border>
+        </Grid>
+    </Border>
+    <!--##########/Window##########-->
+</UserControl>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Webhits for a Hash Value</title>
+  <title lang="zh">Webhits的哈希值</title>
+  <title lang="ru">Webhits для хэш-значения</title>
+  <summary lang="en">Search for a hash value on the web</summary>
+  <summary lang="zh">在网络上搜索哈希值</summary>
+  <summary lang="ru">Поиск значения хэша в Интернете</summary>
+  <description lang="en">This template shows how to search for a certain hash value using the <i>WebHits</i> component.</description>
+  <description lang="zh">该模板显示了如何使用WebHits组件搜索特定的哈希值。</description>
+  <description lang="ru">В этом шаблоне показано, как выполнить поиск определенного значения хэша с помощью компонента WebHits.</description>
+  <keywords>Search, WebHits, Hash, Google</keywords>
+  <keywords lang="zh">搜索，WebHits，哈希，Google</keywords>
+  <keywords lang="ru">Поиск, WebHits, Hash, Google</keywords>
+  <title lang="de">Webhits für einen bestimmten Hashwert</title>
+  <summary lang="de">Suche nach einem bestimmten Hashwert mit Hilfe der <i>WebHits</i>-Komponente</summary>
+  <description lang="de">Diese Vorlage zeigt, wie mithilfe der <i>WebHits</i>-Komponente geprüft werden kann, ob ein bestimmter Hashwert von der Google-Suchmaschine im Web gefunden wird.</description>
+  <keywords lang="de">Suche, WebHits, Hash, Google</keywords>
+  <icon file="search.png" />
+  <relevantPlugins>
+    <plugin name="TextInput" />
+    <plugin name="TextOutput" />
+    <plugin name="WebHits" />
+  </relevantPlugins>
+</sample>

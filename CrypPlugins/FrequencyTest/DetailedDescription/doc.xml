@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Frequency analysis reveals statistical information about a text, which can be used as an aid or as a breaking tool itself (in the case of monoalphabetical ciphers).<newline /><newline />
+    A monoalphabetic cipher is especially vulnerable to frequency analysis. Frequency analysis is simply counting of the reoccurring letters in the ciphertext and comparing them to previously calculated frequencies of occurrences in a given language.
+    Here is an example of how a monoalphabetic cipher (in our case Caesar’s cipher) can be broken with the help of frequency analysis:<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/frequencies.png" /><newline />
+    From the picture it is easy to see that the patterns are the same although the texts are different which could be expected for any writing (in English or any other language). Moreover we could say that the pattern of the ciphertext (in this case)
+    is shifted exactly three positions to the right. Replacing each character in the ciphertext with the character three positions to the left, considering the order of the alphabet, one could easily decipher the text.<newline /><newline />
+    Such an exploration gives us very little information for polyalphabetically enciphered message. Polyalphabetic ciphers disguise the frequencies of the characters which makes the cipher immune to frequency analysis alone and therefore
+    other methods should be also used.
+  </introduction>
+  <introduction lang="zh-CN">频率分析揭示了有关文本的统计信息，这些统计信息可以用作辅助工具或本身就是破坏工具（在单字母密码的情况下）。单字母密码特别容易受到频率分析的影响。频率分析只是对密文中的重复出现的字母进行计数，并将它们与先前计算的给定语言中出现的频率进行比较。这是一个如何通过频率分析来打破单字母密码（在我们的例子中为凯撒密码）的示例：从图片中很容易看出，模式是相同的，尽管文本可能有所不同。任何文字（英语或其他任何语言）。此外，我们可以说密文的模式（在这种情况下）恰好向右移动了三个位置。考虑到字母的顺序，将密文中的每个字符替换为左侧的三个位置，可以轻松地解密文本。这样的探索很少给我们提供有关多字母加密消息的信息。多字母密码掩盖了字符的频率，这使得该密码仅能单独进行频率分析，因此也应使用其他方法。</introduction>
+  <introduction lang="ru">Частотный анализ показывает статистическую информацию о тексте, который может использоваться как помощь или как сам инструмент разлома (в случае моноалфавитных шифров). Моноалфавитный шифр особенно уязвим для частотного анализа. Частотный анализ - это просто подсчет повторяющихся букв в зашифрованном тексте и сравнение их с ранее рассчитанными частотами появления на данном языке. Вот пример того, как моноалфавитный шифр (в нашем случае шифр Цезаря) можно сломать с помощью частотного анализа. Из рисунка легко видеть, что шаблоны одинаковы, хотя тексты разные, что можно было бы ожидать для любой письменной форме (на английском или любом другом языке). Более того, можно сказать, что схема зашифрованного текста (в данном случае) сдвигается ровно на три позиции вправо. Заменяя каждый символ в зашифрованном тексте символом трех положений влево, учитывая порядок алфавита, можно легко расшифровать текст. Такое исследование дает нам очень мало информации для сообщения с полиалапатически зашифрованным. Полиальфабетические шифры маскируют частоты символов, которые делают шифр невосприимчивым к анализу частоты, и поэтому должны использоваться и другие методы.</introduction>
+  <introduction lang="de-DE">
+    Die Häufigkeitsanalyse liefert statistische Informationen über einen Text, die hilfreich für Analysezwecke sind oder, z.B. im Falle der monoalphabetischen Chiffre, bereits als Entschlüsselungswerkzeug Verwendung finden können.<newline /><newline />
+    Monoalphabetische Chiffren sind besonders anfällig gegenüber der Häufigkeitsanalyse. Bei der Häufigkeitsanalyse wird einfach die Häufigkeit der im Geheimtext auftretenden Buchstaben festgestellt und kann dann mit den bekannten Buchstabenhäufigkeiten
+    von Texten in verschiedenen Sprachen verglichen werden. Am Bespiel der Caesar-Chiffre wird hier gezeigt, wie eine monoalphabetische Chiffre mit Hilfe der Häufigkeitsanalyse gebrochen werden kann:<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/frequencies.png" /><newline />
+    Im Bild ist erkennbar, dass die gleichen Muster vorliegen, obwohl unterschiedliche Texte zugrunde liegen. Dies kann im Allgemeinen von Texten in beliebigen Sprachen erwartet werden.
+    Weiterhin kann man sehen, dass das Muster des Geheimtextes in diesem Fall um genau drei Positionen nach rechts verschoben ist. Wenn man also jeden Buchstaben des Geheimtextes durch den Buchstaben ersetzt, der drei Positionen weiter links erscheint,
+    erhält man den Klartext.<newline /><newline />
+    Eine Häufigkeitsanalyse gibt uns aber nur wenig Informationen, wenn die Nachricht polyalphabetisch verschlüsselt wurde. Polyalphabetische Chiffren verschleiern die Buchstabenhäufigkeiten und sind somit immun gegen die Häufigkeitsanalyse.
+    In diesem Fall müssen andere Methoden eingesetzt werden.
+  </introduction>
+  <usage lang="en">
+    In cryptanalysis, frequency analysis is the study of the frequency of letters or groups of letters in a ciphertext. The method is used as an aid to breaking classical ciphers. The method of frequency analysis is implemented in the component
+    described below. The component takes a single input from string type and yields string and integer array outputs. This means that any other component with string output can be used as input source for Frequency Test. The string output of
+    Frequency Test shows statistical information about each character counted, number of occurrences and percentage from the entire text. The integer array output (black triangle) gives information only about the character counts and is used
+    exclusively from Friedman Test component for key length proposition of Vigenère ciphertext.<newline /><newline />
+    As depicted below we use Text Input and Text Output in connection with Frequency Test:<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/usage.png" /><newline /><newline />
+    The gram length option gives the possibility to count and output statistical data for groups of characters with the selected size. The default value is: 1. Non alphabetic characters option is proposing the possibilities to consider or not
+    the characters which are not in the English alphabet. The default value is: Don’t count. Case sensitivity option gives the choice if the uppercase and lowercase letters should be considered equal or not. Default value is: Case insensitive.
+    Another option lets you decide how the component should treat word boundaries. Example for N-gram size 3 and the word "CHERRY":
+    If you don't include fragments at word boundaries, the component will produce the four trigrams "CHE", "HER", "ERR" and "RRY".
+    If you include fragments, it will additionally produce the trigrams "__C", "_CH", "RY_" and "Y__". The underline character represents a whitespace.
+  </usage>
+  <usage lang="zh-CN">在密码分析中，频率分析是研究密文中字母或字母组的频率。该方法用作破解经典密码的辅助方法。频率分析方法在下面描述的组件中实现。该组件从字符串类型获取单个输入，并产生字符串和整数数组输出。这意味着具有字符串输出的任何其他组件都可以用作频率测试的输入源。 “频率测试”的字符串输出显示有关所计数的每个字符的统计信息，出现次数和整个文本中的百分比。整数数组输出（黑色三角形）仅提供有关字符计数的信息，并且仅从Friedman测试组件中使用，用于Vigenère密文的密钥长度主张。如下图所示，我们将“文本输入”和“文本输出”与“频率测试”结合使用：克长度选项使您可以对具有选定大小的字符组进行计数和输出统计数据。默认值为：1.“非字母字符”选项建议考虑是否考虑非英语字母的字符。默认值为：不计算。区分大小写选项可以选择是否应将大写字母和小写字母视为相等。默认值为：不区分大小写。另一个选项使您可以决定组件应如何对待单词边界。 N-gram大小3和单词“ CHERRY”的示例：如果在单词边界不包含片段，则组件将产生四个字母组“ CHE”，“ HER”，“ ERR”和“ RRY”。如果包含片段，它将另外产生三元组“ __C”，“ _ CH”，“ RY_”和“ Y__”。下划线字符表示空白。</usage>
+  <usage lang="ru">В криптоанализе частотный анализ представляет собой изучение частоты букв или групп букв в зашифрованном тексте. Этот метод используется как средство для разрушения классических шифров. Метод частотного анализа реализован в компоненте, описанном ниже. Компонент принимает один вход из строкового типа и выводит вывод строковых и целых массивов. Это означает, что любой другой компонент со строковым выходом может использоваться как источник входного сигнала для теста частоты. Строковый вывод Frequency Test показывает статистическую информацию о каждом подсчитанном символе, количестве вхождений и процентах от всего текста. Вывод целочисленного массива (черный треугольник) дает информацию только о количестве символов и используется исключительно из компонента теста Фридмана для определения длины ключа зашифрованного текста Vigenère. Как показано ниже, мы используем Text Input и Text Output в связи с Frequency Test: опция длины графа дает возможность подсчитывать и выводить статистические данные для групп символов с выбранным размером. Значение по умолчанию: 1. Параметр не алфавитных символов предлагает возможности рассмотреть или не символы, которые не находятся в английском алфавите. Значение по умолчанию: Не считайте. Опция чувствительности к регистру дает выбор, если заглавные и строчные буквы следует считать равными или нет. Значение по умолчанию: нечувствительное к регистру. Другой вариант позволяет вам решить, как компонент должен обрабатывать границы слов. Пример для N-грамма 3 и слова «ЧЕРРИ»: если вы не включаете фрагменты на границах слов, компонент будет генерировать четыре триграммы «CHE», «HER», «ERR» и «RRY». Если вы включите фрагменты, они дополнительно будут создавать триграммы «__C», «_CH», «RY_» и «Y__». Символ подчеркивания представляет собой пробел.</usage>
+  <usage lang="de-DE">
+    In der Kryptoanalyse untersucht die Häufigkeitsanalyse die Häufigkeiten von Buchstaben oder Buchstabengruppen in einem Geheimtext.
+    Die Methode findet hauptsächlich bei klassischen Chiffren Anwendung und wird in der vorliegenden Komponente implementiert.
+    Die Komponente hat einen einzelnen Eingang, an dem sie den zu untersuchenden Text als Zeichenkette erwartet.
+    Die gewonnenen statistischen Informationen werden in unterschiedlichen Formaten an den Ausgängen der Komponente zur Verfügung gestellt:<newline />
+    Am Textausgang wird die statistische Information als Text ausgegeben. Jede Zeile listet hierbei durch einen Doppelpunkt getrennt folgende Daten auf: den Buchstaben bzw. die Buchstabengruppe, dessen absolute Häufigkeit im Eingabetext und die
+    relative Häufigkeit.<newline />
+    Am Ausgang 'Listenausgabe' werden die absoluten Häufigkeiten der vorkommenden Buchstaben bzw. Buchstabengruppen (sortiert in alphabetischer Reihenfolge) als ein Array von Zahlen ausgegeben. Dieses Format wird z.B. von der
+    Komponente Friedman-Test, die die Schlüssellänge für Vigenère-Chiffren berechnet, als Eingabe erwartet.<newline />
+    Der dritte Ausgang gibt die Informationen in Form eines Wörterbuches aus. Jedem auftretenden Buchstaben bzw. Buchstabengruppe wird dabei ein Zahlenarray bestehend aus vier Zahlen, die statistische Kenngrößen darstellen, zugeordnet.
+    Die erste Zahl ist die absolute Häufigkeit, die zweite Zahl ist die relative Häufigkeit, die dritte ist der binäre Logarithmus der absoluten Häufigkeit und die vierte Zahl ist die Sinkov-Größe, die sich als natürlicher Logarithmus der
+    relativen Häufigkeit berechnet.<newline /><newline />
+    Im Bild wird dargestellt, wie die Häufigkeitsanalyse zusammen mit den Komponenten 'Texteingabe' und 'Textausgabe' verwendet werden kann:<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/usage.png" /><newline /><newline />
+    In den Einstellungen der Komponente kann die Größe der den statistischen Berechnungen zugrunde liegenden N-Gramme eingestellt werden. Sie gibt an, aus wie vielen Zeichen eine Buchstabengruppe bestehen soll.
+    Voreingestellt ist der Wert 1, was bedeutet, dass die statistische Untersuchung auf Einzelbuchstaben beruht.
+    Weiterhin kann man festlegen, wie ungültige (also nichtalphabetische) Zeichen behandelt werden sollen: sie können mitgezählt oder ignoriert werden. In der Standardeinstellung werden sie ignoriert.<newline />
+    Die Einstellung für Groß-/Kleinschreibung legt fest, ob große und kleine Buchstaben als gleiche oder als unterschiedliche Zeichen behandelt werden sollen. Voreingestellt ist die Gleichbehandlung.<newline />
+    Schließlich kann noch eingestellt werden, ob Fragmente an Wortgrenzen bei der Erzeugung der N-Gramme mitberücksichtigt werden sollen. Ein Beispiel soll die Wirkungsweise verdeutlichen: Die N-Gramm-Größe sei 3 und
+    das Eingabewort sei "KIRSCHE". Sollen Fragmente nicht mitgezählt werden, so betrachtet die Komponente nur die fünf Trigramme "KIR", "IRS", "RSC", "SCH" und "CHE". Sollen Fragmente berücksichtigt werden, so werden auch
+    die mit Leerzeichen aufgefüllten Trigramme am Beginn und am Ende eines Wortes mitgezählt und man erhält neun Trigramme: "__K", "_KI", "KIR", "IRS", "RSC", "SCH", "CHE", "HE_" und "E__" (wobei der Unterstrich für das Leerzeichen steht).
+  </usage>
+  <presentation lang="en">
+    The frequency analysis component visualizes data in a bar graph. In the settings of the component, you can select whether the diagram should adapt automatically to the viewport size, or
+    you can manually enter the display size. It is also possible to adjust the zoom factor of the diagram.<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/presentation.png" /></presentation>
+  <presentation lang="zh-CN">频率分析组件将条形图中的数据可视化。在组件的设置中，可以选择是图应自动适应视口大小，还是可以手动输入显示大小。也可以调整图表的缩放比例。</presentation>
+  <presentation lang="ru">Компонент частотного анализа визуализирует данные на гистограмме. В настройках компонента вы можете выбрать, будет ли диаграмма автоматически адаптироваться к размеру видового экрана, или вы можете вручную ввести размер экрана. Также можно настроить коэффициент масштабирования диаграммы.</presentation>
+  <presentation lang="de-DE">
+    Die Häufigkeitsanalyse-Komponente visualisiert die Häufigkeiten als Balkendiagramm. In den Einstellungen der Komponente kann ausgewählt werden, ob sich das Diagramm automatisch an den Darstellungsbereich angepassen soll.
+    Es besteht auch die Möglichkeit einer manuellen Größenanpassung und der Angabe eines Zoomfaktors.<newline /><newline /><img src="FrequencyTest/DetailedDescription/Images/presentation.png" /></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Frequency_analysis_(cryptanalysis)" lang="en" />
+      <caption lang="en">Frequency analysis (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Häufigkeitsanalyse" lang="de-DE" />
+      <caption lang="de-DE">Häufigkeitsanalyse (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="wikipedia2">
+      <link url="http://en.wikipedia.org/wiki/Letter_frequency" lang="en" />
+      <caption lang="en">Letter frequency (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Buchstabenhäufigkeit" lang="de-DE" />
+      <caption lang="de-DE">Buchstabenhäufigkeit (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

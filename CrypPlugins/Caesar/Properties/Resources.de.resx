@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Caesar</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Caesar – Klassische Substitutions-Verschlüsselung durch Alphabet-Verschiebung</value>
+  </data>
+  <data name="InputStringCaption" xml:space="preserve">
+    <value>Texteingabe</value>
+  </data>
+  <data name="InputStringTooltip" xml:space="preserve">
+    <value>Geben Sie den Text ein, der mit dem Caesar-Verfahren ver-/entschlüsselt werden soll.</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>Ausgabetext</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>Der mit der Caesar-Verfahren ver-/entschlüsselte Text</value>
+  </data>
+  <data name="InputAlphabetCaption" xml:space="preserve">
+    <value>Eingabe-Alphabet</value>
+  </data>
+  <data name="InputAlphabetTooltip" xml:space="preserve">
+    <value>Geben Sie die Zeichen an, aus denen das Eingabe-Alphabet für Caesar bestehen soll. Wenn hier nichts angegeben wird, dann wird das interne Alphabet verwendet (A-Z).</value>
+  </data>
+  <data name="ShiftKeyCaption" xml:space="preserve">
+    <value>Verschiebung (Zahl)</value>
+  </data>
+  <data name="ShiftKeyTooltip" xml:space="preserve">
+    <value>Geben Sie die Anzahl der Positionen ein, um die jedes Zeichen des Eingabetextes verschoben werden soll. Z.B. bedeutet ein Wert von 1 für den Schlüssel, dass das Klartextzeichen B durch das Geheimzeichen C ersetzt wird, usw.</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Wählen Sie die Betriebsart des Plugins.</value>
+  </data>
+  <data name="ActionTPCaption" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="ActionTPTooltip" xml:space="preserve">
+    <value>Wählen Sie die Betriebsart des Plugins.</value>
+  </data>
+  <data name="AlphabetCaseCaption" xml:space="preserve">
+    <value>Groß-/Kleinschreibung unterscheiden</value>
+  </data>
+  <data name="AlphabetCaseTooltip" xml:space="preserve">
+    <value>Bei einer Unterscheidung wächst das Alphabet von 26 auf 52 Zeichen. Ohne Unterscheidung werden vor der Verschlüsselung die Kleinbuchstaben den Großbuchstaben zugeordnet.</value>
+  </data>
+  <data name="AlphabetSymbolsCaption" xml:space="preserve">
+    <value>Alphabet</value>
+  </data>
+  <data name="AlphabetSymbolsTooltip" xml:space="preserve">
+    <value>Verwendetes Eingabe-Alphabet</value>
+  </data>
+  <data name="ShiftValueCaption" xml:space="preserve">
+    <value>Schlüssel als Zahl</value>
+  </data>
+  <data name="ShiftValueTooltip" xml:space="preserve">
+    <value>Geben Sie die Anzahl der Positionen ein, um die jedes Zeichen des Eingabetextes verschoben werden soll. Z.B. bedeutet ein Wert von 1 für den Schlüssel, dass das Klartextzeichen B durch das Geheimzeichen C ersetzt wird, usw.</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Behandlung ungültiger Zeichen</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>Wie soll auf Zeichen in der Eingabe reagiert werden, die nicht Bestandteil des Eingabe-Alphabets sind?</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>Verschlüsselung</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>Entschlüsselung</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Ignorieren (nicht ändern)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Ersetzen durch '?'</value>
+  </data>
+  <data name="ShiftStringCaption" xml:space="preserve">
+    <value>Zeichenzuordnung</value>
+  </data>
+  <data name="ShiftStringTooltip" xml:space="preserve">
+    <value>Zeigt die Zeichenzuordnung für ein einzelnes Zeichen des Eingabe-Alphabetes für die angegebene Verschiebung.</value>
+  </data>
+  <data name="AlphabetGroup" xml:space="preserve">
+    <value>Alphabet-Parameter</value>
+  </data>
+  <data name="MemorizeCaseCaption" xml:space="preserve">
+    <value>Ausgabeanzeige kennt ursprüngliche Groß-/Kleinschreibung</value>
+  </data>
+  <data name="MemorizeCaseTooltip" xml:space="preserve">
+    <value>Obwohl die Kleinbuchstaben vor der Verschlüsselung einander zu geordnet wurden (so dass ein "a" wie ein "A" behandelt wird), merkt sich das Programm, welche Schreibweise der Buchstabe hatte und stellt ihn in der Ausgabe entsprechend dar</value>
+  </data>
+</root>

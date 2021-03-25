@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Transposition Cipher</title>
+  <title lang="zh">换位密码</title>
+  <title lang="ru">Шифрование транспонирования</title>
+  <summary lang="en">Usage of the <i>Transposition</i> cipher</summary>
+  <summary lang="zh">换位密码的用法</summary>
+  <summary lang="ru">Использование шифрования Transposition</summary>
+  <description lang="en">In cryptography, a transposition cipher is a method of encryption by which the positions held by units of plaintext (which are commonly characters or groups of characters) are shifted according to a regular system, so that the ciphertext constitutes a permutation of the plaintext. That is, the order of the units is changed. Mathematically a bijective function is used on the characters' positions to encrypt and an inverse function to decrypt.<newline /><newline />
+Source: <external ref="http://en.wikipedia.org/wiki/Transposition_cipher" /></description>
+  <description lang="zh">在密码术中，转置密码是一种加密方法，通过该方法，明文单元（通常是字符或字符组）所保持的位置会根据常规系统移动，从而使密文构成明文的排列。即，单位的顺序被改变。数学上，在角色的位置上使用双射函数进行加密，并使用反函数进行解密。资源：</description>
+  <description lang="ru">В криптографии шифр транспонирования является методом шифрования, посредством которого позиции, занимаемые единицами открытого текста (которые обычно являются символами или группами символов), смещаются в соответствии с обычной системой, так что зашифрованный текст представляет собой перестановку открытого текста. То есть порядок единиц изменяется. Математически биективная функция используется на позиции символов для шифрования и обратная функция для дешифрования. Источник:</description>
+  <keywords>Transposition</keywords>
+  <keywords lang="zh">换位</keywords>
+  <keywords lang="ru">перестановка</keywords>
+  <title lang="de">Transpositions-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Transpositions</i>-Chiffre</summary>
+  <description lang="de">In der Kryptographie ist die Transposition eine der beiden grundlegenden Verschlüsselungsklassen. Dabei werden die Zeichen einer Botschaft (des Klartextes) umsortiert. Jedes Zeichen bleibt zwar unverändert erhalten, jedoch wird die Stelle, an der es steht, geändert. Dies steht im Gegensatz zu der Klasse der (monoalphabetischen oder polyalphabetischen) Substitution, bei der jedes Zeichen des Klartextes zwar seinen Platz behält, jedoch durch ein anderes Zeichen ersetzt („substituiert“) wird.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Transposition_(Kryptographie)" /></description>
+  <keywords lang="de">Transposition</keywords>
+  <icon file="Transposition.png" />
+  <relevantPlugins>
+    <plugin name="Transposition" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Transposition (Encryption)$" value="Transposition (Verschlüsselung)" />
+    <replacement key="$Transposition (Decryption)$" value="Transposition (Entschlüsselung)" />
+    <replacement key="$text$" value="Wir wurden entdeckt, flieh wenn du kannst" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Transposition (Encryption)$" value="换位（加密）" />
+    <replacement key="$Transposition (Decryption)$" value="换位（解密）" />
+    <replacement key="$text$" value="我们被发现了，如果可以的话，逃跑" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Transposition (Encryption)$" value="Транспонирование (шифрование)" />
+    <replacement key="$Transposition (Decryption)$" value="Транспонирование (дешифрование)" />
+    <replacement key="$text$" value="Мы были обнаружены, беги, если сможешь" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$Transposition (Encryption)$" value="Transposition (Encryption)" />
+    <replacement key="$Transposition (Decryption)$" value="Transposition (Decryption)" />
+    <replacement key="$text$" value="We were discovered, flee if you can" />
+  </replacements>
+</sample>

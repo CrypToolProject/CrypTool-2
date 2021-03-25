@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">DES Visualization</title>
+  <title lang="zh">DES可视化</title>
+  <title lang="ru">Визуализация</title>
+  <summary lang="en">Usage of the <i>DESVisualization</i></summary>
+  <summary lang="zh">DESVisualization的用法</summary>
+  <summary lang="ru">Использование DESVisualization</summary>
+  <description lang="en">With this template you can have a step-by-step look at the encryption process of the Data Encryption Standard (DES). As the plugin's goal is the actual
+ visualization of the DES algorithm, it does not offer the usage of padding or modes of operation. This means the plugin expects exactly one block with 64 bits as plaintext.</description>
+  <description lang="zh">使用此模板，您可以逐步查看数据加密标准（DES）的加密过程。由于该插件的目标是DES算法的实际可视化，因此它不提供对padding或操作模式的使用。这意味着该插件期望一个正好为64位的纯文本块。</description>
+  <description lang="ru">С помощью этого шаблона вы можете поэтапно просмотреть процесс шифрования стандарта шифрования данных (DES). Поскольку целью плагина является фактическая визуализация алгоритма DES, он не предлагает использование дополнений или режимов работы. Это означает, что плагин ожидает ровно один блок с 64 битами в качестве открытого текста.</description>
+  <keywords lang="en">advanced, modern, cipher, encryption, Lucifer, symmetric, nist, visualization, DES</keywords>
+  <keywords lang="zh">高级，现代，密码，加密，路西法，对称，nist，可视化，DES</keywords>
+  <keywords lang="ru">современный, шифрованный, шифрование, Lucifer, симметричный, nist, визуализация, DES</keywords>
+  <title lang="de">DES-Visualisierung</title>
+  <summary lang="de">Benutzung der <i>DES-Visualisierung</i></summary>
+  <description lang="de">Mit dieser Vorlagen können Sie sich den Verschlüsselungsprozess des Data Encryption Standards schrittweise anschauen. Da das eigentliche Ziel die
+ Visualisierung des DES-Algorithmus ist, wurden Methoden des Padding und Betriebsmodi nicht integriert. Das bedeutet, dass das Plugin genau ein Block mit 64 Bits als Klartext
+  erwartet.</description>
+  <keywords lang="de">symmetrisch, modern, Blockchiffre, Verschlüsselung, Lucifer, Visualisierung, DES</keywords>
+  <icon file="DESVisualization.png" />
+  <relevantPlugins>
+    <plugin name="DESVisualization" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement value="Klartext (Hexwerte)" key="$Text$" />
+    <replacement value="Geheimtext nach letzter Runde (Hexwerte)" key="$Ciphertext$" />
+    <replacement value="Geheimtext nach letzter Runde (Binärwerte)" key="$CiphertextBin$" />
+    <replacement value="Schlüssel (Hexwerte)" key="$Key$" />
+    <replacement value="Text-Decodierer" key="$TextDecoder$" />
+    <replacement value="Schlüssel-Decodierer" key="$KeyDecoder$" />
+    <replacement value="Ausgabe-Codierer" key="$OutputEncoder$" />
+    <replacement value="DES-Visualisierung" key="$DESVisualization$" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Text$" value="纯文本（十六进制值）" />
+    <replacement key="$Ciphertext$" value="最后一轮后的密文（十六进制值）" />
+    <replacement key="$CiphertextBin$" value="最后一轮后的密文（二进制值）" />
+    <replacement key="$Key$" value="键（十六进制值）" />
+    <replacement key="$TextDecoder$" value="文字解码器" />
+    <replacement key="$KeyDecoder$" value="密钥解码器" />
+    <replacement key="$OutputEncoder$" value="输出编码器" />
+    <replacement key="$DESVisualization$" value="DES可视化" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Text$" value="Обычный текст (шестнадцатеричные значения)" />
+    <replacement key="$Ciphertext$" value="Зашифрованный текст после последнего раунда (шестнадцатеричные значения)" />
+    <replacement key="$CiphertextBin$" value="Зашифрованный текст после последнего раунда (двоичные значения)" />
+    <replacement key="$Key$" value="Ключ (шестнадцатеричные значения)" />
+    <replacement key="$TextDecoder$" value="Текстовый декодер" />
+    <replacement key="$KeyDecoder$" value="Ключ-декодер" />
+    <replacement key="$OutputEncoder$" value="Выход датчика" />
+    <replacement key="$DESVisualization$" value="DES Визуализация" />
+  </replacements>
+  <replacements lang="en">
+    <replacement value="Plaintext (hex)" key="$Text$" />
+    <replacement value="Ciphertext after last round (hex)" key="$Ciphertext$" />
+    <replacement value="Ciphertext after last round (bin)" key="$CiphertextBin$" />
+    <replacement value="Key (hex)" key="$Key$" />
+    <replacement value="Text Decoder" key="$TextDecoder$" />
+    <replacement value="Key Decoder" key="$KeyDecoder$" />
+    <replacement value="Output Encoder" key="$OutputEncoder$" />
+    <replacement value="DES Visualization" key="$DESVisualization$" />
+  </replacements>
+</sample>

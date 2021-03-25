@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="CrypCloud.Manager.CrypCloudSettingsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" xmlns:Properties="clr-namespace:CrypTool.PluginBase.Properties;assembly=CrypPluginBase"     
+             d:DesignHeight="300" d:DesignWidth="550">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <StackPanel Name="stackPanel1" VerticalAlignment="Top">
+                <Label Content="{Loc CrypCloudSettingsTitle}" FontWeight="Bold" FontSize="14"/>
+                <Label Content="{Loc General}" FontWeight="Bold" />
+                <Grid Margin="30,5,0,2" Width="Auto" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Loc AmountOfWorker_Settings}" Grid.Column="0" Width="Auto"/>
+                    <Grid Width="50" VerticalAlignment="Center" HorizontalAlignment="Left"  Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="27"/>
+                            <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="13"/>
+                            <RowDefinition Height="13"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Width="25" Grid.Row="0" Grid.RowSpan="2"  Name="NUDTextBox"  TextAlignment="Right" PreviewKeyDown="NUDTextBox_PreviewKeyDown" PreviewKeyUp="NUDTextBox_PreviewKeyUp" TextChanged="NUDTextBox_TextChanged" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                        <RepeatButton Grid.Row="0" Grid.Column="1"  Name="NUDButtonUP" FontSize="8" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="NUDButtonUP_Click">5</RepeatButton>
+                        <RepeatButton Grid.Row="1" Grid.Column="1"  Name="NUDButtonDown" FontFamily="Marlett" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Click="NUDButtonDown_Click">6</RepeatButton>
+                    </Grid>
+                </Grid>
+                <CheckBox Name="EnableOpenCL" Content="{Loc EnableOpenCL}" Margin="30,5,0,10" VerticalAlignment="Center" HorizontalAlignment="Left" Click="EnableOpenCL_Click"/>
+                <Grid Margin="30,5,0,10" Width="Auto" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Loc OpenCLDevice}" Grid.Column="0" Width="150"/>
+                    <ComboBox Width="200" Name="OpenCLDevice" Grid.Column="1" SelectionChanged="OpenCLDevice_SelectionChanged"/>
+                </Grid>
+                <Grid Margin="30,5,0,10" Width="Auto" HorizontalAlignment="Left">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Loc LogLevel}" Grid.Column="0" Width="150"/>
+                    <ComboBox Width="200" Text="{Loc LogLevel}" Grid.Column="1" Name="LogLevelComboBox" SelectionChanged="LogLevelComboBox_SelectionChanged">
+                        <ComboBoxItem>Debug</ComboBoxItem>
+                        <ComboBoxItem>Info</ComboBoxItem>
+                        <ComboBoxItem>Warning</ComboBoxItem>
+                        <ComboBoxItem>Error</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

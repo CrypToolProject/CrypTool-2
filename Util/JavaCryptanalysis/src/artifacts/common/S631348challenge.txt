@@ -1,0 +1,21 @@
+Challenge ID: 631348 
+Indicator Procedure: Plain indicator followed by encrypted DOUBLED Message Key - in use from 1938 until 1940. Can be solved using Zygalski Sheets
+Total Length: 150 split into  1 messages. 
+
+
+Message Number: 1 of 1 Length: 169 Indicator: SOP KBM(=<Message Key encrypted twice using daily Message Key>)
+
+
+ CAKLD ZVWPN JUROO MEFVG VHWOU
+ HYKSM MWZCD URPRD UZXRP IHKER
+ YGEHO MZZXP TQBSY BASEM DKILU
+ NUWOW SQOCG TZPVR NWNCR TXWBN
+ SUTTG VXFJW YKYJC HHPRX MLMPO
+ QCKCQ LXQBU EPSLN BWUDV ZOUOG
+ AQRVQ UMPKN VPOOJ WVXC
+
+
+Crib provided for this message (message 1): AUFWIESENINDEINEMDAMMERWE at position: 0
+
+
+

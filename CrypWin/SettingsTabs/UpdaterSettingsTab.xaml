@@ -1,0 +1,36 @@
+<UserControl x:Class="CrypTool.CrypWin.SettingsTabs.UpdaterSettingsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+             xmlns:p="clr-namespace:CrypTool.CrypWin.Properties"
+             d:DesignHeight="300" d:DesignWidth="600">
+    <Grid>
+        <Image Source="/CrypWin;component/images/updaterBackground.png" Opacity="0.1" RenderTransformOrigin="0.5,0.5"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Label Content="{Loc UpdaterSettingsTitle}" FontWeight="Bold" FontSize="14"/>
+                <Label Content="{Loc checkLabelContent}" Name="checkLabel" VerticalAlignment="Center" FontWeight="Bold"/>
+                <CheckBox Content="{Loc checkPeriodicallyContent}" ToolTip="{Loc checkPeriodicallyToolTip}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=CheckPeriodically, Mode=TwoWay}" HorizontalAlignment="Left" Name="checkPeriodically" VerticalAlignment="Center" Checked="checkPeriodically_Changed" Unchecked="checkPeriodically_Changed" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <Grid Style="{StaticResource ResourceKey=settingsStyle}" ToolTip="{Loc minutesInputToolTip}" IsEnabled="{Binding ElementName=checkPeriodically, Path=IsChecked}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="15" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="1" Content="{Loc checkPeriodicallyText1Content}" HorizontalAlignment="Left" Name="checkPeriodicallyText1" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="2" HorizontalAlignment="Left" Name="minutesInput" VerticalAlignment="Center" Width="50" TextChanged="minutesInput_TextChanged" />
+                    <Label Grid.Column="3" Content="{Loc checkPeriodicallyText2Content}" HorizontalAlignment="Left" Name="checkPeriodicallyText2" VerticalAlignment="Center" />
+                    <Label Grid.Column="4" Content="{Loc checkPeriodicallyWarningContent}" HorizontalAlignment="Left" Name="checkPeriodicallyWarning" VerticalAlignment="Center" Foreground="Red"/>
+                </Grid>
+                <CheckBox Content="{Loc checkStartupContent}" ToolTip="{Loc checkStartupToolTip}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=CheckOnStartup, Mode=TwoWay}" HorizontalAlignment="Left" Name="checkStartup" VerticalAlignment="Center" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <Label Content="{Loc autoLabelContent}" HorizontalAlignment="Stretch" Name="autoLabel" VerticalAlignment="Center" FontWeight="Bold"  />
+                <CheckBox Content="{Loc autoDownloadContent}" ToolTip="{Loc autoDownloadToolTip}"  IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoDownload, Mode=TwoWay}" HorizontalAlignment="Left" Name="autoDownload" VerticalAlignment="Center" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <CheckBox Content="{Loc autoInstallContent}" ToolTip="{Loc autoInstallToolTip}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=AutoInstall, Mode=TwoWay}" HorizontalAlignment="Left" Name="autoInstall" VerticalAlignment="Center" Style="{StaticResource ResourceKey=settingsStyle}" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,242 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              Background="White" Foreground="Black">
+  <Paragraph FontWeight="Bold" FontSize="16" FontFamily="Calibri" TextDecorations="Underline">
+      Boolean Function Parser
+  </Paragraph>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      The <Bold>Boolean Function Parser (BFP)</Bold> parses a given boolean function, replaces input variables, and computes the result.
+  </Paragraph>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      The BFP accepts all kind of <Bold>binary</Bold> logical functions, namely AND, NAND, OR, NOR, XOR, and NXOR.
+      In addition to the word-approach of the logical functions you may want to use <Bold>symbols</Bold>. Valid symbols are "+" for AND, "*" for XOR, and "|" for OR.
+      Here are some examples how your function could look like:
+  </Paragraph>
+  <Section Margin="10,0,5,0">
+  <Paragraph FontSize="11" FontStyle="Oblique" FontFamily="Calibri">
+      Example 1: Valid binary functions without variables
+  </Paragraph>
+  <Paragraph Background="#F2F2F2" Padding="2" FontSize="10" FontFamily="Courier New">
+      1 XOR 0 AND 1 OR 0
+  </Paragraph>
+  <Paragraph Background="#F2F2F2" Padding="2" FontSize="10" FontFamily="Courier New">
+      1 * 0 + 1 | 0
+  </Paragraph>
+  <Paragraph Background="#F2F2F2" Padding="2" FontSize="10" FontFamily="Courier New">
+      1 * 0 + 1 OR 0
+  </Paragraph>
+  </Section>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      Note that the BFP only works on binary constants, more precisely in GF(2) (also known as F<Span BaselineAlignment="Subscript">2</Span> or Z/2Z).
+  </Paragraph>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      As you are able to select the <Bold>number of input variables</Bold> in the settings pane, your functions may contain variables.
+      At first we assume that you chose "Single Boolean" as input variant.
+      All of the input variables start with "i_" and are followed by the number of the plugin input starting by one.
+      So a function with two input variables (assuming two inputs for the plugin) could look as follows:
+  </Paragraph>
+  <Section Margin="10,0,5,0">
+  <Paragraph FontSize="11" FontStyle="Oblique" FontFamily="Calibri">
+      Example 2.1: Valid binary functions with variables (boolean variant)
+  </Paragraph>
+  <Paragraph Background="#F2F2F2" Padding="2" FontSize="10" FontFamily="Courier New">
+      i_<Run Foreground="#A21A17">1</Run> * i_<Run Foreground="#A21A17">2</Run>
+  </Paragraph>
+  </Section>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      Your function may also contain <Bold>static content</Bold>:
+  </Paragraph>
+  <Section Margin="10,0,5,0">
+  <Paragraph FontSize="11" FontStyle="Oblique" FontFamily="Calibri">
+      Example 2.2: Valid binary functions with variables and constants
+  </Paragraph>
+  <Paragraph Background="#F2F2F2" Padding="2" FontSize="10" FontFamily="Courier New">
+      i_1 * i_2 + <Run Foreground="#A21A17">1</Run>
+  </Paragraph>
+  </Section>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      If you have chosen to use a <Bold>boolean array</Bold> as an input ("Boolean Array" in the settings pane) your function variable is,
+      in addition to the number of the input, followed by the array index starting by zero:
+  </Paragraph>
+   <Section Margin="10,0,0,0">
+  <Paragraph FontSize="11" FontStyle="Oblique" FontFamily="Calibri">
+      Example 2.3: Valid binary functions with array variables
+  </Paragraph>
+  <Paragraph Background="#F2F2F2" Padding="2" FontSize="10" FontFamily="Courier New">
+      i_1<Run Foreground="#A21A17">.0</Run> * i_1<Run Foreground="#A21A17">.1</Run>
+  </Paragraph>
+  </Section>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      This version may contain static content as well.
+  </Paragraph>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      As a reference the following table shows the truth table of the binary functions interpreted by the BFP:
+  </Paragraph>
+  <Table CellSpacing="2" FontSize="11" FontFamily="Cambria">
+
+      <Table.Columns>
+        <TableColumn/>
+        <TableColumn/>
+        <TableColumn/>
+        <TableColumn/>
+        <TableColumn/>
+        <TableColumn/>
+        <TableColumn/>
+        <TableColumn/>
+      </Table.Columns>
+      
+      <TableRowGroup FontWeight="Bold" Background="#F7F7F7">
+
+        <TableRow>
+          <TableCell TextAlignment="Center">
+            <Paragraph >a</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >b</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >AND</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >NAND</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >OR</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >NOR</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >XOR</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >NXOR</Paragraph>
+          </TableCell>
+        </TableRow>
+        
+  </TableRowGroup>
+  
+  <TableRowGroup>
+
+        <TableRow>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+        </TableRow>
+        
+        <TableRow>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+        </TableRow>
+        
+        <TableRow>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+        </TableRow>
+        
+        <TableRow>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >0</Paragraph>
+          </TableCell>
+          <TableCell TextAlignment="Center">
+            <Paragraph >1</Paragraph>
+          </TableCell>
+        </TableRow>
+        
+  </TableRowGroup>
+  
+  </Table>
+  <Paragraph FontSize="12" FontFamily="Cambria" FontWeight="Bold">
+      <LineBreak/>Notes on the implementation by the author
+  </Paragraph>
+  <Paragraph FontSize="11" FontFamily="Cambria">
+      The binary function is internally populated into a parse tree. Every node of the tree has a type, a left child, a right child, and,
+      in case of a constant type, a constant data field. So a simple tree filled by the function "1 * 1" has a root node with type "*", a left child node with type constant,
+      and a right child node with type constant. Both constant nodes have value "1" in their constant data field. At the moment the parse tree isn't balanced at all when populated by the plugin.
+      The result is computed by recursively walking down from the root to the lowest leaf of the tree.<LineBreak/>
+      For more information you may want to take a look at the "Parse Trees" paper by John Kennedy (http://homepage.smc.edu/kennedy_john/parsetrees.pdf), which gives a good introduction on parse trees.
+  </Paragraph>
+</FlowDocument>

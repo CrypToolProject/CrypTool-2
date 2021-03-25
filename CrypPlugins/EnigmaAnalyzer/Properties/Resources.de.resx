@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnalysisLanguageCaption" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="AnalysisLanguageTooltip" xml:space="preserve">
+    <value>Verwende diese Sprache für die Kostenfunktion.</value>
+  </data>
+  <data name="AnalysisMode" xml:space="preserve">
+    <value>Analyse Modus:</value>
+  </data>
+  <data name="AnalysisModeCaption" xml:space="preserve">
+    <value>Analysemodus</value>
+  </data>
+  <data name="AnalysisModeTooltip" xml:space="preserve">
+    <value>Welcher Kryptoanalysemodus soll ausgeführt werden?</value>
+  </data>
+  <data name="AnalysisStep" xml:space="preserve">
+    <value>Analyseschritt:</value>
+  </data>
+  <data name="AnalysisTypeGroup" xml:space="preserve">
+    <value>Analyseverfahren</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>Geheimtext</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>Der zu analysierender Geheimtext</value>
+  </data>
+  <data name="CribCaption" xml:space="preserve">
+    <value>Crib</value>
+  </data>
+  <data name="CribPositionFromCaption" xml:space="preserve">
+    <value>Crib-Position von</value>
+  </data>
+  <data name="CribPositionFromTooltip" xml:space="preserve">
+    <value>Startposition des während der Analyse zu verwendenen Cribbs</value>
+  </data>
+  <data name="CribPositionToCaption" xml:space="preserve">
+    <value>Crib-Position bis</value>
+  </data>
+  <data name="CribPositionToTooltip" xml:space="preserve">
+    <value>Endposition des während der Analyse zu verwendenen Cribs</value>
+  </data>
+  <data name="CribTooltip" xml:space="preserve">
+    <value>Crib, der während der Kryptoanalyse mit der Turing-Bombe verwendet wird.</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>Ende:</value>
+  </data>
+  <data name="GreekRingFromCaption" xml:space="preserve">
+    <value>Griechischer Ring von</value>
+  </data>
+  <data name="GreekRingFromTooltip" xml:space="preserve">
+    <value>Erster Ring, der in der griechischen Position zu analysieren ist.</value>
+  </data>
+  <data name="GreekRingToCaption" xml:space="preserve">
+    <value>Griechischer Ring bis</value>
+  </data>
+  <data name="GreekRingToTooltip" xml:space="preserve">
+    <value>Letzter Ring, der in der griechischen Position zu analysieren ist.</value>
+  </data>
+  <data name="GreekRoto PositionToTooltip" xml:space="preserve">
+    <value>Letzte zu analysierende Rotorstellung in der griechischer Position.</value>
+  </data>
+  <data name="GreekRotorFromCaption" xml:space="preserve">
+    <value>Griechischer Rotor von</value>
+  </data>
+  <data name="GreekRotorFromTooltip" xml:space="preserve">
+    <value>Erster Rotor, der in der griechischen Position zu analysieren ist.</value>
+  </data>
+  <data name="GreekRotorPositionFromCaption" xml:space="preserve">
+    <value>Griechische Rotorstellung von</value>
+  </data>
+  <data name="GreekRotorPositionFromTooltip" xml:space="preserve">
+    <value>Erste Rotorstellung, welche in der griechischen Position zu analysieren ist.</value>
+  </data>
+  <data name="GreekRotorPositionToCaption" xml:space="preserve">
+    <value>Griechische Rotorstellung bis</value>
+  </data>
+  <data name="GreekRotorToCaption" xml:space="preserve">
+    <value>Griechischer Rotor bis</value>
+  </data>
+  <data name="GreekRotorToTooltip" xml:space="preserve">
+    <value>Letzter Rotor, der in griechischer Stellung zu analysieren ist.</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Bester Schlüssel</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Der beste Schlüssel, der während der Analyse gefunden wurde.</value>
+  </data>
+  <data name="LeftRingFromCaption" xml:space="preserve">
+    <value>Linker Ring von</value>
+  </data>
+  <data name="LeftRingFromTooltip" xml:space="preserve">
+    <value>Erster Ring, der in der linken Position zu analysieren ist.</value>
+  </data>
+  <data name="LeftRingToCaption" xml:space="preserve">
+    <value>Linker Ring bis</value>
+  </data>
+  <data name="LeftRingToTooltip" xml:space="preserve">
+    <value>Letzter Ring, der in der linken Position zu analysieren ist.</value>
+  </data>
+  <data name="LeftRotorFromCaption" xml:space="preserve">
+    <value>Letzte zu analysierende Rotorstellung in der linken Position.</value>
+  </data>
+  <data name="LeftRotorFromTooltip" xml:space="preserve">
+    <value>Linker Rotor von</value>
+  </data>
+  <data name="LeftRotorPositionFromCaption" xml:space="preserve">
+    <value>Erster Rotor, der in der linken Position zu analysieren ist.</value>
+  </data>
+  <data name="LeftRotorPositionFromTooltip" xml:space="preserve">
+    <value>Linke Rotorstellung von</value>
+  </data>
+  <data name="LeftRotorPositionToCaption" xml:space="preserve">
+    <value>Erste Rotorstellung, welche in der linken Position zu analysieren ist.</value>
+  </data>
+  <data name="LeftRotorPositionToTooltip" xml:space="preserve">
+    <value>Linke Rotorstellung bis</value>
+  </data>
+  <data name="LeftRotorToCaption" xml:space="preserve">
+    <value>Linker Rotor bis</value>
+  </data>
+  <data name="LeftRotorToTooltip" xml:space="preserve">
+    <value>Letzter Rotor, der in linker Position zu analysieren ist.</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Lokal</value>
+  </data>
+  <data name="MachineModelCaption" xml:space="preserve">
+    <value>Maschinen-Modell</value>
+  </data>
+  <data name="MachineModelTooltip" xml:space="preserve">
+    <value>Das Modell der Enigma, das analysiert werden soll.</value>
+  </data>
+  <data name="MiddleRingFromCaption" xml:space="preserve">
+    <value>Mittler Ring von</value>
+  </data>
+  <data name="MiddleRingFromTooltip" xml:space="preserve">
+    <value>Erster Ring, der in der mittleren Position zu analysieren ist.</value>
+  </data>
+  <data name="MiddleRingToCaption" xml:space="preserve">
+    <value>Mittler Ring bis</value>
+  </data>
+  <data name="MiddleRingToTooltip" xml:space="preserve">
+    <value>Letzter Ring, der in der mittleren Position zu analysieren ist.</value>
+  </data>
+  <data name="MiddleRotorFromCaption" xml:space="preserve">
+    <value>Letzte zu analysierende Rotorstellung in der linken Position.</value>
+  </data>
+  <data name="MiddleRotorFromTooltip" xml:space="preserve">
+    <value>Mittler Rotor von</value>
+  </data>
+  <data name="MiddleRotorPositionFromCaption" xml:space="preserve">
+    <value>Erster Rotor, der in der mittleren Position zu analysieren ist.</value>
+  </data>
+  <data name="MiddleRotorPositionFromTooltip" xml:space="preserve">
+    <value>Mittler Rotorstellung von</value>
+  </data>
+  <data name="MiddleRotorPositionToCaption" xml:space="preserve">
+    <value>Erste Rotorstellung, welche in der mittleren Position zu analysieren ist.</value>
+  </data>
+  <data name="MiddleRotorPositionToTooltip" xml:space="preserve">
+    <value>Mittlere Rotorstellung bis</value>
+  </data>
+  <data name="MiddleRotorToCaption" xml:space="preserve">
+    <value>Mittlerer Rotor bis</value>
+  </data>
+  <data name="MiddleRotorToTooltip" xml:space="preserve">
+    <value>Letzter Rotor, der in der mittleren Position zu analysieren ist.</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>Bester Klartext</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>Der beste Klartext der während der Analyse gefunden wurde.</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Enigma Analyzer</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Komponente zur Kryptoanalyse verschiedener Typen der Enigma-Rotorschlüsselmaschine.</value>
+  </data>
+  <data name="PlugsInputCaption" xml:space="preserve">
+    <value>Stecker</value>
+  </data>
+  <data name="PlugsInputTooltip" xml:space="preserve">
+    <value>Stecker, die bei der Trigramm-Suche verwendet werden.</value>
+  </data>
+  <data name="RankingHeader" xml:space="preserve">
+    <value>Rangfolge</value>
+  </data>
+  <data name="ReflectorFromCaption" xml:space="preserve">
+    <value>Reflektor von</value>
+  </data>
+  <data name="ReflectorFromTooltip" xml:space="preserve">
+    <value>Erster zu analysierender Reflektor</value>
+  </data>
+  <data name="ReflectorFromTooltip1" xml:space="preserve">
+    <value>Letzter zu analysierender Reflektor</value>
+  </data>
+  <data name="ReflectorGroup" xml:space="preserve">
+    <value>Reflektoren</value>
+  </data>
+  <data name="ReflectorToCaption" xml:space="preserve">
+    <value>Reflektor zu</value>
+  </data>
+  <data name="RightRingFromCaption" xml:space="preserve">
+    <value>Rechter Ring von</value>
+  </data>
+  <data name="RightRingFromTooltip" xml:space="preserve">
+    <value>Erster Ring, der in der rechten Position zu analysieren ist.</value>
+  </data>
+  <data name="RightRingToCaption" xml:space="preserve">
+    <value>Rechter Ring bis</value>
+  </data>
+  <data name="RightRingToTooltip" xml:space="preserve">
+    <value>Letzter Ring, der in der rechten Position zu analysieren ist.</value>
+  </data>
+  <data name="RightRotorFromCaption" xml:space="preserve">
+    <value>Letzte zu analysierende Rotorstellung in der rechten Position.</value>
+  </data>
+  <data name="RightRotorFromTooltip" xml:space="preserve">
+    <value>Rechter Rotor von</value>
+  </data>
+  <data name="RightRotorPositionFromCaption" xml:space="preserve">
+    <value>Erster Rotor, der in der rechten Position zu analysieren ist.</value>
+  </data>
+  <data name="RightRotorPositionFromTooltip" xml:space="preserve">
+    <value>Rechter Rotorstellung von</value>
+  </data>
+  <data name="RightRotorPositionToCaption" xml:space="preserve">
+    <value>Erste Rotorstellung, welche in der rechten Position zu analysieren ist.</value>
+  </data>
+  <data name="RightRotorPositionToTooltip" xml:space="preserve">
+    <value>Rechte Rotorstellung bis</value>
+  </data>
+  <data name="RightRotorToCaption" xml:space="preserve">
+    <value>Rechter Rotor bis</value>
+  </data>
+  <data name="RightRotorToTooltip" xml:space="preserve">
+    <value>Letzter Rotor, der in rechter Position zu analysieren ist.</value>
+  </data>
+  <data name="RingGroup" xml:space="preserve">
+    <value>Ringstellungen</value>
+  </data>
+  <data name="RotorGroup" xml:space="preserve">
+    <value>Rotoren</value>
+  </data>
+  <data name="RotorPositionGroup" xml:space="preserve">
+    <value>Rotorstellungen</value>
+  </data>
+  <data name="SearchFrom" xml:space="preserve">
+    <value>Suche von:</value>
+  </data>
+  <data name="SearchTo" xml:space="preserve">
+    <value>Suche bis:</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Startzeit:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ThreadsCaption" xml:space="preserve">
+    <value>Threads</value>
+  </data>
+  <data name="ThreadsTooltip" xml:space="preserve">
+    <value>Wie viele Threads sollen während der Analyse verwendet werden?</value>
+  </data>
+  <data name="TimeLeftLabel" xml:space="preserve">
+    <value>Verbleibende Zeit:</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Bestenliste</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+</root>

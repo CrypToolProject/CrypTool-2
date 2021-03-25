@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">DES Complementation Property</title>
+  <title lang="zh">DES互补性质</title>
+  <title lang="ru">Свойство реализации DES</title>
+  <summary lang="en">Shows the complementation property of the <i>DES</i> cipher</summary>
+  <summary lang="zh">显示DES密码的互补性质</summary>
+  <summary lang="ru">Показывает свойство дополнения DES-шифра</summary>
+  <description lang="en">The complementation property of DES means that the work for a brute-force attack could be reduced by a factor of 2 (or a single bit) under a chosen-plaintext assumption. By definition, this property also applies also to 3DES cipher. The template demonstrates the property.</description>
+  <description lang="zh">DES的互补性意味着在选定明文假设下，蛮力攻击的工作量可以减少2倍（或一位）。根据定义，此属性也适用于3DES密码。该模板演示了该属性。</description>
+  <description lang="ru">Свойство дополнения DES означает, что работа по атаке грубой силы может быть уменьшена в 2 раза (или на один бит) в предположении выбранного открытого текста. По определению это свойство также применяется также к шифрованию 3DES. Шаблон демонстрирует свойство.</description>
+  <keywords>DES, complementation</keywords>
+  <keywords lang="zh">DES，互补</keywords>
+  <keywords lang="ru">DES, дополнение</keywords>
+  <title lang="de">DES Komplement-Eigenschaft</title>
+  <summary lang="de">Zeigt die Komplement-Eigenschaft der <i>DES</i>-Chiffre</summary>
+  <description lang="de">Durch die Komplement-Eigenschaft lässt sich mit einem Chosen-Plaintext-Angriff bei einer vollständigen Schlüsselsuche der Suchraum des DES auf 2^55 Schlüssel halbieren. Diese Vorlage zeigt diese Eigenschaft des DES.</description>
+  <keywords lang="de">DES, Komplement</keywords>
+  <icon file="DES.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="DES" />
+    <plugin name="StreamComparator" />
+    <plugin name="Xor" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$P$" value="P (ein einzelner 64-Bit-Block für DES)" />
+    <replacement key="$K$" value="K (ein 56-Bit DES-Schlüssel)" />
+    <replacement key="$111$" value="111... ein 64-Bit-Block mit 111... für XOR" />
+    <replacement key="$equals$" value="Gleichheit?" />
+    <replacement key="$memo1$" value="Durch Vergleich von C mit C' XOR 111... erkennt man, dass DES tatsächlich die &quot;Komplement-Eigenschaft&quot; hat." />
+    <replacement key="$memo2$" value="Diese Vorlage demonstriert die &quot;Komplement-Eigenschaft&quot; der DES-Chiffre .\line\line Die &quot;Komplement-Eigenschaft&quot; besagt, dass DES die folgende Gleichung erfüllt:\line\line DES(P,k) = C &lt;=&gt; DES(P',k') = C'\line\line wobei P der Klartext ist, k der Schlüssel, C der Geheimtext und P', k', C' die &quot;bitweisen Komplemente&quot; von Klartext, Schlüssel und Geheimtext.\line Beispiel k='110011000...&quot; =&gt; k'='001100111...\line\line Aus der Komplement-Eigenschaft folgt, dass der Aufwand für einen Brute-Force-Angriff bei einem Chosen-Plaintext-Angriff um den Faktor 2 (bzw. ein Bit) reduziert werden kann (Quelle: http://en.wikipedia.org/wiki/Data_Encryption_Standard#Security_and_cryptanalysis).\line\line Die Komplexität eines Chosen-Plaintext-Angriffs ist daher 2^55." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$P$" value="P（DES的单个64位块）" />
+    <replacement key="$K$" value="K（56位DES密钥）" />
+    <replacement key="$111$" value="111 ...具有111 ...的64位块用于XOR" />
+    <replacement key="$equals$" value="平等？" />
+    <replacement key="$memo1$" value="通过将C与C&amp;#39;XOR 111 ...进行比较，您可以看到DES实际上具有“互补属性”。" />
+    <replacement key="$memo2$" value="此模板演示了DES密码的“互补属性”。\Line \line“ complement property”表明DES满足以下公式：\line \line DES（P，k）= C &amp;lt;=&amp;gt; DES（ P&amp;#39;，k&amp;#39;）= C&amp;#39;\line \line其中P是明文，k是密钥，C是密文，P&amp;#39;，k&amp;#39;，C&amp;#39;是明文，密钥和密文的“按位补码”。 k =&amp;#39;110011000 ...“ =&amp;gt; k” =&amp;#39;001100111 ... \line \line从complement属性得出，在选定的纯文本攻击中，蛮力攻击的工作量增加了2倍（或一位）可以减少（来源：http：//en.wikipedia.org/wiki/Data_Encryption_Standard#Security_and_cryptanalysis）。\line \line所选明文攻击的复杂度为2 ^ 55。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$P$" value="P (один 64-разрядный блок для DES)" />
+    <replacement key="$K$" value="K (56-разрядный ключ DES)" />
+    <replacement key="$111$" value="111 ... 64-битный блок с 111 ... для XOR" />
+    <replacement key="$equals$" value="Равенство?" />
+    <replacement key="$memo1$" value="Сравнивая C с C&amp;#39;XOR 111 ..., можно понять, что DES фактически имеет свойство «дополнение»." />
+    <replacement key="$memo2$" value="Этот шаблон демонстрирует «свойство дополнения» DES-шифра. \Line \line «Свойство дополнения» подразумевает, что DES удовлетворяет следующему уравнению: \line \line DES (P, k) = C &amp;lt;=&amp;gt; DES ( P &amp;#39;, k&amp;#39;) = C &amp;#39;\line \line, где P - это открытый текст, k - ключ, C - зашифрованный текст и P&amp;#39;, k &amp;#39;, C&amp;#39; - «побитовые дополнения» открытого текста, ключа и зашифрованного текста k = &amp;#39;110011000 ... &amp;quot;=&amp;gt; k&amp;#39; = &amp;#39;001100111 ... \line \line Из свойства дополнения следует, что попытка атаки грубой силы в атаке с выбранным открытым текстом в 2 раза (или один бит) можно уменьшить (Источник: http://en.wikipedia.org/wiki/Data_Encryption_Standard#Security_and_cryptanalysis).line_line. Сложность атаки Chosen Plaintext составляет, следовательно, 2 ^ 55." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$P$" value="P (a single 64 bit block for DES)" />
+    <replacement key="$K$" value="K (a 56 bit DES key)" />
+    <replacement key="$111$" value="111... a 64 bit block with 111... for XOR" />
+    <replacement key="$equals$" value="equals?" />
+    <replacement key="$memo1$" value="By comparing C and C' XOR 111... you can see that DES indeed has a &quot;complementation property&quot;." />
+    <replacement key="$memo2$" value="This template demonstrates the &quot;complementation property&quot; of the DES encryption algorithm.\line\line &quot;Complementation property&quot; means that DES fullfills the following equation:\line\line DES(P,k) = C &lt;=&gt; DES(P',k') = C'\line\line where P is the plaintext, k is the key, C is the ciphertext and P', k', C' are the &quot;bitwise complements&quot; of the plaintext, the key, and the ciphertext.\line Example k='110011000...&quot; =&gt; k'='001100111...\line\line The complementation property means that the work for a brute force attack could be reduced by a factor of 2 (or a single bit) under a chosen-plaintext assumption (source: http://en.wikipedia.org/wiki/Data_Encryption_Standard#Security_and_cryptanalysis).\line\line Thus, the complexity for a chosen-plaintext attack is 2^55." />
+  </replacements>
+</sample>

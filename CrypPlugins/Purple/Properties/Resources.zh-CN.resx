@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>紫色</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>第二次世界大战的日本密码机</value>
+  </data>
+  <data name="InputNumberCaption" xml:space="preserve">
+    <value>文字输入</value>
+  </data>
+  <data name="InputNumberTooltip" xml:space="preserve">
+    <value>输入一个BigInteger</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>布尔输出</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="DecryptCaption" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="EncryptCaption" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="MotionCaption" xml:space="preserve">
+    <value>速度</value>
+  </data>
+  <data name="MotionTooltip" xml:space="preserve">
+    <value>20阶步进开关的顺序从1到3（1 =慢速，2 =中，3 =快速）</value>
+  </data>
+  <data name="PlugBoardCaption" xml:space="preserve">
+    <value>插板</value>
+  </data>
+  <data name="PositionGroup" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="PositionSixesCaption" xml:space="preserve">
+    <value>Sixes步进开关</value>
+  </data>
+  <data name="PositionTwentiesCaption1" xml:space="preserve">
+    <value>二十步步进开关＃1</value>
+  </data>
+  <data name="PositionTwentiesCaption2" xml:space="preserve">
+    <value>二十年代步进开关＃2</value>
+  </data>
+  <data name="PositionTwentiesCaption3" xml:space="preserve">
+    <value>二十步开关＃3</value>
+  </data>
+  <data name="SixesCaption" xml:space="preserve">
+    <value>Sixes</value>
+  </data>
+  <data name="TwentiesCaption" xml:space="preserve">
+    <value>二十多岁</value>
+  </data>
+  <data name="CaseHandlingCaption" xml:space="preserve">
+    <value>案件处理</value>
+  </data>
+  <data name="CaseHandlingList1" xml:space="preserve">
+    <value>保留大小写</value>
+  </data>
+  <data name="CaseHandlingList2" xml:space="preserve">
+    <value>转换为上</value>
+  </data>
+  <data name="CaseHandlingList3" xml:space="preserve">
+    <value>转换为较低</value>
+  </data>
+  <data name="CaseHandlingTooltip" xml:space="preserve">
+    <value>大写和小写字母应该怎么做？</value>
+  </data>
+  <data name="TextOptionsGroup" xml:space="preserve">
+    <value>文字选项</value>
+  </data>
+  <data name="TextTooltip" xml:space="preserve">
+    <value>输入文本</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>未知符号处理</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>忽视</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>复制（保留未修改的内容）</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>替换为占位符</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>如果输入中遇到的字符不是字母，该怎么办？</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>选择算法动作</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>文字输出</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>用紫光机加工后的弦</value>
+  </data>
+  <data name="PlugBoardTooltip" xml:space="preserve">
+    <value>插板</value>
+  </data>
+  <data name="StartwertTooltip" xml:space="preserve">
+    <value>起始值</value>
+  </data>
+  <data name="TextCaption" xml:space="preserve">
+    <value>输入文本</value>
+  </data>
+  <data name="AlphabetCaption" xml:space="preserve">
+    <value>字母</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>字母</value>
+  </data>
+  <data name="PlugBoardGroup" xml:space="preserve">
+    <value>插板</value>
+  </data>
+  <data name="OutputFormattingCaption" xml:space="preserve">
+    <value>输出格式</value>
+  </data>
+  <data name="OutputFormattingList1" xml:space="preserve">
+    <value>保持输入格式</value>
+  </data>
+  <data name="OutputFormattingList2" xml:space="preserve">
+    <value>删除空格</value>
+  </data>
+  <data name="OutputFormattingList3" xml:space="preserve">
+    <value>5块</value>
+  </data>
+  <data name="OutputFormattingTooltip" xml:space="preserve">
+    <value>输出格式</value>
+  </data>
+</root>

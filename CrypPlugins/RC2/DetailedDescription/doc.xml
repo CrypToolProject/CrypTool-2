@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    RC2 is a 64-bit block cipher with variable key length, that was designed by Ronald Rivest as a possible replacement for DES in 1987. RC stands for Rivest Cipher or Ron’s Code.
+    Rivest has also designed the block ciphers RC4, RC5 and RC6.
+    <newline /><newline />
+    The RC2 algorithm uses a key of variable size. The speed of the encryption does not exclusively depend on the used key size, as the key is used to generate a 128-byte table in a first step.
+    The 18 rounds of RC2 are arranged as a Feistel network, with 16 rounds of type MIXING and two rounds of type MASHING. A MIXING round consists of four applications of the MIX transformation.
+  </introduction>
+  <introduction lang="zh-CN">RC2是具有可变密钥长度的64位分组密码，由Ronald Rivest设计，可以在1987年替代DES。RC代表Rivest Cipher或Ron&amp;#39;s Code。 Rivest还设计了分组密码RC4，RC5和RC6。 RC2算法使用可变大小的密钥。加密的速度并不仅仅取决于所使用的密钥大小，因为在第一步中该密钥用于生成128字节的表。 18轮RC2被安排为Feistel网络，其中16轮为MIXING类型，两轮为MASHING类型。 MIXING回合包含MIX转换的四个应用程序。</introduction>
+  <introduction lang="ru">RC2 - это 64-битный блочный шифр с переменной длиной ключа, который был разработан Рональдом Ривестом в качестве возможной замены DES в 1987 году. RC означает «Rivest Cipher» или «Ron&amp;#39;s Code». Rivest также разработал блок-шифры RC4, RC5 и RC6. Алгоритм RC2 использует ключ переменной величины. Скорость шифрования зависит не только от используемого размера ключа, так как ключ используется для генерации 128-байтовой таблицы на первом шаге. 18 раундов RC2 расположены в виде сети Feistel, с 16 раундами типа MIXING и двух раундов типа MASHING. Круг MIXING состоит из четырех приложений преобразования MIX.</introduction>
+  <introduction lang="de-DE">
+    RC2 ist eine 64-Bit-Blockchiffre mit variabler Schlüssellänge, die von Ronald Rivest als möglicher Ersatz für DES im Jahr 1987 entwickelt wurde. RC steht für Rivest Cipher oder Ron’s Code. Weitere Blockchiffren,
+    die von Ronald Rivest entwickelt worden sind: RC4, RC5 und RC6.
+    <newline /><newline />
+    Der RC2-Algorithmus benutzt einen Schlüssel variabler Länge. Die Geschwindigkeit der Verschlüsselung hängt dabei nicht von der Schlüssellänge ab, da aus dem Schlüssel vorab eine schlüsselabhängige Tabelle mit 128 Bytes berechnet wird.
+    Die 18 Runden sind als Feistelnetzwerk angelegt, 16 davon sind vom Typ MIXING, 2 weitere vom Typ MASHING. Eine Runde des Typs MIXING besteht aus der vierfachen Anwendung der Mix-Tansformation.
+    <newline /><newline /><i>Quelle: <ref id="wikipedia" /></i></introduction>
+  <usage lang="en">
+    The RC2 component has three inputs and one output. On one input, it expects the RC2 key as a byte array. The size of the key must be between 40 and 128 bits, so the provided byte array must consist of 5 to 16 bytes.
+    If you use one of the block chaining modes CBC (Cipher Block Chaining), CFB (Cipher Feedback) or OFB (Output Feedback), you must also provide a byte array with 8 bytes which is used as the 64 bit initialization vector.
+    The ciphertext to decrypt or plaintext to encrypt is expected as a data stream on the third input of the component, and the resulting ciphertext/plaintext is then available as a data stream on the component's output.
+    RC2 internally uses a block size of 64 bits (8 bytes). Thus messages whose length is not a multiple of 8 bytes must be padded accordingly. You can select the kind of padding to use in the settings of the component.
+  </usage>
+  <usage lang="zh-CN">RC2组件具有三个输入和一个输出。在一个输入上，它期望RC2键为字节数组。密钥的大小必须在40到128位之间，因此提供的字节数组必须由5到16个字节组成。如果使用块链接模式CBC（密码块链接），CFB（密码反馈）或OFB（输出反馈）之一，则还必须提供一个8字节的字节数组，用作64位初始化向量。期望将要解密的密文或要加密的明文作为组件第三个输入上的数据流，然后将所得的密文/明文用作组件输出上的数据流。 RC2在内部使用64位（8字节）的块大小。因此，长度必须不是8字节倍数的消息必须相应地填充。您可以选择要在组件设置中使用的填充类型。</usage>
+  <usage lang="ru">Компонент RC2 имеет три входа и один выход. На одном входе он ожидает ключ RC2 в виде байтового массива. Размер ключа должен быть от 40 до 128 бит, поэтому предоставленный массив байтов должен состоять из 5-16 байтов. Если вы используете один из режимов цепочки блоков CBC (Cipher Block Chaining), CFB (Обратная связь с шифрованием) или OFB (Обратная связь с выводами), вы также должны предоставить массив байтов с 8 байтами, который используется как вектор инициализации 64 бит. Зашифрованный текст для расшифровки или открытого текста для шифрования ожидается как поток данных на третьем входе компонента, а полученный шифротекст / открытый текст затем доступен как поток данных на выходе компонента. RC2 внутренне использует размер блока 64 бит (8 байтов). Таким образом, сообщения, длина которых не равна кратным 8 байтам, должны соответственно дополняться. Вы можете выбрать тип дополнения, который будет использоваться в настройках компонента.</usage>
+  <usage lang="de-DE">
+    Die RC2-Komponente besitzt drei Eingänge und einen Ausgang. Am Eingang "Schlüssel" wird der RC2-Schlüssel als Byte-Array erwartet. Der Schlüssel kann 40 bis 128 Bits lang sein, so dass das Byte-Array zwischen 5 und 16 Bytes groß sein muss.
+    Optional kann ein 64 Bit großer Initialisierungsvektor angegeben werden, der für die Blockverkettungsmodi CBC (Cipher Block Chaining), CFB (Cipher Feedback) und OFB (Output Feedback) benötigt wird. 
+    Der zu ver- oder entschlüsselnde Text wird als Datenstrom übergeben. Ebenso wird der ausgehende ent- oder verschlüsselte Text als Datenstrom ausgegeben.
+    RC2 arbeitet mit einer Blockgröße von 64 Bits (8 Bytes). Daher müssen Nachrichten, deren Länge kein Vielfaches von 8 Bytes ist, entsprechend aufgefüllt werden. Die Art des Paddings kann in den Einstellungen gewählt werden.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/RC2" lang="en" />
+      <caption lang="en">RC2 in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/RC2_(Verschlüsselungsverfahren)" lang="de-DE" />
+      <caption lang="de-DE">RC2 in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,68 @@
+Challenge ID: 631348 
+Indicator Procedure: Plain indicator followed by encrypted DOUBLED Message Key - in use from 1938 until 1940. Can be solved using Zygalski Sheets
+Total Length: 150 split into  1 messages. 
+Stecker Board Plugs: 10
+Crib for first message using 25 numbers in words followed by X
+Crib: AUFWIESENINDEINEMDAMMERWE
+Full plain text:
+AUFWIESENINDEINEMDAMMERWEBEN VONALLEMWISSENSQUALMENTLADEN INDEINEMTAUGESUNDMICHBADEN WEHSTECKICHINDEMKERKERNOCH VERFLUCHTESDUMPFESMAUERLOCH WOSELBSTDASLIEBEHIMMELSLICHT 
+
+
+Daily Key:  UKW:B Wheels:213 Ring:AMW Msg:AHN Stb:BKDPEJHUIMLYNROXSVTW(AKCPJFGUMEBYIRXDQNVWHSTOLZ)
+
+
+
+
+Message Number: 1
+Message Key: XQD Message Key is encrypted with plain indicator: AHN  (Encrypted Doubled Msg Key: SOPKBM) Trigram Score: 15214 IC Score: 0.06501831501831502
+
+AUFWIESENINDEINEMDAMMERWEBENXVONALLEMWISSENSQUALMENTLADENXINDEINEMTAUGESUNDMICHBADENXWEHSTECKICHINDEMKERKERNOCHX
+VERFLUCHTESDUMPFESMAUERLOCHXWOSELBSTDASLIEBEHIMMELSLICHTX
+
+Crib: AUFWIESENINDEINEMDAMMERWE at position: 0
+
+
+
+Indicators (non encrypted)
+
+XQD    TEJ    MDC    ZTQ    IKL    WWW    PEV    RST    XYZ    KKK    
+TUV    EFG    TGB    AAA    QQQ    EDC    QRS    GGG    ESY    CCC    
+SSS    MNO    VWX    PQR    JXJ    ABC    BNN    UOO    WAP    STU    
+RFK    WSX    PKX    UUU    MYI    VOY    DDD    XPZ    ALB    BCD    
+UZM    AUV    KFM    TRQ    LXG    ADL    IJK    KLM    RDX    JOV    
+ZZR    ETT    TZL    ZIK    DZX    WXY    GPU    OPQ    OGN    UVW    
+FFF    MZE    HNB    MZE    RAF    GHI    ZBE    FGH    FED    CSK    
+OJA    QWJ    GFP    ALT    KYH    VZV    BBB    WJT    EAV    GJV    
+OOO    IEF    XWG    DEE    GJH    UHB    FXO    CYL    WLD    FAO    
+DWA    CNU    STU    ZGV    HHH    SJB    VVV    STM    ZCN    FFA    
+Challenge ID: 631348 
+Indicator Procedure: Plain indicator followed by encrypted DOUBLED Message Key - in use from 1938 until 1940. Can be solved using Zygalski Sheets
+Total Length: 150 split into  1 messages. 
+
+
+Message Number: 1 of 1 Length: 169 Indicator: SOP KBM(=<Message Key encrypted twice using daily Message Key>)
+
+
+ CAKLD ZVWPN JUROO MEFVG VHWOU
+ HYKSM MWZCD URPRD UZXRP IHKER
+ YGEHO MZZXP TQBSY BASEM DKILU
+ NUWOW SQOCG TZPVR NWNCR TXWBN
+ SUTTG VXFJW YKYJC HHPRX MLMPO
+ QCKCQ LXQBU EPSLN BWUDV ZOUOG
+ AQRVQ UMPKN VPOOJ WVXC
+
+
+Crib provided for this message (message 1): AUFWIESENINDEINEMDAMMERWE at position: 0
+
+
+SOPKBM     WZULST     UJBSAK     LIZQIP     RCECGR     TLYFFB     DZNUSF     IPOHEJ     SNQKNY     HCMXGC     
+WANLPF     CHIDWA     WMCLKW     JUHJDG     GOZZBP     CJBDAK     GXRZCI     QMIYKA     CPWDEZ     EKBIRK     
+XPRMEI     UYTSYU     NLFOFH     DOSUBL     ARUAJT     JVBJQK     OYVNYE     MQTPZU     TUDFDQ     XIJMIO     
+IHMHWC     TPFFEH     DCFUGH     MAJPPO     UNGSNS     NQWOZZ     PJPEAM     SSQKUY     JWCJVW     OKPNRM     
+MEKPOD     JANJPF     HHKXWD     WXZLCP     ZRITJA     JJEJAR     RDMCXC     HWKXVD     IJFHAH     AQNAZF     
+LESQOL     CIODIJ     WEELOR     LTMQTC     PEFEOH     TRWFJZ     QSJYUO     BSZVUP     BMVVKE     MBYPLB     
+YHXWWV     UELSON     KYCRYW     UELSON     IUXHDV     QFGYMS     LVLQQN     YMAWKX     YZPWSM     EPMIEC     
+BDHVXG     GLUZFT     QHDYWQ     JWOJVJ     HNAXNX     NENOOF     OVCNQW     TDOFXJ     CUNDDF     QDNYXF     
+BQTVZU     RZXCSV     SLIKFA     PZLESN     QDAYXX     MFCPMW     YRTWJU     ENEINR     TWPFVM     YUTWDU     
+PLHEFG     EYJIYO     XIJMIO     LMNQKF     KFARMX     XDCMXW     NBNOLF     XIKMID     LKVQRE     YHHWWG     
+

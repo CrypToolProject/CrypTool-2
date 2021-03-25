@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE category SYSTEM "..\wizard.dtd"[]>
+<!-- This is the XML file defining the classic encryption/decryption categories a user can select from. -->
+<category image="EnDeCrypt">
+  <name lang="en">Encryption/Decryption</name>
+  <name lang="zh-CN">加密/解密</name>
+  <name lang="ru">Шифрование / дешифрование</name>
+  <name lang="de-DE">Verschlüsselungsverfahren</name>
+  <description lang="en">Selecting this allows you to encrypt a plaintext or decrypt a ciphertext. You can choose which algorithm you want to use for doing this.</description>
+  <description lang="zh-CN">选择此项可以加密明文或解密密文。您可以选择要使用的算法。</description>
+  <description lang="ru">Выбрав это, вы можете зашифровать открытый текст или расшифровать зашифрованный текст. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
+  <description lang="de-DE">Wählen Sie diesen Punkt, um einen Klartext zu verschlüsseln oder einen Geheimtext zu entschlüsseln. Das zu verwendende Verschlüsselungsverfahren kann von Ihnen ausgewählt werden.</description>
+  <!-- This is the step's headline. It should be short, but precise. -->
+  <headline lang="en">Age Selection</headline>
+  <headline lang="zh-CN">年龄选择</headline>
+  <headline lang="ru">Выбор возрастов</headline>
+  <headline lang="de-DE">Epochenauswahl</headline>
+  <!-- This is the step's description. -->
+  <task lang="en">Select classic or modern encryption/decryption.</task>
+  <task lang="zh-CN">选择经典或现代加密/解密。</task>
+  <task lang="ru">Выберите классическое или современное шифрование / дешифрование.</task>
+  <task lang="de-DE">Wählen Sie zwischen klassischen und modernen Verschlüsselungsverfahren.</task>
+  <!-- Classic Encryption/Decryption Category -->
+  <file resource="Wizard.Config.EnDeCrypt.wizard.config.classicEnDe.xml" />
+  <!-- Modern Encryption/Decryption Category -->
+  <file resource="Wizard.Config.EnDeCrypt.wizard.config.modernEnDe.xml" />
+</category>

@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="de-DE" />
+  <language culture="zh-CN" />
+  <language culture="en" />
+  <!-- Introduction -->
+  <introduction lang="de-DE">
+    Bei der Verwendung symmetrischer Blockchiffren müssen diese in den meisten Fällen mit einem Betriebsmodus verwendet werden. Erst dadurch ist es möglich, 
+    Eingaben zu verarbeiten, deren Länge die Blockgröße der jeweiligen Chiffre überschreiten. Für die Authentifizierung der Daten können einige Betriebsmodi zusätzlich 
+    s.g. Nachrichten-Tags berechnen, die vom Empfänger zur Überprüfung verwendet werden können.
+    <newline /><newline />
+    In einigen der in CrypTool 2 implementierten Blockchiffren - z.B. AES, DES und RC2 - kann der Betriebsmodus direkt in der jeweiligen Komponente der Chiffre eingestellt 
+    werden. Damit dies möglich ist, muss jeder Betriebsmodus individuell für jede einzelne Chiffre ausimplementiert worden sein. Der Zweck dieser Komponente 
+    <i>Betriebsmodus-Visualisierer</i> ist es, eine Möglichkeit bereitzustellen, auch andere Blockchiffren mit verschiedenen Betriebsmodi benutzen zu können, ohne diese 
+    zuerst implementieren zu müssen. Für die einzelne Chiffre ist es lediglich nötig, sie um das <i>IControlEncryption</i>-Interface zu erweitern, um sie mit dieser 
+    Komponente benutzen zu können.
+    <newline /><newline />
+    Aktuell stellt der <i>Betriebsmodus-Visualisierer</i> die folgenden Betriebsmodi zur Verfügung:<newline />
+    - Electronic Codebook Modus (ECB)<newline />
+    - Cipher Block Chaining Modus (CBC)<newline />
+    - Cipher Feedback Modus (CFB)<newline />
+    - Output Feedback Modus (OFB)<newline />
+    - Counter Modus (CTR)<newline />
+    - XEX mit Tweak und Ciphertext-Stealing Modus (XTS)<newline />
+    - Counter mit CBC-MAC Modus (CCM)<newline />
+    - Galois/Counter Modus (GCM)
+    <newline /><newline /><b>Anmerkung:</b> Alle oben genannten Betriebsmodi erfüllen vollständig die Anforderungen des <i>National Institute of Standards and Technology (NIST)</i>. Werden die Modi 
+    mit der Blockchiffre AES betrieben, entsprechen deren Implementierungen exakt den Vorgaben, die auch an die offizielle Verwendung der Betriebsmodi gestellt werden. Um jedoch 
+    dem didaktischen Nutzen einer E-Learning-Software gerecht zu werden, sind die Algorithmen für CrypTool 2 dahingehend verallgemeinert worden, dass auch Blockchiffren 
+    verwendet werden können, die sich insbesondere hinsichtlich ihrer Blockgröße von AES unterscheiden. Im GCM-Modus beispielsweise werden vom Initialisierungsvektor nur die 
+    letzten 32 Bit für den Zähler verwendet. Bei einer Blockgröße von 128 Bit entspricht das genau 25%. Würde GCM stattdessen mit DES benutzt werden, würden entsprechend nur
+    25% von 64 Bit - die letzten 16 Bit - für den Zähler verwendet werden. Analog würden die arithmetischen Funktionen nicht mehr im Galoiskörper GF(2^128) sondern 
+    stattdessen in GF(2^64) operieren.
+  </introduction>
+  <introduction lang="zh-CN">使用对称分组密码时，在大多数情况下，必须将它们与工作模式一起使用。只有这样，才可以处理长度超过相应密码的块大小的输入。为了验证数据，某些操作模式还可以计算所谓的消息标签，收件人可以使用这些消息标签进行验证。在CrypTool 2中实现的某些分组密码（例如AES，DES和RC2）中，可以直接在密码的各个组件中设置操作模式。为了做到这一点，必须为每个单独的密码分别实现每个操作模式。此操作模式可视化器组件的目的是提供一种使用其他具有不同操作模式的分组密码的方式，而不必先实现它们。对于单个密码，只需要使用IControlEncryption接口对其进行扩展，以使其能够与此组件一起使用。操作模式可视化器当前提供以下操作模式：-电子密码本模式（ECB）-密码块链接模式（CBC）-密码反馈模式（CFB）-输出反馈模式（OFB）-计数器模式（CTR）-具有调整和密文填充模式（XTS）-CBC-MAC模式计数器（CCM）-Galois /计数器模式（GCM）注意：以上所有操作模式都完全符合美国国家标准技术研究院（NIST）的要求。如果这些模式使用AES分组密码进行操作，则其实现方式将完全对应于正式用于这些操作模式的规范。但是，为了公平对待电子学习软件的教学优势，已对CrypTool 2的算法进行了一般化，以使得也可以使用与AES不同的分组密码，特别是在分组大小方面。例如，在GCM模式下，仅初始化向量的最后32位用于计数器。对于128位的块大小，这恰好相当于25％。如果将GCM改为与DES一起使用，则64位中只有25％（最后16位）将用于计数器。同样，算术函数将不再在Galois字段GF（2 ^ 128）中运行，而是在GF（2 ^ 64）中运行。</introduction>
+  <introduction lang="en">
+    When it comes to symmetric blockciphers in most cases they must be used in combination with a certain mode of operation. Only then it is possible to encrypt or decrypt 
+    inputs whose length is greater the the blockcipher's blocksize. Additionally some of the modes of operation provide the generation of a message tag for authentication 
+    of the messages.
+    <newline /><newline />
+    For some of the in CrypTool 2 implemented blockciphers - e.g. AES, DES and RC2 - the mode of operation can be selected directly in the certain component of the cipher. 
+    Therefore every mode of operation must be implemented in every single blockchipher independantly. With this component <i>Blockmode Visualizer</i> it is possible to 
+    use a bandwith of modes of operation with every blockcipher which has been implemented for CrypTool 2. It is only necessary to extend the desired ciphers with the 
+    <i>IControlEncryption</i> interface to be able to connect them with this component.
+    <newline /><newline />
+    The current version of the <i>Blockmode Visualizer</i> supports the following eight modes of operation:<newline />
+    - Electronic Codebook Mode (ECB)<newline />
+    - Cipher Block Chaining Mode (CBC)<newline />
+    - Cipher Feedback Mode (CFB)<newline />
+    - Output Feedback Mode (OFB)<newline />
+    - Counter Mode (CTR)<newline />
+    - XEX with tweak and ciphertext stealing Mode (XTS)<newline />
+    - Counter with CBC-MAC Mode (CCM)<newline />
+    - Galois/Counter Mode (GCM)
+    <newline /><newline /><b>Note:</b> Each of the modes of operation totally meets the requirements of the <i>National Institute of Standards and Technology (NIST)</i>. If they are used with 
+    the AES blockcipher their implementations conform the specified standards for the official usage of the modes of operation. However, for a didactical e-learning software 
+    like CrypTool 2, the algorithms have been generalized to be used with various blockciphers, especially when the have a different blocksize as AES. For example, in the 
+    GCM mode only the last 32 bit of the initialization vector will be used for the counter. For a blocksize of 128 bit this is equivalent to 25%. When GCM is used with 
+    the DES blockcipher, again only the last 25% of the initialization vector will be used for the counter - in this case just 16 bit. Also the arithmetic functions in the 
+    GCM or XTS mode won't operate in the galois field GF(2^128) but in GF(2^64) instead.
+  </introduction>
+  <!-- Usage -->
+  <usage lang="de-DE">
+    Damit überhaupt eine Verarbeitung der Eingabedaten stattfinden kann, muss zunächst die Blockchiffre eingestellt werden, die im weiteren Verlauf verwendet werden soll. Über 
+    die <i>IControlEncryption</i>-Schaltfläche (der gelbe Blitz im rechten Bereich der Titelleiste der Komponente) können alle Blockchiffren ausgewählt werden, die das oben 
+    genannte Interface implementiert haben. Ggf. können für die Chiffre noch individuelle Einstellungen vorgenommen werden. Als nächstes kann der Betriebsmodus eingestellt 
+    werden, mit dem die Chiffre verwendet werden soll. Die Aktion der Komponente legt fest, ob eine Ver- oder Entschlüsselung durchgeführt werden soll.
+    <newline /><newline />
+    Je nach ausgewähltem Betriebsmodus werden unterschiedliche Datenein- und ausgänge verwendet. In jedem Fall benötigt die Komponente den Klartext für die Verschlüsselung bzw. 
+    Geheimtext für die Entschlüsselung. Auch der Schlüssel für die Blockchiffre ist eine verpflichtende Eingabe. Die Länge des Schlüssels hängt von der eingestellten 
+    Blockchiffre ab. Die einzige Ausnahme ist der XTS-Modus, der einen Schlüssel mit der doppelten Länge für die Verarbeitung benötigt. Für den Fall, dass der Schlüssel zu 
+    kurz oder zu lang sein sollte, wird er entsprechend mit Nullen aufgefüllt oder gekürzt. Der tatsächlich verwendete Schlüssel wird dann über die Nachrichtenkonsole am 
+    unteren Rand der Arbeitsfläche ausgegeben.
+    <newline /><section headline="Electronic Codebook Modus (ECB)">
+      Der Electronic Codebook Modus benötigt keine weiteren Eingaben für die Verschlüsselung. Da die Länge der Eingabe jedoch ein Vielfaches der Blockgröße der Blockchiffre 
+      sein muss, kann ein Auffüllverfahren (Padding) ausgewählt werden, um zu kurze Eingaben notfalls auffüllen zu können.
+    </section><newline /><section headline="Cipher Block Chaining Modus (CBC)">
+      Für die Verarbeitung des ersten Datenblocks wird im Cipher Block Chaining Modus ein Initialisierungsvektor benötigt. Die Länge des Vektors entspricht der Blockgröße 
+      der Blockchiffre. Genau wie der Schlüssel wird auch der Initialisierungsvektor mit Nullen aufgefüllt oder gekürzt, wenn er zu kurz oder zu lang sein sollte. Der 
+      tatsächlich verwendete Initialisierungsvektor wird über die Nachrichtenkonsole der Arbeitsfläche ausgegeben. Genau wie beim ECB-Modus muss die Länge der Eingabe 
+      ein Vielfaches der Blockgröße sein. Hierzu kann ebenfalls ein Auffüllverfahren (Padding) ausgewählt werden, um zu kurze Eingaben entsprechend aufzufüllen.
+    </section><newline /><section headline="Cipher Feedback Modus (CFB)">
+      Der Cipher Feedback Modus benötigt ebenfalls einen Initialisierungsvektor für die Verarbeitung des ersten Blocks. Genau wie beim CBC-Modus muss die Länge des 
+      Vektors gleich der Blockgröße der Blockchiffre sein. Abweichungen von der Länge werden durch Auffüllen mit Nullen oder Kürzung korrigiert. Der tatsächlich verwendete 
+      Initialisierungsvektor wird über die Nachrichtenkonsole der Arbeitsfläche ausgegeben. Beim CFB-Modus wird von den jeweiligen Ergebnissen der Blockchiffre nur der erste 
+      Teil, das sog. Datensegment, verwendet. Die Länge dieses Segments kann in den Einstellungen der Komponente eingestellt werden und darf die Blockgröße der Blockchiffre 
+      nicht überschreiten. Zu große Werte werden mit Hilfe des Modulo-Operators korrigiert und entsprechend über die Nachrichtenkonsole ausgegeben. Ähnlich wie beim ECB- 
+      oder CBC-Modus muss auch beim CFB-Modus ein Auffüllverfahren (Padding) ausgewählt werden. Die Länge der Eingabe muss jedoch kein Vielfaches der Blockgröße sein, sondern 
+      der Länge des Datensegments.
+    </section><newline /><section headline="Output Feedback Modus (OFB)">
+      Der Output Feedback Modus hat die interessante Eigenschaft, die intern verwendete Blockchiffre als Stromchiffre benutzen zu können. Auf diese Weise können nun 
+      Eingaben beliebiger Länge (auch Null) ver- oder entschlüsselt werden. Für die Erzeugung des sog. Schlüsselstroms wird lediglich ein Initialisierungsvektor benötigt. 
+      Dessen Länge muss der Blockgröße der Blockchiffre entsprechen und wird, wie auch in den vorigen Betriebsmodi, bei abweichender Länge mit Nullen aufgefüllt oder 
+      gekürzt. Im OFB-Modus wird der Schlüsselstrom durch wiederholtes Verschlüsseln des Initialisierungsvektors erzeugt. Auf diese Weise wird von der Blockchiffre auch 
+      nur die Verschlüsselungsfunktion benötigt, selbst wenn die Eingabe entschlüsselt werden soll.
+    </section><newline /><section headline="Counter Modus (CTR)">
+      Der Counter Modus unterscheidet sich vom OFB-Modus lediglich in der Art und Weise, wie der Schlüsselstrom generiert wird. Im CTR-Modus wird der 
+      Initialisierungsvektor für weiteren Block um Eins erhöht, ehe er verschlüsselt wird. Völlig analog zum OFB-Modus können auf diese Weise Nachrichten beliebiger 
+      Länge ver- und entschlüsselt werden. Auch wird von der Blockchiffre nur die Verschlüsselungsfunktion benötigt, um die Daten zu ver- oder entschlüsseln.
+    </section><newline /><section headline="XEX mit Tweak und Ciphertext-Stealing Modus (XTS)">
+      Der XTS-Modus ist eine Erweiterung von Philip Rogaways XEX-Modus. Die Verwendung eines Tweaks verhindert, dass, ähnlich wie im ECB-Modus, gleiche Eingabetexte zu 
+      gleichen Ausgabetexte verschlüsselt werden. Mit Hilfe des Ciphertext-Stealing können Nachrichten, deren Länge kein Vielfaches der Blockgröße der Blockchiffre ist, 
+      mit Teilen des eigenen Geheimtexts aufgefüllt werden. Damit dies möglich ist, muss die Eingabe mindestens einen vollständigen Block lang sein, oder vorher mit 
+      externen Verfahren aufgefüllt worden sein. Für den Tweak gilt ebenfalls, dass dessen Länge der Blockgröße entsprechen muss. Analog zum Initialisierungsvektor werden 
+      abweichende Längen mit Nullen aufgefüllt oder entsprechend gekürzt.
+    </section><newline /><section headline="Counter mit CBC-MAC Modus (CCM)">
+      Der Counter mit CBC-MAC Modus gewährleistet neben der Integrität der Eingabedaten auch deren Authentizität. Zu diesem Zweck wird zusätzlich zur Ver- oder 
+      Entschlüsselung noch ein Nachrichten-Tag, der sog. Message Authentication Code (MAC), berechnet. Dessen Länge darf die Blockgröße der Blockchiffre nicht überschreiten 
+      und wird ggf. mit dem Modulo-Operator korrigiert. Für den intern verwendeten Counter Modus wird ein ein Initialisierungsvektor benötigt. Im CCM-Modus muss dieser Vektor 
+      kürzer sein als die Blockgröße der Blockchiffre. Dessen Länge hat außerdem Auswirkungen auf die maximale Länge des Klartexts. Zusätzlich kann der CCM-Modus 
+      optional noch assoziierte Daten verarbeiten. Diese werden nicht verschlüsselt, sondern ausschließlich für die Berechnung des Nachrichten-Tag verwendet. Beim 
+      Verschicken der verschlüsselten Nachricht werden die assoziierten Daten und das Nachrichten-Tag unverschlüsselt mit angehängt. Für die Entschlüsselung wird aus 
+      den empfangenen Daten ein zweites Nachrichten-Tag berechnet und mit dem Empfangenen verglichen. Stimmen beide Tags überein, können die Daten als authentifiziert 
+      betrachtet und weiter verarbeitet werden. Im anderen Fall werden die Daten verworfen und es wird eine entsprechende Meldung ausgegeben.
+    </section><newline /><section headline="Galois/Counter Modus (GCM)">
+      Genau wie der CCM-Modus kann auch der Galois/Counter Modus Integrität und Authentizität der zu verarbeitenden Daten gewährleisten. Für die Berechnung des 
+      Nachrichten-Tag muss dessen Länge angegeben werden. Diese darf die Blockgröße der Blockchiffre nicht überschreiten und wird notfalls mit dem Modulo-Operator 
+      korrigiert. Für den internen Counter Modus wird ebenfalls ein Initialisierungsvektor benötigt. Im Gegensatz zum CCM-Modus darf dieser im GCM-Modus eine beliebige 
+      Länge haben. Auch der GCM-Modus kann optional assoziierte Daten verarbeiten, die für die Berechnung des Nachrichten-Tag verwendet und unverschlüsselt mit der 
+      Nachricht verschickt werden. Der Empfänger berechnet aus den empfangenen Daten ebenfalls ein Tag und vergleicht es mit dem Empfangenen. Wenn beide Tags übereinstimmen, 
+      sind die Daten authentifiziert. Im anderen Fall werden sie verworfen und es wird eine entsprechende Meldung ausgegeben.
+    </section></usage>
+  <usage lang="zh-CN">为了完全处理输入数据，必须首先设置将在进一步过程中使用的分组密码。使用IControlEncryption按钮（组件标题栏右侧的黄色闪电），可以选择实现了上述接口的所有分组密码。可能吧。可以对密码进行单独设置。接下来，可以设置使用密码的操作模式。组件的操作确定是否应该执行加密或解密。根据所选的操作模式，使用不同的数据输入和输出。无论如何，该组件需要用于加密的明文或用于解密的密文。分组密码的密钥也是必填项。密钥的长度取决于设置的分组密码。唯一的例外是XTS模式，该模式要求密钥的长度是处理长度的两倍。如果密钥太短或太长，则用零填充或相应地将其缩短。然后，实际使用的密钥通过工作区底部的消息控制台输出。电子密码本模式不需要任何其他条目即可进行加密。但是，由于输入的长度必须是块密码的块大小的倍数，因此可以选择一种填充方法，以便能够填充必要时太短的输入。需要一个初始化向量来以密码块链接模式处理第一个数据块。向量的长度对应于分组密码的分组大小。就像键一样，初始化向量用零填充或如果它太短或太长则被截断。实际使用的初始化向量通过工作空间的消息控制台输出。与ECB模式一样，输入的长度必须是块大小的倍数。为此，也可以选择填充方法，以便填写太短的条目。密码反馈模式还需要用于处理第一块的初始化向量。与CBC模式一样，向量的长度必须与块密码的块大小相同。通过用零填充或缩短来纠正与长度的偏差。实际使用的初始化向量通过工作空间的消息控制台输出。在CFB模式下，块密码的相应结果仅使用了第一部分，即所谓的数据段。此段的长度可以在组件的设置中设置，并且不得超过块密码的块大小。太大的值将在取模运算符的帮助下进行校正，并通过消息控制台进行相应的输出。与ECB或CBC模式类似，CFB模式也必须选择填充方法。输入的长度不必是块大小的倍数，而可以是数据段的长度。输出反馈模式具有有趣的特性，能够将内部使用的分组密码用作流密码。这样，可以对任何长度（包括零）的条目进行加密或解密。仅需要初始化向量即可生成所谓的密钥流。它的长度必须与块密码的块大小相对应，并且像在先前的操作模式中一样，用零填充或如果长度不同则缩短。在OFB模式下，通过重复加密初始化向量来生成密钥流。这样，即使要解密输入，分组密码也只需要加密功能。计数器模式与OFB模式的不同之处仅在于生成密钥流的方式。在CTR模式下，初始化矢量在加密之前针对另一个块增加一个。这样，可以完全类似于OFB模式对任何长度的消息进行加密和解密。分组密码仅需要加密功能即可对数据进行加密或解密。 XTS模式是Philip Rogaway的XEX模式的扩展。调整的使用可以防止将相同的输入文本加密为相同的输出文本，就像在ECB模式下一样。在密文窃取的帮助下，长度不是分组密码的块大小的倍数的邮件可以用您自己的密文的一部分填充。为了使之成为可能，该条目必须至少有一个完整的块长，或者必须事先使用外部程序将其填写。对于调整，也适用于其长度必须与块大小相对应。与初始化向量类似，不同的长度用零填充或相应地缩短。具有CBC-MAC模式的计数器不仅可以保证输入数据的完整性，还可以保证其真实性。为此，除了加密或解密之外，还计算消息标签，即所谓的消息认证代码（MAC）。其长度不得超过块密码的块大小，并在必要时使用模运算符进行校正。内部使用的计数器模式需要初始化向量。在CCM模式下，此向量必须短于块密码的块大小。它的长度也影响明文的最大长度。另外，CCM模式可以选择处理关联数据。这些未加密，仅用于计算消息标签。发送加密的消息时，关联的数据和消息标签也以未加密的形式附加。为了解密，从接收到的数据中计算出第二个消息标签，并将其与已接收到的消息进行比较。如果两个标签都匹配，则可以认为该数据已通过身份验证并进行了进一步处理。否则，将丢弃数据并输出相应的消息。就像CCM模式一样，Galois / Counter模式可以保证要处理的数据的完整性和真实性。要计算消息标签，必须指定其长度。该值不得超过块密码的块大小，并在必要时通过取模运算符进行纠正。内部计数器模式也需要初始化向量。与CCM模式相比，GCM模式可以具有任何长度。 GCM模式还可以选择处理关联的数据，该数据用于计算消息标签，并且未随消息一起加密发送。接收者还根据接收到的数据计算标签，并将其与接收到的数据进行比较。如果两个标签匹配，则对数据进行身份验证。否则，将其丢弃并发出相应的消息。</usage>
+  <usage lang="en">
+    To be able to encrypt or decrypt in the first place, a blockcipher must be selected for further computations. The <i>IControlEncryption</i> button (the little yellow 
+    flash in the component's title bar) provides all blockciphers which are extended with the interface mentioned before. Eventually additional configurations can be applied 
+    to the cipher. Now the mode of operation can be selected in which the blockcipher will be executed. The action defines if the input data should be encrypted or decrypted.
+    <newline /><newline />
+    Depending on the selected mode of operation additional paramaters must be provided. In every case the component needs the plaintext for encryption respectively the 
+    ciphertext for decryption. Also the blockcipher needs a key for its computation. The length of the key is determined by the blockcipher. Only the XTS mode needs 
+    a key with twice the length of the blockcipher's keysize. When the provided key is too short or too long it will be padded with zeros or trimmed to the correct size. 
+    The actual key will be displayed in the notification section of the workspace.
+    <newline /><section headline="Electronic Codebook Mode (ECB)">
+      The Electronic Codebook Mode doesn't need additional parameters for encryption or decryption. The length of the input has to be a multiple of the blockcipher's 
+      blocksize. Therefore a padding method can be selected to pad inputs which are too short.
+    </section><newline /><section headline="Cipher Block Chaining Modus (CBC)">
+      For the encryption or decryption of the first block in the Cipher Block Chaining mode an initialization vector is required. Its length must be equals to the cipher's 
+      blocksize. Like the key the initialization vector will be padded witz zeros or trimmed, if it's too short or too long. Like the key the actual initialization vector 
+      will be displayed in the workspace's notification section. And like for the ECB mode the input's length has to be a multiple of the blockcipher's blocksize. If 
+      necessary the input will be corrected with a padding method.
+    </section><newline /><section headline="Cipher Feedback Modus (CFB)">
+      Der Cipher Feedback Modus benötigt ebenfalls einen Initialisierungsvektor für die Verarbeitung des ersten Blocks. Genau wie beim CBC-Modus muss die Länge des 
+      Vektors gleich der Blockgröße der Blockchiffre sein. Abweichungen von der Länge werden durch Auffüllen mit Nullen oder Kürzung korrigiert. Der tatsächlich verwendete 
+      Initialisierungsvektor wird über die Nachrichtenkonsole der Arbeitsfläche ausgegeben. Beim CFB-Modus wird von den jeweiligen Ergebnissen der Blockchiffre nur der erste 
+      Teil, das sog. Datensegment, verwendet. Die Länge dieses Segments kann in den Einstellungen der Komponente eingestellt werden und darf die Blockgröße der Blockchiffre 
+      nicht überschreiten. Zu große Werte werden mit Hilfe des Modulo-Operators korrigiert und entsprechend über die Nachrichtenkonsole ausgegeben. Ähnlich wie beim ECB- 
+      oder CBC-Modus muss auch beim CFB-Modus ein Auffüllverfahren (Padding) ausgewählt werden. Die Länge der Eingabe muss jedoch kein Vielfaches der Blockgröße sein, sondern 
+      der Länge des Datensegments.
+    </section><newline /><section headline="Output Feedback Modus (OFB)">
+      Der Output Feedback Modus hat die interessante Eigenschaft, die intern verwendete Blockchiffre als Stromchiffre benutzen zu können. Auf diese Weise können nun 
+      Eingaben beliebiger Länge (auch Null) ver- oder entschlüsselt werden. Für die Erzeugung des sog. Schlüsselstroms wird lediglich ein Initialisierungsvektor benötigt. 
+      Dessen Länge muss der Blockgröße der Blockchiffre entsprechen und wird, wie auch in den vorigen Betriebsmodi, bei abweichender Länge mit Nullen aufgefüllt oder 
+      gekürzt. Im OFB-Modus wird der Schlüsselstrom durch wiederholtes Verschlüsseln des Initialisierungsvektors erzeugt. Auf diese Weise wird von der Blockchiffre auch 
+      nur die Verschlüsselungsfunktion benötigt, selbst wenn die Eingabe entschlüsselt werden soll.
+    </section><newline /><section headline="Counter Modus (CTR)">
+      Der Counter Modus unterscheidet sich vom OFB-Modus lediglich in der Art und Weise, wie der Schlüsselstrom generiert wird. Im CTR-Modus wird der 
+      Initialisierungsvektor für weiteren Block um Eins erhöht, ehe er verschlüsselt wird. Völlig analog zum OFB-Modus können auf diese Weise Nachrichten beliebiger 
+      Länge ver- und entschlüsselt werden. Auch wird von der Blockchiffre nur die Verschlüsselungsfunktion benötigt, um die Daten zu ver- oder entschlüsseln.
+    </section><newline /><section headline="XEX mit Tweak und Ciphertext-Stealing Modus (XTS)">
+      Der XTS-Modus ist eine Erweiterung von Philip Rogaways XEX-Modus. Die Verwendung eines Tweaks verhindert, dass, ähnlich wie im ECB-Modus, gleiche Eingabetexte zu 
+      gleichen Ausgabetexte verschlüsselt werden. Mit Hilfe des Ciphertext-Stealing können Nachrichten, deren Länge kein Vielfaches der Blockgröße der Blockchiffre ist, 
+      mit Teilen des eigenen Geheimtexts aufgefüllt werden. Damit dies möglich ist, muss die Eingabe mindestens einen vollständigen Block lang sein, oder vorher mit 
+      externen Verfahren aufgefüllt worden sein. Für den Tweak gilt ebenfalls, dass dessen Länge der Blockgröße entsprechen muss. Analog zum Initialisierungsvektor werden 
+      abweichende Längen mit Nullen aufgefüllt oder entsprechend gekürzt.
+    </section><newline /><section headline="Counter mit CBC-MAC Modus (CCM)">
+      Der Counter mit CBC-MAC Modus gewährleistet neben der Integrität der Eingabedaten auch deren Authentizität. Zu diesem Zweck wird zusätzlich zur Ver- oder 
+      Entschlüsselung noch ein Nachrichten-Tag, der sog. Message Authentication Code (MAC), berechnet. Dessen Länge darf die Blockgröße der Blockchiffre nicht überschreiten 
+      und wird ggf. mit dem Modulo-Operator korrigiert. Für den intern verwendeten Counter Modus wird ein ein Initialisierungsvektor benötigt. Im CCM-Modus muss dieser Vektor 
+      kürzer sein als die Blockgröße der Blockchiffre. Dessen Länge hat außerdem Auswirkungen auf die maximale Länge des Klartexts. Zusätzlich kann der CCM-Modus 
+      optional noch assoziierte Daten verarbeiten. Diese werden nicht verschlüsselt, sondern ausschließlich für die Berechnung des Nachrichten-Tag verwendet. Beim 
+      Verschicken der verschlüsselten Nachricht werden die assoziierten Daten und das Nachrichten-Tag unverschlüsselt mit angehängt. Für die Entschlüsselung wird aus 
+      den empfangenen Daten ein zweites Nachrichten-Tag berechnet und mit dem Empfangenen verglichen. Stimmen beide Tags überein, können die Daten als authentifiziert 
+      betrachtet und weiter verarbeitet werden. Im anderen Fall werden die Daten verworfen und es wird eine entsprechende Meldung ausgegeben.
+    </section><newline /><section headline="Galois/Counter Modus (GCM)">
+      Genau wie der CCM-Modus kann auch der Galois/Counter Modus Integrität und Authentizität der zu verarbeitenden Daten gewährleisten. Für die Berechnung des 
+      Nachrichten-Tag muss dessen Länge angegeben werden. Diese darf die Blockgröße der Blockchiffre nicht überschreiten und wird notfalls mit dem Modulo-Operator 
+      korrigiert. Für den internen Counter Modus wird ebenfalls ein Initialisierungsvektor benötigt. Im Gegensatz zum CCM-Modus darf dieser im GCM-Modus eine beliebige 
+      Länge haben. Auch der GCM-Modus kann optional assoziierte Daten verarbeiten, die für die Berechnung des Nachrichten-Tag verwendet und unverschlüsselt mit der 
+      Nachricht verschickt werden. Der Empfänger berechnet aus den empfangenen Daten ebenfalls ein Tag und vergleicht es mit dem Empfangenen. Wenn beide Tags übereinstimmen, 
+      sind die Daten authentifiziert. Im anderen Fall werden sie verworfen und es wird eine entsprechende Meldung ausgegeben.
+    </section></usage>
+  <!-- Presentation -->
+  <presentation lang="de-DE">
+    In Bearbeitung!
+  </presentation>
+  <presentation lang="zh-CN">进行中！</presentation>
+  <presentation lang="en">
+    Under construction!
+  </presentation>
+  <!-- References -->
+  <references>
+    <linkReference>
+      <link url="http://web.cs.ucdavis.edu/~rogaway/papers/modes.pdf" />
+      <caption lang="de-DE">Philip Rogaway: Evaluation of Some Blockcipher Modes of Operation (engl).</caption>
+      <caption lang="en">Philip Rogaway: Evaluation of Some Blockcipher Modes of Operation.</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38a.pdf" />
+      <caption lang="de-DE">NIST-Spezifikation für die Betriebsmodi ECB, CBC, CFB, OFB und CTR (engl).</caption>
+      <caption lang="en">NIST specification for the ECB, CBC, CFB, OFB and CTR modes of operation.</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38e.pdf" />
+      <caption lang="de-DE">NIST-Spezifikation für den Betriebsmodus XTS (engl).</caption>
+      <caption lang="en">NIST specification for the XTS mode of operation.</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38c.pdf" />
+      <caption lang="de-DE">NIST-Spezifikation für den Betriebsmodus CCM (engl).</caption>
+      <caption lang="en">NIST specification for the CCM mode of operation.</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://nvlpubs.nist.gov/nistpubs/legacy/sp/nistspecialpublication800-38d.pdf" />
+      <caption lang="de-DE">NIST-Spezifikation für den Betriebsmodus GCM (engl).</caption>
+      <caption lang="en">NIST specification for the GCM mode of operation.</caption>
+    </linkReference>
+  </references>
+</documentation>

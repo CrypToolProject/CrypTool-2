@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component compares two data streams and determines the differences between them.
+  </introduction>
+  <introduction lang="zh-CN">该组件比较两个数据流并确定它们之间的差异。</introduction>
+  <introduction lang="ru">Этот компонент сравнивает два потока данных и определяет различия между ними.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente vergleicht zwei Datenströme und stellt die Unterschiede in den beiden Eingaben fest.
+  </introduction>
+  <usage lang="en">
+    Connect the two inputs of the component with the data streams you want to compare.
+    If they are identical, the component will output the boolean value 'True', otherwise 'False'.
+  </usage>
+  <usage lang="zh-CN">将组件的两个输入与要比较的数据流连接。如果它们相同，则组件将输出布尔值“ True”，否则输出“ False”。</usage>
+  <usage lang="ru">Соедините два входа компонента с потоками данных, которые вы хотите сравнить. Если они идентичны, компонент выведет логическое значение «True», иначе «False».</usage>
+  <usage lang="de-DE">
+    Verbinden Sie die beiden Eingänge der Komponente mit den Datenströmen, die Sie miteinander vergleichen wollen.
+    Sind sie identisch, so wird am booleschen Ausgang der Komponente der Wert 'True' ausgegeben, sonst 'False'.
+  </usage>
+  <presentation lang="en">
+    The component can also make a detailed report about the differences of the two data streams.
+    To see the report, activate the checkbox <i>Create Diff</i> in the settings and open the presentation view of the component.
+    When the workspace is executed, the difference report will be displayed.
+    <newline /><newline />
+    You can choose between several presentation formats for the report:
+    <list><item>Page Mode: The report is split into browsable pages. One page at a time is displayed.</item><item>Two Page Mode: The report is split into browsable pages. Two pages are displayed.</item><item>Scroll Mode: The report is displayed as a scrollable text.</item></list>
+    The size of the text can be adjusted with the zoom slider at the lower right side of the presentation view.
+    <newline /><newline />
+    With the search function on the lower left side you can search the report.
+  </presentation>
+  <presentation lang="zh-CN">该组件还可以提供有关两个数据流差异的详细报告。要查看报告，请激活设置中的创建差异复选框，然后打开组件的演示视图。执行工作空间后，将显示差异报告。您可以在报告的几种演示格式之间进行选择：页面模式：报告分为可浏览的页面。一次显示一页。两页模式：报告分为可浏览的页面。显示两页。滚动模式：报告以可滚动文本显示。可以使用演示视图右下方的缩放滑块调整文本大小。使用左下方的搜索功能，您可以搜索报告。</presentation>
+  <presentation lang="ru">Компонент также может составить подробный отчет о различиях двух потоков данных. Чтобы увидеть отчет, установите флажок «Создать разницу» в настройках и откройте представление презентации компонента. Когда рабочая область будет выполнена, отобразится отчет о различиях. Вы можете выбрать один из нескольких форматов презентации для отчета: Режим страницы: отчет разбит на страницы, доступные для просмотра. Отображается одна страница за раз. Два режима страницы: отчет разбит на страницы, доступные для просмотра. Отображаются две страницы. Режим прокрутки: отчет отображается как прокручиваемый текст. Размер текста можно настроить с помощью ползунка масштабирования в нижней правой части презентации. С помощью функции поиска в нижней левой части вы можете выполнить поиск отчета.</presentation>
+  <presentation lang="de-DE">
+    Die Komponente kann auch einen detaillierten Bericht über die Unterschiede der beiden Datenströme erstellen.
+    Aktivieren Sie dafür in den Einstellungen das Kontrollkästchen <i>Differenz</i> und öffnen die Präsentationsansicht der Komponente.
+    Nachdem der Arbeitsbereich ausgeführt wurde, wird der erstellte Bericht angezeigt.
+    <newline /><newline />
+    Sie können zwischen mehreren Darstellungsform des Berichtes wählen:
+    <list><item>Seitenmodus: Der Bericht wird in Seiten aufgeteilt, zwischen denen Sie blättern können.</item><item>Zwei-Seiten-Modus: Der Bericht wird in Seiten aufgeteilt. Es werden zwei Seiten gleichzeitig angezeigt.</item><item>Blättermodus: Der Bericht wird als scrollbarer Text angezeigt.</item></list>
+    Die Größe des angezeigten Textes kann mit der Zoomfunktion am unteren rechten Rand der Präsentationsansicht verändert werden.
+    <newline /><newline />
+    Mit der Suchfunktion am unteren linken Rand der Präsentationsansicht kann der Bericht durchsucht werden.
+  </presentation>
+  <references></references>
+</documentation>

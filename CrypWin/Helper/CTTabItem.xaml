@@ -1,0 +1,189 @@
+﻿<TabItem x:Class="CrypTool.CrypWin.Helper.CTTabItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:CrypTool.CrypWin.Helper" xmlns:System="clr-namespace:System;assembly=mscorlib"
+         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="300" d:DesignWidth="300" Style="{DynamicResource ResourceKey=TabStyle}">
+    <TabItem.Resources>
+
+        <LinearGradientBrush x:Key="linear"
+		StartPoint="0.50,0" EndPoint="0.50,1" 
+		SpreadMethod="Pad" ColorInterpolationMode="SRgbLinearInterpolation" >
+            <GradientStop Color="Transparent" Offset="0" />
+            <GradientStop Color="#21000000" Offset="1" />
+        </LinearGradientBrush>
+
+        <Style TargetType="{x:Type Button}" x:Key="DeleteBtn">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate x:Name="TemplateBtn" TargetType="Button">
+                        <Border x:Name="Border" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" BorderThickness="1">
+                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Top" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="#55ff0000" TargetName="Border" />
+                                <Setter Property="BorderBrush" Value="#aaff0000" TargetName="Border" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" Value="#77ff0000" TargetName="Border" />
+                                <Setter Property="BorderBrush" Value="#ccff0000" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AppMenuSeparator" TargetType="{x:Type Separator}">
+            <Setter Property="Margin" Value ="40,0,0,0"/>
+        </Style>
+
+        <Style x:Key="HasChangesStyle" TargetType="{x:Type TextBlock}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HasChanges}" Value="True">
+                    <Setter Property="FontStyle" Value="Oblique"></Setter>
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                </DataTrigger> 
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="ProgressBarStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid MinHeight="14">
+                            <Border
+                                Name="PART_Track" 
+                                Background="Transparent"
+                                BorderBrush="Transparent" />
+                                <Border 
+                                    Name="PART_Indicator" Opacity="0.3"
+                                    Background="{TemplateBinding Foreground}" 
+                                    BorderBrush="#CCC" 
+                                    BorderThickness="1"
+                                    CornerRadius="2,12,0,0" 
+                                    HorizontalAlignment="Left" >
+                                </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <Style x:Key="TabStyle" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Grid.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Click="CopyToClipboard"  Header="{Loc Copy_Title}">
+                                        <MenuItem.Icon>
+                                            <Image Width="15" Height="15" Source="../images/Paste32.png"></Image>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Click="Button_Click2"  Header="{Loc Close_All}">
+                                        <MenuItem.Icon>
+                                            <Image Width="15" Height="15" Source="../images/delete.png"></Image>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Click="Button_Click3"  Header="{Loc Close_All_except_this}">
+                                        <MenuItem.Icon>
+                                            <Image Width="15" Height="15" Source="../images/delete2.png"></Image>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Click="Button_Click"  Header="{Loc Close}">
+                                        <MenuItem.Icon>
+                                            <Image Width="15" Height="15" Source="../images/delete2.png"></Image>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator></Separator>
+                                    <MenuItem Click="MenuItem_Click"  Header="{Loc HideMenu}" InputGestureText="F12">
+                                        <MenuItem.Icon>
+                                            <Image Width="15" Height="15" Source="../images/copy32.png"></Image>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+
+                                    <MenuItem Click="MenuItem_Click_1"  Header="{Loc DistractionFree}" InputGestureText="F11">
+                                        <MenuItem.Icon>
+                                            <Image Width="15" Height="15" Source="../images/copy32.png"></Image>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator></Separator>
+                                    <MenuItem Click="MenuItem_Click_2"  Header="{Loc ToolTip_Copy}">
+                                        <MenuItem.Icon>
+                                            <Image Width="15" Height="15" Source="../images/copy32.png"></Image>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </ContextMenu>
+                            </Grid.ContextMenu>
+                            <Border Width="170"
+                                CornerRadius="2,12,0,0" >
+                                <Border x:Name="Border"
+                                Background="White"
+                                CornerRadius="2,12,0,0" >
+                                    <Border
+                                    Name="Border2"
+                                    Margin="0,0,0,0" 
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="#888" 
+                                    BorderThickness="1,1,1,1.5" 
+                                    CornerRadius="2,12,0,0"  ClipToBounds="True">
+                                        <Grid ClipToBounds="True">
+                                            <ProgressBar Style="{StaticResource ResourceKey=ProgressBarStyle}" Value="{Binding Path=Editor.Presentation.Progress}" Maximum="1" Opacity="1" Margin="0"></ProgressBar>
+                                            <Border
+                                            Name="Border3"
+                                            Background="{StaticResource ResourceKey=linear}"
+                                            CornerRadius="2,12,0,0" ></Border>
+                                            <DockPanel MouseDown="DockPanel_MouseDown" 
+                                                       ToolTip="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CTTabItem}}, Path=HeaderTooltip,Mode=OneWay}" 
+                                                       ToolTipService.ShowDuration="{x:Static Member=System:Int32.MaxValue}">
+                                                <Image VerticalAlignment="Center" MaxWidth="18" MaxHeight="18" Margin="2">
+                                                    <Image.Style>
+                                                        <Style TargetType="Image">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CTTabItem}}, Path=IsExecuting,Mode=OneWay}" Value="True">
+                                                                    <Setter Property="Source" Value="../Resources/play.png"></Setter>
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CTTabItem}}, Path=IsExecuting,Mode=OneWay}" Value="False">
+                                                                    <Setter Property="Source" Value="../Resources/pause.png"></Setter>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Image.Style>
+                                                </Image>
+                                                <Image Width="20" Height="20" Margin="2" Source="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CTTabItem}}, Path=Icon,Mode=OneWay}"></Image>
+
+                                                <TextBlock x:Name="ContentSite" DockPanel.Dock="Left"
+                                        VerticalAlignment="Center" IsEnabled="false"
+                                        HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Style="{StaticResource ResourceKey=HasChangesStyle}"
+                                        Text="{Binding Path=Header}"
+                                        Margin="5,0,0,0"
+                                        Width="90"/>
+                                                <Button Style="{StaticResource ResourceKey=DeleteBtn}" Click="Button_Click" VerticalAlignment="Center" Height="15" Width="15" Margin="0,0,0,0" DockPanel.Dock="Right">
+                                                    <Image Source="../images/delete.png"></Image>
+                                                </Button>
+                                            </DockPanel>
+                                        </Grid>
+                                    </Border>
+                                </Border>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100" />
+                                <Setter TargetName="Border2" Property="BorderThickness" Value="1.5,1.5,1.5,0" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1.5,1.5,1.5,0" />
+                                <Setter TargetName="Border3" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </TabItem.Resources>
+</TabItem>

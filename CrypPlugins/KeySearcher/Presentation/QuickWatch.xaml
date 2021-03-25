@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="KeySearcherPresentation.QuickWatch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:Controls="clr-namespace:KeySearcherPresentation.Controls" xmlns:Converter="clr-namespace:KeySearcherConverter" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" x:Name="QuickWatchControl">
+	<UserControl.Resources>
+		<Converter:FalseToVisibleConverter x:Key="FalseToVisibleConverter" />
+		<Converter:TrueToVisibleConverter x:Key="TrueToVisibleConverter" />
+	</UserControl.Resources>
+
+    <Grid>
+            <Grid Visibility="{Binding ShowStatistics, ElementName=QuickWatchControl, Converter={StaticResource FalseToVisibleConverter}}">
+                <Controls:LocalQuickWatchPresentation x:Name="LocalQuickWatchPresentation" Visibility="{Binding IsP2PEnabled, ElementName=QuickWatchControl, Converter={StaticResource FalseToVisibleConverter}}" />
+                <Controls:P2PQuickWatchPresentation x:Name="P2PQuickWatchPresentation" Visibility="{Binding IsP2PEnabled, ElementName=QuickWatchControl, Converter={StaticResource TrueToVisibleConverter}}" />
+            </Grid>
+            
+    </Grid>
+    
+</UserControl>

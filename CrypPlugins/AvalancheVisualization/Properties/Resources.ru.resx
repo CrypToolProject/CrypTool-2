@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AES" xml:space="preserve">
+    <value>AES</value>
+  </data>
+  <data name="AfterRoundSubtitle" xml:space="preserve">
+    <value>После раунда</value>
+  </data>
+  <data name="AvalancheEffect" xml:space="preserve">
+    <value>Эффект лавины</value>
+  </data>
+  <data name="AvalancheTooltip" xml:space="preserve">
+    <value>Визуализация эффекта лавины в криптографических шифрах и хэш-функциях</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>категория</value>
+  </data>
+  <data name="CategoryTooltip" xml:space="preserve">
+    <value>Выберите нужную категорию.</value>
+  </data>
+  <data name="CheckAvalanche" xml:space="preserve">
+    <value>Проверить лавинный эффект после раунда ...</value>
+  </data>
+  <data name="ClassicCipher" xml:space="preserve">
+    <value>Классические шифры</value>
+  </data>
+  <data name="ClassicCipherSubtitle" xml:space="preserve">
+    <value>(Классические шифры)</value>
+  </data>
+  <data name="ClearButton" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="ContinueButton" xml:space="preserve">
+    <value>Продолжать</value>
+  </data>
+  <data name="Decimal" xml:space="preserve">
+    <value>Десятичная дробь</value>
+  </data>
+  <data name="DES" xml:space="preserve">
+    <value>О</value>
+  </data>
+  <data name="DisplayInfo" xml:space="preserve">
+    <value>Отображать ввод как:</value>
+  </data>
+  <data name="DisplayInformation" xml:space="preserve">
+    <value>Отображать ввод как:</value>
+  </data>
+  <data name="DoneButton" xml:space="preserve">
+    <value>Готово</value>
+  </data>
+  <data name="EncryptionInitialMsg" xml:space="preserve">
+    <value>Шифрование исходного сообщения</value>
+  </data>
+  <data name="EncryptionModifiedMsg" xml:space="preserve">
+    <value>Шифрование измененного сообщения</value>
+  </data>
+  <data name="ExplanationText" xml:space="preserve">
+    <value>Входные изменения могут быть сделаны путем непосредственного изменения внешнего входного фида.</value>
+  </data>
+  <data name="FlippedBits" xml:space="preserve">
+    <value>Перевернутые биты</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Испытательный лавинный эффект</value>
+  </data>
+  <data name="HashFunction" xml:space="preserve">
+    <value>Хэш-функции</value>
+  </data>
+  <data name="Hex" xml:space="preserve">
+    <value>шестнадцатеричный</value>
+  </data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>ВИЗУАЛИЗАЦИЯ АВАЛЬЯННОГО ЭФФЕКТА</value>
+  </data>
+  <data name="InputData" xml:space="preserve">
+    <value>Входные данные</value>
+  </data>
+  <data name="InputKey" xml:space="preserve">
+    <value>ключ</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>Введите ключ</value>
+  </data>
+  <data name="InputMessage" xml:space="preserve">
+    <value>Значение Message / Hash</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>Введите сообщение или значение хэша</value>
+  </data>
+  <data name="InputTitleAES" xml:space="preserve">
+    <value>Изменение входных данных AES-</value>
+  </data>
+  <data name="InstructionsPrep" xml:space="preserve">
+    <value>Подготовленные методы:</value>
+  </data>
+  <data name="InstructionsPrepBullet1" xml:space="preserve">
+    <value>Используйте ключевые и сообщения.</value>
+  </data>
+  <data name="InstructionsPrepBullet2" xml:space="preserve">
+    <value>Укажите ключ в шестнадцатеричном формате: 16, 24 или 32 байта (AES) - 8 байтов (DES).</value>
+  </data>
+  <data name="InstructionsPrepBullet3" xml:space="preserve">
+    <value>Входные данные изначально показаны в: Hex и двоичном формате (AES) - двоичный формат (DES).</value>
+  </data>
+  <data name="InstructionsPrepBullet4" xml:space="preserve">
+    <value>Изменение начального ввода (действует только тогда, когда отображается экран «Изменить входные данные». Изменения с внешнего входа также не учитываются, если вы уже проверяете лавинный эффект после каждого раунда).</value>
+  </data>
+  <data name="InstructionsPrepBullet5" xml:space="preserve">
+    <value>Проверьте лавинный эффект.</value>
+  </data>
+  <data name="InstructionsPrepSubtitle" xml:space="preserve">
+    <value>AES, DES</value>
+  </data>
+  <data name="InstructionsTitle" xml:space="preserve">
+    <value>инструкции</value>
+  </data>
+  <data name="InstructionsUnprep" xml:space="preserve">
+    <value>Неподготовленные методы:</value>
+  </data>
+  <data name="InstructionsUnprepBullet1" xml:space="preserve">
+    <value>Методы в категории «Неподготовленные методы» не имеют дополнительной реализации в плагине «Лавина». Таким образом, плагин оценивает эффект лавины только путем сравнения исходного и измененного внешнего входа. Это очень общий характер. Здесь используется только запись сообщения.</value>
+  </data>
+  <data name="InstructionsUnprepBullet2" xml:space="preserve">
+    <value>Входные данные изначально показаны в формате: hex (хеш-функции и современные шифры) - текстовый формат (классические шифры).</value>
+  </data>
+  <data name="InstructionsUnprepBullet3" xml:space="preserve">
+    <value>Измените начальный ввод (для классических и современных шифров, длина сообщения, которое будет оцениваться плагином Avalanche, не может быть изменена).</value>
+  </data>
+  <data name="InstructionsUnprepSubtitle" xml:space="preserve">
+    <value>Общие хэш-функции, классические шифры, современные шифры</value>
+  </data>
+  <data name="Intro" xml:space="preserve">
+    <value>Хороший эффект лавины достигается, когда небольшое изменение входного сигнала приводит к существенному изменению зашифрованного текста. Вы можете выбрать в настройках категорию алгоритма, эффект лавины которого вы хотели бы проверить.</value>
+  </data>
+  <data name="KeyLength" xml:space="preserve">
+    <value>Длина ключа</value>
+  </data>
+  <data name="KeyLengthTooltip" xml:space="preserve">
+    <value>Выберите длину ключа для AES.</value>
+  </data>
+  <data name="ModernCipher" xml:space="preserve">
+    <value>Современные шифры</value>
+  </data>
+  <data name="OutputStream" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="OutputStreamDescription" xml:space="preserve">
+    <value>Сгенерированные статистические данные</value>
+  </data>
+  <data name="OverviewButton" xml:space="preserve">
+    <value>Общий обзор</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Визуализация лавины</value>
+  </data>
+  <data name="PreparedCaption" xml:space="preserve">
+    <value>Подготовленные методы</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>выбор</value>
+  </data>
+  <data name="SelectionTooltipPrep" xml:space="preserve">
+    <value>Выберите метод из категории «Подготовленные методы», эффект лавины которого вы хотели бы протестировать.</value>
+  </data>
+  <data name="SingleBitCheckBox" xml:space="preserve">
+    <value>Разрешить изменять отдельные биты</value>
+  </data>
+  <data name="SkipInstructions" xml:space="preserve">
+    <value>Пропустить инструкции</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="Title_AES128" xml:space="preserve">
+    <value>Лавинный эффект AES-128</value>
+  </data>
+  <data name="Title_AES192" xml:space="preserve">
+    <value>Лавинный эффект AES-192</value>
+  </data>
+  <data name="Title_AES256" xml:space="preserve">
+    <value>Лавинный эффект AES-256</value>
+  </data>
+  <data name="UnpreparedCaption" xml:space="preserve">
+    <value>Неподготовленные методы</value>
+  </data>
+  <data name="BinaryRep" xml:space="preserve">
+    <value>Бинарное представление</value>
+  </data>
+  <data name="BinaryValues" xml:space="preserve">
+    <value>Двоичные значения</value>
+  </data>
+  <data name="ChangesText" xml:space="preserve">
+    <value>Измените ввод, чтобы продолжить презентацию. Изменение сообщения и ключа может быть выполнено двумя способами:</value>
+  </data>
+  <data name="ChangesTextBullet1" xml:space="preserve">
+    <value>Измените внешний входной канал напрямую.</value>
+  </data>
+  <data name="ChangesTextBullet2" xml:space="preserve">
+    <value>Нажмите на отдельные биты - возможно только после проверки флажка.</value>
+  </data>
+  <data name="CipherStateInitMsg" xml:space="preserve">
+    <value>Состояние шифрования исходного ввода</value>
+  </data>
+  <data name="CipherStateModMsg" xml:space="preserve">
+    <value>Состояние шифрования измененного ввода</value>
+  </data>
+  <data name="ClickOnBits" xml:space="preserve">
+    <value>Нажмите на бит (ы), который вы хотите перевернуть.</value>
+  </data>
+  <data name="FlippedBits_" xml:space="preserve">
+    <value>Перевернутые биты</value>
+  </data>
+  <data name="InitialKeyHex" xml:space="preserve">
+    <value>Начальный ключ (в шестнадцатеричном формате)</value>
+  </data>
+  <data name="InitialMessageHex" xml:space="preserve">
+    <value>Исходное сообщение (в шестнадцатеричном формате)</value>
+  </data>
+  <data name="InitialMsg" xml:space="preserve">
+    <value>Первоначальный msg</value>
+  </data>
+  <data name="ModifiedKey" xml:space="preserve">
+    <value>Измененный ключ</value>
+  </data>
+  <data name="ModifiedMessage" xml:space="preserve">
+    <value>Модифицированное сообщение</value>
+  </data>
+  <data name="ModifiedMsg" xml:space="preserve">
+    <value>Модифицированные сообщения</value>
+  </data>
+  <data name="Initial_Key" xml:space="preserve">
+    <value>Начальный ключ</value>
+  </data>
+  <data name="Initial_Message" xml:space="preserve">
+    <value>Исходное сообщение</value>
+  </data>
+  <data name="LeftHalf" xml:space="preserve">
+    <value>Левая половина</value>
+  </data>
+  <data name="NoChanges" xml:space="preserve">
+    <value>Никаких изменений не произошло!</value>
+  </data>
+  <data name="OnlyLeft" xml:space="preserve">
+    <value>Изменения произошли только в левой половине шифрования!</value>
+  </data>
+  <data name="OnlyRight" xml:space="preserve">
+    <value>Изменения произошли только в правой половине шифрования!</value>
+  </data>
+  <data name="RightHalf" xml:space="preserve">
+    <value>Правая половина</value>
+  </data>
+  <data name="StatsBullet1" xml:space="preserve">
+    <value>бит перевернулся (из {0}). Лавинный эффект {1}%</value>
+  </data>
+  <data name="StatsBullet1_Plural" xml:space="preserve">
+    <value>бит (из {0}). Лавинный эффект {1}%</value>
+  </data>
+  <data name="StatsBullet2" xml:space="preserve">
+    <value>Длина самой длинной идентичной последовательности бит: {0}. Смещение {1}.</value>
+  </data>
+  <data name="StatsBullet3" xml:space="preserve">
+    <value>Длина самой длинной перевернутой последовательности бит: {0}. Смещение {1}.</value>
+  </data>
+  <data name="StatsBullet4" xml:space="preserve">
+    <value>Среднее количество бит в байтах: {0}</value>
+  </data>
+  <data name="FlippedBytes" xml:space="preserve">
+    <value>Измененные байты</value>
+  </data>
+  <data name="InitialKeyColon" xml:space="preserve">
+    <value>Начальный ключ:</value>
+  </data>
+  <data name="InitialKeyDES" xml:space="preserve">
+    <value>Начальный ключ (64 бит):</value>
+  </data>
+  <data name="InitialMessageColon" xml:space="preserve">
+    <value>Исходное сообщение:</value>
+  </data>
+  <data name="InitialMessageDES" xml:space="preserve">
+    <value>Исходное сообщение (64 бит):</value>
+  </data>
+  <data name="InputTitleDES" xml:space="preserve">
+    <value>Изменение входных данных DES</value>
+  </data>
+  <data name="ModKeyColon" xml:space="preserve">
+    <value>Измененный ключ:</value>
+  </data>
+  <data name="ModMessageColon" xml:space="preserve">
+    <value>Модифицированное сообщение:</value>
+  </data>
+  <data name="UnchangedBits" xml:space="preserve">
+    <value>Неизменные биты</value>
+  </data>
+  <data name="UnchangedBytes" xml:space="preserve">
+    <value>Неизменные байты</value>
+  </data>
+  <data name="Binary" xml:space="preserve">
+    <value>двоичный</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>Шифрованный текст (шестнадцатеричный)</value>
+  </data>
+  <data name="EncryptionInit" xml:space="preserve">
+    <value>Шифрование init. сообщение (bin)</value>
+  </data>
+  <data name="EncryptionMod" xml:space="preserve">
+    <value>Шифрование мод. сообщение (bin)</value>
+  </data>
+  <data name="HashFunctionInit" xml:space="preserve">
+    <value>Начальное значение хэш-функции</value>
+  </data>
+  <data name="HashFunctionMod" xml:space="preserve">
+    <value>Измененное значение хэша</value>
+  </data>
+  <data name="HashFunctionSubtitle" xml:space="preserve">
+    <value>(Хэш-функции)</value>
+  </data>
+  <data name="ModernCipherSubtitle" xml:space="preserve">
+    <value>(Современные шифры)</value>
+  </data>
+  <data name="OverviewAES128" xml:space="preserve">
+    <value>Результаты шифрования после всех раундов AES-128</value>
+  </data>
+  <data name="OverviewAES192" xml:space="preserve">
+    <value>Результаты шифрования после всех раундов AES-192</value>
+  </data>
+  <data name="OverviewAES256" xml:space="preserve">
+    <value>Результаты шифрования после всех раундов AES-256</value>
+  </data>
+  <data name="OverviewDES" xml:space="preserve">
+    <value>Результаты шифрования после всех раундов DES</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>% изменено</value>
+  </data>
+  <data name="PercentageFlipped" xml:space="preserve">
+    <value>% перевернутых битов</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Круглый</value>
+  </data>
+  <data name="AfterRound" xml:space="preserve">
+    <value>После раунда {0}: {1}</value>
+  </data>
+  <data name="EncryptionInitialMsgOut" xml:space="preserve">
+    <value>Шифрование исходного ввода: {0}</value>
+  </data>
+  <data name="EncryptionModifiedlMsgOut" xml:space="preserve">
+    <value>Шифрование измененного ввода: {0}</value>
+  </data>
+  <data name="InitialHashOutput" xml:space="preserve">
+    <value>Начальное значение хеша: {0}</value>
+  </data>
+  <data name="ModHashOutput" xml:space="preserve">
+    <value>Измененное значение хеша: {0}</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="OutputInitialDESKey" xml:space="preserve">
+    <value>Начальный ключ DES: {0}</value>
+  </data>
+  <data name="OutputInitialDESMsg" xml:space="preserve">
+    <value>Начальное сообщение DES: {0}</value>
+  </data>
+  <data name="OutputModifiedDESKey" xml:space="preserve">
+    <value>Измененный ключ DES: {0}</value>
+  </data>
+  <data name="OutputModifiedDESMsg" xml:space="preserve">
+    <value>Измененное сообщение DES: {0}</value>
+  </data>
+  <data name="OutputStats1" xml:space="preserve">
+    <value>Перевернутые биты: {0}. Эффект лавины: {1}% {2}</value>
+  </data>
+  <data name="OutputStats2" xml:space="preserve">
+    <value>Длина самой длинной идентичной последовательности бит: {0}. Смещение: {1}. {2}</value>
+  </data>
+  <data name="OutputStats3" xml:space="preserve">
+    <value>Длина самой длинной перевернутой последовательности бит: {0}. Смещение: {1}. {2}</value>
+  </data>
+  <data name="OutputStatsClassic1" xml:space="preserve">
+    <value>Измененные байты: {0}. Эффект лавины: {1}% {2}</value>
+  </data>
+  <data name="OutputStatsClassic2" xml:space="preserve">
+    <value>Длина самой длинной идентичной последовательности байтов: {0}. Смещение {1}. {2}</value>
+  </data>
+  <data name="OutputStatsClassic3" xml:space="preserve">
+    <value>Длина самой длинной измененной последовательности байтов: {0}. Смещение {1}. {2}</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>Сгенерированные данные</value>
+  </data>
+  <data name="StatsClassicBullet1" xml:space="preserve">
+    <value>байт изменен (из {0}). Лавинный эффект {1}%</value>
+  </data>
+  <data name="StatsClassicBullet1_Plural" xml:space="preserve">
+    <value>байты изменены (из {0}). Лавинный эффект {1}%</value>
+  </data>
+  <data name="StatsClassicBullet2" xml:space="preserve">
+    <value>Длина самой длинной идентичной последовательности байтов: {0}. Смещение {1}.</value>
+  </data>
+  <data name="StatsClassicBullet3" xml:space="preserve">
+    <value>Длина самой длинной измененной последовательности байтов: {0}. Смещение {1}.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Модифицированное сообщение ({0} символов) должно быть таким же, как и начальное сообщение ({1} символов).</value>
+  </data>
+  <data name="KeyLength128" xml:space="preserve">
+    <value>Ключ должен иметь 16 байт.</value>
+  </data>
+  <data name="KeyLength192" xml:space="preserve">
+    <value>Ключ должен содержать 24 байта.</value>
+  </data>
+  <data name="KeyLength256" xml:space="preserve">
+    <value>Ключ должен иметь 32 байта.</value>
+  </data>
+  <data name="KeyLengthDES" xml:space="preserve">
+    <value>Ключ должен иметь 8 байтов.</value>
+  </data>
+  <data name="University" xml:space="preserve">
+    <value>Университет Мангейма</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>Конец презентации!</value>
+  </data>
+  <data name="OutputInitialAESKey" xml:space="preserve">
+    <value>Начальный ключ AES: {0}</value>
+  </data>
+  <data name="OutputInitialAESMsg" xml:space="preserve">
+    <value>Исходное сообщение AES: {0}</value>
+  </data>
+  <data name="OutputModifiedAESKey" xml:space="preserve">
+    <value>Измененный ключ AES: {0}</value>
+  </data>
+  <data name="OutputModifiedAESMsg" xml:space="preserve">
+    <value>Модифицированное сообщение AES: {0}</value>
+  </data>
+  <data name="DESderivedFromInit" xml:space="preserve">
+    <value>{0} Конечный шифротекст DES, полученный из исходного ввода: {1}</value>
+  </data>
+  <data name="DESderivedFromMod" xml:space="preserve">
+    <value>Окончательный шифротекст DES, полученный из измененного ввода: {0}</value>
+  </data>
+  <data name="AESDerivedFromInit" xml:space="preserve">
+    <value>{0} Заключительный шифрованный текст AES, полученный из исходного ввода: {1}</value>
+  </data>
+  <data name="AESDerivedFromMod" xml:space="preserve">
+    <value>Заключительный шифрованный текст AES, полученный из измененного ввода: {0}</value>
+  </data>
+  <data name="HashFunctionInitBin" xml:space="preserve">
+    <value>Начальное значение хэша (двоичное)</value>
+  </data>
+  <data name="HashFunctionModBin" xml:space="preserve">
+    <value>Измененное значение хеша (двоичное)</value>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>инструкции</value>
+  </data>
+  <data name="InstructionsPrepDescription" xml:space="preserve">
+    <value>Методы в категории «Подготовленные методы» реализованы в плагине «Лавина». Таким образом, плагин может отображать изменения не только для результата криптографической функции (последний шаг), но и для всех промежуточных этапов.</value>
+  </data>
+  <data name="ShowChangeTitleAES" xml:space="preserve">
+    <value>Показать измененные входные данные AES-</value>
+  </data>
+  <data name="ShowChangeTitleDES" xml:space="preserve">
+    <value>Показать измененные входные данные DES</value>
+  </data>
+  <data name="Title_DES" xml:space="preserve">
+    <value>Лавинный эффект DES</value>
+  </data>
+  <data name="ChangedInput" xml:space="preserve">
+    <value>Измененный вход</value>
+  </data>
+  <data name="OutputNotMod" xml:space="preserve">
+    <value>Вход не изменен.</value>
+  </data>
+  <data name="OutputNotModAESKey" xml:space="preserve">
+    <value>Ключ AES не изменен.</value>
+  </data>
+  <data name="OutputNotModAESMsg" xml:space="preserve">
+    <value>Сообщение AES не изменено.</value>
+  </data>
+  <data name="OutputNotModDESKey" xml:space="preserve">
+    <value>DES ключ не изменен.</value>
+  </data>
+  <data name="OutputNotModDESMsg" xml:space="preserve">
+    <value>Сообщение DES не изменено.</value>
+  </data>
+  <data name="SelectionTooltipUnprep" xml:space="preserve">
+    <value>Выберите метод из категории «Неподготовленные методы», эффект лавины которого вы хотели бы протестировать.</value>
+  </data>
+  <data name="black_white" xml:space="preserve">
+    <value>Черно-белый</value>
+  </data>
+  <data name="Contrast" xml:space="preserve">
+    <value>контрастировать</value>
+  </data>
+  <data name="ContrastTooltip" xml:space="preserve">
+    <value>Выберите контраст для круговой диаграммы.</value>
+  </data>
+  <data name="red_green" xml:space="preserve">
+    <value>Красный зеленый</value>
+  </data>
+</root>

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Coin Flipping Protocol</title>
+  <title lang="zh">硬币翻转协议</title>
+  <title lang="ru">Протокол конвертирования монет</title>
+  <summary lang="en">Usage of the <i>Coin flipping protocol</i></summary>
+  <summary lang="zh">硬币翻转协议的用法</summary>
+  <summary lang="ru">Использование протокола перевода монет</summary>
+  <description lang="en">This template shows the usage of the <i>Coin flipping protocol</i>.</description>
+  <description lang="zh">该模板显示了硬币翻转协议的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование протокола перевода монет.</description>
+  <keywords>coin flipping</keywords>
+  <keywords lang="zh">掷硬币</keywords>
+  <keywords lang="ru">копирование монет</keywords>
+  <title lang="de">Coin-Flipping-Protokoll</title>
+  <summary lang="de">Benutzung des <i>Coin-Flipping-Protokolls</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>Coin-Flipping-Protokolls</i>.</description>
+  <keywords lang="de">coin flipping</keywords>
+  <icon file="CoinFlip.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="CoinFlipping" />
+    <plugin name="SHA" />
+    <plugin name="StreamComparator" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Flip Coin$" value="Werfe Münze" />
+    <replacement key="$Alice's Coin$" value="Alices Münze" />
+    <replacement key="$Secret Key$" value="Geheimer Schlüssel" />
+    <replacement key="$Concat$" value="Konkateniere" />
+    <replacement key="$Coin Flipping$" value="Münzwurf" />
+    <replacement key="$Bob wins?$" value="Bob gewinnt?" />
+    <replacement key="$Bob's Guess$" value="Bobs Vermutung" />
+    <replacement key="$Comparator$" value="Vergleich" />
+    <replacement key="$Alice honest?$" value="Alice ehrlich?" />
+    <replacement key="$step1$" value="{\b Schritt 1}\line Alice wirft eine Münze." />
+    <replacement key="$step2$" value="{\b Schritt 2}\line Alice wählt einen geheimen Schlüssel und sendet das verschlüsselte Resultat ihres Münzwurfs an Bob." />
+    <replacement key="$step3$" value="{\b Schritt 3}\line Bob rät das Ergebnis von Alices Münzwurf und schickt seine Vermutung an Alice." />
+    <replacement key="$step4$" value="{\b Schritt 4}\line Abhängig von ihrer Ehrlichkeit verrät Alice Bob ihre geworfene Münze oder sie lügt. Dann bestimmt sie den Gewinner und teilt Bob ihren geheimen Schlüssel mit." />
+    <replacement key="$step5$" value="{\b Schritt 5}\line Bob empfängt den geheimen Schlüssel und verschlüsselt damit den Münzwert, den Alice ihm mitgeteilt hat. Er vergleicht den Wert mit dem von Alice verschlüsselten Wert. Sind sie unterschiedlich, so weiß Bob, dass Alice gelogen hat." />
+    <replacement key="$memo$" value="{\b Coin-Flipping-Protokoll}\line\line Alice und Bob wollen eine Streitfrage durch einen Münzwurf entscheiden. Alice wirft eine Münze, und Bob gewinnt, falls er das Ergebnis korrekt vorhersagen kann. Andernfalls gewinnt Alice. Unglücklicherweise befinden sich die beiden nicht im selben Raum und können nur über das Telefon kommunizieren. Wenn Bob Alice seine Vorhersage mitteilt, könnte sie einfach lügen und behaupten, die Münze zeige die andere Seite und somit hätte Alice gewonnen. Wie kann ein faires Protokoll implementiert werden, das verhindert, dass Alice schummeln kann?\line\line Das {\b Münzwurf-Protokoll} zwingt Alice zu einem fairen Münzwurf und erlaubt Bob festzustellen, ob Alice ehrlich war:\line\line {\b Schritt 1:} Alice wirft eine Münze.\line\line {\b Schritt 2:} Alice wählt einen geheimen Schlüssel und hängt das Ergebnis des Münzwurfes an den Schlüssel an. Dann wendet sie eine kryptographische Einwegfunktion (hier SHA) auf den zusammengesetzten Schlüssel an und sendet den resultierenden Hashwert an Bob. Sie hat sich damit auf ihren Münzwurf {\b festgelegt}.\line\line {\b Schritt 3:} Bob sendet seine Voraussage an Alice.\line\line {\b Schritt 4:} Alice empfängt Bobs Voraussage und teilt ihm ihren geheimen Schlüssel mit. Wenn Bobs Voraussage falsch ist, erklärt sich Alice zum Gewinner. Wenn Bobs Voraussage richtig ist, kann Alice entweder ehrlich sein und Bob zum Gewinner erklären, oder sie kann schummeln und wieder sich selbst zum Gewinner erklären.\line\line {\b Schritt 5:} Bob erfährt das (angebliche) Resultat von Alices Münzwurf und ihren geheimen Schlüssel. Er wendet dieselbe Einwegfunktion auf Alices angeblichen Münzwurf an und vergleicht das Resultat mit dem Hashwert, den ihm Alice in Schritt 2 geschickt hat. Wenn sie gleich sind, weiss Bob, dass Alice ehrlich war. Sind sie unterschiedlich, dann weiss er, dass sie gemogelt und das Münzwurf-Ergebnis, auf das sie sich festgelegt hatte, nochmals abgeändert hat." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Flip Coin$" value="扔硬币" />
+    <replacement key="$Alice's Coin$" value="爱丽丝的硬币" />
+    <replacement key="$Secret Key$" value="密钥" />
+    <replacement key="$Concat$" value="Konkateniere" />
+    <replacement key="$Coin Flipping$" value="掷硬币" />
+    <replacement key="$Bob wins?$" value="鲍勃赢了？" />
+    <replacement key="$Bob's Guess$" value="鲍勃的猜测" />
+    <replacement key="$Comparator$" value="比较" />
+    <replacement key="$Alice honest?$" value="老实说爱丽丝？" />
+    <replacement key="$step1$" value="{\b步骤1} \行Alice投掷硬币。" />
+    <replacement key="$step2$" value="{\b步骤2} \行Alice选择了一个秘密密钥，并将掷硬币的加密结果发送给Bob。" />
+    <replacement key="$step3$" value="{\b步骤3} \行Bob猜出Alice投掷硬币的结果，并将其猜测发送给Alice。" />
+    <replacement key="$step4$" value="{\b步骤4} \行根据她的诚实，爱丽丝会告诉鲍勃她掷了什么硬币，或者她撒谎。然后，她确定获胜者，并将鲍勃的秘密钥匙给鲍勃。" />
+    <replacement key="$step5$" value="{\b步骤5} \行Bob收到了秘密密钥，并用它来加密Alice给他的硬币值。他将值与Alice加密的值进行比较。如果他们不同，鲍勃知道爱丽丝说谎。" />
+    <replacement key="$memo$" value="{\b Coin-Flipping-Protocol} \line \line爱丽丝和鲍勃想通过扔硬币来解决问题。爱丽丝掷硬币，如果鲍勃能正确预测结果，他就会获胜。否则，爱丽丝获胜。不幸的是，这两个人不在同一个房间，只能通过电话通信。如果鲍勃把爱丽丝的预言给了爱丽丝，她可以简单地撒谎并声称硬币显示出另一面，而爱丽丝则赢了。如何实施公平协议以防止Alice作弊？\Line \line {\b投掷协议}迫使Alice进行公平投掷，并允许Bob确定Alice是否诚实：\line \line {\b步骤1：}爱丽丝投掷硬币\line \line {\b步骤2：}爱丽丝选择一个秘密钥匙，并将掷硬币的结果附加到钥匙上。然后，它将单向加密功能（此处为SHA）应用于复合密钥，并将生成的哈希值发送给Bob。她致力于掷硬币{\b}。\Line \line {\b步骤3：} Bob将他的预测发送给Alice。\Line \line {\b步骤4：} Alice收到Bob的预测并与他分享她的预测。私钥。如果鲍勃的预言是错误的，爱丽丝将宣布自己为获胜者。如果行长的预测正确，则爱丽丝可以诚实并宣布鲍勃为获胜者，也可以作弊并再次声明自己为获胜者\行\行{\b步骤5：}鲍勃了解了爱丽丝掷硬币的结果和他们的秘密钥匙。他将相同的单向函数应用于Alice的假定抛硬币，并将结果与Alice在步骤2中向他发送的哈希值进行比较。如果他们相同，鲍勃就会知道爱丽丝很诚实。如果它们不同，则他知道她作弊并改变了她再次投入的抛硬币结果。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Flip Coin$" value="Бросьте монету" />
+    <replacement key="$Alice's Coin$" value="Монета Алисы" />
+    <replacement key="$Secret Key$" value="Секретный ключ" />
+    <replacement key="$Concat$" value="Konkateniere" />
+    <replacement key="$Coin Flipping$" value="Münzwurf" />
+    <replacement key="$Bob wins?$" value="Боб побеждает?" />
+    <replacement key="$Bob's Guess$" value="Догадка Боба" />
+    <replacement key="$Comparator$" value="сравнение" />
+    <replacement key="$Alice honest?$" value="Алиса честная?" />
+    <replacement key="$step1$" value="{\b step 1} \line Алик бросает монету." />
+    <replacement key="$step2$" value="{\b step 2} \line Алиса выбирает секретный ключ и отправляет зашифрованный результат своей монеты Бобу." />
+    <replacement key="$step3$" value="{\b step 3} \line Боб угадывает результат броска монеты Алисы и отправляет его догадки Алисе." />
+    <replacement key="$step4$" value="{\b Шаг 4} \line В зависимости от ее честности, Алиса Боб раскрывает свою брошенную монету или ложь. Затем она выбирает победителя и говорит Бобу секретный ключ." />
+    <replacement key="$step5$" value="{\b step 5} \line Боб получает секретный ключ и шифрует деноминацию, которую дал ему Алиса. Он сравнивает значение со значением, зашифрованным Алисой. Если они разные, Боб знает, что Алиса солгала." />
+    <replacement key="$memo$" value="{\b Coin-Flipping Protocol} \line \line Алиса и Боб хотят решить спор, бросив монету. Алиса бросает монету, и Боб выигрывает, если он может правильно предсказать результат. В противном случае побеждает Алиса. К сожалению, они не находятся в одной комнате и могут общаться только по телефону. Если Боб расскажет Алисе о своем предсказании, она может просто солгать и сказать, что монета указывает на другую сторону, и поэтому Алиса выиграла бы. Как можно реализовать справедливый протокол, который не позволяет Алисе обманывать? \Line \line. {\B мошеннический тонизирующий протокол} заставляет Алису сделать честную монетную броску и позволяет Бобу определить, была ли Алиса честной: \line \line {\b Шаг 1:} Алиса бросает монету. \line \line {\b Шаг 2:} Алиса выбирает секретный ключ и прикрепляет монету к ключу. Затем он применяет одностороннюю криптографическую функцию (здесь SHA) к составному ключу и отправляет полученное значение хэша в Боб. Она поселилась на ее броске монеты {\b} \line \\b {3} Боб отправил свое предсказание Алисе. \Line \\b {4} Алиса получает предсказание Боба и говорит ей секретный ключ с. Если предсказание Боба неверно, Алиса объявляет себя победителем. Если предсказание Боба верное, Алиса может быть честной и объявить Боб победителем, иначе она может обмануть и объявить себя победителем снова. \Line \line {\b Шаг 5:} Боб узнает (якобы) результат броска монеты Алисы и ее секретный ключ. Он применяет одну и ту же одностороннюю функцию к предполагаемой монете Алисы и сравнивает результат с хэш-значением, которое Алиса послала ему на шаге 2. Если они такие же, Боб знает, что Алиса была честна. Если они разные, то он знает, что они обманули и снова изменили результат броска, на который они решили." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Flip Coin$" value="Flip Coin" />
+    <replacement key="$Alice's Coin$" value="Alice's Coin" />
+    <replacement key="$Secret Key$" value="Secret Key" />
+    <replacement key="$Concat$" value="Concat" />
+    <replacement key="$Coin Flipping$" value="Coin Flipping" />
+    <replacement key="$Bob wins?$" value="Bob wins?" />
+    <replacement key="$Bob's Guess$" value="Bob's Guess" />
+    <replacement key="$Comparator$" value="Comparator" />
+    <replacement key="$Alice honest?$" value="Alice honest?" />
+    <replacement key="$step1$" value="{\b Step 1}\line Alice flips a coin." />
+    <replacement key="$step2$" value="{\b Step 2}\line Alice chooses a secret key and sends the encrypted result of the coin flip to Bob." />
+    <replacement key="$step3$" value="{\b Step 3}\line Bob guesses the result of Alice's coin flip and sends his guess to Alice." />
+    <replacement key="$step4$" value="{\b Step 4}\line Depending on her honesty, Alice tells Bob her real coin value or she lies. She declares the winner. She also tells Bob her secret key." />
+    <replacement key="$step5$" value="{\b Step 5}\line Bob receives the secret key and encrypts Alice's coin value. He compares the result with Alice's encrypted value. If they differ, Bob knows that Alice has cheated." />
+    <replacement key="$memo$" value="{\b Coin Flipping Protocol}\line\line Alice and Bob want to settle an argument by flipping a coin. Alice flips a coin, and if Bob can correctly guess the outcome, he wins. Otherwise, Alice wins. Unfortunately, they are not in the same room and can only communicate over the telephone. When Bob tells Alice his guess, she could simply lie and say that her coin showed the other side, making her the winner. How can a fair protocol be implemented, that prevents Alice from cheating?\line\line The {\b Coin Flipping Protocol} commits Alice to her coin flip and allows Bob to detect, whether Alice was honest:\line\line {\b Step 1:} Alice flips a coin.\line\line {\b Step 2:} Alice chooses a secret key and appends the result of her coin flip to it. She then applies a cryptographic one-way function (SHA) to the concatenated string and sends the resulting hash code to Bob. She has now {\b commited} to her coin flip result.\line\line {\b Step 3:} Bob sends his guess to Alice.\line\line {\b Step 4:} Alice receives Bob guess and tells him her secret key. If Bob's guess is wrong, Alice declares herself the winner. If Bob's guess is correct, Alice can either be honest and declare Bob the winner, or she can cheat and again declare herself the winner.\line\line {\b Step 5:} Bob learns Alice's (alleged) coin flip result and her secret key. He applies the same one-way function to Alice's announced coin flip result and compares it to the hash code Alice sent him in step 2. If they are equal, Bob knows that Alice was honest. If they differ, he knows that Alice has cheated by altering the coin flip result to which she has commited herself." />
+  </replacements>
+</sample>

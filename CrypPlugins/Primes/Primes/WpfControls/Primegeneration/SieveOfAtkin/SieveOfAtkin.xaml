@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primegeneration.SieveOfAtkin.SieveOfAtkin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:this="clr-namespace:Primes.WpfControls.Primegeneration.SieveOfAtkin"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+        <this:Numbergrid x:Name="numbergrid" Grid.Column="0" MinWidth="400" Margin="10" />
+        <comps:LogControl x:Name="log" Grid.Column="1" Margin="10" />
+    </Grid>
+
+</UserControl>

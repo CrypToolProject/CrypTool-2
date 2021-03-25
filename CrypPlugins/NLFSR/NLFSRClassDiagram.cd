@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CrypTool.NLFSR.NLFSR" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ACCgiUJAJCFQYR4jIEAAAtAChEGgEgFDsAAoQQACABA=</HashCode>
+      <FileName>NLFSR.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CrypTool.NLFSR.NLFSRPresentation">
+    <Position X="3.25" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NLFSRPresentation.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.NLFSR.NLFSRSettings" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QEAAAAAAAAAEUMAAJFCAACAAhQQCAAQAAgAAAAJAQAA=</HashCode>
+      <FileName>NLFSRSettings.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="CrypTool.Plugins.FEAL.Controls.KeyRound"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:t="clr-namespace:CrypTool.Plugins.FEAL.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <t:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVisConverter" />
+    </UserControl.Resources>
+    <Canvas Margin="0,0,0,0">
+        <!-- fk rectangle and text-->
+        <Rectangle Width="100" Height="50" Margin="0,75,0,0" Stroke="Black" StrokeThickness="1.5"/>
+        <Label FontFamily="Courier New" Width="100" FontSize="18" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="fk" Margin="0,75,0,0"/>
+        <!-- left arrow -->
+        <Line X1="50" Y1="75" X2="50" Y2="25" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="50" Y1="74" X2="45" Y2="69" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="50" Y1="74" X2="55" Y2="69" Stroke="Black" StrokeThickness="1.5"/>
+        <!-- right line -->
+        <Line X1="250" Y1="25" X2="250" Y2="100" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="250" Y1="100" X2="250" Y2="150" Stroke="Black" StrokeThickness="1.5"  Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <!-- middle line with arrow to next XOR -->
+        <Line X1="50" Y1="50" X2="150" Y2="50" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <Line X1="150" Y1="50" X2="198" Y2="267" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <Line X1="200" Y1="260" X2="198" Y2="267" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <Line X1="193" Y1="262" X2="198" Y2="267" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <!-- middle arrow -->
+        <Line X1="250" Y1="100" X2="100" Y2="100" Stroke="Black" StrokeThickness="1.5"/>                
+        <!-- XOR circle -->
+        <Ellipse Width="15" Height="15" Stroke="Black" StrokeThickness="1.5" Fill="White" Canvas.Left="192" Canvas.Top="92" Visibility="{Binding Path=FirstRound, Converter={StaticResource InverseBoolToVisConverter} }" />
+        <Line X1="193" Y1="100" X2="206" Y2="100" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=FirstRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <Line X1="200" Y1="106" X2="200" Y2="93" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=FirstRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <!-- left line -->
+        <Line X1="50" Y1="125" X2="50" Y2="137" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="50" Y1="137" X2="50" Y2="150" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }" Stroke="Black" StrokeThickness="1.5"/>
+        <!-- keys output line -->
+        <Line X1="-30" Y1="137" X2="50" Y2="137" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="-30" Y1="137" X2="-25" Y2="132" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="-30" Y1="137" X2="-25" Y2="142" Stroke="Black" StrokeThickness="1.5"/>
+        <Label Width="75" FontFamily="Courier New" FontSize="14" Height="33" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding Path=RoundKeyNames }" Canvas.Top="130" Canvas.Left="-25"/>
+        <Label Width="90" FontFamily="Courier New" FontSize="14" Height="42" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding Path=RoundKey }" Canvas.Top="115" Canvas.Left="-120"/>
+        <!-- down crossing lines -->
+        <Line X1="50" Y1="150" X2="250" Y2="200" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+        <Line X1="50" Y1="200" X2="250" Y2="150" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }"/>
+    </Canvas>
+</UserControl>

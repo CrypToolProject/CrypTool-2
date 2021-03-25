@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">AES Known-Plaintext Analysis (1)</title>
+  <title lang="zh">AES已知明文分析（1）</title>
+  <title lang="ru">AES Известный-простой анализ (1)</title>
+  <summary lang="en">Cryptanalysis of <i>AES</i> using the <i>KeySearcher</i> component and a known plaintext</summary>
+  <summary lang="zh">使用KeySearcher组件和已知的明文对AES进行密码分析</summary>
+  <summary lang="ru">Криптоанализ AES с использованием компонента KeySearcher и известного открытого текста</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>AES</i> algorithm using the <i>KeySearcher</i> component and a known piece of plaintext (crib). The <i>KeySearcher</i> gets an encrypted text as input and tries all keys of the given keyspace. The resulting plaintexts are then matched against the crib. The plaintext that best matches the crib is sent to the output.</description>
+  <description lang="zh">该模板显示了使用KeySearcher组件和已知的明文（crib）对AES算法进行的密码分析。 KeySearcher获取加密的文本作为输入，并尝试给定键空间的所有键。然后将生成的明文与婴儿床进行匹配。与婴儿床最匹配的纯文本发送到输出。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма AES с использованием компонента KeySearcher и известного фрагмента открытого текста (crib). KeySearcher получает зашифрованный текст в качестве входных данных и пробует все ключи данного пространства ключей. Полученные в результате открытые тексты затем сопоставляются с кроваткой. Исходный текст, который лучше всего соответствует кроватке, отправляется на выход.</description>
+  <keywords>advanced, Daemen, Rijmen, standard, Rijndael, symmetric, keysearcher, Attack, Analysis</keywords>
+  <keywords lang="zh">高级，Daemen，Rijmen，标准，Rijndael，对称，keysearcher，攻击，分析</keywords>
+  <keywords lang="ru">продвинутый, Daemen, Rijmen, стандарт, Rijndael, симметричный, keyearcher, Attack, Analysis</keywords>
+  <title lang="de">AES Known-Plaintext-Analyse (1)</title>
+  <summary lang="de">Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Abschnittes des Klartextes (Crib). Der <i>KeySearcher</i> erhält hierzu einen verschlüsselten Text als Eingabe und probiert alle Schlüssel des angegebenen Schlüsselraumes. Die resultierenden Klartexte werden dann mit dem Crib verglichen und der Klartext, der dem Crib am besten entspricht, wird ausgegeben.</description>
+  <keywords lang="de">symmetrisch, Daemen, Rijmen, Standard, Rijndael, Keysearcher, Angriff</keywords>
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="CostFunction" />
+    <plugin name="KeySearcher" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$riphertext$" value="Geheimtext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Revealed Key$" value="Gefundener Schlüssel" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$riphertext$" value="密文" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$Revealed Key$" value="找到钥匙" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$KeySearcher$" value="关键搜索" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$riphertext$" value="шифротекста" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$Revealed Key$" value="Найдено ключ" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$KeySearcher$" value="ключ поиска" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
+    <replacement key="$Revealed Key$" value="Revealed Key" />
+    <replacement key="$StringDecoder$" value="StringDecoder" />
+    <replacement key="$Converter$" value="Converter" />
+    <replacement key="$KeySearcher$" value="KeySearcher" />
+  </replacements>
+</sample>

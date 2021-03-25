@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="de">Betriebsmodus-Visualisierer</title>
+  <title lang="zh">可视化操作模式</title>
+  <title lang="en">Blockmode Visualizer</title>
+  <summary lang="de">Visualisierung verschiedener <i>Betriebsmodi</i> für Blockchiffren.</summary>
+  <summary lang="zh">可视化块密码的不同操作模式。</summary>
+  <summary lang="en">Visualization of different <i>modes of operation</i> for blockciphers.</summary>
+  <description lang="de">
+Im Zusammenhang mit dem Data Encryption Standard DES sind 1980 die ersten vier Betriebsmodi für Blockchiffren, Electronic Codebook Modus, Cipher Block Chaining Modus, Cipher Feedback Modus und Output Feedback Modus, durch das National Institute for Standards and Technology (NIST) spezifiziert worden. Als der DES als zu unsicher eingestuft und durch den Advanced Encryption Standard AES ersetzt wurde, wurde 2001 der Counter Modus mit in den Kanon aufgenommen. Mit dem XTS-Modus stellt die Komponente "Betriebsmodus-Visualisierer" zudem einen Modus für die Verschlüsselung von Festplatten zur Verfügung.<newline /><newline />
+Eine weitere wichtige Funktion von Betriebsmodi ist die sog. <i>authenticated encryption</i>, die Verschlüsselung mit Authentifizierung. In dieser Kategorie haben sich der Counter Modus mit CBC-MAC und der Galois/Counter Modus etabliert.<newline /><newline />
+Quellen:<newline /><external ref="https://csrc.nist.gov/csrc/media/publications/fips/81/archive/1980-12-02/documents/fips81.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38e.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38c.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf" /></description>
+  <description lang="zh">与数据加密标准DES结合使用时，美国国家标准技术研究院（NIST）在1980年指定了分组密码的前四种操作模式，电子密码本模式，密码块链接模式，密码反馈模式和输出反馈模式。当DES被归类为过于不安全并被高级加密标准AES取代时，计数器模式在2001年被添加到标准中。在XTS模式下，“运行模式可视化器”组件还提供了一种用于加密硬盘的模式。操作模式的另一个重要功能是所谓的认证加密，即带有认证的加密。在这一类别中，建立了具有CBC-MAC的计数器模式和Galois /计数器模式。资料来源：</description>
+  <description lang="en">
+In connection with the Data Encryption Standard DES, the first four modes of operation, Electronic Codebook Mode, Cipher Block Chaining Mode, Cipher Feedback Mode, and Output Feedback Mode, have been standardized in 1980 by the National Institute for Standards and Technology (NIST). After DES has been classified as too unsafe and replaced by the Advanced Encryption Standard AES another mode of operation, the Counter Mode, has been added to the canon. The component "Blockmode Visualizer" also provides a mode for encrypting hard disks, the XTS Mode.<newline /><newline />
+Another functionality of modes of operation is the so called <i>authenticated encryption</i>. In this algorithm class the Counter Mode with CBC-MAC and the Galois/Counter Mode are the state of the art.
+Sources:<newline /><external ref="https://csrc.nist.gov/csrc/media/publications/fips/81/archive/1980-12-02/documents/fips81.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38a.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38e.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38c.pdf" /><newline /><external ref="https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-38d.pdf" /></description>
+  <keywords lang="de">betriebsmodus, blockchiffre, ecb, cbc, cfb, ofb, ctr, xts, ccm, gcm</keywords>
+  <keywords lang="zh">betriebsmodus，blockchiffre，ecb，cbc，cfb，ofb，ctr，xts，ccm，gcm</keywords>
+  <keywords lang="en">mode of operation, blockcipher, ecb, cbc, cfb, ofb, ctr, xts, ccm, gcm</keywords>
+  <icon file="BlockmodeVisualizer.png" />
+  <relevantPlugins>
+    <plugin name="BlockmodeVisualizer" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$textinput$" value="Klartext/Geheimtext" />
+    <replacement key="$textinputdecoder$" value="Klartext-/Geheimtextdekodierer" />
+    <replacement key="$taginput$" value="Nachrichten-Tag" />
+    <replacement key="$taginputdecoder$" value="Tag-Dekodierer" />
+    <replacement key="$key$" value="Schlüssel" />
+    <replacement key="$keydecoder$" value="Schlüsseldekodierer" />
+    <replacement key="$iv$" value="Initialisierungsvektor" />
+    <replacement key="$ivdecoder$" value="IV-Dekodierer" />
+    <replacement key="$ad$" value="Assoziierte Daten" />
+    <replacement key="$addecoder$" value="AD-Dekodierer" />
+    <replacement key="$textoutput$" value="Geheimtext/Klartext" />
+    <replacement key="$textoutputencoder$" value="Geheimtext-/Klartextkodierer" />
+    <replacement key="$tagoutput$" value="Nachrichten-Tag" />
+    <replacement key="$tagoutputencoder$" value="Tag-Kodierer" />
+    <replacement key="$visualizer$" value="Betriebsmodus-Visualisierer" />
+    <replacement key="$inputtext$" value="Als Gregor Samsa eines Morgens aus unruhigen Träumen erwachte, fand er sich in seinem Bett zu einem ungeheueren Ungeziefer verwandelt." />
+    <replacement key="$keytext$" value="9C D4 96 12 84 AA 48 C1 53 CC 70 46 BE 71 08 AD" />
+    <replacement key="$ivtext$" value="D5 E5 4D 58 19 3E 9E 89 64 50 C4 19 08 93 5B D3" />
+    <replacement key="$memotext$" value="Den Memotext würde ich nochmal überarbeiten, wenn das Layout der Vorlage feststeht." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$textinput$" value="纯文本/密文" />
+    <replacement key="$textinputdecoder$" value="纯文本/密文解码器" />
+    <replacement key="$taginput$" value="新闻日" />
+    <replacement key="$taginputdecoder$" value="标签解码器" />
+    <replacement key="$key$" value="键" />
+    <replacement key="$keydecoder$" value="密钥解码器" />
+    <replacement key="$iv$" value="初始服务商" />
+    <replacement key="$ivdecoder$" value="IV解码器" />
+    <replacement key="$ad$" value="关联数据" />
+    <replacement key="$addecoder$" value="AD解码器" />
+    <replacement key="$textoutput$" value="密文/明文" />
+    <replacement key="$textoutputencoder$" value="密文/明文编码器" />
+    <replacement key="$tagoutput$" value="新闻日" />
+    <replacement key="$tagoutputencoder$" value="标签编码器" />
+    <replacement key="$visualizer$" value="可视化操作模式" />
+    <replacement key="$inputtext$" value="当格雷戈尔·萨姆萨（Gregor Samsa）从一个动荡的梦中醒来的一个早晨时，他发现自己变成了躺在床上的大害虫。" />
+    <replacement key="$keytext$" value="9C D4 96 12 84 AA 48 C1 53 CC 70 46 BE 71 08 AD" />
+    <replacement key="$ivtext$" value="D5 E5 4D 58 19 3E 9E 89 64 50 C4 19 08 93 5B D3" />
+    <replacement key="$memotext$" value="模板的布局固定后，我将再次修改备忘录文本。" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$textinput$" value="Plaintext/Ciphertext" />
+    <replacement key="$textinputdecoder$" value="Plaintext/Ciphertext decoder" />
+    <replacement key="$taginput$" value="Message tag" />
+    <replacement key="$taginputdecoder$" value="Tag decoder" />
+    <replacement key="$key$" value="Key" />
+    <replacement key="$keydecoder$" value="Key decoder" />
+    <replacement key="$iv$" value="Initialization vector" />
+    <replacement key="$ivdecoder$" value="IV decoder" />
+    <replacement key="$ad$" value="Associated data" />
+    <replacement key="$addecoder$" value="AD decoder" />
+    <replacement key="$textoutput$" value="Ciphertext/Plaintext" />
+    <replacement key="$textoutputencoder$" value="Ciphertext/Plaintext encoder" />
+    <replacement key="$tagoutput$" value="Message tag" />
+    <replacement key="$tagoutputencoder$" value="Tag encoder" />
+    <replacement key="$visualizer$" value="Blockmode Visualizer" />
+    <replacement key="$inputtext$" value="One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin." />
+    <replacement key="$keytext$" value="9C D4 96 12 84 AA 48 C1 53 CC 70 46 BE 71 08 AD" />
+    <replacement key="$ivtext$" value="D5 E5 4D 58 19 3E 9E 89 64 50 C4 19 08 93 5B D3" />
+    <replacement key="$memotext$" value="Under Construction..." />
+  </replacements>
+</sample>

@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE category SYSTEM "..\wizard.dtd"[]>
+<!-- This is the XML file defining the mordern encryption categories a user can select from. -->
+<category image="Modern">
+  <name lang="en">Modern Encryption</name>
+  <name lang="zh-CN">现代加密</name>
+  <name lang="ru">Современное шифрование</name>
+  <name lang="de">Moderne Verschlüsselung</name>
+  <description lang="en">Selecting this allows you to analyze a ciphertext that was encrypted by a modern algorithm. You can choose which algorithm you want to use for doing this.</description>
+  <description lang="zh-CN">选择此选项可以分析由现代算法加密的密文。您可以选择要使用的算法。</description>
+  <description lang="ru">Выбор этого позволяет анализировать зашифрованный текст, который был зашифрован с помощью современного алгоритма. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
+  <description lang="de-DE">Wählen Sie diesen Punkt, um einen Geheimtext, der mit einem modernen Algorithmus verschlüsselt wurde, zu analysieren. Das zu verwendende Verschlüsselungsverfahren kann von Ihnen ausgewählt werden.</description>
+  <!-- This is the step's headline. It should be short, but precise. -->
+  <headline lang="en">Type Selection</headline>
+  <headline lang="zh-CN">类型选择</headline>
+  <headline lang="ru">Выбор типа</headline>
+  <headline lang="de">Auswahl des Typs</headline>
+  <!-- This is the step's description. -->
+  <task lang="en">Select which kind of modern encryption algorithm you want to use.</task>
+  <task lang="zh-CN">选择您要使用哪种现代加密算法。</task>
+  <task lang="ru">Выберите, какой из современных алгоритмов шифрования вы хотите использовать.</task>
+  <task lang="de">Wählen Sie, welches moderne Verschlüsselungsverfahren Sie benutzen wollen.</task>
+  <!-- Symmetric Encryption Category -->
+  <file resource="Wizard.Config.Analysis.wizard.config.modernSymEn.xml" />
+  <!-- Asymmetric Encryption Category -->
+  <category image="Asym">
+    <name lang="en">Asymmetric Encryption</name>
+    <name lang="zh-CN">非对称加密</name>
+    <name lang="ru">Асимметричное шифрование</name>
+    <name lang="de">Asymmetrische Verschlüsselung</name>
+    <description lang="en">Selecting this allows you to analyze a ciphertext that was encrypted by a modern asymmetric algorithm. You can choose which algorithm you want to use for doing this.</description>
+    <description lang="zh-CN">选择此项可以分析由现代非对称算法加密的密文。您可以选择要使用的算法。</description>
+    <description lang="ru">Выбор этого позволяет проанализировать зашифрованный текст, который был зашифрован современным асимметричным алгоритмом. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
+    <description lang="de-DE">Wählen Sie diesen Punkt, um einen Geheimtext, der mit einem modernen asymmetrischen Algorithmus verschlüsselt wurde, zu analysieren. Das zu verwendende Verschlüsselungsverfahren kann von Ihnen ausgewählt werden.</description>
+    <!-- This is the step's headline. It should be short, but precise. -->
+    <headline lang="en">Algorithm Selection</headline>
+    <headline lang="zh-CN">算法选择</headline>
+    <headline lang="ru">Выбор алгоритма</headline>
+    <headline lang="de">Algorithmenauswahl</headline>
+    <!-- This is the step's description. -->
+    <task lang="en">Select an asymmetric encryption/decryption algorithm.</task>
+    <task lang="zh-CN">选择非对称加密/解密算法。</task>
+    <task lang="ru">Выберите асимметричный алгоритм шифрования / дешифрования.</task>
+    <task lang="de">Wählen Sie ein asymmetrisches Verschlüsselungsverfahren.</task>
+    <!-- RSA input -->
+    <input image="RSA">
+      <name lang="en">RSA</name>
+      <name lang="zh-CN">RSA</name>
+      <name lang="ru">RSA</name>
+      <description lang="en">RSA is an asymmetric (public-key) algorithm to encrypt plaintext or to decrypt ciphertext. RSA stands for Rivest, Shamir and Adleman who first publicly described it. It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public-key cryptography.
+RSA is widely used in electronic commerce protocols, and is believed to be secure given sufficiently long keys and using of up-to-date implementations.
+      </description>
+      <description lang="zh-CN">RSA是用于加密明文或解密密文的非对称（公钥）算法。 RSA代表Rivest，Shamir和Adleman，他们首先公开描述了它。它是已知的第一个适用于签名和加密的算法，并且是公钥密码学的第一个重大进步。 RSA被广泛用于电子商务协议中，并且被认为具有足够长的密钥并使用最新的实现是安全的。</description>
+      <description lang="ru">RSA - это асимметричный (открытый ключ) алгоритм для шифрования открытого текста или для дешифрования зашифрованного текста. RSA означает Ривеста, Шамира и Адлемана, которые впервые публично описали его. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции, и считается, что он защищен при использовании достаточно длинных ключей и использовании современных реализаций.</description>
+      <description lang="de">RSA ist ein asymmetrisches Verschlüsselungsverfahren. RSA steht für Rivest, Shamir und Adleman, die dieses Verfahren zum ersten Mal öffentlich beschrieben. Es ist der erste Algorithmus, der sowohl zur Signierung als auch für die Verschlüsselung benutzt werden konnte und war einer der ersten großen Fortschritte in der Public-Key-Kryptographie.
+RSA ist in kommerziellen Protokollen weit verbreitet und gilt bei genügend langen Schlüsseln und unter Verwendung aktueller Implementierungen als sicher.
+</description>
+      <headline lang="en">RSA Attack</headline>
+      <headline lang="zh-CN">RSA攻击</headline>
+      <headline lang="ru">Атака RSA</headline>
+      <headline lang="de">RSA-Angriff</headline>
+      <task lang="en">Please read the explanation.</task>
+      <task lang="zh-CN">请阅读说明。</task>
+      <task lang="ru">Прочтите объяснение.</task>
+      <task lang="de">Bitte lesen Sie die Beschreibung.</task>
+      <inputBox plugin="" property="" visibleLines="10">
+        <description lang="en"></description>
+        <defaultvalue lang="en">
+The security of the RSA cryptosystem is based on the problem of factoring large integer numbers.
+This is because the equation N = p*q holds, where p and q are primes. N is the common part of the private and public keypair.
+If you know the public keypair (N, e), it is possible to also calculate the private keypair (N, d), 
+because d is simply the multiplicative inverse of e modulo (p-1)*(q-1).
+So the main problem of attacking RSA lies in the factorization of N into its two prime factors.
+
+By clicking "next", you can factorize a large number into all its factors.
+        </defaultvalue>
+        <defaultvalue lang="zh-CN">RSA密码系统的安全性基于分解大整数的问题。这是因为等式N = p * q成立，其中p和q是质数。 N是私有和公共密钥对的公共部分。如果知道公共密钥对（N，e），则也可以计算私有密钥对（N，d），因为d只是e模（p-1）*（q-1）的乘法逆。因此，攻击RSA的主要问题在于将N分解为两个主要因子。通过单击“下一步”，可以将大量因素分解为所有因素。</defaultvalue>
+        <defaultvalue lang="ru">Безопасность криптосистемы RSA основана на проблеме факторизации больших целых чисел. Это связано с тем, что имеет место равенство N = p * q, где p и q - простые числа. N является общей частью частной и открытой пары ключей. Если вы знаете общую пару ключей (N, e), можно также вычислить частную пару ключей (N, d), так как d является просто мультипликативным обратным по модулю (p-1) * (q-1). Таким образом, основная проблема атаки RSA заключается в факторизации N в два ее основных фактора. Нажимая «next», вы можете разложить большое количество на все его факторы.</defaultvalue>
+        <defaultvalue lang="de">
+Die Sicherheit des RSA-Kryptosystems basiert auf dem Problem, eine sehr große Semi-Primzahl in ihre beiden Primfaktoren zu zerlegen.
+Der gemeinsame Teil des privaten und des öffentlichen Schlüssels, die Zahl N = p*q, ist das Produkt zweier großer Primzahlen. Wären die
+Faktoren p und q von N bekannt, so könnte man aus dem öffentlichen Schlüssel (N, e) leicht den privaten Schlüssel (N, d) berechnen,
+indem man d als das multiplikative Inverse von e modulo (p-1)*(q-1) ermittelt.
+Also liegt das Hauptproblem eines RSA-Angriffes darin, N in seine beiden Primfaktoren zu zerlegen.
+
+Klicken Sie auf 'Weiter', um eine große Zahl in ihre Faktoren zu zerlegen.
+        </defaultvalue>
+      </inputBox>
+      <file resource="Wizard.Config.Math.wizard.config.factorization.xml" />
+    </input>
+  </category>
+  <category image="Hash">
+    <name lang="en">Hash Functions</name>
+    <name lang="zh-CN">散列函数</name>
+    <name lang="ru">Хэш-функции</name>
+    <name lang="de">Hash-Funktionen</name>
+    <description lang="en">Selecting this allows you to create a collision for a hash function. You can choose which hash algorithm you want to use.</description>
+    <description lang="zh-CN">选择此项可以为哈希函数创建冲突。您可以选择要使用的哈希算法。</description>
+    <description lang="ru">Выбрав это, вы можете создать столкновение для хэш-функции. Вы можете выбрать, какой алгоритм хеширования вы хотите использовать.</description>
+    <description lang="de">Wählen Sie diesen Punkt, um eine Kollision eines Hashwertes zu erzeugen. Sie können auswählen, welchen Hash-Algorithmus Sie verwenden wollen.</description>
+    <!-- This is the step's headline. It should be short, but precise. -->
+    <headline lang="en">Hash Function Selection</headline>
+    <headline lang="zh-CN">哈希函数选择</headline>
+    <headline lang="ru">Выбор функции хеширования</headline>
+    <headline lang="de">Hash-Funktion: Auswahl</headline>
+    <!-- This is the step's description. -->
+    <task lang="en">Select a hash function.</task>
+    <task lang="zh-CN">选择一个哈希函数。</task>
+    <task lang="ru">Выберите хеш-функцию.</task>
+    <task lang="de">Wählen Sie eine Hash-Funktion.</task>
+    <input image="MD5">
+      <name lang="en">MD5</name>
+      <name lang="zh-CN">MD5</name>
+      <name lang="ru">MD5</name>
+      <description lang="en">MD5 (Message-Digest algorithm 5) is a widely used cryptographic hash function with a 128-bit (16-byte) hash value.</description>
+      <description lang="zh-CN">MD5（消息摘要算法5）是具有128位（16字节）哈希值的广泛使用的密码哈希函数。</description>
+      <description lang="ru">MD5 (алгоритм Message-Digest 5) - широко используемая криптографическая хеш-функция с 128-битным (16-байтовым) значением хэш-функции.</description>
+      <description lang="de">MD5 (Message-Digest algorithm 5) ist eine weit verbreitete kryptographische Hash-Funktion mit einem 128-Bit-Hashwert (16 Bytes).</description>
+      <headline lang="en">MD5</headline>
+      <headline lang="zh-CN">MD5</headline>
+      <headline lang="ru">MD5</headline>
+      <task lang="en">Select if you want to create an MD5 collision.</task>
+      <task lang="zh-CN">选择是否要创建MD5碰撞。</task>
+      <task lang="ru">Выберите, если вы хотите создать столкновение MD5.</task>
+      <task lang="de">Wählen Sie dies, wenn Sie eine MD5 Kollision erzeugen wollen.</task>
+      <inputBox plugin="$Prefix$" property="Text" visibleLines="1" regex="(................................................................)+">
+        <description lang="en">Prefix (must be a multiple of 64 characters):</description>
+        <description lang="zh-CN">前缀（必须为64个字符的倍数）：</description>
+        <description lang="ru">Префикс (должен быть кратным 64 символам):</description>
+        <description lang="de">Präfix (muss ein Vielfaches von 64 Zeichen sein):</description>
+        <defaultvalue lang="en">1234567890123456789012345678!! PREFIX !!012345678901234567890123</defaultvalue>
+        <defaultvalue lang="zh-CN">1234567890123456789012345678 !!前缀!! 012345678901234567890123</defaultvalue>
+        <defaultvalue lang="ru">1234567890123456789012345678 !! PREFIX !! 012345678901234567890123</defaultvalue>
+      </inputBox>
+      <inputBox plugin="$Suffix$" property="Text" visibleLines="1">
+        <description lang="en">Suffix (any data of any length):</description>
+        <description lang="zh-CN">后缀（任何长度的任何数据）：</description>
+        <description lang="ru">Суффикс (любые данные любой длины):</description>
+        <description lang="de">Suffix (beliebige Daten beliebiger Länge):</description>
+        <defaultvalue lang="en">!! SUFFIX !!Just some random text</defaultvalue>
+        <defaultvalue lang="zh-CN">!! SUFFIX !!只是一些随机文本</defaultvalue>
+        <defaultvalue lang="ru">!! SUFFIX !! Просто какой-то случайный текст</defaultvalue>
+      </inputBox>
+      <sampleViewer image="MD5" file="Hashfunctions\MD5Collider.cwm">
+        <name lang="en">MD5 Collision</name>
+        <name lang="zh-CN">MD5碰撞</name>
+        <name lang="ru">Столкновение MD5</name>
+        <name lang="de">MD5 Kollision</name>
+        <description lang="en">Creates a collision for MD5.</description>
+        <description lang="zh-CN">为MD5创建碰撞。</description>
+        <description lang="ru">Создает столкновение для MD5.</description>
+        <description lang="de">Erzeugt eine Kollision für MD5.</description>
+        <headline lang="en">MD5</headline>
+        <headline lang="zh-CN">MD5</headline>
+        <headline lang="ru">MD5</headline>
+        <task lang="en">Watch the MD5-Collision calculation result.</task>
+        <task lang="zh-CN">观看MD5-Collision计算结果。</task>
+        <task lang="ru">Посмотрите результат расчета MD5-Collision.</task>
+        <task lang="de">Betrachten Sie das Resultat der MD5-Kollisionsberechnung.</task>
+        <presentation plugin="$MD5Collider$" alignment="Stretch" height="30%">
+          <description lang="en">Collider Progress:</description>
+          <description lang="zh-CN">对撞机进度：</description>
+          <description lang="ru">Прогресс коллайдера:</description>
+          <description lang="en">Kollisions Fortschritt:</description>
+          <description lang="zh-CN">碰撞进度：</description>
+          <description lang="ru">Достигнутый прогресс:</description>
+        </presentation>
+        <presentation plugin="$Data$ 1" height="120" alignment="Left" width="49%" group="one">
+          <description lang="en">Data 1 Output:</description>
+          <description lang="zh-CN">数据1输出：</description>
+          <description lang="ru">Данные 1 Выход:</description>
+          <description lang="de">Data 1-Ausgabe:</description>
+        </presentation>
+        <presentation plugin="$MD5 of data$ 1" height="120" alignment="Right" width="49%" group="one">
+          <description lang="en">MD5 Data 1 Output:</description>
+          <description lang="zh-CN">MD5数据1输出：</description>
+          <description lang="ru">MD5 Данные 1 Выход:</description>
+          <description lang="de">MD5 Data 1-Ausgabe:</description>
+        </presentation>
+        <presentation plugin="$Data$ 2" height="120" alignment="Left" width="49%" group="two">
+          <description lang="en">Data 2 Output:</description>
+          <description lang="zh-CN">数据2输出：</description>
+          <description lang="ru">Данные 2 Выход:</description>
+          <description lang="de">Data 2-Ausgabe:</description>
+        </presentation>
+        <presentation plugin="$MD5 of data$ 2" height="120" alignment="Right" width="49%" group="two">
+          <description lang="en">MD5 Data 2 Output:</description>
+          <description lang="zh-CN">MD5数据2输出：</description>
+          <description lang="ru">MD5 Данные 2 Выход:</description>
+          <description lang="de">MD5 Data 2-Ausgabe:</description>
+        </presentation>
+      </sampleViewer>
+    </input>
+  </category>
+</category>

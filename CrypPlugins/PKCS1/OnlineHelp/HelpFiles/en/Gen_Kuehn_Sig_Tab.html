@@ -1,0 +1,40 @@
+﻿<h2>Generate the Kuehn signature</h2>
+
+In this tab you can generate a faked signature using the method described by Ulrich Kuehn.
+The structure of the signatures is similar to that of the <a href="help://Gen_Bleichenb_Sig_Tab">Bleichenbacher attack</a>. 
+It is also applicable to signatures with a length of 1024 bits. The signatures have the following structure: '00' '01' PS '00' HI HD GG. </br>
+
+The differences to the Bleichenbacher signatures are the following:
+<ul>
+  <li>
+  The padding string has a fixed length of 8 bytes (64 bits). This length was chosen because some faulty implementations
+  require different lengths of the padding string, but not more than 8 bytes. Thus the position of the hash identifier (HI) and the hash digest (HD) are also fixed.
+  </li>
+  <li>
+  The appended garbage does not need to be calculated, but consists simply of appended bytes with the value 'FF'.</li>
+</ul>
+
+The Kuehn approach works like this: The cube root of the structure described above is extracted. Then the integer part
+of the root is again raised to the third power. If the 46 leftmost bytes of the result have not changed in this process, we have
+found a value that can be used to forge a signature.
+These 46 bytes include:
+
+<ul>
+	<li><strong>'00' '01'</strong> leading bytes (2 bytes)</li>
+	<li><strong>PS</strong> padding string (8 bytes)</li>
+	<li><strong>'00'</strong> trailing zero byte (1 byte)</li>
+	<li><strong>HI</strong> hash identifier (15 bytes (SHA-1))</li>
+	<li><strong>HD</strong> hash digest (20 bytes (SHA-1))</li>
+</ul>
+
+If the 46 leftmost bytes do not match, the message that is to be signed is modified, resulting in a new hash value.
+Again, by extracting the cube root and raising to the third power, it is checked whether the new hash value results
+in a correct signature.
+This process is repeated until the 46 leftmost bytes remain unchanged, which leads to a signature that is accepted as
+valid by faulty implementations.</br>
+In each iteration of this algorithm a cube root and a hash value have to be calculated. As these are expensive operations, 
+the running time of this algorithm might be very long.
+To limit the running time, a <a href="help://Gen_Kuehn_Iterations">maximum number of iterations</a> can be specified.</br></br>
+
+The signature that is displayed in this tab is the result after cube root extraction and raising to the third power of the
+signature that ends with 'FF' bytes. Thus the displayed signature does (most probably) not end with a block of 'FF' bytes. 

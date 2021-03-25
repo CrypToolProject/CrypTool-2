@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>PRESENT</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>PRESENT ist eine ultra-leichtgewichtige Blockchiffre</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>Eingabedatenstrom</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>zu ver-/entschlüsselnde Daten</value>
+  </data>
+  <data name="InputKeyCaption" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>Der Schlüssel muss 10 oder 16 Bytes lang sein.</value>
+  </data>
+  <data name="InputIVCaption" xml:space="preserve">
+    <value>Initialisierungsvektor</value>
+  </data>
+  <data name="InputIVTooltip" xml:space="preserve">
+    <value>Der Initialisierungsvektor (IV) für die Blockverschlüsselungs-Modi (CBC,CFB,OFB). Er muss gleich groß wie die Blockgröße sein (8 Bytes).</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>Ausgabedatenstrom</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>Ver- bzw. entschlüsselter Ausgabedatenstrom</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Sollen die Eingabedaten ver- oder entschlüsselt werden?</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>Blockverkettungsmodus</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Wählen Sie die Art der Blockverkettung.</value>
+  </data>
+  <data name="PaddingCaption" xml:space="preserve">
+    <value>Auffüll-Methode (Padding)</value>
+  </data>
+  <data name="PaddingTooltip" xml:space="preserve">
+    <value>Wählen Sie die Methode, wie zu kurze Blöcke zur Blockgröße aufgefüllt werden.</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>Verschlüsselung</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>Entschlüsselung</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>Electronic Code Book (ECB)</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>Cipher Block Chaining (CBC)</value>
+  </data>
+  <data name="ModeList3" xml:space="preserve">
+    <value>Cipher Feedback (CFB)</value>
+  </data>
+  <data name="ModeList4" xml:space="preserve">
+    <value>Output feedback (OFB)</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="Add_Roundkey" xml:space="preserve">
+    <value>Rundenschlüssel addieren</value>
+  </data>
+  <data name="animation_speed" xml:space="preserve">
+    <value>Animationsgeschwindigkeit</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Übernehmen</value>
+  </data>
+  <data name="A_top_level_algorithmic_description_of_PRESENT" xml:space="preserve">
+    <value>Algorithmische Beschreibung des PRESENT-Verfahrens:</value>
+  </data>
+  <data name="bit_group_sbox" xml:space="preserve">
+    <value>Bitgruppe {0} (bits {1:d2},{2:d2},{3:d2},{4:d2}) S-Box : {5} -&gt; {6}</value>
+  </data>
+  <data name="bit_group_xor" xml:space="preserve">
+    <value>Bitgruppe {0} (Bits {1:d2},{2:d2},{3:d2},{4:d2}) Schlüssel XOR : {5} XOR {6} = {7}</value>
+  </data>
+  <data name="Data_" xml:space="preserve">
+    <value>Daten (8 Byte):</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Fertig</value>
+  </data>
+  <data name="Encrypted_to" xml:space="preserve">
+    <value>Verschlüsselt 0x{0:x16} nach 0x{1:x16}</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Verschlüsselung</value>
+  </data>
+  <data name="Encryption_Data" xml:space="preserve">
+    <value>Verschlüsselung: Daten = 0x{0:x16}</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Beendet</value>
+  </data>
+  <data name="Finished_generating_32_roundkeys" xml:space="preserve">
+    <value>Erzeugung der 32 Rundenschlüssel beendet</value>
+  </data>
+  <data name="Key_" xml:space="preserve">
+    <value>Schlüssel (10 Byte):</value>
+  </data>
+  <data name="Key_Extraction" xml:space="preserve">
+    <value>Schlüsselextraktion</value>
+  </data>
+  <data name="Key_Schedule" xml:space="preserve">
+    <value>Schlüsselerzeugung</value>
+  </data>
+  <data name="Key_Schedule_" xml:space="preserve">
+    <value>Schlüsselerzeugung: Schlüssel = 0x{0:x16}{1:x4}</value>
+  </data>
+  <data name="Key_Shift" xml:space="preserve">
+    <value>Schlüssel verschieben</value>
+  </data>
+  <data name="Key_XOR" xml:space="preserve">
+    <value>Schlüssel XOR</value>
+  </data>
+  <data name="Key_XOR_" xml:space="preserve">
+    <value>Schlüssel XOR (0x{1:x16} -&gt; 0x{2:x16})</value>
+  </data>
+  <data name="next_round" xml:space="preserve">
+    <value>nächste Runde</value>
+  </data>
+  <data name="next_step" xml:space="preserve">
+    <value>nächster Schritt</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Überblick</value>
+  </data>
+  <data name="passing_leftmost_4_bits" xml:space="preserve">
+    <value>Weitergabe der 4 höchstwertigen Bits an die S-Box ({0} -&gt; {1})</value>
+  </data>
+  <data name="pause_resume" xml:space="preserve">
+    <value>Animation anhalten/fortsetzen</value>
+  </data>
+  <data name="Permutation" xml:space="preserve">
+    <value>Permutation</value>
+  </data>
+  <data name="picking_the_64_left_most_bits" xml:space="preserve">
+    <value>Auswahl der 64 höchstwertigen Bits als Rundenschlüssel {0} (0x{1:x16})</value>
+  </data>
+  <data name="previous_round" xml:space="preserve">
+    <value>vorherige Runde</value>
+  </data>
+  <data name="previous_step" xml:space="preserve">
+    <value>vorheriger Schritt</value>
+  </data>
+  <data name="rotate_key_register_61" xml:space="preserve">
+    <value>rotiere Schlüsselregister 61 Stellen nach links (0x{0:x16} {1:x4} -&gt; 0x{2:x16} {3:x4})</value>
+  </data>
+  <data name="Roundcounter_XOR" xml:space="preserve">
+    <value>Rundenzähler XOR</value>
+  </data>
+  <data name="Round_" xml:space="preserve">
+    <value>Runde:</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Step_" xml:space="preserve">
+    <value>Schritt:</value>
+  </data>
+  <data name="S_Box" xml:space="preserve">
+    <value>S-Box</value>
+  </data>
+  <data name="The_PRESENT_cipher_is_an_example" xml:space="preserve">
+    <value>Die PRESENT-Chiffre ist ein Beispiel für ein SP-Netzwerk und besteht aus 31 Runden. Die Blockgröße beträgt 64 Bits und Schlüssel mit 80 und 128 Bits werden unterstützt (in dieser Implementierung wird allerdings nur die 80-Bit-Version unterstützt).</value>
+  </data>
+  <data name="Trace" xml:space="preserve">
+    <value>Protokoll</value>
+  </data>
+  <data name="xor_round_counter" xml:space="preserve">
+    <value>XOR Rundenzähler mit Schlüsselregister: {0} XOR {1} = {2}</value>
+  </data>
+  <data name="PaddingList1" xml:space="preserve">
+    <value>Keine</value>
+  </data>
+  <data name="PaddingList2" xml:space="preserve">
+    <value>Nullen</value>
+  </data>
+  <data name="PaddingList3" xml:space="preserve">
+    <value>PKCS7</value>
+  </data>
+  <data name="PaddingList4" xml:space="preserve">
+    <value>ANSIX923</value>
+  </data>
+  <data name="PaddingList5" xml:space="preserve">
+    <value>ISO10126</value>
+  </data>
+  <data name="PaddingList6" xml:space="preserve">
+    <value>1-0-Padding</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>Die Visualisierung der PRESENT-Chiffre ist unabhängig von den Daten, die im CT2-Arbeitsbereich eingegeben werden. Die in der Präsentation zu nutzenden Eingabedaten können unter der Registerkarte "Einstellungen" geändert werden.</value>
+  </data>
+  <data name="SettingsInfoText" xml:space="preserve">
+    <value>Hier können Schlüssel und Daten (Klartext in hex) zur Verwendung in der Präsentation geändert werden. Die Visualisierung verschlüsselt genau einen Block -- somit werden keine zusätzlichen Parameter (z.B. ein Initialisierungsvektor) benötigt.</value>
+  </data>
+</root>

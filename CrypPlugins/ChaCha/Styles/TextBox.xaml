@@ -1,0 +1,39 @@
+﻿<ResourceDictionary x:Class="CrypTool.Plugins.ChaCha.Styles.TextBox"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="DefaultTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style x:Key="Text" TargetType="{x:Type TextBox}" BasedOn="{StaticResource DefaultTextBox}">
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+    <Style x:Key="Title" TargetType="{x:Type TextBox}" BasedOn="{StaticResource DefaultTextBox}">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="Hex" TargetType="{x:Type TextBox}" BasedOn="{StaticResource Text}">
+        <Setter Property="FontFamily" Value="Courier New" />
+    </Style>
+    <Style x:Key="StateText" TargetType="{x:Type TextBox}" BasedOn="{StaticResource Hex}">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Border}}}" />
+    </Style>
+    <Style x:Key="Input" TargetType="{x:Type TextBox}" BasedOn="{StaticResource Text}">
+        <Setter Property="IsReadOnly" Value="False" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="TextAlignment" Value="Right" />
+        <Setter Property="Margin" Value="3,0,0,0" />
+    </Style>
+    <Style x:Key="XORLabel" TargetType="{x:Type TextBox}" BasedOn="{StaticResource DefaultTextBox}">
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="8" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="Text" Value="XOR" />
+    </Style>
+</ResourceDictionary>

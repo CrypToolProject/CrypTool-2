@@ -1,0 +1,892 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE category SYSTEM "..\wizard.dtd"[]>
+<!-- This is the XML file defining the classic encryption/decryption categories a user can select from. -->
+<category image="Classic">
+  <name lang="en">Classic Encryption/Decryption</name>
+  <name lang="zh-CN">经典加密/解密</name>
+  <name lang="ru">Классическое шифрование / дешифрование</name>
+  <name lang="de-DE">Klassische Verschlüsselungsverfahren</name>
+  <description lang="en">Selecting <b>this</b> allows you to encrypt a plaintext or decrypt a ciphertext with a classic algorithm. You can choose which algorithm you want to use for doing this.</description>
+  <description lang="zh-CN">选择此项可以使用经典算法对明文进行加密或对密文进行解密。您可以选择要使用的算法。</description>
+  <description lang="ru">Выбор этого позволяет зашифровать открытый текст или расшифровать зашифрованный текст классическим алгоритмом. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
+  <description lang="de-DE">Wählen Sie diesen Punkt, um mit Hilfe eines klassischen Verschlüsselungsverfahrens einen Klartext zu verschlüsseln oder einen Geheimtext zu entschlüsseln. Das zu verwendende Verfahren kann von Ihnen ausgewählt werden.</description>
+  <!-- This is the step's headline. It should be short, but precise. -->
+  <headline lang="en">Algorithm Selection</headline>
+  <headline lang="zh-CN">算法选择</headline>
+  <headline lang="ru">Выбор алгоритма</headline>
+  <headline lang="de">Algorithmenauswahl</headline>
+  <!-- This is the step's description. -->
+  <task lang="en">Select a classic encryption/decryption algorithm.</task>
+  <task lang="zh-CN">选择经典的加密/解密算法。</task>
+  <task lang="ru">Выберите классический алгоритм шифрования / дешифрования.</task>
+  <task lang="de">Wählen Sie ein klassisches Verschlüsselungsverfahren.</task>
+  <!-- Caesar input -->
+  <input image="Caesar">
+    <name lang="en">Caesar</name>
+    <name lang="zh-CN">es撒</name>
+    <name lang="ru">Цезарь</name>
+    <description lang="en">This <b>encryption</b> algorithm, already used by the Roman general and dictator Caesar, substitutes single letters: The substitution rule is that the letters of the cleartext alphabet are shifted by a special value (key).</description>
+    <description lang="zh-CN">罗马将军和独裁者凯撒大帝已经使用了这种加密算法来替换单个字母：替换规则是，将明文字母的字母移动一个特殊值（键）。</description>
+    <description lang="ru">Этот алгоритм шифрования, уже используемый римским генералом и диктатором Цезарем, заменяет собой одиночные буквы: Правило подстановки состоит в том, что буквы алфавита cleartext сдвинуты на специальное значение (ключ).</description>
+    <description lang="de">Dieses <b>Verschlüsselungsverfahren</b>, das schon vom römischen General und Diktator Caesar benutzt wurde, substituiert einzelne Buchstaben: Die Substitutionsregel ist, dass die Buchstaben des Alphabets um einen bestimmen Wert (den Schlüssel) verschoben werden.</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <comboBox plugin="Caesar" property="Action" alignment="Left" width="20%">
+      <description lang="en">Encrypt or Decrypt:</description>
+      <description lang="zh-CN">加密或解密：</description>
+      <description lang="ru">Шифрование или расшифровка:</description>
+      <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
+      <item lang="en" content="Encrypt" />
+      <item lang="zh-CN" content="加密" />
+      <item lang="ru" content="шифровать" />
+      <item lang="de" content="Verschlüsseln" />
+      <item lang="en" content="Decrypt" />
+      <item lang="zh-CN" content="解密" />
+      <item lang="ru" content="расшифровывать" />
+      <item lang="de" content="Entschlüsseln" />
+    </comboBox>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Right" width="80%" visibleLines="5" group="input1">
+      <description lang="en">
+        <condition plugin="Caesar" property="Action" value="0">
+          Message to <b>encrypt</b>:
+        </condition>
+        <condition plugin="Caesar" property="Action" value="1">
+          Message to <b>decrypt</b>:
+        </condition>
+      </description>
+      <description lang="zh-CN">加密消息：解密消息：</description>
+      <description lang="ru">Сообщение для шифрования: сообщение для расшифровки:</description>
+      <description lang="de">
+        <condition plugin="Caesar" property="Action" value="0">
+          Zu <b>verschlüsselnde</b> Nachricht:
+        </condition>
+        <condition plugin="Caesar" property="Action" value="1">
+          Zu <b>entschlüsselnde</b> Nachricht:
+        </condition>
+      </description>
+      <defaultvalue lang="en">Input your message here.</defaultvalue>
+      <defaultvalue lang="zh-CN">在这里输入您的信息。</defaultvalue>
+      <defaultvalue lang="ru">Введите свое сообщение здесь.</defaultvalue>
+      <defaultvalue lang="de">Geben Sie Ihre Nachricht hier ein.</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$Key$" property="Number" alignment="Left" width="5%" visibleLines="1" group="input1" regex="[0-9]+">
+      <description lang="en">Key:</description>
+      <description lang="zh-CN">键：</description>
+      <description lang="ru">Ключ:</description>
+      <description lang="de">Schlüssel:</description>
+      <defaultvalue lang="en">3</defaultvalue>
+      <defaultvalue lang="zh-CN">3</defaultvalue>
+    </inputBox>
+    <sampleViewer image="Caesar" file="Cryptography\Classic\Caesar.cwm" showCreateButton="true">
+      <name lang="en">Caesar Output</name>
+      <name lang="zh-CN">凯撒输出</name>
+      <name lang="ru">Выход Цезаря</name>
+      <name lang="de">Caesar-Ausgabe</name>
+      <description lang="en">This encryption algorithm, already used by the Roman general and dictator Caesar, substitutes single letters: The substitution rule is that the letters of the cleartext alphabet are shifted by a special value (key).</description>
+      <description lang="zh-CN">罗马将军和独裁者凯撒大帝已经使用了这种加密算法来替换单个字母：替换规则是，将明文字母的字母移动一个特殊值（键）。</description>
+      <description lang="ru">Этот алгоритм шифрования, уже используемый римским генералом и диктатором Цезарем, заменяет собой одиночные буквы: Правило подстановки состоит в том, что буквы алфавита cleartext сдвинуты на специальное значение (ключ).</description>
+      <description lang="de">Dieses Verschlüsselungsverfahren, das schon vom römischen General und Diktator Caesar benutzt wurde, substituiert einzelne Buchstaben: Die Substitutionsregel ist, dass die Buchstaben des Alphabets um einen bestimmen Wert (den Schlüssel) verschoben werden.</description>
+      <headline lang="en">Caesar Output</headline>
+      <headline lang="zh-CN">凯撒输出</headline>
+      <headline lang="ru">Выход Цезаря</headline>
+      <headline lang="de">Caesar-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+        <description lang="en">
+          <condition plugin="Caesar" property="Action" value="0">
+            Message to encrypt:
+          </condition>
+          <condition plugin="Caesar" property="Action" value="1">
+            Message to decrypt:
+          </condition>
+        </description>
+        <description lang="zh-CN">加密消息：解密消息：</description>
+        <description lang="ru">Сообщение для шифрования: сообщение для расшифровки:</description>
+        <description lang="de">
+          <condition plugin="Caesar" property="Action" value="0">
+            Zu verschlüsselnde Nachricht:
+          </condition>
+          <condition plugin="Caesar" property="Action" value="1">
+            Zu entschlüsselnde Nachricht:
+          </condition>
+        </description>
+        <defaultvalue lang="en">Input your message here.</defaultvalue>
+        <defaultvalue lang="zh-CN">在这里输入您的信息。</defaultvalue>
+        <defaultvalue lang="ru">Введите свое сообщение здесь.</defaultvalue>
+        <defaultvalue lang="de">Geben Sie Ihre Nachricht hier ein.</defaultvalue>
+      </inputBox>
+      <presentation plugin="$Ciphertext$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">Caesar Output:</description>
+        <description lang="zh-CN">凯撒输出：</description>
+        <description lang="ru">Цезарь Выход:</description>
+        <description lang="de">Caesar-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- Vigenère input -->
+  <input image="Vigenere">
+    <name lang="en">Vigenère</name>
+    <name lang="zh-CN">维吉内尔</name>
+    <name lang="ru">Vigenere</name>
+    <description lang="en">The Vigenère cipher is a method of encrypting alphabetic text by using a series of different Caesar ciphers based on the letters of a keyword. It is a simple form of polyalphabetic substitution.</description>
+    <description lang="zh-CN">Vigenère密码是一种通过使用一系列基于关键字字母的不同Caesar密码来加密字母文本的方法。它是多字母替换的一种简单形式。</description>
+    <description lang="ru">Шифр Vigenère - это метод шифрования алфавитного текста с использованием ряда различных цезарных шифров на основе букв ключевого слова. Это простая форма полиалфабической замены.</description>
+    <description lang="de">Mit dem Vigenère-Verfahren werden Texte verschlüsselt. Es wendet mehrfach das Caesar-Verfahren auf den Klartext an, basierend auf den Buchstaben eines Schlüsselwortes und ist ein einfaches Beispiel für eine polyalphabetische Substitution.</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <comboBox plugin="$Vigenère enc$" property="Action" alignment="Left" width="20%">
+      <description lang="en">Encrypt or Decrypt:</description>
+      <description lang="zh-CN">加密或解密：</description>
+      <description lang="ru">Шифрование или расшифровка:</description>
+      <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
+      <item lang="en" content="Encrypt">
+        <pluginSetter plugin="$Vigenère dec$" property="Action">1</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="ru" content="шифровать" />
+      <item lang="de" content="Verschlüsseln" />
+      <item lang="en" content="Decrypt">
+        <pluginSetter plugin="$Vigenère dec$" property="Action">0</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="解密">0</item>
+      <item lang="ru" content="расшифровывать" />
+      <item lang="de" content="Entschlüsseln" />
+    </comboBox>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Right" width="78%" visibleLines="5" group="1">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue>Hello world! Hallo Welt! Hola mundo! Bonjour le monde!</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$Key$" property="Text" alignment="Right" width="20%" visibleLines="5" group="1">
+      <description lang="en">Key:</description>
+      <description lang="zh-CN">键：</description>
+      <description lang="ru">Ключ:</description>
+      <description lang="de">Schlüssel:</description>
+      <defaultvalue lang="en">TURING</defaultvalue>
+      <defaultvalue lang="zh-CN">调音</defaultvalue>
+      <defaultvalue lang="ru">ТЬЮРИНГА</defaultvalue>
+    </inputBox>
+    <sampleViewer image="Vigenere" file="Cryptography\Classic\Vigenere.cwm">
+      <name lang="en">Vigenère Output</name>
+      <name lang="zh-CN">Vigenère输出</name>
+      <name lang="ru">Выход Vigenère</name>
+      <name lang="de">Vigenère-Ausgabe</name>
+      <description lang="en">The Vigenère cipher is a method of encrypting alphabetic text by using a series of different Caesar ciphers based on the letters of a keyword. It is a simple form of polyalphabetic substitution.</description>
+      <description lang="zh-CN">Vigenère密码是一种通过使用一系列基于关键字字母的不同Caesar密码来加密字母文本的方法。它是多字母替换的一种简单形式。</description>
+      <description lang="ru">Шифр Vigenère - это метод шифрования алфавитного текста с использованием ряда различных цезарных шифров на основе букв ключевого слова. Это простая форма полиалфабической замены.</description>
+      <description lang="de">Mit dem Vigenère-Verfahren werden Texte verschlüsselt. Es wendet mehrfach das Caesar-Verfahren auf den Klartext an, basierend auf den Buchstaben eines Schlüsselwortes. Sie ist eine einfaches Beispiel für eine polyalphabetische Substitution.</description>
+      <headline lang="en">Vigenère Output</headline>
+      <headline lang="zh-CN">Vigenère输出</headline>
+      <headline lang="ru">Выход Vigenère</headline>
+      <headline lang="de">Vigenère-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+        <defaultvalue>Hello world! Hallo Welt! Hola mundo! Bonjour le monde!</defaultvalue>
+      </inputBox>
+      <presentation plugin="$Ciphertext$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">Vigenère Output:</description>
+        <description lang="zh-CN">Vigenère输出：</description>
+        <description lang="ru">Vigenère Выход:</description>
+        <description lang="de">Vigenère-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- Substitution input -->
+  <input image="Substitution">
+    <name lang="en">Substitution</name>
+    <name lang="zh-CN">替代</name>
+    <name lang="ru">подмена</name>
+    <description lang="en">A substitution cipher is a method of encryption by which units of plaintext are replaced with ciphertext according to a regular system; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing an inverse substitution.</description>
+    <description lang="zh-CN">替换密码是一种加密方法，根据常规系统，用明文替换明文单元； “单位”可以是单个字母（最常见），成对的字母，字母的三元组，上述的混合物，等等。接收者通过执行反向替换来解密文本。</description>
+    <description lang="ru">Шифр замещения - это метод шифрования, посредством которого единицы открытого текста заменяются зашифрованным текстом в соответствии с обычной системой; «единицами» могут быть одиночные буквы (наиболее распространенные), пары букв, триплеты букв, смеси выше и т. д. Приемник расшифровывает текст, выполняя обратную замену.</description>
+    <description lang="de">Das Substitutions-Verfahren ist eine Verschlüsselungsmethode, bei der Einheiten des Klartextes nach gewissen Regeln durch Geheimtext ersetzt werden. Die "Einheiten" sind im Allgemeinen einzelne Buchstaben, können aber auch Buchstabenpaare, Buchstabentripel oder Kombinationen davon sein. Der Empfänger entschlüsselt den Text, indem er eine inverse Substitution anwendet.</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <comboBox plugin="$Encrypt$" property="Action" alignment="Left" width="20%">
+      <description lang="en">Encrypt or Decrypt:</description>
+      <description lang="zh-CN">加密或解密：</description>
+      <description lang="ru">Шифрование или расшифровка:</description>
+      <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
+      <item lang="en" content="Encrypt">
+        <pluginSetter plugin="$Decrypt$" property="Action">1</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="ru" content="шифровать" />
+      <item lang="de" content="Verschlüsseln" />
+      <item lang="en" content="Decrypt">
+        <pluginSetter plugin="$Decrypt$" property="Action">0</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="解密">0</item>
+      <item lang="ru" content="расшифровывать" />
+      <item lang="de" content="Entschlüsseln" />
+    </comboBox>
+    <comboBox plugin="$Encrypt$" property="UnknownSymbolHandling" alignment="Left" width="20%">
+      <description lang="en">Unknown symbols handling:</description>
+      <description lang="zh-CN">未知符号处理：</description>
+      <description lang="ru">Обработка неизвестных символов:</description>
+      <description lang="de">Behandlung unbekannter Symbole:</description>
+      <item lang="en" content="Leave as is" />
+      <item lang="zh-CN" content="照原样" />
+      <item lang="ru" content="Оставить как есть" />
+      <item lang="de" content="Übernehmen" />
+      <item lang="en" content="Replace" />
+      <item lang="zh-CN" content="更换" />
+      <item lang="ru" content="замещать" />
+      <item lang="de" content="Ersetzen" />
+      <item lang="en" content="Remove" />
+      <item lang="zh-CN" content="去掉" />
+      <item lang="ru" content="Удалить" />
+      <item lang="de" content="Entfernen" />
+    </comboBox>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Right" width="78%" visibleLines="5" group="1">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue lang="en">A substitution cipher is a method of encryption by which units of plaintext are replaced with ciphertext according to a regular system; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing an inverse substitution.</defaultvalue>
+      <defaultvalue lang="zh-CN">替换密码是一种加密方法，根据常规系统，用明文替换明文单元； “单位”可以是单个字母（最常见），成对的字母，字母的三元组，上述的混合物，等等。接收者通过执行反向替换来解密文本。</defaultvalue>
+      <defaultvalue lang="ru">Шифр замещения - это метод шифрования, посредством которого единицы открытого текста заменяются зашифрованным текстом в соответствии с обычной системой; «единицами» могут быть одиночные буквы (наиболее распространенные), пары букв, триплеты букв, смеси выше и т. д. Приемник расшифровывает текст, выполняя обратную замену.</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$Password$" property="Text" alignment="Right" width="20%" visibleLines="5" group="1">
+      <description lang="en">Password:</description>
+      <description lang="zh-CN">密码：</description>
+      <description lang="ru">Пароль:</description>
+      <description lang="de">Passwort :</description>
+      <defaultvalue lang="en">Crypto</defaultvalue>
+      <defaultvalue lang="zh-CN">加密货币</defaultvalue>
+      <defaultvalue lang="ru">крипто-</defaultvalue>
+    </inputBox>
+    <inputBox plugin="Offset" property="Number" alignment="Left" width="5%" visibleLines="1" regex="[0-9]+" group="2">
+      <description lang="en">Password-Position:</description>
+      <description lang="zh-CN">密码位置：</description>
+      <description lang="ru">Пароль-Position:</description>
+      <description lang="de">Passwort Position:</description>
+      <defaultvalue>0</defaultvalue>
+    </inputBox>
+    <comboBox plugin="Permutator" property="Order" alignment="Left" width="20%" group="2">
+      <description lang="en">Order:</description>
+      <description lang="zh-CN">订购：</description>
+      <description lang="ru">Порядок:</description>
+      <description lang="de">Sortierung:</description>
+      <item lang="en" content="Ascending" />
+      <item lang="zh-CN" content="上升" />
+      <item lang="ru" content="Восходящий" />
+      <item lang="de" content="Aufsteigend" />
+      <item lang="en" content="Descending" />
+      <item lang="zh-CN" content="降序" />
+      <item lang="ru" content="нисходящий" />
+      <item lang="de" content="Absteigend" />
+      <item lang="en" content="Leave as ist" />
+      <item lang="zh-CN" content="照原样" />
+      <item lang="ru" content="Оставить как ist" />
+      <item lang="de" content="Unverändert" />
+    </comboBox>
+    <sampleViewer image="Substitution" file="Cryptography\Classic\Substitution_with_Password.cwm">
+      <name lang="en">Substitution Output</name>
+      <name lang="zh-CN">替代输出</name>
+      <name lang="ru">Результат замещения</name>
+      <name lang="de">Substitution-Ausgabe</name>
+      <description lang="en">A substitution cipher is a method of encryption by which units of plaintext are replaced with ciphertext according to a regular system; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing an inverse substitution.</description>
+      <description lang="zh-CN">替换密码是一种加密方法，根据常规系统，用明文替换明文单元； “单位”可以是单个字母（最常见），成对的字母，字母的三元组，上述的混合物，等等。接收者通过执行反向替换来解密文本。</description>
+      <description lang="ru">Шифр замещения - это метод шифрования, посредством которого единицы открытого текста заменяются зашифрованным текстом в соответствии с обычной системой; «единицами» могут быть одиночные буквы (наиболее распространенные), пары букв, триплеты букв, смеси выше и т. д. Приемник расшифровывает текст, выполняя обратную замену.</description>
+      <description lang="de">Das Substitutions-Verfahren ist eine Verschlüsselungsmethode, bei der Einheiten des Klartextes nach gewissen Regeln durch Geheimtext ersetzt werden. Die "Einheiten" sind im Allgemeinen einzelne Buchstaben, können aber auch Buchstabenpaare, Buchstabentripel oder Kombinationen davon sein. Der Empfänger entschlüsselt den Text, indem er eine inverse Substitution anwendet.</description>
+      <headline lang="en">Substitution Output</headline>
+      <headline lang="zh-CN">替代输出</headline>
+      <headline lang="ru">Результат замещения</headline>
+      <headline lang="de">Substitution-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5" width="95%">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      </inputBox>
+      <inputBox plugin="$Password$" property="Text" alignment="Stretch" visibleLines="1" width="95%">
+        <description lang="en">Password:</description>
+        <description lang="zh-CN">密码：</description>
+        <description lang="ru">Пароль:</description>
+        <description lang="de">Passwort:</description>
+      </inputBox>
+      <presentation plugin="$Encrypt$" width="95%" height="200">
+        <description lang="en">Substitution Mapping:</description>
+        <description lang="zh-CN">替代映射：</description>
+        <description lang="ru">Отображение подстановки:</description>
+        <description lang="de">Substitutions-Abbildung:</description>
+      </presentation>
+      <presentation plugin="$Ciphertext$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">Substitution Output:</description>
+        <description lang="zh-CN">替代输出：</description>
+        <description lang="ru">Результат замещения:</description>
+        <description lang="de">Substitution-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- Enigma input -->
+  <input image="Enigma">
+    <name lang="en">Enigma</name>
+    <name lang="zh-CN">谜</name>
+    <name lang="ru">загадка</name>
+    <description lang="en">An Enigma machine is any of a family of related electro-mechanical rotor machines used for the encryption and decryption of secret messages.
+      <newline />The first Enigma was invented by German engineer Arthur Scherbius at the end of World War I. This model and its variants were used commercially from the early 1920s, and adopted by military and government services of several countries — most notably by Nazi Germany before and during World War II.
+    </description>
+    <description lang="zh-CN">Enigma机器是用于加密和解密机密消息的一系列相关的机电转子机器中的任何一个。第一个Enigma是在一战结束时由德国工程师Arthur Scherbius发明的。此模型及其变体从1920年代初开始在商业上使用，并被多个国家的军事和政府部门采用-最著名的是纳粹德国在此之前和期间第二次世界大战。</description>
+    <description lang="ru">Машина Enigma представляет собой семейство связанных электромеханических роторных машин, используемых для шифрования и дешифрования секретных сообщений. Первая Энигма была изобретена немецким инженером Артуром Щербием в конце Первой мировой войны. Эта модель и ее варианты использовались коммерчески с начала 1920-х годов и были приняты военными и правительственными службами нескольких стран - прежде всего нацистской Германией до и во время Вторая Мировая Война.</description>
+    <description lang="de">Die Enigma-Maschine gehört zu den elektromechanischen Rotormaschinen. Sie wurde zur Ver- und Entschlüsselung geheimer Nachrichten verwendet. 
+      <newline />Die erste Enigma wurde von dem deutschen Ingenieur Arthur Scherbius am Ende des ersten Weltkrieges entwickelt. Dieses Modell und seine Varianten wurden kommerziell seit den frühen 1920igern benutzt und von Militär und Regierungen verschiedener Länder übernommen – insbesondere von Deutschland vor und während des zweiten Weltkriegs.
+    </description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <inputBox plugin="$Message$" property="Text" alignment="Stretch" visibleLines="5">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue lang="en">We were discovered, retreat immediately!</defaultvalue>
+      <defaultvalue lang="zh-CN">我们被发现，立即撤退！</defaultvalue>
+      <defaultvalue lang="ru">Мы были обнаружены, немедленно отступили!</defaultvalue>
+      <defaultvalue lang="de">Wir wurden entdeckt, sofortiger Rückzug!</defaultvalue>
+    </inputBox>
+    <inputBox plugin="Enigma" property="InitialRotorPos" alignment="Stretch" width="10%" visibleLines="1" group="settings">
+      <description lang="en">Key:</description>
+      <description lang="zh-CN">键：</description>
+      <description lang="ru">Ключ:</description>
+      <description lang="de">Schlüssel:</description>
+      <defaultvalue lang="en">AAA</defaultvalue>
+      <defaultvalue lang="zh-CN">AAA级</defaultvalue>
+      <defaultvalue lang="ru">AAA</defaultvalue>
+    </inputBox>
+    <sampleViewer file="Cryptography\Classic\Enigma.cwm" image="Enigma">
+      <name lang="en">Enigma Output</name>
+      <name lang="zh-CN">谜题输出</name>
+      <name lang="ru">Выход энигмы</name>
+      <name lang="de">Enigma-Ausgabe</name>
+      <description lang="en">A transposition cipher is a method of encryption by which the positions held by units of plaintext (which are commonly characters or groups of characters) are shifted according to a regular system, so that the ciphertext constitutes a permutation of the plaintext.</description>
+      <description lang="zh-CN">换位密码是一种加密方法，通过该加密方法，明文单元（通常是字符或字符组）所保持的位置会根据常规系统进行移位，从而使密文构成明文的排列。</description>
+      <description lang="ru">Шифр транспонирования - это метод шифрования, посредством которого позиции, занимаемые единицами открытого текста (которые обычно являются символами или группами символов), смещаются в соответствии с обычной системой, так что зашифрованный текст представляет собой перестановку открытого текста.</description>
+      <description lang="de">Eine Transpositions-Verschlüsselung vertauscht die Positionen, die von den Einheiten des Klartextes (meistens einzelne Buchstaben oder Gruppen von Buchstaben) eingenommen werden, nach gewissen Regeln, so dass der Geheimtext eine Permutation des Klartextes darstellt.</description>
+      <headline lang="en">Enigma Output</headline>
+      <headline lang="zh-CN">谜题输出</headline>
+      <headline lang="ru">Выход энигмы</headline>
+      <headline lang="de">Enigma-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Message$" property="Text" alignment="stretch" visibleLines="5">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+        <defaultvalue lang="en">We were discovered, retreat immediately!</defaultvalue>
+        <defaultvalue lang="zh-CN">我们被发现，立即撤退！</defaultvalue>
+        <defaultvalue lang="ru">Мы были обнаружены, немедленно отступили!</defaultvalue>
+        <defaultvalue lang="de">Wir wurden entdeckt, flieh wenn du kannst!</defaultvalue>
+      </inputBox>
+      <presentation plugin="Enigma" height="50%" width="50%">
+        <description lang="en">Plugin Presentation:</description>
+        <description lang="zh-CN">插件演示：</description>
+        <description lang="ru">Представление плагина:</description>
+        <description lang="de">Plugin-Präsentation:</description>
+      </presentation>
+      <presentation plugin="$Result$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">Enigma Output:</description>
+        <description lang="zh-CN">谜题输出：</description>
+        <description lang="ru">Выход Enigma:</description>
+        <description lang="de">Enigma-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- Playfair input -->
+  <input image="Playfair">
+    <name lang="en">Playfair</name>
+    <name lang="zh-CN">平等游戏</name>
+    <name lang="ru">Играй честно</name>
+    <description lang="en">The Playfair cipher or Playfair square is a manual symmetric encryption technique and was the first literal digraph substitution cipher.</description>
+    <description lang="zh-CN">Playfair密码或Playfair平方是一种手动对称加密技术，并且是第一个文字二字图替换密码。</description>
+    <description lang="ru">Шифр Playfair или квадрат Playfair представляет собой ручную симметричную технологию шифрования и был первым литературным шифром замещения орграфа.</description>
+    <description lang="de">Die Playfair-Verschlüsselung ist symmetrisches Verschlüsselungsverfahren, das manuell ausgeführt werden kann und war die erste bigraphische Substitutions-Verschlüsselung.</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <comboBox plugin="Playfair" property="Action" alignment="Left" width="20%">
+      <description lang="en">Encrypt or Decrypt:</description>
+      <description lang="zh-CN">加密或解密：</description>
+      <description lang="ru">Шифрование или расшифровка:</description>
+      <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
+      <item lang="en" content="Encrypt" />
+      <item lang="zh-CN" content="加密" />
+      <item lang="ru" content="шифровать" />
+      <item lang="de" content="Verschlüsseln" />
+      <item lang="en" content="Decrypt" />
+      <item lang="zh-CN" content="解密" />
+      <item lang="ru" content="расшифровывать" />
+      <item lang="de" content="Entschlüsseln" />
+    </comboBox>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Right" width="70%" visibleLines="5" group="InputGroup">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue lang="en">We were discovered, retreat immediately!</defaultvalue>
+      <defaultvalue lang="zh-CN">我们被发现，立即撤退！</defaultvalue>
+      <defaultvalue lang="ru">Мы были обнаружены, немедленно отступили!</defaultvalue>
+      <defaultvalue lang="de">Wir wurden entdeckt, sofortiger Rückzug!</defaultvalue>
+    </inputBox>
+    <inputBox plugin="Playfair" property="KeyPhraseString" alignment="Left" width="30%" visibleLines="1" group="InputGroup">
+      <description lang="en">Key:</description>
+      <description lang="zh-CN">键：</description>
+      <description lang="ru">Ключ:</description>
+      <description lang="de">Schlüssel:</description>
+      <defaultvalue>BCD</defaultvalue>
+    </inputBox>
+    <sampleViewer image="Playfair" file="Cryptography\Classic\Playfair.cwm">
+      <name lang="en">Playfair Output</name>
+      <name lang="zh-CN">公平竞赛的输出</name>
+      <name lang="ru">Выход Playfair</name>
+      <name lang="de">Playfair-Ausgabe</name>
+      <headline lang="en">Playfair Output</headline>
+      <headline lang="zh-CN">公平竞赛的输出</headline>
+      <headline lang="ru">Выход Playfair</headline>
+      <headline lang="de">Playfair-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+        <defaultvalue lang="en">This is a test!</defaultvalue>
+        <defaultvalue lang="zh-CN">这是一个测试！</defaultvalue>
+        <defaultvalue lang="ru">Это тест!</defaultvalue>
+      </inputBox>
+      <presentation plugin="$Ciphertext$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">Playfair Output:</description>
+        <description lang="zh-CN">Playfair输出：</description>
+        <description lang="ru">Выход Playfair:</description>
+        <description lang="de">Playfair-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- ADFGVX input -->
+  <input image="ADFGVX">
+    <name lang="en">ADFGVX</name>
+    <name lang="zh-CN">ADFGVX</name>
+    <name lang="ru">ADFGVX</name>
+    <description lang="en">The ADFGVX cipher was a field cipher used by the German Army during World War I. It is a fractionating transposition cipher which combines a modified Polybius square with a single columnar transposition. The cipher is named after the six possible letters used in the ciphertext: A, D, F, G, V and X.</description>
+    <description lang="zh-CN">ADFGVX密码是第一次世界大战期间德国陆军使用的场密码。它是一种分数换位密码，它结合了经过修改的Polybius正方形和单个柱状换位。密码以密文中使用的六个可能的字母命名：A，D，F，G，V和X。</description>
+    <description lang="ru">Шифр ADFGVX был полевым шифром, используемым немецкой армией во время Первой мировой войны. Он представляет собой фракционирующий шифр транспонирования, который сочетает в себе модифицированный квадрат Полибия с одной столбчатой ​​транспозицией. Шифр назван в честь шести возможных букв, используемых в зашифрованном тексте: A, D, F, G, V и X.</description>
+    <description lang="de">Die ADFGVX-Verschlüsselung wurde von der deutschen Armee während des ersten Weltkrieges benutzt. Sie ist eine Transpositions-Verschlüsselung, die ein modifiziertes Polybios-Quadrat mit einer einzelnen Spaltentransposition kombiniert. Das Verfahren wurde nach den sechs möglichen Buchstaben des Geheimtextes benannt: A, D, F, G, V und X.</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <comboBox plugin="$ADFGVX_Encrypt$" property="Action" alignment="Left" width="20%">
+      <description lang="en">Encrypt or Decrypt:</description>
+      <description lang="zh-CN">加密或解密：</description>
+      <description lang="ru">Шифрование или расшифровка:</description>
+      <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
+      <item lang="en" content="Encrypt">
+        <pluginSetter plugin="$ADFGVX_Decrypt$" property="Action">1</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="ru" content="шифровать" />
+      <item lang="de" content="Verschlüsseln" />
+      <item lang="en" content="Decrypt">
+        <pluginSetter plugin="$ADFGVX_Decrypt$" property="Action">0</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="解密">0</item>
+      <item lang="ru" content="расшифровывать" />
+      <item lang="de" content="Entschlüsseln" />
+    </comboBox>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue lang="en">WE WERE DISCOVERED!</defaultvalue>
+      <defaultvalue lang="zh-CN">我们被发现了！</defaultvalue>
+      <defaultvalue lang="ru">Мы были открыты!</defaultvalue>
+      <defaultvalue lang="de">WIR WURDEN ENTDECKT!</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$ADFGVX_Encrypt$" property="SubstitutionPass" alignment="Stretch" visibleLines="1" group="settings">
+      <description lang="en">Substitution Password:</description>
+      <description lang="zh-CN">替代密码：</description>
+      <description lang="ru">Пароль замены:</description>
+      <description lang="de">Substitutions-Kennwort:</description>
+      <defaultvalue>BAUM</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$ADFGVX_Encrypt$" property="TranspositionPass" alignment="Stretch" visibleLines="1" group="settings">
+      <description lang="en">Transposition Password:</description>
+      <description lang="zh-CN">换位密码：</description>
+      <description lang="ru">Пароль транспонирования:</description>
+      <description lang="de">Transpositions-Kennwort:</description>
+      <defaultvalue>HAUS</defaultvalue>
+    </inputBox>
+    <sampleViewer image="ADFGVX" file="Cryptography\Classic\ADFGVX.cwm">
+      <name lang="en">ADFGVX Output</name>
+      <name lang="zh-CN">ADFGVX输出</name>
+      <name lang="ru">Выход ADFGVX</name>
+      <name lang="de">ADFGVX-Ausgabe</name>
+      <description lang="en">The ADFGVX cipher was a field cipher used by the German Army during World War I. It was a fractionating transposition cipher which combined a modified Polybius square with a single columnar transposition. The cipher is named after the six possible letters used in the ciphertext: A, D, F, G, V and X.</description>
+      <description lang="zh-CN">ADFGVX密码是第一次世界大战期间德国陆军使用的场密码。它是分数转位密码，它将修改后的Polybius正方形与单个柱状转位结合在一起。密码以密文中使用的六个可能的字母命名：A，D，F，G，V和X。</description>
+      <description lang="ru">Шифр ADFGVX был полевым шифром, используемым немецкой армией во время Первой мировой войны. Это был фракционирующий шифр транспонирования, который объединил модифицированный квадрат Полибия с одной столбчатой ​​транспозицией. Шифр назван в честь шести возможных букв, используемых в зашифрованном тексте: A, D, F, G, V и X.</description>
+      <description lang="de">Die ADFGVX-Verschlüsselung wurde von der deutschen Armee während des ersten Weltkrieges benutzt. Es war eine Transpositions-Verschlüsselung, die ein modifiziertes Polybios-Quadrat mit einer einzelnen Spaltentransposition kombinierte. Das Verfahren wurde nach den sechs möglichen Buchstaben des Geheimtextes benannt: A, D, F, G, V und X.</description>
+      <headline lang="en">ADFGVX Output</headline>
+      <headline lang="zh-CN">ADFGVX输出</headline>
+      <headline lang="ru">Выход ADFGVX</headline>
+      <headline lang="de">ADFGVX-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      </inputBox>
+      <presentation plugin="$Ciphertext$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">ADFGVX Output:</description>
+        <description lang="zh-CN">ADFGVX输出：</description>
+        <description lang="ru">Выход ADFGVX:</description>
+        <description lang="de">ADFGVX-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- XOR input -->
+  <input image="XOR">
+    <name lang="en">XOR</name>
+    <name lang="zh-CN">异或</name>
+    <name lang="ru">бЕСПЛАТНО</name>
+    <description lang="en">XOR is a boolean operator which can be used to encrypt plaintext. Every character of the plaintext will be linked with a character of the given key by the XOR operator. If the key is as long as the plaintext, this becomes a "One-Time-Pad".</description>
+    <description lang="zh-CN">XOR是一个布尔运算符，可用于加密纯文本。 XOR运算符会将明文的每个字符与给定键的字符链接。如果密钥与纯文本一样长，则它将成为“一次性垫”。</description>
+    <description lang="ru">XOR является булевым оператором, который может использоваться для шифрования открытого текста. Каждый символ открытого текста будет связан с символом данного ключа оператором XOR. Если ключ до тех пор, как открытый текст, это становится «одноразовой панелью».</description>
+    <description lang="de">XOR ist ein boolescher Operator, der zum Verschlüsseln von Klartext benutzt werden kann. Jedes Zeichen des Klartextes wird mit einem Zeichen des gegebenen Schlüssels mittels XOR verknüpft. Wenn der Schlüssel so lang wie der Klartext ist, spricht man von einem "One-Time-Pad".</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Strech" width="49%" visibleLines="5" group="InputGroup">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue>ABCDCVX</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$Key$" property="Text" alignment="Strech" width="49%" visibleLines="5" group="InputGroup">
+      <description lang="en">Key:</description>
+      <description lang="zh-CN">键：</description>
+      <description lang="ru">Ключ:</description>
+      <description lang="de">Schlüssel:</description>
+      <defaultvalue>99 AA BB CC DD EE FF</defaultvalue>
+    </inputBox>
+    <sampleViewer image="XOR" file="Cryptography\Classic\XOR.cwm">
+      <name lang="en">XOR Output</name>
+      <name lang="zh-CN">异或输出</name>
+      <name lang="ru">Выход XOR</name>
+      <name lang="de">XOR-Ausgabe</name>
+      <description lang="en">XOR is a boolean operator which can be used to encrypt plaintext. Every character of the plaintext will be linked with a character of the given key by the XOR operator. If the key is as long as the plaintext, this becomes a "One-Time-Pad".</description>
+      <description lang="zh-CN">XOR是一个布尔运算符，可用于加密纯文本。 XOR运算符会将明文的每个字符与给定键的字符链接。如果密钥与纯文本一样长，则它将成为“一次性垫”。</description>
+      <description lang="ru">XOR является булевым оператором, который может использоваться для шифрования открытого текста. Каждый символ открытого текста будет связан с символом данного ключа оператором XOR. Если ключ до тех пор, как открытый текст, это становится «одноразовой панелью».</description>
+      <description lang="de">XOR ist ein boolescher Operator, der zum Verschlüsseln von Klartext benutzt werden kann. Jedes Zeichen des Klartextes wird mit einem Zeichen des gegebenen Schlüssels mittels XOR verknüpft. Wenn der Schlüssel so lang wie der Klartext ist, spricht man von einem "One-Time-Pad".</description>
+      <headline lang="en">XOR Output</headline>
+      <headline lang="zh-CN">异或输出</headline>
+      <headline lang="ru">Выход XOR</headline>
+      <headline lang="de">XOR-Ausgabe</headline>
+      <task lang="en">Here you can change the parameters and view the results.</task>
+      <task lang="zh-CN">您可以在此处更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+        <defaultvalue lang="en">ABCDCVX</defaultvalue>
+        <defaultvalue lang="zh-CN">ABCDCVX</defaultvalue>
+        <defaultvalue lang="ru">ABCDCVX</defaultvalue>
+      </inputBox>
+      <presentation plugin="$Ciphertext (Hex)$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">XOR Output:</description>
+        <description lang="zh-CN">XOR输出：</description>
+        <description lang="ru">Выход XOR:</description>
+        <description lang="de">XOR-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- Transposition input -->
+  <input image="Transposition">
+    <name lang="en">Transposition</name>
+    <name lang="zh-CN">换位</name>
+    <name lang="ru">перестановка</name>
+    <description lang="en">A transposition cipher is a method of encryption by which the positions held by units of plaintext (which are commonly characters or groups of characters) are shifted according to a regular system, so that the ciphertext constitutes a permutation of the plaintext.</description>
+    <description lang="zh-CN">换位密码是一种加密方法，通过该加密方法，明文单元（通常是字符或字符组）所保持的位置会根据常规系统进行移位，从而使密文构成明文的排列。</description>
+    <description lang="ru">Шифр транспонирования - это метод шифрования, посредством которого позиции, занимаемые единицами открытого текста (которые обычно являются символами или группами символов), смещаются в соответствии с обычной системой, так что зашифрованный текст представляет собой перестановку открытого текста.</description>
+    <description lang="de">Eine Transpositions-Verschlüsselung vertauscht die Positionen, die von den Einheiten des Klartextes (meistens einzelne Buchstaben oder Gruppen von Buchstaben) eingenommen werden, nach gewissen Regeln, so dass der Geheimtext eine Permutation des Klartextes darstellt.</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <comboBox plugin="$Transposition (Encryption)$" property="Action" alignment="Left" width="20%">
+      <description lang="en">Encrypt or Decrypt:</description>
+      <description lang="zh-CN">加密或解密：</description>
+      <description lang="ru">Шифрование или расшифровка:</description>
+      <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
+      <item lang="en" content="Encrypt">
+        <pluginSetter plugin="$Transposition (Decryption)$" property="Action">1</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="ru" content="шифровать" />
+      <item lang="de" content="Verschlüsseln" />
+      <item lang="en" content="Decrypt">
+        <pluginSetter plugin="$Transposition (Decryption)$" property="Action">0</pluginSetter>
+      </item>
+      <item lang="zh-CN" content="解密">0</item>
+      <item lang="ru" content="расшифровывать" />
+      <item lang="de" content="Entschlüsseln" />
+    </comboBox>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" width="49%" visibleLines="5" group="InputGroup">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue lang="en">We were discovered, retreat immediately!</defaultvalue>
+      <defaultvalue lang="zh-CN">我们被发现，立即撤退！</defaultvalue>
+      <defaultvalue lang="ru">Мы были обнаружены, немедленно отступили!</defaultvalue>
+      <defaultvalue lang="de">Wir wurden entdeckt, flieh wenn du kannst!</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$Key$" property="Text" alignment="Stretch" width="49%" visibleLines="5" group="InputGroup">
+      <description lang="en">Key:</description>
+      <description lang="zh-CN">键：</description>
+      <description lang="ru">Ключ:</description>
+      <description lang="de">Schlüssel:</description>
+      <defaultvalue lang="en">ZEBRAS</defaultvalue>
+      <defaultvalue lang="zh-CN">泽布拉斯</defaultvalue>
+      <defaultvalue lang="ru">зебры</defaultvalue>
+    </inputBox>
+    <comboBox plugin="$Transposition (Encryption)$;$Transposition (Decryption)$" property="ReadIn" defaultValue="0" group="settings">
+      <description lang="en">Read in:</description>
+      <description lang="zh-CN">读入：</description>
+      <description lang="ru">Читайте в:</description>
+      <description lang="de">Einlesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="$Transposition (Encryption)$;$Transposition (Decryption)$" property="Permutation" defaultValue="1" group="settings">
+      <description lang="en">Permutation:</description>
+      <description lang="zh-CN">排列：</description>
+      <description lang="ru">Перестановка:</description>
+      <description lang="de">Permutation:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="$Transposition (Encryption)$;$Transposition (Decryption)$" property="ReadOut" defaultValue="0" group="settings">
+      <description lang="en">Read out:</description>
+      <description lang="zh-CN">读出：</description>
+      <description lang="ru">Зачитать:</description>
+      <description lang="de">Auslesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <sampleViewer file="Cryptography\Classic\Transposition.cwm" image="Transposition">
+      <name lang="en">Transposition Output</name>
+      <name lang="zh-CN">转置输出</name>
+      <name lang="ru">Выход транспонирования</name>
+      <name lang="de">Transpositions-Ausgabe</name>
+      <description lang="en">A transposition cipher is a method of encryption by which the positions held by units of plaintext (which are commonly characters or groups of characters) are shifted according to a regular system, so that the ciphertext constitutes a permutation of the plaintext.</description>
+      <description lang="zh-CN">换位密码是一种加密方法，通过该加密方法，明文单元（通常是字符或字符组）所保持的位置会根据常规系统进行移位，从而使密文构成明文的排列。</description>
+      <description lang="ru">Шифр транспонирования - это метод шифрования, посредством которого позиции, занимаемые единицами открытого текста (которые обычно являются символами или группами символов), смещаются в соответствии с обычной системой, так что зашифрованный текст представляет собой перестановку открытого текста.</description>
+      <description lang="de">Eine Transpositions-Verschlüsselung vertauscht die Positionen, die von den Einheiten des Klartextes (meistens einzelne Buchstaben oder Gruppen von Buchstaben) eingenommen werden, nach gewissen Regeln, so dass der Geheimtext eine Permutation des Klartextes darstellt.</description>
+      <headline lang="en">Transposition Output</headline>
+      <headline lang="zh-CN">转置输出</headline>
+      <headline lang="ru">Выход транспонирования</headline>
+      <headline lang="de">Transpositions-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+        <defaultvalue lang="en">We were discovered, retreat immediately!</defaultvalue>
+        <defaultvalue lang="zh-CN">我们被发现，立即撤退！</defaultvalue>
+        <defaultvalue lang="ru">Мы были обнаружены, немедленно отступили!</defaultvalue>
+        <defaultvalue lang="de">Wir wurden entdeckt, flieh wenn du kannst!</defaultvalue>
+      </inputBox>
+      <presentation plugin="$Transposition (Encryption)$" height="300" width="80%">
+        <description lang="en">Plugin Presentation:</description>
+        <description lang="zh-CN">插件演示：</description>
+        <description lang="ru">Представление плагина:</description>
+        <description lang="de">Plugin-Präsentation:</description>
+      </presentation>
+      <presentation plugin="$Ciphertext$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">Transposition Output:</description>
+        <description lang="zh-CN">换位输出：</description>
+        <description lang="ru">Транспозиция:</description>
+        <description lang="de">Transpositions-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <!-- Scytale input -->
+  <input image="Scytale">
+    <name lang="en">Scytale</name>
+    <name lang="zh-CN">镰状</name>
+    <name lang="ru">скитала</name>
+    <name lang="de">Skytale</name>
+    <description lang="en">A scytale is a tool used to perform a transposition cipher, consisting of a cylinder with a strip of parchment wound around it on which is written a message. The ancient Greeks, and the Spartans in particular, are said to have used this cipher to communicate during military campaigns.</description>
+    <description lang="zh-CN">脚本是一种用于执行换位密码的工具，它由一个圆柱体和一条缠绕着羊皮纸的圆柱体组成，上面写有一条消息。据说古希腊人，特别是斯巴达人，在军事战役中使用这种密码进行交流。</description>
+    <description lang="ru">Scytale - инструмент, используемый для выполнения шифрования транспонирования, состоящий из цилиндра с полосой пергамента, намотанной вокруг него, на которой написано сообщение. Говорят, что древние греки и спартанцы использовали этот шифр для общения во время военных кампаний.</description>
+    <description lang="de">Die Skytale ist ein Werkzeug, mit dem eine Transpositions-Verschlüsselung durchgeführt werden kann. Sie besteht aus einem Zylinder, der mit einem Pergamentstreifen umwickelt wird und auf den dann eine Nachricht geschrieben wird. Die alten Griechen (insbesondere die Spartaner) sollen dieses Verfahren zur Kommunikation während militärischer Einsätze benutzt haben.</description>
+    <headline lang="en">Message Input</headline>
+    <headline lang="zh-CN">留言输入</headline>
+    <headline lang="ru">Ввод сообщений</headline>
+    <headline lang="de">Nachrichteneingabe</headline>
+    <task lang="en">Here, you can input the message and the key to use.</task>
+    <task lang="zh-CN">在这里，您可以输入消息和要使用的密钥。</task>
+    <task lang="ru">Здесь вы можете ввести сообщение и ключ для использования.</task>
+    <task lang="de">Hier können Sie die Nachricht und den zu benutzenden Schlüssel eingeben.</task>
+    <comboBox plugin="$Scytale$" property="Action" alignment="Left" width="20%">
+      <description lang="en">Encrypt or Decrypt:</description>
+      <description lang="zh-CN">加密或解密：</description>
+      <description lang="ru">Шифрование или расшифровка:</description>
+      <description lang="de">Verschlüsseln oder Entschlüsseln:</description>
+      <item lang="en" content="Encrypt" />
+      <item lang="zh-CN" content="加密" />
+      <item lang="ru" content="шифровать" />
+      <item lang="de" content="Verschlüsseln" />
+      <item lang="en" content="Decrypt" />
+      <item lang="zh-CN" content="解密" />
+      <item lang="ru" content="расшифровывать" />
+      <item lang="de" content="Entschlüsseln" />
+    </comboBox>
+    <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" width="49%" visibleLines="5" group="InputGroup">
+      <description lang="en">Message to encrypt/decrypt:</description>
+      <description lang="zh-CN">加密/解密消息：</description>
+      <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+      <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+      <defaultvalue lang="de">Eine geheime Botschaft</defaultvalue>
+      <defaultvalue lang="en">A secret message</defaultvalue>
+      <defaultvalue lang="zh-CN">秘密讯息</defaultvalue>
+      <defaultvalue lang="ru">Секретное сообщение</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$Key$" property="Number" alignment="Stretch" width="49%" visibleLines="5" group="InputGroup" regex="[0-9]+">
+      <description lang="en">Key:</description>
+      <description lang="zh-CN">键：</description>
+      <description lang="ru">Ключ:</description>
+      <description lang="de">Schlüssel:</description>
+      <defaultvalue>11</defaultvalue>
+    </inputBox>
+    <sampleViewer image="Scytale" file="Cryptography\Classic\Scytale.cwm">
+      <name lang="en">Scytale Output</name>
+      <name lang="zh-CN">Scytale输出</name>
+      <name lang="ru">Выход Scytale</name>
+      <name lang="de">Skytale-Ausgabe</name>
+      <description lang="en">A scytale is a tool used to perform a transposition cipher, consisting of a cylinder with a strip of parchment wound around it on which is written a message. The ancient Greeks, and the Spartans in particular, are said to have used this cipher to communicate during military campaigns.</description>
+      <description lang="zh-CN">脚本是一种用于执行换位密码的工具，它由一个圆柱体和一条缠绕着羊皮纸的圆柱体组成，上面写有一条消息。据说古希腊人，特别是斯巴达人，在军事战役中使用这种密码进行交流。</description>
+      <description lang="ru">Scytale - инструмент, используемый для выполнения шифрования транспонирования, состоящий из цилиндра с полосой пергамента, намотанной вокруг него, на которой написано сообщение. Говорят, что древние греки и спартанцы использовали этот шифр для общения во время военных кампаний.</description>
+      <description lang="de">Die Skytale ist ein Werkzeug, mit dem eine Transpositions-Verschlüsselung durchgeführt werden kann. Sie besteht aus einem Zylinder, der mit einem Pergamentstreifen umwickelt wird und auf den dann eine Nachricht geschrieben wird. Die alten Griechen (insbesondere die Spartaner) sollen dieses Verfahren zur Kommunikation während militärischer Einsätze benutzt haben.</description>
+      <headline lang="en">Scytale Output</headline>
+      <headline lang="zh-CN">Scytale输出</headline>
+      <headline lang="ru">Выход Scytale</headline>
+      <headline lang="de">Skytale-Ausgabe</headline>
+      <task lang="en">Here, you can change the parameters and view the results.</task>
+      <task lang="zh-CN">在这里，您可以更改参数并查看结果。</task>
+      <task lang="ru">Здесь вы можете изменить параметры и просмотреть результаты.</task>
+      <task lang="de">Hier können Sie Parameter verändern und die Ergebnisse sehen.</task>
+      <inputBox plugin="$Plaintext$" property="Text" alignment="Stretch" visibleLines="5">
+        <description lang="en">Message to encrypt/decrypt:</description>
+        <description lang="zh-CN">加密/解密消息：</description>
+        <description lang="ru">Сообщение для шифрования / расшифровки:</description>
+        <description lang="de">Zu verschlüsselnde/entschlüsselnde Nachricht:</description>
+        <defaultvalue lang="de">Eine geheime Botschaft</defaultvalue>
+        <defaultvalue lang="en">A secret message</defaultvalue>
+        <defaultvalue lang="zh-CN">秘密讯息</defaultvalue>
+        <defaultvalue lang="ru">Секретное сообщение</defaultvalue>
+      </inputBox>
+      <presentation plugin="$Ciphertext$" alignment="Stretch" width="100%" height="20%">
+        <description lang="en">Scytale Output:</description>
+        <description lang="zh-CN">Scytale输出：</description>
+        <description lang="ru">Вывод Scytale:</description>
+        <description lang="de">Skytale-Ausgabe:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+</category>

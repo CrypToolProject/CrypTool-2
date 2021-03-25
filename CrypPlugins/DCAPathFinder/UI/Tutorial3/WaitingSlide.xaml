@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="DCAPathFinder.UI.Tutorial3.WaitingSlide"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DCAPathFinder.UI.Tutorial3"
+             mc:Ignorable="d"
+             d:DesignHeight="350" d:DesignWidth="600" IsEnabled="{Binding IsUIEnabled, Mode=OneWay}">
+    <Grid Height="350" Width="600">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="100*" />
+        </Grid.RowDefinitions>
+        <RichTextBox Grid.Column="0" Grid.Row="0" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="20" FontWeight="Bold" Margin="10,0,10,0">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center">
+                    <Run Text="{Loc Tutorial3WaitingSlideHeader}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox Grid.Column="0" Grid.Row="1" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,0,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial3WaitingSlideContent1}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <RichTextBox Grid.Column="0" Grid.Row="2" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,0,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial3WaitingSlideContent2}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <RichTextBox Grid.Column="0" Grid.Row="3" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,0,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial3WaitingSlideContent3Run1}" />
+                    <LineBreak />
+                    <LineBreak />
+                    <Run Text="{Loc Tutorial3WaitingSlideContent3Run2}" /><Run Text="{Binding InputDifference, Mode=OneWay}" />
+                    <LineBreak />
+                    <Run Text="{Loc Tutorial3WaitingSlideContent3Run3}" /><Run Text="{Binding ExpectedDifference, Mode=OneWay}" />
+                    <LineBreak />
+                    <Run Text="{Loc Tutorial3WaitingSlideContent3Run4}" /><Run Text="{Binding Probability, Mode=OneWay}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+    </Grid>
+</UserControl>

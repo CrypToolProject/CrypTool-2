@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>CrypTool-Store</value>
+  </data>
+  <data name="PluginsOverview" xml:space="preserve">
+    <value>Plugins-Übersicht</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>CrypTool-Store ermöglicht das Herunterladen zusätzlicher CrypTool 2-Komponenten</value>
+  </data>
+  <data name="Welcome_To_CrypToolStore" xml:space="preserve">
+    <value>Willkommen im CrypTool-Store</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Suche:</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Autoren:</value>
+  </data>
+  <data name="AuthorsEmails" xml:space="preserve">
+    <value>Autoren-Emails</value>
+  </data>
+  <data name="AuthorsInstitutes" xml:space="preserve">
+    <value>Autoren-Institute:</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="downloaded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\downloaded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PendingChanges" xml:space="preserve">
+    <value>Sie haben kürzlich Komponenten aus dem CrypTool-Store installiert oder deinstalliert. Damit die Änderungen wirksam werden, müssen Sie CrypTool 2 neu starten.</value>
+  </data>
+  <data name="RestartCrypTool2" xml:space="preserve">
+    <value>CrypTool 2 jetzt neu starten</value>
+  </data>
+  <data name="_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Installieren</value>
+  </data>
+  <data name="Uninstall" xml:space="preserve">
+    <value>Deinstallieren</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Could_not_uninstall__Exception_was___0_" xml:space="preserve">
+    <value>Deinstallation nicht möglich. Fehlermeldung: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Do_you_really_want_to_uninstall___0___from_CrypTool_Store_" xml:space="preserve">
+    <value>Möchten Sie "{0}" wirklich deinstallieren?</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Exception_during_uninstallation_" xml:space="preserve">
+    <value>Ausnahme bei der Deinstallation.</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click___0___has_been_marked_for_uninstallation__You_need_to_restart_CrypTool_2_to_complete_installation_" xml:space="preserve">
+    <value>"{0}" wurde zur Deinstallation markiert. Sie müssen CrypTool 2 neu starten, um die Deinstallation abzuschließen.</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallButton_Click_Do_you_really_want_to_download_and_install___0___from_CrypTool_Store_" xml:space="preserve">
+    <value>Möchten Sie "{0}" wirklich vom CrypTool-Store herunterladen und installieren?</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Could_not_download_from_CrypToolStore_Server__Message_was___0_" xml:space="preserve">
+    <value>Herunterladen von CrypTool-Store Server nicht möglich. Nachricht lautete: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Error_during_download_" xml:space="preserve">
+    <value>Fehler während des Downloads.</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_" xml:space="preserve">
+    <value>Ausnahme aufgetreten.</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_deleting_old_installation_files___0_" xml:space="preserve">
+    <value>Beim Löschen alter Installationsdateien ist eine Ausnahme aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_downloading_and_installing___0_" xml:space="preserve">
+    <value>Beim Herunterladen und Installieren ist eine Ausnahme aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_locking_of_everything___0_" xml:space="preserve">
+    <value>Ausnahme beim Sperren von allem aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_unlocking_of_everything___0_" xml:space="preserve">
+    <value>Ausnahme beim Entsperren von allem aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin___0___has_been_successfully_downloaded__You_need_to_restart_CrypTool_2_to_complete_installation_" xml:space="preserve">
+    <value>"{0}" wurde erfolgreich heruntergeladen. Sie müssen CrypTool 2 neu starten, um die Installation abzuschließen.</value>
+  </data>
+  <data name="CrypToolStorePresentation_PluginListView_SelectionChanged_Exception_occured_during_showing_of_selected_plugin_in_the_right_box_of_the_CrypToolStore_UI___0_" xml:space="preserve">
+    <value>Ausnahme beim Anzeigen des ausgewählten Plugins im rechten Feld der CrypTool-Store-Benutzeroberfläche aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_RestartButton_Click_Exception_during_restart_" xml:space="preserve">
+    <value>Ausnahme beim Neustart aufgetreten.</value>
+  </data>
+  <data name="CrypToolStorePresentation_RestartButton_Click_Exception_occured_while_trying_to_restart_CrypTool_2___0_" xml:space="preserve">
+    <value>Beim Neustart von CrypTool 2 ist eine Ausnahme aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_UpdateStorePluginList_Error_occured_during_retrieval_of_current_list_of_plugins_from_CrypToolStore___0_" xml:space="preserve">
+    <value>Fehler beim Abrufen der aktuellen Liste der Plugins aus CrypTool-Store aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_UpdateStorePluginList_Exception_occured_during_adding_of_current_list_of_plugins_to_the_user_interface___0_" xml:space="preserve">
+    <value>Ausnahme beim Hinzufügen der aktuellen Liste der Plugins zur Benutzeroberfläche aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_UpdateStorePluginList_Exception_occured_during_retrieval_of_current_list_of_plugins_from_CrypToolStore___0_" xml:space="preserve">
+    <value>Ausnahme beim Abrufen der aktuellen Liste der Plugins aus CrypTool-Store aufgetreten: {0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Unistallation_" xml:space="preserve">
+    <value>Deinstallation?</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Download_succeeded_" xml:space="preserve">
+    <value>Download erfolgreich.</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version:</value>
+  </data>
+  <data name="CrypToolStorePresentation_CheckIfAlreadyInstalled_Exception_occured_during_check_of__0__for_updates___1_" xml:space="preserve">
+    <value>Ausnahme bei der Überprüfung von "{0}" auf Updates: {1}</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Updaten</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>Dateigröße:</value>
+  </data>
+  <data name="CrypToolStorePresentation_ResourceSuccessfullyInstalled" xml:space="preserve">
+    <value>Ressource "{0}" erfolgreich installiert.</value>
+  </data>
+  <data name="ShowResources" xml:space="preserve">
+    <value>Zeige Ressourcen</value>
+  </data>
+  <data name="CopyInfo" xml:space="preserve">
+    <value>Kopiere Informationen</value>
+  </data>
+</root>

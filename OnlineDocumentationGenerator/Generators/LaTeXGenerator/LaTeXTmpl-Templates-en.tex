@@ -1,0 +1,65 @@
+\documentclass[10pt,a4paper]{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{tipa}
+\usepackage{amsfonts}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{german,longtable}
+\usepackage[export]{adjustbox}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\DisableLigatures{}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\makeatletter \setlength\@fptop{0\p@}
+\makeatother
+
+\title{Documentation of the Templates in CrypTool v2 (CT2)}
+\author{The CrypTool 2 Team}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\hspace{0pt}\\[2.5cm]
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Documentation of the Templates in CrypTool v2 (CT2) }\\[0.4cm]
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Authors:} \\
+The CrypTool 2 Team
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Version:} \\
+$VERSION$
+\end{flushright}
+\end{minipage}
+\vfill
+{\large \today}
+\end{center}
+\newpage
+\large
+This document gives an overview over the templates that are included in {\bf CrypTool v2}.\\\\
+The first part of this document (``Overview over the Templates'') compactly lists all templates. For each template, it lists the icon, the title and a short summary. The templates are presented in the same order as they appear in the Startcenter of CT2.\\\\
+On page \pageref{part2} starts a list of the templates and the corresponding balloon text that is used in the program and which offers a more detailed description of the template.
+\newpage
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+$CONTENT$
+
+\end{document}

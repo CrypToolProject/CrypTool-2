@@ -1,0 +1,155 @@
+﻿<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" Background="White" Name="flowDoc"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span FontWeight="Bold" FontSize="16" xml:lang="de-de">
+            <Span.TextDecorations>
+                <TextDecoration Location="Underline" />
+            </Span.TextDecorations> Using the "Internet frame generator" plugin (IFG)
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">This IFG plugin offers the possibility to create either
+            Internet Protocol packets ("IPv4 packets") or Address Resolution Protocol packets ("ARP
+            request packets"). ARP request packets are used to request the Media Access
+            Control (MAC) address corresponding to a certain IP address. This happens, when an Ethernet
+            interface wants to send a message to a certain IP address, but doesn't have the corresponding
+            MAC address. The ARP response message contains this MAC address belonging to the specified IP
+            address. Each Ethernet device has such a unique MAC address, consisting of 6 bytes (or 48 bits).
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">You can choose the kind of packets
+        </Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">- either in the</Span>
+        <Span FontStyle="Italic" xml:lang="de-de">Algorithm Settings</Span>
+        <Span xml:lang="de-de">(within the drop-down menu "Kind of packet"):
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="192" Height="224" Source="/Internet_frame_generator;Component/DetailedDescription/Images/IFG_AS_KOP.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">- or by right clicking on the plugin in the editor:
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="260" Height="170" Source="/Internet_frame_generator;Component/DetailedDescription/Images/IFG_Settings_rightClick.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">Please note: This plugin supports only ARP request packets, ARP response packets
+            can't be created.
+        </Span>
+    </Paragraph>
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">You can also adjust how many packets are going to be created. This can only be done within the
+        </Span>
+        <Span FontStyle="Italic" xml:lang="de-de">Algorithm Settings</Span>
+        <Span xml:lang="de-de">by entering the according number in the text field "Number of packets":</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="192" Height="243" Source="/Internet_frame_generator;Component/DetailedDescription/Images/IFG_AS_NOP.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">You can enter a value between 1 and 100,000 packets. If you try
+            to type in a invalid value, e.g. a number grater than 100,000 or a character, an error will occur:
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="192" Height="242" Source="/Internet_frame_generator;Component/DetailedDescription/Images/IFG_AS_NOP_Error.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">Now let's have a look on how you can use this IFG plugin. This plugin is part
+            of a prepared workspace, which you can find in the CrypTool 2.0 SampleProjects folder. It's called
+            "AttackWEP-01.cte" and provides the following workflow:</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The packets, which are created within this plugin, are delivered
+            to the "WEP protocol" plugin, which encrypts the packets according to the WEP protocol (for details,
+            please have a look at the description tab of the "WEP protocol" plugin). Those encrypted packets are then
+            delivered to the "Attacks on the WEP protocol" plugin, which simulates one of three provided attacks
+            against the WEP protocol (for details, please have a look at the description tab of the "Attacks on the WEP
+            protocol" plugin).</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The following plugins are involved in the chain (besides the above mentioned
+            ones): The "TextInput" plugin, the "Number Input" plugin, the "Multiplexer" plugin and the
+            "IncDec" plugin. The "TextInput" provides the key, which is used within the "WEP protocol" plugin
+            for the encryption operation.</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="522" Height="266" Source="/Internet_frame_generator;Component/DetailedDescription/Images/SW_AWEP.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The packets, which are encrypted by the "WEP protocol" plugin, are
+            delivered to the "Attacks on the WEP protocol" plugin. This plugin tries to recover the key,
+            which has been used to encrypt the packets. There are three attacks possible: The "FMS attack",
+            the "KoreK attack" and the "PTW attack" (for details, please have a look at the description tab of the
+            "Attacks on the WEP protocol" plugin).</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">If the recovery of this key has not been successful with the number of packets
+            adjusted in this IFG plugin, the "Attacks on the WEP protocol" plugin forwards the value "false"
+            at one of it's output. This value goes to the "Multiplexer" plugin, which decides whether the number
+            provided by the "IncDec" plugin will be forwarded or not. If the value, provided by the "Attacks on the
+            WEP protocol" plugin, is "false", the "Multiplexer" plugin will forward the incremented integer value.
+            This incremented value is also forwarded to this IFG plugin, which will then create the requested packet in
+            the requested amount once again. If the value provided from the "Attacks on the WEP protocol" plugin is
+            "true", the "Multiplexer" plugin will forward nothing, and the chain stops working.
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">So this workflow is a loop, which doesn't stop until the key has been recovered
+            successfully.
+        </Span>
+    </Paragraph>
+
+    <Paragraph />
+</FlowDocument>

@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ButtonLabelEnd" xml:space="preserve">
+    <value>Ende</value>
+  </data>
+  <data name="ButtonLabelStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="ChaChaCaption" xml:space="preserve">
+    <value>ChaCha</value>
+  </data>
+  <data name="ChaChaHashName" xml:space="preserve">
+    <value>ChaCha-Hash</value>
+  </data>
+  <data name="ChaChaHashNavigationAdditionReverseBytesLabel" xml:space="preserve">
+    <value>Addition / Bytes umdrehen</value>
+  </data>
+  <data name="ChaChaHashNavigationKeystreamBlockLabel" xml:space="preserve">
+    <value>Schlüsselstromblock</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabel" xml:space="preserve">
+    <value>Viertelrunde</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelColumn1" xml:space="preserve">
+    <value>VR(0,4,8,12)</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelColumn2" xml:space="preserve">
+    <value>VR(1,5,9,13)</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelColumn3" xml:space="preserve">
+    <value>VR(2,6,10,14)</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelColumn4" xml:space="preserve">
+    <value>VR(3,7,11,15)</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelDiagonal1" xml:space="preserve">
+    <value>VR(0,5,10,15)</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelDiagonal2" xml:space="preserve">
+    <value>VR(1,6,11,12)</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelDiagonal3" xml:space="preserve">
+    <value>VR(2,7,8,13)</value>
+  </data>
+  <data name="ChaChaHashNavigationQrLabelDiagonal4" xml:space="preserve">
+    <value>VR(3,4,9,14)</value>
+  </data>
+  <data name="ChaChaHashNavigationRoundLabel" xml:space="preserve">
+    <value>Runde</value>
+  </data>
+  <data name="ChaChaHashOriginalStateLabel" xml:space="preserve">
+    <value>Anfangszustand</value>
+  </data>
+  <data name="ChaChaHashTitle" xml:space="preserve">
+    <value>ChaCha-Hashfunktion</value>
+  </data>
+  <data name="ChaChaTooltip" xml:space="preserve">
+    <value>Eine Stromchiffre, die in TLS eingesetzt wird und auf Salsa20 basiert. Entwickelt von Daniel J. Bernstein.</value>
+  </data>
+  <data name="CounterValidationErrorMessage" xml:space="preserve">
+    <value>Zähler muss 64-bit in der DJB-Version oder 32-bit in der IETF-Version sein</value>
+  </data>
+  <data name="DiffusionCounterLabel1" xml:space="preserve">
+    <value>Eingabe initialer Zähler (hex):</value>
+  </data>
+  <data name="DiffusionCounterLabel2" xml:space="preserve">
+    <value>Zweiter initialer Zähler (hex):</value>
+  </data>
+  <data name="DiffusionCounterLabel3" xml:space="preserve">
+    <value>XOR der beiden Zähler (hex):</value>
+  </data>
+  <data name="DiffusionDescription1" xml:space="preserve">
+    <value>Auf dieser Seite kann ein zweiter Wert für Schlüssel, IV und Blockzähler eingegeben werden.</value>
+  </data>
+  <data name="DiffusionDescription2" xml:space="preserve">
+    <value>Die ChaCha-Chiffre wird dann auch mit diesen Werten ausgeführt um die Diffusionscharakteristik der Chiffre zu visualisieren. Die Werte vom zweiten Chiffrendurchlauf (mit den zweiten Werten) werden unter den Werten des ersten Durchlaufs angezeigt. Unterschiedliche Hexwerte werden rot markiert. Auf der rechten Seite ist hierfür ein Beispiel zu sehen.</value>
+  </data>
+  <data name="DiffusionDescription3" xml:space="preserve">
+    <value>Da für das Studium der Diffusionscharakteristik die Unterschiede der Werte von zwei Durchläufen interessanter sind als die tatsächlichen Werte, ist es auch möglich explizit die Differenz (XOR) einzugeben.
+Mit dem Knopf in der oberen rechten Ecke ist es möglich, zwischen der XOR-Anzeige und der Anzeige beider Werte umzuschalten.
+Das kann im Beispiel ausprobiert werden. Drücke den Knopf und die Anzeige im Beispiel schaltet sich um.</value>
+  </data>
+  <data name="DiffusionDescription4" xml:space="preserve">
+    <value>In der Seite über die ChaCha-Hashfunktion wird auch die Anzahl der geflippten Bits angezeigt. Eine sichere Chiffre sollte 50% aller Bits im Geheimtext flippen, wenn ein Bit im Klartext geflippt wurde und vice versa.</value>
+  </data>
+  <data name="DiffusionExampleCaption" xml:space="preserve">
+    <value>Beispiel wie die Diffusion visualisiert wird.
+Benutze den Knopf oben rechts um zwischen XOR-Anzeige und Anzeige beider Werte umzuschalten.</value>
+  </data>
+  <data name="DiffusionFlippedBits" xml:space="preserve">
+    <value>Geflippte Bits:</value>
+  </data>
+  <data name="DiffusionIVLabel1" xml:space="preserve">
+    <value>Eingabe Initialisierungsvektor (hex):</value>
+  </data>
+  <data name="DiffusionIVLabel2" xml:space="preserve">
+    <value>Zweiter Initialisierungsvektor (hex):</value>
+  </data>
+  <data name="DiffusionIVLabel3" xml:space="preserve">
+    <value>XOR der beiden Initialisierungsvektoren (hex):</value>
+  </data>
+  <data name="DiffusionKeyLabel1" xml:space="preserve">
+    <value>Eingabe Schlüssel (hex):</value>
+  </data>
+  <data name="DiffusionKeyLabel2" xml:space="preserve">
+    <value>Zweiter Schlüssel (hex):</value>
+  </data>
+  <data name="DiffusionKeyLabel3" xml:space="preserve">
+    <value>XOR der beiden Schlüssel (hex):</value>
+  </data>
+  <data name="DiffusionState" xml:space="preserve">
+    <value>Diffusionszustand:</value>
+  </data>
+  <data name="InputInitialCounterCaption" xml:space="preserve">
+    <value>Initialer Zähler</value>
+  </data>
+  <data name="InputInitialCounterTooltip" xml:space="preserve">
+    <value>Initialer Block Zähler. Wird bei jedem Schlüsselstromblock inkrementiert. 64-bit in der DJB version. 32-bit in der IETF version.</value>
+  </data>
+  <data name="InputIVCaption" xml:space="preserve">
+    <value>Initialisierungsvektor</value>
+  </data>
+  <data name="InputIVTooltip" xml:space="preserve">
+    <value>Initialisierungsvektor. 64-bit in der DJB version. 96-bit in der IETF version.</value>
+  </data>
+  <data name="InputKeyCaption" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>Schlüssel. 128-bit oder 256-bit möglich. Ein 128-bit Schlüssel wird in einen 256-bit Schlüssel erweitert durch Verkettung mit sich selbst.</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>Klartext</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>Text der ver- bzw. entschlüsselt werden soll mit ChaCha.</value>
+  </data>
+  <data name="InputValidationErrorMessage" xml:space="preserve">
+    <value>Eingabetext darf nicht leer sein.</value>
+  </data>
+  <data name="IVValidationErrorMessage" xml:space="preserve">
+    <value>IV muss 64-bit in der DJB-Version oder 96-bit in der IETF-Version sein</value>
+  </data>
+  <data name="KeyValidationErrorMessage" xml:space="preserve">
+    <value>Schlüssel muss 128-bit oder 256-bit sein</value>
+  </data>
+  <data name="LogExecutionStarted" xml:space="preserve">
+    <value>Ausführung gestartet.</value>
+  </data>
+  <data name="LogInput" xml:space="preserve">
+    <value>Key: {0}-bit, IV: {1}-bit, Counter: {2}</value>
+  </data>
+  <data name="LogInputInvalid" xml:space="preserve">
+    <value>Eingabe ungültig: {0}</value>
+  </data>
+  <data name="LogInputValid" xml:space="preserve">
+    <value>Eingabe gültig.</value>
+  </data>
+  <data name="LogSettings" xml:space="preserve">
+    <value>Einstellungen: {0}</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>Geheimtext</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>Von ChaCha ent- bzw. verschlüsselter Text.</value>
+  </data>
+  <data name="OverviewConstants" xml:space="preserve">
+    <value>Konstanten (128-bit)</value>
+  </data>
+  <data name="OverviewIntro1" xml:space="preserve">
+    <value>ChaCha ist eine Stromchiffre. Sie generiert einen pseudozufälligen Strom an Bits (Schlüsselstrom) und verschlüsselt den Klartext mithilfe einer bitweisen XOR Operation mit dem Schlüsselstrom.</value>
+  </data>
+  <data name="OverviewIntro2" xml:space="preserve">
+    <value>Der Schlüsselstrom wird in Blöcken generiert. Jeder Block ist 512-bit groß. Es werden solange Blöcke generiert, bis der Schlüsselstrom größer oder gleich der Länge des Klartextes ist.
+ChaCha benutzt eine Hashfunktion zusammen mit einem 512-bit Zustand, der aus folgenden vier Parametern besteht:</value>
+  </data>
+  <data name="OverviewKey" xml:space="preserve">
+    <value>Schlüssel (128-bit oder 256-bit. Ein 128-bit Schlüssel wird in einen 256-bit Schlüssel umgewandelt.)</value>
+  </data>
+  <data name="OverviewMatrixCaption" xml:space="preserve">
+    <value>Zustand als 4x4 Matrix. Jeder Eintrag besteht aus vier Bytes.</value>
+  </data>
+  <data name="OverviewMatrixConstants" xml:space="preserve">
+    <value>KONSTANTE</value>
+  </data>
+  <data name="OverviewMatrixCounter" xml:space="preserve">
+    <value>ZÄHLER</value>
+  </data>
+  <data name="OverviewMatrixIV" xml:space="preserve">
+    <value>IV</value>
+  </data>
+  <data name="OverviewMatrixKey" xml:space="preserve">
+    <value>SCHLÜSSEL</value>
+  </data>
+  <data name="OverviewName" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="OverviewOutro1" xml:space="preserve">
+    <value>Durch Anwendung der ChaCha-Hashfunktion entsteht aus einem 512-bit Zustand ein Schlüsselstromblock.</value>
+  </data>
+  <data name="OverviewOutro2" xml:space="preserve">
+    <value>Das führt uns zu folgenden Schritten um eine Nachricht M mit ChaCha zu verschlüsseln:</value>
+  </data>
+  <data name="OverviewOutroStep1" xml:space="preserve">
+    <value>Zustandsmatrix initialisieren</value>
+  </data>
+  <data name="OverviewOutroStep2" xml:space="preserve">
+    <value>Schlüsselstrom generieren</value>
+  </data>
+  <data name="OverviewOutroStep3" xml:space="preserve">
+    <value>M XOR Schlüsselstrom</value>
+  </data>
+  <data name="OverviewRemark" xml:space="preserve">
+    <value>Bemerkung: Weil XOR die inverse Operation zu sich selbst ist, verläuft das Entschlüsseln von Nachrichten gleich ab.</value>
+  </data>
+  <data name="OverviewTitle" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="RoundCaption" xml:space="preserve">
+    <value>Runden</value>
+  </data>
+  <data name="RoundTooltip" xml:space="preserve">
+    <value>Wähle aus wieviele Runden benutzt werden sollen.</value>
+  </data>
+  <data name="SettingsToString" xml:space="preserve">
+    <value>Runden: {0}, Version: {1}</value>
+  </data>
+  <data name="StateMatrixButtonConstants" xml:space="preserve">
+    <value>Konstanten</value>
+  </data>
+  <data name="StateMatrixButtonCounter" xml:space="preserve">
+    <value>Zähler</value>
+  </data>
+  <data name="StateMatrixButtonIV" xml:space="preserve">
+    <value>Initialisierungsvektor</value>
+  </data>
+  <data name="StateMatrixButtonKey" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="StateMatrixDescription1" xml:space="preserve">
+    <value>Der 512-bit (128-Byte) ChaCha-Zustand kann als 4x4 Matrix interpretiert werden, in der jeder Eintrag aus vier Bytes besteht. Die Einträge werden aus den Parametern, die unten zu sehen sind, aufgebaut. Diese Einträge werden kodiert bevor sie in die Matrix eingefügt werden.</value>
+  </data>
+  <data name="StateMatrixDescription6" xml:space="preserve">
+    <value>Auf der nächsten Seite wird dieser initialisierte Zustand der ChaCha-Hashfunktion übergeben um den ersten Schlüsselstromblock zu generieren.</value>
+  </data>
+  <data name="StateMatrixEncodingConstants1" xml:space="preserve">
+    <value>Originaler Wert (ASCII):</value>
+  </data>
+  <data name="StateMatrixEncodingConstants2" xml:space="preserve">
+    <value>Als Bytes:</value>
+  </data>
+  <data name="StateMatrixEncodingConstants3" xml:space="preserve">
+    <value>In 4-Byte Stücke aufteilen:</value>
+  </data>
+  <data name="StateMatrixEncodingConstants4" xml:space="preserve">
+    <value>Bytereihenfolge von jedem Stück umkehren:</value>
+  </data>
+  <data name="StateMatrixEncodingConstantsHeader" xml:space="preserve">
+    <value>Konstanten-Kodierung</value>
+  </data>
+  <data name="StateMatrixEncodingCounter1" xml:space="preserve">
+    <value>Originaler Wert:</value>
+  </data>
+  <data name="StateMatrixEncodingCounter2" xml:space="preserve">
+    <value>Bytereihenfolge umkehren:</value>
+  </data>
+  <data name="StateMatrixEncodingCounter3" xml:space="preserve">
+    <value>In 4-Byte Stücke aufteilen:</value>
+  </data>
+  <data name="StateMatrixEncodingCounter4" xml:space="preserve">
+    <value>Bytereihenfolge von jedem Stück umkehren:</value>
+  </data>
+  <data name="StateMatrixEncodingCounterHeader" xml:space="preserve">
+    <value>Zähler-Kodierung</value>
+  </data>
+  <data name="StateMatrixEncodingIV1" xml:space="preserve">
+    <value>Originaler Wert:</value>
+  </data>
+  <data name="StateMatrixEncodingIV2" xml:space="preserve">
+    <value>In 4-Byte Stücke aufteilen:</value>
+  </data>
+  <data name="StateMatrixEncodingIV3" xml:space="preserve">
+    <value>Bytereihenfolge von jedem Stück umkehren:</value>
+  </data>
+  <data name="StateMatrixEncodingIVHeader" xml:space="preserve">
+    <value>IV-Kodierung</value>
+  </data>
+  <data name="StateMatrixEncodingKey1" xml:space="preserve">
+    <value>Originaler Wert:</value>
+  </data>
+  <data name="StateMatrixEncodingKey2" xml:space="preserve">
+    <value>In 4-Byte Stücke aufteilen:</value>
+  </data>
+  <data name="StateMatrixEncodingKey3" xml:space="preserve">
+    <value>Bytereihenfolge von jedem Stück umkehren:</value>
+  </data>
+  <data name="StateMatrixEncodingKeyHeader" xml:space="preserve">
+    <value>Schlüssel-Kodierung</value>
+  </data>
+  <data name="StateMatrixName" xml:space="preserve">
+    <value>Zustandsmatrix</value>
+  </data>
+  <data name="StateMatrixParameterConstants" xml:space="preserve">
+    <value>Konstanten</value>
+  </data>
+  <data name="StateMatrixParameterCounter" xml:space="preserve">
+    <value>Initialer Blockzähler</value>
+  </data>
+  <data name="StateMatrixParameterHeader" xml:space="preserve">
+    <value>Zustandsparameter</value>
+  </data>
+  <data name="StateMatrixParameterIV" xml:space="preserve">
+    <value>Initialisierungsvektor</value>
+  </data>
+  <data name="StateMatrixParameterKey" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="StateMatrixTitle" xml:space="preserve">
+    <value>Initialisierung Zustandsmatrix</value>
+  </data>
+  <data name="VersionCaption" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="VersionTooltip" xml:space="preserve">
+    <value>Wähle die Version aus. Die Versionen unterscheiden sich lediglich in der Größe des Zählers und Initialisierungsvektors. Die DJB Version benutzt einen 64-bit Zähler und einen 64-bit IV. Die IETF Version benutzt einen 32-bit Zähler und einen 96-bit IV.</value>
+  </data>
+  <data name="XorToggle" xml:space="preserve">
+    <value>XOR Anzeige</value>
+  </data>
+</root>

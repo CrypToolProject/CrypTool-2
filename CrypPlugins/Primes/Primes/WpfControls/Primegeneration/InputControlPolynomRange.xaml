@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primegeneration.InputControlPolynomRange"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Generation"
+    Loaded="UserControl_Loaded">
+
+    <GroupBox Name="gbTitle">
+        <StackPanel>
+            <DockPanel Name="pnlImage" />
+            <Grid Name="pnlFactors" ShowGridLines="False" Margin="0,0,0,7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.9*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <StackPanel Name="pnlRandom">
+                <DockPanel Margin="0,0,0,7">
+                    <Label Margin="0,7,0,0" Content="{x:Static lang:PrimesGeneration.polynomrange_numberofformulars}"></Label>
+                    <comps:InputSingleControl x:Name="icNumberOfFormulars" Execute="InputSingleControl_Execute" InputRangeControlType="Vertical" ShowButtons="False" Title="" ShowCalcInput="False" HorizontalAlignment="Left" FreeTextboxWidth="50" />
+                </DockPanel>
+                <GroupBox Header="{x:Static lang:PrimesGeneration.polynomrange_foreachformulars}">
+                    <StackPanel Margin="0,7,0,0">
+                        <RadioButton Name="rbChooseRandom" IsChecked="True" Click="rbChoose_Click" Margin="0,0,0,7" Content="{x:Static lang:PrimesGeneration.polynomrange_choosevaluesrnd}"></RadioButton>
+                        <DockPanel Margin="0,0,0,7" Name="pnlChooseXRandom">
+                            <Label Margin="0,7,0,0" Content="{x:Static lang:PrimesGeneration.polynomrange_numberofcalculations}"></Label>
+                            <comps:InputSingleControl x:Name="icNumberOfCalculations" Execute="InputSingleControl_Execute" InputRangeControlType="Vertical" ShowButtons="False" Title="" ShowCalcInput="False" HorizontalAlignment="Left" FreeTextboxWidth="50" />
+                        </DockPanel>
+                        <RadioButton Name="rbChooseRange" Click="rbChoose_Click" Margin="0,0,0,7" Content="{x:Static lang:PrimesGeneration.polynom_values}"></RadioButton>
+                        <comps:InputRangeControl SecondParameterPresent="False" InputRangeControlType="Vertical" x:Name="ircRandomChooseXRange" ShowButtons="False" Title="" Execute="InputRangeControl_Execute" ShowCalcInput="False" IsEnabled="False" />
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+            <GroupBox Name="pnlSystematic" Header="{x:Static lang:PrimesGeneration.polynom_values}">
+                <comps:InputRangeControl SecondParameterPresent="False" InputRangeControlType="Vertical" x:Name="ircSystematicChooseXRange" Execute="InputRangeControl_Execute" ShowButtons="False" Title="" ShowCalcInput="False" />
+            </GroupBox>
+            <DockPanel Name="pnlButtons" Margin="0,7,0,0">
+                <Button Name="btnExecute" Click="btnExecute_Click" Content="{x:Static lang:PrimesGeneration.polynomrange_btnExecute}" HorizontalAlignment="Left" Width="100" />
+                <Button Name="btnCancel" Click="btnCancel_Click" Content="{x:Static lang:PrimesGeneration.polynomrange_btnCancel}" HorizontalAlignment="Left" Width="100" Margin="7,0,0,0" IsEnabled="False" />
+            </DockPanel>
+        </StackPanel>
+    </GroupBox>
+
+</UserControl>

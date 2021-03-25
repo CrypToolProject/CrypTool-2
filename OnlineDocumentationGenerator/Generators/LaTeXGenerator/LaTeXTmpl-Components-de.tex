@@ -1,0 +1,65 @@
+\documentclass[10pt,a4paper]{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{tipa}
+\usepackage{amsfonts}
+\usepackage{german}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{german,longtable}
+\usepackage[export]{adjustbox}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\hyphenation{Er-folgs-wahr-schein-lich-keit Klartext-alphabet Kombina-tions-feld IControl-Transpo-Encryption IControl-Cube-Attack Initia-lisie-rungs-vektor Block-verkettungs-modus Ausgabe-daten-strom Eingabe-daten-strom}
+
+\DisableLigatures{}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\makeatletter \setlength\@fptop{0\p@}
+\makeatother
+
+\title{Dokumentation zu den Komponenten in CrypTool v2 (CT2)}
+\author{Das CrypTool 2-Team}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\hspace{0pt}\\[2.5cm]
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Dokumentation zu den Komponenten in CrypTool v2 (CT2) }\\[0.4cm]
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autoren:} \\
+Das CrypTool 2 Team
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Version:} \\
+$VERSION$
+\end{flushright}
+\end{minipage}
+\vfill
+{\large \today}
+\end{center}
+\newpage
+\large
+Dieses Dokument gibt eine Übersicht über die in {\bf CrypTool v2} enthaltenen Komponenten.
+\newpage
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+$CONTENT$
+
+\end{document}

@@ -1,0 +1,31 @@
+﻿<Window x:Class="TemplateEditor.AllKeywordsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="400" Width="400" Title="All Keywords" xmlns:my="clr-namespace:TemplateEditor" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <my:NegationConverter x:Key="NegationConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Language: "/>
+            <ComboBox Grid.Column="1" ItemsSource="{Binding}" Name="LangBox" SelectionChanged="LangBox_SelectionChanged" IsEnabled="{Binding ElementName=AllLanguages, Path=IsChecked, Converter={StaticResource NegationConverter}}" />
+            <CheckBox Name="AllLanguages" Grid.Column="2" Content="All Languages" VerticalAlignment="Center" Checked="AllLanguages_Checked" Unchecked="AllLanguages_Unchecked" />
+        </Grid>
+
+        <ListBox SelectionMode="Multiple" Grid.Row="1" ItemsSource="{Binding}" Name="keywordsList"/>
+        
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+            <Button Content="Cancel" Width="60" Margin="5" IsCancel="True" Name="CancelButton" />
+            <Button Content="OK" IsDefault="True" Width="40" Margin="5" Click="Button_Click" />            
+        </StackPanel>        
+    </Grid>
+</Window>

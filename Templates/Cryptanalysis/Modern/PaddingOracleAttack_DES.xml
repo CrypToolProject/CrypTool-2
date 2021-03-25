@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Padding Oracle Attack on DES</title>
+  <title lang="zh">应对Oracle对DES的攻击</title>
+  <title lang="ru">Заполнение Oracle Attack на DES</title>
+  <summary lang="en">Padding Oracle Attack on <i>DES</i></summary>
+  <summary lang="zh">应对Oracle对DES的攻击</summary>
+  <summary lang="ru">Заполнение Oracle Attack на DES</summary>
+  <description lang="en">This template shows a padding oracle attack on <i>DES</i>.</description>
+  <description lang="zh">该模板显示了对DES的填充Oracle攻击。</description>
+  <description lang="ru">Этот шаблон показывает атаку оскорбления простуды на DES.</description>
+  <keywords>padding, oracle, DES, Attack, Analysis, POA</keywords>
+  <keywords lang="zh">填充，oracle，DES，攻击，分析，POA</keywords>
+  <keywords lang="ru">padding, oracle, DES, Attack, Analysis, POA</keywords>
+  <title lang="de">Padding-Orakel-Angriff auf DES</title>
+  <summary lang="de">Padding-Orakel-Angriff auf <i>DES</i></summary>
+  <description lang="de">Diese Vorlage zeigt einen Padding-Orakel-Angriff auf die <i>DES</i>-Verschlüsselung.</description>
+  <keywords lang="de">Padding, Orakel, DES, Analyse, POA</keywords>
+  <icon file="PaddingOracleAttack.png" />
+  <relevantPlugins>
+    <plugin name="DES" />
+    <plugin name="PaddingOracle" />
+    <plugin name="PaddingOracleAttack" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
+    <replacement key="$Encrypt$" value="Verschlüsselung" />
+    <replacement key="$Decrypt$" value="Entschlüsselung" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$Padding Oracle$" value="Padding-Orakel" />
+    <replacement key="$Padding Oracle Attack$" value="Padding-Orakel-Angriff" />
+    <replacement key="$memo1$" value="CLIENT\line Der Client will eine Nachricht an den Server schicken. Die Nachricht wird mit DES im CBC-Modus verschlüsselt. Sie besteht aus zwei 8 Bytes langen Blöcken: Der erste Block wird nur als Initialisierungsvektor verwendet, während der zweite die geheime Information enthält." />
+    <replacement key="$memo2$" value="SERVER\line Nach Empfang einer verschlüsselten Nachricht entschlüsselt der Server sie im CBC-Modus (C2 wird entschlüsselt und dann XOR-verknüpft mit C1). Anschließend wird das Padding überprüft. Das Ergebnis der Überprüfung wird dann als Wahr/Falsch-Antwort an den Angreifer zurückgegeben." />
+    <replacement key="$memo3$" value="LEGENDE\line C1: Der erste Block der Client-Nachricht (verschlüsselt).\line C2: Der zweite Block der Client-Nachricht (verschlüsselt).\line D2: Der entschlüsselte Block C2.\line O: Das Overlay, das die Manipulation an C1 darstellt.\line P2: Die resultierende Klartext-Nachricht. Während des Angriffes stellt P2 das Padding dar. Am Ende des Angriffes enthält P2 den zweiten Block der ursprünglichen Klartext-Nachricht." />
+    <replacement key="$memo4$" value="ANGREIFER\line Der Angreifer sitzt zwischen dem Client und dem Server und liest alle Nachrichten mit. Sein Ziel ist, die geheime Information in der Nachricht zu entschlüsseln. Die Nachricht besteht aus den zwei Geheimtextblöcken C1 und C2. Die geheime Information ist in Block C2 enthalten. Die Entschlüsselung wird dadurch bewerkstelligt, dass der erste Geheimtextblock C1 manipuliert wird, Nachrichten an den Server geschickt werden und dessen Antworten darauf ausgewertet werden. Die Manipulation geschieht durch die XOR-Verknüpfung des originalen Blockes C1 und dem sogenannten &quot;Overlay&quot; O. Das Ergebnis dieser Berechnung ist der neue, manipulierte Block C1.\line\line {\b Der Angriff besteht aus den folgenden drei Phasen:}\line 1. Finde ein gültiges Padding.\line 2. Bestimme die Länge des Paddings durch Auffinden des ersten Padding-Bytes.\line 3. Byteweise Entschlüsselung der Nachricht." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$KeySearcher$" value="关键搜索" />
+    <replacement key="$Encrypt$" value="加密" />
+    <replacement key="$Decrypt$" value="解密" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$Padding Oracle$" value="填充Oracle" />
+    <replacement key="$Padding Oracle Attack$" value="填充oracle攻击" />
+    <replacement key="$memo1$" value="CLIENT \行客户端希望向服务器发送消息。该消息在CBC模式下使用DES加密。它由两个8字节的块组成：第一个块仅用作初始化向量，而第二个块包含机密信息。" />
+    <replacement key="$memo2$" value="SERVER \line接收到加密的消息后，服务器将以CBC模式对其进行解密（解密C2，然后与C1进行异或）。然后检查填充。然后将检查结果作为对/错答案返回给攻击者。" />
+    <replacement key="$memo3$" value="LEGEND \C1行：客户消息的第一个块（已加密）\C2行：客户消息的第二个块（已加密）\D2行：解密后的块C2 \O行：显示操作的叠加层在C1 \P2行：生成的纯文本消息。在攻击过程中，P2代表填充，在攻击结束时，P2包含原始纯文本消息的第二个块。" />
+    <replacement key="$memo4$" value="ANGREIFER \line攻击者位于客户端和服务器之间，读取所有消息。其目的是解密消息中的秘密信息。该消息由两个密文块C1和C2组成。秘密信息包含在块C2中。通过操纵第一密文块C1，将消息发送到服务器并评估其响应来实现解密。通过对原始块C1和所谓的“叠加” O进行XOR运算，该计算的结果是新的，被操纵的块C1。\Line \line {\b攻击包括以下三个阶段：第1行，找到有效的填充\第2行，通过找到第一个填充字节确定填充的长度\第3行，逐字节解码消息。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$KeySearcher$" value="ключ поиска" />
+    <replacement key="$Encrypt$" value="кодирование" />
+    <replacement key="$Decrypt$" value="дешифрование" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$Padding Oracle$" value="Перетяжка-Oracle" />
+    <replacement key="$Padding Oracle Attack$" value="Перетяжка Атака Oracle" />
+    <replacement key="$memo1$" value="CLIENT \line Клиент хочет отправить сообщение на сервер. Сообщение зашифровывается DES в режиме CBC. Он состоит из двух 8-байтовых блоков: первый блок используется только как вектор инициализации, а второй содержит секретную информацию." />
+    <replacement key="$memo2$" value="SERVER \line После получения зашифрованного сообщения сервер расшифровывает его в режиме CBC (C2 дешифруется, а затем XORed с C1). Затем проверяется прокладка. Результат проверки затем возвращается злоумышленнику как истинный / ложный ответ." />
+    <replacement key="$memo3$" value="LEGEND \line C1: первый блок сообщения клиента (зашифрован). \Line C2: второй блок сообщения клиента (зашифрован). \Line D2: расшифрованный блок C2. \Line O: наложение, содержащее манипуляции в C1. \line P2: Полученное сообщение открытого текста. Во время атаки P2 представляет отступы. В конце атаки P2 содержит второй блок исходного сообщения открытого текста." />
+    <replacement key="$memo4$" value="ANGREIFER \line Атакующий находится между клиентом и сервером и считывает все сообщения. Его цель - расшифровать секретную информацию в сообщении. Сообщение состоит из двух блоков шифрованного текста C1 и C2. Секретная информация содержится в блоке C2. Дешифрование выполняется посредством манипулирования первым блоком C1 шифрованного текста, отправкой сообщений на сервер и оценкой его ответов на него. Манипуляция выполняется с помощью XORing исходного блока C1 и так называемого «наложения» O. Результатом этого вычисления является новый, управляемый блок C1. \Line \line {\b Атака состоит из следующих трех фаз:} \line 1. Найдите допустимое дополнение. \line 2. Определите длину заполнения, набрав первый байт заполнения. \line 3. Декодирование байта сообщения байтом." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$KeySearcher$" value="KeySearcher" />
+    <replacement key="$Encrypt$" value="Encrypt" />
+    <replacement key="$Decrypt$" value="Decrypt" />
+    <replacement key="$StringDecoder$" value="String Decoder" />
+    <replacement key="$Padding Oracle$" value="Padding Oracle" />
+    <replacement key="$Padding Oracle Attack$" value="Padding Oracle Attack" />
+    <replacement key="$memo1$" value="CLIENT\line The client wants to send a message to the server. DES in CBC mode is used to encrypt the message. The message consists of two 8 byte long blocks: The first block is only used as initialization vector, while the second block contains the secret information." />
+    <replacement key="$memo2$" value="SERVER\line Upon receipt of an encrypted message, the server decrypts it in CBC mode (C2 is decrypted and then XORed with C1). Afterwards the padding is validated. The result of the validation is then returned as True/False Response to the attacker." />
+    <replacement key="$memo3$" value="LEGEND\line C1: The first block of the client message (encrypted).\line C2: The second block of the client message (encrypted).\line D2: The decrypted block C2.\line O: The Overlay, which represents the manipulation to C1.\line P2: The resulting plaintext message. During the attack, P2 represents the padding. At the end of the attack, P2 represents the second block of the original plaintext message." />
+    <replacement key="$memo4$" value="ATTACKER\line The attacker is between client and server and intercepts every message. His/her goal is to decipher the secret information of the message. The message consists of two ciphertext blocks C1 and C2 and the secret information is in block C2. The decipherment is performed by modifying the first ciphertext block C1, sending messages to the server and interpreting the server responses. The modifications are performed by computing the XOR of the original block C1 and a so called &quot;Overlay&quot; O. The result of this computation is the new, corrupt block C1.\line\line {\b The attack consists of three phases:}\line 1. Find a valid padding.\line 2. Determine the padding length by finding the first padding byte.\line 3. Bytewise decryption of the message." />
+  </replacements>
+</sample>

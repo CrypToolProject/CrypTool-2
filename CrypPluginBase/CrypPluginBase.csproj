@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{25DB2B47-A457-4EC2-960B-395CE07AE093}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CrypTool.PluginBase</RootNamespace>
+    <AssemblyName>CrypPluginBase</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>CT2_Key.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\CrypBuild\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\CrypBuild\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\CrypBuild\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\CrypBuild\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\AssemblyAttributes.cs" />
+    <Compile Include="Attributes\AutoAssumeFullEndProgressAttribute.cs" />
+    <Compile Include="Attributes\ComponentCategoryAttribute.cs" />
+    <Compile Include="Attributes\ComponentVisualAppearance.cs" />
+    <Compile Include="Attributes\DontSaveAttribute.cs" />
+    <Compile Include="Attributes\FunctionListAttribute.cs" />
+    <Compile Include="Attributes\LocalizationAttribute.cs" />
+    <Compile Include="Attributes\NotStoredInSessionAttribute.cs" />
+    <Compile Include="Attributes\SettingsFormatAttribute.cs" />
+    <Compile Include="Attributes\ContextMenuAttribute.cs" />
+    <Compile Include="Attributes\AuthorAttribute.cs" />
+    <Compile Include="Attributes\SettingsTabAttribute.cs" />
+    <Compile Include="Attributes\TabColorAttribute.cs" />
+    <Compile Include="ComponentInformations.cs" />
+    <Compile Include="Control\IControlCubeAttack.cs" />
+    <Compile Include="Control\IControlSigabaEncryption.cs" />
+    <Compile Include="Control\IControlTranspoEncryption.cs" />
+    <Compile Include="Control\IControlCost.cs" />
+    <Compile Include="Control\IControlEncryption.cs" />
+    <Compile Include="Control\KeyTranslator.cs" />
+    <Compile Include="Editor\ComponentConnectionStatistics.cs" />
+    <Compile Include="ICrypComponent.cs" />
+    <Compile Include="IO\CStreamReader.cs" />
+    <Compile Include="IO\CStreamWriter.cs" />
+    <Compile Include="IO\DirectoryHelper.cs" />
+    <Compile Include="IO\ICrypToolStream.cs" />
+    <Compile Include="ICrypTutorial.cs" />
+    <Compile Include="Miscellaneous\ApplicationSettingsHelper.cs" />
+    <Compile Include="Miscellaneous\BigIntegerHelper.cs" />
+    <Compile Include="Miscellaneous\AssemblyHelper.cs" />
+    <Compile Include="Miscellaneous\BlockCipherHelper.cs" />
+    <Compile Include="Miscellaneous\DataManager.cs" />
+    <Compile Include="Attributes\RibbonBarAttribute.cs" />
+    <Compile Include="Control\IControl.cs" />
+    <Compile Include="Miscellaneous\DescriptionHyperlink.cs" />
+    <Compile Include="Miscellaneous\EventsHelper.cs" />
+    <Compile Include="Attributes\PropertySaveOrderAttribute.cs" />
+    <Compile Include="Attributes\IntegerRangeAttribute.cs" />
+    <Compile Include="Editor\DragDropDataObject.cs" />
+    <Compile Include="Editor\EditorExtension.cs" />
+    <Compile Include="Editor\EditorInfoAttribute.cs" />
+    <Compile Include="Attributes\PropertyInfoAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Miscellaneous\ModMatrix.cs" />
+    <Compile Include="Miscellaneous\Msieve.cs" />
+    <Compile Include="Miscellaneous\LocExtension.cs" />
+    <Compile Include="Miscellaneous\SelectableTextBlock.cs" />
+    <Compile Include="Miscellaneous\StringHelper.cs" />
+    <Compile Include="Miscellaneous\SuperTooltip.cs" />
+    <Compile Include="Miscellaneous\Tokenizer.cs" />
+    <Compile Include="Miscellaneous\XMLHelper.cs" />
+    <Compile Include="PluginExtension.cs" />
+    <Compile Include="Attributes\PluginInfoAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Attributes\TaskPaneAttribute.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="EventArgs.cs" />
+    <Compile Include="Editor\IEditor.cs" />
+    <Compile Include="IPlugin.cs" />
+    <Compile Include="ISettings.cs" />
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneous\Hex.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabInfo.cs" />
+    <Compile Include="Utils\Alphabet.cs" />
+    <Compile Include="Utils\Datatypes.cs" />
+    <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramChart.xaml.cs">
+      <DependentUpon>HistogramChart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramDataSource.cs" />
+    <Compile Include="Utils\Graphics\Diagrams\Histogram\HistogramElement.cs" />
+    <Compile Include="Utils\LanguageStatistics.cs" />
+    <Compile Include="Utils\Logging.cs" />
+    <Compile Include="Utils\ObjectDeconstruct.cs" />
+    <Compile Include="Utils\StandaloneComponent\StandaloneComponentCompat.cs" />
+    <Compile Include="Utils\StandaloneComponent\StandaloneComponents.cs" />
+    <Compile Include="Utils\Text.cs" />
+    <Compile Include="Utils\UnicodeHelper.cs" />
+    <Compile Include="Validation\IntegerRule.cs" />
+    <Compile Include="Validation\RegExRule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrypCore\CrypCore.csproj">
+      <Project>{FF5D473C-0716-4D3E-9078-2EBD979F94C6}</Project>
+      <Name>CrypCore</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Utils\Graphics\Diagrams\Histogram\HistogramChart.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CT2_Key.snk" />
+    <None Include="Miscellaneous\Florsn01.ttf" />
+    <Resource Include="Miscellaneous\YanoneKaffeesatz-Bold.ttf" />
+    <Resource Include="Miscellaneous\YanoneKaffeesatz-ExtraLight.ttf" />
+    <Resource Include="Miscellaneous\YanoneKaffeesatz-Light.ttf" />
+    <Resource Include="Miscellaneous\YanoneKaffeesatz-Regular.ttf" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\UnicodeData.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

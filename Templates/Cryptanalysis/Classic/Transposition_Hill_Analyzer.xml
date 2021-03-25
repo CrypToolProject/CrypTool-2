@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Transposition Hill Climbing Analysis</title>
+  <title lang="zh">换位爬坡分析</title>
+  <title lang="ru">Анализ пересадки холмов</title>
+  <summary lang="en">Cryptanalysis of the <i>Transposition</i> cipher using a hill climbing algorithm</summary>
+  <summary lang="zh">使用爬山算法对换位密码进行密码分析</summary>
+  <summary lang="ru">Криптоанализ шифрования Transposition с использованием алгоритма альпинизма</summary>
+  <description lang="en">This template shows the cryptanalysis of the single <i>Transposition</i> cipher with the <i>Transposition Analyzer</i> using a hill climbing algorithm. It is a ciphertext-only attack, as no part of the plaintext is known in advance.</description>
+  <description lang="zh">该模板显示了使用“爬山”算法使用“转置分析器”对单个“转置密码”进行的密码分析。这是仅密文攻击，因为事先不知道明文的任何部分。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ одиночного Transposition cipher с Transposition Analyzer с использованием алгоритма альпинизма. Это атака только с зашифрованным текстом, поскольку никакая часть открытого текста не известна заранее.</description>
+  <keywords>Attack, Analysis, Transposition, Permutation</keywords>
+  <keywords lang="zh">攻击，分析，换位，排列</keywords>
+  <keywords lang="ru">Атака, анализ, транспонирование, перестановка</keywords>
+  <title lang="de">Transposition Hill-Climbing-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>Transpositionsverschlüsselung</i> mit einem Hill-Climbing-Algorithmus</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der einstufigen <i>Transpositionsverschlüsselung</i> mit der Komponente <i>Transpositions-Analyse</i> mit einem Hill-Climbing-Algorithmus. Es handelt sich hierbei um eine Ciphertext-only-Analyse, da keine Informationen über den Klartext bekannt sind.</description>
+  <keywords lang="de">Transposition, Permutation, Angriff</keywords>
+  <icon file="Transposition.png" />
+  <relevantPlugins>
+    <plugin name="CostFunction" />
+    <plugin name="Transposition" />
+    <plugin name="TranspositionAnalyser" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$TranspositionAnalyser$" value="Transpositions-Analyse" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt die Kryptoanalyse eines Geheimtextes, der mit einer Spaltentransposition und einem Schlüssel der Länge 25 verschlüsselt wurde. Die Analyse verwendet einen Hill-Climbing-Algorithmus. Da dieser Ansatz nicht deterministisch ist, ist nicht garantiert, dass die Lösung (WHYHEWASSOANGRY...) gefunden wird. Starten Sie in diesem Fall die Vorlage einfach erneut.\line\line Der Geheimtext wurde der CC1-3-Challenge von MysteryTwister I entnommen, die noch viele weitere mit der Spaltentransposition verschlüsselte Geheimtexte enthält und die ebenfalls mit dieser Vorlage entschlüsselt werden können.\line\line Link: http://www.mysterytwisterc3.org/de/alte-mysterytwister-spiele/cc1-3" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$TranspositionAnalyser$" value="换位分析" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$memo$" value="该模板显示了对密文的密码分析，密文使用列转置和长度为25的密钥加密。分析使用爬山算法。由于此方法不是确定性的，因此无法保证将找到解决方案（WHYHEWASSOANGRY ...）。在这种情况下，只需再次启动模板\Line \line密文来自MysteryTwister I的CC1-3挑战，其中包含许多其他通过列转置加密的密文，也可以使用此模板解密。 \线链接：http://www.mysterytwisterc3.org/de/alte-mysterytwister-spiele/cc1-3" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$TranspositionAnalyser$" value="Транспозиций-анализ" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$memo$" value="Этот шаблон показывает криптоанализ зашифрованного текста, зашифрованного транспозицией столбца, и ключа длиной 25 строк. В анализе используется алгоритм альпинизма. Поскольку этот подход не является детерминированным, нет никакой гарантии, что решение (WHYHEWASSOANGRY ...) будет найдено. Просто запустите шаблон снова. \Line \line Зашифрованный текст был взят из вызова CC1-3 MysteryTwister I, который содержит гораздо больше шифров шифрованного текста и который также может быть расшифрован с помощью этого шаблона. \Line \line Ссылка: http://www.mysterytwisterc3.org/en/old-mysterytwister-games/cc1-3" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
+    <replacement key="$TranspositionAnalyser$" value="TranspositionAnalyzer" />
+    <replacement key="$Converter$" value="Converter" />
+    <replacement key="$memo$" value="This template shows the analysis of a ciphertext that was encrypted with a columnar transposition and a key of length 25. The analysis uses a hill climbing algorithm. This approach is not deterministic, hence, if the result (WHYHEWASSOANGRY...) is not found at the first run, simply try to run again.\line\line The ciphertext was retrieved from the CC1-3 challenge of MysteryTwister I, where you can find many more ciphertexts that were encrypted with a columnar transposition. You can try to decode them with this template.\line\line Link: http://www.mysterytwisterc3.org/de/alte-mysterytwister-spiele/cc1-3" />
+  </replacements>
+</sample>

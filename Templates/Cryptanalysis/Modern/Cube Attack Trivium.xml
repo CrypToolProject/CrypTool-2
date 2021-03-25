@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Cube Attack on Trivium</title>
+  <title lang="zh">多维数据集攻击琐事</title>
+  <title lang="ru">Cube Attack on Trivium</title>
+  <summary lang="en">Cryptanalysis of the <i>Trivium</i> cipher using the Cube attack</summary>
+  <summary lang="zh">使用Cube攻击对Trivium密码进行密码分析</summary>
+  <summary lang="ru">Криптоанализ шифрования Trivium с использованием атаки Cube</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>Trivium</i> cipher using the Cube attack.</description>
+  <description lang="zh">该模板显示了使用Cube攻击对Trivium密码进行的密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Trivium с использованием атаки Cube.</description>
+  <keywords>stream, Preneel, Canniere, estream, Attack, Analysis</keywords>
+  <keywords lang="zh">流，Preneel，Canniere，estream，攻击，分析</keywords>
+  <keywords lang="ru">поток, Preneel, Canniere, estream, Attack, Analysis</keywords>
+  <title lang="de">Cube-Angriff auf Trivium</title>
+  <summary lang="de">Kryptoanalyse der <i>Trivium</i>-Verschlüsselung per Cube-Angriff</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Trivium</i>-Verschlüsselung per Cube-Angriff.</description>
+  <keywords lang="de">Stromchiffre, Preneel, Canniere, estream, Analyse</keywords>
+  <icon file="Cube Attack Trivium.png" />
+  <relevantPlugins>
+    <plugin name="CubeAttack" />
+    <plugin name="Trivium" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Cube Attack$" value="Cube-Angriff" />
+    <replacement key="$StringEncoder$" value="String-Kodierer" />
+    <replacement key="$TextOutput$" value="Textausgabe" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Cube Attack$" value="立方体攻击" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$TextOutput$" value="文字输出" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Cube Attack$" value="Атака Cube" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$TextOutput$" value="вывод текста" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Cube Attack$" value="Cube Attack" />
+    <replacement key="$StringEncoder$" value="String Encoder" />
+    <replacement key="$TextOutput$" value="Text Output" />
+  </replacements>
+</sample>

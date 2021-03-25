@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="CrypTool.Plugins.VisualEncoder.VisualEncoderPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Height="Auto" Width="Auto" Margin="0" MinHeight="30" MinWidth="200">
+    <UserControl.Resources>
+        <RotateTransform x:Key="HeaderRotate" Angle="270" />
+        <RotateTransform x:Key="ExpanderRotate" Angle="90" />
+        
+        <Style x:Key="ValueRow1">
+            <Setter Property="Label.Margin" Value="80,0,0,0" />
+        </Style>
+        <Style x:Key="ValueRow2">
+            <Setter Property="Label.Margin" Value="80,0,0,0" />
+        </Style>
+    </UserControl.Resources>
+    <Viewbox>
+        <StackPanel Name="panel" Width="365">
+            <Border BorderBrush="Silver" BorderThickness="2,2,2,2">
+                <Grid Height="400">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="26" />
+                        <ColumnDefinition Width="310" />
+                        <ColumnDefinition Width="28" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="0" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Border BorderThickness="1" BorderBrush="Black" LayoutTransform="{StaticResource HeaderRotate}" Background="#FFE56B00" Grid.Column="0">
+                        <Label Content="{Loc DimCodeLabel}" FontSize="11" Margin="0,-1,0,0"  HorizontalAlignment="Center" Foreground="White" />
+                    </Border>
+                    <Border BorderThickness="1" Grid.Column="1" BorderBrush="Black"  Background="#AFFFD4C1">
+                            <Image VerticalAlignment="Center" HorizontalAlignment="Center" Name="Image" />
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="Black" LayoutTransform="{StaticResource HeaderRotate}" Background="#FF479308" Grid.Column="2">
+                        <Expander Name="Explain" HorizontalAlignment="Center"  VerticalAlignment="Center" IsExpanded="False" Collapsed="Explain_Collapsed" Expanded="Explain_Expanded">
+                            <Expander.Header>
+                                <Label Content="{Loc ExplainLabel}" Margin="0,-2,0,0" FontSize="11" Foreground="White" />
+                            </Expander.Header>
+                        </Expander>
+                    </Border>
+                    
+                    <Border BorderThickness="1" BorderBrush="Black" Background="#FF479308" Grid.Column="3">
+                           <Canvas Name="legendBox" Background="#AFE2FFCE" Margin="0,0,0,0">
+                            <Canvas Name="legend1" Visibility="Hidden" >
+                                    <Label  Margin="20,10,0,0" Name="lable1"/>
+                                    <Ellipse Height="10" Margin="5,17,0,0" Name="ellipse1" Width="10" />
+                                <TextBlock Margin="5,30,0,0" Name="disc1"  FontSize="10" />
+                                </Canvas>
+                                <Canvas Name="legend2" Visibility="Hidden">
+                                    <Label Margin="20,110,0,0" Name="lable2" />
+                                <Ellipse Height="10" Margin="5,117,0,0" Name="ellipse2"  Width="10" />
+                                <TextBlock Name="disc2" Margin="5,130,0,0"  FontSize="10" />
+
+                            </Canvas>
+                            <Canvas Name="legend3" Visibility="Hidden">
+                                    <Label Margin="20,210,0,0" Name="lable3" />
+                                    <Ellipse Height="10" Margin="5,217,0,0" Name="ellipse3" Width="10" />
+                                <TextBlock  Margin="5,230,0,0"  FontSize="10" Name="disc3" />
+                                </Canvas>
+                            <Canvas Name="legend4" Visibility="Hidden">
+                                    <Label  Margin="20,310,0,0" Name="lable4" />
+                                    <Ellipse Height="10" Margin="5,317,0,0" Name="ellipse4" Width="10" />
+                                <TextBlock  Margin="5,330,0,0" Name="disc4"   FontSize="10"/>
+                                </Canvas>
+                            </Canvas>
+                    </Border>
+                    <StackPanel Grid.Column="4">
+                        <Image Visibility="Hidden" Name="ExplImage" />
+                        <Image Visibility="Hidden" Name="PureImage" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Viewbox>
+</UserControl>

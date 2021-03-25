@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Component to process CSV (Comma Separated Values) files.
+  </introduction>
+  <introduction lang="zh-CN">处理CSV（逗号分隔值）文件的组件。</introduction>
+  <introduction lang="ru">Компонент для обработки файлов CSV (Comma Separated Values).</introduction>
+  <introduction lang="de-DE">
+    Komponente um CSV (Comma Separated Values) -Dateien zu verarbeiten.
+  </introduction>
+  <usage lang="en">
+    In the settings enter the separation values for columns and rows and the id of the column which should be returned. <newline />
+    For example ";" as column separation value splits the CSV at every semicolon. Escape symbols like \n or \r are also possible.<newline />
+    The column index starts at 0.
+  </usage>
+  <usage lang="zh-CN">在设置中，输入列和行的分隔值以及应返回的列ID。例如 ”;”因为列分隔值会在每个分号处拆分CSV。也可以使用\ n或\ r等转义符号。列索引从0开始。</usage>
+  <usage lang="ru">В настройках введите значения разделения для столбцов и строк и идентификатор столбца, который должен быть возвращен. Например &amp;quot;;&amp;quot; поскольку значение разделения столбцов разбивает CSV на каждую точку с запятой. Возможны также escape-символы, такие как \ n или \ r. Индекс столбца начинается с 0.</usage>
+  <usage lang="de-DE">
+    In den Einstellungen werden die Trennzeichen für Spalten und Reihen sowie die ID der zurückzugebenden Spalte eingetragen.<newline />
+    Zum Beispiel ";" als Zeilentrenner teilt die CSV bei jedem Semikolon. Escape Symbole wie  \n oder \r sind auch möglich.<newline />
+    Der Spaltenindex startet bei 0.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+</documentation>

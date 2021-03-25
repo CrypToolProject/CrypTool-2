@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Wordpattern Analysis with Self-Defined Dictionary</title>
+  <title lang="zh">自定义词典的字型分析</title>
+  <title lang="ru">Анализ Wordpattern с самоопределяемым словарем</title>
+  <summary lang="en">Usage of the <i>Wordpattern Analysis</i> with a self-defined dictionary</summary>
+  <summary lang="zh">Wordpattern Analysis与自定义词典的用法</summary>
+  <summary lang="ru">Использование анализа Wordpattern с помощью самоопределяемого словаря</summary>
+  <description lang="en">This sample demonstrates how to use the WordPatterns component together with a self defined dictionary. The dictionary is provided as a text file where each line defines one entry of the dictionary.</description>
+  <description lang="zh">此示例演示如何将WordPatterns组件与自定义词典一起使用。该词典以文本文件的形式提供，其中每一行定义了词典的一个条目。</description>
+  <description lang="ru">Этот пример демонстрирует, как использовать компонент WordPatterns вместе с самоопределяемым словарем. Словарь предоставляется в виде текстового файла, где каждая строка определяет одну запись словаря.</description>
+  <keywords>WordPatterns, pattern, search, match, Attack, Analysis</keywords>
+  <keywords lang="zh">字样，模式，搜索，匹配，攻击，分析</keywords>
+  <keywords lang="ru">WordPatterns, шаблон, поиск, совпадение, атака, анализ</keywords>
+  <title lang="de">Wortmusteranalyse mit selbstdefiniertem Wörterbuch</title>
+  <summary lang="de">Benutzung der <i>Wortmusteranalyse</i> mit einem selbstdefinierten Wörterbuch</summary>
+  <description lang="de">Diese Vorlage demonstriert, wie die Wortmuster-Komponente in Verbindung mit einem selbstdefinierten Wörterbuch verwendet werden kann. Das Wörterbuch muss als Textdatei vorliegen, wobei jede Zeile der Textdatei als ein Eintrag des Wörterbuches interpretiert wird.</description>
+  <keywords lang="de">Wortmuster, Suche, Treffer, Angriff</keywords>
+  <icon file="WordPatterns.png" />
+  <relevantPlugins>
+    <plugin name="FileInputClass" />
+    <plugin name="WordPatterns" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Dictionary file$" value="Wörterbuch-Datei" />
+    <replacement key="$Dictionary size$" value="Größe des Wörterbuchs" />
+    <replacement key="$Convert to string$" value="Konvertiere nach String" />
+    <replacement key="$Word pattern$" value="Wortmuster" />
+    <replacement key="$Separators$" value="Trennzeichen" />
+    <replacement key="$Split input$" value="Trenne Eingabe" />
+    <replacement key="$Search$" value="Suche" />
+    <replacement key="$Matching entries$" value="Passende Einträge" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie die Wortmuster-Komponente in Verbindung mit einem selbstdefinierten Wörterbuch verwendet werden kann. Das Wörterbuch muss als Textdatei vorliegen, wobei jede Zeile der Textdatei als ein Eintrag des Wörterbuches interpretiert wird." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Dictionary file$" value="字典文件" />
+    <replacement key="$Dictionary size$" value="字典大小" />
+    <replacement key="$Convert to string$" value="转换为字符串" />
+    <replacement key="$Word pattern$" value="mus草" />
+    <replacement key="$Separators$" value="定界符" />
+    <replacement key="$Split input$" value="断开输入" />
+    <replacement key="$Search$" value="搜索" />
+    <replacement key="$Matching entries$" value="匹配条目" />
+    <replacement key="$memo$" value="此模板演示了如何将“单词模式”组件与自定义词典结合使用。该词典必须以文本文件形式提供，并且文本文件的每一行都将被解释为词典中的一个条目。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Dictionary file$" value="файл словаря" />
+    <replacement key="$Dictionary size$" value="Размер словаря" />
+    <replacement key="$Convert to string$" value="Преобразовать в строку" />
+    <replacement key="$Word pattern$" value="Wortmuster" />
+    <replacement key="$Separators$" value="сепаратор" />
+    <replacement key="$Split input$" value="Отдельный вход" />
+    <replacement key="$Search$" value="поиск" />
+    <replacement key="$Matching entries$" value="Соответствующие записи" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, как компонент шаблона слов можно использовать в сочетании с пользовательским словарем. Словарь должен существовать как текстовый файл, причем каждая строка текстового файла интерпретируется как запись в словаре." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Dictionary file$" value="Dictionary file" />
+    <replacement key="$Dictionary size$" value="Dictionary size" />
+    <replacement key="$Convert to string$" value="Convert to string" />
+    <replacement key="$Word pattern$" value="Word pattern" />
+    <replacement key="$Separators$" value="Separators" />
+    <replacement key="$Split input$" value="Split input" />
+    <replacement key="$Search$" value="Search" />
+    <replacement key="$Matching entries$" value="Matching entries" />
+    <replacement key="$memo$" value="This sample demonstrates how to use the WordPatterns component together with a self defined dictionary. The dictionary is provided as a text file where each line defines one entry of the dictionary." />
+  </replacements>
+</sample>

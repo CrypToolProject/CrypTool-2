@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Primes.WpfControls.NumberTheory.Goldbach.GoldbachControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.Numbertheory"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Name="gridContent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <comps:InputRangeControl Grid.Row="0" x:Name="ircGoldbach" InputRangeControlType="Horizontal" ShowButtons="True" ShowCalcInput="False" SecondParameterPresent="false" />
+        <SelectableTextBlock Grid.Row="1" x:Name="Description" Margin="10,0,10,10" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{x:Static lang:Numbertheory.goldbach_desc}" TextWrapping="Wrap" />
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Viewbox Stretch="Uniform">
+                <Viewbox.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="{Binding ElementName=silderScale, Path=Value}" ScaleY="{Binding ElementName=silderScale, Path=Value}" />
+                    </TransformGroup>
+                </Viewbox.LayoutTransform>
+                <Canvas Name="PaintArea" SizeChanged="PaintArea_SizeChanged" />
+            </Viewbox>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="3" Name="spSlider">
+            <Slider Name="silderScale" Minimum="0.9" Maximum="5" Value="0.9" />
+        </StackPanel>
+
+    </Grid>
+
+</UserControl>

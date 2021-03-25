@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>二次筛</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>现代分解算法</value>
+  </data>
+  <data name="InputNumberCaption" xml:space="preserve">
+    <value>号码输入</value>
+  </data>
+  <data name="InputNumberTooltip" xml:space="preserve">
+    <value>输入您要分解的数字</value>
+  </data>
+  <data name="OutputFactorsCaption" xml:space="preserve">
+    <value>因素输出</value>
+  </data>
+  <data name="OutputFactorsTooltip" xml:space="preserve">
+    <value>您的因素将发送到这里</value>
+  </data>
+  <data name="ChannelCaption" xml:space="preserve">
+    <value>渠道</value>
+  </data>
+  <data name="ChannelTooltip" xml:space="preserve">
+    <value>Peer2Peer网络的渠道</value>
+  </data>
+  <data name="CoresUsedCaption" xml:space="preserve">
+    <value>使用的磁芯</value>
+  </data>
+  <data name="CoresUsedTooltip" xml:space="preserve">
+    <value>选择应使用多少个筛芯</value>
+  </data>
+  <data name="DeleteCacheCaption" xml:space="preserve">
+    <value>删除缓存</value>
+  </data>
+  <data name="DeleteCacheTooltip" xml:space="preserve">
+    <value>如果选中，此插件将在开始筛选之前删除旧的缓存文件。</value>
+  </data>
+  <data name="StatusKeyButtonCaption" xml:space="preserve">
+    <value>复制状态键</value>
+  </data>
+  <data name="StatusKeyButtonTooltip" xml:space="preserve">
+    <value>将状态键复制到剪贴板。然后可以使用P2PEditor将密钥与作业一起上传。</value>
+  </data>
+  <data name="UsePeer2PeerCaption" xml:space="preserve">
+    <value>使用Peer2Peer</value>
+  </data>
+  <data name="UsePeer2PeerTooltip" xml:space="preserve">
+    <value>如果选中，此插件将连接到Peer2Peer网络以与其他客户端一起筛分</value>
+  </data>
+  <data name="Relpack_loaded" xml:space="preserve">
+    <value>{0}过滤了此关系包，但我们已加载它。</value>
+  </data>
+  <data name="Relpack_lost" xml:space="preserve">
+    <value>这个关系包迷路了。</value>
+  </data>
+  <data name="Relpack_other" xml:space="preserve">
+    <value>其他使用者</value>
+  </data>
+  <data name="Relpack_unknown" xml:space="preserve">
+    <value>该关系包已被未知用户筛分，我们尚未加载它。</value>
+  </data>
+  <data name="Relpack_us" xml:space="preserve">
+    <value>这个关系包由我们筛选。</value>
+  </data>
+  <data name="Active_Peers_" xml:space="preserve">
+    <value>活动对等方：</value>
+  </data>
+  <data name="Composite_Factor" xml:space="preserve">
+    <value>综合因素</value>
+  </data>
+  <data name="Cores_used_" xml:space="preserve">
+    <value>使用的核心：</value>
+  </data>
+  <data name="days" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="Downloaded_" xml:space="preserve">
+    <value>已下载：</value>
+  </data>
+  <data name="Elapsed_" xml:space="preserve">
+    <value>过去：</value>
+  </data>
+  <data name="End_" xml:space="preserve">
+    <value>结束：</value>
+  </data>
+  <data name="Factorlist" xml:space="preserve">
+    <value>因子表</value>
+  </data>
+  <data name="Found_enough_relations" xml:space="preserve">
+    <value>找到足够的关系。请耐心等待...</value>
+  </data>
+  <data name="Found_Relations_" xml:space="preserve">
+    <value>找到的关系：</value>
+  </data>
+  <data name="hours" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="State_" xml:space="preserve">
+    <value>州：</value>
+  </data>
+  <data name="Local_Sieving_" xml:space="preserve">
+    <value>本地筛选（未连接）</value>
+  </data>
+  <data name="minutes" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="Needed_Relations_" xml:space="preserve">
+    <value>所需关系：</value>
+  </data>
+  <data name="Now_sieving_first_composite_factor" xml:space="preserve">
+    <value>现在筛选第一个复合因子。</value>
+  </data>
+  <data name="Other_peer_finished_sieving" xml:space="preserve">
+    <value>其他同伴完成了筛分。</value>
+  </data>
+  <data name="Peer2Peer" xml:space="preserve">
+    <value>对等2</value>
+  </data>
+  <data name="Prime_Factor" xml:space="preserve">
+    <value>主要方面</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>进展</value>
+  </data>
+  <data name="Queue_" xml:space="preserve">
+    <value>队列：</value>
+  </data>
+  <data name="Remaining_" xml:space="preserve">
+    <value>剩余的：</value>
+  </data>
+  <data name="Searching_trivial_factors" xml:space="preserve">
+    <value>寻找琐碎的因素。</value>
+  </data>
+  <data name="seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="seconds_left" xml:space="preserve">
+    <value>还剩几秒钟</value>
+  </data>
+  <data name="Sieving_finished" xml:space="preserve">
+    <value>筛分完毕。找到所有{0}个因素。</value>
+  </data>
+  <data name="Sieving_now" xml:space="preserve">
+    <value>现在筛选。</value>
+  </data>
+  <data name="Starting_quadratic_sieve" xml:space="preserve">
+    <value>正在启动，请稍候。</value>
+  </data>
+  <data name="Start_" xml:space="preserve">
+    <value>开始：</value>
+  </data>
+  <data name="Stopped_by_user" xml:space="preserve">
+    <value>已被用户停止。</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="Uploaded_" xml:space="preserve">
+    <value>已上传：</value>
+  </data>
+  <data name="very_soon" xml:space="preserve">
+    <value>很快</value>
+  </data>
+  <data name="Bits" xml:space="preserve">
+    <value>位</value>
+  </data>
+  <data name="Digits" xml:space="preserve">
+    <value>数字</value>
+  </data>
+  <data name="day" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="hour" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="minute" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="second" xml:space="preserve">
+    <value>第二</value>
+  </data>
+  <data name="NoneLeft" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="SievingFinished2" xml:space="preserve">
+    <value>筛分完毕。</value>
+  </data>
+  <data name="Input_too_big_" xml:space="preserve">
+    <value>输入太大（上限：10 ^ 274；给定输入：10 ^ {0}）</value>
+  </data>
+  <data name="Digit" xml:space="preserve">
+    <value>数字</value>
+  </data>
+  <data name="Bit" xml:space="preserve">
+    <value>一点</value>
+  </data>
+  <data name="Input_too_small_" xml:space="preserve">
+    <value>请输入数字&amp;gt; = 2</value>
+  </data>
+</root>

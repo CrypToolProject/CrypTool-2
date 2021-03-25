@@ -1,0 +1,45 @@
+﻿<h2>Generate Bleichenbacher signature</h2>
+
+In this tab you can generate a faked signature. It is displayed in encrypted and in decrypted form.
+A signature that is accepted by faulty implementations has the following structure:
+'00' '01' PS '00' HI HD GG. </br>
+
+In detail, this means:
+<ul>
+<li>
+<strong>'00'</strong> 
+Leading zero block (8 bit). This guarantees that the numerical value of the signature is less than the
+<a href="help://KeyGen_ModulusSize">RSA modulus.</a>
+</li>
+<li>
+<strong>'01'</strong>
+This block indicates whether we have an operation with a public or a private key.
+As we use the private key for signature generation, it is set to '01'
+</li>
+<li>
+<strong>PS</strong>
+Padding string. The padding string consists of a number of blocks with the value 'FF'.
+In a signature that is faked with the Bleichenbacher method, the padding string is shorter than the padding string of a correctly generated PKCS#1 signature.
+You can choose the position of the data block (and thus the length of the padding string) in the control "Bit position of the data block".
+</li>
+<li>
+<strong>'00'</strong>
+Zero block. This block marks the end of the padding string and the start of the data block.
+</li>
+<li>
+<strong>HI</strong>
+Hash identifier. This is the first part of the <a href="help://Gen_Datablock_Tab">data block</a>.
+It includes informations such as the used hash function in ASN.1 encoded form.
+</li>
+<li>
+<strong>HD</strong>
+Hash digest. The second part of the <a href="help://Gen_Datablock_Tab">data block</a> includes the generated hash value.
+</li>
+<li>
+<strong>GG</strong>
+Garbage. The last part of the faked signature consists of 'garbage data'.
+It is required to match the length of the faked signature to the length of a correct signature.
+The 'garbage data' is chosen such that it is a perfect cube.
+</li>
+
+</ul>

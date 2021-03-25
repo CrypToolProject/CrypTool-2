@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Fialka Key Output</title>
+  <title lang="zh">Fialka键输出</title>
+  <title lang="ru">Выход продукта Fialka</title>
+  <summary lang="en">Output of the key of the <i>Fialka M-125</i></summary>
+  <summary lang="zh">Fialka M-125钥匙的输出</summary>
+  <summary lang="ru">Выход ключа Fialka M-125</summary>
+  <description lang="en">This template shows the usage of the Fialka cipher machine.</description>
+  <description lang="zh">该模板显示了Fialka密码机的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование шифровальной машины Fialka.</description>
+  <keywords>Fialka, Proton</keywords>
+  <keywords lang="zh">质子菲亚卡</keywords>
+  <keywords lang="ru">Fialka, Proton</keywords>
+  <title lang="de">Fialka Schlüsselausgabe</title>
+  <summary lang="de">Ausgabe des Schlüssels der <i>Fialka M-125</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der Chiffriermaschine Fialka.</description>
+  <keywords lang="de">Fialka, Proton</keywords>
+  <icon file="FialkaRot.png" />
+  <relevantPlugins>
+    <plugin name="Fialka" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Key$" value="键" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Key$" value="ключ" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+  </replacements>
+</sample>

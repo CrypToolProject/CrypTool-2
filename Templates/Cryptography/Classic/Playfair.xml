@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Playfair Cipher</title>
+  <title lang="zh">Playfair密码</title>
+  <title lang="ru">Playfair Cipher</title>
+  <summary lang="en">Usage of the <i>Playfair</i> cipher</summary>
+  <summary lang="zh">Playfair密码的用法</summary>
+  <summary lang="ru">Использование шифрования Playfair</summary>
+  <description lang="en">The Playfair cipher or Playfair square is a manual symmetric encryption technique and was the first literal digraph substitution cipher. The scheme was invented in 1854 by Charles Wheatstone, but bears the name of Lord Playfair who promoted the use of the cipher. The technique encrypts pairs of letters (digraphs), instead of single letters as in the simple substitution cipher and rather more complex Vigenère cipher systems then in use. The Playfair is thus significantly harder to break since the frequency analysis used for simple substitution ciphers does not work with it. Frequency analysis can still be undertaken, but on the 600 possible digraphs rather than the 26 possible monographs. The frequency analysis of digraphs is possible, but considerably more difficult – and it generally requires a much larger ciphertext in order to be useful.<newline /><newline />
+Source: <external ref="http://en.wikipedia.org/wiki/Playfair_cipher" /></description>
+  <description lang="zh">Playfair密码或Playfair平方是一种手动对称加密技术，并且是第一个文字二字图替换密码。该方案是由查尔斯·惠斯通（Charles Wheatstone）于1854年发明的，但以促进使用密码的Playfair勋爵的名字命名。该技术加密成对的字母（图），而不是像使用的简单替换密码和更复杂的Vigenère密码系统那样加密单个字母。因此，Playfair很难破解，因为用于简单替换密码的频率分析无法使用。仍然可以进行频率分析，但是要分析600个可能的图，而不是26个可能的图。有向图的频率分析是可能的，但是要困难得多–而且通常需要更大的密文才能使用。资源：</description>
+  <description lang="ru">Шифр Playfair или квадрат Playfair представляет собой ручную симметричную технологию шифрования и был первым литературным шифром замещения орграфа. Схема была изобретена в 1854 году Чарльзом Уитстоном, но носит имя лорда Плейфэйра, который пропагандировал использование шифрования. Этот метод шифрует пары букв (орграфов), вместо отдельных букв, как в простом шифровании замещения, и более сложные системы шифрования Vigenère, которые затем используются. Таким образом, Playfair значительно сложнее сломать, так как частотный анализ, используемый для простых шифров замещения, не работает с ним. Частотный анализ может быть проведен, но на 600 возможных орграфах, а не на 26 возможных монографиях. Частотный анализ орграфов возможен, но значительно сложнее - и для того, чтобы быть полезным, для этого требуется значительно больший зашифрованный текст. Источник:</description>
+  <keywords>Wheatstone, Lord, Bigram, Digraph, Square</keywords>
+  <keywords lang="zh">惠斯通，勋爵，比格勒姆，人物，广场</keywords>
+  <keywords lang="ru">Уитстоун, Господь, Биграм, Диграф, Квадрат</keywords>
+  <title lang="de">Playfair-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Playfair</i>-Chiffre</summary>
+  <description lang="de">Die Playfair-Verschlüsselung ist ein klassisches Verschlüsselungsverfahren, bei dem jedes Buchstabenpaar des Klartextes durch ein anderes Buchstabenpaar ersetzt wird. Sie gehört damit zur Klasse der bigraphischen Verfahren und wurde 1854 von Sir Charles Wheatstone erfunden. Sein guter Bekannter, Lord Lyon Playfair, unter dessen Namen sie berühmt wurde, empfahl diese Methode zur Benutzung beim britischen Militär. Sie wurde erstmals im Krimkrieg eingesetzt und war bis zum Ersten Weltkrieg, in modifizierter Form sogar noch während des Zweiten Weltkriegs, in Gebrauch.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Playfair" /></description>
+  <keywords lang="de">Wheatstone, Lord, Bigramme, Quadrat</keywords>
+  <icon file="Playfair.png" />
+  <relevantPlugins>
+    <plugin name="Playfair" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$KeyPhrase$" value="Schlüsselwort" />
+    <replacement key="$Cipherkey$" value="Codeschlüssel" />
+    <replacement key="$Pre-formatted Text$" value="Vorformatierter Text" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verschlüsselung mit der Playfair-Chiffre. Der oben angegebene Klartext und das Schlüsselwort (key phrase) werden an die Playfair-Komponente geschickt, die dann aus dem Schlüsselwort den eigentlichen Schlüssel herleitet.\line\line Dieser Schlüssel (Ausgabe unten rechts) wird daraufhin benutzt, um den vorformatierten Eingabetext (Ausgabe oben rechts) zu verschlüsseln." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$KeyPhrase$" value="关键词" />
+    <replacement key="$Cipherkey$" value="密码键" />
+    <replacement key="$Pre-formatted Text$" value="预格式化文字" />
+    <replacement key="$memo$" value="该模板演示了使用Playfair密码进行的加密。上面给出的纯文本和关键字词组被发送到Playfair组件，该组件然后从关键字中得出实际的键\Line \line此键（右下方的输出）用于转换预格式化的输入文本（输出右上）。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Pre-formatted Text$" value="Форматированный текст" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$KeyPhrase$" value="Key phrase" />
+    <replacement key="$Cipherkey$" value="Cipher key" />
+    <replacement key="$Pre-formatted Text$" value="Pre-formatted Text" />
+    <replacement key="$memo$" value="This template demonstrates the encryption with the Playfair cipher. The ciphertext and key phrase given above are sent to the Playfair component which derives the actual key from the key phrase.\line\line This key (output at bottom right) is then used to encrypt the pre-formated input text (output at top right)." />
+  </replacements>
+</sample>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    A virtual machine, which allows to execute encrypted software, qualifies for secret program execution.<newline />
+    If a user wants to get his program executed by a third party without revealing the input, output or the program itself, he can achieve that by encrypting his program (this only works for batch programs without later user interaction). The requirement of not knowing the input or output is not a mandatory one.
+    In both cases the third party receives the encrypted program, which can be executed using the virtual machine. The encrypted result will then be returned to the user.<newline />
+    To be able to execute an encrypted program, homomorphic encryption is used.<newline />
+    The process of executing a program can be described as follows:
+    <enum><item>Generate keys <!-- (<docRef item="CrypTool.Plugins.EncryptedVMKeyGen"/>) --></item><item>Assemble and encrypt program code into machine code <!-- (<docRef item="CrypTool.Plugins.EncryptedVMAssembler"/>) --></item><item>Execute the machine code <!-- (<docRef item="CrypTool.Plugins.EncryptedVMMachine"/>) --></item><item><b>Decrypt and interpret the result</b></item></enum>
+	All these steps are available by using plugins in <i>CrypTool 2</i>.<newline />
+	The used virtual machine is based on <i>ShapeCPU</i> and works in conjunction with <i>SEAL</i> (Simple Encrypted Arithmetic Library), which implements the Fan-Vercauteren homomorphic cryptosystem.
+	
+	<section headline="Memory Display">  
+	  The memory display decrypts and interprets the content of the memory supplied by the <i>Machine</i>.
+	  By specifying a program to interpret the content of the memory it's possible to output a certain notation.
+	  The supplied program has to be written in C#. The code is surrounded by a function and the content of the memory is given in an one-dimensional boolean array (<i>memory</i>).
+	  The <i>SubMemory(data, index, length)</i> function outputs a specified part of the memory. The method <i>Decode(values)</i> decodes a boolean array into an integer. The desired output has to been written to the string variable <i>output</i>.<newline />
+	  Example:<newline />
+	  output += Decode(SubMemory(memory, 0, 8));<newline /><newline />
+	  This example outputs the first 8 bit of the memory interpreted as an integer.
+	</section></introduction>
+  <introduction lang="zh-CN">允许执行加密软件的虚拟机有资格执行秘密程序。如果用户希望在不泄露输入，输出或程序本身的情况下让第三方执行其程序，则可以通过对其程序进行加密来实现这一点（这仅适用于批处理程序，而无需以后的用户交互）。不知道输入或输出的要求不是强制性的。在这两种情况下，第三方都会接收加密的程序，该程序可以使用虚拟机执行。然后，加密的结果将返回给用户。为了能够执行加密程序，使用了同态加密。执行程序的过程可以描述如下：生成密钥将程序代码组装并加密为机器代码执行机器代码解密并解释结果所有这些步骤都可以通过使用CrypTool 2中的插件来使用。使用的虚拟机基于ShapeCPU可以与SEAL（简单加密算术库）一起使用，后者实现了Fan-Vercauteren同态密码系统。内存显示解密并解释机器提供的内存内容。通过指定解释内存内容的程序，可以输出某种符号。提供的程序必须用C＃编写。该代码被函数包围，并且存储器的内容以一维布尔数组（内存）给出。 SubMemory（数据，索引，长度）功能输出存储器的指定部分。 Decode（values）方法将布尔数组解码为整数。必须将所需的输出写入字符串变量输出。示例：输出+ = Decode（SubMemory（memory，0，8））;本示例输出解释为整数的存储器的前8位。</introduction>
+  <introduction lang="ru">Виртуальная машина, которая позволяет выполнять зашифрованное программное обеспечение, подходит для выполнения секретной программы. Если пользователь хочет получить свою программу, выполненную третьей стороной, не раскрывая ввод, вывод или сама программа, он может добиться этого, зашифровав свою программу (это работает только для пакетных программ без последующего взаимодействия с пользователем). Требование не знать ввод или вывод не является обязательным. В обоих случаях третья сторона получает зашифрованную программу, которая может быть выполнена с использованием виртуальной машины. Зашифрованный результат будет затем возвращен пользователю. Для выполнения зашифрованной программы используется гомоморфное шифрование. Процесс выполнения программы можно описать следующим образом: Сгенерировать ключи Собрать и зашифровать программный код в машинный код Выполнить машинный код Расшифровать и интерпретировать результат Все эти шаги доступны с помощью плагинов в CrypTool 2. Используемая виртуальная машина основана на ShapeCPU и работает совместно с SEAL (простая зашифрованная арифметическая библиотека), которая реализует гомоморфную криптосистему Fan-Vercauteren. Дисплей памяти расшифровывает и интерпретирует содержимое памяти, поставляемой машиной. Указав программу для интерпретации содержимого памяти, вы можете вывести определенную нотацию. Прилагаемая программа должна быть записана на C #. Код окружен функцией, а содержимое памяти задается в одномерном булевом массиве (памяти). Функция SubMemory (данные, индекс, длина) выводит определенную часть памяти. Метод Decode (values) декодирует логический массив в целое число. Требуемый вывод должен быть записан на выход строковой переменной. Пример: output + = Decode (SubMemory (память, 0, 8)); В этом примере выводится первый 8 бит памяти, интерпретируемый как целое число.</introduction>
+  <introduction lang="de-DE">
+    Eine verschlüsselt arbeitende virtuelle Maschine erlaubt es, das auszuführende Programm zu verbergen.<newline />
+    Möchte ein Nutzer sein Programm von einer dritten Partei ausführen lassen, ohne dass diese die Eingabe, den Algorithmus oder auch die Ausgabe kennt, so kann er dies durch die Verschlüsselung seines Programms samt Daten erreichen (dies geht nur für Batchprogramme ohne spätere User-Interaktion). Die Forderung nach der Unkenntlichmachung der Eingabe/Ausgabe kann aber auch entfallen.
+    In beiden Fällen erhält die dritte Partei das verschlüsselte Programm und führt es mittels der virtuellen Maschine aus. Das verschlüsselte Ergebnis wird danach an den Nutzer zurückübermittelt.<newline />
+    Die Möglichkeit, ein verschlüsseltes Programm auszuführen, wird durch die Nutzung eines homomorphen Kryptosystems erreicht.<newline />
+    Der Ablauf beim Ausführen eines verschlüsselten Programms sieht wie folgt aus:
+    <enum><item>Schlüsselgenerierung <!-- (<docRef item="CrypTool.Plugins.EncryptedVMKeyGen"/>) --></item><item>Assemblierung und Verschlüsselung des Programmcodes in Maschinencode <!-- (<docRef item="CrypTool.Plugins.EncryptedVMAssembler"/>) --></item><item>Ausführen des Maschinencodes <!-- (<docRef item="CrypTool.Plugins.EncryptedVMMachine"/>) --></item><item><b>Entschlüsselung und Interpretation des Ergebnisses</b></item></enum>
+    Alle diese Schritte sind einzeln als Plugins im <i>CrypTool 2</i> verfügbar.<newline />
+    Die verschlüsselt arbeitende virtuelle Maschine basiert auf <i>ShapeCPU</i> und wird in Kombination mit der Kryptobibliothek <i>SEAL</i> (Simple Encrypted Arithmetic Library), welche die homomorphe Verschlüsselung nach <i>Fan-Vercauteren</i> umsetzt, genutzt.
+
+    <section headline="Speicheranzeige">
+	  Die Speicheranzeige entschlüsselt und interpretiert den von der <i>Maschine</i> übermittelten Speicherinhalt.<newline />
+	  Mittels Angabe eines Programmes zur Interpretierung des Speicherinhaltes kann auch eine eigene Darstellungsart gewählt werden.
+	  Das angegebene Programm muss in C# vorliegen. Der Programmcode befindet sich in einer Funktionsumgebung und der Speicherinhalt steht in einem eindimensionalen booleschen Feld (<i>memory</i>).
+	  Durch die Methode <i>SubMemory(data, index, length)</i> kann ein Teil des Speichers ausgewählt werden und mittels <i>Decode(values)</i> in eine natürliche Zahl überführt werden. Die erwünschte Ausgabe muss in die Variable <i>output</i> vom Typ String geschrieben werden.<newline />
+	  Beispiel:<newline />
+	  output += Decode(SubMemory(memory, 0, 8));<newline /><newline />
+	  Das Beispiel gibt die ersten acht Bit des Speichers als natürliche Zahl aus.
+	</section></introduction>
+  <usage lang="en">
+    <section headline="Input">
+	  The encrypted memory content should be connected to the <i>Machine</i>.
+	  The private key and the encryption parameters should be connected to the <i>Key Generator</i>.
+	  It's possible the decide whether to just dump the memory content or interpret it by connecting to a <i>File Input</i> plugin.	  
+    </section>
+    <section headline="Output">
+	  The result is either a memory dump or the generated output of the specified interpreting program (via <i>Textoutput</i>-Plugin).
+    </section>
+    <section headline="Progress bar">
+      <list>
+        <item>0%: Start of the plugin.</item>
+        <item>50%: If a C# program was connected: The program is compiled.</item>
+        <item>100%: The memory (or it's interpretation) has been written.</item>
+      </list>
+    </section>
+  </usage>
+  <usage lang="zh-CN">加密的内存内容应连接到机器。私钥和加密参数应连接到密钥生成器。可以决定是转储内存内容还是通过连接到File Input插件来解释它。结果是内存转储或指定的解释程序的生成输出（通过Textoutput-Plugin）。 0％：插件启动50％：如果已连接C＃程序：程序已编译100％：内存（或其解释）已被写入。</usage>
+  <usage lang="ru">Содержимое зашифрованной памяти должно быть подключено к аппарату. Закрытый ключ и параметры шифрования должны быть подключены к генератору ключей. Возможно решить, просто ли выгрузить содержимое памяти или интерпретировать ее, подключившись к плагину ввода файлов. Результатом является либо дамп памяти, либо сгенерированный вывод указанной программы интерпретации (через Textoutput-Plugin). 0%: начало плагина.50%: если была подключена программа C #: программа скомпилирована.100%: записана память (или ее интерпретация).</usage>
+  <usage lang="de-DE">
+    <section headline="Eingabe">
+	  Der vom <i>Assembler</i> generierte, verschlüsselte Maschinencode.<newline />
+	  Der private Schlüssel und die Verschlüsselungs-Parameter sind vom  <i>Schlüsselgenerator</i> zuzuführen.
+	  Zudem ist es möglich entweder einen Speicherabzug zu generieren oder den Speicher durch Verbindung mit einem <i>Texteingabe</i>-Plugin zu interpretieren.
+    </section>
+    <section headline="Ausgabe">
+	  Die Ausgabe ist entweder ein Speicherabbild oder der vom C#-Code generierte String.
+    </section>
+    <section headline="Fortschrittsanzeige">
+      <list>
+        <item>0%: Start des Plugins.</item>
+        <item>50%: Falls ein C#-Programm angegeben wurde: Das Programm wurde kompiliert.</item>
+        <item>100%: Der Speicher (oder die Interpretierung dessen) wurde ausgegeben.</item>
+      </list>
+    </section>
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://en.wikipedia.org/wiki/Homomorphic_encryption" lang="en" />
+      <caption lang="en">Homomorphic encryption (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Homomorphe_Verschlüsselung" lang="de-DE" />
+      <caption lang="de-DE">Homomorphe Verschlüsselung (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://shapecpu.de/shape-cpu/" />
+      <caption lang="en">ShapeCPU</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://sealcrypto.codeplex.com/" />
+      <caption lang="en">Simple Encrypted Arithmetic Library (SEAL)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://eprint.iacr.org/2012/144" />
+      <caption lang="en">Somewhat Practical Fully Homomorphic Encryption (Fan-Vercauteren)</caption>
+    </linkReference>
+  </references>
+</documentation>

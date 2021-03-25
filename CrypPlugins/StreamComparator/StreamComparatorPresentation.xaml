@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="CrypTool.StreamComparator.StreamComparatorPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="468" Width="712">
+  <UserControl.Resources>
+    <FlowDocument x:Key="documentBinaryInput" Background="White" FontFamily="Tahoma">
+      <Paragraph>Binary input. No Diff created.</Paragraph>
+    </FlowDocument>
+    <FlowDocument x:Key="documentNoComparsionYet" Background="White" FontFamily="Tahoma">
+      <Paragraph>No diff created yet (Activated in settings?).</Paragraph>
+    </FlowDocument>
+  </UserControl.Resources>
+  
+  <Grid>
+    <FlowDocumentReader Name="documentReader" ViewingMode="Scroll" 
+                        HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+    </FlowDocumentReader>
+  </Grid>
+</UserControl>

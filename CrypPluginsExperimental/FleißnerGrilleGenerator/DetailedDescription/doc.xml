@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Fleißner Grille Generator is a help to create a grille.
+  </introduction>
+  <introduction lang="zh-CN">Fleißner格栅生成器有助于创建格栅。</introduction>
+  <introduction lang="ru">Fleißner Grille Generator - это помощь в создании решетки.</introduction>
+  <introduction lang="de-DE">
+    Der Fleißnersche Schablone Generator ist eine Hilfe um eine Schablone zu erstellen.
+  </introduction>
+  <usage lang="en">
+    After dragging the FleißnerGrilleGenerator component onto the workspace, you need to specify a data source that represents the text to be encrypted or decrypted. This input is mandatory to determine the size of the grille.
+    <newline />
+    In the component settings you can decide whether you want to generate randomly or not randomly a grille.
+  </usage>
+  <usage lang="zh-CN">将FleißnerGrilleGenerator组件拖到工作区后，需要指定一个数据源，该数据源表示要加密或解密的文本。此输入是确定格栅尺寸的必填项。在组件设置中，您可以决定是否要随机生成格栅。</usage>
+  <usage lang="ru">После перетаскивания компонента FleißnerGrilleGenerator в рабочее пространство вам нужно указать источник данных, который представляет текст, который должен быть зашифрован или дешифрован. Этот ввод является обязательным для определения размера решетки. В настройках компонента вы можете решить, хотите ли вы генерировать случайным образом или не произвольно решетку.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die FleißnerGrilleGenerator-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die den zu verschlüsselnden oder entschlüsselnden Text repräsentiert. Diese Datenquelle ist notwendig um die Größe der Schablone zu erkennen.
+    <newline />
+    In den Einstellungen für die Komponente können Sie entscheiden, ob Sie zufällig oder nicht zufällig eine Schablone erzeugen wollen.
+  </usage>
+  <presentation lang="en">
+    If you start the Presentation, it shows depending on the setting of the option:
+    <newline />
+    1: the randomly generated grille or
+    <newline />
+    2: a matrix of buttons with content 0, if you clicks on a button, is this red (hole in grille) and 3 other buttons weren't clickable. Thus it generates itself its own grille.
+  </presentation>
+  <presentation lang="zh-CN">如果您启动Presentation，则根据选项的设置显示：1：随机生成的格栅或2：包含内容0的按钮矩阵（如果单击按钮）是红色（格栅上的孔）和3其他按钮不可点击。因此，它自己产生了自己的格栅。</presentation>
+  <presentation lang="ru">Если вы запустите презентацию, она отобразится в зависимости от настройки параметра: 1: случайно созданная решетка или 2: матрица кнопок с содержимым 0, если вы нажмете на кнопку, это красный (отверстие в решетке) и 3 другие кнопки не были доступны. Таким образом, он генерирует собственную решетку.</presentation>
+  <presentation lang="de-DE">
+    Wenn man die Presentation startet, zeigt sie, je nach Einstellung der Option:
+    <newline />
+    1: die zufällig erzeugte Schablone an oder
+    <newline />
+    2: eine Matrix von Buttons mit Inhalt 0, klickt man nun auf einen Button wird dieser rot (Loch in Schablone) und 3 andere Buttons werden nicht klickbar. Somit generiert man sich seine eigene Schablone.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Grille_%28cryptography%29" lang="en" />
+      <caption lang="en">Fleißner Grille in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Flei%C3%9Fnersche_Schablone" lang="de-DE" />
+      <caption lang="de-DE">Fleißner Schablone in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

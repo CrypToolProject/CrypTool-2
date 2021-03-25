@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="CrypTool.Plugins.PaddingOracleAttack.AttackPresentation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:properties="clr-namespace:PaddingOracleAttack.Properties"
+        mc:Ignorable="d" 
+        d:DesignHeight="406" d:DesignWidth="582" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="125*" />
+            <RowDefinition Height="281*" />
+        </Grid.RowDefinitions>
+        <Image Name="bgPic" Source="img/background.png" Grid.RowSpan="2"></Image>
+        
+        <Image Name="phase1" Source="img/phase1.png" Visibility="Hidden" Height="31" Margin="1,0,0,0" Stretch="UniformToFill" HorizontalAlignment="Left" Width="195" VerticalAlignment="Top"></Image>
+        <Image Name="phase2" Source="img/phase2.png" Margin="193,0,0,0" Visibility="Hidden" Stretch="UniformToFill" Height="31" VerticalAlignment="Top" HorizontalAlignment="Left" Width="196"></Image>
+        <Image Name="phase3" Source="img/phase3.png" Width="195" Margin="386,0,0,0" Visibility="Hidden" Height="31" VerticalAlignment="Top" HorizontalAlignment="Left" Stretch="UniformToFill"></Image>
+
+        <Label Name="inputLabel" Content="{x:Static properties:Resources.lblInput}" FontFamily="Arial Bold" FontSize="15" Height="32" Margin="8,35,0,0" HorizontalAlignment="Left" Width="97" VerticalAlignment="Top" />
+        <Label Name="outputLabel" Content="{x:Static properties:Resources.lblOutput}" FontFamily="Arial Bold" FontSize="15" Height="32" Margin="8,213,0,0" HorizontalAlignment="Left" Width="97" Grid.Row="1" VerticalAlignment="Top" />
+        <Label Name="attackLabel" Content="{x:Static properties:Resources.lblAttackLogic}" FontFamily="Arial Bold" FontSize="15" Height="32" Margin="8,3,0,0" HorizontalAlignment="Left" Width="118" VerticalAlignment="Top" Grid.Row="1" />
+        
+        <Label Name="inPadInvalid" Margin="14,95,464,9" Content="{x:Static properties:Resources.lblInvalid}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF8B0000" Foreground="White" FontFamily="Arial" FontWeight="Bold" FontSize="14" Padding="0" Visibility="Hidden"></Label>
+        <Label Name="inPadValid" Margin="14,95,464,9" Content="{x:Static properties:Resources.lblValid}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="#FF008000" Foreground="White" FontFamily="Arial" FontWeight="Bold" FontSize="14" Padding="0" Visibility="Hidden"></Label>
+        <Label Name="inPadLbl" Margin="125,92,203,1" Content="{x:Static properties:Resources.descPadIn}"></Label>
+
+        <!-- Input Blocks-->
+        <!-- <Label Name="inPrelBlock" Content="" FontFamily="Courier New" FontSize="16" Height="32" Margin="42,62,310,46" Width="230" ToolTip="{Loc ttPrelBlock}"/> -->
+        <TextBlock Name="inPrelBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="45,68,0,0" Width="223" ToolTip="{Loc ttPrelBlock}" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" />
+        <TextBlock Name="inCipherBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="309,68,0,0" Width="223"  ToolTip="{Loc ttCipherBlock}" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" />
+
+        <!-- Attack Blocks-->
+        <TextBlock Name="attDecBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="81,37,0,0" Width="221"  ToolTip="{Loc ttDecBlock}" Grid.Row="1" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <TextBlock Name="attCorruptedBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="81,70,0,0" Width="221"  ToolTip="{Loc ttPrelBlock}" Grid.Row="1" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <TextBlock Name="attOverlayBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="81,103,0,0" Width="221"  ToolTip="{Loc ttOverlayBlock}" Grid.Row="1" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <TextBlock Name="attPlainBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="81,136,0,0" Width="221"  ToolTip="{Loc ttPlainBlock}" Grid.Row="1" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" />
+
+        <!-- Output Blocks-->
+        <TextBlock Name="outCorruptedBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="45,246,0,0" Width="223"  ToolTip="{Loc ttCorruptedBlock}" Grid.Row="1" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" />
+        <TextBlock Name="outCipherBlock" Text="" FontFamily="Courier New" FontSize="16" Margin="309,246,0,0" Width="223"  ToolTip="{Loc ttCipherBlock}" Grid.Row="1" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Label Name="outCounterLabel" Content="{x:Static properties:Resources.lblRequests}" FontFamily="Courier New" FontSize="16" Height="32" Margin="284,213,0,36" HorizontalAlignment="Left" Width="244"  ToolTip="ttSentRequests" Grid.Row="1" HorizontalContentAlignment="Right" />
+        <Label Name="outCounter" Content="0" FontFamily="Courier New" FontSize="16" Height="32" Margin="529,213,0,36"   ToolTip="ttSentRequests" Grid.Row="1" />
+
+        <!-- Tooltips-->
+        <Label Height="28" HorizontalAlignment="Left" Margin="15,62,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttPrelBlock}"/>
+        <Label Height="28" HorizontalAlignment="Left" Margin="279,62,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttCipherBlock}"/>
+        <Label Height="28" HorizontalAlignment="Left" Margin="51,31,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttDecBlock}" Grid.Row="1" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="51,64,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttPrelBlock}" Grid.Row="1" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="51,97,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttOverlayBlock}" Grid.Row="1" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="51,130,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttPlainBlock}" Grid.Row="1" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="15,240,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttCorruptedBlock}" Grid.Row="1" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="279,240,0,0" VerticalAlignment="Top" Width="28" ToolTip="{Loc ttCipherBlock}" Grid.Row="1" />
+
+
+        <!-- Description-->
+        <Border Name="descBorder" BorderBrush="Gray" BorderThickness="1" Margin="323,7,12,156" Visibility="Visible" Grid.Row="1" />
+        <TextBox Background="Transparent" Name="descTask" TextWrapping="Wrap" Margin="324,7,13,157" FontFamily="Cambria" FontSize="16" Text="" IsReadOnly="True" Grid.Row="1" />
+        <!--<Image Name="imgComplete" Source="img/complete.png" Margin="375,46,66,163" Grid.Row="1" Visibility="Hidden"></Image>-->
+        <Label Name="imgComplete" Content="{x:Static properties:Resources.lblComplete}" FontFamily="Arial Bold" FontSize="20" Height="32" Margin="386,76,0,0" Width="118" Grid.Row="1" Foreground="#FF00B050" FontWeight="Normal" Visibility="Hidden" HorizontalContentAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left" />
+
+        <!-- ViewByte-->
+        <StackPanel Name="viewBytePanel" Margin="323,130,7,123" Grid.Row="1" ToolTip="{Loc ttViewByte}">
+            <Border Name="viewBorder" BorderBrush="Gray" BorderThickness="1" Margin="-5,0,0,-25" Visibility="Visible" Grid.Row="1" Width="247" Height="27" />
+            <ScrollBar Name="viewByteScroller" Margin="223,-1,0,0" Grid.Row="1" Width="17" Height="25" />
+            <Label Background="Transparent" Name="descByte" Margin="-80,-25,0,0" FontFamily="Cambria" FontSize="14" Content="{x:Static properties:Resources.ttViewByteDesc}" Grid.Row="1" Height="26" Width="161" BorderBrush="Transparent"/>
+            <Label Background="Transparent" Name="descShownBytes" Margin="120,-26,0,0" FontFamily="Cambria" FontSize="14" Content="1..8" Grid.Row="1" Height="26" Width="48" BorderBrush="Transparent"/>
+        </StackPanel>
+            
+        <!-- BytePointer-->
+        <Border BorderBrush="Green" BorderThickness="2" Height="139" HorizontalAlignment="Left" Margin="145,25,0,0" Name="bytePointer" VerticalAlignment="Top" Width="23" Visibility="Hidden" Grid.Row="1" />
+
+        <!-- Buttons -->
+        <StackPanel Name="buttonPanel" Margin="0,166,0,71" Orientation="Horizontal" Grid.Row="1">
+            <Button Name="btnReturnPhase" Width="25" Height="26" Margin="5,-2,-12,4" Content="&lt;&lt;" FontSize="14" IsEnabled="True" ToolTip="{Loc ttBtnReturnPhase}"></Button>
+            <Button Name="btnReturn" Width="25" Height="26" Margin="15,-2,-12,4" Content="&lt;" FontSize="14" IsEnabled="True" ToolTip="{Loc ttBtnReturn}"></Button>
+            <Button Name="btnNext" Width="80" Height="26" Margin="15,-2,0,4" Content="{x:Static properties:Resources.btnNext}" FontSize="14" IsEnabled="True" ToolTip="{Loc ttBtnNext}"></Button>
+            <Label Name="btnNextLbl" Width="142" Height="26" Margin="1,-2,-5,4" Content=""></Label>
+            <Button Name="btnRun" Width="140" Height="26" Margin="5,-2,53,4" Content="{x:Static properties:Resources.btnAuto}" FontSize="14" ToolTip="{Loc ttBtnAuto}"></Button>
+            <Button Name="btnFinish" Width="140" Height="26" Margin="-45,-2,58,4" Content="{x:Static properties:Resources.btnAll}" FontSize="14" ToolTip="{Loc ttBtnAll}"></Button>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>

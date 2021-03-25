@@ -1,0 +1,19 @@
+﻿<h2>LLL algorithm</h2>
+<p>
+    Unlike the Gaussian algorithm, which operates in the 2-dimensional case, the LLL 
+    algorithm outputs a <a href="help://SVP">shortest vector</a> in n-dimensional space. However, the 
+    shortest vector is not always the shortest actually, but often a very short 
+    vector. This restriction has the advantage that the algorithm works in 
+    polynomial time, so a good solution can be found quickly.</p>
+<p>
+    
+    Two important components of the algorithm are on the one hand the Gram-Schmidt 
+    orthogonalization, which is generated for the given vectors mutually orthogonal 
+    vectors that span the same vector space. On the other hand, this is the Lovász 
+    condition with which the reduced form can be checked.</p>
+    <p>In order to ensure that the reduced lattice still generates the same lattice as in 
+        the beginning, only such transformations are performed, which form an unimodular 
+        matrix. Unimodular means that the determinant is +1 or -1. This unimodular 
+        transformation matrix can be found, in addition to the reduced base and their 
+        <a href="help://SuccessiveMinima">successive minima</a> in the log.</p>
+

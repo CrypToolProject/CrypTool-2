@@ -1,0 +1,21 @@
+﻿<h2>LLL-Algorithmus</h2>
+<p>
+    Im Unterschied zum Gauß-Algorithmus,welcher im 2-dimensionalen Fall arbeitet, 
+    liefert der LLL-Algorithmus einen <a href="help://SVP">kürzesten Vektor</a> im n-dimensionalen Raum. 
+    Allerdings ist der kürzeste Vektor nicht immer der tatsächlich kürzeste, sondern 
+    häufig nur ein sehr kurzer Vektor. Diese Einschränkung hat jedoch den Vorteil, 
+    dass der Algorithmus in Polynomialzeit arbeitet, wodurch schnell eine gute 
+    Lösung gefunden werden kann.</p>
+<p>
+    Zwei wichtige Komponenten des Algorithmus sind zum einen die 
+    Gram-Schmidt-Orthogonalisierung, welche zu den gegebenen Vektoren paarweise 
+    orthogonale Vektoren erzeugt, die den gleichen Vektorraum aufspannen. Zum 
+    anderen ist dies die Lovász-Bedingung, mit der die Reduziertheit überprüft 
+    werden kann.</p>
+<p>
+    Damit gewährleistet bleibt, dass die reduzierte Basis am Ende des Algorithmus 
+    immernoch das gleiche Gitter erzeugt, werden nur Transformationen durchgeführt, 
+    die durch eine unimodulare Matrix gebildet werden. Unimodular bedeutet, dass die 
+    Determinante +1 oder -1 beträgt. Diese unimodulare Transformationsmatrix finden 
+    Sie, neben der reduzierten Basis und deren <a href="help://SuccessiveMinima">sukzessiven Minima</a>, im Log.</p>
+

@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="CrypTool.MD5.Presentation.States.InitializedPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:displays="clr-namespace:CrypTool.MD5.Presentation.Displays" Height="400" Width="800">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+		<Grid>
+			<displays:HashAccumulatorDisplay Margin="8,144,8,0" DataContext="{Binding CurrentState}" VerticalAlignment="Top" Height="86"/>
+        <TextBlock Margin="8,0,8,8" Text="{Loc The_first_thing_we_do_is_initialize_our_accumulators}" Height="80" VerticalAlignment="Bottom" Style="{DynamicResource textBlockStyle}"/>
+        <TextBlock Height="130" Margin="8,8,8,0" VerticalAlignment="Top" Text="{Loc The_variables_H1_H4_are_our_accumulator_variables}" Style="{DynamicResource textBlockStyle}"/>
+		</Grid>
+</UserControl>

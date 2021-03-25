@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">SAT Attack (Second Preimage Attack on Hash Function)</title>
+  <title lang="zh">SAT攻击（对散列函数的第二次原像攻击）</title>
+  <title lang="ru">Атака SAT (вторая атака префикса на хэш-функцию)</title>
+  <summary lang="en">Usage of the <i>SAT Attack</i> component demonstrating a second preimage attack on a hash function.</summary>
+  <summary lang="zh">SAT Attack组件的用法说明了对散列函数的第二次原像攻击。</summary>
+  <summary lang="ru">Использование компонента SAT Attack, демонстрирующего вторую атаку префикса на хэш-функцию.</summary>
+  <description lang="en">This template demonstrates how to use the <i>SAT Attack</i> component and to perform a second preimage attack on the hash function Keccak (SHA-3).</description>
+  <description lang="zh">该模板演示了如何使用SAT Attack组件以及如何对哈希函数Keccak（SHA-3）进行第二次图像前攻击。</description>
+  <description lang="ru">В этом шаблоне показано, как использовать компонент SAT Attack и выполнить вторую атаку на префикс хэш-функции Keccak (SHA-3).</description>
+  <keywords>satsolver, sat, solver, satisfiability, hash, hash function, analyse, attack, preimage, second preimage</keywords>
+  <keywords lang="zh">satsolver，sat，求解器，可满足性，哈希，哈希函数，分析，攻击，原像，第二原像</keywords>
+  <keywords lang="ru">satsolver, sat, solver, выполнимость, хеш, хеш-функция, анализ, атака, прообраз, второй прообраз</keywords>
+  <title lang="de">SAT-Angriff (Second-Preimage-Angriff auf Hashfunktion)</title>
+  <summary lang="de">Benutzung der <i>SAT Attack</i> Komponente, welche einen Second-Preimage-Angriff auf eine Hashfunktion zeigt.</summary>
+  <description lang="de">Diese Vorlage zeigt wie die <i>SAT Attack</i> Komponente verwendet werden kann und wie ein Second-Preimage-Angriff auf die Hashfunktion Keccak (SHA-3) durchgeführt wird.</description>
+  <keywords lang="de">satsolver, sat, solver, erfüllbarkeit, hash, hashfunktion, analyse, attack, angriff, urbild, preimage, second preimage</keywords>
+  <icon file="SATAttack.png" />
+  <relevantPlugins>
+    <!--<plugin name="SATAttack" />-->
+  </relevantPlugins>
+</sample>

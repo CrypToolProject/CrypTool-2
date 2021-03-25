@@ -1,0 +1,100 @@
+﻿<UserControl x:Class="WorkspaceManager.View.VisualComponents.TextEditPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tools="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             xmlns:visuals="clr-namespace:WorkspaceManager.View.VisualComponents"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Style>
+        <Style TargetType="UserControl">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SelectedText}" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Visibility" Value="Visible"></Setter>
+        </Style>
+    </UserControl.Style>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="formatTextStyle">
+            <Setter Property="FontFamily" Value="Palatino Linotype"></Setter>
+            <Setter Property="Width" Value="30"></Setter>
+            <Setter Property="FontSize" Value ="14"></Setter>
+            <Setter Property="CommandTarget" Value="{Binding Path=SelectedText.mainRTB}"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="formatImageStyle">
+            <Setter Property="Width" Value="30"></Setter>
+            <Setter Property="CommandTarget" Value="{Binding Path=SelectedText.mainRTB}"></Setter>
+        </Style>
+
+        <RadialGradientBrush x:Key="BlueRadientBrush" RadiusX="0.5" RadiusY="1.7" Center="0.524,1.7" GradientOrigin="0.524,1.7">
+            <GradientStop Color="#eee" Offset="1.0" />
+            <GradientStop Color="#aaa" Offset="0" />
+        </RadialGradientBrush>
+    </UserControl.Resources>
+    <DockPanel LastChildFill="True">
+        <ToolBar Foreground="Black" Name="mainToolBar" Background="{StaticResource ResourceKey=BlueRadientBrush}" BorderBrush="#666" BorderThickness="1" Height="34" DockPanel.Dock="Top">
+            <tools:ColorPicker x:Name="CrPicker" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Cut" ToolTip="{Loc Cut}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/EditCut.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Copy" ToolTip="{Loc Copy}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/EditCopy.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Paste" ToolTip="{Loc Paste}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/EditPaste.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Undo" ToolTip="{Loc Undo}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/EditUndo.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Redo" ToolTip="{Loc Redo}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/EditRedo.png"></Image>
+            </Button>
+
+            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleBold" ToolTip="{Loc Bold}">
+                <TextBlock FontWeight="Bold">B</TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleItalic" ToolTip="{Loc Italic}">
+                <TextBlock FontStyle="Italic" FontWeight="Bold">I</TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatTextStyle}" Command="EditingCommands.ToggleUnderline" ToolTip="{Loc Underline}">
+                <TextBlock TextDecorations="Underline" FontWeight="Bold">U</TextBlock>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseFontSize" ToolTip="{Loc Grow_Font}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/CharacterGrowFont.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseFontSize" ToolTip="{Loc Shrink_Font}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/CharacterShrinkFont.png"></Image>
+            </Button>
+
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleBullets" ToolTip="{Loc Bullets}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ListBullets.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleNumbering" ToolTip="{Loc Numbering}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ListNumbering.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignLeft" ToolTip="{Loc Align_Left}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ParagraphLeftJustify.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignCenter" ToolTip="{Loc Align_Center}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ParagraphCenterJustify.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignRight" ToolTip="{Loc Align_Right}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ParagraphRightJustify.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignJustify" ToolTip="{Loc Align_Justify}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ParagraphFullJustify.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseIndentation" ToolTip="{Loc Increase_Indent}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ParagraphIncreaseIndentation.png"></Image>
+            </Button>
+            <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseIndentation" ToolTip="{Loc Decrease_Indent}">
+                <Image Source="/WorkspaceManager;component/View/Images/TextIcons/ParagraphDecreaseIndentation.png"></Image>
+            </Button>
+        </ToolBar>
+    </DockPanel>
+</UserControl>
+

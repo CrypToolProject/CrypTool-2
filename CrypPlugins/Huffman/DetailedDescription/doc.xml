@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    Huffman's algorithm is a lossless data compression algorithm. It produces an optimal prefix-free code of variable length, based on the
+    frequencies of characters in the input data (more frequent characters will be represented with less bits and vice versa). It was developed
+    by David A. Huffman while he was a Ph.D. student at MIT. Today it is used in other compression algorithms such as DEFLATE and PKZIP, as well as
+    some multimedia codecs like JPEG and MP3.
+    <newline /><newline /><section headline="Significance of compression in cryptography"><newline />
+      The only absolutely secure cipher is the one-time pad, assuming the following conditions are fulfilled:      
+      <enum><item>The key is truly random</item><item>It is as long as the plaintext</item><item>It is used only once</item><item>It is kept secret</item></enum>      
+      Given the difficulty of implementing such a system, certain compromises had to be made. With modern ciphers, where we traded absolute secrecy for
+      practicality, the key is pseudorandom and is shorter than the plaintext. Such cipher is computationaly secure, but theoretically it is possible
+      to break it. Unicity distance is a theoretical measure of the amount of ciphertext needed to unambiguously determine the correct key and is
+      inversely proportional to plaintext redundancy. By compressing data prior to encryption, we increase unicity distance, as well as reduce the
+      amount of data to be encrypted. Unicity distance of one-time pad is infinite.
+    </section></introduction>
+  <introduction lang="zh-CN">霍夫曼算法是一种无损数据压缩算法。它会根据输入数据中字符的频率生成可变长度的最佳无前缀代码（频率更高的字符将用较少的位表示，反之亦然）。它是由David A. Huffman博士期间开发的。麻省理工学院的学生。今天，它已用于其他压缩算法中，例如DEFLATE和PKZIP，以及一些多媒体编解码器，例如JPEG和MP3。唯一的绝对安全的密码是一次性密码，前提是满足以下条件：密钥是真正随机的只要是明文就可以使用一次它被保密由于实施这种系统的困难，必须做出一些妥协被制造。对于现代密码，我们在实用性上交换了绝对的保密性，密钥是伪随机的，并且比明文短。这样的密码在计算上是安全的，但是从理论上讲有可能破解它。唯一性距离是明确确定正确密钥所需密文量的理论量度，与明文冗余度成反比。通过在加密之前压缩数据，我们可以增加统一距离，并减少要加密的数据量。一次性垫的唯一性距离是无限的。</introduction>
+  <introduction lang="ru">Алгоритм Хаффмана - алгоритм сжатия данных без потерь. Он создает оптимальный без префикса код переменной длины, основанный на частотах символов во входных данных (более частые символы будут представлены с меньшим количеством бит и наоборот). Он был разработан Дэвидом А. Хаффманом, когда он был доктором философии. студент Массачусетского технологического института. Сегодня он используется в других алгоритмах сжатия, таких как DEFLATE и PKZIP, а также некоторые мультимедийные кодеки, такие как JPEG и MP3. Единственный абсолютно безопасный шифр - это одноразовый пэд, предполагающий выполнение следующих условий: ключ действительно случайный. До тех пор, пока plaintextIt используется только один раз. Он хранится в тайне. Учитывая сложность реализации такой системы, некоторые компромиссы должны были сделайте. С современными шифрами, где мы торгуем абсолютной секретностью для практичности, ключ псевдослучайный и короче, чем открытый текст. Такой шифр является безопасным, но теоретически его можно сломать. Расстояние единства - это теоретическая мера объема шифрованного текста, необходимого для однозначного определения правильного ключа и обратно пропорциональна избыточности открытого текста. Сжав данные до шифрования, мы увеличиваем расстояние однозначности, а также уменьшаем количество данных, подлежащих шифрованию. Расстояние единства одноразового прохода бесконечно.</introduction>
+  <usage lang="en">
+    You can compress anything using 'Binary' presentation format (it uses code page 437, an eight-bit character set), but you may get worse results
+    than compressing data in its original form (for e.g. decoding UTF-32 encoded text to code page 437 will result in 4 times longer text).
+    <newline /><newline /><section headline="Compression"><newline />
+      Huffman compression involves the following steps:      
+      <enum><item>Calculate character frequencies</item><item>Create a node for each characacter-frequency pair and add it to a priority queue</item><item>Combine two nodes with smallest frequencies until there is only one node left - the Huffman tree</item><item>Create a code table by traversing the tree to each character and note down the paths taken (0 for left turn, 1 for rigth turn)</item><item>Represent characters using their newly created codewords</item></enum>      
+      Below is an example tree generated from the sentence "this is an example of a huffman tree":
+      <newline /><img src="Huffman/DetailedDescription/example_tree.png"></img><newline /><newline />
+      Note that compressing small amounts of data and/or high entropy data will result in a bigger compressed size. That is because we need to have
+      the tree in order to be able to decompress, so it is prepended to the compressed data. Also, lossless data compression relies on redundancy
+      in order to be effective. That fact is the reason why we do compression before encryption (since good encryption should produce seemingly random
+      ciphertext).
+      <newline /><newline /></section><section headline="Decompression"><newline />
+      Process of decompression is simply a matter of reading compressed data like a "road map" to the appropriate characters in the tree. It involves
+      the following steps:
+      <enum><item>Start from the root node</item><item>Read next bit from the compressed data and go left if its 0 - otherwise go right</item><item>Repeat step 2 until you hit a leaf node and output the character contained in it</item><item>Repeat steps 1-3 until you've read all compressed data</item></enum></section></usage>
+  <usage lang="zh-CN">您可以使用“二进制”表示格式压缩任何内容（它使用代码页437，即八位字符集），但是与压缩原始格式的数据（例如，将UTF-32编码的文本解码为代码页）相比，结果可能会更糟。 437将导致文本长4倍）。霍夫曼压缩涉及以下步骤：计算字符频率为每个字符频率对创建一个节点，并将其添加到优先级队列中合并两个频率最小的节点，直到只剩下一个节点-霍夫曼树通过遍历每个树来创建代码表字符并记下所走的路径（0表示左转，1表示右转）使用新创建的代码字表示字符下面是从句子“这是霍夫曼树的一个例子”生成的示例树：请注意，压缩少量数据和/或高熵数据将导致更大的压缩大小。那是因为我们需要树才能解压缩，所以它被放在压缩数据之前。同样，无损数据压缩依赖于冗余才能有效。这就是为什么我们在加密之前进行压缩的原因（因为良好的加密应该产生看似随机的密文）。解压缩过程仅是读取压缩数据（例如“路线图”）到树中适当字符的问题。它涉及以下步骤：从根节点开始，从压缩数据中读取下一位，如果其为0，则向左走，否则向右，重复步骤2，直到您命中了一个叶子节点并输出包含在其中的字符，重复步骤1-3，直到您已经读取所有压缩数据</usage>
+  <usage lang="ru">Вы можете сжимать все, используя формат представления «Двоичный» (он использует кодовую страницу 437, восьмибитовый набор символов), но вы можете получить худшие результаты, чем сжатие данных в исходной форме (например, для декодирования кодированного текста UTF-32 на кодовую страницу 437 приведет к увеличению текста в 4 раза). Сжатие Хаффмана включает в себя следующие шаги: Вычисление символьных частот. Создайте узел для каждой пары пара характеристик и добавьте его в очередь приоритетов. Соедините два узла с наименьшими частотами, пока не останется только один узел. Дерево Хаффмана. Создайте таблицу кодов, пройдя дерево до каждого символ и запишите пройденные пути (0 для левого поворота, 1 для поворота) Представьте символы, используя их вновь созданные кодовые слова Ниже приведен пример дерева, сгенерированного из предложения «это пример дерева хаффмана»: обратите внимание, что сжатие небольших количеств данных и / или данных с высокой энтропией приведет к большему сжатому размеру. Это связано с тем, что нам нужно иметь дерево, чтобы иметь возможность распаковывать, поэтому оно добавляется к сжатым данным. Кроме того, сжатие данных без потерь основано на избыточности, чтобы быть эффективным. Этот факт является причиной того, что мы делаем сжатие перед шифрованием (поскольку хорошее шифрование должно создавать, по-видимому, случайный зашифрованный текст). Процесс декомпрессии - это просто вопрос чтения сжатых данных, таких как «дорожная карта», с соответствующими символами в дереве. Он включает в себя следующие шаги: Начните с корневого узла. Прочтите следующий бит из сжатых данных и идите влево, если его 0 - в противном случае перейдите вправо. Повторите шаг 2, пока вы не нажмете на листовой узел и не выпустите символ, содержащийся в нем. Повторите шаги 1-3, пока вы не читать все сжатые данные</usage>
+  <presentation lang="en">
+    In the presentation view, you can see general information about the effectiveness of compression, as well as code table used in the process.
+  </presentation>
+  <presentation lang="zh-CN">在演示视图中，您可以查看有关压缩效果的一般信息以及该过程中使用的代码表。</presentation>
+  <presentation lang="ru">В представлении презентации вы можете увидеть общую информацию об эффективности сжатия, а также таблицу кодов, используемую в этом процессе.</presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="https://en.wikipedia.org/wiki/Huffman_coding" />
+      <caption lang="en">Huffman coding (Wikipedia)</caption>
+      <link lang="de-DE" url="https://de.wikipedia.org/wiki/Huffman-Kodierung" />
+      <caption lang="de-DE">Huffman-Kodierung (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="https://en.wikipedia.org/wiki/Unicity_distance" />
+      <caption lang="en">Unicity distance (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

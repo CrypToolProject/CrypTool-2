@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">    
+  In cryptography, Treyfer is a block cipher/MAC designed in 1997 by Gideon Yuval.
+  Aimed at smart card applications, the algorithm is extremely simple and compact; it can be implemented in just 29 bytes of 8051 machine code.
+  Treyfer has a rather small key size and block size of 64 bits each. 
+  All operations are byte-oriented, and there is a single 8×8-bit S-box. 
+  The S-box is left undefined; the implementation can simply use whatever data is available in memory. 
+  In each round, each byte has added to it the S-box value of the sum of a key byte and the previous data byte, then it is rotated left one bit. 
+  The design attempts to compensate for the simplicity of this round transformation by using a large number of rounds (32 in this case).
+  </introduction>
+  <introduction lang="zh-CN">在密码学中，Treyfer是由Gideon Yuval在1997年设计的分组密码/ MAC。针对智能卡应用，该算法非常简单和紧凑。仅用29个字节的8051机器代码即可实现。 Treyfer的密钥大小非常小，每个块大小为64位。所有操作都面向字节，并且只有一个8×8位S-box。 S-box未定义；该实现可以简单地使用内存中可用的任何数据。在每一轮中，每个字节都将一个关键字节和前一个数据字节之和的S-box值添加到该字节中，然后将其左移一位。设计尝试通过使用大量回合（本例中为32个）来补偿此回合变换的简单性。</introduction>
+  <introduction lang="ru">В криптографии Treyfer является блочным шифром / MAC, разработанным в 1997 году Гидеоном Ювалем. Алгоритм, ориентированный на приложения для смарт-карт, чрезвычайно прост и компактен; он может быть реализован всего за 29 байтов машинного кода 8051. Treyfer имеет довольно небольшой размер ключа и размер блока по 64 бита. Все операции байт-ориентированы, и имеется один 8 × 8-бит S-box. S-box остается неопределенным; реализация может просто использовать любые доступные данные в памяти. В каждом раунде каждый байт добавил к нему значение S-box суммы байта ключа и предыдущего байта данных, затем он поворачивается налево на один бит. Проект пытается компенсировать простоту этого раундного преобразования, используя большое количество раундов (в данном случае 32).</introduction>
+  <introduction lang="de-DE"></introduction>
+  <usage lang="en">
+    The plugin for the Treyfer attack implemented in CrypTool 2 takes three inputs: the plaintext, the key (both must be of length 8), and an
+    integer value indicating the number of rounds. The 'number of rounds' parameter must have a positive integer value (up to 32) for the plugin to run.
+    Plaintext and key could be any ASCII character. After providing these two parameters and running the algorithm, the ciphertext is produced as output in the field connected to output port of Treyfer.
+    Rotation of bits (as it appears in the proposed algorithm) is not employed.
+    A simple 8x8 S-box is implemented in the code.
+  </usage>
+  <usage lang="zh-CN">在CrypTool 2中实现的Treyfer攻击插件需要三个输入：纯文本，密钥（都必须是长度8）和指示轮数的整数值。 “轮数”参数必须具有正整数值（最多32个），插件才能运行。明文和键可以是任何ASCII字符。提供这两个参数并运行算法后，将在连接到Treyfer输出端口的字段中将密文作为输出生成。不采用位旋转（如在所提出的算法中所出现的）。该代码中实现了一个简单的8x8 S-box。</usage>
+  <usage lang="ru">Плагин для атаки Treyfer, реализованный в CrypTool 2, принимает три входа: открытый текст, ключ (оба должны быть длиной 8) и целочисленное значение, указывающее количество раундов. Параметр «число раундов» должен иметь положительное целочисленное значение (до 32) для запуска плагина. Обычным текстом и ключом может быть любой символ ASCII. После предоставления этих двух параметров и запуска алгоритма шифротекст создается как выход в поле, подключенном к выходному порту Treyfer. Вращение битов (как показано в предлагаемом алгоритме) не используется. В коде реализован простой 8x8 S-box.</usage>
+  <usage lang="de-DE"></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://en.wikipedia.org/wiki/Treyfer" lang="en" />
+      <caption lang="en">Treyfer (Wikipedia)</caption>
+    </linkReference>
+    <bookReference>
+      <author lang="en">David Wagner, Alex Biryukov</author>
+      <publisher lang="de-DE">In: Knudsen L. (eds) Fast Software Encryption. FSE 1999. Lecture Notes in Computer Science, vol 1636. Springer, Berlin, Heidelberg</publisher>
+      <name lang="en">Slide Attacks</name>
+    </bookReference>
+  </references>
+</documentation>

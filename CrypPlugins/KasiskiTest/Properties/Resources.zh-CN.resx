@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>霞关的测验</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>计算多字母替换密码的可能密钥长度</value>
+  </data>
+  <data name="StringInputCaption" xml:space="preserve">
+    <value>要分析的字符串</value>
+  </data>
+  <data name="StringInputTooltip" xml:space="preserve">
+    <value>输入的字符串应该是使用Vigenère密码加密的密文。</value>
+  </data>
+  <data name="IntegerArrayCaption" xml:space="preserve">
+    <value>整数数组</value>
+  </data>
+  <data name="IntegerArrayTooltip" xml:space="preserve">
+    <value>包含建议的密钥长度作为整数的数组。 Vigenère分析仪使用。</value>
+  </data>
+  <data name="StringOutputCaption" xml:space="preserve">
+    <value>密钥长度及其遇到的次数的倍数。</value>
+  </data>
+  <data name="StringOutputTooltip" xml:space="preserve">
+    <value>密钥长度是最常见的因素，或者是其倍数。</value>
+  </data>
+  <data name="CaseSensitivityCaption" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="CaseSensitivityTooltip" xml:space="preserve">
+    <value>是a == A吗？请注意给定密文中使用的字母以及所应用的Vigenère密码的“大小写敏感性”。</value>
+  </data>
+  <data name="FactorSizeCaption" xml:space="preserve">
+    <value>最大因子大小</value>
+  </data>
+  <data name="FactorSizeTooltip" xml:space="preserve">
+    <value>输入要检查的最大因子/密钥大小。默认值= 20</value>
+  </data>
+  <data name="GrammLengthCaption" xml:space="preserve">
+    <value>克长度</value>
+  </data>
+  <data name="GrammLengthTooltip" xml:space="preserve">
+    <value>输入要检查的最大克长度。最小值/默认值= 3</value>
+  </data>
+  <data name="RemoveUnknownSymbolsCaption" xml:space="preserve">
+    <value>处理未知字符</value>
+  </data>
+  <data name="RemoveUnknownSymbolsTooltip" xml:space="preserve">
+    <value>如果输入中遇到的字符不是字母，该怎么办？</value>
+  </data>
+  <data name="CaseSensitivityList1" xml:space="preserve">
+    <value>是的，“ a”应等于“ A”</value>
+  </data>
+  <data name="CaseSensitivityList2" xml:space="preserve">
+    <value>没有“ a”不应该等于“ A”</value>
+  </data>
+  <data name="RemoveUnknownSymbolsList1" xml:space="preserve">
+    <value>忽略（保留未修改的内容）</value>
+  </data>
+  <data name="RemoveUnknownSymbolsList2" xml:space="preserve">
+    <value>去掉</value>
+  </data>
+  <data name="Label1Desc" xml:space="preserve">
+    <value>构成距离的因素的频率</value>
+  </data>
+  <data name="Label2Desc" xml:space="preserve">
+    <value>密文中相同字符串之间</value>
+  </data>
+  <data name="TooltipDesc" xml:space="preserve">
+    <value>提示：密钥长度可能是最常见的因素之一，也可能是倍数</value>
+  </data>
+  <data name="Number_of_hits_for_the_corresponding_factor" xml:space="preserve">
+    <value>对应因子的点击数</value>
+  </data>
+</root>

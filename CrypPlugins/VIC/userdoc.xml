@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <introduction lang="en">
+    This component is the implementation of the VIC Cipher.
+    <newline />
+    This component uses the original enciphering algorithm used by the Soviet agent Reino Häyhänen in the 1950s.
+    It uses 1 substitution and 2 transpositions and the tables are composed using a 5-part key. 
+    This component also brings the latin alphabet support to VIC cipher.
+  </introduction>
+  <introduction lang="zh-CN">该组件是VIC密码的实现。该组件使用1950年代苏联特工ReinoHäyhänen使用的原始加密算法。它使用1个替换和2个换位，并且表由5个部分组成。该组件还为VIC密码带来了拉丁字母支持。</introduction>
+  <usage lang="en">
+    This component needs has a key composed of 5 values. All values have to be provided, otherwise the component
+    will not execute. All the parts of the key are provided as a string.
+    <newline /><enum><item>First part - Agent's personal number: 2 digit number greater than 0 and smaller than 33.</item><item>Second part - Phrase: A multiple word phrase of at least 20 alphabetical characters.</item><item>Third part - Password: A single word at least 6 letters long.</item><item>Fourth part - Date in a continental format: Date in a continental format is DD/MM/YYYY. Date has to be greater or equal
+        than the First of January, 999 (1.1.999).</item><item>Fifth part - Initializing string: A single string composed of at least 5 digits.</item></enum></usage>
+  <usage lang="zh-CN">该组件需要一个由5个值组成的键。必须提供所有值，否则组件将无法执行。密钥的所有部分均以字符串形式提供。第一部分-代理人的个人号码：大于0且小于33的2位数字;第二部分-短语：至少20个字母字符的多词短语;第三部分-密码：至少6个字母的单词。第四部分-大陆格式的日期：大陆格式的日期为DD / MM / YYYY。日期必须大于或等于999年一月一日（1.1.999）。第五部分-初始化字符串：单个字符串，至少由5位数字组成。</usage>
+  <presentation lang="en"></presentation>
+  <references>
+    <link url="https://en.wikipedia.org/wiki/VIC_cipher" lang="en" />
+    <caption lang="en">VIC Cipher Wiki</caption>
+  </references>
+</documentation>

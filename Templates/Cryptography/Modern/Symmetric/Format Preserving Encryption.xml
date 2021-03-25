@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Format Preserving Encryption</title>
+  <title lang="zh">格式保存加密</title>
+  <summary lang="en">Usage of <i>Format Preserving Encryption</i> with a credit card number.</summary>
+  <summary lang="zh">带有信用卡号的格式保留加密的用法。</summary>
+  <description lang="en">This template shows how the <i>Format Preserving Encryption</i> component can be used to encrypt a credit card number.</description>
+  <description lang="zh">此模板显示了如何使用“格式保留加密”组件来加密信用卡号。</description>
+  <title lang="de">Formaterhaltende Verschlüsselung</title>
+  <summary lang="de">Verwendung von <i>Format Preserving Encryption</i> mit einer Kreditkartennummer.</summary>
+  <description lang="de">Diese Vorlage zeigt, wie die Komponente <i>Format Preserving Encryption</i> verwendet werden kann, um eine Kreditkartennummer zu verschlüsseln.</description>
+  <keywords>FF1, FF2, FF3, DFF, FPE</keywords>
+  <keywords lang="zh">FF1，FF2，FF3，DFF，FPE</keywords>
+  <icon file="Format Preserving Encryption.png" />
+  <relevantPlugins>
+    <plugin name="FormatPreservingEncryption" />
+  </relevantPlugins>
+  <replacements lang="en">
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$Format Preserving Encryption$" value="Format Preserving Encryption" />
+    <replacement key="$credit card number$" value="Credit card number" />
+    <replacement key="$Output$" value="Encrypted credit card number" />
+    <replacement key="$Log$" value="Log" />
+    <replacement key="$key$" value="Key" />
+    <replacement key="$tweak$" value="Tweak" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$tweak radix$" value="Tweak Radix" />
+    <replacement key="$memo$" value="{\b Format preserving encryption (FPE) of a text}\line In this template, a 16-digit credit card number is encrypted with a randomly chosen key and tweak format-preserving. The result is again a 16-digit number.  In addition, a log with intermediate values of the encryption is shown. The four algorithms FF1, FF2, FF3, and DFF are available for selection, all of which can be executed with the input values, given in this template. These four algorithms have become part of the NIST standardization process.\line Decryption is also possible: The encrypted credit card number must be copied into the text input component &quot;Credit card number&quot; and the &quot;Decrypt&quot; operation operation must be selected in the component &quot;Format Preserving Encryption&quot;." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Alphabet$" value="字母" />
+    <replacement key="$Format Preserving Encryption$" value="格式保存加密" />
+    <replacement key="$credit card number$" value="信用卡号" />
+    <replacement key="$Output$" value="加密的信用卡号" />
+    <replacement key="$Log$" value="日志记录" />
+    <replacement key="$key$" value="键" />
+    <replacement key="$tweak$" value="调整" />
+    <replacement key="$String Decoder$" value="字符串解码器" />
+    <replacement key="$tweak radix$" value="调整基数" />
+    <replacement key="$memo$" value="{\b文本的格式保留加密（FPE）} \行在此模板中，使用随机选择的密钥并调整格式保留来加密16位信用卡号。结果还是一个16位数字。此外，还显示了具有加密中间值的日志。可以选择四种算法FF1，FF2，FF3和DFF，所有这些算法都可以使用此模板中给定的输入值来执行。这四种算法已成为NIST标准化过程的一部分。\行解密也是可能的：必须将加密的信用卡号复制到文本输入组件“信用卡号”中，并且必须在该组件中选择“解密”操作“格式保留加密”。" />
+  </replacements>
+  <replacements lang="de">
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$Format Preserving Encryption$" value="Formaterhaltende Verschlüsselung" />
+    <replacement key="$credit card number$" value="Kreditkartennummer" />
+    <replacement key="$Output$" value="Verschlüsselte Kreditkartennummer" />
+    <replacement key="$Log$" value="Log" />
+    <replacement key="$key$" value="Schlüssel" />
+    <replacement key="$tweak$" value="Tweak" />
+    <replacement key="$String Decoder$" value="Zeichenketten-Decodierer" />
+    <replacement key="$tweak radix$" value="Tweak Radix" />
+    <replacement key="$memo$" value="{\ b Formaterhaltende Verschlüsselung (FPE) eines Textes} \ Zeile In dieser Vorlage wird eine 16-stellige Kreditkartennummer mit einem zufällig ausgewählten Schlüssel verschlüsselt und das Format beibehalten. Das Ergebnis ist wieder eine 16-stellige Zahl. Zusätzlich wird ein Protokoll mit Zwischenwerten der Verschlüsselung angezeigt. Zur Auswahl stehen die vier Algorithmen FF1, FF2, FF3 und DFF, die alle mit den in dieser Vorlage angegebenen Eingabewerten ausgeführt werden können.  Diese vier Algorithmen sind Teil des NIST-Standardisierungsprozesses geworden. Eine Entschlüsselung ist ebenfalls möglich: Die verschlüsselte Kreditkartennummer muss in die Texteingabekomponente &quot;Kreditkartennummer&quot; kopiert werden und in der Komponente &quot;Formaterhaltende Verschlüsselung&quot; die Operation &quot;Entschlüsseln&quot; ausgewählt werden." />
+  </replacements>
+</sample>

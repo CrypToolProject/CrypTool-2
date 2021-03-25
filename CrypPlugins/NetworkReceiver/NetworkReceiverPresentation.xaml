@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="CrypTool.Plugins.NetworkReceiver.NetworkReceiverPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl">
+
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc MetaLabel}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc StartLabel}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc LisPort}" x:Name="LisPort" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc AmountLabel}" x:Name="Amount" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc UniqueIPLabel}" x:Name="UniqueIP" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc SpeedrateLabel}" x:Name="Speedrate" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+            <crypanalysisviewcontrol:SectionControl SectionHeaderCaption="{Loc ReceivedPackagesLabel}" SectionHeaderBackground="#e012329b" SectionBackground="#505abcc5">
+                <crypanalysisviewcontrol:CrypAnalysisResultListView Name="ListView" ItemsSource="{Binding}" ItemContainerStyle="{x:Null}">
+                    <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                        <GridView>
+                            <GridViewColumn Header="{Loc TORHeader}" DisplayMemberBinding="{Binding Path=TimeOfReceiving}" Width="73">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{Loc IPFromHeader}" DisplayMemberBinding="{Binding Path=IPFrom}" Width="75">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn   Header="{Loc Size}" DisplayMemberBinding="{Binding Path=PackageSize}" Width="70">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn   Header="{Loc PaylodHeader}" DisplayMemberBinding="{Binding Path=Payload}" Width="389">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                </crypanalysisviewcontrol:CrypAnalysisResultListView>
+            </crypanalysisviewcontrol:SectionControl>
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>

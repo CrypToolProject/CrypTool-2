@@ -1,0 +1,54 @@
+<survey version="123" uid="456">
+  <questions>
+    <question id="1">
+      <text lang="de">question1DE</text>
+      <text lang="en">question1EN</text>
+      <help lang="de">help1DE</help>
+      <help lang="en">help1EN</help>
+      <answers type="Rage" from="0" to="10">
+        <answered>3</answered>
+      </answers>
+    </question>
+    <question id="2">
+      <text lang="de">question2DE</text>
+      <text lang="en">question2EN</text>
+      <help lang="de">help2DE</help>
+      <help lang="en">help2EN</help>
+      <answers type="Number" from="0" to="10"/>
+    </question>
+    <question id="3">
+      <text lang="de">question3DE</text>
+      <text lang="en">question3EN</text>
+      <help lang="de">help3DE</help>
+      <help lang="en">help3EN</help>
+      <answers type="Checkbox">
+        <answer id="1" selected="true">
+          <text lang="de">Antwort1</text>
+          <text lang="en">Answer1</text>
+          <help lang="de">help1DE</help>
+          <help lang="en">help1EN</help>
+        </answer>
+        <answer id="2" selected="true">
+          <text lang="de">Antwort2</text>
+          <text lang="en">Answer2</text>
+          <help lang="de">help2DE</help>
+          <help lang="en">help2EN</help>
+        </answer>
+      </answers>
+    </question>
+    <question id="4">
+      <text lang="de">question4DE</text>
+      <text lang="en">question4EN</text>
+      <help lang="de">help4DE</help>
+      <help lang="en">help4EN</help>
+      <answers type="Combobox">
+        <answer id="1">
+          <text lang="de">Antwort1</text>
+          <text lang="en">Answer1</text>
+          <help lang="de">help1DE</help>
+          <help lang="en">help1EN</help>
+        </answer>
+      </answers>
+    </question>
+  </questions>
+</survey>

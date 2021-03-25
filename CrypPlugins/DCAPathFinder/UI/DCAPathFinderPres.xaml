@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="DCAPathFinder.UI.DCAPathFinderPres"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DCAPathFinder.UI"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Viewbox Stretch="Uniform">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="425" />
+                <RowDefinition Height="25" />
+            </Grid.RowDefinitions>
+            <!-- Viewbox for Content -->
+            <Viewbox Grid.Row="0" Name="ContentViewBox" Stretch="Uniform" />
+            <!-- Footer of the slides -->
+            <Grid VerticalAlignment="Center" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="0.5*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" FontSize="8" Background="LightGray"
+                            Content="{Loc BtnPrevChapter}" HorizontalAlignment="Right" Margin="5,0,5,0"
+                            Visibility="{Binding IsPrevChapterVisible, Mode=OneWay}"
+                            IsEnabled="{Binding IsPrevChapterPossible, Mode=OneWay}" Click="BtnPrevChapterClicked" />
+                    <Button Grid.Column="1" Name="BtnPrevious" Background="LightGray" HorizontalAlignment="Right"
+                            Margin="5,0,5,0" Click="BtnPreviousClicked"
+                            IsEnabled="{Binding IsPreviousPossible, Mode=OneWay}">
+                        <Image Source="/DCAPathFinder;component/images/prev-button.png"
+                               Opacity="{Binding ArrowBeforeOpacity, Mode=OneWay}" />
+                    </Button>
+                    <Button Grid.Column="2" Name="BtnNext" Background="LightGray" HorizontalAlignment="Left"
+                            Margin="5,0,5,0" Click="BtnNextClicked" IsEnabled="{Binding IsNextPossible, Mode=OneWay}">
+                        <Image Source="/DCAPathFinder;component/images/next-button.png"
+                               Opacity="{Binding ArrowNextOpacity, Mode=OneWay}" />
+                    </Button>
+                    <Button Grid.Column="3" FontSize="8" Background="LightGray"
+                            Content="{Loc BtnSkipChapter}" HorizontalAlignment="Left" Margin="5,0,5,0"
+                            Visibility="{Binding IsSkipChapterVisible, Mode=OneWay}"
+                            IsEnabled="{Binding IsSkipChapterPossible, Mode=OneWay}" Click="BtnSkipChapterClicked" />
+                </Grid>
+
+
+                <!-- 
+                <StackPanel  Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Name="BtnPrevious" Background="LightGray" HorizontalAlignment="Center" Margin="5,0,5,0" Click="BtnPreviousClicked" IsEnabled="{Binding IsPreviousPossible, Mode=OneWay}">
+                        <Image Source="/DCAPathFinder;component/images/prev-button.png" Opacity="{Binding ArrowBeforeOpacity, Mode=OneWay}"/>
+                    </Button>
+                    <Button Name="BtnNext" Background="LightGray" HorizontalAlignment="Center" Margin="5,0,5,0" Click="BtnNextClicked" IsEnabled="{Binding IsNextPossible, Mode=OneWay}">
+                        <Image Source="/DCAPathFinder;component/images/next-button.png" Opacity="{Binding ArrowNextOpacity, Mode=OneWay}" />
+                    </Button>
+                    <Button FontSize="8" Name="BtnSkip" Background="LightGray" Content="{Loc BtnSkipChapter}" HorizontalAlignment="Center" Margin="5,0,5,0" Visibility="Visible" IsEnabled="{Binding IsSkipPossible, Mode=OneWay}" Click="BtnSkipChapterClicked"></Button>
+                </StackPanel>
+-->
+                <StackPanel VerticalAlignment="Center" Grid.Column="1" HorizontalAlignment="Right">
+                    <Label FontFamily="Courier New" FontSize="10" Content="{Binding SlideCounter, Mode=OneWay}"
+                           Visibility="{Binding SlideCounterVisibility, Mode=OneWay}" Margin="0,0,0,-5" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</UserControl>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Friedman test allows you to calculate a probable key length of a polyalphabetic substitution cipher.
+    William F. Friedman was a cryptologist who developed a method of calculating the key length of the Vigenère cipher. He used the index of coincidence, which measures the unevenness of the cipher letter frequencies.
+    By knowing the probability κp that any two randomly chosen source language letters are the same (around 0.067 for monocase English) and the probability of a coincidence for a uniform random selection from the alphabet κr
+    (1/26 = 0.0385 for English), the key length can be estimated as:<newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/formula1.png" /><newline /><newline />
+    where k – key length; n – size of the text; IC – observed index of coincidence; κr and κp as mentioned above.
+    <newline /><newline />
+    The Index of Coincidence is calculated as:
+    <newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/formula2.png" /><newline /><newline />
+    where N is the length of the text and n1 through nc are the frequencies (as integers) of the "c" letters of the alphabet.
+  </introduction>
+  <introduction lang="zh-CN">弗里德曼（Friedman）测试允许您计算多字母替换密码的可能密钥长度。威廉·弗里德曼（William F. Friedman）是一位密码学家，他开发了一种计算Vigenère密码密钥长度的方法。他使用巧合指数来衡量密文字母频率的不均匀性。通过知道任意两个随机选择的源语言字母是相同的概率κp（单写英语约为0.067）和从字母表r进行统一随机选择的巧合概率（英语为1/26 = 0.0385），关键长度可以估算为：其中k –密钥长度； n –文字大小； IC –观察到的符合指数；如上所述的κr和κp。符合指数的计算公式为：其中N是文本的长度，n1到nc是字母表中“ c”个字母的频率（作为整数）。</introduction>
+  <introduction lang="ru">Тест Friedman позволяет рассчитать вероятную длину ключа полиалфавитного шифрования замещения. Уильям Ф. Фридман был криптологом, который разработал метод вычисления длины ключа шифра Вигена. Он использовал индекс совпадения, который измеряет неравномерность частот букв шифрования. Зная вероятность κp, что любые две случайно выбранные исходные языковые буквы одинаковы (около 0,067 для монокасс английского языка) и вероятность совпадения для равномерного случайного выбора из алфавита κr (1/26 = 0,0385 для английского), ключ длина может быть оценена как: где k - длина ключа; n - размер текста; IC - наблюдаемый индекс совпадения; κr и κp, как указано выше. Индекс совпадения вычисляется как: где N - длина текста, а от n1 до nc - частоты (как целые числа) букв «c» алфавита.</introduction>
+  <introduction lang="de-DE">
+    Mit dem Friedman-Test kann man die wahrscheinliche Schlüssellänge einer polyalphabetischen Substitutions-Verschlüsselung berechnen.
+    Der Kryptologe William F. Friedman entwickelte eine Methode, mit der man die Schlüssellänge einer Vigenère-Verschlüsselung berechnen kann. Er verwendete hierfür den Koinzidenzindex, der ein Maß für die Zufälligkeit
+    der Buchstabenhäufigkeiten eines gegebenen Textes ist.
+    Wenn κp die Wahrscheinlichkeit ist, dass zwei zufällig ausgewählte Buchstaben eines Textes in einer gegebenen Sprache gleich sind (etwa 0.067 bei englischen Texten), und die Wahrscheinlichkeit κr der Übereinstimmung
+    bei zwei zufällig ausgewählten Buchstaben des Alphabets 1/26 = 0.0385 beträgt, kann die Schlüssellänge folgendermaßen abgeschätzt werden:
+    <newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/formula1.png" /><newline /><newline />
+    wobei k die Schlüssellänge ist, n die Länge des Textes, IC der Koinzidenzindex des Textes sowie κr und κp wie oben definiert sind.
+    <newline /><newline />
+    Der Koinzidenzindex eines Textes wird so berechnet:<newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/formula2.png" /><newline /><newline />
+    wobei N die Länge des Textes ist und n1 bis nc die absoluten Häufigkeiten der Buchstaben des Alphabets im Text darstellen.
+  </introduction>
+  <usage lang="en">
+    The frequencies are supplied by the <docRef item="CrypTool.FrequencyTest.FrequencyTest" /> component. A typical usage scenario looks like this:<newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/usage.png" caption="Usage scenario" /></usage>
+  <usage lang="zh-CN">频率由组件提供。典型的使用场景如下所示：</usage>
+  <usage lang="ru">Частоты передаются компонентом. Типичный сценарий использования выглядит так:</usage>
+  <usage lang="de-DE">
+    Die benötgten Buchstabenhäufigkeiten erhält man mit der Komponente <docRef item="CrypTool.FrequencyTest.FrequencyTest" />. Ein typisches Anwendungsszenario sieht folgendermaßen aus:
+    <newline /><newline /><img src="FriedmanTest/DetailedDescription/Images/usage.png" caption="Anwendungsszenario" /></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Friedman_test" lang="en" />
+      <caption lang="en">Friedman test (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Friedman-Test_(Kryptologie)" lang="de-DE" />
+      <caption lang="en">Friedman-Test (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

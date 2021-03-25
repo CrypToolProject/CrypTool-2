@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Monoalphabetic Substitution Analyzer performs a ciphertext-only attack on monoalphabetic substitution ciphers.
+    This component conducts two different approaches to find the plaintext and the corresponding key. At first a dictionary attack
+    is executed. Within the dictionary attack words of the assumed plaintext language are mapped to the words in the given ciphertext.
+    If a valid mapping is found the according key will be reported. Besides the dictionary attack, a heuristic search based on a genetic algorithm
+    and frequencies of letter groups is implemented. This approach is turn-based and creates randomly new key candidates which are evaluated according
+    to a cost function. <newline />
+    Further details on the implemented algorithms and the usage are presented in the next sections.
+
+    <section headline="Dictionary Attack">
+      The dictionary attack is implemented based on an approach of Edwin Olson and the DeCrypto project. For each word in the ciphertext a list with possible
+      candidates from the dictionary is created. The candidates are mapped to the ciphertext words according to the pattern of the words. Subsequently, for all combinations
+      of candidates it is tried to find appropriate keys. The exact approach is described in the paper of Olson listed in the Reference section below.
+    </section><section headline="Genetic Attack">
+      The genetic attack is based on a genetic algorithm which is a type of a heuristic search. A population of keys evolves over several generations. Each generation is
+      created from the previous generation where only the fittest keys are selected. Additionally, with a certain probability a key mutates, that means a randomly chosen
+      element of the key is swapped with another element. The fitness of a key is calculated with the help of letter group frequencies (n-gram frequencies) of the plaintext
+      resulting from decrypting the given ciphertext with this key. <newline />
+      After the population evolved several generations the fitness of the fittest key does not change anymore. At this point the search is stopped and the key is reported.
+      This process is conducted several times during one analysis. <newline />
+      The power of this method strongly depends on the prior calculated n-gram frequencies. These have been provided by Ulrich Kunitz and are based on absolute discounting.
+    </section><section headline="Hillclimbing Attack">
+      The hillclimbing attack is based on the hillclimbing algorithm. 
+      The algorithm starts with a random key. Then it changes the key in a defined way. The new key will then be valued with a costfunction.
+      If the new key is better than the old one, you will use the new key for the rest of the algorithm or until you find an even
+      better one. The GPU version of this attack uses the computer's graphic board,
+      if this is a NVIDIA CUDA-enabled GPU.
+    </section><section headline="Comparison of Dictionary and Genetic Attack">
+      The genetic attack and the dictionary attack have different advantages and disadvantages that complement each other for an holistic approach to analyze
+      a monoalphabetic substitution cipher.<newline />
+      The advantages of a genetic attack are that it does not need word boundaries for it's analysis, that it can take care of large ciphertext samples, and that nothing more
+      than the n-gram probabilities are needed for the analysis. Hence, the ciphertext's word boundaries can be scrambled without negative impact on the analysis. Furthermore, the larger the sample of the ciphertext
+      the better the genetic attack performs because the fingerprint according to the n-gram probabilities is better. A disadvantage of the genetic attack is
+      that it performs poorly on very short ciphertext samples, e.g. 60 characters or less.<newline />
+      The advantage of the dictionary attack is that it can cope with very short ciphertext samples in a short and efficient way. Disadvantages of this attack
+      are that a dictionary with the most common words is needed, that the words of the ciphertext have to be in the dictionary, and that the single words of the ciphertext must be identifiable.
+    </section></introduction>
+  <introduction lang="zh-CN">单字母替代分析器对单字母替代密码执行仅密文攻击。该组件执行两种不同的方法来查找明文和相应的密钥。首先，执行字典攻击。在字典中，将假定的明文语言的单词映射到给定密文中的单词。如果找到有效的映射，则将报告相应的密钥。除字典攻击外，还实现了基于遗传算法和字母组频率的启发式搜索。这种方法是基于回合的，并根据成本函数随机创建新的关键候选项。下一部分将介绍有关已实现算法及其用法的更多详细信息。字典攻击是基于Edwin Olson和DeCrypto项目的方法实施的。对于密文中的每个单词，将创建一个列表，其中包含字典中可能的候选单词。根据单词的模式将候选者映射到密文单词。随后，对于候选者的所有组合，尝试找到适当的密钥。确切的方法在下面“参考”部分列出的Olson论文中进行了描述。遗传攻击基于遗传算法，它是一种启发式搜索。密钥的总代数代演变。每一代都是从仅选择最适合的键的上一代创建的。此外，某个键有一定的概率发生突变，这意味着该键的随机选择元素将与另一个元素交换。密钥的适用性是借助于使用此密钥解密给定密文而得到的明文的字母组频率（n-gram频率）来计算的。总体发展了几代之后，最合适的密钥的适用性不再改变。此时，搜索将停止并报告密钥。在一次分析中，此过程进行了多次。此方法的功能在很大程度上取决于先前计算出的n-gram频率。这些是由Ulrich Kunitz提供的，并且基于绝对折扣。爬山攻击基于爬山算法。该算法以随机密钥开始。然后，它以定义的方式更改密钥。然后，将使用成本函数来评估新密钥。如果新密钥比旧密钥好，您将在算法的其余部分使用新密钥，或者直到找到更好的密钥为止。如果这是支持NVIDIA CUDA的GPU，则此攻击的GPU版本使用计算机的图形板。遗传攻击和字典攻击具有不同的优势和劣势，这些优势和劣势可以互补，从而可以采用整体方法来分析单字母替代密码。基因攻击的优点是它不需要单词边界来进行分析，可以处理大型密文样本，并且仅需要n元语法概率即可进行分析。因此，可以对密文的单词边界进行加扰，而不会对分析产生负面影响。此外，密文样本越大，遗传攻击就越好，因为根据n元语法概率的指纹更好。基因攻击的一个缺点是，它在非常短的密文样本（例如60个字符或更少）上表现不佳。字典攻击的优点在于，它可以以短而有效的方式处理非常短的密文样本。这种攻击的缺点是需要使用最常用单词的字典，密文的单词必须在字典中，并且密文的单个单词必须可识别。</introduction>
+  <introduction lang="ru">Моноалфавитный анализатор замещений выполняет атаку только на основе шифрованного текста на моноалфавитные заместительные шифры. Этот компонент использует два разных подхода для поиска открытого текста и соответствующего ключа. Сначала выполняется атака словаря. В словарном словаре слова предполагаемого языка открытого текста отображаются на слова в данном зашифрованном тексте. Если будет найдено допустимое сопоставление, будет указан соответствующий ключ. Помимо атаки словаря, выполняется эвристический поиск на основе генетического алгоритма и частот буквенных групп. Этот подход основан на пошаговом режиме и создает случайным образом новые ключевые кандидаты, которые оцениваются в соответствии со стоимостью. Более подробная информация о реализованных алгоритмах и использовании приведена в следующих разделах. Атака словаря реализована на основе подхода Эдвина Олсона и проекта DeCrypto. Для каждого слова в зашифрованном тексте создается список с возможными кандидатами из словаря. Кандидаты сопоставляются с зашифрованными текстовыми словами в соответствии с шаблоном слов. Впоследствии, для всех комбинаций кандидатов, он пытается найти соответствующие ключи. Точный подход описан в статье Олсона, приведенной в разделе «Ссылки» ниже. Генетическая атака основана на генетическом алгоритме, который является типом эвристического поиска. Население ключей развивается в течение нескольких поколений. Каждое поколение создается из предыдущего поколения, где выбираются только самые подходящие клавиши. Кроме того, с определенной вероятностью ключ мутирует, это означает, что случайно выбранный элемент ключа обменивается другим элементом. Подгонка ключа вычисляется с помощью частот групп букв (частоты n-грамм) открытого текста, возникающего в результате дешифрования данного зашифрованного текста с помощью этого ключа. После того, как население развивалось в течение нескольких поколений, пригодность наиболее приспособленного ключа больше не меняется. На этом этапе поиск останавливается и сообщается о ключе. Этот процесс проводится несколько раз в течение одного анализа. Мощность этого метода сильно зависит от предварительно рассчитанных n-грамм частот. Они были предоставлены Ульрихом Куниц и основаны на абсолютном дисконтировании. Атака на холм основана на алгоритме холмирования. Алгоритм начинается с случайного ключа. Затем он меняет ключ определенным образом. Затем новый ключ будет оценен с помощью функции затрат. Если новый ключ лучше старого, вы будете использовать новый ключ для остальной части алгоритма или пока не найдете еще лучший. Версия GPU этой атаки использует графическую плату компьютера, если это графический процессор с поддержкой NVIDIA CUDA. Генетическая атака и атака словаря имеют разные преимущества и недостатки, которые дополняют друг друга для целостного подхода к анализу моноалфавитного шифрования замещения. Преимущества генетической атаки заключаются в том, что ей не нужны границы слов для ее анализа, что она может заботиться о больших образцах зашифрованного текста и что для анализа необходимы не более n-граммовые вероятности. Следовательно, границы слова зашифрованного текста могут быть скремблированы без негативного влияния на анализ. Более того, чем больше образец зашифрованного текста, тем лучше выполняется генетическая атака, потому что отпечаток пальца в соответствии с вероятностями n-грамм лучше. Недостатком генетической атаки является то, что она плохо работает на очень коротких образцах зашифрованного текста, например, 60 символов или меньше. Преимуществом атаки словаря является то, что он может быстро и эффективно справляться с очень короткими зашифрованными образцами. Недостатки этой атаки заключаются в том, что необходим словарь с наиболее распространенными словами, что слова зашифрованного текста должны быть в словаре и что отдельные слова зашифрованного текста должны быть идентифицируемы.</introduction>
+  <introduction lang="de-DE">
+    Der Monoalphabetic Substitution Analyzer entschlüsselt Geheimtexte, die durch die Anwendung der monoalphabetischen Substitution entstanden sind.
+    Die Analyse verwendet zwei Angriffe, um sowohl den Klartext als auch den dazugehörigen Schlüssel zu finden. Als erstes wird ein sogenannter Wörterbuchangriff
+    ausgeführt, der Wörter im Geheimtext zu Wörtern der angenommenen Klartextsprache zuordnet und aus dieser Zuordnung einen Schlüssel erstellt.
+    Neben dem Wörterbuchangriff wird eine heuristische Suche, die auf einem genetischen Algorithmus und Häufigkeiten von Buchstabengruppen basiert, ausgeführt.
+    Dieser Angriff erstellt rundenweise neue Schlüsselkandidaten und bewertet sie anhand einer Kostenfunktion.<newline />
+    Weitere Informationen zu den implementierten Algorithmen und der Benutzung der Komponente werden in den nachfolgenden Abschnitten dargestellt.
+
+    <section headline="Wörterbuchangriff">
+      Die Implementierung des Wörterbuchangriffs basiert auf einer Ausarbeitung von Edwin Olson und dem DeCrypto-Projekt. Für jedes Wort im Geheimtext
+      wird eine Liste mit möglichen Kandidaten aus dem Wörterbuch erstellt. Diese Kandidaten werden anhand eines Musters zu den Geheimtextwörtern zugeordnet.
+      Anschließend wird versucht für alle möglichen Kombinationen der Kandidaten entsprechende Schlüssel zu finden. Die genaue Vorgehensweise ist in der
+      Ausarbeitung von Edwin Olson, die im Abschnitt Referenzen aufgelistet ist, beschrieben.
+    </section><section headline="Genetischer Angriff">
+      Der genetische Angriff nutzt einen genetischen Algrithmus als heuristische Suche zum Auffinden des Schlüssels von dem Geheimtext. Die Population
+      der Schlüssel entwickelt sich über mehrere Generationen und in jede neue Generation werden nur die besten Schlüssel der vorherigen Generation übernommen.
+      Zusätzlich mutiert ein Schlüssel mit einer gewissen Wahrscheinlichkeit, d. h. ein zufällig ausgewähltes Element des Schlüssels wird mit einem anderen
+      Element vertauscht. Die Güte des Schlüssels wird anhand von Wahrscheinlichkeiten der Buchstabengruppen (n-gram) des Klartextes, der bei der Entschlüsselung
+      mit dem Schlüssel entstanden ist, bestimmt.<newline />
+      Nachdem sich die Population über mehrere Generationen entwickelt hat, ändert sich die Güte des besten Schlüssels nicht mehr. An diesem Punkt wird die
+      Suche angehalten und der Schlüssel als Ergebnis gemeldet. Dieser Prozess wird mehrmals während eines Analysevorgangs durchgeführt.<newline />
+      Die Mächtigkeit dieser Methode hängt sehr stark von vorher berechneten n-gram Wahrscheinlichkeiten ab. Die in dieser Komponente verwendeten Wahrscheinlichkeiten
+      wurden von Ulrich Kunitz zur Verfügung gestellt und basieren auf dem Absolute Discounting Algorithmus.
+    </section><section headline="Hillclimbing Angriff">
+      Dieser Angriff benutzt den sogenannten Bergsteiger-Algorithmus (Hill-Climbing). Der Angriff startet mit einem zufällig gewählten Schlüssel.
+      Dieser Schlüssel wird anschließend in einer definierten Vorgehensweise verändert. Der so neu erzeugte Schlüssel
+      wird dann mit einer Kostenfunktion bewertet. Falls der neue Schlüssel besser bewertet wird,
+      wird von nun an der neue Schlüssel verwendet. Dies geschieht so lange, bis man keinen besseren Schlüssel mehr findet.
+      Die GPU-Version dieses Angriffs verwendet die Grafikkarte des Computers, falls diese kompatibel ist mit NVIDIA-CUDA.
+    </section><section headline="Vergleich des Wörterbuch- und des genetischen Angriffs">
+      Der genetische Angriff und der Wörterbuchangriff ergänzen sich -- aufgrund verschiedener Vor- und Nachteile der einzelnen Vorgehensweisen --
+      gegenseitig sehr gut zu einer ganzheitlichen Analyse der monoalphabetische Substitution.<newline />
+      Die Vorteile des genetischen Angriffs liegen in der Unabhängigkeit von Wortgrenzen, in der Beherrschung langer Geheimtexte und darin, dass nur die n-gram Wahrscheinlichkeiten
+      für die Analyse benötigt werden. Infolgedessen können die Wortgrenzen innerhalb des Geheimtextes verwürfelt sein, ohne einen negativen Einfluss auf die
+      Analyse zu haben. Zusätzlich beeinflusst die Länge des Geheimtextes das Ergebnis der Analyse durch den genetischen Angriff. Je länger der Geheimtext ist umso
+      besser und effizienter kann der genetische Angriff seine Analyse durchführen. Dagegen führt der genetische Angriff nur zu schlechten Ergebnissen bei sehr
+      kurzen Geheimtexten, die bspw. nur aus 60 Zeichen oder weniger bestehen. Dies kann als Nachteil der Analysemethode gewertet werden.<newline />
+      Der Vorteil des Wörterbuchangriffs ist der effiziente Umgang mit sehr kurzen Geheimtexten. Nachteile sind die Abhängigkeit von einem Wörterbuch,
+      das die Wörter des Geheimtextes enthalten muss, sowie die Notwendigkeit, Wortgrenzen zu identifizieren. Können die Wortgrenzen in dem Geheimtext
+      nicht identifiziert werden oder wurden sie verwürfelt, erlaubt der Wörterbuchangriff keine Entschlüsselung des Geheimtextes.
+    </section></introduction>
+  <usage lang="en">
+    Using the Monoalphabetic Substitution Analyzer is very simple due to the few options. Currently, the component can analyze
+    ciphertexts based on English and German plaintexts. The required input is the ciphertext. Furthermore, the outputs are the plaintext and the
+    according key.<newline />
+    Within the settings section of this plugin it is possible to choose the language of the ciphertext that should be analyzed. Besides this option
+    there is an extended option section where the treatment of invalid characters can be configured. Invalid characters are characters that are not a
+    part of the chosen language's alphabet. These characters can be skipped, deleted, or replaced by a question mark.
+  </usage>
+  <usage lang="zh-CN">由于选项很少，因此使用单字母替代分析器非常简单。当前，该组件可以分析基于英语和德语纯文本的密文。所需的输入是密文。此外，输出是明文和相应的键。在此插件的设置部分中，可以选择应分析的密文语言。除此选项外，还有一个扩展的选项部分，可以在其中配置无效字符的处理。无效字符是不属于所选语言字母的字符。这些字符可以跳过，删除或替换为问号。</usage>
+  <usage lang="ru">Использование анализатора моноалфавитного замещения очень просто из-за нескольких вариантов. В настоящее время компонент может анализировать зашифрованные тексты на основе английского и немецкого открытого текста. Требуемый ввод - это зашифрованный текст. Кроме того, выходы представляют собой открытый текст и соответствующий ключ. В разделе настроек этого плагина можно выбрать язык зашифрованного текста, который необходимо проанализировать. Помимо этой опции есть расширенный раздел параметров, в котором можно настроить обработку недопустимых символов. Недопустимые символы - это символы, которые не являются частью алфавита выбранного языка. Эти символы могут быть пропущены, удалены или заменены знаком вопроса.</usage>
+  <usage lang="de-DE">
+    Die Benutzung des Monoalphabetic Substitution Analyzer ist sehr einfach durch die geringe Anzahl von Optionen. Gegenwärtig können
+    Geheimtexte analysiert werden, die auf einem englischen oder deutschen Klartext basieren.<newline />
+    Die Einstellungen dieser Komponente ermöglichen die Auswahl der Sprache des Geheimtextes. Neben dieser Option kann im Bereich der erweiterten Optionen
+    die Behandlung unbekannter Zeichen des Geheimtextes ausgewählt werden. Unbekannte Zeichen sind Buchstaben, die nicht Teil des Alphabets der ausgewählten
+    Sprache sind. Diese Zeichen können ausgelassen, gelöscht oder durch ein Fragezeichen ersetzt werden.
+  </usage>
+  <presentation lang="en">
+    The presentation of this component is split in an upper part that displays the start, elapsed, and end time as well as a table in the lower part
+    to show the best 20 keys that have been found during the cryptanalysis. This table shows for each found key a rank (column 0), the value of the cost function (column 1),
+    the attack which found the key (column 3), the key itself (column 4), and the according plaintext (column 5). The value of the cost function is the logarithm of the arithmetic mean n-gram
+    probabilities that are contained in the according plaintext. The difference of this value between two keys determines the range of how much one key is better than the other.
+    In column 3 the attack which found the key is displayed. A "G" stands for genetic attack and a "D" stands for dictionary attack. A "H" stands for hillclimbing attack.<newline />
+    Double-clicking a row forwards the according plaintext and key to the outputs.
+  </presentation>
+  <presentation lang="zh-CN">在上半部分显示了该组件，在下部显示了开始，经过和结束时间，在下部显示了表格，以显示在密码分析过程中找到的最佳20个密钥。该表显示了每个找到的密钥的等级（第0列），成本函数的值（第1列），发现该密钥的攻击（第3列），密钥本身（第4列）和相应的明文（第3列） 5）。成本函数的值是相应明文中包含的算术平均n元语法概率的对数。两个键之间此值的差异决定一个键比另一个键好多少的范围。在第3列中，显示找到密钥的攻击。 “ G”代表基因攻击，“ D”代表字典攻击。 “ H”代表爬山攻击。双击一行会将相应的明文和关键字转发到输出。</presentation>
+  <presentation lang="ru">Представление этого компонента разбивается на верхнюю часть, которая отображает начальное, истекшее и конечное время, а также таблицу в нижней части, чтобы показать лучшие 20 ключей, которые были найдены во время криптоанализа. В этой таблице показан для каждого найденного ключа ранг (столбец 0), значение функции стоимости (столбец 1), атака, в которой найден ключ (столбец 3), сам ключ (столбец 4) и соответствующий открытый текст (столбец 5). Значение функции стоимости - это логарифм арифметических средних значений n-грамм, которые содержатся в соответствующем открытом тексте. Разница этого значения между двумя клавишами определяет диапазон того, насколько один ключ лучше другого. В столбце 3 отображается атака, в которой найден ключ. «G» означает генетическую атаку, а «D» означает атаку словаря. «H» означает нападение на холм. Двойной щелчок по строке переводит соответствующий текст и ключ к выходам.</presentation>
+  <presentation lang="de-DE">
+    Die Darstellung dieser Komponente gliedert sich in zwei Bereiche. Das obere Areal zeigt die Start- und Endzeit sowie die vergangene Zeit an.
+    Der untere Bereich enthält eine Tabelle zur Darstellung der 20 besten Schlüssel, die während der Analyse gefunden wurden. Für jeden
+    Schlüssel wird in der Tabelle ein Rang (Spalte 1), der Wert der Kostenfunktion (Spalte 2), der Angriff, der den Schlüssel gefunden hat (Spalte 3),
+    der Schlüssel selber (Spalte 4) und der zugehörige Klartext (Spalte 5) dargestellt. Der Wert der Kostenfunktion in Spalte 2 ist das logarithmierte
+    arithmetische Mittel der n-gram Wahrscheinlichkeiten des Klartextes. Die Differenz dieser Werte zweier Schlüssels gibt die Spanne an, um die ein Schlüssel besser
+    ist als der andere. In Spalte 3 wird der Angriff dargestellt, der den entsprechenden Schlüssel gefunden hat. "G" steht für den genetischen Angriff und "W"
+    symbolisiert den Wörterbuchangriff. Ein "H" steht für den Hillclimbing-Angriff.<newline />
+    Durch einen Doppelklick auf eine Zeile wird der entsprechende Schlüssel und Klartext ausgewählt und zu den dazugehörigen Ausgängen weitergeleitet.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Substitution_cipher" lang="en" />
+      <caption lang="en">Substitution Cipher (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://april.eecs.umich.edu/pdfs/olson2007crypt.pdf" lang="en" />
+      <caption lang="en">Olson, E.: Robust Dictionary Attack of Short Simple Substitution Ciphers</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Genetic_algorithm" lang="en" />
+      <caption lang="en">Genetic Algorithm (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://sourceforge.net/projects/decrypto/" lang="en" />
+      <caption lang="en">DeCrypto Project</caption>
+    </linkReference>
+  </references>
+</documentation>

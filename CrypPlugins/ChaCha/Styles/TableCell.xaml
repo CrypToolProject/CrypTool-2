@@ -1,0 +1,9 @@
+﻿<ResourceDictionary x:Class="CrypTool.Plugins.ChaCha.Styles.TableCell"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="DefaultTableCell" TargetType="{x:Type TableCell}">
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="TextAlignment" Value="Center" />
+    </Style>
+</ResourceDictionary>

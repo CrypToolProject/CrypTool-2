@@ -1,0 +1,183 @@
+﻿<UserControl x:Class="DCAPathVisualiser.UI.Cipher3.Cipher3Characteristic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DCAPathVisualiser.UI.Cipher3"
+             xmlns:controls="clr-namespace:DCAPathVisualiser.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="1400" d:DesignWidth="600">
+    <UserControl.Resources>
+        <RotateTransform x:Key="HeaderRotate" Angle="270" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Height="1400" Width="600" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Name="InputBlock" Grid.Row="0" Grid.Column="0" FontFamily="Courier New" FontSize="20" HorizontalAlignment="Center" FontWeight="Bold" Content="{Binding InputDiff, Mode=OneWay}" Margin="40,0,0,0"/>
+
+                <!-- Round 1 -->
+                <Image Source="/DCAPathVisualiser;component/images/curlyBracet.png" Height="240" Grid.Row="0" Grid.Column="0" Margin="-280,-1010,0,0"></Image>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25" HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}" Margin="0,0,0,1160">
+                    <Run Text="{Loc R1}"></Run>
+                </TextBlock>
+
+                <controls:_16BitKeyRoundInOut x:Name="KeyRound1" Grid.Row="0" Grid.Column="0" Margin="50,0,0,0"></controls:_16BitKeyRoundInOut>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,82.5,0,0">
+                    <Run Text="k"></Run><Run Text="0" BaselineAlignment="Subscript" FontSize="10"></Run>
+                </TextBlock>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,145,0,0">
+                    <Run Text="u"></Run><Run Text="1" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text=""></Run><Run Text="{Binding Round1InputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,215,0,0">
+                    <Run Text="v"></Run><Run Text="1" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text=""></Run><Run Text="{Binding Round1OutputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round1" Grid.Row="0" Grid.Column="0" Margin="50,170,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox3Round1" Grid.Row="0" Grid.Column="0" Margin="130,170,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox2Round1" Grid.Row="0" Grid.Column="0" Margin="210,170,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox1Round1" Grid.Row="0" Grid.Column="0" Margin="290,170,0,0"></controls:_4BitSBox>
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation" Margin="0,250,0,0" HorizontalAlignment="Left"></Label>
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound1" Grid.Row="0" Grid.Column="0" Margin="50,195,0,0"></controls:_16BitPermutationTBC>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Margin="0,325,0,0">
+                    <Run Text="k"></Run><Run Text="1" BaselineAlignment="Subscript" FontSize="15"></Run>
+                </TextBlock>
+                <!-- /Round 1 -->
+
+                <!-- Round 2 -->
+                <Image Source="/DCAPathVisualiser;component/images/curlyBracet.png" Height="240" Grid.Row="0" Grid.Column="0" Margin="-280,-530,0,0"></Image>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25" HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}" Margin="0,0,0,922">
+                    <Run Text="{Loc R2}"></Run>
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound2" Grid.Row="0" Grid.Column="0" Margin="50,240,0,0"></controls:_16BitKeyRoundOut>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,387,0,0">
+                    <Run Text="u"></Run><Run Text="2" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text="{Binding Round2InputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,455,0,0">
+                    <Run Text="v"></Run><Run Text="2" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text="{Binding Round2OutputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round2" Grid.Row="0" Grid.Column="0" Margin="50,410,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox3Round2" Grid.Row="0" Grid.Column="0" Margin="130,410,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox2Round2" Grid.Row="0" Grid.Column="0" Margin="210,410,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox1Round2" Grid.Row="0" Grid.Column="0" Margin="290,410,0,0"></controls:_4BitSBox>
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation" Margin="0,480,0,0" HorizontalAlignment="Left"></Label>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Margin="0,565,0,0">
+                    <Run Text="k"></Run><Run Text="2" BaselineAlignment="Subscript" FontSize="15"></Run>
+                </TextBlock>
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound2" Grid.Row="0" Grid.Column="0" Margin="50,435,0,0"></controls:_16BitPermutationTBC>
+                <!-- /Round 2 -->
+
+                <!-- Round 3 -->
+                <Image Source="/DCAPathVisualiser;component/images/curlyBracet.png" Height="240" Grid.Row="0" Grid.Column="0" Margin="-280,-50,0,0"></Image>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25" HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}" Margin="0,0,0,682">
+                    <Run Text="{Loc R3}"></Run>
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound3" Grid.Row="0" Grid.Column="0" Margin="50,480,0,0"></controls:_16BitKeyRoundOut>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,627,0,0">
+                    <Run Text="u"></Run><Run Text="3" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text="{Binding Round3InputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,695,0,0">
+                    <Run Text="v"></Run><Run Text="3" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text="{Binding Round3OutputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round3" Grid.Row="0" Grid.Column="0" Margin="50,650,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox3Round3" Grid.Row="0" Grid.Column="0" Margin="130,650,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox2Round3" Grid.Row="0" Grid.Column="0" Margin="210,650,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox1Round3" Grid.Row="0" Grid.Column="0" Margin="290,650,0,0"></controls:_4BitSBox>
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation" Margin="0,740,0,0" HorizontalAlignment="Left"></Label>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Margin="0,805,0,0">
+                    <Run Text="k"></Run><Run Text="3" BaselineAlignment="Subscript" FontSize="15"></Run>
+                </TextBlock>
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound3" Grid.Row="0" Grid.Column="0" Margin="50,675,0,0"></controls:_16BitPermutationTBC>
+                <!-- /Round 3 -->
+
+                <!-- Round 4 -->
+                <Image Source="/DCAPathVisualiser;component/images/curlyBracet.png" Height="240" Grid.Row="0" Grid.Column="0" Margin="-280,430,0,0"></Image>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25" HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}" Margin="0,0,0,440">
+                    <Run Text="{Loc R4}"></Run>
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound4" Grid.Row="0" Grid.Column="0" Margin="50,720,0,0"></controls:_16BitKeyRoundOut>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,867,0,0">
+                    <Run Text="u"></Run><Run Text="4" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text="{Binding Round4InputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,935,0,0">
+                    <Run Text="v"></Run><Run Text="4" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text="{Binding Round4OutputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round4" Grid.Row="0" Grid.Column="0" Margin="50,890,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox3Round4" Grid.Row="0" Grid.Column="0" Margin="130,890,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox2Round4" Grid.Row="0" Grid.Column="0" Margin="210,890,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox1Round4" Grid.Row="0" Grid.Column="0" Margin="290,890,0,0"></controls:_4BitSBox>
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation" Margin="0,980,0,0" HorizontalAlignment="Left"></Label>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Margin="0,1045,0,0">
+                    <Run Text="k"></Run><Run Text="4" BaselineAlignment="Subscript" FontSize="15"></Run>
+                </TextBlock>
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound4" Grid.Row="0" Grid.Column="0" Margin="50,915,0,0"></controls:_16BitPermutationTBC>
+                <!-- /Round 4 -->
+
+                <!-- Round 5 -->
+                <Image Source="/DCAPathVisualiser;component/images/curlyBracet.png" Height="235" Grid.Row="0" Grid.Column="0" Margin="-280,905,0,0"></Image>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25" HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}" Margin="0,0,0,205">
+                    <Run Text="{Loc R5}"></Run>
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound5" Grid.Row="0" Grid.Column="0" Margin="50,960,0,0"></controls:_16BitKeyRoundOut>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,1107,0,0">
+                    <Run Text="u"></Run><Run Text="5" BaselineAlignment="Subscript" FontSize="10"></Run><Run Text="{Binding Round5InputDiff, Mode=OneWay}"></Run>
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round5" Grid.Row="0" Grid.Column="0" Margin="50,1130,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox3Round5" Grid.Row="0" Grid.Column="0" Margin="130,1130,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox2Round5" Grid.Row="0" Grid.Column="0" Margin="210,1130,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox x:Name="SBox1Round5" Grid.Row="0" Grid.Column="0" Margin="290,1130,0,0"></controls:_4BitSBox>
+
+                <controls:_16BitKeyRoundInOut x:Name="KeyRound6" Grid.Row="0" Grid.Column="0" Margin="50,1145,0,0"></controls:_16BitKeyRoundInOut>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Margin="0,1230,0,0">
+                    <Run Text="k"></Run><Run Text="5" BaselineAlignment="Subscript" FontSize="15"></Run>
+                </TextBlock>
+                <!-- /Round 5 -->
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

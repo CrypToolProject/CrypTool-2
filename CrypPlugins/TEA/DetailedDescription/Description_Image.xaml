@@ -1,0 +1,35 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              Background="White">
+    <Table>
+        <Table.Columns>
+            <TableColumn Width="200"/>
+            <TableColumn Width="500"/>
+        </Table.Columns>
+
+        <TableRowGroup>
+          <TableRow>
+            <TableCell>
+            <Paragraph>
+                <Image Source="TEA/DetailedDescription/Images/TEA.png"></Image>
+                </Paragraph>
+            </TableCell>
+            <TableCell>
+                <Paragraph>
+                    <Run FontWeight="Bold" FontSize="18.6666666666667" xml:lang="de-de">
+                        <Run.TextDecorations>
+                            <TextDecoration Location="Underline" />
+                        </Run.TextDecorations> TEA (Tiny Encryption Standard)
+                    </Run>
+                </Paragraph>
+                <Paragraph>
+                    <Run FontSize="14.6666666666667" xml:lang="de-de">In cryptography, the Tiny Encryption Algorithm (TEA) is a block cipher notable for its simplicity of description and implementation (typically a few lines of code). It was designed by David Wheeler and Roger Needham of the Cambridge Computer Laboratory, and first presented at the Fast Software Encryption workshop in 1994.</Run>
+                </Paragraph>
+                <Paragraph>
+                    <Run FontSize="14.6666666666667" xml:lang="de-de">TEA operates on 64-bit blocks and uses a 128-bit key. It has a Feistel structure with a suggested 64 rounds, typically implemented in pairs termed cycles. It has an extremely simple key schedule, mixing all of the key material in exactly the same way for each cycle. Different multiples of a magic constant are used to prevent simple attacks based on the symmetry of the rounds. The magic constant, 2654435769 or 9E3779B916 is chosen to be (2^32 / phi) where phi is the golden ratio.</Run>
+                </Paragraph>
+            </TableCell>
+          </TableRow>
+        </TableRowGroup>
+    </Table>
+</FlowDocument>

@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The alphabet permutator can be used to permutate an input alphabet, e.g. the Latin alphabet, based on a given keyword and an offset value.
+    To do so, the permutator first removes all occurences of all letters of the keyword from a new alphabet.
+    Then, the keyword is put into the new alphabet at the position defined by the offset value. If a letter is repeated in the keyword, the repeated letter is omitted in the new alphabet.
+    Then, the rest of the alphabet is put before and after the keyword into the new alphabet.
+  </introduction>
+  <introduction lang="zh-CN">字母置换器可用于基于给定关键字和偏移值来置换输入字母，例如拉丁字母。为此，置换器首先从新字母中删除关键字所有字母的所有出现。然后，将关键字放入由偏移值定义的位置的新字母中。如果关键字中重复字母，则新字母中将省略重复的字母。然后，将其余字母放在新字母中关键字之前和之后。</introduction>
+  <introduction lang="ru">Многие криптографические методы требуют перестановки в качестве ключа. Примером является моноалфавитная подстановка, для которой ключ может быть представлен как перестановка алфавита. Чем больше элементов содержит перестановка, тем сложнее запомнить ее. С трюком легко сгенерировать перестановку из простого ключевого слова, которое легко запомнить. Выберите любое ключевое слово и запишите его, но используйте любую букву ключевого слова только один раз. Если письмо происходит несколько раз, оно отбрасывается после первого появления. Таким образом, ключевое слово «MASSACHUSETTS» станет «MASCHUET». Теперь все буквы, которые встречаются в ключевом слове, удаляются из базового алфавита: «BDFGIJKLNOPQRVWXYZ». Остальные буквы затем добавляются к ключевому слову: «MASCHUETBDFGIJKLNOPQRVWXYZ». Полученная строка является перестановкой базового алфавита и является достаточно хорошим ключом для многих криптографических методов. Этот компонент реализует создание перестановленного алфавита с использованием ключевого слова.</introduction>
+  <introduction lang="de-DE">
+    Der Alphabet-Permutator kann verwendet werden, um ein Eingabealphabet zu permutieren, z.b. das lateinische Alphabet, basierend auf einem bestimmten Schlüsselwort und einem Offset.
+    Dazu entfernt der Permutator zunächst alle Vorkommen aller Buchstaben des Schlüsselworts aus dem Alphabet.
+    Anschließend wird das Schlüsselwort an der durch den Offset definierten Position in das neue Alphabet eingefügt. Wenn ein Buchstabe im Schlüsselwort wiederholt wird, wird der wiederholte Buchstabe im neuen Alphabet weggelassen.
+    Dann wird der Rest des Alphabets vor und nach dem Schlüsselwort in das neue Alphabet eingefügt.
+  </introduction>
+  <usage lang="en">
+    The input "Source Alphabet" is used to provide an input alphabet to the permutator.
+    In the settings, you can determine whether the component should use the ascending or descending sorted alphabet as base alphabet, or whether the alphabet should be used unchanged.
+    The keyword must be entered as a string on the input labeled "Keyword".
+    The keyword does not have to be put at the beginning of the alphabet, but can be inserted at any position. This is based on the value of the "Offset" input.
+    <newline /><newline />
+    Keyword and offset can also be specified in the settings of the component, if the respective inputs are left unconnected.
+  </usage>
+  <usage lang="zh-CN">输入“源字母”用于为置换器提供输入字母。在设置中，您可以确定组件是否应使用升序或降序的排序字母作为基本字母，或者是否应不变使用该字母。必须在标有“关键字”的输入上以字符串形式输入关键字。关键字不必放在字母的开头，但是可以插入到任何位置。这基于“偏移”输入的值。如果各个输入未连接，则也可以在组件的设置中指定关键字和偏移量。</usage>
+  <usage lang="ru">На входе «Source Alphabet» компонент ожидает алфавит, который должен использоваться как основа перестановки, в виде строки. В настройках вы можете определить, должен ли компонент использовать восходящий или нисходящий отсортированный алфавит в качестве базового алфавита или использовать ли алфавит без изменений. Ключевое слово должно быть введено как строка на входе с надписью «Пароль». Ключевое слово не должно быть помещено в начало алфавита, но может быть вставлено в любую позицию. Введите нужную позицию на входе с надписью «Смещение» в виде числа. Ключевое слово и смещение также могут быть указаны в настройках компонента, если соответствующие входы остаются несвязанными.</usage>
+  <usage lang="de-DE">
+    Der Eingang "Quellalphabet" wird verwendet, um dem Permutator ein Eingabealphabet bereitzustellen.
+    In den Einstellungen können Sie festlegen, ob die Komponente das aufsteigende oder absteigende sortierte Alphabet als Basisalphabet verwenden soll oder ob das Alphabet unverändert verwendet werden soll.
+    Der Wert des Eingangs mit der Bezeichnung "Schlüsselwort" wird als Schlüsselwort für verwendet.
+    Das Schlüsselwort muss nicht am Anfang des Alphabets stehen, sondern kann an einer beliebigen Stelle eingefügt werden. Die Position basiert auf dem Wert des Eingangs "Offset".
+    <newline /><newline />
+    Schlüsselwort und Offset können auch in den Einstellungen der Komponente angegeben werden, wenn die jeweiligen Eingänge nicht verbunden sind.
+  </usage>
+  <references></references>
+</documentation>

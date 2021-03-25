@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+   <head>
+      <title></title>
+      <style type="text/css">
+			body
+			{
+	   		font-family:Arial,Verdana,Georgia;
+	   		font-size:smaller;
+            background-color: #EBEFF6;
+			}
+      </style>
+   </head>
+
+<body>
+   <h2>Lattice-based cryptography</h2>
+
+   <p align="justify">
+		In this crypto tutorial you will learn about lattices and their use in cryptography 
+		especially cryptanalysis. This introduction is intended to provide the basics, 
+		to better understand the following chapters.
+   </p>
+
+   <p>
+		<strong>Lattices</strong><br>
+
+		A lattice consists of linearly independent vectors that are linearly combined with each other and thereby generate lattice points. 
+		The difference between lattices and a &quot;normal&quot; vector space is the fact that the 
+		vectors are multiplied with integer factors instead of real factors.<br>
+
+		All the vectors form a so called basis for the lattice. This basis can be written in the form of a matrix.
+		The vectors can be written down in column notation, this is the most common way in papers. The vectors define so-called parallelepipeds, in the two-dimensional case these are parallelograms.
+		The volume of this parallelepiped is equal to the absolute value of the determinant.<br><br>
+
+		Please note that in this crypto tutorial all values are integers, 
+		since big integers are common in modern cryptography. This however is not a 
+		requirement for lattices itself, but only for the factors multiplied with the 
+		vectors. The benefit of this limitation will arise in the later chapters "Merkle-Hellman" and "RSA".
+	</p>
+
+	<p>
+		<strong>Lattice problems</strong><br>
+
+  		An important characteristic of lattices is the fact that they
+		can have different bases producing the same lattice. The determinants of all these bases 
+		have the same value. Regarding lattices, vectors with minimum length are 
+		interesting. The problem to find these vectors is called the Shortest Vector 
+		Problem (SVP) and relates to the search for "successive minima".<br>
+
+		The first minimum is the shortest vector. All other vectors are linearly independent to this and to each other, they are 
+		also as short as possible. 
+		An upper bound for the shortest vector is determined by the Hermite constant. The shortest vector is also interesting for the packing density of a lattice. Here circles are constructed around each
+		Lattice point being as large as possible without overlapping each other 
+		(both the Hermite circuit and the package circuits can be enabled in the settings).
+		It can be easily observed that after reduction the vectors are very much orthogonal to each other, ideally they even have the angle of 90&deg;.<br>
+
+		Another interesting problem is the Closest Vector Problem (CVP).
+		Here an arbitrary point is specified and then we search for a lattice point which is closest to this arbitrary point. 
+	</p>
+
+	<p>
+		<strong>Lattice reduction</strong><br> 
+
+		There are two important methods that implement the search for shortest vectors. One of these is the Gaussian algorithm for dimension 2 and secondly the LLL algorithm, named after
+  		Arjen Lenstra, Hendrik Lenstra and L&aacute;szl&oacute; Lov&aacute;sz, for an arbitrary lattice dimension.
+		The Gaussian algorithm works similar to the Euclidean algorithm for searching 
+		the greatest common divisor (gcd) of two integers. By combining and subtracting of two vectors the basis&nbsp;improves after each iteration with a shorter vector. 
+		The LLL algorithm works similar to the Gauss algorithm, but for higher 
+		dimensions it produces only an approximation to the shortest vector. An 
+		important part of the algorithm is the Gram-Schmidt orthogonalization.
+	</p>
+
+	<p align="justify">
+		<strong>Cryptanalysis</strong><br>
+
+		After the publication of the LLL algorithm in 1982, many possible applications were found for it, cryptanalysis being one of them.
+		The Merkle-Hellman knapsack cryptosystem, designed in 1978 and named after its two inventors Ralph C. Merkle and Martin E. Hellman, could impressively be broken with the help of lattices. 
+		This cryptosystem is based on the knapsack problem, for which a general solution is difficult to find. 
+		But it could be demonstrated, that the problem of decrypting a ciphertext can be reformulated as a search for a shortest vector.<br>
+
+		The well-known asymmetric encryption scheme RSA (named after its inventors Ronald L. Rivest, Adi Shamir and Leonard Adleman) was developed at about the same time as the Merkle-Hellman cryptosystem.
+		It is based on the problem of the prime factorization of big integers.
+		Using lattices, Don Coppersmith was able to show that certain messages, for which a part of the plaintext is known, can be deciphered.
+		The messages in this case are so called "stereotypical messages", for example "Your new PIN is: ****".
+		The first part of the messages, which is always the same, must be known to the attacker.
+		A prerequisite for this attack is that the public exponent e is very small, for example 3.<br>
+
+		Another attack scenario that uses lattices involves a partially known private key. 
+		In contrast to the Merkle-Hellman cryptosystem, RSA was not broken and can as yet be considered safe, provided some constraints on the parameters are respected.
+    </p>
+
+    <p align="justify">
+		<strong>Lattice-based cryptosystems</strong><br>
+
+		Cryptosystems that are based on lattices exploit the hardness of certain lattice problems, in particular the Shortest Vector Problem (SVP) and the Closest Vector Problem (CVP).
+		As in the case of RSA, these cryptosystems are asymmetric public-key cryptosystems.<br>
+
+		The foundations for lattice-based cryptography were laid by Miklos Ajtai in 1986, when he demonstrated how lattices could be used for cryptography.
+		In cooperation with Cynthia Dwork, Ajtai published the Ajtai-Dwork cryptosystem a short time later in 1997. Its security is based on the hardness of SVP.
+		In the same year, Oded Goldreich, Shafi Goldwasser and Shai Halevi published the GGH cryptosystem. Improvements by Daniele Micciancio made the system practicable.
+		The security of GGH is based on the hardness of CVP.
+		GGH can also be used to generate electronic signatures.
+		Both cryptosystems, Ajtai-Dwork and GGH, were successfully attacked and broken.<br>
+
+		The cryptosystem NTRU (Number Theory Research Unit) was presented by Jeffrey Hoffstein, Jill Pipher and Joseph H. Silverman in 1998.
+		It can encrypt (NTRUEncrypt) as well as create electronic signatures (NTRUSign). The security of NTRU relies on the hardness of SVP.
+		The advantages of NTRU are the fast encryption and decryption speed and the fact that, unlike in the case of RSA, no quantum algorithm for attacking it in polynomial time is as yet known.<br>
+
+		The latest lattice-based cryptosystem is <i>Learning With Errors</i> (LWE), which was published by Oded Regev in 2005.
+		It too is based on hard lattice problems, like SVP.<br>
+
+		Compared to established public-key cryptosystems like RSA, lattice-based cryptosystems have to handle larger key sizes and also larger ciphertexts.
+		On the other hand, they have the advantage of being faster and, in contrast to RSA, they are not (yet) vulnerable to quantum computing attacks.
+    </p>
+
+    <p>
+		Note: This plugin uses icons with Creative Commons Attribution NonCommercial licence (BY-NC). Designers of these icons are "iconshock.com", "gentleface.com" and "wpzoom.com".
+    </p>
+
+</body>
+</html>

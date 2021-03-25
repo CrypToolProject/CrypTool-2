@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="DCAPathFinder.UI.Tutorial1.DifferentialCryptanalysisSlide9"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DCAPathFinder.UI.Tutorial1"
+             mc:Ignorable="d"
+             d:DesignHeight="350" d:DesignWidth="600">
+    <Grid Height="350" Width="600">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="73" />
+            <RowDefinition Height="22" />
+            <RowDefinition Height="18" />
+            <RowDefinition Height="26" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <RichTextBox Grid.Row="0" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center">
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Header}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <RichTextBox Grid.Row="1" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,0,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run1}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run2}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run3}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run4}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run5}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run6}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run7}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run8}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content1Run9}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Image Grid.Row="2" Source="/DCAPathFinder;component/images/DiffInternValues.png" />
+        <RichTextBox Padding="0,5,0,0" Grid.Row="2" IsReadOnly="True" HorizontalContentAlignment="Right" HorizontalAlignment="Right" Background="Transparent" BorderThickness="0" FontFamily="Courier New" FontSize="12" Margin="10,0,10,0" >
+            <FlowDocument TextAlignment="Right">
+                <Paragraph>
+                    <Run Text="(1)"></Run>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <RichTextBox Grid.Row="3" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,2,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run1}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run2}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run3}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run4}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run5}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run6}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run7}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run8}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run9}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run10}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run11}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run12}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run13}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run14}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run15}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run16}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content2Run17}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Image Grid.Row="4" Source="/DCAPathFinder;component/images/vXORk1.png" />
+
+        
+        <RichTextBox Grid.Row="5" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,0,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content3Run1}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content3Run2}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content3Run3}" /><Run BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content3Run4}" FontSize="10" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content3Run5}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <RichTextBox Grid.Row="6" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,0,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content4Run1}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Image Grid.Row="7" Source="/DCAPathFinder;component/images/StepSBOX.png" />
+
+        <RichTextBox Grid.Row="8" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,2,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content5Run1}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Image Grid.Row="9" Source="/DCAPathFinder;component/images/SBoxInverted.png" />
+
+        <RichTextBox Grid.Row="10" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,2,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content6Run1}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+<!--
+        <RichTextBox Grid.Row="11" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="12" Margin="10,2,10,0">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content7Run1}" /><Run FontSize="10" BaselineAlignment="Subscript" Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content7Run2}" /><Run Text="{Loc Tutorial1DifferentialCryptanalysisSlide9Content7Run3}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <Image Grid.Row="12" Source="/DCAPathFinder;component/images/u1XORu2Eq.png" />
+-->
+    </Grid>
+</UserControl>

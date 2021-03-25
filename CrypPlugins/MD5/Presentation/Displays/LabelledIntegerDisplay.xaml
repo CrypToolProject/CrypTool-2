@@ -1,0 +1,30 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="CrypTool.MD5.Presentation.Displays.LabelledIntegerDisplay"
+    xmlns:converters="clr-namespace:CrypTool.MD5.Presentation.Converters"
+    Background="White" BorderThickness="1" BorderBrush="Black" Height="160" Width="442">
+    <UserControl.Effect>
+        <DropShadowEffect/>
+    </UserControl.Effect>
+    <UserControl.Resources>
+        <converters:UintToLittleEndianHexStringConverter x:Key="uintToLittleEndianHexStringConverter"/>
+    </UserControl.Resources>
+    <Viewbox>
+        <Grid Height="80" Width="200">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60px"/>
+                <ColumnDefinition Width="140px"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{Binding Caption,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="40"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Label Content="{Binding Value,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" />
+                <Label Content="{Binding Value,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}},Converter={StaticResource uintToLittleEndianHexStringConverter}}" Grid.Row="1" x:Name="littleEndianHexLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" />
+            </Grid>
+        </Grid>
+    </Viewbox>
+</UserControl>

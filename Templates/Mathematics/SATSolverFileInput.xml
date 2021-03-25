@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">SAT Solver (File Input)</title>
+  <title lang="zh">SAT解算器（文件输入）</title>
+  <title lang="ru">SAT Solver (ввод файлов)</title>
+  <summary lang="en">Usage of the <i>SAT Solver</i> with file input</summary>
+  <summary lang="zh">SAT解算器与文件输入的配合使用</summary>
+  <summary lang="ru">Использование SAT Solver с вводом файла</summary>
+  <description lang="en">This template shows how to use the <i>SAT Solver</i> with file input.</description>
+  <description lang="zh">该模板显示了如何在文件输入中使用SAT解算器。</description>
+  <description lang="ru">Этот шаблон показывает, как использовать SAT Solver с вводом файла.</description>
+  <keywords>satsolver, sat, solver, satisfiability</keywords>
+  <keywords lang="zh">饱和度，饱和度，饱和度</keywords>
+  <keywords lang="ru">satsolver, sat, solver, выполнимость</keywords>
+  <title lang="de">SAT-Solver (Dateieingabe)</title>
+  <summary lang="de">Benutzung des <i>SAT Solver</i> mit Dateieingabe</summary>
+  <description lang="de">Diese Vorlage zeigt, wie der <i>SAT-Solver</i> mit Dateieingabe verwendet wird.</description>
+  <keywords lang="de">satsolver, sat, solver, erfüllbarkeit</keywords>
+  <icon file="SATSolver.png" />
+  <relevantPlugins>
+    <plugin name="FileInputClass" />
+    <plugin name="SATSolver" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$File Input$" value="Dateieingabe" />
+    <replacement key="$String Encoder$" value="String-Kodierer" />
+    <replacement key="$Text Output$" value="Textausgabe" />
+    <replacement key="$SAT Solver$" value="SAT-Solver" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$File Input$" value="档案输入" />
+    <replacement key="$String Encoder$" value="字符串编码器" />
+    <replacement key="$Text Output$" value="文字输出" />
+    <replacement key="$SAT Solver$" value="SAT求解器" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$File Input$" value="входной файл" />
+    <replacement key="$String Encoder$" value="Строка кодировщик" />
+    <replacement key="$Text Output$" value="вывод текста" />
+    <replacement key="$SAT Solver$" value="СБ-Solver" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$File Input$" value="File Input" />
+    <replacement key="$String Encoder$" value="String Encoder" />
+    <replacement key="$Text Output$" value="Text Output" />
+    <replacement key="$SAT Solver$" value="SAT Solver" />
+  </replacements>
+</sample>

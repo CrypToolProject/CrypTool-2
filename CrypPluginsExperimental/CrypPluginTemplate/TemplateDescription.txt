@@ -1,0 +1,5 @@
+Template name:
+CrypTool 2.0 Plugin
+
+Template description:
+Skeleton for new CrypTool 2.0 plugins. Please note: You must place your plugin into the CrypPluginsExperimental subfolder (see location below) or your plugin will be built into the wrong output directory.

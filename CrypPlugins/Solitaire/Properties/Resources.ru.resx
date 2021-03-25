@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Пасьянс</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Шифр пасьянса из романа «Криптономикон»</value>
+  </data>
+  <data name="InputStringCaption" xml:space="preserve">
+    <value>Ввод текста</value>
+  </data>
+  <data name="InputStringTooltip" xml:space="preserve">
+    <value>Введите строку для обработки</value>
+  </data>
+  <data name="PasswordCaption" xml:space="preserve">
+    <value>Ввод ключевого слова</value>
+  </data>
+  <data name="PasswordTooltip" xml:space="preserve">
+    <value>Введите ключевое слово, с которым будет создана начальная колода</value>
+  </data>
+  <data name="DeckstateCaption" xml:space="preserve">
+    <value>Вход в декестат</value>
+  </data>
+  <data name="DeckstateTooltip" xml:space="preserve">
+    <value>Введите состояние стойки, последовательность представляет колоду сверху вниз. Каждая карта представлена ​​числом, самые высокие из которых являются джокерами. Разделите карты запятой, например «1,2,3,4». Максимальное количество карточек - 54.</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>Текстовый вывод</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>Строка после обработки с помощью шифрования Solitaire</value>
+  </data>
+  <data name="InitialDeckCaption" xml:space="preserve">
+    <value>Начальная колода</value>
+  </data>
+  <data name="InitialDeckTooltip" xml:space="preserve">
+    <value>Используется начальная колода.</value>
+  </data>
+  <data name="FinalDeckCaption" xml:space="preserve">
+    <value>Заключительная колода</value>
+  </data>
+  <data name="FinalDeckTooltip" xml:space="preserve">
+    <value>Палуба после генерации последней буквой ключей.</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>Вывод потока</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>Поток, используемый для шифрования или дешифрования текста.</value>
+  </data>
+  <data name="ActionTypeCaption" xml:space="preserve">
+    <value>Тип действия</value>
+  </data>
+  <data name="ActionTypeTooltip" xml:space="preserve">
+    <value>Выберите, следует ли шифровать или расшифровывать</value>
+  </data>
+  <data name="GenerationTypeCaption" xml:space="preserve">
+    <value>Поколение колоды</value>
+  </data>
+  <data name="GenerationTypeTooltip" xml:space="preserve">
+    <value>Выберите метод генерации для начальной колоды: - По возрастанию: сортирует карты в порядке возрастания (начиная с самого низкого). - По убыванию: сортирует карты в порядке убывания (начиная с самого высокого). - Введенное состояние: используйте начальное состояние в форме - Ключевое слово: сгенерируйте начальную колоду из ключевого слова - Случайное: произвольно генерируйте начальную колоду</value>
+  </data>
+  <data name="NumberOfCardsCaption" xml:space="preserve">
+    <value>Карты</value>
+  </data>
+  <data name="NumberOfCardsTooltip" xml:space="preserve">
+    <value>Выберите количество карт в колоде. Обычная настройка - 54 карты, обычные 52 игральные карты и 2 шутника, что также является максимальным количеством карт. Минимальная настройка - 3 карты, одна карта и 2 шутника.</value>
+  </data>
+  <data name="StreamTypeCaption" xml:space="preserve">
+    <value>Потоковое поколение</value>
+  </data>
+  <data name="StreamTypeTooltip" xml:space="preserve">
+    <value>Выберите генерацию потока: - Автоматически: автоматически генерируется шифрованный поток и отображается конечный результат. - Руководство: можно вручную пройти пять различных шагов. Карты, которые меняются после каждого шага, будут выделены жирным шрифтом.</value>
+  </data>
+  <data name="ActionTypeList1" xml:space="preserve">
+    <value>шифровать</value>
+  </data>
+  <data name="ActionTypeList2" xml:space="preserve">
+    <value>расшифровывать</value>
+  </data>
+  <data name="GenerationTypeList1" xml:space="preserve">
+    <value>Восходящий</value>
+  </data>
+  <data name="GenerationTypeList2" xml:space="preserve">
+    <value>нисходящий</value>
+  </data>
+  <data name="GenerationTypeList3" xml:space="preserve">
+    <value>Данное государство</value>
+  </data>
+  <data name="GenerationTypeList4" xml:space="preserve">
+    <value>Ключевое слово</value>
+  </data>
+  <data name="GenerationTypeList5" xml:space="preserve">
+    <value>случайный</value>
+  </data>
+  <data name="StreamTypeList1" xml:space="preserve">
+    <value>автоматическая</value>
+  </data>
+  <data name="StreamTypeList2" xml:space="preserve">
+    <value>Руководство</value>
+  </data>
+  <data name="labelAutomatic" xml:space="preserve">
+    <value>автоматическая</value>
+  </data>
+  <data name="labelCipherStream" xml:space="preserve">
+    <value>Cipher Stream</value>
+  </data>
+  <data name="labelDeck" xml:space="preserve">
+    <value>колода</value>
+  </data>
+  <data name="labelInitialize" xml:space="preserve">
+    <value>инициализировать</value>
+  </data>
+  <data name="labelInputText" xml:space="preserve">
+    <value>Входной текст</value>
+  </data>
+  <data name="labelOutputText" xml:space="preserve">
+    <value>зашифрованный</value>
+  </data>
+  <data name="labelStep1" xml:space="preserve">
+    <value>Шаг 1</value>
+  </data>
+  <data name="labelStep2" xml:space="preserve">
+    <value>Шаг 2</value>
+  </data>
+  <data name="labelStep3" xml:space="preserve">
+    <value>Шаг 3</value>
+  </data>
+  <data name="labelStep4" xml:space="preserve">
+    <value>Шаг 4</value>
+  </data>
+  <data name="labelStep5" xml:space="preserve">
+    <value>Шаг 5</value>
+  </data>
+</root>

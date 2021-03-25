@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">   
+	The Number Field Sieve (NFS) is a modern integer factorization algorithm. For numbers above 95 decimal digits, the NFS is the fastest know algorithm. The NFS algorithm can be divided in two types, General NFS (GNFS) and Special NFS (SNFS).
+	The first takes any number as input, while the second only accepts special forms, which will be discussed later. 
+	
+	<section headline="Complexity">
+	  The running time of the GNFS for number n is:
+	  $$\exp((\sqrt{64/9}{3}+o(1))(\ln n)^{1/3}(\ln \ln n)^{2/3}) $$
+	  while the running time of the SNFS:
+	  $$\exp((1+o(1))(32/9\log n)^{1/3}(\log \log n)^{2/3}) $$
+	</section><section headline="About this component">
+	  This component not only offers the possibility to factor numbers with the Number Field Sieve, but also with algorithms as Quadratic Sieve (QS), Elliptic Curve Method (ECM) or Pollards rho method among others. It is a wrapper of the C implementation YAFU (Yet Another Factoring Utility). 
+	  The executable is called upon each time a factorization is run. The output is then parsed to send it to the GUI. If you want to get further information about YAFU, please have a loot at <ref id="yafuSource" /> or <red id="yafuHome" /></section></introduction>
+  <introduction lang="zh-CN">数字字段筛选（NFS）是现代的整数分解算法。对于超过95个十进制数字的数字，NFS是最快的已知算法。 NFS算法可以分为两种类型，通用NFS（GNFS）和特殊NFS（SNFS）。第一个输入任何数字，而第二个仅接受特殊形式，这将在后面讨论。 GNFS的编号n的运行时间为：$$ \ exp（（\ sqrt {64/9} {3} + o（1））（\ ln n）^ {1/3}（\ ln \ ln n ）^ {2/3}）$$，同时SNFS的运行时间：$$ \ exp（（1 + o（1））（32/9 \ log n）^ {1/3}（\ log \ log n）^ {2/3}）$$此组件不仅提供了使用“数字字段筛”分解因子的可能性，而且还提供了二次筛（QS），椭圆曲线方法（ECM）或Pollards rho方法等算法。它是C实现YAFU（另一个因子分解实用程序）的包装。每次运行分解时都会调用该可执行文件。然后解析输出以将其发送到GUI。如果您想获得有关YAFU的更多信息，请在或</introduction>
+  <introduction lang="ru">Сито с числовым полем (NFS) представляет собой современный алгоритм целочисленной факторизации. Для чисел выше 95 десятичных цифр NFS является самым быстрым алгоритмом. Алгоритм NFS можно разделить на два типа: общий NFS (GNFS) и специальный NFS (SNFS). Первое принимает любое число в качестве входных данных, а второе принимает только специальные формы, которые будут рассмотрены ниже. Время работы GNFS для числа n: $$ \ exp ((\ sqrt {64/9} {3} + o (1)) (\ ln n) ^ {1/3} (\ ln \ ln n ) ^ {2/3}) $$, а время работы SNFS: $$ \ exp ((1 + o (1)) (32/9 \ log n) ^ {1/3} (\ log \ log n) ^ {2/3}) $$ Этот компонент не только предлагает возможность умножить числа на числовое сито, но также и на алгоритмы как квадратичное сито (QS), метод эллиптической кривой (ECM) или метод Поллардса rho , Это оболочка реализации C YAFU (еще одна факторинговая утилита). Исполняемый файл вызывается каждый раз, когда выполняется факторизация. Затем результат анализируется, чтобы отправить его в графический интерфейс. Если вы хотите получить дополнительную информацию о YAFU, пожалуйста,</introduction>
+  <usage lang="en">
+	This component has a BigNumber input, which means that the input can be inserted in the form of a number to factor, or as an expression of the kind: $$b^n \pm 1$$.
+	The component has three outputs, one will be the list of the factors, another saying whether all factors are prime, and an optional third one, which opens the log file of the process. 
+	The main window of the GUI will give information on the process, and a summary of the two main algorithms of the plug-in, NFS and QS.
+	
+	It offers a wide choice of algorithms to factor with, together with an implementation where different algorithms are used in an optimized way chosen by the program itself. 
+	Each of these algorithms has different settings which will be available for the user in the window of the parameters. Most of the choice for the algorithms are straight forward to use, however, as mentioned before, the SNFS only works for specific types of numbers: 
+	<section headline="Forms of numbers for the SNFS">
+	  The SNFS can be used if the number introduced is of the form $$k*b^n+c$$ such as:
+		- Cunningham numbers 					$$(b^n\pm 1 with b=2,3,5,6,7,10,11,12)$$
+		- Brent Forms							$$(b^n\pm 1, where 13\leq b \leq 99)$$
+		- Odd perfect numbers					$$(b^n -1, b&gt;99)$$
+		- Generalized Cullen numbers			$$(a*b^a \pm 1)$$
+		- Homogeneous Cunningham numbers 		$$(a^n \pm b^n, where a,b\leq 12 and \gcd(a,b) ==1)$$
+		- XYYXF numbers							$$(x^y+y^x, where 1\leq y\leq x\leq 151)$$
+	  Note that for large b, cases with $$k&gt;1$$ or abs(c)&gt;1 may not be deteced.
+	  
+	  If none of these are found, the algorithm will automatically be switched to the NFS.
+	</section></usage>
+  <usage lang="zh-CN">该组件具有一个BigNumber输入，这意味着该输入可以以要分解的数字形式或以下形式的表达式插入：$$ b ^ n \ pm 1 $$。该组件具有三个输出，一个是因子列表，另一个是所有因子是否都是素数，另一个是可选的第三个因子，用于打开流程的日志文件。 GUI的主窗口将提供有关该过程的信息，以及该插件的两个主要算法NFS和QS的摘要。它提供了多种可供选择的算法，以及一种以程序本身选择的优化方式使用不同算法的实现。这些算法中的每一个都有不同的设置，这些设置将在参数窗口中供用户使用。大部分算法选择都是可以直接使用的，但是，如前所述，SNFS仅适用于特定类型的数字：如果引入的数字的格式为$$ k * b ^ n +，则可以使用SNFS c $$，例如：-坎宁安编号$$（b = n，b，n，pm 1，b = 2、3、5、6、7、10、11、12）$$-布伦特表格$$（b ^ n \ pm 1，其中13 \ leq b \ leq 99）$$-奇数奇数$$（b ^ n -1，b&amp;gt; 99）$$-广义库伦数$$（a * b ^ a \ pm 1）$$ -同质坎宁安数字$$（a ^ n \ pm b ^ n，其中a，b \ leq 12和\ gcd（a，b）== 1）$$-XYYXF数字$$（x ^ y + y ^ x ，其中1 \ leq y \ leq x \ leq 151）$$请注意，对于大b，可能无法确定$$ k&amp;gt; 1 $$或abs（c）&amp;gt; 1的情况。如果未找到这些算法，则算法将自动切换到NFS。</usage>
+  <usage lang="ru">Этот компонент имеет вход BigNumber, что означает, что вход может быть вставлен в виде числа в фактор или в виде выражения: $$ b ^ n \ pm 1 $$. Компонент имеет три выхода, один из которых будет списком факторов, а другой говорит, являются ли все факторы первичными, и необязательным третьим, который открывает файл журнала процесса. Главное окно GUI предоставит информацию об этом процессе и краткое изложение двух основных алгоритмов подключаемого модуля, NFS и QS. Он предлагает широкий выбор алгоритмов для учета вместе с реализацией, где различные алгоритмы используются оптимизированным образом, выбранным самой программой. Каждый из этих алгоритмов имеет разные настройки, которые будут доступны пользователю в окне параметров. Однако большинство вариантов для алгоритмов прямо используются, однако, как упоминалось ранее, SNFS работает только для определенных типов чисел: SNFS можно использовать, если введенное число имеет форму $$ k * b ^ n + c $$, например: - числа Каннингема $$ (b ^ n \ pm 1 с b = 2,3,5,6,7,10,11,12) $$ - Брент Формы $$ (b ^ n \ pm 1, где 13 \ leq b \ leq 99) $$ - Нечетные совершенные числа $$ (b ^ n -1, b&amp;gt; 99) $$ - Обобщенные числа Каллена $$ (a * b ^ a \ pm 1) $$ - Однородные числа Каннингема $$ (a ^ n \ pm b ^ n, где a, b \ leq 12 и \ gcd (a, b) == 1) $$ - XYYXF числа $$ (x ^ y + y ^ x , где 1 \ leq y \ leq x \ leq 151) $$ Заметим, что для больших b случаи с $$ k&amp;gt; 1 $$ или abs (c)&amp;gt; 1 не могут быть определены. Если ни один из них не найден, алгоритм автоматически переключится на NFS.</usage>
+  <presentation lang="en">
+	The presentation of this plug-in offers a list of the factors, together with its primality and a window with the process of the algorithm in question. For the NFS and QS there is an extra window where the sections of Polynomial Selection, Sieving and Algebra step will be summarized. 
+	For more information on these algorithms have a look at <ref id="NFSWiki" /> and <ref id="QSWiki" />. For more detailed information on NFS and QS, together with a description of all other algorithms available in the plug-in, have a look at the following sections of this master thesis: [link for thesis]
+    - The theory of the General Number Field Sieve. (link to chapter 4)
+    - Details of the General Number Field Sieve. (link to chapter 5)
+    - Is cryptography in danger with the General Number Field Sieve? (link to chapter 6)
+    - A detailed description of the GeneralFactorizer. (link to chapter 7)
+    
+	In main window of the GUI, the user has the option of cliquing a button which will open the log file of the process once its finish (in the third output window).
+  </presentation>
+  <presentation lang="zh-CN">该插件的介绍提供了因素列表，以及其素数和有关算法过程的窗口。对于NFS和QS，有一个额外的窗口，其中总结了多项式选择，筛选和代数步骤的各个部分。有关这些算法的更多信息，请参见和。有关NFS和QS的更多详细信息，以及对该插件中可用的所有其他算法的描述，请查看本硕士论文的以下部分：[论文链接]-通用数字字段筛的理论。 （链接到第4章）-通用号码字段筛选的详细信息。 （链接到第5章）-通用数字字段筛选器的加密术是否处于危险之中？ （链接到第6章）-GeneralFactorizer的详细说明。 （链接到第7章）在GUI的主窗口中，用户可以选择按下按钮，该按钮一旦完成即会打开进程的日志文件（在第三个输出窗口中）。</presentation>
+  <presentation lang="ru">Представление этого плагина предлагает список факторов вместе с его первостепенью и окном с процессом рассматриваемого алгоритма. Для NFS и QS есть дополнительное окно, в котором будут обобщены разделы этапа полиномиального выбора, просеивания и алгебры. Для получения дополнительной информации об этих алгоритмах смотрите и. Более подробную информацию о NFS и QS, а также описание всех других алгоритмов, доступных в подключаемом модуле, можно найти в следующих разделах этой магистерской диссертации: [link for thesis] - Теория общего ситового поля , (ссылка на главу 4) - Подробная информация об общем полевом сите. (ссылка на главу 5). Является ли криптография опасной для общего ситового поля? (ссылка на главу 6) - подробное описание GeneralFactorizer. (ссылка на главу 7) В главном окне графического интерфейса пользователь имеет возможность кликировать кнопку, которая откроет файл журнала процесса после его завершения (в третьем окне вывода).</presentation>
+  <introduction lang="de-DE"></introduction>
+  <usage lang="de-DE"></usage>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="yafuSource">
+      <link url="https://sourceforge.net/projects/yafu/" lang="en" />
+      <caption lang="en"> YAFU SourceForge page </caption>
+    </linkReference>
+    <linkReference id="yafuHome">
+      <link url="https://sites.google.com/site/bbuhrow/" lang="en" />
+      <caption lang="en">YAFU's homepage </caption>
+    </linkReference>
+    <linkReference id="NFSWiki">
+      <link url="https://en.wikipedia.org/wiki/General_number_field_sieve" lang="en" />
+      <caption lang="en"> NFS description </caption>
+    </linkReference>
+    <linkReference id="QSWiki">
+      <link url="https://en.wikipedia.org/wiki/Quadratic_sieve" lang="en" />
+      <caption lang="en"> QS description </caption>
+    </linkReference>
+  </references>
+</documentation>

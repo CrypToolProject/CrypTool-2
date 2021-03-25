@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    With the help of WebHits component can be checked whether a particular search term, eg a MD5 hash value, can be found on the web using the Google search engine.
+  </introduction>
+  <introduction lang="zh-CN">借助WebHits组件，可以检查是否可以使用Google搜索引擎在网络上找到特定的搜索词，例如MD5哈希值。</introduction>
+  <introduction lang="ru">С помощью компонента WebHits можно проверить, можно ли найти конкретный поисковый запрос, например хеш-значение MD5, в Интернете с помощью поисковой системы Google.</introduction>
+  <introduction lang="de-DE"> 
+    Mit Hilfe der WebHits-Komponente kann geprüft werden, ob ein bestimmter Suchbegriff, z.B. ein MD5-Hashwert, über die Suchmaschine Google im Web gefunden wird.
+  </introduction>
+  <usage lang="en">
+    After dragging the WebHits component onto the workspace, you need to specify a data source that represents the value to be searched on Google. This input is mandatory.
+  </usage>
+  <usage lang="zh-CN">将WebHits组件拖到工作区后，您需要指定一个数据源，该数据源代表要在Google上搜索的值。此输入是必需的。</usage>
+  <usage lang="ru">После перетаскивания компонента WebHits в рабочую область вам нужно указать источник данных, представляющий значение, которое нужно искать в Google. Этот ввод является обязательным.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die WebHits-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die den Begriff repräsentiert, wonach in Google gesucht werden soll. Diese Datenquelle ist notwendig.
+  </usage>
+  <presentation lang="en">
+    The WebHits component offers a presentation showing the search term, the duration of the search, the total number of hits, and a table with the URLs of the first ten results. By clicking on a link, the page opens in a browser.
+    <newline />
+    Note 1: Due to the Google-API, the indicated total number of hits does not reflect all possible Google hits.
+    <newline />
+    Note 2: The Google-API provides 100 search queries per day for free. When the limit for 100 free requests per day is reached, no further search results are delivered. You can try it the next day again.
+  </presentation>
+  <presentation lang="zh-CN">WebHits组件提供了一个演示文稿，其中显示了搜索词，搜索持续时间，命中总数以及带有前十个结果的URL的表格。通过单击链接，页面将在浏览器中打开。注意1：由于使用了Google-API，因此显示的总点击数并未反映所有可能的Google匹配数。注意2：Google-API每天免费提供100个搜索查询。每天达到100个免费请求的限制时，将不再提供其他搜索结果。您可以第二天再试一次。</presentation>
+  <presentation lang="ru">Компонент WebHits предлагает презентацию, показывающую период поиска, продолжительность поиска, общее количество обращений и таблицу с URL-адресами первых десяти результатов. Нажав на ссылку, страница открывается в браузере. Примечание 1: из-за Google-API указанное общее количество обращений не отражает все возможные хиты Google. Примечание 2: Google-API предоставляет 100 поисковых запросов в день бесплатно. Когда достигнут предел для 100 бесплатных запросов в день, дальнейшие результаты поиска не доставляются. Вы можете попробовать его на следующий день снова.</presentation>
+  <presentation lang="de-DE">
+    In der Präsentationsansicht der Komponente wird die Gesamtzahl der gefundenen Treffer, die Dauer der Suche sowie eine Tabelle mit den URLs der ersten zehn Treffer angezeigt. Beim Klicken auf eine URL wird die verlinkte Webseite im Browser geöffnet.
+    <newline />
+    Hinweis 1: Bedingt durch die Google-API, bildet die angezeigte Gesamtanzahl der Treffer nicht alle möglichen Google-Treffer ab.
+    <newline />
+    Hinweis 2: Die Google-API bietet 100 Suchanfragen pro Tag kostenlos. Wenn das Limit für 100 kostenlose Anfragen pro Tag erreicht wurde, werden keine weiteren Suchergebnisse geliefert. Sie können es am nächsten Tag wieder versuchen.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="https://developers.google.com/custom-search/" lang="en" />
+      <caption lang="en">Custom Search Google API</caption>
+      <link url="https://developers.google.com/custom-search/" lang="de-DE" />
+      <caption lang="de-DE">Custom-Search-Google-API</caption>
+    </linkReference>
+  </references>
+</documentation>

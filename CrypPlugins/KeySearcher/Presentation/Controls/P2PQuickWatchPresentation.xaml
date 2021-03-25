@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="KeySearcherPresentation.Controls.P2PQuickWatchPresentation" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Converter="clr-namespace:KeySearcherConverter" xmlns:Controls="clr-namespace:KeySearcherPresentation.Controls"
+             xmlns:con="clr-namespace:KeySearcher.Converter"
+             xmlns:crypCloud="clr-namespace:KeySearcher.CrypCloud"
+             xmlns:properties="clr-namespace:KeySearcher.Properties"
+             xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+             x:Name="P2PQuickWatch">
+
+    <UserControl.Resources>
+        <con:BigIntegerToStringConverter x:Key="BigIntegerToStringConverter"/>
+        <con:ByteArrayToHexStringConverter x:Key="ByteArrayToHexStringConverter"/>
+        <con:BigIntegerToHexStringConverter x:Key="BigIntegerToHexStringConverter" />
+        <con:ByteArrayToUtf8StringConverter x:Key="ByteArrayToUtf8StringConverter" />
+        <con:ListToStringConverter x:Key="ListToStringConverter" />
+        <Converter:DateTimeConverter x:Key="DateTimeConverter" />
+        <Converter:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+    </UserControl.Resources>
+
+
+    <UserControl.DataContext>
+        <crypCloud:P2PPresentationVM/>
+    </UserControl.DataContext>
+
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc Local_}" ResultListCaption="{Loc Top_Ten_}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Finished_Chunks_}" Value="{Binding LocalFinishedChunks,  FallbackValue=-}" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Abort_Chunks_}" Value="{Binding LocalAbortChunks,  FallbackValue=-}" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Avg_Time_Per_Chunk}" Value="{Binding AvgTimePerChunk, FallbackValue=-,  Converter={StaticResource TimeSpanToStringConverter}}" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_Sec_}" Value="{Binding KeysPerSecond, FallbackValue=-, Converter={StaticResource BigIntegerToStringConverter}}" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc local_throughput_sec}" Value="{Binding LocalThroughput}" />
+            <!--Empty for layouting purposes:-->
+            <crypanalysisviewcontrol:ViewLabel />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Current_Chunk_}" Value="{Binding CurrentChunks, FallbackValue=~, Converter={StaticResource ListToStringConverter}}" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding TopList}" ResultItemAction="HandleResultItemAction">
+            <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                <GridView>
+                    <GridViewColumn Header="{Loc Value}" Width="73" DisplayMemberBinding="{Binding Path=Costs}"/>
+                    <GridViewColumn Header="{Loc Text}" Width="300" DisplayMemberBinding="{Binding Path=Decryption, Converter={StaticResource ByteArrayToUtf8StringConverter}}"/>
+                    <GridViewColumn Header="{Loc Key}" Width="250" DisplayMemberBinding="{Binding Path=KeyBytes, Converter={StaticResource ByteArrayToHexStringConverter}}"/>
+                </GridView>
+            </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+        </crypanalysisviewcontrol:CrypAnalysisResultListView>
+
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+            <crypanalysisviewcontrol:SectionControl SectionHeaderCaption="{Loc Static_}" SectionHeaderBackground="#FF5C5CFF" SectionBackground="#AFE2E2FF">
+                <crypanalysisviewcontrol:SectionViewLabelsControl>
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc JobName}" Value="{Binding JobName, FallbackValue=-}" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc JobID_}" Value="{Binding JobID, FallbackValue=-, Converter={StaticResource BigIntegerToHexStringConverter}}" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Total_Chunks_}" Value="{Binding TotalAmountOfChunks, FallbackValue=-, Converter={StaticResource BigIntegerToStringConverter}}" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_Per_Chunk_}" Value="{Binding KeysPerBlock, FallbackValue=-, Converter={StaticResource BigIntegerToStringConverter}}" />
+                </crypanalysisviewcontrol:SectionViewLabelsControl>
+            </crypanalysisviewcontrol:SectionControl>
+            <crypanalysisviewcontrol:SectionControl SectionHeaderCaption="{Loc Global_}" SectionHeaderBackground="#FF099BA7" SectionBackground="#AFAAE1E8">
+                <StackPanel Orientation="Vertical">
+                    <crypanalysisviewcontrol:SectionViewLabelsControl>
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Avg_Time_Per_Chunk}" Value="{Binding AvgTimePerChunkGlobal, FallbackValue=-,Converter={StaticResource TimeSpanToStringConverter}}" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_Sec_}" Value="{Binding KeysPerSecondGlobal, FallbackValue=-, Converter={StaticResource BigIntegerToStringConverter}}" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Dataspace}" Value="{Binding Dataspace}" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc global_throughput_sec}" Value="{Binding GlobalThroughput}" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc End_}" Value="{Binding EstimatedFinishDate, FallbackValue=-, Converter={StaticResource DateTimeConverter}}" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Remaining_}" Value="{Binding RemainingTimeTotal, FallbackValue=-, Converter={StaticResource TimeSpanToStringConverter}}" />
+                    </crypanalysisviewcontrol:SectionViewLabelsControl>
+                    <Grid Height="26">
+                        <ProgressBar Value="{Binding GlobalProgress, FallbackValue=0}" Maximum="100" />
+                        <Viewbox>
+                            <Label Content="{Binding GlobalProgressString, FallbackValue=~}" HorizontalAlignment="Center" />
+                        </Viewbox>
+                    </Grid>
+                </StackPanel>
+            </crypanalysisviewcontrol:SectionControl>
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>

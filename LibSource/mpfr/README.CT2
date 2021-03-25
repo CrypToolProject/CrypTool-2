@@ -1,0 +1,8 @@
+Information about usage of mpfr library in CrypTool 2:
+
+This source code has been taken from a git snapshot.
+Source project: https://github.com/BrianGladman/mpfr
+
+The project files have been slightly modified by CT2 team.
+The library needs to be compiled by using Visual Studio 2019 compilers.
+Compile the solution file in subdirectory "build.vs19".

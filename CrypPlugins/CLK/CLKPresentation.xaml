@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="CrypTool.CLK.CLKPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto">
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        
+        <!--<Button Width="35" Height="35" Name="CLKButton">
+            <Image Source="icon.png" Stretch="None" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Grid.Row="0" />
+        </Button>-->
+        
+        <Image Source="icon.png" Stretch="Fill" Name="CLKButtonImage" HorizontalAlignment="Center" VerticalAlignment="Center" Cursor="Hand" Grid.Row="0" Width="32" Height="32" />
+
+    </Grid>
+</UserControl>

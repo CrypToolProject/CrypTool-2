@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component implements different attacks on the <docRef item="CrypTool.M_138.M_138">M-138</docRef>, an American cipher device. For more information about the 
+    M-138, please see the dedicated M-138 component.
+    There are three different attacks implemented in this component. A known-plaintext attack, a partially-known-plaintext attack and a ciphertext-only attack.    
+  </introduction>
+  <introduction lang="zh-CN">该组件对美国密码设备M-138实施不同的攻击。有关M-138的更多信息，请参阅专用的M-138组件。在此组件中实施了三种不同的攻击。已知明文攻击，部分已知明文攻击和仅密文攻击。</introduction>
+  <introduction lang="ru">Этот компонент реализует различные атаки на M-138, американское шифровальное устройство. Для получения дополнительной информации о M-138 см. Специальный компонент M-138. В этом компоненте реализованы три различные атаки. Атака с известным-открытым текстом, атака частично известного текста и атака только с использованием шифрованного текста.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente implementiert verschiedene Attacken auf die <docRef item="CrypTool.M_138.M_138">M-138</docRef>, ein amerikanisches Verschlüsselungswerkzeug. Für mehr Informationen über die M-138
+    sehen Sie sich bitte die eigenständige M-138-Komponente an.
+    Es sind drei verschiedene Angriffsarten implementiert. Ein Known-Plaintext, ein Ciphertext-Only und ein Partially-Known-Plaintext Angriff.
+  </introduction>
+  <usage lang="en">
+    The component has two optional and one mandatory input. The mandatory input is the ciphertext which always has to be provided. On the first optional input,
+    you can enter the definition of the strip set that is to be used. The definition consists of a string in which each line contains a permutation of the alphabet.
+    Thus each line defines one strip. If this input is not connected, a default strip set is used.
+    The second optional input is the cleartext. In case a known-plaintext attack is run, this plaintext has to be provided as well. <newline />
+    As outputs, the component provides the calculated cleartext as well as the key used for the decryption. <newline />
+    You have the possibility to change various settings of the component. Most important, you have to select the type of the attack to be executed. The
+    setting "Method" allows you to choose between known-plaintext, ciphertext-only and partially-known-plaintext attacks.
+    <newline />
+    For the known-plaintext attack, the component takes a pair of given plain- and ciphertext and calculates all possible keys that translate the given
+    plaintext into the given ciphertext. The list of keys is ordered by their offsets. If at one position multiple strips can be used, they are separated
+    by "|".
+    <newline />
+    For the ciphertext-only attack, a hillclimbing algorithm was implemented. The algorithm is executed separately for every offset. In a first step,
+    a random key is generated. After that, two elements of the key are swapped as long as a better key can be found. If a key can't be improved by swapping
+    two of its elements, it is put into a bestlist where the best keys of all offsets are stored. The keys are rated by the quality of the plaintext they
+    create. This is calculated using tri- and quadgrams as well as the relative occurence of characters. The more a plaintext equals a natural language, the
+    better it is rated. The algorithm is restarted several times for each offset so different random startkeys can be tested. The number of restarts can be
+    configured in the settings. In case no manual input is given, the number is set dependent on the length of the given ciphertext. The longer the ciphertext
+    is, the less restarts are done as the quality of the key can be calculated more reliable due to more text to be analyzed being available.
+    <newline />
+    The partially-known-plaintext attack is a mixture of both attacks. In this implementation, the given plaintext has to start at the first character of the
+    ciphertext. In a first step, a known-plaintext attack is executed using the plaintext and the first part of the ciphertext, matching the length of the
+    plaintext. The known-plaintext attack returns a list of all possible keys. These keys are now used to decrypt the complete ciphertext, rating them using
+    the same function as in the ciphertext-only attack. 
+    <newline />
+    Another setting is the keylength. The original M-138 used a keylength of 25 or, in a later revision, 30. However, the component also allows you
+    to run the attack on a different keylength.
+    Regarding the key to be found, you can also set the minimal and maximal offset to be tested. This is useful in case you already know the offset but
+    still need to find out the rest of the key.
+    The next setting, language, is only relevant in case of a ciphertext-only or partially-known plaintext attack. In these cases, a hillclimbing
+    algorithm is implemented which rates the plaintext using tri- and quadgrams. The setting allows you to choose whether the plaintext is supposed to be
+    German or English.
+    Restarts for Hillclimbing is only relevant for ciphertext-only and partially-known-plaintext attacks as well. This setting controls how often the
+    implemented hillclimbing algorithm tries to find the key before it proceeds with the next offset.
+    The "fast converge" option is also specific to the hillclimbing algorithm. If the option is checked, the algorithm will not try all modifications of
+    a key and take the best one to further modify it, but as soon as a modification is rated better than the original key, it is taken and further modified.
+    This results in the algorithm terminating faster, however it decreases the probability to find the correct key. However, it is still likely that parts of
+    the key are correctly detected. This is useful e.g. to find the used offset before running the algorithm on that offset only.
+    <newline />
+    Challenges that can be solved using this component can be found at MysteryTwister C3 (<external ref="https://www.mysterytwisterc3.org">https://www.mysterytwisterc3.org</external>).
+  </usage>
+  <usage lang="zh-CN">该组件具有两个可选输入和一个强制输入。强制输入是必须始终提供的密文。在第一个可选输入上，您可以输入要使用的带材集的定义。该定义由一个字符串组成，其中每行包含一个字母排列。因此，每一行限定一个条带。如果未连接此输入，则使用默认的条带集。第二个可选输入是明文。如果运行已知明文攻击，则还必须提供此明文。作为输出，该组件提供计算出的明文以及用于解密的密钥。您可以更改组件的各种设置。最重要的是，您必须选择要执行的攻击类型。设置“方法”可让您在已知明文，仅密文和部分已知明文攻击之间进行选择。对于已知明文攻击，该组件采用一对给定的明文和密文，并计算将给定的明文转换为给定密文的所有可能的密钥。键列表按其偏移量排序。如果在一个位置可以使用多个条带，则它们之间用“ |”分隔。对于仅密文攻击，实施了爬山算法。该算法针对每个偏移量单独执行。第一步，生成一个随机密钥。之后，只要可以找到更好的密钥，就交换密钥的两个元素。如果不能通过交换两个元素来改进某个键，则将其放入存储所有偏移量的最佳键的最佳列表中。密钥通过它们创建的纯文本的质量进行评级。这是使用三字图和四字图以及字符的相对出现次数来计算的。明文等于自然语言越多，它的评级就越高。对于每个偏移量，算法都会重新启动几次，因此可以测试不同的随机开始键。可以在设置中配置重启次数。如果没有手动输入，则根据给定密文的长度设置数字。密文越长，完成重新启动的次数就越少，因为可以使用更多要分析的文本，因此可以更可靠地计算密钥的质量。部分已知的纯文本攻击是两种攻击的混合。在此实现中，给定的明文必须从密文的第一个字符开始。第一步，使用明文和密文的第一部分执行与明文长度匹配的已知明文攻击。明文攻击会返回所有可能密钥的列表。这些密钥现在用于解密完整的密文，并使用与纯密文攻击相同的功能对它们进行评级。另一个设置是密钥长度。最初的M-138使用的密钥长度为25，或者在以后的版本中为30。但是，该组件还允许您对其他密钥长度进行攻击。关于要找到的密钥，您还可以设置要测试的最小和最大偏移量。如果您已经知道偏移量但仍需要找出键的其余部分，这将很有用。下一个设置，语言，仅在仅密文或部分已知的明文攻击的情况下才相关。在这些情况下，将执行爬山算法，该算法使用三字母组合和四字母组合对明文进行评分。该设置使您可以选择将纯文本设置为德语还是英语。重新启动Hillclimbing也仅与仅密文和部分已知明文攻击有关。此设置控制已实施的爬山算法在继续进行下一个偏移之前尝试查找密钥的频率。 “快速收敛”选项也特定于爬山算法。如果选中了该选项，则算法将不会尝试对密钥进行所有修改，而是采用最佳密钥对它进行进一步修改，但是，一旦对某项修改的评价优于原始密钥，就立即采用并对其进行进一步修改。这导致算法终止更快，但是会降低找到正确密钥的可能性。但是，仍然有可能正确检测到钥匙的一部分。这很有用，例如在仅在该偏移量上运行算法之前查找使用的偏移量。使用此组件可以解决的难题可以在MysteryTwister C3（https://www.mysterytwisterc3.org）上找到。</usage>
+  <usage lang="ru">Компонент имеет два необязательных и один обязательный ввод. Обязательный ввод - это зашифрованный текст, который всегда должен предоставляться. На первом дополнительном входе вы можете ввести определение набора полосок, которое должно использоваться. Определение состоит из строки, в которой каждая строка содержит перестановку алфавита. Таким образом, каждая строка определяет одну полосу. Если этот вход не подключен, используется набор полос по умолчанию. Второй необязательный ввод - это чистый текст. В случае запуска атаки с открытым текстом, этот открытый текст также должен быть предоставлен. В качестве выходов компонент предоставляет вычисленный открытый текст, а также ключ, используемый для дешифрования. У вас есть возможность изменить различные настройки компонента. Самое главное, вам нужно выбрать тип атаки, которую нужно выполнить. Параметр «Метод» позволяет выбирать между известными атаками типа «открытый текст», «зашифрованный текст» и «частично известный». Для атаки с открытым текстом компонент принимает пару заданных простых и зашифрованных текстов и вычисляет все возможные ключи, которые переводят данный открытый текст в данный зашифрованный текст. Список ключей упорядочивается по их смещениям. Если в одной позиции можно использовать несколько полос, они разделяются символом «|». Для атаки только с зашифрованным текстом был реализован алгоритм холмирования. Алгоритм выполняется отдельно для каждого смещения. На первом этапе генерируется случайный ключ. После этого два элемента ключа меняются местами, пока может быть найден лучший ключ. Если ключ не может быть улучшен путем замены двух его элементов, он помещается в список, в котором хранятся лучшие ключи всех смещений. Ключи оцениваются по качеству открытого текста, который они создают. Это вычисляется с использованием три- и квадрантов, а также относительного появления символов. Чем больше открытый текст равен естественному языку, тем лучше он оценивается. Алгоритм перезапускается несколько раз для каждого смещения, поэтому могут быть протестированы различные случайные стартовые клавиши. В настройках можно настроить количество перезапусков. Если ручной ввод не задан, число устанавливается в зависимости от длины данного зашифрованного текста. Чем длиннее зашифрованный текст, тем меньше перезапуска выполняется, поскольку качество ключа может быть рассчитано более надежно из-за того, что доступно больше анализируемого текста. Атака частично известного открытого текста представляет собой смесь обеих атак. В этой реализации данный открытый текст должен начинаться с первого символа зашифрованного текста. На первом этапе атака с известным-открытым текстом выполняется с использованием открытого текста и первой части зашифрованного текста, соответствующей длине открытого текста. Атака известного-открытого текста возвращает список всех возможных ключей. Эти ключи теперь используются для дешифрования полного зашифрованного текста, оценивая их с использованием той же функции, что и в атаке только с зашифрованным текстом. Другой настройкой является длина ключа. В исходном M-138 использовалась длина ключа 25 или, в более поздней версии, 30. Однако компонент также позволяет запускать атаку на другую длину ключа. Что касается ключа, который нужно найти, вы также можете установить минимальное и максимальное смещение, которое будет проверено. Это полезно, если вы уже знаете смещение, но все равно нужно выяснить остальную часть ключа. Следующий параметр, язык, применим только в случае использования шифрованного текста или частично известного открытого текста. В этих случаях реализуется алгоритм холмирования, который оценивает открытый текст с использованием трехмерных и квадрантов. Этот параметр позволяет вам выбрать, должен ли открытый текст быть немецким или английским. Перезапуск для Hillclimbing применим только для зашифрованных и частично известных атак с открытым текстом. Этот параметр определяет, как часто реализуемый алгоритм холмирования пытается найти ключ до его последующего смещения. Опция «быстрого сближения» также специфична для алгоритма холмирования. Если опция отмечена, алгоритм не будет проверять все модификации ключа и использовать лучший вариант для дальнейшего его изменения, но как только модификация будет оценена лучше, чем исходный ключ, она будет принята и дополнительно изменена. Это приводит к тому, что алгоритм заканчивается быстрее, однако он уменьшает вероятность нахождения правильного ключа. Тем не менее, все же вероятность того, что части ключа будут правильно обнаружены. Это полезно, например, для поиска использованного смещения перед запуском алгоритма только для этого смещения. Вызовы, которые можно решить с помощью этого компонента, можно найти в MysteryTwister C3 (https://www.mysterytwisterc3.org).</usage>
+  <usage lang="de-DE">
+    Diese Komponente hat zwei optionale und einen notwendigen Eingang. Am ersten optionalen Eingang kann die Definition einer eigenen Streifenmenge eingegeben werden.
+    Die Definition der Streifen besteht aus einem String, bei dem jede Zeile eine Permutation des Alphabets enthält. Jede Zeile definiert dabei einen Streifen.
+    Wird hier nichts eingegeben, so wird eine vordefinierte Menge von Streifen verwendet.
+    Am zweiten optionalen Eingang wird der Klartext übergeben. Dies ist für den Known-Plaintext und den Partially-Known-Plaintext Angriff notwendig.
+    Über den notwendigen Eingang wird der Geheimtext übergeben. Dieser muss immer angegeben werden.<newline />
+    Als Ausgabe gibt die Komponente den gefundenen Schlüssel sowie den dazugehörigen Klartext zurück.
+    <newline />
+    Es gibt einige Einstellungen, die man als Nutzer entsprechend des gewünschten Angriffs anpassen kann. Zuerst muss die Art des Angriffs ausgewählt werden.
+    Dabei kann der Nutzer zwischen Known-Plaintext, Ciphertext-Only und Partially-Known-Plaintext Angriffen wählen.
+    <newline />
+    Im Fall des Known-Plaintext Angriffs übergibt der Benutzer der Komponente ein Paar von Klar- und Geheimtext. Als Ausgabe erhält er eine Liste aller
+    möglichen Schlüssel. Diese ist nach offsets sortiert. Gibt es für einen Offset an einer Stelle mehrere mögliche Streifen, so sind diese durch ein "|"
+    getrennt.
+    <newline />
+    Für die Ciphertext-Only Attacke wurde ein Hill-Climbing Algorithmus implementiert. Dieser wird unabhaengig für jeden Offset ausgeführt. In einem ersten
+    Schritt wird ein zufälliger Schlüssel generiert. In diesem werden dann so lange zwei Elemente getauscht, solange der Schlüssel dadurch verbessert werden kann.
+    Wenn durch dieses Tauschen kein besserer Schlüssel mehr gefunden wird. In diesem Fall wird der Schlüssel in einer Bestenliste gespeichert.
+    Die Bewertung der Schlüssel wird anhand einer Funktion durchgeführt, die mithilfe von Tri- und Quadgrammen die Ähnlichkeit eines Textes zu einer
+    natürlichen Sprache bewertet. Der Algorithmus wird für jeden Offset mehrmals neu gestartet. Wie oft dies der Fall ist, kann der Benutzer angeben.
+    Wird kein Wert vorgegeben, so wird in Abhängigkeit der Textlänge ein Wert gesetzt. Je länger der Text ist, umso seltener wird der Algorithmus neu 
+    gestartet, da in diesem Fall mehr Text zum Bewerten vorhanden ist, wodurch die Bewertung der Schlüssel genauer wird.
+    <newline />
+    Der Partially-Known-Plaintext Angriff stellt eine Mischung aus den beiden genannten Angriffen dar. Für diesen Angriff muss der vorgegebene Klartext dem 
+    Anfang des Geheimtextes entsprechen. Im ersten Schritt wird nun ein Known-Plaintext Angriff auf den Klartext und dem auf dessen Länge gekürzten
+    Geheimtext ausgeführt. Dieser gibt eine Menge möglicher Schlüssel vor. Im nächsten Schritt werden nun diese Schlüssel auf den gesamten Geheimtext
+    angewandt und mithilfe der im Hill-Climbing verwandten Funktion bewertet.
+    <newline />
+    Eine weitere Einstellung ist die Schlüssellänge. Die originale M-138 funktionierte mit einem Schlüssel der Länge 25, eine spätere Version auch mit
+    einem Schlüssel der Länge 30. Die Komponente erlaubt es jedoch, die Schlüssellänge frei zu wählen.
+    Ebenso ist es möglich, den Offset des gesuchten Schlüssels einzugrenzen. Dazu werden die Felder minimaler und maximaler Offset genutzt. Dies ist
+    hilfreich, wenn man den Offset bereits kennt und den Ciphertext-Only Angriff mit vielen Restarts nur auf diesen Offset durchführen will.
+    Die nächste Einstellung, Sprache, ist nur für Angriffe, die den Klartext bewerten, relevant. Da zur Bewertung des Textes Tri- und Quadgramme
+    verwendet werden, die in verschiedenen Sprachen verschieden häufig vorkommen, muss der Nutzer auswählen, ob hierzu die Statistiken für die
+    Deutsche oder Englische Sprache verwendet werden sollen.
+    Die Restarts des Hill-Climbing können ebenfalls angepasst werden. Dies gibt an, wie oft der Hill-Climbing Algorithmus für jeden Offset durchgeführt werden soll.
+    Zuletzt erlaubt die Option "Schnelle Konvergierung" dem Nutzer zu wählen, ob der Algorithmus möglichst schnell oder langsamer, dafür gründlicher arbeiten soll.
+    Ist diese Option gewählt, so test der Hill-Climbing Algorithmus nicht alle Variationen eines Schlüssels und wählt die beste, um mit dieser weiter zu arbeiten.
+    Stattdessen wird der erste Schlüssel, der gefunden wird und besser als der aktuelle Schlüssel ist, weiterverwendet. Dies senkt zwar die Chance, den komplett
+    richtigen Schlüssel zu finden, verringert jedoch die Laufzeit und erhöht somit die Chance, schnell richtige Teile des Schlüssels zu finden. Dies kann
+    z.B. sinnvoll sein, um den verwendeten Offset herauszufinden.
+    <newline />
+    Challenges, die unter Verwendung des in der Komponente verwendeten Streifensatzes gelöst werden können,
+    finden sich auf MysteryTwister C3 (<external ref="https://www.mysterytwisterc3.org">https://www.mysterytwisterc3.org</external>).
+  </usage>
+  <presentation lang="en">
+    The component's presentation is separated into two parts. The upper part contains information about the currently executed attack. It shows the
+    start time when execution of the attack was triggered as well as the expected time the algorithm ends. This is constantly calculated using the time
+    needed for the already tested offsets and the number of offsets remaining to be tested. As long as the attack is running, the field "Elapsed time" shows
+    how long the attack is already running. Once the execution finished, this field contains the time the attack actually needed to finish. The field
+    "Estimated end time" will hold the information at what time the execution finished then. In the last row, you see information about how many keys are
+    currently tested each second as well as how many have been tested per second in average since the attack was started.
+    <newline />
+    The presentation's lower part contains a list of keys with some information about each key:
+    <list><item>
+        In case of a known-plaintext attack, this table has one entry for every offset a valid key was found for. In the column "Value" in that case the offset is shown.
+        The column "Key" will hold the rest of the key, the used strips. The column "Plaintext" hosts the already known plaintext.
+      </item><item>
+        In case of a ciphertext-only or a partially-known-plaintext attack, a list of the best found keys is shown. In that case, the column "Value" shows the quality of
+        a key calculated by a function described above. The column "Key" will hold the key, while the plaintext generated using that key is shown in the column "Plaintext".
+        This list is constantly updated with the best keys while the attack is running.
+    </item></list></presentation>
+  <presentation lang="zh-CN">组件的展示分为两个部分。上部包含有关当前执行的攻击的信息。它显示了触发执行攻击的开始时间以及算法结束的预期时间。使用已经测试的偏移量所需的时间和要测试的剩余偏移量的数量来不断地计算得出。只要攻击正在运行，字段“经过的时间”就会显示攻击已经运行了多长时间。执行完成后，此字段包含攻击实际需要完成的时间。字段“预计结束时间”将保存该信息，然后说明执行时间。在最后一行中，您会看到有关自攻击开始以来当前每秒测试多少密钥以及平均每秒测试多少密钥的信息。演示文稿的下部包含一个密钥列表，其中包含有关每个密钥的一些信息：在已知明文攻击的情况下，此表为找到有效密钥的每个偏移量都有一个条目。在这种情况下，在“值”列中显示偏移量。 “键”列将保留其余的键，即已使用的带。 “明文”列包含已知的明文。在仅密文攻击或部分已知明文攻击的情况下，将显示找到的最佳密钥的列表。在这种情况下，“值”列表示通过上述功能计算出的键的质量。 “键”列将保存该键，而使用该键生成的明文将显示在“明文”列中。攻击运行时，此列表将使用最佳密钥不断更新。</presentation>
+  <presentation lang="ru">Представление компонента разделено на две части. Верхняя часть содержит информацию о текущей атаке. Он показывает время начала запуска атак, а также ожидаемое время окончания алгоритма. Это постоянно вычисляется с использованием времени, необходимого для уже проверенных смещений, и количества оставшихся смещений, подлежащих тестированию. Пока атака выполняется, поле «Истекшее время» показывает, как долго атака уже запущена. После завершения выполнения это поле содержит время, необходимое для завершения атаки. Поле «Предполагаемое время окончания» будет содержать информацию, в какое время будет завершено выполнение. В последней строке вы видите информацию о том, сколько ключей в настоящее время тестируется каждую секунду, а также сколько из них было протестировано в секунду в среднем с момента начала атаки. Нижняя часть презентации содержит список ключей с некоторой информацией о каждом ключе: в случае атаки с известным-открытым текстом в этой таблице есть одна запись для каждого смещения, для которого найден действительный ключ. В столбце «Значение» в этом случае отображается смещение. Столбец «Ключ» будет содержать остальную часть ключа, используемые полосы. В столбце «Plaintext» размещен уже известный открытый текст. В случае атаки зашифрованного текста или частично известного открытого текста отображается список наилучших найденных ключей. В этом случае столбец «Значение» показывает качество ключа, рассчитанного с помощью функции, описанной выше. В столбце «Ключ» будет храниться ключ, а открытый текст, сгенерированный с использованием этого ключа, отображается в столбце «Plaintext». Этот список постоянно обновляется с помощью лучших клавиш во время атаки.</presentation>
+  <presentation lang="de-DE">
+    Die Präsentation der Komponente ist in zwei Abschnitte unterteilt. Im oberen Teil werden Informationen zu dem aktuell durchgeführten Angriff angezeigt.
+    Dies sind die Startzeit, zu der der Angriff gestartet wurde, sowie die seit dem Start vergangene Zeit. Solange ein Angriff läuft, wird die erwartete
+    Endzeit anhand der bereits geprüften Offsets und der dafür benötigten Zeit sowie den noch zu testenden Offsets berechnet. Ist der Angriff abgeschlossen,
+    so wird in diesem Feld die tatsächliche Endzeit angezeigt. Im Feld "Vergangene Zeit" wird in diesem Fall die Zeit, die der Angriff benötigt hat, angezeigt.
+    Desweiteren wird der Offset, der aktuell analzsiert wird, angezeigt. In der unteren Zeile sieht man, wie viele Schlüssel aktuell pro Sekunde getestet werden
+    und wie viele Schlüssel seit Beginn des Angriffs durchschnittlich pro Sekunde getestet wurden.
+    <newline />
+    Im unteren Teil wird eine Liste von Schlüsseln mit einigen Informationen zu diesen angezeigt:
+    <list><item>
+        Im Fall eines Known-Plaintext Angriffs wird in dieser Liste für jeden Offset, für den ein funktionierender Schlüssel gefunden wurde, ein Eintrag erzeugt.
+        In der Spalte "Wert" wird in diesem Fall der zu dem Schlüssel gehörende Offset angezeigt. In der Spalte Schlüssel werden der Rest des Schlüssels, also die verwendeten Streifen, angezeigt.
+        Die Spalte "Klartext" beinhaltet den bereits bekannten Klartext.
+      </item><item>
+        Im Fall eines Ciphertext-Only oder Partially-Known-Plaintext Angriffs wird in diesem Teil der Präsentation eine Liste der besten Schlüssel angezeigt.
+        In diesem Fall wird in der Spalte "Wert" der für den Schlüssel berechnete Wert eingetragen. In der Spalte "Schlüssel" steht der komplette Schlüssel und in
+        der Spalte "Klartext" der jeweils zu dem Schlüssel gehörende Klartext. In dieser Liste werden die besten gefundenen Schlüssel, während der Angriff läuft,
+        durchgehend aktualisiert.
+      </item></list></presentation>
+  <references>
+    <linkReference id="schmeh">
+      <link url="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" lang="en" />
+      <caption lang="en">M-138 challenge in Klaus Schmeh's blog</caption>
+      <link url="http://scienceblogs.de/klausis-krypto-kolumne/m-138-challenge/" lang="de-DE" />
+      <caption lang="de-DE">M-138-Challenge in Klaus Schmehs Blog</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,241 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:local="clr-namespace:PKCS1.WpfControls.Components">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Brushes.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="GridSplitter">
+        <Setter Property="Background" Value="#FFAEBBD4" />
+    </Style>
+
+    <Style TargetType="Border">
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="BorderBrush" Value="{StaticResource CTBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Background" Value="{StaticResource CTPanelBackgroundBrush}"/>
+    </Style>
+
+    <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
+    <Style TargetType="GroupBox">
+        <Setter Property="BorderBrush" Value="{StaticResource CTBorderBrush}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Background" Value="{StaticResource CTPanelBackgroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GroupBox}">
+                    <Grid SnapsToDevicePixels="true">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="6" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="6" />
+                        </Grid.RowDefinitions>
+                        <Border CornerRadius="5" Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent" Background="{TemplateBinding Background}" />
+                        <Border Name="Header" Padding="3,1,3,0" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+                            <Label FontWeight="Bold">
+                                <ContentPresenter ContentSource="Header" RecognizesAccessKey="true" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <ContentPresenter.Resources>
+                                        <DataTemplate DataType="{x:Type System:String}">
+                                            <SelectableTextBlock Text="{Binding}" />
+                                        </DataTemplate>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                            </Label>
+                        </Border>
+                        <ContentPresenter Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <Border Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="5">
+                            <Border.OpacityMask>
+                                <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
+                                    <Binding ElementName="Header" Path="ActualWidth" />
+                                    <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Border.OpacityMask>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="Border"
+                    BorderThickness="1" CornerRadius="2"
+                    TextBlock.Foreground="Black" TextBlock.TextAlignment="Left" Padding="3"
+                    HorizontalAlignment="Stretch" Background="{StaticResource NormalBrush}" BorderBrush="{StaticResource NormalBorderBrush}">
+                        <TextBlock Text="{TemplateBinding Content}" TextBlock.TextAlignment="Center" Margin="{TemplateBinding Padding}" Name="btnTextBlock">
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource LightBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource PressedBrush}" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="btnTextBlock" Property="Foreground" Value="Gray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate TargetType="{x:Type Button}" x:Key="simplearrowbtntmpl" >
+        <Border BorderBrush="Gray" CornerRadius="3" BorderThickness="2" Margin="{TemplateBinding Margin}">
+            <Canvas Background="Transparent">
+                <Polygon Points="4,23 28,23 16,5" Name="p" Width="32" >
+                    <Polygon.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="-0.4" Color="WhiteSmoke" />
+                            <GradientStop Offset="0.15" Color="Gray" />
+                            <GradientStop Offset="1" Color="Black" />
+
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+                </Polygon>
+            </Canvas>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill" TargetName="p" >
+                    <Setter.Value>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="-0.1" Color="WhiteSmoke" />
+                            <GradientStop Offset="0.38" Color="Gray" />
+                            <GradientStop Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="p" Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate TargetType="{x:Type Button}" x:Key="doublearrowbtntmpl">
+        <Border BorderBrush="Gray" CornerRadius="3" BorderThickness="2" Margin="{TemplateBinding Margin}">
+            <Canvas Background="Transparent">
+                <Polygon Points="4,13 28,13 16,4" Name="p1" Width="32" >
+                    <Polygon.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="-0.4" Color="WhiteSmoke" />
+                            <GradientStop Offset="0.15" Color="Gray" />
+                            <GradientStop Offset="1" Color="Black" />
+
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+
+                </Polygon>
+                <Polygon Points="4,23 28,23 16,13" Name="p2" Width="32">
+                    <Polygon.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="-0.4" Color="WhiteSmoke" />
+                            <GradientStop Offset="0.15" Color="Gray" />
+                            <GradientStop Offset="1" Color="Black" />
+
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+
+                </Polygon>
+            </Canvas>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill" TargetName="p1" >
+                    <Setter.Value>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="-0.1" Color="WhiteSmoke" />
+                            <GradientStop Offset="0.38" Color="Gray" />
+                            <GradientStop Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="p1" Property="Opacity" Value="0.5"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Fill" TargetName="p2" >
+                    <Setter.Value>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="-0.1" Color="WhiteSmoke" />
+                            <GradientStop Offset="0.38" Color="Gray" />
+                            <GradientStop Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="p2" Property="Opacity" Value="0.5"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="btnNavigateLeft" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="2" IsHitTestVisible="True" Name="b">
+                        <DockPanel Margin="5" IsHitTestVisible="True"  >
+                            <Image Source="../Resources/icons/resultset_previous.png" Width="16" Height="16" HorizontalAlignment="Left" IsHitTestVisible="True"/>
+                            <TextBlock Margin="4" Text="{TemplateBinding Content}" Name="tb"></TextBlock>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="b" Property="Background" Value="{StaticResource PressedBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="tb" Property="Foreground" Value="Gray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="btnNavigateRight" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderBrush="Gray" CornerRadius="2" BorderThickness="1" IsHitTestVisible="True" Name="b">
+                        <DockPanel Margin="5" IsHitTestVisible="True" Name="dp" >
+                            <TextBlock Margin="4" Text="{TemplateBinding Content}" Name="tb"></TextBlock>
+                            <Image Source="../Resources/icons/resultset_next.png" Width="16" Height="16" HorizontalAlignment="Left"/>
+                        </DockPanel>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="b" Property="Background" Value="{StaticResource PressedBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="tb" Property="Foreground" Value="Gray"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

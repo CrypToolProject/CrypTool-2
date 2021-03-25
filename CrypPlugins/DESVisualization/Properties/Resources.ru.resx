@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DESVisualizationCaption" xml:space="preserve">
+    <value>DESVisualization</value>
+  </data>
+  <data name="DESVisualizationTooltip" xml:space="preserve">
+    <value>Визуализация шифрования DES</value>
+  </data>
+  <data name="inputKeyDescription" xml:space="preserve">
+    <value>Введите ключ, используемый для шифрования</value>
+  </data>
+  <data name="inputKeyName" xml:space="preserve">
+    <value>Ввод ключа</value>
+  </data>
+  <data name="inputTextDescription" xml:space="preserve">
+    <value>Введите текст для шифрования</value>
+  </data>
+  <data name="inputTextName" xml:space="preserve">
+    <value>Вход в обычный текст</value>
+  </data>
+  <data name="institute" xml:space="preserve">
+    <value>Университет Мангейма</value>
+  </data>
+  <data name="IntroBottom" xml:space="preserve">
+    <value>Визуализация блочного шифрования</value>
+  </data>
+  <data name="outputCiphertextDescription" xml:space="preserve">
+    <value>Вывод шифрованного текста после шифрования с помощью алгоритма DES</value>
+  </data>
+  <data name="outputCiphertextName" xml:space="preserve">
+    <value>Вывод шифротекста</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>активный</value>
+  </data>
+  <data name="Bit32" xml:space="preserve">
+    <value>32-битный</value>
+  </data>
+  <data name="Bit48" xml:space="preserve">
+    <value>48 бит</value>
+  </data>
+  <data name="Bit6" xml:space="preserve">
+    <value>6 бит</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>зашифрованный</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Очистить</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Колонка:</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Данные</value>
+  </data>
+  <data name="DataKey" xml:space="preserve">
+    <value>Ключ (64 бит):</value>
+  </data>
+  <data name="DataMessage" xml:space="preserve">
+    <value>Сообщение (64 бит):</value>
+  </data>
+  <data name="DiffInfo" xml:space="preserve">
+    <value>Нажмите «ОК», чтобы перевернуть отмеченные биты</value>
+  </data>
+  <data name="DiffusionVisualizer" xml:space="preserve">
+    <value>Показать иллюстратор диффузии</value>
+  </data>
+  <data name="FinalCiphertext" xml:space="preserve">
+    <value>Шифрованный текст (64 бит):</value>
+  </data>
+  <data name="FunctionLabel" xml:space="preserve">
+    <value>Функция f (K, R) Round / 16</value>
+  </data>
+  <data name="HistoryText" xml:space="preserve">
+    <value>- В 1973 году НБС (Национальное бюро стандартов) начало разработку или поиск официального стандартного алгоритма шифрования и дешифрования данных. Одним из возможных кандидатов был алгоритм, основанный на IBM Lucifer. - Чтобы проверить и проверить безопасность этого алгоритма, NSA (Агентство национальной безопасности) попросили о помощи. - После изменения длины ключа и используемых S-блоков этот алгоритм стал официальным стандартом шифрования данных 23 ноября 1976 года. - 2 октября 2000 года DES был заменен бельгийским алгоритмом под названием «Rijndael», который стал AES (Advanced Encryption Standard ).</value>
+  </data>
+  <data name="InfoText" xml:space="preserve">
+    <value>DES - это современный блочный шифр с симметричным ключом, который шифрует один блок сообщений из 64 бит с помощью 64-битного ключа в 64-разрядный зашифрованный текст. Каждый 8-й бит (младший значащий бит) используется исключительно для проверки четности и затем отбрасывается. Эти 8 младших битов фактически не используются алгоритмом, поэтому эффективная длина ключа для шифрования составляет всего 56 бит. Общая структура алгоритма имеет 16 идентичных этапов обработки, называемых раундами. Эти раунды организованы в сети Фейстеля (серия связанных математических операций, аналогичных сети подстановочно-перестановочных). Это гарантирует, что дешифрование и шифрование являются очень похожими процессами.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Входные данные:</value>
+  </data>
+  <data name="Intro" xml:space="preserve">
+    <value>вступление</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>ключ</value>
+  </data>
+  <data name="KeyAddition" xml:space="preserve">
+    <value>Ключевое дополнение</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Вывод:</value>
+  </data>
+  <data name="OutputAll" xml:space="preserve">
+    <value>Вывод всех S-блоков:</value>
+  </data>
+  <data name="PrevStep" xml:space="preserve">
+    <value>Пред. шаг</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Круглый</value>
+  </data>
+  <data name="Round1" xml:space="preserve">
+    <value>Раунд 1</value>
+  </data>
+  <data name="Round16" xml:space="preserve">
+    <value>Круглый 16</value>
+  </data>
+  <data name="RoundData" xml:space="preserve">
+    <value>Круглый LR</value>
+  </data>
+  <data name="Roundfunction" xml:space="preserve">
+    <value>Круглые функции</value>
+  </data>
+  <data name="RoundKey" xml:space="preserve">
+    <value>Круглый ключ</value>
+  </data>
+  <data name="RoundKeyData" xml:space="preserve">
+    <value>Круглый круглый ключ</value>
+  </data>
+  <data name="RoundShift" xml:space="preserve">
+    <value>Раунд: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 Сдвиги: 1 1 2 2 2 2 2 2 1 2 2 2 2 2 2 1</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Ряд:</value>
+  </data>
+  <data name="Runde_16" xml:space="preserve">
+    <value>Круглый {0} / 16</value>
+  </data>
+  <data name="SBoxesLabel" xml:space="preserve">
+    <value>S-коробки</value>
+  </data>
+  <data name="SkipStep" xml:space="preserve">
+    <value>Пропустить шаг</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Резюме</value>
+  </data>
+  <data name="Background" xml:space="preserve">
+    <value>Задний план</value>
+  </data>
+  <data name="BitwiseXOROperation" xml:space="preserve">
+    <value>Побитовая операция XOR</value>
+  </data>
+  <data name="CyclicShift" xml:space="preserve">
+    <value>Циклический сдвиг</value>
+  </data>
+  <data name="DESEncryption" xml:space="preserve">
+    <value>DES шифрование</value>
+  </data>
+  <data name="DiffusionVisualizerHide" xml:space="preserve">
+    <value>Скрыть диффузный визуализатор</value>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>Главная Информация</value>
+  </data>
+  <data name="GeneralStructure" xml:space="preserve">
+    <value>Общая структура</value>
+  </data>
+  <data name="InputData" xml:space="preserve">
+    <value>Входные данные</value>
+  </data>
+  <data name="Introduction" xml:space="preserve">
+    <value>Введение</value>
+  </data>
+  <data name="KeySchedule" xml:space="preserve">
+    <value>Расписание</value>
+  </data>
+  <data name="PermutationFunction" xml:space="preserve">
+    <value>Функция перестановки</value>
+  </data>
+  <data name="SkipRound" xml:space="preserve">
+    <value>Пропустить раунд</value>
+  </data>
+  <data name="NextStep" xml:space="preserve">
+    <value>Следующий шаг</value>
+  </data>
+  <data name="DiffOkLabel" xml:space="preserve">
+    <value>Подтвердите переброс выбранных битов.</value>
+  </data>
+  <data name="SBoxResultLong" xml:space="preserve">
+    <value>→ Результат для применения S-box</value>
+  </data>
+  <data name="SBoxJumpButton" xml:space="preserve">
+    <value>Перейти к концу текущей операции</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>Переключатель Hex-Binary</value>
+  </data>
+  <data name="ChapterTextDES" xml:space="preserve">
+    <value>- «Шифрование DES» является второй основной частью алгоритма: здесь сообщение зашифровывается в течение 16 раундов. - Кнопки в двух строках внизу также показывают, где вы находитесь: пока вы находитесь в этой второй части DES, либо одна из кнопок «IP», «DES» или «FP» является синей.</value>
+  </data>
+  <data name="ChapterTextKS" xml:space="preserve">
+    <value>- «Ключевое расписание» является первой основной частью алгоритма: здесь данный ключ используется для генерации ключа для каждого раунда DES (эти круглые клавиши затем используются во второй части DES, которая является фактическим процессом шифрования ). - Кнопки в двух строках внизу имеют две цели: они показывают, где вы находитесь, и они позволяют осуществлять прямую навигацию. - Пока вы находитесь в этой первой части DES, кнопка «Key Schedule» во второй строке синяя (чтобы показать вам, где вы находитесь).</value>
+  </data>
+</root>

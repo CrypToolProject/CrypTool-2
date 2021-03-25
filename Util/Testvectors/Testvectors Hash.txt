@@ -1,0 +1,143 @@
+"a..z" = "abcdefghijklmnopqrstuvwxyz"
+"A..Za..z0..9" = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+--------------------------------------------------------------------------------
+MD5
+--------------------------------------------------------------------------------
+
+md5("") = d41d8cd98f00b204e9800998ecf8427e
+md5("a") = 0cc175b9c0f1b6a831c399e269772661
+md5("abc") = 900150983cd24fb0d6963f7d28e17f72
+md5("message digest") = f96b697d7cb7938d525a2f31aaf161d0
+md5("a..z") = c3fcd3d76192e4007dfb496cca67e13b
+md5("A..Za..z0..9") = d174ab98d277d9f5a5611c2c9f419d9f
+md5("1234567890"x8) = 57edf4a22be3c955ac49da2e2107b67a
+md5("a"x1000000) = 7707d6ae4e027c70eea2a935c2296f21
+md5("Franz jagt im komplett verwahrlosten Taxi quer durch Bayern") = a3cca2b2aa1e3b5b3b5aad99a8529074
+md5("Frank jagt im komplett verwahrlosten Taxi quer durch Bayern") = 7e716d0e702df0505fc72e2b89467910
+md5("38") = a5771bce93e200c36f7cd9dfd0e5deaa
+
+--------------------------------------------------------------------------------
+RIPEMD-160
+--------------------------------------------------------------------------------
+
+ripemd-160("") = 9c1185a5c5e9fc54612808977ee8f548b2258d31
+ripemd-160("a") = 0bdc9d2d256b3ee9daae347be6f4dc835a467ffe
+ripemd-160("abc") = 8eb208f7e05d987a9b044a8e98c6b087f15a0bfc
+ripemd-160("message digest") = 5d0689ef49d2fae572b881b123a85ffa21595f36
+ripemd-160("a..z") = f71c27109c692c1b56bbdceb5b9d2865b3708dbc
+ripemd-160("A..Za..z0..9") = b0e20b6e3116640286ed3a87a5713079b21f5189
+ripemd-160("1234567890"x8) = 9b752e45573d4b39f4dbd3323cab82bf63326bfb
+ripemd-160("a"x1000000) = 52783243c1697bdbe16d37f97f68f08325dc1528
+ripemd-160("38") = 6b2d075b1cd34cd1c3e43a995f110c55649dad0e
+
+--------------------------------------------------------------------------------
+SHA1
+--------------------------------------------------------------------------------
+
+sha1("") = da39a3ee5e6b4b0d3255bfef95601890afd80709
+sha1("a") = 86f7e437faa5a7fce15d1ddcb9eaeaea377667b8
+sha1("38") = 5b384ce32d8cdef02bc3a139d4cac0a22bb029e8
+sha1("abc") = a9993e364706816aba3e25717850c26c9cd0d89d
+sha1("message digest") = c12252ceda8be8994d5fa0290a47231c1d16aae3
+sha1("a..z") = 32d10c7b8cf96570ca04ce37f2a19d84240d3a89
+sha1("A..Za..z0..9") = 761c457bf73b14d27e9e9265c46f4b4dda11f940
+sha1("1234567890"x8) = 50abf5706a150990a08b2c5ea40fa0e585554732
+sha1("Franz jagt im komplett verwahrlosten Taxi quer durch Bayern") = 68ac906495480a3404beee4874ed853a037a7a8f
+sha1("Frank jagt im komplett verwahrlosten Taxi quer durch Bayern") = d8e8ece39c437e515aa8997c1a1e94f1ed2a0e62
+
+--------------------------------------------------------------------------------
+SHA224
+--------------------------------------------------------------------------------
+
+sha224("") = d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42f
+sha224("a") = abd37534c7d9a2efb9465de931cd7055ffdb8879563ae98078d6d6d5
+sha224("38") = 4cfca6da32da647198225460722b7ea1284f98c4b179e8dbae3f93d5
+sha224("abc") = 23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7
+sha224("message digest") = 2cb21c83ae2f004de7e81c3c7019cbcb65b71ab656b22d6d0c39b8eb
+sha224("a..z") = 45a5f72c39c5cff2522eb3429799e49e5f44b356ef926bcf390dccc2
+sha224("A..Za..z0..9") = bff72b4fcb7d75e5632900ac5f90d219e05e97a7bde72e740db393d9
+sha224("1234567890"x8) = b50aecbe4e9bb0b57bc5f3ae760a8e01db24f203fb3cdcd13148046e
+
+--------------------------------------------------------------------------------
+SHA256
+--------------------------------------------------------------------------------
+
+sha256("") = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+sha256("a") = ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb
+sha256("38") = aea92132c4cbeb263e6ac2bf6c183b5d81737f179f21efdc5863739672f0f470
+sha256("abc") = ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+sha256("message digest") = f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650
+sha256("a..z") = 71c480df93d6ae2f1efad1447c66c9525e316218cf51fc8d9ed832f2daf18b73
+sha256("A..Za..z0..9") = db4bfcbd4da0cd85a60c3c37d3fbd8805c77f15fc6b1fdfe614ee0a7c8fdb4c0
+sha256("1234567890"x8) = f371bc4a311f2b009eef952dd83ca80e2b60026c8e935592d0f9c308453c813e
+sha256("Franz jagt im komplett verwahrlosten Taxi quer durch Bayern") = d32b568cd1b96d459e7291ebf4b25d007f275c9f13149beeb782fac0716613f8
+sha256("Frank jagt im komplett verwahrlosten Taxi quer durch Bayern") = 78206a866dbb2bf017d8e34274aed01a8ce405b69d45db30bafa00f5eeed7d5e
+
+--------------------------------------------------------------------------------
+SHA384
+--------------------------------------------------------------------------------
+
+sha384("") = 38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b
+sha384("a") = 54a59b9f22b0b80880d8427e548b7c23abd873486e1f035dce9cd697e85175033caa88e6d57bc35efae0b5afd3145f31
+sha384("38") = c071d202ad950b6a04a5f15c24596a993af8b212467958d570a3ffd4780060638e3a3d06637691d3012bd31122071b2c
+sha384("abc") = cb00753f45a35e8bb5a03d699ac65007272c32ab0eded1631a8b605a43ff5bed8086072ba1e7cc2358baeca134c825a7
+sha384("message digest") = 473ed35167ec1f5d8e550368a3db39be54639f828868e9454c239fc8b52e3c61dbd0d8b4de1390c256dcbb5d5fd99cd5
+sha384("a..z") = feb67349df3db6f5924815d6c3dc133f091809213731fe5c7b5f4999e463479ff2877f5f2936fa63bb43784b12f3ebb4
+sha384("A..Za..z0..9") = 1761336e3f7cbfe51deb137f026f89e01a448e3b1fafa64039c1464ee8732f11a5341a6f41e0c202294736ed64db1a84
+sha384("1234567890"x8) = b12932b0627d1c060942f5447764155655bd4da0c9afa6dd9b9ef53129af1b8fb0195996d2de9ca0df9d821ffee67026
+
+--------------------------------------------------------------------------------
+SHA512
+--------------------------------------------------------------------------------
+
+sha512("") = cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+sha512("a") = 1f40fc92da241694750979ee6cf582f2d5d7d28e18335de05abc54d0560e0f5302860c652bf08d560252aa5e74210546f369fbbbce8c12cfc7957b2652fe9a75
+sha512("38") = caae34a5e81031268bcdaf6f1d8c04d37b7f2c349afb705b575966f63e2ebf0fd910c3b05160ba087ab7af35d40b7c719c53cd8b947c96111f64105fd45cc1b2
+sha512("abc") = ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f
+sha512("message digest") = 107dbf389d9e9f71a3a95f6c055b9251bc5268c2be16d6c13492ea45b0199f3309e16455ab1e96118e8a905d5597b72038ddb372a89826046de66687bb420e7c
+sha512("a..z") = 4dbff86cc2ca1bae1e16468a05cb9881c97f1753bce3619034898faa1aabe429955a1bf8ec483d7421fe3c1646613a59ed5441fb0f321389f77f48a879c7b1f1
+sha512("A..Za..z0..9") = 1e07be23c26a86ea37ea810c8ec7809352515a970e9253c26f536cfc7a9996c45c8370583e0a78fa4a90041d71a4ceab7423f19c71b9d5a3e01249f0bebd5894
+sha512("1234567890"x8) = 72ec1ef1124a45b047e8b7c75a932195135bb61de24ec0d1914042246e0aec3a2354e093d76f3048b456764346900cb130d2a4fd5dd16abb5e30bcb850dee843
+
+--------------------------------------------------------------------------------
+WHIRLPOOL
+--------------------------------------------------------------------------------
+
+whirlpool("") = 19fa61d75522a4669b44e39c1d2e1726c530232130d407f89afee0964997f7a73e83be698b288febcf88e3e03c4f0757ea8964e59b63d93708b138cc42a66eb3
+whirlpool("a") = 8aca2602792aec6f11a67206531fb7d7f0dff59413145e6973c45001d0087b42d11bc645413aeff63a42391a39145a591a92200d560195e53b478584fdae231a
+whirlpool("38") = b89f9f0485e8a03e6c8aaa97b29c41479351e4906bdcdef05f0568d3eeed180962bf983c8be65153da0df05b10fa4156d8d8af309245a252a3cb5467faee09d1
+whirlpool("abc") = 4e2448a4c6f486bb16b6562c73b4020bf3043e3a731bce721ae1b303d97e6d4c7181eebdb6c57e277d0e34957114cbd6c797fc9d95d8b582d225292076d4eef5
+whirlpool("message digest") = 378c84a4126e2dc6e56dcc7458377aac838d00032230f53ce1f5700c0ffb4d3b8421557659ef55c106b4b52ac5a4aaa692ed920052838f3362e86dbd37a8903e
+whirlpool("a..z") = f1d754662636ffe92c82ebb9212a484a8d38631ead4238f5442ee13b8054e41b08bf2a9251c30b6a0b8aae86177ab4a6f68f673e7207865d5d9819a3dba4eb3b
+whirlpool("A..Za..z0..9") = dc37e008cf9ee69bf11f00ed9aba26901dd7c28cdec066cc6af42e40f82f3a1e08eba26629129d8fb7cb57211b9281a65517cc879d7b962142c65f5a7af01467
+whirlpool("1234567890"x8) = 466ef18babb0154d25b9d38a6414f5c08784372bccb204d6549c4afadb6014294d5bd8df2a6c44e538cd047b2681a51a2c60481e88c5a20b2c2a80cf3a9a083b
+whirlpool("The quick brown fox jumps over the lazy dog") = b97de512e91e3828b40d2b0fdce9ceb3c4a71f9bea8d88e75c4fa854df36725fd2b52eb6544edcacd6f8beddfea403cb55ae31f03ad62a5ef54e42ee82c3fb35
+whirlpool("The quick brown fox jumps over the lazy eog") = c27ba124205f72e6847f3e19834f925cc666d0974167af915bb462420ed40cc50900d85a1f923219d832357750492d5c143011a76988344c2635e69d06f2d38c
+
+--------------------------------------------------------------------------------
+TIGER
+--------------------------------------------------------------------------------
+
+tiger("") = 4441be75f6018773c206c22745374b924aa8313fef919f41
+tiger("a") = 67e6ae8e9e968999f70a23e72aeaa9251cbc7c78a7916636
+tiger("abc") = f68d7bc5af4b43a06e048d7829560d4a9415658bb0b1f3bf
+tiger("message digest") = e29419a1b5fa259de8005e7de75078ea81a542ef2552462d
+tiger("a..z") = f5b6b6a78c405c8547e91cd8624cb8be83fc804a474488fd
+tiger("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq") = a6737f3997e8fbb63d20d2df88f86376b5fe2d5ce36646a9
+tiger("A..Za..z0..9") = ea9ab6228cee7b51b77544fca6066c8cbb5bbae6319505cd
+tiger("1234567890"x8) = d85278115329ebaa0eec85ecdc5396fda8aa3a5820942fff
+tiger("a"x1000000) = e068281f060f551628cc5715b9d0226796914d45f7717cf4
+
+--------------------------------------------------------------------------------
+HMAC
+--------------------------------------------------------------------------------
+
+HMAC_MD5("", "") = 74e6f7298a9c2d168935f58c001bad88
+HMAC_SHA1("", "") = fbdb1d1b18aa6c08324b7d64b71fb76370690e1d
+HMAC_SHA256("", "") = b613679a0814d9ec772f95d778c35fc5ff1697c493715653c6c712144292c5ad
+
+HMAC_MD5("key", "The quick brown fox jumps over the lazy dog") = 80070713463e7749b90c2dc24911e275
+HMAC_SHA1("key", "The quick brown fox jumps over the lazy dog") = de7c9b85b8b78aa6bc8a7a36f70a90701c9db4d9
+HMAC_SHA256("key", "The quick brown fox jumps over the lazy dog") = f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8
+

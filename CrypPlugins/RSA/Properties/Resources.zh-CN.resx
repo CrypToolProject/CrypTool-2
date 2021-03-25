@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>RSA</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>RSA加密/解密</value>
+  </data>
+  <data name="PluginKeyCaption" xml:space="preserve">
+    <value>RSA密钥生成器</value>
+  </data>
+  <data name="PluginKeyTooltip" xml:space="preserve">
+    <value>RSA密钥生成器</value>
+  </data>
+  <data name="InputNCaption" xml:space="preserve">
+    <value>公钥N输入</value>
+  </data>
+  <data name="InputNTooltip" xml:space="preserve">
+    <value>在此处输入您的公共密钥N。</value>
+  </data>
+  <data name="InputMCCaption" xml:space="preserve">
+    <value>消息m /密文c输入（作为数字）</value>
+  </data>
+  <data name="InputMCTooltip" xml:space="preserve">
+    <value>在此处输入要加密或解密的号码。</value>
+  </data>
+  <data name="InputEDCaption" xml:space="preserve">
+    <value>公共指数e /私钥d输入</value>
+  </data>
+  <data name="InputEDTooltip" xml:space="preserve">
+    <value>在此处输入您的公共指数e /私钥d。</value>
+  </data>
+  <data name="OutputMCCaption" xml:space="preserve">
+    <value>密文c /消息m输出（以数字表示）</value>
+  </data>
+  <data name="OutputMCTooltip" xml:space="preserve">
+    <value>加密或解密的号码将在此处发送。</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>消息m /密文c输入</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>在此处输入要加密或解密的文本。</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>密文c /消息m输出</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>加密或解密的文本将在此处发送。</value>
+  </data>
+  <data name="NCaption" xml:space="preserve">
+    <value>公共模数N</value>
+  </data>
+  <data name="NTooltip" xml:space="preserve">
+    <value>公共模数N</value>
+  </data>
+  <data name="ECaption" xml:space="preserve">
+    <value>公共指数</value>
+  </data>
+  <data name="ETooltip" xml:space="preserve">
+    <value>公共指数</value>
+  </data>
+  <data name="DCaption" xml:space="preserve">
+    <value>私钥d</value>
+  </data>
+  <data name="DTooltip" xml:space="preserve">
+    <value>私钥d</value>
+  </data>
+  <data name="CertificateFileCaption" xml:space="preserve">
+    <value>打开X.509证书</value>
+  </data>
+  <data name="CertificateFileTooltip" xml:space="preserve">
+    <value>选择要打开的X.509证书。</value>
+  </data>
+  <data name="CloseFileCaption" xml:space="preserve">
+    <value>关闭档案</value>
+  </data>
+  <data name="CloseFileTooltip" xml:space="preserve">
+    <value>关闭档案</value>
+  </data>
+  <data name="PCaption" xml:space="preserve">
+    <value>质数p</value>
+  </data>
+  <data name="PTooltip" xml:space="preserve">
+    <value>质数p</value>
+  </data>
+  <data name="PasswordCaption" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="PasswordTooltip" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="QCaption" xml:space="preserve">
+    <value>质数q</value>
+  </data>
+  <data name="QTooltip" xml:space="preserve">
+    <value>质数q</value>
+  </data>
+  <data name="SourceCaption" xml:space="preserve">
+    <value>资源</value>
+  </data>
+  <data name="SourceTooltip" xml:space="preserve">
+    <value>选择关键数据的来源。</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>是否要对输入数据进行加密或解密？</value>
+  </data>
+  <data name="CoresUsedCaption" xml:space="preserve">
+    <value>使用的铁芯</value>
+  </data>
+  <data name="CoresUsedTooltip" xml:space="preserve">
+    <value>选择应使用多少个内核。</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="SourceList1" xml:space="preserve">
+    <value>手动输入素数</value>
+  </data>
+  <data name="SourceList2" xml:space="preserve">
+    <value>手动输入键</value>
+  </data>
+  <data name="SourceList3" xml:space="preserve">
+    <value>产生随机素数</value>
+  </data>
+  <data name="SourceList4" xml:space="preserve">
+    <value>X.509证书</value>
+  </data>
+  <data name="InputBlocksizeCaption" xml:space="preserve">
+    <value>输入块大小</value>
+  </data>
+  <data name="InputBlocksizeTooltip" xml:space="preserve">
+    <value>输入输入块的字节数。</value>
+  </data>
+  <data name="OutputBlocksizeCaption" xml:space="preserve">
+    <value>输出块大小</value>
+  </data>
+  <data name="OutputBlocksizeTooltip" xml:space="preserve">
+    <value>输入输出块的字节数。</value>
+  </data>
+  <data name="OverrideBlocksizesCaption" xml:space="preserve">
+    <value>覆盖隐式块大小</value>
+  </data>
+  <data name="OverrideBlocksizesGroup" xml:space="preserve">
+    <value>块大小</value>
+  </data>
+  <data name="OverrideBlocksizesTooltip" xml:space="preserve">
+    <value>覆盖隐式块大小，然后手动输入值。</value>
+  </data>
+  <data name="RangeCaption" xml:space="preserve">
+    <value>范围</value>
+  </data>
+  <data name="RangeTooltip" xml:space="preserve">
+    <value>范围参数，指示要生成的随机素数的大小。</value>
+  </data>
+  <data name="RangeTypeCaption" xml:space="preserve">
+    <value>范围类型</value>
+  </data>
+  <data name="RangeTypeList1" xml:space="preserve">
+    <value>位数</value>
+  </data>
+  <data name="RangeTypeList2" xml:space="preserve">
+    <value>上限</value>
+  </data>
+  <data name="RangeTypeTooltip" xml:space="preserve">
+    <value>范围参数应解释为“位数”还是“上限”？</value>
+  </data>
+  <data name="Enter_d" xml:space="preserve">
+    <value>输入d</value>
+  </data>
+  <data name="Enter_e" xml:space="preserve">
+    <value>输入和</value>
+  </data>
+  <data name="E_or_D" xml:space="preserve">
+    <value>输入e或d</value>
+  </data>
+</root>

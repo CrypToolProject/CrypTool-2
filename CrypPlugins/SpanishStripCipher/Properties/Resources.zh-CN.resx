@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>加密还是解密？</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="HomophonesCaption" xml:space="preserve">
+    <value>谐音表</value>
+  </data>
+  <data name="HomophonesTooltip" xml:space="preserve">
+    <value>此参数包含90或99位两位数字，范围为10-99或01-99。这些数字在加密和解密期间使用。每个字母分配三个或四个数字。</value>
+  </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>输入值</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>如果选择了“加密”操作，则插入要加密的纯文本。如果选择了“解密”操作，则插入要解密的密文。</value>
+  </data>
+  <data name="KeywordCaption" xml:space="preserve">
+    <value>关键词</value>
+  </data>
+  <data name="KeywordTooltip" xml:space="preserve">
+    <value>关键字必须包含给定字母的字母。它用于生成随机字母。</value>
+  </data>
+  <data name="OrderedAlphabetCaption" xml:space="preserve">
+    <value>有序字母</value>
+  </data>
+  <data name="OrderedAlphabetTooltip" xml:space="preserve">
+    <value>西班牙字母</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>加密或解密的输出数据</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>西班牙地带密码</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>西班牙地带密码</value>
+  </data>
+  <data name="Position1Caption" xml:space="preserve">
+    <value>位置随机字母的字母</value>
+  </data>
+  <data name="Position1Tooltip" xml:space="preserve">
+    <value>随机字母将一直移动，直到此参数表示的字母与参数“在有序字母的字母上”表示的有序字母的字母匹配为止</value>
+  </data>
+  <data name="Position2Caption" xml:space="preserve">
+    <value>在订购的字母上</value>
+  </data>
+  <data name="Position2Tooltip" xml:space="preserve">
+    <value>此参数用于移动随机字母。</value>
+  </data>
+  <data name="UnorderedAlphabetPanelCaption" xml:space="preserve">
+    <value>随机字母</value>
+  </data>
+  <data name="UnorderedAlphabetPanelTooltip" xml:space="preserve">
+    <value>西班牙语字母随机排列。随机顺序由关键字定义。</value>
+  </data>
+  <data name="HomophonesTablesCaption" xml:space="preserve">
+    <value>谐音表</value>
+  </data>
+  <data name="HomophonesTablesTooltip" xml:space="preserve">
+    <value>请选择一个谐音表。</value>
+  </data>
+  <data name="HomophonesTablesList1" xml:space="preserve">
+    <value>随机同音表</value>
+  </data>
+  <data name="HomophonesTablesList2" xml:space="preserve">
+    <value>90个同音字（10-99）</value>
+  </data>
+  <data name="HomophonesTablesList3" xml:space="preserve">
+    <value>99个同音字（01-99）</value>
+  </data>
+  <data name="AlphabetsList1" xml:space="preserve">
+    <value>西班牙语字母（27个字母）</value>
+  </data>
+  <data name="AlphabetsList2" xml:space="preserve">
+    <value>西班牙语字母（29个字母-包括CH和LL）</value>
+  </data>
+  <data name="AlphabetsTooltip" xml:space="preserve">
+    <value>选择一个字母。</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="AlphabetsCaption" xml:space="preserve">
+    <value>字母</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>输出量</value>
+  </data>
+  <data name="HomophoneSelectionCaption" xml:space="preserve">
+    <value>同音字选择</value>
+  </data>
+  <data name="HomophoneSelectionList1" xml:space="preserve">
+    <value>随机</value>
+  </data>
+  <data name="HomophoneSelectionList2" xml:space="preserve">
+    <value>循环赛</value>
+  </data>
+  <data name="HomophoneSelectionTooltip" xml:space="preserve">
+    <value>加密期间应如何从可能的同音字列表中选择同音字？</value>
+  </data>
+</root>

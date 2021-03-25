@@ -1,0 +1,17 @@
+﻿Author: Christopher Konze, christopher.konze@CrypTool.org
+
+To add a new DimcodeTypes you simply will have to do the following steps:
+
+First: Add your DimcodeType to the Settings (VisualEncoderSettings.cs)
+	1)  add your codeType to the DropDownmenu of EncodingType and to the DimCodeType enum in the exact same syntax
+   
+    optional steps:   
+	   if you want to have unique settings for your code type f.e. YourSettings:
+       1. add in constructor to inputlist : inputList.Add("YourSettings");
+       2. add your input to the inputVisibilitylist of your code type: inputVisibility[DimCodeType.QRCode].Add("YourSettings"); 
+
+Second: create a new child of Encoders/DimCodeEncoder.cs and fill all necessary methods
+
+Third: Add your DimcodeType to  the codeTypeHandler by adding a line to the constructor of DimCodeEncoder.cs. 
+		e.g.: codeTypeHandler.Add(DimCodeEncoderSettings.DimCodeType.EAN8, new EAN8());
+		new EAN8() is an instance of your class, that was created at the Second Step

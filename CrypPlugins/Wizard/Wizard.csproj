@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FF247A82-21AD-4010-B2FB-D93EE2B02677}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wizard</RootNamespace>
+    <AssemblyName>Wizard</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Debug\CrypPlugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Wizard.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\Wizard.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Debug\CrypPlugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\settingsRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>settingsRes.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StorageContainer.xaml.cs">
+      <DependentUpon>StorageContainer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StorageEntry.cs" />
+    <Compile Include="StorageControl.xaml.cs">
+      <DependentUpon>StorageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wizard.cs" />
+    <Compile Include="WizardControl.xaml.cs">
+      <DependentUpon>WizardControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WizardSettingsTab.xaml.cs">
+      <DependentUpon>WizardSettingsTab.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrypCore\CrypCore.csproj">
+      <Project>{FF5D473C-0716-4D3E-9078-2EBD979F94C6}</Project>
+      <Name>CrypCore</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
+      <Name>CrypPluginBase</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LibSource\KeyTextBox\KeyTextBox.csproj">
+      <Project>{FD4214D8-FFB9-406F-9202-BB5EC0645E8F}</Project>
+      <Name>KeyTextBox</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WorkspaceManagerModel\WorkspaceManagerModel.csproj">
+      <Project>{C35A6E71-D6FE-478B-A12D-FAD54FC4EDC9}</Project>
+      <Name>WorkspaceManagerModel</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkspaceManager\WorkspaceManager.csproj">
+      <Project>{949B4294-2894-43B4-BD73-E0B031F5434F}</Project>
+      <Name>WorkspaceManager</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\settingsRes.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\settingsRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>settingsRes.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EmbeddedResource Include="Config\wizard.dtd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\Description.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="StorageContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StorageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WizardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WizardSettingsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="wizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\wizard.config.start.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\EnDeCrypt\wizard.config.classicEnDe.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Analysis\wizard.config.analysis.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config\Analysis\wizard.config.modernEn.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config\EnDeCrypt\wizard.config.enDe.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config\EnDeCrypt\wizard.config.modernEnDe.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config\Indiv\wizard.config.indiv.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\EnDeCrypt\wizard.config.modernSymEnDe.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Analysis\wizard.config.classicEn.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Analysis\wizard.config.modernSymEn.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Calc.png" />
+    <Resource Include="Images\EnDeCrypt.png" />
+    <Resource Include="Images\Indiv.png" />
+    <Resource Include="Images\Key.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Analyse.png" />
+    <Resource Include="Images\Classic.png" />
+    <Resource Include="Images\Hash.png" />
+    <Resource Include="Images\Modern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ADFGVX.png" />
+    <Resource Include="Images\AES.png" />
+    <Resource Include="Images\Caesar.png" />
+    <Resource Include="Images\DES.png" />
+    <Resource Include="Images\Enigma.png" />
+    <Resource Include="Images\MD5.png" />
+    <Resource Include="Images\Playfair.png" />
+    <Resource Include="Images\Primes.png" />
+    <Resource Include="Images\RIPEMD160.png" />
+    <Resource Include="Images\RSA.png" />
+    <Resource Include="Images\Scytale.png" />
+    <Resource Include="Images\SDES.png" />
+    <Resource Include="Images\SHA.png" />
+    <Resource Include="Images\Substitution.png" />
+    <Resource Include="Images\TEA.png" />
+    <Resource Include="Images\Tiger.png" />
+    <Resource Include="Images\Transposition.png" />
+    <Resource Include="Images\Trivium.png" />
+    <Resource Include="Images\Twofish.png" />
+    <Resource Include="Images\Vernam.png" />
+    <Resource Include="Images\Vigenere.png" />
+    <Resource Include="Images\Whirlpool.png" />
+    <Resource Include="Images\XOR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RC2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Asym.png" />
+    <Resource Include="Images\Sym.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Hat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Analysis\wizard.config.transposition.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\createProject.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\doc.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\header_wizard5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Math\wizard.config.math.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Hash\wizard.config.hash.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Math\wizard.config.factorization.xml" />
+    <EmbeddedResource Include="Config\Math\wizard.config.prime.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Math.png" />
+    <Resource Include="Images\QS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Dec.png" />
+    <Resource Include="Images\Enc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PasswordStrength.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\check.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\remove.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\apply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RND.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\Codes\wizard.config.codes.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Codes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MorseCode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\VisualCode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\Images\Figure1.png" />
+    <Resource Include="DetailedDescription\Images\Figure2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\Images\Figure3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HeartbleedTest.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

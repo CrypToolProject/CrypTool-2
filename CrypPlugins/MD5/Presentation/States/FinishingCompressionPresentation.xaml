@@ -1,0 +1,30 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:displays="clr-namespace:CrypTool.MD5.Presentation.Displays"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="CrypTool.MD5.Presentation.States.FinishingCompressionPresentation"
+    Height="400" Width="800" mc:Ignorable="d">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			<Style x:Key="textBlockStyle" TargetType="{x:Type TextBlock}">
+				<Setter Property="TextWrapping" Value="Wrap"/>
+				<Setter Property="FontSize" Value="16pt"/>
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Grid>
+        <TextBlock Margin="8,8,8,0" x:Name="textBlock1" Text="{Loc We_have_finished_with_the_last_round_of_the_compression_}" TextWrapping="Wrap" Height="65" VerticalAlignment="Top" Style="{DynamicResource textBlockStyle}" />
+    	<displays:HashAccumulatorDisplay DataContext="{Binding LastState}" Height="70" Margin="8,87,8,0" VerticalAlignment="Top" />
+    	<displays:CompressionVariableDisplay DataContext="{Binding LastState}" Margin="8,189,8,0" VerticalAlignment="Top" Height="70" />
+    	<displays:HashAccumulatorDisplay DataContext="{Binding CurrentState}" Height="70" Margin="8,295,8,0" VerticalAlignment="Top">
+    		<displays:HashAccumulatorDisplay.Effect>
+    			<BlurEffect/>
+    		</displays:HashAccumulatorDisplay.Effect>
+    	</displays:HashAccumulatorDisplay>
+    	<TextBlock Margin="8,157,0,0" x:Name="label1" Style="{DynamicResource textBlockStyle}" HorizontalAlignment="Left" Text="+" TextAlignment="Center" Width="784" VerticalAlignment="Top" Height="28"/>
+    	<TextBlock Margin="8,0,8,110" x:Name="label2" Style="{DynamicResource textBlockStyle}" VerticalAlignment="Bottom" Height="28" Text="=" TextAlignment="Center"/>
+    </Grid>
+</UserControl>

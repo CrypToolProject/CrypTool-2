@@ -1,0 +1,234 @@
+﻿<UserControl x:Class="CrypTool.Internet_frame_generator.Internet_frame_generator_Presentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" MinWidth="640" MinHeight="480">
+    <Grid>
+        <TabControl Name="tabControl">
+            <TabItem x:Name="tabIP" Header="{Loc IP_packet}">
+                <Grid Name="gridIPPacket">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="columnIP1" Width="40"/>
+                        <ColumnDefinition Name="columnIP2" Width="40"/>
+                        <ColumnDefinition Name="columnIP3" Width="40"/>
+                        <ColumnDefinition Name="columnIP4" Width="40"/>
+                        <ColumnDefinition Name="columnIP5" Width="40"/>
+                        <ColumnDefinition Name="columnIP6" Width="40"/>
+                        <ColumnDefinition Name="columnIP7" Width="40"/>
+                        <ColumnDefinition Name="columnIP8" Width="40"/>
+                        <ColumnDefinition Name="columnIP9" Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Name="rowIP1" Height="40"/>
+                        <RowDefinition Name="rowIP2" Height="40"/>
+                        <RowDefinition Name="rowIP3" Height="40"/>
+                        <RowDefinition Name="rowIP4" Height="40"/>
+                        <RowDefinition Name="rowIP5" Height="40"/>
+                        <RowDefinition Name="rowIP6" Height="40"/>
+                        <RowDefinition Name="rowIP7" Height="40"/>
+                        <RowDefinition Name="rowIP8" Height="40"/>
+                        <RowDefinition Name="rowIP9" Height="40"/>
+                        <RowDefinition Name="rowIP10" Height="40"/>
+                        <RowDefinition Name="rowIP11" Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="9"  FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Content="{Loc IP_packet}" />
+                    <Label Grid.Row="1" Grid.Column="8" Grid.RowSpan="13" Width="Auto" Height="Auto">
+                        <TextBlock Name="textBlockIP" Background="White"/>
+                    </Label>
+                    <Path Name="pathIP1_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="1"/>
+                    <Path Name="pathIP1_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="1"/>
+                    <Path Name="pathIP1_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="1"/>
+                    <Path Name="pathIP1_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="1"/>
+                    <Path Name="pathIP1_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="1"/>
+                    <Path Name="pathIP1_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="1"/>
+                    <Path Name="pathIP1_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="1"/>
+                    <Path Name="pathIP1_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="1"/>
+                    <Path Name="pathIP2_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="2"/>
+                    <Path Name="pathIP2_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="2"/>
+                    <Path Name="pathIP2_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="2"/>
+                    <Path Name="pathIP2_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="2"/>
+                    <Path Name="pathIP2_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="2"/>
+                    <Path Name="pathIP2_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="2"/>
+                    <Path Name="pathIP2_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="2"/>
+                    <Path Name="pathIP2_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="2"/>
+                    <Path Name="pathIP3_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="3"/>
+                    <Path Name="pathIP3_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="3"/>
+                    <Path Name="pathIP3_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="3"/>
+                    <Path Name="pathIP3_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="3"/>
+                    <Path Name="pathIP3_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="3"/>
+                    <Path Name="pathIP3_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="3"/>
+                    <Path Name="pathIP3_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="3"/>
+                    <Path Name="pathIP3_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="3"/>
+                    <Path Name="pathIP4_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="4"/>
+                    <Path Name="pathIP4_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="4"/>
+                    <Path Name="pathIP4_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="4"/>
+                    <Path Name="pathIP4_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="4"/>
+                    <Path Name="pathIP4_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="4"/>
+                    <Path Name="pathIP4_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="4"/>
+                    <Path Name="pathIP4_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="4"/>
+                    <Path Name="pathIP4_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="4"/>
+                    <Path Name="pathIP5_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="5"/>
+                    <Path Name="pathIP5_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="5"/>
+                    <Path Name="pathIP5_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="5"/>
+                    <Path Name="pathIP5_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="5"/>
+                    <Path Name="pathIP5_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="5"/>
+                    <Path Name="pathIP5_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="5"/>
+                    <Path Name="pathIP5_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="5"/>
+                    <Path Name="pathIP5_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="5"/>
+                    <Path Name="pathIP6_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="6"/>
+                    <Path Name="pathIP6_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="6"/>
+                    <Path Name="pathIP6_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="6"/>
+                    <Path Name="pathIP6_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="6"/>
+                    <Path Name="pathIP6_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="6"/>
+                    <Path Name="pathIP6_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="6"/>
+                    <Path Name="pathIP6_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="6"/>
+                    <Path Name="pathIP6_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="6"/>
+                    <Path Name="pathIP7_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="7"/>
+                    <Path Name="pathIP7_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="7"/>
+                    <Path Name="pathIP7_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="7"/>
+                    <Path Name="pathIP7_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="7"/>
+                    <Path Name="pathIP7_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="7"/>
+                    <Path Name="pathIP7_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="7"/>
+                    <Path Name="pathIP7_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="7"/>
+                    <Path Name="pathIP7_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="7"/>
+                    <Path Name="pathIP8_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="8"/>
+                    <Path Name="pathIP8_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="8"/>
+                    <Path Name="pathIP8_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="8"/>
+                    <Path Name="pathIP8_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="8"/>
+                    <Path Name="pathIP8_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="8"/>
+                    <Path Name="pathIP8_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="8"/>
+                    <Path Name="pathIP8_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="8"/>
+                    <Path Name="pathIP8_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="8"/>
+                    <Path Name="pathIP9_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="9"/>
+                    <Path Name="pathIP9_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="9"/>
+                    <Path Name="pathIP9_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="9"/>
+                    <Path Name="pathIP9_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="9"/>
+                    <Path Name="pathIP9_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="9"/>
+                    <Path Name="pathIP9_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="9"/>
+                    <Path Name="pathIP9_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="9"/>
+                    <Path Name="pathIP9_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="9"/>
+                    <Path Name="pathIP10_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="10"/>
+                    <Path Name="pathIP10_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="10"/>
+                    <Path Name="pathIP10_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="10"/>
+                    <Path Name="pathIP10_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="10"/>
+                    <Path Name="pathIP10_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="10"/>
+                    <Path Name="pathIP10_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="10"/>
+                    <Path Name="pathIP10_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="10"/>
+                    <Path Name="pathIP10_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="10"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="tabARP" Header="{Loc ARP_packet}">
+                <Grid Name="gridARPPacket">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Name="columnARP1" Width="40"/>
+                        <ColumnDefinition Name="columnARP2" Width="40"/>
+                        <ColumnDefinition Name="columnARP3" Width="40"/>
+                        <ColumnDefinition Name="columnARP4" Width="40"/>
+                        <ColumnDefinition Name="columnARP5" Width="40"/>
+                        <ColumnDefinition Name="columnARP6" Width="40"/>
+                        <ColumnDefinition Name="columnARP7" Width="40"/>
+                        <ColumnDefinition Name="columnARP8" Width="40"/>
+                        <ColumnDefinition Name="columnARP9" Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Name="rowARP1" Height="40"/>
+                        <RowDefinition Name="rowARP2" Height="40"/>
+                        <RowDefinition Name="rowARP3" Height="40"/>
+                        <RowDefinition Name="rowARP4" Height="40"/>
+                        <RowDefinition Name="rowARP5" Height="40"/>
+                        <RowDefinition Name="rowARP6" Height="40"/>
+                        <RowDefinition Name="rowARP7" Height="40"/>
+                        <RowDefinition Name="rowARP8" Height="40"/>
+                        <RowDefinition Name="rowARP9" Height="40"/>
+                        <RowDefinition Name="rowARP10" Height="40"/>
+                        <RowDefinition Name="rowARP11" Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.ColumnSpan="9"  FontWeight="Bold" FontSize="16" VerticalAlignment="Top" Content="{Loc ARP_packet}" />
+                    <Label Grid.Row="1" Grid.Column="8" Grid.RowSpan="13" Width="Auto" Height="Auto">
+                        <TextBlock Name="textBlockARP" Background="White"/>
+                    </Label>
+                    <Path Name="pathARP1_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="1"/>
+                    <Path Name="pathARP1_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="1"/>
+                    <Path Name="pathARP1_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="1"/>
+                    <Path Name="pathARP1_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="1"/>
+                    <Path Name="pathARP1_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="1"/>
+                    <Path Name="pathARP1_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="1"/>
+                    <Path Name="pathARP1_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="1"/>
+                    <Path Name="pathARP1_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="1"/>
+                    <Path Name="pathARP2_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="2"/>
+                    <Path Name="pathARP2_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="2"/>
+                    <Path Name="pathARP2_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="2"/>
+                    <Path Name="pathARP2_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="2"/>
+                    <Path Name="pathARP2_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="2"/>
+                    <Path Name="pathARP2_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="2"/>
+                    <Path Name="pathARP2_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="2"/>
+                    <Path Name="pathARP2_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="2"/>
+                    <Path Name="pathARP3_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="3"/>
+                    <Path Name="pathARP3_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="3"/>
+                    <Path Name="pathARP3_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="3"/>
+                    <Path Name="pathARP3_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="3"/>
+                    <Path Name="pathARP3_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="3"/>
+                    <Path Name="pathARP3_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="3"/>
+                    <Path Name="pathARP3_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="3"/>
+                    <Path Name="pathARP3_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="3"/>
+                    <Path Name="pathARP4_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="4"/>
+                    <Path Name="pathARP4_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="4"/>
+                    <Path Name="pathARP4_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="4"/>
+                    <Path Name="pathARP4_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="4"/>
+                    <Path Name="pathARP4_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="4"/>
+                    <Path Name="pathARP4_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="4"/>
+                    <Path Name="pathARP4_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="4"/>
+                    <Path Name="pathARP4_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="4"/>
+                    <Path Name="pathARP5_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="5"/>
+                    <Path Name="pathARP5_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="5"/>
+                    <Path Name="pathARP5_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="5"/>
+                    <Path Name="pathARP5_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="5"/>
+                    <Path Name="pathARP5_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="5"/>
+                    <Path Name="pathARP5_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="5"/>
+                    <Path Name="pathARP5_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="5"/>
+                    <Path Name="pathARP5_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="5"/>
+                    <Path Name="pathARP6_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="6"/>
+                    <Path Name="pathARP6_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="6"/>
+                    <Path Name="pathARP6_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="6"/>
+                    <Path Name="pathARP6_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="6"/>
+                    <Path Name="pathARP6_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="6"/>
+                    <Path Name="pathARP6_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="6"/>
+                    <Path Name="pathARP6_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="6"/>
+                    <Path Name="pathARP6_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="6"/>
+                    <Path Name="pathARP7_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="7"/>
+                    <Path Name="pathARP7_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="7"/>
+                    <Path Name="pathARP7_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="7"/>
+                    <Path Name="pathARP7_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="7"/>
+                    <Path Name="pathARP7_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="7"/>
+                    <Path Name="pathARP7_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="7"/>
+                    <Path Name="pathARP7_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="7"/>
+                    <Path Name="pathARP7_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="7"/>
+                    <Path Name="pathARP8_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="8"/>
+                    <Path Name="pathARP8_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="8"/>
+                    <Path Name="pathARP8_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="8"/>
+                    <Path Name="pathARP8_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="8"/>
+                    <Path Name="pathARP8_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="8"/>
+                    <Path Name="pathARP8_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="8"/>
+                    <Path Name="pathARP8_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="8"/>
+                    <Path Name="pathARP8_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="8"/>
+                    <Path Name="pathARP9_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="9"/>
+                    <Path Name="pathARP9_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="9"/>
+                    <Path Name="pathARP9_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="9"/>
+                    <Path Name="pathARP9_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="9"/>
+                    <Path Name="pathARP9_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="9"/>
+                    <Path Name="pathARP9_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="9"/>
+                    <Path Name="pathARP9_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="9"/>
+                    <Path Name="pathARP9_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="9"/>
+                    <Path Name="pathARP10_1" Stroke="Black" StrokeThickness="1" Grid.Column="0" Grid.Row="10"/>
+                    <Path Name="pathARP10_2" Stroke="Black" StrokeThickness="1" Grid.Column="1" Grid.Row="10"/>
+                    <Path Name="pathARP10_3" Stroke="Black" StrokeThickness="1" Grid.Column="2" Grid.Row="10"/>
+                    <Path Name="pathARP10_4" Stroke="Black" StrokeThickness="1" Grid.Column="3" Grid.Row="10"/>
+                    <Path Name="pathARP10_5" Stroke="Black" StrokeThickness="1" Grid.Column="4" Grid.Row="10"/>
+                    <Path Name="pathARP10_6" Stroke="Black" StrokeThickness="1" Grid.Column="5" Grid.Row="10"/>
+                    <Path Name="pathARP10_7" Stroke="Black" StrokeThickness="1" Grid.Column="6" Grid.Row="10"/>
+                    <Path Name="pathARP10_8" Stroke="Black" StrokeThickness="1" Grid.Column="7" Grid.Row="10"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

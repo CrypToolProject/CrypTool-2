@@ -1,0 +1,15 @@
+<FlowDocument 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  Background="White">
+
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="18" FontFamily="Tahoma" xml:lang="de-de">
+            <Run.TextDecorations>
+                <TextDecoration Location="Underline" />
+            </Run.TextDecorations> Wizard
+        </Run>
+    </Paragraph>
+
+
+</FlowDocument>

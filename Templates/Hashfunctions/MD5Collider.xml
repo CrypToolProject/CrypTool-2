@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">MD5 Collision Finder</title>
+  <title lang="zh">MD5碰撞查找器</title>
+  <title lang="ru">MD5 Collision Finder</title>
+  <summary lang="en">Usage of the <i>MD5 Collision Finder</i></summary>
+  <summary lang="zh">MD5碰撞查找器的用法</summary>
+  <summary lang="ru">Использование MD5 Collision Finder</summary>
+  <description lang="en">This template shows the usage of the <i>MD5 Collision Finder</i>.</description>
+  <description lang="zh">该模板显示了MD5 Collision Finder的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование MD5 Collision Finder.</description>
+  <keywords>message, digest, Hash, Rivest, collision</keywords>
+  <keywords lang="zh">信息，摘要，哈希，Rivest，冲突</keywords>
+  <keywords lang="ru">сообщение, дайджест, хэш, ривест, столкновение</keywords>
+  <title lang="de">MD5-Kollisionsfinder</title>
+  <summary lang="de">Benutzung des <i>MD5-Kollisionsfinders</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>MD5-Kollisionsfinders</i>.</description>
+  <keywords lang="de">hash</keywords>
+  <icon file="MD5.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="Concatenate" />
+    <plugin name="MD5" />
+    <plugin name="MD5Collider" />
+    <plugin name="StreamComparator" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Random seed$" value="Zufälliger Seed (optional)" />
+    <replacement key="$MD5Collider$" value="MD5-Kollisionsgenerator" />
+    <replacement key="$Prefix$" value="Präfix (Vielfaches von 64 Bytes)" />
+    <replacement key="$Suffix$" value="Suffix (Daten beliebiger Länge)" />
+    <replacement key="$StringDecoder$" value="String-Kodierer" />
+    <replacement key="$StringEncoder$" value="String-Dekodierer" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$MD5 of data$" value="MD5 von Daten" />
+    <replacement key="$Data$" value="Daten" />
+    <replacement key="$Compare Data$" value="Vergleiche Daten" />
+    <replacement key="$Compare Hash$" value="Vergleiche Hash" />
+    <replacement key="$Same Data$" value="Gleiche Daten" />
+    <replacement key="$Same Hash$" value="Gleicher Hash" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Komponente MD5-Kollisionsgenerator, mit der eine MD5-Kollision der Form\line &lt;PRÄFIX&gt; || &lt;GENERIERTER KOLLISIONSBLOCK&gt; || &lt;SUFFIX&gt;\line erzeugt wird." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Random seed$" value="随机种子（可选）" />
+    <replacement key="$MD5Collider$" value="MD5碰撞产生器" />
+    <replacement key="$Prefix$" value="前缀（64字节的倍数）" />
+    <replacement key="$Suffix$" value="后缀（任意长度的数据）" />
+    <replacement key="$StringDecoder$" value="字符串编码器" />
+    <replacement key="$StringEncoder$" value="字符串解码器" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$MD5 of data$" value="数据的MD5" />
+    <replacement key="$Data$" value="数据" />
+    <replacement key="$Compare Data$" value="比较数据" />
+    <replacement key="$Compare Hash$" value="比较哈希" />
+    <replacement key="$Same Data$" value="相同的日期" />
+    <replacement key="$Same Hash$" value="相同的哈希" />
+    <replacement key="$memo$" value="该模板演示了MD5碰撞生成器组件的用法，该组件与\5线形式的MD5碰撞&lt;PRÄFIX&gt;||&lt;GENERIERTER KOLLISIONSBLOCK&gt; ||&lt;SUFFIX&gt; \行已创建。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Random seed$" value="Случайное семя (необязательно)" />
+    <replacement key="$MD5Collider$" value="MD5-Цион Генератор Kolli" />
+    <replacement key="$Prefix$" value="Префикс (несколько из 64 байтов)" />
+    <replacement key="$Suffix$" value="Суффикс (данные любой длины)" />
+    <replacement key="$StringDecoder$" value="Строка кодировщик" />
+    <replacement key="$StringEncoder$" value="Строка декодера" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$MD5 of data$" value="MD5 данных" />
+    <replacement key="$Data$" value="данные" />
+    <replacement key="$Compare Data$" value="Сравнить данные" />
+    <replacement key="$Compare Hash$" value="Сравнить хеш" />
+    <replacement key="$Same Data$" value="Те же данные" />
+    <replacement key="$Same Hash$" value="Тот же хеш" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует использование компонента генератора столкновений MD5, который вызывает столкновение MD5 формы \line &lt;PRÄFIX&gt; || &lt;GENERIERTER KOLLISIONSBLOCK&gt; || &lt;SUFFIX&gt; \line." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Random seed$" value="Random seed (optional)" />
+    <replacement key="$MD5Collider$" value="MD5 Collider" />
+    <replacement key="$Prefix$" value="Prefix (must be a multiple of 64 bytes)" />
+    <replacement key="$Suffix$" value="Suffix (data of any length)" />
+    <replacement key="$StringDecoder$" value="String Decoder" />
+    <replacement key="$StringEncoder$" value="String Encoder" />
+    <replacement key="$Concatenate$" value="Concatenate" />
+    <replacement key="$MD5 of data$" value="MD5 of data" />
+    <replacement key="$Data$" value="Data" />
+    <replacement key="$Compare Data$" value="Compare Data" />
+    <replacement key="$Compare Hash$" value="Compare Hash" />
+    <replacement key="$Same Data$" value="Same Data" />
+    <replacement key="$Same Hash$" value="Same Hash" />
+    <replacement key="$memo$" value="This template demonstrates the use of the MD5Collider component to generate an MD5 collision. A collision of the form\line &lt;PREFIX&gt; || &lt;GENERATED COLLISION BLOCK&gt; || &lt;SUFFIX&gt;\line is created." />
+  </replacements>
+</sample>

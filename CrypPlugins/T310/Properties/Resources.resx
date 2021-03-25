@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>T-310</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Historic Cipher Machine used by German Democratic Republic</value>
+  </data>
+  <data name="InputDataCaption" xml:space="preserve">
+    <value>Input data</value>
+  </data>
+  <data name="InputDataTooltip" xml:space="preserve">
+    <value>Enter plaintext (for encryption) or ciphertext (for decryption)</value>
+  </data>
+  <data name="InputKeyCaption1" xml:space="preserve">
+    <value>Subkey 1</value>
+  </data>
+  <data name="InputKeyTooltip1" xml:space="preserve">
+    <value>Enter a T-310 subkey as binary data. It needs to be exactly 120 bits (15 bytes) long and its parity must be odd.</value>
+  </data>
+  <data name="OutputDataCaption" xml:space="preserve">
+    <value>Output data</value>
+  </data>
+  <data name="OutputDataTooltip" xml:space="preserve">
+    <value>Resulting ciphertext (when encrypting) or plaintext (when decrypting)</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Do you want the input data to be encrypted or decrypted?</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>Decrypt</value>
+  </data>
+  <data name="VersionCaption" xml:space="preserve">
+    <value>Version of the T-310</value>
+  </data>
+  <data name="VersionList1" xml:space="preserve">
+    <value>T-310/50 telex encryption</value>
+  </data>
+  <data name="VersionList2" xml:space="preserve">
+    <value>T-310/51 data encryption</value>
+  </data>
+  <data name="VersionTooltip" xml:space="preserve">
+    <value>Die T310 was available in the models T-310/50 und T-310/51. Version 50 can only decrypt CCITT-2 encoded characters; version 51 any data. </value>
+  </data>
+  <data name="BitSelectorCaption" xml:space="preserve">
+    <value>Bit selector</value>
+  </data>
+  <data name="BitSelectorList1" xml:space="preserve">
+    <value>Most significant bits</value>
+  </data>
+  <data name="BitSelectorList2" xml:space="preserve">
+    <value>Least significant bits</value>
+  </data>
+  <data name="BitSelectorTooltip" xml:space="preserve">
+    <value>Choose if the most or least significant bits of certain vectors should be used</value>
+  </data>
+  <data name="Key14" xml:space="preserve">
+    <value>Long term key 14</value>
+  </data>
+  <data name="Key15" xml:space="preserve">
+    <value>Long term key 15</value>
+  </data>
+  <data name="Key16" xml:space="preserve">
+    <value>Long term key 16</value>
+  </data>
+  <data name="Key17" xml:space="preserve">
+    <value>Long term key 17</value>
+  </data>
+  <data name="Key21" xml:space="preserve">
+    <value>Long term key 21</value>
+  </data>
+  <data name="Key26" xml:space="preserve">
+    <value>Long term key 26</value>
+  </data>
+  <data name="Key29" xml:space="preserve">
+    <value>Long term key 29</value>
+  </data>
+  <data name="Key30" xml:space="preserve">
+    <value>Long term key 30</value>
+  </data>
+  <data name="Key31" xml:space="preserve">
+    <value>Long term key 31</value>
+  </data>
+  <data name="Key32" xml:space="preserve">
+    <value>Long term key 32</value>
+  </data>
+  <data name="Key33" xml:space="preserve">
+    <value>Long term key 33</value>
+  </data>
+  <data name="LongTermKeyCaption" xml:space="preserve">
+    <value>Long term key</value>
+  </data>
+  <data name="LongTermKeyTooltip" xml:space="preserve">
+    <value>Long term keys were special permutations used in the T-310 block cipher (Wurmreihe D-W). They were fixed to the machine, but could be changed.</value>
+  </data>
+  <data name="InputKeyCaption2" xml:space="preserve">
+    <value>Subkey 2</value>
+  </data>
+  <data name="InputKeyTooltip2" xml:space="preserve">
+    <value>Enter a T-310 subkey as binary data. It needs to be exactly 120 bits (15 bytes) long and its parity must be odd.</value>
+  </data>
+  <data name="ErrorBothKeysEvenParity" xml:space="preserve">
+    <value>Both keys are even. Odd keys are required. Check the documentation for more information.</value>
+  </data>
+  <data name="ErrorBothKeysLength" xml:space="preserve">
+    <value>Both keys have an incorrect length, provide 15 byte (120 bit) keys at both connectors. Both of these keys have to have an odd parity.</value>
+  </data>
+  <data name="ErrorBothKeysNull" xml:space="preserve">
+    <value>No keys connected, provide 15 byte (120 bit) keys at both connectors. Both these keys have to have an odd parity.</value>
+  </data>
+  <data name="ErrorEmptyConversion" xml:space="preserve">
+    <value>After converting the message into CCITT-2 character encoding, no characters of the messages were left. (The message consists completely of invalid characters)</value>
+  </data>
+  <data name="ErrorHeaderBytes" xml:space="preserve">
+    <value>The "magic number bytes" of the message header were invalid (It consists of 4 byte 0x19, 25 bytes inizialization vector and 4 byte 0x0F)</value>
+  </data>
+  <data name="ErrorHeaderIntegrity" xml:space="preserve">
+    <value>The message header is invalid. (It consists of 4 byte 0x19, 25 bytes inizialization vector and 4 byte 0x0F). The 4 byte at the beginning 0x19 and 0x0F at the end were valid.</value>
+  </data>
+  <data name="ErrorHeaderLength" xml:space="preserve">
+    <value>Message header could not be parsed, it is too short. Required Length: {0}; Given Length: {1}</value>
+  </data>
+  <data name="ErrorInputEmpty" xml:space="preserve">
+    <value>The input connector is empty, no action can be performed.</value>
+  </data>
+  <data name="ErrorInputNull" xml:space="preserve">
+    <value>No input connected, please connect a byte[] as input.</value>
+  </data>
+  <data name="ErrorKeyEvenParity" xml:space="preserve">
+    <value>The parity of Key {0} is even. An odd key is required. Check the documentation for more information.</value>
+  </data>
+  <data name="ErrorKeyLength" xml:space="preserve">
+    <value>Key {0} needs to be exactly 15 bytes long (120 bits). The given Key {0} is {1} bytes long.</value>
+  </data>
+  <data name="ErrorKeyNull" xml:space="preserve">
+    <value>Key {0} is not connected, provide a 15 byte (120 bit) key with an odd parity.</value>
+  </data>
+  <data name="ErrorUnconvertableBeginningPlural" xml:space="preserve">
+    <value>There were {0} unconvertable characters in the given message</value>
+  </data>
+  <data name="ErrorUnconvertableBeginningSingular" xml:space="preserve">
+    <value>There was {0} unconvertable character in the given message</value>
+  </data>
+  <data name="ErrorUnconvertableEndPlural" xml:space="preserve">
+    <value>; they were truncated before encrypting.</value>
+  </data>
+  <data name="ErrorUnconvertableEndSingular" xml:space="preserve">
+    <value>; it was truncated before encrypting.</value>
+  </data>
+</root>

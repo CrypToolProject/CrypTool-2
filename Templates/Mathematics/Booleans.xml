@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Booleans</title>
+  <title lang="zh">布尔值</title>
+  <title lang="ru">Булевы</title>
+  <summary lang="en">Usage of the <i>Boolean</i> components</summary>
+  <summary lang="zh">布尔组件的用法</summary>
+  <summary lang="ru">Использование булевых компонентов</summary>
+  <description lang="en">This template shows the usage of the <i>Boolean</i> components.</description>
+  <description lang="zh">此模板显示布尔组件的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование булевых компонентов.</description>
+  <keywords>Boole, binary, and, or, nand, nor, xor, exor, nor</keywords>
+  <keywords lang="zh">布尔，二进制，和，或，与，或，异或，异或</keywords>
+  <keywords lang="ru">Boole, двоичный, и, или, nand, nor, xor, exor, nor</keywords>
+  <title lang="de">Boole'sche Werte</title>
+  <summary lang="de">Benutzung der Komponente für <i>Boolsche Operationen</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der Komponente für <i>Boolsche Operationen</i>.</description>
+  <keywords lang="de">binär, und, oder, nicht</keywords>
+  <icon file="Booleans.png" />
+  <relevantPlugins>
+    <plugin name="BooleanBinaryOperators" />
+    <plugin name="BooleanInput" />
+    <plugin name="BooleanOutput" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$BooleanInput$" value="Boolesche Eingabe" />
+    <replacement key="$BooleanOutput$" value="Boolesche Ausgabe" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$BooleanInput$" value="布尔输入" />
+    <replacement key="$BooleanOutput$" value="布尔输出" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$BooleanInput$" value="Логический вход" />
+    <replacement key="$BooleanOutput$" value="Логический вывод" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$BooleanInput$" value="Boolean Input" />
+    <replacement key="$BooleanOutput$" value="Boolean Output" />
+  </replacements>
+</sample>

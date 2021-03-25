@@ -1,0 +1,36 @@
+﻿<h2>Merkle-Hellman-Cryptosystem</h2>
+<p>
+    The Merkle-Hellman-Cryptosystem (named after Ralph Merkle and Martin Hellman) 
+    was created in 1987 next to the RSA cryptosystem as one of the first asymmetric 
+    cryptosystems at all. It was characterized by the fact that it is relatively 
+    easy to understand. Of these two, however, only RSA prevailed since 
+    Merkle-Hellman soon was impressively broken using lattices.</p>
+<p>The Merkle-Hellman cryptosystem is based on the knapsack problem, more precisely, 
+    the partial sum problem. Given a set N of objects wj with the respective weight 
+    and a capacity constraint c. The aim is as in the general knapsack problem a 
+    maximization. The Merkle-Hellman cryptosystem is based on the partial sum 
+    problem, but requires an additional constraint, the result must correspond to 
+    the exact weight c. The knapsack problem belongs to the NP-complete problems.</p>
+<p>The knapsack problem can easily be illustrated with an example: Suppose a thief 
+    breaks at night into a shop and sees various valuables left on the shelves. His 
+    backpack carries only limited weight. Since he wants to maximize the total value 
+    of his stolen goods and would like to make his backpack full he must consider 
+    thoroughly 
+    what items he actually takes.</p>
+<p>
+    Idea of the cryptosystem: The private key is a superincreasing 
+    set of weights. For the owner of this key it is very easy to solve the partial 
+    sum problem for a certain capacity size, because he just has to check the 
+    weights one after the other in descending order by size weights. To transform 
+    the simple knapsack problem into a heavy knapsack problem, two large numbers q and w are 
+    generated with gcd (q, w) = 1. Further, there must be a number k such that k * w = 
+    1 mod q. This guarantees a multiplicative inverse for w which is needed for the 
+    decryption. This heavy knapsack problem is the public key.</p>
+<p>For the attack a square lattice matrix is set up and reduced with LLL:</p>
+<img src="ImgMerkleHellman" />
+
+<br/>
+<p>Bibliography:</p>
+<p>[MH78] Merkle, R. C. ; Hellman, M. E.: Hiding Information and Signatures in Trapdoor
+Knapsacks. In: IEEE Transactions on Information theory 24 (1978), no. 5,
+    pp. 525–530</p>

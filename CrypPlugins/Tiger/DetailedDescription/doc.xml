@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Tiger is a cryptographic hash function that was designed by the cryptographers Ross Anderson and Eli Biham in 1996.
+    The Tiger algorithm calculates a hash value of 192 bits (24 bytes) length from its input of arbitrary length.
+    Internally, Tiger operates on 64-bit words and is therefore optimized for the use on 64-bit architectures.
+    CrypTool2 implements version 2 of the Tiger algorithm.
+    <newline />
+    Tiger is patent-free and is not subjected to any limitations of use.
+  </introduction>
+  <introduction lang="zh-CN">Tiger是一种加密哈希函数，由密码学家Ross Anderson和Eli Biham在1996年设计。Tiger算法从其任意长度的输入中计算出192位（24字节）长度的哈希值。在内部，Tiger在64位字上运行，因此针对在64位体系结构上使用进行了优化。 CrypTool2实现了Tiger算法的版本2。 Tiger是免专利的，并且不受任何使用限制。</introduction>
+  <introduction lang="ru">Тигр - криптографическая хеш-функция, разработанная криптографами Росс Андерсон и Эли Бихем в 1996 году. Алгоритм Тигра вычисляет значение хэша длиной 192 бита (24 байта) от его ввода произвольной длины. Внутри Tiger работает на 64-битных словах и поэтому оптимизирован для использования на 64-битных архитектурах. CrypTool2 реализует версию 2 алгоритма Тигра. Тигр не имеет патентных прав и не подвергается каким-либо ограничениям использования.</introduction>
+  <introduction lang="de-DE">
+	  Tiger ist eine kryptographische Hash-Funktion und wurde 1996 von den Kryptographen Ross Anderson und Eli Biham entworfen. 
+	  Der Tiger-Algorithmus berechnet für eine Eingabe beliebiger Länge einen Hashwert mit einer Länge von 192 Bits (24 Bytes).
+	  Er arbeitet intern mit 64-Bit-Worten und ist daher optimiert für die Verwendung auf 64-Bit-Architekturen.
+	  In CrypTool2 ist die Version 2 des Tiger-Algorithmus implementiert.
+	  <newline />
+	  Tiger ist patentfrei und unterliegt keinen Nutzungsbeschränkungen.
+  </introduction>
+  <usage lang="en">
+    The Tiger component expects the data of which to calculate the hash value either as a byte array on the input labeled "Input Data" or as a data stream on the input labeled "Input Data Stream".
+    The resulting hash value is provided at the outputs of the component, again as a byte array and as a data stream.
+  </usage>
+  <usage lang="zh-CN">Tiger组件期望将其哈希值作为标记为“输入数据”的输入上的字节数组或作为标记为“输入数据流”的输入上的数据流来计算哈希值的数据。最终的哈希值在组件的输出端再次提供为字节数组和数据流。</usage>
+  <usage lang="ru">Компонент Tiger ожидает, что данные для вычисления хэш-значения будут либо в виде байтового массива на входе с меткой «Входные данные», либо как поток данных на входе с надписью «Input Data Stream». Полученное хеш-значение предоставляется на выходах компонента, снова как массив байтов и как поток данных.</usage>
+  <usage lang="de-DE">
+    Die Tiger-Komponente erwartet die Daten, deren Hashwert berechnet werden soll, entweder als Byte-Array am Eingang "Eingabedaten" oder als Datenstrom am Eingang "Eingabedatenstrom".
+    Der resultierende Tiger-Hashwert wird an den Ausgängen der Komponente wiederum als Datenstrom und als Byte-Array bereitgestellt.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://de.wikipedia.org/wiki/Tiger_(Hashfunktion)" lang="de" />
+      <caption lang="de">Tiger (Wikipedia)</caption>
+      <link url="http://en.wikipedia.org/wiki/Tiger_(cryptography)" lang="en" />
+      <caption lang="en">Tiger (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://www.cs.technion.ac.il/~biham/Reports/Tiger/" lang="de" />
+      <caption lang="de">Tiger-Homepage (engl.)</caption>
+      <link url="http://www.cs.technion.ac.il/~biham/Reports/Tiger/" lang="en" />
+      <caption lang="en">Tiger Homepage</caption>
+    </linkReference>
+  </references>
+</documentation>

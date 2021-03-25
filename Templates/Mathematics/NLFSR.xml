@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Non-Linear Feedback Shift Register (NLFSR)</title>
+  <title lang="zh">非线性反馈移位寄存器（NLFSR）</title>
+  <title lang="ru">Нелинейный регистр сдвига обратной связи (NLFSR)</title>
+  <summary lang="en">Usage of the <i>Non-Linear Feedback Shift Register</i></summary>
+  <summary lang="zh">非线性反馈移位寄存器的使用</summary>
+  <summary lang="ru">Использование нелинейного регистра сдвига обратной связи</summary>
+  <description lang="en">This template shows the usage of the <i>Non-Linear Feedback Shift Register</i>.</description>
+  <description lang="zh">该模板显示了非线性反馈移位寄存器的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование нелинейного регистра сдвига обратной связи.</description>
+  <keywords>shift, register, feedback</keywords>
+  <keywords lang="zh">移位，注册，反馈</keywords>
+  <keywords lang="ru">сдвиг, регистрация, обратная связь</keywords>
+  <title lang="de">Nichtlinear rückgekoppeltes Schieberegister (NLFSR)</title>
+  <summary lang="de">Benutzung des <i>Nichtlinear rückgekoppelten Schieberegisters</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>Nichtlinear rückgekoppelten Schieberegisters</i>.</description>
+  <keywords lang="de">shift, register, rückkopplung</keywords>
+  <icon file="NLFSR.png" />
+  <relevantPlugins>
+    <plugin name="NLFSR" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Tap Sequence$" value="Tap-Sequenz" />
+    <replacement key="$NLFSR$" value="Nichtlinear rückgekoppeltes Schieberegister" />
+    <replacement key="$TextOutput$" value="Textausgabe" />
+    <replacement key="$memo$" value="Ein nichtlinear rückgekoppeltes Schieberegister (engl. Non-Linear Feedback Shift Register, NLFSR) kommt oft in modernen Stromchiffren zum Einsatz, besonders in RFIDs und Smartcard-Anwendungen. NLFSRs sind widerstandsfähiger gegen kryptoanalytische Angriffe als linear rückgekoppelte Schieberegister (LFSRs), obwohl die Konstruktion von NLFSRs mit garantiert großen Perioden weiterhin ein ungelöstes Problem ist.\line\line http://en.wikipedia.org/wiki/NLFSR\line\line Werfen Sie auch einen Blick auf die LFSR-Vorlage in CrypTool 2." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Tap Sequence$" value="点击顺序" />
+    <replacement key="$NLFSR$" value="带有非线性反馈的移位寄存器" />
+    <replacement key="$TextOutput$" value="文字输出" />
+    <replacement key="$memo$" value="非线性反馈移位寄存器（NLFSR）通常用于现代流密码中，尤其是在RFID和智能卡应用中。 NLFSR比线性反馈移位寄存器（LFSR）更能抵抗密码分析攻击，尽管具有大周期保证的NLFSR的构造仍未解决。还要看看CrypTool 2中的LFSR模板。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Tap Sequence$" value="последовательность Tap" />
+    <replacement key="$NLFSR$" value="Регистр сдвига нелинейной обратной связи" />
+    <replacement key="$TextOutput$" value="вывод текста" />
+    <replacement key="$memo$" value="Регистр сдвига нелинейной обратной связи (NLFSR) часто используется в современных потоковых шифрах, особенно в приложениях RFID и смарт-карт. NLFSRs более устойчивы к криптоаналитическим атакам, чем линейные регистры сдвига обратной связи (LFSR), хотя построение NLFSR с гарантированными большими периодами остается нерешенной проблемой. \Line \line http://en.wikipedia.org/wiki/NLFSR\line\line Также взгляните на шаблон LFSR в CrypTool 2." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Tap Sequence$" value="Tap Sequence" />
+    <replacement key="$NLFSR$" value="Non-Linear Feedback Shift Register" />
+    <replacement key="$TextOutput$" value="Text Output" />
+    <replacement key="$memo$" value="A NLFSR (Non-Linear Feedback Shift Register) is a common component in modern stream ciphers, especially in RFID and smartcard applications. NLFSRs are known to be more resistant to cryptanalytic attacks than Linear Feedback Shift Registers (LFSRs), although construction of large NLFSRs with guaranteed long periods remains an open problem.\line\line http://en.wikipedia.org/wiki/NLFSR\line\line You may also want to take a look at the LFSR template included in CrypTool 2." />
+  </replacements>
+</sample>

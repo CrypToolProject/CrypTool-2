@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Primes.WpfControls.Components.LogControl2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Components">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/menu.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!--<GroupBox Header="{x:Static lang:Components.logprogress}" Name="gbHeader">-->
+    <ScrollViewer Name="scroller" ScrollChanged="scroller_ScrollChanged" VerticalScrollBarVisibility="Auto">
+        <Grid Name="gridMessages" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static lang:Components.logcontextmenucopyall}" Click="MenuItem_Click" Name="miCopyAll" />
+                </ContextMenu>
+            </Grid.ContextMenu>
+        </Grid>
+        <!--<StackPanel Name="pnlMessages" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />-->
+    </ScrollViewer>
+    <!--</GroupBox>-->
+
+</UserControl>

@@ -1,0 +1,21 @@
+Challenge ID: 703505 
+Indicator Procedure: Plain indicator followed by encrypted DOUBLED Message Key - in use from 1938 until 1940. Can be solved using Zygalski Sheets
+Total Length: 150 split into  1 messages. 
+
+
+Message Number: 1 of 1 Length: 167 Indicator: MRJ XRU(=<Message Key encrypted twice using daily Message Key>)
+
+
+ KVLBV COXKZ FSTHU FSWRB ANGPR
+ FQVAK HBILU AHCPE FZGCH LHUSF
+ LFJZI MWPLT JDLQY FVYKV YJSMA
+ NAZKQ MWXVE ETNGM QEVVQ QODCZ
+ XHOBG DBEOF WPDTK GCJZL NWTTD
+ SHHUB CBAIU KKBBP DIZAW QXIOY
+ IJRUY AMBNK UHBFO AA
+
+
+Crib provided for this message (message 1): ERFLEHTERGEISTXENTHULLEDI at position: 0
+
+
+

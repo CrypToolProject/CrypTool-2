@@ -1,0 +1,161 @@
+﻿<UserControl x:Class="Primes.WpfControls.PrimesDistribution.NumberRectangle.NumberRectangleControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Distribution">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
+                <Grid>
+                    <comps:ResizeThumb Width="2" Cursor="SizeWE" Margin="-2 0 0 0" BorderBrush="Black" Position="Left" VerticalAlignment="Stretch" BorderThickness="2" HorizontalAlignment="Left" LeftButtonUp="ResizeThumb_MouseLeftButtonDown" LeftButtonDown="ResizeThumb_LeftButtonDown" />
+                    <comps:ResizeThumb Width="2" Cursor="SizeWE" Margin="0 0 -2 0" Position="Right" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Black" HorizontalAlignment="Right" LeftButtonUp="ResizeThumb_MouseLeftButtonDown" LeftButtonDown="ResizeThumb_LeftButtonDown" />
+                    <comps:ResizeThumb Height="2" Cursor="SizeNS" Margin="0 0 0 -2" BorderBrush="Black" Position="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" BorderThickness="2" LeftButtonUp="ResizeThumb_MouseLeftButtonDown" LeftButtonDown="ResizeThumb_LeftButtonDown" />
+                    <comps:ResizeThumb Height="2" Margin="-2 -2 -2 -2" BorderBrush="Black" Position="Top" VerticalAlignment="Top" HorizontalAlignment="Stretch" BorderThickness="2" IsEnabled="False" />
+                    <comps:ResizeThumb Width="2" Height="2" Cursor="SizeNESW" Margin="-2 0 0 -2" Position="BottomLeft" VerticalAlignment="Bottom" BorderThickness="2" BorderBrush="Black" HorizontalAlignment="Left" LeftButtonUp="ResizeThumb_MouseLeftButtonDown" LeftButtonDown="ResizeThumb_LeftButtonDown" />
+                    <comps:ResizeThumb Width="2" Height="2" Cursor="SizeNWSE" Margin="-2 0 -2 -2" BorderThickness="2" BorderBrush="Black" Position="BottomRight" VerticalAlignment="Bottom" HorizontalAlignment="Right" LeftButtonUp="ResizeThumb_MouseLeftButtonDown" LeftButtonDown="ResizeThumb_LeftButtonDown" />
+                </Grid>
+            </ControlTemplate>
+
+            <ControlTemplate x:Key="ResizeableDesignerItem" TargetType="ContentControl">
+                <Grid>
+                    <Control Template="{StaticResource ResizeDecoratorTemplate}" DataContext="{Binding RelativeSource= {RelativeSource TemplatedParent}}" />
+                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}" />
+                </Grid>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0" Grid.ColumnSpan="2" Header="{x:Static lang:Distribution.numbergrid_input}" Margin="2">
+            <StackPanel>
+                <SelectableTextBlock Margin="5" x:Name="lblInfoError" Foreground="Blue"></SelectableTextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <SelectableTextBlock Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Center" Text="{x:Static lang:Distribution.numbergrid_width}"></SelectableTextBlock>
+
+                    <comps:InputSingleControl
+                        x:Name="iscWidth"
+                        InputRangeControlType="Horizontal"
+                        ShowButtons="False"
+                        ShowCalcInput="False"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FreeTextboxWidth="40"
+                        FreeText="10"
+                        ShowInfoErrorText="False"
+                        />
+                    <SelectableTextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="5" Text="{x:Static lang:Distribution.numbergrid_height}"></SelectableTextBlock>
+                    <comps:InputSingleControl
+                        x:Name="iscHeight"
+                        InputRangeControlType="Horizontal"
+                        ShowButtons="False"
+                        ShowCalcInput="False"
+                        Grid.Row="0"
+                        Grid.Column="3"
+                        FreeTextboxWidth="40"
+                        FreeText="10"
+                        ShowInfoErrorText="False"
+                        />
+                    <SelectableTextBlock Margin="5" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Text="{x:Static lang:Distribution.numbergrid_start}"></SelectableTextBlock>
+                    <comps:InputSingleControl
+                        x:Name="iscStart"
+                        InputRangeControlType="Horizontal"
+                        ShowButtons="False"
+                        ShowCalcInput="False"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        FreeTextboxWidth="100"
+                        FreeText="1"
+                        ShowInfoErrorText="False"
+                        />
+                    <DockPanel Grid.Row="2" Grid.ColumnSpan="4">
+                        <Button Name="btnExecute" Width="100" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Click="btnExecute_Click" Content="{x:Static lang:Distribution.numbergrid_btnExecute}"></Button>
+                    </DockPanel>
+
+                </Grid>
+            </StackPanel>
+
+        </GroupBox>
+        <Grid Grid.Row="2" Grid.RowSpan="2" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="32" />
+                <RowDefinition Height="2" />
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+            <SelectableTextBlock Grid.Row="0" TextWrapping="Wrap" MinWidth="100" Text="{x:Static lang:Distribution.numbergrid_scroll}" Visibility="Collapsed"></SelectableTextBlock>
+            <Button Template="{StaticResource doublearrowbtntmpl}" Grid.Row="1" Width="36" HorizontalAlignment="Right" Name="btnFastUp" Click="btnScroll_Click" ToolTip="{x:Static lang:Distribution.numbergrid_tooltipscrollupfast}" />
+            <Button Template="{StaticResource simplearrowbtntmpl}" Grid.Row="3" Width="36" HorizontalAlignment="Right" Name="btnUp" Click="btnScroll_Click" ToolTip="{x:Static lang:Distribution.numbergrid_tooltipscrollup}" />
+            <Button Template="{StaticResource simplearrowbtntmpl}" Grid.Row="5" Width="36" HorizontalAlignment="Right" Name="btnDown" Click="btnScroll_Click" ToolTip="{x:Static lang:Distribution.numbergrid_tooltipscrolldown}">
+                <Button.LayoutTransform>
+                    <RotateTransform Angle="180" />
+                </Button.LayoutTransform>
+            </Button>
+            <Button Template="{StaticResource doublearrowbtntmpl}" Grid.Row="7" Width="36" HorizontalAlignment="Right" Name="btnFastDown" Click="btnScroll_Click" ToolTip="{x:Static lang:Distribution.numbergrid_tooltipscrolldownfast}">
+                <Button.LayoutTransform>
+                    <RotateTransform Angle="180" />
+                </Button.LayoutTransform>
+            </Button>
+        </Grid>
+
+        <SelectableTextBlock x:Name="lblActualNumberInfo" Grid.Row="1" Grid.Column="1" Margin="5" HorizontalAlignment="Center" Visibility="Hidden">
+            <Run Text="{x:Static lang:Distribution.numbergrid_actualnumber}"/>
+            <Run x:Name="lblActualNumber" />
+        </SelectableTextBlock>
+
+        <Border VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Name="sv" Margin="5">
+                <Viewbox Grid.Row="0" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
+                    <Viewbox.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="{Binding ElementName=silderScale, Path=Value}" ScaleY="{Binding ElementName=silderScale, Path=Value}" />
+                        </TransformGroup>
+                    </Viewbox.LayoutTransform>
+                    <ContentControl Name="DesignerItem" Template="{StaticResource ResizeableDesignerItem}" SizeChanged="DesignerItem_SizeChanged" MinWidth="120" MinHeight="120" MaxWidth="1200" MaxHeight="1200">
+                        <!--<Border BorderBrush="Black" BorderThickness="1" Name="border" Grid.Row="1">-->
+                        <Canvas Name="NumberRectangle" MouseMove="NumberRectangle_MouseMove" MouseLeave="NumberRectangle_MouseLeave" SizeChanged="NumberRectangle_SizeChanged" RenderOptions.CachingHint="Cache">
+                        </Canvas>
+                        <!--</Border>-->
+                    </ContentControl>
+                </Viewbox>
+
+            </ScrollViewer>
+        </Border>
+        <GroupBox Header="{x:Static lang:Distribution.numbergrid_zoom}" Grid.Row="4" Grid.Column="1" Margin="5">
+            <Slider Name="silderScale" Minimum="0.1" Maximum="4" Value="2" />
+        </GroupBox>
+    </Grid>
+
+</UserControl>

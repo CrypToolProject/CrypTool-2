@@ -1,0 +1,16 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+              Background="White">
+
+  <Paragraph>
+      <Run FontWeight="Bold" FontSize="14" FontFamily="Calibri" xml:lang="de-de">
+        Berlekamp-Massey algorithm
+      </Run>
+  </Paragraph>
+  <Paragraph>
+      <Run FontSize="11" FontFamily="Cambria" xml:lang="de-de">
+      The Berlekamp–Massey algorithm is an algorithm for finding the shortest linear feedback shift register (LFSR) with length L for a given output sequence. Equivalently, it is an algorithm for finding the minimal polynomial C(D) of a linearly recurrent sequence.
+      The algorithm was invented by Elwyn Berlekamp in 1968. Its connection to linear codes was observed by James Massey the following year. It became the key to practical application of the now ubiquitous Reed–Solomon code.
+      </Run>
+  </Paragraph>
+</FlowDocument>

@@ -1,0 +1,40 @@
+{
+  "Round": 2,
+  "ActiveSBoxes": [
+    false,
+    false,
+    false,
+    true
+  ],
+  "IsFirst": false,
+  "IsLast": false,
+  "IsBeforeLast": false,
+  "Probability": 0.25,
+  "InputDifference": 8,
+  "ExpectedDifference": 4096,
+  "Characteristics": [
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        8,
+        4096,
+        0,
+        0,
+        0
+      ],
+      "OutputDifferentials": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "Probability": 0.25
+    }
+  ],
+  "UnfilteredPairList": [],
+  "FilteredPairList": [],
+  "EncrypedPairList": [],
+  "SearchPolicy": 2,
+  "AbortingPolicy": 1,
+  "SelectedAlgorithm": 2
+}

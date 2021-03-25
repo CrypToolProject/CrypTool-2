@@ -1,0 +1,14 @@
+﻿<ResourceDictionary x:Class="CrypTool.Plugins.ChaCha.ContentTemplate.ViewboxButton"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="..\Styles\Index.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <ControlTemplate x:Key="ViewboxButton" TargetType="{x:Type ContentControl}">
+        <Button>
+            <Viewbox Style="{StaticResource UniformViewbox}">
+                <ContentPresenter />
+            </Viewbox>
+        </Button>
+    </ControlTemplate>
+</ResourceDictionary>

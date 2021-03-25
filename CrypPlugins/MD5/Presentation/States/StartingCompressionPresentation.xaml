@@ -1,0 +1,24 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:displays="clr-namespace:CrypTool.MD5.Presentation.Displays"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="CrypTool.MD5.Presentation.States.StartingCompressionPresentation"
+    Height="400" Width="800" mc:Ignorable="d">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Grid>
+        <TextBlock Height="58" Margin="8,8,8,0" x:Name="textBlock1" VerticalAlignment="Top" Text="{Loc We_now_start_the_compression_function_for_our_next_data_block_}" Style="{DynamicResource textBlockStyle}" />
+        <displays:DataBlockDisplay Data="{Binding CurrentState.CurrentDataBlock}" Height="30" Margin="8,64,8,0" VerticalAlignment="Top" />
+        <TextBlock Margin="8,98,8,0" x:Name="textBlock2" TextWrapping="Wrap" Style="{DynamicResource textBlockStyle}" VerticalAlignment="Top" Height="85" ><Run Text="{Loc The_compression_function_operates_on_32_bit_integers_}"/></TextBlock>
+        <displays:HashAccumulatorDisplay DataContext="{Binding CurrentState}" Margin="8,199,0,156" HorizontalAlignment="Left" Width="350" />
+        <displays:CompressionVariableDisplay DataContext="{Binding NextState}" Margin="0,199,8,156" HorizontalAlignment="Right" Width="350" />
+        <Label Margin="364,199,356,156" x:Name="label1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Style="{DynamicResource labelStyle}" Content="&gt;&gt;&gt;"/>
+        <TextBlock Margin="8,0,8,98.7" x:Name="textBlock2_Copy" TextWrapping="Wrap" Style="{DynamicResource textBlockStyle}" VerticalAlignment="Bottom" Height="35" ><Run Text="{Loc We_also_split_our_512_bit_data_block_into_16_}"/></TextBlock>
+    	<displays:DataIntegerDisplay Margin="8,0,8,8" VerticalAlignment="Bottom" Height="86.7" DisplayedValues="{Binding NextState.DataAsIntegers}"/>
+    </Grid>
+</UserControl>

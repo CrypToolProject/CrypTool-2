@@ -1,0 +1,119 @@
+[b]CrypTool 2 Release 2020.1[b]
+
+Dear CrypTool 2 users,
+
+CrypTool 2 (CT2) is free, open-source e-learning software about cryptography and cryptanalysis. CT is used in schools, universities, companies, and administrations all over the world since more than 10 years.
+
+In April 2020, we published the first release of CT2 this year, named "2020.1". This is a major functional update (compared to the last release "2018.3").
+
+In this release, we improved the performance of the Workspace Manager significantly as well as of CT2 in general. Additionally, we updated several components and fixed bugs. Furthermore, we improved several templates, the online help, and the setting pages of CT2.
+
+As a major update with respect to modern cryptanalysis, we created a full visualized tutorial on differential cryptanalysis (DCA). For that, we implemented different components, like the DCA Path Finder or the DCA Key Recovery components.
+
+We aligned all user interfaces of all cryptanalysis components that have a "best list" by developing a general user interface for showing a best list. Also, the look and feel of the analysis components is now equalized.
+
+We created an English "quick introduction video" for new CT2 users, which can be opened in the Startcenter. The video is located on the new CT2 YouTube channel, where we weekly publish new videos on cryptography and cryptanalysis, always with the help of CT2. We would be happy if you support us by subscribing to our channel. Additionally, we maintain a Facebook page "CrypTool 2", where you can also get news and new videos on CT2.
+
+Thanks for the many users who sent feedback, requests, laud, and criticism.
+
+We hope that you have as much fun using CT2 as we have creating it!
+
+Stay safe and healthy!
+
+Sincerely yours,
+The CrypTool 2 Developer Team, April 2020
+
+
+------------------
+Changelog summary:
+------------------
+
+On April 23rd, we released a hotfix:
+- Fixed a bug in the Crypto Tutorials
+- Fixed a bug in the WorkspaceManager that prevented the change of icons in the Startcenter
+- Added a handler for uncaught exceptions in the UI thread
+- Optimized frequency analysis
+- Optimzed/added some more templates
+
+------------------
+Core components:
+------------------
+
+Workspace Manager (WSM):
+- The handling performance of the Workspace Manager is significantly improved.
+- Execution Engine: before execution, input properties of all plugins are now reset to their default values.
+- The log window is per default hidden now, when a new instance of the WSM is created.
+
+CrypTool Store:
+- After a server movement, the CrypTool Store was not working in the last release any more. This is fixed now.
+- CrypToolStore now also allows to view and download "resources" in the CrypToolStoreEditor.
+
+Online Help:
+- A lot of pages in the online help are improved.
+- Online help generation is now done during the build process of CT2, thus, there is no need to create it during the installation any more.
+
+Settings:
+- All settings pages of the settings tab of CT2 are refreshed.
+
+CrypCloud (and KeySearcher):
+- A lot of layout optimizations.
+- Additional information is now shown on job list usage in the UI.
+- Created possiblity in CrypCloudManager to copy job information to the clipboard.
+- Information about anonymous-login to login screen is now shown.
+- Layout looks "nicer" now.
+- Reactivated OpenCL for Cloud KeySearcher.
+
+Startcenter:
+- Added link to YouTube channel.
+- Replaced SVN RSS feed with YouTube RSS Feed.
+- Added quick introduction video.
+- Reworked buttons.
+
+------------------
+Components:
+------------------
+
+Playfair Analyzer:
+- The Playfair Analyzer is now implemented in C# (replaced the Java version).
+Thus, no Java installation is needed any more to run the analyzer.
+
+DECODE/DECRYPT tools
+- The former DECODE tools are removed. In one of the next releases, we introduce the new DECRYPT tools.
+
+Homophonic Substitution Analyzer:
+- It can now use all language statistics implemented in CT2.
+- Fixed some bugs, that caused a crash.
+
+Differential Cryptanalysis:
+- Different components were built that form a tutorial on differential cryptanalysis of modern block ciphers.
+
+CryptoTutorials: Lattice Tutorial / Primes Tutorial / PKCS#1:
+- A lot of rework of the user interface was done.
+
+MorseCode:
+- Sound output of the played morse code was improved.
+
+LFSR: 
+- Improved polynom to tap sequence regex parsing.
+
+Random Number Generator:
+- Added "subtractive generator" as new PRNG.
+
+Speck:
+- Implemented the block cipher Speck in different variants.
+- Added template for the Speck cipher.
+
+Number Operations:
+- Implemented many already documented but previously non-implemented math functions.
+
+Alphabets:
+- Added messagebox before deletion of an alphabet.
+- Did some minor layout fixes.
+
+Transposition and Transposition Analyzer:
+- Changed all byte array inputs to string inputs.
+
+Network Receiver:
+- Added lock to avoid race conditions.
+
+... and many more bugfixes, improvements, etc.

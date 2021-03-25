@@ -1,0 +1,21 @@
+Challenge ID: 317068 
+Indicator Procedure: Plain indicator followed by encrypted DOUBLED Message Key - in use from 1938 until 1940. Can be solved using Zygalski Sheets
+Total Length: 150 split into  1 messages. 
+
+
+Message Number: 1 of 1 Length: 159 Indicator: JYV KYP PUL(=<Plain Indicator> + <Message Key Encrypted twice by plain indicator>)
+
+
+ THSEB WUZHU JMVAS NQQFK MEPJW
+ YDMWO MTYGO TAQVG NFBYI PSGIK
+ LJYVL UBVBO XXUOB PHGWL LAGRL
+ AEKEO HWEUT LMKKS SIJSC BIFOC
+ CUVEP RTOKN FXFZG YJYZZ SBKFC
+ WMWZP GMBSQ HVBNN WZJTP LOHZQ
+ CHJVA XMKG
+
+
+Crib provided for this message (message 1): UNDWENNNATURDICHUNTERWEIS at position: 0
+
+
+

@@ -1,0 +1,440 @@
+﻿<UserControl x:Class="WorkspaceManager.View.Visuals.FullscreenVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WorkspaceManager.View.Visuals"
+             xmlns:model="clr-namespace:WorkspaceManager.Model;assembly=WorkspaceManagerModel"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:p="clr-namespace:CrypTool.PluginBase.Properties;assembly=CrypPluginBase" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="BackgroundRadientBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#6610548f" Offset="1.0"/>
+                    <GradientStop Color="#33239fcf" Offset="0.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="ContentBackground" >
+            <GradientStop Color="#e2ecf9" Offset="0" />
+            <GradientStop Color="#fff" Offset="0.5" />
+            <GradientStop Color="#e2ecf9" Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundMouseOver" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#ebf4ff" Offset="0.0"/>
+                    <GradientStop Color="#c2dcfd" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundIsFullscreen" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#fff5eb" Offset="0.0"/>
+                    <GradientStop Color="#fddfc2" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundNormal" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#fff9f5" Offset="0.0"/>
+                    <GradientStop Color="#ebe6e2" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundTitle" StartPoint="0,0.5" EndPoint="1,0.5">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="Transparent" Offset="0.0"/>
+                    <GradientStop Color="#e4eefa" Offset="0.5"/>
+                    <GradientStop Color="Transparent" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+        
+        <Style x:Key="ProgressBarStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid MinHeight="14" MinWidth="200">
+                            <Border
+                                Name="PART_Track" 
+                                Background="Transparent"
+                                BorderBrush="Transparent" />
+                            <Border 
+                                Name="PART_Indicator" Opacity="0.3"
+                                CornerRadius="2" 
+                                Background="{TemplateBinding Foreground}" 
+                                BorderBrush="#CCC" 
+                                BorderThickness="1" 
+                                HorizontalAlignment="Left" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ComponentListStyle" TargetType="{x:Type ListView}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+            </Style.Resources>
+            <Setter Property="Margin" Value="5,5,5,5"></Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Grid Background="{TemplateBinding Background}" Width="{TemplateBinding Width}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{Loc Component_Overview}" FontSize="14" FontWeight="Bold" 
+                                       Foreground="#444" Margin="5" Grid.Row="0"></TextBlock>
+                            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" Grid.Row="1">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type local:ComponentVisual}">
+                        <Border x:Name="Border" BorderBrush="White" BorderThickness="1.5" CornerRadius="3" Margin="2" Background="#edf5ff">
+                            <Grid x:Name="Background" Background="{StaticResource ResourceKey=BackgroundNormal}" Margin="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="40"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Border BorderThickness="1.5" BorderBrush="#888" CornerRadius="5" Grid.Column="0" Grid.Row="0">
+                                    <Image Source="{Binding Path=Icon.Source}" Margin="2.5"></Image>
+                                </Border>
+                                <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">     
+                                    <TextBlock Text="{Binding Path=CustomName}" TextTrimming="WordEllipsis" Foreground="#555" 
+                                               FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Path=FunctionName}" TextTrimming="WordEllipsis" Foreground="#555" 
+                                               HorizontalAlignment="Center"></TextBlock>
+                                </StackPanel>
+                                <ProgressBar Value="{Binding Path=Progress}" Style="{StaticResource ResourceKey=ProgressBarStyle}" Margin="2"
+                                           Foreground="ForestGreen" Maximum="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"></ProgressBar>
+                                <TextBlock FontFamily="Tahoma" FontSize="13" HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" FontWeight="ExtraBold" Foreground="WhiteSmoke" 
+                                           Grid.Column="1" Grid.Row="1">
+                                    <TextBlock.Text>
+                                        <Binding Path="Progress" StringFormat=" {0:p0}" FallbackValue="0"></Binding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=Border, Path=IsMouseOver}" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#7da2ce"></Setter>
+                                <Setter TargetName="Background" Property="Background" Value="{StaticResource ResourceKey=BackgroundMouseOver}"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Path=IsActive}" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#cea57d"></Setter>
+                                <Setter TargetName="Background" Property="Background" Value="{StaticResource ResourceKey=BackgroundIsFullscreen}"></Setter>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Static p:Settings.Default}, Path=WorkspaceManager_ToggleFullscreenPluginList}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Source={x:Static p:Settings.Default}, Path=WorkspaceManager_ToggleFullscreenPluginList}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <ControlTemplate x:Key="CtrlTemplate" TargetType="{x:Type Button}">
+            <Border x:Name="Border" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                <Image RenderOptions.BitmapScalingMode="Linear" 
+                       Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag.Source}" 
+                       Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"></Image>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#55222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#aa222222" TargetName="Border" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="CtrlTemplateChar" TargetType="{x:Type ToggleButton}">
+            <Border x:Name="Border" BorderThickness="1" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}" FontFamily="Arial"
+                            FontWeight="Bold" FontSize="10" TextAlignment="Center" Foreground="WhiteSmoke" VerticalAlignment="Center"></TextBlock>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#55222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#aa222222" TargetName="Border" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type Button}" x:Key="ActionBasicStyle">
+            <Setter Property="Height" Value="23"></Setter>
+            <Setter Property="Width" Value="23"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=IsEnabled}" Value="false">
+                    <Setter Property="Opacity" Value="0.3"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PresentationBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="23"></Setter>
+            <Setter Property="Width" Value="23"></Setter>
+            <Setter Property="Visibility" Value="Visible"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HasComponentPresentation, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                    <Setter Property="Opacity" Value="0.3"></Setter>
+                    <Setter Property="IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=ActiveComponent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
+                    <Setter Property="Opacity" Value="0.3"></Setter>
+                    <Setter Property="IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            
+        </Style>
+
+        <Style x:Key="SettingBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="23"></Setter>
+            <Setter Property="Width" Value="23"></Setter>
+            <Setter Property="Visibility" Value="Visible"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HasComponentSetting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                    <Setter Property="Opacity" Value="0.3"></Setter>
+                    <Setter Property="IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=ActiveComponent, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
+                    <Setter Property="Opacity" Value="0.3"></Setter>
+                    <Setter Property="IsEnabled" Value="False"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="OpenCloseBtnStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Width" Value="30"></Setter>
+            <Setter Property="Visibility" Value="Visible"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplateChar}"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Static p:Settings.Default}, Path=WorkspaceManager_ToggleFullscreenPluginList}" Value="True">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <sys:Boolean>False</sys:Boolean>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Tag">
+                        <Setter.Value>
+                            <sys:String>◄◄</sys:String>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Source={x:Static p:Settings.Default}, Path=WorkspaceManager_ToggleFullscreenPluginList}" Value="False">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <sys:Boolean>True</sys:Boolean>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Tag">
+                        <Setter.Value>
+                            <sys:String>►►</sys:String>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="WindowStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{Binding Path=ActiveComponent.BackgroundBrushColor}"></Setter>
+            <Setter Property="BorderBrush" Value="{Binding Path=ActiveComponent.BorderBrushColor}"></Setter>
+        </Style>
+
+        <Style x:Key="ContentPresenterStyle" TargetType="{x:Type ContentPresenter}">
+            <!--<Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsFullscreen}" Value="True">
+                    <Setter Property="Content" Value="{Binding Path=ActiveComponent.ActivePresentation, Onproper}"></Setter>
+                </DataTrigger>
+            </Style.Triggers>-->
+            <Setter Property="Content" Value="{Binding Path=ActivePresentation, UpdateSourceTrigger=PropertyChanged}"></Setter>
+        </Style>
+
+        <x:Array Type="{x:Type Button}" x:Key="Actions">
+            <Button ToolTip="{Loc PresentationTooltip}" Style="{StaticResource ResourceKey=PresentationBtnStyle}" Click="ActionHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/presentation.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Presentation</model:BinComponentState>
+            </Button>
+
+            <Button ToolTip="{Loc SettingsTooltip}" Style="{StaticResource ResourceKey=SettingBtnStyle}" Click="ActionHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/setting.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Setting</model:BinComponentState>
+            </Button>
+
+            <Button ToolTip="{Loc LogTooltip}" Style="{StaticResource ResourceKey=ActionBasicStyle}" Click="ActionHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/log.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Log</model:BinComponentState>
+            </Button>
+
+            <Button ToolTip="{Loc DataTooltip}" Style="{StaticResource ResourceKey=ActionBasicStyle}" Click="ActionHandler" >
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/data.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Data</model:BinComponentState>
+            </Button>
+        </x:Array>
+
+        <x:Array Type="{x:Type ButtonBase}" x:Key="Operations">
+            <Button Style="{StaticResource ResourceKey=ActionBasicStyle}" IsEnabled="False">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/minimize.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </Button.Tag>
+            </Button>
+
+            <Button Style="{StaticResource ResourceKey=ActionBasicStyle}" Click="CloseClickHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/min.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </Button.Tag>
+            </Button>
+
+            <Button Style="{StaticResource ResourceKey=ActionBasicStyle}" IsEnabled="False">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/delete.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </Button.Tag>
+            </Button>
+        </x:Array>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource ResourceKey=ContentBackground}" 
+          DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:FullscreenVisual}}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border CornerRadius="0,5,5,0" Background="#ccd8eb" BorderThickness="1.5" BorderBrush="#aaa" 
+                Grid.Column="0" Grid.RowSpan="2">
+            <Border CornerRadius="0,5,5,0" Background="#98a1af" Margin="1.5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton ToolTip="{Loc SettingsTooltip}" 
+                                  IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=WorkspaceManager_ToggleFullscreenPluginList, Mode=TwoWay}" 
+                                  Style="{StaticResource ResourceKey=OpenCloseBtnStyle}"
+                            HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="1">
+                    </ToggleButton>
+
+                    <ListView Style="{StaticResource ResourceKey=ComponentListStyle}" ItemsSource="{Binding Path=ComponentCollection}" 
+                              SelectedItem="{Binding Path=ActiveComponent, Mode=TwoWay}"
+                              SelectionMode="Single" Width="230" Grid.Column="0"></ListView>
+                </Grid>
+            </Border>
+        </Border>
+
+        <Border CornerRadius="5" BorderThickness="2" BorderBrush="#444" Grid.Row="0" Grid.Column="1">
+            <Border x:Name="Window" Style="{StaticResource ResourceKey=WindowStyle}" 
+                        CornerRadius="2" BorderThickness="3">
+                <Grid>
+                    <!--##########Definitions##########-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <!--<RowDefinition Height="16"></RowDefinition>-->
+                    </Grid.RowDefinitions>
+                    <!--##########/Definitions##########-->
+
+                    <!--##########Window Titlebar##########-->
+                    <Rectangle Fill="{Binding ElementName=Window, Path=BorderBrush}" Height="32" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0"></Rectangle>
+
+                    <DockPanel LastChildFill="True" Grid.Column="0" Grid.Row="0">
+
+                        <Border Background="{Binding ElementName=Window, Path=BorderBrush}" Padding="0,0,7,0" CornerRadius="0,0,10,0" DockPanel.Dock="Left">
+                            <ItemsControl x:Name="ActionsItemsControl" ItemsSource="{StaticResource ResourceKey=Actions}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </Border>
+
+                        <ItemsControl x:Name="OperationsItemsControl" ItemsSource="{StaticResource ResourceKey=Operations}" HorizontalAlignment="Right" VerticalAlignment="Top" DockPanel.Dock="Right">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Height="32" Orientation="Horizontal"></StackPanel>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+
+                        <Grid Height="30" VerticalAlignment="Top">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="{Binding Path=ActiveComponent.Icon.Source}" Margin="2.5" Grid.Column="0"></Image>
+                                <StackPanel Orientation="Vertical" Grid.Column="1">
+                                    <TextBlock Text="{Binding Path=ActiveComponent.CustomName}" 
+                               TextTrimming="WordEllipsis" Foreground="#555" 
+                               FontWeight="Bold" FontSize="12"></TextBlock>
+                                    <TextBlock Text="{Binding Path=ActiveComponent.FunctionName}" 
+                               TextTrimming="WordEllipsis" Foreground="#555"></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+
+                    </DockPanel>
+                    <!--##########/Window Titlebar##########-->
+
+                    <!--##########Content##########-->
+                    <ContentPresenter Content="{Binding Path=ActivePresentation}" Grid.Column="1" Grid.Row="1"></ContentPresenter>
+                    <!--##########/Content##########-->
+                </Grid>
+            </Border>
+        </Border>
+        <!--##########/Window##########-->
+
+    </Grid>
+</UserControl>

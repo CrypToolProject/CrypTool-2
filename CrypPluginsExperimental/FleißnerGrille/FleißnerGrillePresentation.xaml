@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="CrypTool.Plugins.FleißnerGrille.FleißnerGrillePresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="1250" d:DesignWidth="1850">
+    <Grid>
+        <Canvas Name="mainmain" Height="1250" Width="1850" HorizontalAlignment="Left">
+            <WrapPanel Canvas.Left="950" Canvas.Top="75" Height="850" Name="fieldWrapPanel" Width="850" />
+            <Canvas Canvas.Left="50" Canvas.Top="325" Height="850" Name="moveCanvas" Width="850">
+                <Canvas Canvas.Left="0" Canvas.Top="0" Height="850" Name="stencilCanvas" Width="850" />
+            </Canvas>
+            <WrapPanel Canvas.Left="50" Canvas.Top="75" Height="200" Name="inputWrap" Width="850" DataContext="{Binding}" />
+            <Label Canvas.Left="50" Canvas.Top="23" Content="input: " Height="45" Name="inputLabel" FontSize="32" FontFamily="Arial" Width="850" />
+            <Label Canvas.Left="50" Canvas.Top="282" Content="Stencil:" FontFamily="Arial" FontSize="32" Height="45" Name="stencilLabel" Width="300" />
+            <WrapPanel Canvas.Left="950" Canvas.Top="975" Height="200" Name="outputWrap" Width="850"></WrapPanel>
+            <Label Canvas.Left="950" Canvas.Top="923" Content="output:" FontFamily="Arial" FontSize="32" Height="45" Name="outputLabel" Width="850" />
+            <Label Canvas.Left="600" Canvas.Top="282" Content="Stencilsize:" FontFamily="Arial" FontSize="32" Height="45" Name="stencilSizeLabel" Width="300" />
+            <Canvas Canvas.Left="1565" Canvas.Top="1180" Height="40" Name="canvasControlPanel" Width="240">
+                <Button Canvas.Left="0" Click="buttonPlay_Click" Height="40" Name="buttonPlay" Width="40">
+                    <Image Source ="/FleißnerGrille;component/Images/Play.png"/>
+                </Button>
+                <Button Canvas.Left="40" Click="buttonBreak_Click" Height="40" Name="buttonBreak" Width="40">
+                    <Image Source ="/FleißnerGrille;component/Images/Break.png"/>
+                </Button>
+                <Button Canvas.Left="80" Click="buttonResume_Click" Height="40" Name="buttonResume" Width="40">
+                    <Image Source ="/FleißnerGrille;component/Images/Resume.png"/>
+                </Button>
+                <Button Canvas.Left="120" Click="buttonSpeed_Click" Height="40" Name="buttonSpeed" Width="40" Canvas.Top="0">
+                    <Image Source ="/FleißnerGrille;component/Images/Speed.png"/>
+                </Button>
+                <Button Canvas.Left="160" Click="buttonFillPeriod_Click" Height="40" Name="buttonFillPeriod" Width="40">
+                    <Image Source ="/FleißnerGrille;component/Images/FillPeriod.png"/>
+                </Button>
+                <Button Canvas.Left="200" Click="buttonStop_Click" Height="40" Name="buttonStop" Width="40">
+                    <Image Source ="/FleißnerGrille;component/Images/Stop.png"/>
+                </Button>
+            </Canvas>
+        </Canvas>
+    </Grid>
+</UserControl>
+

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Paillier cryptosystem is a probabilistic asymmetric algorithm for public-key cryptography.
+    <newline /><newline />
+    The homomorphic properties of this cryptosystem and further <b>references</b> are described in the online help of the <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>  component and in the <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_en.html">tutorial</internal> "Homomorphic Ciphers and their Importance in Cryptography".
+    <newline /><newline />
+    This component generates the public and the private key of the Paillier cryptosystem, that can be used by the <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef> component.
+  </introduction>
+  <introduction lang="zh-CN">Paillier密码系统是用于公钥密码的概率非对称算法。 Paillier组件的在线帮助和教程“同态密码及其在密码学中的重要性”中介绍了此密码系统的同态特性和其他参考。该组件生成Paillier密码系统的公钥和私钥，可由Paillier组件使用。</introduction>
+  <introduction lang="ru">Криптосистема Пайлера, названная в честь Паскаля Пайлера в 1999 году, была вероятностным асимметричным алгоритмом криптографии с открытым ключом. Считается, что проблема вычисления n-го класса вычетов является сложной вычислительной задачей. Предполагаемое предположение о композиционной остаточности решения - гипотеза о неразрешимости, на которой основана эта криптосистема. Особым атрибутом криптосистемы Пайлера являются его гомоморфные свойства: два зашифрованных сообщения могут быть добавлены без необходимости их дешифрования в первую очередь. Он также может умножать зашифрованное число с незашифрованным номером, так что результатом будет зашифрованный продукт. Этот компонент генерирует открытый и закрытый ключ криптосистемы Paillier, который может использоваться компонентом Paillier.</introduction>
+  <introduction lang="de-DE">
+    Das Paillier-Kryptosystem ist ein probabilistisches asymmetrisches Kryptosystem.
+    <newline /><newline />
+    Die homomorphen Eigenschaften von Paillier und weitere <b>Referenzen</b> werden in der Onlinehilfe der <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>-Komponente und im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptographie" genauer erläutert.
+    <newline /><newline />
+    Diese Komponente generiert den öffentlichen und den privaten Schlüssel des Paillier-Kryptosystems, die als Eingaben für die <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>-Komponente verwendet werden können.
+  </introduction>
+  <usage lang="en">
+    For the generation of the key, the component needs only two prime numbers.
+    In the settings of the component you can choose whether you want to enter the primes manually, or whether the component should
+    generate a pair of random primes. If you choose the second method, you can also enter the bit length that the generated primes should have.
+  </usage>
+  <usage lang="zh-CN">为了生成密钥，该组件仅需要两个质数。在组件的设置中，您可以选择是要手动输入素数，还是要生成一对随机素数。如果选择第二种方法，则还可以输入生成的素数应具有的位长。</usage>
+  <usage lang="ru">Для генерации ключа компонент нуждается только в двух простых числах. В настройках компонента вы можете выбрать, хотите ли вы вводить простые числа вручную или должен ли компонент генерировать пару случайных простых чисел. Если вы выберете второй метод, вы также можете ввести длину бит, которую должны иметь генерируемые простые числа.</usage>
+  <usage lang="de-DE">
+    Zur Erzeugung der Schlüssel ist lediglich die Angabe zweier Primzahlen notwendig.
+    Sie können in den Einstellungen angeben, ob Sie die Primzahlen eingeben oder von der Komponente automatisch generieren lassen wollen.
+    Wird die automatische Erzeugung gewählt, so können Sie noch die Bitlänge der zu erzeugenden Primzahlen einstellen.
+  </usage>
+</documentation>

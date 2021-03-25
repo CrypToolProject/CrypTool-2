@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="CrypTool.M138Analyzer.M138AnalyzerPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+             mc:Ignorable="d">
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc LocalLabel}" ResultListCaption="{Loc TopTenL}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc StartLabel}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc EndLabel}" x:Name="EndTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc ElapsedLabel}" x:Name="ElapsedTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc CurrentAnalysedKeylengthLabel}" x:Name="CurrentAnalysedKeylength" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc KeysPerSecondCurrentLabel}" x:Name="KeysPerSecondCurrentLabel" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc KeysPerSecondAverageLabel}" x:Name="KeysPerSecondAverageLabel" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
+            <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                <GridView>
+                    <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Ranking}" Width="25">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{Loc ValueHeader}" DisplayMemberBinding="{Binding Path=ExactValue}" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{Loc KeyHeader}" DisplayMemberBinding="{Binding Path=Key}" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{Loc OffsetHeader}" DisplayMemberBinding="{Binding Path=Offset}" Width="30">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <!---
+                        <GridViewColumn Header="{Loc KeyLengthHeader}" DisplayMemberBinding="{Binding Path=Offset}" Width="80">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        -->
+                    <GridViewColumn Header="{Loc TextHeader}" DisplayMemberBinding="{Binding Path=Text}" Width="300">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+        </crypanalysisviewcontrol:CrypAnalysisResultListView>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>

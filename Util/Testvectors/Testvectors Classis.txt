@@ -1,0 +1,140 @@
+--------------------------------------------------------------------------------
+Caesar
+--------------------------------------------------------------------------------
+
+Key: 24 
+Alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Plain:  Franz jagt im komplett verwahrlosten Taxi quer durch Bayern
+Cipher: Dpylx hyer gk imknjcrr tcpuyfpjmqrcl Ryvg oscp bspaf Zywcpl
+
+Key: 24 
+Alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 
+Plain:  Franz jagt im komplett verwahrlosten Taxi quer durch Bayern
+Cipher: dPyLX HyER GK IMKNJCRR TCPUyFPJMQRCL ryVG OSCP BSPAF ZyWCPL
+
+
+--------------------------------------------------------------------------------
+ADFGX
+--------------------------------------------------------------------------------
+
+Substitution: WIKPEDAZYXVUTSRQONMLHGFCB
+Transposition: BEOBACHTUNGSLISTE
+Klartext: Munitionierung beschleunigen Punkt Soweit nicht eingesehen auch bei Tag
+Geheimtext: GXGGADDDGDXXAFADDFAAXAFDFFXFDGDXGAGGAAXFAGADFAAADGFAXXADADFFFDDADFGAXGXAFXGXFXDAFAGFXXFAXGFDXFFDFAGXXGXXADGXGFXDFFDGAXXFFFFGDX
+
+--------------------------------------------------------------------------------
+ADFGVX
+--------------------------------------------------------------------------------
+
+Substitution: 8P3D1NLT4OAH7KBC5ZJU6WGMXSVIR29EY0FQ
+Transposition: MARK
+Klartext: ANGRIFFUMX0UHR
+Geheimtext: VVGVXGXXVVDADVDGVXGXDAVXGVGV
+
+Substitution: 8P3D1NLT4OAH7KBC5ZJU6WGMXSVIR29EY0FQ
+Transposition: RHIEN
+Klartext: CAN YOU ATTACK THE LEFT FLANK OF THE ARMY DURING THE SECOND HOUR TOMORROW. WE WILL BE ABLE TO SEND REINFORCEMENTS BY NOON. HOW MANY MEN DO YOU HAVE? DO YOU NEED SUPPLIES? SEND YOUR REPLY TO THE RIVER.
+Geheimtext: VDVDDXDXVDDDXGGDDFXDVGVGDDFFDVXXXVDADAGDXXDDGDDXDXDAGVXDVAFDDVVGXDDGDADAFVXVAVGXXGDDDGDGVADADDVGDGXDXGDGAXAFDFDGXGAAVDXDXADXVDDFDDFXXDDDDDGGVVXDAXVGVGXGFVXGAVAGXDVFDXGXXGDXXGGDVDVDAFVDXGXGVAGDVDDXVAGDVXDADVGAGDXVGGAXFDDADXVGXFXAGDFAGGVAFADGDXDAGVDDDVFFXGDFDDVDXXXVFVXDDDGGDDVGGDDDDXGVVFXDFDXGVGXXDVGDXADDDXGGVDDDVX
+
+--------------------------------------------------------------------------------
+Enigma
+--------------------------------------------------------------------------------
+
+(getestet mit Enigma Simulator v6.4 von D.Rijmenants)
+
+UKW: B
+Walzen: I II III
+Ringstellung A-01 A-01 A-01
+Stecker: keine
+
+Plaintext:  AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+Ciphertext: BDZGOWCXLTKSBTMCDLPBMUQOFXYHCXTGYJFLINHNXSHIUNTHEORXPQPKOVHCBUBTZSZSOOSTGOTFSODBBZZLXLCYZXIFGWFDZEEQIBMGFJBWZFCKPFMGBXQCIVIBBRNCOCJUVYDKMVJPFMDRMTGLWFOZLXGJEYYQPVPBWNCKVKLZTCBDLDCTSNRCOOVPTGBVBBISGJSOYHDENCTNUUKC
+
+--------------------------------------------------------------------------------
+M-209
+--------------------------------------------------------------------------------
+
+Key: AAAAAA
+
+Active Pins:
+   Rotor 1: ABDHIKMNSTVW
+   Rotor 2: ADEGJKLORSUX
+   Rotor 3: ABGHJLMNRSTUX
+   Rotor 4: CEFHIMNPSTU
+   Rotor 5: BDEFHIMNPS
+   Rotor 6: ABDHKNOQ
+
+Sliders:	36	06	16	15	45	04	04	04	04 20	20	20	20	20	20	20	20	20 20	25	25	05	05	05	05	05	05
+
+Plaintext:  AAAAAAAAAAAAAAAAAAAAAAAAAA
+Ciphertext: TNJUWAUQTKCZKNUTOTBCWARMIO
+
+--------------------------------------------------------------------------------
+Nihilist
+--------------------------------------------------------------------------------
+
+(Quelle: Wikipedia)
+
+Keyword1: ZEBRAS
+Keyword2: RUSSIAN
+
+Plaintext: DYNAMITE WINTER PALACE
+Ciphertext: 256A3E24432F561A68353E4D1B3739423724361B
+
+--------------------------------------------------------------------------------
+Playfair
+--------------------------------------------------------------------------------
+
+(Quelle: Wikipedia)
+
+Key: "playfair example"
+
+Plaintext: "Hide the gold in the tree stump" 
+Ciphertext: "BMODZBXDNABEKUDMUIXMMOUVIF"
+
+--------------------------------------------------------------------------------
+Scytale
+--------------------------------------------------------------------------------
+
+(Quelle: Wikipedia)
+
+Plaintext: "Help me I am under attack"
+Ciphertext: HENTEIDTLAEAPMRCMUAK
+
+--------------------------------------------------------------------------------
+Transposition
+--------------------------------------------------------------------------------
+
+Key: ZEBRAS
+Plaintext: WEAREDISCOVEREDFLEEATONCE
+Ciphertext: EVLNACDTESEAROFODEECWIREE
+
+--------------------------------------------------------------------------------
+Vigenere
+--------------------------------------------------------------------------------
+
+Key:			LEMON
+Plaintext	ATTACKATDAWN
+Ciphertext:	LXFOPVEFRNHR
+
+Key:			ABCD
+Plaintext:	CRYPTOISSHORTFORCRYPTOGRAPHY
+Ciphertext:	CSASTPKVSIQUTGQUCSASTPIUAQJB
+
+Key:			RELATIONS
+Plaintext:	TOBEORNOTTOBETHATISTHEQUESTION
+Ciphertext:	KSMEHZBBLKSMEMPOGAJXSEJCSFLZSY
+
+
+--------------------------------------------------------------------------------
+SZ-42
+--------------------------------------------------------------------------------
+
+http://www.codesandciphers.org.uk/cevent2.htm
+
+--------------------------------------------------------------------------------
+T-310
+--------------------------------------------------------------------------------
+
+http://scz.bplaced.net/t310-fs.html#scharf

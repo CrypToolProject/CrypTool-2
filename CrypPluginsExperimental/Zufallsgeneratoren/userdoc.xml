@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component generates pseudo-random numbers using the <i>DieHarder</i> implementation of these (pseudo)-random number generators.
+  </introduction>
+  <introduction lang="zh-CN">该组件使用这些（伪）随机数生成器的DieHarder实现来生成伪随机数。</introduction>
+  <introduction lang="ru">Этот компонент генерирует псевдослучайные числа, используя реализацию DieHarder этих генераторов (псевдо) -случайных чисел.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente nutzt die in <i>DieHarder</i> implementierten (pseudo)-Zufallszahlengeneratoren, um Pseudo-Zufallszahlen zu generieren und auszugeben.
+  </introduction>
+  <usage lang="en">
+    <list>
+      <item>Put a NumberInput component in front of the (pseudo)-random number generator and specify the amount of numbers you want to generate.</item>
+      <item>Connect the output of the NumberInput component with the input of the (pseudo)-random number generator component.</item>
+      <item>Place any component that needs (pseudo)-random numbers behind the (pseudo)-random number generator and connect them properly.</item>
+      <item>Push the start button to start the execution of the workspace.</item>
+    </list>
+  </usage>
+  <usage lang="zh-CN">将NumberInput组件放在（伪）随机数字生成器的前面，并指定要生成的数字数量。将NumberInput组件的输出与（伪）随机数字生成器组件的输入连接。需要在（伪）随机数生成器后面的（伪）随机数并正确连接它们。按开始按钮开始执行工作区。</usage>
+  <usage lang="ru">Поместите компонент NumberInput перед генератором (псевдо) -случайных чисел и укажите количество чисел, которое вы хотите сгенерировать. Соедините вывод компонента NumberInput с входом компонента генератора (псевдо) -случайного числа. Поместите любой компонент который требует (псевдо) -случайных чисел за генератором (псевдо) -случайного числа и правильно подключает их. Нажмите кнопку запуска, чтобы начать выполнение рабочей области.</usage>
+  <usage lang="de-DE">
+    <list>
+      <item>Mit einer Zahleneingabe-Komponente kann man die Menge der zu generierenden Pseudo-Zufallszahlen festlegen.</item>
+      <item>Der Ausgang der Zahleneingabe-Komponente wird mit dem Eingang der (Pseudo)-Zufallszahlengeneratoren-Komponente verbunden.</item>
+      <item>Erstelle und verbinde die Komponente, die die Pseudo-Zufallszahlen benötigt, mit dem Ausgang der (Pseudo)-Zufallszahlengeneratoren-Komponente.</item>
+      <item>Durch Betätigen des Start-Buttons wird die Ausführung gestartet.</item>
+    </list>
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://www.phy.duke.edu/~rgb/General/dieharder.php" lang="en" />
+      <caption lang="en">DieHarder homepage by Robert G. Brown</caption>
+      <link url="http://www.phy.duke.edu/~rgb/General/dieharder.php" lang="de-DE" />
+      <caption lang="de-DE">DieHarder-Homepage von Robert G. Brown (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

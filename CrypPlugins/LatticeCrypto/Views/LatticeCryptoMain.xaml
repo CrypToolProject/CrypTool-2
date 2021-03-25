@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="LatticeCrypto.Views.LatticeCryptoMain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Views="clr-namespace:LatticeCrypto.Views"
+        VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../WpfResources/LatticeCrypto.WpfResources.xaml" />
+    </UserControl.Resources>
+    <Grid Background="{StaticResource CTBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="345"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Views:Navigation x:Name="navigator"/>
+
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="3" HorizontalContentAlignment="Center" ResizeBehavior="PreviousAndNext" />
+
+        <Grid Grid.Column="2" Name="mainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <SelectableTextBlock Padding="5" Name="lblTitel" Margin="10,0,0,0" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center">Label</SelectableTextBlock>
+                <Image Cursor="Hand" Source="/LatticeCrypto;component/Utilities/Images/help32.gif" Width="24" Height="24" MouseLeftButtonDown="Image_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </DockPanel>
+            <ContentControl  Grid.Row="1" Name="ContentArea" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5">
+                <Views:StartControl HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" x:Name="StartControl"/>
+            </ContentControl>
+        </Grid>
+        
+        <!--<TabControl Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Shortest Vector Problem">
+                <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <TabItem Header="{x:Static Properties:Languages.tabGaussAlgorithm}" IsSelected="True">
+                        <Views1:SvpGaussView/>
+                    </TabItem>
+                    <TabItem Header="{x:Static Properties:Languages.tabLLLAlgorithm}">
+                        <Views:SvpLLLView/>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Closest Vector Problem">
+                <Views:CvpView/>
+            </TabItem>
+            <TabItem Header="{x:Static Properties:Languages.tabCryptanalysis}">
+                <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <TabItem Header="{x:Static Properties:Languages.tabAttackMerkleHellman}" IsSelected="True">
+                        <Views:MerkleHellmanView/>
+                    </TabItem>
+                    <TabItem Header="{x:Static Properties:Languages.tabAttackRSA}">
+                        <Views:RSAView/>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+        </TabControl>-->
+    </Grid>
+</UserControl>

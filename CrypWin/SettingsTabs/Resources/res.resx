@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="balloonTooltip" xml:space="preserve">
+    <value>This is a balloon</value>
+  </data>
+  <data name="MainSettings" xml:space="preserve">
+    <value>General settings</value>
+  </data>
+  <data name="NotificationIconSettings" xml:space="preserve">
+    <value>Notification icon</value>
+  </data>
+  <data name="checkLabelContent" xml:space="preserve">
+    <value>Update-check preferences (changes are firstly effective after a restart of CT2)</value>
+  </data>
+  <data name="UpdaterSettings" xml:space="preserve">
+    <value>Updater</value>
+  </data>
+  <data name="checkPeriodicallyContent" xml:space="preserve">
+    <value>Check periodically</value>
+  </data>
+  <data name="checkPeriodicallyText1Content" xml:space="preserve">
+    <value>Check for updates every </value>
+  </data>
+  <data name="checkPeriodicallyText2Content" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="checkPeriodicallyToolTip" xml:space="preserve">
+    <value>Check to check for updates periodically</value>
+  </data>
+  <data name="checkPeriodicallyWarningContent" xml:space="preserve">
+    <value>Please enter a valid integer</value>
+  </data>
+  <data name="minutesInputToolTip" xml:space="preserve">
+    <value>The checking time interval (in minutes)</value>
+  </data>
+  <data name="autoDownloadContent" xml:space="preserve">
+    <value>Download automatically</value>
+  </data>
+  <data name="autoDownloadToolTip" xml:space="preserve">
+    <value>Check to download updates automatically (if available)</value>
+  </data>
+  <data name="autoInstallContent" xml:space="preserve">
+    <value>Install automatically</value>
+  </data>
+  <data name="autoInstallToolTip" xml:space="preserve">
+    <value>Check to install updates automatically</value>
+  </data>
+  <data name="autoLabelContent" xml:space="preserve">
+    <value>Auto download/install options</value>
+  </data>
+  <data name="checkStartupContent" xml:space="preserve">
+    <value>Check on startup</value>
+  </data>
+  <data name="checkStartupToolTip" xml:space="preserve">
+    <value>Check to check for updates on startup</value>
+  </data>
+  <data name="Show_balloon_log_messages_in_balloon" xml:space="preserve">
+    <value>Show balloon log messages in balloon</value>
+  </data>
+  <data name="Show_error_log_messages_in_balloon" xml:space="preserve">
+    <value>Show error log messages in balloon</value>
+  </data>
+  <data name="Preferred_language" xml:space="preserve">
+    <value>Preferred language</value>
+  </data>
+  <data name="Please_restart_CrypTool" xml:space="preserve">
+    <value>Please restart CT2 for the change to take effect</value>
+  </data>
+  <data name="Show_balloon_log_messages_in_balloon_tooltip" xml:space="preserve">
+    <value>Check this to show the balloon log messages in the tray icon balloon!</value>
+  </data>
+  <data name="Show_error_log_messages_in_balloon_tooltip" xml:space="preserve">
+    <value>Check this to show the error log messages in the tray icon balloon!</value>
+  </data>
+  <data name="Reopen_last_opened_file" xml:space="preserve">
+    <value>Reopen last opened workspaces on startup</value>
+  </data>
+  <data name="Reopen_last_opened_file_tooltip" xml:space="preserve">
+    <value>Check this to reopen the last opened file on CT2 startup</value>
+  </data>
+  <data name="PluginSettings" xml:space="preserve">
+    <value>Settings of single components</value>
+  </data>
+  <data name="BackgroundingContent" xml:space="preserve">
+    <value>Hide in background when CT2 is closing and workspaces are still running</value>
+  </data>
+  <data name="BackgroundingLabelContent" xml:space="preserve">
+    <value>Backgrounding options</value>
+  </data>
+  <data name="BackgroundingToolTip" xml:space="preserve">
+    <value>Check to background CT2 when clicking close if there are running tasks</value>
+  </data>
+  <data name="PowerModeLabelContent" xml:space="preserve">
+    <value>Power saving options</value>
+  </data>
+  <data name="SavePowerContent" xml:space="preserve">
+    <value>Stop workspaces if power mode is offline</value>
+  </data>
+  <data name="SavePowerToolTip" xml:space="preserve">
+    <value>Check to save power</value>
+  </data>
+  <data name="Show_debug_log_messages_in_balloon" xml:space="preserve">
+    <value>Show debug log messages in balloon</value>
+  </data>
+  <data name="Show_debug_log_messages_in_balloon_tooltip" xml:space="preserve">
+    <value>Check this to show the debug log messages in the tray icon balloon!</value>
+  </data>
+  <data name="Show_info_log_messages_in_balloon" xml:space="preserve">
+    <value>Show info log messages in balloon</value>
+  </data>
+  <data name="Show_info_log_messages_in_balloon_tooltip" xml:space="preserve">
+    <value>Check this to show the info log messages in the tray icon balloon!</value>
+  </data>
+  <data name="Show_warning_log_messages_in_balloon" xml:space="preserve">
+    <value>Show warning log messages in balloon</value>
+  </data>
+  <data name="Show_warning_log_messages_in_balloon_tooltip" xml:space="preserve">
+    <value>Check this to show the warning log messages in the tray icon balloon</value>
+  </data>
+  <data name="cultureBox_tooltip" xml:space="preserve">
+    <value>Set your preferred language for CT2 here</value>
+  </data>
+  <data name="Startup_Behaviour" xml:space="preserve">
+    <value>Startup behaviour</value>
+  </data>
+  <data name="EditorOpeningContent" xml:space="preserve">
+    <value>New editor opening behaviour</value>
+  </data>
+  <data name="SelectEditorLabel" xml:space="preserve">
+    <value>Select preferred editor:</value>
+  </data>
+  <data name="SelectEditorTooltip" xml:space="preserve">
+    <value>Choose the editor you want to open when clicking the "New" button here</value>
+  </data>
+  <data name="UseLastEditorContent" xml:space="preserve">
+    <value>Use last editor</value>
+  </data>
+  <data name="UseLastEditorTooltip" xml:space="preserve">
+    <value>Check this to always open the last used editor when clicking the "New" button</value>
+  </data>
+  <data name="UseLastPathContent" xml:space="preserve">
+    <value>Use last path in file dialog</value>
+  </data>
+  <data name="UseLastPathTooltip" xml:space="preserve">
+    <value>Check this to ensure that the file dialog always shows the last path</value>
+  </data>
+  <data name="Restart_Button_Content" xml:space="preserve">
+    <value>Restart now</value>
+  </data>
+  <data name="BalloonDuration_Tooltip" xml:space="preserve">
+    <value>Set the duration of the balloon visibility in seconds</value>
+  </data>
+  <data name="Deselect_all" xml:space="preserve">
+    <value>Deselect all</value>
+  </data>
+  <data name="HeaderAssembly" xml:space="preserve">
+    <value>Assembly</value>
+  </data>
+  <data name="HeaderDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="HeaderDisabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="HeaderPluginName" xml:space="preserve">
+    <value>Component name</value>
+  </data>
+  <data name="Invert_selection" xml:space="preserve">
+    <value>Invert selection</value>
+  </data>
+  <data name="RecentFileListLength" xml:space="preserve">
+    <value>Length of the list of recently opened cwm files:</value>
+  </data>
+  <data name="seconds_" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="Select_all" xml:space="preserve">
+    <value>Select all</value>
+  </data>
+  <data name="Show_balloon_for_" xml:space="preserve">
+    <value>Show balloon for </value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Copy all lines</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>Copy line</value>
+  </data>
+  <data name="SingletonApplication" xml:space="preserve">
+    <value>Start CT2 as singleton application (Global setting: a change of the setting here has no effect. 
+It has to be manually edited in CrypWin.exe.config file in the CT2 installation directory).</value>
+  </data>
+  <data name="SingletonApplicationTooltip" xml:space="preserve">
+    <value>When checked only one CT2 application instance is started. Disable in CrypWin.exe.config file in the CT2 installation directory for allowing CT2 being started multiple times</value>
+  </data>
+  <data name="WriteLogFile" xml:space="preserve">
+    <value>Write log file</value>
+  </data>
+  <data name="WriteLogFileTooltip" xml:space="preserve">
+    <value>If this setting is enabled, CT2 automatically writes all of its log to a logfile</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>General settings</value>
+  </data>
+  <data name="UpdaterSettingsTitle" xml:space="preserve">
+    <value>Updater settings</value>
+  </data>
+  <data name="MessageSettings" xml:space="preserve">
+    <value>Message settings</value>
+  </data>
+  <data name="NotificationIconSettingsTitle" xml:space="preserve">
+    <value>Notification icon settings</value>
+  </data>
+  <data name="ComponentSettings" xml:space="preserve">
+    <value>Component Settings</value>
+  </data>
+  <data name="EnableDisableComponents" xml:space="preserve">
+    <value>Enable/disable components (for developers)</value>
+  </data>
+  <data name="DoYouReallyWantReset" xml:space="preserve">
+    <value>Do you really want to reset CT2's settings to default values? A restart is performed then.</value>
+  </data>
+  <data name="ResetCrypTool2Button" xml:space="preserve">
+    <value>Reset CT2 to default setting values</value>
+  </data>
+  <data name="ResetCrypTool2Label" xml:space="preserve">
+    <value>Reset CrypTool 2 (General settings, workspace, and updates)</value>
+  </data>
+  <data name="ResetToDefaultValues" xml:space="preserve">
+    <value>Reset to default values</value>
+  </data>
+  <data name="LogLevel" xml:space="preserve">
+    <value>Log level:</value>
+  </data>
+  <data name="LogLevelTooltip" xml:space="preserve">
+    <value>Sets the default loglevel, which is used in the CT2 log window. For example: If the level is set to 'Info', only logs with level 'Info' and above are shown.</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+</root>

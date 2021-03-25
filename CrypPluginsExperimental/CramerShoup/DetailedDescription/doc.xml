@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Cramer-Shoup is an asymmetric key encryption algorithm based on ElGamal.
+    Cramer-Shoup was presented by Ronald Cramer and Victor Shoup in 1998.
+    It was the first efficient cryptosystem against adaptive chosen ciphertext attacks.
+    In comparison to ElGamal, Cramer-Shoup was extended to ensure non-malleability even against a resourceful attacker.
+    The difference between ensure an increase of the ciphertexts size (two to three times).
+  </introduction>
+  <introduction lang="zh-CN">Cramer-Shoup是基于ElGamal的非对称密钥加密算法。 Cramer-Shoup由Ronald Cramer和Victor Shoup在1998年提出。它是第一个针对自适应选择的密文攻击的有效密码系统。与ElGamal相比，Cramer-Shoup进行了扩展，以确保即使对一个机智的攻击者也没有恶意。两者之间的差异确保密文大小增加（两到三倍）。</introduction>
+  <introduction lang="ru">Cramer-Shoup - это асимметричный алгоритм шифрования ключей, основанный на ElGamal. Крамер-Шуп был представлен Рональдом Крамером и Виктором Шоупом в 1998 году. Это была первая эффективная криптосистема против адаптивных выбранных атак шифрованного текста. По сравнению с ElGamal, Cramer-Shoup был расширен, чтобы обеспечить непривлекательность даже против находчивого атакующего. Разница между обеспечением увеличения размера зашифрованного текста (два-три раза).</introduction>
+  <introduction lang="de-DE">
+    Cramer-Shoup ist ein asymmetrisches Verschlüsselungsverfahren basierend auf ElGamal dem Verschlüsselungsschema.
+    Das Verfahren ist das erste asymmetrisches Verfahren, das gegenüber von Chosen Chiffretext Attacks (CCA) sicher ist ohne Random Oracle Model.
+    Bei einem CCA-sicheren Verfahren kann der Angreifer den Chiffretext entschlüsseln lassen.
+    Jedoch ist es nicht möglich während der Entschlüsselungsanfrage, den Chiffretext anhand gewonnener Informationen zu entschlüsseln.
+    Ein Random Oracle Model wird in der Kryptographie genutzt um (ideale) Hashfunktion zumodullieren.
+    Dabei kann es zu Problem führen, wenn eine reale Hashfunktion verwendet wird.
+    Dieses Verfahren wurde von Ronald Cramer und Victor Shoup im Jahr 1998 vorgestellt.
+    Die Unterschied zwischen Cramer-Shoup und ElGamal sind Erweiterung des Chiffretext um Verifizierung, dadurch kommt ein drei mal so länger Chiffretext zustande.
+  </introduction>
+  <usage lang="en">
+    Cramer-Shoup plugin is based on three components.
+    The different components are needed to build a cryptosystem based on the KEM/DEM paradigma.
+    This paradigma is developed to create a hybrid encryption scheme.
+    The asymmetric part is necessary to generate a random key and to generate the public/private key pair.
+    The key can be used for symmetric encryption scheme.
+    <section headline="Cramer-Shoup Key Generator">
+      The CS Key Generator is used to generate a public/private pair key based on a chosen elliptic curve.
+      The recommended elliptic is curve25519.
+      The output is split in two parts, the public key and the private key.
+    </section><newline /><newline />
+    The AES component has the two operation modes "Encaps" and "Decaps". You can switch between the modes in the settings of the component.
+    <section headline="Cramer-Shoup Encaps">
+      CS Encaps generates a session key and a ciphertext based on public key and chosen hash function.
+      The public key is an input and the hash function can be chosen via settings.
+    </section><section headline="Cramer-Shoup Decaps">
+      CS Decaps is used to extract the key from the ciphertext.
+      The hash function must be the same as in the encaps mode.
+    </section></usage>
+  <usage lang="zh-CN">Cramer-Shoup插件基于三个组件。建立基于KEM / DEM范式的密码系统需要不同的组件。开发此范式以创建混合加密方案。非对称部分对于生成随机密钥和生成公用/专用密钥对是必需的。该密钥可用于对称加密方案。 CS密钥生成器用于根据所选的椭圆曲线生成公共/专用对密钥。推荐的椭圆为curve25519。输出分为两部分，公钥和私钥。 AES组件具有两种操作模式“ Encaps”和“ Decaps”。您可以在组件设置中的模式之间切换。 CS Encaps根据公钥和所选的哈希函数生成会话密钥和密文。公钥是输入，可以通过设置选择哈希函数。 CS Decaps用于从密文中提取密钥。哈希函数必须与encaps模式相同。</usage>
+  <usage lang="ru">Плагин Cramer-Shoup основан на трех компонентах. Различные компоненты необходимы для построения криптосистемы на основе парадигмы KEM / DEM. Эта парадигма разработана для создания гибридной схемы шифрования. Асимметричная часть необходима для генерации случайного ключа и для создания пары открытых / закрытых ключей. Ключ можно использовать для симметричной схемы шифрования. Генератор ключей CS используется для генерации ключа public / private pair на основе выбранной эллиптической кривой. Рекомендуемая эллиптика - кривая25519. Вывод разделен на две части: открытый ключ и закрытый ключ. Компонент AES имеет два режима работы: «Encaps» и «Decaps». Вы можете переключаться между режимами в настройках компонента. CS Encaps генерирует ключ сеанса и шифрованный текст на основе открытого ключа и выбранной хэш-функции. Открытый ключ - это вход, а функция хэша может быть выбрана с помощью настроек. CS Decaps используется для извлечения ключа из зашифрованного текста. Хэш-функция должна быть такой же, как в режиме encaps.</usage>
+  <usage lang="de-DE">
+    Das Cramer-Shoup Plugin ist nach dem KEM/DEM Hybrid Paradigma aufgebaut.
+    Dieses Paradigma definiert ein kombiniertes Verschlüsselungssystem.
+    KEM ist der asymmetrische Teil: Dieser berechnet ein Schlüssel und den passende Chiffretext.
+    Anschließend lässt sich mit dem Chiffretext und dem geheimen Schlüssel der Schlüssel berechnen.
+    DEM ist der symmetrische Teil, der mit Hilfe von dem Schlüssel Daten verschlüsseln kann.
+    Das Cramer-Shoup Plugin besteht aus drei Komponenten.
+    <section headline="Cramer-Shoup Key Generator">
+      Wählen Sie in den Einstellungen der Komponente eine elliptische Kurve.
+      Die Ausgabe besteht aus dem geheimen und dem öffentlichen Schlüssel.
+      Der geheime Schlüssel wird für die Komponente Cramer-Shoup Decaps benötigt und der öffentliche Schlüssel wird für die Komponente Cramer-Shoup Encaps benötigt.
+    </section><newline /><newline />
+    Die Komponente hat die zwei Betriebsarten "Encaps" und "Decaps", zwischen denen in den Einstellungen der Komponente umgeschaltet werden kann.
+    <section headline="Encaps">
+      Wählen Sie in den Einstellungen der Komponente eine Hashfunktion.
+      Die Eingabe besteht nur aus dem öffentlichen Schlüssel (generiert in der Komponente Cramer-Shoup Key Generator).
+      Die Ausgabe besteht aus einem zufälligen Schlüssel und dem Geheimtext, der in der Komponente Cramer-Shoup Decaps benötigt wird.
+    </section><section headline="Decaps">
+      Wählen Sie in den Einstellungen der Komponente eine Hashfunktion.
+      Die Hashfunktion muss mit der Hashfunktion der Komponente Cramer-Shoup Encaps übereinstimmen.
+      Als Eingabe werden der geheime Schlüssel und der Geheimtext benötigt.
+      Die Ausgabe ist der generierte Schlüssel.
+    </section></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Cramer%E2%80%93Shoup_cryptosystem" lang="en" />
+      <caption lang="en">Cramer-Shoup cryptosystem (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Cramer-Shoup-Kryptosystem" lang="de-DE" />
+      <caption lang="de-DE">Cramer-Shoup-Kryptosystem (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

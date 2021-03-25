@@ -1,0 +1,72 @@
+Challenge ID: 703505 
+Indicator Procedure: Plain indicator followed by encrypted DOUBLED Message Key - in use from 1938 until 1940. Can be solved using Zygalski Sheets
+Total Length: 150 split into  1 messages. 
+Stecker Board Plugs: 10
+Crib for first message using 25 numbers in words followed by X
+Crib: ERFLEHTERGEISTXENTHULLEDI
+Full plain text:
+ERFLEHTERGEIST ENTHULLEDICH HAWIESINMEINEMHERZENREISST ZUNEUENGEFUHLEN ALLMEINESINNENSICHERWUHLEN ICHFUHLEGANZMEINHERZDIRHINGEGEBEN DUMUSSTDUMUSSTUNDKOSTETESMEINLEBEN 
+
+
+Daily Key:  UKW:B Wheels:213 Ring:AMM Msg:AUP Stb:BOCKDQEWFIGVHPJNLSTX(AOKQWIVPFNCSMJBHDRLXUGETYZ)
+
+
+
+
+Message Number: 1
+Message Key: IZF Message Key is encrypted with plain indicator: AUP  (Encrypted Doubled Msg Key: MRJXRU) Trigram Score: 18433 IC Score: 0.08000865738402713
+
+ERFLEHTERGEISTXENTHULLEDICHXHAWIESINMEINEMHERZENREISSTXZUNEUENGEFUHLENXALLMEINESINNENSICHERWUHLENXICHFUHLEGANZMEINHERZDIRHINGEGEBENX
+DUMUSSTDUMUSSTUNDKOSTETESMEINLEBENX
+
+Crib: ERFLEHTERGEISTXENTHULLEDI at position: 0
+
+
+
+Indicators (non encrypted)
+
+IZF    ZZZ    MMM    FNU    PHK    HIJ    LBH    YJU    RST    UVW    
+AAA    FMC    KJY    WSX    KLM    POW    CRX    WVJ    RFV    TTT    
+OZZ    QKL    ASU    MEF    XXX    XLK    LMN    RFT    UXX    IJK    
+QQQ    ABC    ZGV    WCL    BCD    GVZ    NNN    GHI    CPD    YYY    
+FFF    UHD    OKM    XRV    ANN    KGG    SFC    CAA    YLR    VDS    
+PJV    PPP    RKU    XYZ    YWR    CCC    VYM    MJR    III    LLL    
+OKA    VWX    PQR    ESY    EEE    OPQ    ERC    MJG    OMT    VKJ    
+QPH    VVV    VGX    QJR    ZUZ    YRD    GGG    AKT    LSQ    HYB    
+ZOW    YUV    HJX    IHT    QAY    PBG    LTD    NOP    WAP    TFR    
+QPM    WXY    OOO    TFC    TEB    PLG    MXP    RDX    NBF    JMA    
+ANU    FGH    JBR    JKL    FJF    TUL    HAJ    GHQ    BVJ    QQQ    
+QRS    GJT    EBA    ADF    QIL    AOG    FNZ    JSP    TGB    ZWR    
+Challenge ID: 703505 
+Indicator Procedure: Plain indicator followed by encrypted DOUBLED Message Key - in use from 1938 until 1940. Can be solved using Zygalski Sheets
+Total Length: 150 split into  1 messages. 
+
+
+Message Number: 1 of 1 Length: 167 Indicator: MRJ XRU(=<Message Key encrypted twice using daily Message Key>)
+
+
+ KVLBV COXKZ FSTHU FSWRB ANGPR
+ FQVAK HBILU AHCPE FZGCH LHUSF
+ LFJZI MWPLT JDLQY FVYKV YJSMA
+ NAZKQ MWXVE ETNGM QEVVQ QODCZ
+ XHOBG DBEOF WPDTK GCJZL NWTTD
+ SHHUB CBAIU KKBBP DIZAW QXIOY
+ IJRUY AMBNK UHBFO AA
+
+
+Crib provided for this message (message 1): ERFLEHTERGEISTXENTHULLEDI at position: 0
+
+
+MRJXRU     VRGRRJ     ICRJVT     NSOBPF     TOXSEG     XPFGUZ     BUPVFY     GKOCKF     QNLZYM     SYEWMI     
+EDDDXS     NCSBVP     WKVEKH     KNKUYO     WERETT     THESDI     JZKYZO     KYFUMZ     QXYZBB     PQLQLM     
+DRGNRJ     RJTTJR     ENODYF     ILJJHU     HFKIAO     HEXITG     BCQVVD     QXLZBM     SFKWAO     MKXXKG     
+RTNTCE     EUSDFP     VWYRWB     KMTUQR     LMAFQN     YYGHMJ     FSQOPD     YOBHEW     JIAYNN     GVVCSH     
+NXJBBU     SOAWEN     DJRNJT     HZYIZB     ESQDPD     WWZEWK     UXSPBP     JDDYXS     GEMCTL     ZACLOA     
+TKYSKB     TIHSNC     QJOZJF     HVGISJ     GGMCGL     JMSYQP     ZVRLST     IKMJKL     MPBXUW     BETVTR     
+DJDNJS     ZGKLGO     TTMSCL     ANVKYH     ALWKHQ     DINNNE     AZSKZP     IKZJKK     DCLNVM     ZJFLJZ     
+RIPTNY     ZYYLMB     ZWKLWO     RKMTKL     VBGRIJ     GZACZN     YWZHWK     EJLDJM     BNNVYE     XVIGSV     
+VHERDI     GBYCIB     XKKGKO     MOLXEM     RDVTXH     TUZSFK     BQAVLN     FHHODC     KDHUXC     PXMQBL     
+RIRTNT     KFVUAH     DHUNDX     PXSQBP     PLIQHV     TEZSTK     IFHJAC     QAKZOO     FUJOFU     CCDMVS     
+ESODPF     NWPBWY     CUMMFL     CJTMJR     NKJBKU     PBTQIR     XDFGXZ     YONHEE     LYFFMZ     RTNTCE     
+RZCTZA     YKLHKM     AUDKFS     EAJDOU     RPTTUR     EHZDDK     NSGBPJ     CNHMYC     PWIQWV     VGMRGL     
+

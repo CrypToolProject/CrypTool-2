@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">AES Encryption with Implicit Conversion</title>
+  <title lang="zh">隐式转换的AES加密</title>
+  <title lang="ru">Шифрование AES с неявным преобразованием</title>
+  <summary lang="en">Encryption with the <i>AES</i> cipher using the implicit conversion of input and output data types</summary>
+  <summary lang="zh">使用输入和输出数据类型的隐式转换使用AES密码进行加密</summary>
+  <summary lang="ru">Шифрование с использованием AES-шифра с использованием неявного преобразования входных и выходных типов данных</summary>
+  <description lang="en">This template demonstrates the automatic conversion of data types. If the data types of two joined connectors allow for an unambiguous conversion, CrypTool2 converts them implicitly without the need for an explicit conversion with a Converter component.</description>
+  <description lang="zh">该模板演示了数据类型的自动转换。如果两个连接的连接器的数据类型允许进行明确的转换，则CrypTool2隐式转换它们，而无需使用Converter组件进行显式转换。</description>
+  <description lang="ru">Этот шаблон демонстрирует автоматическое преобразование типов данных. Если типы данных двух соединенных соединителей допускают однозначное преобразование, CrypTool2 преобразует их неявно без необходимости явного преобразования с компонентом Converter.</description>
+  <keywords>advanced, Daemen, Rijmen, Rijndael, symmetric, nist, conversion, data, type</keywords>
+  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist，转换，数据，类型</keywords>
+  <keywords lang="ru">продвинутый, Daemen, Rhymes, Rijndael, симметричный, nist, преобразование, данные, тип</keywords>
+  <title lang="de">AES-Verschlüsselung mit impliziter Konvertierung</title>
+  <summary lang="de">Verschlüsselung mit der <i>AES</i>-Chiffre und impliziter Konvertierung der Datentypen von Ein- und Ausgabe</summary>
+  <description lang="de">Diese Vorlage demonstriert die automatische Konvertierung von Datentypen. Wenn die Datentypen zweier verbundener Konnektoren eine eindeutige Konvertierung zulassen, führt CrypTool2 diese implizit selbst durch, ohne dass eine zwischengeschaltete Konvertierungs-Komponente notwendig ist.</description>
+  <keywords lang="de">symmetrisch, Datentyp</keywords>
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$AES$" value="AES-Verschlüsselung" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Key$" value="Schlüssel (wird konvertiert und expandiert)" />
+    <replacement key="$memo$" value="Wenn die Datentypen zweier verbundener Konnektoren eine eindeutige Konvertierung zulassen, führt CrypTool2 diese implizit selbst durch, ohne dass eine zwischengeschaltete Konvertierungs-Komponente notwendig ist. In diesem Beispiel wird der Klartext automatisch von String in einen Stream konvertiert und der Schlüssel von String in ein Byte-Array." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$AES$" value="AES加密" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Key$" value="密钥（将转换并扩展）" />
+    <replacement key="$memo$" value="如果两个连接的连接器的数据类型允许进行明确的转换，则CrypTool2本身将隐式执行此操作，而无需中间转换组件。在此示例中，纯文本自动从String转换为流，而密钥从String自动转换为字节数组。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$AES$" value="шифрования AES" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Key$" value="Ключ (будет преобразован и расширен)" />
+    <replacement key="$memo$" value="Если типы данных двух подключенных соединителей допускают уникальное преобразование, CrypTool2 неявно выполняет их без необходимости в компоненте промежуточного преобразования. В этом примере обычный текст автоматически преобразуется из строки в поток и к ключу от строки к массиву байтов." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$AES$" value="AES Encryption" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Key$" value="Key (to be converted + expanded)" />
+    <replacement key="$memo$" value="If the data types of two joined connectors allow for an unambiguous conversion, CrypTool2 converts them implicitly without the need for an explicit conversion with a Converter component. In this example, the plaintext is automatically converted from String to Stream and the key from String to a byte array." />
+  </replacements>
+</sample>

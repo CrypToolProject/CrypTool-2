@@ -1,0 +1,75 @@
+# These are default parameters for different size factorizations.
+# They will be used only to fill in any non-user-supplied parameters.
+# At the moment, they surely will not be optimal - they are just
+# my best guess. Once we've gathered more data from succesful factorizations
+# we will be able to fill them in more accurately.
+# The format of the file is as follows:
+#
+# type,digits,deg,maxs1,maxskew,goodScore,efrac,j0,j1,eStepSize, 
+#       maxTime,rlim,alim,lpbr,lpba,mfbr,mfba,rlambda,alambda,qintsize,A,B
+#
+###########################################################################
+# 4/10/05: Note that the last two fields are new; these specify a default classical
+# sieve range, for (a,b)\in [-A,A]x[1,B].
+# The values that are here are just a random choice for now; at some point,
+# somebody should do some experimentation at various levels to decide on
+# more reasonable choices.
+###########################################################################
+#
+# Of course, for SNFS numbers, the values deg through maxTime are ignored,
+# since these are used only for polynomial selection. Also note that for
+# SNFS numbers, the 'digits' is the SNFS difficulty. For example, if you're
+# factoring a c110 divisor of 10^130-1, the SNFS difficulty is 130 since
+# you could essentially factor a special 130 with the same parameters (i.e.,
+# most obviously, the 'm' will be the same size as for a special 130).
+# Finally: note that some of these numbers are pure guesses - I grabbed
+# some of them from factorizations with earlier versions of GGNFS for which
+# lambda values were limited to < 2.0, but tried to make a reasonable
+# guess at what might be good. I am currently running a large number of tests
+# to get some good figures for the polynomial selection numbers.
+# Note: The 'qintsize' figures have apparent drop-offs and places where the
+# 13I siever kicks in instead of the 12I siever, because the 13I spends more
+# time on each 'q' value than the 12I does. There will also be another dropoff
+# where the 14I kicks in.
+
+gnfs,70,4,51,1500,4.0e-2,0.30,200,12,10000,200,300000,350000,24,24,34,34,1.7,1.7,8000,2000000,200
+gnfs,75,4,52,1500,1.2e-2,0.30,200,12,10000,300,350000,400000,24,24,34,34,1.7,1.7,10000,2000000,200
+gnfs,80,4,52,1500,5.0e-3,0.30,220,15,10000,400,350000,500000,24,24,37,37,1.7,1.7,10000,2000000,200
+gnfs,85,4,56,1500,1.0e-3,0.30,200,15,10000,500,550000,550000,24,24,40,40,1.9,1.9,10000,2000000,200
+gnfs,88,4,56,1500,6.0e-4,0.30,200,15,10000,500,600000,600000,25,25,43,43,2.2,2.2,10000,2000000,200
+gnfs,90,4,58,2000,2.5e-4,0.30,220,15,10000,600,700000,700000,25,25,44,44,2.4,2.4,40000,2000000,200
+gnfs,95,4,60,2000,1.0e-4,0.30,220,15,10000,600,1200000,1200000,25,25,45,45,2.4,2.4,60000,2000000,200
+gnfs,100,5,58,1500,3.0e-3,0.4,220,15,10000,2000,1800000,1800000,26,26,48,48,2.5,2.5,100000,4000000,300
+gnfs,103,5,59,2000,9.0e-4,0.35,200,15,15000,2000,2300000,2300000,26,26,49,49,2.6,2.6,100000,4000000,300
+gnfs,106,5,59,2000,6.0e-4,0.25,200,15,15000,2000,2500000,2500000,26,26,49,49,2.6,2.6,150000,4000000,300
+gnfs,110,5,61,2000,1.5e-4,0.3,250,15,50000,2400,3200000,3200000,27,27,50,50,2.6,2.6,100000,4000000,300
+gnfs,112,5,61,2000,1.6e-4,0.25,250,15,50000,2800,3500000,3500000,27,27,50,50,2.6,2.6,100000,4000000,300
+gnfs,118,5,63,2000,2.6e-5,0.28,250,20,50000,3600,4500000,4500000,27,27,50,50,2.4,2.4,60000,4000000,300
+# These next two are complete guesses. But then, I think most of these are. At
+# some point, we need to gather some stats and figure out reasonable choices
+# in a systematic way.
+gnfs,122,5,65,2000,1.0e-5,0.28,250,20,50000,3600,6000000,6000000,27,27,50,50,2.4,2.4,60000,4000000,300
+gnfs,126,5,65,2000,1.0e-5,0.28,250,20,50000,3600,8000000,8000000,27,27,51,51,2.5,2.5,100000,4000000,300
+gnfs,128,5,65,2000,1.0e-5,0.28,250,20,50000,3600,11000000,11000000,27,27,51,51,2.6,2.6,100000,4000000,300
+gnfs,130,5,65,2000,1.0e-5,0.28,250,20,50000,3600,11000000,11000000,27,27,51,51,2.6,2.6,100000,4000000,300
+gnfs,134,5,65,2000,1.0e-5,0.28,250,20,50000,3600,12000000,12000000,28,28,51,51,2.6,2.6,100000,4000000,300
+gnfs,137,5,65,2000,1.0e-5,0.28,250,20,50000,3600,15000000,15000000,28,28,51,51,2.6,2.6,100000,4000000,300
+gnfs,140,5,65,2000,1.0e-5,0.28,250,20,50000,3600,18000000,18000000,28,28,52,52,2.6,2.6,100000,4000000,300
+
+
+
+snfs,100,4,0,0,0,0,0,0,0,0,300000,350000,25,25,43,43,2.1,2.1,10000,2000000,200
+snfs,110,4,0,0,0,0,0,0,0,0,450000,500000,25,25,44,44,2.2,2.2,20000,2000000,200
+snfs,125,5,0,0,0,0,0,0,0,0,600000,800000,25,25,46,46,2.4,2.4,50000,2000000,200
+snfs,130,5,0,0,0,0,0,0,0,0,800000,800000,25,25,44,44,2.2,2.2,50000,2000000,200
+snfs,137,5,0,0,0,0,0,0,0,0,1000000,800000,25,25,43,43,2.3,2.3,75000,2000000,200
+snfs,144,5,0,0,0,0,0,0,0,0,1300000,1300000,26,26,45,45,2.3,2.3,100000,2000000,200
+snfs,148,5,0,0,0,0,0,0,0,0,1500000,1500000,26,26,45,45,2.3,2.3,100000,4000000,400
+snfs,153,5,0,0,0,0,0,0,0,0,2400000,2400000,27,27,48,48,2.3,2.3,100000,4000000,400
+snfs,156,5,0,0,0,0,0,0,0,0,3000000,3000000,27,27,48,48,2.3,2.3,100000,4000000,400
+snfs,160,5,0,0,0,0,0,0,0,0,4000000,4000000,27,27,48,48,2.3,2.3,100000,4000000,400
+snfs,163,5,0,0,0,0,0,0,0,0,4500000,4500000,27,27,48,48,2.3,2.3,100000,4000000,400
+snfs,166,5,0,0,0,0,0,0,0,0,5000000,5000000,27,27,48,48,2.5,2.5,100000,4000000,400
+snfs,168,5,0,0,0,0,0,0,0,0,5500000,5500000,27,27,48,48,2.6,2.6,100000,4000000,400
+snfs,170,5,0,0,0,0,0,0,0,0,6000000,6000000,27,27,48,48,2.6,2.6,100000,4000000,400
+snfs,175,5,0,0,0,0,0,0,0,0,7400000,7400000,27,27,48,48,2.6,2.6,100000,4000000,400

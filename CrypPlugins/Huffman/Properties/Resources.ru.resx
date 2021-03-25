@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>действие</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>Компресс</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>Распаковка</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Выберите действие алгоритма.</value>
+  </data>
+  <data name="CharacterCaption" xml:space="preserve">
+    <value>символ</value>
+  </data>
+  <data name="CodeCaption" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="CodeTableCaption" xml:space="preserve">
+    <value>Таблица кодов</value>
+  </data>
+  <data name="CompressedSizeCaption" xml:space="preserve">
+    <value>Сжатый размер:</value>
+  </data>
+  <data name="CompressionRateCaption" xml:space="preserve">
+    <value>Степень сжатия:</value>
+  </data>
+  <data name="EncodingCaption" xml:space="preserve">
+    <value>Кодирование входных данных</value>
+  </data>
+  <data name="EncodingList1" xml:space="preserve">
+    <value>UTF-8,</value>
+  </data>
+  <data name="EncodingList2" xml:space="preserve">
+    <value>UTF-7</value>
+  </data>
+  <data name="EncodingList3" xml:space="preserve">
+    <value>UTF-16</value>
+  </data>
+  <data name="EncodingList4" xml:space="preserve">
+    <value>UTF-32</value>
+  </data>
+  <data name="EncodingList5" xml:space="preserve">
+    <value>ASCII</value>
+  </data>
+  <data name="EncodingList6" xml:space="preserve">
+    <value>ISO8859-15</value>
+  </data>
+  <data name="EncodingList7" xml:space="preserve">
+    <value>Windows-1252</value>
+  </data>
+  <data name="EncodingTooltip" xml:space="preserve">
+    <value>Выберите кодировку входных данных.</value>
+  </data>
+  <data name="FrequencyCaption" xml:space="preserve">
+    <value>частота</value>
+  </data>
+  <data name="InputBytesCaption" xml:space="preserve">
+    <value>байт []</value>
+  </data>
+  <data name="InputBytesTooltip" xml:space="preserve">
+    <value>Входные данные для обработки алгоритмом Хаффмана</value>
+  </data>
+  <data name="InputHuffmanTreeCaption" xml:space="preserve">
+    <value>Вход дерева Хаффмана</value>
+  </data>
+  <data name="InputHuffmanTreeTooltip" xml:space="preserve">
+    <value>Входное дерево Хаффмана, используемое для сжатия входных данных</value>
+  </data>
+  <data name="OutputBytesCaption" xml:space="preserve">
+    <value>байт []</value>
+  </data>
+  <data name="OutputBytesTooltip" xml:space="preserve">
+    <value>Данные, обработанные алгоритмом Хаффмана</value>
+  </data>
+  <data name="OutputHuffmanTreeCaption" xml:space="preserve">
+    <value>Выход дерева Хаффмана</value>
+  </data>
+  <data name="OutputHuffmanTreeTooltip" xml:space="preserve">
+    <value>Дерево Хаффмана, используемое для сжатия входных данных</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Хаффман</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Алгоритм сжатия данных</value>
+  </data>
+  <data name="PresentationCaption" xml:space="preserve">
+    <value>Формат презентации</value>
+  </data>
+  <data name="PresentationList1" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="PresentationList2" xml:space="preserve">
+    <value>двоичный</value>
+  </data>
+  <data name="PresentationTooltip" xml:space="preserve">
+    <value>Выберите формат, который будет использоваться для представления входных данных.</value>
+  </data>
+  <data name="UncompressedSizeCaption" xml:space="preserve">
+    <value>Несжатый размер:</value>
+  </data>
+</root>

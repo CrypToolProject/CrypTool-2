@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Oblivious Transfer Protocol (1 out of n)</title>
+  <title lang="zh">遗忘传输协议（n个中的1个）</title>
+  <title lang="ru">Записанный протокол передачи (1 из n)</title>
+  <summary lang="en">Usage of the <i>Oblivious transfer protocol (1 out of n)</i></summary>
+  <summary lang="zh">遗忘传输协议的使用（n个中的1个）</summary>
+  <summary lang="ru">Использование протокола передачи Забытого (1 из n)</summary>
+  <description lang="en">This template shows the <i>Oblivious transfer protocol (1 out of n)</i>.</description>
+  <description lang="zh">此模板显示了遗忘传输协议（n中有1个）。</description>
+  <description lang="ru">Этот шаблон показывает протокол передачи Oblivious (1 из n).</description>
+  <keywords>oblivious transfer</keywords>
+  <keywords lang="zh">遗忘转移</keywords>
+  <keywords lang="ru">забытый перевод</keywords>
+  <title lang="de">Oblivious Transfer-Protokoll (1 aus n)</title>
+  <summary lang="de">Benutzung des <i>Oblivious Transfer-Protokoll (1 aus n)</i></summary>
+  <description lang="de">Diese Vorlage zeigt das <i>Oblivious Transfer-Protokoll (1 aus n)</i>.</description>
+  <keywords lang="de">oblivious transfer</keywords>
+  <icon file="ObliviousTransfer.png" />
+  <relevantPlugins>
+    <plugin name="ObliviousTransfer1" />
+    <plugin name="ObliviousTransfer2" />
+    <plugin name="RSAKeyGenerator" />
+    <plugin name="RandomNumberGenerator" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$RSA Key$" value="RSA-Schlüssel" />
+    <replacement key="$Newline$" value="Zeilenumbruch" />
+    <replacement key="$Split$" value="Trenne" />
+    <replacement key="$Database$" value="Datenbank" />
+    <replacement key="$Requested entry$" value="Angefragter Eintrag" />
+    <replacement key="$step1$" value="{\b Schritt 1}\line Alice erzeugt eine Liste von Zufallszahlen (eine Zufallszahl pro Datenbankeintrag)." />
+    <replacement key="$step2$" value="{\b Schritt 2}\line Bob generiert zufälliges k und v=x[i]+enc(k)." />
+    <replacement key="$step3$" value="{\b Schritt 3}\line Alice sendet verschlüsselte Datenbank-Einträge m[j]+dec(v-x[j])." />
+    <replacement key="$step4$" value="{\b Schritt 4}\line Bob entschlüsselt den angefragten Datenbank-Eintrag." />
+    <replacement key="$memo1$" value="Alices geheimer und privater Schlüssel" />
+    <replacement key="$memo2$" value="Alices Datenbank (eine Zahl pro Zeile)" />
+    <replacement key="$memo3$" value="Index der angefragten Nachricht" />
+    <replacement key="$desc$" value="{\b Oblivious Transfer-Protokoll}\line\line Alice hat eine Datenbank mit mehreren Einträgen. Bob will einen dieser Einträge abfragen, aber er will nicht, dass Alice weiss, welchen Eintrag er abgefragt hat. Alice ist bereit, Bob den angefragten Eintrag zu schicken, aber sie will nicht, dass Bob mehr als einen Eintrag pro Abfrage erhält.\line\line Das {\b Oblivious Transfer-Protokoll} erfüllt diese Bedingungen. Dazu muss Alice die Schlüssel für eine RSA-Verschlüsselung zur Verfügung stellen. Alice und Bob folgen diesen Schritten:\line\line {\b Schritt 1:} Alice erzeugt eine Liste x von Zufallszahlen. Die Liste muss dieselbe Anzahl von Zahlen enthalten wie es Einträge in der Datenbank gibt, und die Zahlen müssen kleiner als der Modulus N des RSA-Schlüssels sein. Alice sendet x an Bob.\line\line {\b Schritt 2:} Bob wählt den Index i, der die Nummer des Eintrages in Alices Datenbank ist, den Bob abfragen will. Er erzeugt eine Zufallszahl k, die zur Verschleierung von i vor Alice dient: er berechnet v = x[i] + encode(k) mit Alices öffentlichem Schlüssel und sendet v an Alice.\line\line {\b Schritt 3:} Für jeden Eintrag m[j] in ihrer Datenbank berechnet Alice den Wert m[j] + decode(v-x[j]) mit ihrem privaten Schlüssel und sendet die resultierende Liste an Bob. Für Eintrag Nummer i ergibt dies m[i]+k, aber da Alice k nicht kennt, kann sie nicht feststellen, um welchen Eintrag es sich handelt.\line\line {\b Schritt 4:} Bob empfängt Alices Liste und wählt Eintrag i aus, welcher m[i] + k ist. Er subtrahiert k und erhält m[i], den Eintrag aus Alices Datenbank, den er abfragen wollte. Ohne Alices privaten Schlüssel kann Bob die anderen Werte aus Alices Liste nicht rekonstruieren." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$RSA Key$" value="RSA密钥" />
+    <replacement key="$Newline$" value="新队" />
+    <replacement key="$Split$" value="断开" />
+    <replacement key="$Database$" value="数据库" />
+    <replacement key="$Requested entry$" value="要求输入" />
+    <replacement key="$step1$" value="{\b步骤1} \行Alice创建一个随机数列表（每个数据库条目一个随机数）。" />
+    <replacement key="$step2$" value="{\b步骤2} \行Bob产生随机k，v = x [i] + enc（k）。" />
+    <replacement key="$step3$" value="{\b步骤3} \行Alice发送加密的数据库条目m [j] + dec（vx [j]）。" />
+    <replacement key="$step4$" value="{\b步骤4} \行Bob解密请求的数据库条目。" />
+    <replacement key="$memo1$" value="爱丽丝的秘密和私钥" />
+    <replacement key="$memo2$" value="爱丽丝的数据库（每行一个数字）" />
+    <replacement key="$memo3$" value="请求消息的索引" />
+    <replacement key="$desc$" value="{\b遗忘传输协议} \line \line Alice有一个包含多个条目的数据库。鲍勃想查询这些条目之一，但他不希望爱丽丝知道他查询了哪个条目。爱丽丝已准备好向鲍勃发送请求的条目，但她不希望鲍勃在每个查询中收到不止一个条目\Line \line {\b遗忘传输协议}满足了这些条件。为此，Alice必须提供用于RSA加密的密钥。爱丽丝和鲍勃执行以下步骤：\line \line {\b步骤1：} Alice创建了一个x的随机数列表。该列表必须包含与数据库中条目相同的数字，并且这些数字必须小于RSA密钥的模数N。 Alice将x发送给Bob。\Line \line {\b步骤2：} Bob选择了索引i，它是Bob要查询的Alice数据库中条目的编号。 \Line \line {\b步骤3：}生成一个随机数k，该随机数k用于在Alice中隐藏i：使用alice的公钥计算v = x [i] +编码（k）并将v发送给Alice。她的数据库中的每个条目m [j] Alice都使用她的私钥计算值m [j] +解码（vx [j]），并将结果列表发送给Bob。对于第i个条目，结果为m [i] + k，但是由于Alice不知道k，因此她无法确定它是哪个条目\Line \line {\b步骤4：} Bob收到Alice的列表并选择条目i，即m [i] + k。他减去k并得到m [i]，这是他想查询的Alice数据库中的条目。没有爱丽丝的私钥，鲍勃无法从爱丽丝的列表中重建其他值。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$RSA Key$" value="ключи RSA" />
+    <replacement key="$Newline$" value="WordWrap" />
+    <replacement key="$Split$" value="отдельный" />
+    <replacement key="$Database$" value="база данных" />
+    <replacement key="$Requested entry$" value="Запрошенная запись" />
+    <replacement key="$step1$" value="{\b step 1} \line Алиса генерирует список случайных чисел (одно случайное число на запись в базу данных)." />
+    <replacement key="$step2$" value="{\b step 2} \line Боб генерирует случайные k и v = x [i] + enc (k)." />
+    <replacement key="$step3$" value="{\b step 3} \line Алиса отправляет зашифрованные записи базы данных m [j] + dec (vx [j])." />
+    <replacement key="$step4$" value="{\b step 4} \line Боб расшифровывает запрошенную запись в базе данных." />
+    <replacement key="$memo1$" value="Секретный и закрытый ключ Алисы" />
+    <replacement key="$memo2$" value="База данных Алисы (по одному номеру в строке)" />
+    <replacement key="$memo3$" value="Индекс запрашиваемого сообщения" />
+    <replacement key="$desc$" value="{\b Oblivious Transfer Protocol} \line \line У Alice есть база данных с несколькими записями. Боб хочет запросить одну из этих записей, но он не хочет, чтобы Алиса узнала, какую запись он запросил. Алиса готова отправить Бобу запрошенную запись, но она не хочет, чтобы Боб получил более одной записи для каждого запроса. \Line \line {\b Oblivious Transfer Protocol} соответствует этим условиям. Алиса должна предоставить ключи для шифрования RSA. Алиса и Боб следуют следующим шагам: \line \line {\b Шаг 1:} Алиса генерирует список х случайных чисел. Список должен содержать то же количество чисел, что и записи в базе данных, а номера должны быть меньше модуля N ключа RSA. Алиса отправляет x в Боб. \Line \line {\b Шаг 2:} Боб выбирает индекс i, который является номером записи в базе данных Алисы, которую Боб хочет запросить. Он генерирует случайное число k, которое служит для скрытия i перед Алисой: он вычисляет v = x [i] + encode (k) с открытым ключом Алисы и отправляет v в Алису. \Line \line {\b Шаг 3:} Для каждая запись m [j] в своей базе данных, Алиса вычисляет значение m [j] + decode (vx [j]) своим личным ключом и отправляет полученный список Бобу. Для номера входа i это дает m [i] + k, но поскольку Алиса не знает k, она не может определить, в какую запись она находится. \Line \line {\b Шаг 4:} Боб получает список Алисы и выбирает запись i out, который является m [i] + k. Он вычитает k и получает m [i], запись из базы данных Алисы, которую он хотел запросить. Без секретного ключа Алисы Боб не может восстановить другие значения из списка Алисы." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$RSA Key$" value="RSA Key" />
+    <replacement key="$Newline$" value="Newline" />
+    <replacement key="$Split$" value="Split" />
+    <replacement key="$Database$" value="Database" />
+    <replacement key="$Requested entry$" value="Requested entry" />
+    <replacement key="$step1$" value="{\b Step 1}\line Alice creates a list of random numbers (one random number per database entry)." />
+    <replacement key="$step2$" value="{\b Step 2}\line Bob generates random k and v=x[i]+enc(k)." />
+    <replacement key="$step3$" value="{\b Step 3}\line Alice sends encoded database entries m[j]+dec(v-x[j])." />
+    <replacement key="$step4$" value="{\b Step 4}\line Bob decodes the requested database entry." />
+    <replacement key="$memo1$" value="Alice's secret and private key" />
+    <replacement key="$memo2$" value="Alice's database (one number per line)" />
+    <replacement key="$memo3$" value="Index of requested message" />
+    <replacement key="$desc$" value="{\b Oblivious Transfer Protocol}\line\line Alice has a database of messages. Bob wants to retrieve one of the entries, but doesn't want Alice to know, which entry he requested. Alice is prepared to send the requested entry to Bob, but she doesn't want Bob to get more than this one entry per request.\line\line The {\b Oblivious Transfer Protocol} meets these requirements. It requires Alice to supply the keys for an RSA encryption. Alice and Bob follow these steps:\line\line {\b Step 1:} Alice creates a list x of random numbers. The list must have the same number of entries as the database and the numbers must be smaller than the modulus N of the RSA key. Alice sends x to Bob.\line\line {\b Step 2:} Bob chooses the index i, which is the index of the database entry he wants to request from Alice. He generates a random number k that serves to blind the index i for Alice: he calculates v = x[i] + encode(k) with Alice's public key and sends it to Alice.\line\line {\b Step 3:} For each entry m[j] in her database, Alice calculates the value m[j] + decode(v-x[j]) using her private key and sends the resulting list to Bob. For entry number i, this evaluates to m[i]+k, but as Alice doesn't know k, she can't tell which entry that is.\line\line {\b Step 4:} Bob receives Alice's list and selects entry i, which is m[i] + k. He subtracts k and is left with m[i], the entry of Alice's database that he requested. Without the private key, Bob can't reconstruct any other values of Alice's list." />
+  </replacements>
+</sample>

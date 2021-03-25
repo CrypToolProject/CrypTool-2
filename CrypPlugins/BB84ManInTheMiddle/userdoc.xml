@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">   
+	The BB84-Man-in-the-Middle is part of the BB84 protocol implemented in CrypTool 2. It simulates how an attacker tries to listen to the photon channel,
+	eventually changes a part of the photons and forwards them to the receiver. The intercepted key is also sent to an output. 
+  </introduction>
+  <introduction lang="zh-CN">中间人BB84是CrypTool 2中实现的BB84协议的一部分。它模拟攻击者如何尝试收听光子通道，最终更改部分光子并将其转发给接收器。截获的密钥也将发送到输出。</introduction>
+  <introduction lang="ru">BB84-Man-in-the-Middle является частью протокола BB84, реализованного в CrypTool 2. Он моделирует, как злоумышленник пытается прослушивать фотонный канал, в конечном итоге изменяет часть фотонов и пересылает их в приемник. Перехваченный ключ также отправляется на выход.</introduction>
+  <introduction lang="de-DE">   
+	Der BB84-Mittelsmann ist Teil des in CrypTool 2 implementierten BB84-Protokolls. Das Plugin simuliert die Handlung eines Angreifers, der die Photonen vom Sendekanal 
+	abhört, dabei eventuell unabsichtlich verändert und anschließend weiter schickt. Den abgefangenen Schlüssel gibt er ebenfalls aus.  
+  </introduction>
+  <usage lang="en">
+	This plugin can be put between the BB84 Photon Encoder and the BB84 Photon Decoder. For input it needs both the sent photons from the encoder and its own
+	randomly generated photon bases which are normally created by the BB84 Photonbase Generator plugin. Both inputs are given as strings. When executing the 
+	plugin decodes the received photons via its translation table defined in its settings. Then it sends its received key to an output and forwards the (eventually
+	changed) photons via another one. <newline />
+	This plugin can also be set to an inactive state in its settings, which yields in no changes to the photon channel. Also it is important to set the correct
+	amount of waiting cycles to the number of the previous animation containing plugins. The standard value is 1 because normally only the photon encoder is preceding.
+   </usage>
+  <usage lang="zh-CN">该插件可以放在BB84光子编码器和BB84光子解码器之间。对于输入，它既需要编码器发送的光子，又需要它自己随机生成的光子基，这些基通常由BB84 Photonbase Generator插件创建。两个输入均以字符串形式给出。执行插件时，将通过其设置中定义的转换表对接收到的光子进行解码。然后，它将接收到的密钥发送到输出，并通过另一个（最终更改的）光子转发。也可以在其设置中将此插件设置为非活动状态，从而不会更改光子通道。同样重要的是，将正确的等待周期数设置为先前包含插件的动画的数量。标准值是1，因为通常只有光子编码器在前。</usage>
+  <usage lang="ru">Этот плагин может быть помещен между кодировщиком фотобарабана BB84 и декодером фотонов BB84. Для ввода ему нужны как отправленные фотоны из кодировщика, так и его собственные случайно созданные фотонные базы, которые обычно создаются плагином генератора фотобазы BB84. Оба входа указаны как строки. При выполнении плагина декодирует полученные фотоны через свою таблицу переводов, определенную в его настройках. Затем он отправляет полученный сигнал на выход и пересылает (в конечном итоге, измененные) фотоны через другой. Этот плагин также может быть настроен на неактивное состояние в своих настройках, что не дает никаких изменений в канале фотонов. Также важно установить правильное количество циклов ожидания на номер предыдущей анимации, содержащей плагины. Стандартное значение равно 1, потому что обычно предшествует только фотонный кодер.</usage>
+  <usage lang="de-DE">
+	Dieses Plugin wird bei Bedarf zwischen den BB84-Photonencodierer und den BB84-Photonendecodierer gesetzt. Als Eingang benötigt es zum einen die von Codierer
+	gesendeten Photonen, zum anderen auch die zufälligen Photonenbasen, die normalerweise vom Plugin BB84-Photonenbasis-Generator erzeugt werden. Beide Eingaben 
+	erfolgen dabei als String. Beim Ausführen decodiert das Plugin die empfangenen Photonen nach der Tabelle, die in seinen Einstellungen festgelegt ist. Anschließend
+	gibt es über einen Ausgang seinen abgefangenen Schlüssel aus, über den anderen werden die Photonen weitergeleitet, wobei durch die Decodierung Fehler entstanden
+	sein können. <newline />
+	Das Plugin kann in den Einstellungen auch inaktiv gesetzt werden, sodass es keinerlei Änderungen am Photonenkanal vornimmt. Außerdem ist es wichtig, die Anzahl
+	der Wartezyklen auf die Menge der vorhergeschalteten Animationplugins zu setzen. Standardmäßig ist dies 1, da sich üblicherweise nur der Photonencodierer vorher
+	befindet.
+  </usage>
+  <presentation lang="en">
+	If the status of the plugin is set to "inactive" the animation shows only how photons are moving through the channel. Otherwise you see how every single 
+	photon is sensed by a random photon base, eventually changed, copied and forwarded. In this way the user can see all cases where an error occured. The animation
+	speed can be changed in the settings, which also affects the speed of all other photon encoders, decoders and men-in-the-middle to ensure synchronity. 
+  </presentation>
+  <presentation lang="zh-CN">如果插件的状态设置为“非活动”，则动画仅显示光子如何在通道中移动。否则，您将看到随机光子碱基如何感测每个单个光子，并最终对其进行更改，复制和转发。这样，用户可以查看发生错误的所有情况。可以在设置中更改动画速度，这也会影响所有其他光子编码器，解码器和中间人的速度，以确保同步。</presentation>
+  <presentation lang="ru">Если статус плагина установлен в «неактивный», анимация показывает только то, как фотоны движутся по каналу. В противном случае вы видите, как каждый фотон воспринимается случайной базой фотонов, в конечном итоге изменен, скопирован и переадресован. Таким образом, пользователь может видеть все случаи, когда произошла ошибка. Скорость анимации может быть изменена в настройках, что также влияет на скорость всех других фотонных кодеров, декодеров и людей в середине для обеспечения синхронности.</presentation>
+  <presentation lang="de-DE">
+	Steht der Status des Plugins in den Einstellungen auf "inaktiv", so ist in der Animation nur zu sehen, wie sich die Photonen durch den Kanal bewegen. Bei
+	aktivem Status jedoch zeigt sich, wie jedes Photon mit einer zufälligen Basis gemessen, eventuell verändert, kopiert und weitergeleitet wird. So wird für den
+	Beobachter sichtbar, an welcher Stelle ein Fehler bei der Decodierung aufgetreten ist. Die Animationsgeschwindigkeit kann in den Einstellungen
+	des Plugins verändert werden, wobei diese Einstellung die Geschwindigkeit aller Photonencodierer, Photonendecodierer und Mittelsmänner gleichzeitig verändert,
+	um Synchronität zu gewährleisten.
+  </presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/BB84" />
+      <caption lang="en">BB84 (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Quantenschlüsselaustausch#BB84-Protokoll" />
+      <caption lang="de-DE">BB84 (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Quantum_key_distribution" />
+      <caption lang="en">Quantum key distribution (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Quantenschlüsselaustausch" />
+      <caption lang="de-DE">Quantenschlüsselaustausch (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Man-in-the-middle_attack" />
+      <caption lang="en">Man-in-the-middle attack (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Man-in-the-Middle-Angriff" />
+      <caption lang="de-DE">Man-in-the-Middle-Angriff (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

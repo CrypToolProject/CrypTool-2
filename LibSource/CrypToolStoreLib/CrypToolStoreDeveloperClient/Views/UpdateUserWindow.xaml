@@ -1,0 +1,38 @@
+﻿<Window x:Class="CrypToolStoreDeveloperClient.Views.UpdateUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Update User" Height="300" Width="300">
+    <Grid Background="AliceBlue">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="160"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Right">Username:</Label>
+        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right">Firstname:</Label>
+        <Label Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right">Lastname:</Label>
+        <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right">Email:</Label>
+        <Label Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right">Is Admin:</Label>
+        <Label Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Right">Password:</Label>
+        <Label Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Right">Confirm Password:</Label>
+
+        <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Height="25" Name="UsernameLabel"/>
+        <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Name="FirstnameTextBox"/>
+        <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Name="LastnameTextBox"/>
+        <TextBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Name="EmailTextBox"/>
+        <CheckBox Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" Name="IsAdminCheckBox"/>
+        <PasswordBox Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Name="PasswordPasswordBox"/>
+        <PasswordBox Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150" Name="ConfirmPasswordPasswordBox"/>
+        <Button Name="UpdateButton" Background="White" Click="UpdateButton_Click" Grid.Column="1" Grid.Row="7" Height="25" Width="100" HorizontalAlignment="Right">Update</Button>
+    </Grid>
+</Window>

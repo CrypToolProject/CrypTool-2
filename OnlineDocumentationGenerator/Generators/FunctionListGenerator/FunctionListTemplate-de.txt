@@ -1,0 +1,11 @@
+﻿Liste der CrypTool 2-Funktionen
+Version: $VERSION$
+Erstellungsdatum: $DATE$
+
+Legende:
+K	Funktion ist als Komponente verfügbar.
+T	Funktion wird in einem fertigen Beispiel-Template demonstriert.
+N	Funktion ist im Navigations-Bar verfügbar.
+W	Funktion ist Teil des Wizards.
+
+

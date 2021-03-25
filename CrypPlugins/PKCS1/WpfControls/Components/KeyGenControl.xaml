@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="PKCS1.WpfControls.Components.KeyGenControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:my="clr-namespace:PKCS1.WpfResources"
+    xmlns:lib="clr-namespace:PKCS1.Library"
+    xmlns:lang="clr-namespace:PKCS1.Resources.lang.Gui"
+    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <UserControl.Resources>
+        <my:ErrorsToMessageConverter x:Key="eToMConverter" />
+    </UserControl.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Margin="0,0,0,0">
+                <GroupBox.Header>
+                    <x:Static Member="lang:RsaKeyGenCtrl.genRsaKey"></x:Static>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                            
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <SelectableTextBlock Padding="5" Grid.Row="0" Margin="5,0,5,0">
+                            <x:Static Member="lang:RsaKeyGenCtrl.pubKey"></x:Static>
+                        </SelectableTextBlock>
+                        <SelectableTextBlock Padding="5" Grid.Row="1" Margin="5,0,5,0">
+                            <x:Static Member="lang:RsaKeyGenCtrl.bitSize"></x:Static>
+                        </SelectableTextBlock>
+                            
+                        <TextBox Grid.Row="0" Grid.Column="1" Name="tbInputPubKey"  Margin="5,0,5,5" MinWidth="50">
+                            <TextBox.Text>
+                                <Binding Source="{x:Static lib:RsaKey.Instance}" Path="PubExponent" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <my:NumberValidationRule UpperBound="20" LowerBound="0" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox Grid.Row="1" Grid.Column="1" Name="tbInputMod" Margin="5,0,5,5" MinWidth="50">
+                            <TextBox.Text>
+                                <Binding Source="{x:Static lib:RsaKey.Instance}" Path="RsaKeySize" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <my:NumberValidationRule UpperBound="4097" LowerBound="1023" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                            
+                        <DockPanel Grid.Row="0" Grid.Column="2">
+                            <SelectableTextBlock Padding="5" Margin="5,0,5,0">
+                                <x:Static Member="lang:RsaKeyGenCtrl.pubKeyComment"></x:Static>
+                            </SelectableTextBlock>
+                            <Image Name="btnHelpPubKey" Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" HorizontalAlignment="Right" MouseLeftButtonDown="btn_Help_MouseLeftButtonDown" />
+                        </DockPanel>
+                        <DockPanel Grid.Row="1" Grid.Column="2">
+                            <SelectableTextBlock Padding="5" Margin="5,0,5,0">
+                                <x:Static Member="lang:RsaKeyGenCtrl.bitSizeUnit"></x:Static>
+                            </SelectableTextBlock>
+                            <Image Name="btnHelpBitSizeModulus" Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" HorizontalAlignment="Right" MouseLeftButtonDown="btn_Help_MouseLeftButtonDown" />
+                        </DockPanel>
+                    </Grid>
+                    
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <SelectableTextBlock Grid.Column="0"  Foreground="Red" FontWeight="Bold" FontSize="10"
+                                Text="{Binding ElementName=tbInputPubKey,
+                                Path=(Validation.Errors),
+                                Converter={StaticResource eToMConverter}}" />
+                        <SelectableTextBlock Grid.Column="0"  Foreground="Red" FontWeight="Bold" FontSize="10"
+                                Text="{Binding ElementName=tbInputMod,
+                                Path=(Validation.Errors),
+                                Converter={StaticResource eToMConverter}}" />
+                        <Button Grid.Column="2" Name="btnGenRsaKey" Click="btnGenRsaKey_Click" Height="25" MinWidth="100" VerticalAlignment="Bottom" HorizontalContentAlignment="Center">
+                            <x:Static Member="lang:RsaKeyGenCtrl.genKey"></x:Static>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Margin="0,15,0,0">
+                <GroupBox.Header>
+                    <x:Static Member="lang:RsaKeyGenCtrl.generatedKey"></x:Static>
+                </GroupBox.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <SelectableTextBlock Padding="5" Grid.Row="0">
+                        <x:Static Member="lang:RsaKeyGenCtrl.privKey"></x:Static>
+                    </SelectableTextBlock>
+                    <SelectableTextBlock Padding="5" Grid.Row="0" Margin="150,0,0,0" Name="lblPrivKeyLength"></SelectableTextBlock>
+                    <TextBox Grid.Row="1" Name="tbResultPrivKey" IsReadOnly="True" TextWrapping="Wrap" MaxWidth="450" MinHeight="80" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="tbResultPrivKey_TextChanged"></TextBox>
+                    <SelectableTextBlock Padding="5" Grid.Row="2">
+                        <x:Static Member="lang:RsaKeyGenCtrl.mod"></x:Static>
+                    </SelectableTextBlock>
+                    <SelectableTextBlock Padding="5" Grid.Row="2" Margin="150,0,0,0" Name="lblModulusLength"></SelectableTextBlock>
+                    <TextBox Grid.Row="3" Name="tbResultModulus" IsReadOnly="True" TextWrapping="Wrap" MaxWidth="450" MinHeight="80" Margin="5,0,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextChanged="tbResultModulus_TextChanged"></TextBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
+</UserControl>

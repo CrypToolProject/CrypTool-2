@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Format Preserving Encryption (XML)</title>
+  <title lang="zh">格式保存加密（XML）</title>
+  <summary lang="en">Usage of <i>Format Preserving Encryption</i> with an xml document.</summary>
+  <summary lang="zh">xml文档中格式保留加密的用法。</summary>
+  <description lang="en">This template shows how the <i>Format Preserving Encryption</i> component can be used to encrypt parts of an xml document.</description>
+  <description lang="zh">该模板显示了如何使用“格式保留加密”组件来加密xml文档的一部分。</description>
+  <title lang="de">Formaterhaltende Verschlüsselung (XML)</title>
+  <summary lang="de">Verwendung von <i>Format Preserving Encryption</i> mit einem xml-Dokument.</summary>
+  <description lang="de">Diese Vorlage zeigt, wie die Komponente <i>Format Preserving Encryption</i> verwendet werden kann, um Teile eines Xml-Dokuments zu verschlüsseln.</description>
+  <keywords>FF1, FF2, FF3, DFF, XML, FPE</keywords>
+  <keywords lang="zh">FF1，FF2，FF3，DFF，XML，FPU</keywords>
+  <icon file="Format Preserving Encryption.png" />
+  <relevantPlugins>
+    <plugin name="FormatPreservingEncryption" />
+  </relevantPlugins>
+  <replacements lang="en">
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$Format Preserving Encryption$" value="Format Preserving Encryption" />
+    <replacement key="$Output$" value="Encrypted XML document" />
+    <replacement key="$Log$" value="Log" />
+    <replacement key="$xml$" value="XML document" />
+    <replacement key="$key$" value="Key" />
+    <replacement key="$tweak$" value="Tweak" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$tweak radix$" value="Tweak Radix" />
+    <replacement key="$memo$" value="{\b Format preserving encryption (FPE) inside an xml document}\line In this template, an XML document is encrypted with a randomly selected key and tweak format-preserving. First, the elements of the XML document to be encrypted are defined via the alphabet input by means of an XPath expression and an alphabet. The selected elements are then encrypted or decrypted by the selected method and replaced in the XML document. Note that a single XPath expression can be used to address multiple elements. The selected entries must all be in the same format to enable encryption.\line \line In the FPE component, the optional checkbox was selected to additionally forward the unencrypted XML document once to the output. Together with the option &quot;Show changes&quot; of the text output component &quot;Encrypted XML document&quot; the differences between the unmodified and encrypted XML document are displayed.\line \line The four algorithms FF1, FF2, FF3, and DFF are available for selection, all of which can be executed with the input values, given in this template. These four algorithms have become part of the NIST standardization process.\line \line Decryption is also possible: The encrypted XML document must be copied into the text input component &quot;XML Document&quot; and the &quot;Decrypt&quot; operation must be selected in the component &quot;Format Preserving Encryption&quot;." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Alphabet$" value="字母" />
+    <replacement key="$Format Preserving Encryption$" value="格式保存加密" />
+    <replacement key="$Output$" value="加密的XML文档" />
+    <replacement key="$Log$" value="日志记录" />
+    <replacement key="$xml$" value="XML文件" />
+    <replacement key="$key$" value="键" />
+    <replacement key="$tweak$" value="调整" />
+    <replacement key="$String Decoder$" value="字符串解码器" />
+    <replacement key="$tweak radix$" value="调整基数" />
+    <replacement key="$memo$" value="{\b xml文档中的格式保留加密（FPE）} \line在此模板中，使用随机选择的密钥和调整格式保留来加密XML文档。首先，借助于XPath表达式和字母，通过输入的字母定义要加密的XML文档的元素。然后，所选元素将通过所选方法进行加密或解密，并替换为XML文档。请注意，单个XPath表达式可用于寻址多个元素。选定的条目必须全部采用相同的格式以启用加密。\line \line在FPE组件中，已选中可选复选框，以将一次未加密的XML文档另外一次转发到输出。连同文本输出组件“加密的XML文档”的“显示更改”选项一起，显示未修改的XML文档和加密的XML文档之间的差异。所有这些都可以使用此模板中提供的输入值执行。这四种算法已成为NIST标准化过程的一部分。\line \line还可以进行解密：必须将加密的XML文档复制到文本输入组件“ XML Document”中，并且必须在组件“格式保存加密”。" />
+  </replacements>
+  <replacements lang="de">
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$Format Preserving Encryption$" value="Formaterhaltende Verschlüsselung" />
+    <replacement key="$Output$" value="Verschlüsseltes XML-Dokument" />
+    <replacement key="$Log$" value="Log" />
+    <replacement key="$xml$" value="XML-Dokument" />
+    <replacement key="$key$" value="Schlüssel" />
+    <replacement key="$tweak$" value="Tweak" />
+    <replacement key="$String Decoder$" value="Zeichenketten-Decodierer" />
+    <replacement key="$tweak radix$" value="Tweak Radix" />
+    <replacement key="$memo$" value="{\b Formaterhaltende Verschlüsselung (FPE) in einem XML-Dokument} \line In dieser Vorlage wird ein XML-Dokument mit einem zufällig ausgewählten Schlüssel verschlüsselt und das Format beibehalten. Zunächst werden die zu verschlüsselnden Elemente des XML-Dokuments über den Eingang Alphabet mittels eines XPath-Ausdrucks und eines Alphabets definiert. Die ausgewählten Elemente werden dann mit der ausgewählten Methode verschlüsselt oder entschlüsselt und im XML-Dokument ersetzt. Beachten Sie, dass ein einzelner XPath-Ausdruck verwendet werden kann, um mehrere Elemente zu adressieren. Die ausgewählten Einträge müssen alle unter dem gleichen Format vorliegen, um eine Verschlüsselung zu ermöglichen. \line \line In der FPE-Komponente hier wurde die Checkbox unten bei den Parametern ausgewählt, um das unverschlüsselte XML-Dokument zusätzlich einmal an die Ausgabe weiterzuleiten. Zusammen mit der Option &quot;Zeige Änderungen&quot; der Textausgabe-Komponente &quot;Diff-Ausgabe&quot; werden die Unterschiede zwischen dem unveränderten und dem verschlüsselten XML-Dokument farblich hervorgehoben.\line \line Zur Auswahl stehen die vier Algorithmen FF1, FF2, FF3 und DFF, die alle mit den vorab eingestellten Werten ausgeführt werden können. Diese vier Algorithmen sind Teil des NIST-Standardisierungsprozesses geworden. \line \line Eine Entschlüsselung ist auch möglich: Das verschlüsselte XML-Dokument muss in die Texteingabe &quot;XML-Dokument&quot; kopiert werden und in der Komponente &quot;Formaterhaltende Verschlüsselung&quot; die Operation Entschlüsseln ausgewählt werden." />
+  </replacements>
+</sample>

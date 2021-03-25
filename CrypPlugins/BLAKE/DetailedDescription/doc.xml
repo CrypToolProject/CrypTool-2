@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    BLAKE is one the five finalists of the NIST SHA-3 Competition. It follows the HAIFA iteration mode, has a local
+    wide-pipe internal structure and uses Bernstein's stream cipher ChaCha (a variant of Salsa20) as its compression
+    algorithm.
+  </introduction>
+  <introduction lang="zh-CN">BLAKE是NIST SHA-3竞赛的五支决赛选手之一。它遵循HAIFA迭代模式，具有局部宽管道内部结构，并使用Bernstein的流密码ChaCha（Salsa20的变体）作为其压缩算法。</introduction>
+  <introduction lang="ru">BLAKE - один из пяти финалистов конкурса NIST SHA-3. Он следует итерационному режиму HAIFA, имеет локальную внутреннюю структуру с широким трудом и использует в качестве алгоритма сжатия алгоритм потокового шифрования Бернштейна ChaCha (вариант Salsa20).</introduction>
+  <introduction lang="de-DE">
+    BLAKE ist einer der fünf Finalisten des SHA-3-Wettbewerbs von NIST.
+    BLAKE basiert auf dem HAIFA-Konzept, hat eine lokale Wide-Pipe-Konstruktion und verwendet Bernsteins Stromchiffre
+    ChaCha (eine Variante von Salsa20) als Kompressionsfunktion.
+  </introduction>
+  <usage lang="en">
+    The BLAKE component has two inputs and one output. <i>Input Stream</i> is mandatory and connects to the data to be
+    hashed. <i>Salt</i> is optional, but if it is used its size must be 16 bytes if you pick either <i>BLAKE-224</i> or
+    <i>BLAKE-256</i>. For the other two functions (<i>BLAKE-384</i> and <i>BLAKE-512</i>) its size must be 32 bytes.
+    In the component settings you can select the BLAKE hash function you want to use (<i>BLAKE-224</i>, <i>BLAKE-256</i>,
+    <i>BLAKE-384</i>, <i>BLAKE-512</i>).
+  </usage>
+  <usage lang="zh-CN">BLAKE组件有两个输入和一个输出。输入流是必需的，并且连接到要散列的数据。 Salt是可选的，但如果使用它，则选择BLAKE-224或BLAKE-256时，其大小必须为16个字节。对于其他两个功能（BLAKE-384和BLAKE-512），其大小必须为32个字节。在组件设置中，您可以选择要使用的BLAKE哈希函数（BLAKE-224，BLAKE-256，BLAKE-384，BLAKE-512）。</usage>
+  <usage lang="ru">Компонент BLAKE имеет два входа и один выход. Входной поток является обязательным и подключается к хэшированию данных. Соль необязательна, но если она используется, ее размер должен быть 16 байтов, если вы выбираете BLAKE-224 или BLAKE-256. Для двух других функций (BLAKE-384 и BLAKE-512) его размер должен быть 32 байта. В настройках компонента вы можете выбрать хеш-функцию BLAKE, которую вы хотите использовать (BLAKE-224, BLAKE-256, BLAKE-384, BLAKE-512).</usage>
+  <usage lang="de-DE">
+    Die BLAKE-Komponente hat zwei Eingänge und einen Ausgang. Am Eingang <i>Eingabedatenstrom</i> müssen die Daten anliegen, deren
+    Hashwert berechnet werden soll.
+    Die Angabe des Wertes <i>Salt</i> ist optional. Wenn <i>Salt</i> angegeben wird, so muss seine Größe 16 Bytes betragen, falls
+    die Variante <i>BLAKE-224</i> oder <i>BLAKE-256</i> ausgewählt wurde. 
+    Für die beiden anderen Varianten (<i>BLAKE-384</i> und <i>BLAKE-512</i>) muss die Größe 32 Bytes betragen.
+    In den Einstellungen der Komponente können Sie auswählen, welche Variante der BLAKE-Hashfunktion verwendet werden soll
+    (<i>BLAKE-224</i>, <i>BLAKE-256</i>, <i>BLAKE-384</i>, <i>BLAKE-512</i>).
+</usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://131002.net/blake" lang="en" />
+      <caption lang="en">BLAKE homepage</caption>
+      <link url="https://131002.net/blake" lang="de-DE" />
+      <caption lang="de-DE">BLAKE-Homepage (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/BLAKE_(hash_function)" lang="en" />
+      <caption lang="en">BLAKE hash function (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/BLAKE_(Hashfunktion)" lang="de-DE" />
+      <caption lang="de-DE">BLAKE-Hashfunktion (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

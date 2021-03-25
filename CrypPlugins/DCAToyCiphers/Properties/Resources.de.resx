@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BtnSwitchView" xml:space="preserve">
+    <value>Ansicht wechseln</value>
+  </data>
+  <data name="ChoiceOfAlgorithm" xml:space="preserve">
+    <value>Choice of cipher</value>
+  </data>
+  <data name="ChoiceOfAlgorithmToolTop" xml:space="preserve">
+    <value>Hier können Sie eine der in der Liste enthaltenen Chiffren auswählen. Diese kann dann mittels differenzieller Kryptoanalyse untersucht werden.</value>
+  </data>
+  <data name="ChoiceOfMode" xml:space="preserve">
+    <value>Ver-/Entschlüsseln</value>
+  </data>
+  <data name="ChoiceOfModeToolTop" xml:space="preserve">
+    <value>Je nach gewählter Betriebsoption werden Daten verschlüsselt oder entschlüsselt</value>
+  </data>
+  <data name="Cipher1" xml:space="preserve">
+    <value>Chiffre 1: 16 Bit Blockgröße, 2 Rundenschlüssel, 32 Bit Schlüssellänge</value>
+  </data>
+  <data name="Cipher1LblHeading" xml:space="preserve">
+    <value>Chiffre 1</value>
+  </data>
+  <data name="Cipher1LblInputBlock" xml:space="preserve">
+    <value>Eingabeblock</value>
+  </data>
+  <data name="Cipher1LblOutputBlock" xml:space="preserve">
+    <value>Ausgabeblock</value>
+  </data>
+  <data name="Cipher1LblText" xml:space="preserve">
+    <value>Diese Blockchiffre arbeitet auf 16 Bit großen Blöcken. Es wird eine Verschlüsselungsrunde ausgeführt, wobei insgesamt zwei Rundenschlüssel verwendet werden. In der Verschlüsselungsrunde werden folgende Schritte durchgeführt: Schlüsseladdidtion, Substitution und Schlüsseladdition. Die Rundenschlüssel sind 16 Bit lang, die S-Boxen verarbeiten jeweils 4 Bit. Die Schlüssellänge beträgt damit 32 Bit.</value>
+  </data>
+  <data name="Cipher2" xml:space="preserve">
+    <value>Chiffre 2: 16 Bit Blockgröße, 4 Rundenschlüssel, 64 Bit Schlüssellänge</value>
+  </data>
+  <data name="Cipher2LblHeading" xml:space="preserve">
+    <value>Chiffre 2</value>
+  </data>
+  <data name="Cipher2LblInputBlock" xml:space="preserve">
+    <value>Eingabeblock</value>
+  </data>
+  <data name="Cipher2LblOutputBlock" xml:space="preserve">
+    <value>Ausgabeblock</value>
+  </data>
+  <data name="Cipher2LblText" xml:space="preserve">
+    <value>Diese Blockchiffre arbeitet auf 16 Bit großen Blöcken. Es werden drei Verschlüsselungsrunden durchgeführt, wobei insgesamt vier Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus drei Teilschritten: Schlüsseladdition, Substitution und Permutation – in der letzten Runde entfällt die Permutation und es wird der letzte Rundenschlüssel addiert. Die Rundenschlüssel sind 16 Bit lang, die S-Boxen verarbeiten jeweils 4 Bit. Die Schlüssellänge beträgt damit 64 Bit.</value>
+  </data>
+  <data name="Cipher3" xml:space="preserve">
+    <value>Chiffre 3: 16 Bit Blockgröße, 6 Rundenschlüssel, 96 Bit Schlüssellänge</value>
+  </data>
+  <data name="Cipher3LblHeading" xml:space="preserve">
+    <value>Chiffre 3</value>
+  </data>
+  <data name="Cipher3LblInputBlock" xml:space="preserve">
+    <value>Eingabeblock</value>
+  </data>
+  <data name="Cipher3LblOutputBlock" xml:space="preserve">
+    <value>Ausgabeblock</value>
+  </data>
+  <data name="Cipher3LblText" xml:space="preserve">
+    <value>Diese Blockchiffre arbeitet auf 16 Bit großen Blöcken. Es werden 5 Verschlüsselungsrunden durchgeführt, wobei insgesamt sechs Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus drei Teilschritten: Schlüsseladdition, Substitution und Permutation – in der letzten Runde entfält die Permutation und es wird der letzte Rundenschlüssel addiert. Die Rundenschlüssel sind 16 Bit lang, die S-Boxen verarbeiten jeweils 4 Bit. Die Schlüssellänge beträgt damit 96 Bit.</value>
+  </data>
+  <data name="Cipher4" xml:space="preserve">
+    <value>Chiffre 4: 4 Bit Blockgröße , 4 Rundenschlüssel, 16 Bit Schlüssellänge</value>
+  </data>
+  <data name="Cipher4LblHeading" xml:space="preserve">
+    <value>Chiffre 4</value>
+  </data>
+  <data name="Cipher4LblInputBlock" xml:space="preserve">
+    <value>Eingabeblock</value>
+  </data>
+  <data name="Cipher4LblOutputBlock" xml:space="preserve">
+    <value>Ausgabeblock</value>
+  </data>
+  <data name="Cipher4LblText" xml:space="preserve">
+    <value>Diese Blockchiffre arbeitet auf 4 Bit großen Blöcken. Es werden drei Verschlüsselungsrunden durchgeführt, wobei insgesamt vier Rundenschlüssel verwendet werden. In der letzten Verschlüsselungsrunde werden zwei Rundenschlüssel angewandt. Jede Runde besteht aus zwei Teilschritten: Schlüsseladdition und Substitution. In der letzten Runde wird anschließend der letzte Rundenschlüssel noch addiert. Die Rundenschlüssel sind 4 Bit lang und die S-Boxen arbeiten auf jeweils 4 Bit. Die Schlüssellänge beträgt damit 16 Bit.</value>
+  </data>
+  <data name="Cipher5" xml:space="preserve">
+    <value>Feal-4</value>
+  </data>
+  <data name="CipherDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="CipherView" xml:space="preserve">
+    <value>Chiffre</value>
+  </data>
+  <data name="DescPermutation" xml:space="preserve">
+    <value>Die Permutation vertauscht die feste Position i eines Eingabebits auf eine Position j in der Ausgabe. Die folgende Tabelle beschreibt die Permutation, wobei die erste Zeile die Position eines Bits in der Eingabe darstellt und die zweite Zeile die Position des entsprechenden Bits in der Ausgabe.</value>
+  </data>
+  <data name="DescSBox" xml:space="preserve">
+    <value>Die S-Box substituiert feste Eingabebits auf andere Ausgabebits. Die folgende Tabelle beschreibt die S-Box, wobei die erste Zeile den Wert der Eingabebits und die zweite Zeile die Ausgabebits darstellt. </value>
+  </data>
+  <data name="HeaderPermutation" xml:space="preserve">
+    <value>Tabelle der Permutation:</value>
+  </data>
+  <data name="HeaderSBox" xml:space="preserve">
+    <value>Tabelle der S-Box:</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Eingabe</value>
+  </data>
+  <data name="KeyError" xml:space="preserve">
+    <value>Der angegebene Schlüssel ist nicht lang genug. Bitte überprüfen Sie die Anforderungen dieser Chiffre.</value>
+  </data>
+  <data name="KeyInput" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="KeyInputTooltip" xml:space="preserve">
+    <value>Eingang für den Schlüssel</value>
+  </data>
+  <data name="MessageError" xml:space="preserve">
+    <value>Die eingegebenen Nachrichten sind zu klein oder zu groß. Bitte überprüfen Sie die Anforderungen dieser Chiffre.</value>
+  </data>
+  <data name="MessageInput" xml:space="preserve">
+    <value>Klartext / Geheimtext</value>
+  </data>
+  <data name="MessageInputTooltip" xml:space="preserve">
+    <value>Eingang für den Klartext / Geheimtext (je nach gewähltem Betriebsmodus)</value>
+  </data>
+  <data name="MessageOutput" xml:space="preserve">
+    <value>Klartext / Geheimtext</value>
+  </data>
+  <data name="MessageOutputTooltip" xml:space="preserve">
+    <value>Ausgang für den Klartext / Geheimtext (je nach gewähltem Betriebsmodus)</value>
+  </data>
+  <data name="Mode1" xml:space="preserve">
+    <value>Verschlüsseln</value>
+  </data>
+  <data name="Mode2" xml:space="preserve">
+    <value>Entschlüsseln</value>
+  </data>
+  <data name="OperatingOptions" xml:space="preserve">
+    <value>Betriebsoptionen</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Ausgabe</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>DKA-ToyCipher</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Diese Komponente enthält verschiedene symmetrische Blockchiffren zur Verschlüsselung. Die Chiffren sind sehr einfach und kurz, um an ihnen kryptographische Prinzipien oder kryptoanalytische Verfahren demonstrieren zu können.</value>
+  </data>
+  <data name="TablePermutationInput" xml:space="preserve">
+    <value>Position in Eingabe</value>
+  </data>
+  <data name="TablePermutationOutput" xml:space="preserve">
+    <value>Position in Ausgabe</value>
+  </data>
+</root>

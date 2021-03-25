@@ -1,0 +1,39 @@
+
+
+<p>
+Das GGH-Kryptosystem basiert auf der Annahme, dass es sehr leicht ist, mittels einer Basis B und einem kleinen Störvektor e einen Vektor zu konstruieren, der ebenfalls im Vektorraum V und sehr nahe an einem Gitterpunkt im Gitter L liegt.  Auf der anderen Seite ist es schwer, aus diesem Vektor den ursprünglichen Gitterpunkt zu rekonstruieren, der in der Nähe dieses Vektors liegt.  Andererseits könnte auch das Finden einer sehr kleinen Basis die Suche nach dem ursprünglichen Gitterpunkt erleichtern. Dieses Problem entspricht dem Shortest-Basis-Problem (SBP), wobei eine Basis nach [GGH96, S. 117] dann als klein gilt, wenn die Basisvektoren paarweise annähernd orthogonal zueinander sind, also einen sehr kleinen Orthogonalitätsdefekt besitzen.
+</p>
+<p>
+Für die Ver- und Entschlüsselung werden zwei n x n Basismatrizen eingesetzt, die dasselbe, volldimensionale Gitter L aus Z^n erzeugen. Als öffentlicher Schlüssel dient dabei die Basismatrix B, die sich durch Transformation mittels einer unimodularen Matrix aus dem privaten Schlüssel R ergibt. Die Sicherheit des Systems ergibt sich sowohl durch eine hohe Gitterdimension n als auch durch den Sicherheitsparameter e, der das Aussehen des Störvektors e bestimmt.
+</p>
+<p>
+Für die Schlüsselerzeugung wird zunächst der private Schlüssel R bestimmt. Dabei werden möglichst orthogonale Vektoren angestrebt. Es wird eine Matrix R&#39; gewählt, die ihre Einträge aus der Menge {-l,...,l} gleichverteilt bezieht.  Diese Matrix wird dann mit dem Produkt aus dem Wert k und der Einheitsmatrix I summiert. Die private Basis ergibt sich daher folgendermaßen: R := R&#39; + kI, wobei k aus N ist.
+</p>
+<p>
+Der öffentliche Schlüssel entsteht durch die Multiplikation von R mit einer zufälligen, unimodularen Transformationsmatrix U, sodass: B := R * U.
+</p>
+<p>
+Für die Verschlüsselung einer Nachricht m aus Z^n wird durch Multiplikation des Klartextvektors und des öffentlichen Schlüssels B ein neuer Gitterpunkt erzeugt.  Um das Rekonstruieren dieses Gitterpunktes zu erschweren, wird außerdem ein Störvektor e addiert. Dieser besteht aus einer Gleichverteilung der Werte + Sigma und - Sigma (In diesem Kryptotutorial ist Sigma = 1).
+</p>
+<p>
+Der Geheimtext c ergibt sich durch: c = Bm + e.
+</p>
+<p>
+Um diese Nachricht zu entschlüsseln, muss der ursprüngliche Gitterpunkt rekonstruiert werden.  László Babai stellte 1986 in [Bab86] einen Algorithmus vor, der für einen gegebenen Punkt im Vektorraum einen approximativ nahen Gitterpunkt liefert. Dazu wird der Punkt zunächst als Linearkombination der Gittervektoren aufgefasst. Die Skalare der Linearkombination werden nun auf die nächste ganze Zahl gerundet, sodass als Ergebnis ein Vektor im Gitter herauskommt. Die Rundung ist jedoch nur möglich, wenn eine ausreichend orthogonale Basis vorliegt. Der gegebene Zielpunkt (engl. target point) liegt innerhalb eines Parallelepipeds, das von den Basisvektoren aufgespannt wird. Wird nun Babais Rundungsmethode angewandt, wird der nächste Eckpunkt (engl. closest vertex) dieses Parallelepipeds als Lösung ausgeben. Je weniger orthogonal die Gittervektoren sind, desto größer ist der Rundungsfehler, da das Parallelepiped immer lang gezogener sein wird und sich die Eckpunkte dadurch weiter vom tatsächlich nächstgelegenen Gittervektor (engl. closest lattice point) entfernen (vergleiche hierzu Abbildung 3.1 aus [HPS98, S. 382], wo eine Basis zu sehen ist, deren Basisvektoren wenig orthogonal zueinander sind und die sich daher schlecht für Babais Rundungsmethode eignet). Bei einer nicht-reduzierten Basis kann das Ergebnis der Rundung daher so wenig wert sein wie ein zufällig aus der Basis gewonnener Vektor. In diesem Fall erhält man bei Anwendung der Methode keine neuen Informationen. Derjenige, der über den privaten Schlüssel verfügt, kann Babais Rundungsmethode jedoch einsetzen, da der private Schlüssel die Voraussetzung der orthogonalen Basis erfüllt.
+</p>
+
+<img src="ImgBabai" />
+<br/>
+
+<p>
+Quellenangaben:
+</p>
+<p>
+[Bab86] Babai, L.: On Lovász’ Lattice Reduction and the Nearest Lattice Point Problem. In: Combinatorica Bd. 6, 1986, S. 1-13
+</p>
+<p>
+[GGH96] Goldreich, O ; Goldwasser, S. ; Halevi, S.: Public-Key Cryptosystems from Lattice Reduction Problems. In: CRYPTO ’97 Proceedings of the 17th Annual International Cryptology Conference on Advances in Cryptology, Springer, 1196, S. 112-131
+</p>
+<p>
+[HPS98] Hoffstein, J. ; Pipher, J. ; Silverman, J. H.: NTRU: A Ring-Based Public Key Cryptosystem. In: Buhler, J. P. (Hrsg.): Lecture Notes in Computer Science Bd. 1423, Springer, 1998, S. 267-288
+</p>

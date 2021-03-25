@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AES" xml:space="preserve">
+    <value>AES</value>
+  </data>
+  <data name="AfterRoundSubtitle" xml:space="preserve">
+    <value>After round </value>
+  </data>
+  <data name="AvalancheEffect" xml:space="preserve">
+    <value>Avalanche Effect</value>
+  </data>
+  <data name="AvalancheTooltip" xml:space="preserve">
+    <value>Visualization of the avalanche effect in cryptographic ciphers and hash functions</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CategoryTooltip" xml:space="preserve">
+    <value>Select the desired category.</value>
+  </data>
+  <data name="CheckAvalanche" xml:space="preserve">
+    <value>Check avalanche effect after round ...</value>
+  </data>
+  <data name="ClassicCipher" xml:space="preserve">
+    <value>Classic Ciphers</value>
+  </data>
+  <data name="ClassicCipherSubtitle" xml:space="preserve">
+    <value>(Classic ciphers)</value>
+  </data>
+  <data name="ClearButton" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ContinueButton" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Decimal" xml:space="preserve">
+    <value>Decimal</value>
+  </data>
+  <data name="DES" xml:space="preserve">
+    <value>DES</value>
+  </data>
+  <data name="DisplayInfo" xml:space="preserve">
+    <value>Display input as:</value>
+  </data>
+  <data name="DisplayInformation" xml:space="preserve">
+    <value>Display input as:</value>
+  </data>
+  <data name="DoneButton" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="EncryptionInitialMsg" xml:space="preserve">
+    <value>Encryption of initial message</value>
+  </data>
+  <data name="EncryptionModifiedMsg" xml:space="preserve">
+    <value>Encryption of modified message</value>
+  </data>
+  <data name="ExplanationText" xml:space="preserve">
+    <value>Input changes can be done by directly modifying the external input feed.</value>
+  </data>
+  <data name="FlippedBits" xml:space="preserve">
+    <value>Flipped bits</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>Test avalanche effect</value>
+  </data>
+  <data name="HashFunction" xml:space="preserve">
+    <value>Hash Functions</value>
+  </data>
+  <data name="Hex" xml:space="preserve">
+    <value>Hexadecimal</value>
+  </data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>VISUALIZATION OF THE AVALANCHE EFFECT</value>
+  </data>
+  <data name="InputData" xml:space="preserve">
+    <value>Input Data</value>
+  </data>
+  <data name="InputKey" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>Enter key</value>
+  </data>
+  <data name="InputMessage" xml:space="preserve">
+    <value>Message/ Hash value</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>Enter message or hash value</value>
+  </data>
+  <data name="InputTitleAES" xml:space="preserve">
+    <value>Change Input Data AES-</value>
+  </data>
+  <data name="InstructionsPrep" xml:space="preserve">
+    <value>Prepared methods:</value>
+  </data>
+  <data name="InstructionsPrepBullet1" xml:space="preserve">
+    <value> Use key and message entries.</value>
+  </data>
+  <data name="InstructionsPrepBullet2" xml:space="preserve">
+    <value> Provide key in hex format:
+ 16, 24, or 32 bytes (AES)   --    8 bytes (DES).</value>
+  </data>
+  <data name="InstructionsPrepBullet3" xml:space="preserve">
+    <value> Input data initially shown in:
+ Hex and binary format (AES)    --   binary format (DES).</value>
+  </data>
+  <data name="InstructionsPrepBullet4" xml:space="preserve">
+    <value> Modify initial input (only effective when the screen "Change Input Data" is shown. Modifications from the external input are also not taken into account if you are already checking the avalanche effect after each round).</value>
+  </data>
+  <data name="InstructionsPrepBullet5" xml:space="preserve">
+    <value> Check avalanche effect.</value>
+  </data>
+  <data name="InstructionsPrepSubtitle" xml:space="preserve">
+    <value> AES, DES</value>
+  </data>
+  <data name="InstructionsTitle" xml:space="preserve">
+    <value>Instructions</value>
+  </data>
+  <data name="InstructionsUnprep" xml:space="preserve">
+    <value>Unprepared methods:</value>
+  </data>
+  <data name="InstructionsUnprepBullet1" xml:space="preserve">
+    <value> Methods in the category "Unprepared methods" have no extra implementation within the Avalanche plugin. So the plugin evaluates the Avalanche effect only by comparing the initial and the changed external input. This is very generic. Here only the message entry is used.</value>
+  </data>
+  <data name="InstructionsUnprepBullet2" xml:space="preserve">
+    <value> Input data initially shown in: 
+ hex format (hash functions and modern ciphers)  --  text format (classic ciphers). </value>
+  </data>
+  <data name="InstructionsUnprepBullet3" xml:space="preserve">
+    <value> Modify initial input (for classic and modern ciphers, the length of the message to be evaluated by the Avalanche plugin may not be changed).</value>
+  </data>
+  <data name="InstructionsUnprepSubtitle" xml:space="preserve">
+    <value>General hash functions, classic ciphers, modern ciphers</value>
+  </data>
+  <data name="Intro" xml:space="preserve">
+    <value>A good avalanche effect is achieved when a small change in the input results in a significant change of the encrypted text.
+You can select in the settings the category of the algorithm whose avalanche effect you would like to test.</value>
+  </data>
+  <data name="KeyLength" xml:space="preserve">
+    <value>Key length</value>
+  </data>
+  <data name="KeyLengthTooltip" xml:space="preserve">
+    <value>Select the key length for AES.</value>
+  </data>
+  <data name="ModernCipher" xml:space="preserve">
+    <value>Modern Ciphers</value>
+  </data>
+  <data name="OutputStream" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="OutputStreamDescription" xml:space="preserve">
+    <value>Generated statistical data </value>
+  </data>
+  <data name="OverviewButton" xml:space="preserve">
+    <value> General 
+Overview</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Avalanche Visualization</value>
+  </data>
+  <data name="PreparedCaption" xml:space="preserve">
+    <value>Prepared methods</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="SelectionTooltipPrep" xml:space="preserve">
+    <value>Select the method from the category "Prepared methods" whose avalanche effect you would like to test.</value>
+  </data>
+  <data name="SingleBitCheckBox" xml:space="preserve">
+    <value>Enable to change single bits</value>
+  </data>
+  <data name="SkipInstructions" xml:space="preserve">
+    <value>Skip instructions</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Title_AES128" xml:space="preserve">
+    <value>Avalanche Effect AES-128</value>
+  </data>
+  <data name="Title_AES192" xml:space="preserve">
+    <value>Avalanche Effect AES-192</value>
+  </data>
+  <data name="Title_AES256" xml:space="preserve">
+    <value>Avalanche Effect AES-256</value>
+  </data>
+  <data name="UnpreparedCaption" xml:space="preserve">
+    <value>Unprepared methods</value>
+  </data>
+  <data name="BinaryRep" xml:space="preserve">
+    <value>Binary representation</value>
+  </data>
+  <data name="BinaryValues" xml:space="preserve">
+    <value>Binary values</value>
+  </data>
+  <data name="ChangesText" xml:space="preserve">
+    <value>Modify input in order to proceed with the presentation.
+Message and key changes can be made in two ways:</value>
+  </data>
+  <data name="ChangesTextBullet1" xml:space="preserve">
+    <value> Modify external input feed directly.</value>
+  </data>
+  <data name="ChangesTextBullet2" xml:space="preserve">
+    <value> Click on single bits -- only possible after checking checkbox.</value>
+  </data>
+  <data name="CipherStateInitMsg" xml:space="preserve">
+    <value> Encryption state of
+      initial input</value>
+  </data>
+  <data name="CipherStateModMsg" xml:space="preserve">
+    <value> Encryption state of
+    modified input</value>
+  </data>
+  <data name="ClickOnBits" xml:space="preserve">
+    <value>Click on the bit(s) you'd like to flip.</value>
+  </data>
+  <data name="FlippedBits_" xml:space="preserve">
+    <value>  Flipped bits</value>
+  </data>
+  <data name="InitialKeyHex" xml:space="preserve">
+    <value>Initial key (in hex)</value>
+  </data>
+  <data name="InitialMessageHex" xml:space="preserve">
+    <value>Initial message (in hex)</value>
+  </data>
+  <data name="InitialMsg" xml:space="preserve">
+    <value>  Initial msg</value>
+  </data>
+  <data name="ModifiedKey" xml:space="preserve">
+    <value>Modified key</value>
+  </data>
+  <data name="ModifiedMessage" xml:space="preserve">
+    <value>Modified message</value>
+  </data>
+  <data name="ModifiedMsg" xml:space="preserve">
+    <value>  Modified msg</value>
+  </data>
+  <data name="Initial_Key" xml:space="preserve">
+    <value>Initial key</value>
+  </data>
+  <data name="Initial_Message" xml:space="preserve">
+    <value>Initial message</value>
+  </data>
+  <data name="LeftHalf" xml:space="preserve">
+    <value>Left half</value>
+  </data>
+  <data name="NoChanges" xml:space="preserve">
+    <value>No changes occurred at all!</value>
+  </data>
+  <data name="OnlyLeft" xml:space="preserve">
+    <value>Changes occurred only on the left half of the cipher!</value>
+  </data>
+  <data name="OnlyRight" xml:space="preserve">
+    <value>Changes occurred only on the right half of the cipher!</value>
+  </data>
+  <data name="RightHalf" xml:space="preserve">
+    <value>Right half</value>
+  </data>
+  <data name="StatsBullet1" xml:space="preserve">
+    <value> bit flipped (out of {0}). Avalanche effect of {1}%</value>
+  </data>
+  <data name="StatsBullet1_Plural" xml:space="preserve">
+    <value> bits flipped (out of {0}). Avalanche effect of {1}%</value>
+  </data>
+  <data name="StatsBullet2" xml:space="preserve">
+    <value> Length of longest identical bit sequence: {0}. Offset {1}.</value>
+  </data>
+  <data name="StatsBullet3" xml:space="preserve">
+    <value> Length of longest flipped bit sequence: {0}. Offset {1}.</value>
+  </data>
+  <data name="StatsBullet4" xml:space="preserve">
+    <value> Average number of differing bits per byte: {0}</value>
+  </data>
+  <data name="FlippedBytes" xml:space="preserve">
+    <value>Changed bytes</value>
+  </data>
+  <data name="InitialKeyColon" xml:space="preserve">
+    <value>Initial key:</value>
+  </data>
+  <data name="InitialKeyDES" xml:space="preserve">
+    <value>Initial key (64 bits):</value>
+  </data>
+  <data name="InitialMessageColon" xml:space="preserve">
+    <value>Initial message:</value>
+  </data>
+  <data name="InitialMessageDES" xml:space="preserve">
+    <value>Initial message (64 bits):</value>
+  </data>
+  <data name="InputTitleDES" xml:space="preserve">
+    <value>Change Input Data DES</value>
+  </data>
+  <data name="ModKeyColon" xml:space="preserve">
+    <value>Modified key:</value>
+  </data>
+  <data name="ModMessageColon" xml:space="preserve">
+    <value>Modified message:</value>
+  </data>
+  <data name="UnchangedBits" xml:space="preserve">
+    <value>Unchanged bits</value>
+  </data>
+  <data name="UnchangedBytes" xml:space="preserve">
+    <value>Unchanged bytes</value>
+  </data>
+  <data name="Binary" xml:space="preserve">
+    <value>Binary</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>Ciphertext (hex)</value>
+  </data>
+  <data name="EncryptionInit" xml:space="preserve">
+    <value>Encryption of init. message (bin)</value>
+  </data>
+  <data name="EncryptionMod" xml:space="preserve">
+    <value>Encryption of mod. message (bin)</value>
+  </data>
+  <data name="HashFunctionInit" xml:space="preserve">
+    <value>Initial hash value</value>
+  </data>
+  <data name="HashFunctionMod" xml:space="preserve">
+    <value>Modified hash value</value>
+  </data>
+  <data name="HashFunctionSubtitle" xml:space="preserve">
+    <value>(Hash functions)</value>
+  </data>
+  <data name="ModernCipherSubtitle" xml:space="preserve">
+    <value>(Modern ciphers)</value>
+  </data>
+  <data name="OverviewAES128" xml:space="preserve">
+    <value>Encryption Results after All Rounds of AES-128</value>
+  </data>
+  <data name="OverviewAES192" xml:space="preserve">
+    <value>Encryption Results after All Rounds of AES-192</value>
+  </data>
+  <data name="OverviewAES256" xml:space="preserve">
+    <value>Encryption Results after All Rounds of AES-256</value>
+  </data>
+  <data name="OverviewDES" xml:space="preserve">
+    <value>Encryption Results after All DES Rounds</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>% changed</value>
+  </data>
+  <data name="PercentageFlipped" xml:space="preserve">
+    <value>% of flipped bits</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="AfterRound" xml:space="preserve">
+    <value>After round {0}:{1}</value>
+  </data>
+  <data name="EncryptionInitialMsgOut" xml:space="preserve">
+    <value>Encryption of initial input:{0}</value>
+  </data>
+  <data name="EncryptionModifiedlMsgOut" xml:space="preserve">
+    <value>Encryption of modified input:{0}</value>
+  </data>
+  <data name="InitialHashOutput" xml:space="preserve">
+    <value>Initial hash value:{0}</value>
+  </data>
+  <data name="ModHashOutput" xml:space="preserve">
+    <value>Modified hash value:{0}</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="OutputInitialDESKey" xml:space="preserve">
+    <value>Initial DES key:{0}</value>
+  </data>
+  <data name="OutputInitialDESMsg" xml:space="preserve">
+    <value>Initial DES message:{0}</value>
+  </data>
+  <data name="OutputModifiedDESKey" xml:space="preserve">
+    <value>Modified DES key:{0}</value>
+  </data>
+  <data name="OutputModifiedDESMsg" xml:space="preserve">
+    <value>Modified DES message:{0}</value>
+  </data>
+  <data name="OutputStats1" xml:space="preserve">
+    <value>Flipped bits: {0}. Avalanche effect: {1}%{2}</value>
+  </data>
+  <data name="OutputStats2" xml:space="preserve">
+    <value>Length of longest identical bit sequence: {0}. Offset: {1}.{2}</value>
+  </data>
+  <data name="OutputStats3" xml:space="preserve">
+    <value>Length of longest flipped bit sequence: {0}. Offset: {1}.{2}</value>
+  </data>
+  <data name="OutputStatsClassic1" xml:space="preserve">
+    <value>Changed bytes: {0}. Avalanche effect: {1}% {2}</value>
+  </data>
+  <data name="OutputStatsClassic2" xml:space="preserve">
+    <value>Length of longest identical byte sequence: {0}. Offset {1}.{2}</value>
+  </data>
+  <data name="OutputStatsClassic3" xml:space="preserve">
+    <value>Length of longest changed byte sequence: {0}. Offset {1}.{2}</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>Generated data</value>
+  </data>
+  <data name="StatsClassicBullet1" xml:space="preserve">
+    <value> byte changed (out of {0}). Avalanche effect of {1}%</value>
+  </data>
+  <data name="StatsClassicBullet1_Plural" xml:space="preserve">
+    <value> bytes changed (out of {0}). Avalanche effect of {1}%</value>
+  </data>
+  <data name="StatsClassicBullet2" xml:space="preserve">
+    <value> Length of longest identical byte sequence: {0}. Offset {1}.</value>
+  </data>
+  <data name="StatsClassicBullet3" xml:space="preserve">
+    <value> Length of longest changed byte sequence: {0}. Offset {1}.</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Modified message ({0} characters) must be as long as the initial message ({1} characters).</value>
+  </data>
+  <data name="KeyLength128" xml:space="preserve">
+    <value>Key must have 16 bytes.</value>
+  </data>
+  <data name="KeyLength192" xml:space="preserve">
+    <value>Key must have 24 bytes.</value>
+  </data>
+  <data name="KeyLength256" xml:space="preserve">
+    <value>Key must have 32 bytes.</value>
+  </data>
+  <data name="KeyLengthDES" xml:space="preserve">
+    <value>Key must have 8 bytes.</value>
+  </data>
+  <data name="University" xml:space="preserve">
+    <value>University of Mannheim</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>End of presentation!</value>
+  </data>
+  <data name="OutputInitialAESKey" xml:space="preserve">
+    <value>Initial AES key:{0}</value>
+  </data>
+  <data name="OutputInitialAESMsg" xml:space="preserve">
+    <value>Initial AES message:{0}</value>
+  </data>
+  <data name="OutputModifiedAESKey" xml:space="preserve">
+    <value>Modified AES key:{0}</value>
+  </data>
+  <data name="OutputModifiedAESMsg" xml:space="preserve">
+    <value>Modified AES message:{0}</value>
+  </data>
+  <data name="DESderivedFromInit" xml:space="preserve">
+    <value>{0}Final DES ciphertext derived from the initial input:{1}</value>
+  </data>
+  <data name="DESderivedFromMod" xml:space="preserve">
+    <value>Final DES ciphertext derived from the modified input:{0}</value>
+  </data>
+  <data name="AESDerivedFromInit" xml:space="preserve">
+    <value>{0}Final AES ciphertext derived from the initial input:{1}</value>
+  </data>
+  <data name="AESDerivedFromMod" xml:space="preserve">
+    <value>Final AES ciphertext derived from the modified input:{0}</value>
+  </data>
+  <data name="HashFunctionInitBin" xml:space="preserve">
+    <value>Initial hash value (binary)</value>
+  </data>
+  <data name="HashFunctionModBin" xml:space="preserve">
+    <value>Modified hash value (binary)</value>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>Instructions</value>
+  </data>
+  <data name="InstructionsPrepDescription" xml:space="preserve">
+    <value>Methods in the category "Prepared methods" are implemented within the Avalanche plugin. So the plugin can show the changes not only for the result of the cryptographic function (last step), but also for all intermediate steps.</value>
+  </data>
+  <data name="ShowChangeTitleAES" xml:space="preserve">
+    <value>Show Changed Input Data AES-</value>
+  </data>
+  <data name="ShowChangeTitleDES" xml:space="preserve">
+    <value>Show Changed Input Data DES</value>
+  </data>
+  <data name="Title_DES" xml:space="preserve">
+    <value>Avalanche Effect DES</value>
+  </data>
+  <data name="ChangedInput" xml:space="preserve">
+    <value>Changed
+  input</value>
+  </data>
+  <data name="OutputNotMod" xml:space="preserve">
+    <value>Input not modified.</value>
+  </data>
+  <data name="OutputNotModAESKey" xml:space="preserve">
+    <value>AES key not modified.</value>
+  </data>
+  <data name="OutputNotModAESMsg" xml:space="preserve">
+    <value>AES message not modified.</value>
+  </data>
+  <data name="OutputNotModDESKey" xml:space="preserve">
+    <value>DES key not modified.</value>
+  </data>
+  <data name="OutputNotModDESMsg" xml:space="preserve">
+    <value>DES message not modified.</value>
+  </data>
+  <data name="SelectionTooltipUnprep" xml:space="preserve">
+    <value>Select the method from the category "Unprepared methods" whose avalanche effect you would like to test.</value>
+  </data>
+  <data name="black_white" xml:space="preserve">
+    <value>Black/white</value>
+  </data>
+  <data name="Contrast" xml:space="preserve">
+    <value>Contrast</value>
+  </data>
+  <data name="ContrastTooltip" xml:space="preserve">
+    <value>Choose contrast for the pie chart.</value>
+  </data>
+  <data name="red_green" xml:space="preserve">
+    <value>Red/green</value>
+  </data>
+</root>

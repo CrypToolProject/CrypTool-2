@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdvancedSettingsGroup" xml:space="preserve">
+    <value>Advanced settings</value>
+  </data>
+  <data name="AlphabetCaption" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="AlphabetGroup" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>Complete used alphabet</value>
+  </data>
+  <data name="CaseSensitiveCaption" xml:space="preserve">
+    <value>Case sensitive</value>
+  </data>
+  <data name="CaseSensitiveTooltip" xml:space="preserve">
+    <value>Distinguish between small and captial letters.</value>
+  </data>
+  <data name="ChooseAlphabetCaption" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="ChooseAlphabetList1" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ChooseAlphabetList2" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="ChooseAlphabetList3" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="ChooseAlphabetTooltip" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="CTAlphabetCaption" xml:space="preserve">
+    <value>Ciphertext language</value>
+  </data>
+  <data name="CTAlphabetGroup" xml:space="preserve">
+    <value>Ciphertext language</value>
+  </data>
+  <data name="CTAlphabetTooltip" xml:space="preserve">
+    <value>Complete used ciphertext language</value>
+  </data>
+  <data name="CTChooseAlphabetCaption" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="CTChooseAlphabetTooltip" xml:space="preserve">
+    <value>Choose ciphertext language</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Homophonic Substitution Analyzer</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Cryptanalyzes homophonic substitution ciphers</value>
+  </data>
+  <data name="PTAlphabetCaption" xml:space="preserve">
+    <value>Plaintext language</value>
+  </data>
+  <data name="PTAlphabetGroup" xml:space="preserve">
+    <value>Plaintext language</value>
+  </data>
+  <data name="PTAlphabetTooltip" xml:space="preserve">
+    <value>Complete used plaintext language</value>
+  </data>
+  <data name="PTChooseAlphabetCaption" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="PTChooseAlphabetTooltip" xml:space="preserve">
+    <value>Choose plaintext language</value>
+  </data>
+  <data name="SeparateAlphabetsCaption" xml:space="preserve">
+    <value>Separate plaintext/ciphertext language</value>
+  </data>
+  <data name="SeparateAlphabetsTooltip" xml:space="preserve">
+    <value>Use distinct languages for plaintext and ciphertext</value>
+  </data>
+  <data name="CTCaseSensitiveCaption" xml:space="preserve">
+    <value>Case sensitive</value>
+  </data>
+  <data name="CTCaseSensitiveTooltip" xml:space="preserve">
+    <value>Distinguish between small and captial letters.</value>
+  </data>
+  <data name="PTCaseSensitiveCaption" xml:space="preserve">
+    <value>Case sensitive</value>
+  </data>
+  <data name="PTCaseSensitiveTooltip" xml:space="preserve">
+    <value>Distinguish between small and captial letters.</value>
+  </data>
+  <data name="PropCiphertextalphabetCaption" xml:space="preserve">
+    <value>Ciphertext alphabet</value>
+  </data>
+  <data name="PropCiphertextalphabetTooltip" xml:space="preserve">
+    <value>Alphabet of the ciphertext</value>
+  </data>
+  <data name="PropCiphertextCaption" xml:space="preserve">
+    <value>Ciphertext</value>
+  </data>
+  <data name="PropCiphertextTooltip" xml:space="preserve">
+    <value>Encrypted text</value>
+  </data>
+  <data name="PropLanguagedictionaryCaption" xml:space="preserve">
+    <value>Dictionary</value>
+  </data>
+  <data name="PropLanguagedictionaryTooltip" xml:space="preserve">
+    <value>Dictionary of assumed plaintext language</value>
+  </data>
+  <data name="PropPlaintextalphabetCaption" xml:space="preserve">
+    <value>Plaintext alphabet</value>
+  </data>
+  <data name="PropPlaintextalphabetoutputCaption" xml:space="preserve">
+    <value>Plaintext alphabet</value>
+  </data>
+  <data name="PropPlaintextalphabetoutputTooltip" xml:space="preserve">
+    <value>Plaintext alphabet with letters in the order to decrypt the ciphertext</value>
+  </data>
+  <data name="PropPlaintextalphabetTooltip" xml:space="preserve">
+    <value>Assumed alphabet of the plaintext</value>
+  </data>
+  <data name="PropPlaintextCaption" xml:space="preserve">
+    <value>Plaintext</value>
+  </data>
+  <data name="PropPlaintextTooltip" xml:space="preserve">
+    <value>Decrypted text</value>
+  </data>
+  <data name="PropReferencetextCaption" xml:space="preserve">
+    <value>Reference text</value>
+  </data>
+  <data name="PropReferencetextTooltip" xml:space="preserve">
+    <value>Sample text to extract letter frequencies of the assumed plaintext language</value>
+  </data>
+  <data name="TreatmentInvalidCharsCaption" xml:space="preserve">
+    <value>Invalid Characters</value>
+  </data>
+  <data name="TreatmentInvalidCharsTooltip" xml:space="preserve">
+    <value>Treatment of invalid characters.</value>
+  </data>
+  <data name="UseDefaultWordSeparatorCaption" xml:space="preserve">
+    <value>Default word separator</value>
+  </data>
+  <data name="UseDefaultWordSeparatorTooltip" xml:space="preserve">
+    <value>Use default word separator (blank) for dictionary attack or set manually a separator</value>
+  </data>
+  <data name="ChooseInvalidCharsList1" xml:space="preserve">
+    <value>Ignore</value>
+  </data>
+  <data name="ChooseInvalidCharsList2" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ChooseInvalidCharsList3" xml:space="preserve">
+    <value>Replace with ?</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>Elapsed:</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Top Ten</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="dic_attack_finished" xml:space="preserve">
+    <value>Dictionary attack finished in </value>
+  </data>
+  <data name="error_alphabet_length" xml:space="preserve">
+    <value>Length of ciphertext alphabet and plaintext alphabet is different.</value>
+  </data>
+  <data name="error_ciphertext" xml:space="preserve">
+    <value>Error while obtaining ciphertext.</value>
+  </data>
+  <data name="error_dictionary" xml:space="preserve">
+    <value>Error while obtaining English language dictionary file</value>
+  </data>
+  <data name="gen_attack_finished" xml:space="preserve">
+    <value>Genetic attack finished in </value>
+  </data>
+  <data name="gen_attack_testedkeys" xml:space="preserve">
+    <value>Number of tested keys with genetic attack: </value>
+  </data>
+  <data name="no_ciphertext" xml:space="preserve">
+    <value>No ciphertext is set.</value>
+  </data>
+  <data name="no_ciphertext_alphabet" xml:space="preserve">
+    <value>No ciphertext alphabet is set.</value>
+  </data>
+  <data name="no_dictionary" xml:space="preserve">
+    <value>No language dictionary is set.</value>
+  </data>
+  <data name="no_lang_freq" xml:space="preserve">
+    <value>No language frequencies are available.</value>
+  </data>
+  <data name="no_ngram_file" xml:space="preserve">
+    <value>No ngram file is available.</value>
+  </data>
+  <data name="no_plaintext_alphabet" xml:space="preserve">
+    <value>No plaintext alphabet is set.</value>
+  </data>
+  <data name="no_reference_text" xml:space="preserve">
+    <value>No reference text is available.</value>
+  </data>
+  <data name="AttackHeader" xml:space="preserve">
+    <value>Attack</value>
+  </data>
+  <data name="DicAttackDisplay" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="GenAttackDisplay" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Copy all lines</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>Copy key</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>Copy selected line</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>Copy text</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>Copy value</value>
+  </data>
+  <data name="HillAttackDisplay" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="hill_attack_finished" xml:space="preserve">
+    <value>Hillclimbing attack finished in: </value>
+  </data>
+  <data name="hill_attack_testedkeys" xml:space="preserve">
+    <value>Number of tested keys with hillclimbing attack: </value>
+  </data>
+  <data name="hill_attack_keyspersecond" xml:space="preserve">
+    <value>Tested keys with hillclimbing per second: </value>
+  </data>
+  <data name="ChooseAlgorithmCaption" xml:space="preserve">
+    <value>Algorithm</value>
+  </data>
+  <data name="ChooseAlgorithmList1" xml:space="preserve">
+    <value>Hillclimbing CPU</value>
+  </data>
+  <data name="ChooseAlgorithmList2" xml:space="preserve">
+    <value>Hillclimbing GPU</value>
+  </data>
+  <data name="ChooseAlgorithmList3" xml:space="preserve">
+    <value>Dictionary &amp; Genetic</value>
+  </data>
+  <data name="ChooseAlgorithmTooltip" xml:space="preserve">
+    <value>Choose the algorithm which should be used.</value>
+  </data>
+  <data name="RestartsCaption" xml:space="preserve">
+    <value>Amount of restarts (Hillclimbing only)</value>
+  </data>
+  <data name="RestartsTooltip" xml:space="preserve">
+    <value>Choose how often the hillclimbing algorithm should start over.</value>
+  </data>
+  <data name="SelectAlgorithmGroup" xml:space="preserve">
+    <value>Attack type</value>
+  </data>
+  <data name="no_cuda" xml:space="preserve">
+    <value>No CUDA-enabled device or CUDA driver found.</value>
+  </data>
+  <data name="ChooseAlphabetList4" xml:space="preserve">
+    <value>Latin</value>
+  </data>
+  <data name="ChooseAlphabetList10" xml:space="preserve">
+    <value>Portuguese</value>
+  </data>
+  <data name="ChooseAlphabetList11" xml:space="preserve">
+    <value>Czech</value>
+  </data>
+  <data name="ChooseAlphabetList12" xml:space="preserve">
+    <value>Greek</value>
+  </data>
+  <data name="ChooseAlphabetList5" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="ChooseAlphabetList6" xml:space="preserve">
+    <value>Hungarian</value>
+  </data>
+  <data name="ChooseAlphabetList7" xml:space="preserve">
+    <value>Swedish</value>
+  </data>
+  <data name="ChooseAlphabetList8" xml:space="preserve">
+    <value>Italian</value>
+  </data>
+  <data name="ChooseAlphabetList9" xml:space="preserve">
+    <value>Dutch</value>
+  </data>
+</root>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<AdditionalResources>
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/doc.css" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/print.css" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/download_bar.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/footer_bg.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/header_logo.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/shadow_l.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/shadow_r.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/forward.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/backward.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/index.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/external_link.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/filterTable.js" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/de.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/en.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/ru.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/zh.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/components.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/templates.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/editors.png" />
+  <file path="OnlineDocumentationGenerator/Generators/HtmlGenerator/common.png" />
+  <archive path="OnlineDocumentationGenerator/Generators/HtmlGenerator/MathJax.zip" excludeDeveloper="true" />
+</AdditionalResources>

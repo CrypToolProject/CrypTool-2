@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">AES Cipher (File Input)</title>
+  <title lang="zh">AES密码（文件输入）</title>
+  <title lang="ru">Шифрование AES (ввод файлов)</title>
+  <summary lang="en">Usage of the <i>AES</i> cipher with file input</summary>
+  <summary lang="zh">AES密码与文件输入的配合使用</summary>
+  <summary lang="ru">Использование шифрования AES с вводом файла</summary>
+  <description lang="en">In cryptography, the Advanced Encryption Standard (AES) is a symmetric-key encryption standard adopted by the U.S. government. The standard comprises three block ciphers, AES-128, AES-192 and AES-256, adopted from a larger collection originally published as Rijndael. Each of these ciphers has a 128-bit block size, with key sizes of 128, 192 and 256 bits, respectively. The AES ciphers have been analyzed extensively and are now used worldwide, as was the case with its predecessor, the Data Encryption Standard (DES).<newline /><newline />
+AES was announced by National Institute of Standards and Technology (NIST) as U.S. FIPS PUB 197 (FIPS 197) on November 26, 2001 after a 5-year standardization process in which fifteen competing designs were presented and evaluated before Rijndael was selected as the most suitable (see Advanced Encryption Standard process for more details). It became effective as a Federal government standard on May 26, 2002 after approval by the Secretary of Commerce. It is available in many different encryption packages. AES is the first publicly accessible and open cipher approved by the NSA for top secret information (see Security of AES, below).<newline /><newline />
+The Rijndael cipher was developed by two Belgian cryptographers, Joan Daemen and Vincent Rijmen, and submitted by them to the AES selection process. Rijndael (Dutch pronunciation: [ˈrɛindaːl]) is a wordplay based upon the names of the two inventors.<newline /><newline />
+Source: <external ref="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" /></description>
+  <description lang="zh">在加密技术中，高级加密标准（AES）是美国政府采用的对称密钥加密标准。该标准包括三个分组密码，即AES-128，AES-192和AES-256，从最初发行为Rijndael的较大集合中采用。这些密码中的每个密码都有128位的块大小，密钥大小分别为128、192和256位。 AES密码已进行了广泛的分析，并且像其前身数据加密标准（DES）一样，现已在全球范围内使用。 AES由美国国家标准技术研究院（NIST）在2001年11月26日宣布为US FIPS PUB 197（FIPS 197），历经5年的标准化过程，其中提出并评估了15个竞争设计，然后才被选为Rijndael最适合（有关更多详细信息，请参阅“高级加密标准”过程）。经商务部长批准后，它于2002年5月26日作为联邦政府标准生效。它有许多不同的加密软件包可用。 AES是美国国家安全局（NSA）批准的第一个可公开访问的开放密码，用于获取最高机密信息（请参阅下面的AES安全性）。 Rijndael密码是由两名比利时密码学家Joan Daemen和Vincent Rijmen开发的，并由他们提交给AES选择过程。 Rijndael（荷兰语发音：[rɛindaːl]）是基于两位发明者姓名的文字游戏。资源：</description>
+  <description lang="ru">В криптографии стандарт расширенного шифрования (AES) является стандартом шифрования с симметричным ключом, принятым правительством США. Стандарт состоит из трех блочных шифров, AES-128, AES-192 и AES-256, принятых из более крупной коллекции, первоначально опубликованной как Rijndael. Каждый из этих шифров имеет 128-битный размер блока, с размерами клавиш 128, 192 и 256 бит, соответственно. Шифры AES были подробно проанализированы и теперь используются во всем мире, как это было в случае с его предшественником, стандартом шифрования данных (DES). AES был анонсирован Национальным институтом стандартов и технологий (NIST) в качестве US FIPS PUB 197 (FIPS 197) 26 ноября 2001 года после пятилетнего процесса стандартизации, в котором 15 конкурирующих проектов были представлены и оценены до того, как Rijndael был выбран как наиболее (см. расширенный процесс шифрования для более подробной информации). Он вступил в силу как стандарт федерального правительства 26 мая 2002 года после одобрения министра торговли. Он доступен во многих различных пакетах шифрования. AES является первым общедоступным и открытым шифром, одобренным NSA для получения полной секретной информации (см. Безопасность AES ниже). Шифр Rijndael был разработан двумя бельгийскими криптографами Джоан Даемен и Винсент Риджмен и представлен ими в процессе отбора AES. Rijndael (голландское произношение: [rɛindaːl]) - это игровой процесс, основанный на именах двух изобретателей. Источник:</description>
+  <keywords>advanced, Daemen, Rijmen, Rijndael, symmetric, nist</keywords>
+  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist</keywords>
+  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, симметричный, nist</keywords>
+  <title lang="de">AES-Chiffre (Dateieingabe)</title>
+  <summary lang="de">Benutzung der <i>AES</i>-Chiffre mit Dateieingabe</summary>
+  <description lang="de">Der Advanced Encryption Standard (AES) ist ein symmetrisches Kryptosystem, das als Nachfolger für DES und 3DES im Oktober 2000 vom National Institute of Standards and Technology (NIST) als Standard bekanntgegeben wurde. Nach seinen Entwicklern Joan Daemen und Vincent Rijmen wird er auch Rijndael-Algorithmus genannt (gesprochen wie dt. räindahl). Der Rijndael-Algorithmus besitzt eine variable Blockgröße von 128, 192 oder 256 Bits und eine variable Schlüssellänge von 128, 192 oder 256 Bits. Rijndael bietet ein sehr hohes Maß an Sicherheit. Das Verfahren wurde eingehenden kryptoanalytischen Prüfungen unterzogen. AES schränkt die Blocklänge auf 128 Bit ein, während die Wahl der Schlüssellänge von 128, 192 oder 256 Bits unverändert übernommen worden ist. Die Bezeichnungen der drei AES-Varianten AES-128, AES-192 und AES-256 beziehen sich jeweils auf die gewählte Schlüssellänge.<newline />
+Der Algorithmus ist frei verfügbar und darf ohne Lizenzgebühren eingesetzt sowie in Soft- und Hardware implementiert werden. AES ist in den USA für staatliche Dokumente mit höchster Geheimhaltungsstufe zugelassen.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Advanced_Encryption_Standard" /></description>
+  <keywords lang="de">symmetrisch</keywords>
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="FileInputClass" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$File Input$" value="Dateieingabe" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$StringDecoder$" value="String-Decodierer" />
+    <replacement key="$memo$" value="Verschlüsselung einer Datei mit der AES-Verschlüsselung und der Komponente &quot;Schlüssel&quot; als Schlüssel und den Parametern Schlüsselgröße, Blockverkettungsmodus und Padding in den Einstellungen der &quot;AES&quot;-Komponente. Für 128 Bit-AES müssen 32 hexadezimale Zeichen als Schlüssel eingegeben werden. Nicht-hexadezimale Zeichen werden von der Komponente &quot;String-Dekodierer&quot; entfernt.\line\line Zuerst muss eine Datei mit der Komponente &quot;Dateieingabe&quot; geöffnet werden: Klicken Sie dazu entweder auf das &quot;Maximieren&quot;-Icon oder das &quot;Fullscreen&quot;-Icon der Komponente (Fullscreen kann auch durch Doppelklick auf die Komponente erreicht werden). Alternativ kann die Datei auch über &quot;Datei öffnen&quot; in den Einstellungen der Komponente geöffnet werden." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$File Input$" value="档案输入" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$memo$" value="使用AES加密和“密钥”组件作为密钥以及参数密钥大小，块链接模式和“ AES”组件的设置中的填充来加密文件。对于128位AES，必须输入32个十六进制字符作为密钥。从“字符串解码器”组件中删除非十六进制字符。\Line \line首先必须打开带有“文件输入”组件的文件：为此，请单击“最大化”图标或“全屏”图标组件（也可以通过双击该组件来全屏显示）。或者，也可以通过组件设置中的“打开文件”来打开文件。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$File Input$" value="входной файл" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$memo$" value="Зашифруйте файл, содержащий AES-шифрование, и ключевой компонент в виде ключей, а также размер ключа, цепочку блоков и параметры заполнения в настройках компонента AES. Для 128-битного AES в качестве ключа необходимо ввести 32 шестнадцатеричных символа. Не шестнадцатеричные символы удаляются компонентом String Decoder. \Line \line Сначала откройте файл с помощью компонента «Вход в файл»: либо нажмите значок «Максимизировать», либо значок «Полноэкранный» компонент (Fullscreen также может быть достигнут путем двойного щелчка по компоненту). Кроме того, файл можно также открыть через «Открыть файл» в настройках компонента." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$File Input$" value="File Input" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$StringDecoder$" value="StringDecoder" />
+    <replacement key="$memo$" value="Encryption of a file with the AES cipher using the content of the component &quot;Key&quot; as key and the parameters of the AES component for key size, block mode and padding. For 128 bit AES you should enter 32 hex characters as key. Non-hex characters are extracted by the &quot;StringDecoder&quot; component.\line\line First you have to open a file using the component &quot;File Input&quot;: To do so you can either click within this component on the icon &quot;Maximize&quot; or &quot;Fullscreen&quot; (which is the same as double clicking this component). Alternatively you can select the &quot;File Input&quot; component and open a file with the button in its parameter bar." />
+  </replacements>
+</sample>

@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>选择算法动作</value>
+  </data>
+  <data name="CipherTypeList1" xml:space="preserve">
+    <value>ADFGX</value>
+  </data>
+  <data name="CipherTypeList2" xml:space="preserve">
+    <value>ADFGVX</value>
+  </data>
+  <data name="CipherTypeList3" xml:space="preserve">
+    <value>ADFGVXZ</value>
+  </data>
+  <data name="CipherVariantCaption" xml:space="preserve">
+    <value>密码变体</value>
+  </data>
+  <data name="CipherVariantTooltip" xml:space="preserve">
+    <value>ADFGX使用25个字母的明文字母（AZ不带J），而ADFGVX使用36个字母的字母（AZ和0-9）。</value>
+  </data>
+  <data name="CleanTranspositionPassCaption" xml:space="preserve">
+    <value>换位列序列</value>
+  </data>
+  <data name="CleanTranspositionPassTooltip" xml:space="preserve">
+    <value>换位阶段使用的列号顺序</value>
+  </data>
+  <data name="InputStringCaption" xml:space="preserve">
+    <value>文字输入</value>
+  </data>
+  <data name="InputStringTooltip" xml:space="preserve">
+    <value>输入字符串要加密或解密</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>文字输出</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>处理后输出密文或明文</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>ADFGVX</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>WW1中使用的密码，结合了置换和置换</value>
+  </data>
+  <data name="RandomMatrixCaption" xml:space="preserve">
+    <value>随机键</value>
+  </data>
+  <data name="RandomMatrixTooltip" xml:space="preserve">
+    <value>创建随机替换矩阵和换位键</value>
+  </data>
+  <data name="StandardMatrixCaption" xml:space="preserve">
+    <value>重置键</value>
+  </data>
+  <data name="StandardMatrixTooltip" xml:space="preserve">
+    <value>创建没有替换键的默认替换矩阵</value>
+  </data>
+  <data name="SubstitutionMatrixCaption" xml:space="preserve">
+    <value>替代矩阵</value>
+  </data>
+  <data name="SubstitutionMatrixTooltip" xml:space="preserve">
+    <value>用于加密/解密的矩阵</value>
+  </data>
+  <data name="SubstitutionPassCaption" xml:space="preserve">
+    <value>替代密码</value>
+  </data>
+  <data name="SubstitutionPassTooltip" xml:space="preserve">
+    <value>输入替代矩阵的字符串</value>
+  </data>
+  <data name="TranspositionPassCaption" xml:space="preserve">
+    <value>换位密码</value>
+  </data>
+  <data name="TranspositionPassTooltip" xml:space="preserve">
+    <value>密码用于生成转置的列顺序序列。使用相同的字母作为替换矩阵，即纯文本字母。</value>
+  </data>
+</root>

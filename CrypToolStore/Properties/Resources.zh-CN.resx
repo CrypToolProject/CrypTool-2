@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>CrypTool商店</value>
+  </data>
+  <data name="PluginsOverview" xml:space="preserve">
+    <value>插件概述</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>CrypTool Store允许下载其他CrypTool 2组件</value>
+  </data>
+  <data name="Welcome_To_CrypToolStore" xml:space="preserve">
+    <value>欢迎来到CrypTool商店</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索：</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>作者：</value>
+  </data>
+  <data name="AuthorsEmails" xml:space="preserve">
+    <value>作者的电子邮件：</value>
+  </data>
+  <data name="AuthorsInstitutes" xml:space="preserve">
+    <value>作者机构：</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="downloaded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\downloaded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PendingChanges" xml:space="preserve">
+    <value>您最近从CrypTool商店安装或卸载了组件。为了使更改生效，您必须重新启动CrypTool 2。</value>
+  </data>
+  <data name="RestartCrypTool2" xml:space="preserve">
+    <value>立即重新启动CrypTool 2</value>
+  </data>
+  <data name="_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>安装</value>
+  </data>
+  <data name="Uninstall" xml:space="preserve">
+    <value>卸载</value>
+  </data>
+  <data name="CrypToolStorePresentation_UpdateStorePluginList_Exception_occured_during_adding_of_current_list_of_plugins_to_the_user_interface___0_" xml:space="preserve">
+    <value>当前插件列表添加到用户界面期间发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_UpdateStorePluginList_Error_occured_during_retrieval_of_current_list_of_plugins_from_CrypToolStore___0_" xml:space="preserve">
+    <value>从CrypToolStore检索当前插件列表期间发生错误：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_UpdateStorePluginList_Exception_occured_during_retrieval_of_current_list_of_plugins_from_CrypToolStore___0_" xml:space="preserve">
+    <value>从CrypToolStore检索当前插件列表期间发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_PluginListView_SelectionChanged_Exception_occured_during_showing_of_selected_plugin_in_the_right_box_of_the_CrypToolStore_UI___0_" xml:space="preserve">
+    <value>在CrypTool Store UI的右框中显示所选插件期间发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallButton_Click_Do_you_really_want_to_download_and_install___0___from_CrypTool_Store_" xml:space="preserve">
+    <value>您真的要从CrypTool Store下载并安装“ {0}”吗？</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_deleting_old_installation_files___0_" xml:space="preserve">
+    <value>删除旧的安装文件时发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_locking_of_everything___0_" xml:space="preserve">
+    <value>锁定所有内容时发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Could_not_download_from_CrypToolStore_Server__Message_was___0_" xml:space="preserve">
+    <value>无法从CrypToolStore服务器下载。消息为：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Error_during_download_" xml:space="preserve">
+    <value>下载期间出错。</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin___0___has_been_successfully_downloaded__You_need_to_restart_CrypTool_2_to_complete_installation_" xml:space="preserve">
+    <value>“ {0}”已成功下载。您需要重新启动CrypTool 2才能完成安装。</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_downloading_and_installing___0_" xml:space="preserve">
+    <value>下载和安装期间发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_" xml:space="preserve">
+    <value>发生异常。</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Exception_occured_while_unlocking_of_everything___0_" xml:space="preserve">
+    <value>解锁所有内容时发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Do_you_really_want_to_uninstall___0___from_CrypTool_Store_" xml:space="preserve">
+    <value>您真的要卸载“ {0}”吗？</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click___0___has_been_marked_for_uninstallation__You_need_to_restart_CrypTool_2_to_complete_installation_" xml:space="preserve">
+    <value>“ {0}”已标记为要卸载。您需要重新启动CrypTool 2才能完成卸载。</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Could_not_uninstall__Exception_was___0_" xml:space="preserve">
+    <value>无法卸载。例外是：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Exception_during_uninstallation_" xml:space="preserve">
+    <value>卸载期间发生异常。</value>
+  </data>
+  <data name="CrypToolStorePresentation_RestartButton_Click_Exception_occured_while_trying_to_restart_CrypTool_2___0_" xml:space="preserve">
+    <value>尝试重新启动CrypTool 2时发生异常：{0}</value>
+  </data>
+  <data name="CrypToolStorePresentation_RestartButton_Click_Exception_during_restart_" xml:space="preserve">
+    <value>重新启动期间发生异常。</value>
+  </data>
+  <data name="CrypToolStorePresentation_DeleteButton_Click_Unistallation_" xml:space="preserve">
+    <value>落伍？</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallPlugin_Download_succeeded_" xml:space="preserve">
+    <value>下载成功。</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>版：</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>更新资料</value>
+  </data>
+  <data name="CrypToolStorePresentation_InstallButton_Click_Start_download_and_installation_of___0___" xml:space="preserve">
+    <value>开始下载和安装“ {0}”吗？</value>
+  </data>
+  <data name="CrypToolStorePresentation_CheckIfAlreadyInstalled_Exception_occured_during_check_of__0__for_updates___1_" xml:space="preserve">
+    <value>检查“ {0}”以进行更新时发生异常：{1}</value>
+  </data>
+  <data name="updateavailable" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\updateavailable.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>文件大小：</value>
+  </data>
+  <data name="CTStoreTLS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\ctstoretls.crt;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="icon_resource" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\icon_resource.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CrypToolStorePresentation_ResourceSuccessfullyInstalled" xml:space="preserve">
+    <value>资源“ {0}”已成功安装。</value>
+  </data>
+  <data name="ShowResources" xml:space="preserve">
+    <value>显示资源</value>
+  </data>
+  <data name="CopyInfo" xml:space="preserve">
+    <value>复制信息</value>
+  </data>
+</root>

@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="CrypTool.LFSR.LFSRPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"    
+    xmlns:properties="clr-namespace:CrypTool.LFSR.Properties"
+    Height="Auto" Width="Auto" Margin="0" Background="White" BorderBrush="Black" BorderThickness="1">
+
+    <Viewbox Stretch="Uniform">
+        <Grid Name="completeGrid">
+            <Ellipse Name="innercircle" Height="10" Width="10" StrokeThickness="0" Fill="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5" />
+            <Grid Height="50" Width="Auto" Margin="5,0,0,60" Name="polynomialGrid" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Label Name="polynomialText" />
+            </Grid>
+            <Grid Height="Auto" Width="Auto" Margin="0,40,0,0" Name="myGrid" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Content="{x:Static properties:Resources.No_Quickwatch_data_right_now_}" Name="infoText" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+    </Viewbox>
+
+</UserControl>

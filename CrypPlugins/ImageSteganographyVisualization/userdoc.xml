@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component implements image steganography which hides a secret message inside an image.  The component also offers an interactive visualization of the process. <newline />
+    The message can be hidden using the LSB or the BPCS technique, see <ref id="steganographywiki" /> and <ref id="bpcswiki" /> for more information about these techniques.
+  </introduction>
+  <introduction lang="zh-CN">该组件实现了图像隐写术，该隐匿术将秘密消息隐藏在图像内部。该组件还提供了过程的交互式可视化。可以使用LSB或BPCS技术隐藏该消息，有关这些技术的更多信息，请参见参考资料。</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente implementiert Bildsteganographie wo eine geheime Nachricht in einem Bild versteckt wird. Die Komponente bietet auch eine interaktive Visualisierung des Prozesses.  <newline />
+    Die Nachricht kann mittels der LSB oder der BPCS Methode versteckt werden, siehe <ref id="steganographywiki" /> und <ref id="bpcswiki" /> für mehr Informationen über diese Verfahren.
+  </introduction>
+  <usage lang="en">
+    The component requires two inputs for the hiding process: a secret message and a cover image which can be used to hide the secret message. To enter the secret message you need a text input component and for the cover image you can upload an image from your computer using a file input component.
+    The output here is the stego image, therefore the picture output component can be used to display the image or you can use the file output component when you want to save the stego image. <newline />
+    When extracting a message the component only requires the stego image as an input. This again can be an image uploaded from your computer or the output of a steganography component which was used to hide a message in an image. The output here is the extracted secret message which can be displayed using a text output component. <newline />
+    When using this component, you can decide which technique you want to use to hide and extract the secret message (LSB or BPCS). 
+  </usage>
+  <usage lang="zh-CN">该组件需要两个输入来进行隐藏过程：秘密消息和可用于隐藏秘密消息的封面图像。要输入秘密消息，您需要一个文本输入组件，对于封面图像，您可以使用文件输入组件从计算机上载图像。这里的输出是Stego图像，因此图片输出组件可用于显示图像，或者在要保存Stego图像时可以使用文件输出组件。提取消息时，组件仅需要隐秘图像作为输入。再次可以是从计算机上载的图像，也可以是用于在图像中隐藏消息的隐写术组件的输出。此处的输出是提取的秘密消息，可以使用文本输出组件显示该消息。使用此组件时，您可以决定要使用哪种技术来隐藏和提取秘密消息（LSB或BPCS）。</usage>
+  <usage lang="de-DE">
+    Die Komponente benötigt zwei Eingaben für den Versteckprozess: eine geheime Nachricht und ein Coverbild in dem die Nachricht versteckt werden kann. Um die geheime Nachricht einzugeben, benötigen Sie eine Texteingabekomponente. Für das Coverbild können Sie ein Bild mithilfe einer Dateieingabekomponente von Ihrem Computer hochladen.
+    Die Ausgabe hier ist das Stego-Bild, daher kann die Bildausgabekomponente verwendet werden um das Bild anzuzeigen, oder Sie können die Dateiausgabekomponente verwenden wenn Sie das Stego-Bild speichern möchten. <newline />
+    Beim Extrahieren einer Nachricht benötigt die Komponente nur das Stego-Bild als Eingabe. Dies kann wiederum ein Bild sein, das von Ihrem Computer hochgeladen wurde, oder die Ausgabe einer Steganographie Komponente, die für das Verstecken einer Nachricht in einem Bild benutzt wurde. Die Ausgabe hier ist die extrahierte geheime Nachricht, die unter Verwendung einer Textausgabekomponente angezeigt werden kann.<newline />
+    Wenn Sie diese Komponente benutzen möchten, können Sie auswählen welches Verfahren für das Verstecken und Extrahieren der geheimen Nachricht benutzt werden soll (LSB oder BPCS).
+  </usage>
+  <presentation lang="en">
+    After executing the model, assuming the presentation is activated in the settings, the main menu view is displayed. The main menu helps you navigate between the different views available to help visualize the process.
+    <newline /><section headline="Introduction View:">
+      This view gives an introduction into the topic of steganography and explains the concept behind the technique chosen in the settings (LSB or BPCS).
+    </section><newline /><section headline="Choose Bits View:">
+      This view is only present in the LSB mode. You can use this view to choose which bits should be used to hide the secret message. Each group of buttons portrays one of the RGB color channels. As default the LSBs are already
+      selected. Buttons of the selected bits have a cyan background color. To select/unselect a bit, the user only has to click on the button of the corresponding bit and it will be enabled/disabled (1 = bit is selected, 0 = bit is not selected).
+      In order for the changes to take place, the Apply Changes button in the below bar should be clicked. If the presentation is activated, no hiding process will be done until the bits are
+      chosen in this view and the Apply Changes button is clicked.
+    </section><newline /><section headline="Pixel Conversion View:">
+      This view serves as a way to examine the difference between the original and the stego image by viewing color samples of each pixel before and after the substitution. You can browse through the pixels using the arrows or enter the x and y coordinates of a certain pixel.
+    </section><newline /><section headline="Bit Planes View:">
+      This is only present in the BPCS mode. In order to better visualize and understand the difference between informative and noise-like regions, this view displays the 24 different bit planes of the cover image. Each 8 planes with the same color channel (red, green or blue) are grouped
+      together and shown from MSB to the LSB. Using the below bar, you can see and compare these different groups of bit planes.
+    </section><newline /><section headline="Overview: ">
+      You can find after each hiding process an overview where there are some general information about the secret message and the cover image. This include the size of the provided inputs and the hiding capacity in each case. In LSB, the hiding capcity depends on the number of bits you chose. In BPCS, this depends on the complexity threshold set in the settings. <newline />
+      In the BPCS mode you can also see a visual representation of the image blocks and message blocks that are defined when using the BPCS algorithm. You can also switch between viewing only complex image blocks or all image blocks by using the buttons in the bar below. 
+      You can browse through these blocks by using the arrows or you can go to a certain block by entering a valid index. 
+    </section></presentation>
+  <presentation lang="zh-CN">执行模型后，假设在设置中激活了演示，则会显示主菜单视图。主菜单可帮助您在可用的不同视图之间导航，以帮助可视化该过程。该视图介绍了隐写术主题，并解释了在设置（LSB或BPCS）中选择的技术背后的概念。该视图仅在LSB模式下显示。您可以使用此视图选择应使用哪些位来隐藏秘密消息。每组按钮描绘一个RGB颜色通道。默认情况下，已选择LSB。所选位的按钮具有青色背景色。要选择/取消选择某个位，用户只需单击相应位的按钮，即可启用/禁用该位（1 =选择位，0 =未选择位）。为了进行更改，应单击下面栏中的“应用更改”按钮。如果演示文稿已激活，则在此视图中选择位并单击“应用更改”按钮之前，不会进行任何隐藏过程。通过查看替换前后每个像素的颜色样本，此视图可作为检查原始图像与隐秘图像之间差异的方法。您可以使用箭头浏览像素，也可以输入特定像素的x和y坐标。仅在BPCS模式下存在。为了更好地可视化和理解信息性区域和类似噪声的区域之间的差异，此视图显示了封面图像的24个不同位平面。具有相同颜色通道（红色，绿色或蓝色）的每8个平面被组合在一起，并从MSB到LSB进行显示。使用下面的栏，您可以查看和比较这些不同的位平面组。在每个隐藏过程之后，您都可以找到概述，其中包含有关机密消息和封面图像的一些常规信息。在每种情况下，这包括提供的输入的大小和隐藏容量。在LSB中，隐藏能力取决于您选择的位数。在BPCS中，这取决于设置中设置的复杂度阈值。在BPCS模式下，您还可以看到使用BPCS算法时定义的图像块和消息块的可视表示。您也可以使用下面栏中的按钮在仅查看复杂图像块或所有图像块之间切换。您可以使用箭头浏览这些块，也可以通过输入有效的索引转到特定的块。</presentation>
+  <presentation lang="de-DE">
+    Nach der Ausführung des Modells wird unter der Annahme, dass die Präsentation in den Einstellungen aktiviert ist, die Hauptmenüansicht angezeigt. Das Hauptmenü hilft Ihnen beim Navigieren zwischen den verschiedenen verfügbaren Ansichten, die dabei helfen den Prozess zu visualisieren und ihn besser zu verstehen.
+    <newline /><section headline="Einführung:">
+     Diese Ansicht gibt eine Einführung in das Thema Steganographie und erläutert das Konzept der in den Einstellungen gewählten Technik (LSB oder BPCS).
+    </section><newline /><section headline="Bits für den Versteckprozess auswählen:">
+      Diese Ansicht ist nur im LSB-Modus vorhanden. In dieser Ansicht können Sie auswählen, welche Bits zum Verstecken der geheimen Nachricht verwendet werden sollen. Jede Bitsgruppe zeigt einen der RGB-Farbkanäle. Standardmäßig sind die LSBs bereits´ausgewählt. Die Schaltflächen der ausgewählten Bits haben eine cyan Hintergrundfarbe. Um ein Bit auszuwählen/abzuwählen, müssen Sie nur auf die Schaltfläche des entsprechenden Bits klicken und es wird aktiviert/deaktiviert.
+      Damit die Änderungen vorgenommen werden können, muss der Button "Änderungen übernehmen" in der unteren Leiste geklickt werden. Wenn die Präsentation aktiviert ist, wird kein Versteckvorgang durchgeführt, bis die Bits in dieser Ansicht ausgewählt werden und den Button "Änderungen übernehmen" angeklickt wird.
+    </section><newline /><section headline="Pixelkonvertierung ansehen: ">
+    Diese Ansicht dient dazu, den Unterschied zwischen dem Original- und dem Stego-Bild zu untersuchen, indem Farbmuster jedes Pixels vor und nach der Ersetzung angezeigt werden. Sie können die Pixel mit den Pfeilen browsen oder die x- und y-Koordinaten eines bestimmten Pixels eingeben.
+  </section><newline /><section headline="Bitebenen ansehen:">
+    Dies ist nur im BPCS-Modus vorhanden. Um den Unterschied zwischen informativen und komplexen Bereichen besser zu visualisieren und zu verstehen. Es werden in dieser Ansicht die 24 verschiedenen Bitebenen des Coverbilds angezeigt. Jeweils 8 Ebenen mit demselben Farbkanal (rot, grün oder blau) werden gruppiert zusammen und von MSB zum LSB gezeigt. Mithilfe der unteren Leiste können Sie diese verschiedenen Gruppen von Bitebenen ansehen und vergleichen.
+  </section><newline /><section headline="Übersicht: ">
+    Nach jedem Versteckprozess finden Sie eine Übersicht mit allgemeinen Informationen zur geheimen Nachricht und zum Coverbild. Dazu gehören jeweils die Größe der bereitgestellten Eingaben und die Versteckkapazität. In LSB hängt die Versteckkapazität von der Anzahl der von Ihnen ausgewählten Bits ab. In BPCS hängt dies von der in den Einstellungen festgelegten Komplexitätsschwelle ab. <newline />
+    Im BPCS-Modus sehen Sie auch eine visuelle Darstellung der Bildblöcke und Nachrichtenblöcke, die bei Verwendung des BPCS-Algorithmus definiert werden. Sie können auch zwischen der Anzeige nur komplexer Bildblöcke oder aller Bildblöcke wechseln, indem Sie die Buttons in der Leiste unten verwenden.
+    Sie können diese Blöcke mithilfe der Pfeile durchsuchen oder durch Eingabe eines gültigen Index zu einem bestimmten Block wechseln.
+  </section></presentation>
+  <references>
+    <linkReference id="steganographywiki">
+      <link url="https://en.wikipedia.org/wiki/Steganography" lang="en" />
+      <caption lang="en">Steganography (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Steganographie" lang="de-DE" />
+      <caption lang="de-DE">Steganographie (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="bpcswiki">
+      <link url="https://en.wikipedia.org/wiki/BPCS-steganography" />
+      <caption lang="en">BPCS-steganography (Wikipedia)</caption>
+      <caption lang="de">BPCS-Steganographie (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

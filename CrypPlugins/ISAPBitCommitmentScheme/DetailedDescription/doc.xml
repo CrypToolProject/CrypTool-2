@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de" />
+  <introduction lang="en">
+    <!-- Goals of the chapter:
+       - Beschreibung des kryptographischen Verfahrens 
+       - Beschreibung der Geschichte des Verfahrens
+       - Keine komplette mathematische Beschreibung
+       - Einsatzfelder des Verfahrens
+       - Zu welcher Klasse von Verfahren gehört das Verfahren
+       - (Möglichst abstrakte) Beschreibung der Ein- und Ausgaben
+     -->
+
+    ISAP-CS is a perfectly binding and computationally hiding bit commitment
+    scheme by Frederik Armknecht, Carsten Elsner and Martin
+    Schmidt. The scheme has been developed as a proof of concept for the usage
+    of analytic number theory, especially diophantine approximation, for
+    cryptographic design. Its design and its security proofs are based on the
+    theory of the
+    <i>inhomogeneous simultaneous diophantine approximation problem</i> (ISAP):
+    <newline /><newline />
+    Find $p_i (i=1,...,n)$ and $q$ satisfying
+    <![CDATA[$$| \alpha_i - p_i/q - \eta_i | < \epsilon $$]]>
+    for given $\alpha_i$, $\eta_i$ with $(i=1,...,n)$ and $\epsilon$.
+    <newline /><newline />
+    Roughly speaking, the basic idea is as follows: If one wants to commit to
+    a single bit $m$, the algorithm creates an instance
+    of ISAP having the unique solution $(p_1,...,p_n,q)$ incorporating the bit $m$
+    as the LSB of $q$. The generated ISAP instance gets published as the
+    commitment information whereby the solution is kept secret and later is
+    used as the opening information. The problem instance is generated in a
+    way such that an attacker has to solve ISAP to break the hiding
+    property. Thus, the instances are generated such that they are not
+    efficiently solvable by current algorithmic approaches to ISAP. The
+    binding property follows from the fact that $(p_1,...,p_n,q)$ is the unique
+    solution to the generated instance.
+  </introduction>
+  <introduction lang="zh-CN">ISAP-CS是Frederik Armknecht，Carsten Elsner和Martin Schmidt完美结合并具有计算隐蔽性的比特承诺方案。该方案已开发为概念证明，用于密码设计的解析数论，尤其是双色子碱近似。它的设计和安全性证明均基于非均匀同时双色子态逼近问题（ISAP）的理论：查找满足$$ |的$ p_i（i = 1，...，n）$和$ q $。 \ alpha_i-p_i / q-\ eta_i |对于给定的$ \ alpha_i $，$ \ eta_i $和$（i = 1，...，n）$和$ \ epsilon $，&amp;lt;\ epsilon $$。粗略地讲，基本思想如下：如果要提交一位$ m $，该算法将创建一个具有唯一解决方案$（p_1，...，p_n，q）$并包含该位的ISAP实例。 $ m $作为$ q $的最低有效位。生成的ISAP实例将作为承诺信息发布，从而使解决方案处于保密状态，之后用作开始信息。问题实例的生成方式使攻击者必须解决ISAP才能破坏隐藏属性。因此，实例被生成，使得它们不能被当前的ISAP算法方法有效地解决。绑定属性来自于以下事实：$（p_1，...，p_n，q）$是生成的实例的唯一解决方案。</introduction>
+  <introduction lang="ru">ISAP-CS - это идеальная привязка и расчетная схема привязки битков от Фредерика Армкнехта, Карстен Элснер и Мартина Шмидта. Схема была разработана как доказательство концепции использования аналитической теории чисел, особенно диофантовой аппроксимации, для криптографического проектирования. Его конструкция и доказательства безопасности основаны на теории неоднородной задачи одновременного диофантового приближения (ISAP): Найти $ p_i (i = 1, ..., n) $ и $ q $, удовлетворяющие $$ | \ alpha_i - p_i / q - \ eta_i | &amp;lt;\ epsilon $$ для заданных $ \ alpha_i $, $ \ eta_i $ с $ (i = 1, ..., n) $ и $ \ epsilon $. Грубо говоря, основная идея такова: если кто-то хочет зафиксировать один бит $ m $, алгоритм создает экземпляр ISAP, имеющий уникальное решение $ (p_1, ..., p_n, q) $, включающее бит $ m $ как LSB $ q $. Сгенерированный экземпляр ISAP публикуется как информация о приверженности, в соответствии с которой решение хранится в секрете, а затем используется как открывающая информация. Экземпляр проблемы генерируется таким образом, что злоумышленник должен решить ISAP, чтобы разбить свойство скрытия. Таким образом, экземпляры генерируются таким образом, что они не могут быть эффективно разрешены текущими алгоритмическими подходами к ISAP. Свойство binding следует из того факта, что $ (p_1, ..., p_n, q) $ является единственным решением для сгенерированного экземпляра.</introduction>
+  <introduction lang="de">
+    ISAP-CS ist ein uneingeschränkt bindendes und inhaltsverbergendes Bit-Commitment-Verfahren, das von
+    Frederik Armknecht, Carsten Elsner und Martin Schmidt als Machbarkeitsstudie für die
+    Anwendbarkeit der analytischen Zahlentheorie (insbesondere der diophantischen Approximation) beim
+    Entwurf kryptographischer Systeme entwickelt wurde.
+    Das System und die Nachweise seiner Sicherheit basieren auf der Theorie des
+    <i>inhomogenen simultanen diophantischen Approximationsproblems</i>
+    (<i>inhomogeneous simultaneous diophantine approximation problem</i>, ISAP):
+    <newline /><newline />
+    Finde $p_i (i=1,...,n)$ und $q$, für die für ein gegebenes $\alpha_i$, $\eta_i$ mit $(i=1,...,n)$ und $\epsilon$ gilt:
+    <![CDATA[$$| \alpha_i - p_i/q - \eta_i | < \epsilon $$]]><newline /><newline />
+    Die zugrunde liegende Idee ist grob gesagt die folgende:
+    Wenn man sich auf ein einzelnes Bit $m$ festlegen will, erzeugt der Algorithmus
+    eine Instanz des ISAP, das die eindeutige Lösung $(p_1,...,p_n,q)$ hat und bei dem
+    $m$ durch das niedrigstwertige Bit von $q$ dargestellt wird.
+    Diese ISAP-Instanz wird als die Commitment-Information veröffentlicht, wobei die Lösung
+    des Problems noch geheim gehalten wird und erst später zur Bestätigung des Commitments
+    bekanntgegeben wird.
+    Um den Wert des versteckten Bits zu erfahren, muss ein Angreifer das veröffentlichte Problem lösen.
+    Daher wird bei der Generierung der ISAP-Instanz darauf geachtet, dass sie nicht in effektiver
+    Weise durch einen der bekannten Algorithmen zur Lösung von ISAP gelöst werden kann.
+    Die bindende Eigenschaft dieser Methode folgt aus der Tatsache, dass $(p_1,...,p_n,q)$ die
+    eindeutige Lösung der generierten Probleminstanz ist.
+  </introduction>
+  <usage lang="en">
+    Simply drag the <i>ISAP Bit Commitment Scheme</i> component to your workspace and connect a component, that outputs a boolean
+    (for instance the <docRef item="CrypTool.Plugins.BooleanOperators.BooleanInput" /> component), to the <i>InputBit</i> input connector.
+    A value of <i>true</i> means $m=1$ and <i>false</i> means $m=0$. <newline />
+    Optionally, you can connect to the <i>Dimension</i> and the <i>S</i> input connectors to define these integer
+    values (By default, <i>Dimension</i> is 7 and <i>S</i> is 128).
+    <newline /><newline />
+    The <i>ISAP Bit Commitment Scheme</i> component has a lot of output connectors (see below), which allow you to obtain the results of
+    the algorithm.<newline />
+    The <i>Log message</i> output gives a lot of informations about the intermediate steps of the used algorithm and
+    its results.
+  </usage>
+  <usage lang="zh-CN">只需将ISAP Bit Commitment Scheme组件拖到您的工作区中，然后将一个输出布尔值的组件（例如该组件）连接到InputBit输入连接器。值为true表示$ m = 1 $，值为false表示$ m = 0 $。 （可选）您可以连接到Dimension和S输入连接器以定义这些整数值（默认情况下，Dimension为7，S为128）。 ISAP位承诺方案组件具有许多输出连接器（请参见下文），使您可以获取算法的结果。 Log消息输出提供了许多有关所用算法的中间步骤及其结果的信息。</usage>
+  <usage lang="ru">Просто перетащите компонент BitCommitmentScheme в рабочее пространство и подключите компонент, который выводит логическое (например, компонент) на входной разъем InputBit. Значение true означает $ m = 1 $, а false означает $ m = 0 $. При желании вы можете подключиться к входным разъемам Dimension и S для определения этих целых значений (по умолчанию размер равен 7, а S - 128). В компоненте BitCommitmentScheme имеется много выходных разъемов (см. Ниже), которые позволяют получить результаты алгоритма. Выход сообщения журнала дает много информации о промежуточных шагах используемого алгоритма и его результатах.</usage>
+  <usage lang="de">
+    Ziehen Sie einfach die <i>ISAP Bit-Commitment-Verfahren</i>-Komponente auf den Arbeitsbereich und verbinden den Eingang <i>Eingabe-Bit</i> mit
+    einer Komponente, die einen booleschen Wert generiert (zum Beispiel mit der <docRef item="CrypTool.Plugins.BooleanOperators.BooleanInput" />-Komponente).
+    Hierbei bedeutet der Wert <i>wahr</i>, dass $m=1$ und <i>falsch</i>, dass $m=0$.<newline />
+    Optional kann man an den Eingängen <i>Dimension</i> und <i>S</i> Werte für diese Parameter angeben, ansonsten werden die voreingestellten Werte
+    <i>Dimension</i>=7 und <i>S</i>=128 verwendet.
+    <newline /><newline />
+    Die <i>ISAP Bit-Commitment-Verfahren</i>-Komponente hat viele Ausgänge, an denen die Ergebnisse der Berechnungen zur Verfügung gestellt werden.<newline />
+    Am Ausgang <i>Ereignisprotokoll</i> werden einige zusätzliche Informationen über den Ablauf des Algorithmus und Zwischenresultate ausgegeben.
+  </usage>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://www.ifam.uni-hannover.de/~mschmidt/files/ISAPCommitmentScheme.tgz" />
+      <caption lang="en">Object oriented C++ implementation of CS-ISAP by Martin Schmidt</caption>
+      <link lang="de" url="http://www.ifam.uni-hannover.de/~mschmidt/files/ISAPCommitmentScheme.tgz" />
+      <caption lang="de">Objektorientierte C++-Implementierung von CS-ISAP von Martin Schmidt</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://www.springerlink.com/content/w630617804364681" />
+      <caption lang="en"> "Using the Inhomogeneous Simultaneous Approximation Problem for Cryptographic Design" by F. Armknecht, C. Elsner and M. Schmidt</caption>
+      <link lang="de" url="http://www.springerlink.com/content/w630617804364681" />
+      <caption lang="de"> "Using the Inhomogeneous Simultaneous Approximation Problem for Cryptographic Design" von F. Armknecht, C. Elsner and M. Schmidt (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://ls.fmi.uni-mannheim.de/de/ths/arbeitsgruppe/mitarbeiter/prof-dr-frederik-armknecht/" />
+      <caption lang="en">Prof. Dr. Frederik Armknecht (University of Mannheim)</caption>
+      <link lang="de" url="http://ls.fmi.uni-mannheim.de/de/ths/arbeitsgruppe/mitarbeiter/prof-dr-frederik-armknecht/" />
+      <caption lang="de">Prof. Dr. Frederik Armknecht (Universität Mannheim)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://www.fhdw-hannover.de/de/node/45" />
+      <caption lang="en">Prof. Dr. Carsten Elsner (FHDW Hannover)</caption>
+      <link lang="de" url="http://www.fhdw-hannover.de/de/node/45" />
+      <caption lang="de">Prof. Dr. Carsten Elsner (FHDW Hannover)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://www.ifam.uni-hannover.de/~mschmidt/" />
+      <caption lang="en">Dipl.-Math. Martin Schmidt (Leibniz University of Hannover)</caption>
+      <link lang="de" url="http://www.ifam.uni-hannover.de/~mschmidt/" />
+      <caption lang="de">Dipl.-Math. Martin Schmidt (Leibniz Universität Hannover)</caption>
+    </linkReference>
+  </references>
+</documentation>

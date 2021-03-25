@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <OuterGlowBitmapEffect x:Key="ErrorGlow" GlowColor="Red" GlowSize="4" x:Shared="False" />
+  
+  <ControlTemplate x:Key="validationTemplate">
+    <DockPanel>
+      <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+      <AdornedElementPlaceholder/>
+    </DockPanel>
+  </ControlTemplate>
+
+  <Style x:Key="textStyleTextBox" TargetType="TextBox">
+    <Setter Value="4,0,4,0" Property="Margin"/>
+    <Setter Value="Auto" Property="Width"/>
+    <Style.Triggers>
+      <Trigger Property="Validation.HasError" Value="true">
+        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+        <Setter Property="BitmapEffect" Value="{StaticResource ErrorGlow}" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+
+
+
+</ResourceDictionary>

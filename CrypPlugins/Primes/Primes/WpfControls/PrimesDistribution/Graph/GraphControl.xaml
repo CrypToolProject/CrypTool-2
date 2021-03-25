@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="Primes.WpfControls.PrimesDistribution.Graph.GraphControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:graph="clr-namespace:Primes.WpfControls.PrimesDistribution.Graph" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Distribution"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <comps:InputRangeControl x:Name="ircCountPrimes" InputRangeControlType="Horizontal" Grid.Row="0" Title="" SecondParameterPresent="false" />
+
+        <GroupBox Header="{x:Static lang:Distribution.graph_groupboxheader}" Name="gbFunctions" Grid.Row="1" Margin="0,15,0,0">
+            <StackPanel>
+                <CheckBox Name="cbDontPaint" IsChecked="False" Margin="3,3,3,3" VerticalAlignment="Center" Click="cbDontPaint_Click" Visibility="Collapsed">Nicht zeichnen</CheckBox>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Grid Name="pnlFunctions">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="14" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="16" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Line X1="0" X2="10" Y1="0" Y2="0" Stroke="Blue" StrokeThickness="3" VerticalAlignment="Center" />
+                            <CheckBox Name="cbPiGauss" IsChecked="True" Margin="3,3,3,3" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1" Content="{x:Static lang:Distribution.graph_gaussname}"></CheckBox>
+                            <Button Name="btnStopPiGauss" IsEnabled="False" Click="StopFunctionClick" Margin="3,3,3,3" Grid.Row="0" Grid.Column="2" Content="{x:Static lang:Distribution.graph_btnStop}"></Button>
+                            <Button Name="btnResumePiGauss" IsEnabled="False" Click="ResumeFunctionClick" Margin="3,3,3,3" Grid.Row="0" Grid.Column="3" Content="{x:Static lang:Distribution.graph_btnResume}"></Button>
+                            <Image Cursor="Hand" Source="../../../Resources/icons/help.png" Width="16" Height="16" Grid.Row="0" Grid.Column="4" Name="btnHelpPiGauss" HorizontalAlignment="Left" MouseLeftButtonDown="btnHelpFunctionTypeClick" />
+                            <DockPanel Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10,0,0,0" Name="dpGauss">
+                                <SelectableTextBlock x:Name="lblCalcInfoPiGaussTextBlock" Visibility="Collapsed">
+                                    <Run x:Name="lblCalcInfoPiGauss" Text="{x:Static lang:Distribution.graph_gausscountinfo}" />
+                                    <Run x:Name="tbInfoGaußPrimeTheorem" />
+                                </SelectableTextBlock>
+                            </DockPanel>
+                            <Line X1="0" X2="10" Y1="0" Y2="0" Stroke="Green" StrokeThickness="3" Grid.Row="1" VerticalAlignment="Center" />
+                            <CheckBox Name="cbLin" IsChecked="True" Margin="3,3,3,3" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Content="{x:Static lang:Distribution.graph_linname}"></CheckBox>
+                            <Button Name="btnStopLin" IsEnabled="False" Click="StopFunctionClick" Margin="3,3,3,3" Grid.Row="1" Grid.Column="2" Content="{x:Static lang:Distribution.graph_btnStop}"></Button>
+                            <Button Name="btnResumeLin" IsEnabled="False" Click="ResumeFunctionClick" Margin="3,3,3,3" Grid.Row="1" Grid.Column="3" Content="{x:Static lang:Distribution.graph_btnResume}"></Button>
+                            <Image Cursor="Hand" Source="../../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpLiN" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" MouseLeftButtonDown="btnHelpFunctionTypeClick" />
+                            <DockPanel Grid.Row="1" Grid.Column="5" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="10,0,0,0" Name="dpLin">
+                                <SelectableTextBlock x:Name="lblCalcInfoLiNTextBlock" Visibility="Collapsed">
+                                    <Run x:Name="lblCalcInfoLiN" Text="{x:Static lang:Distribution.graph_lincountinfo}" />
+                                    <Run x:Name="tbInfoLin" />
+                                </SelectableTextBlock>
+                            </DockPanel>
+                            <Line X1="0" X2="10" Y1="0" Y2="0" Stroke="Red" StrokeThickness="3" Grid.Row="2" VerticalAlignment="Center" />
+                            <CheckBox Name="cbPiX" IsChecked="True" Margin="3,3,3,3" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Content="{x:Static lang:Distribution.graph_pinname}"></CheckBox>
+                            <Button Name="btnStopPix" IsEnabled="False" Click="StopFunctionClick" Margin="3,3,3,3" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Content="{x:Static lang:Distribution.graph_btnStop}"></Button>
+                            <Button Name="btnResumePix" IsEnabled="False" Click="ResumeFunctionClick" Margin="3,3,3,3" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Content="{x:Static lang:Distribution.graph_btnResume}"></Button>
+                            <Image Cursor="Hand" Source="../../../Resources/icons/help.png" Width="16" Height="16" Grid.Row="2" Grid.Column="4" Name="btnHelpPiX" HorizontalAlignment="Left" VerticalAlignment="Center" MouseLeftButtonDown="btnHelpFunctionTypeClick" />
+                            <DockPanel Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" Margin="10,0,0,0" Name="dpPiX">
+                                <SelectableTextBlock x:Name="lblCalcInfoPiXTextBlock" Visibility="Collapsed" Margin="0,0,0,0">
+                                    <Run x:Name="lblCalcInfoPiX" Text="{x:Static lang:Distribution.graph_pincountinfo}" />
+                                    <Run x:Name="tbInfoPiX" />
+                                </SelectableTextBlock>
+                            </DockPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+        <Grid Grid.Row="2">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Viewbox Stretch="Uniform" Name="vb" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Viewbox.LayoutTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="{Binding ElementName=sliderTest, Path=Value}" ScaleY="{Binding ElementName=sliderTest, Path=Value}" />
+                        </TransformGroup>
+                    </Viewbox.LayoutTransform>
+                    <Canvas Margin="30,10,10,20" Name="PaintArea">
+                        <graph:CartesianPlane x:Name="cgraph" />
+                    </Canvas>
+                </Viewbox>
+            </ScrollViewer>
+        </Grid>
+        <Slider Name="sliderTest" Minimum="1" Maximum="5" Grid.Row="3" Value="1" />
+    </Grid>
+
+</UserControl>

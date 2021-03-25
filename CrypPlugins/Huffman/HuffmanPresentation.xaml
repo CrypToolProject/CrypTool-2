@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Huffman.HuffmanPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Huffman"
+             xmlns:p="clr-namespace:Huffman.Properties;assembly=Huffman"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Content="{x:Static p:Resources.UncompressedSizeCaption}"></Label>
+        <Label Name="uncompressedSize_LB" Grid.Column="1"></Label>
+        <Label Content="{x:Static p:Resources.CompressedSizeCaption}" Grid.Row="1"></Label>
+        <Label Name="compressedSize_LB" Grid.Column="1" Grid.Row="1"></Label>
+        <Label Content="{x:Static p:Resources.CompressionRateCaption}" Grid.Row="2"></Label>
+        <Label Name="compressionRate_LB" Grid.Column="1" Grid.Row="2"></Label>
+        <Label Content="{x:Static p:Resources.CodeTableCaption}"  Grid.Row="3" Grid.ColumnSpan="2" FontSize="18" HorizontalAlignment="Center"></Label>
+        <DataGrid Name="codeTable_DG" Grid.Row="4" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static p:Resources.CharacterCaption}" Width="*"  Binding="{Binding character}"></DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static p:Resources.FrequencyCaption}" Width="*" Binding="{Binding frequency}"></DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static p:Resources.CodeCaption}" Width="*" Binding="{Binding code}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

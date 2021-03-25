@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    SOSEMANUK is a software-efficient, synchronous stream cipher. SOSEMANUK is a part of the eSTREAM portfolio from the ECRYPT Stream Cipher Project.
+    The cipher has a variable key length, ranging from 64 to 256 bits, and takes an initial value (IV) ranging from 32 to 128 bits in length.
+    SOSEMANUK uses design principles similar to the stream cipher SNOW 2.0 and block cipher SERPENT. The design of SOSEMANUK aims to fix some potential
+    structural weaknesses of SNOW 2.0, while providing better performance by decreasing the size of the internal state.
+  </introduction>
+  <introduction lang="zh-CN">SOSEMANUK是一种软件有效的同步流密码。 SOSEMANUK是ECRYPT流密码项目的eSTREAM产品组合的一部分。密码的密钥长度可变，范围为64到256位，长度为32到128位的初始值（IV）。 SOSEMANUK使用类似于流密码SNOW 2.0和块密码SERPENT的设计原理。 SOSEMANUK的设计旨在解决SNOW 2.0的某些潜在结构缺陷，同时通过减小内部状态的大小来提供更好的性能。</introduction>
+  <introduction lang="ru">SOSEMANUK - это программный, синхронный потоковый шифр. SOSEMANUK входит в портфель eSTREAM из проекта ECRYPT Stream Cipher. Шифр имеет длину ключа переменной, от 64 до 256 бит и принимает начальное значение (IV) в диапазоне от 32 до 128 бит в длину. SOSEMANUK использует принципы проектирования, аналогичные строковым шифрам SNOW 2.0 и блочным шифрам SERPENT. Дизайн SOSEMANUK направлен на устранение некоторых потенциальных структурных недостатков SNOW 2.0, обеспечивая при этом лучшую производительность за счет уменьшения размера внутреннего состояния.</introduction>
+  <introduction lang="de-DE">
+    SOSEMANUK ist eine softwareeffiziente, synchrone Stromchiffre. SOSEMANUK ist ein Teil des eSTREAM Portfolio des ECRYPT Stream Cipher Projektes.
+    Die Chiffre hat eine variable Schlüssellänge, die von 64 bis 256 Bits reicht und benötigt einen Initialisierungsvektor (IV), der zwischen 32 und 128 Bits lang sein muss.
+    Die Grundprinzipien der Chiffre wurden aus zwei verschiedenen Ansätzen entnommen. Zum einem aus der Stromchiffre SNOW 2.0 und zum anderen aus der Blockchiffre SERPENT.
+    Das Design von SOSEMANUK zielt darauf ab, einige potenzielle strukturelle Schwachstellen von SNOW 2.0 zu beheben und gleichzeitig eine
+    bessere Leistung durch eine Reduzierung der Größe des internen Zustandes zu bekommen.
+  </introduction>
+  <usage lang="en">
+    After dragging the SOSEMANUK component onto your workspace, you will
+    have to attach the three input connectors 'Input', 'Key' and 'IV' to data sources.
+
+    Additionally you have to connect a text output component to the 'Output' connector.
+  </usage>
+  <usage lang="zh-CN">将SOSEMANUK组件拖到工作区后，必须将三个输入连接器“输入”，“键”和“ IV”连接到数据源。另外，您必须将文本输出组件连接到“输出”连接器。</usage>
+  <usage lang="ru">После перетаскивания компонента SOSEMANUK в рабочее пространство вам нужно будет подключить три входных разъема «Вход», «Ключ» и «IV» к источникам данных. Кроме того, вам необходимо подключить компонент вывода текста к разъему «Выход».</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die SOSEMANUK-Komponente auf den Arbeitsbereich gezogen
+    haben, müssen Sie die Eingänge 'Eingabe', 'Schlüssel' und 'IV' mit Datenquellen verbinden.
+    
+    Außerdem muss der Ausgang mit einer Textausgabe-Komponente verbunden werden.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://www.ecrypt.eu.org/stream/sosemanukpf.html" lang="en" />
+      <caption lang="en">SOSEMANUK at the eSTREAM Project</caption>
+      <link url="http://www.ecrypt.eu.org/stream/sosemanukpf.html" lang="de-DE" />
+      <caption lang="de-DE">SOSEMANUK beim eSTREAM Project (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/SOSEMANUK" lang="en" />
+      <caption lang="en">SOSEMANUK at Wikipedia</caption>
+      <link url="http://en.wikipedia.org/wiki/SOSEMANUK" lang="de-DE" />
+      <caption lang="de-DE">SOSEMANUK bei Wikipedia (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

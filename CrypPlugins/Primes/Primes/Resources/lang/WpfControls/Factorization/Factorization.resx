@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="bf_actualdiv" xml:space="preserve">
+    <value>actual divisor: </value>
+  </data>
+  <data name="bf_scale" xml:space="preserve">
+    <value>Scale of the factor tree</value>
+  </data>
+  <data name="fac_bruteforce" xml:space="preserve">
+    <value>Brute-force</value>
+  </data>
+  <data name="fac_copytoclipboard" xml:space="preserve">
+    <value>Copy to clipboard</value>
+  </data>
+  <data name="fac_generaternd" xml:space="preserve">
+    <value>Generate random number for factorization</value>
+  </data>
+  <data name="fac_groupboxheader" xml:space="preserve">
+    <value>Number to factorize</value>
+  </data>
+  <data name="fac_qs" xml:space="preserve">
+    <value>Quadratic sieve</value>
+  </data>
+  <data name="fac_result" xml:space="preserve">
+    <value>Factorization result</value>
+  </data>
+  <data name="fac_resultaborted" xml:space="preserve">
+    <value>Factorization result (aborted)</value>
+  </data>
+  <data name="fac_resultabortedtime" xml:space="preserve">
+    <value>Factorization result (The brute-force division was canceled after {0}.)</value>
+  </data>
+  <data name="fac_resultfinished" xml:space="preserve">
+    <value>Factorization result (finished)</value>
+  </data>
+  <data name="fac_resultfinishedtime" xml:space="preserve">
+    <value>Factorization result (The brute-force division finished in {0}.)</value>
+  </data>
+  <data name="fac_resultrunning" xml:space="preserve">
+    <value>Factorization result (running)</value>
+  </data>
+  <data name="fac_timehour" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="fac_timehours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="fac_timeminute" xml:space="preserve">
+    <value>minute</value>
+  </data>
+  <data name="fac_timeminutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="fac_timeseconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="qs_btnrestart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="qs_copytoclipboard" xml:space="preserve">
+    <value>Copy to clipboard</value>
+  </data>
+  <data name="qs_step1" xml:space="preserve">
+    <value>Step 1 (Determine suitable values)</value>
+  </data>
+  <data name="qs_step1_squareroot" xml:space="preserve">
+    <value>The square root of n={0} is {1} ≈ {2}. The sieving interval is [{3}, {4}].</value>
+  </data>
+  <data name="qs_step2" xml:space="preserve">
+    <value>Step 2 (Determine smooth values)</value>
+  </data>
+  <data name="qs_step2_B" xml:space="preserve">
+    <value>The upper bound is {0}. The factor base is {{{1}}}. Start sieving step.</value>
+  </data>
+  <data name="qs_step2_bsmooth" xml:space="preserve">
+    <value>Is b-smooth?</value>
+  </data>
+  <data name="qs_step2_factorization" xml:space="preserve">
+    <value>Smooth factors</value>
+  </data>
+  <data name="qs_step2_no" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="qs_step2_yes" xml:space="preserve">
+    <value>yes</value>
+  </data>
+  <data name="qs_step3" xml:space="preserve">
+    <value>Step 3 (Search for squares)</value>
+  </data>
+  <data name="qs_step3_ignored" xml:space="preserve">
+    <value>{0} is ignored.</value>
+  </data>
+  <data name="qs_step3_isnotsquare" xml:space="preserve">
+    <value>{0} is not a square number.</value>
+  </data>
+  <data name="qs_step3_issquare" xml:space="preserve">
+    <value>{0} is a square number. The square root of {1} is {2}.</value>
+  </data>
+  <data name="qs_step3_smooth" xml:space="preserve">
+    <value>{0} smooth value(s) found.</value>
+  </data>
+  <data name="qs_step3_smoothvalues" xml:space="preserve">
+    <value>{0} smooth value(s) found.</value>
+  </data>
+  <data name="qs_step3_testcombi" xml:space="preserve">
+    <value>Test combinations</value>
+  </data>
+  <data name="qs_step3_testcombiignore" xml:space="preserve">
+    <value>The combination {0} = {1} is ignored.</value>
+  </data>
+  <data name="qs_step3_testcombiisnotsquare" xml:space="preserve">
+    <value>The combination {0} = {1} is not a square.</value>
+  </data>
+  <data name="qs_step3_testcombiisquare" xml:space="preserve">
+    <value>The combination {0} = {1} is a square. The square root of {2} is {3}.</value>
+  </data>
+  <data name="qs_step4" xml:space="preserve">
+    <value>Step 4 (Calculate congruences and factorization)</value>
+  </data>
+  <data name="qs_step4_abcalculated" xml:space="preserve">
+    <value>a and b were calculated with a = {0}, b = {1}.</value>
+  </data>
+  <data name="qs_step4_checkcong" xml:space="preserve">
+    <value>Check the congruences a² ≡ b² (mod n), a ≢ b (mod n):</value>
+  </data>
+  <data name="qs_step4_end" xml:space="preserve">
+    <value>No more congruences found. Could not factorize n={0} with the quadratic sieve.</value>
+  </data>
+  <data name="qs_step4_factor1" xml:space="preserve">
+    <value>   gcd({0} + {1}, {2}) = {3}</value>
+  </data>
+  <data name="qs_step4_factor2" xml:space="preserve">
+    <value>   gcd({0} - {1}, {2}) = {3}</value>
+  </data>
+  <data name="qs_step4_no" xml:space="preserve">
+    <value>no</value>
+  </data>
+  <data name="qs_step4_notproofed" xml:space="preserve">
+    <value>The conditions are not fulfilled. Click 'Restart' to search for a new combination.</value>
+  </data>
+  <data name="qs_step4_proofed" xml:space="preserve">
+    <value>Both conditions are fulfilled. We get the following factors of n={0}:</value>
+  </data>
+  <data name="qs_step4_refactorize" xml:space="preserve">
+    <value>{0} is not a prime. Click 'Restart' to factorize {1}.</value>
+  </data>
+  <data name="qs_step4_reset" xml:space="preserve">
+    <value>The factorization with a = {0} and b = {1} provided only trivial factors.
+Click 'Restart' for a new factorization round. The unsuccessful values will be ignored.</value>
+  </data>
+  <data name="qs_step4_yes" xml:space="preserve">
+    <value>yes</value>
+  </data>
+</root>

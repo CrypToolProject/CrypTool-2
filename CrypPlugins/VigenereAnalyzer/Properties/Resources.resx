@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Vigenère Analyzer</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Cryptanalysis of the Vigenère cipher using hillclimbing.</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Copy all lines</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>Copy key</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>Copy selected line</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>Copy text</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>Copy value</value>
+  </data>
+  <data name="FromKeylengthCaption" xml:space="preserve">
+    <value>Lower bound of keylength</value>
+  </data>
+  <data name="FromKeylengthTooltip" xml:space="preserve">
+    <value>Start from this keylength when analyzing the given ciphertext.</value>
+  </data>
+  <data name="KeyStyleCaption" xml:space="preserve">
+    <value>Keystyle</value>
+  </data>
+  <data name="KeyStyleTooltip" xml:space="preserve">
+    <value>Is the key a natural passphrase or not?</value>
+  </data>
+  <data name="LanguageCaption" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>Use this language for the costfunction.</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Use this mode for the analysis.</value>
+  </data>
+  <data name="NaturalLanguage" xml:space="preserve">
+    <value>Natural Language</value>
+  </data>
+  <data name="Random" xml:space="preserve">
+    <value>Random</value>
+  </data>
+  <data name="RestartsCaption" xml:space="preserve">
+    <value>Restarts</value>
+  </data>
+  <data name="RestartsTooltip" xml:space="preserve">
+    <value>Amount of restarts of the hillclimbing algorithm.</value>
+  </data>
+  <data name="ToKeylengthCaption" xml:space="preserve">
+    <value>Upper bound of keylength</value>
+  </data>
+  <data name="ToKeylengthTooltip" xml:space="preserve">
+    <value>Stop the analysis after evaluating this keylength.</value>
+  </data>
+  <data name="Vigenere" xml:space="preserve">
+    <value>Classic Vigenère</value>
+  </data>
+  <data name="VigenereAutokey" xml:space="preserve">
+    <value>Vigenère Autokey</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>Ciphertext</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>The ciphertext that should be analyzed.</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>Elapsed Time:</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>End Time:</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Best Key</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="KeyLengthHeader" xml:space="preserve">
+    <value>Key Length</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>The best key found during the analysis.</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>Best Plaintext</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>The best plaintext which was found during the analysis.</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Start Time:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="VigenereAlphabetCaption" xml:space="preserve">
+    <value>Vigenère Alphabet</value>
+  </data>
+  <data name="VigenereAlphabetTooltip" xml:space="preserve">
+    <value>Use this Vigenère alphabet for the analyis.</value>
+  </data>
+  <data name="CurrentAnalysedKeylengthLabel" xml:space="preserve">
+    <value>Current analyzed keylength:</value>
+  </data>
+  <data name="FastConvergeCaption" xml:space="preserve">
+    <value>Fast converge</value>
+  </data>
+  <data name="FastConvergeTooltip" xml:space="preserve">
+    <value>If selected, the hillclimbing algorithm jumps to every improvement. Otherwise it jumps to the best possible improvement.</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Analysis</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Bestlist</value>
+  </data>
+  <data name="SpeedLabel" xml:space="preserve">
+    <value>Keys/second:</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Trigrams + 4-grams</value>
+  </data>
+  <data name="CostFunction" xml:space="preserve">
+    <value>Cost function</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="Trigrams" xml:space="preserve">
+    <value>Trigrams</value>
+  </data>
+  <data name="CostFunctionTooltip" xml:space="preserve">
+    <value>The costfunction for rating the putative cleartext.</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
+  <data name="ComparisonFrequencyCaption" xml:space="preserve">
+    <value>Stop percentage</value>
+  </data>
+  <data name="ComparisonFrequencyTooltip" xml:space="preserve">
+    <value>Stop the current analysis in the cryptanalytic component if the given percentage is reached.</value>
+  </data>
+  <data name="StopIfPercentReachedCaption" xml:space="preserve">
+    <value>Stop current analysis if percentage reached</value>
+  </data>
+  <data name="StopIfPercentReachedTooltip" xml:space="preserve">
+    <value>Stop the current analysis in the cryptanalytic component if the given percentage is reached.</value>
+  </data>
+  <data name="Bigrams" xml:space="preserve">
+    <value>Bigrams</value>
+  </data>
+  <data name="GramsTypeCaption" xml:space="preserve">
+    <value>Grams type:</value>
+  </data>
+  <data name="GramsTypeTooltip" xml:space="preserve">
+    <value>Defines the n-gram size, which should be used in the cost function during the cryptanalysis.</value>
+  </data>
+  <data name="Pentagrams" xml:space="preserve">
+    <value>Pentagrams</value>
+  </data>
+  <data name="Unigrams" xml:space="preserve">
+    <value>Unigrams</value>
+  </data>
+</root>

@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>KKDF摇256</value>
+  </data>
+  <data name="KKDFSHAKE256Tooltip" xml:space="preserve">
+    <value>密钥派生函数KKDF SHAKE256的可视化</value>
+  </data>
+  <data name="ConfigPresCaption" xml:space="preserve">
+    <value>活跃的演讲？</value>
+  </data>
+  <data name="ConfigPresTooltip" xml:space="preserve">
+    <value>激活或停用演示</value>
+  </data>
+  <data name="ConfigPrintKMToFileCaption" xml:space="preserve">
+    <value>将生成的密钥材料保存到文件</value>
+  </data>
+  <data name="ConfigPrintKMToFileTooltip" xml:space="preserve">
+    <value>定义将生成的密钥材料保存到文件中，以便可以在其他工具中使用</value>
+  </data>
+  <data name="InputKeyCaption" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="InputKeyToolTip" xml:space="preserve">
+    <value>按键输入</value>
+  </data>
+  <data name="InputOutputLengthCaption" xml:space="preserve">
+    <value>钥匙材料长度</value>
+  </data>
+  <data name="InputOutputLengthToolTip" xml:space="preserve">
+    <value>密钥材料的长度（以字节为单位）</value>
+  </data>
+  <data name="InputSKMCaption" xml:space="preserve">
+    <value>源密钥材料</value>
+  </data>
+  <data name="InputSKMToolTip" xml:space="preserve">
+    <value>输入源密钥资料</value>
+  </data>
+  <data name="OutputKeyMaterialCaption" xml:space="preserve">
+    <value>关键材料</value>
+  </data>
+  <data name="OutputKeyMaterialToolTip" xml:space="preserve">
+    <value>输出以生成关键材料</value>
+  </data>
+  <data name="PresCalc" xml:space="preserve">
+    <value>跳过计算</value>
+  </data>
+  <data name="PresExplanationSectionHeading" xml:space="preserve">
+    <value>KKDF摇256</value>
+  </data>
+  <data name="PresIntro" xml:space="preserve">
+    <value>跳过章节</value>
+  </data>
+  <data name="PresNext" xml:space="preserve">
+    <value>下一个</value>
+  </data>
+  <data name="PresSectionIntroductionText" xml:space="preserve">
+    <value>&lt;Bold&gt;&lt;Underline&gt;输入：&lt;/Underline&gt;&lt;/Bold&gt;&lt;Bold&gt;源密钥材料：&lt;/Bold&gt;指定源密钥材料（SKM）。&lt;Bold&gt;键：&lt;/Bold&gt;指定用于计算的密钥。&lt;Bold&gt;密钥材料的长度（以字节为单位）：&lt;/Bold&gt;指定密钥材料的长度（KM），以字节为单位。&lt;Bold&gt;&lt;Underline&gt;输出：&lt;/Underline&gt;&lt;/Bold&gt;&lt;Bold&gt;关键材料：&lt;/Bold&gt;计算后，结果在文本字段中可见。</value>
+  </data>
+  <data name="PresTitleHeading" xml:space="preserve">
+    <value>KKDF SHAKE256-具有可扩展输出长度的按键推导功能</value>
+  </data>
+  <data name="PrintToFileGroup" xml:space="preserve">
+    <value>保存参数</value>
+  </data>
+  <data name="ProcessGroup" xml:space="preserve">
+    <value>插件配置</value>
+  </data>
+  <data name="SaveFileDialogCaption" xml:space="preserve">
+    <value>将关键材料保存到文件：</value>
+  </data>
+  <data name="SaveFileDialogTooltip" xml:space="preserve">
+    <value>指定生成的密钥材料的输出文件（如果要保存到文件中）</value>
+  </data>
+  <data name="ExSystemOutOfMemory" xml:space="preserve">
+    <value>从系统请求内存时，发生了异常。请为输出字节尝试较小的值。</value>
+  </data>
+  <data name="PresCalculationSectionHeading" xml:space="preserve">
+    <value>计算阶段</value>
+  </data>
+  <data name="PresCalculationSectionHeadingNum" xml:space="preserve">
+    <value>3.计算阶段</value>
+  </data>
+  <data name="PresCalculationText" xml:space="preserve">
+    <value>输入：SKM：{1}键：{2}计算完全在哈希函数SHAKE256 ...中进行。</value>
+  </data>
+  <data name="PresConstructionPart1Text" xml:space="preserve">
+    <value>关键材料的计算可描述如下：</value>
+  </data>
+  <data name="PresConstructionPart2Text" xml:space="preserve">
+    <value>密钥材料是通过执行以密钥为前缀的哈希函数来计算的。哈希函数将输出的长度作为参数。与具有固定输出长度的哈希函数相比，SHAKE256不需要任何其他设计即可允许任何长度的输出。 SHAKE256中散列值的生成分为两个阶段，如下图所示。</value>
+  </data>
+  <data name="PresConstructionPart3Text" xml:space="preserve">
+    <value>这两个阶段称为&lt;Bold&gt;吸收&lt;/Bold&gt;和&lt;Bold&gt;挤压阶段&lt;/Bold&gt;。在里面&lt;Bold&gt;吸收相&lt;/Bold&gt;，读取输入并执行各种操作。</value>
+  </data>
+  <data name="PresConstructionPart4Text" xml:space="preserve">
+    <value>在里面&lt;Bold&gt;挤压阶段&lt;/Bold&gt;，取决于length参数，函数f经常执行，并且生成所需长度的哈希值。</value>
+  </data>
+  <data name="PresConstructionScheme" xml:space="preserve">
+    <value>KM = H（K || SKM）</value>
+  </data>
+  <data name="PresConstructionSectionHeading" xml:space="preserve">
+    <value>施工</value>
+  </data>
+  <data name="PresConstructionSectionHeadingNum" xml:space="preserve">
+    <value>2. KKDF SHAKE256的构造</value>
+  </data>
+  <data name="PresErrorText" xml:space="preserve">
+    <value>发生错误。请在CrypTool2的日志中找到详细信息。</value>
+  </data>
+  <data name="PresFinishedSectionHeading" xml:space="preserve">
+    <value>4.计算完成</value>
+  </data>
+  <data name="PresFinishedText" xml:space="preserve">
+    <value>要重复计算，有3种选择：-停止执行并再次开始执行-或更改输入之一-或单击“重新启动”按钮（然后计算将自动重新开始）</value>
+  </data>
+  <data name="PresIntroductionPart1Text" xml:space="preserve">
+    <value>函数KKDF SHAKE256是密钥派生函数（KDF）。它使用键控哈希函数作为伪随机函数（PRF）。该键将作为输入的前缀。它使用SHAKE256哈希函数。此哈希函数是SHA-3系列的一部分。 SHAKE256的特征是根据参数确定输出长度。这样就可以轻松生成具有特定长度的密钥，而无需在PRF周围进行额外的构造。可以在模板Keccak中将SHA-3系列视为哈希函数。</value>
+  </data>
+  <data name="PresIntroductionSectionHeading" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="PresIntroductionSectionHeadingNum" xml:space="preserve">
+    <value>1.简介</value>
+  </data>
+  <data name="TooMuchOutputRequestedLogMSG" xml:space="preserve">
+    <value>最大输出量为5 MB（5242880字节）。请求的{0}字节数量已设置为最大值。</value>
+  </data>
+  <data name="PresRestart" xml:space="preserve">
+    <value>重新开始</value>
+  </data>
+  <data name="PresStart" xml:space="preserve">
+    <value>开始</value>
+  </data>
+  <data name="PresStepText" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+</root>

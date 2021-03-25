@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">ChaCha Cipher (Presentation)</title>
+  <summary lang="en">Usage of the <i>ChaCha</i> cipher</summary>
+  <description lang="en">
+  ChaCha is a 256-bit stream cipher developed by Daniel J. Bernstein (DJB) in 2008. It is a refinement of the Salsa cipher by the same author.
+  
+  This template includes an in-depth visualization of the encryption and decryption process and features both current versions of the cipher: The original version by DJB with a 64-bit counter and a 64-bit initialization vector and the modified version by the Internet Engineering Task Force (IETF) with a 32-bit counter and a 96-bit initialization vector. The version can be chosen in the component's settings.
+  </description>
+  <keywords>encryption, decryption, stream cipher</keywords>
+  
+  <title lang="de">ChaCha-Chiffre</title>
+  <summary lang="de">Anwendung der ChaCha-Chiffre</summary>
+  <description lang="de">
+  ChaCha ist eine 256-bit Stromchiffre, die 2008 von Daniel J. Bernstein (DJB) entwickelt wurde. Sie basiert auf der Salsa-Chiffre des selben Autors.
+  
+  Dieses Template beinhaltet eine detaillierte Visualisierung des Ver- und Entschlüsselungsprozesses sowie beide existierende Versionen der Chiffre: Die originale Version von DJB mit einem 64-bit Zähler und einem 64-bit Initialisierungsvektor und die modifizierte Version der Internet Engineering Task Force (IETF) mit einem 32-bit Zähler und einem 96-bit Initialisierungsvektor. Die Version kann in den Komponenten-Einstellungen ausgewählt werden.
+  </description>
+  <keywords lang="de">verschlüsselung, entschlüsselung, strom chiffre</keywords>
+  
+  <icon file="ChaCha.png" />
+  
+  <relevantPlugins>
+    <plugin name="ChaCha" />
+  </relevantPlugins>
+  
+  <replacements lang="de">
+    <replacement key="$plaintext$" value="Klartext" />
+    <replacement key="$ciphertext$" value="Geheimtext" />
+    <replacement key="$key$" value="Schlüssel" />
+    <replacement key="$plaintextvalue$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
+	<replacement key="$iv$" value="Initialisierungsvektor (IV)" />
+	<replacement key="$decode$" value="String-Decodierer" />
+	<replacement key="$encode$" value="String-Encodierer" />
+	<replacement key="$chacha_enc$" value="ChaCha" />
+	<replacement key="$counter$" value="Initialer Blockzähler" />
+  </replacements>
+  
+  <replacements lang="en">
+    <replacement key="$plaintext$" value="Plaintext" />
+    <replacement key="$ciphertext$" value="Ciphertext" />
+    <replacement key="$decrypted$" value="Decrypted ciphertext" />
+	<replacement key="$key$" value="Key" />
+    <replacement key="$plaintextvalue$" value="The quick brown fox jumps over the lazy dog." />
+	<replacement key="$iv$" value="Initialization vector (IV)" />
+	<replacement key="$decode$" value="String decoder" />
+	<replacement key="$encode$" value="String encoder" />
+	<replacement key="$chacha_enc$" value="ChaCha (Encryption)" />
+	<replacement key="$counter$" value="Initial block counter (optional)" />
+  </replacements>
+</sample>

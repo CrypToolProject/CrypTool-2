@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Primes.WpfControls.NumberTheory.NumberTheoryFunctions.NumberTheoryFunctionsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.Numbertheory"
+    Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="0">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MaxHeight="{Binding ElementName=ParameterRow, Path=ActualHeight}" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Name="ParameterRow" Margin="5,5,5,0" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <comps:InputRangeControl Grid.Row="0" x:Name="irc" BorderThickness="0" InputRangeControlType="Horizontal" SecondParameterPresent="true" BorderBrush="Gray" Margin="0" />
+
+            <GroupBox Grid.Row="1" Header="{x:Static lang:Numbertheory.groupbox_choosefunctions}" Height="120" Margin="0,0,0,10">
+                <Grid HorizontalAlignment="Left" Name="gridChooseFunctions">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition MinWidth="252" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition MinWidth="252" />
+                    </Grid.ColumnDefinitions>
+                    <ListBox x:Uid="lbSource" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" Grid.Column="0" Name="lbSource" DisplayMemberPath="Description" SelectionMode="Extended">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <EventSetter Event="MouseDoubleClick" Handler="lbSource_MouseDoubleClick" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                    <StackPanel x:Uid="StackPanel_1" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Margin="5">
+                        <Button x:Uid="btnToExec" Name="btnToExec" Margin="5" Click="btnToExec_Click" Width="50">&gt;&gt;</Button>
+                        <Button x:Uid="btnToDontExec" Name="btnToDontExec" Margin="5" Click="btnToDontExec_Click">&lt;&lt;</Button>
+                    </StackPanel>
+                    <ListBox x:Uid="lbDestination" ItemsSource="{Binding}" IsSynchronizedWithCurrentItem="True" Grid.Column="2" Name="lbDestination" DisplayMemberPath="Description" SelectionMode="Extended">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <EventSetter Event="MouseDoubleClick" Handler="lbDestination_MouseDoubleClick" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="3" HorizontalContentAlignment="Center" Margin="0" ResizeBehavior="PreviousAndNext" />
+
+        <DockPanel Name="spGrid" Grid.Row="2" Background="AntiqueWhite" Margin="5">
+            <WindowsFormsHost Name="DataGridViewHost">
+                <WindowsFormsHost.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="test" />
+                    </ContextMenu>
+                </WindowsFormsHost.ContextMenu>
+            </WindowsFormsHost>
+        </DockPanel>
+
+    </Grid>
+
+</UserControl>

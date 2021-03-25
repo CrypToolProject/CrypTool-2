@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="HtmlGenerator_GenerateSettingsListCode_Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Direction" xml:space="preserve">
+    <value>Richtung</value>
+  </data>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Not_available" xml:space="preserve">
+    <value>Nicht verfügbar.</value>
+  </data>
+  <data name="NoContent" xml:space="preserve">
+    <value>Keine</value>
+  </data>
+  <data name="Templates_description" xml:space="preserve">
+    <value>Die unten aufgelisteten Vorlagen sind für diese Komponente verfügbar.</value>
+  </data>
+  <data name="Text_box" xml:space="preserve">
+    <value>Textbox</value>
+  </data>
+  <data name="Combo_box" xml:space="preserve">
+    <value>Kombinationsfeld</value>
+  </data>
+  <data name="Radio_button" xml:space="preserve">
+    <value>Optionsfeld</value>
+  </data>
+  <data name="Check_box" xml:space="preserve">
+    <value>Auswahlkasten</value>
+  </data>
+  <data name="Open_file_dialog" xml:space="preserve">
+    <value>Datei-Öffnen-Dialog</value>
+  </data>
+  <data name="Save_file_dialog" xml:space="preserve">
+    <value>Datei-Speichern-Dialog</value>
+  </data>
+  <data name="Numeric_up_down" xml:space="preserve">
+    <value>Numerisch hoch/runter</value>
+  </data>
+  <data name="Button" xml:space="preserve">
+    <value>Taste</value>
+  </data>
+  <data name="Slider" xml:space="preserve">
+    <value>Gleiter</value>
+  </data>
+  <data name="Text_box__read_only_" xml:space="preserve">
+    <value>Textbox (nur lesen)</value>
+  </data>
+  <data name="Dynamic_combo_box" xml:space="preserve">
+    <value>Dynamisches Kombinationsfeld</value>
+  </data>
+  <data name="Text_box__hidden_" xml:space="preserve">
+    <value>Textbox (versteckt)</value>
+  </data>
+  <data name="Input_data" xml:space="preserve">
+    <value>Eingabedaten</value>
+  </data>
+  <data name="Output_data" xml:space="preserve">
+    <value>Ausgabedaten</value>
+  </data>
+  <data name="Control_slave" xml:space="preserve">
+    <value>Kontroll-Sklave</value>
+  </data>
+  <data name="Control_master" xml:space="preserve">
+    <value>Kontroll-Meister</value>
+  </data>
+  <data name="Category_CiphersModernAsymmetric" xml:space="preserve">
+    <value>Moderne asymmetrische Verfahren</value>
+  </data>
+  <data name="Category_CiphersModernSymmetric" xml:space="preserve">
+    <value>Moderne symmetrische Verfahren</value>
+  </data>
+  <data name="Category_Classic_Ciphers" xml:space="preserve">
+    <value>Klassische Verfahren</value>
+  </data>
+  <data name="Category_CryptanalysisGeneric" xml:space="preserve">
+    <value>Generische Kryptoanalyse</value>
+  </data>
+  <data name="Category_CryptanalysisSpecific" xml:space="preserve">
+    <value>Spezifische Kryptoanalyse</value>
+  </data>
+  <data name="Category_HashFunctions" xml:space="preserve">
+    <value>Hash-Funktionen</value>
+  </data>
+  <data name="Category_Protocols" xml:space="preserve">
+    <value>Protokolle</value>
+  </data>
+  <data name="Category_Steganography" xml:space="preserve">
+    <value>Steganographie</value>
+  </data>
+  <data name="Category_ToolsBoolean" xml:space="preserve">
+    <value>Werkzeuge - Boolean</value>
+  </data>
+  <data name="Category_ToolsDataflow" xml:space="preserve">
+    <value>Werkzeuge - Dataflow</value>
+  </data>
+  <data name="Category_ToolsDataInputOutput" xml:space="preserve">
+    <value>Werkzeuge - Daten-Ein- und Ausgabe</value>
+  </data>
+  <data name="Category_ToolsMisc" xml:space="preserve">
+    <value>Werkzeuge - Diverse</value>
+  </data>
+  <data name="Category_ToolsP2P" xml:space="preserve">
+    <value>Werkzeuge - Peer2Peer</value>
+  </data>
+  <data name="Category_Unknown" xml:space="preserve">
+    <value>Andere</value>
+  </data>
+  <data name="LatexGenerator_ChapterSubTitle" xml:space="preserve">
+    <value>Die Vorlagen</value>
+  </data>
+  <data name="LatexGenerator_ChapterTitle" xml:space="preserve">
+    <value>Übersicht über die Vorlagen</value>
+  </data>
+  <data name="ComponentTemplate_Introduction" xml:space="preserve">
+    <value>Einleitung</value>
+  </data>
+  <data name="ComponentTemplate_Presentation" xml:space="preserve">
+    <value>Präsentation</value>
+  </data>
+  <data name="ComponentTemplate_Usage" xml:space="preserve">
+    <value>Benutzung</value>
+  </data>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Key_text_box" xml:space="preserve">
+    <value>Key text box</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="LaTeXTmpl_Appendix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\latexgenerator\latextmpl-appendix.tex;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LaTeXTmpl_Components" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\latexgenerator\latextmpl-components-de.tex;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LaTeXTmpl_Templates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\latexgenerator\latextmpl-templates-de.tex;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Null" xml:space="preserve">
+    <value>Null</value>
+  </data>
+  <data name="ComponentTemplate_Connections" xml:space="preserve">
+    <value>Konnektoren</value>
+  </data>
+  <data name="ComponentTemplate_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Category_FL_CiphersModernAsymmetric" xml:space="preserve">
+    <value>Moderne Verfahren\ Asymmetrisch</value>
+  </data>
+  <data name="Category_FL_CiphersModernSymmetric" xml:space="preserve">
+    <value>Moderne Verfahren\ Symmetrisch</value>
+  </data>
+  <data name="Category_FL_Classic_Ciphers" xml:space="preserve">
+    <value>Klassische Verfahren</value>
+  </data>
+  <data name="Category_FL_CryptanalysisGeneric" xml:space="preserve">
+    <value>Kryptoanalyse\ Generisch</value>
+  </data>
+  <data name="Category_FL_CryptanalysisSpecific" xml:space="preserve">
+    <value>Kryptoanalyse\ Spezifisch</value>
+  </data>
+  <data name="Category_FL_HashFunctions" xml:space="preserve">
+    <value>Hash-Funktionen</value>
+  </data>
+  <data name="Category_FL_Protocols" xml:space="preserve">
+    <value>Protokolle</value>
+  </data>
+  <data name="Category_FL_Steganography" xml:space="preserve">
+    <value>Steganographie</value>
+  </data>
+  <data name="Category_FL_ToolsBoolean" xml:space="preserve">
+    <value>Werkzeuge\ Boolean</value>
+  </data>
+  <data name="Category_FL_ToolsDataflow" xml:space="preserve">
+    <value>Werkzeuge\ Datenfluss</value>
+  </data>
+  <data name="Category_FL_ToolsDataInputOutput" xml:space="preserve">
+    <value>Werkzeuge\ Daten-Ein-/Ausgabe</value>
+  </data>
+  <data name="Category_FL_ToolsMisc" xml:space="preserve">
+    <value>Werkzeuge\ Sonstige</value>
+  </data>
+  <data name="Category_FL_ToolsP2P" xml:space="preserve">
+    <value>Werkzeuge\ Peer-to-peer</value>
+  </data>
+  <data name="Category_FL_Unknown" xml:space="preserve">
+    <value>Andere</value>
+  </data>
+  <data name="FL_Letter_Component" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="FL_Letter_Template" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="FL_Letter_Tutorial" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="FL_Letter_Wizard" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="FL_Tutorial" xml:space="preserve">
+    <value>Kryptotutorien</value>
+  </data>
+  <data name="FunctionListTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\functionlistgenerator\functionlisttemplate-de.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LanguageSelector" xml:space="preserve">
+    <value>Sprachauswahl</value>
+  </data>
+  <data name="Category_FL_DECRYPT" xml:space="preserve">
+    <value>DECRYPT Projekt</value>
+  </data>
+  <data name="Category_ToolsCodes" xml:space="preserve">
+    <value>Werkzeuge\ Kodierungen</value>
+  </data>
+  <data name="Category_ToolsRandomNumbers" xml:space="preserve">
+    <value>Werkzeuge\ Zufallszahlen</value>
+  </data>
+</root>

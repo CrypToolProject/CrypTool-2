@@ -1,0 +1,140 @@
+﻿<Window x:Class="WellKnownPeer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:w="clr-namespace:WellKnownPeer"
+        Title="VoluntLib2 - WellKnownPeer" Height="350" Width="850">
+    <Window.Resources>
+        <w:PeerIDConverter x:Key="PeerIDConverter" />
+        <w:JobIDConverter x:Key="JobIDConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="650"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>                                
+                <Label Grid.Row="0" Name="MyPeerID" Content="My PeerId: 0"/>
+
+                <ListView Grid.Row="2" Name="JobList" Background="White" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="12" FontFamily="Courier" Height="Auto" Foreground="Black" MouseDoubleClick="JobList_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="CreationDate" DisplayMemberBinding="{Binding Path=CreationDate}" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="JobId" DisplayMemberBinding="{Binding Path=JobId, Converter={StaticResource JobIDConverter}}" Width="250">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="JobName" DisplayMemberBinding="{Binding Path=JobName}" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="JobDescription" DisplayMemberBinding="{Binding Path=JobDescription}" Width="550">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="CreatorName" DisplayMemberBinding="{Binding Path=CreatorName}" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>                           
+                            <GridViewColumn Header="HasPayload" DisplayMemberBinding="{Binding Path=HasPayload}" Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>                          
+            </Grid>            
+            <ListView Grid.Column="1" Name="ContactListView" Background="White" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="12" FontFamily="Courier" Height="Auto" Foreground="Black">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="PeerId" DisplayMemberBinding="{Binding Path=PeerId, Converter={StaticResource PeerIDConverter}}" Width="320">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="IP Address" DisplayMemberBinding="{Binding Path=IPAddress}" Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Port" DisplayMemberBinding="{Binding Path=Port}" Width="50">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Last Seen" DisplayMemberBinding="{Binding Path=LastSeen}" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <ListView Grid.Row="1" Name="LogListView" Background="White" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" FontSize="12"  FontFamily="Courier" Grid.Column="1" Height="Auto" Foreground="Black">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Log Time" DisplayMemberBinding="{Binding Path=LogTime}" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Logtype" DisplayMemberBinding="{Binding Path=LogType}" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>                   
+                    <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Path=Message}" Width="800">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

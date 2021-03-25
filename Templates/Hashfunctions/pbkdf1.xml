@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">PBKDF-1 (PKCS#5 2.0)</title>
+  <title lang="zh">PBKDF-1（PKCS＃5 2.0）</title>
+  <title lang="ru">PBKDF-1 (PKCS # 5 2.0)</title>
+  <summary lang="en">Password Based Key Derivation Function 1</summary>
+  <summary lang="zh">基于密码的密钥派生功能1</summary>
+  <summary lang="ru">Функция определения ключа на основе пароля 1</summary>
+  <description lang="en">This template shows how to implement PBKDF-1 in CrypTool 2</description>
+  <description lang="zh">该模板显示了如何在CrypTool 2中实现PBKDF-1</description>
+  <description lang="ru">Этот шаблон показывает, как реализовать PBKDF-1 в CrypTool 2</description>
+  <keywords>Hash, SHA-1, pkcs#5, PBKDF-1, key generation, iterations, RFC 2898 </keywords>
+  <keywords lang="zh">哈希，SHA-1，pkcs＃5，PBKDF-1，密钥生成，迭代，RFC 2898</keywords>
+  <keywords lang="ru">Hash, SHA-1, pkcs # 5, PBKDF-1, генерация ключей, итерации, RFC 2898</keywords>
+  <title lang="de">PBKDF-1 (PKCS#5 2.0)</title>
+  <summary lang="de">Passwortbasierte Schlüsselgeneration mit PBKDF-1</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man mit CT2 PBKDF-1 implementieren kann.</description>
+  <keywords lang="de">Hash, SHA-1, pkcs#5, PBKDF-1,Schlüsselerzeugung</keywords>
+  <icon file="pbkdf1.png" />
+  <relevantPlugins>
+    <plugin name="SHA" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$Comparator$" value="Vergleicher" />
+    <replacement key="$String Decoder$" value="String-Decodierer" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Password$" value="Passwort" />
+    <replacement key="$Incrementer$" value="Inkrementierer" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$Progress$" value="Fortschritt" />
+    <replacement key="$Stop at$" value="Stop bei" />
+    <replacement key="$memo$" value="{\b PBKDF1 (Password-based key-derivation function 1):}\line Diese Vorlage demonstriert, wie ein Schlüssel von einem Passwort abgeleitet werden kann. Es implementiert das im RFC2898 [1] beschriebene PBKDF1.\line\line Das vom Benutzer gegebene Passwort wird mit dem ebenfalls vom Benutzer angegebenen Salt (Salzwert) konkateniert:\line {\b T_0 = Salt || Passwort}, wobei || für die Konkatenation steht.\line Danach werden von den T_s nacheinander die Hashwerte berechnet:\line {\b T_1 = hash(T_0)\line T_2 = hash(T_1)\line ...\line T_i = hash(T_i-1)},\line wobei T_1 der SHA-1-Hashwert von T_0 ist, T_2 der SHA-1-Hashwert von T_1, usw.\line Der endgültige Schlüssel ist dann der Wert T_i und wird in der Schlüssel-Komponente ausgegeben (i steht für Iterationszähler und wird schrittweise bis z.B. 1000 erhöht). Während der Ausführung wird der momentane Fortschritt in der Fortschritt-Komponente angezeigt. Hinweis: Um neue Schlüssel zu berechnen, muss die Vorlage jedes Mal neu gestartet werden. Um die Zwischenwerte bei der Hashwert-Berechnung zu sehen, muss im Gatter 3 das Auslöseereignis auf &quot;Pforte immer offen&quot; gesetzt werden.\line\line [1] RFC2898: https://tools.ietf.org/html/rfc2898" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$Comparator$" value="比较器" />
+    <replacement key="$String Decoder$" value="字符串解码器" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Password$" value="密码" />
+    <replacement key="$Incrementer$" value="增量器" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$Progress$" value="进展" />
+    <replacement key="$Stop at$" value="停在" />
+    <replacement key="$memo$" value="{\b PBKDF1（基于密码的密钥派生功能1）：} \line此模板演示了如何从密码派生密钥。它实现了RFC2898 [1]中所述的PBKDF1。\Line \line用户提供的密码与用户也提供的盐（盐值）串联：\line {\b T_0 = Salt ||密码}，其中|| \line然后依次计算T_s的哈希值：\line {\b T_1 = hash（T_0）\line T_2 = hash（T_1）\line ... \line T_i = hash（T_i-1 ）}，\行，其中T_1是T_0的SHA-1哈希值，T_2是T_1的SHA-1哈希值，依此类推。\line最后的键是值T_i，并在键组件中输出（i用于迭代计数器，并递增到例如1000）。执行期间，当前进度将显示在进度组件中。注意：要计算新密钥，必须每次都重新启动模板。要查看哈希值计算过程中的中间值，必须在3号门中将触发事件设置为``门始终打开&amp;#39;&amp;#39;。\line \line [1] RFC2898：https://tools.ietf.org/html/rfc2898" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$Comparator$" value="компаратор" />
+    <replacement key="$String Decoder$" value="Строка декодера" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Password$" value="пароль" />
+    <replacement key="$Incrementer$" value="инкрементора" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$Progress$" value="прогресс" />
+    <replacement key="$Stop at$" value="Остановитесь" />
+    <replacement key="$memo$" value="{\b PBKDF1 (функция деривации ключа на основе пароля 1)}} Этот шаблон демонстрирует, как ключ может быть получен из пароля. Он реализует PBKDF1, описанный в RFC2898 [1]. \Line \line. Пользовательский пароль объединяется с указанной пользователем солью: \line {\b T_0 = Salt || Пароль}, где || для конкатенации. \line Затем значения хэша рассчитываются последовательно T_s: \line {\b T_1 = hash (T_0) \line T_2 = hash (T_1) \line ... \line T_i = hash (T_i-1 )}, \line, где T_1 является хэшем SHA-1 T_0, T_2 является хэшем SHA-1 T_1 и т. д. \line. Конечным ключом является T_i и выводится в ключевом компоненте. Во время выполнения текущий прогресс отображается в компоненте прогресса. Примечание. Чтобы вычислить новые ключи, шаблон необходимо перезапускать каждый раз. Чтобы увидеть промежуточные значения в вычислении значения хэш-функции, gate 3 должен установить событие триггера на «всегда открывать ворота». \Line \line [1] RFC2898: https://tools.ietf.org/html/rfc2898" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Gate$" value="Gate" />
+    <replacement key="$Comparator$" value="Comparator" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$Concatenate$" value="Concatenate" />
+    <replacement key="$Password$" value="Password" />
+    <replacement key="$Incrementer$" value="Incrementer" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$Progress$" value="Progress" />
+    <replacement key="$Stop at$" value="Stop at" />
+    <replacement key="$memo$" value="{\b PBKDF1 (Password based key derivation function 1):}\line This template demonstrates how to compute a key that is derived from a password. It implements PBKDF1 as described in the RFC2898 [1].\line\line The user given password is concatenated with the user given salt:\line {\b T_0 = Salt || Password}, where || means string concatenation.\line After that, the T_s are hashed in a row:\line {\b T_1 = hash(T_0)\line T_2 = hash(T_1)\line ...\line T_i = hash(T_i-1)},\line where T_1 is the SHA-1 hash of T_0, T_2 is the SHA-1 hash of T_1, and so on.\line The final key is equal to T_i and will appear in the Key TextOutput component. During the execution, the current progress is visible at the Progress component. Hint: To compute a new key, you have to restart the workspace every time. If you want to see intermediate hash values, change the Gate 3 to &quot;no trigger (always open)&quot;.\line\line [1] RFC2898: https://tools.ietf.org/html/rfc2898" />
+  </replacements>
+</sample>

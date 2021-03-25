@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="Primes.WpfControls.Components.InputRangeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Components"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <GroupBox Name="gbTitle" Header="" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Margin="0" Padding="0">
+
+        <StackPanel Name="pnlParent">
+
+            <StackPanel Name="pnlHorizontal">
+                <DockPanel Margin="0,0,0,10" Name="pnlInputControlHorFree">
+                    <RadioButton Name="rbHorFree" IsChecked="True" HorizontalAlignment="Left" VerticalAlignment="Center" Click="RadioButton_Click" />
+                    <DockPanel Name="pnlHorFree">
+                        <Label Name="lblHorFreeFrom" Content="{x:Static lang:Components.inputrange_from}"></Label>
+                        <TextBox Name="tbHorFreeFrom" Width="100" HorizontalAlignment="Left" Tag="FreeFrom" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label Name="lblHorFreeTo" Content="{x:Static lang:Components.inputrange_to}"></Label>
+                        <TextBox Name="tbHorFreeTo" Width="100" HorizontalAlignment="Left" Tag="FreeTo" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <SelectableTextBlock x:Name="lblInfoHorFree" TextWrapping="Wrap" Margin="5,0,0,0" />
+                        <Image VerticalAlignment="Top" Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpHorFree" MouseLeftButtonDown="Help_Click" Visibility="Hidden" />
+                    </DockPanel>
+                </DockPanel>
+                <DockPanel Name="pnlInputControlHorCalc">
+                    <RadioButton Name="rbHorCalc" HorizontalAlignment="Left" VerticalAlignment="Center" Click="RadioButton_Click" />
+                    <DockPanel Name="pnlHorCalc" IsEnabled="False">
+                        <Label Name="lblHorCalcFrom" Content="{x:Static lang:Components.inputrange_from}"></Label>
+                        <TextBox Name="tbHorCalcFromFactor" Width="30" HorizontalAlignment="Left" Tag="CalcFromFactor" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label>*</Label>
+                        <TextBox Name="tbHorCalcFromBase" Width="30" HorizontalAlignment="Left" Tag="CalcFromBase" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label>^</Label>
+                        <TextBox Name="tbHorCalcFromExp" Width="30" HorizontalAlignment="Left" Tag="CalcFromExp" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label>+</Label>
+                        <TextBox Name="tbHorCalcFromSum" Width="30" HorizontalAlignment="Left" Tag="CalcFromSum" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label Name="lblHorCalcTo" Content="{x:Static lang:Components.inputrange_to}"></Label>
+                        <TextBox Name="tbHorCalcToFactor" Width="30" HorizontalAlignment="Left" Tag="CalcToFactor" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label>*</Label>
+                        <TextBox Name="tbHorCalcToBase" Width="30" HorizontalAlignment="Left" Tag="CalcToBase" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label>^</Label>
+                        <TextBox Name="tbHorCalcToExp" Width="30" HorizontalAlignment="Left" Tag="CalcToExp" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label>+</Label>
+                        <TextBox Name="tbHorCalcToSum" Width="30" HorizontalAlignment="Left" Tag="CalcToSum" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <SelectableTextBlock x:Name="lblInfoHorCalc" TextWrapping="Wrap" Margin="5,0,0,0" />
+                        <Image VerticalAlignment="Top" Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpHorCalc" MouseLeftButtonDown="Help_Click" Visibility="Hidden" />
+                    </DockPanel>
+                </DockPanel>
+            </StackPanel>
+
+            <StackPanel Name="pnlVertical">
+                <DockPanel Name="pnlInputControlVertFree">
+                    <RadioButton Name="rbVertFree" Margin="0,7,0,0" Click="RadioButton_Click" IsChecked="True" />
+                    <Grid Name="pnlVertFree">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="7" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Name="lblVertFreeFrom" Grid.Column="0" Grid.Row="0" Content="{x:Static lang:Components.inputrange_from}"></Label>
+                        <TextBox Name="tbVertFreeFrom" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" Tag="FreeFrom" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        <Label Name="lblVertFreeTo" Grid.Column="0" Grid.Row="2" Content="{x:Static lang:Components.inputrange_to}"></Label>
+                        <TextBox Name="tbVertFreeTo" Width="100" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Tag="FreeTo" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                    </Grid>
+                </DockPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="16" />
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Top" Grid.Column="1" Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpVertFree" MouseLeftButtonDown="Help_Click" Visibility="Collapsed" />
+                    <SelectableTextBlock x:Name="lblInfoVertFree" Grid.Column="0" TextWrapping="Wrap" Visibility="Collapsed" />
+                </Grid>
+                <DockPanel Name="pnlInputControlVertCalc">
+                    <RadioButton Name="rbVertCalc" Margin="0,7,0,0" Click="RadioButton_Click" />
+                    <Grid Name="pnlVertCalc" IsEnabled="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Name="lblVertCalcFrom" Grid.Column="0" Grid.Row="0" Content="{x:Static lang:Components.inputrange_from}"></Label>
+                        <DockPanel Grid.Column="1" Grid.Row="0">
+                            <TextBox Name="tbVertCalcFromFactor" Width="30" HorizontalAlignment="Left" Tag="CalcFromFactor" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                            <Label>*</Label>
+                            <TextBox Name="tbVertCalcFromBase" Width="30" HorizontalAlignment="Left" Tag="CalcFromBase" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                            <Label>^</Label>
+                            <TextBox Name="tbVertCalcFromExp" Width="30" HorizontalAlignment="Left" Tag="CalcFromExp" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                            <Label>+</Label>
+                            <TextBox Name="tbVertCalcFromSum" Width="30" HorizontalAlignment="Left" Tag="CalcFromSum" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        </DockPanel>
+                        <Label Name="lblVertCalcTo" Grid.Column="0" Grid.Row="1" Content="{x:Static lang:Components.inputrange_to}"></Label>
+                        <DockPanel Grid.Column="1" Grid.Row="1">
+                            <TextBox Name="tbVertCalcToFactor" Width="30" HorizontalAlignment="Left" Tag="CalcToFactor" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                            <Label>*</Label>
+                            <TextBox Name="tbVertCalcToBase" Width="30" HorizontalAlignment="Left" Tag="CalcToBase" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                            <Label>^</Label>
+                            <TextBox Name="tbVertCalcToExp" Width="30" HorizontalAlignment="Left" Tag="CalcToExp" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                            <Label>+</Label>
+                            <TextBox Name="tbVertCalcToSum" Width="30" HorizontalAlignment="Left" Tag="CalcToSum" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                        </DockPanel>
+                    </Grid>
+                </DockPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="16" />
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Top" Grid.Column="1" Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpVertCalc" MouseLeftButtonDown="Help_Click" Visibility="Collapsed" />
+                    <SelectableTextBlock x:Name="lblInfoVertCalc" TextWrapping="Wrap" Visibility="Collapsed"/>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Name="pnlSecondParameter">
+                <DockPanel Margin="0,10,0,0" Name="pnlSecondParameterPanel">
+                    <Label Name="lblSecondParameter" Content="{x:Static lang:Components.secondparameter}"></Label>
+                    <TextBox Name="tbSecondParameter" Width="100" HorizontalAlignment="Left" Tag="SecondParameter" KeyUp="tb_KeyDown" GotFocus="tb_GotFocus" />
+                    <SelectableTextBlock x:Name="lblInfoSecond" TextWrapping="Wrap" Margin="5,0,0,0" />
+                </DockPanel>
+            </StackPanel>
+
+            <DockPanel Margin="0,10,0,0" Name="pnlButtons">
+                <Button Name="btnExecute" HorizontalAlignment="Left" Margin="0,0,7,0" Width="100" Click="btnExecute_Click" Content="{x:Static lang:Components.btnExecute}"></Button>
+                <Button Name="btnCancel" HorizontalAlignment="Left" Width="100" Click="btnCancel_Click" Content="{x:Static lang:Components.btnCancel}"></Button>
+            </DockPanel>
+
+        </StackPanel>
+
+    </GroupBox>
+
+</UserControl>

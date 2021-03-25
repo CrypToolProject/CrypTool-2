@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Whirlpool is a cryptographic hash function that was designed by the cryptographers Vincent Rijmen und Paulo S. L. M. Barreto in 2000.
+    The Whirlpool algorithm calculates a hash value of 512 bits (64 bytes) length from its input. The input may be up to 2^256 bits long.
+    No security weaknesses of Whirlpool are as yet known.
+    <newline />
+    Whirlpool is patent-free and is not subjected to any limitations of use.
+    <newline />
+    The hash has been recommended by the NESSIE project was also adopted by ISO and IEC as part of the joint ISO/IEC 10118-3 international standard.
+  </introduction>
+  <introduction lang="zh-CN">Whirlpool是由密码学家Vincent Rijmen和Paulo SLM Barreto在2000年设计的一种密码哈希函数。Whirlpool算法从其输入中计算出512位（64字节）长度的哈希值。输入的最大长度为2 ^ 256位。尚不知道惠而浦的安全漏洞。惠而浦是免专利的，并且不受使用限制。 NESSIE项目建议使用该哈希，ISO和IEC还采用了该哈希作为联合ISO / IEC 10118-3国际标准的一部分。</introduction>
+  <introduction lang="ru">Whirlpool - это криптографическая хеш-функция, разработанная криптографами Винсент Риймен и Паулу SLM Barreto в 2000 году. Алгоритм Whirlpool вычисляет хеш-значение длиной 512 бит (64 байта) от его ввода. Вход может составлять до 2 ^ 256 бит в длину. Никаких слабых мест безопасности Whirlpool пока не известно. Whirlpool не имеет патентных прав и не подвергается каким-либо ограничениям использования. Хэш был рекомендован проектом NESSIE, также был принят ИСО и МЭК в рамках совместного международного стандарта ISO / IEC 10118-3.</introduction>
+  <introduction lang="de-DE">
+    Whirlpool ist eine kryptographische Hash-Funktion und wurde 2000 von den Kryptographen Vincent Rijmen und Paulo S. L. M. Barreto entworfen.
+    Der Whirlpool-Algorithmus berechnet für Eingaben mit einer Länge von bis zu 2^256 Bit einen Hashwert mit einer Länge von 512 Bits (64 Bytes).
+    Bislang sind keine Schwächen des Algorithmus bekannt.
+    <newline />
+    Whirlpool ist patentfrei und unterliegt keinen Nutzungsbeschränkungen.
+    <newline />
+    Whirlpool gehört zu den vom Projekt NESSIE empfohlenen kryptographischen Algorithmen und wurde von der ISO mit ISO/IEC 10118-3:2004 standardisiert.
+  </introduction>
+  <usage lang="en">
+    The Whirlpool component expects the data of which to calculate the hash value either as a byte array on the input labeled "Input Data" or as a data stream on the input labeled "Input Stream".
+    The resulting hash value is provided at the outputs of the component, again as a byte array and as a data stream.
+  </usage>
+  <usage lang="zh-CN">Whirlpool组件期望其数据可以将哈希值作为标记为“ Input Data”的输入上的字节数组或作为标记为“ Input Stream”的输入上的数据流来计算。最终的哈希值在组件的输出端再次提供为字节数组和数据流。</usage>
+  <usage lang="ru">Компонент Whirlpool ожидает, что данные для вычисления хэш-значения будут либо в виде байтового массива на входе с надписью «Input Data», либо в виде потока данных на входе с надписью «Input Stream». Полученное хеш-значение предоставляется на выходах компонента, снова как массив байтов и как поток данных.</usage>
+  <usage lang="de-DE">
+    Die Whirlpool-Komponente erwartet die Daten, deren Hashwert berechnet werden soll, entweder als Byte-Array am Eingang "Eingabedaten" oder als Datenstrom am Eingang "Eingabedatenstrom".
+    Der resultierende Hashwert wird an den Ausgängen der Komponente wiederum als Datenstrom und als Byte-Array bereitgestellt.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Whirlpool_(cryptography)" lang="en" />
+      <caption lang="en">Whirlpool (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Whirlpool_(Algorithmus)" lang="de-DE" />
+      <caption lang="de-DE">Whirlpool (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="pbarreto">
+      <link url="http://www.larc.usp.br/~pbarreto/WhirlpoolPage.html" lang="en" />
+      <caption lang="en">The WHIRLPOOL Hash Function</caption>
+      <link url="http://www.larc.usp.br/~pbarreto/WhirlpoolPage.html" lang="de-DE" />
+      <caption lang="de-DE">The WHIRLPOOL Hash Function (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

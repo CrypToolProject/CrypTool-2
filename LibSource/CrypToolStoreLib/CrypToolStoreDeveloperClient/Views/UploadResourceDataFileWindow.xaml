@@ -1,0 +1,24 @@
+﻿<Window x:Class="CrypToolStoreDeveloperClient.Views.UploadResourceDataFileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Upload New Resource File" Height="200" Width="500">
+    <Grid Background="AliceBlue" Width="500" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="430"/>
+        </Grid.ColumnDefinitions>
+
+        <ProgressBar Name="ProgressBar" Background="White" Grid.Column="1" Grid.Row="0" Height="25"/>
+        <TextBlock Name="ProgressText" Background="Transparent" Grid.Column="1" Grid.Row="0"  Foreground="Black" TextAlignment="Center" VerticalAlignment="Center">Upload Progress</TextBlock>
+        <Button Name="SelectFileButton" Background="White" Click="SelectFileButton_Click" Grid.Column="1" Grid.Row="1" Height="25" Width="100" HorizontalAlignment="Right">Select file</Button>
+        <Button Name="UploadButton" Background="White" Click="UploadButton_Click" Grid.Column="1" Grid.Row="2" Height="25" Width="100" HorizontalAlignment="Right">Upload</Button>
+        <TextBlock Name="ZipFileName" Background="Transparent" Grid.Column="1" Grid.Row="1" Width="320"  Foreground="Black" TextAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center">
+            No file selected
+        </TextBlock>
+    </Grid>
+</Window>

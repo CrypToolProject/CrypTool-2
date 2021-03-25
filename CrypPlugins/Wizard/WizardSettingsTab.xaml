@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Wizard.WizardSettingsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" xmlns:Properties="clr-namespace:CrypTool.PluginBase.Properties;assembly=CrypPluginBase"
+             xmlns:wizard="clr-namespace:Wizard"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Image Source="/Wizard;component/Images/Hat.png" Opacity="0.2" />
+            <StackPanel HorizontalAlignment="Stretch" Name="stackPanel1" VerticalAlignment="Top">
+                <Label Content="{Loc WizardSettingsTitle}" FontWeight="Bold" FontSize="14"/>
+                <Label Content="{Loc General}" FontWeight="Bold" />
+                <CheckBox Content="{Loc RunContent}" ToolTip="{Loc RunToolTip}" Height="16" Name="run" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=Wizard_RunTemplate, Mode=TwoWay}" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <CheckBox Content="{Loc ShowAnimationsContent}" ToolTip="{Loc ShowAnimationsTooltip}" Height="16" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=Wizard_ShowAnimations, Mode=TwoWay}" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <Label Content="{Loc WizardStorage}" FontWeight="Bold" />
+                <wizard:StorageControl Style="{StaticResource ResourceKey=settingsStyle}" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

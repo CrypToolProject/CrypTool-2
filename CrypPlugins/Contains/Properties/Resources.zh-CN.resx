@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="building_search_structure" xml:space="preserve">
+    <value>现在建立搜寻结构。这可能需要几秒钟的时间...</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>包含</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>搜索字典中的字符串</value>
+  </data>
+  <data name="finished_building_search_structure" xml:space="preserve">
+    <value>...以“ {0}”秒为单位完成了builing搜索结构。</value>
+  </data>
+  <data name="no_dictionary" xml:space="preserve">
+    <value>没有字典。</value>
+  </data>
+  <data name="no_input_string" xml:space="preserve">
+    <value>没有输入字符串。</value>
+  </data>
+  <data name="InputStringCaption" xml:space="preserve">
+    <value>输入值</value>
+  </data>
+  <data name="InputStringTooltip" xml:space="preserve">
+    <value>在其中搜索搜索词的单词列表或文本。</value>
+  </data>
+  <data name="DictionaryInputStringCaption" xml:space="preserve">
+    <value>搜索词</value>
+  </data>
+  <data name="DictionaryInputStringTooltip" xml:space="preserve">
+    <value>在输入中要搜索的单词或单词列表。</value>
+  </data>
+  <data name="HitsCaption" xml:space="preserve">
+    <value>查找的命中数。</value>
+  </data>
+  <data name="HitsTooltip" xml:space="preserve">
+    <value>搜索方法需要找到n个匹配项才能返回true。</value>
+  </data>
+  <data name="ResultCaption" xml:space="preserve">
+    <value>搜索结果</value>
+  </data>
+  <data name="ResultTooltip" xml:space="preserve">
+    <value>搜索结果基于当前输入和给定的参数。</value>
+  </data>
+  <data name="HitCountCaption" xml:space="preserve">
+    <value>命中数</value>
+  </data>
+  <data name="HitCountTooltip" xml:space="preserve">
+    <value>搜索结果基于当前输入和给定的参数。</value>
+  </data>
+  <data name="CountWordsOnlyOnceCaption" xml:space="preserve">
+    <value>每个字只计数一次</value>
+  </data>
+  <data name="CountWordsOnlyOnceTooltip" xml:space="preserve">
+    <value>每个单词仅计数一次（即使同一单词出现几次）</value>
+  </data>
+  <data name="DelimiterDictionaryCaption" xml:space="preserve">
+    <value>分隔符搜索词</value>
+  </data>
+  <data name="DelimiterDictionaryTooltip" xml:space="preserve">
+    <value>“搜索词”输入的定界符，用于分割词。</value>
+  </data>
+  <data name="DelimiterInputStringCaption" xml:space="preserve">
+    <value>定界符输入</value>
+  </data>
+  <data name="DelimiterInputStringTooltip" xml:space="preserve">
+    <value>输入文本的分隔符，用于拆分单词。</value>
+  </data>
+  <data name="HitPercentFromInputStringCaption" xml:space="preserve">
+    <value>命中百分比值</value>
+  </data>
+  <data name="HitPercentFromInputStringTooltip" xml:space="preserve">
+    <value>命中值被解释为基于输入字符串的百分比值。</value>
+  </data>
+  <data name="SearchSettingCaption" xml:space="preserve">
+    <value>搜索类型</value>
+  </data>
+  <data name="SearchSettingTooltip" xml:space="preserve">
+    <value>选择搜索方式。</value>
+  </data>
+  <data name="ToLowerCaption" xml:space="preserve">
+    <value>忽略大小写</value>
+  </data>
+  <data name="ToLowerTooltip" xml:space="preserve">
+    <value>忽略大小写</value>
+  </data>
+  <data name="SearchSettingList1" xml:space="preserve">
+    <value>哈希表</value>
+  </data>
+  <data name="LabelHits" xml:space="preserve">
+    <value>点击数：0</value>
+  </data>
+  <data name="LabelWordIndex" xml:space="preserve">
+    <value>[word]，[index]</value>
+  </data>
+  <data name="LabelHits1" xml:space="preserve">
+    <value>点击数：</value>
+  </data>
+  <data name="LabelTarget" xml:space="preserve">
+    <value>目标：</value>
+  </data>
+  <data name="SearchSettingList2" xml:space="preserve">
+    <value>Aho-Corasick</value>
+  </data>
+  <data name="IgnoreDiacriticsCaption" xml:space="preserve">
+    <value>忽略变音符号</value>
+  </data>
+  <data name="IgnoreDiacriticsTooltip" xml:space="preserve">
+    <value>忽略变音符号</value>
+  </data>
+</root>

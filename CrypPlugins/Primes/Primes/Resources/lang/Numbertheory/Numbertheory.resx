@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="copy_savetable" xml:space="preserve">
+    <value>Save whole table to file</value>
+  </data>
+  <data name="copy_selectedrow" xml:space="preserve">
+    <value>Copy selected row to clipboard</value>
+  </data>
+  <data name="copy_table" xml:space="preserve">
+    <value>Copy whole table to clipboard</value>
+  </data>
+  <data name="eulerphi" xml:space="preserve">
+    <value>Euler's totient function</value>
+  </data>
+  <data name="eulerphisum" xml:space="preserve">
+    <value>Sum of divisor totients</value>
+  </data>
+  <data name="eulerphivalues" xml:space="preserve">
+    <value>List of coprimes</value>
+  </data>
+  <data name="exteuclid" xml:space="preserve">
+    <value>Extended Euclidean algorithm</value>
+  </data>
+  <data name="gcd" xml:space="preserve">
+    <value>Greatest common divisor</value>
+  </data>
+  <data name="goldbach_desc" xml:space="preserve">
+    <value>y(n) is the number of ways that the number n can be expressed as the sum of two prime numbers. Example: 10 = 3 + 7 and 10 = 5 + 5, thus y(10)=2.</value>
+  </data>
+  <data name="goldbach_sum" xml:space="preserve">
+    <value>sum</value>
+  </data>
+  <data name="goldbach_sums" xml:space="preserve">
+    <value>sums</value>
+  </data>
+  <data name="groupbox_choosefunctions" xml:space="preserve">
+    <value>Choose functions</value>
+  </data>
+  <data name="groupbox_input" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="invalidnumber" xml:space="preserve">
+    <value>{0} does not lie between {1} und {2} and is not evaluated further.</value>
+  </data>
+  <data name="lcm" xml:space="preserve">
+    <value>Least common multiple</value>
+  </data>
+  <data name="modinv" xml:space="preserve">
+    <value>Modular multiplicative inverse</value>
+  </data>
+  <data name="pix" xml:space="preserve">
+    <value>Number of primes</value>
+  </data>
+  <data name="powermod_base" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="powermod_max_base" xml:space="preserve">
+    <value>Max. base</value>
+  </data>
+  <data name="powermod_btncancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="powermod_btnexecute" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="powermod_btnnextstep" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="powermod_btnresume" xml:space="preserve">
+    <value>Continue with automatic execution</value>
+  </data>
+  <data name="powermod_ccw" xml:space="preserve">
+    <value>anti-clockwise</value>
+  </data>
+  <data name="powermod_cw" xml:space="preserve">
+    <value>clockwise</value>
+  </data>
+  <data name="powermod_execution" xml:space="preserve">
+    <value>{0}.	{1}^{2} mod {3} = {4}</value>
+  </data>
+  <data name="powermod_cycle_length" xml:space="preserve">
+    <value>Cycle length: {0}</value>
+  </data>
+  <data name="powermod_cycle_duplicate_values" xml:space="preserve">
+    <value>(cycle contains duplicate values)</value>
+  </data>
+  <data name="powermod_max_exponent" xml:space="preserve">
+    <value>Max. exponent</value>
+  </data>
+  <data name="powermod_exponent" xml:space="preserve">
+    <value>Exponent</value>
+  </data>
+  <data name="powermod_inputgroupbox" xml:space="preserve">
+    <value>Input parameter</value>
+  </data>
+  <data name="powermod_modulus" xml:space="preserve">
+    <value>Modulus</value>
+  </data>
+  <data name="powermod_points" xml:space="preserve">
+    <value>Point order</value>
+  </data>
+  <data name="powermod_progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="powermod_rsa_description" xml:space="preserve">
+    <value>Typical parameters for RSA: (N, e) = (33, 3), (55, 7), (143, 23)</value>
+  </data>
+  <data name="powermod_cycle_length_description" xml:space="preserve">
+    <value>The maximum cycle length is phi(N). It can be reached for the multiplicative group Z*_N, e.g. with N=11 and b=2 or b=6: phi(N)=10.</value>
+  </data>
+  <data name="powermod_missing_values" xml:space="preserve">
+    <value>Missing values: {0}</value>
+  </data>
+  <data name="powermod_no_missing_values" xml:space="preserve">
+    <value>No values are missing.</value>
+  </data>
+  <data name="powermod_rbautomatic" xml:space="preserve">
+    <value>automatic execution</value>
+  </data>
+  <data name="powermod_stepwise" xml:space="preserve">
+    <value>stepwise execution</value>
+  </data>
+  <data name="powermod_zoom" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="proot_btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="proot_btnExecute" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="proot_btnSkipCalculation" xml:space="preserve">
+    <value>Skip current calculation</value>
+  </data>
+  <data name="proot_calculating" xml:space="preserve">
+    <value>Calculating the roots...</value>
+  </data>
+  <data name="proot_genprimes" xml:space="preserve">
+    <value>Generate primes</value>
+  </data>
+  <data name="proot_input" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="proot_insert" xml:space="preserve">
+    <value>Please enter a number</value>
+  </data>
+  <data name="proot_noprime" xml:space="preserve">
+    <value>{0} is not a prime.</value>
+  </data>
+  <data name="proot_noprimes" xml:space="preserve">
+    <value>No primes were found in the given interval(s).</value>
+  </data>
+  <data name="proot_novalidnumber" xml:space="preserve">
+    <value>{0} is not a number between {1} and {2}. </value>
+  </data>
+  <data name="proot_printing" xml:space="preserve">
+    <value>Printing...</value>
+  </data>
+  <data name="proot_progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="proot_rangeboth" xml:space="preserve">
+    <value>Please enter the interval boundaries.</value>
+  </data>
+  <data name="proot_rangedown" xml:space="preserve">
+    <value>Please enter the interval boundaries. The number {0} is interpreted as the lower boundary of a closed interval, the upper boundary is still missing.</value>
+  </data>
+  <data name="proot_rangeupper" xml:space="preserve">
+    <value>Please enter the interval boundaries. The number {0} is interpreted as the upper boundary of a closed interval, the lower boundary is still missing.</value>
+  </data>
+  <data name="proot_result" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="proot_resultcalc" xml:space="preserve">
+    <value>{0} has {1} primitive root</value>
+  </data>
+  <data name="proot_resultscalc" xml:space="preserve">
+    <value>{0} has {1} primitive roots</value>
+  </data>
+  <data name="proot_skip" xml:space="preserve">
+    <value>The calculation was skipped.</value>
+  </data>
+  <data name="proot_warningbiginterval" xml:space="preserve">
+    <value>Warning: The interval {0} contains big numbers for which the calculation may take some time.</value>
+  </data>
+  <data name="proot_warningbignumber" xml:space="preserve">
+    <value>Warning: For big numbers like {0} the calculation may take some time.</value>
+  </data>
+  <data name="proot_wronginterval" xml:space="preserve">
+    <value>The first number of the interval {0} has to be smaller than the second.</value>
+  </data>
+  <data name="secondparametermissing" xml:space="preserve">
+    <value>You selected a function that requires the second parameter.</value>
+  </data>
+  <data name="sigma" xml:space="preserve">
+    <value>Sum of divisors</value>
+  </data>
+  <data name="tabitemheader_goldbach" xml:space="preserve">
+    <value>Goldbach's conjecture</value>
+  </data>
+  <data name="tabitemheader_ntfunctions" xml:space="preserve">
+    <value>Number-theoretic functions</value>
+  </data>
+  <data name="tabitemheader_power" xml:space="preserve">
+    <value>Powering (iterating exponent)</value>
+  </data>
+  <data name="tabitemheader_powerBase" xml:space="preserve">
+    <value>Powering (iterating base)(RSA)</value>
+  </data>
+  <data name="tabitemheader_proots" xml:space="preserve">
+    <value>Primitive roots</value>
+  </data>
+  <data name="tau" xml:space="preserve">
+    <value>Number of divisors</value>
+  </data>
+  <data name="tauvalues" xml:space="preserve">
+    <value>List of divisors</value>
+  </data>
+</root>

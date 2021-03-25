@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Primes Test</title>
+  <title lang="zh">测试保费</title>
+  <title lang="ru">Тест Primes</title>
+  <summary lang="en">Usage of the <i>Primes Test</i></summary>
+  <summary lang="zh">素数测试的用法</summary>
+  <summary lang="ru">Использование теста Primes</summary>
+  <description lang="en">This template shows the usage of the <i>Primes Test</i> component. For small numbers, it uses trial division and for big numbers the Miller-Rabin primality test, which can determine whether a number is a prime number with a very high probability.</description>
+  <description lang="zh">该模板显示了Primes Test组件的用法。对于小数，它使用试验除法；对于大数，它使用Miller-Rabin素数测试，该测试可以确定数字是否是极有可能的素数。</description>
+  <description lang="ru">Этот шаблон показывает использование компонента Primes Test. Для небольших чисел он использует пробное деление и для больших чисел критерий примитивности Миллера-Рабина, который может определить, является ли число простым числом с очень высокой вероятностью.</description>
+  <keywords>prime, composite, primality</keywords>
+  <keywords lang="zh">素数，复合，素数</keywords>
+  <keywords lang="ru">простой, составной, примитивный</keywords>
+  <title lang="de">Primzahltest</title>
+  <summary lang="de">Durchführen von <i>Primzahltests</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der Komponente <i>Primzahltest</i>. Sie verwendet für kleine Zahlen die Probedivision und für große Zahlen den Miller-Rabin-Test, der mit hoher Wahrscheinlichkeit feststellen kann, ob die zu untersuchende Zahl eine Primzahl ist.</description>
+  <keywords lang="de">Primzahl, zusammengesetzt</keywords>
+  <icon file="Factorization.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="PrimeTest" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Number Input$" value="Zahleneingabe" />
+    <replacement key="$PrimeTest$" value="Primzahltest" />
+    <replacement key="$Is Prime?$" value="Ist prim?" />
+    <replacement key="$memo$" value="Grün: wahr\line Rot: falsch" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Number Input$" value="输入数字" />
+    <replacement key="$PrimeTest$" value="首要测试" />
+    <replacement key="$Is Prime?$" value="是素数？" />
+    <replacement key="$memo$" value="绿色：真\线红色：假" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Number Input$" value="ввод номера" />
+    <replacement key="$PrimeTest$" value="простоты чисел" />
+    <replacement key="$Is Prime?$" value="Это здорово?" />
+    <replacement key="$memo$" value="Зеленый: true \line Красный: неправильный" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Number Input$" value="Number Input" />
+    <replacement key="$PrimeTest$" value="PrimeTest" />
+    <replacement key="$Is Prime?$" value="Is Prime?" />
+    <replacement key="$memo$" value="Green: true\line Red: false" />
+  </replacements>
+</sample>

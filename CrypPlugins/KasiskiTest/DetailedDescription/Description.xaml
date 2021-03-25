@@ -1,0 +1,166 @@
+﻿<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" 
+              NumberSubstitution.CultureSource="User" 
+              Background="White" FontFamily="Tahoma"
+              FontSize="10"
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="24">The Kasiski Test</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="12" xml:space="preserve">The Kasiski test is a method of attacking polyalphabetic substituton ciphers in order to find out the length of their keyword.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333">The method was first developed by Charles Babbage and later by Prussian infantry officer Friedrich Wilhelm Kasiski, who also published the method in 1863.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333">The Kasiski examination involves looking for strings of characters that are repeated in the ciphertext. The strings should be three characters long or more for the examination to be successful. Then, the distances between consecutive occurrences of the strings are likely to be multiples of the length of the keyword.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333">The reason this test works is that if a repeated string occurs in the plaintext, and the distance between them is a multiple of the keyword length, the keyword letters will line up in the same way with both occurrences of the string. For example, consider the plaintext:</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="14" xml:lang="de-de">crypto is short for cryptography</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333" xml:lang="de-de">In this case the repeated string is “crypto” the distances between repetitions being 20 characters. Let us now line up the plaintext with first a six-character keyword "abcdef" (6 does not divide 20) and a five-character keyword "abcde" (5 divides 20).</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="14">abcdef</Run>
+        <Run FontSize="14" xml:lang="de-de">abcdefabcdefab</Run>
+        <Run FontWeight="Bold" FontSize="14">cdefab</Run>
+        <Run FontSize="14" xml:lang="de-de">cdefabc</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="14" xml:lang="de-de">crypto is short for cryptography</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333">Notice that the first instance of "crypto" lines up with "abcdef" and the second instance lines up with "cdefab". The two instances will encrypt to different ciphertexts. Let's see what happens when we encrypt the same text with a keyworld of length 5.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="14">abcdea</Run>
+        <Run FontSize="14" xml:lang="de-de">bcdeabcdeabcde</Run>
+        <Run FontWeight="Bold" FontSize="14">abcdea</Run>
+        <Run FontSize="14" xml:lang="de-de">cdeabc</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="14">crypto</Run>
+        <Run FontSize="14" xml:lang="de-de">is short for</Run>
+        <Run FontWeight="Bold" FontSize="14">crypto</Run>
+        <Run FontSize="14" xml:lang="de-de">graphy</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333">Note that both occurrences of "crypto" now line up with "abcdea". The two instances will encrypt to the same ciphertext and the Kasiski examination will be effective.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333">The Plug-in itself takes a string (of polyalphabetic ciphertext, for the test to work accurately) as an input and, after certain analysis has been done to the input, yields a string output.  The Plug-in in action looks something like this:</Run>
+        
+        <InlineUIContainer>
+            <Image Source="/KasiskiTest;Component/DetailedDescription/Images/Kasiski.jpg" />
+        </InlineUIContainer>
+        <Run FontSize="13.3333333333333">Just conect the plug-in as depicted in the screenshot, or alternatively open the "Statistics-Test-Classical-02-be.cte" file, which is to be found in the ProjectSamples folder of CrypTool 2.0. On the text output of the plug-in you will get numbers sorted in two columns. The two columns are devided by the column (":") sign. The left column contains all factors (and therefore keylengths) the plug-in took into conssideration. Each value on the right corresponds to a factor on the left, and represents the number of times this particular factor was encountered during the examination of the input string. From the screenshot we can see that in this case the factor "3" is encountered 342 times. This is more than two times as often as the next most common factor. Therefore it can be said the length of the keyword for this case is three.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="13.3333333333333"></Run>
+    </Paragraph>
+
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">For	the	Kasiski	text	to	work	correctly	we	need	to	set	it	up	accordingly	through	use	of	its	op-
+tions. The settings Panel for the plug-in look like this: </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image MaxWidth="200" Source="/KasiskiTest;Component/DetailedDescription/Images/Kasiski_settings.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The	“Gramm	Length”	setting	is	used	to	set	the	maximum	length	of	gramms	(short strings 
+of characters)	between	which	we	count	distances.	The	default	value	is	three,	but	setting	a	
+higher	value	(i.e. 5)	improves	the	precision	of	the	algorithm	since	more	repetitions	of	dis-
+tances	(or	multiples	of	the	key-length)	will	be	counted.</Span>
+    </Paragraph>
+    
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The	“Maximum	Factor	Size”	setting	is	used	to	set	the	maximum	factor	(hence maximum 
+probable key-length)	which	the	algorithm	should	take	into	consideration.	Default	value	for	
+practical	reasons	–	20.</Span>
+    </Paragraph>
+    
+    
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The	“Case	Sensitivity”	setting	is	used	to	determine	if	the	algorithm	should	analyze	the	
+input	with	or	without	any	changes	to	the	case	of	letters.	The	default	value	is	“Yes	‘a’	should	
+equal	‘A’”	i.e.	the	algorithm	will	set	all	letters	of	the	input	string	to	lower	case.	
+For	shorter	texts	in	particular	it	is	highly	recommended	that	the	default	is	not	changed.	
+Otherwise	the	results	of	the	test	could	be	misleading.</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The	“Unknown	Symbol	Handling”	setting	is	used	to	determine	wheatear	or	not	unknown	
+and/or	special	symbols	(numbers, umlauts, space, new lines etc.)	should	be	left	in	the	
+input	string	for	consequent	analysis.	Default	value	is	“Remove”,	meaning	that	all	unknown	
+symbols	(in our case symbols that are not part of the Latin/English Alphabet) are	removed	
+from	the	input	string,	and	hence	take	no	further	part	in	the	calculations	of	the	probable	key-
+length.	In	practice	such	“special”	symbols	are	not	encrypted,	and	changing	the	setting	to	
+“Ignore”	will	produce	inaccurate	results.</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The	last	two	options	work	more	or	less	in	exactly	the	same	way	as	in	the	Frequency	Test	
+plug-in.	And	can	be	accessed	as	demonstrated	with	the	Frequency	Test	plug-in.
+This	plug-in	also	has	a	presentation	very	similar	to	the	one	in	the	Frequency	Test.	It	looks	
+like this:</Span>
+    </Paragraph>
+    
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Source="/KasiskiTest;Component/DetailedDescription/Images/Kasiski_pres.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    
+
+
+
+
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">At the bottom of each bar is its corresponding factor, above it the frequency with which this 
+factor is encountered. In this case it is not exactly obvious which one of three most frequent factors (2,3 and 6) is the actual 
+key-length. With some practise would be easy to make predictions with high possibility for truth. Here six is the key length. Two and three have higher values because they are factors of six. Keep in mind that Bigger factors with relatively high frequency should have priority as a probable key length. Pay special attention to prime numbers. Using the Friedman test plug-in as a supplement to this method should make the decision for key length easier.	</Span>
+     
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The graph can be accessed also as quick watch presentation directly on the work feld by 
+clicking	the	expanding sign	under	the	plug-in	icon.</Span>
+    </Paragraph>
+
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image MaxWidth="300" Source="/KasiskiTest;Component/DetailedDescription/Images/Kasiski_Quick.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+
+
+
+
+
+</FlowDocument>

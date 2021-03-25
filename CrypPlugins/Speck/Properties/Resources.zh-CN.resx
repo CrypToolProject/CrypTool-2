@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ChoiceOfModeOfOperation" xml:space="preserve">
+    <value>区块链模式：</value>
+  </data>
+  <data name="ChoiceOfModeOfOperationGroup" xml:space="preserve">
+    <value>操作模式</value>
+  </data>
+  <data name="ChoiceOfModeOfOperationToolTip" xml:space="preserve">
+    <value>定义密码的操作模式</value>
+  </data>
+  <data name="ChoiceOfOperatingMode" xml:space="preserve">
+    <value>行动：</value>
+  </data>
+  <data name="ChoiceOfOperatingModeGroup" xml:space="preserve">
+    <value>加密/解密</value>
+  </data>
+  <data name="ChoiceOfOperatingModeToolTip" xml:space="preserve">
+    <value>确定组件是否对输入进行加密或解密</value>
+  </data>
+  <data name="ChoiceOfPaddingMode" xml:space="preserve">
+    <value>填充模式：</value>
+  </data>
+  <data name="ChoiceOfPaddingModeGroup" xml:space="preserve">
+    <value>填充</value>
+  </data>
+  <data name="ChoiceOfPaddingModeToolTip" xml:space="preserve">
+    <value>设置填充数据块的模式。</value>
+  </data>
+  <data name="ChoiceOfVariant" xml:space="preserve">
+    <value>参数化：</value>
+  </data>
+  <data name="ChoiceOfVariantGroup" xml:space="preserve">
+    <value>块大小/密钥长度</value>
+  </data>
+  <data name="ChoiceOfVariantToolTip" xml:space="preserve">
+    <value>可以在此处选择Speck的块大小和密钥长度</value>
+  </data>
+  <data name="Decrypt" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="BlockModeList1" xml:space="preserve">
+    <value>电子密码书（ECB）</value>
+  </data>
+  <data name="Encrypt" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="InputKeyCaption" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>提供的密钥必须具有所选的Speck参数化所需的必要长度。如果密钥太短，则处理终止。如果键太长，则缩短键。</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>输入流</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>要加密或解密的数据。</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>输出流</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>该连接器输出加密或解密的数据。</value>
+  </data>
+  <data name="PaddingList2" xml:space="preserve">
+    <value>零点</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>斑点</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>斑点</value>
+  </data>
+  <data name="Speck128_128" xml:space="preserve">
+    <value>斑点128/128</value>
+  </data>
+  <data name="Speck128_192" xml:space="preserve">
+    <value>斑点128/192</value>
+  </data>
+  <data name="Speck128_256" xml:space="preserve">
+    <value>斑点128/256</value>
+  </data>
+  <data name="Speck32_64" xml:space="preserve">
+    <value>斑点32/64</value>
+  </data>
+  <data name="Speck48_72" xml:space="preserve">
+    <value>斑点48/72</value>
+  </data>
+  <data name="Speck48_96" xml:space="preserve">
+    <value>斑点48/96</value>
+  </data>
+  <data name="Speck64_128" xml:space="preserve">
+    <value>斑点64/128</value>
+  </data>
+  <data name="Speck64_96" xml:space="preserve">
+    <value>斑点64/96</value>
+  </data>
+  <data name="Speck96_144" xml:space="preserve">
+    <value>斑点96/144</value>
+  </data>
+  <data name="Speck96_96" xml:space="preserve">
+    <value>斑点96/96</value>
+  </data>
+  <data name="Speck_blockmode_not_implemented" xml:space="preserve">
+    <value>尚未实现模式{0}。</value>
+  </data>
+  <data name="Speck_Execute_Key_too_long" xml:space="preserve">
+    <value>密钥长度= {0}太长。将密钥剪切到长度{1}。</value>
+  </data>
+  <data name="Speck_Execute_Key_too_short" xml:space="preserve">
+    <value>密钥长度= {0}太短。必要的密钥长度为{1}字节。</value>
+  </data>
+  <data name="Speck_no_cryptofunction" xml:space="preserve">
+    <value>无法根据设置选择加密功能。</value>
+  </data>
+  <data name="BlockModeList2" xml:space="preserve">
+    <value>密码块链接（CBC）</value>
+  </data>
+  <data name="InputIVCaption" xml:space="preserve">
+    <value>初始化向量</value>
+  </data>
+  <data name="InputIVTooltip" xml:space="preserve">
+    <value>链接模式中使用的初始化向量（IV）。它必须具有与块相同的大小。</value>
+  </data>
+  <data name="PaddingList1" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="PaddingList3" xml:space="preserve">
+    <value>PKCS7</value>
+  </data>
+  <data name="PaddingList4" xml:space="preserve">
+    <value>ANSIX923</value>
+  </data>
+  <data name="PaddingList5" xml:space="preserve">
+    <value>ISO10126</value>
+  </data>
+  <data name="PaddingList6" xml:space="preserve">
+    <value>1-0填充</value>
+  </data>
+  <data name="Speck_Input_padded" xml:space="preserve">
+    <value>输入流用{0}填充</value>
+  </data>
+  <data name="Speck_Input_too_short" xml:space="preserve">
+    <value>明文/密文输入流太短。检查输入的块长（请参阅所选Speck变体的块长）或必须选择填充模式。</value>
+  </data>
+  <data name="Speck_IV_too_long" xml:space="preserve">
+    <value>给定的初始化向量太长。它将被截断。</value>
+  </data>
+  <data name="Speck_IV_too_short" xml:space="preserve">
+    <value>给定的初始化向量太短。它将用零填充。</value>
+  </data>
+  <data name="Speck_No_IV_was_given" xml:space="preserve">
+    <value>没有指定初始化向量。初始化为值0。</value>
+  </data>
+  <data name="BlockModeList3" xml:space="preserve">
+    <value>密码反馈（CFB）</value>
+  </data>
+  <data name="BlockModeList4" xml:space="preserve">
+    <value>输出反馈（OFB）</value>
+  </data>
+</root>

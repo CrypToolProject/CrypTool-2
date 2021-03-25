@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="CrypToolStoreDeveloperClient.Views.MainMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="300">
+    <Grid VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" Name="UserManagementRow"/>
+            <RowDefinition Height="50" Name="PluginManagementRow"/>
+            <RowDefinition Height="50" Name="ResourceManagementRow"/>
+            <RowDefinition Height="50" Name="UpdateMyDataRow"/>
+            <RowDefinition Height="50" Name="LogOutRow"/>
+        </Grid.RowDefinitions>        
+        <Button Name="UserManagementButton" Background="White" Grid.Row="1" Height="40" Width="200" Click="UserManagementButton_Click">User management</Button>
+        <Button Name="PluginManagementButton" Background="White" Grid.Row="2" Height="40" Width="200" Click="PluginManagementButton_Click">Plugin management</Button>
+        <Button Name="ResourceManagementButton" Background="White" Grid.Row="3" Height="40" Width="200" Click="ResourceManagementButton_Click">Resource management</Button>
+        <Button Name="UpdateMyDataButton" Background="White" Grid.Row="4" Height="40" Width="200" Click="UpdateMyDataButton_Click">Update my data</Button>
+        <Button Name="LogoutButton" Background="White" Grid.Row="5" Height="40" Width="200" Click="LogoutButton_Click">Logout</Button>
+    </Grid>
+</UserControl>

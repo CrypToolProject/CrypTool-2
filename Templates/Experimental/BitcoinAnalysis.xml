@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Bitcoin Blockchain Analysis</title>
+  <title lang="zh">比特币区块链分析</title>
+  <summary lang="en">Consideration of <i>Bitcoin</i> blockchain</summary>
+  <summary lang="zh">考虑比特币区块链</summary>
+  <description lang="en">Bitcoin literally means "digital coin" and is a digital currency and also the name of the decentralized booking system. Transfers are handled anonymously using computing power over the Internet in a peer-to-peer application. Thus, no central clearing house is necessary. The Bitcoin network is based on a decentralized database, the Blockchain, in which all transactions are stored. With this template, the blocks and transactions from the block chain can be viewed clearly.</description>
+  <description lang="zh">比特币的字面意思是“数字硬币”，是数字货币，也是去中心化预订系统的名称。传输是使用对等应用程序中的Internet上的计算能力来匿名处理的。因此，不需要中央票据交换所。比特币网络基于去中心化的数据库，即存储所有交易的区块链。使用此模板，可以清楚地查看来自区块链的区块和交易。</description>
+  <keywords>Bitcoin, blockchain, block, transaction</keywords>
+  <keywords lang="zh">比特币，区块链，区块，交易</keywords>
+  <title lang="de">Bitcoin Blockchain Analyse</title>
+  <summary lang="de">Betrachtung der <i>Bitcoin</i> Blockchain</summary>
+  <description lang="de">Bitcoin bedeutet Sinngemäß "digitale Münze" und ist eine digitale Währung und auch gleichzeitig der Name des dezentralen Buchungssystems. Überweisungen werden anonym mithilfe von Rechenleistung über das Internet in einer Peer-to-Peer Anwendung abgewickelt. Somit ist keine zentrale Abwicklungsstelle notwendig. Das Bitcoin-Netzwerk basiert auf einer dezentralen Datenbank, der Blockchain, in dieser sind alle Transaktionen gespeichert. Mit diesem Template können sich die Blöcke und Transaktionen aus der Blockchain übersichtlich angeschaut werden.</description>
+  <keywords lang="de">Bitcoin, Blockchain, Block, Transaktion</keywords>
+  <icon file="Bitcoinlogo.png" />
+  <relevantPlugins>
+    <plugin name="BitcoinBlockDownloader" />
+    <plugin name="BitcoinBlockViewer" />
+    <plugin name="BitcoinTransactionDownloader" />
+    <plugin name="BitcoinTransactionViewer" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$text1$" value="Geben Sie eine Blocknummer oder einen Blockhash ein. Der Downloader verbindet sich mit dem Server und läd die Informationen herunter.\line\line Durch einen Doppelklick auf einen der beiden Hashwerte von previousblockhash oder nextblockhash können Sie einen Block vor oder zurück springen.\line\line Durch einen Doppelklick auf eine der Transaktionen in der Liste werden die Transaktionsinformationen vom Transaktions-Downloader heruntergeladen und im Transaktions-Betrachter  angezeigt.\line\line Für detailiertere Informationen der einzelnen Angaben: \line https://en.bitcoin.it/wiki/Block \line https://en.bitcoin.it/wiki/Protocol_documentation" />
+    <replacement key="$text2$" value="Der Transaktions-Betrachter zeigt die wichtigsten Informationen der Transaktion an.\line\line Die Gebühr errechnet sich aus der Differenz zwischen der Summe aller Eingänge und der Summe aller Ausgänge." />
+    <replacement key="$blockinput$" value="Blocknummer oder Blockhash" />
+    <replacement key="$blockdownloader$" value="Block-Downloader" />
+    <replacement key="$blockviewer$" value="Block-Betrachter" />
+    <replacement key="$transactiondownloader$" value="Transaktions-Downloader" />
+    <replacement key="$transactionviewer$" value="Transaktions-Betrachter" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$text1$" value="输入块编号或块哈希。下载器连接到服务器并下载信息。\Line \line双击上一个blockhash或nextblockhash的两个哈希值之一，可以向前或向后跳转一个块\Line \line通过双击其中的一个交易在该列表中，交易信息是从交易下载器下载的，并显示在交易查看器中。\line \line有关各个信息的更多详细信息：\line https://en.bitcoin.it/wiki/Block \line https：// // .bitcoin.it / Wiki / Protocol_documentation" />
+    <replacement key="$text2$" value="交易查看器显示有关交易的最重要信息\Line \line费用是根据所有输入的总和与所有输出的总和之间的差计算的。" />
+    <replacement key="$blockinput$" value="块号或块哈希" />
+    <replacement key="$blockdownloader$" value="块下载器" />
+    <replacement key="$blockviewer$" value="阻止查看器" />
+    <replacement key="$transactiondownloader$" value="交易下载器" />
+    <replacement key="$transactionviewer$" value="交易查看器" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$text1$" value="Enter a block number or a block hash. The Downloader connects to the server and downloads the information.\line\line To double-click one of the two hash values of previousblockhash or nextblockhash you can jump back and forth one block.\line\line To double-click on one of the transactions in the list the transaction information is downloaded from the transaction downloader and displayed in the transaction viewer.\line\line For more detailed information of the individual details: \line https://en.bitcoin.it/wiki/Block \line https://en.bitcoin.it/wiki/Protocol_documentation" />
+    <replacement key="$text2$" value="The transaction viewer displays the most important information of the transaction.\line\line The fee is calculated as the difference between the sum of all inputs and the sum of all the outputs." />
+    <replacement key="$blockinput$" value="Blocknumber or blockhash" />
+    <replacement key="$blockdownloader$" value="Block Downloader" />
+    <replacement key="$blockviewer$" value="Block Viewer" />
+    <replacement key="$transactiondownloader$" value="Transaction Downloader" />
+    <replacement key="$transactionviewer$" value="Transaction Viewer" />
+  </replacements>
+</sample>

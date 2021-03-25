@@ -1,0 +1,62 @@
+<h2>GGH Crypto System</h2>
+
+<p>
+The GGH cryptosystem is based on the hypothesis, that it is very easy to construct a vector from a basis B and a small error vector e, that lies in the vector space V and is close to a lattice point in the lattice L.
+On the other hand, it is very hard to reconstruct the original lattice point lying close to the vector if only the vector is known.
+If one could find a very small basis, the search for the original lattice point would be much easier.
+This problem corresponds to the Shortest Basis Problem (SBP), where, according to [GGH96, p. 117], a basis is small if the base vectors are pairwise nearly orthogonal, thus having a very small orthogonality defect.
+</p>
+
+<p>
+For encryption and decryption, two n x n basis matrices are required, which both generate the same full-dimensional lattice over Z^n. The basis matrix B serves as the public key. B can be transformed into the private key R by multiplication with a unimodular matrix. The security of the system relies on a high lattice dimension n and on a parameter, that determines the error vector e.
+</p>
+
+<p>
+The key generation process starts with the definition of the private key R. 
+The vectors of the matrix are strived to be as orthogonal as possible.
+Then, a matrix R&#39; is chosen, whose entries are obtained from the set {-l,...,l} with random equal distribution.
+The product of the value k and the identity matrix I is then added to R&#39;.
+Thus the resulting private basis is: R := R&#39; + kI, where k is a natural number.
+</p>
+
+<p>
+The public key B arises from the multiplication of R with a random unimodular transformation matrix U: B := R * U.
+</p>
+
+<p>
+For encrypting a message m in Z^n, the plaintext vector is multiplied with the public key B, resulting in a new lattice point.
+The error vector e is added to make the reconstruction of this lattice point difficult.
+e is a vector consisting of random values selected with equal distribution from the set {-Sigma, Sigma} (In this tutorial: Sigma=1).
+</p>
+
+<p>
+The resulting ciphertext is c = Bm + e.
+</p>
+
+<p>
+For decrypting a message, the original lattice point has to be reconstructed.
+In 1986, László Babai presented an algorithm that produces an approximate lattice point for a given point of the vector space [Bab86].
+For this purpose, the point is regarded as a linear combination of the lattice basis vectors.
+The coefficients of the linear combination are then rounded up to the next integer, so that the result is a vector of the lattice.
+This method only works, if the basis vectors are nearly orthogonal.
+The given target point lies inside a parallelepiped, which is spanned by the basis vectors.
+With Babai's rounding method, the closest vertex of this parallelepiped will be given as the solution.
+If the basis vectors are less orthogonal, the rounding error will increase as the parallelepiped will be more and more elongated and the vertices will move away from the true closest lattice point (see figure 3.1 in [HPS98, p. 382], showing a basis with less orthogonal vectors and thus unsuitable for Babai's method).
+If the basis is not reduced, the result of the rounding may not be better than a randomly generated vector and we gain no new information with this method.
+The owner of the private key, however, can apply Babai's method, as the private key fulfills the requirements on the orthogonality of the basis.
+</p>
+
+<img src="ImgBabai" />
+<br/>
+
+<p>Sources:</p>
+
+<p>
+[Bab86] Babai, L.: On Lovász’ Lattice Reduction and the Nearest Lattice Point Problem. In: Combinatorica vol. 6, 1986, p. 1-13
+</p>
+<p>
+[GGH96] Goldreich, O.; Goldwasser, S.; Halevi, S.: Public-Key Cryptosystems from Lattice Reduction Problems. In: CRYPTO ’97 Proceedings of the 17th Annual International Cryptology Conference on Advances in Cryptology, Springer, 1196, p. 112-131
+</p>
+<p>
+[HPS98] Hoffstein, J.; Pipher, J.; Silverman, J. H.: NTRU: A Ring-Based Public Key Cryptosystem. In: Buhler, J. P. (Hrsg.): Lecture Notes in Computer Science Bd. 1423, Springer, 1998, p. 267-288
+</p>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component determines the length of the data at its input. Depending on the data type of the given data, their length is interpreted in different ways.
+  </introduction>
+  <introduction lang="zh-CN">该组件确定输入数据的长度。根据给定数据的数据类型，它们的长度以不同的方式解释。</introduction>
+  <introduction lang="ru">Этот компонент определяет длину данных на его входе. В зависимости от типа данных данных, их длина интерпретируется по-разному.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente bestimmt die Länge der Daten, die an ihrem Eingang anliegen, wobei die Länge abhängig vom Datentyp der anliegenden Daten berechnet wird.
+  </introduction>
+  <usage lang="en">
+    The only input of this component is of type <i>Object</i>, so it accepts all available data types. The length is calculated differently for different data types.
+    If the input is an <i>Array</i>, the returned length is the size of the array. For a <i>Dictionary</i>, the length is the number of dictionary entries.
+    For all other data types, the input will be converted to a string and the resulting length is the length of that string.
+  </usage>
+  <usage lang="zh-CN">该组件的唯一输入是Object类型，因此它接受所有可用的数据类型。对于不同的数据类型，长度的计算方式有所不同。如果输入是数组，则返回的长度是数组的大小。对于字典，长度是字典条目的数量。对于所有其他数据类型，输入将转换为字符串，结果长度为该字符串的长度。</usage>
+  <usage lang="ru">Единственный вход этого компонента имеет тип Object, поэтому он принимает все доступные типы данных. Длина вычисляется по-разному для разных типов данных. Если вход представляет собой массив, возвращаемая длина - это размер массива. Для словаря длина - это количество словарных статей. Для всех других типов данных вход будет преобразован в строку, а результирующая длина - это длина этой строки.</usage>
+  <usage lang="de-DE">
+    Die Komponente hat nur einen Eingang. Dieser ist vom Typ <i>Object</i> und akzeptiert daher alle vorhandenen Datentypen als Eingabedaten.
+    Die Länge der Eingabedaten wird, abhängig von ihrem Datentyp, unterschiedlich berechnet.
+    Ist die Eingabe ein <i>Array</i>, so wird als Länge die Größe des Arrays zurückgegeben. Für ein <i>Directory</i> wird die Anzahl der Einträge zurückgegeben.
+    Für alle anderen Datentypen werden die Eingabedaten in eine Zeichenkette konvertiert und als Ergebnis wird die Länge dieser Zeichenkette zurückgegeben.    
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references></references>
+</documentation>

@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Description" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="HtmlGenerator_GenerateSettingsListCode_Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Direction" xml:space="preserve">
+    <value>方向</value>
+  </data>
+  <data name="HtmlGenerator_GenerateConnectorListCode_Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AdditionalResources" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\additionalresources.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="Not_available" xml:space="preserve">
+    <value>无法使用。</value>
+  </data>
+  <data name="NoContent" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="Null" xml:space="preserve">
+    <value>空值</value>
+  </data>
+  <data name="TemplateComponentDocumentationPage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templatecomponentdocumentationpage.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TemplateEditorDocumentationPage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templateeditordocumentationpage.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Templates_description" xml:space="preserve">
+    <value>下面列出的模板可用于此组件。</value>
+  </data>
+  <data name="Text_box" xml:space="preserve">
+    <value>文本框</value>
+  </data>
+  <data name="Combo_box" xml:space="preserve">
+    <value>组合框</value>
+  </data>
+  <data name="Radio_button" xml:space="preserve">
+    <value>单选按钮</value>
+  </data>
+  <data name="Check_box" xml:space="preserve">
+    <value>复选框</value>
+  </data>
+  <data name="Open_file_dialog" xml:space="preserve">
+    <value>打开文件对话框</value>
+  </data>
+  <data name="Save_file_dialog" xml:space="preserve">
+    <value>保存文件对话框</value>
+  </data>
+  <data name="Numeric_up_down" xml:space="preserve">
+    <value>数字上/下</value>
+  </data>
+  <data name="Button" xml:space="preserve">
+    <value>纽扣</value>
+  </data>
+  <data name="Slider" xml:space="preserve">
+    <value>滑杆</value>
+  </data>
+  <data name="Text_box__read_only_" xml:space="preserve">
+    <value>文字框（只读）</value>
+  </data>
+  <data name="Dynamic_combo_box" xml:space="preserve">
+    <value>动态组合框</value>
+  </data>
+  <data name="Text_box__hidden_" xml:space="preserve">
+    <value>文字框（隐藏）</value>
+  </data>
+  <data name="Input_data" xml:space="preserve">
+    <value>输入数据</value>
+  </data>
+  <data name="Output_data" xml:space="preserve">
+    <value>输出数据</value>
+  </data>
+  <data name="Control_slave" xml:space="preserve">
+    <value>控制从机</value>
+  </data>
+  <data name="Control_master" xml:space="preserve">
+    <value>控制主机</value>
+  </data>
+  <data name="Category_CiphersModernAsymmetric" xml:space="preserve">
+    <value>现代不对称密码</value>
+  </data>
+  <data name="Category_CiphersModernSymmetric" xml:space="preserve">
+    <value>现代对称密码</value>
+  </data>
+  <data name="Category_Classic_Ciphers" xml:space="preserve">
+    <value>经典密码</value>
+  </data>
+  <data name="Category_CryptanalysisGeneric" xml:space="preserve">
+    <value>密码分析-通用</value>
+  </data>
+  <data name="Category_CryptanalysisSpecific" xml:space="preserve">
+    <value>密码分析-特定</value>
+  </data>
+  <data name="Category_HashFunctions" xml:space="preserve">
+    <value>哈希函数</value>
+  </data>
+  <data name="Category_Protocols" xml:space="preserve">
+    <value>规约</value>
+  </data>
+  <data name="Category_Steganography" xml:space="preserve">
+    <value>隐写术</value>
+  </data>
+  <data name="Category_ToolsBoolean" xml:space="preserve">
+    <value>工具-布尔</value>
+  </data>
+  <data name="Category_ToolsDataflow" xml:space="preserve">
+    <value>工具-数据流</value>
+  </data>
+  <data name="Category_ToolsDataInputOutput" xml:space="preserve">
+    <value>工具-数据输入和输出</value>
+  </data>
+  <data name="Category_ToolsMisc" xml:space="preserve">
+    <value>工具-其他</value>
+  </data>
+  <data name="Category_ToolsP2P" xml:space="preserve">
+    <value>工具-Peer2Peer</value>
+  </data>
+  <data name="Category_Unknown" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="Key_text_box" xml:space="preserve">
+    <value>关键文本框</value>
+  </data>
+  <data name="TemplateTemplateDocumentationPage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templatetemplatedocumentationpage.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TemplateCommonDocumentationPage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templatecommondocumentationpage.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="HomomorphicChiffres" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\staticdocs\HomomorphicChiffres.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TemplateCommonIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templatecommonindex.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TemplateComponentsIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templatecomponentsindex.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TemplateTemplatesIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templatetemplatesindex.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TemplateEditorIndex" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\htmlgenerator\templateeditorindex.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LatexGenerator_ChapterSubTitle" xml:space="preserve">
+    <value>模板</value>
+  </data>
+  <data name="LatexGenerator_ChapterTitle" xml:space="preserve">
+    <value>模板概述</value>
+  </data>
+  <data name="ComponentTemplate_Introduction" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="ComponentTemplate_Presentation" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="ComponentTemplate_Usage" xml:space="preserve">
+    <value>用法</value>
+  </data>
+  <data name="LaTeXTmpl_Appendix" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\latexgenerator\latextmpl-appendix.tex;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LaTeXTmpl_Components" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\latexgenerator\latextmpl-components-en.tex;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LaTeXTmpl_Templates" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\latexgenerator\latextmpl-templates-en.tex;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="ComponentTemplate_Connections" xml:space="preserve">
+    <value>连接数</value>
+  </data>
+  <data name="ComponentTemplate_Settings" xml:space="preserve">
+    <value>设定值</value>
+  </data>
+  <data name="Category_FL_CiphersModernAsymmetric" xml:space="preserve">
+    <value>现代密码\不对称</value>
+  </data>
+  <data name="Category_FL_CiphersModernSymmetric" xml:space="preserve">
+    <value>现代密码\对称</value>
+  </data>
+  <data name="Category_FL_Classic_Ciphers" xml:space="preserve">
+    <value>经典密码</value>
+  </data>
+  <data name="Category_FL_CryptanalysisGeneric" xml:space="preserve">
+    <value>密码分析\通用</value>
+  </data>
+  <data name="Category_FL_CryptanalysisSpecific" xml:space="preserve">
+    <value>密码分析\特定</value>
+  </data>
+  <data name="Category_FL_HashFunctions" xml:space="preserve">
+    <value>哈希函数</value>
+  </data>
+  <data name="Category_FL_Protocols" xml:space="preserve">
+    <value>规约</value>
+  </data>
+  <data name="Category_FL_Steganography" xml:space="preserve">
+    <value>隐写术</value>
+  </data>
+  <data name="Category_FL_ToolsBoolean" xml:space="preserve">
+    <value>工具\布尔</value>
+  </data>
+  <data name="Category_FL_ToolsDataflow" xml:space="preserve">
+    <value>工具\数据流</value>
+  </data>
+  <data name="Category_FL_ToolsDataInputOutput" xml:space="preserve">
+    <value>工具\数据输入/输出</value>
+  </data>
+  <data name="Category_FL_ToolsMisc" xml:space="preserve">
+    <value>工具\杂项</value>
+  </data>
+  <data name="Category_FL_ToolsP2P" xml:space="preserve">
+    <value>工具\对等</value>
+  </data>
+  <data name="Category_FL_Unknown" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="FL_Letter_Component" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="FL_Letter_Template" xml:space="preserve">
+    <value>Ť</value>
+  </data>
+  <data name="FL_Letter_Tutorial" xml:space="preserve">
+    <value>ñ</value>
+  </data>
+  <data name="FL_Letter_Wizard" xml:space="preserve">
+    <value>在</value>
+  </data>
+  <data name="FL_Tutorial" xml:space="preserve">
+    <value>加密教程</value>
+  </data>
+  <data name="FunctionListTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\generators\functionlistgenerator\functionlisttemplate-en.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CrypToolBook" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\staticdocs\CrypToolbook.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="PseudoRandomFunction_based_KeyDerivationFunctions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\StaticDocs\PseudoRandomFunction_based_KeyDerivationFunctions.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LanguageSelector" xml:space="preserve">
+    <value>语言选择器</value>
+  </data>
+  <data name="Category_FL_DECRYPT" xml:space="preserve">
+    <value>DECRYPT项目</value>
+  </data>
+  <data name="Category_ToolsCodes" xml:space="preserve">
+    <value>工具\代码</value>
+  </data>
+  <data name="Category_ToolsRandomNumbers" xml:space="preserve">
+    <value>工具\随机数</value>
+  </data>
+</root>

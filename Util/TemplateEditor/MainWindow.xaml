@@ -1,0 +1,157 @@
+﻿<Window x:Class="TemplateEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Template Editor" Height="650" Width="1040" WindowState="Maximized" xmlns:my="clr-namespace:TemplateEditor" >
+    <Window.Resources>
+        <my:TrueToVisibleConverter x:Key="TrueToVisibleConverter" />
+        <my:FalseToVisibleConverter x:Key="FalseToVisibleConverter" />
+        <my:MetadataToBackgroundConverter x:Key="MetadataToBackgroundConverter" />
+        <my:NegationConverter x:Key="NegationConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <ToolBarTray>
+            <ToolBar IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}">
+                <Button ToolTip="Switch View" Click="SwitchButton_Click">
+                    <Image Source="/TemplateEditor;component/icons/switch.png" />
+                </Button>
+                
+                <Button ToolTip="Show all keywords" Click="AllKeywordsButton_Click">
+                    <Image Source="/TemplateEditor;component/icons/keywords.png" Width="22"/>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid Grid.Row="1">
+            <ListView Name="AllTemplatesList" ItemsSource="{Binding}" Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsOverview, Converter={StaticResource TrueToVisibleConverter}}" MouseDoubleClick="AllTemplatesList_MouseDoubleClick">                
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        <GridViewColumn Header="File" DisplayMemberBinding="{Binding Path=FilePath}" />
+                        <GridViewColumn Header="Metadata" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=HasMetadata, Mode=OneTime}" IsEnabled="False" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Path=Title}" />
+                        <GridViewColumn Header="Icon" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Path=Icon}" Width="32" Height="32"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="All Keywords" DisplayMemberBinding="{Binding Path=AllKeywords}" />
+                        <GridViewColumn Header="Relevant Plugin" DisplayMemberBinding="{Binding Path=AllRelevantPlugins}" />
+                        <GridViewColumn Header="Available Translations" DisplayMemberBinding="{Binding Path=AvailableTranslations}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Grid Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsOverview, Converter={StaticResource FalseToVisibleConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="500" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox ItemsSource="{Binding}" Name="AllTemplatesList2" Grid.Column="0" HorizontalAlignment="Stretch" SelectionChanged="AllTemplatesList2_SelectionChanged" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=FilePath}" Background="{Binding Converter={StaticResource MetadataToBackgroundConverter}}" HorizontalAlignment="Stretch" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+
+                <ScrollViewer Grid.Column="2">
+                    <Grid HorizontalAlignment="Stretch" Background="GhostWhite">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <GroupBox>
+                            <GroupBox.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Language: " VerticalAlignment="Center"/>
+                                    <ComboBox Width="200" Margin="5" Name="LanguageBox" SelectionChanged="LanguageBox_SelectionChanged" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Label Content="{Binding Path=Key}" />
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                    <Button Content="Add Language" Margin="5" Click="AddLanguageButton_Click" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}"/>
+                                    <Button Content="Delete Language" Margin="5" Click="DeleteLanguageButton_Click" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}"/>
+                                </StackPanel>
+                            </GroupBox.Header>
+                            <StackPanel Orientation="Vertical">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Title: "/>
+                                    <TextBox Grid.Column="1" Name="TitleTextBox" TextChanged="TextChanged" />
+                                </Grid>
+                                <Label Content="Description: " />
+                                <TextBox Name="DescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" Height="200" Margin="40,0,0,0" TextChanged="TextChanged" />
+                                <Label Content="Keywords: " />
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ListBox Name="KeywordsListBox" />
+                                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                                        <Button Content="Add Known Keywords" Margin="5" Click="AddKnownKeywordButton_Click" />
+                                        <Button Content="Add New Keyword" Margin="5" Click="AddNewKeywordButton_Click" />
+                                        <Button Content="Delete Selected Keywords" Margin="5" Click="DeleteKeywordButton_Click" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </GroupBox>
+                    
+                        <GroupBox Grid.Row="1" Header="Relevant Plugins">
+                            <Grid Margin="40,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ListBox Name="RelevantPluginsListBox"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="1">
+                                    <Button Content="Add" Margin="5" Click="PluginAddButton_Click" />
+                                    <Button Content="Delete" Margin="5" Click="PluginDeleteButton_Click" />                                    
+                                </StackPanel>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Grid.Row="2" Header="Icon File">
+                            <Grid Margin="40,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBox Name="IconTextBox" TextChanged="TextChanged" />
+                            </Grid>
+                        </GroupBox>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="3">
+                            <Button Content="Revert changes" Name="RevertButton" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty}" Margin="5" IsCancel="True" Padding="15,1" Click="RevertButton_Click" />
+                            <Button Content="Save changes for this template" Margin="5" IsDefault="True" Padding="15,1" Click="SaveButton_Click" />
+                        </StackPanel>
+                        
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</Window>

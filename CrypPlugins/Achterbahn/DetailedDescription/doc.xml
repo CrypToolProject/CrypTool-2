@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Achterbahn is a synchronous stream cipher algorithm that was submitted to the eSTREAM Project of the ECRYPT network, where it was selected as a phase 2 candidate.
+    It was developed by Berndt Gammel, Rainer Göttfert and Oliver Kniffler.
+    The two cipher variants Achterbahn-80 and Achterbahn-128 support key lengths of up to 80 bits and up to 128 bits, respectively.
+    <newline />
+    The Achterbahn stream cipher is optimized for hardware applications with restricted resources.
+  </introduction>
+  <introduction lang="zh-CN">Achterbahn是一种同步流密码算法，已提交给ECRYPT网络的eSTREAM项目，在该项目中被选为第2阶段候选者。它是由Berndt Gammel，RainerGöttfert和Oliver Kniffler开发的。两种密码变体Achterbahn-80和Achterbahn-128分别支持最多80位和128位的密钥长度。 Achterbahn流密码针对资源受限的硬件应用进行了优化。</introduction>
+  <introduction lang="ru">Achterbahn - это синхронный алгоритм шифрования потока, который был отправлен в проект eSTREAM сети ECRYPT, где он был выбран в качестве кандидата фазы 2. Он был разработан Берндом Гаммелем, Райнером Геттфертом и Оливером Книффлером. Два варианта шифрования Achterbahn-80 и Achterbahn-128 поддерживают длину ключа до 80 бит и до 128 бит соответственно. Шифр потока Achterbahn оптимизирован для аппаратных приложений с ограниченными ресурсами.</introduction>
+  <introduction lang="de-DE">
+    Achterbahn ist eine synchrone Stromchiffre und war ein Phase-2-Kandidat beim eSTREAM-Projekt des ECRYPT-Netzwerkes.
+    Die Chiffre wurde von Berndt Gammel, Rainer Göttfert und Oliver Kniffler entwickelt.
+    Die beiden Chiffre-Varianten Achterbahn-80 und Achterbahn-128 unterstützen Schlüssellängen von jeweils bis zu 80 Bit und 128 Bit.
+    <newline />
+    Achterbahn ist für Hardware-Anwendungen mit beschränkten Ressourcen optimiert.
+  </introduction>
+  <usage lang="en">
+    Select the cipher variant you want to use in the settings of the component. The component implements the Achterbahn-80 and the Achterbahn-128 ciphers.
+    <newline /><newline />
+    The key and the initialization vector must both be provided as byte arrays at the appropriate inputs.
+    Their sizes depend on the selected cipher variant.
+    If you select Achterbahn-80, the key size must be between 40 and 80 bits (5 and 10 bytes), and the initialization vector can be at most 80 bits (10 bytes) long.
+    For Achterbahn-128, the key size must be between 40 and 128 bits (5 and 16 bytes), and the initialization vector can be at most 128 bits (16 bytes) long.
+    <newline /><newline />
+    The data, that is to be encrypted or decrypted, must be entered as a byte array of arbitrary size at the input labeled "Input".
+  </usage>
+  <usage lang="zh-CN">选择要在组件设置中使用的密码变体。该组件实现了Achterbahn-80和Achterbahn-128密码。键和初始化向量都必须在适当的输入处都作为字节数组提供。它们的大小取决于所选的密码变体。如果选择Achterbahn-80，则密钥大小必须在40到80位（5到10个字节）之间，并且初始化向量的长度最多为80位（10字节）。对于Achterbahn-128，密钥大小必须在40到128位（5到16个字节）之间，并且初始化向量的长度最多为128位（16字节）。必须将要加密或解密的数据作为任意大小的字节数组输入到标记为“输入”的输入处。</usage>
+  <usage lang="ru">Выберите вариант шифрования, который вы хотите использовать в настройках компонента. Компонент реализует шифры Achterbahn-80 и Achterbahn-128. Ключ и вектор инициализации должны быть представлены как байтовые массивы на соответствующих входах. Их размеры зависят от выбранного варианта шифрования. Если вы выбрали Achterbahn-80, размер ключа должен быть от 40 до 80 бит (5 и 10 байт), а вектор инициализации может составлять не более 80 бит (10 байт). Для Achterbahn-128 размер ключа должен быть между 40 и 128 битами (5 и 16 байт), а вектор инициализации может составлять не более 128 бит (16 байт). Данные, которые должны быть зашифрованы или дешифрованы, должны вводиться как байтовый массив произвольного размера на входе с надписью «Вход».</usage>
+  <usage lang="de-DE">
+    Wählen Sie die Chiffre-Variante, die Sie verwenden wollen, in den Einstellungen der Komponente aus.
+    Zur Auswahl stehen Achterbahn-80 und Achterbahn-128.
+    <newline /><newline />
+    Der Schlüssel und der Initialisierungsvektor müssen als Byte-Arrays an den entsprechend benannten Eingängen der Komponente eingegeben werden.
+    Die jeweilige Größe des angeforderten Schlüssels und des Initialisierungsvektors hängt von der gewählten Chiffre-Variante ab.
+    Wenn Sie Achterbahn-80 gewählt haben, muss der Schlüssel zwischen 40 und 80 Bits (5 und 10 Bytes) lang sein, und der Initialisierungsvektor darf höchstens 80 Bits lang sein (10 Bytes).
+    Für Achterbahn-128 muss der Schlüssel zwischen 40 und 128 Bits (5 und 16 Bytes) lang sein, und der Initialisierungsvektor darf höchstens 128 Bits lang sein (16 Bytes).
+    <newline /><newline />
+    Die zu verschlüsselnden oder entschlüsselnden Daten müssen als Byte-Array beliebiger Größe am Eingang "Eingabe" anliegen.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://www.matpack.de/achterbahn/Gammel_Goettfert_Kniffler_Achterbahn-128-80.pdf" lang="en" />
+      <caption lang="en">Specification of ACHTERBAHN-128/80 (PDF)</caption>
+      <link url="http://www.matpack.de/achterbahn/Gammel_Goettfert_Kniffler_Achterbahn-128-80.pdf" lang="de-DE" />
+      <caption lang="de-DE">Spezifikation von ACHTERBAHN-128/80 (PDF,englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://www.matpack.de/achterbahn/" lang="en" />
+      <caption lang="en">The Achterbahn Stream Cipher</caption>
+      <link url="http://www.matpack.de/achterbahn/" lang="de-DE" />
+      <caption lang="de-DE">The Achterbahn Stream Cipher (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://www.ecrypt.eu.org/stream/p2ciphers/achterbahn/" lang="en" />
+      <caption lang="en">Achterbahn at eCrypt</caption>
+      <link url="http://www.ecrypt.eu.org/stream/p2ciphers/achterbahn/" lang="de-DE" />
+      <caption lang="de-DE">Achterbahn bei eCrypt (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

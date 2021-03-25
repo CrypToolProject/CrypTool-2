@@ -1,0 +1,2 @@
+Die serialisierten Konfigurationen sind aus Speichergründen nicht enthalten. 
+Diese können lokal selbst erstellt werden, indem Konfigurationen mittels GenerateConfigurationAttack() erstellt und anschließend serialisiert werden.

@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>Шифрованный текст, который будет использоваться</value>
+  </data>
+  <data name="CurrentAnalysedKeylengthLabel" xml:space="preserve">
+    <value>Текущее проанализированное смещение:</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>Пройденное время:</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>Расчетное время окончания:</value>
+  </data>
+  <data name="LanguageList1" xml:space="preserve">
+    <value>английский</value>
+  </data>
+  <data name="FastConvergeCaption" xml:space="preserve">
+    <value>Быстрая сходимость</value>
+  </data>
+  <data name="FastConvergeTooltip" xml:space="preserve">
+    <value>Выберите, следует ли использовать «Быстрый сближение». Объяснение можно найти в интерактивной справке.</value>
+  </data>
+  <data name="LanguageList2" xml:space="preserve">
+    <value>Немецкий</value>
+  </data>
+  <data name="MethodList2" xml:space="preserve">
+    <value>Частично известный открытый текст</value>
+  </data>
+  <data name="HillClimbRestartsCaption" xml:space="preserve">
+    <value>Количество перезапуска</value>
+  </data>
+  <data name="HillClimbRestartsTooltip" xml:space="preserve">
+    <value>Задайте количество перезапуска для каждого смещения.</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>ключ</value>
+  </data>
+  <data name="KeyLengthCaption" xml:space="preserve">
+    <value>Keyledagth</value>
+  </data>
+  <data name="KeyLengthTooltip" xml:space="preserve">
+    <value>Задайте длину ключевого слова, которая будет использоваться для анализа.</value>
+  </data>
+  <data name="KeyLengthHeader" xml:space="preserve">
+    <value>офсет</value>
+  </data>
+  <data name="CalculatedKeyCaption" xml:space="preserve">
+    <value>Вычисленный ключ</value>
+  </data>
+  <data name="CalculatedKeyTooltip" xml:space="preserve">
+    <value>Найден лучший ключ</value>
+  </data>
+  <data name="KeysPerSecondAverageLabel" xml:space="preserve">
+    <value>Средние ключи / сек:</value>
+  </data>
+  <data name="KeysPerSecondCurrentLabel" xml:space="preserve">
+    <value>Текущие клавиши / сек:</value>
+  </data>
+  <data name="MethodList1" xml:space="preserve">
+    <value>Известный открытый текст</value>
+  </data>
+  <data name="LanguageCaption" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>Выберите язык, на котором, скорее всего, написан текст.</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>факты</value>
+  </data>
+  <data name="MaxOffsetCaption" xml:space="preserve">
+    <value>Максимальное смещение</value>
+  </data>
+  <data name="MaxOffsetTooltip" xml:space="preserve">
+    <value>Установите максимальное смещение, которое необходимо проанализировать.</value>
+  </data>
+  <data name="MethodCaption" xml:space="preserve">
+    <value>метод</value>
+  </data>
+  <data name="MethodTooltip" xml:space="preserve">
+    <value>Выберите метод, который следует использовать для атаки шифрования.</value>
+  </data>
+  <data name="MinOffsetCaption" xml:space="preserve">
+    <value>Минимальное смещение</value>
+  </data>
+  <data name="MinOffsetTooltip" xml:space="preserve">
+    <value>Установите минимальное смещение, подлежащее анализу</value>
+  </data>
+  <data name="MethodList3" xml:space="preserve">
+    <value>Скалолазание</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>Простой текст</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>Известный открытый текст, который будет использоваться</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Анализатор M-138</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Выбор атак на M-138, подробно объясняющий используемый холминг</value>
+  </data>
+  <data name="ResultTextCaption" xml:space="preserve">
+    <value>Результат открытого текста</value>
+  </data>
+  <data name="ResultTextTooltip" xml:space="preserve">
+    <value>Результат открытого текста с использованием наилучшего найденного ключа</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Время начала:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Простой текст</value>
+  </data>
+  <data name="TopTenL" xml:space="preserve">
+    <value>Лучшие рейтинговые ключи</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>зашифрованный</value>
+  </data>
+  <data name="StripsCaption" xml:space="preserve">
+    <value>полоски</value>
+  </data>
+  <data name="StripsTooltip" xml:space="preserve">
+    <value>Введите полосы как строку, где каждая строка определяет одну полосу.</value>
+  </data>
+  <data name="LanguageList3" xml:space="preserve">
+    <value>испанский</value>
+  </data>
+  <data name="RemainingLabel" xml:space="preserve">
+    <value>Осталось:</value>
+  </data>
+  <data name="OffsetHeader" xml:space="preserve">
+    <value>офсет</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Скопировать все строки</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>Копировать ключ</value>
+  </data>
+  <data name="Copy_keyphrase" xml:space="preserve">
+    <value>Скопировать ключевую фразу</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>Копировать выбранную строку</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>Копировать текст</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>Копировать значение</value>
+  </data>
+  <data name="MethodList4" xml:space="preserve">
+    <value>Имитация отжига</value>
+  </data>
+  <data name="HighscoreBeepCaption" xml:space="preserve">
+    <value>Рекордный сигнал</value>
+  </data>
+  <data name="HighscoreBeepTooltip" xml:space="preserve">
+    <value>Сделайте звук, если будет найден новый рекорд. Рекорды в течение первых 10 секунд игнорируются.</value>
+  </data>
+  <data name="KillCounterCaption" xml:space="preserve">
+    <value>Убить счетчика</value>
+  </data>
+  <data name="KillCounterTooltip" xml:space="preserve">
+    <value>После того, сколько итераций, не найдя лучшего значения, следует отказаться от поиска?</value>
+  </data>
+</root>

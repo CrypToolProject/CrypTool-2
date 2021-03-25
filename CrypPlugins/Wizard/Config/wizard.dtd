@@ -1,0 +1,166 @@
+<!ELEMENT category (name*, description*, headline*, task*, (category|input|sampleViewer|loadSample|file)*) >
+<!ATTLIST category 
+   image	CDATA #IMPLIED
+>
+
+<!ELEMENT input (name*, description*, headline*, task*, (inputBox|comboBox|checkBox|keyTextBox|pluginSetter|label)*, (category|input|sampleViewer|loadSample|file)?) >
+<!ATTLIST input 
+   image	CDATA #IMPLIED
+>
+
+<!ELEMENT sampleViewer (name*, description*, headline*, task*, (inputBox|comboBox|checkBox|keyTextBox|pluginSetter|label|outputBox|progressBar|presentation)*) >
+<!ATTLIST sampleViewer 
+   image	CDATA 	#IMPLIED
+   file		CDATA       #REQUIRED
+   showCreateButton		CDATA       #IMPLIED
+>
+
+<!ELEMENT loadSample (name*, description*) >
+<!ATTLIST loadSample 
+   file		CDATA       #REQUIRED
+   title	CDATA       #REQUIRED
+>
+
+<!ELEMENT file EMPTY >
+<!ATTLIST file 
+   resource	CDATA       #REQUIRED
+>
+
+<!ELEMENT name (#PCDATA|condition)* >
+<!ATTLIST name 
+   lang	CDATA       "en"
+>
+
+<!ELEMENT description (#PCDATA|condition|b|i|u|newline|external)* >
+<!ATTLIST description 
+   lang	CDATA       "en"
+>
+
+<!ELEMENT headline (#PCDATA|condition)* >
+<!ATTLIST headline 
+   lang	CDATA       "en"
+>
+
+<!ELEMENT task (#PCDATA|condition)* >
+<!ATTLIST task 
+   lang	CDATA       "en"
+>
+
+<!ELEMENT b (#PCDATA|b|i|u|newline)* >
+<!ELEMENT i (#PCDATA|b|i|u|newline)* >
+<!ELEMENT u (#PCDATA|b|i|u|newline)* >
+<!ELEMENT newline EMPTY >
+<!ELEMENT external (#PCDATA|b|i|u|newline)* >
+<!ATTLIST external 
+   ref	CDATA       #REQUIRED
+>
+
+<!ELEMENT condition (#PCDATA|b|i|u|newline|external)* >
+<!ATTLIST condition
+   plugin		CDATA       #REQUIRED
+   property		CDATA       #REQUIRED
+   value	CDATA       #REQUIRED
+>
+
+<!ELEMENT inputBox (storage?, description+, defaultvalue*) >
+<!ATTLIST inputBox 
+   plugin		CDATA       #REQUIRED
+   property		CDATA       #REQUIRED
+   alignment	CDATA       #IMPLIED
+   width		CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+   visibleLines	CDATA       #IMPLIED
+   regex		CDATA       #IMPLIED
+>
+
+<!ELEMENT outputBox (storage?, description+) >
+<!ATTLIST outputBox 
+   plugin		CDATA       #REQUIRED
+   property		CDATA       #REQUIRED
+   alignment	CDATA       #IMPLIED
+   width		CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+   visibleLines	CDATA       #IMPLIED
+>
+
+<!ELEMENT presentation (description+) >
+<!ATTLIST presentation 
+   plugin		CDATA       #REQUIRED
+   alignment	CDATA       #IMPLIED
+   width		CDATA       #IMPLIED
+   height		CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+>
+
+<!ELEMENT comboBox (description+, item+) >
+<!ATTLIST comboBox 
+   plugin		CDATA       #IMPLIED
+   property		CDATA       #IMPLIED
+   alignment	CDATA       #IMPLIED
+   width		CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+   defaultValue	CDATA       #IMPLIED
+>
+
+<!ELEMENT checkBox (description+, content+) >
+<!ATTLIST checkBox 
+   plugin		CDATA       #REQUIRED
+   property		CDATA       #REQUIRED
+   alignment	CDATA       #IMPLIED
+   width		CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+   defaultValue	CDATA       #IMPLIED
+>
+
+<!ELEMENT keyTextBox (storage?, description+) >
+<!ATTLIST keyTextBox 
+   plugin		CDATA       #REQUIRED
+   property		CDATA       #REQUIRED
+   format		CDATA       #REQUIRED
+   defaultkey		CDATA       #IMPLIED
+   alignment	CDATA       #IMPLIED
+   width		CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+>
+
+<!ELEMENT progressBar (description+) >
+<!ATTLIST progressBar
+   plugin		CDATA       #REQUIRED   
+   alignment	CDATA       #IMPLIED
+   width		CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+>
+
+<!ELEMENT pluginSetter (#PCDATA) >
+<!ATTLIST pluginSetter
+   plugin		CDATA       #REQUIRED
+   property		CDATA       #REQUIRED
+>
+
+<!ELEMENT label (description+) >
+<!ATTLIST label
+   alignment	CDATA       #IMPLIED
+   group		CDATA       #IMPLIED
+>
+
+<!ELEMENT item (pluginSetter*) >
+<!ATTLIST item 
+   content	CDATA       #REQUIRED
+   lang	CDATA       "en"
+>
+
+<!ELEMENT content (#PCDATA|condition)* >
+<!ATTLIST content 
+   lang	CDATA       "en"
+>
+<!ELEMENT defaultvalue (#PCDATA|condition)* >
+<!ATTLIST defaultvalue 
+   lang	CDATA       "en"
+>
+
+<!ELEMENT storage (#PCDATA) >
+<!ATTLIST storage
+   key	CDATA       #REQUIRED
+   showStorageButton (true|false)       #IMPLIED
+   showLoadAddButtons (true|false)       #IMPLIED
+>

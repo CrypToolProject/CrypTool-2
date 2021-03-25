@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlgorithmSettingsGroup" xml:space="preserve">
+    <value>密码分析算法设置</value>
+  </data>
+  <data name="AnalaysisModeTooltip" xml:space="preserve">
+    <value>自动或半自动模式</value>
+  </data>
+  <data name="AnalysisModeCaption" xml:space="preserve">
+    <value>分析模式</value>
+  </data>
+  <data name="Analyzer" xml:space="preserve">
+    <value>分析仪</value>
+  </data>
+  <data name="BestList" xml:space="preserve">
+    <value>最佳名单</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>密文：</value>
+  </data>
+  <data name="CiphertextAlphabet" xml:space="preserve">
+    <value>密文字母：</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>密文</value>
+  </data>
+  <data name="CiphertextFormatCaption" xml:space="preserve">
+    <value>密文格式</value>
+  </data>
+  <data name="CiphertextFormatTooltip" xml:space="preserve">
+    <value>这定义了密文的格式（单个字母，数字组或逗号分隔）</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>要分析的密文</value>
+  </data>
+  <data name="SymbolSeparated" xml:space="preserve">
+    <value>符号分隔</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>复制所有行</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>复制键</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>复制所选行</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>复制文字</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>复制值</value>
+  </data>
+  <data name="CostFactorMultiplicatorCaption" xml:space="preserve">
+    <value>成本因素乘数</value>
+  </data>
+  <data name="CostValue_0" xml:space="preserve">
+    <value>成本值：{0}</value>
+  </data>
+  <data name="CyclesCaption" xml:space="preserve">
+    <value>周期数</value>
+  </data>
+  <data name="CyclesTooltip" xml:space="preserve">
+    <value>要执行的最大分析循环数</value>
+  </data>
+  <data name="DictionaryCaption" xml:space="preserve">
+    <value>字典</value>
+  </data>
+  <data name="DictionaryTooltip" xml:space="preserve">
+    <value>附带的字典在密码分析期间用于查找和锁定已显示的明文单词。</value>
+  </data>
+  <data name="DifferentHomophones" xml:space="preserve">
+    <value>密文长度为{0}，并且密文包含{1}个不同的同音词。</value>
+  </data>
+  <data name="FindLockWords" xml:space="preserve">
+    <value>查找/锁定单词</value>
+  </data>
+  <data name="FixedTemperatureCaption" xml:space="preserve">
+    <value>固定温度</value>
+  </data>
+  <data name="FullAutomatic" xml:space="preserve">
+    <value>自动</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="KeyLetterDistribution" xml:space="preserve">
+    <value>关键字母分布</value>
+  </data>
+  <data name="LanguageCaption" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="LanguageSettingsGroup" xml:space="preserve">
+    <value>语言设定</value>
+  </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>此语言将由成本函数使用</value>
+  </data>
+  <data name="MaxWordLengthCaption" xml:space="preserve">
+    <value>最大字长</value>
+  </data>
+  <data name="MaxWordLengthTooltip" xml:space="preserve">
+    <value>自动锁定的每个单词的最大长度</value>
+  </data>
+  <data name="MinWordLengthCaption" xml:space="preserve">
+    <value>最小字长</value>
+  </data>
+  <data name="MinWordLengthTooltip" xml:space="preserve">
+    <value>自动锁定的每个单词的最小长度</value>
+  </data>
+  <data name="NumberGroups" xml:space="preserve">
+    <value>数字组</value>
+  </data>
+  <data name="Plaintext" xml:space="preserve">
+    <value>显示的纯文本：</value>
+  </data>
+  <data name="PlaintextMapping" xml:space="preserve">
+    <value>纯文本映射：</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>纯文本</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>显示更高分数的新纯文本候选者</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>谐音替代分析仪</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>分析器对同声替换密码进行密码分析</value>
+  </data>
+  <data name="ResetLockedLetters" xml:space="preserve">
+    <value>重置锁定字母</value>
+  </data>
+  <data name="RestartsCaption" xml:space="preserve">
+    <value>重新启动</value>
+  </data>
+  <data name="RestartsTooltip" xml:space="preserve">
+    <value>分析算法应重新启动多少次？</value>
+  </data>
+  <data name="SemiAutomatic" xml:space="preserve">
+    <value>半自动</value>
+  </data>
+  <data name="SingleLetters" xml:space="preserve">
+    <value>单字母</value>
+  </data>
+  <data name="TextFormatGroup" xml:space="preserve">
+    <value>文字格式</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>显示明文</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>最佳名单</value>
+  </data>
+  <data name="UseSpacesCaption" xml:space="preserve">
+    <value>使用空间</value>
+  </data>
+  <data name="UseSpacesTooltip" xml:space="preserve">
+    <value>如果激活，则分析器将采用明文形式的空格</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>成本价值</value>
+  </data>
+  <data name="WordCountToFindCaption" xml:space="preserve">
+    <value>字数查找</value>
+  </data>
+  <data name="WordCountToFindTooltip" xml:space="preserve">
+    <value>定义要在显示的纯文本中找到的最小单词数，自动储物柜将锁定相应的符号</value>
+  </data>
+  <data name="WordLockerGroup" xml:space="preserve">
+    <value>储物柜</value>
+  </data>
+  <data name="LetterLabel" xml:space="preserve">
+    <value>信件</value>
+  </data>
+  <data name="MaxLabel" xml:space="preserve">
+    <value>最大人数</value>
+  </data>
+  <data name="MinLabel" xml:space="preserve">
+    <value>最小人数</value>
+  </data>
+  <data name="FoundWordsCaption" xml:space="preserve">
+    <value>找到的话</value>
+  </data>
+  <data name="FoundWordsTooltip" xml:space="preserve">
+    <value>在此显示根据连接的词典找到的单词</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>显露钥匙</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>此处显示得分更高的新关键候选人</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>段</value>
+  </data>
+  <data name="FullStop" xml:space="preserve">
+    <value>句号</value>
+  </data>
+  <data name="Semicolon" xml:space="preserve">
+    <value>分号</value>
+  </data>
+  <data name="SeparatorCaption" xml:space="preserve">
+    <value>分隔器</value>
+  </data>
+  <data name="SeparatorTooltip" xml:space="preserve">
+    <value>分隔符，用于将密文分为单个字母或字母组。</value>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value>空格符号</value>
+  </data>
+  <data name="Analyze" xml:space="preserve">
+    <value>分析</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="UseNullsCaption" xml:space="preserve">
+    <value>使用空值</value>
+  </data>
+  <data name="UseNullsTooltip" xml:space="preserve">
+    <value>如果激活，分析器将假定密文为空</value>
+  </data>
+  <data name="KeepLinebreaksCaption" xml:space="preserve">
+    <value>保持换行</value>
+  </data>
+  <data name="KeepLinebreaksTooltip" xml:space="preserve">
+    <value>如果激活，分析器将保留给定文本的原始换行符</value>
+  </data>
+</root>

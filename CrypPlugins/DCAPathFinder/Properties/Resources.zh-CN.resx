@@ -1,0 +1,1491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbortingPolicy1" xml:space="preserve">
+    <value>全局最大值</value>
+  </data>
+  <data name="AbortingPolicy2" xml:space="preserve">
+    <value>全球门槛</value>
+  </data>
+  <data name="AbortingThresholdBestCharacteristicSearch" xml:space="preserve">
+    <value>中止的阈值（最佳特性）</value>
+  </data>
+  <data name="AbortingThresholdBestCharacteristicSearchToolTip" xml:space="preserve">
+    <value>确定中止搜索最佳特性的概率。</value>
+  </data>
+  <data name="AbortingThresholdDifferentialSearch" xml:space="preserve">
+    <value>中止的阈值（微分）</value>
+  </data>
+  <data name="AbortingThresholdDifferentialSearchToolTip" xml:space="preserve">
+    <value>确定中止差异搜索特征的概率。</value>
+  </data>
+  <data name="AutomaticMode" xml:space="preserve">
+    <value>自动模式</value>
+  </data>
+  <data name="AutomaticModeHeader" xml:space="preserve">
+    <value>DCA PfadFinder在自动模式下工作。</value>
+  </data>
+  <data name="AutomaticModeToolTip" xml:space="preserve">
+    <value>在自动模式下无需用户输入</value>
+  </data>
+  <data name="BtnPrevChapter" xml:space="preserve">
+    <value>回章</value>
+  </data>
+  <data name="BtnSkipChapter" xml:space="preserve">
+    <value>跳过章节</value>
+  </data>
+  <data name="CharacteristicCount" xml:space="preserve">
+    <value>＃特点：</value>
+  </data>
+  <data name="ChoiceAbortingPolicyPolicy" xml:space="preserve">
+    <value>中止政策</value>
+  </data>
+  <data name="ChoiceOfAbortingPolicyGroup" xml:space="preserve">
+    <value>搜索选项</value>
+  </data>
+  <data name="ChoiceOfAbortingPolicyToolTop" xml:space="preserve">
+    <value>通过选择中止策略，可以控制搜索最佳差异的行为。</value>
+  </data>
+  <data name="ChoiceOfAlgorithm" xml:space="preserve">
+    <value>密码选择</value>
+  </data>
+  <data name="ChoiceOfAlgorithmGroup" xml:space="preserve">
+    <value>教程选项</value>
+  </data>
+  <data name="ChoiceOfAlgorithmToolTop" xml:space="preserve">
+    <value>此时，您可以选择列表中包含的一种密码。这可以通过差分密码分析来检查。</value>
+  </data>
+  <data name="ChoiceOfSearchPolicy" xml:space="preserve">
+    <value>搜索政策</value>
+  </data>
+  <data name="ChoiceOfSearchPolicyGroup" xml:space="preserve">
+    <value>搜索选项</value>
+  </data>
+  <data name="ChoiceOfSearchPolicyToolTop" xml:space="preserve">
+    <value>通过选择搜索策略，可以控制搜索最佳差异的行为。</value>
+  </data>
+  <data name="ChosenMessagePairsCount" xml:space="preserve">
+    <value>消息对数</value>
+  </data>
+  <data name="ChosenMessagePairsCountToolTip" xml:space="preserve">
+    <value>确定要生成的消息对的数量。</value>
+  </data>
+  <data name="Cipher1" xml:space="preserve">
+    <value>教程1：密码1（16位块大小，2个圆形密钥，32位密钥长度）</value>
+  </data>
+  <data name="Cipher2" xml:space="preserve">
+    <value>教程2：密码2（16位块大小，4个圆形密钥，64位密钥长度）</value>
+  </data>
+  <data name="Cipher3" xml:space="preserve">
+    <value>教程3：密码3（16位块大小，6个圆形密钥，96位密钥长度）</value>
+  </data>
+  <data name="Cipher4" xml:space="preserve">
+    <value>教程4：密码4（4位块大小，4个圆形密钥，16位密钥长度）</value>
+  </data>
+  <data name="DCAOptions" xml:space="preserve">
+    <value>差分密码分析选项</value>
+  </data>
+  <data name="DescriptionContent2" xml:space="preserve">
+    <value>教程1使用DCA ToyCipher组件的密码1。该密码适用于16位块，并使用两个16位轮回密钥。执行一轮加密。在本教程中，将还原两个未知的回合密钥。</value>
+  </data>
+  <data name="DescriptionContent3" xml:space="preserve">
+    <value>教程2使用DCA ToyCipher组件的密码2。该密码适用于16位块，并使用四个16位轮回密钥。执行三轮加密。在本教程中，将还原所有未知的回合密钥。</value>
+  </data>
+  <data name="DescriptionContent4" xml:space="preserve">
+    <value>教程3使用DKA ToyCipher组件的密码3。该密码适用于16位块，并使用六个16位轮回密钥。执行五轮加密。在本教程中，将还原所有未知的回合密钥。</value>
+  </data>
+  <data name="DescriptionHeader" xml:space="preserve">
+    <value>教程说明</value>
+  </data>
+  <data name="DescriptionSubHeader1" xml:space="preserve">
+    <value>教程1</value>
+  </data>
+  <data name="DescriptionSubHeader2" xml:space="preserve">
+    <value>教程2</value>
+  </data>
+  <data name="DescriptionSubHeader3" xml:space="preserve">
+    <value>教程3</value>
+  </data>
+  <data name="DisplayOptions" xml:space="preserve">
+    <value>显示选项</value>
+  </data>
+  <data name="EndTime" xml:space="preserve">
+    <value>结束：</value>
+  </data>
+  <data name="ExpectedDifferential" xml:space="preserve">
+    <value>预期差异</value>
+  </data>
+  <data name="ExpectedDifferentialToolTip" xml:space="preserve">
+    <value>预期差异的输出</value>
+  </data>
+  <data name="InputDiffHeader1" xml:space="preserve">
+    <value>输入差异</value>
+  </data>
+  <data name="InputDiffR1Header1Run1" xml:space="preserve">
+    <value>ü</value>
+  </data>
+  <data name="InputDiffR1Header1Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="InputDiffR2Header1Run1" xml:space="preserve">
+    <value>ü</value>
+  </data>
+  <data name="InputDiffR2Header1Run2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="InputDiffR3Header1Run1" xml:space="preserve">
+    <value>ü</value>
+  </data>
+  <data name="InputDiffR3Header1Run2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="InputDiffR4Header1Run1" xml:space="preserve">
+    <value>ü</value>
+  </data>
+  <data name="InputDiffR4Header1Run2" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="InputDiffR5Header1Run1" xml:space="preserve">
+    <value>ü</value>
+  </data>
+  <data name="InputDiffR5Header1Run2" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="MessageCount" xml:space="preserve">
+    <value>消息对数</value>
+  </data>
+  <data name="MessageCountToolTip" xml:space="preserve">
+    <value>消息对计数的输出</value>
+  </data>
+  <data name="NoCharacteristicFoundError" xml:space="preserve">
+    <value>找不到特征。请检查搜索和中止策略的设置</value>
+  </data>
+  <data name="OutputDiffR1Header1Run1" xml:space="preserve">
+    <value>v</value>
+  </data>
+  <data name="OutputDiffR1Header1Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="OutputDiffR2Header1Run1" xml:space="preserve">
+    <value>v</value>
+  </data>
+  <data name="OutputDiffR2Header1Run2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="OutputDiffR3Header1Run1" xml:space="preserve">
+    <value>v</value>
+  </data>
+  <data name="OutputDiffR3Header1Run2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="OutputDiffR4Header1Run1" xml:space="preserve">
+    <value>v</value>
+  </data>
+  <data name="OutputDiffR4Header1Run2" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="OverviewContent1" xml:space="preserve">
+    <value>欢迎来到差分密码分析（DCA）教程。这种用于分析基于回合的对称分组密码的方法的目的是恢复单个位直到完整的回合密钥。该程序由以色列的两位研究人员伊莱·比厄姆（Eli Biham）和阿迪·沙米尔（Adi Shamir）于1991年发表。</value>
+  </data>
+  <data name="OverviewContent2" xml:space="preserve">
+    <value>本教程分三部分介绍DCA。第1部分通过带有加密回合的密码来传达DCA的基本思想。第2部分使用带有三轮加密的密码加深了这个想法。第3部分通过将密码的复杂性增加到五轮加密来加深知识。</value>
+  </data>
+  <data name="OverviewContent3" xml:space="preserve">
+    <value>在此组件的配置中，可以选择教程的编号和教程模式。</value>
+  </data>
+  <data name="OverviewContent4" xml:space="preserve">
+    <value>尝试并打破密码，玩得开心！</value>
+  </data>
+  <data name="OverviewContent5" xml:space="preserve">
+    <value>（可以通过启动工作空间来跳过此介绍）</value>
+  </data>
+  <data name="OverviewHeader" xml:space="preserve">
+    <value>差分密码分析教程</value>
+  </data>
+  <data name="OverviewPreambleHeader" xml:space="preserve">
+    <value>前言</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>微分</value>
+  </data>
+  <data name="PathToolTip" xml:space="preserve">
+    <value>描述通过密码的差异流</value>
+  </data>
+  <data name="PerformanceSettingsGroup" xml:space="preserve">
+    <value>速度选项</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>DCA路径查找器</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>该组件根据用户指定的参数搜索对称块密码中的差分。</value>
+  </data>
+  <data name="PresentationMode" xml:space="preserve">
+    <value>教程模式</value>
+  </data>
+  <data name="PresentationModeToolTip" xml:space="preserve">
+    <value>如果激活了教程模式，则会为每个教程显示一个包含差分密码分析信息的演示文稿。</value>
+  </data>
+  <data name="ProbabilityHeader" xml:space="preserve">
+    <value>可能性</value>
+  </data>
+  <data name="R1" xml:space="preserve">
+    <value>第1轮</value>
+  </data>
+  <data name="R2" xml:space="preserve">
+    <value>第二回合</value>
+  </data>
+  <data name="R3" xml:space="preserve">
+    <value>第三回合</value>
+  </data>
+  <data name="R4" xml:space="preserve">
+    <value>第四回合</value>
+  </data>
+  <data name="R5" xml:space="preserve">
+    <value>第五回合</value>
+  </data>
+  <data name="ReadyInput" xml:space="preserve">
+    <value>触发</value>
+  </data>
+  <data name="ReadyInputToolTip" xml:space="preserve">
+    <value>触发输入信号向DCA PathFinder组件发出DCA KeyRecovery组件已完成其计算的信号。</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>被攻击的加密回合：</value>
+  </data>
+  <data name="SBoxes" xml:space="preserve">
+    <value>被攻击的S盒：</value>
+  </data>
+  <data name="SBoxWarning" xml:space="preserve">
+    <value>必须标记至少一个S-box才能继续进行攻击。</value>
+  </data>
+  <data name="SearchConfiguration" xml:space="preserve">
+    <value>组态</value>
+  </data>
+  <data name="SearchPolicy" xml:space="preserve">
+    <value>搜索政策：</value>
+  </data>
+  <data name="SearchPolicy1" xml:space="preserve">
+    <value>最佳特征（启发式），然后进行差异搜索</value>
+  </data>
+  <data name="SearchPolicy2" xml:space="preserve">
+    <value>最佳特征（深度搜索），然后进行差异搜索</value>
+  </data>
+  <data name="SearchPolicy3" xml:space="preserve">
+    <value>所有特征按深度搜索</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>结果</value>
+  </data>
+  <data name="StartMaskContent1" xml:space="preserve">
+    <value>当您启动工作区时，教程开始。</value>
+  </data>
+  <data name="StartMaskContent2Run1" xml:space="preserve">
+    <value>在此模板中，</value>
+  </data>
+  <data name="StartMaskContent2Run2" xml:space="preserve">
+    <value>教程{0}</value>
+  </data>
+  <data name="StartMaskContent2Run3" xml:space="preserve">
+    <value>被选中。</value>
+  </data>
+  <data name="StartMaskHeader" xml:space="preserve">
+    <value>准备执行</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>开始：</value>
+  </data>
+  <data name="ThreadCount" xml:space="preserve">
+    <value>要使用的线程</value>
+  </data>
+  <data name="ThreadCountToolTip" xml:space="preserve">
+    <value>指定用于计算的线程数。</value>
+  </data>
+  <data name="ThreadSettingError" xml:space="preserve">
+    <value>您系统的最大线程数为{0}个线程。此数字受您的处理器的限制。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisHeader" xml:space="preserve">
+    <value>2.密码1的差分密码分析</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content1" xml:space="preserve">
+    <value>的价值</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content2Run1" xml:space="preserve">
+    <value>是已知的。如前一页所示，k的值</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content2Run3" xml:space="preserve">
+    <value>猜到了。这里说明了如何限制可能的正确值的集合：密码分析器尝试k的所有值t</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content2Run4" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content2Run5" xml:space="preserve">
+    <value>通过和如果</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content3Run1" xml:space="preserve">
+    <value>成立，t被认为是k的候选者</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content3Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content3Run3" xml:space="preserve">
+    <value>。如果最后还有一个以上的候选者，则使用新的明文和密文对重新进行攻击。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content4" xml:space="preserve">
+    <value>通过再次单击“下一步”按钮，可以在“ DCA密钥恢复”组件中的密码1上执行差分密码分析。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content4Run1" xml:space="preserve">
+    <value>成功恢复k后</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content4Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content4Run3" xml:space="preserve">
+    <value>可以</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content4Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content4Run5" xml:space="preserve">
+    <value>立即计算。这可以通过计算方程来完成</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Content5Run1" xml:space="preserve">
+    <value>被确定。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide10Header" xml:space="preserve">
+    <value>密码1的差分密码分析</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content1" xml:space="preserve">
+    <value>在这里，我们将DCA的概念应用于Chiffre1。密码的结构通常是公共的，因此所有组件及其功能都是已知的。密码的安全性永远不应基于构造的保密性，而应取决于密钥的保密性。此要求也称为Kerckhoff原理。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run1" xml:space="preserve">
+    <value>密码1</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run2" xml:space="preserve">
+    <value>由密钥添加和替换组成。可以在DCA ToyCipher组件中查看该结构。现在，我们尝试找到两个未知的圆形密钥k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run3" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run4" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run5" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run6" xml:space="preserve">
+    <value>恢复。为此，我们查看加密的各个步骤。首先钥匙k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run7" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content2Run8" xml:space="preserve">
+    <value>被添加到输入块m：</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Content3" xml:space="preserve">
+    <value>然后，将中间结果u替换为S框：</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide1Header" xml:space="preserve">
+    <value>密码1的差分密码分析</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content1Run1" xml:space="preserve">
+    <value>最后，再次进行密钥加法（中间结果v用k表示</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content1Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content1Run3" xml:space="preserve">
+    <value>添加）：</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content2Run1" xml:space="preserve">
+    <value>密码的内部变量u和v在下面非常重要，因为我们使用这些中间结果来恢复未知密钥k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content2Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content2Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Content2Run5" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide2Header" xml:space="preserve">
+    <value>密码1的差分密码分析</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide3Content1" xml:space="preserve">
+    <value>下图总结了幻灯片11至16上概述的加密过程。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide3Header" xml:space="preserve">
+    <value>密码1的差分密码分析</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide4Content1" xml:space="preserve">
+    <value>下图总结了幻灯片11至16上概述的加密过程。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide4Header" xml:space="preserve">
+    <value>密码1的差分密码分析</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent6Run1" xml:space="preserve">
+    <value>但是，这些值不能直接与内部值u进行比较。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent6Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent6Run3" xml:space="preserve">
+    <value>和你</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent6Run4" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent6Run5" xml:space="preserve">
+    <value>因为这些是未知的。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent7Run1" xml:space="preserve">
+    <value>从等式（1）可以得出，如果正确猜出了回合密钥，则k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent7Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9bContent7Run3" xml:space="preserve">
+    <value>以下内容适用：</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run1" xml:space="preserve">
+    <value>密码分析者知道参数m和c，但不知道内部中间值u和v，因为k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run2" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run4" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run5" xml:space="preserve">
+    <value>未知。但是，密码分析者可以根据两个纯文本之间的差异来计算两个内部u中间值之间的差异。下面我们考虑两个消息m</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run6" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run7" xml:space="preserve">
+    <value>和米</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run8" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content1Run9" xml:space="preserve">
+    <value>并建立他们的差异：</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run1" xml:space="preserve">
+    <value>该知识可用于计算k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run10" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run11" xml:space="preserve">
+    <value>）。根据等式（1），u值的差等于m的差</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run12" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run13" xml:space="preserve">
+    <value>和米</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run14" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run15" xml:space="preserve">
+    <value>。接下来，k</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run16" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run17" xml:space="preserve">
+    <value>被“建议”，以便</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run3" xml:space="preserve">
+    <value>。为此，我们将考虑两对明文和密文（m</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run4" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run5" xml:space="preserve">
+    <value>， C</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run6" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run7" xml:space="preserve">
+    <value>）和（m</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run8" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content2Run9" xml:space="preserve">
+    <value>， C</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content3Run1" xml:space="preserve">
+    <value>v的值</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content3Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content3Run3" xml:space="preserve">
+    <value>和v</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content3Run4" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content3Run5" xml:space="preserve">
+    <value>可以计算。</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content4Run1" xml:space="preserve">
+    <value>由于S-Box的功能是公共的，因此也是可逆的，因此密码分析器可以使用</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content5Run1" xml:space="preserve">
+    <value>的价值</value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Content6Run1" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Tutorial1DifferentialCryptanalysisSlide9Header" xml:space="preserve">
+    <value>密码1的差分密码分析</value>
+  </data>
+  <data name="Tutorial1IntroductionHeader" xml:space="preserve">
+    <value>1.简介</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide1Content1Run1" xml:space="preserve">
+    <value>在本节中，我们考虑差分密码分析的基本思想。</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide1Content1Run2" xml:space="preserve">
+    <value>大多数现代的基于回合的分组密码包括三个基本操作：密钥加法，替换和置换。密码1由密钥添加和替换组成。密码2和3也包含一个排列。</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide1Content2" xml:space="preserve">
+    <value>XOR操作（异或）通常用于密钥添加。 XOR操作是一个两位数运算符，可以通过以下值表来描述：</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide1DataColHeader1" xml:space="preserve">
+    <value>输入位A</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide1DataColHeader2" xml:space="preserve">
+    <value>输入位B</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide1DataColHeader3" xml:space="preserve">
+    <value>结果位</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide1Header" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide2Content1" xml:space="preserve">
+    <value>如果使用XOR操作对密钥为k的消息m进行加密，则密文c的获取如下：</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide2Content2" xml:space="preserve">
+    <value>差分密码分析的基本思想是通过两次使用密钥k来使用XOR操作的属性效果。如果执行两次密钥添加，则适用以下条件：</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide2Content3Run1" xml:space="preserve">
+    <value>我们得到原始消息m。</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide2Content3Run2" xml:space="preserve">
+    <value>XOR运算符通常称为差异运算符。本教程中也使用该名称。</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide2Content4" xml:space="preserve">
+    <value>差分密码分析是所谓的“选择的明文攻击”，这意味着密码分析者可以选择明文消息并将其加密以具有匹配的明文/密文对。</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide2Header" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Content1Run1" xml:space="preserve">
+    <value>我们利用消息对m来利用两次使用密钥的想法</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Content1Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Content1Run3" xml:space="preserve">
+    <value>和米</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Content1Run4" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Content1Run5" xml:space="preserve">
+    <value>。如果现在形成了密文之间的差异，则以下内容成立：</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Content2" xml:space="preserve">
+    <value>它遵循：</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Content3" xml:space="preserve">
+    <value>我们通过计算密文的差异来获得明文的差异。这可用于获取有关DCA上的回合密钥的信息。</value>
+  </data>
+  <data name="Tutorial1IntroductionSlide3Header" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="Tutorial1LastSlideContent1" xml:space="preserve">
+    <value>现在，DCA在DCA KeyRecovery组件中继续。</value>
+  </data>
+  <data name="Tutorial1LastSlideContent2Run1" xml:space="preserve">
+    <value>在DCA KeyRecovery组件中，您现在可以恢复回合密钥k</value>
+  </data>
+  <data name="Tutorial1LastSlideContent2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1LastSlideContent2Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial1LastSlideContent2Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial1LastSlideContent2Run5" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="Tutorial1LastSlideContent3Run1" xml:space="preserve">
+    <value>为此，您必须点击</value>
+  </data>
+  <data name="Tutorial1LastSlideContent3Run2" xml:space="preserve">
+    <value>开始按钮</value>
+  </data>
+  <data name="Tutorial1LastSlideContent3Run3" xml:space="preserve">
+    <value>在DCA KeyRecovery组件中。</value>
+  </data>
+  <data name="Tutorial1LastSlideHeader" xml:space="preserve">
+    <value>教程1完成</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisHeader" xml:space="preserve">
+    <value>3.执行差分密码分析</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisSlide1Content1Run1" xml:space="preserve">
+    <value>在针对密码1的DCA中，圆形密钥k</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisSlide1Content1Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisSlide1Content1Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisSlide1Content1Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisSlide1Content1Run5" xml:space="preserve">
+    <value>将受到攻击。攻击按照本教程中的描述进行。</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisSlide1Content2" xml:space="preserve">
+    <value>单击“下一步”（下面的右箭头）开始攻击。该控件将传递到DCA KeyRecovery组件。</value>
+  </data>
+  <data name="Tutorial1PracticalDifferentialCryptanalysisSlide1Header" xml:space="preserve">
+    <value>执行差分密码分析</value>
+  </data>
+  <data name="Tutorial1TitleHeaderRun1" xml:space="preserve">
+    <value>讲解</value>
+  </data>
+  <data name="Tutorial1TitleHeaderRun2" xml:space="preserve">
+    <value>对称分组密码的差分密码分析</value>
+  </data>
+  <data name="Tutorial2AnalysisHeader" xml:space="preserve">
+    <value>2.密码分析2</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxHeader" xml:space="preserve">
+    <value>3. S盒分析</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide1Content1" xml:space="preserve">
+    <value>由于增加了按键，因此S-box的行为是非线性的。无法直接检查k3的猜测尝试。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide1Content2" xml:space="preserve">
+    <value>密码2的所有S盒的行为都相同。因此，分析单个S-box的功能就足够了。基本上可以将4个并行S盒视为一个大S盒，但这会增加分析工作量。 S-box接收4位作为输入，也输出4位作为输出。 4个输入位被其他4个输出位代替。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide1Content3" xml:space="preserve">
+    <value>切记：差分密码分析适用于不同的消息。为了检查S-box，考虑了输入明文的所有组合并形成了它们的差异。对于每对，将纯文本分别输入到S-box中，然后计算替代输出的差。记录了从输入到输出差异的过渡。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide1Content4" xml:space="preserve">
+    <value>下一页的表将可视化此过程。每个可能的输入差异只有一行。每个可能的输出差异都有一列。特定差异的出现次数由表格中的条目描述。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide1Content5" xml:space="preserve">
+    <value>要计算出现差异的可能性，必须将该数字除以16。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide1Header" xml:space="preserve">
+    <value>S盒分析</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide2Content1" xml:space="preserve">
+    <value>差异分布表如下所示：</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide2Header" xml:space="preserve">
+    <value>S盒分析</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide2InputDifference" xml:space="preserve">
+    <value>输入差异</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide2OutputDifference" xml:space="preserve">
+    <value>输出差异</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide3Content1" xml:space="preserve">
+    <value>输入和输出差异以及差异分布表的条目以十六进制格式显示。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide3Content2" xml:space="preserve">
+    <value>一个4位的S-box具有16个不同的输入和16个不同的输出。如果将2条消息组合为具有不相交差异的消息对，则可以观察到256个不同的差异过渡。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide3Content3" xml:space="preserve">
+    <value>一个重要的发现是，差异比其他差异更频繁地发生。也有根本没有发生的差异。例如，将输入差8映射到输出差D 8倍。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide3Content4" xml:space="preserve">
+    <value>差异的分布显然不是均匀分布的。实际上，S盒不是完美的。密码分析者利用了这一事实。特别高的概率有助于差分密码分析。</value>
+  </data>
+  <data name="Tutorial2AnalysisOfSBoxSlide3Header" xml:space="preserve">
+    <value>S盒分析</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide1Content1" xml:space="preserve">
+    <value>密码2由三个加密回合和四个回合密钥组成。每个回合都包括键的添加，替换和排列。在最后一轮中，执行了附加的密钥添加。</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide1Content2" xml:space="preserve">
+    <value>在下文中，示意性地示出了纯文本块的加密。与教程1相同，使用变量u和v描述加密过程中的内部状态。下表显示了纯文本块的加密。</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide1Content3" xml:space="preserve">
+    <value>另外，在该密码中使用了置换P（）。该置换交换块的位位置。除了内部状态u和v，还引入了w。该状态w表示置换后的值。</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide1Header" xml:space="preserve">
+    <value>密码分析2</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide2Header" xml:space="preserve">
+    <value>密码分析2</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run1" xml:space="preserve">
+    <value>您现在可以尝试获取密钥k</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run10" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run11" xml:space="preserve">
+    <value>。使用明文，您仍然能够计算出u的差</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run12" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run13" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run3" xml:space="preserve">
+    <value>以与密码1类似的方式。为此，您将使用一对明文及其对应的密文。然后，您可能会猜测一个可能的回合密钥t来计算内部变量v</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run4" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run5" xml:space="preserve">
+    <value>。这会让你</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run6" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run7" xml:space="preserve">
+    <value>待计算。自圆键k</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run8" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content1Run9" xml:space="preserve">
+    <value>也未知，您现在可以计算出u的差</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content2Run1" xml:space="preserve">
+    <value>由于“异或”，S盒的行为是非线性的，因此v的差</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content2Run2" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content2Run3" xml:space="preserve">
+    <value>无法确定。因此，不可能检查k的猜测尝试。</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content2Run4" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content2Run5" xml:space="preserve">
+    <value>通过使用差异。</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Content3" xml:space="preserve">
+    <value>为了解决这个问题，让我们仔细研究一下S盒的工作方式。</value>
+  </data>
+  <data name="Tutorial2AnalysisSlide3Header" xml:space="preserve">
+    <value>密码分析2</value>
+  </data>
+  <data name="Tutorial2AttackFinishedContent1" xml:space="preserve">
+    <value>DCA PathFinder组件中有关差分密码分析的教程2已完成。</value>
+  </data>
+  <data name="Tutorial2AttackFinishedContent2Run1" xml:space="preserve">
+    <value>最后单击DCA KeyRecovery组件中的“开始”，尝试恢复最后两个回合密钥k</value>
+  </data>
+  <data name="Tutorial2AttackFinishedContent2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial2AttackFinishedContent2Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial2AttackFinishedContent2Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial2AttackFinishedContent2Run5" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="Tutorial2AttackFinishedHeader" xml:space="preserve">
+    <value>教程2完成</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent1Run1" xml:space="preserve">
+    <value>在最后一步中，最后两个回合键k</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent1Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent1Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent1Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent1Run5" xml:space="preserve">
+    <value>被攻击。这种攻击类似于教程1中描述的过程。</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent2Run1" xml:space="preserve">
+    <value>通过点击“继续”（下面的右箭头），前两个圆形键k</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent2Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent2Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundContent2Run5" xml:space="preserve">
+    <value>被攻击。</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundHeaderRun1" xml:space="preserve">
+    <value>圆形键k的计算</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundHeaderRun2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundHeaderRun3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial2AttackFirstRoundHeaderRun4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial2AttackHeader" xml:space="preserve">
+    <value>7.密码2的差分密码分析</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound2Content1Run1" xml:space="preserve">
+    <value>此时，第二轮密钥k</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound2Content1Run2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound2Content1Run3" xml:space="preserve">
+    <value>被攻击。可以在第二轮加密中为此选择S盒。通过选择一个S盒，将攻击回合密钥的各个4位，并尝试恢复它们。</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound2Content1Run4" xml:space="preserve">
+    <value>攻击几乎类似于对回合密钥k的攻击</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound2Content1Run5" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound2Content1Run6" xml:space="preserve">
+    <value>。但是，在搜索差异时，不必再对密码进行如此深入的搜索，因为已经完全攻击了加密回合。</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound3Content1Run1" xml:space="preserve">
+    <value>此时，第一个回合密钥k</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound3Content1Run2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound3Content1Run3" xml:space="preserve">
+    <value>的密码将被攻击。可以在第三轮加密中为此选择S盒。通过选择一个S盒，将攻击回合密钥的各个4位，并尝试恢复它们。</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound3Content1Run4" xml:space="preserve">
+    <value>在差分密码分析中，考虑了S盒处的差异变化。因此，此时应选择S盒。</value>
+  </data>
+  <data name="Tutorial2AttackKeyRound3Content1Run5" xml:space="preserve">
+    <value>选择的关键位越多，寻找差值的难度就越大。但是，同时攻击多个S-box可能很有意义。根据密码的性质，可以发现更好或更差的差异。</value>
+  </data>
+  <data name="Tutorial2AttackRound2HeaderRun1" xml:space="preserve">
+    <value>从第2轮中选择S盒，从k中获取关键位</value>
+  </data>
+  <data name="Tutorial2AttackRound2HeaderRun2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial2AttackRound2HeaderRun3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Tutorial2AttackRound3HeaderRun1" xml:space="preserve">
+    <value>从第3轮中选择S盒，从k中获取关键位</value>
+  </data>
+  <data name="Tutorial2AttackRound3HeaderRun2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial2AttackRound3HeaderRun3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Tutorial2CharacteristicHeader" xml:space="preserve">
+    <value>4.特征</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Content1Run1" xml:space="preserve">
+    <value>两个条目存在差异</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Content1Run2" xml:space="preserve">
+    <value>使用S-box替换为一对差异有所不同的输出</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Content1Run3" xml:space="preserve">
+    <value>。这是由</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Content2" xml:space="preserve">
+    <value>特性可以相互组合，因此可以进行多轮连接。前提条件是，前一个特性的输出差具有与后一个特性的输入差相同的值。假设特征彼此独立，则概率可以相乘。这样，可以搜索通过密码的差异路径。</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Content2Run1" xml:space="preserve">
+    <value>我们称这样的一对</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Content2Run2" xml:space="preserve">
+    <value>在S-box操作下的微分特性。如前所述，微分特性具有固定的概率。</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Content3" xml:space="preserve">
+    <value>搜索的目的是找到一种可能性最高的方法。这些路径可以在DKA路径可视化器组件中以图形方式显示。</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide1Header" xml:space="preserve">
+    <value>特点</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide2Content1" xml:space="preserve">
+    <value>密码2的加密回合包括密钥添加，替换和置换。密码适用于16位块。前面的符号扩展如下，以表示16位块的S盒的差分特性</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide2Content2" xml:space="preserve">
+    <value>替换后，对密码2中的位进行置换。密码的排列是已知的，因此排列的微分特性可以描述如下</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide2Content3" xml:space="preserve">
+    <value>总而言之，加密轮回的替代特征和置换特征的区别特征如下所示</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide2Header" xml:space="preserve">
+    <value>特点</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide3Content1" xml:space="preserve">
+    <value>现在，将各个回合的差异特征组合成贯穿整个密码的差异路径。对于具有许多加密回合和大块密码的密码，高概率搜索路径是一个复杂且耗时的问题。</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide3Content2" xml:space="preserve">
+    <value>DCA PathFinder组件具有用于确定此类路径的各种搜索选项。</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide3Content3" xml:space="preserve">
+    <value>前面介绍的符号用于表示n次加密回合（此处为3）的回合的差分特征：</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide3Content4" xml:space="preserve">
+    <value>在第一个4元组中，在第一个加密回合中给出前4个S-box的S-box的输入差异。在第二个四元组中，第一个加密回合的输出差和第二个加密回合的输入差均被记录。在第三个四元组中，记下第二个加密输出的输出差和最后一个加密回合的输入差。</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide3Content5" xml:space="preserve">
+    <value>搜索的目的是找到一种可能性最高的方法。</value>
+  </data>
+  <data name="Tutorial2CharacteristicSlide3Header" xml:space="preserve">
+    <value>特点</value>
+  </data>
+  <data name="Tutorial2DifferentialHeader" xml:space="preserve">
+    <value>5.差异</value>
+  </data>
+  <data name="Tutorial2DifferentialSlide1Content1" xml:space="preserve">
+    <value>在n个回合中搜索特征时，可能会出现不同特征，这些特征具有第一个加密回合的第一个输入差异和最后一个加密回合的输出差异相同。因此，特征具有形式</value>
+  </data>
+  <data name="Tutorial2DifferentialSlide1Content2" xml:space="preserve">
+    <value>差异的输入和输出值对于使用特征进行差分密码分析至关重要。如果找到具有相同输入和输出值的多个特征，则可以将这些概率相加。由几个特性组成的结构称为微分。</value>
+  </data>
+  <data name="Tutorial2DifferentialSlide1Content3" xml:space="preserve">
+    <value>因此，密码分析的目的是找到概率最高的微分。</value>
+  </data>
+  <data name="Tutorial2DifferentialSlide1Header" xml:space="preserve">
+    <value>微分</value>
+  </data>
+  <data name="Tutorial2IntroductionHeader" xml:space="preserve">
+    <value>1.简介</value>
+  </data>
+  <data name="Tutorial2IntroductionSlide1Content1" xml:space="preserve">
+    <value>在教程1中，介绍了差分密码分析的思想，并用一种密码进行了演示，该密码由一轮加密和两轮密钥组成。</value>
+  </data>
+  <data name="Tutorial2IntroductionSlide1Content2" xml:space="preserve">
+    <value>在本教程中，将通过三个带有四轮密钥的加密轮来加深和展示该思想。</value>
+  </data>
+  <data name="Tutorial2IntroductionSlide1Content3" xml:space="preserve">
+    <value>要通过差分密码分析对具有多个加密回合和回合密钥的密码进行攻击，必须对其进行更仔细的检查。有趣的是加密回合的各个组成部分以及它们的行为方式。</value>
+  </data>
+  <data name="Tutorial2IntroductionSlide1Content4" xml:space="preserve">
+    <value>由于进行了多次加密，因此无法像密码1一样攻击该密码。对于密码2，需要一种以一定概率预测多个加密回合中差异变化的方法。</value>
+  </data>
+  <data name="Tutorial2IntroductionSlide1Header" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="Tutorial2RecoverKeyInformationHeader" xml:space="preserve">
+    <value>6.恢复关键信息</value>
+  </data>
+  <data name="Tutorial2RecoverKeyInformationSlide1Content1" xml:space="preserve">
+    <value>一旦发现差异的可能性很高，就可以恢复密钥位。为此，在期望差异不同于0的情况下考虑S盒。</value>
+  </data>
+  <data name="Tutorial2RecoverKeyInformationSlide1Content2" xml:space="preserve">
+    <value>为每个可能的关键候选者生成一个计数器。密码分析器生成许多满足输入差异的消息。使用候选密钥对它们进行加密和部分解密。如果部分解密的消息之间的差异满足预期的差异，则计数器将增加1。此过程将对所有生成的消息对重复进行。</value>
+  </data>
+  <data name="Tutorial2RecoverKeyInformationSlide1Content3" xml:space="preserve">
+    <value>命中率最高的关键候选人应具有最高的计数器。这应该非常接近差分的期望值。</value>
+  </data>
+  <data name="Tutorial2RecoverKeyInformationSlide1Header" xml:space="preserve">
+    <value>恢复关键信息</value>
+  </data>
+  <data name="Tutorial2TitleHeaderRun1" xml:space="preserve">
+    <value>讲解</value>
+  </data>
+  <data name="Tutorial2TitleHeaderRun2" xml:space="preserve">
+    <value>对称分组密码的差分密码分析</value>
+  </data>
+  <data name="Tutorial2WaitingSlideContent1" xml:space="preserve">
+    <value>现在，您可以使用DCA KeyRecovery组件中DCA PathFinder组件中生成的攻击配置来还原密钥位。为此，必须单击“开始”按钮。</value>
+  </data>
+  <data name="Tutorial2WaitingSlideContent2" xml:space="preserve">
+    <value>（可选）您可以在DCA PathVisualizer组件中显示确定的微分及其特性。</value>
+  </data>
+  <data name="Tutorial2WaitingSlideContent3Run1" xml:space="preserve">
+    <value>分析结果摘要：</value>
+  </data>
+  <data name="Tutorial2WaitingSlideContent3Run2" xml:space="preserve">
+    <value>输入差异：</value>
+  </data>
+  <data name="Tutorial2WaitingSlideContent3Run3" xml:space="preserve">
+    <value>预期差异：</value>
+  </data>
+  <data name="Tutorial2WaitingSlideContent3Run4" xml:space="preserve">
+    <value>可能性：</value>
+  </data>
+  <data name="Tutorial2WaitingSlideHeader" xml:space="preserve">
+    <value>以下部分继续进行差分密码分析</value>
+  </data>
+  <data name="Tutorial3AttackFinishedContent1" xml:space="preserve">
+    <value>DCA PathFinder组件中有关差分密码分析的教程3已完成。</value>
+  </data>
+  <data name="Tutorial3AttackFinishedContent2Run1" xml:space="preserve">
+    <value>最后单击DKA KeyRecovery组件中的“开始”将尝试恢复最后两个回合密钥k</value>
+  </data>
+  <data name="Tutorial3AttackFinishedContent2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial3AttackFinishedContent2Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial3AttackFinishedContent2Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial3AttackFinishedContent2Run5" xml:space="preserve">
+    <value>。</value>
+  </data>
+  <data name="Tutorial3AttackFinishedHeader" xml:space="preserve">
+    <value>教程3完成</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent1Run1" xml:space="preserve">
+    <value>在最后一步中，最后两个回合键k</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent1Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent1Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent1Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent1Run5" xml:space="preserve">
+    <value>被攻击。这种攻击类似于教程1中描述的过程。</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent2Run1" xml:space="preserve">
+    <value>通过点击“继续”（下面的右箭头），前两个圆形键k</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent2Run2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent2Run3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent2Run4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundContent2Run5" xml:space="preserve">
+    <value>被攻击。</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundHeaderRun1" xml:space="preserve">
+    <value>圆形键k的计算</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundHeaderRun2" xml:space="preserve">
+    <value>1个</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundHeaderRun3" xml:space="preserve">
+    <value>和k</value>
+  </data>
+  <data name="Tutorial3AttackFirstRoundHeaderRun4" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Tutorial3AttackHeader" xml:space="preserve">
+    <value>5.密码3的差分密码分析</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound2Content1Run1" xml:space="preserve">
+    <value>此时，第二轮密钥k</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound2Content1Run2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound2Content1Run3" xml:space="preserve">
+    <value>被攻击。可以在第二轮加密中为此选择S盒。通过选择一个S盒，将攻击回合密钥的各个4位，并尝试恢复它们。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound2Content1Run4" xml:space="preserve">
+    <value>攻击几乎类似于对回合密钥k的攻击</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound2Content1Run5" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound2Content1Run6" xml:space="preserve">
+    <value>。但是，在搜索差异时，不必再对密码进行如此深入的搜索，因为已经完全攻击了加密回合。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound3Content1Run1" xml:space="preserve">
+    <value>此时，第三轮密钥k</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound3Content1Run2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound3Content1Run3" xml:space="preserve">
+    <value>被攻击。可以在第三轮加密中为此选择S盒。通过选择一个S盒，将攻击回合密钥的各个4位，并尝试恢复它们。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound3Content1Run4" xml:space="preserve">
+    <value>攻击几乎类似于对回合密钥k的攻击</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound3Content1Run5" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound3Content1Run6" xml:space="preserve">
+    <value>。但是，在搜索差异时，不必再对密码进行如此深入的搜索，因为已经完全攻击了加密回合。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound4Content1Run1" xml:space="preserve">
+    <value>此时，第四轮密钥k</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound4Content1Run2" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound4Content1Run3" xml:space="preserve">
+    <value>被攻击。可以在第四轮加密中为此选择S盒。通过选择一个S盒，将攻击回合密钥的各个4位，并尝试恢复它们。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound4Content1Run4" xml:space="preserve">
+    <value>攻击几乎类似于对回合密钥k的攻击</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound4Content1Run5" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound4Content1Run6" xml:space="preserve">
+    <value>。但是，在搜索差异时，不必再对密码进行如此深入的搜索，因为已经完全攻击了加密回合。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound5Content1Run1" xml:space="preserve">
+    <value>此时，第五轮密钥k</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound5Content1Run2" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound5Content1Run3" xml:space="preserve">
+    <value>被攻击。可以在第五轮加密中为此选择S盒。通过选择一个S盒，将攻击回合密钥的各个4位，并尝试恢复它们。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound5Content1Run4" xml:space="preserve">
+    <value>在差分密码分析中，考虑了S盒处的差异变化。因此，此时应选择S盒。</value>
+  </data>
+  <data name="Tutorial3AttackKeyRound5Content1Run5" xml:space="preserve">
+    <value>选择的关键位越多，寻找差值的难度就越大。但是，同时攻击多个S-box可能很有意义。根据密码的性质，可以发现更好或更差的差异。</value>
+  </data>
+  <data name="Tutorial3AttackRound2HeaderRun1" xml:space="preserve">
+    <value>从第2轮中选择S盒以攻击k中的关键位</value>
+  </data>
+  <data name="Tutorial3AttackRound2HeaderRun2" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Tutorial3AttackRound2HeaderRun3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Tutorial3AttackRound3HeaderRun1" xml:space="preserve">
+    <value>从第3轮中选择S盒以攻击k中的关键位</value>
+  </data>
+  <data name="Tutorial3AttackRound3HeaderRun2" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="Tutorial3AttackRound3HeaderRun3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Tutorial3AttackRound4HeaderRun1" xml:space="preserve">
+    <value>从第4轮中选择S盒以攻击k中的关键位</value>
+  </data>
+  <data name="Tutorial3AttackRound4HeaderRun2" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="Tutorial3AttackRound4HeaderRun3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Tutorial3AttackRound5HeaderRun1" xml:space="preserve">
+    <value>从第5轮中选择S盒以攻击k中的关键位</value>
+  </data>
+  <data name="Tutorial3AttackRound5HeaderRun2" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="Tutorial3AttackRound5HeaderRun3" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Tutorial3FilterHeader" xml:space="preserve">
+    <value>2.筛选</value>
+  </data>
+  <data name="Tutorial3FilterSlide1Content1" xml:space="preserve">
+    <value>在执行DCA期间，会生成许多具有一定差异的明文对。可能会发生消息没有通过密码在差分中找到的路径的情况。</value>
+  </data>
+  <data name="Tutorial3FilterSlide1Content2" xml:space="preserve">
+    <value>如果一对满足输入差异，则并不意味着它也满足最后一个差异。</value>
+  </data>
+  <data name="Tutorial3FilterSlide1Content3" xml:space="preserve">
+    <value>当一对跟随差分流时，就说对了。另一方面，不遵循差分的对称为错误对。</value>
+  </data>
+  <data name="Tutorial3FilterSlide1Header" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="Tutorial3FilterSlide2Content1" xml:space="preserve">
+    <value>错误的配对可能会在恢复所需的回合密钥时引起问题。这些使得通过在恢复过程中敲击不正确的回合键来识别正确的回合键非常困难。</value>
+  </data>
+  <data name="Tutorial3FilterSlide2Content2" xml:space="preserve">
+    <value>因此，在恢复回合密钥之前识别错误的对是有用的，而不是进一步考虑它们。</value>
+  </data>
+  <data name="Tutorial3FilterSlide2Header" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="Tutorial3IntroductionHeader" xml:space="preserve">
+    <value>1.简介</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide1Content1" xml:space="preserve">
+    <value>在教程1中，介绍了差分密码分析的思想，并用一种密码进行了演示，该密码由一轮加密和两轮密钥组成。在教程2中，这个想法得到了深化，并通过三轮加密在密码中显示出来。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide1Content2" xml:space="preserve">
+    <value>为此，引入了诸如特性和差分之类的结构。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide1Content3" xml:space="preserve">
+    <value>在本教程中，将显示与DCA一起使用的其他技术。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide1Content4" xml:space="preserve">
+    <value>密码3由五个加密回合和六个回合密钥组成。使用此密码将深化已演示的代码。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide1Header" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide3Content1" xml:space="preserve">
+    <value>下面介绍了两种过滤技术。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide3Content2" xml:space="preserve">
+    <value>首先要考虑的技术是一对密文之间的差异。当使用DCA进行攻击时，并非加密回合中的所有S-box都同时受到攻击，而通常只是其中一部分。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide3Content3" xml:space="preserve">
+    <value>差异为0的S盒，也出现差异0。因此，如果对应位置的差异不同于0，则通过考虑密文差异，已经排除了一些对。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide3Header" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide4Content1" xml:space="preserve">
+    <value>其次，可以考虑差分的最后（预期）差异。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide4Content2" xml:space="preserve">
+    <value>该值是已知的，并且可以通过查看S-box的差异分布表来确定S-box的输出值。通常，这里可能有几个不同的值。当考虑密文的差异时，也可以使用这些值。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide4Content3" xml:space="preserve">
+    <value>如果S-box位置处的密文差异不对应于S-box的不同输出值之一，则也可以将此对识别为错误的对。</value>
+  </data>
+  <data name="Tutorial3IntroductionSlide4Header" xml:space="preserve">
+    <value>筛选</value>
+  </data>
+  <data name="Tutorial3NeededPairsHeader" xml:space="preserve">
+    <value>3.必要的对数</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Content1" xml:space="preserve">
+    <value>对的必要数量基本上取决于某些因素。这些是找到差异的概率，差异所攻击的密钥位数以及过滤技术。</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Content2" xml:space="preserve">
+    <value>它描述了跟随差分的对数与错误子键的平均频率的比率。</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Content2Run1" xml:space="preserve">
+    <value>确定必要对的通用公式N</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Content2Run2" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Content2Run3" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Content3" xml:space="preserve">
+    <value>其中c是一个小常数，DP是相差的概率。</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Content4" xml:space="preserve">
+    <value>c的示例值为10。</value>
+  </data>
+  <data name="Tutorial3NeededPairsSlide1Header" xml:space="preserve">
+    <value>必要对数</value>
+  </data>
+  <data name="Tutorial3SignalToNoiseHeader" xml:space="preserve">
+    <value>4.信噪比</value>
+  </data>
+  <data name="Tutorial3SignalToNoiseSlide1Content1" xml:space="preserve">
+    <value>评估成功机会的工具是所谓的信噪比。</value>
+  </data>
+  <data name="Tutorial3SignalToNoiseSlide1Content3" xml:space="preserve">
+    <value>为了确定信噪比，有时需要通过实验确定平均值，例如被过滤去除的对的百分比或对建议的子关键字候选的平均数量。</value>
+  </data>
+  <data name="Tutorial3SignalToNoiseSlide1Content4" xml:space="preserve">
+    <value>DCA PathFinder组件的联机帮助包含有关DCA过程的更多文献信息。</value>
+  </data>
+  <data name="Tutorial3SignalToNoiseSlide1Header" xml:space="preserve">
+    <value>信噪比</value>
+  </data>
+  <data name="Tutorial3TitleHeaderRun1" xml:space="preserve">
+    <value>讲解</value>
+  </data>
+  <data name="Tutorial3TitleHeaderRun2" xml:space="preserve">
+    <value>对称分组密码的差分密码分析</value>
+  </data>
+  <data name="Tutorial3WaitingSlideContent1" xml:space="preserve">
+    <value>现在，您可以使用DCA KeyRecovery组件中DCA PathFinder组件中生成的攻击配置来还原密钥位。为此，请单击“开始”按钮。</value>
+  </data>
+  <data name="Tutorial3WaitingSlideContent2" xml:space="preserve">
+    <value>（可选）您可以在DCA PathVisualizer组件中显示确定的微分及其特性。</value>
+  </data>
+  <data name="Tutorial3WaitingSlideContent3Run1" xml:space="preserve">
+    <value>分析结果摘要：</value>
+  </data>
+  <data name="Tutorial3WaitingSlideContent3Run2" xml:space="preserve">
+    <value>输入差异：</value>
+  </data>
+  <data name="Tutorial3WaitingSlideContent3Run3" xml:space="preserve">
+    <value>预期差异：</value>
+  </data>
+  <data name="Tutorial3WaitingSlideContent3Run4" xml:space="preserve">
+    <value>可能性：</value>
+  </data>
+  <data name="Tutorial3WaitingSlideHeader" xml:space="preserve">
+    <value>以下部分继续进行差分密码分析</value>
+  </data>
+  <data name="UseOfflinePaths" xml:space="preserve">
+    <value>预先计算的数据</value>
+  </data>
+  <data name="UseOfflinePathsToolTip" xml:space="preserve">
+    <value>如果选择此设置，则不搜索特征，而是将其用于相应的包装箱编号，这些零件使用存储在组件中的预先计算的数据。是。这样可以使较长的计算时间最小化。</value>
+  </data>
+</root>

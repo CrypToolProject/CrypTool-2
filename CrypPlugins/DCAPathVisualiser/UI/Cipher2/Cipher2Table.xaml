@@ -1,0 +1,194 @@
+﻿<UserControl x:Class="DCAPathVisualiser.UI.Cipher2.Cipher2Table"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DCAPathVisualiser.UI.Cipher2"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="400">
+    <UserControl.Resources>
+        <RotateTransform x:Key="HeaderRotate" Angle="270" />
+    </UserControl.Resources>
+    <Grid Width="800" Height="400">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition Height="200*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="2,2,2,2">
+            <Grid Height="120" Background="#AFFFD4C1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="350*" />
+                    <ColumnDefinition Width="450*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                    <RowDefinition Height="22" />
+                </Grid.RowDefinitions>
+                <Border BorderThickness="1" BorderBrush="Black" LayoutTransform="{StaticResource HeaderRotate}" Background="#FFE56B00" Grid.Column="0" Grid.RowSpan="5">
+                    <Label Content="{Loc Differential}" FontSize="12" HorizontalAlignment="Center" Foreground="White" />
+                </Border>
+                <!-- first row -->
+                <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="{Loc Cipher2}" FontFamily="Courier New" FontSize="12" VerticalAlignment="Center" />
+                </StackPanel>
+                <!-- /first row -->
+                <!-- second row -->
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="{Loc Round}" FontFamily="Courier New" FontSize="12"  />
+                    <Label Content="{Binding CurrentRound, Mode=OneWay}" FontFamily="Courier New" FontSize="12"  />
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="{Loc Probability}" FontFamily="Courier New" FontSize="12" />
+                    <Label Content="{Binding CurrentProbability, Mode=OneWay}" FontFamily="Courier New" FontSize="12" />
+                </StackPanel>
+                <!-- /second row -->
+                <!-- third row -->
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="{Loc InputDifferential}" FontFamily="Courier New" FontSize="12"  />
+                    <Label Content="{Binding CurrentInputDiff, Mode=OneWay}" FontFamily="Courier New" FontSize="12"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="{Loc ExpectedDifferential}" FontFamily="Courier New" FontSize="12"  />
+                    <Label Content="{Binding CurrentExpectedDiff, Mode=OneWay}" FontFamily="Courier New" FontSize="12"/>
+                </StackPanel>
+                <!-- /third row -->
+                <!-- fourth row -->
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="{Loc CountOfDifferentials}" FontFamily="Courier New" FontSize="12" />
+                    <Label Content="{Binding CurrentCountOfCharacteristics, Mode=OneWay}" FontFamily="Courier New" FontSize="12" />
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="{Loc ActiveSBoxes}" FontFamily="Courier New" FontSize="12"></Label>
+                    <Label Content="{Binding CurrentActiveSBoxes, Mode=OneWay}" FontFamily="Courier New" FontSize="12"></Label>
+                </StackPanel>
+                <!-- /forth row -->
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2,2,2,2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderThickness="1" BorderBrush="Black" LayoutTransform="{StaticResource HeaderRotate}" Background="#FF479308">
+                    <Label Content="{Loc Characteristics}" FontSize="12" HorizontalAlignment="Center" Foreground="White" />
+                </Border>
+                <DataGrid x:Name="DataGridCharacteristics" Grid.Row="0" Grid.Column="1" Background="#AFE2FFCE"  CanUserAddRows="false" AutoGenerateColumns="False" Margin="0,0,0,0" ItemsSource="{Binding Characteristics, Mode=OneWay}" SelectionMode="Single" SelectedCellsChanged="CharacteristicSelectionChanged">
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Binding="{Binding Path=InputDiff, Mode=OneWay}" Width="1*"  MinWidth="25" IsReadOnly="True">
+                            <DataGridTextColumn.Header>
+                                <TextBlock FontSize="12" FontFamily="Courier New">
+                                    <Run Text="{Loc InputDiffHeader1}"></Run><Run Text="" BaselineAlignment="Subscript" FontSize="8"></Run>
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=InputDiffR1, Mode=OneWay}" Width="1*" MinWidth="25" IsReadOnly="True">
+                            <DataGridTextColumn.Header>
+                                <TextBlock FontSize="12" FontFamily="Courier New">
+                                    <Run Text="{Loc InputDiffR1Header1Run1}"></Run><Run Text="{Loc InputDiffR1Header1Run2}" BaselineAlignment="Subscript" FontSize="8"></Run>
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=OutputDiffR1, Mode=OneWay}" Width="1*" MinWidth="25" IsReadOnly="True">
+                            <DataGridTextColumn.Header>
+                                <TextBlock FontSize="12" FontFamily="Courier New">
+                                    <Run Text="{Loc OutputDiffR1Header1Run1}"></Run><Run Text="{Loc OutputDiffR1Header1Run2}" BaselineAlignment="Subscript" FontSize="8"></Run>
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn x:Name="DataGridCharacteristicsInputDiffR2Col" Width="1*" Binding="{Binding Path=InputDiffR2, Mode=OneWay}" MinWidth="25" IsReadOnly="True">
+                            <DataGridTextColumn.Header>
+                                <TextBlock FontSize="12" FontFamily="Courier New">
+                                    <Run Text="{Loc InputDiffR2Header1Run1}"></Run><Run Text="{Loc InputDiffR2Header1Run2}" BaselineAlignment="Subscript" FontSize="8"></Run>
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn x:Name="DataGridCharacteristicsOutputDiffR2Col" Width="1*" Binding="{Binding Path=OutputDiffR2, Mode=OneWay}" MinWidth="25" IsReadOnly="True">
+                            <DataGridTextColumn.Header>
+                                <TextBlock FontSize="12" FontFamily="Courier New">
+                                    <Run Text="{Loc OutputDiffR2Header1Run1}"></Run><Run Text="{Loc OutputDiffR2Header1Run2}" BaselineAlignment="Subscript" FontSize="8"></Run>
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn x:Name="DataGridCharacteristicsInputDiffR3Col" Binding="{Binding Path=ExpectedDiff, Mode=OneWay}" Width="1*" MinWidth="25" IsReadOnly="True">
+                            <DataGridTextColumn.Header>
+                                <TextBlock FontSize="12" FontFamily="Courier New">
+                                    <Run Text="{Loc InputDiffR3Header1Run1}"></Run><Run Text="{Loc InputDiffR3Header1Run2}" BaselineAlignment="Subscript" FontSize="8"></Run>
+                                </TextBlock>
+                            </DataGridTextColumn.Header>
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

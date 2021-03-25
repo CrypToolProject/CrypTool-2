@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <usage lang="en"></usage>
+  <usage lang="de-DE"></usage>
+  
+  <settings lang="en"></settings>
+  <settings lang="de-DE"></settings>
+  
+  <references></references>
+</documentation>

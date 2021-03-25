@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="CrypTool.KasiskiTest.KasiskiTestPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CrypTool.KasiskiTest"        
+    Background="Wheat"
+    SnapsToDevicePixels="True" 
+    HorizontalAlignment="Stretch"
+             Height="Auto"
+             Width="Auto" >
+
+    <UserControl.Resources>
+
+        <local:DataSource x:Key="source"/>
+
+
+        <DataTemplate x:Key="template" >
+
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" >
+
+                <Rectangle Width="5"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+                    <TextBlock HorizontalAlignment="Center" Foreground="Black" ToolTip="{Loc Number_of_hits_for_the_corresponding_factor}"  Text="{Binding Path=Amount}">
+                    </TextBlock>
+
+                    <Rectangle Height="3"/>
+
+                    <Rectangle Height="{Binding Path=Height}" Width="30" StrokeThickness="1" Stroke="Beige" RadiusX="5" RadiusY="5" >
+                        <Rectangle.BitmapEffect>
+                            <DropShadowBitmapEffect />
+                        </Rectangle.BitmapEffect>
+
+                        <Rectangle.Fill>
+                            <RadialGradientBrush >
+                                <GradientStop Color="Wheat" Offset="0" />
+                                <GradientStop Color="DarkOliveGreen" Offset="1" />
+                            </RadialGradientBrush>
+                        </Rectangle.Fill>
+
+
+                    </Rectangle>
+
+                    <Rectangle Height="10" />
+
+                    <TextBlock HorizontalAlignment="Center" Foreground="Black" Text="{Binding Path=Factor}"/>
+
+
+                </StackPanel>
+                
+            </StackPanel>
+
+        </DataTemplate>
+
+
+        <ItemsPanelTemplate x:Key="panelTemplate">
+            <StackPanel Orientation="Horizontal"/>
+
+        </ItemsPanelTemplate>
+
+    </UserControl.Resources>
+
+    <StackPanel VerticalAlignment="Bottom" Orientation="Vertical" >
+
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+            <Grid VerticalAlignment="Bottom" >
+
+                <Grid.LayoutTransform>
+
+                    <ScaleTransform   ScaleX="{Binding ElementName=sli,Path=Value}" ScaleY="{Binding
+                         ElementName=sli, Path=Value}"/>
+                </Grid.LayoutTransform>
+
+
+
+                <StackPanel>
+                    <TextBlock TextAlignment="Center" IsHyphenationEnabled="True" FontSize="18" Foreground="Black"  FontFamily="Academy" OpacityMask="Turquoise" Text="{Loc Label1Desc}"
+                ToolTip="{Loc TooltipDesc}"  >
+                
+            </TextBlock>
+
+                    <TextBlock TextAlignment="Center" IsHyphenationEnabled="True" FontSize="18" Foreground="Black"  FontFamily="Academy" OpacityMask="Turquoise" Text="{Loc Label2Desc}"
+                 ToolTip="{Loc TooltipDesc}"      >
+                
+            </TextBlock>
+
+
+                    <ItemsControl  HorizontalAlignment="Center"
+             
+             ItemsSource="{Binding Source={StaticResource source},Path=ValueCollection}"
+             ItemTemplate="{StaticResource template}" ItemsPanel="{StaticResource panelTemplate}">
+
+                    </ItemsControl>
+
+
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        <Slider x:Name="sli" Width="100" HorizontalAlignment="Center" Minimum="0.2" VerticalAlignment="Bottom" 
+                Maximum="2" Value="1"/>
+
+    </StackPanel>
+
+</UserControl>
+    

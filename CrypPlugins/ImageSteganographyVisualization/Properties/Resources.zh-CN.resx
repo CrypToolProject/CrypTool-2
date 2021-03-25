@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>隐藏</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>提取</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>选择一个动作</value>
+  </data>
+  <data name="ApplyButton" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="ApplyChangesButton" xml:space="preserve">
+    <value>应用更改</value>
+  </data>
+  <data name="BackToMainMenu" xml:space="preserve">
+    <value>返回主菜单</value>
+  </data>
+  <data name="BitmaskTooltip" xml:space="preserve">
+    <value>选择一个位掩码，该位掩码定义隐藏过程应使用哪些位</value>
+  </data>
+  <data name="BitsAfterLabel" xml:space="preserve">
+    <value>之后的RGB位</value>
+  </data>
+  <data name="BitsBeforeLabel" xml:space="preserve">
+    <value>RGB位之前</value>
+  </data>
+  <data name="BitsChosenLabel" xml:space="preserve">
+    <value>选择隐藏秘密消息的位数：</value>
+  </data>
+  <data name="BlueBitMaskLabel" xml:space="preserve">
+    <value>蓝色位掩码</value>
+  </data>
+  <data name="BluePBLabel" xml:space="preserve">
+    <value>蓝位飞机</value>
+  </data>
+  <data name="BlueValueLabel" xml:space="preserve">
+    <value>蓝色值：</value>
+  </data>
+  <data name="BPCSMainMenu1" xml:space="preserve">
+    <value>无法理解算法的工作原理</value>
+  </data>
+  <data name="BPCSMainMenu2" xml:space="preserve">
+    <value>查看隐藏过程</value>
+  </data>
+  <data name="BPCSMainMenu3" xml:space="preserve">
+    <value>查看像素转换</value>
+  </data>
+  <data name="BPCSMainMenu4" xml:space="preserve">
+    <value>查看不同的位平面</value>
+  </data>
+  <data name="ChooseBitsButton" xml:space="preserve">
+    <value>选择其他位</value>
+  </data>
+  <data name="ChooseBitsViewText1" xml:space="preserve">
+    <value>单击应用于隐藏消息位的位</value>
+  </data>
+  <data name="ChooseBitsViewTitle" xml:space="preserve">
+    <value>选择位视图</value>
+  </data>
+  <data name="ColorOrderCaption" xml:space="preserve">
+    <value>颜色顺序</value>
+  </data>
+  <data name="ColorOrderTooltip" xml:space="preserve">
+    <value>借助不同的可能的颜色顺序选择位平面应如何排序</value>
+  </data>
+  <data name="ComplexityCaption" xml:space="preserve">
+    <value>复杂度阈值</value>
+  </data>
+  <data name="ComplexityLabel" xml:space="preserve">
+    <value>复杂：</value>
+  </data>
+  <data name="ComplexityTooltip" xml:space="preserve">
+    <value>选择复杂度值的阈值，该阈值用于确定块是否复杂。此值应介于0和1之间</value>
+  </data>
+  <data name="ConjugatedLabel" xml:space="preserve">
+    <value>共轭：</value>
+  </data>
+  <data name="ConjugationText" xml:space="preserve">
+    <value>P是原始消息块，Wc是增加复杂度的棋盘图案，P *是消息块P的共轭版本。</value>
+  </data>
+  <data name="ConversionViewText1" xml:space="preserve">
+    <value>隐藏过程现已完成，您可以在图片输出组件中看到输出图像。</value>
+  </data>
+  <data name="ConversionViewText2" xml:space="preserve">
+    <value>您可以通过在下面的文本框中输入x和y坐标或使用箭头浏览像素来查看像素的转换。</value>
+  </data>
+  <data name="CurrentComplexBlockNrLabel" xml:space="preserve">
+    <value>当前的复杂块号：</value>
+  </data>
+  <data name="CurrentImageBlockNrLabel" xml:space="preserve">
+    <value>当前图像块号：</value>
+  </data>
+  <data name="CurrentMessageBlockNrLabel" xml:space="preserve">
+    <value>当前消息块编号：</value>
+  </data>
+  <data name="CurrentPixelLabel" xml:space="preserve">
+    <value>当前像素</value>
+  </data>
+  <data name="GreenBitMaskLabel" xml:space="preserve">
+    <value>绿色位掩码</value>
+  </data>
+  <data name="GreenPBLabel" xml:space="preserve">
+    <value>绿位飞机</value>
+  </data>
+  <data name="GreenValueLabel" xml:space="preserve">
+    <value>绿色价值：</value>
+  </data>
+  <data name="HiderBlocksPanelText1" xml:space="preserve">
+    <value>右侧的图像块被左侧的消息块替换</value>
+  </data>
+  <data name="HidingAndCapacityTitle" xml:space="preserve">
+    <value>概述和隐藏容量信息</value>
+  </data>
+  <data name="HidingCapacityText" xml:space="preserve">
+    <value>隐藏容量：</value>
+  </data>
+  <data name="HidingProcessViewTitle" xml:space="preserve">
+    <value>隐藏过程</value>
+  </data>
+  <data name="HintPrompt" xml:space="preserve">
+    <value>提示：使用功能区栏中的“播放”按钮启动程序。这将启用上面的“选择位”按钮。</value>
+  </data>
+  <data name="HintPrompt2" xml:space="preserve">
+    <value>选择隐藏位以执行隐藏过程并激活其他视图。</value>
+  </data>
+  <data name="HintPrompt3" xml:space="preserve">
+    <value>提示：使用功能区栏中的“播放”按钮启动程序。这将执行隐藏过程，并使按钮可以访问其他视图。</value>
+  </data>
+  <data name="ImageBlocksInfoText1" xml:space="preserve">
+    <value>图像块总数：</value>
+  </data>
+  <data name="ImageBlocksInfoText2" xml:space="preserve">
+    <value>复杂图像块的数量：</value>
+  </data>
+  <data name="ImageHeightLabel" xml:space="preserve">
+    <value>影像高度：</value>
+  </data>
+  <data name="ImageInfoLabel" xml:space="preserve">
+    <value>图片信息：</value>
+  </data>
+  <data name="ImageWidthLabel" xml:space="preserve">
+    <value>图片宽度：</value>
+  </data>
+  <data name="InputImageCaption" xml:space="preserve">
+    <value>影像输入</value>
+  </data>
+  <data name="InputImageTooltip" xml:space="preserve">
+    <value>上载应该隐藏秘密消息或从中提取秘密消息的图像</value>
+  </data>
+  <data name="InputMessageCaption" xml:space="preserve">
+    <value>留言输入</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>输入要隐藏在图像中的文本</value>
+  </data>
+  <data name="Intro0Text1" xml:space="preserve">
+    <value>隐秘术是将秘密数据隐藏在非秘密文件中以掩盖正在传达秘密消息这一事实的过程。</value>
+  </data>
+  <data name="Intro0Text2" xml:space="preserve">
+    <value>该术语结合了希腊单词steganós（意味着隐藏）和图形（graph）（意味着书写）。</value>
+  </data>
+  <data name="Intro0Text3" xml:space="preserve">
+    <value>该过程旨在以一种微妙的方式对数据进行编码，以使更改不会被注意到。</value>
+  </data>
+  <data name="Intro0Text4" xml:space="preserve">
+    <value>隐写术可以与加密技术结合使用，以在传递敏感数据时增加额外的安全性。</value>
+  </data>
+  <data name="Intro1Text1" xml:space="preserve">
+    <value>此图显示了隐秘程序通常如何在不安全的通信通道上工作。</value>
+  </data>
+  <data name="Intro1Text2" xml:space="preserve">
+    <value>秘密消息可以是加密的（密文）或明文。</value>
+  </data>
+  <data name="Intro2BPCSText1" xml:space="preserve">
+    <value>为了克服传统隐写技术的数据隐藏能力有限的缺点，引入了BPCS算法。该技术可以隐藏多达50％的封面图像数据量，而不会在原始图像的视觉外观上造成很大的失真。</value>
+  </data>
+  <data name="Intro2BPCSText2" xml:space="preserve">
+    <value>在BPCS中，可以将由24位像素组成的多值图像分解为24个二进制图片（位平面）的集合。</value>
+  </data>
+  <data name="Intro2BPCSText3" xml:space="preserve">
+    <value>这些平面被划分为8 x 8像素块，然后将这些块分为噪声类区域和信息性区域，</value>
+  </data>
+  <data name="Intro2BPCSText4" xml:space="preserve">
+    <value>可以将噪声类似的区域（复杂区域）替换为秘密消息的8 x 8位块，该块也应该是复杂的。如果消息块不复杂，则应对其进行缀合以保持图像块的复杂度，</value>
+  </data>
+  <data name="Intro2BPCSTitle" xml:space="preserve">
+    <value>BPCS算法</value>
+  </data>
+  <data name="Intro2LSBText1" xml:space="preserve">
+    <value>在LSB算法中，秘密消息的位替换输入封面图像的像素位的最低有效位（LSB）。</value>
+  </data>
+  <data name="Intro2LSBText2" xml:space="preserve">
+    <value>更改像素的红色，蓝色和绿色通道的LSB会导致用肉眼几乎无法察觉的差异，因此不会怀疑秘密信息隐藏在图像中。</value>
+  </data>
+  <data name="Intro2LSBText3" xml:space="preserve">
+    <value>示例：在以下像素中编码消息位111：</value>
+  </data>
+  <data name="Intro2LSBTitle" xml:space="preserve">
+    <value>LSB算法</value>
+  </data>
+  <data name="Intro3BPCSTitle" xml:space="preserve">
+    <value>类噪声与信息区域的示例</value>
+  </data>
+  <data name="Intro3LSBText1" xml:space="preserve">
+    <value>这将是一个交互式可视化，您可以在其中选择秘密消息位将替换的位，并查看选择MSB和LSB之间的区别。</value>
+  </data>
+  <data name="Intro3LSBText2" xml:space="preserve">
+    <value>选择位并执行程序后，您可以浏览像素并查看替换过程如何更改每个像素。</value>
+  </data>
+  <data name="Intro3LSBText3" xml:space="preserve">
+    <value>最后3个像素用于存储提取过程的信息，包括：秘密消息的长度和用于编码的位。</value>
+  </data>
+  <data name="Intro3LSBText4" xml:space="preserve">
+    <value>仅使用LSB隐藏数据，该算法最多可以隐藏宽度*高度* 3位（用于隐藏标题信息的负72位）。</value>
+  </data>
+  <data name="Intro3LSBTitle" xml:space="preserve">
+    <value>开始之前的更多信息</value>
+  </data>
+  <data name="Intro4BPCSTitle" xml:space="preserve">
+    <value>共轭图</value>
+  </data>
+  <data name="InvalidComplexityThresholdInput" xml:space="preserve">
+    <value>复杂度阈值输入无效，值应在0到1之间</value>
+  </data>
+  <data name="InvalidInputPrompt" xml:space="preserve">
+    <value>输入无效，请输入值：</value>
+  </data>
+  <data name="LSBMainMenu1" xml:space="preserve">
+    <value>了解算法的工作原理</value>
+  </data>
+  <data name="LSBMainMenu2" xml:space="preserve">
+    <value>选择隐藏过程的位</value>
+  </data>
+  <data name="LSBMainMenu3" xml:space="preserve">
+    <value>查看像素转换</value>
+  </data>
+  <data name="LSBMainMenu4" xml:space="preserve">
+    <value>概述和隐藏容量信息</value>
+  </data>
+  <data name="MessageBlocksInfoText1" xml:space="preserve">
+    <value>消息块总数：</value>
+  </data>
+  <data name="MessageBlocksInfoText2" xml:space="preserve">
+    <value>讯息大小：</value>
+  </data>
+  <data name="MessageInfoLabel" xml:space="preserve">
+    <value>留言信息：</value>
+  </data>
+  <data name="MessageLengthExtractLabel" xml:space="preserve">
+    <value>讯息长度：</value>
+  </data>
+  <data name="MessageLengthLabel" xml:space="preserve">
+    <value>讯息长度：</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>LSB隐写术</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>BPCS隐写术</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>选择一种模式</value>
+  </data>
+  <data name="NextButton" xml:space="preserve">
+    <value>下一个</value>
+  </data>
+  <data name="NoImageLogMessage" xml:space="preserve">
+    <value>请上传图片</value>
+  </data>
+  <data name="NoPresentationPrompt" xml:space="preserve">
+    <value>没有要显示的演示</value>
+  </data>
+  <data name="NotEnoughHidingCapacity" xml:space="preserve">
+    <value>隐藏容量小于秘密消息的大小，因此并非整个消息都隐藏在图像中。</value>
+  </data>
+  <data name="NoTextLogMessage" xml:space="preserve">
+    <value>请输入信息以隐藏</value>
+  </data>
+  <data name="OutputImageCaption" xml:space="preserve">
+    <value>影像输出</value>
+  </data>
+  <data name="OutputImageTooltip" xml:space="preserve">
+    <value>这是带有秘密消息编码的图像</value>
+  </data>
+  <data name="OutputMessageCaption" xml:space="preserve">
+    <value>讯息输出</value>
+  </data>
+  <data name="OutputMessageTooltip" xml:space="preserve">
+    <value>这是提取的消息</value>
+  </data>
+  <data name="PercentageCapacityLabel" xml:space="preserve">
+    <value>隐藏容量百分比：</value>
+  </data>
+  <data name="PixelConversionViewTitle" xml:space="preserve">
+    <value>像素转换</value>
+  </data>
+  <data name="PlaneLabel" xml:space="preserve">
+    <value>平面层：</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>图像隐写术</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>在图像中隐藏秘密消息</value>
+  </data>
+  <data name="PointLabel" xml:space="preserve">
+    <value>点</value>
+  </data>
+  <data name="PreviousButton" xml:space="preserve">
+    <value>以前</value>
+  </data>
+  <data name="RedBitMaskLabel" xml:space="preserve">
+    <value>红色位掩码</value>
+  </data>
+  <data name="RedPBLabel" xml:space="preserve">
+    <value>红位飞机</value>
+  </data>
+  <data name="RedValueLabel" xml:space="preserve">
+    <value>红色值：</value>
+  </data>
+  <data name="SeePixelConversionButton" xml:space="preserve">
+    <value>查看像素转换</value>
+  </data>
+  <data name="SeeSlide4Text" xml:space="preserve">
+    <value>请参阅幻灯片1.4。</value>
+  </data>
+  <data name="SeeSlide5Text" xml:space="preserve">
+    <value>请参阅幻灯片1.5。</value>
+  </data>
+  <data name="ShowAllBlocksButton" xml:space="preserve">
+    <value>显示所有图像块</value>
+  </data>
+  <data name="ShowButton" xml:space="preserve">
+    <value>节目</value>
+  </data>
+  <data name="ShowHiderBlocksButton" xml:space="preserve">
+    <value>显示复杂的方块</value>
+  </data>
+  <data name="ShowPresentationPrompt" xml:space="preserve">
+    <value>要在此处显示演示文稿，请单击上方的“设置”图标，然后启用“显示演示文稿”复选框。如果模板已停止，则只能更改设置。</value>
+  </data>
+  <data name="ShowPresentationSettingsCaption" xml:space="preserve">
+    <value>显示演示</value>
+  </data>
+  <data name="ShowPresentationSettingsTooltip" xml:space="preserve">
+    <value>显示隐藏过程的演示</value>
+  </data>
+  <data name="SkipIntroButton" xml:space="preserve">
+    <value>跳过介绍</value>
+  </data>
+  <data name="StartButton" xml:space="preserve">
+    <value>开始吧</value>
+  </data>
+  <data name="SteganographyLabel" xml:space="preserve">
+    <value>隐写术</value>
+  </data>
+  <data name="SteganographyModelLabel" xml:space="preserve">
+    <value>隐写术模型</value>
+  </data>
+  <data name="StegModelUrl" xml:space="preserve">
+    <value>images / model_en.png</value>
+  </data>
+  <data name="XCoTextArea" xml:space="preserve">
+    <value>x坐标</value>
+  </data>
+  <data name="YCoTextArea" xml:space="preserve">
+    <value>和协调</value>
+  </data>
+</root>

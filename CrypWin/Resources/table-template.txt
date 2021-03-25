@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>CrypTool 2 Log Messages</title>
+<style type="text/css">
+
+table{table-layout:fixed;border-spacing:1px;font:10px 'Verdana', Arial, Helvetica, sans-serif;background:#E7E7E7;color:#000000;width:100%;font-weight:bold}
+caption{background:#E7E7E7;border:#666666;border-bottom:2px solid #666666;text-transform:uppercase;padding:10px;font:15px 'Verdana', Arial, Helvetica, sans-serif;font-style:italic;font-weight:bold;}
+td, th{padding:4px;}
+thead th{text-align:center;background:#F5F5F5;color:#666666;border:1px solid #ffffff;text-transform:uppercase;}
+tbody th{font-weight:bold;}
+tbody tr{background:#EBF8FE;text-align:left;}
+tbody tr.odd{background:#ffffff;border-top:1px solid #ffffff;}
+tbody th a:link, tbody th a:visited{color:#666666;padding:3px 0px 0px 18px;background-repeat:no-repeat;}
+tbody th a:hover{color:#009900;}
+tbody tr td{background:#EBF8FE;border:1px solid #ffffff;}
+tbody tr.odd td{background:#ffffff;border-top:1px solid #ffffff;}
+table td a:link, table td a:visited{color:#666666;text-decoration:none;font-weight: bold;}
+table td a:hover{color:#009900;text-decoration:underline;font-weight: bold;}
+table a[title^="Download"]{padding:20px 0px 0px 15px;}
+td { vertical-align:top; overflow:hidden; }
+tfoot th, tfoot td{padding:10px;text-align:center;font:15px 'Verdana', Arial, Helvet
+
+</style>
+</head>
+<body>
+<table summary="CrypTool 2 Log Messages" >
+	<caption>CrypTool 2 Log Messages</caption>
+	<thead>
+		<tr>
+			<th style="width:30px" scope="col">Nr</th>
+			<th style="width:60px" scope="col">LogLevel</th>
+			<th style="width:80px" scope="col">Time</th>
+			<th style="width:80px" scope="col">Plugin</th>
+			<th style="width:100px" scope="col">Title</th>
+			<th scope="col">Message</th>
+		</tr>
+	</thead>	
+	<tfoot>
+		<tr>
+			<th scope="row">Total</th>
+			<td colspan="5">{0} entries</td>
+		</tr>
+	</tfoot>
+	<tbody>
+{1}
+	</tbody>		
+</table>
+
+</body>
+</html>

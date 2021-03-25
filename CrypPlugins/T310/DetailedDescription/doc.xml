@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The T-310 ARGON is a historic cipher machine that has been used by German Democratic Republic (Deutsche Demokratische Republik).
+    It is a stream cipher using a special encryption process which is more sophisticated than a plain XOR used by most stream ciphers. This
+    process includes a matrix multiplication. The keystream is derived from a complex algorithm which resembles a block cipher.
+    Unlike electro-mechanical machines like Enigma, the encryption function of T-310 is realized completely in electronics.
+    <newline />
+    It uses two keys. The main key is a 240 bit key (30 bytes) grouped into two keys of respective 15 bytes. Each of these keys must
+    have an odd parity. Thus, the key has an entropy (effective value) of 10 times 23 = 230 bit. The second key is called long term key
+    and is a permutation fixed onto the machine. It could be changed as a last resort measurement if other parts turned out to be insecure.
+    
+  </introduction>
+  <introduction lang="zh-CN">T-310 ARGON是德国民主共和国（Deutsche Demokratische Republik）使用的具有历史意义的加密机。它是使用特殊加密过程的流密码，它比大多数流密码所使用的纯XOR更为复杂。该过程包括矩阵乘法。密钥流是从类似于分组密码的复杂算法中派生的。与像Enigma这样的机电设备不同，T-310的加密功能完全在电子产品中实现。它使用两个键。主密钥是一个240位密钥（30个字节），分为两个分别为15个字节的密钥。这些密钥中的每个密钥必须具有奇数奇偶校验。因此，密钥的熵（有效值）为10乘以23 = 230位。第二个密钥称为长期密钥，是固定在机器上的排列。如果其他部分被证明是不安全的，则可以将其更改为最后的测量方法。</introduction>
+  <introduction lang="de-DE">
+    Die T310 ARGON ist eine historische Chiffriermaschine, die in der Deutschen Demokratischen Republik (DDR) eingesetzt wurde.
+    Sie verwendet eine spezielle Stromchiffre, die sich durch eine besondere Verknüpfung des Klartexts mit dem Schlüsselstrom
+    von anderen Algorithmen dieser Klasse abhebt. Dabei wird eine Matrixmultiplikation durchgeführt. Der Schlüsselstrom wird aus einem komplexen
+    Algorithmus abgeleitet, der einer Blockchiffre gleicht. Im Gegensatz zu elektromechanischen Maschinen (wie der Enigma) wird
+    die Verschlüsselungsfunktion der T-310/50 alleine durch elektronische Bauteile realisiert.
+    <newline />
+    Die Maschine verwendet zwei Schlüssel. Einen 240 Bit langen Hauptschlüssel (30 Bytes), der in zwei Teilschlüssel à 120 Bit (15 Bytes) unterteilt ist.
+    Beide Teilschlüssel müssen eine ungerade Parität haben. Daher hat der Gesamtschlüssel eine Entropie (Informationsgehalt) von 10 mal 23 = 230 Bit.
+    Der zweite Schlüssel heißt Langzeitschlüssel und besteht aus verschiedenen Permutationen, die fest auf der Maschine installiert sind. Der Langzeitschlüssel
+    konnte als zusätzliche Sicherheitsoption getauscht werden.
+    
+    </introduction>
+  <usage lang="en">
+    <section headline="General Usage">
+      Connect the input and output connectors, as well as the keys. There are two key connectors for two subkeys,
+      which form the main key together. The plugin has 4 settings you can change (see below).
+    </section>
+    <section headline="Key structure">
+     Both subkeys must fulfill two requirements:
+     <enum><item>The length must be exactly 15 bytes (120 bit).</item><item>The parity of the key must be odd.</item></enum></section>
+    <section headline="Action">
+      Choose if you want to encrypt or decrypt data
+    </section>
+    <section headline="Bit selector">
+      Due to the complex structure of the T310 and its logical gates, it is not always clear which bits of a vector are used.
+      This button allows you to switch between the least or most significant bits of certain vectors like the initialization vector
+      and the keys.
+    </section>
+    <section headline="Long term key">
+      A special key which was fixed onto the complex unit, and could only be changed with some effort. It consists of permutations
+      which are used for deriving the keystream, therefore the long term key is crucial to the security of the algorithm.
+      They were numbered (not chronologically); some of these keys are selectable in this plugin.
+    </section>
+    <section headline="Version of the T-310">
+      Select if you want to use the T310/50 or T-310/51. The older T-310/50 was only able to 
+      encrypt characters of the CCITT-2 encoding table, which is a 5 bit teleprinting standard. Due to the short
+      length of only 5 bits the amount of available characters was limited. It supports only upper case letters,
+      numbers from 0-9 and some other characters. This version will truncate all input data which is not 7 bit ASCII encoded
+      by default and without warning. If the input still contains non-convertable characters, you will receive a warning.
+      They will be truncated from the message before encrypting. Lower case letters will be converted automatically to upper case.
+      <newline /><newline />
+      The newer T-310/51 could encrypt any kind of byte-based data. It reduces bytes to 5-bit words before encrypting it.
+      This implementation handles this process by expanding 5 bytes to 8 bytes with a length of 5 bits (lowest common multiple: 5 * 8 = 40)
+    </section>
+  </usage>
+  <usage lang="zh-CN">连接输入和输出连接器以及按键。两个子键有两个键连接器，这两个子键共同构成主键。该插件有4个您可以更改的设置（请参见下文）。两个子密钥都必须满足两个要求：长度必须正好为15个字节（120位）。密钥的奇偶校验必须为奇数。选择是否要加密或解密数据由于T310及其逻辑门的复杂结构，并不总是清楚使用向量的哪些位。使用此按钮可以在某些向量的最低或最高有效位之间进行切换，例如初始化向量和键。固定在复杂单元上的特殊键，只能费些力气才能更改。它由用于派生密钥流的排列组成，因此，长期密钥对于算法的安全性至关重要。他们被编号（不是按时间顺序）。其中一些键在此插件中是可选的。选择是否要使用T310 / 50或T-310 / 51。较旧的T-310 / 50仅能加密CCITT-2编码表的字符，该表是5位电传打印标准。由于只有5位的短长度，因此可用字符的数量受到限制。它仅支持大写字母，0-9之间的数字以及其他一些字符。该版本将截断所有默认情况下未经7位ASCII编码且没有警告的输入数据。如果输入仍然包含不可转换的字符，您将收到警告。在加密之前，它们将从消息中被截断。小写字母将自动转换为大写字母。较新的T-310 / 51可以加密任何类型的基于字节的数据。在加密之前，它将字节减少为5位字。该实现通过将5个字节扩展为8个字节（长度为5位）来处理此过程（最低公共倍数：5 * 8 = 40）</usage>
+  <usage lang="de-DE">
+    <section headline="Allgemeine Verwendung">
+      Verbinden Sie die Eingabe- und Ausgabekonnektoren, sowie die Schlüssel. Es gibt zwei Schlüsseleingabekonnektoren für die Teilschlüssel,
+      die den Hauptschlüssel (Zeitschlüssel) bilden. Des Weiteren gibt es vier veränderbare Einstellungen
+      für den Algorithmus (siehe unten).
+    </section>
+    <section headline="Aufbau der Schlüssel">
+      Ein am Schlüsseleingang angegebener Schlüssel muss zwei Anforderungen erfüllen:
+      <enum><item>Die Länge muss 15 Byte betragen (120 Bits)</item><item>Die Parität des Schlüssels muss ungerade sein</item></enum></section>
+    <section headline="Aktion">
+      Es kann zwischen Ver- oder Entschlüsseln gewählt werden.
+    </section>
+    <section headline="Bit-Auswahl">
+      Aufgrund der komplexen Struktur der logischen Schaltungen der T-310, ist nicht immer klar, welche Bits der (Schlüssel-)Vektoren
+      wirklich verwendet werden. Aus diesem Grund kann mit dieser Option gewählt werden, ob das höchst- oder niedrigstwertige Bit eines Vektors
+      verwendet wird (zum Beispiel beim Initialisierungsvektor).
+      
+    </section>
+    <section headline="Langzeitschlüssel">
+      Ein spezieller Schlüssel, der fest auf der Maschine installiert wurde und nicht einfach zu tauschen war.
+      Er besteht aus Permutationen die bei der Ableitung pseudozufälliger Bits (Wurmreihe) verwendet werden,
+      und ist damit für die Sicherheit des Verfahrens wichtig. Diese Schlüssel waren (nicht chronologisch) durchnummeriert;
+      einige können in diesem Plug-in ausgewählt werden.
+      
+    </section>
+    <section headline="Version der T-310">
+      Es kann zwischen der T-310/50 oder der T-310/51 gewählt werden. Die ältere T-310/50 konnte nur Zeichen nach dem Kodierungstandard
+      für Fernschreibzeichen CCITT-2 verschlüsseln. Da dieser nur 5 Bit lang ist, ist die Zahl der verfügbaren Zeichen begrenzt. Es werden
+      nur Großbuchstaben, Ziffern von 0 bis 9 und einige Sonderzeichen unterstützt. In diesem Modus werden alle Zeichen automatisch
+      und ohne Warnung entfernt, die nicht im 7-Bit-ASCII-Zeichensatz enthalten sind. Falls Zeichen in den Eingabedaten übergeben werden,
+      die es in 7-Bit-ASCII aber nicht in CCITT-2 gibt, wird eine Warnung ausgegeben, bevor die jeweiligen Zeichen entfernt und der Klartext
+      verschlüsselt wird. Kleinbuchstaben werden automatisch in Großbuchstaben umgewandelt.
+      <newline /><newline />
+      Die neuere T-310/51 konnte beliebige Daten verschlüsseln. Dazu wurden Bytes vor dem Verschlüsseln auf 5-Bit-Wörter reduziert.
+      Diese Implementierung teilt 5-Byte-Blöcke auf 8 Byte auf (Kleinstes gemeinsames Vielfaches: 5 * 8 = 40).
+    </section>
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://de.wikipedia.org/wiki/T-310/50" lang="en" />
+      <caption lang="en">T-310/50 (Wikipedia, german)</caption>
+      <link url="http://de.wikipedia.org/wiki/T-310/50" lang="de-DE" />
+      <caption lang="de-DE">T-310/50 (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

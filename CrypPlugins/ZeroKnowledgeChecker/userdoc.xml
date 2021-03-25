@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    In cryptography, a zero-knowledge proof or zero-knowledge protocol is a method by which one party (the prover) can prove to another party (the verifier) that he knows a secret,
+    without conveying any information about the secret apart from the fact that he knows it.
+    <newline /><newline />
+    The implementation of the zero-knowledge protocol in CrypTool assumes, that the prover can prove that he knows the secret by influencing an experiment in such a way, that its result is a value that was requested by the verifier.
+    The result of the experiment is a number in a given interval.
+    <newline /><newline />
+    The verifier determines the number of possible results of the experiment. He chooses a random result and challenges the prover to reproduce this result of the experiment.
+    If the prover knows the secret, he can reproduce it every time. If he doesn't know it, the result of the experiment will be random.
+    If it is different from the requested value, the verifier knows immediately that the prover doesn't know the secret.
+    But if the result happens to be correct, the verifier can draw no conclusion.
+    By repeating this process several times, the probability that the prover can convince the verifier without knowing the secret gets smaller and smaller.
+    <newline /><newline />
+    This component implements the actions of the verifier. He determines the number of possible results of the experiment and the number of repetitions.
+  </introduction>
+  <introduction lang="zh-CN">在密码学中，零知识证明或零知识协议是一种方法，通过该方法，一方（证明方）可以向另一方（验证方）证明他知道秘密，而无需传递与秘密有关的任何信息。他知道这一点。 CrypTool中零知识协议的实现假定，证明者可以通过影响实验来证明自己知道秘密，其结果是验证者要求的值。实验的结果是给定间隔中的数字。验证者确定实验的可能结果数量。他选择一个随机结果，并挑战证明者重现该实验结果。如果证明者知道秘密，则他可以每次都复制它。如果他不知道，实验结果将是随机的。如果与要求的值不同，则验证者立即知道证明者不知道秘密。但是，如果结果恰好是正确的，则验证者无法得出任何结论。通过多次重复此过程，证明者可以在不知道秘密的情况下说服验证者的可能性越来越小。该组件实现验证程序的动作。他确定了实验的可能结果数量和重复次数。</introduction>
+  <introduction lang="ru">В криптографии протокол доказательства нулевого знания или нулевой информации - это метод, с помощью которого одна сторона (проверщик) может доказать другой стороне (верификатору), что он знает секрет, не передавая никакой информации о тайне, кроме факта что он это знает. Внедрение протокола zero-knowledge в CrypTool предполагает, что проверщик может доказать, что он знает секрет, воздействуя таким образом на эксперимент таким образом, что его результат является значением, которое запрашивал верификатор. Результатом эксперимента является число в данном интервале. Верификатор определяет количество возможных результатов эксперимента. Он выбирает случайный результат и бросает вызов тому, чтобы воспроизвести этот результат эксперимента. Если проникник знает секрет, он может воспроизводить его каждый раз. Если он этого не знает, результат эксперимента будет случайным. Если он отличается от запрашиваемого значения, верификатор сразу узнает, что средство проверки не знает секрет. Но если результат окажется правильным, верификатор не может сделать никакого вывода. Повторяя этот процесс несколько раз, вероятность того, что проверщик может убедить верификатора, не зная тайны, становится все меньше и меньше. Этот компонент реализует действия верификатора. Он определяет количество возможных результатов эксперимента и количество повторений.</introduction>
+  <introduction lang="de-DE">
+    Ein Zero-Knowledge-Beweis (auch kenntnisfreier Beweis) oder Zero-Knowledge-Protokoll (auch kenntnisfreies Protokoll) ist ein Protokoll aus dem Bereich der Kryptographie.
+    Bei einem Zero-Knowledge-Protokoll kommunizieren zwei Parteien (der Beweiser und der Verifizierer) miteinander.
+    Der Beweiser überzeugt dabei den Verifizierer mit einer gewissen Wahrscheinlichkeit davon, dass er ein Geheimnis kennt, ohne dabei Informationen über das Geheimnis selbst bekannt zu geben.
+    <newline /><newline />
+    Die Implementierung des Zero-Knowledge-Protokolls in CrypTool geht davon aus, dass der Beweiser die Kenntnis des Geheimnisses dadurch belegen kann, dass er ein Experiment so beeinflusst,
+    dass ein vom Verifizierer verlangter Wert dabei herauskommt.
+    Das Ergebnis des Experimentes ist eine Zahl aus einem vorgegebenen Intervall.
+    <newline /><newline />
+    Der Verifizierer bestimmt die Anzahl der möglichen Ergebnisse des Experimentes. Er wählt ein beliebiges Ergebnis aus und fordert den Beweiser auf, dieses durch das Experiment zu reproduzieren.
+    Kennt der Beweiser das Geheimnis, so kann er das Experiment stets so ausführen, dass das geforderte Ergebnis zustande kommt. Kennt er es nicht, so ist das Ergebnis des Experiments zufällig.
+    Wenn das Ergebnis nicht übereinstimmt, so weiss der Verifizierer sicher, dass der Beweiser das Geheimnis nicht kennt. Ist das Ergebnis aber durch Zufall richtig, so kann der Verifizierer keine Rückschlüsse ziehen.
+    Durch mehrmalige Wiederholung wird die Wahrscheinlichkeit, dass der Beweiser bei Nichtkenntnis des Geheimnisses stets das richtige Ergebnis erzeugt, immer kleiner.
+    <newline /><newline />
+    Diese Komponente implementiert die Aktionen des Verifizierers. Er bestimmt die Anzahl der möglichen Ergebnisse des Experimentes und die Anzahl der durchzuführenden Wiederholungen.
+  </introduction>
+  <usage lang="en">
+    Enter the number of possible results of the experiment and the number of repetitions in the settings of the component.
+    When the workspace is executed, the component sends the number of possible results to the prover on the output "Amount of options".
+    On the output labeled "Output Random", the prover announces the result he requests. Hereupon, the prover executes the experiment and sends the result to the input of the component.
+    This process is repeated according to the number of repetitions in the settings.
+    <newline /><newline />
+    After that, the verifier sends his conclusion to the output labeled "Success" as a boolean value. If he is convinced that the prover knows the secret, he outputs the value "True", otherwise "False".
+    The probability, that the prover can convince the verifier falsely, depends on the number of options and repetitions. The more options and repetitions there are, the smaller that probability gets.
+    The resulting probability is provided at the output "Rate of success".
+  </usage>
+  <usage lang="zh-CN">在组件的设置中输入实验的可能结果数和重复数。当执行工作空间时，组件会在输出“ Amount of options”上将可能的结果数量发送给证明者。在标有“ Output Random”的输出上，证明者宣布他要求的结果。于是，证明者执行实验并将结果发送到组件的输入。根据设置中的重复次数重复此过程。此后，验证者将其结论作为布尔值发送到标记为“成功”的输出。如果他确信证明者知道该秘密，则他输出值“ True”，否则输出“ False”。证明者可以错误地使验证者信服的可能性取决于选择和重复的次数。选项和重复次数越多，概率就越小。在输出“成功率”处提供结果概率。</usage>
+  <usage lang="ru">Введите количество возможных результатов эксперимента и количество повторений в настройках компонента. Когда рабочая область выполняется, компонент отправляет количество возможных результатов в проверку на выходе «Количество опций». На выходе с надписью «Выходной случайный» средство проверки объявляет результат, который он запрашивает. В этом случае программа выполняет эксперимент и отправляет результат на вход компонента. Этот процесс повторяется в соответствии с количеством повторений в настройках. После этого верификатор отправляет ваше заключение на вывод с надписью «Успех» в виде логического значения. Если он убежден, что пропер знает секрет, он выводит значение «Истина», иначе «Ложно». Вероятность того, что проверщик может убедить верификатора ложно, зависит от количества опций и повторений. Чем больше вариантов и повторений есть, тем меньше вероятность. Полученная вероятность предоставляется на выходе «Скорость успеха».</usage>
+  <usage lang="de-DE">
+    Geben Sie in den Einstellungen der Komponente die Anzahl der möglichen Ergebnisse des Experimentes und die Anzahl der durchzuführenden Wiederholungen an.
+    Wenn der Arbeitsbereich ausgeführt wird, gibt die Komponente die Anzahl der möglichen Ergebnisse an ihrem Ausgang "Anzahl der Optionen" an den Beweiser weiter.
+    Am Ausgang "Ausgabe Zufallswert" wird das vom Beweiser verlangte Ergebnis ausgegeben. Am Eingang der Komponente wird ihm daraufhin der vom Beweiser erzielte Ausgang des Experimentes mitgeteilt.
+    Dieser Vorgang wird gemäß der in den Einstellungen angegebenen Zahl wiederholt.
+    <newline /><newline />
+    Danach wird am Ausgang "Erfolg" die vom Verifizierer getroffene Schlussfolgerung als boolescher Wert ausgegeben, ob er glaubt, dass der Beweiser das Geheimnis kennt oder nicht.
+    Wenn er dem Beweiser glaubt, gibt er den Wert "True" aus, andernfalls "False".
+    Am Ausgang "Erfolgswahrscheinlichkeit" wird die von der Anzahl der Optionen und der Wiederholungen abhängige Wahrscheinlichkeit ausgegeben, dass der Beweiser den Verifizierer fälschlicherweise überzeugen kann.
+    Je größer die Anzahl der Optionen und der Wiederholungen ist, desto geringer ist diese Wahrscheinlichkeit.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Zero-knowledge_proof" lang="en" />
+      <caption lang="en">Zero-knowledge proof</caption>
+      <link url="http://de.wikipedia.org/wiki/Zero-Knowledge-Beweis" lang="de-DE" />
+      <caption lang="de-DE">Zero-Knowledge-Beweis</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,14 @@
+﻿<h2>Factorization by trial division (brute-force method)</h2>
+
+Trial division is a very intuitive method of factorization.
+One begins by dividing the number to be factored by 2. If the number is divisible by 2 without remainder (known as dividing evenly), we then divide the result by 2 again. This process is continued until the result is no longer divisible by 2.
+The next step is to divide by 3 in the same manner, until the result of the division by 3 is no longer even.
+The process continues, with the divisor increasing, to the next natural number
+and so on until the result of the division is finally a prime number.<br /><br />
+Although the process is clear, it is by far the least efficient, compared with other factorization methods.
+Trial division is a brute-force attack. Even if using only prime divisors instead of using all natural numbers, doesn't speed it up significicantly.
+The factorization of a number with two very large prime factors would take a prohibitive length of time.
+Today, for the RSA process numbers in the range of 300-digit decimals or larger are used routinely. To apply trial division in such a case would take longer than the estimated age of the universe.<br />
+In this implementation, the trial division is preceded by a modern primality test (the Miller-Rabin test) which can very fast detect whether or not a number is a prime number. The time-consuming trial factorization will only be executed, if the number is not a prime number.
+<p />
+Link: <a href="http://en.wikipedia.org/wiki/Trial_division" target="_blank">http://en.wikipedia.org/wiki/Trial_division</a>

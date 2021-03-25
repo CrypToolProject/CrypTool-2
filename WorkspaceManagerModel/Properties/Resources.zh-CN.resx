@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ExecutionEngine_Execute_Exception_occured_during_startup_of_Workspace___0_" xml:space="preserve">
+    <value>工作空间启动期间发生异常：{0}</value>
+  </data>
+  <data name="ExecutionEngine_BenchmarkTimeout_Executing_at__0_0_0__Plugins_sec_" xml:space="preserve">
+    <value>在{0：0,0} Plugins \ sec处执行。</value>
+  </data>
+  <data name="ExecutionEngine_CheckGui_Exception_occured_during_update_of_GUI_of_Workspace___0__" xml:space="preserve">
+    <value>更新工作区的GUI期间发生异常：{0}</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Start_stopping_ExecutionEngine" xml:space="preserve">
+    <value>开始停止ExecutionEngine</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Waiting_for_all_threads_to_stop" xml:space="preserve">
+    <value>等待所有线程停止</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Thread__0__did_not_stop_in__1__miliseconds_and_will_be_aborted_now_" xml:space="preserve">
+    <value>线程{0}在{1}毫秒内没有停止，现在将被中止。</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Exception_during_waiting_for_thread___0___to_stop___1_" xml:space="preserve">
+    <value>等待线程“ {0}”停止期间发生异常：{1}</value>
+  </data>
+  <data name="ExecutionEngine_Stop_All_threads_stopped" xml:space="preserve">
+    <value>所有线程停止</value>
+  </data>
+  <data name="ExecutionEngine_Stop_WorkspaceModel_states_resetted" xml:space="preserve">
+    <value>已重置WorkspaceModel状态</value>
+  </data>
+  <data name="ExecutionEngine_Stop_ExecutionEngine_successfully_stopped" xml:space="preserve">
+    <value>ExecutionEngine成功停止</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Exception_occured_during_stopping_of_Workspace___0__" xml:space="preserve">
+    <value>停止工作区期间发生异常：{0}</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Aborting___0___now" xml:space="preserve">
+    <value>现在正在中止“ {0}”</value>
+  </data>
+  <data name="ConnectorModel_PropertyChangedOnPlugin_Error_occured_during_propagating_of_new_value_of___0___of_Output___1_____2_" xml:space="preserve">
+    <value>传播输出&amp;#39;{1}&amp;#39;的新值&amp;#39;{0}&amp;#39;时发生错误：{2}</value>
+  </data>
+  <data name="PluginModel_Execute_Number_of__0__too_big_for__1____2_" xml:space="preserve">
+    <value>{0}的数量对{1}而言太大：{2}</value>
+  </data>
+  <data name="PluginModel_Execute_An_error_occured_while_setting_value_of_connector___0___of___1_____2_" xml:space="preserve">
+    <value>将连接器“ {0}”的值设置为“ {1}”时发生错误：{2}</value>
+  </data>
+  <data name="PluginModel_Execute_An_error_occured_while_executing____0______1__" xml:space="preserve">
+    <value>执行&amp;#39;{0}&amp;#39;时发生错误：{1}</value>
+  </data>
+  <data name="PluginModel_Execute_An_error_occured_while_executing___0______1_" xml:space="preserve">
+    <value>执行&amp;#39;{0}&amp;#39;时发生错误：{1}</value>
+  </data>
+  <data name="CopyOperation_Execute_Could_not_restore_the_setting___0___of_plugin___1__" xml:space="preserve">
+    <value>无法恢复插件“ {1}”的设置“ {0}”</value>
+  </data>
+  <data name="CopyOperation_Execute_Error_while_initializing___0__" xml:space="preserve">
+    <value>初始化“ {0}”时出错</value>
+  </data>
+  <data name="CopyOperation_Execute_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_" xml:space="preserve">
+    <value>恢复“ {0}”到“ {1}”之间的IControl连接时出错。工作区肯定无法正常工作。</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__" xml:space="preserve">
+    <value>无法恢复插件“ {1}”的设置“ {0}”</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_A_property_with_name___0___of_type___1___does_not_exist_in___2___3___but_a_ConnectorModel_exists_in_the_PluginModel__Delete_the_ConnectorModel_now_" xml:space="preserve">
+    <value>类型&amp;#39;{1}&amp;#39;的名称&amp;#39;{0}&amp;#39;的属性在&amp;#39;{2}：{3}&amp;#39;中不存在，但是PluginModel中存在ConnectorModel。立即删除ConnectorModel。</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_A_ConnectorModel_for_the_plugins_property___0___of_type___1___does_not_exist_in_the_PluginModel_of___2___3____Create_a_ConnectorModel_now_" xml:space="preserve">
+    <value>类型&amp;#39;{1}&amp;#39;的插件属性&amp;#39;{0}&amp;#39;的ConnectorModel在&amp;#39;{2}：{3}&amp;#39;的PluginModel中不存在。现在创建一个ConnectorModel。</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_Error_while_initializing____0__" xml:space="preserve">
+    <value>初始化“ {0}”时出错</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_" xml:space="preserve">
+    <value>恢复“ {0}”到“ {1}”之间的IControl连接时出错。工作区肯定无法正常工作。</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_" xml:space="preserve">
+    <value>没有数据的ImageModel（字节数组== null ||字节数组为空）无法还原。立即删除。</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_TextModel" xml:space="preserve">
+    <value>没有数据（字节数组== null ||字节数组为空）的TextModel无法还原。立即删除。</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_ImageModel" xml:space="preserve">
+    <value>没有数据的ImageModel（字节数组== null ||字节数组为空）无法还原。立即删除。</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Could_not_create_instance_of___0_" xml:space="preserve">
+    <value>无法创建以下实例：{0}</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_create_a_Color_with__0__Channels_" xml:space="preserve">
+    <value>无法创建具有{0}个通道的颜色！</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Expected_1_or_2_types_for_list__But_found___0_" xml:space="preserve">
+    <value>清单应为1或2种类型；但发现：{0}</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_create_a_Point_with__0__Coordinates_" xml:space="preserve">
+    <value>无法使用{0}坐标创建点！</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Could_not_deserialize_model_element___0___of_type___1__" xml:space="preserve">
+    <value>无法反序列化类型为“ {1}”的模型元素“ {0}”</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_find_list_field___0___of___1__" xml:space="preserve">
+    <value>找不到“ {1}”的列表字段“ {0}”</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_find_field___0___of___1__" xml:space="preserve">
+    <value>找不到“ {1}”的字段“ {0}”</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Could_not_restore_reference_beteen_model_element___0___and_its_reference_with_id___1__" xml:space="preserve">
+    <value>无法还原参考beteen模型元素“ {0}”及其ID为“ {1}”的参考</value>
+  </data>
+  <data name="An_Error_occured_while_stopping_0_1" xml:space="preserve">
+    <value>停止“ {0}”时发生错误：{1}</value>
+  </data>
+  <data name="An_Error_occured_while_post_0_1" xml:space="preserve">
+    <value>执行&amp;#39;{0}&amp;#39;的PostExecution时发生错误：{1}</value>
+  </data>
+  <data name="An_Error_occured_while_pre_0_1" xml:space="preserve">
+    <value>执行&amp;#39;{0}&amp;#39;的预执行时发生错误：{1}</value>
+  </data>
+</root>

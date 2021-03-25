@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    HC128 is one of seven symmetric stream ciphers that was chosen for the final eSTREAM portfolio of the ECRYPT Stream Cipher Project.
+    HC128 is the simplified version of the HC256 stream cipher with a key and initialization vector length of 128 bits.
+    The cipher is based on two secret tables each consisting of 512 32-bit elements and a non-linear feedback function.
+    Each key/IV pair produces up to 2^64 key stream bits though in practice there is no need to restrict the length as the effect of
+    a longer stream is negligible for the security of the message. No attack faster than brute-force has been identified so far.
+  </introduction>
+  <introduction lang="zh-CN">HC128是为ECRYPT流密码项目的最终eSTREAM产品组合选择的七个对称流密码之一。 HC128是HC256流密码的简化版本，具有密钥和128位初始化矢量长度。该密码基于两个秘密表，每个秘密表由512个32位元素和一个非线性反馈函数组成。每个密钥/ IV对最多可生成2 ^ 64个密钥流位，尽管实际上不需要限制长度，因为更长的流的影响对于消息的安全性可以忽略。到目前为止，还没有发现比蛮力还要快的攻击。</introduction>
+  <introduction lang="ru">HC128 является одним из семи симметричных потоковых шифров, который был выбран для окончательного портфеля eSTREAM проекта ECRYPT Stream Cipher. HC128 является упрощенной версией шифрования потока HC256 с длиной ключа и длиной вектора инициализации 128 бит. Шифр основан на двух секретных таблицах, каждый из которых состоит из 512 32-битных элементов и нелинейной функции обратной связи. Каждая пара ключей / IV генерирует до 2 ^ 64 бит ключа, хотя на практике нет необходимости ограничивать длину, поскольку эффект более длинного потока пренебрежимо мал для обеспечения безопасности сообщения. До сих пор не было обнаружено атаки быстрее, чем грубая сила.</introduction>
+  <usage lang="en">
+    After dragging the HC128 component onto your workspace, you will
+    have to attach the three input connectors 'Input', 'Key' and 'IV' to data sources.
+
+    Additionally you have to connect a text output component to the 'Output' connector.
+  </usage>
+  <usage lang="zh-CN">将HC128组件拖到工作区后，必须将三个输入连接器“输入”，“键”和“ IV”连接到数据源。另外，您必须将文本输出组件连接到“输出”连接器。</usage>
+  <usage lang="ru">После перетаскивания компонента HC128 в рабочее пространство вам необходимо будет подключить три входных разъема «Вход», «Ключ» и «IV» к источникам данных. Кроме того, вам необходимо подключить компонент вывода текста к разъему «Выход».</usage>
+  <language culture="de" />
+  <introduction lang="de">
+    HC128 ist eine von sieben symmetrischen Stromchiffren, die für das finale eSTREAM Portfolio des
+    ECRYPT Stream Cipher Project gewählt wurden. HC128 ist eine vereinfachte Ausführung der HC256 Stromchiffre mit einem Schlüssel und
+    Initialisierungsvektor der Länge 128 Bits. Die Chiffre basiert auf zwei geheimen Tabellen mit je 512 32-Bit Elementen und einer
+    nicht-linearen Feedback-Funktion. Jedes Schlüssel/IV-Paar produziert bis zu 2^64 Schlüsselstrombits, aber in der Praxis ist es nicht
+    notwendig die Länge zu begrenzen, da die Auswirkungen eines längeren Schlüsselstroms für die Sicherheit der Nachricht vernachlässigbar sind.
+    Es wurde bisher kein Angriff gefunden, der schneller als Brute-Force ist.
+  </introduction>
+  <usage lang="de-DE">
+    Nachdem Sie die HC128-Komponente auf den Arbeitsbereich gezogen
+    haben, müssen Sie die Eingänge 'Eingabe', 'Schlüssel' und 'IV' mit Datenquellen verbinden.
+
+    Außerdem muss der Ausgang mit einer Textausgabe-Komponente verbunden werden.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://www.ecrypt.eu.org/stream/hcpf.html" lang="en" />
+      <caption lang="en">HC128 at the eSTREAM Project</caption>
+      <link url="http://www.ecrypt.eu.org/stream/hcpf.html" lang="de-DE" />
+      <caption lang="de-DE">HC128 beim eSTREAM Project (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/HC-256" lang="en" />
+      <caption lang="en">HC256 at Wikipedia</caption>
+      <link url="http://en.wikipedia.org/wiki/HC-256" lang="de-DE" />
+      <caption lang="de-DE">HC256 bei Wikipedia (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

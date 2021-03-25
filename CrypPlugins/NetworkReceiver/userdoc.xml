@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component offers the UDP and the TCP/IP protocol in order to receive packages over the network.
+    <newline />
+    The User Datagram Protocol (UDP) is a simple protocol to send data over an IP network to a specific port.
+    It is a connectionless protocol, which means that it is quick and easy, but also unreliable.
+    For example, there is no guarantee that packets arrive in the correct order.
+    UDP was standardized 1980 and is used among others for VOIP.
+
+    The Transmission Control Protocol (TCP) is one of the two original core protocols of the Internet protocol suite (IP),
+    and is so ubiquitous that the entire suite is often called TCP/IP. TCP provides reliable, ordered, error-checked delivery
+    of a stream of octets between programs running on computers connected to an intranet or the public Internet.
+    Browsers use it when they connect to servers on the World Wide Web sites, and it is used to accurately deliver
+    email and transfer files from one location to another. Applications that do not require the reliability of a
+    TCP connection may instead use the connectionless User Datagram Protocol (UDP), which emphasizes low-overhead operation
+    and reduced latency rather than error checking and delivery validation.
+  </introduction>
+  <introduction lang="zh-CN">该组件提供UDP和TCP / IP协议，以便通过网络接收包。用户数据报协议（UDP）是一种简单的协议，用于通过IP网络将数据发送到特定端口。它是无连接协议，这意味着它既快速又容易，但是也不可靠。例如，不能保证包以正确的顺序到达。 UDP于1980年标准化，除其他外，还用于VOIP。传输控制协议（TCP）是Internet协议套件（IP）的两个原始核心协议之一，并且无处不在，以至于整个套件通常称为TCP / IP。 TCP在连接到Intranet或公共Internet的计算机上运行的程序之间提供可靠，有序，经过错误检查的八位字节流交付。当浏览器连接到万维网站点上的服务器时，浏览器就会使用它，并且它用于准确地传递电子邮件并将文件从一个位置传输到另一个位置。不需要TCP连接可靠性的应用程序可以改用无连接用户数据报协议（UDP），该协议强调低开销操作和减少的延迟，而不是错误检查和传递验证。</introduction>
+  <introduction lang="ru">Этот компонент предлагает UDP и протокол TCP / IP для приема пакетов по сети. Протокол пользовательских дейтаграмм (UDP) - это простой протокол для передачи данных по IP-сети на определенный порт. Это протокол без установления соединения, что означает, что он быстрый и легкий, но также ненадежный. Например, нет гарантии, что пакеты поступают в правильном порядке. UDP был стандартизован в 1980 году и используется среди других для VOIP. Протокол управления передачей (TCP) является одним из двух исходных основных протоколов пакета интернет-протокола (IP) и настолько вездесущ, что весь пакет часто называют TCP / IP. TCP обеспечивает надежную, упорядоченную, проверенную проверку доставки потока октетов между программами, запущенными на компьютерах, подключенных к интрасети или общедоступному Интернету. Браузеры используют его при подключении к серверам на сайтах World Wide Web, и он используется для точной доставки электронной почты и передачи файлов из одного места в другое. Приложения, не требующие надежности TCP-соединения, могут вместо этого использовать протокол пользовательских дейтаграмм без установления соединения (UDP), который подчеркивает работу с низкими нагрузками и уменьшенную задержку, а не проверку ошибок и проверку доставки.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente nutzt das UDP- und das TCP/IP-Protokoll, um Pakete über ein Netzwerk zu erhalten.
+    <newline />
+    Das User Datagram Protocol (UDP) ist ein einfaches Protokoll zur Versendung von Daten über ein IP Netzwerk an einen bestimmten Port.
+    Es ist ein verbindungsloses Protokoll, was dazu führt, dass es schnell und einfach, aber auch unzuverlässig ist.
+    Zum Beispiel gibt es keine Garantie, dass Pakete in der richtigen Reihenfolge ankommen.
+    UDP wurde 1980 standardisiert und wird unter anderem für VOIP verwendet.
+
+    Transmission Control Protocol / Internet Protocol (TCP/IP) ist eine Familie von Netzwerkprotokollen und
+    wird wegen ihrer großen Bedeutung für das Internet auch als Internetprotokollfamilie bezeichnet.
+    Die Identifizierung der am Netzwerk teilnehmenden Rechner geschieht über IP-Adressen. Ein Rechner oder
+    allgemein ein Gerät mit IP-Adresse wird im TCP/IP-Jargon als Host bezeichnet. Ursprünglich wurde TCP als
+    monolithisches Netzwerkprotokoll entwickelt, jedoch später in die Protokolle IP und TCP aufgeteilt.
+    Die Kerngruppe der Protokollfamilie wird durch das User Datagram Protocol (UDP) als weiteres Transportprotokoll ergänzt.
+    Außerdem gibt es zahlreiche Hilfs- und Anwendungsprotokolle, wie zum Beispiel DHCP und ARP.
+  </introduction>
+  <usage lang="en">
+    After dragging the Network Receiver component onto your workspace, you will have to choose a protocol and set a port in the component's settings.
+    <newline />
+    If you choose the TCP/IP protocol you should change the port for every new connection. It could cause some trouble if you don't use a new port for a new connection, because the port tries to receive the rest of the data and after that it shuts gracefully down. This can take up to 4 minutes.
+    <newline />
+    In contrast to UDP, the TCP/IP protocol is able to handle multiple clients simultaneously. If you are using TCP/IP, it ensures that the packets arrive in the correct order.
+    <newline />
+    There are a couple other settings, for example, if you want the component to listen to a particular network device, you can enter the internal IP of the device. By default the component will listen on all available network devices
+<newline />
+    The component is now waiting on the port you specified for incoming packages.
+
+  </usage>
+  <usage lang="zh-CN">将Network Receiver组件拖到工作区后，您将必须选择协议并在组件的设置中设置端口。如果选择TCP / IP协议，则应为每个新连接更改端口。如果您不使用新的端口进行新的连接，可能会造成一些麻烦，因为该端口会尝试接收其余数据，然后将其正常关闭。这最多可能需要4分钟。与UDP相比，TCP / IP协议能够同时处理多个客户端。如果使用的是TCP / IP，它将确保数据包以正确的顺序到达。还有一些其他设置，例如，如果您希望组件侦听特定的网络设备，则可以输入设备的内部IP。默认情况下，该组件将在所有可用的网络设备上进行侦听。该组件现在在为传入软件包指定的端口上等待。</usage>
+  <usage lang="ru">После перетаскивания компонента сетевого приемника в рабочую область вам нужно будет выбрать протокол и установить порт в настройках компонента. Если вы выберете протокол TCP / IP, вы должны изменить порт для каждого нового соединения. Это может вызвать некоторые проблемы, если вы не используете новый порт для нового подключения, потому что порт пытается получить остальную часть данных, и после этого он изящно отключается. Это может занять до 4 минут. В отличие от UDP, протокол TCP / IP способен обрабатывать несколько клиентов одновременно. Если вы используете TCP / IP, он гарантирует, что пакеты поступят в правильном порядке. Например, есть несколько других настроек, если вы хотите, чтобы компонент прослушивал конкретное сетевое устройство, вы можете ввести внутренний IP-адрес устройства. По умолчанию компонент будет прослушивать все доступные сетевые устройства. Компонент теперь ожидает порт, указанный для входящих пакетов.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die Netzwerk-Empfänger-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie in den Einstellungen der Komponente ein Protokoll und einen Port festlegen.
+    <newline />
+    Es gibt noch einige andere Einstellungen, zum Beispiel, wenn Sie möchten, dass die Komponente nur auf einem bestimmten Netzwerkgerät horcht, können Sie dies durch Eingabe der internen IP des Gerätes erreichen.  Standardmäßig wird auf allen verfügbaren Netzwerkgeräten auf Pakete gewartet.
+<newline />
+    Wenn Sie das TCP/IP-Protokoll auswählen, sollten Sie bei jeder neuen Verbindung einen neuen Port benutzen. Es kann zu Problemen kommen, wenn Sie den gleichen Port nochmals verwenden, da TCP/IP nach dem Beenden weiterhin auf eingehende Daten wartet, bis dieser Port heruntergefahren wird. Dies kann bis zu 4 Minuten dauern.
+    <newline />
+    Das TCP/IP-Protokoll kann – im Gegensatz zu UDP – mehrere Clients gleichzeitig behandeln. Wenn Sie TCP/IP benutzen, wird außerdem sichergestellt, dass die Pakete in der richtigen Reihenfolge ankommen.
+    <newline />
+    Die Komponente wird nun auf dem von Ihnen angegebenen Port auf eingehende Pakete warten.
+  </usage>
+  <presentation lang="en">
+    The Presentation shows you all received packages plus some meta data of each package.
+		<newline />
+    You can also change the "Single Package" output by simply double clicking on the package of your choice.
+  </presentation>
+  <presentation lang="zh-CN">演示文稿向您显示了所有收到的软件包以及每个软件包的一些元数据。您也可以通过双击所选的软件包来更改“单个软件包”的输出。</presentation>
+  <presentation lang="ru">Презентация показывает все полученные пакеты и некоторые метаданные каждого пакета. Вы также можете изменить выход «Single Package», просто дважды щелкнув по выбранному вами пакету.</presentation>
+  <presentation lang="de-DE">
+    Die Präsentation zeigt Ihnen alle empfangenen Pakete sowie einige Meta-Daten zu jedem Paket.
+		<newline />
+    Sie können auch den "Einzelnes Packet" Ausgang ändern, indem Sie einfach auf das Paket Ihrer Wahl doppelt klicken.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/User_Datagram_Protocol" lang="en" />
+      <caption lang="en">UDP at Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/User_Datagram_Protocol" lang="de-DE" />
+      <caption lang="de-DE">UDP bei Wikipedia</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Transmission_Control_Protocol" lang="en" />
+      <caption lang="en">TCP at Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Transmission_Control_Protocol/Internet_Protocol" lang="de-DE" />
+      <caption lang="de-DE">TCP bei Wikipedia</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://tools.ietf.org/html/rfc768" lang="en" />
+      <caption lang="en">RFC 768 STANDARD</caption>
+      <link url="http://tools.ietf.org/html/rfc768" lang="de-DE" />
+      <caption lang="de-DE">RFC 768 STANDARD</caption>
+    </linkReference>
+  </references>
+</documentation>

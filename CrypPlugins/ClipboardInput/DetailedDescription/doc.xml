@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component reads the clipboard of the operating system and provides it as a data stream.
+  </introduction>
+  <introduction lang="zh-CN">该组件读取操作系统的剪贴板并将其作为数据流提供。</introduction>
+  <introduction lang="ru">Этот компонент считывает буфер обмена операционной системы и предоставляет его как поток данных.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente liest die Zwischenablage des Betriebssystems aus und stellt sie als Datenstrom zur Verfügung.
+  </introduction>
+  <usage lang="en">
+    Connect the output of the component with the component, that should receive the contents of the clipboard as input.
+    The component can apply a conversion, if the content of the clipboard is base64-encoded or is a string of hexadecimal characters.
+    You can choose the appropriate format in the settings.
+    If the content of the clipboard does not comply with the selected format, an error message will be issued.
+    Choose the format 'text', if the clipboard content should be sent to the output unchanged.
+  </usage>
+  <usage lang="zh-CN">将组件的输出与应该接收剪贴板内容作为输入的组件连接。如果剪贴板的内容是base64编码的或者是十六进制字符串，则组件可以应用转换。您可以在设置中选择适当的格式。如果剪贴板的内容不符合所选格式，则会发出错误消息。如果剪贴板内容应原样发送到输出，请选择格式“文本”。</usage>
+  <usage lang="ru">Подключите выход компонента к компоненту, который должен получать содержимое буфера обмена в качестве входного сигнала. Компонент может применять преобразование, если содержимое буфера обмена base64-кодировано или представляет собой строку шестнадцатеричных символов. Вы можете выбрать соответствующий формат в настройках. Если содержимое буфера обмена не соответствует выбранному формату, выдается сообщение об ошибке. Выберите формат «текст», если содержимое буфера обмена должно быть отправлено на выход без изменений.</usage>
+  <usage lang="de-DE">
+    Verbinden Sie den Ausgang der Komponente mit einer Komponente, die den Inhalt der Zwischenablage als Eingabe erhalten soll.
+    Die Komponente kann eine automatische Konvertierung vornehmen, falls der Inhalt der Zwischenablage im Base-64-Format oder als Folge von Hexadezimalzeichen kodiert ist.
+    In den Einstellungen können Sie das Format angeben.
+    Entspricht das Format der Zwischenablage nicht dem eingestellten Format, so wird eine Fehlermeldung ausgegeben.
+    Soll der Inhalt der Zwischenablage unverändert ausgegeben werden, so wählen Sie das Format 'Text'.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Clipboard_(software)" />
+      <caption lang="en">Clipboard</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Zwischenablage" />
+      <caption lang="de-DE">Zwischenablage</caption>
+    </linkReference>
+  </references>
+</documentation>

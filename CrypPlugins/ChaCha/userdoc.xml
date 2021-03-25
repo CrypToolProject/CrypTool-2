@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+    <language culture="en" />
+    <language culture="de-DE" />
+
+    <introduction lang="en">
+        ChaCha is a 256-bit stream cipher family developed by Daniel J. Bernstein in 2008. It is based on the Salsa20 cipher family by the same author and was "designed to improve diffusion per round while preserving &#8211; and often improving &#8211; time per round" <ref id="ChaChaSpecification" />. <newline />
+        Internally, it uses a 512-bit state to generate keystream blocks which are concatenated to create a keystream. A XOR operation with this keystream then encrypts or decrypts the input. <newline />
+        ChaCha is used in the Transport Layer security protocol (TLS) since 2014 and so very relevant for applied modern cryptography <ref id="GoogleSecurityBlog" />. <newline />
+        There exist two versions. The original version by Bernstein supports 64-bit counters and 64-bit initialization vectors. The Internet Engineering Task Force (IETF) slightly changed this design by using 32-bit counters and 96-bit initialization vectors <ref id="RFC8439" />.
+    </introduction>
+
+    <introduction lang="de-DE">
+        ChaCha ist eine Familie von 256-bit Stromchiffren die 2008 von Daniel J. Bernstein entwickelt wurde. Sie basiert auf der Salsa20-Familie. Der Fokus bei der Entwicklung lag auf eine erhöhte Diffusion per Runde ohne die Zeit pro Runde zu verringern <ref id="ChaChaSpecification" />. <newline />
+        Intern wird ein 512-bit Zustand benutzt um Schlüsselstromblöcke zu generieren. Diese bilden den Schlüsselstrom. Eine XOR Operation mit diesem ver- bzw. entschlüsselt dann eine Nachricht. <newline />
+        ChaCha wird im Transport Layer Security Protokoll (TLS) seit 2014 eingesetzt und ist somit sehr relevant für die moderne angewandte Kryptographie <ref id="GoogleSecurityBlog" />. <newline />
+        Es existieren zwei Versionen. Die originale Version von Bernstein unterstützt 64-bit Blockzähler und 64-bit Initialisierungsvektoren. Die Internet Engineering Task Force (IEF) hat dieses Design leicht abgewandelt. Ihre Version benutzt 32-bit Blockzähler und 96-bit Initialisierungsvektoren <ref id="RFC8439" />.
+    </introduction>
+
+    <usage lang="en">
+        <newline />
+        <section headline="Settings">
+            In the plugin settings one can chose the rounds per keystream block and the version.
+            The version determines the size of the counter and the initialization vector.
+        </section>
+        <newline />
+        <section headline="Inputs and Output">
+            The ChaCha plugin has four inputs and one output. The inputs message, key and initialization vector are mandatory while the input for the initial counter is optional.<newline /><newline />
+            The message size is in theory limited by the counter size because we need to make sure that the keystream does not repeat (else one could use a two-time pad attack <ref id="TwoTimePadAttack" />).<newline />
+            In practice, this limit is high enough that in general, one does not have to think about it. For example, for the DJB version with a 64-bit counter, one can encrypt
+            messages up to 2^70 bytes (2^64 blocks with 64 byte each) which is equal to 1024 exabyte.<newline />
+            This very high number is also the reason why the IETF chose a smaller counter size to make use of a larger initialization vector. With a 32-bit counter, one can still
+            encrypt messages up to 256 GB which should be enough for most use cases. With a larger initialization vector, one could reuse the same key more safely by partitioning
+            the 96-bit initialization vector into a counter section and a unique section <ref id="RFC8439" />. <newline /><newline />
+            The key can be 128-bit or 256-bit key. A 128-bit key will be concatenated with itself to form a 256-bit key. <newline /><newline />
+            The initialization vector must be 64-bit or 96-bit, depending on the chosen version. As with all stream ciphers, a key-IV pair should never be reused for encryption.<newline /><newline />
+            The initial counter determines the counter value for the first keystream block. In following keystream blocks, it is used exactly as in block ciphers in counter mode: It is incremented to generate a unique input for the hash function which generates the keystream blocks.<newline />
+            The initial counter is optional and defaults to zero. The counter must be 64-bit or 32-bit, depending on the chosen version.<newline /><newline />
+            The single output of the plugin is the encrypted or decrypted text. There is no option to chose encryption or decryption. The cipher will output the plaintext if the ciphertext
+            with the same key-IV pair are set as inputs and vice versa because XOR is the inverse operation to itself.
+        </section>
+    </usage>
+
+    <usage lang="de-DE">
+        <newline />
+        <section headline="Einstellungen">
+            In the Plug-in Einstellungen kann die Rundenanzahl ausgewählt werden sowie die Version der Chiffre.
+            Die Version beeinflusst die Größe des Blockzählers und des Initialisierungsvektors.
+        </section>
+        <newline />
+        <section headline="Ein- und Ausgaben">
+            Das ChaCha Plug-in hat vier Eingaben und eine Ausgabe. Die Nachricht, der Schlüssel und der Initialisierungsvektor müssen vorgegeben werden, während der initiale Blockzähler optional ist.<newline /><newline />
+            Die Nachrichtengröße ist in der Theorie limitiert von der Größe des Zählers um sicherzustellen, dass der Schlüsselstrom sich nicht wiederholt (ansonsten kann ein Two-time pad Angriff durchgeführt werden <ref id="TwoTimePadAttack" />).<newline />
+            Im Praktischen ist dieses Limit groß genug, sodass im Normalfall man sich darüber keine Gedanken machen muss. So ist die maximale Nachrichtengröße für die DJB-Version mit einem 64-bit Zähler 2^70 Bytes (2^64 Blöcke mit jeweils 64 Bytes).
+            Dies entspricht einer Nachrichtengröße von 1024 Exabyte.<newline />
+            Das ist auch der Grund, wieso die IETF sich für einen 32-bit Zähler entschieden hat: Mit einem 32-bit Zähler können immer noch 256 Gigabyte auf einmal verschlüsselt werden was für die meisten Anwendungen mehr als genug sein sollte.<newline />
+            Mit dem größeren Initialisierungsvektor kann somit besser sichergestellt werden, dass das gleiche Schlüssel-IV Paar nicht erneut benutzt wird; beispielsweise indem man den IV in eine Zählersektion und eine feste Sektion trennt <ref id="RFC8439" />.<newline /><newline />
+            Der Schlüssel kann 128-bit oder 256-bit groß sein. Ein 256-bit Schlüssel wird mit sich selbst konkateniert um einen 256-bit Schlüssel zu bilden.<newline /><newline />
+            Der Initialisierungsvektor muss entsprechend der ausgewählten Version 64-bit oder 96-bit sein.<newline /><newline />
+            Der initiale Zähler legt den Zählwert für den ersten Schlüsselstromblock fest. In den folgenden Schlüsselstromblöcken funktioniert der Zähler genau wie in Blockchiffren im Counter-Modus: Er wird inkrementiert um jedes mal eine neue, einzigartige Eingabe für die Hashfunktion zu haben, die die Schlüsselstromblöcke generiert.<newline />
+            Der initiale Zähler ist optional und wird standardmäßig auf 0 gesetzt. Er muss entsprechend der ausgewählten Version 64-bit oder 32-bit groß sein.<newline /><newline />
+            Die einzige Ausgabe des Plug-ins ist der Geheim- bzw. Klartext. Es gibt keine Einstellung um zwischen Ver- oder Entschlüsselung umzuschalten. Die Chiffre gibt den Geheimtext aus, wenn der Klartext mit dem
+            selben Schlüssel-IV Paair eingegeben wird und vice versa weil XOR die inverse Operation zu sich selbst ist.
+        </section>
+    </usage>
+
+    <presentation lang="en">
+        The visualization is build up of five pages:<newline />
+        <enum>
+            <item>Start page: Entry-point of the visualization. Every time the workspace is restarted, the visualization resets to this page.</item>
+            <item>Overview page: Gives a brief overview over the cipher and the visualization.</item>
+            <item>Diffusion page: Here the user can optionally enter secondary values for the key, IV and counter. These values will be used to show the diffusion property of the cipher on the next pages.</item>
+            <item>State Matrix page: Visualizes the initialization of the 512-bit state.</item>
+            <item>ChaCha Hash Function page: Visualizes the execution of the hash function which generates keystream blocks out of the 512-bit state. Most of the encryption happens here thus this is the most important page.</item>
+        </enum>
+        Each page is split into the following three sections (see Figure 1):<newline />
+        <enum>
+            <item>
+                The first section consists of the page navigation with the page title and a toggle button. The navigation section is located in the top row of each page. It can be used to switch between pages.
+                The toggle button in the top-right corner is only shown if diffusion is active. With it, the user can toggle between two diffusion visualization views. If not toggled,
+                both values of the cipher runs are shown (non-XOR view). If toggled, only the XOR of both values are shown (XOR view). Figure 2 shows the ChaCha hash function mid-execution with the button not toggled.
+                The values in the top row of each cell are the intermediate values of the cipher execution with the input values.
+                The values in the bottom row of each cell are the intermediate values of the cipher execution with the values the user entered on the Diffusion page.
+                Hexadecimal characters which are different in the two cipher execution runs are marked red for easier visual recognition.
+                Figure 3 shows the ChaCha hash function mid-execution with the button toggled.
+                Now there is only one value per cell. It is the XOR of the two values seen before.
+                <img src="ChaCha/Images/en_user_interface_hash_750x406_sections.PNG" caption="Figure 1: Page sections (ChaCha hash function page as example)" />
+            </item>
+            <item>
+                The second section contains the content of the page. This is the main section and is located in the middle of a page. <newline />
+                For the first two pages, the content is static and thus does not change. <newline />
+                On the Diffusion page, there are input fields with which the user can optionally enter the secondary values. <newline />
+                On the last two pages, the content is dynamic. This means that the current content of the page depends on the current action index. This action index can be chosen in the third section.
+            </item>
+            <item>
+                The third section in the lower part is called the action navigation section. It only exists in the State Matrix page and the ChaCha Hash Function page. It is used to move through the visualization step-by-step. It consists
+                of a slider, a previous and a next button, and an input field together with a label indicating how many actions the current page has. The previous and next button can be used to move backwards or forward one step at a time.
+                The slider can be used to skip a lot of actions at once. The slider and the actions start from 0 on each of the last two dynamic pages. The input field can be used to immediately to go a specific action index by entering a number and pressing ENTER. <newline />
+                Additionally, page-specific buttons are shown above the slider to go to milestones of the current page.<newline />
+                For example, on the State Matrix page, one can use them go to the start or the end of the encoding of a specific state parameter.<newline />
+            </item>
+        </enum>
+        <img src="ChaCha/Images/en_user_interface_hash_diffusion_active_800x433.PNG" caption="Figure 2: ChaCha hash function with diffusion (without XOR view)" />
+        <img src="ChaCha/Images/en_user_interface_hash_diffusion_active_xor_800x433.PNG" caption="Figure 3: ChaCha hash function with diffusion (with XOR view)" />
+    </presentation>
+
+    <presentation lang="de-DE">
+        <section headline="Benutzeroberfläche">
+            Die Visualisierung besteht aus insgesamt fünf Seiten:<newline />
+            <enum>
+                <item>Startseite: Anfang der Visualisierung. Jedes Mal wenn die Arbeitsfläche neugestartet wird, wird die Visualisierung auf diese Seite zurückgesetzt.</item>
+                <item>Übersichtsseite: Gibt einen kurzen Überblick über die Chiffre und die Visualisierung.</item>
+                <item>Diffusionsseite: Ermöglicht dem Benutzer optional zweite Werte für Schlüssel, IV und Zähler einzugeben. Diese werdeb nuetzt um die Diffusionseigenschaft der Chiffre zu visualisieren auf den nächsten Seiten.</item>
+                <item>Zustandsmatrix-Seite: Visualisiert die Initialisierung des 512-bit Zustands.</item>
+                <item>ChaCha-Hashfunktion-Seite: Visualisiert die Ausführung der Hashfunktion, die die Schlüsselstromblöcke generiert aus dem 512-bit Zustand.</item>
+            </enum>
+            Jede Seite ist in die folgenden drei Sektionen aufgeteilt (siehe Figur 1):<newline />
+            <enum>
+                <item>
+                    Die erste Sektion besteht aus der Seitennavigation mit dem Seitentitel und einem Umschaltknopf. Sie ist in der obersten Reihe jeder Seite zu finden. Wie der Name andeutet, kann mit der Seitennavigation zwischen den Seiten der Visualisierung gewechselt werden.
+                    Es existieren insgesamt fünf Seiten:
+
+                    Der Umschaltknopf in der oberen, rechten Ecke ist nur sichtbar wenn Diffusion eingeschaltet ist. Mit ihm kann der Benutzer zwischen zwei Ansichten wechseln.
+                    Wenn er nicht gedrückt wurde, dann werden beide Werte der Chiffre-Ausführungen angezeigt (Nicht-XOR-Ansicht).
+                    Wenn er gedrückt wurde, wird nur die Differenz (XOR) der beiden Werte angezeigt (XOR-Ansicht). Figur 1 zeigt die ChaCha-Hashfunktion während der Ausführung in der Nicht-XOR-Ansicht.
+                    Die Werte in der oberen Reihe einer jeden Zelle sind die Zwischenwerte aus den Plugin-Inputs. Die Werte in der unteren Reihe einer jeden Zelle sind die Zwischenwerte aus den Werten der Diffusionsseite.
+                    Hexadezimale Charakter, die sich unterscheiden, sind mit Rot markiert um diese leichter zu erkennen.
+                    Figur 2 zeigt die ChaCha-Hashfunktion in der XOR-Ansicht. Dort ist demententsprechend nur ein Wert in jeder Zelle zu sehen. Es ist der XOR-Wert der beiden Werte.
+                    <img src="ChaCha/Images/de_user_interface_hash_750x406_sections.png" caption="Figur 1: Sektionen (ChaCha-Hashfunktion-Seite als Beispiel)" />
+                </item>
+                <item>
+                    Die zweite Sektion besteht aus dem Inhalt der Seite. Es ist die Hauptsektion und befindet sich in der Mitte einer jeder Seite. <newline />
+                    Auf den ersten beiden Seiten ist der Inhalt statisch. Er verändert sich also nicht. <newline />
+                    Auf der Diffusionseite sind Eingabefelder zu finden, mit denen der Nutzer interagieren kann um optional die zweiten Werte einzugeben. <newline />
+                    Auf den letzten beiden Seiten ist der Inhalt dynamisch. Das bedeutet, dass der aktuelle Inhalt der Seite davon abhängt, auf welchem Aktionsindex man sich beinfdet. Dieser Aktionsindex kann in der dritten und letzten Sektion ausgewählt werden.
+                </item>
+                <item>
+                    Die dritte Sektion am unteren Rand einer Seite beinhaltet die Aktionsnavigation. Sie existiert nur auf der Zustandsmatrix- und ChaCha-Hashfunktion-Seite. Sie wird benutzt um innerhalb einer Seite die Visualisierung Schritt-für-Schritt durchzugehen.
+                    Sie besteht aus einem Slider, einem Zurück- und Vor-Knopf, und einem Inputfeld zusammen mit einem Label das die Anzahl der Aktionen der aktuellen Seite anzeigt.
+                    Die Zurück- und Vor-Knöpfe können benutzt werden um einen Schritt zurück bzw. vor zu gehen. Der Slider kann benutzt werden um schnell viele Schritte zu überspringen. Der Slider und die Aktionen starten bei Null auf den letzten beiden dynamischen Seiten.
+                    Das Inputfeld kann benutzt werden um sofort zu einer bestimmten Aktion zu springen, indem man eine Zahl eingibt und ENTER drückt. <newline />
+                    Zusätzlich befinden sich weitere, seitenabhängige Knöpfe für wichtige Meilensteine oberhalb des Sliders.<newline />
+                    Als Beispiel, auf der Zustandsmatrix-Seite gibt es Knöpfe die zum Start und Ende der Enkodierung eines Zustandparameters führen.
+                </item>
+            </enum>
+            <img src="ChaCha/Images/de_user_interface_hash_diffusion_active_800x433.PNG" caption="Figur 2: ChaCha Hashfunktion mit Diffusion (ohne XOR-Anzeige)" />
+            <img src="ChaCha/Images/de_user_interface_hash_diffusion_active_xor_800x433.PNG" caption="Figur 3: ChaCha Hashfunktion mit Diffusion (mit XOR-Anzeige)" />
+        </section>
+    </presentation>
+
+    <references>
+        <linkReference id="ChaChaSpecification">
+            <link url="https://cr.yp.to/chacha/chacha-20080120.pdf" lang="en" />
+            <caption lang="en">ChaCha, a variant of Salsa20</caption>
+            <link url="https://cr.yp.to/chacha/chacha-20080120.pdf" lang="de-DE" />
+            <caption lang="de-DE">ChaCha, a variant of Salsa20</caption>
+        </linkReference>
+        <linkReference id="GoogleSecurityBlog">
+            <link url="https://security.googleblog.com/2014/04/speeding-up-and-strengthening-https.html" lang="en" />
+            <caption lang="en">Speeding up and strengthening HTTPS connections for Chrome on Android</caption>
+            <link url="https://security.googleblog.com/2014/04/speeding-up-and-strengthening-https.html" lang="de-DE" />
+            <caption lang="de-DE">Speeding up and strengthening HTTPS connections for Chrome on Android</caption>
+        </linkReference>
+        <linkReference id="RFC8439">
+            <link url="https://tools.ietf.org/html/rfc8439" lang="en" />
+            <caption lang="en">ChaCha20 and Poly1305 for IETF Protocols</caption>
+            <link url="https://tools.ietf.org/html/rfc8439" lang="de-DE" />
+            <caption lang="de-DE">ChaCha20 and Poly1305 for IETF Protocols</caption>
+        </linkReference>
+        <linkReference id="TwoTimePadAttack">
+            <link url="http://www.crypto-it.net/eng/attacks/two-time-pad.html" lang="en" />
+            <caption lang="en">Attack on Two-Time Pad</caption>
+            <link url="http://www.crypto-it.net/eng/attacks/two-time-pad.html" lang="de" />
+            <caption lang="de">Attack on Two-Time Pad</caption>
+        </linkReference>
+    </references>
+</documentation>

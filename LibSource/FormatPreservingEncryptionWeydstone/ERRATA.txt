@@ -1,0 +1,72 @@
+Format-Preserving Encryption: Errata
+====================================
+
+   There are several points in NIST SP 800-38G that require interpretation
+   beyond what is written in the specification.
+
+FF1 sample data
+---------------
+   
+   The FF1 sample data provides 32-byte values of R, as if the operation in Step
+   6. ii. were "Let R = PRF(P || Q) || P." This sample data appears to be
+   incorrect, as the xor operation of R and a 16-byte value in Step 6. iii.
+   would fail if R were 32 bytes. Note that this xor operation is not performed
+   with the sample inputs, so the sample tests could have been run successfully
+   with the incorrect value of R. As such, the values of R produced by this
+   implementation match only the first 16 bytes of values of R in the FF1 sample
+   data.
+   
+FF1 tweak length
+----------------
+
+   NIST SP 800-38G describes maxTlen as a prerequisite for the FF1 algorithms,
+   but does not specify a maximum value for this parameter. In practice, the
+   tweak, which is an array of up to maxTlen bytes, is concatenated with other
+   data to form an array of 16-byte blocks that is provided as input to the
+   PRF(X) function. The PRF(X) function operates on input of arbitrary length,
+   up to the maximum size of a byte array in the implementation. Instead of
+   allowing arbitrarily large values of maxTlen, we restrict it to the same
+   maximum as the length of the plaintext and ciphertext inputs (i.e. 4096
+   bytes).
+
+AES block cipher modes
+----------------------
+   
+   The CIPH and PRF functions call the AES block cipher with the specified key
+   in ECB mode. Although this mode of operation is not explicitly mentioned in
+   NIST SP 800-38G, it is implied by the use of the functions in FF1 and FF3,
+   and for PRF it is implicit in the specification's statement that PRF is an
+   implementation of the CBC mode.
+   
+Bit strings
+-----------
+   
+   NIST SP 800-38G defines BYTELEN(X) as "LEN(X)/8", which implies that either
+   LEN(X) is always a multiple of 8, or there is an implicit ceiling of the
+   result to round up to the next integer.
+   
+   The REVB(X) algorithm is defined as an operation on an array of bytes, but
+   the pseudocode in NIST SP 800-38G is written as if it were operating on an
+   array of bits. The result is a reversal of byte order, so it would have been
+   clearer to write NIST SP 800-38G in terms of bytes rather than bits.
+   
+Numeric types
+-------------
+   
+   The mod function in NIST SP 800-38G is described both as a function of
+   integers and as a function of real numbers. However, in context, it is only
+   used as a function of integers.
+   
+   NIST SP 800-38G describes the input to LOG(x) as a "real" number, but
+   provides only integer values as input. We have defined the input as an
+   integer to avoid unnecessary type conversion.
+   
+Array Indexes
+-------------
+   
+   As a matter of style, it would seem to be preferable if NIST SP 800-38G
+   were written with array indexes starting at zero, as is conventional in most
+   programming languages, rather than with array indexes starting at one. It may
+   seem to be a trivial point, but as the indexes are used in calculations, the
+   calculations need to be adjusted as they are implemented, which is a
+   potential source of errors in implementations.

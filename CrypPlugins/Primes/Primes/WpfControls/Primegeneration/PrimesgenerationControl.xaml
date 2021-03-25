@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primegeneration.PrimesgenerationControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:this="clr-namespace:Primes.WpfControls.Primegeneration"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Generation">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="350" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <comps:LogControl Grid.Column="0" Grid.RowSpan="2" Grid.Row="0" x:Name="log" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
+        <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Name="pnl" Margin="0,0,0,20">
+            <Border HorizontalAlignment="Stretch" Height="30" Margin="0,0,0,7">
+                <DockPanel>
+                    <ToggleButton Width="25" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Margin="2" Template="{StaticResource ExpanderToggleButton}" Name="tbRandom" Click="tbRandom_Click"></ToggleButton>
+                    <SelectableTextBlock VerticalAlignment="Center" Text="{x:Static lang:PrimesGeneration.rndPrimes}"></SelectableTextBlock>
+                    <Image Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpGenerateRandom" HorizontalAlignment="Right" MouseLeftButtonDown="btnHelp_MouseLeftButtonDown" Margin="0,0,4,0" />
+                </DockPanel>
+            </Border>
+            <StackPanel Name="spRandom">
+                <Button Height="26" Content="{x:Static lang:PrimesGeneration.rnd1020}" Name="btnGeneratePrimes10Times20" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Click="Generate10Times_Click" Margin="0,0,0,4"></Button>
+                <Button Height="26" Content="{x:Static lang:PrimesGeneration.rnd1050}" Name="btnGeneratePrimes10Times50" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Click="Generate10Times_Click" Margin="0,0,0,4"></Button>
+                <Button Height="26" Content="{x:Static lang:PrimesGeneration.rnd10100}" Name="btnGeneratePrimes10Times100" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Click="Generate10Times_Click" Margin="0,0,0,4"></Button>
+                <Button Height="30" Name="btnGeneratePrimesNTimesM" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Margin="0,0,0,7">
+                    <DockPanel>
+                        <TextBlock Text="{x:Static lang:PrimesGeneration.rndntimesm}"></TextBlock>
+                        <Image Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpGenerateNTimesM" HorizontalAlignment="Right" MouseLeftButtonDown="btnHelp_MouseLeftButtonDown" />
+                    </DockPanel>
+                </Button>
+                <this:InputControlNTimesM x:Name="gnentimesm" Loaded="gnentimesm_Loaded" />
+            </StackPanel>
+            <!--<Label BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Stretch">Primzahlen in Bereichen</Label>-->
+            <Border HorizontalAlignment="Stretch" Height="30" Margin="0,0,0,7">
+                <DockPanel>
+                    <ToggleButton Width="25" VerticalAlignment="Center" HorizontalAlignment="Center" Height="25" Margin="2" Template="{StaticResource ExpanderToggleButton}" Name="tbFormular" Click="tbFormular_Click"></ToggleButton>
+
+                    <SelectableTextBlock VerticalAlignment="Center" Text="{x:Static lang:PrimesGeneration.rndQuadratic}"></SelectableTextBlock>
+                    <Image Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpQuadratic" HorizontalAlignment="Right" MouseLeftButtonDown="btnHelp_MouseLeftButtonDown" Margin="0,0,4,0" />
+                </DockPanel>
+            </Border>
+            <StackPanel Name="spFormular">
+                <Button Height="30" Name="btnGenerateSecondDegree" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Click="btnGeneratePolynom_Click" Margin="0,0,0,7">
+                    <DockPanel>
+                        <TextBlock Text="{x:Static lang:PrimesGeneration.rndQuadraticFormular}"></TextBlock>
+                        <Image Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpGenerateQuadratic" HorizontalAlignment="Right" MouseLeftButtonDown="btnHelp_MouseLeftButtonDown" />
+                    </DockPanel>
+                </Button>
+                <Button Height="30" Name="btnGeneratePrimesEuler" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Click="btnGeneratePolynom_Click" Margin="0,0,0,7">
+                    <DockPanel>
+                        <TextBlock Text="{x:Static lang:PrimesGeneration.rndQuadraticEuler}"></TextBlock>
+                        <Image Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpGenerateEuler1" HorizontalAlignment="Right" MouseLeftButtonDown="btnHelp_MouseLeftButtonDown" />
+                    </DockPanel>
+                </Button>
+                <Button Height="30" Name="btnGenerateRandomPolynoms" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Click="btnGeneratePolynoms_Click" Margin="0,0,0,7">
+                    <DockPanel>
+                        <TextBlock Text="{x:Static lang:PrimesGeneration.rndQuadraticRnd}"></TextBlock>
+                        <Image Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpGenerateQuadraticRandom" HorizontalAlignment="Right" MouseLeftButtonDown="btnHelp_MouseLeftButtonDown" />
+                    </DockPanel>
+                </Button>
+                <Button Height="30" Name="btnGenerateSystematicPolynoms" HorizontalAlignment="Stretch" Template="{StaticResource ButtonTemplate}" Click="btnGeneratePolynoms_Click" Margin="0,0,0,7">
+                    <DockPanel>
+                        <TextBlock Text="{x:Static lang:PrimesGeneration.rndQuadraticSystematic}"></TextBlock>
+                        <Image Cursor="Hand" Source="../../Resources/icons/help.png" Width="16" Height="16" Name="btnHelpGenerateQuadraticSystematic" HorizontalAlignment="Right" MouseLeftButtonDown="btnHelp_MouseLeftButtonDown" />
+                    </DockPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Name="svFormular">
+            <StackPanel Name="pnlInput">
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

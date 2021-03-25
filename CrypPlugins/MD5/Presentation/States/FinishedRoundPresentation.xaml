@@ -1,0 +1,19 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:CrypTool_MD5_Presentation_Displays="clr-namespace:CrypTool.MD5.Presentation.Displays" x:Class="CrypTool.MD5.Presentation.States.FinishedRoundPresentation"
+    Height="400" Width="800">
+	<UserControl.Resources>
+		<Style x:Key="textBlockStyle" TargetType="{x:Type TextBlock}">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+			<Setter Property="FontSize" Value="16pt"/>
+		</Style>
+	</UserControl.Resources>
+    <Grid>
+
+        <TextBlock Margin="8,118,8,0" Style="{StaticResource textBlockStyle}" VerticalAlignment="Top" Height="30.373"><Run Text="{Loc We_have_finished_all_16_steps_of_this_round_}"/></TextBlock>
+    	<CrypTool_MD5_Presentation_Displays:CompressionVariableDisplay DataContext="{Binding CurrentState}" Margin="8,168.373,8,150.627" />
+    	<CrypTool_MD5_Presentation_Displays:RoundAndStepDisplay VerticalAlignment="Top" HorizontalAlignment="Left" DataContext="{Binding CurrentState}" Margin="8,8,0,0"/>
+            
+    </Grid>
+</UserControl>

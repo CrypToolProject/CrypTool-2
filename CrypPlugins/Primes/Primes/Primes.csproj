@@ -1,0 +1,1152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2830F337-A7A3-4A68-87AC-64F3AA79C70B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Primes</RootNamespace>
+    <AssemblyName>Primes</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\..\CrypBuild\Release\CrypPlugins</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\..\CrypBuild\Debug\CrypPlugins</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\..\CrypBuild\Release\CrypPlugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\CrypBuild\Debug\CrypPlugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WpfMath, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Lib\WpfMath.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bignum\PrimesBigInteger.cs" />
+    <Compile Include="CalculatorLib\CalcParser.cs" />
+    <Compile Include="CalculatorLib\CalcProcessor.cs" />
+    <Compile Include="CalculatorLib\CalcToken.cs" />
+    <Compile Include="CalculatorLib\CalcVariables.cs" />
+    <Compile Include="Library\Pair.cs" />
+    <Compile Include="Library\PrimeNumbers.cs" />
+    <Compile Include="Options\OptionVersionInfo.xaml.cs">
+      <DependentUpon>OptionVersionInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PrimesPlugin.cs" />
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Navigation\Navigation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Navigation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Numbertheory\Numbertheory.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Numbertheory.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Onlinehelp\Onlinehelp.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Onlinehelp.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Options\Options.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Options.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\PrimesControl\PrimesControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrimesControl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Validation\Validation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validation.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Components\Components.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Components.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Distribution\Distribution.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Distribution.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Factorization\Factorization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Factorization.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Generation\PrimesGeneration.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrimesGeneration.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Primetest\Primetest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Primetest.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTab\PrimesSettingsTab.xaml.cs">
+      <DependentUpon>PrimesSettingsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Components\LogControl2.xaml.cs">
+      <DependentUpon>LogControl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Components\ResettableTabItem.cs" />
+    <Compile Include="WpfControls\NumberTheory\Goldbach\GoldbachControl.xaml.cs">
+      <DependentUpon>GoldbachControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\GCD.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\ExtEuclid.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\LCM.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\ModInverse.cs" />
+    <Compile Include="WpfControls\NumberTheory\PowerMod\PowerBaseModControl.cs" />
+    <Compile Include="WpfControls\NumberTheory\PowerMod\PowerModCommands.cs" />
+    <Compile Include="Library\ControlHandler.cs" />
+    <Compile Include="Library\Delegates.cs" />
+    <Compile Include="Library\FactorTree\Exceptions\FactorizingException.cs" />
+    <Compile Include="Library\FactorTree\Exceptions\TrialDivisionException.cs" />
+    <Compile Include="Library\FactorTree\GmpFactorTree.cs" />
+    <Compile Include="Library\Function\BaseFunction.cs" />
+    <Compile Include="Library\Function\FunctionLiN.cs" />
+    <Compile Include="Library\Function\FunctionPiGauss.cs" />
+    <Compile Include="Library\Function\FunctionPiX.cs" />
+    <Compile Include="Library\Function\FunctionX2.cs" />
+    <Compile Include="Library\Function\IFunction.cs" />
+    <Compile Include="Library\Function\Range.cs" />
+    <Compile Include="Library\Function\RangeX.cs" />
+    <Compile Include="Library\Function\RangeY.cs" />
+    <Compile Include="Library\Function\ResultNotDefinedException.cs" />
+    <Compile Include="Library\MyInteger.cs" />
+    <Compile Include="Library\NavigationCommandType.cs" />
+    <Compile Include="Library\Pari\PariBridge.cs" />
+    <Compile Include="Library\Pari\PariInitilizationException.cs" />
+    <Compile Include="Library\PrimesCountList.cs" />
+    <Compile Include="Library\StringFormat.cs" />
+    <Compile Include="OnlineHelp\HelpFiles\Help.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Help.resx</DependentUpon>
+    </Compile>
+    <Compile Include="OnlineHelp\OnlineHelpAccess.cs" />
+    <Compile Include="OnlineHelp\OnlineHelpActions.cs" />
+    <Compile Include="OnlineHelp\WindowOnlineHelp.xaml.cs">
+      <DependentUpon>WindowOnlineHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Options\IOption.cs" />
+    <Compile Include="Options\OptionLi.xaml.cs">
+      <DependentUpon>OptionLi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Options\OptionsAccess.cs" />
+    <Compile Include="Options\OptionsUserControl.xaml.cs">
+      <DependentUpon>OptionsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Options\OptionsWindow.xaml.cs">
+      <DependentUpon>OptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Navigation\Navigation.xaml.cs">
+      <DependentUpon>Navigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Navigation\Navigation.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Navigation.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Onlinehelp\Onlinehelp.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Onlinehelp.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Options\Options.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Options.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\PrimesControl\PrimesControl.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrimesControl.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Validation\Validation.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Validation.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Components\Components.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Components.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Distribution\Distribution.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Distribution.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Factorization\Factorization.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Factorization.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Generation\PrimesGeneration.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrimesGeneration.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\WpfControls\Primetest\Primetest.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Primetest.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls.Validation\Advisors\LargeNumberAdvisor.cs" />
+    <Compile Include="WpfControls.Validation\ControlValidator\Exceptions\ControlValidationException.cs" />
+    <Compile Include="WpfControls.Validation\ControlValidator\TextBoxValidator.cs" />
+    <Compile Include="WpfControls.Validation\Exceptions\ValidationException.cs" />
+    <Compile Include="WpfControls.Validation\InputValidator.cs" />
+    <Compile Include="WpfControls.Validation\IRangeValidator.cs" />
+    <Compile Include="WpfControls.Validation\IValidator.cs" />
+    <Compile Include="WpfControls.Validation\Validator\BigIntegerMinValueMaxValueValidator.cs" />
+    <Compile Include="WpfControls.Validation\Validator\BigIntegerMinValueValidator.cs" />
+    <Compile Include="WpfControls.Validation\Validator\BigIntegerValidator.cs" />
+    <Compile Include="WpfControls.Validation\Validator\PositiveBigIntegerValidator.cs" />
+    <Compile Include="WpfControls.Validation\Validator\PositiveMaxValueBigIntegerValidator.cs" />
+    <Compile Include="WpfControls\Components\Arrows\ArrowEnds.cs" />
+    <Compile Include="WpfControls\Components\Arrows\ArrowLine.cs" />
+    <Compile Include="WpfControls\Components\Arrows\ArrowLineBase.cs" />
+    <Compile Include="WpfControls\Components\Arrows\ArrowPolyline.cs" />
+    <Compile Include="WpfControls\Components\Enums.cs" />
+    <Compile Include="WpfControls\Components\GenerateRandomControl.xaml.cs">
+      <DependentUpon>GenerateRandomControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Components\HelpTabItem.cs" />
+    <Compile Include="WpfControls\Components\IExpression.cs" />
+    <Compile Include="WpfControls\Components\InputRangeControl.xaml.cs">
+      <DependentUpon>InputRangeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Components\InputSingleControl.xaml.cs">
+      <DependentUpon>InputSingleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Components\IPolynom.cs" />
+    <Compile Include="WpfControls\Components\LogControl.xaml.cs">
+      <DependentUpon>LogControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Components\NumberButton.cs" />
+    <Compile Include="WpfControls\Components\ResizeThumb.cs" />
+    <Compile Include="WpfControls\Components\ToolTipWindow.xaml.cs">
+      <DependentUpon>ToolTipWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Factorization\FactorizationControl.xaml.cs">
+      <DependentUpon>FactorizationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Factorization\FactorizationGraph.xaml.cs">
+      <DependentUpon>FactorizationGraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Factorization\IFactorizer.cs" />
+    <Compile Include="WpfControls\Factorization\QS\BaseStep.cs" />
+    <Compile Include="WpfControls\Factorization\QS\IQSStep.cs" />
+    <Compile Include="WpfControls\Factorization\QS\QSData.cs" />
+    <Compile Include="WpfControls\Factorization\QS\QuadraticSieveControl.xaml.cs">
+      <DependentUpon>QuadraticSieveControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Factorization\QS\Step1.cs" />
+    <Compile Include="WpfControls\Factorization\QS\Step2.cs" />
+    <Compile Include="WpfControls\Factorization\QS\Step3.cs" />
+    <Compile Include="WpfControls\Factorization\QS\Step4.cs" />
+    <Compile Include="WpfControls\Factorization\Rho\RhoControl.xaml.cs">
+      <DependentUpon>RhoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\IPrimeUserControl.cs" />
+    <Compile Include="WpfControls\IPrimeVisualization.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryControl.xaml.cs">
+      <DependentUpon>NumberTheoryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\BaseNTFunction.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\EulerPhi.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\EulerPhiSum.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\EulerPhiValues.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\INTFunction.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\NumberTheoryFunctionsControl.xaml.cs">
+      <DependentUpon>NumberTheoryFunctionsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\PiX.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\Rho.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\Tau.cs" />
+    <Compile Include="WpfControls\NumberTheory\NumberTheoryFunctions\TauValues.cs" />
+    <Compile Include="WpfControls\NumberTheory\PowerMod\PowerModCommandHelper.cs" />
+    <Compile Include="WpfControls\NumberTheory\PowerMod\PowerModCommandBindings.cs" />
+    <Compile Include="WpfControls\NumberTheory\PowerMod\PowerModControl.xaml.cs">
+      <DependentUpon>PowerModControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\NumberTheory\PrimitivRoots\PrimitivRootControl.xaml.cs">
+      <DependentUpon>PrimitivRootControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primegeneration\Function\EulerPolynom.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\FunctionExecuter.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\GenerateMDigitPrimes.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\IExpression.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\NonFurtherPrimeFoundException.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\SecondDegreePolynom.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\SecondDegreePolynomRandom.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\SecondDegreePolynomRange.cs" />
+    <Compile Include="WpfControls\Primegeneration\Function\SecondDegreePolynomSystematic.cs" />
+    <Compile Include="WpfControls\Primegeneration\InputControlNTimesM.xaml.cs">
+      <DependentUpon>InputControlNTimesM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primegeneration\InputControlPolynom.xaml.cs">
+      <DependentUpon>InputControlPolynom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primegeneration\InputControlPolynomRange.xaml.cs">
+      <DependentUpon>InputControlPolynomRange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primegeneration\PrimesgenerationControl.xaml.cs">
+      <DependentUpon>PrimesgenerationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primegeneration\SieveOfAtkin\Numbergrid.xaml.cs">
+      <DependentUpon>Numbergrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primegeneration\SieveOfAtkin\SieveOfAtkin.xaml.cs">
+      <DependentUpon>SieveOfAtkin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primegeneration\SieveOfAtkin\SieveOfAtkinControl.xaml.cs">
+      <DependentUpon>SieveOfAtkinControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\PrimesDistribution\Graph\CartesianPlane.xaml.cs">
+      <DependentUpon>CartesianPlane.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\PrimesDistribution\Graph\GraphControl.xaml.cs">
+      <DependentUpon>GraphControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\PrimesDistribution\IPrimeDistribution.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\Numberline\BaseNTFunction.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\Numberline\EulerPhi.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\Numberline\EulerPhiSum.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\Numberline\INTFunction.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\Numberline\NumberlineControl.xaml.cs">
+      <DependentUpon>NumberlineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\PrimesDistribution\Numberline\Rho.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\Numberline\Tau.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\NumberRectangle\NumberRectangleControl.xaml.cs">
+      <DependentUpon>NumberRectangleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\PrimesDistribution\PrimesInNaturalNumbersControl.xaml.cs">
+      <DependentUpon>PrimesInNaturalNumbersControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\PrimesDistribution\Spirals\IPrimeSpiral.cs" />
+    <Compile Include="WpfControls\PrimesDistribution\Spirals\PrimesprialControl.xaml.cs">
+      <DependentUpon>PrimesprialControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\PrimesDistribution\Spirals\UlamSpiral.xaml.cs">
+      <DependentUpon>UlamSpiral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primetest\IPrimeTest.cs" />
+    <Compile Include="WpfControls\Primetest\MillerRabin\MillerRabinControl.xaml.cs">
+      <DependentUpon>MillerRabinControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primetest\Numbergrid\Numbergrid.xaml.cs">
+      <DependentUpon>Numbergrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primetest\PrimetestControl.xaml.cs">
+      <DependentUpon>PrimetestControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primetest\SieveOfEratosthenes\SieveOfEratosthenes.xaml.cs">
+      <DependentUpon>SieveOfEratosthenes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Primetest\SieveOfEratosthenes\Step.cs" />
+    <Compile Include="WpfControls\Primetest\TestOfFermat\TestOfFermatControl.xaml.cs">
+      <DependentUpon>TestOfFermatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\ShapeManagement\Ellipse\EllipseConnector.cs" />
+    <Compile Include="WpfControls\ShapeManagement\Ellipse\EllipseItem.cs" />
+    <Compile Include="WpfControls\ShapeManagement\Ellipse\EllipseManager.cs" />
+    <Compile Include="WpfControls\Start\StartControl.xaml.cs">
+      <DependentUpon>StartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfControls\Threads\CountPiXThread.cs" />
+    <Compile Include="WpfControls\Threads\FindPrimesThread.cs" />
+    <Compile Include="WpfControls\Threads\FunctionThread.cs" />
+    <Compile Include="WpfControls\Threads\SuspenableThread.cs" />
+    <Compile Include="WpfVisualization\Navigation\Navigation.xaml.cs">
+      <DependentUpon>Navigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WpfVisualization\PrimesControl.xaml.cs">
+      <DependentUpon>PrimesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\lang\Numbertheory\Numbertheory.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Numbertheory.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="OnlineHelp\WindowOnlineHelp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Options\OptionLi.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Options\OptionsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Options\OptionsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Options\OptionVersionInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Options\Resources\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Options\Resources\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Navigation\Navigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsTab\PrimesSettingsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Components\GenerateRandomControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Components\InputRangeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Components\InputSingleControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Components\LogControl2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Components\LogControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Components\ToolTipWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Factorization\FactorizationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Factorization\FactorizationGraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Factorization\QS\QuadraticSieveControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Factorization\Rho\RhoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\NumberTheory\Goldbach\GoldbachControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\NumberTheory\NumberTheoryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\NumberTheory\NumberTheoryFunctions\NumberTheoryFunctionsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\NumberTheory\PowerMod\PowerModControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\NumberTheory\PrimitivRoots\PrimitivRootControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primegeneration\InputControlNTimesM.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primegeneration\InputControlPolynom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primegeneration\InputControlPolynomRange.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primegeneration\PrimesgenerationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primegeneration\SieveOfAtkin\Numbergrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primegeneration\SieveOfAtkin\SieveOfAtkin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primegeneration\SieveOfAtkin\SieveOfAtkinControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\PrimesDistribution\Graph\CartesianPlane.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\PrimesDistribution\Graph\GraphControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\PrimesDistribution\Numberline\NumberlineControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\PrimesDistribution\NumberRectangle\NumberRectangleControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\PrimesDistribution\PrimesInNaturalNumbersControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\PrimesDistribution\Spirals\PrimesprialControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\PrimesDistribution\Spirals\UlamSpiral.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primetest\MillerRabin\MillerRabinControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primetest\Numbergrid\Numbergrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primetest\PrimetestControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primetest\SieveOfEratosthenes\SieveOfEratosthenes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Primetest\TestOfFermat\TestOfFermatControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Resources\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Resources\menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Resources\menu2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Resources\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Start\StartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfControls\Threads\Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfVisualization\Navigation\Navigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfVisualization\PrimesControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfResources\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfResources\menu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfResources\menu2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfResources\Primes.WpfResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfResources\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\doc.xml" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_Distribution.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_EulerPhi.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_EulerPhiSum.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_Goldbach.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_Numbergrid.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_Numberline.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_QuadrupletPrimes.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_Sigma.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_SixTupletPrimes.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_Tau.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Distribution_TwinPrimes.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Factorization_BruteForce.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Factorization_Factorization.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Factorization_Generate.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Factorization_Generate_BigInteger.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Factorization_QS.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_GenerateEuler1.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_GenerateQuadratic.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_GenerateQuadraticRandom.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_GenerateQuadraticSystematic.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_Generation.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_Quadratic.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_Random.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_RandomNTimesM.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Generation_SieveOfAtkin.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Graph_GaussPi.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Graph_LargeNumbers.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Graph_LiN.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Graph_PiX.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Graph_PrimesCount.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Modular_Exponentiation.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Numbertheoretic_Functions.html" />
+    <None Include="OnlineHelp\HelpFiles\de\Numbertheory_Numbertheory.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Pari_Lin.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Primetest_MillerRabin.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Primetest_Primetest.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Primetest_SieveOfEratosthenes.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\PrimitivRoot_Input.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\PrimitivRoot_PrimitivRoot.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Simpson_Lin.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\Spiral_Ulam.html" />
+    <Content Include="OnlineHelp\HelpFiles\de\StartControl.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_Distribution.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_EulerPhi.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_EulerPhiSum.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_Goldbach.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_Numbergrid.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_Numberline.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_QuadrupletPrimes.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_Sigma.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_SixTupletPrimes.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_Tau.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Distribution_TwinPrimes.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Factorization_BruteForce.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Factorization_Factorization.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Factorization_Generate.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Factorization_Generate_BigInteger.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Factorization_QS.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_GenerateEuler1.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_GenerateQuadratic.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_GenerateQuadraticRandom.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_GenerateQuadraticSystematic.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_Generation.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_Quadratic.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_Random.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_RandomNTimesM.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Generation_SieveOfAtkin.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Graph_GaussPi.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Graph_LargeNumbers.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Graph_LiN.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Graph_PiX.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Graph_PrimesCount.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Modular_Exponentiation.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Numbertheoretic_Functions.html" />
+    <None Include="OnlineHelp\HelpFiles\en\Numbertheory_Numbertheory.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Pari_Lin.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Primetest_MillerRabin.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Primetest_Primetest.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Primetest_SieveOfEratosthenes.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\PrimitivRoot_Input.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\PrimitivRoot_PrimitivRoot.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Simpson_Lin.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\Spiral_Ulam.html" />
+    <Content Include="OnlineHelp\HelpFiles\en\StartControl.html" />
+    <Resource Include="PrimesPlugin.png" />
+    <None Include="OnlineHelp\Resources\sigma.jpg" />
+    <Content Include="OnlineHelp\HelpFiles\template.de.html" />
+    <Content Include="OnlineHelp\HelpFiles\template.html" />
+    <Resource Include="Resources\icons\restart.png" />
+    <Resource Include="Resources\icons\restart_disabled.png" />
+    <Content Include="WpfControls\Start.de.html" />
+    <Content Include="WpfControls\Start.html" />
+    <Resource Include="Resources\icons\application_edit.png" />
+    <Resource Include="Resources\icons\application_tile_horizontal.png" />
+    <Resource Include="Resources\icons\back.png" />
+    <Resource Include="Resources\icons\back_disabled.png" />
+    <Resource Include="Resources\icons\completeback.png" />
+    <Resource Include="Resources\icons\completeback_disabled.png" />
+    <Resource Include="Resources\icons\completeforward.png" />
+    <Resource Include="Resources\icons\completeforward_disabled.png" />
+    <Resource Include="Resources\icons\ctLogo.png" />
+    <Resource Include="Resources\icons\eulerpolynom.jpg" />
+    <Resource Include="Resources\icons\forward.png" />
+    <Resource Include="Resources\icons\forward_disabled.png" />
+    <Resource Include="Resources\icons\help.png" />
+    <Resource Include="Resources\icons\help32.gif" />
+    <Resource Include="Resources\icons\page_copy.png" />
+    <Resource Include="Resources\icons\polynomdegree2.jpg" />
+    <Resource Include="Resources\icons\resultset_next.png" />
+    <Resource Include="Resources\icons\resultset_previous.png" />
+    <EmbeddedResource Include="OnlineHelp\HelpFiles\Help.de.resx" />
+    <EmbeddedResource Include="OnlineHelp\Resources\eulerphi.jpg" />
+    <EmbeddedResource Include="OnlineHelp\Resources\eulerphi.png" />
+    <EmbeddedResource Include="OnlineHelp\Resources\eulerphiproduct.jpg" />
+    <EmbeddedResource Include="OnlineHelp\Resources\eulerphiproduct.png" />
+    <EmbeddedResource Include="OnlineHelp\Resources\eulerphisum.jpg" />
+    <EmbeddedResource Include="OnlineHelp\Resources\eulerpolynom.jpg" />
+    <EmbeddedResource Include="OnlineHelp\Resources\help.png" />
+    <EmbeddedResource Include="OnlineHelp\Resources\primitivroot_inputsample.jpg" />
+    <EmbeddedResource Include="OnlineHelp\Resources\quadratic.jpg" />
+    <EmbeddedResource Include="OnlineHelp\Resources\rho.jpg" />
+    <EmbeddedResource Include="OnlineHelp\Resources\tau.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OnlineHelp\HelpFiles\Help.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Help.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Navigation\Navigation.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Navigation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Navigation\Navigation.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Navigation.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Numbertheory\Numbertheory.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Numbertheory.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Numbertheory\Numbertheory.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Numbertheory.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Onlinehelp\Onlinehelp.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Onlinehelp.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Onlinehelp\Onlinehelp.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Onlinehelp.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Options\Options.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Options.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Options\Options.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Options.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\PrimesControl\PrimesControl.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrimesControl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\PrimesControl\PrimesControl.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrimesControl.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Validation\Validation.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\Validation\Validation.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Components\Components.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Components.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Components\Components.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Components.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Distribution\Distribution.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Distribution.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Distribution\Distribution.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Distribution.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Factorization\Factorization.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Factorization.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Factorization\Factorization.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Factorization.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Generation\PrimesGeneration.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrimesGeneration.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Generation\PrimesGeneration.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrimesGeneration.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Primetest\Primetest.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Primetest.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\lang\WpfControls\Primetest\Primetest.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Primetest.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
+      <Name>CrypPluginBase</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Library\Threads\" />
+    <Folder Include="Resources\Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

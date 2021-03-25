@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primetest.PrimetestControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:numbergrid="clr-namespace:Primes.WpfControls.Primetest.Numbergrid"
+    xmlns:sieveOfEratosthenes="clr-namespace:Primes.WpfControls.Primetest.SieveOfEratosthenes"
+    xmlns:millerrabin="clr-namespace:Primes.WpfControls.Primetest.MillerRabin"
+    xmlns:fermat="clr-namespace:Primes.WpfControls.Primetest.TestOfFermat"
+    xmlns:soa="clr-namespace:Primes.WpfControls.Primegeneration.SieveOfAtkin"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Primetest"
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel>
+
+        <Grid Name="ContentGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MaxHeight="{Binding ElementName=ParameterRow, Path=ActualHeight}" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Name="ParameterRow" Margin="10,10,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Header="{x:Static lang:Primetest.test_groupboxheader}" Margin="0,0,0,20">
+                    <comps:InputSingleControl
+                        x:Name="iscNumber"
+                        InputRangeControlType="Vertical"
+                        Margin="7,7,7,7"
+                        FreeTextboxWidth="200"
+                        Execute="iscNumber_Execute"
+                        Cancel="iscNumber_Cancel"
+                        CancelButtonIsEnabled="False"
+                        ShowGenerateRandomNumber="True"
+                        GenerateRandomNumberTitle="{x:Static lang:Primetest.test_genNumber}"
+                        GenerateRandomNumberShowMultipleFactors="False"
+                        GenerateRandomNumberShowTwoBigFactors="False" />
+                </GroupBox>
+            </Grid>
+
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="3" HorizontalContentAlignment="Center" Margin="0,0,0,0" ResizeBehavior="PreviousAndNext" />
+
+            <TabControl Grid.Row="2" Name="tbctrl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="tbctrl_SelectionChanged" Margin="10">
+                <comps:HelpTabItem Header="{x:Static lang:Primetest.test_soe}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="tabItemSieveOfEratosthenes" HelpButtonClick="TabItem_HelpButtonClick">
+                    <DataTemplate>
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <sieveOfEratosthenes:SieveOfEratosthenes x:Name="sieveoferatosthenes" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                        </ScrollViewer>
+                    </DataTemplate>
+                </comps:HelpTabItem>
+
+                <comps:HelpTabItem Header="{x:Static lang:Primetest.test_fermat}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="tabItemTestOfFermat" Visibility="Collapsed" HelpButtonClick="TabItem_HelpButtonClick">
+                    <DataTemplate>
+                        <fermat:TestOfFermatControl x:Name="fermat" />
+                    </DataTemplate>
+                </comps:HelpTabItem>
+
+                <comps:HelpTabItem Header="{x:Static lang:Primetest.test_millerrabin}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="tabItemMillerRabin" HelpButtonClick="TabItem_HelpButtonClick">
+                    <DataTemplate>
+                        <millerrabin:MillerRabinControl x:Name="millerrabin" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </DataTemplate>
+                </comps:HelpTabItem>
+
+                <comps:HelpTabItem Header="{x:Static lang:Primetest.test_soa}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="tabItemSoa" HelpButtonClick="TabItem_HelpButtonClick">
+                    <DataTemplate>
+                        <soa:SieveOfAtkinControl x:Name="soa" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    </DataTemplate>
+                </comps:HelpTabItem>
+            </TabControl>
+
+        </Grid>
+    </DockPanel>
+
+</UserControl>

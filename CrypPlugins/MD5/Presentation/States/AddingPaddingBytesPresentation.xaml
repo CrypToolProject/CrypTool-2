@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="CrypTool.MD5.Presentation.States.AddingPaddingBytesPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:displays="clr-namespace:CrypTool.MD5.Presentation.Displays"
+    Height="400" Width="800">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Grid>
+        <displays:DataBlockDisplay Data="{Binding CurrentState.CurrentDataBlock}" Height="40" Margin="8,75,8,0" VerticalAlignment="Top" />
+        <TextBlock Margin="8,119,8,186" Name="textBlock1" Text="{Loc and_start_the_padding_process_by_appending_one_single__1__bit}" TextWrapping="Wrap" Style="{DynamicResource textBlockStyle}" />
+        <TextBlock Margin="8,248,8,0" x:Name="textBlock2" TextWrapping="Wrap" Height="120" VerticalAlignment="Top" Style="{DynamicResource textBlockStyle}" ><Run Text="{Loc After_that__we_append_multiple_zero_bytes_to_our_data_}"/></TextBlock>
+        <TextBlock Height="25" Margin="8,46,8,0" Name="textBlock3" Text="{Loc We_take_the_incomplete_block_of_data_that_we_ve_read_}" TextWrapping="Wrap" VerticalAlignment="Top" Style="{DynamicResource textBlockStyle}" />
+    </Grid>
+</UserControl>

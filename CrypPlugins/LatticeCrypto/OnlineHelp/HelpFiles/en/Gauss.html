@@ -1,0 +1,15 @@
+﻿<h2>Gauss algorithm</h2>
+<p>
+    In a lattice in two-dimensional space the Gaussian algorithm finds reliably a 
+    shortest vector. It works similar to the Euclidean algorithm for the greatest 
+    common divisor gcd of two integers, because after each step, the basis improves 
+    by a shorter vector. In this case the longer vector b2 is iteratively subtracted 
+    by an integer multiple of the shorter vector b1. The subtrahend is the component 
+    of b2 which points in the direction of b1 (see figure). With this operation the linear 
+    independence is maintained. After the substraction b2 gets smaller and so does 
+    ||b1|| * ||b2||. Since there is an finite number of lattice points the 
+    algorithm terminates in any case.</p>
+    <p>
+    <img src="ImgGauss" />
+</p>
+    <p>The angle between the two vectors is at the end between 60° and 120°. One can easily see that a reduced basis approximates the 90° angle.</p>

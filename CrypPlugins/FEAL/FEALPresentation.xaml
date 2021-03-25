@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="CrypTool.Plugins.FEAL.FEALPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:controls="clr-namespace:CrypTool.Plugins.FEAL"
+             d:DesignHeight="1200" d:DesignWidth="740">
+    <ScrollViewer Name="ScrollViewer" VerticalScrollBarVisibility="Visible" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" HorizontalScrollBarVisibility="Auto" Background="White">
+        <Grid Margin="5,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Center" Background="White">
+            <controls:FEAL4Presentation x:Name="Feal4Presentation" Margin="5,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            <controls:FEAL8Presentation x:Name="Feal8Presentation" Margin="5,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

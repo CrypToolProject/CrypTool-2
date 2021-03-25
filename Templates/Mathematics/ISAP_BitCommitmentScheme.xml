@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">ISAP Bit Commitment Scheme</title>
+  <title lang="zh">ISAP比特承诺方案</title>
+  <title lang="ru">Схема привязки битов ISAP</title>
+  <summary lang="en">Usage of the <i>ISAP Bit Commitment Scheme</i></summary>
+  <summary lang="zh">ISAP比特承诺方案的用法</summary>
+  <summary lang="ru">Использование схемы фиксации битов ISAP</summary>
+  <description lang="en">This template shows the usage of the <i>ISAP Bit Commitment Scheme</i>.<newline /><newline />
+In cryptography, a commitment scheme allows one party to commit to a chosen value while keeping it hidden to other parties, with the ability to reveal the committed value later. Commitment schemes are designed so that a party cannot change the value after it has committed to it: That is, commitment schemes are binding.</description>
+  <description lang="zh">该模板显示了ISAP位承诺方案的用法。在密码术中，承诺方案允许一个方承诺选定的值，同时将其隐藏给其他方，并具有稍后显示承诺值的能力。承诺方案的设计旨在使当事方对其承诺后无法更改其价值：也就是说，承诺方案具有约束力。</description>
+  <description lang="ru">Этот шаблон показывает использование схемы привязки бит ISAP. В криптографии схема обязательств позволяет одной стороне совершать выбранную ценность, сохраняя ее скрытой для других сторон, с возможностью раскрытия зафиксированного значения позже. Схемы приверженности разработаны таким образом, чтобы сторона не могла изменить значение после того, как оно взяло на себя обязательство: то есть схемы обязательств являются обязательными.</description>
+  <keywords>commitment, binding, hidden, ISAP, diophantine</keywords>
+  <keywords lang="zh">承诺，约束力，隐藏，ISAP，色氨酸</keywords>
+  <keywords lang="ru">обязательство, привязка, скрытие, ISAP, диофантий</keywords>
+  <title lang="de">ISAP Bit-Commitment-Verfahren</title>
+  <summary lang="de">Benutzung des <i>ISAP Bit-Commitment-Verfahrens</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>ISAP Bit-Commitment-Verfahrens</i>.<newline /><newline />
+Ein Commitment-Protokoll ist ein kryptographisches Zwei-Parteien-Protokoll, das es einer Partei ermöglicht, sich gegenüber der anderen Partei verbindlich auf einen Wert festzulegen, ohne etwas über diesen Wert zu verraten. Später kann dieser Wert dann aufgedeckt werden. Hat sich eine Partei auf einen Wert festgelegt, kann sie diesen nicht mehr unbemerkt verändern.</description>
+  <keywords lang="de">verbindlich, versteckt</keywords>
+  <icon file="ISAP_BitCommitmentScheme.png" />
+  <relevantPlugins>
+    <plugin name="ISAPBitCommitmentScheme" />
+    <plugin name="BooleanInput" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$InputBit$" value="Eingabe-Bit" />
+    <replacement key="$ISAPBitCommitmentScheme$" value="ISAP Bit-Commitment-Verfahren" />
+    <replacement key="$memo$" value="{\b Beschreibung des Verfahrens}\line\line Ein Commitment-Protokoll ist ein kryptographisches Zwei-Parteien-Protokoll, das es einer Partei ermöglicht, sich gegenüber der anderen Partei verbindlich auf einen Wert festzulegen, ohne etwas über diesen Wert zu verraten. Später kann dieser Wert dann aufgedeckt werden. Hat sich eine Partei auf einen Wert festgelegt, kann sie diesen nicht mehr unbemerkt verändern.\line\line Diese Vorlage demonstriert das Verfahren anhand des Bit-basierten &quot;ISAP Bit-Commitment-Verfahrens&quot; (ISAP = inhomogenes simultanes diophantisches Approximationsproblem).\line Die boolesche Eingabekomponente &quot;Eingabe-Bit&quot; stellt den festzulegenden Bit-Wert dar. Die Ausgabekomponenten &quot;P&quot; und &quot;Q&quot; stellen das &quot;Commitment&quot; dar. Die Ausgabekomponente &quot;Log&quot; zeigt interne Informationen der Algorithmusausführung.\line\line Weitere Details des Verfahrens können der Dokumentation der &quot;ISAP Bit-Commitment-Verfahren&quot; Komponente entnommen werden." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$InputBit$" value="输入位" />
+    <replacement key="$ISAPBitCommitmentScheme$" value="ISAP比特承诺程序" />
+    <replacement key="$memo$" value="{\b过程的描述} \line \line承诺协议是一种加密的两方协议，它使一方可以将自己对绑定值承诺给另一方，而无需透露有关该值的任何信息。然后可以显示此值。一旦一方将自己承诺为一个值，就无法再更改它了。\Line \line此模板使用基于位的“ ISAP位承诺过程”（ISAP =不均匀的同时丢番图逼近问题）来演示该过程。布尔输入组件“输入位”表示要指定的位值；输出组件“ P”和“ Q”表示“承诺”。输出组件“ Log”显示有关算法执行的内部信息。该过程可以在“ ISAP位承诺过程”组件的文档中找到。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$InputBit$" value="Логический вход" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$InputBit$" value="Input Bit" />
+    <replacement key="$ISAPBitCommitmentScheme$" value="ISAP Bit Commitment Scheme" />
+    <replacement key="$memo$" value="{\b Description of the method}\line\line In cryptography, a commitment scheme allows one party to commit to a chosen value while keeping it hidden to other parties, with the ability to reveal the committed value later. Commitment schemes are designed so that a party cannot change the value after it has committed to it: That is, commitment schemes are binding.\line\line This template demonstrates the method using the bit based &quot;ISAP Bit Commitment Scheme&quot; (ISAP = inhomogeneous simultaneous diophantine approximation problem).\line The boolean input component &quot;Input Bit&quot; represents the bit value to commit to. The output components &quot;P&quot; and &quot;Q&quot; are representing the commitment. The output component &quot;Log&quot; shows information about the internal processing of the algorithm.\line\line Further details about the method can be taken from the documentation of the &quot;ISAP Bit Commitment Scheme&quot; component." />
+  </replacements>
+</sample>

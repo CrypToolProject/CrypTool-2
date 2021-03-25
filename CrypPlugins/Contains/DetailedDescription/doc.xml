@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This plugin tests whether a word (or several words) occurs in a given text or in a list of words and provides the count
+    of occurances.
+  </introduction>
+  <introduction lang="zh-CN">该插件测试一个单词（或多个单词）是否出现在给定的文本或单词列表中，并提供出现次数。</introduction>
+  <introduction lang="ru">Этот плагин проверяет, происходит ли слово (или несколько слов) в заданном тексте или в списке слов и обеспечивает подсчет событий.</introduction>
+  <introduction lang="de-DE">
+    Dieses Plugin testet, ob und wie oft ein Wort (bzw. mehrere Worte) in einem Eingabetext oder in einer Liste von 
+    Worten vorkommt.
+  </introduction>
+  <usage lang="en">
+    This plugin has the two operating modes 'Hashtable' und 'Aho-Corasick'. You can choose between the two in the settings tab
+    of the plugin.
+    <newline /><newline />
+
+    When 'Hashtable' is selected, the plugin expects two lists of words on its inputs 'Input' und 'Search word'.
+    They must be entered as strings that are split into words using the delimiter characters that are specified in the
+    settings tab.
+    <newline />
+    When the plugin is started, it checks for each word in the 'Search word' list whether it occurs in the 'Input' list
+    and increases the hit count accordingly. You can specify in the settings tab if a word that occurs several times should
+    be counted on each occurance or only once. The hit count is then presented at the plugin output.
+    <newline /><newline />
+
+    When 'Aho-Corasick' is selected, the plugin again expects a word list on the 'Search word' input. On 'Input', it now
+    expects a regular text. When the plugin is started, it searches for all occurances of words in the 'Search word' list in the
+    input text using the Aho-Corasick string matching algorithm.
+    <newline /><newline />
+
+    For both operating modes you can select whether the search should be case sensitive or case insensitive.
+    Furthermore you can select wheter diacritical marks (i.e. accents, circumflex, diaeresis, ...) should be taken
+    into account when comparing characters. Example: If diacritics are to be ignored, the character 'a' matches 'à', 'á' and 'ä'
+    and 'Vigenère' matches 'Vigenere'.
+    <newline /><newline />
+
+    You can also specify a minimum number of hits that have to be found. When this number is reached, the search is
+    considered to be successful and the boolean value 'true' is sent to the plugin output 'Search result', otherwise
+    the output will be 'false'.
+    The minimum number of hits can be specified via the corresponding plugin input or in the settings tab (if the input 
+    is not connected).
+  </usage>
+  <usage lang="zh-CN">该插件具有两种操作模式：“哈希表”和“ Aho-Corasick”。您可以在插件的设置标签中选择两者。当选择“哈希表”，该插件预计其输入“输入” UND“搜索词”字样的两个列表。必须将它们作为字符串输入，使用设置选项卡中指定的定界符将其分成单词。启动该插件时，它将检查“搜索单词”列表中的每个单词是否出现在“输入”列表中，并相应地增加命中次数。您可以在“设置”标签中指定是一次出现一次还是多次出现一个单词。命中计数然后显示在插件输出中。当选择“阿霍Corasick”，插件再次预计在“搜索词”输入一个单词列表。在“输入”上，现在需要常规文本。启动插件后，它将使用Aho-Corasick字符串匹配算法在输入文本的“搜索单词”列表中搜索单词的所有出现情况。对于两种操作模式，您都可以选择搜索是区分大小写还是不区分大小写。此外，您可以选择比较字符时应考虑的变音符号（即重音符号，抑扬音符号，变音符号等）。示例：如果要忽略变音符号，则字符“ a”匹配“à”，“á”和“ä”，而“Vigenère”匹配“ Vigenere”。您还可以指定必须找到的最小匹配数。当达到此数字时，将认为搜索成功，并且布尔值“ true”被发送到插件输出“ Search result”，否则输出将为“ false”。最小匹配数可以通过相应的插件输入或在“设置”标签中指定（如果未连接输入）。</usage>
+  <usage lang="ru">Этот плагин имеет два режима работы: «Hashtable» и «Aho-Corasick». Вы можете выбирать между ними на вкладке настроек плагина. Когда выбрано «Hashtable», плагин ожидает два списка слов на своих входах «Input» и «Search word». Они должны вводиться как строки, которые разбиваются на слова, используя символы разделителя, указанные на вкладке настроек. Когда плагин запущен, он проверяет каждое слово в списке «Поиск слова», происходит ли оно в списке «Ввод» и соответственно увеличивает количество попаданий. Вы можете указать на вкладке настроек, если слово, которое происходит несколько раз, должно учитываться в каждом событии или только один раз. Затем счетчик попадает на выход плагина. Когда выбрано «Aho-Corasick», плагин снова ожидает список слов на входе «Поиск слова». На «Ввод» теперь ожидается регулярный текст. Когда плагин запущен, он ищет все встречные слова в списке «Поиск слова» во входном тексте, используя алгоритм сопоставления строк Aho-Corasick. Для обоих режимов работы вы можете выбрать, должен ли поиск быть чувствительным к регистру или регистрозависимым. Кроме того, при сравнении символов вы должны принимать во внимание диакритические знаки (например, акценты, circumflex, diaeresis, ...). Пример: Если диакритические знаки следует игнорировать, символ &amp;#39;a&amp;#39; соответствует &amp;#39;à&amp;#39;, &amp;#39;á&amp;#39; и &amp;#39;ä&amp;#39; и &amp;#39;Vigenère&amp;#39; соответствует &amp;#39;Vigenere&amp;#39;. Вы также можете указать минимальное количество обращений, которые нужно найти. Когда это число достигнуто, поиск считается успешным, и логическое значение «true» отправляется на выход плагина «Результат поиска», иначе вывод будет «false». Минимальное количество обращений может быть указано через соответствующий вход плагина или на вкладку настроек (если вход не подключен).</usage>
+  <usage lang="de-DE">
+    Dieses Plugin hat die zwei Betriebsarten 'Hash-Tabelle' und 'Aho-Corasick'. In den Einstellungen des Plugins kann die
+    zu verwendende Betriebsart gewählt werden.
+    <newline /><newline />
+    
+    In der Betriebsart 'Hash-Tabelle' erwartet das Plugin an den Eingängen 'Eingabe' und 'Suchwort' jeweils eine Liste von
+    Worten. Diese müssen in Form von Zeichenketten angegeben werden, die anhand der in den Einstellungen spezifizierbaren 
+    Trennzeichen in Einzelworte zerlegt werden.
+    <newline />
+    Nach Start des Plugins wird dann für jedes Wort der 'Suchwort'-Liste getestet, ob es in der 'Eingabe'-Liste
+    enthalten ist und die Trefferzahl wird entsprechend um eins erhöht. In den Einstellungen kann hierbei noch angegeben werden,
+    ob Worte, die mehrfach in der 'Eingabe'-Liste vorkommen, auch mehrfach oder höchstens einmal gezählt werden sollen.
+    Die Anzahl der gefundenen Treffer wird dann am Plugin-Ausgang ausgegeben.
+    <newline /><newline />
+
+    In der Betriebsart 'Aho-Corasick' wird am Eingang 'Suchwort' wiederum eine Liste von zu suchenden Worten erwartet,
+    an 'Eingang' nun aber ein gewöhnlicher Text. Nach Start des Plugins werden unter Verwendung des Aho-Corasick-Algorithmus 
+    dann alle Stellen im Eingabetext gefunden, an denen ein Wort der Suchwort-Liste auftritt.
+    <newline /><newline />
+    
+    Für beide Betriebsarten kann man wählen, ob bei der Wortsuche die Groß-/Kleinschreibung der Worte berücksichtigt werden soll.
+    Außerdem kann man wählen, ob diakritische Zeichen (Akzente, Zirkumflex, Umlautzeichen, ...) beim Vergleich berücksichtigt
+    werden sollen oder ob die entsprechenden Zeichen auch mit ihren Grundformen identifiziert werden dürfen.
+    Wenn sie ignoriert werden, so wird z.B. das Wort 'Vigenère' auch dann gefunden, wenn das Wort 'Vigenere' gesucht wurde.
+    <newline /><newline />
+    
+    Weiterhin lässt sich ein Suchziel als Anzahl der mindestens zu findenden Treffer angeben. Wird diese Trefferzahl
+    erreicht, so wird am Plugin-Ausgang mit der Bezeichnung 'Suchergebnis' der boolesche Wert 'wahr' ausgegeben, sonst 'falsch'.
+    Die Anzahl der mindestens zu findenden Treffer kann entweder über den entsprechenden Plugin-Eingang angeben werden, oder, wenn
+    dieser nicht verbunden wird, über die Plugin-Einstellungen.
+  </usage>
+  <presentation lang="en">
+    In the 'Hashtable' operating mode, the presentation view of the plugin shows the words of the 'Search word' list that
+    occur in the 'Input' list together with their index herein. It also shows again the absolute number of hits.
+    By checking the checkbox in the settings tab, you can display the number of hits as percentage relative to the
+    minimum number of expected hits.
+    <newline /><newline />
+
+    In the 'Aho-Corasick' operating mode, the presentation view displays those words of the 'Search word' list that occur
+    in the input text together with their starting position inside the input text.
+  </presentation>
+  <presentation lang="zh-CN">在“哈希表”操作模式下，插件的显示视图显示出现在“输入”列表中的“搜索单词”列表中的单词及其此处的索引。它还会再次显示绝对点击数。通过选中“设置”标签中的复选框，您可以将命中数显示为相对于预期命中最小数的百分比。在“ Aho-Corasick”操作模式下，演示视图显示输入文本中出现的“搜索词”列表中的那些词以及它们在输入文本中的开始位置。</presentation>
+  <presentation lang="ru">В режиме работы «Hashtable» в представлении презентации плагина отображаются слова списка «Поиск слова», которые встречаются в списке «Вход» вместе с их индексом. Он также снова показывает абсолютное количество обращений. Установив флажок на вкладке настроек, вы можете отобразить количество обращений в процентах относительно минимального количества ожидаемых ударов. В режиме работы «Aho-Corasick» в представлении презентации отображаются те слова из списка «Поиск слова», которые встречаются во входном тексте вместе с их исходной позицией внутри входного текста.</presentation>
+  <presentation lang="de-DE">
+    In der Präsentationsansicht werden in der Betriebsart 'Hash-Tabelle' die Worte der Suchliste, die in der 'Eingabe'-Liste
+    gefunden wurden, zusammen mit ihrer Position innerhalb dieser Liste dargestellt. Außerdem wird nochmals die Anzahl der
+    gefundenen Treffer angezeigt. Diese Zahl wird durch Aktivierung des entsprechenden Kontrollkästchens in den Einstellungen als
+    Prozentwert bezogen auf die zu findende Mindestanzahl von Treffern angezeigt.
+    <newline /><newline />
+
+    In der Betriebsart 'Aho-Corasick' werden diejenigen Worte der 'Suchwort'-Liste, die im Eingabetext gefunden wurden, zusammen mit
+    ihrer Startposition innerhalb des Eingabetextes angezeigt.
+  </presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Aho–Corasick_string_matching_algorithm" />
+      <caption lang="en">Aho–Corasick string matching algorithm</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Aho-Corasick-Algorithmus" />
+      <caption lang="de-DE">Aho-Corasick-Algorithmus</caption>
+    </linkReference>
+  </references>
+</documentation>

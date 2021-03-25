@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Solitaire Brute-Force Analysis</title>
+  <title lang="zh">纸牌蛮力分析</title>
+  <title lang="ru">Анализ грубой силы пасьянса</title>
+  <summary lang="en">Cryptanalysis of the <i>Solitaire</i> cipher using brute-force</summary>
+  <summary lang="zh">使用蛮力对单人密码进行密码分析</summary>
+  <summary lang="ru">Криптоанализ шифрования Solitaire с использованием грубой силы</summary>
+  <description lang="en">This template shows how to analyse a ciphertext encrypted with the <i>Solitaire</i> cipher using a dictionary attack. Any dictionary can be used for both the keywords to try as well as for the word recognition.</description>
+  <description lang="zh">该模板显示了如何使用字典攻击来分析以单人密码加密的密文。任何词典都可用于尝试关键词和单词识别。</description>
+  <description lang="ru">Этот шаблон показывает, как анализировать шифрованный текст, зашифрованный с помощью шифрования Solitaire, используя атаку словаря. Любой словарь может использоваться как для ключевых слов, так и для распознавания слов.</description>
+  <keywords>Dictionary, Analysis, Attack</keywords>
+  <keywords lang="zh">字典，分析，攻击</keywords>
+  <keywords lang="ru">Словарь, анализ, атака</keywords>
+  <title lang="de">Solitaire Brute-Force-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>Solitaire</i>-Verschlüsselung mit Brute-Force</summary>
+  <description lang="de">Diese Vorlage zeigt, wie ein mit der <i>Solitaire</i>-Verschlüsselung verschlüsselter Text mit einem Wörterbuch-Angriff analysiert werden kann. Die Wörterbücher für die zu testenden Schlüsselwörter und für die Texterkennung können frei gewählt werden.</description>
+  <keywords lang="de">Wörterbuch, Angriff</keywords>
+  <icon file="solitaireanalyzer.jpg" />
+  <relevantPlugins>
+    <plugin name="CrypToolDictionary" />
+    <plugin name="SolitaireAnalyser" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Keyword$" value="Schlüsselwort" />
+    <replacement key="$Word dictionary$" value="Nachrichten-Wörterbuch" />
+    <replacement key="$Key dictionary$" value="Schlüssel-Wörterbuch" />
+    <replacement key="$SolitaireAnalyser$" value="Solitaire-Analysierer" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$Keyword$" value="关键词" />
+    <replacement key="$Word dictionary$" value="新闻字典" />
+    <replacement key="$Key dictionary$" value="关键词典" />
+    <replacement key="$SolitaireAnalyser$" value="纸牌分析仪" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$Keyword$" value="ключевое слово" />
+    <replacement key="$Word dictionary$" value="Новости Словарь" />
+    <replacement key="$Key dictionary$" value="Ключевой словарь" />
+    <replacement key="$SolitaireAnalyser$" value="Пасьянс-Analysierer" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
+    <replacement key="$Keyword$" value="Keyword" />
+    <replacement key="$Word dictionary$" value="Word dictionary" />
+    <replacement key="$Key dictionary$" value="Key dictionary" />
+    <replacement key="$SolitaireAnalyser$" value="SolitaireAnalyzer" />
+  </replacements>
+</sample>

@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3F92F927-E6FA-4048-AB98-04D98B82B69E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LatticeCrypto</RootNamespace>
+    <AssemblyName>LatticeCrypto</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\CrypBuild\Debug\CrypPlugins</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Debug\CrypPlugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ExtendedNTL, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\ExtendedNTL.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\FormatSettings.cs" />
+    <Compile Include="Models\GGHModel.cs" />
+    <Compile Include="Models\LatticeND.cs" />
+    <Compile Include="Models\LatticePoint.cs" />
+    <Compile Include="Models\LCGModel.cs" />
+    <Compile Include="Models\LWEModel.cs" />
+    <Compile Include="Models\MatrixND.cs" />
+    <Compile Include="Models\MerkleHellmanModel.cs" />
+    <Compile Include="Models\RSAModel.cs" />
+    <Compile Include="Models\VectorND.cs" />
+    <Compile Include="Models\ObsoleteClasses.cs" />
+    <Compile Include="LatticeCryptoPlugin.cs" />
+    <Compile Include="Properties\HelpLanguages.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelpLanguages.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\HelpLanguages.Designer.cs">
+      <DependentUpon>HelpLanguages.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="OnlineHelp\OnlineHelpAccess.cs" />
+    <Compile Include="OnlineHelp\OnlineHelpActions.cs" />
+    <Compile Include="OnlineHelp\WindowOnlineHelp.xaml.cs">
+      <DependentUpon>WindowOnlineHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\SettingsLanguages.de.Designer.cs">
+      <DependentUpon>SettingsLanguages.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\SettingsLanguages.Designer.cs">
+      <DependentUpon>SettingsLanguages.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Languages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Languages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Languages.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Languages.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Arrows\ArrowEnds.cs" />
+    <Compile Include="Utilities\Arrows\ArrowheadsDemo.cs" />
+    <Compile Include="Utilities\Arrows\ArrowLine.cs" />
+    <Compile Include="Utilities\Arrows\ArrowLineBase.cs" />
+    <Compile Include="Utilities\Arrows\ArrowPolyline.cs" />
+    <Compile Include="Utilities\BigRational.cs" />
+    <Compile Include="Utilities\Delegates.cs" />
+    <Compile Include="Utilities\GuiLogMsgHandOff.cs" />
+    <Compile Include="Utilities\ILatticeCryptoUserControl.cs" />
+    <Compile Include="Utilities\IntegerValidationRule.cs" />
+    <Compile Include="Utilities\VectorNDValidationRule.cs" />
+    <Compile Include="Utilities\NavigationCommandType.cs" />
+    <Compile Include="Utilities\ReductionMethods.cs" />
+    <Compile Include="Utilities\UiServices.cs" />
+    <Compile Include="Utilities\Util.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CvpViewModel.cs" />
+    <Compile Include="ViewModels\GGHViewModel.cs" />
+    <Compile Include="ViewModels\LWEViewModel.cs" />
+    <Compile Include="ViewModels\LatticeManualInputViewModel.cs" />
+    <Compile Include="ViewModels\RSAViewModel.cs" />
+    <Compile Include="ViewModels\SvpGaussViewModel.cs" />
+    <Compile Include="ViewModels\MerkleHellmanViewModel.cs" />
+    <Compile Include="ViewModels\SvpLLLViewModel.cs" />
+    <Compile Include="Views\CvpView.xaml.cs">
+      <DependentUpon>CvpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GGHView.xaml.cs">
+      <DependentUpon>GGHView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MerkleHellmanManualInputView.xaml.cs">
+      <DependentUpon>MerkleHellmanManualInputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LWEView.xaml.cs">
+      <DependentUpon>LWEView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LatticeCopyOrSaveSelection.xaml.cs">
+      <DependentUpon>LatticeCopyOrSaveSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LatticeManualInputView.xaml.cs">
+      <DependentUpon>LatticeManualInputView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Navigation.xaml.cs">
+      <DependentUpon>Navigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LatticeSettingsTab.xaml.cs">
+      <DependentUpon>LatticeSettingsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RSAView.xaml.cs">
+      <DependentUpon>RSAView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartControl.xaml.cs">
+      <DependentUpon>StartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SvpGaussView.xaml.cs">
+      <DependentUpon>SvpGaussView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="Views\MerkleHellmanView.xaml.cs">
+      <DependentUpon>MerkleHellmanView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SvpLLLView.xaml.cs">
+      <DependentUpon>SvpLLLView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="OnlineHelp\WindowOnlineHelp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CvpView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GGHView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MerkleHellmanManualInputView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LWEView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LatticeCopyOrSaveSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LatticeManualInputView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Navigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LatticeSettingsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RSAView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StartControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SvpGaussView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LatticeCryptoMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Views\LatticeCryptoMain.xaml.cs">
+      <DependentUpon>LatticeCryptoMain.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\MerkleHellmanView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SvpLLLView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WpfResources\Brushes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WpfResources\LatticeCrypto.WpfResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WpfResources\Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\HelpLanguages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HelpLanguages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\HelpLanguages.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>HelpLanguages.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\SettingsLanguages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsLanguages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\SettingsLanguages.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SettingsLanguages.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Languages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Languages.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Languages.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
+      <Name>CrypPluginBase</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\cursor_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\zoom_in.png" />
+    <Resource Include="Utilities\Images\zoom_out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\folder_open_icon.png" />
+    <Resource Include="Utilities\Images\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\cursor_drag_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\cursor_drag_hand.png" />
+    <Resource Include="Utilities\Images\cursor_hand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\clipboard_copy_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\book_pencil.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Cursor\grab.cur" />
+    <Resource Include="Utilities\Cursor\grabbing.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Utilities\Images\photography_camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LatticeCryptoPlugin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\doc.xml" />
+    <Content Include="OnlineHelp\HelpFiles\de\Gauss.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\CVP.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\Codomain.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\CodomainLLL.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\DimensionLLL.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\AngleVectors.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\DeterminantLattice.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\GGH.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\LWE.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\TargetPoint.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\SVP.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\SuccessiveMinima.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\LengthVector.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\RSA.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\MerkleHellman.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\LLL.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\de\StartControl.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\AngleVectors.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\Codomain.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\CVP.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\DeterminantLattice.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\DimensionLLL.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\Gauss.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\CodomainLLL.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\GGH.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\LWE.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\LengthVector.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\LLL.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\MerkleHellman.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\RSA.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\StartControl.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Utilities\Images\cursor_CVP.png" />
+    <Resource Include="OnlineHelp\Resources\ImgAngleVectors.png" />
+    <Resource Include="OnlineHelp\Resources\ImgDeterminantLattice.png" />
+    <Resource Include="OnlineHelp\Resources\ImgDeterminantLattice2.png" />
+    <Resource Include="OnlineHelp\Resources\ImgLengthVector.png" />
+    <Content Include="OnlineHelp\HelpFiles\en\SuccessiveMinima.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\SVP.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\en\TargetPoint.html">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="OnlineHelp\HelpFiles\template.de.htm" />
+    <Resource Include="OnlineHelp\Resources\ImgLattice.png" />
+    <Resource Include="OnlineHelp\Resources\ImgSuccessiveMinima.png" />
+    <Resource Include="OnlineHelp\Resources\ImgTwoBasis.png" />
+    <Resource Include="OnlineHelp\Resources\ImgHermite.png" />
+    <Content Include="OnlineHelp\Resources\ImgBabai.PNG" />
+    <Content Include="OnlineHelp\Resources\ImgGauss.png" />
+    <Content Include="OnlineHelp\Resources\ImgLWE1.PNG" />
+    <Content Include="OnlineHelp\Resources\ImgLWE2.png" />
+    <Content Include="OnlineHelp\Resources\ImgMerkleHellman.PNG" />
+    <Content Include="OnlineHelp\Resources\ImgSuccessiveMinimaEng.png" />
+    <Content Include="OnlineHelp\Start.de.htm">
+      <SubType>Designer</SubType>
+    </Content>
+    <Resource Include="Utilities\Images\unequal.png" />
+    <Resource Include="Utilities\Images\help32.gif" />
+    <Resource Include="Utilities\Images\help.png" />
+    <Resource Include="Utilities\Images\equal.png" />
+    <None Include="OnlineHelp\Start.htm" />
+    <None Include="OnlineHelp\HelpFiles\template.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

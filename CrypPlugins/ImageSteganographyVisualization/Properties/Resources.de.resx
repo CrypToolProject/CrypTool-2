@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>Verstecken</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>Extrahieren</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Wählen Sie eine Aktion aus</value>
+  </data>
+  <data name="ApplyButton" xml:space="preserve">
+    <value>übernehmen</value>
+  </data>
+  <data name="ApplyChangesButton" xml:space="preserve">
+    <value>Änderungen übernehmen</value>
+  </data>
+  <data name="BackToMainMenu" xml:space="preserve">
+    <value>Zurück zum Hauptmenu</value>
+  </data>
+  <data name="BitmaskTooltip" xml:space="preserve">
+    <value>Wählen Sie die Bitmaske aus, die definiert welche Bits für das Verstecken benutzt werden sollen</value>
+  </data>
+  <data name="BitsAfterLabel" xml:space="preserve">
+    <value>RGB Bits nachher</value>
+  </data>
+  <data name="BitsBeforeLabel" xml:space="preserve">
+    <value>RGB Bits vorher</value>
+  </data>
+  <data name="BitsChosenLabel" xml:space="preserve">
+    <value>Anzahl der ausgewählten Bits, die für das Verstecken der Nachricht angewendet werden:</value>
+  </data>
+  <data name="BlueBitMaskLabel" xml:space="preserve">
+    <value>Blau Bitmaske </value>
+  </data>
+  <data name="BluePBLabel" xml:space="preserve">
+    <value>Blaue Bitebenen</value>
+  </data>
+  <data name="BlueValueLabel" xml:space="preserve">
+    <value>Blau Wert: </value>
+  </data>
+  <data name="BPCSMainMenu1" xml:space="preserve">
+    <value>Wie der Algorithmus funktioniert</value>
+  </data>
+  <data name="BPCSMainMenu2" xml:space="preserve">
+    <value>Versteckprozess ansehen</value>
+  </data>
+  <data name="BPCSMainMenu3" xml:space="preserve">
+    <value>Pixelkonvertierung ansehen</value>
+  </data>
+  <data name="BPCSMainMenu4" xml:space="preserve">
+    <value>Unterschiedliche Bitebenen ansehen</value>
+  </data>
+  <data name="ChooseBitsButton" xml:space="preserve">
+    <value>andere Bits auswählen</value>
+  </data>
+  <data name="ChooseBitsViewText1" xml:space="preserve">
+    <value>Wählen Sie die Bits aus, die für das Verstecken der Nachrichtenbits benutzt werden sollen </value>
+  </data>
+  <data name="ChooseBitsViewTitle" xml:space="preserve">
+    <value>Bits für das Verstecken auswählen</value>
+  </data>
+  <data name="ColorOrderCaption" xml:space="preserve">
+    <value>Farbensortierung</value>
+  </data>
+  <data name="ColorOrderTooltip" xml:space="preserve">
+    <value>Wählen Sie mithilfe der unterschiedlichen Farbensortierung aus, nach welcher Reihenfolge die Bitebenen sortiert werden sollen</value>
+  </data>
+  <data name="ComplexityCaption" xml:space="preserve">
+    <value>Komplexitätsgrenzwert</value>
+  </data>
+  <data name="ComplexityLabel" xml:space="preserve">
+    <value>Komplexität: </value>
+  </data>
+  <data name="ComplexityTooltip" xml:space="preserve">
+    <value>Bestimmen Sie den Grenzwert für die Komplexität, der bestimmt ob ein Block komplex oder nicht ist.  Dieser Wert soll zwischen 0 und 1 liegen </value>
+  </data>
+  <data name="ConjugatedLabel" xml:space="preserve">
+    <value>Konjugiert: </value>
+  </data>
+  <data name="ConjugationText" xml:space="preserve">
+    <value>P ist der originale Nachrichtenblock, Wc ist das Schachbrettmuster was dem Erhöhen der Komplexität dient, P* ist die konjugierte Version des Nachrichtenblocks P.</value>
+  </data>
+  <data name="ConversionViewText1" xml:space="preserve">
+    <value>Das Verstecken ist jetzt nun abgeschlossen, Sie können das Ergebnis im Bildausgabe Komponente.</value>
+  </data>
+  <data name="ConversionViewText2" xml:space="preserve">
+    <value>Sie können die Konvertierung in den Pixeln sehen, indem Sie die x- und y-Koordinaten des Pixels in das Textfeld unten eingeben, oder mittels den Pfeilen um die Pixels zu browsen.</value>
+  </data>
+  <data name="CurrentComplexBlockNrLabel" xml:space="preserve">
+    <value>Nummer des aktuellen complexen Bildblocks: </value>
+  </data>
+  <data name="CurrentImageBlockNrLabel" xml:space="preserve">
+    <value>Nummer des aktuellen Bildblocks: </value>
+  </data>
+  <data name="CurrentMessageBlockNrLabel" xml:space="preserve">
+    <value>Nummer des aktuellen Nachrichtenblocks: </value>
+  </data>
+  <data name="CurrentPixelLabel" xml:space="preserve">
+    <value>Aktuelles Pixel</value>
+  </data>
+  <data name="GreenBitMaskLabel" xml:space="preserve">
+    <value>Grün Bitmaske</value>
+  </data>
+  <data name="GreenPBLabel" xml:space="preserve">
+    <value>Grüne Bitebenen</value>
+  </data>
+  <data name="GreenValueLabel" xml:space="preserve">
+    <value>Grün Wert: </value>
+  </data>
+  <data name="HiderBlocksPanelText1" xml:space="preserve">
+    <value>Der Bildblock rechts ist mit dem Nachrichtenblock links ersetzt</value>
+  </data>
+  <data name="HidingAndCapacityTitle" xml:space="preserve">
+    <value>Übersicht und Kapazitätsinformationen</value>
+  </data>
+  <data name="HidingCapacityText" xml:space="preserve">
+    <value>Versteckkapazität: </value>
+  </data>
+  <data name="HidingProcessViewTitle" xml:space="preserve">
+    <value>Versteckprozess </value>
+  </data>
+  <data name="HintPrompt" xml:space="preserve">
+    <value>Hinweis: Starten Sie das Programm mit dem "Starten" Button in der Multifunktionsleiste. Dies aktiviert den Button "Bits für den Versteckprozess auswählen" oben.</value>
+  </data>
+  <data name="HintPrompt2" xml:space="preserve">
+    <value>Wählen Sie die Bits, die für das Verstecken benutzt werden sollen, um den Versteckprozess abzuschließen und die anderen Views zu aktivieren. </value>
+  </data>
+  <data name="HintPrompt3" xml:space="preserve">
+    <value>Hinweis: Starten Sie das Programm mit dem "Starten" Button in der Multifunktionsleiste. Dies führt den Versteckprozess aus und aktiviert die Buttons um auf die anderen Ansichten zuzugreifen.</value>
+  </data>
+  <data name="ImageBlocksInfoText1" xml:space="preserve">
+    <value>Anzahl Bildblöcke insgemat: </value>
+  </data>
+  <data name="ImageBlocksInfoText2" xml:space="preserve">
+    <value>Anzahl komplexe Bildblöcke: </value>
+  </data>
+  <data name="ImageHeightLabel" xml:space="preserve">
+    <value>Bildhöhe: </value>
+  </data>
+  <data name="ImageInfoLabel" xml:space="preserve">
+    <value>Bildinformatonen</value>
+  </data>
+  <data name="ImageWidthLabel" xml:space="preserve">
+    <value>Bildbreite: </value>
+  </data>
+  <data name="InputImageCaption" xml:space="preserve">
+    <value>Bildeingabe</value>
+  </data>
+  <data name="InputImageTooltip" xml:space="preserve">
+    <value>Laden Sie ein Bild hoch, das zum Verstecken der Nachricht benutzt werden soll, oder aus dem die Nachricht extrahiert werden soll. </value>
+  </data>
+  <data name="InputMessageCaption" xml:space="preserve">
+    <value>Nachrichteneingabe</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>Geben Sie die geheime Nachricht ein, die im Bild versteckt werden soll</value>
+  </data>
+  <data name="Intro0Text1" xml:space="preserve">
+    <value>Steganographie ist das Verfahren zum Verstecken geheimer Daten in nicht-geheimen Dateien, um die Tatsache zu verbergen, dass eine geheime Nachricht übermittelt wird.</value>
+  </data>
+  <data name="Intro0Text2" xml:space="preserve">
+    <value>Der Begriff kombiniert die griechischen Wörter steganós, was versteckt bedeutet, und graph, was Schreiben bedeutet.</value>
+  </data>
+  <data name="Intro0Text3" xml:space="preserve">
+    <value>Die Prozedur codiert Daten auf eine Weise, die so subtil ist, dass die Änderungen nicht bemerkt werden können.</value>
+  </data>
+  <data name="Intro0Text4" xml:space="preserve">
+    <value>Steganographie kann mit Kryptographie kombiniert werden, um mehr Sicherheit zu gewährleisten bei vertraulichen Daten.</value>
+  </data>
+  <data name="Intro1Text1" xml:space="preserve">
+    <value>Dieses Diagramm zeigt, wie das Steganographie Verfahren normalerweise über einen unsicheren Kommunikationskanal funktioniert.</value>
+  </data>
+  <data name="Intro1Text2" xml:space="preserve">
+    <value>Die geheime Nachricht kann verschlüsselt (Geheimtext) oder Klartext sein.</value>
+  </data>
+  <data name="Intro2BPCSText1" xml:space="preserve">
+    <value>Der BPCS-Algorithmus wurde eingeführt, um die Mängel traditioneller Steganografietechniken mit begrenzter Kapazität zum Verstecken von Daten zu überwinden. Diese Technik kann bis zu 50% der Datenmenge von dem Coverbild verstecken, ohne dass die visuelle Erscheinung des Originalbilds stark verzerrt wird.</value>
+  </data>
+  <data name="Intro2BPCSText2" xml:space="preserve">
+    <value>In BPCS kann ein mehrwertiges Bild, das aus 24-Bit-Pixeln besteht, in einen Satz von 24 Binärbildern (Bitebenen) zerlegt werden.</value>
+  </data>
+  <data name="Intro2BPCSText3" xml:space="preserve">
+    <value>Diese Ebenen sind in 8 × 8-Pixelblöcke unterteilt, die Blöcke werden dann in Noise-like Regionen und informative Regionen klassifiziert, </value>
+  </data>
+  <data name="Intro2BPCSText4" xml:space="preserve">
+    <value>Noise-like Regionen (komplexe Regionen) können durch 8 x 8-Bit-Blöcke der geheimen Nachricht ersetzt werden, die ebenfalls komplex sein sollten. Wenn der Nachrichtenblock nicht komplex ist, sollte er konjugiert werden, um den Komplexitätsgrad des Bildblocks beizubehalten, </value>
+  </data>
+  <data name="Intro2BPCSTitle" xml:space="preserve">
+    <value>BPCS-Algorithmus</value>
+  </data>
+  <data name="Intro2LSBText1" xml:space="preserve">
+    <value>In dem LSB-Algorithmus ersetzen die Bits der geheimen Nachricht die niedrigstwertigen Bits (LSB) der Pixelbits des Eingabebildes.</value>
+  </data>
+  <data name="Intro2LSBText2" xml:space="preserve">
+    <value>Das Ändern des LSB der roten, blauen und grünen Kanäle eines Pixels führt zu einem Unterschied, der mit bloßem Auge kaum zu erkennen ist. Daher besteht kein Verdacht, dass eine geheime Nachricht im Bild verborgen ist.</value>
+  </data>
+  <data name="Intro2LSBText3" xml:space="preserve">
+    <value>Beispiel: Codieren der Nachrichtenbits 111 im folgenden Pixel:</value>
+  </data>
+  <data name="Intro2LSBTitle" xml:space="preserve">
+    <value>LSB Algorithmus</value>
+  </data>
+  <data name="Intro3BPCSTitle" xml:space="preserve">
+    <value>Noise-like vs. informative Regionen Beispiele</value>
+  </data>
+  <data name="Intro3LSBText1" xml:space="preserve">
+    <value>Dies wird eine interaktive Visualisierung sein, in der Sie die Bits auswählen können, die die geheimen Nachrichtenbits ersetzen, und beispielsweise den Unterschied zwischen der Auswahl des MSB und des LSB erkennen können.</value>
+  </data>
+  <data name="Intro3LSBText2" xml:space="preserve">
+    <value>Nachdem Sie die Bits ausgewählt und das Programm ausgeführt haben, können Sie die Pixel durchsuchen und sehen, wie sich der Ersetzungsprozess bei jedem Pixel geändert hat.</value>
+  </data>
+  <data name="Intro3LSBText3" xml:space="preserve">
+    <value>Die letzten 3 Pixel werden zum Speichern von Informationen für den Extraktionsprozess verwendet, einschließlich: Länge der geheimen Nachricht und die Bits, die zum Codieren verwendet werden.</value>
+  </data>
+  <data name="Intro3LSBText4" xml:space="preserve">
+    <value>Wenn der Algorithmus nur das LSB zum Verstecken von Daten verwendet, kann er bis zu Höhe * Breite * 3 Bits verstecken (minus 72 Bits für die Header Informationen).</value>
+  </data>
+  <data name="Intro3LSBTitle" xml:space="preserve">
+    <value>Mehr Informationen bevor wir anfangen</value>
+  </data>
+  <data name="Intro4BPCSTitle" xml:space="preserve">
+    <value>Konjugation Illustration</value>
+  </data>
+  <data name="InvalidComplexityThresholdInput" xml:space="preserve">
+    <value>Ungültige Eingabe für den Komplexitätsgrenzwert, der Wert soll zwischen 0 und 1 liegen</value>
+  </data>
+  <data name="InvalidInputPrompt" xml:space="preserve">
+    <value>Ungültige Eingabe, bitte Wert eingeben: </value>
+  </data>
+  <data name="LSBMainMenu1" xml:space="preserve">
+    <value>Wie der Algorithmus funktioniert</value>
+  </data>
+  <data name="LSBMainMenu2" xml:space="preserve">
+    <value>Bits für den Versteckprozess auswählen</value>
+  </data>
+  <data name="LSBMainMenu3" xml:space="preserve">
+    <value>Pixelkonvertierung ansehen</value>
+  </data>
+  <data name="LSBMainMenu4" xml:space="preserve">
+    <value>Übersicht und Versteckkapazität ansehen</value>
+  </data>
+  <data name="MessageBlocksInfoText1" xml:space="preserve">
+    <value>Anzahl Nachrichtenblöcke insgesamt: </value>
+  </data>
+  <data name="MessageBlocksInfoText2" xml:space="preserve">
+    <value>Größe der Nachricht: </value>
+  </data>
+  <data name="MessageInfoLabel" xml:space="preserve">
+    <value>Nachrichteninformation</value>
+  </data>
+  <data name="MessageLengthExtractLabel" xml:space="preserve">
+    <value>Nachrichtenlänge: </value>
+  </data>
+  <data name="MessageLengthLabel" xml:space="preserve">
+    <value>Nachrichtenlänge: </value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>Modus</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>LSB Steganographie</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>BPCS Steganographie</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Wählen Sie einen Modus aus</value>
+  </data>
+  <data name="NextButton" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="NoImageLogMessage" xml:space="preserve">
+    <value>Laden Sie bitte ein Bild hoch</value>
+  </data>
+  <data name="NoPresentationPrompt" xml:space="preserve">
+    <value>Keine Präsentation die angezeigt werden kann</value>
+  </data>
+  <data name="NotEnoughHidingCapacity" xml:space="preserve">
+    <value>Die Versteckkapazität ist geringer als die Größe der geheimen Nachricht, daher wurde nicht die ganze Nachricht versteckt.</value>
+  </data>
+  <data name="NoTextLogMessage" xml:space="preserve">
+    <value>Geben Sie bitte eine Nachricht zum Verstecken ein</value>
+  </data>
+  <data name="OutputImageCaption" xml:space="preserve">
+    <value>Bildausgabe</value>
+  </data>
+  <data name="OutputImageTooltip" xml:space="preserve">
+    <value>Hier wird das Bild ausgegeben, in dem die Nachricht versteckt wurde</value>
+  </data>
+  <data name="OutputMessageCaption" xml:space="preserve">
+    <value>Extrahierte Nachricht</value>
+  </data>
+  <data name="OutputMessageTooltip" xml:space="preserve">
+    <value>Dies ist die Nachricht, die aus dem Bild extrahiert wird</value>
+  </data>
+  <data name="PercentageCapacityLabel" xml:space="preserve">
+    <value>Prozentuale Versteckkapazität: </value>
+  </data>
+  <data name="PixelConversionViewTitle" xml:space="preserve">
+    <value> Pixelkonvertierung</value>
+  </data>
+  <data name="PlaneLabel" xml:space="preserve">
+    <value>Ebene: </value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Bildsteganographie</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Eine geheime Nachricht in einem Bild verstecken</value>
+  </data>
+  <data name="PointLabel" xml:space="preserve">
+    <value>Punkt</value>
+  </data>
+  <data name="PreviousButton" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="RedBitMaskLabel" xml:space="preserve">
+    <value>Rot Bitmaske</value>
+  </data>
+  <data name="RedPBLabel" xml:space="preserve">
+    <value>Rote Bitebenen</value>
+  </data>
+  <data name="RedValueLabel" xml:space="preserve">
+    <value>Rot Wert: </value>
+  </data>
+  <data name="SeePixelConversionButton" xml:space="preserve">
+    <value>Pixel Konvertierung ansehen</value>
+  </data>
+  <data name="SeeSlide4Text" xml:space="preserve">
+    <value>siehe Folie 1.4. </value>
+  </data>
+  <data name="SeeSlide5Text" xml:space="preserve">
+    <value>siehe Folie 1.5.</value>
+  </data>
+  <data name="ShowAllBlocksButton" xml:space="preserve">
+    <value>Alle Bildblöcke ansehen</value>
+  </data>
+  <data name="ShowButton" xml:space="preserve">
+    <value>anzeigen</value>
+  </data>
+  <data name="ShowHiderBlocksButton" xml:space="preserve">
+    <value>Versteckblöcke ansehen</value>
+  </data>
+  <data name="ShowPresentationPrompt" xml:space="preserve">
+    <value>Um die Präsentation hier anzuzeigen, klicken Sie oben auf das Symbol "Einstellungen" und aktivieren Sie das Feld "Präsentation anzeigen". Das Ändern von Einstellungen ist nur möglich, wenn die Vorlage gestoppt ist.</value>
+  </data>
+  <data name="ShowPresentationSettingsCaption" xml:space="preserve">
+    <value>Präsentation anzeigen</value>
+  </data>
+  <data name="ShowPresentationSettingsTooltip" xml:space="preserve">
+    <value>Präsentation des Versteckprozesses anzeigen</value>
+  </data>
+  <data name="SkipIntroButton" xml:space="preserve">
+    <value>Intro überspringen</value>
+  </data>
+  <data name="StartButton" xml:space="preserve">
+    <value>Los geht's</value>
+  </data>
+  <data name="SteganographyLabel" xml:space="preserve">
+    <value>Steganographie</value>
+  </data>
+  <data name="SteganographyModelLabel" xml:space="preserve">
+    <value>Steganographie Model</value>
+  </data>
+  <data name="StegModelUrl" xml:space="preserve">
+    <value>images/model_de.png</value>
+  </data>
+  <data name="XCoTextArea" xml:space="preserve">
+    <value> x Koordinate</value>
+  </data>
+  <data name="YCoTextArea" xml:space="preserve">
+    <value> y Koordinate</value>
+  </data>
+</root>

@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="DCAPathVisualiser.UI.Cipher1.Cipher1Characteristic"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DCAPathVisualiser.UI.Cipher1"
+             xmlns:controls="clr-namespace:DCAPathVisualiser.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="910" d:DesignWidth="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Grid Height="390" Width="540" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <controls:_16BitKeyRoundInOut Grid.Row="0" Grid.Column="0" Margin="50,0,0,0"></controls:_16BitKeyRoundInOut>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Courier New" FontSize="20" HorizontalAlignment="Center" Margin="200,90,0,0">
+                    <Run Text="k"></Run><Run BaselineAlignment="Subscript" Text="0" FontSize="12"></Run>
+                </TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Courier New" FontSize="20" HorizontalAlignment="Center" Margin="200,150,0,0">
+                    <Run Text="u"></Run><Run BaselineAlignment="Subscript" Text="" FontSize="12"></Run>
+                </TextBlock>
+
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="50,170,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="130,170,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="210,170,0,0"></controls:_4BitSBox>
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="290,170,0,0"></controls:_4BitSBox>
+                <controls:_16BitKeyRoundInOut Grid.Row="0" Grid.Column="0" Margin="50,185,0,0"></controls:_16BitKeyRoundInOut>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Courier New" FontSize="20" HorizontalAlignment="Center" Margin="200,215,0,0">
+                    <Run Text="v"></Run><Run BaselineAlignment="Subscript" Text="" FontSize="12"></Run>
+                </TextBlock>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" FontFamily="Courier New" FontSize="20" HorizontalAlignment="Center" Margin="200,275,0,0">
+                    <Run Text="k"></Run><Run BaselineAlignment="Subscript" Text="1" FontSize="12"></Run>
+                </TextBlock>
+            </Grid>
+        </ScrollViewer>
+
+
+
+
+
+    </Grid>
+</UserControl>

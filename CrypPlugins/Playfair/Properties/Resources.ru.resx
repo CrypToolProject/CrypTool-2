@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Играй честно</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Классический шифр замещения</value>
+  </data>
+  <data name="InputStringCaption" xml:space="preserve">
+    <value>Ввод текста</value>
+  </data>
+  <data name="InputStringTooltip" xml:space="preserve">
+    <value>Введите строку, которая будет обрабатываться с помощью шифрования Playfair</value>
+  </data>
+  <data name="PreFormatedInputStringCaption" xml:space="preserve">
+    <value>Предварительно сформированная строка ввода</value>
+  </data>
+  <data name="PreFormatedInputStringTooltip" xml:space="preserve">
+    <value>Если включена опция форматирования текста, входная строка ограничивается используемым алфавитом.</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>Вывод текста</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>Строка после обработки с помощью шифрования Playfair</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>действие</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Выберите действие «Алгоритм»</value>
+  </data>
+  <data name="AlphabetMatrixCaption" xml:space="preserve">
+    <value>Алфавит</value>
+  </data>
+  <data name="AlphabetMatrixTooltip" xml:space="preserve">
+    <value>Это используемый шифр алфавита для шифрования / дешифрования.</value>
+  </data>
+  <data name="IgnoreDuplicatesCaption" xml:space="preserve">
+    <value>Игнорировать дубликаты</value>
+  </data>
+  <data name="IgnoreDuplicatesTooltip" xml:space="preserve">
+    <value>Игнорировать дубликаты в ключевой фразе</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Значение ключа (несколько букв)</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Введите одно или несколько значений ключа</value>
+  </data>
+  <data name="MatrixSizeCaption" xml:space="preserve">
+    <value>Размер матрицы</value>
+  </data>
+  <data name="MatrixSizeTooltip" xml:space="preserve">
+    <value>Выберите, следует ли запускать Playfair с матрицей 5x5 или 6x6</value>
+  </data>
+  <data name="PreFormatTextCaption" xml:space="preserve">
+    <value>Pre-Format-Text</value>
+  </data>
+  <data name="PreFormatTextTooltip" xml:space="preserve">
+    <value>Это используется для определения того, следует ли использовать текст для используемого алфавита.</value>
+  </data>
+  <data name="SeparatorCaption" xml:space="preserve">
+    <value>Разделитель</value>
+  </data>
+  <data name="SeparatorTooltip" xml:space="preserve">
+    <value>Введите символ для разделения пар одинаковых букв</value>
+  </data>
+  <data name="SeparatorReplacementCaption" xml:space="preserve">
+    <value>Замена сепаратора</value>
+  </data>
+  <data name="SeparatorReplacementTooltip" xml:space="preserve">
+    <value>Введите символ для разделения двойных разделителей. Например, двойной XX будет отдельным путем вставки Y</value>
+  </data>
+  <data name="SeparatePairsCaption" xml:space="preserve">
+    <value>Отдельные пары</value>
+  </data>
+  <data name="SeparatePairsTooltip" xml:space="preserve">
+    <value>Отдельные пары одинаковых букв</value>
+  </data>
+  <data name="SeparatePairsTPCaption" xml:space="preserve">
+    <value>Отдельные пары</value>
+  </data>
+  <data name="SeparatePairsTPTooltip" xml:space="preserve">
+    <value>Отдельные пары одинаковых букв</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>шифровать</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>расшифровывать</value>
+  </data>
+  <data name="IgnoreDuplicatesList1" xml:space="preserve">
+    <value>Игнорировать дубликаты в ключевой фразе</value>
+  </data>
+  <data name="PreFormatTextList1" xml:space="preserve">
+    <value>Предварительный формат текста</value>
+  </data>
+  <data name="SeparatePairsList1" xml:space="preserve">
+    <value>Отдельные пары одинаковых букв</value>
+  </data>
+  <data name="MatrixSizeList1" xml:space="preserve">
+    <value>5 x 5</value>
+  </data>
+  <data name="MatrixSizeList2" xml:space="preserve">
+    <value>6 x 6</value>
+  </data>
+</root>

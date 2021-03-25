@@ -1,0 +1,23 @@
+﻿<Window x:Class="CrypTool.CrypToolStore.DownloadResourceDataFileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Downoad Resource" Height="230" Width="500">
+    <Grid Background="AliceBlue" Width="500" Height="250" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="430"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" Source="/CrypToolStore;component/download.png" Width="48" Height="48"/>
+        <ProgressBar Name="ProgressBar" Background="White" Grid.Column="1" Grid.Row="0" Height="25"/>
+        <TextBlock Name="ProgressText" Background="Transparent" Grid.Column="1" Grid.Row="0"  Foreground="Black" TextAlignment="Center" VerticalAlignment="Center">Download Progress</TextBlock>
+        <TextBlock Name="DescriptionText" TextWrapping="WrapWithOverflow" Background="Transparent" Grid.Column="1" Grid.Row="1"  Foreground="Black" TextAlignment="Justify" VerticalAlignment="Top" Height="101">Descriptive Text</TextBlock>
+        <Button Name="DownloadButton" Background="White" Click="DownloadButton_Click" Grid.Column="1" Grid.Row="2" Height="25" Width="100" HorizontalAlignment="Right" Margin="0,0,105,10">Download</Button>
+        <Button Name="AbortButton" Background="White" Click="AbortButton_Click" Grid.Column="1" Grid.Row="2" Height="25" Width="100" HorizontalAlignment="Right" Margin="0,0,0,10">Abort</Button>
+    </Grid>
+</Window>

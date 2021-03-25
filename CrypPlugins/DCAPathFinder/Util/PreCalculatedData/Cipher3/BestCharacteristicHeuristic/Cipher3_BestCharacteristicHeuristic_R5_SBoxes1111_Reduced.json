@@ -1,0 +1,108 @@
+{
+  "Round": 5,
+  "ActiveSBoxes": [
+    true,
+    true,
+    true,
+    true
+  ],
+  "IsFirst": false,
+  "IsLast": true,
+  "IsBeforeLast": false,
+  "Probability": 0.0039074420928955078,
+  "InputDifference": 8704,
+  "ExpectedDifference": 8738,
+  "Characteristics": [
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        8704,
+        12,
+        4368,
+        224,
+        8738
+      ],
+      "OutputDifferentials": [
+        4352,
+        14,
+        8736,
+        240
+      ],
+      "Probability": 0.0010428428649902344
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        8704,
+        132,
+        8464,
+        224,
+        8738
+      ],
+      "OutputDifferentials": [
+        8448,
+        134,
+        8736,
+        240
+      ],
+      "Probability": 0.00017380714416503906
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        8704,
+        192,
+        8736,
+        224,
+        8738
+      ],
+      "OutputDifferentials": [
+        8704,
+        224,
+        8736,
+        240
+      ],
+      "Probability": 0.0010428428649902344
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        8704,
+        12,
+        4096,
+        128,
+        8738
+      ],
+      "OutputDifferentials": [
+        4352,
+        8,
+        8192,
+        240
+      ],
+      "Probability": 0.000823974609375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        8704,
+        192,
+        8192,
+        128,
+        8738
+      ],
+      "OutputDifferentials": [
+        8704,
+        128,
+        8192,
+        240
+      ],
+      "Probability": 0.000823974609375
+    }
+  ],
+  "UnfilteredPairList": [],
+  "FilteredPairList": [],
+  "EncrypedPairList": [],
+  "SearchPolicy": 0,
+  "AbortingPolicy": 1,
+  "SelectedAlgorithm": 2
+}

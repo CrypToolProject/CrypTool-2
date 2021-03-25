@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdvancedSettingsGroup" xml:space="preserve">
+    <value>Расширенные настройки</value>
+  </data>
+  <data name="AlphabetCaption" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="AlphabetGroup" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>Полный использованный алфавит</value>
+  </data>
+  <data name="CaseSensitiveCaption" xml:space="preserve">
+    <value>Деликатный случай</value>
+  </data>
+  <data name="CaseSensitiveTooltip" xml:space="preserve">
+    <value>Различают маленькие и заглавные буквы.</value>
+  </data>
+  <data name="ChooseAlphabetCaption" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="ChooseAlphabetList1" xml:space="preserve">
+    <value>английский</value>
+  </data>
+  <data name="ChooseAlphabetList2" xml:space="preserve">
+    <value>Немецкий</value>
+  </data>
+  <data name="ChooseAlphabetList3" xml:space="preserve">
+    <value>испанский</value>
+  </data>
+  <data name="ChooseAlphabetTooltip" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="CTAlphabetCaption" xml:space="preserve">
+    <value>Язык зашифрованного текста</value>
+  </data>
+  <data name="CTAlphabetGroup" xml:space="preserve">
+    <value>Язык зашифрованного текста</value>
+  </data>
+  <data name="CTAlphabetTooltip" xml:space="preserve">
+    <value>Полный использованный язык зашифрованного текста</value>
+  </data>
+  <data name="CTChooseAlphabetCaption" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="CTChooseAlphabetTooltip" xml:space="preserve">
+    <value>Выберите язык зашифрованного текста</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Гомофонный анализатор замещений</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Криптоанализы гомофонических замещающих шифров</value>
+  </data>
+  <data name="PTAlphabetCaption" xml:space="preserve">
+    <value>Язык простого текста</value>
+  </data>
+  <data name="PTAlphabetGroup" xml:space="preserve">
+    <value>Язык простого текста</value>
+  </data>
+  <data name="PTAlphabetTooltip" xml:space="preserve">
+    <value>Полный используемый язык открытого текста</value>
+  </data>
+  <data name="PTChooseAlphabetCaption" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="PTChooseAlphabetTooltip" xml:space="preserve">
+    <value>Выберите язык открытого текста</value>
+  </data>
+  <data name="SeparateAlphabetsCaption" xml:space="preserve">
+    <value>Отдельный язык открытого текста / зашифрованного текста</value>
+  </data>
+  <data name="SeparateAlphabetsTooltip" xml:space="preserve">
+    <value>Использовать разные языки для открытого текста и зашифрованного текста</value>
+  </data>
+  <data name="CTCaseSensitiveCaption" xml:space="preserve">
+    <value>Деликатный случай</value>
+  </data>
+  <data name="CTCaseSensitiveTooltip" xml:space="preserve">
+    <value>Различают маленькие и заглавные буквы.</value>
+  </data>
+  <data name="PTCaseSensitiveCaption" xml:space="preserve">
+    <value>Деликатный случай</value>
+  </data>
+  <data name="PTCaseSensitiveTooltip" xml:space="preserve">
+    <value>Различают маленькие и заглавные буквы.</value>
+  </data>
+  <data name="PropCiphertextalphabetCaption" xml:space="preserve">
+    <value>Зашифрованный алфавит</value>
+  </data>
+  <data name="PropCiphertextalphabetTooltip" xml:space="preserve">
+    <value>Алфавит зашифрованного текста</value>
+  </data>
+  <data name="PropCiphertextCaption" xml:space="preserve">
+    <value>зашифрованный</value>
+  </data>
+  <data name="PropCiphertextTooltip" xml:space="preserve">
+    <value>Зашифрованный текст</value>
+  </data>
+  <data name="PropLanguagedictionaryCaption" xml:space="preserve">
+    <value>Словарь</value>
+  </data>
+  <data name="PropLanguagedictionaryTooltip" xml:space="preserve">
+    <value>Словарь предполагаемого открытого текста</value>
+  </data>
+  <data name="PropPlaintextalphabetCaption" xml:space="preserve">
+    <value>Обычный алфавит</value>
+  </data>
+  <data name="PropPlaintextalphabetoutputCaption" xml:space="preserve">
+    <value>Обычный алфавит</value>
+  </data>
+  <data name="PropPlaintextalphabetoutputTooltip" xml:space="preserve">
+    <value>Обычный алфавит с буквами для расшифровки зашифрованного текста</value>
+  </data>
+  <data name="PropPlaintextalphabetTooltip" xml:space="preserve">
+    <value>Предполагаемый алфавит открытого текста</value>
+  </data>
+  <data name="PropPlaintextCaption" xml:space="preserve">
+    <value>Простой текст</value>
+  </data>
+  <data name="PropPlaintextTooltip" xml:space="preserve">
+    <value>Расшифрованный текст</value>
+  </data>
+  <data name="PropReferencetextCaption" xml:space="preserve">
+    <value>Справочный текст</value>
+  </data>
+  <data name="PropReferencetextTooltip" xml:space="preserve">
+    <value>Пример текста для извлечения частот букв предполагаемого языка открытого текста</value>
+  </data>
+  <data name="TreatmentInvalidCharsCaption" xml:space="preserve">
+    <value>Недопустимые символы</value>
+  </data>
+  <data name="TreatmentInvalidCharsTooltip" xml:space="preserve">
+    <value>Обработка недопустимых символов.</value>
+  </data>
+  <data name="UseDefaultWordSeparatorCaption" xml:space="preserve">
+    <value>Разделитель слов по умолчанию</value>
+  </data>
+  <data name="UseDefaultWordSeparatorTooltip" xml:space="preserve">
+    <value>Используйте разделитель слов по умолчанию (пустой) для атаки словаря или вручную установите разделитель</value>
+  </data>
+  <data name="ChooseInvalidCharsList1" xml:space="preserve">
+    <value>игнорировать</value>
+  </data>
+  <data name="ChooseInvalidCharsList2" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="ChooseInvalidCharsList3" xml:space="preserve">
+    <value>Заменить ?</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>Прошедшее:</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>Конец:</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>ключ</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Местный</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Начало:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Топ десять</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="dic_attack_finished" xml:space="preserve">
+    <value>Прерывание словаря закончилось</value>
+  </data>
+  <data name="error_alphabet_length" xml:space="preserve">
+    <value>Длина зашифрованного алфавита и алфавита открытого текста различна.</value>
+  </data>
+  <data name="error_ciphertext" xml:space="preserve">
+    <value>Ошибка при получении зашифрованного текста.</value>
+  </data>
+  <data name="error_dictionary" xml:space="preserve">
+    <value>Ошибка при получении файла словаря на английском языке</value>
+  </data>
+  <data name="gen_attack_finished" xml:space="preserve">
+    <value>Генетическая атака закончилась</value>
+  </data>
+  <data name="gen_attack_testedkeys" xml:space="preserve">
+    <value>Количество проверенных ключей с генетической атакой:</value>
+  </data>
+  <data name="no_ciphertext" xml:space="preserve">
+    <value>Нет зашифрованного текста.</value>
+  </data>
+  <data name="no_ciphertext_alphabet" xml:space="preserve">
+    <value>Нет кодировки с зашифрованным текстом.</value>
+  </data>
+  <data name="no_dictionary" xml:space="preserve">
+    <value>Языковой словарь не установлен.</value>
+  </data>
+  <data name="no_lang_freq" xml:space="preserve">
+    <value>Нет языковых частот.</value>
+  </data>
+  <data name="no_ngram_file" xml:space="preserve">
+    <value>Нет файла ngram.</value>
+  </data>
+  <data name="no_plaintext_alphabet" xml:space="preserve">
+    <value>Не установлен обычный текстовый алфавит.</value>
+  </data>
+  <data name="no_reference_text" xml:space="preserve">
+    <value>Нет ссылочного текста.</value>
+  </data>
+  <data name="AttackHeader" xml:space="preserve">
+    <value>Атака</value>
+  </data>
+  <data name="DicAttackDisplay" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="GenAttackDisplay" xml:space="preserve">
+    <value>г</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Скопировать все строки</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>Копировать ключ</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>Копировать выбранную строку</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>Копировать текст</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>Копировать значение</value>
+  </data>
+  <data name="HillAttackDisplay" xml:space="preserve">
+    <value>ЧАС</value>
+  </data>
+  <data name="hill_attack_finished" xml:space="preserve">
+    <value>Хищная атака закончилась:</value>
+  </data>
+  <data name="hill_attack_testedkeys" xml:space="preserve">
+    <value>Количество проверенных ключей с атакой на холм:</value>
+  </data>
+  <data name="hill_attack_keyspersecond" xml:space="preserve">
+    <value>Протестированные ключи с холмированием в секунду:</value>
+  </data>
+  <data name="ChooseAlgorithmCaption" xml:space="preserve">
+    <value>Алгоритм</value>
+  </data>
+  <data name="ChooseAlgorithmList1" xml:space="preserve">
+    <value>Процессор Hillclimbing</value>
+  </data>
+  <data name="ChooseAlgorithmList2" xml:space="preserve">
+    <value>Графический процессор Hillclimbing</value>
+  </data>
+  <data name="ChooseAlgorithmList3" xml:space="preserve">
+    <value>Словарь и генетика</value>
+  </data>
+  <data name="ChooseAlgorithmTooltip" xml:space="preserve">
+    <value>Выберите алгоритм, который следует использовать.</value>
+  </data>
+  <data name="RestartsCaption" xml:space="preserve">
+    <value>Количество перезапусков (только Hillclimbing)</value>
+  </data>
+  <data name="RestartsTooltip" xml:space="preserve">
+    <value>Выбирайте, как часто должен начинаться алгоритм горизонтального скручивания.</value>
+  </data>
+  <data name="SelectAlgorithmGroup" xml:space="preserve">
+    <value>Тип атаки</value>
+  </data>
+  <data name="no_cuda" xml:space="preserve">
+    <value>Не найдено ни одного устройства с поддержкой CUDA или драйверов CUDA.</value>
+  </data>
+  <data name="ChooseAlphabetList4" xml:space="preserve">
+    <value>латинский</value>
+  </data>
+  <data name="ChooseAlphabetList10" xml:space="preserve">
+    <value>португальский</value>
+  </data>
+  <data name="ChooseAlphabetList11" xml:space="preserve">
+    <value>Чешский</value>
+  </data>
+  <data name="ChooseAlphabetList12" xml:space="preserve">
+    <value>греческий</value>
+  </data>
+  <data name="ChooseAlphabetList5" xml:space="preserve">
+    <value>Французский</value>
+  </data>
+  <data name="ChooseAlphabetList6" xml:space="preserve">
+    <value>Венгерский</value>
+  </data>
+  <data name="ChooseAlphabetList7" xml:space="preserve">
+    <value>шведский</value>
+  </data>
+  <data name="ChooseAlphabetList8" xml:space="preserve">
+    <value>итальянский</value>
+  </data>
+  <data name="ChooseAlphabetList9" xml:space="preserve">
+    <value>Голландский</value>
+  </data>
+</root>

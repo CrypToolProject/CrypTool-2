@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="CrypToolStoreDeveloperClient.Views.SourceManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="SourcesListView" Width="1100" Height="300" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Plugin Id" DisplayMemberBinding="{Binding Path=PluginId}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Plugin Version" DisplayMemberBinding="{Binding Path=PluginVersion}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Has ZIP" DisplayMemberBinding="{Binding Path=HasZipFile}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Build Version" DisplayMemberBinding="{Binding Path=BuildVersion}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>                  
+                    <GridViewColumn Header="Build State" DisplayMemberBinding="{Binding Path=BuildState}" Width="110">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Build Log" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label MaxWidth="160" MaxHeight="30">
+                                    <TextBlock Text="{Binding Path=BuildLog}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"/>
+                                </Label>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Upload Date" DisplayMemberBinding="{Binding Path=UploadDate}" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Build Date" DisplayMemberBinding="{Binding Path=BuildDate}" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Publish state" DisplayMemberBinding="{Binding Path=PublishState}" Width="120">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Modify" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="120"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Button Background="White" CommandParameter="{Binding Path=PluginVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Click="UploadSourceZipFile_Click">Upload src zip</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=PluginVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Click="DownloadSourceZipFile_Click">Download src zip</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=PluginVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Click="DownloadAssembly_Click">Download assembly</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=PluginVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Click="Delete_Click">Delete</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=PluginVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="2" Click="UpdatePublishState_Click">Publish state</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=BuildLog}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Click="Buildlog_Click">Buildlog</Button>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="CreateNewSourceButton" Background="White" Grid.Row="2" Width="110" Height="25" HorizontalAlignment="Center" Click="CreateNewSourceButton_Click">Create new source</Button>
+    </Grid>
+</UserControl>

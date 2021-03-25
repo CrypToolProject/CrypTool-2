@@ -1,0 +1,12 @@
+﻿<Window x:Class="CrypTool.CrypWin.GeneratingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="97" Width="405" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False">
+    <Grid>
+        <ProgressBar Opacity="0.5" IsIndeterminate="True"></ProgressBar>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image Width="30" Name="Icon" Source="/CrypWin;component/images/help32.png" />
+            <Label VerticalAlignment="Center" Name="Message"/>
+        </StackPanel>
+    </Grid>
+</Window>

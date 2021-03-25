@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">M209 Cipher Machine</title>
+  <title lang="zh">M209密码机</title>
+  <title lang="ru">Шифратор M209</title>
+  <summary lang="en">Usage of the <i>M209</i> cipher machine</summary>
+  <summary lang="zh">M209密码机的用法</summary>
+  <summary lang="ru">Использование шифровальной машины M209</summary>
+  <description lang="en">This template shows the usage of the <i>M209</i> cipher machine.</description>
+  <description lang="zh">该模板显示了M209密码机的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование шифровальной машины M209.</description>
+  <keywords>Machine, World War, Rotor</keywords>
+  <keywords lang="zh">机械，第二次世界大战，转子</keywords>
+  <keywords lang="ru">Машина, мировая война, ротор</keywords>
+  <title lang="de">M209-Chiffre</title>
+  <summary lang="de">Benutzung der <i>M209</i>-Chiffriermaschine</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>M209</i>-Chiffriermaschine.</description>
+  <keywords lang="de">Maschine, Weltkrieg</keywords>
+  <icon file="M209_EncryptDecrypt.jpg" />
+  <relevantPlugins>
+    <plugin name="M209" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$M209 Encrypt$" value="M209 Verschlüsselung" />
+    <replacement key="$M209 Decrypt$" value="M209 Entschlüsselung" />
+    <replacement key="$message$" value="Hallo Welt" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$M209 Encrypt$" value="M209加密" />
+    <replacement key="$M209 Decrypt$" value="M209解密" />
+    <replacement key="$message$" value="你好，世界" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$M209 Encrypt$" value="Шифрование M209" />
+    <replacement key="$M209 Decrypt$" value="Расшифровка M209" />
+    <replacement key="$message$" value="Привет мир" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$M209 Encrypt$" value="M209 Encrypt" />
+    <replacement key="$M209 Decrypt$" value="M209 Decrypt" />
+    <replacement key="$message$" value="Hello World" />
+  </replacements>
+</sample>

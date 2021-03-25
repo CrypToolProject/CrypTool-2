@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="PKCS1.WpfVisualization.Pkcs1Control"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:navi="clr-namespace:PKCS1.WpfVisualization.Navigation"
+    xmlns:controls="clr-namespace:PKCS1.WpfControls.Start"
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../WpfResources/PKCS1.WpfResources.xaml" />
+    </UserControl.Resources>
+    <Grid Background="{StaticResource CTBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="330" />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- Navigation -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <navi:Navigation HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" MinWidth="200"  x:Name="navigator"/>
+            <Button VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="2"  Content="Beenden" Visibility="Hidden"></Button>
+        </Grid>
+        
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="3" HorizontalContentAlignment="Center" Margin="0,0,0,0" ResizeBehavior="PreviousAndNext" />
+
+        <!-- hier ist die contentarea -->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <SelectableTextBlock Padding="5" Name="lblTitel" Margin="10,0,0,0" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center">Label</SelectableTextBlock>
+                <Image Cursor="Hand" Source="../Resources/icons/help32.gif" Width="24" Height="24" MouseLeftButtonDown="Image_MouseLeftButtonDown" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </DockPanel>
+            <ContentControl  Grid.Row="1" Name="ContentArea" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,10">
+               <controls:StartControl HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" x:Name="StartControl"/>
+            </ContentControl>
+        </Grid>
+
+    </Grid>
+</UserControl>

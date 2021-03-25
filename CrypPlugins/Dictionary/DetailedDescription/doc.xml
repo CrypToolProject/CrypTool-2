@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The dictionary component passes a flat list of words to the subsequent component for further processing.
+    <newline /><newline />
+    Wordlists obtained from http://invokeit.wordpress.com/frequency-word-lists/<newline />
+    License: http://creativecommons.org/licenses/by-sa/3.0/
+  </introduction>
+  <introduction lang="zh-CN">字典组件将单词的平面列表传递给后续组件，以进行进一步处理。从http://invokeit.wordpress.com/frequency-word-lists/许可获得的词表：http://creativecommons.org/licenses/by-sa/3.0/</introduction>
+  <introduction lang="ru">Компонент словаря передает подробный список слов в последующий компонент для дальнейшей обработки. Слова из списка http://invokeit.wordpress.com/frequency-word-lists/ Лицензия: http://creativecommons.org/licenses/by-sa/3.0/</introduction>
+  <introduction lang="de-DE">
+    Die Wörterbuch-Komponente gibt eine flache Liste von Wörtern an die nachfolgende Komponente zur Weiterverarbeitung weiter.
+    <newline /><newline />
+    Wörterliste von http://invokeit.wordpress.com/frequency-word-lists/<newline />
+    Lizenz: http://creativecommons.org/licenses/by-sa/3.0/
+  </introduction>
+  <usage lang="en">The dictionary to be used can be selected in the component's parameters.
+
+</usage>
+  <usage lang="zh-CN">可以在组件的参数中选择要使用的词典。</usage>
+  <usage lang="ru">Словарь, который будет использоваться, может быть выбран в параметрах компонента.</usage>
+  <usage lang="de-DE">Das zu benutzende Wörterbuch kann in den Parametern der Komponente eingestellt werden.
+</usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references></references>
+</documentation>

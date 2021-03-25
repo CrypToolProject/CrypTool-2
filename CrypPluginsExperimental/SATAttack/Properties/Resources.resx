@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AttackModeCaption" xml:space="preserve">
+    <value>Attack type</value>
+  </data>
+  <data name="AttackModeTooltip" xml:space="preserve">
+    <value>Specify the type of attack.</value>
+  </data>
+  <data name="BinaryString" xml:space="preserve">
+    <value>(Binary): 0b</value>
+  </data>
+  <data name="BinaryStringError" xml:space="preserve">
+    <value>When using the prefix "0b", ensure the string only contains bit values (0 and 1).</value>
+  </data>
+  <data name="BitNumberParseError" xml:space="preserve">
+    <value>Failed to parse the bit number for {0} variable {1}: {2}.</value>
+  </data>
+  <data name="CallingCbmcProcessString" xml:space="preserve">
+    <value>Calling CBMC process... </value>
+  </data>
+  <data name="CallingSatSolverString" xml:space="preserve">
+    <value>Calling SAT solver process... </value>
+  </data>
+  <data name="CallingSatSolverWithParametersString" xml:space="preserve">
+    <value>Calling SAT solver at {0} with parameters {1}.</value>
+  </data>
+  <data name="CbmcOutputStreamCaption" xml:space="preserve">
+    <value>CBMC output stream</value>
+  </data>
+  <data name="CbmcOutputStreamTooltip" xml:space="preserve">
+    <value>Redirect the output of the CBMC process.</value>
+  </data>
+  <data name="CbmcProcessError" xml:space="preserve">
+    <value>CBMC process returned with an error.</value>
+  </data>
+  <data name="CbmcProcessKillException" xml:space="preserve">
+    <value>Killing CBMC process threw an exception: {0} {1}.</value>
+  </data>
+  <data name="CbmcProcessKillSuccess" xml:space="preserve">
+    <value>Successfully killed CBMC process.</value>
+  </data>
+  <data name="CbmcProcessReturnedSuccessfully" xml:space="preserve">
+    <value>CBMC process returned successfully after {0} seconds.</value>
+  </data>
+  <data name="CbmcProcessReturnedWithExitcode" xml:space="preserve">
+    <value>CBMC process returned with exitcode {0}.</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>Ciphertext</value>
+  </data>
+  <data name="CiphertextEncodingError" xml:space="preserve">
+    <value>Encoding of the ciphertext bits returned with an error.</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>Enter the ciphertext.</value>
+  </data>
+  <data name="ClearFileNameCaption" xml:space="preserve">
+    <value>Clear file name</value>
+  </data>
+  <data name="ClearFileNameTooltip" xml:space="preserve">
+    <value>Forget the output file name</value>
+  </data>
+  <data name="CnfFileCaption" xml:space="preserve">
+    <value>Save CNF in file</value>
+  </data>
+  <data name="CnfFileNotFoundError" xml:space="preserve">
+    <value>CNF file not found at {0}.</value>
+  </data>
+  <data name="CnfFileTooltip" xml:space="preserve">
+    <value>Choose filename for saving the resulting CNF.</value>
+  </data>
+  <data name="CodefileNotFoundString" xml:space="preserve">
+    <value>C-Code file not found at {0}.</value>
+  </data>
+  <data name="CopyingCnfString" xml:space="preserve">
+    <value>Copying CNF to {0}… </value>
+  </data>
+  <data name="EncodingInputBitsString" xml:space="preserve">
+    <value>Encoding input bits in CNF… </value>
+  </data>
+  <data name="EncodingOutputBitsString" xml:space="preserve">
+    <value>Encoding output bits in CNF… </value>
+  </data>
+  <data name="FailedString" xml:space="preserve">
+    <value>failed</value>
+  </data>
+  <data name="FileBigWarning" xml:space="preserve">
+    <value>File {0} is very big: {1} bytes.</value>
+  </data>
+  <data name="FileInputCaption" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FileInputTooltip" xml:space="preserve">
+    <value>Select the input file.</value>
+  </data>
+  <data name="FixBitsCaption" xml:space="preserve">
+    <value>Fix input bits</value>
+  </data>
+  <data name="FixBitsOptions" xml:space="preserve">
+    <value>Fix bits options</value>
+  </data>
+  <data name="FixBitsTooltip" xml:space="preserve">
+    <value>Check for the option to fix some bits.</value>
+  </data>
+  <data name="FixedBitsCaption" xml:space="preserve">
+    <value>Fixed bits</value>
+  </data>
+  <data name="FixedBitsEncoding" xml:space="preserve">
+    <value>Encoding fixed bits in CNF...</value>
+  </data>
+  <data name="FixedBitsEncodingError" xml:space="preserve">
+    <value>Encoding of the fixed bits returned with an error.</value>
+  </data>
+  <data name="FixedBitsEncodingHint" xml:space="preserve">
+    <value>Only use the characters '0', '1' and '*' to fix bits, the character {0} is not allowed.</value>
+  </data>
+  <data name="FixedBitsEncodingStrangeError" xml:space="preserve">
+    <value>Something went wrong in the function encodeFixedBitsInCnf (this code should never be reached).</value>
+  </data>
+  <data name="FixedBitsError" xml:space="preserve">
+    <value>Error retrieving fixed Bits.</value>
+  </data>
+  <data name="FixedBitsSizeError" xml:space="preserve">
+    <value>The amount of fixed bits should be less or equal to the amount of input bits{0}Fixed bits: {1} bits{0}Input bits: {2} bits{0}The fixed bits are truncated to the size of the input bits from least significant bit to most significant bit.</value>
+  </data>
+  <data name="FixedBitsTooltip" xml:space="preserve">
+    <value>Fix an arbitrary number of input bits.</value>
+  </data>
+  <data name="FixedBitsWarning" xml:space="preserve">
+    <value>The fix bits option was selected but no bits were fixed.</value>
+  </data>
+  <data name="HashEncodingError" xml:space="preserve">
+    <value>Hash encoding returned with an error.</value>
+  </data>
+  <data name="HexadecimalString" xml:space="preserve">
+    <value>(Hexadecimal): 0x</value>
+  </data>
+  <data name="HexStringError" xml:space="preserve">
+    <value>When using the prefix "0x", ensure the string is an even amount of regular hexadecimal characters.</value>
+  </data>
+  <data name="InputFoundString" xml:space="preserve">
+    <value>Input found!</value>
+  </data>
+  <data name="InputHashValueCaption" xml:space="preserve">
+    <value>Hash value</value>
+  </data>
+  <data name="InputHashValueTooltip" xml:space="preserve">
+    <value>Enter hash value for a preimage or second preimage attack (prefix "0x" for hexadecimal, "0b" for binary).</value>
+  </data>
+  <data name="InputMappingError" xml:space="preserve">
+    <value>Error retrieving input mapping.</value>
+  </data>
+  <data name="InputMessageCaption" xml:space="preserve">
+    <value>First preimage</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>Provide a first preimage for a second preimage attack (prefix "0x" for hexadecimal, "0b" for binary).</value>
+  </data>
+  <data name="InputSelectionCaption" xml:space="preserve">
+    <value>Input selection</value>
+  </data>
+  <data name="InputSelectionFileInput" xml:space="preserve">
+    <value>File input</value>
+  </data>
+  <data name="InputSelectionTextInput" xml:space="preserve">
+    <value>Text input</value>
+  </data>
+  <data name="InputSelectionTooltip" xml:space="preserve">
+    <value>Select how the ANSI-C code is passed to the SAT Attack component.</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>Input stream</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>Connect the input stream to a text input component which contains the ANSI-C code of a cryptographic function.</value>
+  </data>
+  <data name="InputVariablesSizeFailureString" xml:space="preserve">
+    <value>Failed to get the size of input variables.</value>
+  </data>
+  <data name="KeyRecoveryAttack" xml:space="preserve">
+    <value>Key-recovery attack</value>
+  </data>
+  <data name="KeyRecoveryAttackOptions" xml:space="preserve">
+    <value>Key-recovery attack options</value>
+  </data>
+  <data name="LiteralParseError" xml:space="preserve">
+    <value>Failed to parse the literal for {0} variable {1}:{2}.</value>
+  </data>
+  <data name="LiteralParseError2" xml:space="preserve">
+    <value>Failed to parse the literal {0}.</value>
+  </data>
+  <data name="MainFunctionCaption" xml:space="preserve">
+    <value>Main function name</value>
+  </data>
+  <data name="MainFunctionTooltip" xml:space="preserve">
+    <value>Specify the name of the main function if it is not "main()".</value>
+  </data>
+  <data name="MappingFileNotFoundString" xml:space="preserve">
+    <value>Mapping file not found at {0}.</value>
+  </data>
+  <data name="NotAHexCharError" xml:space="preserve">
+    <value>The character {0} is not a valid hexadecimal character.</value>
+  </data>
+  <data name="OnlyCnfOutputCaption" xml:space="preserve">
+    <value>CNF output only</value>
+  </data>
+  <data name="OnlyCnfOutputTooltip" xml:space="preserve">
+    <value>Only translate ANSI-C code to CNF and encode the selected attack; do not solve with the SAT solver.</value>
+  </data>
+  <data name="OutputBitsError" xml:space="preserve">
+    <value>Error retrieving output bits.</value>
+  </data>
+  <data name="OutputMappingError" xml:space="preserve">
+    <value>Error retrieving output mapping.</value>
+  </data>
+  <data name="OutputSizeError" xml:space="preserve">
+    <value>Ensure the specified output has the correct length{0}Hash value / ciphertext: {1} bits{0}Output: {2} bits.</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>Output stream</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>Writes status information and the result of the attack, if the attack was successful.</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>Plaintext</value>
+  </data>
+  <data name="PlaintextEncodingError" xml:space="preserve">
+    <value>Encoding of the plaintext bits returned with an error.</value>
+  </data>
+  <data name="PlaintextPrefixInfoString" xml:space="preserve">
+    <value>Ensure that the provided plaintext has the prefix "0x" or "0b".</value>
+  </data>
+  <data name="PlaintextSizeError" xml:space="preserve">
+    <value>Ensure the specified plaintext has the correct length (the amount of input bits must be larger than the amount of plaintext bits){0}Plaintext: {1} bits{0}Input: {2} bits.</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>Enter the plaintext.</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>SAT Attack</value>
+  </data>
+  <data name="PluginDescription" xml:space="preserve">
+    <value>A tool for SAT-based cryptanalysis</value>
+  </data>
+  <data name="PrefixError" xml:space="preserve">
+    <value>Use the prefix "0x" for hexadecimal value or the prefix "0b" for binary value.</value>
+  </data>
+  <data name="PreimageAttack" xml:space="preserve">
+    <value>Preimage attack</value>
+  </data>
+  <data name="PreimageAttackOptions" xml:space="preserve">
+    <value>Preimage attack options</value>
+  </data>
+  <data name="SatOutputProcessError" xml:space="preserve">
+    <value>Processing of SAT solver output returned an error.</value>
+  </data>
+  <data name="SatProcessKillException" xml:space="preserve">
+    <value>Killing SAT solver process threw an exception: {0} {1}.</value>
+  </data>
+  <data name="SatProcessKillSuccess" xml:space="preserve">
+    <value>Successfully killed SAT solver process.</value>
+  </data>
+  <data name="SatProcessReturnedSuccessful" xml:space="preserve">
+    <value>SAT solver process returned successfully after {0} seconds.</value>
+  </data>
+  <data name="SatProcessReturnedUnsat" xml:space="preserve">
+    <value>SAT solver process returned after {0} seconds... but failed to find a solution.</value>
+  </data>
+  <data name="SatSolverOutputFileError" xml:space="preserve">
+    <value>SAT solver output file not found at {0}.</value>
+  </data>
+  <data name="SatSolverOutputFirstLineError" xml:space="preserve">
+    <value>First line in SAT solver output file {0} is not "SAT".</value>
+  </data>
+  <data name="SatSolverOutputStreamCaption" xml:space="preserve">
+    <value>SAT solver</value>
+  </data>
+  <data name="SatSolverOutputStreamTooltip" xml:space="preserve">
+    <value>Redirect the output of the SAT solver process.</value>
+  </data>
+  <data name="SatSolverReturnedWithExitcode" xml:space="preserve">
+    <value>SAT solver process returned with exitcode {0}.</value>
+  </data>
+  <data name="SecondPreimageAttack" xml:space="preserve">
+    <value>Second preimage attack</value>
+  </data>
+  <data name="SecondPreimageAttackOptions" xml:space="preserve">
+    <value>Second preimage attack options</value>
+  </data>
+  <data name="SecondPreimageEncodingError" xml:space="preserve">
+    <value>Encoding of the second preimage bits returned with an error.</value>
+  </data>
+  <data name="SecondPreimageEncodingString" xml:space="preserve">
+    <value>Encoding first preimage in CNF… </value>
+  </data>
+  <data name="SecondPreimageRetrievingError" xml:space="preserve">
+    <value>Error retrieving second preimage bits.</value>
+  </data>
+  <data name="SecondPreimageSizeError" xml:space="preserve">
+    <value>Ensure the specified second preimage has the correct length{0}Second preimage: {1} bits{0}Input: {2} bits.</value>
+  </data>
+  <data name="SkippingSatSolverString" xml:space="preserve">
+    <value>Skipping SAT solver process… </value>
+  </data>
+  <data name="SuccessfulString" xml:space="preserve">
+    <value>successful</value>
+  </data>
+  <data name="UnassignedVariableWarning" xml:space="preserve">
+    <value>Variable {0}_{1}:{2} does not appear in the {3} mapping. Is the Variable {0}_{1} used in the ANSI-C code? It will be assigned "false" by default.</value>
+  </data>
+  <data name="VariableDefinitionsError" xml:space="preserve">
+    <value>Make sure the {0} variable definitions start with {1}_0 and the indices are incremented steadily and each variable is actually used in the code.</value>
+  </data>
+  <data name="VariableIndexParseError" xml:space="preserve">
+    <value>Failed to parse the variable index for {0} variable {1}:{2}.</value>
+  </data>
+  <data name="VariableNumberParsingFailedString" xml:space="preserve">
+    <value>Failed to read number of {0} variables.</value>
+  </data>
+  <data name="VariableSizeParsingFailedString" xml:space="preserve">
+    <value>Failed to read size of {0} variables.</value>
+  </data>
+  <data name="InputFoundStringKeyRecovery" xml:space="preserve">
+    <value>Key-recovery attack: A key was found that fits to the provided plaintext and ciphertext:</value>
+  </data>
+  <data name="InputFoundStringPreimage" xml:space="preserve">
+    <value>Preimage attack: An input was found that fits to the provided hash value:</value>
+  </data>
+  <data name="InputFoundStringSecondPreimage" xml:space="preserve">
+    <value>Second preimage attack: An input was found that fits to the provided hash value and is different from the provided first preimage:</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>s'.'fff</value>
+  </data>
+  <data name="CbmcExeNotFound" xml:space="preserve">
+    <value>Could not find the cbmc executable at {0}.</value>
+  </data>
+  <data name="satSolverExeNotFound" xml:space="preserve">
+    <value>Could not find the SAT solver executable at {0}.</value>
+  </data>
+</root>

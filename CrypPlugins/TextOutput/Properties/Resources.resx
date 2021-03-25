@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Text Output</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Simple text output</value>
+  </data>
+  <data name="AppendCaption" xml:space="preserve">
+    <value>Append text input</value>
+  </data>
+  <data name="AppendTooltip" xml:space="preserve">
+    <value>With this checkbox enabled, incoming text will be appended to the current text.</value>
+  </data>
+  <data name="AppendBreaksCaption" xml:space="preserve">
+    <value>Append n-breaks</value>
+  </data>
+  <data name="AppendBreaksTooltip" xml:space="preserve">
+    <value>Defines how many new lines are added after new input. (Applies only if "Append text input" is active.)</value>
+  </data>
+  <data name="MaxLengthCaption" xml:space="preserve">
+    <value>Maximum length</value>
+  </data>
+  <data name="MaxLengthTooltip" xml:space="preserve">
+    <value>Provide the maximum number of characters to display.</value>
+  </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>Input data</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>Input data of any type</value>
+  </data>
+  <data name="PresentationFmt" xml:space="preserve">
+    <value>{0:#,0} characters ({1:#,0} bytes)</value>
+  </data>
+  <data name="Byte" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="Bytes" xml:space="preserve">
+    <value>bytes</value>
+  </data>
+  <data name="Char" xml:space="preserve">
+    <value>character</value>
+  </data>
+  <data name="Chars" xml:space="preserve">
+    <value>characters</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>line</value>
+  </data>
+  <data name="Lines" xml:space="preserve">
+    <value>lines</value>
+  </data>
+  <data name="ShowCharsCaption" xml:space="preserve">
+    <value>Number of characters</value>
+  </data>
+  <data name="ShowCharsTooltip" xml:space="preserve">
+    <value>With this checkbox enabled, the number of characters in the text is displayed in the status line of the component.</value>
+  </data>
+  <data name="ShowLinesCaption" xml:space="preserve">
+    <value>Number of lines</value>
+  </data>
+  <data name="ShowLinesTooltip" xml:space="preserve">
+    <value>With this checkbox enabled, the number of lines in the text is displayed in the status line of the component.</value>
+  </data>
+  <data name="ShowCharsGroup" xml:space="preserve">
+    <value>Status bar</value>
+  </data>
+  <data name="Bit" xml:space="preserve">
+    <value>bit</value>
+  </data>
+  <data name="Bits" xml:space="preserve">
+    <value>bits</value>
+  </data>
+  <data name="Digit" xml:space="preserve">
+    <value>decimal digit</value>
+  </data>
+  <data name="Digits" xml:space="preserve">
+    <value>decimal digits</value>
+  </data>
+  <data name="ShowDigitsCaption" xml:space="preserve">
+    <value>Number of digits and bits</value>
+  </data>
+  <data name="ShowDigitsTooltip" xml:space="preserve">
+    <value>With this checkbox enabled, the number of decimal digits and bits of the input is displayed in the status line of the component, provided the input consists only of digits.</value>
+  </data>
+  <data name="ChangesGroup" xml:space="preserve">
+    <value>Changes</value>
+  </data>
+  <data name="DontShow" xml:space="preserve">
+    <value>Don't show</value>
+  </data>
+  <data name="ShowChangesCaption" xml:space="preserve">
+    <value>Show changes</value>
+  </data>
+  <data name="ShowChangesTooltip" xml:space="preserve">
+    <value>Show the changes of the Textoutput between two executions.</value>
+  </data>
+  <data name="ShowInsertsAndDeletions" xml:space="preserve">
+    <value>Show inserts and deletions</value>
+  </data>
+  <data name="ShowOnlyDifferences" xml:space="preserve">
+    <value>Show only differences</value>
+  </data>
+  <data name="ShowChangedSymbols" xml:space="preserve">
+    <value>Show different symbols</value>
+  </data>
+  <data name="FontCaption" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="FontGroup" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="FontSizeCaption" xml:space="preserve">
+    <value>Font Size</value>
+  </data>
+  <data name="FontSizeTooltip" xml:space="preserve">
+    <value>Sets the font size of this TextOutput.</value>
+  </data>
+  <data name="FontTooltip" xml:space="preserve">
+    <value>Sets the font of this TextOutput.</value>
+  </data>
+  <data name="ManualFontSettingsCaption" xml:space="preserve">
+    <value>Manual font settings</value>
+  </data>
+  <data name="ManualFontSettingsTooltip" xml:space="preserve">
+    <value>Set the font manually.</value>
+  </data>
+  <data name="LineBreaksCaption" xml:space="preserve">
+    <value>Line breaks handling</value>
+  </data>
+  <data name="LineBreaksTooltip" xml:space="preserve">
+    <value>Sets if Windows (LF +CR) or Unix (LF) line breaks are used.</value>
+  </data>
+</root>

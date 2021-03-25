@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="CrypTool.CrypWin.LicensesTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600" ToolTip="{Loc LicensesTooltip}">
+    <UserControl.Resources>
+        <BitmapImage x:Key="Icon" UriSource="images/licenses.png"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Image Source="/CrypWin;component/images/licenses.png" Opacity="0.2" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox VerticalScrollBarVisibility="Auto" Opacity="0.5"
+                 HorizontalScrollBarVisibility="Disabled" 
+                 Name="LicenseTextbox" 
+                 IsReadOnly="true" 
+                 MaxLength="80"
+                 TextWrapping="Wrap"/>
+    </Grid>
+</UserControl>

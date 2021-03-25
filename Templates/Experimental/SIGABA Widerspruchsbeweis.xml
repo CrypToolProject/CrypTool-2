@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">SIGABA Contraposition Analysis</title>
+  <title lang="zh">部分对比分析</title>
+  <title lang="ru">РАЗДЕЛЫ Анализ контрацепции</title>
+  <summary lang="en">Cryptanalysis of the <i>SIGABA</i> using contraposition</summary>
+  <summary lang="zh">使用对位对SIGABA进行密码分析</summary>
+  <summary lang="ru">Криптоанализ SIGABA с использованием противопоказаний</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>SIGABA</i> using contraposition.</description>
+  <description lang="zh">该模板显示了使用对位对SIGABA进行的密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ SIGABA с использованием противопоказаний.</description>
+  <keywords>SGIABA, USA, Navy</keywords>
+  <keywords lang="zh">美国SGIABA，海军</keywords>
+  <keywords lang="ru">SGIABA, США, флот</keywords>
+  <title lang="de">SIGABA Widerspruchs-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>SIGABA</i> mit dem Widerspruchsverfahren</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SIGABA</i> mit dem Widerspruchsverfahren.</description>
+  <keywords lang="de">SIGABA, USA, Navy</keywords>
+  <icon file="SIGABA Widerspruchsbeweis.png" />
+  <relevantPlugins>
+    <plugin name="TextInput" />
+    <plugin name="TextOutput" />
+    <plugin name="KeySearcher" />
+    <plugin name="Sigaba" />
+    <plugin name="SigabaKnownPlaintext" />
+  </relevantPlugins>
+</sample>

@@ -1,0 +1,22 @@
+﻿<h2>Bleichenbacher attack (1998)</h2>
+
+To generate a faked signature we first create the <a href="help://Gen_Datablock_Tab">data block</a> as we would for a regular PKCS#1 signature. The <a href="help://Gen_Bleichenb_Sig_Tab">structure</a> of the faked signature differs from the regular signature in the following points:
+ <ul>
+ <li>The padding string is shortened. Thus the <a href="help://Gen_Datablock_Tab">data block</a> is shifted further to the left in the signature. This is not recognized by faulty implementations of the signature validation algorithm.
+The amount of the shift can be varied.</li>
+ <li>The unused space at the end of the signature is filled with random data, the so called 'garbage'.</li>
+ </ul>
+</br></br>
+<strong>Please notice that in order to carry out the Bleichenbacher attack you first have to create an RSA key pair and the data block in the corresponding mask.</strong></br>
+
+<h3>Further information</h3>
+<p>
+    Daniel Bleichenbacher: <a href="http://link.springer.com/chapter/10.1007/BFb0055716" target="_blank">Chosen Ciphertext Attacks Against Protocols Based on the RSA Encryption Standard PKCS #1.</a>
+    In: CRYPTO '98. 1998, S. 1–12. <a href="https://link.springer.com/content/pdf/10.1007%2FBFb0055716.pdf" target="_blank">PDF</a>
+</p>
+<p>
+    Wikipedia: <a href="https://en.wikipedia.org/wiki/Adaptive_chosen-ciphertext_attack" target="_blank">Adaptive chosen-ciphertext attack</a>
+</p>
+<p>
+    Bardou et al. were able to improve the efficiency of the Bleichenbacher attack considerably in 2012.
+</p>

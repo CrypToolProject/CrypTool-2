@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AmountLabel" xml:space="preserve">
+    <value>Received Packages:</value>
+  </data>
+  <data name="IPFromHeader" xml:space="preserve">
+    <value>Source IP Address</value>
+  </data>
+  <data name="MetaLabel" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="PackageLimitCaption" xml:space="preserve">
+    <value>Package limit</value>
+  </data>
+  <data name="PackageLimitTooltip" xml:space="preserve">
+    <value>Indicates the amount of packages after which the component will stop. 0 means "don't stop".</value>
+  </data>
+  <data name="PaylodHeader" xml:space="preserve">
+    <value>Received Data</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Network Receiver</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Receives packets sent over a network</value>
+  </data>
+  <data name="PortCaption" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="PortTooltip" xml:space="preserve">
+    <value>Port on which the component will listen</value>
+  </data>
+  <data name="ReceivedPackagesLabel" xml:space="preserve">
+    <value>Received Packages</value>
+  </data>
+  <data name="SingleOutputCaption" xml:space="preserve">
+    <value>Single Packet</value>
+  </data>
+  <data name="SingleOutputTooltip" xml:space="preserve">
+    <value>Data of a single packet</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Start Time:</value>
+  </data>
+  <data name="StopConditions" xml:space="preserve">
+    <value>Stop Conditions</value>
+  </data>
+  <data name="StreamOutputCaption" xml:space="preserve">
+    <value>Latest Packet</value>
+  </data>
+  <data name="StreamOutputTooltip" xml:space="preserve">
+    <value>Forwards the last received packet.</value>
+  </data>
+  <data name="TimeLimitCaption" xml:space="preserve">
+    <value>Time Limit</value>
+  </data>
+  <data name="TimeLimitTooltip" xml:space="preserve">
+    <value>Indicates the number of seconds after which the component will stop. 0 means "don't stop".</value>
+  </data>
+  <data name="TORHeader" xml:space="preserve">
+    <value>Received at</value>
+  </data>
+  <data name="UniqueIPLabel" xml:space="preserve">
+    <value>Sources:</value>
+  </data>
+  <data name="DeviceIpCaption" xml:space="preserve">
+    <value>Network device IP Address</value>
+  </data>
+  <data name="DeviceIpTooltip" xml:space="preserve">
+    <value>Enter the IP address of your network device to only receive from this device.</value>
+  </data>
+  <data name="LisPort" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="NetworkConditionsGroup" xml:space="preserve">
+    <value>Network Settings</value>
+  </data>
+  <data name="NetworkDeviceCaption" xml:space="preserve">
+    <value>Use all network interfaces</value>
+  </data>
+  <data name="NetworkDeviceTooltip" xml:space="preserve">
+    <value>Enter the IP address of your network interface to only receive from this device.</value>
+  </data>
+  <data name="ByteAsciiSwitchCaption" xml:space="preserve">
+    <value>show bytes as ASCII</value>
+  </data>
+  <data name="ByteAsciiSwitchTooltip" xml:space="preserve">
+    <value>show bytes as ASCII</value>
+  </data>
+  <data name="PresentationSettingsGroup" xml:space="preserve">
+    <value>Presentation</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="ProtocolCaption" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
+  <data name="ProtocolTooltip" xml:space="preserve">
+    <value>Changes the protocol type</value>
+  </data>
+  <data name="SpeedrateLabel" xml:space="preserve">
+    <value>Receiving Rate:</value>
+  </data>
+  <data name="updateSpeedrateLable" xml:space="preserve">
+    <value>update receiving rate intervall:</value>
+  </data>
+  <data name="updateSpeedrateTooltip" xml:space="preserve">
+    <value>Sets the time in seconds in which the receiving rate will be updated.</value>
+  </data>
+  <data name="NumberOfClientsCaption" xml:space="preserve">
+    <value>Client limit</value>
+  </data>
+  <data name="NumberOfClientsTooltip" xml:space="preserve">
+    <value>Sets the maximum number of client connections. 0 means "no limit".</value>
+  </data>
+  <data name="TCPServerConditionsGroup" xml:space="preserve">
+    <value>TCP Conditions</value>
+  </data>
+  <data name="ConnectionIDInputCaption" xml:space="preserve">
+    <value>Connection Input</value>
+  </data>
+  <data name="ConnectionIDInputTooltip" xml:space="preserve">
+    <value>Specifies on which connection the Receiver should listen</value>
+  </data>
+  <data name="ConnectionIDOutputCaption" xml:space="preserve">
+    <value>Connection Output</value>
+  </data>
+  <data name="ConnectionIDOutputTooltip" xml:space="preserve">
+    <value>Shows the ID of the current connection</value>
+  </data>
+  <data name="ConnectionCaption" xml:space="preserve">
+    <value>Only use Connection Input</value>
+  </data>
+  <data name="ConnectionTooltip" xml:space="preserve">
+    <value>The component will not create a new connection. It will only use the connection specified on the connection input.</value>
+  </data>
+</root>

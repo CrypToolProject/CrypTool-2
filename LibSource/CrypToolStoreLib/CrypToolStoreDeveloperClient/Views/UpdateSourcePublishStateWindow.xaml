@@ -1,0 +1,24 @@
+﻿<Window x:Class="CrypToolStoreDeveloperClient.Views.UpdateSourcePublishStateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Update Publish State" Height="100" Width="340">
+    <Grid Background="AliceBlue" Height="80">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0">Publish State:</Label>
+        <ComboBox Name="PublishStateComboBox" Background="White" Grid.Row="0" Grid.Column="1" >
+            <ComboBoxItem>Not published</ComboBoxItem>
+            <ComboBoxItem>Developer</ComboBoxItem>
+            <ComboBoxItem>Nightly</ComboBoxItem>
+            <ComboBoxItem>Beta</ComboBoxItem>
+            <ComboBoxItem>Release</ComboBoxItem>            
+        </ComboBox>
+        <Button Name="ConfirmButton" Background="White" Click="UpdateButton_Click" Grid.Column="1" Grid.Row="1" Margin="1,1,5,1" Height="25" Width="100" HorizontalAlignment="Right">Update</Button>
+    </Grid>
+</Window>

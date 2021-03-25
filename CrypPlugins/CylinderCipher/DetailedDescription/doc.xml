@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">   
+  </introduction>
+
+  <introduction lang="de-DE">  
+  </introduction>
+
+  <usage lang="en">
+  </usage>
+
+  <usage lang="de-DE">
+  </usage>
+
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher" lang="en" />
+      <caption lang="en">Vigenère in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Vigen%C3%A8re-Chiffre" lang="de-DE" />
+      <caption lang="de-DE">Vigenère in Wikipedia</caption>
+    </linkReference>
+  </references>
+  
+</documentation>

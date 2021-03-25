@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Транзитный анализатор</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Выполняет несколько видов атак против столбчатой ​​транспозиции</value>
+  </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>зашифрованный</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>Введите зашифрованный текст, который должен быть проанализирован.</value>
+  </data>
+  <data name="CribCaption" xml:space="preserve">
+    <value>детская кроватка</value>
+  </data>
+  <data name="CribTooltip" xml:space="preserve">
+    <value>Введите кроватку для анализа Crib</value>
+  </data>
+  <data name="ControlMasterCaption" xml:space="preserve">
+    <value>Мастер управления</value>
+  </data>
+  <data name="ControlMasterTooltip" xml:space="preserve">
+    <value>Используется для принудительной работы</value>
+  </data>
+  <data name="CostMasterCaption" xml:space="preserve">
+    <value>Мастер затрат</value>
+  </data>
+  <data name="CostMasterTooltip" xml:space="preserve">
+    <value>Используется для расчета стоимости</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>Простой текст</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>Вывод лучшего кандидата открытого текста</value>
+  </data>
+  <data name="Analysis_methodCaption" xml:space="preserve">
+    <value>Метод анализа</value>
+  </data>
+  <data name="Analysis_methodTooltip" xml:space="preserve">
+    <value>Выберите метод анализа</value>
+  </data>
+  <data name="ColumnColumnColumnCaption" xml:space="preserve">
+    <value>CCC</value>
+  </data>
+  <data name="ColumnColumnColumnTooltip" xml:space="preserve">
+    <value>Bruteforce эти настройки транспонирования: чтение внутри столбца. Переместить по столбцу. Чтение по столбцам</value>
+  </data>
+  <data name="ColumnColumnRowCaption" xml:space="preserve">
+    <value>CCR</value>
+  </data>
+  <data name="ColumnColumnRowTooltip" xml:space="preserve">
+    <value>Bruteforce эти настройки транспонирования: чтение внутри столбца. Переместить по столбцу. Читайте по Row</value>
+  </data>
+  <data name="CribSearchKeylengthCaption" xml:space="preserve">
+    <value>Максимальная длина ключа для анализа кроватки</value>
+  </data>
+  <data name="CribSearchKeylengthTooltip" xml:space="preserve">
+    <value>Введите максимальную длину ключа для анализа на основе кроватки.</value>
+  </data>
+  <data name="IterationsCaption" xml:space="preserve">
+    <value>Итерации</value>
+  </data>
+  <data name="IterationsTooltip" xml:space="preserve">
+    <value>Введите количество итераций, которые алгоритм должен выполнить для одного случайного стартового значения.</value>
+  </data>
+  <data name="KeySizeCaption" xml:space="preserve">
+    <value>KeySize</value>
+  </data>
+  <data name="KeySizeTooltip" xml:space="preserve">
+    <value>Введите поиск ключей.</value>
+  </data>
+  <data name="MaxLengthCaption" xml:space="preserve">
+    <value>Максимальная длина ключевого слова</value>
+  </data>
+  <data name="MaxLengthTooltip" xml:space="preserve">
+    <value>Введите максимальную длину для анализа</value>
+  </data>
+  <data name="RepeatingsCaption" xml:space="preserve">
+    <value>Повторы</value>
+  </data>
+  <data name="RepeatingsTooltip" xml:space="preserve">
+    <value>Введите количество попыток перезапуска алгоритма с новым стартовым значением.</value>
+  </data>
+  <data name="RowColumnColumnCaption" xml:space="preserve">
+    <value>RCC</value>
+  </data>
+  <data name="RowColumnColumnTooltip" xml:space="preserve">
+    <value>Bruteforce эти настройки транспонирования: читайте по строкам. Переместить по столбцу. Читать в колонке</value>
+  </data>
+  <data name="RowColumnRowCaption" xml:space="preserve">
+    <value>RCR</value>
+  </data>
+  <data name="RowColumnRowTooltip" xml:space="preserve">
+    <value>Bruteforce эти настройки транспонирования: читайте по строкам. Переместить по столбцу. Читайте по Row</value>
+  </data>
+  <data name="Analysis_methodList1" xml:space="preserve">
+    <value>Анализ Bruteforce</value>
+  </data>
+  <data name="Analysis_methodList2" xml:space="preserve">
+    <value>Анализ с помощью Crib</value>
+  </data>
+  <data name="Analysis_methodList3" xml:space="preserve">
+    <value>Генетический алгоритм</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>Прошедшее:</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>Конец:</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>ключ</value>
+  </data>
+  <data name="Keys_secLabel" xml:space="preserve">
+    <value>Ключи / сек:</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Местный</value>
+  </data>
+  <data name="RemainingLabel" xml:space="preserve">
+    <value>Осталось:</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Начало:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Топ десять</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="Analysis_methodList4" xml:space="preserve">
+    <value>Скалолазание</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Скопировать все строки</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>Копировать ключ</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>Копировать текст</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>Копировать значение</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>Копировать выбранную строку</value>
+  </data>
+  <data name="CharacterForColumn" xml:space="preserve">
+    <value>С</value>
+    <comment>C for column</comment>
+  </data>
+  <data name="CharacterForRow" xml:space="preserve">
+    <value>р</value>
+    <comment>R for row</comment>
+  </data>
+  <data name="ModeHeader" xml:space="preserve">
+    <value>Режим</value>
+  </data>
+  <data name="Analysis_methodList5" xml:space="preserve">
+    <value>Словарь Атака</value>
+  </data>
+  <data name="CaseSensitiveCaption" xml:space="preserve">
+    <value>Деликатный случай</value>
+  </data>
+  <data name="CaseSensitiveTooltip" xml:space="preserve">
+    <value>Атака словария чувствительна к регистру</value>
+  </data>
+  <data name="DictionaryCaption" xml:space="preserve">
+    <value>Словарь</value>
+  </data>
+  <data name="DictionaryTooltip" xml:space="preserve">
+    <value>Словарь для анализа словаря</value>
+  </data>
+  <data name="MinLengthCaption" xml:space="preserve">
+    <value>Минимальная длина ключевого слова</value>
+  </data>
+  <data name="MinLengthTooltip" xml:space="preserve">
+    <value>Введите минимальную длину для анализа</value>
+  </data>
+</root>

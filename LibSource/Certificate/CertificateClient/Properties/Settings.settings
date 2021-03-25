@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CrypTool.CertificateClientSimpleGUI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SERVER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cloud.cryptool.org</Value>
+    </Setting>
+    <Setting Name="PORT" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10443</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

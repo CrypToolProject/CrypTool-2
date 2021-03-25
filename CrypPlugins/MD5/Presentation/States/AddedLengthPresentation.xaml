@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="CrypTool.MD5.Presentation.States.AddedLengthPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:displays="clr-namespace:CrypTool.MD5.Presentation.Displays"
+    Height="400" Width="800">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Grid>
+        <TextBlock Margin="8,104,8,0" x:Name="textBlock1" TextWrapping="Wrap" Height="53" VerticalAlignment="Top" Style="{DynamicResource textBlockStyle}" ><Run Text="{Loc We_have_added_the_length_at_the_end_of_our_data_buffer}"/><Run Text=":"/></TextBlock>
+        <displays:DataBlockDisplay Data="{Binding CurrentState.CurrentDataBlock}" Height="52" VerticalAlignment="Top" Margin="8,161,8,0" />
+    </Grid>
+</UserControl>

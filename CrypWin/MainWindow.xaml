@@ -1,0 +1,1333 @@
+﻿<dc:RibbonWindow x:Class="CrypTool.CrypWin.MainWindow" Name="MainCrypToolWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dc="clr-namespace:DevComponents.WpfRibbon;assembly=DevComponents.WpfRibbon"
+    xmlns:dd="clr-namespace:DevComponents.WpfDock;assembly=DevComponents.WpfDock"
+    xmlns:de="clr-namespace:DevComponents.WpfEditors;assembly=DevComponents.WpfEditors"
+    xmlns:dragdrop="clr-namespace:DragDropListBox"
+    xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+    xmlns:local="clr-namespace:CrypTool.CrypWin"
+    xmlns:cw="clr-namespace:CrypTool.CrypWin"
+    xmlns:con="clr-namespace:CrypTool.CrypWin.Helper"
+    xmlns:pb="clr-namespace:CrypTool.PluginBase;assembly=CrypPluginBase"
+    xmlns:proprietary="clr-namespace:CrypProprietary;assembly=CrypProprietary"
+    xmlns:ll="clr-namespace:System;assembly=mscorlib"
+    xmlns:WinTheme="clr-namespace.Microsoft.Themes;assemly=PresentationFramework.Luna"      
+    xmlns:properties="clr-namespace:CrypTool.CrypWin.Properties" xmlns:Resources="clr-namespace:CrypTool.CrypWin.Resources" xmlns:Resources1="clr-namespace:CrypTool.CrypWin.SettingsTabs.Resources" Height="700" Width="950" MinHeight="400" MinWidth="500" ResizeMode="CanResizeWithGrip"
+    Visibility="Hidden" StateChanged="MainCrypToolWindow_StateChanged">
+
+    <dc:RibbonWindow.Resources>
+        <cw:VisibilityToMarginHelper x:Key="VisibilityToMarginHelper"></cw:VisibilityToMarginHelper>
+        <LinearGradientBrush x:Key="linear"
+		StartPoint="0.50,0" EndPoint="0.50,1" 
+		SpreadMethod="Pad" ColorInterpolationMode="SRgbLinearInterpolation" >
+            <GradientStop Color="#FFFFFFFF" Offset="0" />
+            <GradientStop Color="#FF3F72B2" Offset="1" />
+            <GradientStop Color="#FF3F72B2" Offset="0.51" />
+            <GradientStop Color="#FF63A3CA" Offset="0.5" />
+        </LinearGradientBrush>
+        <Style x:Key="AppMenuCommandButton" TargetType="{x:Type dc:ButtonDropDown}">
+            <Setter Property="Padding" Value ="4,2,4,2"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnStyle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate x:Name="TemplateBtn" TargetType="Button">
+                        <Border x:Name="Border" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" BorderThickness="1">
+                            <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Top" HorizontalAlignment="Center"></ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" Value="#55222222" TargetName="Border" />
+                                <Setter Property="BorderBrush" Value="#aa222222" TargetName="Border" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                                <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <LinearGradientBrush x:Key="NormalBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFF" Offset="0.0"/>
+                    <GradientStop Color="#CCC" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="HorizontalNormalBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFF" Offset="0.0"/>
+                    <GradientStop Color="#CCC" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LightBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFF" Offset="0.0"/>
+                    <GradientStop Color="#EEE" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="HorizontalLightBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFF" Offset="0.0"/>
+                    <GradientStop Color="#EEE" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="DarkBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#FFF" Offset="0.0"/>
+                    <GradientStop Color="#AAA" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="PressedBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#BBB" Offset="0.0"/>
+                    <GradientStop Color="#EEE" Offset="0.1"/>
+                    <GradientStop Color="#EEE" Offset="0.9"/>
+                    <GradientStop Color="#FFF" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
+
+        <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
+
+        <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
+
+        <SolidColorBrush x:Key="SelectedBackgroundBrush" Color="#DDD" />
+
+        <!-- Border Brushes -->
+
+        <LinearGradientBrush x:Key="NormalBorderBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#CCC" Offset="0.0"/>
+                    <GradientStop Color="#444" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="HorizontalNormalBorderBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#CCC" Offset="0.0"/>
+                    <GradientStop Color="#444" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="DefaultedBorderBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#777" Offset="0.0"/>
+                    <GradientStop Color="#000" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="PressedBorderBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#444" Offset="0.0"/>
+                    <GradientStop Color="#888" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
+
+        <SolidColorBrush x:Key="SolidBorderBrush" Color="#888" />
+
+        <SolidColorBrush x:Key="LightBorderBrush" Color="#AAA" />
+
+        <!-- Miscellaneous Brushes -->
+        <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
+
+        <SolidColorBrush x:Key="LightColorBrush" Color="#DDD" />
+
+
+
+
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="25" />
+                </Grid.ColumnDefinitions>
+                <Border
+      x:Name="Border" 
+      Grid.ColumnSpan="2"
+      CornerRadius="2"
+      BorderThickness="1" />
+                <Border 
+      Grid.Column="0"
+      CornerRadius="2,0,0,2" 
+      Margin="1"
+      BorderThickness="0,0,1,0" />
+                <Image Width="24" Height="20" Source="images/ctLogoDropDown.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>                
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                    <Setter TargetName="Border" Property="Background" Value="#44ffffff" />
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="true">
+                    <Setter TargetName="Border" Property="Background" Value="#22ffffff" />
+                </Trigger>
+
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+
+        <Style x:Key="ComboStyle" TargetType="ComboBox">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="MinWidth" Value="51"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton 
+            Name="ToggleButton" 
+            Template="{StaticResource ComboBoxToggleButton}"  
+            Focusable="false"
+            IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+            ClickMode="Press">
+                            </ToggleButton>
+                
+                            <Popup 
+            Name="Popup"
+            Placement="Bottom"
+            IsOpen="{TemplateBinding IsDropDownOpen}"
+            AllowsTransparency="True" 
+            Focusable="False"
+            PopupAnimation="Slide">
+                                <Grid 
+              Name="DropDown"
+              SnapsToDevicePixels="True"                
+              MinWidth="{TemplateBinding ActualWidth}"
+              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border 
+                x:Name="DropDownBorder"
+                Background="{StaticResource WindowBackgroundBrush}"
+                BorderThickness="1"
+                BorderBrush="{StaticResource SolidBorderBrush}"/>
+                                    <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="HasItems" Value="false">
+                                <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                            <Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+                                <Setter TargetName="DropDownBorder" Property="CornerRadius" Value="4"/>
+                                <Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEditable"
+               Value="true">
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+
+        <ControlTemplate x:Key="HorizontalScrollBarTemplate" TargetType="{x:Type ScrollBar}">
+            <Grid x:Name="Bg" SnapsToDevicePixels="True" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                    <ColumnDefinition Width="1E-05*"/>
+                    <ColumnDefinition MaxWidth="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarButtonWidthKey}}"/>
+                </Grid.ColumnDefinitions>
+                <RepeatButton IsEnabled="{TemplateBinding IsMouseOver}" Command="ScrollBar.PageLeftCommand" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="LeftArrow">
+                    <RepeatButton.Style>
+                        <Style TargetType="{x:Type RepeatButton}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="IsTabStop" Value="False"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                                        <Border Background="Transparent" Height="18" Width="13" x:Name="Border" BorderThickness="1">
+                                            <Path Data=" M 8 15 L 8 3 L 2 9 Z" Fill="#555" HorizontalAlignment="Left"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter Property="Background" Value="#33222222" TargetName="Border" />
+                                                <Setter Property="BorderBrush" Value="#88222222" TargetName="Border" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="true">
+                                                <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                                                <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </RepeatButton.Style>
+                </RepeatButton>
+                <RepeatButton IsEnabled="{TemplateBinding IsMouseOver}" Command="ScrollBar.PageRightCommand" Grid.Column="2" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="RightArrow">
+                    <RepeatButton.Style>
+                        <Style TargetType="{x:Type RepeatButton}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="IsTabStop" Value="False"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                                        <Border Background="Transparent" Height="18" Width="13" x:Name="Border2" BorderThickness="1">
+                                            <Path Data=" M 9 15 L 9 3 L 15 9 Z" Fill="#555" HorizontalAlignment="Right"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="true">
+                                                <Setter Property="Background" Value="#33222222" TargetName="Border2" />
+                                                <Setter Property="BorderBrush" Value="#88222222" TargetName="Border2" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="true">
+                                                <Setter Property="Background" Value="#77222222" TargetName="Border2" />
+                                                <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border2" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </RepeatButton.Style>
+                </RepeatButton>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" TargetName="Bg" Value="#FFF4F4F4"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ScrollViewerTemplate" TargetType="{x:Type ScrollViewer}">
+            <Grid x:Name="Grid" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Rectangle x:Name="Corner" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Column="1" Grid.Row="1"/>
+                <ScrollBar x:Name="PART_HorizontalScrollBar" Cursor="Arrow" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="0" Grid.Row="0" Orientation="Horizontal" ViewportSize="{TemplateBinding ViewportWidth}" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="HorizontalScrollBar" Template="{DynamicResource HorizontalScrollBarTemplate}"/>
+                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="{Binding ElementName=PART_HorizontalScrollBar, Path=Visibility, Converter={StaticResource ResourceKey=VisibilityToMarginHelper}}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Grid.Column="0" Grid.Row="0" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False">
+                </ScrollContentPresenter>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="TabControlTemplate" TargetType="{x:Type TabControl}">
+            <Grid SnapsToDevicePixels="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="ColumnDefinition1" Width="30"/>
+                    <ColumnDefinition x:Name="ColumnDefinition0"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
+                    <RowDefinition x:Name="RowDefinition2" Height="8"/>
+                    <RowDefinition x:Name="RowDefinition1" Height="*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Column="0" Grid.ColumnSpan="2" Height="2" Fill="Gray" Grid.Row="0" VerticalAlignment="Bottom"></Rectangle>
+                <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="0" Template="{DynamicResource ScrollViewerTemplate}">
+                    <TabPanel x:Name="HeaderPanel" IsItemsHost="True" Margin="2,2,2,0" Panel.ZIndex="1"></TabPanel>
+                </ScrollViewer>
+                <ComboBox Grid.Column="0" Grid.Row="0" Style="{StaticResource ResourceKey=ComboStyle}" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=Items,Mode=OneWay}" Height="20" Width="20"
+                    SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding Path=Icon}" Height="22" Width="22" Margin="3"></Image>
+                                <TextBlock Text="{Binding Path=Header}" VerticalAlignment="Center" Margin="3"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Background="White"></Border>
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=SelectedItem.Background,Mode=OneWay}"></Border>
+
+                <Border Grid.ColumnSpan="2" Background="White" Grid.Column="0" Grid.Row="2">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=Items.Count,Mode=OneWay}" Value="0">
+                                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <Border Grid.ColumnSpan="2" x:Name="ContentPanel" Background="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TabControl}}, Path=SelectedItem.Background,Mode=OneWay}" Grid.Column="0" Grid.Row="2" KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
+                        <ContentPresenter ToolTip="{x:Null}" Margin="2" x:Name="PART_SelectedContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Content="{TemplateBinding SelectedContent}" ContentSource="SelectedContent" ContentStringFormat="{TemplateBinding SelectedContentStringFormat}"/>
+                    </Border>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="TabStripPlacement" Value="Bottom">
+                    <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="1"/>
+                    <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                    <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                    <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
+                    <Setter Property="Margin" TargetName="HeaderPanel" Value="2,0,2,2"/>
+                </Trigger>
+                <Trigger Property="TabStripPlacement" Value="Left">
+                    <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                    <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                    <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="0"/>
+                    <Setter Property="Grid.Column" TargetName="ContentPanel" Value="1"/>
+                    <Setter Property="Width" TargetName="ColumnDefinition0" Value="Auto"/>
+                    <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
+                    <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                    <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                    <Setter Property="Margin" TargetName="HeaderPanel" Value="2,2,0,2"/>
+                </Trigger>
+                <Trigger Property="TabStripPlacement" Value="Right">
+                    <Setter Property="Grid.Row" TargetName="HeaderPanel" Value="0"/>
+                    <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                    <Setter Property="Grid.Column" TargetName="HeaderPanel" Value="1"/>
+                    <Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
+                    <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
+                    <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
+                    <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
+                    <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
+                    <Setter Property="Margin" TargetName="HeaderPanel" Value="0,2,2,2"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <DataTemplate x:Key="Local_TabItemDragTemplate">
+            <Border CornerRadius="5"
+                                BorderBrush="Black"
+                                BorderThickness="2"
+                                Background="DodgerBlue">
+                <TextBlock Margin="5"
+                                           Text="{Binding Path=Header}" />
+            </Border>
+        </DataTemplate>
+
+        <Style x:Key="TabControlStyle" TargetType="{x:Type TabControl}">
+            <Setter Property="Template" Value="{StaticResource ResourceKey=TabControlTemplate}" />
+        </Style>
+        <BitmapImage x:Key="CloseButton" UriSource="images/Exit.png"/>
+        <BitmapImage x:Key="Update" UriSource="images/update.png"/>
+        <BitmapImage x:Key="NoUpdate" UriSource="images/noUpdate.png"/>
+        <BitmapImage x:Key="UpdateReady" UriSource="images/updateReady.png"/>
+        <BitmapImage x:Key="CrypToolIcon" UriSource="images/CrypTool.ico"/>
+        <BitmapImage x:Key="cloudConnected" UriSource="images/cloud-connected.png"/>
+        <BitmapImage x:Key="cloudDisconnected" UriSource="images/cloud-disconnected.png"/>
+        <con:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></con:BooleanToVisibilityConverter>
+
+        <Storyboard x:Key="P2PBigIconImageRotateStoryboard">
+            <DoubleAnimation Storyboard.TargetName="P2PBigIconImageRotate" Storyboard.TargetProperty="Angle" By="360" Duration="00:00:10" BeginTime="00:00:00" RepeatBehavior="Forever"/>
+        </Storyboard>
+        <Storyboard x:Key="P2PSmallIconImageRotateStoryboard">
+            <DoubleAnimation Storyboard.TargetName="P2PSmallIconImageRotate" Storyboard.TargetProperty="Angle" By="360" Duration="00:00:10" BeginTime="00:00:00" RepeatBehavior="Forever"/>
+        </Storyboard>
+        <Storyboard x:Key="AutoUpdaterBigIconImageRotateStoryboard">
+            <DoubleAnimation Storyboard.TargetName="AutoUpdaterBigIconImageRotate" Storyboard.TargetProperty="Angle" By="360" Duration="00:00:05" BeginTime="00:00:00" RepeatBehavior="Forever"/>
+        </Storyboard>
+        <Storyboard x:Key="AutoUpdaterSmallIconImageRotateStoryboard">
+            <DoubleAnimation Storyboard.TargetName="AutoUpdaterSmallIconImageRotate" Storyboard.TargetProperty="Angle" By="360" Duration="00:00:05" BeginTime="00:00:00" RepeatBehavior="Forever"/>
+        </Storyboard>
+
+        <con:PanelWidthConverter x:Key="PanelWidthConverter"></con:PanelWidthConverter>
+
+        <VisualBrush x:Key="HelpBrush" TileMode="None" Stretch="None" AlignmentX="Left" AutoLayoutContent="True">
+            <VisualBrush.Visual>
+                <Grid Background="White">
+                    <TextBlock FontStyle="Italic" Opacity="0.4"  Text="{Loc _Search}" Margin="5,0,0,0"></TextBlock>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+    </dc:RibbonWindow.Resources>
+
+    <dc:RibbonWindow.CommandBindings>
+        <CommandBinding Command="New" Executed="New_Executed" />
+        <CommandBinding Command="Open" Executed="Open_Executed" CanExecute="Open_CanExecute"/>
+        <CommandBinding Command="Save" Executed="Save_Executed" CanExecute="Save_CanExecute" />
+        <CommandBinding Command="SaveAs" Executed="SaveAs_Executed" CanExecute="SaveAs_CanExecute" />
+        <CommandBinding Command="Close" Executed="Close_Executed" CanExecute="Close_CanExecute" />
+        <CommandBinding Command="Print" Executed="Print_Executed" CanExecute="Print_CanExecute" />
+
+        <CommandBinding Command="cw:CrypWinCommands.ContextHelp" Executed="ContextHelp_Executed" CanExecute="ContextHelp_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Play" Executed="Play_Executed" CanExecute="Play_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Stop" Executed="Stop_Executed" CanExecute="Stop_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Undo" Executed="Undo_Executed" CanExecute="Undo_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Redo" Executed="Redo_Executed" CanExecute="Redo_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Cut" Executed="Cut_Executed" CanExecute="Cut_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Copy" Executed="Copy_Executed" CanExecute="Copy_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Paste" Executed="Paste_Executed" CanExecute="Paste_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Remove" Executed="Remove_Executed" CanExecute="Remove_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.AddImage" Executed="addimg_Click" CanExecute="AddImage_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.AddText" Executed="addtxt_Click" CanExecute="AddText_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.ShowHideLog" Executed="ShowHideLog_Executed" CanExecute="ShowHideLog_CanExecute" />
+
+        <CommandBinding Command="cw:CrypWinCommands.PlayDemo" Executed="PlayDemo_Executed" CanExecute="PlayDemo_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.StopDemo" Executed="StopDemo_Executed" CanExecute="StopDemo_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Maximize" Executed="handleMaximizeTab" CanExecute="Maximize_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Fullscreen" Executed="Fullscreen_Executed" CanExecute="Fullscreen_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.P2P" Executed="P2P_Executed" CanExecute="P2P_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Startcenter" Executed="Startcenter_Executed" CanExecute="Startcenter_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.CrypToolStore" Executed="CrypToolStore_Executed" CanExecute="CrypToolStore_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.AutoUpdater" Executed="AutoUpdater_Executed" CanExecute="AutoUpdater_CanExecute" />
+        <CommandBinding Command="cw:CrypWinCommands.Settings" Executed="Settings_Executed" CanExecute="Settings_CanExecute" />
+    </dc:RibbonWindow.CommandBindings>
+
+    <dc:RibbonWindow.InputBindings>
+        <KeyBinding Command="cw:CrypWinCommands.ContextHelp" Gesture="F1" />
+        <KeyBinding Command="cw:CrypWinCommands.Play" Gesture="F5" />
+        <KeyBinding Command="cw:CrypWinCommands.Stop" Gesture="SHIFT+F5"/>
+        <KeyBinding Command="cw:CrypWinCommands.Maximize" Gesture="F11"/>
+        <KeyBinding Command="cw:CrypWinCommands.Fullscreen" Gesture="F12"/>
+        <KeyBinding Command="cw:CrypWinCommands.Remove" Gesture="Del"/>
+        <KeyBinding Command="cw:CrypWinCommands.Redo" Gesture="Ctrl + Y"/>
+        <KeyBinding Command="cw:CrypWinCommands.Undo" Gesture="Ctrl + Z"/>
+        <KeyBinding Command="cw:CrypWinCommands.Copy" Gesture="Ctrl + C"/>
+        <KeyBinding Command="cw:CrypWinCommands.Cut" Gesture="Ctrl + X"/>
+        <KeyBinding Command="cw:CrypWinCommands.Paste" Gesture="Ctrl + V"/>
+        <KeyBinding Command="cw:CrypWinCommands.ShowHideLog" Gesture="Ctrl + L"/>
+    </dc:RibbonWindow.InputBindings>
+    <DockPanel LastChildFill="True">
+        <StatusBar Name="statusBar" DockPanel.Dock="Bottom" Height="22" MouseDoubleClick="statusBar_MouseDoubleClick">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel LastChildFill="True"/>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <Separator Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:Ribbon, ResourceId=StatusBarSeparator}}" DockPanel.Dock="Left"/>
+            <StatusBarItem VerticalAlignment="Top" Height="25" Name="statusBarItem">
+            </StatusBarItem>
+            <StatusBarItem VerticalAlignment="Top" Height="25" Name="statusBarItem2" HorizontalAlignment="Right">
+                <StatusBarItem.Content>
+                    <ProgressBar Width="150" Name="updateDownloadBar" Height="12" ToolTip="{Loc Downloading_update___}" Margin="1" Visibility="Hidden"/>
+                </StatusBarItem.Content>
+            </StatusBarItem>
+        </StatusBar>
+
+        <DockPanel LastChildFill="True">
+            <dc:Ribbon DockPanel.Dock="Top" Name="AppRibbon" LicenseKey="{proprietary:LicenseKey}" SelectionChanged="AppRibbon_SelectionChanged">
+                <!--CrypTool Menu-->
+                <dc:Ribbon.ApplicationMenu>
+                    <dc:ApplicationMenu dc:Ribbon.KeyTip="F">
+
+                        <dc:ApplicationMenu.Image>
+                            <Image Source="images/ctLogo.png" Width="24" Height="24"/>
+                        </dc:ApplicationMenu.Image>
+
+                        <!--CrypTool Commands-->
+                        <dc:ApplicationMenu.AppItems>
+                            <!--<dc:ButtonDropDown ColorClass="ButtonWithBackground" dc:Ribbon.KeyTip="T" Command="cw:CrypWinCommands.Options"/>-->
+                            <dc:ButtonDropDown Header="{Loc Exit_CrypTool_}" ColorClass="ButtonWithBackground" Margin="6,0,0,0" dc:Ribbon.KeyTip="X" Command="ApplicationCommands.Close">
+                                <dc:ButtonDropDown.Image>
+                                    <Image Source="images/Exit.png"/>
+                                </dc:ButtonDropDown.Image>
+                            </dc:ButtonDropDown>
+                        </dc:ApplicationMenu.AppItems>
+
+                        <!--Document Commands-->
+                        <dc:ButtonDropDown ImagePosition="Left" dc:Ribbon.KeyTip="N" Command="ApplicationCommands.New" Header="{Loc New}">
+                            <dc:ButtonDropDown.Image>
+                                <Image Source="images/File32.png"/>
+                            </dc:ButtonDropDown.Image>
+                        </dc:ButtonDropDown>
+                        <dc:ButtonDropDown ImagePosition="Left" dc:Ribbon.KeyTip="N" Command="ApplicationCommands.Open" Header="{Loc Open}">
+                            <dc:ButtonDropDown.Image>
+                                <Image Source="images/Open32.png"/>
+                            </dc:ButtonDropDown.Image>
+                        </dc:ButtonDropDown>
+                        <dc:ButtonDropDown ImagePosition="Left" dc:Ribbon.KeyTip="SA" Command="ApplicationCommands.SaveAs" Header="{Loc Save_As_}">
+                            <dc:ButtonDropDown.Image>
+                                <Image Source="images/Save32.png"/>
+                            </dc:ButtonDropDown.Image>
+                        </dc:ButtonDropDown>
+                    </dc:ApplicationMenu>
+                </dc:Ribbon.ApplicationMenu>
+                <!-- End CrypTool Menu -->
+
+                <!--Define Quick Access Toolbar-->
+                <dc:Ribbon.QuickAccessToolbar>
+                    <dc:Qat>
+                        <dc:ButtonDropDown PartVisibility="ImageOnly" dc:Ribbon.KeyTip="1" Command="cw:CrypWinCommands.Play" ToolTip="{Loc Play}">
+                            <dc:ButtonDropDown.Image>
+                                <Image Source="images/test/play.png"/>
+                            </dc:ButtonDropDown.Image>
+                        </dc:ButtonDropDown>
+                        <dc:ButtonDropDown PartVisibility="ImageOnly" dc:Ribbon.KeyTip="3" Command="cw:CrypWinCommands.Stop" ToolTip="{Loc Stop}">
+                            <dc:ButtonDropDown.Image>
+                                <Image Source="images/test/stop.png"/>
+                            </dc:ButtonDropDown.Image>
+                        </dc:ButtonDropDown>
+                    </dc:Qat>
+                </dc:Ribbon.QuickAccessToolbar>
+
+                <!--RibbonTab Home-->
+                <dc:RibbonTab Header="{Loc Home}" Name="ribbonTabHome" dc:Ribbon.KeyTip="H" >
+
+                    <dc:RibbonBarPanel Height="89" x:Name="ToolBarPanel">
+                        <DockPanel LastChildFill="True">
+                            <DockPanel.Width>
+                                <Binding ElementName="AppRibbon" Path="ActualWidth" Mode="OneWay" Converter="{StaticResource PanelWidthConverter}"/>
+                            </DockPanel.Width>
+                            <dc:RibbonBar Header="{Loc RBHeader_File}" DockPanel.Dock="Left" ToolTip="{Loc RBTooltip_File}" x:Name="ribbonMainControls" Padding="7" ResizeOrderIndex="6" dc:Ribbon.KeyTip="CT">
+                                <dc:ButtonDropDown Height="65" VerticalContentAlignment="Center" ImagePosition="Left" Style="{DynamicResource AppMenuCommandButton}" Name="buttonDropDownNew" StaysOpenOnClick="True" dc:Ribbon.KeyTip="N" Command="ApplicationCommands.New" Header="{Loc New}" ToolTip="{Loc RBTooltip_New}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/File32.png"/>
+                                    </dc:ButtonDropDown.Image>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown ImagePosition="Left" Height="65" VerticalContentAlignment="Center" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="O" Command="ApplicationCommands.Open" Name="buttonDropDownOpen" StaysOpenOnClick="True" Header="{Loc Open}" ToolTip="{Loc RBTooltip_Load}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/Open32.png"/>
+                                    </dc:ButtonDropDown.Image>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown ImagePosition="Left" VerticalContentAlignment="Center" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="S" Header="{Loc Save}"
+                               BorderBrush="Black" Height="65" BorderThickness="1" Command="ApplicationCommands.Save" ToolTip="{Loc RBTooltip_Save}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/Save32.png"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown Header="{Loc Save}" Command="ApplicationCommands.Save">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Source="images/Save32.png"/>
+                                        </dc:ButtonDropDown.Image>
+                                    </dc:ButtonDropDown>
+                                    <dc:ButtonDropDown Header="{Loc Save_As_}" Command="ApplicationCommands.SaveAs">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Source="images/Save32.png"/>
+                                        </dc:ButtonDropDown.Image>
+                                    </dc:ButtonDropDown>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown ImagePosition="Left" Height="65" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="P" VerticalContentAlignment="Center" VerticalAlignment="Center" Command="ApplicationCommands.Print" Header="{Loc Print}"
+                               BorderBrush="Black" BorderThickness="1" ToolTip="{Loc RBTooltip_Print}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/Print32.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                </dc:ButtonDropDown>
+
+                            </dc:RibbonBar>
+
+                            <dc:RibbonBar Header="{Loc RBHeader_Execute}" DockPanel.Dock="Left" ToolTip="{Loc RBTooltip_Execute}" Name="ribbonEditorProcess" Padding="7" ResizeOrderIndex="7" dc:Ribbon.KeyTip="EP">
+
+                                <dc:ButtonDropDown ImagePosition="Top" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="PL" Command="cw:CrypWinCommands.Play" ToolTip="{Loc RBTooltip_Start}" ToolTipService.ShowOnDisabled="True">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/test/play.png" Height="40" Width="40" />
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/test/play.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown dc:Ribbon.KeyTip="ST" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Top" Command="cw:CrypWinCommands.Stop" ToolTip="{Loc RBTooltip_Stop}" ToolTipService.ShowOnDisabled="True">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/test/stop.png" Height="40" Width="40"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/test/stop.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                            </dc:RibbonBar>
+
+                            <dc:RibbonBar Header="{Loc RBHeader_View}" ToolTip="{Loc RBTooltip_View}" Padding="7" ResizeOrderIndex="6">
+                                <dc:ButtonDropDown Name="PluginBTN" Click="PluginBTN_Checked" IsCheckable="True" dc:Ribbon.KeyTip="D" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="65" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="left" Header="{Loc Components}" Visibility="Collapsed">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/comp.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/comp.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown Name="LogBTN" Click="LogBTN_Checked" IsCheckable="True" dc:Ribbon.KeyTip="D" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="69" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="left" Header="{Loc Log}"  ToolTip="{Loc RBTooltip_Log}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/log.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/log.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown Name="SettingBTN" Click="SettingBTN_Checked" IsCheckable="True" VerticalContentAlignment="Center" Height="65" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="left" Header="{Loc Parameters}" Visibility="Collapsed">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/setting.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/setting.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+                            </dc:RibbonBar>
+
+                            <dc:RibbonBar Header="{Loc Plugin_editor_}" ToolTip="{Loc Dynamic_controls_of_the_current_plugin_editor_}" Name="ribbonBarEditor" VerticalAlignment="Center" Visibility="Collapsed">
+                                <!-- 
+            Every Editor can add optional ribbon commands using the RibbonBarAttribute in the Settings-Class. 
+            The comand buttons will be displayed in this group.
+            -->
+                            </dc:RibbonBar>
+
+                            <dc:RibbonBar Header="{Loc RBHeader_Demo}" ToolTip="{Loc In_demo_mode_a_selected_set_of_samples_is_repeatedly_executed_}" 
+                                          Name="ribbonDemoMode" Padding="7" ResizeOrderIndex="7" dc:Ribbon.KeyTip="DM" Visibility="Collapsed">
+                                <dc:ButtonDropDown ImagePosition="Top" Style="{DynamicResource AppMenuCommandButton}" 
+                                                   dc:Ribbon.KeyTip="PD" Command="cw:CrypWinCommands.PlayDemo" ToolTip="{Loc Select_samples_and_start_demo_mode_}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/test/play.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/test/play.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <StackPanel Name="stackPanel1" Width="60">
+                                    <de:IntegerInput ShowCheckBox="false" ShowClearButton="true" ShowUpDown="true" Name="demoInterval" 
+                                                     Value="{Binding Source={x:Static properties:Settings.Default},Path=DemoInterval,Mode=Twoway,UpdateSourceTrigger=PropertyChanged}" 
+                                                     ToolTip="{Loc How_long_should_a_sample_be_kept_running_before_opening_next_one_}" MinValue="5" />
+                                    <Label HorizontalAlignment="Center" Content="{Loc Interval}"/>
+                                </StackPanel>
+
+                                <dc:ButtonDropDown ImagePosition="Top" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="SD" Command="cw:CrypWinCommands.StopDemo" ToolTip="{Loc Stop_Demo_Mode_}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/test/stop.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/test/stop.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+                            </dc:RibbonBar>
+
+
+                            <Grid x:Name="ManagementRootMain" HorizontalAlignment="Right">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform X="8"></TranslateTransform>
+                                </Grid.RenderTransform>
+                                <dc:RibbonBar Header="{Loc RBHeader_Extras}" DockPanel.Dock="Right" ToolTip="{Loc Management_functions_for_CrypTool_2_}" x:Name="ribbonManagement" Padding="7" ResizeOrderIndex="6" >
+                                    <dc:ButtonDropDown ImagePosition="Top" Height="70" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="HO" Command="cw:CrypWinCommands.Startcenter" ToolTip="{Loc Startcenter_Tooltip}">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Source="/Startcenter;component/startcenter.png" Height="40" Width="40" />
+                                        </dc:ButtonDropDown.Image>
+                                        <dc:ButtonDropDown.ImageSmall>
+                                            <Image Source="/Startcenter;component/startcenter.png" Height="16" Width="16"/>
+                                        </dc:ButtonDropDown.ImageSmall>
+                                    </dc:ButtonDropDown>
+
+                                    <dc:ButtonDropDown ImagePosition="Top" Height="70" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="HO" Command="cw:CrypWinCommands.CrypToolStore" ToolTip="{Loc CrypToolStore_Tooltip}">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Source="/CrypToolStore;component/icon.png" Height="40" Width="40" />
+                                        </dc:ButtonDropDown.Image>
+                                        <dc:ButtonDropDown.ImageSmall>
+                                            <Image Source="/CrypToolStore;component/icon.png" Height="16" Width="16"/>
+                                        </dc:ButtonDropDown.ImageSmall>
+                                    </dc:ButtonDropDown>
+
+                                    <dc:ButtonDropDown Name="p2pButton" ImagePosition="Top" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="PP" Height="70"
+                                                   Command="cw:CrypWinCommands.P2P" ToolTip="{Loc Manages_the_integrated_network_connection_}">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Name="P2PIconImageBig" Source="images/cloud-connected.png"  Height="40" Width="40" />
+                                        </dc:ButtonDropDown.Image>
+                                        <dc:ButtonDropDown.ImageSmall>
+                                            <Image Name="P2PIconImageSmall" Source="images/cloud-connected.png" Height="16" Width="16"/>
+                                        </dc:ButtonDropDown.ImageSmall>
+                                    </dc:ButtonDropDown>
+
+                                    <dc:ButtonDropDown Name="autoUpdateButton" Height="70" ImagePosition="Top" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="AU" Command="cw:CrypWinCommands.AutoUpdater">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Source="images/noUpdate.png" Height="40" Width="40" RenderTransformOrigin="0.5,0.5">
+                                                <Image.RenderTransform>
+                                                    <RotateTransform x:Name="AutoUpdaterBigIconImageRotate"/>
+                                                </Image.RenderTransform>
+                                            </Image>
+                                        </dc:ButtonDropDown.Image>
+                                        <dc:ButtonDropDown.ImageSmall>
+                                            <Image Source="images/noUpdate.png" Height="16" Width="16" RenderTransformOrigin="0.5,0.5">
+                                                <Image.RenderTransform>
+                                                    <RotateTransform x:Name="AutoUpdaterSmallIconImageRotate"/>
+                                                </Image.RenderTransform>
+                                            </Image>
+                                        </dc:ButtonDropDown.ImageSmall>
+                                    </dc:ButtonDropDown>
+
+                                    <dc:ButtonDropDown Name="settingsButton" Height="70" ImagePosition="Top" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="S" Command="cw:CrypWinCommands.Settings" ToolTip="{Loc SettingsTooltip}">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Source="images/settings.png" Height="40" Width="40" />
+                                        </dc:ButtonDropDown.Image>
+                                        <dc:ButtonDropDown.ImageSmall>
+                                            <Image Source="images/settings.png" Height="16" Width="16"/>
+                                        </dc:ButtonDropDown.ImageSmall>
+                                    </dc:ButtonDropDown>
+
+                                    <dc:ButtonDropDown Header="{Loc Help}" Height="70" Click="ButtonHelp_Click" ImagePosition="Top" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="PR" Name="helpMenu" ToolTip="{Loc RBTooltip_Help}">
+                                        <dc:ButtonDropDown.Image>
+                                            <Image Source="images/help32.png" Height="40" Width="40" />
+                                        </dc:ButtonDropDown.Image>
+                                        <dc:ButtonDropDown.ImageSmall>
+                                            <Image Source="images/help32.png" Height="16" Width="16"/>
+                                        </dc:ButtonDropDown.ImageSmall>
+                                    </dc:ButtonDropDown>
+                                </dc:RibbonBar>
+                            </Grid>
+                            
+                        </DockPanel>
+                    </dc:RibbonBarPanel>
+                </dc:RibbonTab>
+
+                <!--RibbonTab Edit-->
+                <dc:RibbonTab Header="{Loc Edit}" Name="ribbonTabEdit" dc:Ribbon.KeyTip="E">
+
+                    <dc:RibbonBarPanel Height="89">
+                        <DockPanel LastChildFill="True">
+                            <DockPanel.Width>
+                                <Binding ElementName="AppRibbon" Path="ActualWidth" Mode="OneWay" Converter="{StaticResource PanelWidthConverter}"/>
+                            </DockPanel.Width>
+                            <dc:RibbonBar Header="{Loc RBHeader_RedoUndo}" ToolTip="{Loc Redo_or_Undo_your_last_changes_}" Name="ribbonEditorRU" Padding="7" ResizeOrderIndex="7" dc:Ribbon.KeyTip="RU" DockPanel.Dock="left">
+
+                                <dc:ButtonDropDown dc:Ribbon.KeyTip="UD" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Top" Command="cw:CrypWinCommands.Undo" ToolTip="{Loc Undo}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/undo.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/undo.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown dc:Ribbon.KeyTip="RD" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Top" Command="cw:CrypWinCommands.Redo" ToolTip="{Loc Redo}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/redo.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/redo.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                            </dc:RibbonBar>
+
+                            <dc:RibbonBar Header="{Loc RBHeader_Editing}" ToolTip="{Loc RBTooltip_Editing}" Name="ribbonEditorEditing" Padding="7" ResizeOrderIndex="7" dc:Ribbon.KeyTip="RU" DockPanel.Dock="left">
+
+                                <dc:ButtonDropDown dc:Ribbon.KeyTip="CT" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Top" Command="cw:CrypWinCommands.Cut" ToolTip="{Loc Cut}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/cut32.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/cut32.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown dc:Ribbon.KeyTip="CP" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Top" Command="cw:CrypWinCommands.Copy" ToolTip="{Loc Copy}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/copy32.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/copy32.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown dc:Ribbon.KeyTip="PA" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Top" Command="cw:CrypWinCommands.Paste" ToolTip="{Loc Paste}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/paste32.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/paste32.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown dc:Ribbon.KeyTip="RE" Style="{DynamicResource AppMenuCommandButton}" ImagePosition="Top" Command="cw:CrypWinCommands.Remove" ToolTip="{Loc Remove}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/remove32.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/remove32.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+                            </dc:RibbonBar>
+                            <dc:RibbonBar Header="{Loc RBHeader_Add}" ToolTip="{Loc RBTooltip_Add}" Padding="7" ResizeOrderIndex="6" dc:Ribbon.KeyTip="DOCK">
+
+                                <dc:ButtonDropDown Name="addimg" dc:Ribbon.KeyTip="D" Height="65" Style="{DynamicResource AppMenuCommandButton}" 
+                                                   Command="cw:CrypWinCommands.AddImage" ImagePosition="Top" ToolTip="{Loc RBTooltip_AddImg}" DockPanel.Dock="left">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/addimg-big.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/addimg-big.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+
+                                <dc:ButtonDropDown Name="addtxt" dc:Ribbon.KeyTip="D" Height="65" Style="{DynamicResource AppMenuCommandButton}" Command="cw:CrypWinCommands.AddText" ImagePosition="Top" ToolTip="{Loc RBTooltip_AddText}">
+                                    <dc:ButtonDropDown.Image>
+                                        <Image Source="images/addtxt-big.png" Height="32" Width="32"/>
+                                    </dc:ButtonDropDown.Image>
+                                    <dc:ButtonDropDown.ImageSmall>
+                                        <Image Source="images/addtxt-big.png" Height="16" Width="16"/>
+                                    </dc:ButtonDropDown.ImageSmall>
+                                </dc:ButtonDropDown>
+                            </dc:RibbonBar>
+                            <Grid x:Name="ManagementRootEdit" HorizontalAlignment="Right">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform X="8"></TranslateTransform>
+                                </Grid.RenderTransform>
+                            </Grid>
+                        </DockPanel>
+                    </dc:RibbonBarPanel>
+
+                </dc:RibbonTab>
+
+                <!-- RibbonTab CrypTutorials -->
+                <dc:RibbonTab Header="{Loc CrypTutorial}" Name="ribbonTabView" dc:Ribbon.KeyTip="T" Visibility="Collapsed" >
+                    <dc:RibbonBarPanel Height="89" >
+                        <DockPanel LastChildFill="True">
+                            <DockPanel.Width>
+                                <Binding ElementName="AppRibbon" Path="ActualWidth" Mode="OneWay" Converter="{StaticResource PanelWidthConverter}"/>
+                            </DockPanel.Width>
+                            <dc:RibbonBar Name="ribbonBarTutorial" Header="{Loc RBHeader_CrypTutorial}" ToolTip="{Loc RBTooltip_CrypTutorial}" Padding="7" ResizeOrderIndex="6" dc:Ribbon.KeyTip="CT" DockPanel.Dock="Left">
+                                <!-- filled automatically by InitCrypTutorials(...) -->
+                            </dc:RibbonBar>
+                            <Grid x:Name="ManagementRootTutorials" HorizontalAlignment="Right">
+                                <Grid.RenderTransform>
+                                    <TranslateTransform X="8"></TranslateTransform>
+                                </Grid.RenderTransform>
+                            </Grid>
+                        </DockPanel>
+                    </dc:RibbonBarPanel>
+                </dc:RibbonTab>
+
+                <dc:ButtonDropDown Click="ButtonAbout_Click" ImagePosition="Left" Header="{Loc About}" HorizontalAlignment="Left" Name="buttonAbout" dc:RibbonTabPanel.PanelAlignment="Right">
+                    <dc:ButtonDropDown.Image>
+                        <Image Source="images/about.png"/>
+                    </dc:ButtonDropDown.Image>
+                    <dc:ButtonDropDown Click="buttonSysInfo_Click" ImagePosition="Right" Header="{Loc System_Infos_}" HorizontalAlignment="Left" Name="buttonSysInfo" dc:RibbonTabPanel.PanelAlignment="Right"/>
+                    <dc:ButtonDropDown Click="buttonContactUs_Click" ImagePosition="Right" Header="{Loc Contact_Us_}" HorizontalAlignment="Left" dc:RibbonTabPanel.PanelAlignment="Right"/>
+                    <dc:ButtonDropDown Click="buttonWebsite_Click" ImagePosition="Right" Header="{Loc Visit_Homepage}" HorizontalAlignment="Left" dc:RibbonTabPanel.PanelAlignment="Right"/>
+                    <dc:ButtonDropDown Click="buttonLicenses_Click"  ImagePosition="Right" Header="{Loc View_Licenses}" HorizontalAlignment="Left" dc:RibbonTabPanel.PanelAlignment="Right"/>
+                </dc:ButtonDropDown>
+            </dc:Ribbon>
+
+            <!--StatusBar-->
+
+            <dd:DockSite Name="CrypToolDock" Margin="0,4,0,0" LicenseKey="{proprietary:LicenseKey}">
+                <dd:DockSite.SplitPanels>
+
+                    <dd:SplitPanel Name="splitPanelNaviPaneAlgorithms" dd:DockSite.Dock="Left" dd:DockSite.DockSize="195">
+                        <dd:DockWindowGroup x:Name="dockWindowGroupAlgorithms">
+                            <dd:DockWindow Name="dockWindowNaviPaneAlgorithms" Header="{Loc Components}" IsAutoHide="False" CanAutoHide="False" AutoHideOpen="False" 
+                           CanClose="False" CanDockAsDocument="False" Closed="dockWindowNaviPaneAlgorithms_Closed">
+
+                                <Grid Margin="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Column="0" Grid.Row="0" VerticalAlignment="Top" Margin="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="26"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox Name="PluginSearchTextBox" Grid.Column="0" Grid.Row="0" TextChanged="PluginSearchInputChanged" 
+                             KeyDown="PluginSearchTextBox_KeyDown" VerticalAlignment="Top" HorizontalAlignment="Stretch" ToolTip="{Loc Search}" Focusable="True">
+                                            <TextBox.Style>
+                                                <Style TargetType="TextBox">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="Text" Value="">
+                                                            <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                                                        </Trigger>
+                                                        <Trigger Property="Text" Value=" ">
+                                                            <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                                                <Border 
+                                                                      Name="Border"
+                                                                      CornerRadius="2" 
+                                                                      Padding="2"
+                                                                      Background="White"
+                                                                      BorderBrush="#CCC"
+                                                                      BorderThickness="1" >
+                                                                    <Border Background="{TemplateBinding Background}">
+                                                                        <DockPanel LastChildFill="True">
+                                                                            <Image Source="images/search.png" DockPanel.Dock="Left"></Image>
+                                                                            <ScrollViewer Margin="0" x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                                                                        </DockPanel>
+                                                                    </Border>
+
+
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsEnabled" Value="False">
+                                                                        <Setter TargetName="Border" Property="Background" Value="#CCC"/>
+                                                                        <Setter TargetName="Border" Property="BorderBrush" Value="#CCC"/>
+                                                                        <Setter Property="Foreground" Value="#CCC"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                    </Grid>
+
+                                    <!--NavigationPane-->
+                                    <dc:NavigationPane Grid.Column="0" Grid.Row="1" Name="naviPane" DockPanel.Dock="Left" LargeItemsCount="8"
+                            LicenseKey="{proprietary:LicenseKey}" IsExpanded="True" SnapsToDevicePixels="False" 
+                            DisplayMemberPath="Name" SelectedValuePath="Name" Margin="0,0,0,0"
+                            Visibility="Visible" Collapsed="naviPane_Collapsed">
+
+                                        <dc:NavigationPane.Resources>
+                                            <Style TargetType="ListBox">
+                                                <EventSetter Event="PreviewMouseWheel" Handler="navListBox_PreviewMouseWheel"/>
+                                            </Style>
+                                        </dc:NavigationPane.Resources>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemClassic" Header="{Loc Classic_Ciphers}" 
+                       Title="{Loc Classic_Ciphers}" Height="35" IsSelected="True"
+                       ImageSource="images/01-Classic-28x26.png" ImageSmallSource="images/01-Classic-28x26.png"
+                       MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel CanVerticallyScroll="True">
+                                                    <ListBox Name="navListBoxClassic" BorderThickness="0" Margin="0"/>
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemModernCiphers" Header="{Loc Modern_Ciphers_}" 
+                       Title="{Loc Modern_Ciphers_}" Height="35" IsSelected="True"
+                       ImageSource="images/02-Modern-28x26.png" ImageSmallSource="images/02-Modern-28x26.png"
+                       MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc Symmetric}" Name="expanderModernCiphersSymmetric">
+                                                        <ListBox Name="navListBoxModernCiphersSymmetric" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc Asymmetric}" Name="expanderModernCiphersAsymmetric">
+                                                        <ListBox Name="navListBoxModernCiphersAsymmetric" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemSteganography" Header="{Loc Steganography}" 
+                        Title="{Loc Steganography}" Height="35" IsSelected="True"
+                        ImageSource="images/03-Stego-28x26.png" ImageSmallSource="images/03-Stego-28x26.png"
+                        MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel CanVerticallyScroll="True">
+                                                    <ListBox Name="navListBoxSteganography" BorderThickness="0" Margin="0"/>
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemHash" Header="{Loc Hash_Functions_}" 
+                       Title="{Loc Hash_Functions_}" Height="35"
+                       ImageSource="images/04-Hash-28x26.png" ImageSmallSource="images/04-Hash-28x26.png"
+                       MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel CanVerticallyScroll="True">
+                                                    <ListBox Name="navListBoxHashFunctions" BorderThickness="0" Margin="0"/>
+                                                </StackPanel>
+                                            </ScrollViewer>
+
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemCryptanalysis" Header="{Loc Cryptanalysis}" 
+                       Title="{Loc Cryptanalysis}" Height="35"
+                       ImageSource="images/05-Analysis-28x26.png" ImageSmallSource="images/05-Analysis-28x26.png"
+                       MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                                IsExpanded="True" Header="{Loc Specific}" Name="expanderCryptanalysisSpecific">
+                                                        <ListBox Name="navListBoxCryptanalysisSpecific" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                                IsExpanded="True" Header="{Loc Generic}" Name="expanderCryptanalysisGeneric">
+                                                        <ListBox Name="navListBoxCryptanalysisGeneric" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemProtocols" Header="{Loc Protocols}" 
+                        Title="{Loc Protocols}" Height="35" IsSelected="True"
+                        ImageSource="images/06-Protocols-28x26.png" ImageSmallSource="images/06-Protocols-28x26.png"
+                        MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel CanVerticallyScroll="True">
+                                                    <ListBox Name="navListBoxProtocols" BorderThickness="0" Margin="0"/>
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemTools" Header="{Loc Tools}" 
+                       Title="{Loc Tools}" Height="35"
+                       ImageSource="images/07-Tools-28x26.png" ImageSmallSource="images/07-Tools-28x26.png"
+                       MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <!--Style="{DynamicResource {ComponentResourceKey ResourceId=GalleryMenuScrollViewer, TypeInTargetAssembly=dc:Gallery}}"-->
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                                <StackPanel>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc Boolean}" Name="expanderToolsBoolean">
+                                                        <ListBox Name="navListBoxToolsBoolean" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc Dataflow}" Name="expanderToolsDataflow">
+                                                        <ListBox Name="navListBoxToolsDataflow" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc DataInputOutput}" Name="expanderToolsData">
+                                                        <ListBox Name="navListBoxToolsData" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc RandomNumbers}" Name="expanderToolsRandomNumbers">
+                                                        <ListBox Name="navListBoxToolsRandomNumbers" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc Codes}" Name="expanderToolsCodes">
+                                                        <ListBox Name="navListBoxToolsCodes" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                    <Expander Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=dc:NavigationPane, ResourceId=Expander}}" 
+                        IsExpanded="True" Header="{Loc Misc}" Name="expanderToolsMisc">
+                                                        <ListBox Name="navListBoxToolsMisc" BorderThickness="0" Margin="0"/>
+                                                    </Expander>
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemDECRYPTProject" Header="{Loc DECRYPTProject}" 
+                                            ImageSmallSource="images/decrypt-logo.png"
+                                            ImageSource="images/decrypt-logo.png"
+                                            Title="{Loc DECRYPTProject}" Height="35" IsSelected="True"                                            
+                                            MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                                <StackPanel CanVerticallyScroll="True">
+                                                    <ListBox Name="navListBoxDECRYPTProject" BorderThickness="0" Margin="0"/>
+                                                </StackPanel>
+                                            </ScrollViewer>
+                                        </dc:PaneItem>
+
+                                        <dc:PaneItem Visibility="Collapsed" Name="navPaneItemSearch" Header="{Loc Search}" 
+                    Title="{Loc Search}" Height="35" IsSelected="True"
+                    ImageSource="images/08-Search-28x26.png" ImageSmallSource="images/08-Search-28x26.png"
+                    MouseLeftButtonDown="navPaneItem_MouseLeftButtonDown">
+                                            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="navListBoxSearch" BorderThickness="0" Margin="0"/>
+                                        </dc:PaneItem>
+
+                                    </dc:NavigationPane>
+                                </Grid>
+
+                            </dd:DockWindow>
+                        </dd:DockWindowGroup>
+                    </dd:SplitPanel>
+
+                    <!--Component Parameters -->
+                    <dd:SplitPanel Name="splitPanelAlgorithmSettings" dd:DockSite.Dock="Right" dd:DockSite.DockSize="195">
+                        <!--<dd:SplitPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource ResourceKey=BooleanToVisibilityConverter}" ConverterParameter="Setting">
+                                <Binding RelativeSource="{RelativeSource AncestorType=dc:RibbonWindow, Mode=FindAncestor}" Path="VisibilityStart"></Binding>
+                                <Binding ElementName="SettingBTN" Path="IsChecked"></Binding>
+                                <Binding ElementName="dockWindowAlgorithmSettings"></Binding>
+                                <Binding ElementName="splitPanelAlgorithmSettings"></Binding>
+                            </MultiBinding>
+                        </dd:SplitPanel.Visibility>-->
+
+                        <dd:DockWindowGroup x:Name="dockWindowGroupAlgorithmSettings">
+                            <dd:DockWindow Name="dockWindowAlgorithmSettings" Header="{Loc Parameters}" CanAutoHide="False" ImageSource="images/MyFiles16.png" IsAutoHide="False" AutoHideOpen="False" 
+                           CanClose="True" CanDockAsDocument="False" Closed="dockWindowAlgorithmSettings_Closed">
+                            </dd:DockWindow>
+                        </dd:DockWindowGroup>
+                    </dd:SplitPanel>
+
+                    <!--LogMessages-->
+                    <dd:SplitPanel Name="splitPanelLogMessages" dd:DockSite.Dock="Bottom" dd:DockSite.DockSize="250" >
+                        <!--<dd:SplitPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource ResourceKey=BooleanToVisibilityConverter}" ConverterParameter="Setting">
+                                <Binding RelativeSource="{RelativeSource AncestorType=dc:RibbonWindow, Mode=FindAncestor}" Path="VisibilityStart"></Binding>
+                                <Binding ElementName="SettingBTN" Path="IsChecked"></Binding>
+                                <Binding ElementName="dockWindowLogMessages"></Binding>
+                                <Binding ElementName="splitPanelLogMessages"></Binding>
+                            </MultiBinding>
+                        </dd:SplitPanel.Visibility>-->
+                        <dd:DockWindowGroup x:Name="dockWindowGroupLogMessages">
+                            <dd:DockWindow Name="dockWindowLogMessages" Header="{Loc _0_Messages_}" IsAutoHide="False" CanAutoHide="False" AutoHideOpen="False" 
+                           CanClose="True" CanDockAsDocument="False" Closed="dockWindowLogMessages_Closed">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="26" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <ToolBar Grid.Row="0" Height="26" Name="toolBarListViewFilter" VerticalAlignment="Top" Background="Transparent">
+                                        <ToggleButton IsChecked="True" Height="20" HorizontalAlignment="Left" Name="buttonError" VerticalAlignment="Center" ClickMode="Press" Click="buttonError_Click" Padding="0" ToolTip="{Loc Hide_Errors}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="16" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="images/Error.png" Height="16" Width="16" Grid.Column="0" />
+                                                <TextBlock Name="textBlockErrosCount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4, 0, 4, 0">0</TextBlock>
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Loc Errors}"></TextBlock>
+                                            </Grid>
+                                        </ToggleButton>
+                                        <Separator/>
+                                        <ToggleButton IsChecked="True" Height="20" HorizontalAlignment="Left" Name="buttonWarning" VerticalAlignment="Center" ClickMode="Press" Click="buttonWarning_Click" Padding="0" ToolTip="{Loc Hide_Warnings}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="16" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="images/Warning.png" Height="16" Width="16" Grid.Column="0" />
+                                                <TextBlock Name="textBlockWarningsCount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4, 0, 4, 0">0</TextBlock>
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Loc Warnings}"></TextBlock>
+                                            </Grid>
+                                        </ToggleButton>
+                                        <Separator/>
+                                        <ToggleButton IsChecked="True" Height="20" HorizontalAlignment="Left" Name="buttonInfo" VerticalAlignment="Center" ClickMode="Press" Click="buttonInfo_Click" Padding="0" ToolTip="{Loc Hide_Infos}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="16" />
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="images/Info.png" Height="16" Width="16" Grid.Column="0" />
+                                                <TextBlock Name="textBlockInfosCount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4, 0, 4, 0">0</TextBlock>
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Loc Infos}"></TextBlock>
+                                            </Grid>
+                                        </ToggleButton>
+                                        <Separator/>
+                                        <ToggleButton IsChecked="False" Height="20" HorizontalAlignment="Left" Name="buttonDebug" VerticalAlignment="Center" ClickMode="Press" Click="buttonDebug_Click" Padding="0" ToolTip="{Loc Show_Debugs}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="16" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="images/Debug.png" Height="16" Width="16" Grid.Column="0" />
+                                                <TextBlock Name="textBlockDebugsCount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4, 0, 4, 0">0</TextBlock>
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Loc Debugs}"></TextBlock>
+                                            </Grid>
+                                        </ToggleButton>
+                                        <Separator/>
+                                        <ToggleButton IsChecked="False" Height="20" HorizontalAlignment="Left" Name="buttonBalloon" VerticalAlignment="Center" ClickMode="Press" Click="buttonBalloon_Click" Padding="0" ToolTip="{Loc Show_Balloons}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="16" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="images/balloon.png" Height="16" Width="16" Grid.Column="0" />
+                                                <TextBlock Name="textBlockBalloonsCount" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4, 0, 4, 0">0</TextBlock>
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Loc Balloons}"></TextBlock>
+                                            </Grid>
+                                        </ToggleButton>
+                                        <Separator/>
+                                        <Button Height="20" Click="ButtonDeleteMessages_Click" ToolTip="{Loc Clear_LogWindow_}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="16" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="images/Exit.png" Height="16" Width="16" Grid.Column="0" />
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,5,0" Text="{Loc Clear_LogWindow_}"></TextBlock>
+                                            </Grid>
+                                        </Button>
+                                        <Separator/>
+                                        <Button Height="20" Click="ButtonExportToHTML_Click" ToolTip="{Loc Export_to_HTML_}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="16" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image Source="images/exportToHTML.png" Height="16" Width="16" Grid.Column="0" />
+                                                <TextBlock Grid.Column="2" VerticalAlignment="Center" Margin="5,0,5,0" Text="{Loc Export_to_HTML_}"></TextBlock>
+                                            </Grid>
+                                        </Button>
+                                    </ToolBar>
+                                    <ListView Name="listViewLogList" Grid.Row="1"
+                          ItemContainerStyleSelector="{DynamicResource ListViewItemStyleSelector}"
+                          Style="{StaticResource ListViewStyle}">
+                                        <ListView.ContextMenu>
+                                            <ContextMenu>
+                                                <MenuItem IsEnabled="True" Header="{Loc Copy}" InputGestureText="Ctrl + C" Click="MenuItem_Click" />
+                                            </ContextMenu>
+                                        </ListView.ContextMenu>
+                                        <ListView.View>
+                                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle1}" AllowsColumnReorder="True">
+                                                <GridViewColumn Header="{Loc Nr}" Width="40" CellTemplate="{StaticResource NrTemplate}" />
+                                                <GridViewColumn Header="{Loc LogLevel}" Width="53" CellTemplate="{StaticResource ImageTemplate}" />
+                                                <GridViewColumn Header="{Loc Time}" Width="81" DisplayMemberBinding="{Binding Path=Time}"/>
+                                                <GridViewColumn Header="{Loc Plugin}" Width="100" DisplayMemberBinding="{Binding Path=Plugin}"/>
+                                                <GridViewColumn Header="{Loc Title}" Width="130" DisplayMemberBinding="{Binding Path=Title}"/>
+                                                <GridViewColumn Header="{Loc Message}" Width="800" CellTemplate="{StaticResource MessageTemplate}" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
+                            </dd:DockWindow>
+                        </dd:DockWindowGroup>
+                    </dd:SplitPanel>
+
+                </dd:DockSite.SplitPanels>
+
+                <!--Main Content-->
+                <dd:SplitPanel Name="MainSplitPanel" Orientation="Horizontal">
+                    <TabControl x:Name="MainTab" Style="{StaticResource ResourceKey=TabControlStyle}"  SelectionChanged="TabControl_SelectionChanged" Background="#FFA1C3E5" dragdrop:DragDropHelper.IsDragSource="True"
+                                dragdrop:DragDropHelper.IsDropTarget="true" dragdrop:DragDropHelper.DragDropTemplate="{StaticResource ResourceKey=Local_TabItemDragTemplate}">
+                    </TabControl>
+                </dd:SplitPanel>
+            </dd:DockSite>
+        </DockPanel>
+
+    </DockPanel>
+</dc:RibbonWindow>

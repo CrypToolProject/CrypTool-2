@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<directory order="9">
+  <name lang="en">Tools</name>
+  <name lang="zh">工具类</name>
+  <name lang="ru">инструменты</name>
+  <name lang="de">Werkzeuge</name>
+  <summary lang="en">The folder "Tools" contains templates that demonstrate the use of tools and auxiliary components.</summary>
+  <summary lang="zh">文件夹“工具”包含演示工具和辅助组件用法的模板。</summary>
+  <summary lang="ru">Папка «Инструменты» содержит шаблоны, демонстрирующие использование инструментов и вспомогательных компонентов.</summary>
+  <summary lang="de">Das Verzeichnis "Werkzeuge" enthält Vorlagen, die die Verwendung von Werkzeugen und Hilfskomponenten demonstrieren.</summary>
+  <icon file="dir.png" />
+</directory>

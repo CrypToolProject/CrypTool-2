@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AttackModeCaption" xml:space="preserve">
+    <value>攻击类型</value>
+  </data>
+  <data name="AttackModeTooltip" xml:space="preserve">
+    <value>指定攻击类型。</value>
+  </data>
+  <data name="BinaryString" xml:space="preserve">
+    <value>（二进制）：0b</value>
+  </data>
+  <data name="BinaryStringError" xml:space="preserve">
+    <value>使用前缀“ 0b”时，请确保字符串仅包含位值（0和1）。</value>
+  </data>
+  <data name="BitNumberParseError" xml:space="preserve">
+    <value>无法解析{0}变量{1}：{2}的位数。</value>
+  </data>
+  <data name="CallingCbmcProcessString" xml:space="preserve">
+    <value>呼叫CBMC程序...</value>
+  </data>
+  <data name="CallingSatSolverString" xml:space="preserve">
+    <value>调用SAT解算器过程...</value>
+  </data>
+  <data name="CallingSatSolverWithParametersString" xml:space="preserve">
+    <value>使用参数{1}在{0}处调用SAT求解器。</value>
+  </data>
+  <data name="CbmcOutputStreamCaption" xml:space="preserve">
+    <value>CBMC输出流</value>
+  </data>
+  <data name="CbmcOutputStreamTooltip" xml:space="preserve">
+    <value>重定向CBMC进程的输出。</value>
+  </data>
+  <data name="CbmcProcessError" xml:space="preserve">
+    <value>CBMC进程返回了错误。</value>
+  </data>
+  <data name="CbmcProcessKillException" xml:space="preserve">
+    <value>终止CBMC进程引发异常：{0} {1}。</value>
+  </data>
+  <data name="CbmcProcessKillSuccess" xml:space="preserve">
+    <value>成功终止了CBMC进程。</value>
+  </data>
+  <data name="CbmcProcessReturnedSuccessfully" xml:space="preserve">
+    <value>{0}秒后，CBMC进程成功返回。</value>
+  </data>
+  <data name="CbmcProcessReturnedWithExitcode" xml:space="preserve">
+    <value>CBMC进程以退出代码{0}返回。</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>密文</value>
+  </data>
+  <data name="CiphertextEncodingError" xml:space="preserve">
+    <value>错误返回的密文位的编码。</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>输入密文。</value>
+  </data>
+  <data name="ClearFileNameCaption" xml:space="preserve">
+    <value>清除档案名称</value>
+  </data>
+  <data name="ClearFileNameTooltip" xml:space="preserve">
+    <value>忘记输出文件名</value>
+  </data>
+  <data name="CnfFileCaption" xml:space="preserve">
+    <value>将CNF保存在文件中</value>
+  </data>
+  <data name="CnfFileNotFoundError" xml:space="preserve">
+    <value>在{0}找不到CNF文件。</value>
+  </data>
+  <data name="CnfFileTooltip" xml:space="preserve">
+    <value>选择文件名以保存生成的CNF。</value>
+  </data>
+  <data name="CodefileNotFoundString" xml:space="preserve">
+    <value>在{0}处找不到C代码文件。</value>
+  </data>
+  <data name="CopyingCnfString" xml:space="preserve">
+    <value>正在将CNF复制到{0}…</value>
+  </data>
+  <data name="EncodingInputBitsString" xml:space="preserve">
+    <value>在CNF中编码输入位…</value>
+  </data>
+  <data name="EncodingOutputBitsString" xml:space="preserve">
+    <value>在CNF中编码输出位…</value>
+  </data>
+  <data name="FailedString" xml:space="preserve">
+    <value>失败了</value>
+  </data>
+  <data name="FileBigWarning" xml:space="preserve">
+    <value>文件{0}非常大：{1}个字节。</value>
+  </data>
+  <data name="FileInputCaption" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="FileInputTooltip" xml:space="preserve">
+    <value>选择输入文件。</value>
+  </data>
+  <data name="FixBitsCaption" xml:space="preserve">
+    <value>固定输入位</value>
+  </data>
+  <data name="FixBitsOptions" xml:space="preserve">
+    <value>固定位选项</value>
+  </data>
+  <data name="FixBitsTooltip" xml:space="preserve">
+    <value>检查修复某些位的选项。</value>
+  </data>
+  <data name="FixedBitsCaption" xml:space="preserve">
+    <value>固定位</value>
+  </data>
+  <data name="FixedBitsEncoding" xml:space="preserve">
+    <value>在CNF中编码固定位...</value>
+  </data>
+  <data name="FixedBitsEncodingError" xml:space="preserve">
+    <value>固定位的编码返回错误。</value>
+  </data>
+  <data name="FixedBitsEncodingHint" xml:space="preserve">
+    <value>仅使用字符“ 0”，“ 1”和“ *”来固定位，不允许使用字符{0}。</value>
+  </data>
+  <data name="FixedBitsEncodingStrangeError" xml:space="preserve">
+    <value>函数encodeFixedBitsInCnf中出了点问题（永远不要到达此代码）。</value>
+  </data>
+  <data name="FixedBitsError" xml:space="preserve">
+    <value>检索固定位时出错。</value>
+  </data>
+  <data name="FixedBitsSizeError" xml:space="preserve">
+    <value>固定位数应小于或等于输入位数{0}固定位数：{1}位数{0}输入位数：{2}位数{0}固定位数将被截断为输入的大小位从最低有效位到最高有效位。</value>
+  </data>
+  <data name="FixedBitsTooltip" xml:space="preserve">
+    <value>固定任意数量的输入位。</value>
+  </data>
+  <data name="FixedBitsWarning" xml:space="preserve">
+    <value>选择了固定位选项，但没有固定位。</value>
+  </data>
+  <data name="HashEncodingError" xml:space="preserve">
+    <value>哈希编码返回错误。</value>
+  </data>
+  <data name="HexadecimalString" xml:space="preserve">
+    <value>（十六进制）：0x</value>
+  </data>
+  <data name="HexStringError" xml:space="preserve">
+    <value>使用前缀“ 0x”时，请确保该字符串是偶数个常规十六进制字符。</value>
+  </data>
+  <data name="InputFoundString" xml:space="preserve">
+    <value>找到输入！</value>
+  </data>
+  <data name="InputHashValueCaption" xml:space="preserve">
+    <value>哈希值</value>
+  </data>
+  <data name="InputHashValueTooltip" xml:space="preserve">
+    <value>输入原始映像或第二次原始映像攻击的哈希值（十六进制为前缀“ 0x”，二进制为“ 0b”）。</value>
+  </data>
+  <data name="InputMappingError" xml:space="preserve">
+    <value>检索输入映射时出错。</value>
+  </data>
+  <data name="InputMessageCaption" xml:space="preserve">
+    <value>第一张原像</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>为第二次原图像攻击提供一个第一原图像（十六进制的前缀“ 0x”，二进制的前缀“ 0b”）。</value>
+  </data>
+  <data name="InputSelectionCaption" xml:space="preserve">
+    <value>输入选择</value>
+  </data>
+  <data name="InputSelectionFileInput" xml:space="preserve">
+    <value>档案输入</value>
+  </data>
+  <data name="InputSelectionTextInput" xml:space="preserve">
+    <value>文字输入</value>
+  </data>
+  <data name="InputSelectionTooltip" xml:space="preserve">
+    <value>选择如何将ANSI-C代码传递到SAT Attack组件。</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>输入流</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>将输入流连接到包含密码功能的ANSI-C代码的文本输入组件。</value>
+  </data>
+  <data name="InputVariablesSizeFailureString" xml:space="preserve">
+    <value>无法获取输入变量的大小。</value>
+  </data>
+  <data name="KeyRecoveryAttack" xml:space="preserve">
+    <value>密钥恢复攻击</value>
+  </data>
+  <data name="KeyRecoveryAttackOptions" xml:space="preserve">
+    <value>密钥恢复攻击选项</value>
+  </data>
+  <data name="LiteralParseError" xml:space="preserve">
+    <value>无法解析{0}变量{1}：{2}的文字。</value>
+  </data>
+  <data name="LiteralParseError2" xml:space="preserve">
+    <value>解析文字{0}失败。</value>
+  </data>
+  <data name="MainFunctionCaption" xml:space="preserve">
+    <value>主要功能名称</value>
+  </data>
+  <data name="MainFunctionTooltip" xml:space="preserve">
+    <value>如果不是“ main（）”，则指定主函数的名称。</value>
+  </data>
+  <data name="MappingFileNotFoundString" xml:space="preserve">
+    <value>在{0}找不到映射文件。</value>
+  </data>
+  <data name="NotAHexCharError" xml:space="preserve">
+    <value>字符{0}不是有效的十六进制字符。</value>
+  </data>
+  <data name="OnlyCnfOutputCaption" xml:space="preserve">
+    <value>仅CNF输出</value>
+  </data>
+  <data name="OnlyCnfOutputTooltip" xml:space="preserve">
+    <value>仅将ANSI-C代码转换为CNF并对选定的攻击进行编码；不要用SAT求解器求解。</value>
+  </data>
+  <data name="OutputBitsError" xml:space="preserve">
+    <value>检索输出位时出错。</value>
+  </data>
+  <data name="OutputMappingError" xml:space="preserve">
+    <value>检索输出映射时出错。</value>
+  </data>
+  <data name="OutputSizeError" xml:space="preserve">
+    <value>确保指定的输出具有正确的长度{0}哈希值/密文：{1}位{0}输出：{2}位。</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>输出流</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>如果攻击成功，则写入状态信息和攻击结果。</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>纯文本</value>
+  </data>
+  <data name="PlaintextEncodingError" xml:space="preserve">
+    <value>错误返回的明文位的编码。</value>
+  </data>
+  <data name="PlaintextPrefixInfoString" xml:space="preserve">
+    <value>确保提供的明文具有前缀“ 0x”或“ 0b”。</value>
+  </data>
+  <data name="PlaintextSizeError" xml:space="preserve">
+    <value>确保指定的明文具有正确的长度（输入位数必须大于明文位数）{0}明文：{1}位{0}输入：{2}位。</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>输入明文。</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>SAT攻击</value>
+  </data>
+  <data name="PluginDescription" xml:space="preserve">
+    <value>基于SAT的密码分析工具</value>
+  </data>
+  <data name="PrefixError" xml:space="preserve">
+    <value>十六进制值使用前缀“ 0x”，二进制值使用前缀“ 0b”。</value>
+  </data>
+  <data name="PreimageAttack" xml:space="preserve">
+    <value>图像前攻击</value>
+  </data>
+  <data name="PreimageAttackOptions" xml:space="preserve">
+    <value>映像前攻击选项</value>
+  </data>
+  <data name="SatOutputProcessError" xml:space="preserve">
+    <value>SAT求解器输出的处理返回错误。</value>
+  </data>
+  <data name="SatProcessKillException" xml:space="preserve">
+    <value>终止SAT解算器进程引发异常：{0} {1}。</value>
+  </data>
+  <data name="SatProcessKillSuccess" xml:space="preserve">
+    <value>成功终止了SAT求解器过程。</value>
+  </data>
+  <data name="SatProcessReturnedSuccessful" xml:space="preserve">
+    <value>{0}秒后，SAT解算器过程成功返回。</value>
+  </data>
+  <data name="SatProcessReturnedUnsat" xml:space="preserve">
+    <value>SAT求解器进程在{0}秒后返回了...但是找不到解决方案。</value>
+  </data>
+  <data name="SatSolverOutputFileError" xml:space="preserve">
+    <value>在{0}找不到SAT求解器输出文件。</value>
+  </data>
+  <data name="SatSolverOutputFirstLineError" xml:space="preserve">
+    <value>SAT求解器输出文件{0}中的第一行不是“ SAT”。</value>
+  </data>
+  <data name="SatSolverOutputStreamCaption" xml:space="preserve">
+    <value>SAT求解器</value>
+  </data>
+  <data name="SatSolverOutputStreamTooltip" xml:space="preserve">
+    <value>重定向SAT求解器过程的输出。</value>
+  </data>
+  <data name="SatSolverReturnedWithExitcode" xml:space="preserve">
+    <value>SAT解算器进程以退出代码{0}返回。</value>
+  </data>
+  <data name="SecondPreimageAttack" xml:space="preserve">
+    <value>第二次原像攻击</value>
+  </data>
+  <data name="SecondPreimageAttackOptions" xml:space="preserve">
+    <value>第二次原像攻击选项</value>
+  </data>
+  <data name="SecondPreimageEncodingError" xml:space="preserve">
+    <value>返回的第二原像位的编码有错误。</value>
+  </data>
+  <data name="SecondPreimageEncodingString" xml:space="preserve">
+    <value>在CNF中编码第一个原像…</value>
+  </data>
+  <data name="SecondPreimageRetrievingError" xml:space="preserve">
+    <value>检索第二原像位时出错。</value>
+  </data>
+  <data name="SecondPreimageSizeError" xml:space="preserve">
+    <value>确保指定的第二原像具有正确的长度{0}第二原像：{1}位{0}输入：{2}位。</value>
+  </data>
+  <data name="SkippingSatSolverString" xml:space="preserve">
+    <value>跳过SAT求解器过程…</value>
+  </data>
+  <data name="SuccessfulString" xml:space="preserve">
+    <value>成功的</value>
+  </data>
+  <data name="UnassignedVariableWarning" xml:space="preserve">
+    <value>变量{0} _ {1}：{2}未出现在{3}映射中。 ANSI-C代码中是否使用了变量{0} _ {1}？默认情况下，它将被分配为“ false”。</value>
+  </data>
+  <data name="VariableDefinitionsError" xml:space="preserve">
+    <value>确保{0}变量定义以{1} _0开头，并且索引稳定增加，并且每个变量都在代码中实际使用。</value>
+  </data>
+  <data name="VariableIndexParseError" xml:space="preserve">
+    <value>无法解析{0}变量{1}：{2}的变量索引。</value>
+  </data>
+  <data name="VariableNumberParsingFailedString" xml:space="preserve">
+    <value>无法读取{0}个变量。</value>
+  </data>
+  <data name="VariableSizeParsingFailedString" xml:space="preserve">
+    <value>无法读取{0}变量的大小。</value>
+  </data>
+  <data name="InputFoundStringKeyRecovery" xml:space="preserve">
+    <value>密钥恢复攻击：找到了一个适合提供的明文和密文的密钥：</value>
+  </data>
+  <data name="InputFoundStringPreimage" xml:space="preserve">
+    <value>映像前攻击：找到一个适合提供的哈希值的输入：</value>
+  </data>
+  <data name="InputFoundStringSecondPreimage" xml:space="preserve">
+    <value>第二次原图像攻击：找到一个适合提供的哈希值且与提供的第一个原图像不同的输入：</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>s。“” fff</value>
+  </data>
+  <data name="CbmcExeNotFound" xml:space="preserve">
+    <value>在{0}处找不到cbmc可执行文件。</value>
+  </data>
+  <data name="satSolverExeNotFound" xml:space="preserve">
+    <value>在{0}找不到SAT解算器可执行文件。</value>
+  </data>
+</root>

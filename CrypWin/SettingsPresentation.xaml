@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="CrypTool.CrypWin.SettingsPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <BitmapImage x:Key="ctLogo" UriSource="images/ctLogo.png"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="225" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TreeView HorizontalAlignment="Stretch" Name="settingsTree" VerticalAlignment="Stretch" Background="#FFF0F0F0"/>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Name="gridSplitter" VerticalAlignment="Stretch" />
+        <ContentControl Grid.Column="2" HorizontalAlignment="Stretch" Name="settingsTab" VerticalAlignment="Stretch" />
+    </Grid>
+</UserControl>

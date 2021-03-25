@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="CrypTool.FrequencyTest.FrequencyTestPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CrypTool.FrequencyTest"        
+    Background="Transparent"
+    SnapsToDevicePixels="True" 
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    Height="Auto"
+    Width="Auto" 
+    x:Name="ChartControl" >
+    <UserControl.Resources>
+        <local:DataSource x:Key="source"/>
+        <DataTemplate x:Key="template" >
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Visibility="{Binding Path=Visibility}">
+                <Rectangle Width="3"/>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Path=BarHeadValue}" Width="35"/>
+
+                    <Rectangle Height="3" Width="35"/>
+
+                    <Rectangle Height="{Binding Path=Height}" Width="35" StrokeThickness="1" Stroke="Beige" RadiusX="5" RadiusY="5" ToolTip="{Binding Path=Caption}" >
+                        <Rectangle.BitmapEffect>
+                            <DropShadowBitmapEffect />
+                        </Rectangle.BitmapEffect>
+
+                        <Rectangle.Fill>
+                            <RadialGradientBrush >
+                                <GradientStop Color="{Binding Path=ColorA}" Offset="0" />
+                                <GradientStop Color="{Binding Path=ColorB}" Offset="1" />
+                            </RadialGradientBrush>
+                        </Rectangle.Fill>
+
+                    </Rectangle>
+
+                    <Rectangle Height="5" Width="35"/>
+
+                    <TextBlock TextAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Caption}" Width="35"/>
+
+                </StackPanel>
+            </StackPanel>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="panelTemplate">
+            <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
+
+    <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+        <Grid x:Name="chart" Background="LightYellow" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Grid.LayoutTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1"/>
+            </Grid.LayoutTransform>
+
+            <TextBlock x:Name="chartHeadline" VerticalAlignment="Center" TextAlignment="Center" Grid.Row="0" Grid.Column="0" FontSize="20" Foreground="DarkBlue"  FontFamily="Academy" OpacityMask="Turquoise" Text="{Loc No_data_available_yet}" ></TextBlock>
+
+            <ItemsControl x:Name="chartBars" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"            
+             ItemsSource="{Binding Source={StaticResource source},Path=ValueCollection}"
+             ItemTemplate="{StaticResource template}" ItemsPanel="{StaticResource panelTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
+    

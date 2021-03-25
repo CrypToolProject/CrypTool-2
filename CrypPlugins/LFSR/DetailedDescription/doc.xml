@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The LFSR component implements the functionality of a linear feedback shift register. Given a polynomial and a seed, it computes as many output bits as set in the settings of the plugin.
+    Additionally the plugin displays a visual live representation of the LFSR in its presentation. Moreover the plugin can be stepped by an external clock.
+    If all stages are needed, the plugin is able to provide a boolean array that outputs the complete state of an LFSR. These internal states can be given as the current state in form of an array of bool values, as well as strings. Two string outputs are available, that show the current and as well all past internal states.<newline /><newline />
+    
+    Of particular interest should be, when following examples from literature, to set the correct read-in order of the seed string. Some literature intends a seed bitstring to be initially shifted into the register with its leftmost bit first, other write them so that the rightmost bit is shifted in first. A dedicated option is available as setting to control this direction of reading in the seed bitstring.<newline /><newline /><img src="LFSR/DetailedDescription/Images/LFSR.png" /></introduction>
+  <introduction lang="zh-CN">LFSR组件实现了线性反馈移位寄存器的功能。给定一个多项式和一个种子，它计算出与插件设置中设置的一样多的输出位。另外，该插件在其演示文稿中显示了LFSR的可视实时表示。此外，该插件可以通过外部时钟步进。如果需要所有阶段，则插件可以提供一个布尔数组，该数组输出LFSR的完整状态。这些内部状态可以以布尔值数组和字符串的形式作为当前状态给出。提供两个字符串输出，显示当前以及所有过去的内部状态。当遵循文献中的示例时，应该特别注意设置种子串的正确读入顺序。一些文献希望将种子位串首先移到寄存器中最左边的位，然后再写入它们，以便最右边的位先移入。可以使用专用选项作为设置来控制种子位串中的此读取方向。</introduction>
+  <introduction lang="ru">Компонент LFSR реализует функциональные возможности линейного сдвигового регистра обратной связи. Учитывая многочлен и семя, он вычисляет столько выходных битов, сколько задано в настройках плагина. Кроме того, плагин отображает визуальное живое представление LFSR в своем представлении. Кроме того, плагин может быть наложен на внешние часы. Чтобы получить конкретный внутренний этап, плагин LFSR также предоставляет дополнительный выходной бит. Сцена отмечена оранжевым в презентации. Если все этапы необходимы, плагин может обеспечить булевский массив, который выводит полное состояние LFSR.</introduction>
+  <introduction lang="de-DE">
+    Die LFSR-Komponente implementiert die Funktionalität eines linear rückgekoppelten Schieberegisters (engl. Linear feedback shift register, LFSR).
+    Für ein gegebenes Polynom und einen Startwert berechnet es so viele Bits, wie in den Einstellungen der Komponente angefordert werden.
+    Außerdem stellt die Komponente eine graphische Präsentation der Vorgänge im LFSR dar.
+    Weiterhin kann die Komponente mit einem externen Takt geschaltet werden.
+    Falls der gesamte Zustand des Schieberegisters benötigt wird, so können die Zustandsbits an einem weiteren Ausgang der Komponente komplett als ein Bit-Array ausgelesen werden. Diese Möglichkeit besteht sowohl in Form von Boolean-Arrays als auch als (besser lesbare) Zeichenkette aus 0 und 1.<newline /><newline />
+    Wenn Beispiele aus der Literatur nachvollzogen werden sollen, so muss der Einleserichtung für den Seed Beachtung geschenkt werden: Manche Autoren schreiben die Seed-Bitketten so, dass sie in das Register mit dem linkesten Bit zuerst eingeschoben werden (und dadurch andersherum als in der Eingabe aufgereiht im Register erscheinen), andere Autoren schieben das rechte Bit zuerst hinein. Dafür ist eine Option vorgesehen, die diese Einleserichtung kontrollieren lässt.<newline /><newline /><img src="LFSR/DetailedDescription/Images/LFSR.png" /></introduction>
+  <usage lang="en">
+    Some scenarios including detailed walkthroughs that describe the usage of the LFSR plugin can be found here:<newline /><external ref="https://www.CrypTool.org/ct2download/Tutorials/StreamCipherToolboxScenarios.pdf" /></usage>
+  <usage lang="zh-CN">可以在以下位置找到一些场景，其中包括描述LFSR插件用法的详细演练：</usage>
+  <usage lang="ru">Некоторые сценарии, включая подробные пошаговые руководства, описывающие использование плагина LFSR, можно найти здесь:</usage>
+  <usage lang="de-DE">
+    Einige Beispielanwendungen des LFSR finden Sie hier:<newline /><external ref="https://www.CrypTool.org/ct2download/Tutorials/StreamCipherToolboxScenarios.pdf" /></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Linear_feedback_shift_register" lang="en" />
+      <caption lang="en">Linear feedback shift register (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Linear_rückgekoppeltes_Schieberegister" lang="de-DE" />
+      <caption lang="de-DE">Linear rückgekoppeltes Schieberegister (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

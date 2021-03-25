@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Выберите режим работы</value>
+  </data>
+  <data name="AnalysisUseRotor1Caption" xml:space="preserve">
+    <value>Кодовый ротор 1</value>
+  </data>
+  <data name="AnalysisUseRotor2Caption" xml:space="preserve">
+    <value>Кодовый ротор 2</value>
+  </data>
+  <data name="AnalysisUseRotor3Caption" xml:space="preserve">
+    <value>Кодовый ротор 3</value>
+  </data>
+  <data name="AnalysisUseRotor4Caption" xml:space="preserve">
+    <value>Кодовый ротор 4</value>
+  </data>
+  <data name="AnalysisUseRotor9Caption" xml:space="preserve">
+    <value>Кодовый ротор 9</value>
+  </data>
+  <data name="AnalysisUseRotor5Caption" xml:space="preserve">
+    <value>Кодовый ротор 5</value>
+  </data>
+  <data name="AnalysisUseRotor6Caption" xml:space="preserve">
+    <value>Кодовый ротор 6</value>
+  </data>
+  <data name="AnalysisUseRotor7Caption" xml:space="preserve">
+    <value>Кодовый ротор 7</value>
+  </data>
+  <data name="AnalysisUseRotor8Caption" xml:space="preserve">
+    <value>Кодовый ротор 8</value>
+  </data>
+  <data name="AnalysisUseRotor10Caption" xml:space="preserve">
+    <value>Кодовый ротор 10</value>
+  </data>
+  <data name="AnalyzeCipherRotors1Caption" xml:space="preserve">
+    <value>Шифр 1</value>
+  </data>
+  <data name="AnalyzeCipherRotors2Caption" xml:space="preserve">
+    <value>Шифр 2</value>
+  </data>
+  <data name="AnalyzeCipherRotors3Caption" xml:space="preserve">
+    <value>Шифр 3</value>
+  </data>
+  <data name="AnalyzeCipherRotors4Caption" xml:space="preserve">
+    <value>Шифратор 4</value>
+  </data>
+  <data name="AnalyzeCipherRotors5Caption" xml:space="preserve">
+    <value>Шифровальный ротор 5</value>
+  </data>
+  <data name="AnalyzeControlRotors1Caption" xml:space="preserve">
+    <value>Коронный ротор 1</value>
+  </data>
+  <data name="AnalyzeControlRotors2Caption" xml:space="preserve">
+    <value>Коронный ротор 2</value>
+  </data>
+  <data name="AnalyzeControlRotors3Caption" xml:space="preserve">
+    <value>Ротор 3</value>
+  </data>
+  <data name="AnalyzeControlRotors4Caption" xml:space="preserve">
+    <value>Коронный ротор 4</value>
+  </data>
+  <data name="AnalyzeControlRotors5Caption" xml:space="preserve">
+    <value>Рулон ротора 5</value>
+  </data>
+  <data name="AnalyzeIndexRotors1Caption" xml:space="preserve">
+    <value>Индексный ротор 1</value>
+  </data>
+  <data name="AnalyzeIndexRotors2Caption" xml:space="preserve">
+    <value>Индексный ротор 2</value>
+  </data>
+  <data name="AnalyzeIndexRotors3Caption" xml:space="preserve">
+    <value>Индексный ротор 3</value>
+  </data>
+  <data name="AnalyzeIndexRotors4Caption" xml:space="preserve">
+    <value>Индексный ротор 4</value>
+  </data>
+  <data name="AnalyzeIndexRotors5Caption" xml:space="preserve">
+    <value>Индексный ротор 5</value>
+  </data>
+  <data name="CalculateKeypaceCaption" xml:space="preserve">
+    <value>подсчитывать</value>
+  </data>
+  <data name="CalculateKeypaceTooltip" xml:space="preserve">
+    <value>Вычисляет пространство клавиш текущих настроек</value>
+  </data>
+  <data name="CaseHandlingCaption" xml:space="preserve">
+    <value>Обработка корпуса</value>
+  </data>
+  <data name="CaseHandlingList1" xml:space="preserve">
+    <value>Запасной корпус</value>
+  </data>
+  <data name="CaseHandlingList2" xml:space="preserve">
+    <value>Преобразовать в верхнюю</value>
+  </data>
+  <data name="CaseHandlingList3" xml:space="preserve">
+    <value>Преобразовать в нижний</value>
+  </data>
+  <data name="CaseHandlingTooltip" xml:space="preserve">
+    <value>Что нужно делать с помощью строчных и строчных букв?</value>
+  </data>
+  <data name="Cipher1AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите ротор шифрования 1 из</value>
+  </data>
+  <data name="Cipher2AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите шифратор 2 из</value>
+  </data>
+  <data name="Cipher3AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите ротор 3 шифрования из</value>
+  </data>
+  <data name="Cipher4AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите шифратор 4 с</value>
+  </data>
+  <data name="Cipher5AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите шифратор 5 с</value>
+  </data>
+  <data name="CipherGroup" xml:space="preserve">
+    <value>Лабиринт лабиринта</value>
+  </data>
+  <data name="CipherKeyCaption" xml:space="preserve">
+    <value>Ключ шифрования</value>
+  </data>
+  <data name="CipherKeyTooltip" xml:space="preserve">
+    <value>Определяет положения шифраторов</value>
+  </data>
+  <data name="CipherRotor1Caption" xml:space="preserve">
+    <value>Шифр 1 (самый левый)</value>
+  </data>
+  <data name="CipherRotor1FromCaption" xml:space="preserve">
+    <value>Шифр 1: От</value>
+  </data>
+  <data name="CipherRotor1ReverseCaption" xml:space="preserve">
+    <value>Задний ход</value>
+  </data>
+  <data name="CipherRotor1Tooltip" xml:space="preserve">
+    <value>Определяет тип первого ротора шифрования</value>
+  </data>
+  <data name="CipherRotor2Caption" xml:space="preserve">
+    <value>Шифр 2</value>
+  </data>
+  <data name="CipherRotor2FromCaption" xml:space="preserve">
+    <value>Шифр 2: От</value>
+  </data>
+  <data name="CipherRotor2ReverseTooltip" xml:space="preserve">
+    <value>Проверить, подключены ли головки ротора</value>
+  </data>
+  <data name="CipherRotor2Tooltip" xml:space="preserve">
+    <value>Определяет тип второго ротора шифрования</value>
+  </data>
+  <data name="CipherRotor3Caption" xml:space="preserve">
+    <value>Шифратор 3</value>
+  </data>
+  <data name="CipherRotor3ToolTip" xml:space="preserve">
+    <value>Определяет тип третьего ротора шифрования</value>
+  </data>
+  <data name="CipherRotor4Caption" xml:space="preserve">
+    <value>Шифратор 4</value>
+  </data>
+  <data name="CipherRotor4Tooltip" xml:space="preserve">
+    <value>Определяет тип четвертого ротора шифрования</value>
+  </data>
+  <data name="CipherRotor5Caption" xml:space="preserve">
+    <value>Шифр Ротор 5 (самый правый)</value>
+  </data>
+  <data name="CipherRotor5Tooltip" xml:space="preserve">
+    <value>Определяет тип ротора fith cipher</value>
+  </data>
+  <data name="ControlGroup" xml:space="preserve">
+    <value>Шаговый лабиринт</value>
+  </data>
+  <data name="ControlKeyCaption" xml:space="preserve">
+    <value>Клавиша управления</value>
+  </data>
+  <data name="ControlKeyTooltip" xml:space="preserve">
+    <value>Определяет положения управляющих роторов</value>
+  </data>
+  <data name="ControlRotor1Caption" xml:space="preserve">
+    <value>Управляющий ротор 1 (самый правый)</value>
+  </data>
+  <data name="ControlRotor1ReverseCaption" xml:space="preserve">
+    <value>Задний ход</value>
+  </data>
+  <data name="ControlRotor1Tooltip" xml:space="preserve">
+    <value>Определяет тип первого управляющего ротора</value>
+  </data>
+  <data name="ControlRotor2Caption" xml:space="preserve">
+    <value>Управляющий ротор 2</value>
+  </data>
+  <data name="ControlRotor2ReverseTooltip" xml:space="preserve">
+    <value>Нажмите, чтобы подключить головки ротора вверх</value>
+  </data>
+  <data name="ControlRotor2Tooltip" xml:space="preserve">
+    <value>Определяет тип второго управляющего ротора</value>
+  </data>
+  <data name="ControlRotor3Caption" xml:space="preserve">
+    <value>Управляющий ротор 3</value>
+  </data>
+  <data name="ControlRotor3Tooltip" xml:space="preserve">
+    <value>Определяет тип третьего управляющего ротора</value>
+  </data>
+  <data name="ControlRotor4Caption" xml:space="preserve">
+    <value>Управляющий ротор 4</value>
+  </data>
+  <data name="ControlRotor4ToolTip" xml:space="preserve">
+    <value>Определяет тип четвертого управляющего ротора</value>
+  </data>
+  <data name="ControlRotor5Caption" xml:space="preserve">
+    <value>Управляющий ротор 5 (самый левый)</value>
+  </data>
+  <data name="ControlRotor5ToolTip" xml:space="preserve">
+    <value>Определяет тип управляющего ротора fith</value>
+  </data>
+  <data name="IndexGroup" xml:space="preserve">
+    <value>Лабиринт индекса</value>
+  </data>
+  <data name="IndexKeyCaption" xml:space="preserve">
+    <value>Ключ индекса</value>
+  </data>
+  <data name="IndexKeyTooltip" xml:space="preserve">
+    <value>Определяет положения индексных роторов</value>
+  </data>
+  <data name="IndexRotor1Caption" xml:space="preserve">
+    <value>Индекс Ротор 1 (самый левый)</value>
+  </data>
+  <data name="IndexRotor1Tooltip" xml:space="preserve">
+    <value>Определяет тип первого ротора индекса</value>
+  </data>
+  <data name="IndexRotor2Caption" xml:space="preserve">
+    <value>Индексный ротор 2</value>
+  </data>
+  <data name="IndexRotor2Tooltip" xml:space="preserve">
+    <value>Определяет тип второго ротора индекса</value>
+  </data>
+  <data name="IndexRotor3Caption" xml:space="preserve">
+    <value>Индексный ротор 3</value>
+  </data>
+  <data name="IndexRotor3Tooltip" xml:space="preserve">
+    <value>Определяет тип третьего ротора индекса</value>
+  </data>
+  <data name="IndexRotor4Caption" xml:space="preserve">
+    <value>Индексный ротор 4</value>
+  </data>
+  <data name="IndexRotor4Tooltip" xml:space="preserve">
+    <value>Определяет тип четвертого ротора индекса</value>
+  </data>
+  <data name="IndexRotor5Caption" xml:space="preserve">
+    <value>Index Rotor 5 (самый правый)</value>
+  </data>
+  <data name="IndexRotor5Tooltip" xml:space="preserve">
+    <value>Определяет тип ротора индекса fith</value>
+  </data>
+  <data name="KeyspaceCaption" xml:space="preserve">
+    <value>пространство ключей:</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>SigabaBruteforce</value>
+  </data>
+  <data name="PluginToolTip" xml:space="preserve">
+    <value>Аналитический инструмент для американской роторной шифровой машины SIGABA</value>
+  </data>
+  <data name="SigabaSettings_SigabaSettings_Cipher" xml:space="preserve">
+    <value>шифровать</value>
+  </data>
+  <data name="SigabaSettings_SigabaSettings_Decipher" xml:space="preserve">
+    <value>расшифровывать</value>
+  </data>
+  <data name="TextOptionsGroup" xml:space="preserve">
+    <value>Параметры текста</value>
+  </data>
+  <data name="ToCaption" xml:space="preserve">
+    <value>к</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Неизвестная обработка символов</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Игнорировать (оставить без изменений)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Заменить на «X»</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>Что делать с входными символами, которые не находятся в алфавите?</value>
+  </data>
+  <data name="CipherKeyHeader" xml:space="preserve">
+    <value>Ключ шифрования</value>
+  </data>
+  <data name="CipherRotorsHeader" xml:space="preserve">
+    <value>Шины для шифрования</value>
+  </data>
+  <data name="Control1AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите управляющий ротор 1 из</value>
+  </data>
+  <data name="Control2AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите управляющий ротор 2 из</value>
+  </data>
+  <data name="Control3AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите управляющий ротор 3 из</value>
+  </data>
+  <data name="Control4AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите управляющий ротор 4 из</value>
+  </data>
+  <data name="Control5AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите управляющий ротор 5 из</value>
+  </data>
+  <data name="ControlKeyHeader" xml:space="preserve">
+    <value>Клавиша управления</value>
+  </data>
+  <data name="ControlRotorsHeader" xml:space="preserve">
+    <value>Контрольные колеса</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>Прошедшее:</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>Конец:</value>
+  </data>
+  <data name="IndexAnalysisUseRotor1Caption" xml:space="preserve">
+    <value>Индексный ротор 1</value>
+  </data>
+  <data name="IndexAnalysisUseRotor2Caption" xml:space="preserve">
+    <value>Индексный ротор 2</value>
+  </data>
+  <data name="IndexAnalysisUseRotor3Caption" xml:space="preserve">
+    <value>Индексный ротор 3</value>
+  </data>
+  <data name="IndexAnalysisUseRotor4Caption" xml:space="preserve">
+    <value>Индексный ротор 4</value>
+  </data>
+  <data name="IndexAnalysisUseRotor5Caption" xml:space="preserve">
+    <value>Индексный ротор 5</value>
+  </data>
+  <data name="IndexKeyHeader" xml:space="preserve">
+    <value>Ключ индекса</value>
+  </data>
+  <data name="IndexRotorHeader" xml:space="preserve">
+    <value>Индексные колеса</value>
+  </data>
+  <data name="Keys_secLabel" xml:space="preserve">
+    <value>Ключи / Second:</value>
+  </data>
+  <data name="RemainingLabel" xml:space="preserve">
+    <value>Осталось:</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Начало:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Текст</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="RevCaption" xml:space="preserve">
+    <value>Ориентация ротора</value>
+  </data>
+  <data name="OriNormalCaption" xml:space="preserve">
+    <value>нормальный</value>
+  </data>
+  <data name="OriReverseCaption" xml:space="preserve">
+    <value>задний ход</value>
+  </data>
+  <data name="OriBothCaption" xml:space="preserve">
+    <value>и то и другое</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Главный</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Топ десять</value>
+  </data>
+  <data name="CipherRotor3FromCaption" xml:space="preserve">
+    <value>Шифр 3: От</value>
+  </data>
+  <data name="CipherRotor4FromCaption" xml:space="preserve">
+    <value>Шифр 4: От</value>
+  </data>
+  <data name="CipherRotor5FromCaption" xml:space="preserve">
+    <value>Шифр 5: От</value>
+  </data>
+  <data name="ControlRotor1FromCaption" xml:space="preserve">
+    <value>Управляющий ротор 1: От</value>
+  </data>
+  <data name="ControlRotor2FromCaption" xml:space="preserve">
+    <value>Управляющий ротор 2: От</value>
+  </data>
+  <data name="ControlRotor3FromCaption" xml:space="preserve">
+    <value>Управляющий ротор 3: От</value>
+  </data>
+  <data name="ControlRotor4FromCaption" xml:space="preserve">
+    <value>Управляющий ротор 4: От</value>
+  </data>
+  <data name="ControlRotor5FromCaption" xml:space="preserve">
+    <value>Управляющий ротор 5: От</value>
+  </data>
+  <data name="FromTooltip" xml:space="preserve">
+    <value>Выберите первую букву интервала поиска</value>
+  </data>
+  <data name="IndexRotor1FromCaption" xml:space="preserve">
+    <value>Индексный ротор 1: От</value>
+  </data>
+  <data name="IndexRotor2FromCaption" xml:space="preserve">
+    <value>Индексный ротор 2: От</value>
+  </data>
+  <data name="IndexRotor3FromCaption" xml:space="preserve">
+    <value>Индексный ротор 3: От</value>
+  </data>
+  <data name="IndexRotor4FromCaption" xml:space="preserve">
+    <value>Индексный ротор 4: От</value>
+  </data>
+  <data name="IndexRotor5FromCaption" xml:space="preserve">
+    <value>Индексный ротор 5: От</value>
+  </data>
+  <data name="PositionOptionsGroup" xml:space="preserve">
+    <value>Позиции запуска ротора</value>
+  </data>
+  <data name="RotorAnalysisGroup" xml:space="preserve">
+    <value>Показать параметры анализа для</value>
+  </data>
+  <data name="ToTooltip" xml:space="preserve">
+    <value>Выберите последнюю букву интервала поиска</value>
+  </data>
+  <data name="AnalyzeRotorsTooltip" xml:space="preserve">
+    <value>Показать / скрыть параметры для этого ротора.</value>
+  </data>
+  <data name="Cipher10AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве ротора шифрования 10.</value>
+  </data>
+  <data name="Cipher1AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве ротора шифрования 1.</value>
+  </data>
+  <data name="Cipher2AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифратора 2.</value>
+  </data>
+  <data name="Cipher3AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифра 3.</value>
+  </data>
+  <data name="Cipher4AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифратора 4.</value>
+  </data>
+  <data name="Cipher5AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифра 5.</value>
+  </data>
+  <data name="Cipher6AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифратора 6.</value>
+  </data>
+  <data name="Cipher7AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифратора 7.</value>
+  </data>
+  <data name="Cipher8AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифратора 8.</value>
+  </data>
+  <data name="Cipher9AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве шифратора 9.</value>
+  </data>
+  <data name="Control10AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 10.</value>
+  </data>
+  <data name="Control1AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 1.</value>
+  </data>
+  <data name="Control2AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 2.</value>
+  </data>
+  <data name="Control3AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 3.</value>
+  </data>
+  <data name="Control4AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 4.</value>
+  </data>
+  <data name="Control5AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 5.</value>
+  </data>
+  <data name="Control6AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 6.</value>
+  </data>
+  <data name="Control7AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 7.</value>
+  </data>
+  <data name="Control8AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 8.</value>
+  </data>
+  <data name="Control9AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве управляющего ротора 9.</value>
+  </data>
+  <data name="Index1AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите индексный ротор 1 из</value>
+  </data>
+  <data name="Index1AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор как индексный ротор 1.</value>
+  </data>
+  <data name="Index2AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите индексный ротор 2 из</value>
+  </data>
+  <data name="Index2AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор в качестве указателя ротора 2.</value>
+  </data>
+  <data name="Index3AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите индексный ротор 3 из</value>
+  </data>
+  <data name="Index3AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор как индексный ротор 3.</value>
+  </data>
+  <data name="Index4AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите индексный ротор 4 из</value>
+  </data>
+  <data name="Index4AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор как индексный ротор 4.</value>
+  </data>
+  <data name="Index5AnalysisOptionsGroup" xml:space="preserve">
+    <value>Выберите индексный ротор 5 из</value>
+  </data>
+  <data name="Index5AnalysisUseRotorTooltip" xml:space="preserve">
+    <value>Попробуйте этот ротор как индексный ротор 5.</value>
+  </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="KeyspaceTooltip" xml:space="preserve">
+    <value>Вычислите размер пространства ключа (в битах) в результате заданных настроек.</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="RevTooltip" xml:space="preserve">
+    <value>Выберите ориентацию (ы), в которой следует использовать этот ротор.</value>
+  </data>
+</root>

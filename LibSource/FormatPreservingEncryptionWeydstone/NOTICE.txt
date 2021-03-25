@@ -1,0 +1,5 @@
+Format-Preserving Encryption
+Copyright (c) 2016 Weydstone LLC dba Sutton Abinger
+
+This product includes software developed by
+Sutton Abinger (http://www.suttonabinger.com/).

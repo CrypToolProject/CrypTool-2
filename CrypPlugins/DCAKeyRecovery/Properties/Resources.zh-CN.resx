@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnyRoundAttackDataColHeader1" xml:space="preserve">
+    <value>关键候选人</value>
+  </data>
+  <data name="AnyRoundAttackDataColHeader2" xml:space="preserve">
+    <value>命中数</value>
+  </data>
+  <data name="AnyRoundAttackDataColHeader3" xml:space="preserve">
+    <value>可能性</value>
+  </data>
+  <data name="AnyRoundAttackEnd" xml:space="preserve">
+    <value>结束：</value>
+  </data>
+  <data name="AnyRoundAttackRound" xml:space="preserve">
+    <value>被攻击的加密回合：</value>
+  </data>
+  <data name="AnyRoundAttackRoundResults" xml:space="preserve">
+    <value>结果</value>
+  </data>
+  <data name="AnyRoundAttackStart" xml:space="preserve">
+    <value>开始：</value>
+  </data>
+  <data name="AnyRoundAttackStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="AnyRoundExpectedHitCount" xml:space="preserve">
+    <value>预期的点击数：</value>
+  </data>
+  <data name="AnyRoundExpectedProbability" xml:space="preserve">
+    <value>预期概率：</value>
+  </data>
+  <data name="AnyRoundMessagePairCount" xml:space="preserve">
+    <value>消息对数（未过滤/已过滤）：</value>
+  </data>
+  <data name="AnyRoundRecoveredRoundKey" xml:space="preserve">
+    <value>恢复的回合密钥：</value>
+  </data>
+  <data name="AttackLastRoundHeader" xml:space="preserve">
+    <value>{0}密钥恢复</value>
+  </data>
+  <data name="AutomaticMode" xml:space="preserve">
+    <value>自动模式</value>
+  </data>
+  <data name="AutomaticModeToolTip" xml:space="preserve">
+    <value>在自动模式下无需用户输入</value>
+  </data>
+  <data name="BtnNextKey" xml:space="preserve">
+    <value>跳过键</value>
+  </data>
+  <data name="BtnNextMessage" xml:space="preserve">
+    <value>跳过消息对</value>
+  </data>
+  <data name="BtnSkip" xml:space="preserve">
+    <value>跳跃</value>
+  </data>
+  <data name="BtnStart" xml:space="preserve">
+    <value>开始</value>
+  </data>
+  <data name="ChoiceOfAlgorithm" xml:space="preserve">
+    <value>密码选择</value>
+  </data>
+  <data name="ChoiceOfAlgorithmToolTop" xml:space="preserve">
+    <value>此时，您可以选择列表中包含的一种密码。这可以通过差分密码分析来检查。</value>
+  </data>
+  <data name="Cipher1" xml:space="preserve">
+    <value>密码1（16位块大小，2个圆形密钥，32位密钥长度）</value>
+  </data>
+  <data name="Cipher1CipherViewCol" xml:space="preserve">
+    <value>关键候选人</value>
+  </data>
+  <data name="Cipher1SummaryResultViewTotalSummary" xml:space="preserve">
+    <value>总</value>
+  </data>
+  <data name="Cipher2" xml:space="preserve">
+    <value>密码2（16位块大小，4个圆形密钥，64位密钥长度）</value>
+  </data>
+  <data name="Cipher2SummaryResultViewRound1" xml:space="preserve">
+    <value>第1轮</value>
+  </data>
+  <data name="Cipher2SummaryResultViewRound2" xml:space="preserve">
+    <value>第二回合</value>
+  </data>
+  <data name="Cipher2SummaryResultViewRound3" xml:space="preserve">
+    <value>第三回合</value>
+  </data>
+  <data name="Cipher2SummaryResultViewTotalSummary" xml:space="preserve">
+    <value>总</value>
+  </data>
+  <data name="Cipher3" xml:space="preserve">
+    <value>密码3（16位块大小，6个圆形密钥，96位密钥长度）</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound1" xml:space="preserve">
+    <value>第1轮</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound2" xml:space="preserve">
+    <value>第二回合</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound3" xml:space="preserve">
+    <value>第三回合</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound4" xml:space="preserve">
+    <value>第四回合</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound5" xml:space="preserve">
+    <value>第五回合</value>
+  </data>
+  <data name="Cipher3SummaryResultViewTotalSummary" xml:space="preserve">
+    <value>总</value>
+  </data>
+  <data name="DifferentialInput" xml:space="preserve">
+    <value>微分</value>
+  </data>
+  <data name="DifferentialInputToolTip" xml:space="preserve">
+    <value>差动输入</value>
+  </data>
+  <data name="EncryptedMessagePairsInput" xml:space="preserve">
+    <value>密文消息对</value>
+  </data>
+  <data name="EncryptedMessagePairsInputToolTip" xml:space="preserve">
+    <value>密文消息对的输入</value>
+  </data>
+  <data name="ExpectedDifferential" xml:space="preserve">
+    <value>预期差异</value>
+  </data>
+  <data name="ExpectedDifferentialToolTip" xml:space="preserve">
+    <value>预期差异的输出</value>
+  </data>
+  <data name="FinishedOutput" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="FinishedOutputToolTip" xml:space="preserve">
+    <value>输出向DCA PathFinder组件指示计算已完成。</value>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>德国</value>
+  </data>
+  <data name="LastRoundAttackCurrentCiphertext" xml:space="preserve">
+    <value>当前密文：</value>
+  </data>
+  <data name="LastRoundAttackCurrentKeyCandidate" xml:space="preserve">
+    <value>目前的主要候选人：</value>
+  </data>
+  <data name="LastRoundAttackCurrentKeyOfAll" xml:space="preserve">
+    <value>要测试的密钥数：</value>
+  </data>
+  <data name="LastRoundAttackCurrentPlaintext" xml:space="preserve">
+    <value>当前的纯文本：</value>
+  </data>
+  <data name="LastRoundAttackDataColHeader1" xml:space="preserve">
+    <value>迭代</value>
+  </data>
+  <data name="LastRoundAttackDataColHeader2" xml:space="preserve">
+    <value>其余主要候选人</value>
+  </data>
+  <data name="LastRoundAttackEnd" xml:space="preserve">
+    <value>结束：</value>
+  </data>
+  <data name="LastRoundAttackExpectedDifference" xml:space="preserve">
+    <value>预期差异：</value>
+  </data>
+  <data name="LastRoundAttackNumberOfExaminedPairs" xml:space="preserve">
+    <value>检查的明文/密文对：</value>
+  </data>
+  <data name="LastRoundAttackRemainingKeyCandidates" xml:space="preserve">
+    <value>其余主要候选人：</value>
+  </data>
+  <data name="LastRoundAttackRound" xml:space="preserve">
+    <value>被攻击的加密回合：</value>
+  </data>
+  <data name="LastRoundAttackRoundResults" xml:space="preserve">
+    <value>迭代次数</value>
+  </data>
+  <data name="LastRoundAttackStart" xml:space="preserve">
+    <value>开始：</value>
+  </data>
+  <data name="LastRoundAttackStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="MessageDifferenceOutput" xml:space="preserve">
+    <value>预期差异：</value>
+  </data>
+  <data name="MessageDifferenceOutputToolTip" xml:space="preserve">
+    <value>预期差异的输出</value>
+  </data>
+  <data name="MessageNoResult" xml:space="preserve">
+    <value>最后一轮密钥无法恢复。如果以前的回合密钥之一计算不正确，则会发生这种情况。可能应再次选择DCA PathFinder组件中的参数。</value>
+  </data>
+  <data name="NeededMessageCountOutput" xml:space="preserve">
+    <value>消息对数</value>
+  </data>
+  <data name="NeededMessageCountOutputToolTip" xml:space="preserve">
+    <value>输出请求的消息对数</value>
+  </data>
+  <data name="nextStepTextRun1" xml:space="preserve">
+    <value>继续进行差分密码分析。</value>
+  </data>
+  <data name="nextStepTextRun2" xml:space="preserve">
+    <value>DCA PathFinder组件</value>
+  </data>
+  <data name="PerformanceSettingsGroup" xml:space="preserve">
+    <value>速度选项</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>DCA密钥恢复</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>该组件从轮回密钥中执行密钥位的恢复。</value>
+  </data>
+  <data name="RoundKeysOutput" xml:space="preserve">
+    <value>圆键</value>
+  </data>
+  <data name="RoundKeysOutputToolTip" xml:space="preserve">
+    <value>回合键的输出</value>
+  </data>
+  <data name="SummaryResultViewCountOfDecryptions" xml:space="preserve">
+    <value>解密次数：</value>
+  </data>
+  <data name="SummaryResultViewCountOfMessages" xml:space="preserve">
+    <value>讯息数量：</value>
+  </data>
+  <data name="SummaryResultViewCurrentRound" xml:space="preserve">
+    <value>被攻击的加密回合：</value>
+  </data>
+  <data name="SummaryResultViewEndTime" xml:space="preserve">
+    <value>结束：</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK0" xml:space="preserve">
+    <value>恢复回合密钥k0：</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK1" xml:space="preserve">
+    <value>恢复回合密钥k1：</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK2" xml:space="preserve">
+    <value>恢复回合密钥k2：</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK3" xml:space="preserve">
+    <value>恢复回合密钥k3：</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK4" xml:space="preserve">
+    <value>恢复回合密钥k4：</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK5" xml:space="preserve">
+    <value>恢复回合密钥k5：</value>
+  </data>
+  <data name="SummaryResultViewStartTime" xml:space="preserve">
+    <value>开始：</value>
+  </data>
+  <data name="SummaryResultViewTestedKeys" xml:space="preserve">
+    <value>经过测试的按键：</value>
+  </data>
+  <data name="TabItemHeaderCipher" xml:space="preserve">
+    <value>详细视图</value>
+  </data>
+  <data name="TabItemHeaderRoundSummary" xml:space="preserve">
+    <value>回合状态</value>
+  </data>
+  <data name="TabItemHeaderSummary" xml:space="preserve">
+    <value>整体状况</value>
+  </data>
+  <data name="ThreadCount" xml:space="preserve">
+    <value>要使用的线程</value>
+  </data>
+  <data name="ThreadCountToolTip" xml:space="preserve">
+    <value>指定用于计算的线程数。</value>
+  </data>
+  <data name="ThreadSettingError" xml:space="preserve">
+    <value>您系统的最大线程数为{0}个线程。此数字受您的处理器的限制。</value>
+  </data>
+  <data name="TutorialSettingsGroup" xml:space="preserve">
+    <value>教程选项</value>
+  </data>
+  <data name="UIUpdateWhileExecution" xml:space="preserve">
+    <value>计算过程中用户界面的更新</value>
+  </data>
+  <data name="UIUpdateWhileExecutionToolTip" xml:space="preserve">
+    <value>确定是在计算过程中还是仅在计算完成后才更新用户界面。此设置影响组件的执行速度。</value>
+  </data>
+  <data name="UnencryptedMessagePairsInput" xml:space="preserve">
+    <value>纯文本消息对</value>
+  </data>
+  <data name="UnencryptedMessagePairsInputToolTip" xml:space="preserve">
+    <value>纯文本消息对的输入</value>
+  </data>
+</root>

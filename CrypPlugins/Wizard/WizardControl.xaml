@@ -1,0 +1,230 @@
+<UserControl x:Class="Wizard.WizardControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:wizard="clr-namespace:Wizard"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600" ClipToBounds="True">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Copy" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
+    </UserControl.CommandBindings>
+    
+    <UserControl.Resources>
+        <BitmapImage x:Key="Analyse" UriSource="Images/Analyse.png"/>
+        <BitmapImage x:Key="Classic" UriSource="Images/Classic.png"/>
+        <BitmapImage x:Key="Modern" UriSource="Images/Modern.png"/>
+        <BitmapImage x:Key="Indiv" UriSource="Images/Indiv.png"/>
+        <BitmapImage x:Key="Calc" UriSource="Images/Calc.png"/>
+        <BitmapImage x:Key="EnDeCrypt" UriSource="Images/EnDeCrypt.png"/>
+        <BitmapImage x:Key="Key" UriSource="Images/Key.png"/>
+        <BitmapImage x:Key="Hash" UriSource="Images/Hash.png"/>
+        <BitmapImage x:Key="ADFGVX" UriSource="Images/ADFGVX.png"/>
+        <BitmapImage x:Key="AES" UriSource="Images/AES.png"/>
+        <BitmapImage x:Key="DES" UriSource="Images/DES.png"/>
+        <BitmapImage x:Key="Enigma" UriSource="Images/Enigma.png"/>
+        <BitmapImage x:Key="MD5" UriSource="Images/MD5.png"/>
+        <BitmapImage x:Key="Playfair" UriSource="Images/Playfair.png"/>
+        <BitmapImage x:Key="Primes" UriSource="Images/Primes.png"/>
+        <BitmapImage x:Key="RIPEMD160" UriSource="Images/RIPEMD160.png"/>
+        <BitmapImage x:Key="RSA" UriSource="Images/RSA.png"/>
+        <BitmapImage x:Key="Scytale" UriSource="Images/Scytale.png"/>
+        <BitmapImage x:Key="SDES" UriSource="Images/SDES.png"/>
+        <BitmapImage x:Key="SHA" UriSource="Images/SHA.png"/>
+        <BitmapImage x:Key="Substitution" UriSource="Images/Substitution.png"/>
+        <BitmapImage x:Key="TEA" UriSource="Images/TEA.png"/>
+        <BitmapImage x:Key="Tiger" UriSource="Images/Tiger.png"/>
+        <BitmapImage x:Key="Transposition" UriSource="Images/Transposition.png"/>
+        <BitmapImage x:Key="Trivium" UriSource="Images/Trivium.png"/>
+        <BitmapImage x:Key="Twofish" UriSource="Images/Twofish.png"/>
+        <BitmapImage x:Key="Vernam" UriSource="Images/Vernam.png"/>
+        <BitmapImage x:Key="Vigenere" UriSource="Images/Vigenere.png"/>
+        <BitmapImage x:Key="Whirlpool" UriSource="Images/Whirlpool.png"/>
+        <BitmapImage x:Key="XOR" UriSource="Images/XOR.png"/>
+        <BitmapImage x:Key="RC2" UriSource="Images/RC2.png"/>
+        <BitmapImage x:Key="Caesar" UriSource="Images/Caesar.png"/>
+        <BitmapImage x:Key="Sym" UriSource="Images/Sym.png"/>
+        <BitmapImage x:Key="Asym" UriSource="Images/Asym.png"/>
+        <BitmapImage x:Key="QS" UriSource="Images/QS.png"/>
+        <BitmapImage x:Key="Math" UriSource="Images/Math.png"/>
+        <BitmapImage x:Key="Enc" UriSource="Images/Enc.png"/>
+        <BitmapImage x:Key="Dec" UriSource="Images/Dec.png"/>
+        <BitmapImage x:Key="PasswordStrength" UriSource="Images/PasswordStrength.png"/>
+        <BitmapImage x:Key="HeartbleedTest" UriSource="Images/HeartbleedTest.png"/>
+        <BitmapImage x:Key="Codes" UriSource="Images/Codes.png"/>
+        <BitmapImage x:Key="MorseCode" UriSource="Images/MorseCode.png"/>
+        <BitmapImage x:Key="VisualCode" UriSource="Images/VisualCode.png"/>
+        <BitmapImage x:Key="RND" UriSource="Images/RND.png"/>
+        <BitmapImage x:Key="Wizard" UriSource="wizard.png"/>
+
+        <Storyboard x:Key="NextButtonAttentionAnimation">
+            <ColorAnimation Storyboard.TargetName="nextButton" Storyboard.TargetProperty="Background.Color" To="Goldenrod" Duration="0:0:0.3" AutoReverse="True"/>
+        </Storyboard>
+        
+        <Style TargetType="RadioButton">
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="RadioButton.Checked">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Content.Background.Opacity" To="1" From="0" Duration="0:0:0.5"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+            <EventSetter Event="Checked" Handler="EventSetter_OnHandler"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+        
+        <Style x:Key="InputFieldStyle" TargetType="FrameworkElement">
+            <Setter Property="Margin" Value="5, 3, 5, 10"/>
+        </Style>
+        
+        <Style x:Key="TextInputInvalid" TargetType="Control">
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderThickness" Value="5"/>
+        </Style>
+        
+        <Storyboard x:Key="MainGridStoryboardNext1">
+            <DoubleAnimation Storyboard.TargetName="MainGridTransform" Storyboard.TargetProperty="X" From="0" To="-1500" Duration="0:0:0.5" Completed="SetNextContent"/>
+        </Storyboard>
+        <Storyboard x:Key="MainGridStoryboardNext2">
+            <DoubleAnimation Storyboard.TargetName="MainGridTransform" Storyboard.TargetProperty="X" From="1500" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+
+        <Storyboard x:Key="MainGridStoryboardBack1">
+            <DoubleAnimation Storyboard.TargetName="MainGridTransform" Storyboard.TargetProperty="X" From="0" To="1500" Duration="0:0:0.5" Completed="SetLastContent"/>
+        </Storyboard>
+        <Storyboard x:Key="MainGridStoryboardBack2">
+            <DoubleAnimation Storyboard.TargetName="MainGridTransform" Storyboard.TargetProperty="X" From="-1500" To="0" Duration="0:0:0.5"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <UserControl.Background>
+        <RadialGradientBrush RadiusX="1.1" RadiusY="2.8" Center="0.524,1.2" GradientOrigin="0.524,1.2">
+            <GradientStop Color="#add3f5" Offset="0.0" />
+            <GradientStop Color="#293955" Offset="1" />
+        </RadialGradientBrush>
+    </UserControl.Background>
+
+    <Grid>
+        <ScrollViewer Name="OuterScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" PreviewKeyDown="ScrollViewer_PreviewKeyDown">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="MainGridTransform"/>
+                </Grid.RenderTransform>
+            
+                <StackPanel Orientation="Vertical">
+                    <Label Name="ErrorLabel" Content="{Loc Error}" FontSize="20" Foreground="#FFF56161" Visibility="Collapsed" />
+                    <Grid>
+                        <Label  HorizontalContentAlignment="Center" Name="taskHeader" FontSize="28" FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Florsn01" Foreground="#FF003399" VerticalAlignment="Bottom" />
+                        <Image Source="Images/header_wizard5.png" Stretch="Uniform"  HorizontalAlignment="Left"></Image>
+                    </Grid>
+                </StackPanel>
+
+                <Grid Grid.Row="1" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+                    <Label HorizontalAlignment="Stretch" FontSize="13" Margin="5">
+                        <Label.Content>
+                            <TextBlock Name="descHeader" TextWrapping="Wrap" FontSize="15" Foreground="White" />
+                        </Label.Content>
+                    </Label>
+                
+                    <Button Grid.Column="1" ToolTip="{Loc CreateProjectToolTip}" Width="50" Name="CreateProjectButton" Visibility="Hidden" Click="CreateProjectButton_Click">
+                        <Button.Content>
+                            <Image Source="/Wizard;component/Images/createProject.png"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+
+                <Grid HorizontalAlignment="Stretch" Name="categoryGrid" VerticalAlignment="Stretch" Grid.Row="2" Margin="10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                    <ScrollViewer  HorizontalAlignment="Stretch" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" Name="radioButtonScroll">
+                        <StackPanel Name="radioButtonStackPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    </ScrollViewer>
+                    <Border BorderBrush="LightSeaGreen" BorderThickness="1" Grid.Column="1" CornerRadius="5" Background="#FFC8DCF5" MinHeight="{Binding ElementName=radioButtonScroll, Path=ActualHeight}">
+                        <ScrollViewer Name="descScroll" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" >
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >                            
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Content="{Loc Description}" />
+                                <TextBlock Name="CategoryDescription" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextAlignment="Left" Grid.Row="1" Margin="5" FontSize="16" FontWeight="Normal">
+                                    <TextBlock.ContextMenu>
+                                        <ContextMenu><MenuItem Command="ApplicationCommands.Copy" /></ContextMenu>
+                                    </TextBlock.ContextMenu>
+                                </TextBlock>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+
+                <ScrollViewer Grid.Row="2" Name="inputPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <Border BorderBrush="LightSeaGreen" BorderThickness="1" Grid.Column="1" CornerRadius="5" Background="#FFC8DCF5" Margin="20" >
+                        <StackPanel Name="inputStack" Orientation="Vertical" Margin="5" HorizontalAlignment="Stretch"/>
+                    </Border>
+                </ScrollViewer>            
+                <Grid Grid.Row="3" HorizontalAlignment="Stretch" >
+                    <Grid.Resources>
+                        <Style TargetType="Button">
+                            <Style.Setters>
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="BorderBrush" Value="LightSeaGreen" />
+                                <Setter Property="Background" Value="#FFC8DCF5" />
+                                <Setter Property="BorderThickness" Value="3" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="5"
+                                                BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" />
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsEnabled" Value="true" />
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Foreground" Value="SlateGray" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style.Setters>
+                        </Style>
+                    </Grid.Resources>
+                
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ScrollViewer Name="history" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" CanContentScroll="True" MouseMove="history_MouseMove" />
+                    <StackPanel Height="Auto" HorizontalAlignment="Right" Name="buttonStackPanel" VerticalAlignment="Bottom" Margin="2" Grid.Column="1" Orientation="Horizontal" >
+                        <Button Content="{Loc BackButton}" Height="23" Name="backButton" Width="75" Margin="1" Click="backButton_Click" Focusable="False" />
+                        <Button Content="{Loc NextButton}" Tag="{Loc CreateButton}" Height="23" Name="nextButton" Width="75" Margin="1" IsDefault="True" Click="nextButton_Click" Focusable="False" IsEnabledChanged="nextButton_IsEnabledChanged" />
+                        <Button Content="{Loc AbortButton}" Height="23" Name="abortButton" Width="75" Margin="1" Click="abortButton_Click" Focusable="False" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
+        <Border x:Name="Overlay" BorderBrush="Black" BorderThickness="1" Background="#90000000" Visibility="Collapsed">
+            <Grid x:Name="StorageGrid" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Sigaba.PresentationRotor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="541" d:DesignWidth="13">
+    <Canvas Height="541" Width="13">
+
+        <StackPanel Name="Rotor0815"  Orientation="Vertical">
+
+            <TextBlock TextAlignment="Center" Height="16">X</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">Y</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">Z</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">A</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">B</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">C</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">D</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">E</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">F</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">G</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">H</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">I</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">J</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">K</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">L</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">M</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">N</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">O</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">P</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">Q</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">R</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">S</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">T</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">U</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">V</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">W</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">X</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">Y</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">Z</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">A</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">B</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">C</TextBlock>
+            <TextBlock TextAlignment="Center" Height="16">D</TextBlock>
+        </StackPanel>
+    </Canvas>
+</UserControl>

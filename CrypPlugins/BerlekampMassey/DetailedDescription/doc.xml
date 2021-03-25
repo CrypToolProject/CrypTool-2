@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Berlekamp–Massey algorithm is an algorithm for finding the shortest linear feedback shift register (LFSR) with length L for a given output sequence.
+    Equivalently, it will also find the minimal polynomial C of a linear recurrence sequence.
+    <newline /><newline />
+    The algorithm was designed by Elwyn Berlekamp and James Massey in the years 1968 and 1969.
+    It became the key to practical application of the now ubiquitous Reed–Solomon code.
+  </introduction>
+  <introduction lang="zh-CN">Berlekamp–Massey算法是一种算法，用于为给定的输出序列找到长度为L的最短线性反馈移位寄存器（LFSR）。同样，它还会找到线性递归序列的最小多项式C。该算法是由Elwyn Berlekamp和James Massey在1968年和1969年设计的。它成为现在普遍使用的Reed-Solomon代码实际应用的关键。</introduction>
+  <introduction lang="ru">Алгоритм Berlekamp-Massey представляет собой алгоритм поиска кратчайшего линейного сдвигового регистра обратной связи (LFSR) с длиной L для заданной выходной последовательности. Эквивалентно, он также найдет минимальный многочлен C линейной рекуррентной последовательности. Алгоритм был разработан Элвином Берлекампом и Джеймсом Масси в 1968 и 1969 годах. Он стал ключом к практическому применению теперь вездесущего кода Рида-Соломона.</introduction>
+  <introduction lang="de-DE">
+    Der Berlekamp-Massey-Algorithmus dient dazu, das kürzeste, linear rückgekoppelte Schieberegister (LFSR, linear feedback shift register) zu finden, das eine gegebene Folge von Symbolen ausgibt,
+    oder, äquivalent dazu, das Minimalpolynom C einer linearen rekursiven Folge.
+    <newline /><newline />
+    Das Verfahren wurde von 1968 bis 1969 von Elwyn Berlekamp und James Massey entwickelt.
+    Es wurde zum Schlüssel für die praktische Anwendung der heute allgegenwärtigen Reed-Solomon-Codes.
+  </introduction>
+  <usage lang="en">
+    On the input of the component, a string consisting of "0" and "1" is expected, that represents the output of the linear feedback shift register whose minimal polynomial you want to determine.
+    When the workspace is started, the component calculates the minimal polynomial and outputs it as a string (for example "x^5 + x^3 + 1") on the output labeled "Feedback polynomial C".
+    The degree of the polynomial, that corresponds to the minimal length of a LFSR for the given input, is sent to the output "L".
+  </usage>
+  <usage lang="zh-CN">在组件的输入上，应包含由“ 0”和“ 1”组成的字符串，该字符串表示要确定其最小多项式的线性反馈移位寄存器的输出。当工作空间启动时，组件将计算最小多项式并将其作为字符串（例如“ x ^ 5 + x ^ 3 + 1”）输出到标记为“反馈多项式C”的输出上。多项式的次数（对应于给定输入的LFSR的最小长度）被发送到输出“ L”。</usage>
+  <usage lang="ru">На входе компонента ожидается строка, состоящая из «0» и «1», которая представляет выход линейного сдвигового регистра обратной связи, минимальный полином которого вы хотите определить. Когда рабочая область запущена, компонент вычисляет минимальный многочлен и выводит его как строку (например, «x ^ 5 + x ^ 3 + 1») на выходе с надписью «Полином обратной связи C». Степень полинома, соответствующая минимальной длине LFSR для данного входа, отправляется на выход «L».</usage>
+  <usage lang="de-DE">
+    Geben Sie am Eingang die aus "0" und "1" bestehende Zeichenkette an, die die Ausgabe des linear rückgekoppelten Schieberegisters darstellt,
+    dessen Minimalpolynom bestimmt werden soll.
+    Nachdem der Arbeitsbereich gestartet wurde, berechnet die Komponente das Minimalpolynom und gibt dieses als Text am Ausgang "Feedback-Polynom C" aus (zum Beispiel "x^5 + x^3 + 1").
+    Der Grad des Polynoms, der der minimalen Länge des für die Eingabe benötigten Schieberegisters entspricht, wird am Ausgang "L" ausgegeben.
+  </usage>
+  <presentation lang="en">
+    The presentation view of the component displays the found minimum polynomial C and the minimal length L.
+  </presentation>
+  <presentation lang="zh-CN">组件的显示视图显示找到的最小多项式C和最小长度L。</presentation>
+  <presentation lang="ru">Представление представления компонента отображает найденный минимальный многочлен C и минимальную длину L.</presentation>
+  <presentation lang="de-DE">
+    Wenn die Präsentationsansicht der Komponente geöffnet ist, werden das gefundene Minimalpolynom C und die minimale Länge L angezeigt.
+  </presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Berlekamp–Massey_algorithm" lang="en" />
+      <caption lang="en">Berlekamp–Massey algorithm (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Berlekamp-Massey-Algorithmus" lang="de-DE" />
+      <caption lang="de-DE">Berlekamp-Massey-Algorithmus (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

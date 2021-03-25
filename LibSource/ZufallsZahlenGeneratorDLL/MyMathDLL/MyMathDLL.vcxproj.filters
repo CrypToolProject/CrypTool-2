@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bits.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chisq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="countx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dab_birthdays1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dab_bytedistrib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dab_dct.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dab_filltree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dab_filltree2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dab_monobit2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dab_opso2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_2dsphere.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_3dsphere.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_birthdays.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_bitstream.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_count_1s_byte.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_count_1s_stream.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_craps.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_dna.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_operm5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_opso.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_oqso.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_parking_lot.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_rank_6x8.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_rank_32x32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_runs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_squeeze.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="diehard_sums.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dieharder_rng_types.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dieharder_test_types.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="histogram.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kstest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="marsaglia_tsang_gcd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="marsaglia_tsang_gorilla.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="parse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="prob.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="random_seed.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rank.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_bitdist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_kstest_test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_lagged_sums.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_lmn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_minimum_distance.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_operm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_permutations.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_persist.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rgb_timing.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rijndael-alg-fst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_aes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_ca.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_dev_arandom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_dev_random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_dev_urandom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_file_input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_file_input_raw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_jenkins.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_kiss.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_stdin_input_raw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_superkiss.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_uvag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rng_XOR.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rngav.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rngs_gnu_r.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sample.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="static_get_bits.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="std_test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sts_monobit.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sts_runs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sts_serial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="timing.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="version.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vtest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Xtest.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dieharder_functions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="choose_rng.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="run_all_tests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Execute_test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="run_test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="output.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DieHarderDLL.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="brg_endian.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="brg_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="copyright.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dab_birthdays1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dab_bytedistrib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dab_dct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dab_filltree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dab_filltree2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dab_monobit2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dab_opso2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_2dsphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_3dsphere.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_birthdays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_bitstream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_count_1s_byte.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_count_1s_stream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_craps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_dna.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_operm5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_opso.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_oqso.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_parking_lot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_rank_6x8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_rank_32x32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_runs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_squeeze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="diehard_sums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dieharder_rng_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dieharder_test_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dtest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libdieharder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsaglia_tsang_gcd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="marsaglia_tsang_gorilla.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="parse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_bitdist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_kstest_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_lagged_sums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_lmn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_minimum_distance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_operm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_permutations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_persist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rgb_timing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rijndael-alg-fst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skein.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skein_port.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="std_test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sts_monobit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sts_runs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sts_serial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verbose.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vtest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Xtest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DieHarderDLL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

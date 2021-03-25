@@ -1,0 +1,768 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D7200CF-515F-4660-A13F-16918EF348A1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CrypTool.CrypWin</RootNamespace>
+    <AssemblyName>CrypWin</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ApplicationIcon>images\cryptool.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\CrypBuild\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\CrypBuild\Debug\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\CrypBuild\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\CrypBuild\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrypProprietary, Version=2.0.0.0, Culture=neutral, PublicKeyToken=95429f90c3a66dd4, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LibDev\CrypProprietary.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.WpfDock, Version=7.0.0.9, Culture=neutral, PublicKeyToken=adef513edc9ed778, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LibDev\DevComponents.WpfDock.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.WpfEditors, Version=7.0.0.9, Culture=neutral, PublicKeyToken=cbba4a1563683cdb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LibDev\DevComponents.WpfEditors.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.WpfRibbon, Version=7.0.0.9, Culture=neutral, PublicKeyToken=2037e151916410e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LibDev\DevComponents.WpfRibbon.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Helper\StoredTab.cs" />
+    <Compile Include="LicensesTab.xaml.cs">
+      <DependentUpon>LicensesTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplatesAnalyzer.cs" />
+    <Compile Include="GeneratingWindow.xaml.cs">
+      <DependentUpon>GeneratingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Helper\CTTabItem.xaml.cs">
+      <DependentUpon>CTTabItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\DragDropHelper\DragDropHelper.cs" />
+    <Compile Include="Helper\DragDropHelper\DraggedAdorner.cs" />
+    <Compile Include="Helper\DragDropHelper\InsertionAdorner.cs" />
+    <Compile Include="Helper\DragDropHelper\Utilities.cs" />
+    <Compile Include="Helper\EditorTypePanelManager.cs" />
+    <Compile Include="Helper\PanelWidthConverter.cs" />
+    <Compile Include="Helper\PriorityChangedListener.cs" />
+    <Compile Include="MainWindow.Log.cs" />
+    <Compile Include="MainWindow.P2P.cs" />
+    <Compile Include="MainWindow.System.cs" />
+    <Compile Include="Ntfs\AlternateDataStreamInfo.cs" />
+    <Compile Include="Ntfs\FileStreamAttributes.cs" />
+    <Compile Include="Ntfs\FileStreamType.cs" />
+    <Compile Include="Ntfs\FileSystem.cs" />
+    <Compile Include="Ntfs\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ntfs\SafeHGlobalHandle.cs" />
+    <Compile Include="Ntfs\SafeNativeMethods.cs" />
+    <Compile Include="Ntfs\StreamName.cs" />
+    <Compile Include="OnlineHelpTab.xaml.cs">
+      <DependentUpon>OnlineHelpTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Resource.de.Designer.cs">
+      <DependentUpon>Resource.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PluginList.cs" />
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="SettingsPresentation.xaml.cs">
+      <DependentUpon>SettingsPresentation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTabs\MainSettingsTab.xaml.cs">
+      <DependentUpon>MainSettingsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTabs\NotificationIconSettingsTab.xaml.cs">
+      <DependentUpon>NotificationIconSettingsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTabs\PluginsSettingsTab.xaml.cs">
+      <DependentUpon>PluginsSettingsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTabs\Resources\res.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>res.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTabs\Resources\res.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>res.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsTabs\UpdaterSettingsTab.xaml.cs">
+      <DependentUpon>UpdaterSettingsTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemInfos.xaml.cs">
+      <DependentUpon>SystemInfos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContactDevelopersDialog.xaml.cs">
+      <DependentUpon>ContactDevelopersDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdaterPresentation.xaml.cs">
+      <DependentUpon>UpdaterPresentation.xaml</DependentUpon>
+    </Compile>
+    <Page Include="LicensesTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GeneratingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Helper\CTTabItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OnlineHelpTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Splash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\GridViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ValidationRules.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsPresentation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsTabs\MainSettingsTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsTabs\NotificationIconSettingsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsTabs\PluginsSettingsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SettingsTabs\UpdaterSettingsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SystemInfos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\BlackTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Expander.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ToggleButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ContactDevelopersDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UpdaterPresentation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoUpdater.cs" />
+    <Compile Include="DemoController.cs" />
+    <Compile Include="Helper\DictionaryExtension.cs" />
+    <Compile Include="CrypWinCommands.cs" />
+    <Compile Include="Delegates\Delegates.cs" />
+    <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Helper\ListViewItemStyleSelector.cs" />
+    <Compile Include="Helper\LogMessage.cs" />
+    <Compile Include="Helper\MessageBoxHelper.cs" />
+    <Compile Include="Helper\StringExtensions.cs" />
+    <Compile Include="Helper\StringToImageSourceConverter.cs" />
+    <Compile Include="MainWindow.CommandHelper.cs" />
+    <Compile Include="MainWindow.FileIO.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Helper\PropertyGridResources.cs" />
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Reveal.cs" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Resources\old-www.cryptool.org.crt" />
+    <None Include="Resources\www.cryptool.org.crt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Bold.png" />
+    <Resource Include="images\Copy.png" />
+    <Resource Include="images\ctLogo.png" />
+    <Resource Include="images\Cut.png" />
+    <Resource Include="images\Exit.png" />
+    <Resource Include="images\Find.png" />
+    <Resource Include="images\FindNext.png" />
+    <Resource Include="images\FolderClosed32.png" />
+    <Resource Include="images\FontColor.png" />
+    <Resource Include="images\FontSizeDec.png" />
+    <Resource Include="images\FontSizeInc.png" />
+    <Resource Include="images\Italic.png" />
+    <Resource Include="images\NewDocument.png" />
+    <Resource Include="images\Options.png" />
+    <Resource Include="images\Paste16.png" />
+    <Resource Include="images\Paste32.png" />
+    <Resource Include="images\Print32.png" />
+    <Resource Include="images\SaveAs32.png" />
+    <Resource Include="images\SchemeBlack.png" />
+    <Resource Include="images\SchemeBlue.png" />
+    <Resource Include="images\SchemeCustom.png" />
+    <Resource Include="images\SchemeSilver.png" />
+    <Resource Include="images\Select.png" />
+    <Resource Include="images\Strike.png" />
+    <Resource Include="images\StyleSet.png" />
+    <Resource Include="images\Subscript.png" />
+    <Resource Include="images\Superscript.png" />
+    <Resource Include="images\TextHighlight.png" />
+    <Resource Include="images\Underline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cryptool.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\downloadplugins.png" />
+    <Resource Include="images\manageplugins.png" />
+    <Resource Include="images\reloadplugins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\play_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pause_button.png" />
+    <Resource Include="images\stop_button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Warning.png" />
+    <Resource Include="images\Error.png" />
+    <Resource Include="images\Info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Debug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\editorSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ntfs\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsTabs\Resources\res.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>res.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsTabs\Resources\res.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>res.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\redo.png" />
+    <Resource Include="images\undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\test\pause.png" />
+    <Resource Include="images\test\play.png" />
+    <Resource Include="images\test\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\row-template.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\exportToHTML.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Save32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\File32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Open32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CrypCloud\CrypCloudCore\CrypCloudCore.csproj">
+      <Project>{5aa65cee-66bf-4b99-b46b-339e15c1a2c4}</Project>
+      <Name>CrypCloudCore</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypCloud\CrypCloudManager\CrypCloudManager.csproj">
+      <Project>{9925a476-c298-4224-bf66-a18688202e64}</Project>
+      <Name>CrypCloudManager</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypCore\CrypCore.csproj">
+      <Project>{FF5D473C-0716-4D3E-9078-2EBD979F94C6}</Project>
+      <Name>CrypCore</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
+      <Name>CrypPluginBase</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypPlugins\WorkspaceManager\WorkspaceManager.csproj">
+      <Project>{949B4294-2894-43B4-BD73-E0B031F5434F}</Project>
+      <Name>WorkspaceManager</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\CrypToolStore\CrypToolStore.csproj">
+      <Project>{0182e69c-7f75-4b4f-953d-748d9a6d168e}</Project>
+      <Name>CrypToolStore</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\LibSource\HtmlTextBlock\HtmlTextBlock.csproj">
+      <Project>{8E67C36F-4403-4724-96D4-AF6E05744688}</Project>
+      <Name>HtmlTextBlock</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineDocumentationGenerator\OnlineDocumentationGenerator.csproj">
+      <Project>{0698CD9D-DAD6-41AE-9E0A-FB00959FE8B1}</Project>
+      <Name>OnlineDocumentationGenerator</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Startcenter\Startcenter.csproj">
+      <Project>{468D6A22-A7B4-4B70-A7CD-EEC9F3D11566}</Project>
+      <Name>Startcenter</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\WorkspaceManagerModel\WorkspaceManagerModel.csproj">
+      <Project>{C35A6E71-D6FE-478B-A12D-FAD54FC4EDC9}</Project>
+      <Name>WorkspaceManagerModel</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\01-Classic-28x26.png" />
+    <Resource Include="images\02-Modern-28x26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Both.png" />
+    <Resource Include="images\NavPane.png" />
+    <Resource Include="images\RibTab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\AlgSel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Reopen32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\Beginner.png" />
+    <Resource Include="images\DetailLevel.png" />
+    <Resource Include="images\Experienced.png" />
+    <Resource Include="images\Expert.png" />
+    <Resource Include="images\Professional.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\MyFiles16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\balloon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\update.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\noUpdate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\copy32.png" />
+    <Resource Include="images\cut32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\help32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\remove32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\updateReady.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\bigBalloons.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\LogoBlau.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\f2s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\delete2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\addimg-big.png" />
+    <Resource Include="images\addtxt-big.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\systemInfos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cryptoolP2P.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\contact.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\updaterBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\comp.png" />
+    <Resource Include="images\log.png" />
+    <Resource Include="images\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\03-Stego-28x26.png" />
+    <Resource Include="images\04-Hash-28x26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\05-Analysis-28x26.png" />
+    <Resource Include="images\07-Tools-28x26.png" />
+    <Resource Include="images\08-Search-28x26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\06-Protocols-28x26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\update_header.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\backward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ntfs\Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ApacheLicense2.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\licenses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\statistics_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\ctLogoDropdown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pause.png" />
+    <Resource Include="Resources\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\hw.png" />
+    <Resource Include="Resources\xm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cloud-connected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\cloud-disconnected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\decrypt-logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy  /Y "..\..\Lib" "Lib\"
+xcopy  /E /Y "..\..\Templates" "Templates\"
+xcopy  /E /Y "..\..\LanguageStatistics" "LanguageStatistics\"
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>

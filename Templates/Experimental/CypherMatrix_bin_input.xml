@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">CypherMatrix Cipher (File Input)</title>
+  <title lang="zh">CypherMatrix密码（文件输入）</title>
+  <title lang="ru">CypherMatrix Cipher (ввод файлов)</title>
+  <summary lang="en">Usage of the <i>CypherMatrix</i> cipher with file input</summary>
+  <summary lang="zh">将CypherMatrix密码与文件输入配合使用</summary>
+  <summary lang="ru">Использование шифрования CypherMatrix с вводом файла</summary>
+  <description lang="en">This template shows how to input data from a file to the <i>CypherMatrix</i> component.</description>
+  <description lang="zh">该模板显示了如何从文件向CypherMatrix组件输入数据。</description>
+  <description lang="ru">Этот шаблон показывает, как вводить данные из файла в компонент CypherMatrix.</description>
+  <keywords>CypherMatrix, Schnoor, binary</keywords>
+  <keywords lang="zh">CypherMatrix，Schnoor，二进制</keywords>
+  <keywords lang="ru">CypherMatrix, Schnoor, двоичный</keywords>
+  <title lang="de">CypherMatrix-Chiffre (Dateieingabe)</title>
+  <summary lang="de">Benutzung der <i>CypherMatrix</i>-Chiffre mit Dateieingabe</summary>
+  <description lang="de">Diese Vorlage zeigt, wie der <i>CypherMatrix</i>-Komponente Daten aus einer Datei übergeben werden können.</description>
+  <keywords lang="de">CypherMatrix, Schnoor, Binär</keywords>
+  <icon file="CypherMatrix.png" />
+  <relevantPlugins>
+    <plugin name="CypherMatrix" />
+    <plugin name="FileInputClass" />
+    <plugin name="FileOutputClass" />
+  </relevantPlugins>
+</sample>

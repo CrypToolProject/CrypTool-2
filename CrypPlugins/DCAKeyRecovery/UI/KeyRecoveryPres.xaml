@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="DCAKeyRecovery.UI.KeyRecoveryPres"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DCAKeyRecovery"
+             mc:Ignorable="d" 
+             d:DesignHeight="430" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="450*"></RowDefinition>
+            <RowDefinition Height="50*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.Row="0" Grid.Column="0" SelectionChanged="TabControl_ItemChanged">
+            <TabItem Name="TabControlItemRound" Header="{Loc TabItemHeaderRoundSummary}">
+                <Viewbox Name="TabItemTable" Stretch="Uniform">
+
+                </Viewbox>
+            </TabItem>
+            <!-- 
+            <TabItem Name="TabControlItemCipher" Header="{Loc TabItemHeaderCipher}">
+                <Viewbox Grid.Row="0" Name="TabItemCipher" Stretch="Uniform">
+
+                </Viewbox>
+            </TabItem>
+            -->
+            <TabItem Name="TabControlItemSummary" Header="{Loc TabItemHeaderSummary}">
+                <Viewbox Grid.Row="0" Name="TabItemSummary" Stretch="Uniform">
+
+                </Viewbox>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="2,2,2,2" Background="Yellow" Visibility="{Binding IsNextStepPanelVisible, Mode=OneWay}">
+            <TextBlock FontWeight="Bold" FontSize="8" VerticalAlignment="Center">
+                <Run Text="{Loc nextStepTextRun1}"></Run>
+                <LineBreak/>
+                <Run Text="{Loc nextStepTextRun2}"></Run>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="2,2,2,2">
+            <Button Name="BtnStart" Background="LightGray" Content="{Loc BtnStart}" Width="80" IsEnabled="{Binding StartEnabled, Mode=OneWay}" Click="StartButton_Clicked"></Button>
+            <!-- 
+            <Button Content="{Loc BtnNextMessage}" MaxWidth="180" IsEnabled="{Binding NextMessageEnabled, Mode=OneWay}" Click="NextMessageButton_Clicked" Margin="5,0,5,0"></Button>
+            <Button Content="{Loc BtnNextKey}" MaxWidth="150" IsEnabled="{Binding NextKeyEnabled, Mode=OneWay}" Click="NextKeyButton_Clicked"></Button>
+            -->
+        </StackPanel>
+    </Grid>
+</UserControl>
+
+<!--
+<Viewbox Grid.Row="0" Name="ContentViewBox" Stretch="Uniform">
+
+</Viewbox>    
+-->

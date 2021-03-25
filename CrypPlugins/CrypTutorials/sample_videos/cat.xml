@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<categories>
+	<category>
+		<id>1</id>
+		<name lang="en">cryptanalysis</name>
+		<name lang="de">cryptanalysis</name>
+		<subcategories>
+			<category>
+				<id>2</id>
+				<name lang="en">classic</name>
+				<name lang="de">classic</name>
+				<subcategories></subcategories>
+			</category>
+		</subcategories>
+	</category>
+	<category>
+		<id>3</id>
+		<name lang="en">cryptography</name>
+		<name lang="de">cryptography</name>
+		<subcategories>
+			<category>
+				<id>4</id>
+				<name lang="en">modern</name>
+				<name lang="de">modern</name>
+				<subcategories>
+					<category>
+						<id>5</id>
+						<name lang="en">sub modern</name>
+						<name lang="de">sub modern</name>
+						<subcategories></subcategories>
+					</category>
+				</subcategories>
+			</category>
+		</subcategories>
+	</category>
+</categories>

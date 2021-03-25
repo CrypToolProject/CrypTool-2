@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">CRC</title>
+  <title lang="zh">CRC</title>
+  <title lang="ru">CRC</title>
+  <summary lang="en">Usage of the <i>CRC</i> checksum function</summary>
+  <summary lang="zh">CRC校验和功能的用法</summary>
+  <summary lang="ru">Использование хэш-функции CRC</summary>
+  <description lang="en">This template shows the usage of the <i>CRC</i> checksum function.</description>
+  <description lang="zh">此模板显示CRC校验和功能的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование хэш-функции CRC.</description>
+  <keywords>hash</keywords>
+  <keywords lang="zh">杂凑</keywords>
+  <keywords lang="ru">гашиш</keywords>
+  <title lang="de">CRC</title>
+  <summary lang="de">Benutzung des <i>CRC</i>, mit dem der Empfänger die Nachricht auf Integrität überprüfen kann</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>CRC</i>, mit dem der Empfänger die Nachricht auf Integrität überprüfen kann.</description>
+  <keywords lang="de">hash</keywords>
+  <icon file="CRC.png" />
+  <relevantPlugins>
+    <plugin name="CRC" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$memo$" value="Eine {\b Prüfsumme} (z. B. CRC32) ermöglicht das Erkennen versehentlicher Änderungen. Sie sind schnell und werden normalerweise in der Kommunikation verwendet, aber sie schützen nicht vor böswilligen Änderungen: Es ist ziemlich einfach, eine Datei mit einer bestimmten Prüfsumme zu erstellen. \line \line Im Allgemeinen ordnet eine {\b Hash-Funktion} Daten anderen Daten zu. Sie wird häufig verwendet, um Vergleiche zu beschleunigen oder eine Hash-Tabelle zu erstellen. Nicht alle Hash-Funktionen sind sicher und der Hash ändert sich nicht unbedingt, wenn sich die Daten ändern. \line \line Eine {\b kryptographische Hash-Funktion} (wie SHA1) ist eine Prüfsumme, die vor böswilligen Änderungen geschützt ist. Es ist ziemlich schwierig, eine Datei mit einem bestimmten kryptographischen Hash zu erstellen. \line \line Kryptographische Hash-Funktionen werden häufig einfach als Hash-Funktionen bezeichnet. \line \line Prüfsummen und kryptographische Hash-Funktionen sind insofern ähnlich, als sie beide deterministisch sind und Daten variabler Größe einer festen Größe zuordnen können. Sie können beide verwendet werden, um die Gleichheit zu überprüfen, wenn auch mit unterschiedlichen Garantien, und haben daher völlig unterschiedliche Anwendungen." />
+    <replacement key="$Text Input$" value="Texteingabe" />
+    <replacement key="$CRC value (hexadecimal)$" value="CRC-Wert (hexadezimal)" />
+    <replacement key="$CRC value (binary)$" value="CRC-Wert (binär)" />
+    <replacement key="$String Encoder$" value="String-Dekodierer" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$memo$" value="{\b校验和}（例如CRC32）可以识别意外更改。它们速度很快，通常用于通信，但是它们不能防止恶意更改：创建带有特定校验和的文件非常容易。 \line \line通常，{\b hash函数}会将数据映射到其他数据。它通常用于加速比较或创建哈希表。并非所有哈希函数都是安全的，并且哈希不一定随数据变化而变化。 \line \line A {\b加密哈希函数}（如SHA1）是一种校验和，可防止恶意更改。创建带有特定加密哈希的文件非常困难。 \line \line加密哈希函数通常简称为哈希函数。 \line \line校验和与加密哈希函数的相似之处在于它们既具有确定性，又可以将可变大小的数据映射到固定大小。尽管有不同的保证，它们都可以用来检查相等性，因此用途完全不同。" />
+    <replacement key="$Text Input$" value="文字输入" />
+    <replacement key="$CRC value (hexadecimal)$" value="CRC值（十六进制）" />
+    <replacement key="$CRC value (binary)$" value="CRC值（二进制）" />
+    <replacement key="$String Encoder$" value="字符串解码器" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$memo$" value="{\b контрольная сумма} (например, CRC32) позволяет заметить случайные изменения. Они быстрые и обычно используются в общении, но они небезопасны для защиты от злонамеренных изменений: довольно просто создать файл с определенной контрольной суммой. \line \line В общем случае {\b хэш-функция} отображает некоторые данные в другие. Он часто используется для ускорения сравнений или создания хеш-таблицы. Не все хеш-функции являются безопасными, и хеш-код не обязательно изменяется при изменении данных. \line \line {\b криптографическая хеш-функция} (например, SHA1) - это контрольная сумма, защищенная от вредоносных изменений. Создать файл с определенным криптографическим хешем довольно сложно. \line \line Часто криптографические хеш-функции просто называются хеш-функциями. \line \line Таким образом, контрольные суммы и криптографические хеш-функции похожи в том, что они оба являются детерминированными и могут отображать данные переменного размера в фиксированный размер. Они оба могут использоваться для проверки одинаковости, хотя и с разными гарантиями, и поэтому имеют совершенно разные приложения." />
+    <replacement key="$Text Input$" value="ввод текста" />
+    <replacement key="$CRC value (hexadecimal)$" value="Значение CRC (шестнадцатеричное)" />
+    <replacement key="$CRC value (binary)$" value="Значение CRC (двоичное)" />
+    <replacement key="$String Encoder$" value="Строка декодера" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$memo$" value="A {\b checksum} (such as CRC32) enables to notice accidental changes. They are fast and normally used in communication, but they are not safe to protect against malicious changes: It is pretty easy to create a file with a particular checksum.\line \line In general, a {\b hash function} maps some data to other data. It is often used to speed up comparisons or create a hash table. Not all hash functions are secure and the hash does not necessarily changes when the data changes.\line \line A {\b cryptographic hash function} (such as SHA1) is a checksum that is secure against malicious changes. It is pretty hard to create a file with a specific cryptographic hash.\line \line Often, cryptographic hash functions are simply called hash functions.\line \line So checksums and cryptographic hash functions are similar in that they are both are deterministic and can map a variable size data to a fixed size. They can both be used to check for sameness, although with different guarantees, and so have completely different applications." />
+    <replacement key="$Text Input$" value="Text Input" />
+    <replacement key="$CRC value (hexadecimal)$" value="CRC value (hexadecimal)" />
+    <replacement key="$CRC value (binary)$" value="CRC value (binary)" />
+    <replacement key="$String Encoder$" value="String Encoder" />
+  </replacements>
+</sample>

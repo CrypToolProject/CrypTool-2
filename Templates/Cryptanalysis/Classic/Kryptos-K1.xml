@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Kryptos K1 Analysis</title>
+  <title lang="zh">rypto K1分析</title>
+  <title lang="ru">Анализ Kryptos K1</title>
+  <summary lang="en">Analysis of Kryptos K1</summary>
+  <summary lang="zh">rypto K1分析</summary>
+  <summary lang="ru">Анализ Kryptos K1</summary>
+  <description lang="en">Kryptos is an encrypted sculpture by American artist Jim Sanborn located on the grounds of the Central Intelligence Agency (CIA) in Langley, Virginia. Since its dedication on November 3, 1990, there has been much speculation about the meaning of the encrypted messages it bears. Of the four messages, three have been solved, with the fourth remaining one of the most famous unsolved codes in the world. The sculpture continues to provide a diversion for cryptanalysts, both amateur and professional, who are attempting to decrypt the final section. Source: http://en.wikipedia.org/wiki/Kryptos</description>
+  <description lang="zh">Kryptos是美国艺术家Jim Sanborn加密的雕塑，位于弗吉尼亚州兰利市中央情报局（CIA）的场地上。自从1990年11月3日奉献以来，人们就对其所携带的加密消息的含义进行了很多猜测。在这四个消息中，有三个已解决，而第四个消息仍然是世界上最著名的未解决代码之一。该雕塑继续为试图解密最后一部分的业余和专业密码分析人员提供了转移。资料来源：http://en.wikipedia.org/wiki/Kryptos</description>
+  <description lang="ru">Криптос - зашифрованная скульптура американского художника Джима Санборна, расположенного на территории Центрального разведывательного управления (ЦРУ) в Лэнгли, штат Вирджиния. С момента его посвящения 3 ноября 1990 года было много предположений о значении зашифрованных сообщений, которые оно несет. Из четырех сообщений три были решены, четвертый - один из самых известных нераскрытых кодов в мире. Скульптура продолжает обеспечивать утечку криптоаналитиков, как любительских, так и профессиональных, которые пытаются расшифровать заключительный раздел. Источник: http://en.wikipedia.org/wiki/Kryptos</description>
+  <keywords>Kryptos, Vigenère, Vigenere, CIA, Sanborn, challenge, sculpture, riddle, analysis</keywords>
+  <keywords lang="zh">Kryptos，Vigenère，Vigenere，CIA，Sanborn，挑战，雕塑，谜语，分析</keywords>
+  <keywords lang="ru">Криптос, Вигеньер, Виженере, ЦРУ, Санборн, вызов, скульптура, загадка, анализ</keywords>
+  <title lang="de">Kryptos K1 Analyse</title>
+  <summary lang="de">Kryptoanalyse von Kryptos K1</summary>
+  <description lang="de">Kryptos ist eine Skulptur des US-amerikanischen Bildhauers Jim Sanborn auf dem Gelände der Central Intelligence Agency (CIA) in Langley, Virginia, USA. Seit ihrer Einweihung am 3. November 1990 gibt es viele Spekulationen über die auf ihr angebrachten verschlüsselten Nachrichten. Angestellte der CIA und andere Kryptoanalytiker haben schon viele Versuche unternommen, diese zu entschlüsseln. Quelle: http://de.wikipedia.org/wiki/Kryptos_(Skulptur)</description>
+  <keywords lang="de">Kryptos, Vigenère, Vigenere, CIA, Sanborn, Challenge, Skulptur, Rätsel, Analyse</keywords>
+  <icon file="kryptos.png" />
+  <relevantPlugins>
+    <plugin name="VigenereAnalyzer" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext K1" />
+    <replacement key="$Vigenere Analyzer$" value="Vigenère-Analysierer" />
+    <replacement key="$Kryptos Alphabet$" value="Kryptos-Alphabet" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$memo$" value="Kryptos ist eine verschlüsselte Skulptur des amerikanischen Künstlers Jim Sanborn, die auf dem Gelände der Central Intelligence Agency (CIA) in Langley, Virginia steht. Seit seiner Einweihung am 3. November 1990 gab es viele Spekulationen über den Inhalt der darauf abgebildeten verschlüsselten Nachrichten. Drei der vier Nachrichten konnten entschlüsselt werden, die vierte ist noch ungelöst und ist einer der bekanntesten ungelösten Geheimtexte der Welt. Die Skulptur stellt weiterhin eine Herausforderung für Kryptoanalysten, ob Profi oder Amateur, dar, die versuchen, den letzten Abschnitt zu entschlüsseln.\line\line Quelle: http://en.wikipedia.org/wiki/Kryptos\line\line Diese Vorlage demonstriert die Lösung der Kryptos-Aufgabe K1, der ersten Nachricht der Kryptos-Skulptur.\line Die Vigenère-Analyse-Komponente erhält als Eingabe den K1-Geheimtext und das Kryptos-Alphabet (KRYPTOSABCDEFGHIJLMNQUVWXZ). Sie führt eine Hill-Climbing-Suche nach Vigenère-Schlüsseln mit 5 bis 20 Zeichen bei 100 Neustarts durch." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文K1" />
+    <replacement key="$Vigenere Analyzer$" value="维格涅尔分析家" />
+    <replacement key="$Kryptos Alphabet$" value="密码字母" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$memo$" value="Kryptos是美国艺术家吉姆·桑伯恩（Jim Sanborn）的加密雕塑，位于弗吉尼亚州兰利市中央情报局（CIA）的场地上。自1990年11月3日启用以来，人们一直在猜测显示在其上的加密消息的内容。可以解密四封邮件中的三封，第四封仍未解决，并且是世界上最著名的未解决的秘密文本之一。雕塑继续挑战解密专家，试图解密最后一部分。\Line \line来源：http://en.wikipedia.org/wiki/Kryptos\line\line此模板演示密码任务K1（密码雕塑的第一条消息）的解决方案\行Vigenère分析组件接收K1密文和密码字母（KRYPTOSABCDEFGHIJLMNQUVWXZ）作为输入。她在100次重新启动后进行了5到20个字符的Vigenère键爬坡搜索。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="Ciphertext K1" />
+    <replacement key="$Vigenere Analyzer$" value="Vigenere-Analysierer" />
+    <replacement key="$Kryptos Alphabet$" value="Kryptos-алфавит" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$memo$" value="Криптос - зашифрованная скульптура американского художника Джима Санборна, расположенного на месте Центрального разведывательного управления (ЦРУ) в Лэнгли, штат Вирджиния. С момента его инаугурации 3 ноября 1990 года было много предположений о содержании зашифрованных сообщений, отображаемых на нем. Три из четырех сообщений могут быть дешифрованы, четвертый до сих пор не разрешен и является одним из самых известных неразрешенных зашифрованных текстов в мире. Скульптура продолжает ставить вызов криптоаналитикам, профессиональным или любителям, которые пытаются расшифровать последний раздел. \Line \line Источник: http://en.wikipedia.org/wiki/Kryptos\line\line Этот шаблон демонстрирует решение задачи криптографии K1, первое сообщение криптографической скульптуры. \line Компонент анализа Vigenère получает в качестве входного значения зашифрованный текст K1 и криптографический алфавит (KRYPTOSABCDEFGHIJLMNQUVWXZ). Она выполняет поиск по холму для поиска ключей Vigenère с 5-20 символами при 100 перезагрузках." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext K1" />
+    <replacement key="$Vigenere Analyzer$" value="Vigenère Analyzer" />
+    <replacement key="$Kryptos Alphabet$" value="Kryptos Alphabet" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$memo$" value="Kryptos is an encrypted sculpture by American artist Jim Sanborn located on the grounds of the Central Intelligence Agency (CIA) in Langley, Virginia. Since its dedication on November 3, 1990, there has been much speculation about the meaning of the encrypted messages it bears. Of the four messages, three have been solved, with the fourth remaining one of the most famous unsolved codes in the world. The sculpture continues to provide a diversion for cryptanalysts, both amateur and professional, who are attempting to decrypt the final section.\line\line Source: http://en.wikipedia.org/wiki/Kryptos\line\line With this template we demonstrate the solution of Kryptos K1 - the first message of the Kryptos sculpture.\line The Vigenère Analyzer component takes the K1 ciphertext and the Kryptos alphabet (KRYPTOSABCDEFGHIJLMNQUVWXZ). It performs a hillclimb-search for Vigenère keys between 5 and 20 using 100 restarts." />
+  </replacements>
+</sample>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Enigma Simulated Annealing Attack</title>
+  <title lang="zh">谜团模拟退火攻击</title>
+  <title lang="ru">Атака имитации отжига Enigma</title>
+  <summary lang="en">Cryptanalysis of the <i>Enigma</i> cipher</summary>
+  <summary lang="zh">谜密码的密码分析</summary>
+  <summary lang="ru">Криптоанализ шифрования Enigma</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>Enigma</i> cipher.</description>
+  <description lang="zh">该模板显示了对Enigma密码的密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Enigma.</description>
+  <keywords>Machine, Turing, World War, Rotor, Attack, Analysis, Analyzer, Breaker</keywords>
+  <keywords lang="zh">机，图灵，第二次世界大战，转子，攻击，分析，分析仪，破碎机</keywords>
+  <keywords lang="ru">Машина, Тьюринг, Мировая Война, Ротор, Атака, Анализ, Анализатор, Выключатель</keywords>
+  <title lang="de">Enigma Hillclimbing Angriff</title>
+  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit Simulated Annealing</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
+  <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
+  <icon file="Enigma_Analyzer.png" />
+  <relevantPlugins>
+    <plugin name="Enigma" />
+    <plugin name="FrequencyTest" />
+    <plugin name="FriedmanTest" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$EnigmaAnalyzer$" value="Enigma-Analyse" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel Einstellungen" />
+    <replacement key="$memo$" value="Dieses Beispiel zeigt einen simulierten Simulated-Anneling-Angriff, der von George Lasry entwickelt wurde. Es ist eine Erweiterung des Angriffs von Sullivan und Weierud. Für jede mögliche Rotoreinstellung (Reihenfolge, Ringeinstellungen und Rotorstartpositionen) wird ein simulierter Simulated-Annealing-Angriff angewendet, um die Steckerbrett-Einstellungen wiederherzustellen. Er verwendet n-Gramm-Statistiken. Dieser Angriff ist langsamer als der von Sullivan und Weirerud, aber er ist effektiver für kürzere Nachrichten (z.B. mit 50 Buchstaben) oder wenn der Geheimtext viele fehlerhafte Symbole enthält. Es wird empfohlen, zuerst alle auf Ringe auf Z einzustellen und dann einen ersten Lauf auszuführen, der erfolgreich sein kann, wenn keine mittlerere Rotorweiterschaltung vorliegt, und andernfalls eine vollständige Suche (A bis Z) der richtigen Ringeinstellungen durchzuführen. Wenn keiner dieser Läufe erfolgreich ist, kann der Angriff ausgeführt werden, bei dem eine vollständige Suche (von A bis Z) nach dem rechten und dem mittleren Rotor durchgeführt wird, was aber lange dauern kann." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$EnigmaAnalyzer$" value="谜题分析" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Crib$" value="婴儿床" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Key$" value="按键设定" />
+    <replacement key="$memo$" value="此示例显示了由George Lasry开发的模拟模拟的匿名攻击。它是Sullivan和Weierud攻击的扩展。对于每个可能的转子设置（顺序，环设置和转子起始位置），使用模拟模拟退火攻击来恢复插板设置。它使用n-gram统计信息。这种攻击比Sullivan和Weirerud的攻击要慢，但是对于较短的消息（例如50个字母）或密文包含许多不正确的符号时，这种攻击更为有效。建议先将所有环设置为Z，然后再进行第一次运行，如果没有中等转子分度，则可以成功执行此操作，否则，请完全搜索（A到Z）正确的环设置。如果所有这些运行均未成功，则可以执行攻击，从而对右旋翼和中旋翼进行全面搜索（从A到Z），但是这可能需要很长时间。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$EnigmaAnalyzer$" value="Энигма-анализ" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Key$" value="Настройки клавиш" />
+    <replacement key="$memo$" value="Этот пример демонстрирует имитацию атаки с отжигом только зашифрованного текста, разработанную Джорджем Ласри. Это продолжение атаки Салливана и Вейруда. Для каждой возможной настройки ротора (порядок, настройки кольца и начальные положения ротора) применяется алгоритм моделирования отжига для восстановления настроек коммутационной панели. Он использует статистику n-граммов. Эта атака медленнее, чем Sullivan и Weirerud, но она более эффективна для более коротких сообщений (например, с 50 буквами) или когда в зашифрованном тексте много искаженных символов. Рекомендуется сначала запустить атаку всех колец, установленных на Z, для начального запуска, который может быть успешным в случае отсутствия оборота среднего ротора, а в противном случае разрешить полный поиск (от A до Z) правильных настроек кольца. Если ни один из этих прогонов не увенчается успехом, можно запустить атаку с указанием полного поиска (от A до Z) как для правого, так и для среднего роторов, что может занять много времени." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$EnigmaAnalyzer$" value="Enigma Analyzer" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$FriedmanTest$" value="FriedmanTest" />
+    <replacement key="$Key$" value="Key Settings" />
+    <replacement key="$memo$" value="This example demonstrates a simulated annealing ciphertext-only attack, developed by George Lasry. It is an extension of the Sullivan and Weierud attack. For each possible rotor settings (order, ring settings, and rotor starting positions), a simulated annealing algorithm is applied to recover the plugboard settings. It employs n-grams statistics. This attack is slower than Sullivan and Weirerud but it is more effective for shorter messages (e.g. with 50 letters), or when there are many garbled symbols in the ciphertext. It is recommended to first run the attack all rings set to Z, for an initial run, that may succeed in case there was no middle rotor turnover, and otherwise, allow for a full search (A to Z) of the right ring settings. If neither of those runs succeeds, the attack can be run specifying a full search (A to Z) for both the right and middle rotors, which might take a long time. " />
+  </replacements>
+</sample>

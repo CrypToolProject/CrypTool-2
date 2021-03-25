@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>HKDF SHA-256</value>
+  </data>
+  <data name="HKDFSHA256Tooltip" xml:space="preserve">
+    <value>Visualization of the Key Derivation Function HKDF SHA-256</value>
+  </data>
+  <data name="ConfigInfinityOutput" xml:space="preserve">
+    <value>Orientate implementation to RFC 5869</value>
+  </data>
+  <data name="ConfigInfinityOutputTooltip" xml:space="preserve">
+    <value>Configuration is based on RFC 5869. This means that an 8-bit counter is used and the length of the output bytes is limited to 8192. Further information can be found in the help.</value>
+  </data>
+  <data name="ConfigPresCaption" xml:space="preserve">
+    <value>Explain the HKDF SHA-256</value>
+  </data>
+  <data name="ConfigPresTooltip" xml:space="preserve">
+    <value>Activates or deactivates the explanations</value>
+  </data>
+  <data name="ConfigPrintKMToFileCaption" xml:space="preserve">
+    <value>Save generated key material to file</value>
+  </data>
+  <data name="ConfigPrintKMToFileTooltip" xml:space="preserve">
+    <value>Defines, that the generated key material will be saved to a file, so that it can be used in other tools.</value>
+  </data>
+  <data name="InputSaltCaption" xml:space="preserve">
+    <value>Salt</value>
+  </data>
+  <data name="InputSaltToolTip" xml:space="preserve">
+    <value>Input of the salt</value>
+  </data>
+  <data name="InputOutputLengthCaption" xml:space="preserve">
+    <value>Length of the key material</value>
+  </data>
+  <data name="InputOutputLengthToolTip" xml:space="preserve">
+    <value>Length of the key material (in byte)</value>
+  </data>
+  <data name="InputSKMCaption" xml:space="preserve">
+    <value>Source Key Material</value>
+  </data>
+  <data name="InputSKMToolTip" xml:space="preserve">
+    <value>Input of source key material</value>
+  </data>
+  <data name="OutputKeyMaterialCaption" xml:space="preserve">
+    <value>Key Material</value>
+  </data>
+  <data name="OutputKeyMaterialDebugCaption" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="OutputKeyMaterialDebugToolTip" xml:space="preserve">
+    <value>Output of the single steps of the key derivation</value>
+  </data>
+  <data name="OutputKeyMaterialToolTip" xml:space="preserve">
+    <value>Output of the to generate key material</value>
+  </data>
+  <data name="PresCalc" xml:space="preserve">
+    <value>Skip calculation</value>
+  </data>
+  <data name="PresIntro" xml:space="preserve">
+    <value>Skip chapter</value>
+  </data>
+  <data name="PresNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="SaveFileDialogCaption" xml:space="preserve">
+    <value>Save key material to file:</value>
+  </data>
+  <data name="SaveFileDialogTooltip" xml:space="preserve">
+    <value>Specifies the output file for the generated key material, if you want to save it to a file</value>
+  </data>
+  <data name="PresConstructionSectionHeading" xml:space="preserve">
+    <value>Construction</value>
+  </data>
+  <data name="PresConstructionSectionHeadingNum" xml:space="preserve">
+    <value>2. Construction of HKDF SHA-256</value>
+  </data>
+  <data name="PresExplanationSectionHeading" xml:space="preserve">
+    <value>HKDF SHA-256</value>
+  </data>
+  <data name="PresIntroductionPart1Text" xml:space="preserve">
+    <value>The function HKDF SHA-256 is a key derivation function (KDF). It uses the Keyed-Hash Message Authentication Code (HMAC) as a pseudorandom function (PRF). As inputs it gets the SKM and the secret key. In this implementation, the SHA-256 is used in the HMAC. This key derivation fuction is recommended by the National Institute of Standards and Technology (NIST).</value>
+  </data>
+  <data name="PresIntroductionSectionHeading" xml:space="preserve">
+    <value>Introduction</value>
+  </data>
+  <data name="PresIntroductionSectionHeadingNum" xml:space="preserve">
+    <value>1. Introduction</value>
+  </data>
+  <data name="PresSectionIntroductionText" xml:space="preserve">
+    <value>&lt;Bold&gt;&lt;Underline&gt;Inputs:&lt;/Underline&gt;&lt;/Bold&gt;
+&lt;Bold&gt;Source Key Material:&lt;/Bold&gt; Specifies the source key material (SKM)
+
+&lt;Bold&gt;Salt:&lt;/Bold&gt; Specifies the salt value for the calculation of the pseudorandom key (PRK). Does not have to be secret.
+
+&lt;Bold&gt;Context Information:&lt;/Bold&gt; Specifies the applicationspecific constant context information (CTXInfo). Can be empty.
+
+&lt;Bold&gt;Length of the key material (in byte):&lt;/Bold&gt; Specifies the length of the key material in byte.
+
+&lt;Bold&gt;&lt;Underline&gt;Outputs:&lt;/Underline&gt;&lt;/Bold&gt;
+&lt;Bold&gt;Key Material:&lt;/Bold&gt; After the calculation, the resulting key material (KM) is visible in the text field.
+
+&lt;Bold&gt;Debug:&lt;/Bold&gt; The key material will be calculated in multiple steps. Each subresult will be visible in this text field.</value>
+  </data>
+  <data name="PresTitleHeading" xml:space="preserve">
+    <value>HKDF SHA-256
+--
+a Key Derivation Function with extendable output length</value>
+  </data>
+  <data name="ExToMuchOutputRequested" xml:space="preserve">
+    <value>Please specify a smaller value for requested length of outputbytes. You specified: {0}. Allowed is only: {1}</value>
+  </data>
+  <data name="InputCtxInfoCaption" xml:space="preserve">
+    <value>CTXInfo</value>
+  </data>
+  <data name="InputCtxInfoToolTip" xml:space="preserve">
+    <value>Input of the applicationspecific constant CTXInfo</value>
+  </data>
+  <data name="KeyMaterialDebugTextTemplate" xml:space="preserve">
+    <value>Output of the {0}{ord} calculation round:
+
+Byte 1 - 8:     {1}
+Byte 9 - 16:   {2}
+Byte 17 - 24: {3}
+Byte 25 - 32: {4}</value>
+  </data>
+  <data name="PresConstructionPart1Text" xml:space="preserve">
+    <value>The calculation of the key material can be described as following:</value>
+  </data>
+  <data name="PresConstructionPart2Text" xml:space="preserve">
+    <value>The HKDF procedure consists of two steps. In the first step, a pseudo random key (PRK) is generated. It is calculated on the basis of the SKM and an optional salt.</value>
+  </data>
+  <data name="PresConstructionPart3Text" xml:space="preserve">
+    <value>In step 2, the key material is calculated. For this purpose, the prk from step 1 is used as a secret key for the HMAC. The KM is calculated step by step. The HKDF method uses a feedback loop and a counter for this purpose: The respective precalculated value is used as input for the subsequent calculation. The counter is incremented in each step. The input CTXinfo is an application-specific constant, which can also be empty.</value>
+  </data>
+  <data name="PresConstructionPart4Text" xml:space="preserve">
+    <value>The following picture shows the second step:</value>
+  </data>
+  <data name="PresConstructionScheme" xml:space="preserve">
+    <value>Step 1: Extract
+        PRK = HMAC-SHA256(Salt, SKM)
+
+Step 2: Expand
+        KM(0) = empty string (zero length)
+        KM(1) = HMAC-SHA256(PRK, KM(0) || info || CTR)
+        KM(2) = HMAC-SHA256(PRK, KM (1) || info || CTR)
+        …
+        KM(n) = HMAC-SHA256(PRK, KM (n-1) || info || CTR)</value>
+  </data>
+  <data name="PresIterationPRKCalc" xml:space="preserve">
+    <value>Step 1: Calculation of PRK with following inputs:
+
+SKM: {0} 
+Salt: {1}</value>
+  </data>
+  <data name="PresIterationRounds" xml:space="preserve">
+    <value>Step 2: Calculation round {0} of {1}
+
+PRK: {2} 
+SKM: {3}
+CTXInfo: {4}
+Counter: {5}</value>
+  </data>
+  <data name="PresKeyMaterialDebugTextTemplate" xml:space="preserve">
+    <value>Output of the {0}{ord} calculation round:
+
+Byte 1 - 8: {1}
+Byte 9 - 16: {2}
+Byte 17 - 24: {3}
+Byte 25 - 32: {4}</value>
+  </data>
+  <data name="PresPRKDebugTextTemplate" xml:space="preserve">
+    <value>Output of PRK:
+
+Byte 1 - 8: {1}
+Byte 9 - 16: {2}
+Byte 17 - 24: {3}
+Byte 25 - 32: {4}</value>
+  </data>
+  <data name="PRKDebugTextTemplate" xml:space="preserve">
+    <value>Output of PRK:
+
+Byte 1 - 8:   {1}
+Byte 9 - 16:  {2}
+Byte 17 - 24: {3}
+Byte 25 - 32: {4}</value>
+  </data>
+  <data name="ExSystemOutOfMemory" xml:space="preserve">
+    <value>While requesting memory from your system, there was an exception. Please try a smaller value for the output bytes.</value>
+  </data>
+  <data name="PresErrorText" xml:space="preserve">
+    <value>An error occured. Please find detailed information in the log of CrypTool2.</value>
+  </data>
+  <data name="PresFinishedSectionHeading" xml:space="preserve">
+    <value>4. Calculation finished</value>
+  </data>
+  <data name="PresFinishedText" xml:space="preserve">
+    <value>To repeat the calculation, there are 3 alternatives:
+
+- either stop the execution and start it again
+- or change one of the inputs 
+- or click on the "Restart" button (then the calculation will restart automatically)</value>
+  </data>
+  <data name="PresIterationSectionHeading" xml:space="preserve">
+    <value>Calculation</value>
+  </data>
+  <data name="PresIterationSectionHeadingNum" xml:space="preserve">
+    <value>3. Calculation</value>
+  </data>
+  <data name="PresRestart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="PresStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="TooMuchOutputRequestedLogForKPFStd" xml:space="preserve">
+    <value>The maximum amout of outputbytes are 8160 in case of implementation refered to  RFC 5869 . The requested amout of {0} byte was set to the maximum.</value>
+  </data>
+  <data name="TooMuchOutputRequestedLogMSG" xml:space="preserve">
+    <value>The maximum amount of output are 5 MB 5242880 byte). The requested amount of  {0} byte was set to the maximum.</value>
+  </data>
+  <data name="PresStepText" xml:space="preserve">
+    <value>{0}/{1}</value>
+  </data>
+  <data name="PrintToFileGroup" xml:space="preserve">
+    <value>Saving-Parameters</value>
+  </data>
+</root>

@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnalysisGeneric_Label" xml:space="preserve">
+    <value>Analysis/Generic:</value>
+  </data>
+  <data name="AnalysisSpecific_Label" xml:space="preserve">
+    <value>Analysis/Specific:</value>
+  </data>
+  <data name="Asymmetric_Label" xml:space="preserve">
+    <value>Asymmetric:</value>
+  </data>
+  <data name="BBox_Add_Image_to_Workspace_Tooltip" xml:space="preserve">
+    <value>Add image to workspace</value>
+  </data>
+  <data name="BBox_Add_Text_to_Workspace_Tooltip" xml:space="preserve">
+    <value>Add memo (for descriptions) to the workspace</value>
+  </data>
+  <data name="BBox_Fit_to_Screen_Tooltip" xml:space="preserve">
+    <value>Adjust the zoom of the workspace automatically so that all components can be seen to the maximum (Ctrl + F)</value>
+  </data>
+  <data name="BBox_Sort_Caption" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="BBox_Sort_Tooltip" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Benchmark_Label" xml:space="preserve">
+    <value>Benchmark</value>
+  </data>
+  <data name="Benchmark_Tooltip" xml:space="preserve">
+    <value>Should the execution engine benchmark the executed functions per second?</value>
+  </data>
+  <data name="Classic_Label" xml:space="preserve">
+    <value>Classic:</value>
+  </data>
+  <data name="Class_Not_Found" xml:space="preserve">
+    <value>Class not found</value>
+  </data>
+  <data name="DataTooltip" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Datatypecolors_Label" xml:space="preserve">
+    <value>Data type colors:</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>Debug</value>
+  </data>
+  <data name="DebugCheckedFalseTooltip" xml:space="preserve">
+    <value>Show debugs</value>
+  </data>
+  <data name="DebugCheckedTrueTooltip" xml:space="preserve">
+    <value>Hide debugs</value>
+  </data>
+  <data name="Delete_all_messages" xml:space="preserve">
+    <value>Delete all messages</value>
+  </data>
+  <data name="Delete_all_messagesTooltip" xml:space="preserve">
+    <value>Clear log panel</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorCheckedFalseTooltip" xml:space="preserve">
+    <value>Show error</value>
+  </data>
+  <data name="ErrorCheckedTrueTooltip" xml:space="preserve">
+    <value>Hide error</value>
+  </data>
+  <data name="Functioncolors_Label" xml:space="preserve">
+    <value>Function colors:</value>
+  </data>
+  <data name="GUIUpdateinterval_Label" xml:space="preserve">
+    <value>GUI update interval:</value>
+  </data>
+  <data name="GUIUpdateinterval_Tooltip" xml:space="preserve">
+    <value>Sets the interval for updating GUI elements during execution</value>
+  </data>
+  <data name="Hash_Label" xml:space="preserve">
+    <value>Hash:</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="InfoCheckedFalseTooltip" xml:space="preserve">
+    <value>Show information</value>
+  </data>
+  <data name="InfoCheckedTrueTooltip" xml:space="preserve">
+    <value>Hide information</value>
+  </data>
+  <data name="LogTooltip" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="Main_Settings" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="MaximizeTooltip" xml:space="preserve">
+    <value>Maximize</value>
+  </data>
+  <data name="MinimizeTooltip" xml:space="preserve">
+    <value>Minimize</value>
+  </data>
+  <data name="No_data" xml:space="preserve">
+    <value>No data</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Workspace</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Graphical editor for a CT2 workspace</value>
+  </data>
+  <data name="PresentationTooltip" xml:space="preserve">
+    <value>Presentation</value>
+  </data>
+  <data name="Protocols_Label" xml:space="preserve">
+    <value>Protocols:</value>
+  </data>
+  <data name="RepeatTooltip" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="ResetColors_Label" xml:space="preserve">
+    <value>Reset colors</value>
+  </data>
+  <data name="ResetColors_Tooltip" xml:space="preserve">
+    <value>Reset all colors to their default values.</value>
+  </data>
+  <data name="SettingsTooltip" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Show_IControlsTooltip" xml:space="preserve">
+    <value>Show Embedded Components</value>
+  </data>
+  <data name="SleepTime_Label" xml:space="preserve">
+    <value>Sleep time:</value>
+  </data>
+  <data name="SleepTime_Tooltip" xml:space="preserve">
+    <value>Set the sleeping-time between execution of functions (in miliseconds)</value>
+  </data>
+  <data name="Steganography_Label" xml:space="preserve">
+    <value>Steganography:</value>
+  </data>
+  <data name="Symmetricblock_Label" xml:space="preserve">
+    <value>Symmetric block:</value>
+  </data>
+  <data name="SynchronousEvents_Label" xml:space="preserve">
+    <value>Synchronous events</value>
+  </data>
+  <data name="SynchronousEvents_Tooltip" xml:space="preserve">
+    <value>Set the behaviour of event handling of the execution engine</value>
+  </data>
+  <data name="Tools_Label" xml:space="preserve">
+    <value>Tools:</value>
+  </data>
+  <data name="unnamed_project" xml:space="preserve">
+    <value>New project</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="WarningCheckedFalseTooltip" xml:space="preserve">
+    <value>Show warning</value>
+  </data>
+  <data name="WarningCheckedTrueTooltip" xml:space="preserve">
+    <value>Hide warning</value>
+  </data>
+  <data name="WorkspaceManagerSettings" xml:space="preserve">
+    <value>Workspace</value>
+  </data>
+  <data name="HelpTooltip" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="Align_Center" xml:space="preserve">
+    <value>Align center</value>
+  </data>
+  <data name="Align_Justify" xml:space="preserve">
+    <value>Align justify</value>
+  </data>
+  <data name="Align_Left" xml:space="preserve">
+    <value>Align left</value>
+  </data>
+  <data name="Align_Right" xml:space="preserve">
+    <value>Align right</value>
+  </data>
+  <data name="Bold" xml:space="preserve">
+    <value>Bold</value>
+  </data>
+  <data name="Bullets" xml:space="preserve">
+    <value>Bullets</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Cut</value>
+  </data>
+  <data name="Decrease_Indent" xml:space="preserve">
+    <value>Decrease indent</value>
+  </data>
+  <data name="Enter_Name" xml:space="preserve">
+    <value>Enter name</value>
+  </data>
+  <data name="Grow_Font" xml:space="preserve">
+    <value>Grow font</value>
+  </data>
+  <data name="Increase_Indent" xml:space="preserve">
+    <value>Increase indent</value>
+  </data>
+  <data name="Italic" xml:space="preserve">
+    <value>Italic</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>Lock</value>
+  </data>
+  <data name="Numbering" xml:space="preserve">
+    <value>Numbering</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Redo</value>
+  </data>
+  <data name="Shrink_Font" xml:space="preserve">
+    <value>Shrink font</value>
+  </data>
+  <data name="Underline" xml:space="preserve">
+    <value>Underline</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>Unlock</value>
+  </data>
+  <data name="Colors" xml:space="preserve">
+    <value>Colors</value>
+  </data>
+  <data name="Component_Overview" xml:space="preserve">
+    <value>Component overview</value>
+  </data>
+  <data name="Drag" xml:space="preserve">
+    <value>Drag</value>
+  </data>
+  <data name="Loading_" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="NewWorkspaceTooltip" xml:space="preserve">
+    <value>This is a new workspace.</value>
+  </data>
+  <data name="ConversionAmbig" xml:space="preserve">
+    <value>Conversion to different data type, ambiguity may occur</value>
+  </data>
+  <data name="ConversionNone" xml:space="preserve">
+    <value>Invalid connection.</value>
+  </data>
+  <data name="ConversionOK" xml:space="preserve">
+    <value>OK!</value>
+  </data>
+  <data name="ConversionSame" xml:space="preserve">
+    <value>Data types match.</value>
+  </data>
+  <data name="ConversionStop" xml:space="preserve">
+    <value>STOP!</value>
+  </data>
+  <data name="ConversionWarning" xml:space="preserve">
+    <value>WARNING!</value>
+  </data>
+  <data name="ConversionSelf" xml:space="preserve">
+    <value>Can't connect to itself.</value>
+  </data>
+  <data name="CloseComponentTooltip" xml:space="preserve">
+    <value>Close component</value>
+  </data>
+  <data name="Executing___" xml:space="preserve">
+    <value>Executing...</value>
+  </data>
+  <data name="BinSettingsVisual_BinSettingsVisual_No_Settings_available_" xml:space="preserve">
+    <value>This component has no parameters</value>
+  </data>
+  <data name="ElevateTooltip" xml:space="preserve">
+    <value>Elevate</value>
+  </data>
+  <data name="ReduceTooltip" xml:space="preserve">
+    <value>Reduce</value>
+  </data>
+  <data name="Bring_to_FrontTooltip" xml:space="preserve">
+    <value>Bring to front</value>
+  </data>
+  <data name="Move_to_BackTooltip" xml:space="preserve">
+    <value>Move to back</value>
+  </data>
+  <data name="EditingDisabled" xml:space="preserve">
+    <value>Some editing functions are disabled during execution</value>
+  </data>
+  <data name="Toggle_Plugin_Parameters" xml:space="preserve">
+    <value>Open/close the bar with the settings of the selected components of this workspace (Ctrl + I)</value>
+  </data>
+  <data name="Save_File" xml:space="preserve">
+    <value>Save File</value>
+  </data>
+  <data name="Open_File" xml:space="preserve">
+    <value>Open file</value>
+  </data>
+  <data name="Show_ComponentConnection_Proposition" xml:space="preserve">
+    <value>Show component connection propositions</value>
+  </data>
+  <data name="Show_ComponentConnection_Proposition_Tooltip" xml:space="preserve">
+    <value>Shows the most frequently used components when holding a connection line</value>
+  </data>
+  <data name="ComponentAppearanceBehaviourGroupHeader" xml:space="preserve">
+    <value>Standard appearance of components</value>
+  </data>
+  <data name="ComponentAppearanceBehaviourGroupTooltip" xml:space="preserve">
+    <value>Choose how a newly placed component visualization should appear</value>
+  </data>
+  <data name="DefaultComponentAppearance" xml:space="preserve">
+    <value>Appearance predetermined by the component</value>
+  </data>
+  <data name="AlwaysOpenedComponentAppearance" xml:space="preserve">
+    <value>Always opened</value>
+  </data>
+  <data name="AlwaysClosedComponentAppearance" xml:space="preserve">
+    <value>Always closed</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="ResetCCS" xml:space="preserve">
+    <value>Reset component connection statistics</value>
+  </data>
+  <data name="ComponentConnection_Delay" xml:space="preserve">
+    <value>Component connection suggestion delay:</value>
+  </data>
+  <data name="ComponentConnection_Delay_Tooltip" xml:space="preserve">
+    <value>Time to keep the mouse pointer in the same position before a popup with a component suggestion appears</value>
+  </data>
+  <data name="WorkspaceManagerClass_Open_Loading_Model___0_" xml:space="preserve">
+    <value>Loading model: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Open_Could_not_load_Model___0_" xml:space="preserve">
+    <value>Could not load model: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Save_Saving_Model___0_" xml:space="preserve">
+    <value>Saving model: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Save_Could_not_save_Model___0_" xml:space="preserve">
+    <value>Could not save model: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Undo_Can_not_undo___0_" xml:space="preserve">
+    <value>Can not undo: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Redo_Can_not_redo___0_" xml:space="preserve">
+    <value>Can not redo: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Print_Printing_document___0___now" xml:space="preserve">
+    <value>Printing document '{0}' now</value>
+  </data>
+  <data name="WorkspaceManagerClass_Print_Printed__0__pages_of_document___1__" xml:space="preserve">
+    <value>Printed {0} pages of document '{1}'</value>
+  </data>
+  <data name="WorkspaceManagerClass_Print_Exception_while_printing___0_" xml:space="preserve">
+    <value>Exception while printing: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Execute_Model_now_" xml:space="preserve">
+    <value>Execute model now!</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_" xml:space="preserve">
+    <value>GuiUpdateInterval cannot be &lt;=0; Use GuiUpdateInterval = 1</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Could_not_set_GuiUpdateInterval___0_" xml:space="preserve">
+    <value>Could not set GuiUpdateInterval: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_SleepTime" xml:space="preserve">
+    <value>Sleep time cannot be &lt;0; Use sleep time = 0</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Could_not_set_SleepTime___0_" xml:space="preserve">
+    <value>Could not set SleepTime: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Exception_during_the_execution___0_" xml:space="preserve">
+    <value>Exception during the execution: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_waitingStop_Stopping_execution_" xml:space="preserve">
+    <value>Stopping execution.</value>
+  </data>
+  <data name="WorkspaceManagerClass_waitingStop_Exception_during_the_stopping_of_the_execution___0_" xml:space="preserve">
+    <value>Exception during the stopping of the execution: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Dispose_Exception_during_stopping_of_the_ExecutionEngine___0_" xml:space="preserve">
+    <value>Exception during stopping of the ExecutionEngine: {0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Dispose_Exception_during_disposing_of_the_Model___0_" xml:space="preserve">
+    <value>Exception during disposing of the model: {0}</value>
+  </data>
+  <data name="GlobalProgressBar_Description" xml:space="preserve">
+    <value>Calculation finished after {0} (To stop the workspace please push the stop button or enter new data to start a new calculation)</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>Default workspace font used by TextInput and TextOutput components</value>
+  </data>
+  <data name="Global_Progressbar" xml:space="preserve">
+    <value>Global progress bar</value>
+  </data>
+  <data name="CompLayout_AlignBottom" xml:space="preserve">
+    <value>Align bottom</value>
+  </data>
+  <data name="CompLayout_AlignLeft" xml:space="preserve">
+    <value>Align left</value>
+  </data>
+  <data name="CompLayout_AlignRight" xml:space="preserve">
+    <value>Align right</value>
+  </data>
+  <data name="CompLayout_AlignTop" xml:space="preserve">
+    <value>Align top</value>
+  </data>
+  <data name="CompLayout_BiggestHeight" xml:space="preserve">
+    <value>Biggest height</value>
+  </data>
+  <data name="CompLayout_BiggestWidth" xml:space="preserve">
+    <value>Biggest width</value>
+  </data>
+  <data name="CompLayout_MoveDown" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="CompLayout_MoveLeft" xml:space="preserve">
+    <value>Move left</value>
+  </data>
+  <data name="CompLayout_MoveRight" xml:space="preserve">
+    <value>Move right</value>
+  </data>
+  <data name="CompLayout_MoveUp" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="CompLayout_SmallestHeight" xml:space="preserve">
+    <value>Smallest height</value>
+  </data>
+  <data name="CompLayout_SmallestWidth" xml:space="preserve">
+    <value>Smallest width</value>
+  </data>
+  <data name="CompLayout_SpreadHorizontal" xml:space="preserve">
+    <value>Spread horizontal</value>
+  </data>
+  <data name="CompLayout_SpreadVertical" xml:space="preserve">
+    <value>Spread vertical</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="Rearrange_all_lines" xml:space="preserve">
+    <value>Rearrange all lines</value>
+  </data>
+  <data name="TemplateReplacement" xml:space="preserve">
+    <value>Template placeholder replacement</value>
+  </data>
+  <data name="TemplateReplacementTooltip" xml:space="preserve">
+    <value>Enables/disables the replacement of template placeholders, e.g. $something$, with text of the language currently selected in CrypTool 2</value>
+  </data>
+  <data name="FontTooltip" xml:space="preserve">
+    <value>Changes the standard font (type, size) that is used for TextInput and TextOutput components</value>
+  </data>
+  <data name="GlobalProgressBarTooltip" xml:space="preserve">
+    <value>Enables/disables the global progress bar shown on top of the WorkspaceManager</value>
+  </data>
+  <data name="GeneralWorkspaceSettings" xml:space="preserve">
+    <value>General workspace settings</value>
+  </data>
+  <data name="UserInterfaceSettings" xml:space="preserve">
+    <value>User interface settings</value>
+  </data>
+  <data name="WorkspaceManagerSettingsTitle" xml:space="preserve">
+    <value>Workspace settings</value>
+  </data>
+</root>

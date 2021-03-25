@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>KKDF SHAKE256</value>
+  </data>
+  <data name="KKDFSHAKE256Tooltip" xml:space="preserve">
+    <value>Visualization of the Key Derivation Function KKDF SHAKE256</value>
+  </data>
+  <data name="ConfigPresCaption" xml:space="preserve">
+    <value>Presentation activ?</value>
+  </data>
+  <data name="ConfigPresTooltip" xml:space="preserve">
+    <value>Activates or deactivates the presentation</value>
+  </data>
+  <data name="ConfigPrintKMToFileCaption" xml:space="preserve">
+    <value>Save generated key material to file</value>
+  </data>
+  <data name="ConfigPrintKMToFileTooltip" xml:space="preserve">
+    <value>Defines, that the generated key material will be saved to a file, so that it can be used in other tools</value>
+  </data>
+  <data name="InputKeyCaption" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="InputKeyToolTip" xml:space="preserve">
+    <value>Input of the key</value>
+  </data>
+  <data name="InputOutputLengthCaption" xml:space="preserve">
+    <value>Length of the key material</value>
+  </data>
+  <data name="InputOutputLengthToolTip" xml:space="preserve">
+    <value>Length of the key material (in byte)</value>
+  </data>
+  <data name="InputSKMCaption" xml:space="preserve">
+    <value>Source Key Material</value>
+  </data>
+  <data name="InputSKMToolTip" xml:space="preserve">
+    <value>Input of source key material</value>
+  </data>
+  <data name="OutputKeyMaterialCaption" xml:space="preserve">
+    <value>Key Material</value>
+  </data>
+  <data name="OutputKeyMaterialToolTip" xml:space="preserve">
+    <value>Output of the to generate key material</value>
+  </data>
+  <data name="PresCalc" xml:space="preserve">
+    <value>Skip calculation</value>
+  </data>
+  <data name="PresExplanationSectionHeading" xml:space="preserve">
+    <value>KKDF SHAKE256</value>
+  </data>
+  <data name="PresIntro" xml:space="preserve">
+    <value>Skip chapter</value>
+  </data>
+  <data name="PresNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="PresSectionIntroductionText" xml:space="preserve">
+    <value>&lt;Bold&gt;&lt;Underline&gt;Inputs:&lt;/Underline&gt;&lt;/Bold&gt;
+&lt;Bold&gt;Source Key Material:&lt;/Bold&gt; Specifies the source key material (SKM).
+
+&lt;Bold&gt;Key:&lt;/Bold&gt; Specifies the secret key for the calculation. 
+
+&lt;Bold&gt;Length of the key material (in byte):&lt;/Bold&gt; Specifies the length of the key material (KM) in byte.
+
+&lt;Bold&gt;&lt;Underline&gt;Outputs:&lt;/Underline&gt;&lt;/Bold&gt;
+&lt;Bold&gt;Key Material:&lt;/Bold&gt; After the calculation, the result is visible in the text field.</value>
+  </data>
+  <data name="PresTitleHeading" xml:space="preserve">
+    <value>KKDF SHAKE256
+--
+a Key Derivation Function with extendable output length</value>
+  </data>
+  <data name="PrintToFileGroup" xml:space="preserve">
+    <value>Saving-Parameters</value>
+  </data>
+  <data name="ProcessGroup" xml:space="preserve">
+    <value>Configuration of the Plugin</value>
+  </data>
+  <data name="SaveFileDialogCaption" xml:space="preserve">
+    <value>Save key material to file:</value>
+  </data>
+  <data name="SaveFileDialogTooltip" xml:space="preserve">
+    <value>Specifies the output file for the generated key material, if you want to save it to a file</value>
+  </data>
+  <data name="ExSystemOutOfMemory" xml:space="preserve">
+    <value>While requesting memory from your system, there was an exception. Please try a smaller value for the output bytes.</value>
+  </data>
+  <data name="PresCalculationSectionHeading" xml:space="preserve">
+    <value>Calculation phase</value>
+  </data>
+  <data name="PresCalculationSectionHeadingNum" xml:space="preserve">
+    <value>3. Calculation phase</value>
+  </data>
+  <data name="PresCalculationText" xml:space="preserve">
+    <value>Inputs:
+
+SKM: {1} 
+Key: {2}
+
+The calculation takes place completely within the hash function SHAKE256...</value>
+  </data>
+  <data name="PresConstructionPart1Text" xml:space="preserve">
+    <value>The calculation of the key material can be described as following:</value>
+  </data>
+  <data name="PresConstructionPart2Text" xml:space="preserve">
+    <value>The key material is calculated by executing the hash function with the key as prefix. The hash function gets the length of the output as parameter. Compared to hash functions with fixed output length, the SHAKE256 does not require any additional design to allow any length of output. The generation of a hash value in the SHAKE256 is divided into two phases, wich are shown in the following diagram.</value>
+  </data>
+  <data name="PresConstructionPart3Text" xml:space="preserve">
+    <value>The two phases are called &lt;Bold&gt;absorbing&lt;/Bold&gt; and &lt;Bold&gt;squeezing phase&lt;/Bold&gt;. In the &lt;Bold&gt;absorbing phase&lt;/Bold&gt;, the input is read and various operations are performed.</value>
+  </data>
+  <data name="PresConstructionPart4Text" xml:space="preserve">
+    <value>In the &lt;Bold&gt;squeezing phase&lt;/Bold&gt;, depending on the length parameter, the function f is executed often and the desired length of the hash value is generated.</value>
+  </data>
+  <data name="PresConstructionScheme" xml:space="preserve">
+    <value>KM = H(K || SKM)</value>
+  </data>
+  <data name="PresConstructionSectionHeading" xml:space="preserve">
+    <value>Construction</value>
+  </data>
+  <data name="PresConstructionSectionHeadingNum" xml:space="preserve">
+    <value>2. Construction of KKDF SHAKE256</value>
+  </data>
+  <data name="PresErrorText" xml:space="preserve">
+    <value>An error occured. Please find detailed information in the log of CrypTool2.</value>
+  </data>
+  <data name="PresFinishedSectionHeading" xml:space="preserve">
+    <value>4. Calculation finished</value>
+  </data>
+  <data name="PresFinishedText" xml:space="preserve">
+    <value>To repeat the calculation, there are 3 alternatives:
+
+- either stop the execution and start it again
+- or change one of the inputs 
+- or click on the "Restart" button (then the calculation will restart automatically)</value>
+  </data>
+  <data name="PresIntroductionPart1Text" xml:space="preserve">
+    <value>The function KKDF SHAKE256 is a key derivation function (KDF). It uses a keyed hash function as pseudorandom function (PRF). The key will be prefixed to the input. It uses the SHAKE256 hash function. This hash function is part of the SHA-3 family. Characteristic for the SHAKE256 is the determination of the outputlength in dependency of a parameter. This makes it easy to generate keys with a specific length without additional construction around the PRF.
+
+The SHA-3 family can be viewed in the template Keccak as hash function.</value>
+  </data>
+  <data name="PresIntroductionSectionHeading" xml:space="preserve">
+    <value>Introduction</value>
+  </data>
+  <data name="PresIntroductionSectionHeadingNum" xml:space="preserve">
+    <value>1. Introduction</value>
+  </data>
+  <data name="TooMuchOutputRequestedLogMSG" xml:space="preserve">
+    <value>The maximum amount of output are 5 MB (5242880 byte). The requested amount of  {0} byte was set to the maximum.</value>
+  </data>
+  <data name="PresRestart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="PresStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="PresStepText" xml:space="preserve">
+    <value>{0}/{1}</value>
+  </data>
+</root>

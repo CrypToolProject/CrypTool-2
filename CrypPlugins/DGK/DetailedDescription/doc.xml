@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en"></introduction>
+  <introduction lang="de-DE">
+    Das DGK-Kryptosystem ist ein homomorphes Verschlüsselungsverfahren, das 2007 von I. Damgård, M. Geisler und M. Krøigaard vorgestellt wurde.
+    <newline /><newline />
+    Das Kryptosystem hat die folgenden homomorphen Eigenschaften:
+    <list><item>
+        Werden zwei verschlüsselte Nachrichten miteinander multipliziert, so ist das Produkt die Verschlüsselung der Summe m1 + m2 der beiden Klartext-Nachrichten:
+        <newline />
+        Dec( Enc(m1) * Enc(m2) ) = m1 + m2
+      </item><item>
+        Wird eine verschlüsselte Nachricht m1 zur m2-ten Potenz erhoben, so ist das Resultat die Verschlüsselung des Produktes m1 * m2 der beiden Klartext-Nachrichten.
+        <newline />
+        Dec( Enc(m1) ^ m2 ) = m1 * m2
+      </item></list>
+    Dies bedeutet, dass man ohne Kenntnis des privaten Schlüssels auf den verschlüsselten Daten die mathematischen Operationen Addition und Multiplikation mit einer Konstanten
+    durchführen kann, ohne die Argumente zu kennen und die Ergebnisse zu erfahren.
+    <newline /><newline />
+    Das sind dieselben homomorphen Eigenschaften wie beim <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier-Kryptosystem</docRef>.
+    <newline /><newline />
+    Die homomorphen Eigenschaften von DGK und weitere <b>Referenzen</b> werden im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptographie" (in der Online-Hilfe unter "Allgemein") genauer erläutert. Dort finden Sie auch einen generellen Überblick über homomorphe Chiffren.
+  </introduction>
+  <usage lang="en">
+    The DGK cryptosystem is a homomorphic cryptosystem, that was presented by I. Damgård, M. Geisler, and M. Krøigaard in 2007.
+    <newline /><newline />
+    The cryptosystem has the following homomorphic properties:
+    <list><item>
+        If you multiply two encrypted messages, the product is the encryption of the sum m1 + m2 of the two plaintext messages:
+        <newline />
+        Dec( Enc(m1) * Enc(m2) ) = m1 + m2
+      </item><item>
+        If you raise an encrypted message m1 to the m2-th power, the result is the encryption of the product m1 * m2 of the two plaintext messages.
+        <newline />
+        Dec( Enc(m1) ^ m2 ) = m1 * m2
+      </item></list>
+    This means that, even without knowing the private key, one can carry out the mathematical operations addition and multiplication with a constant on encrypted numbers,
+    without knowing their values and without learning anything about the results.
+    <newline /><newline />
+    These are the same homomorphic properties as for the <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef> cryptosystem.
+    <newline /><newline />
+    The homomorphic properties of this cryptosystem and further <b>references</b> are described in the <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_en.html">tutorial</internal> "Homomorphic Ciphers and their Importance in Cryptography" (in the online help below "Common"). There you can get a general overview about homomorphic ciphers.
+  </usage>
+  <usage lang="zh-CN">DGK密码系统是一个同态密码系统，由I.Damgård，M。Geisler和M.Krøigaard于2007年提出。该密码系统具有以下同态属性：如果将两个加密消息相乘，则乘积就是对总和的加密。两个纯文本消息中的m1 + m2：Dec（Enc（m1）* Enc（m2））= m1 + m2如果将加密消息m1提升为m2的幂，则结果是对乘积m1 * m2进行加密两个纯文本消息中的一个。 Dec（Enc（m1）^ m2）= m1 * m2这意味着，即使不知道私钥，也可以对加密数字进行常量的数学运算加法和乘法，而无需知道其值，也无需学习任何知识。结果。这些具有与Paillier密码系统相同的同态性质。在“同态密码及其在密码学中的重要性”教程（在“公共”下方的在线帮助中）中介绍了此密码系统的同态特性和其他参考。在那里，您可以获得有关同态密码的一般概述。</usage>
+  <usage lang="ru">Криптосистема DGK является гомоморфной криптосистемой, которая была представлена ​​И. Даггардом, М. Гейслером и М. Крёгиардом в 2007 году. Криптосистема имеет следующие гомоморфные свойства: если вы умножаете два зашифрованных сообщения, то это шифрование суммы m1 + m2 двух сообщений открытого текста: Dec (Enc (m1) * Enc (m2)) = m1 + m2 Если вы повышаете зашифрованное сообщение до m2-й мощности, результатом является шифрование продукта m1 * m2 два сообщения открытого текста. Dec (Enc (m1) ^ m2) = m1 * m2 Это означает, что, даже не зная частного ключа, можно выполнить добавление и умножение математических операций с константой на зашифрованных числах, не зная их значений и не узнавая ничего о результаты.</usage>
+  <usage lang="de-DE">
+    Wählen Sie in den Einstellungen der Komponente, ob diese verschlüsseln oder entschlüsseln soll.
+    <newline /><newline />
+    Für die Verschlüsselung benötigt die Komponente den öffentlichen Schlüssel, der aus dem 4-Tupel (N,G,H,U) besteht. Dieser kann durch die <docRef item="CrypTool.Plugins.DGK.DGKKeyGenerator">DGK-Schlüsselgenerator</docRef>-Komponente erzeugt werden.
+    <newline /><newline />
+    Für die Entschlüsselung wird zusätzlich der private Schlüssel (VP,VQ,P) benötigt, der ebenfalls vom <docRef item="CrypTool.Plugins.DGK.DGKKeyGenerator">DGK-Schlüsselgenerator</docRef> zur Verfügung gestellt wird.
+    <newline /><newline />
+    Die zu verschlüsselnde oder entschlüsselnde Nachricht muss am Eingang mit der Bezeichnung "Eingabe M" angegeben werden.
+    Als Eingabe werden BigInteger-Zahlen und Byte-Arrays akzeptiert. Abhängig vom eingegebenen Datentyp wird das Resultat am BigInteger-Ausgang oder am Byte-Array-Ausgang ausgegeben.
+  </usage>
+  <presentation lang="en">
+    Select in the settings of the component whether you want to encrypt or decrypt data.
+    <newline /><newline />
+    For encryption, the component needs the public key, that consists of the tuple (N,G,H,U). The public key can be provided by the <docRef item="CrypTool.Plugins.DGK.DGKKeyGenerator">DGK Key Generator</docRef> component.
+    <newline /><newline />
+    For decryption, the component additionally needs the private key (VP,VQ,P), that is also provided by the <docRef item="CrypTool.Plugins.DGK.DGKKeyGenerator">DGK Key Generator</docRef>.
+    <newline /><newline />
+    The data that is to be encrypted or decrypted must be entered at the input labeled "Input message M".
+    The component accepts BigInteger numbers and byte arrays as input. Depending on the given data type, the result will be sent to the BigInteger output or the byte array output.
+  </presentation>
+  <presentation lang="zh-CN">在组件的设置中选择要加密还是解密数据。为了进行加密，该组件需要包含元组（N，G，H，U）的公共密钥。公用密钥可以由DGK密钥生成器组件提供。为了解密，组件还需要私钥（VP，VQ，P），该私钥也由DGK密钥生成器提供。必须在标有“输入消息M”的输入处输入要加密或解密的数据。该组件接受BigInteger数字和字节数组作为输入。根据给定的数据类型，结果将发送到BigInteger输出或字节数组输出。</presentation>
+  <presentation lang="ru">Выберите в настройках компонента, хотите ли вы шифровать или дешифровать данные. Для шифрования компоненту нужен открытый ключ, который состоит из кортежа (N, G, H, U). Открытый ключ может быть предоставлен компонентом генератора ключей DGK. Для дешифрования компоненту дополнительно нужен закрытый ключ (VP, VQ, P), который также предоставляется генератором ключей DGK. Данные, которые должны быть зашифрованы или дешифрованы, должны вводиться на входе с надписью «Input message M». Компонент принимает значения BigInteger и байтовые массивы в качестве входных данных. В зависимости от заданного типа данных результат будет отправлен на выход BigInteger или на выходной массив байтов.</presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="dgk">
+      <link url="http://alexandria.tue.nl/extra1/afstversl/wsk-i/makkes2010.pdf" />
+      <caption>Makkes, M.: Efficient Implementation of Homomorphic Cryptosystems</caption>
+    </linkReference>
+    <linkReference id="springer">
+      <link url="http://alexandria.tue.nl/extra1/afstversl/wsk-i/makkes2010.pdf" />
+      <caption>Damgård, Geisler, Krøigaard: Efficient and Secure Comparison for On-Line Auctions</caption>
+    </linkReference>
+    <bookReference id="Diss-Franz">
+      <author>Martin Franz</author>
+      <name>Secure Computations on Non-Integer Values</name>
+      <publisher>PhD Thesis, TU Darmstadt</publisher>
+      <year>2011</year>
+    </bookReference>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Homomorphic_encryption" />
+      <caption>Homomorphic encryption (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

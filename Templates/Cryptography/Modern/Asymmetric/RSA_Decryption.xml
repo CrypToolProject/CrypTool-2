@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">RSA Decryption</title>
+  <title lang="zh">RSA解密</title>
+  <title lang="ru">Расшифровка RSA</title>
+  <summary lang="en">Usage of the <i>RSA</i> cipher for decryption</summary>
+  <summary lang="zh">RSA密码用于解密的用途</summary>
+  <summary lang="ru">Использование шифрования RSA для дешифрования</summary>
+  <description lang="en">In cryptography, RSA (which stands for Rivest, Shamir and Adleman who first publicly described it) is an algorithm for public-key cryptography. It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public key cryptography. RSA is widely used in electronic commerce protocols, and is believed to be sufficiently secure given sufficiently long keys and the use of up-to-date implementations.<newline /><newline />
+Source: <external ref="http://en.wikipedia.org/wiki/RSA" /></description>
+  <description lang="zh">在加密技术中，RSA（代表Rivest，Shamir和Adleman首次公开描述它）是一种用于公钥加密的算法。它是已知的第一个适用于签名和加密的算法，并且是公钥密码学的第一个重大进步。 RSA在电子商务协议中被广泛使用，并且被认为在足够长的密钥和使用最新实现的情况下是足够安全的。资源：</description>
+  <description lang="ru">В криптографии RSA (которая стоит за Rivest, Shamir и Adleman, которые впервые публично описали ее), является алгоритмом криптографии с открытым ключом. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции, и считается, что он достаточно безопасен, учитывая достаточно длинные ключи и использование современных реализаций. Источник:</description>
+  <keywords>Rivest, Shamir, Adleman, public key, PKI, asymmetric</keywords>
+  <keywords lang="zh">Rivest，Shamir，Adleman，公钥，PKI，非对称</keywords>
+  <keywords lang="ru">Ривест, Шамир, Адлеман, открытый ключ, PKI, асимметричный</keywords>
+  <title lang="de">RSA-Entschlüsselung</title>
+  <summary lang="de">Benutzung der <i>RSA</i>-Chiffre für die Entschlüsselung</summary>
+  <description lang="de">RSA ist ein asymmetrisches Kryptosystem. Es verwendet ein Schlüsselpaar, bestehend aus einem privaten Schlüssel, der zum Entschlüsseln von Daten verwendet wird, und einem öffentlichen Schlüssel, mit dem man verschlüsselt.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/RSA-Kryptosystem" /></description>
+  <keywords lang="de">öffentlicher Schlüssel, asymmetrisch</keywords>
+  <icon file="RSA.png" />
+  <relevantPlugins>
+    <plugin name="RSA" />
+    <plugin name="RSAKeyGenerator" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$memo$" value="In der Kryptographie ist RSA (was für Rivest, Shamir und Adleman steht) ein Algorithmus für die Kryptographie mit öffentlichem Schlüssel (Asymmetrische Kryptographie). Es ist der erste bekannte Algorithmus, der sowohl für das Signieren als auch für die Verschlüsselung geeignet ist, und war einer der ersten großen Fortschritte in der Kryptographie mit öffentlichen Schlüsseln. RSA wird häufig in Protokollen für den elektronischen Handel verwendet und gilt bei ausreichend langen Schlüsseln und der Verwendung aktueller Implementierungen als ausreichend sicher." />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$StringDecoder$" value="String-Decodierer" />
+    <replacement key="$RSAKeyGenerator$" value="RSA-Schlüsselgenerator" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$memo$" value="在密码学中，RSA（代表Rivest，Shamir和Adleman）是一种用于公共密钥密码学（非对称密码学）的算法。它是第一个适用于签名和加密的已知算法，并且是公钥密码学的第一个主要进步。 RSA通常用于电子商务协议中，并被认为具有足够长的密钥和当前实现方式的使用是足够安全的。" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$RSAKeyGenerator$" value="RSA密钥生成器" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$memo$" value="В криптографии RSA (которая стоит за Rivest, Shamir и Adleman) является алгоритмом криптографии с открытым ключом (асимметричная криптография). Это первый известный алгоритм, подходящий как для подписи, так и для шифрования, и был одним из первых важных достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции и считается достаточно надежным, если ключи достаточно длинные и используют текущие реализации." />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$RSAKeyGenerator$" value="Генератор ключа RSA" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$memo$" value="In cryptography, RSA (which stands for Rivest, Shamir and Adleman who first publicly described it) is an algorithm for public-key cryptography. It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public key cryptography. RSA is widely used in electronic commerce protocols, and is believed to be sufficiently secure given sufficiently long keys and the use of up-to-date implementations." />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$StringEncoder$" value="StringEncoder" />
+    <replacement key="$StringDecoder$" value="StringDecoder" />
+    <replacement key="$RSAKeyGenerator$" value="RSA Key Generator" />
+  </replacements>
+</sample>

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    Enigma is a cipher machine that implements a polyalphabetic substitution cipher.
+    The text that is to be encrypted is entered on a keyboard. After each key pressed, a lamp near one of the 26 letters will light up and thus indicate the next letter of the ciphertext.
+    <newline /><newline />
+    The cryptographic security of Enigma relies on the use of several rotors, where each rotor implements a monoalphabetic substitution.
+    The rotors are arranged adjacently along a spindle. When a letter is entered, it is passed through the successive rotors and mapped by their respective substitutions.
+    After each entered letter, the rotors are stepped by certain rules, thus implementing a new combined substitution.
+    <newline /><newline />
+    Another component of Enigma is the reflector. This is a static rotor, that also implements a substitution. It is used to reflect the signal, after is has passed through the rotors, and lets it
+    pass through the rotors again in the opposite direction.
+    The key of the Enigma encryption consists of the selected reflector, the set of rotors, their order and their initial positions.
+    <newline /><newline />
+    The result of this design is, that the realized substitution is involutoric. This means, that a key, that was used to encrypt a message, can also be used to decrypt it again.
+    <newline /><newline />
+    Later models of Enigma were supplemented with a plugboard, that could swap pairs of letters before they were fed into the rotors.
+    This added another layer of substitutions to the combined substitution.
+    Naturally, for models with plugboards, the plugboard setting is also part of the key.
+    <newline /><newline />
+    Besides encrypting and decrypting messages, the Enigma component can also analyze ciphertexts.
+  </introduction>
+  <introduction lang="zh-CN">谜题是一种密码机，可实现多字母替换密码。要加密的文本在键盘上输入。按下每个键后，26个字母之一附近的灯将亮起，从而指示密文的下一个字母。 Enigma的密码安全性依赖于多个转子的使用，其中每个转子都执行单字母替代。转子沿着主轴相邻布置。输入字母后，它会穿过连续的转子，并通过它们各自的替换进行映射。在每个输入的字母之后，转子按照特定规则步进，从而实现新的组合替换。谜的另一个组成部分是反射器。这是一个静态转子，也实现了替代。在通过转子后，它用于反射信号，并使其沿相反方向再次通过转子。 Enigma加密的密钥包括选定的反射器，转子组，它们的顺序及其初始位置。这种设计的结果是，实现的替代是强制性的。这意味着，用于加密消息的密钥也可以再次用于解密消息。后来的Enigma模型增加了一个插板，可以在将成对的字母送入转子之前交换成对的字母。这为组合替换添加了另一层替换。自然，对于带插板的型号，插板设置也是关键。除了加密和解密消息外，Enigma组件还可以分析密文。</introduction>
+  <introduction lang="ru">Enigma - это шифровальная машина, которая реализует полиалфавитный шифр замещения. Текст, который должен быть зашифрован, вводится на клавиатуре. После каждой нажатой клавиши загорается лампочка возле одной из 26 букв и, таким образом, указывается следующая буква зашифрованного текста. Криптографическая безопасность Enigma основана на использовании нескольких роторов, где каждый ротор реализует моноалфавитную замену. Роторы расположены рядом по шпинделю. Когда вводится буква, она пропускается через последовательные роторы и отображается их соответствующими заменами. После каждой введенной буквы роторы выполняются определенными правилами, тем самым реализуя новую комбинированную замену. Другим компонентом Enigma является отражатель. Это статический ротор, который также реализует замену. Он используется для отражения сигнала, после того как он прошел через роторы и позволяет ему снова проходить через роторы в противоположном направлении. Ключ шифрования Enigma состоит из выбранного отражателя, набора роторов, их порядка и их начальных положений. Результатом этого проекта является то, что реализованная замена является инволюционной. Это означает, что ключ, который использовался для шифрования сообщения, также может быть использован для дешифрования его снова. Более поздние модели Enigma дополнялись плагином, который мог бы заменять пары букв до того, как их подавали в роторы. Это добавило еще один уровень подстановок к объединенной замене. Естественно, что для моделей с разъемами параметр платы также является частью ключа. Помимо шифрования и дешифрования сообщений, компонент Enigma также может анализировать зашифрованные тексты.</introduction>
+  <usage lang="en">
+    In the main section of the settings, you can select the Enigma model.
+    You can enter the initial rotor setting in the key textfield and select the operation mode of the component: should the input text be analyzed or encrypted/decrypted?
+    <newline /><newline />
+    In the 'Text options' menu you find settings for handling of unknown symbols (for example spaces) and for handling of uppercase and lowercase letters.
+    Case handling is necessary, as Enigma can only process uppercase letters. You can convert the output of the component to uppercase, lowercase, or restore the case of the input text.
+    If the input text contains an unknown symbol, you can choose whether that symbol should be removed, ignored, or replaced by the letter 'X'. If it is ignored, it will be added unmodified to the
+    output text.
+    <newline /><newline />
+    The menu 'Analysis options' contains settings for the analysis mode of the component.
+    Here you can select which parts of Enigma should be included in the analysis of a ciphertext.
+    <newline /><newline />
+    In the menu 'Used rotors', you can choose the rotors with which to operate Enigma. The available set of rotors depends on the chosen Enigma model.
+    <newline /><newline />
+    In the 'Ring settings' menu, you can determine the position of the rings on each of the rotors.
+    <newline /><newline />
+    In the 'Plugboard' menu, you can configure a plug for each of the letters.
+    The combination of all applied plugs determines a substitution, that is displayed above the plugs as a substitution alphabet.
+    If you want to reset the plugboard, press the button 'Remove all plugs'.
+  </usage>
+  <usage lang="zh-CN">在设置的主要部分，您可以选择Enigma模型。您可以在关键文本字段中输入初始转子设置，然后选择组件的操作模式：应分析输入的文本还是对其进行加密/解密？在“文本选项”菜单中，找到用于处理未知符号（例如空格）以及用于处理大写和小写字母的设置。因为Enigma只能处理大写字母，所以必须进行大小写处理。您可以将组件的输出转换为大写，小写，或恢复输入文本的大小写。如果输入文本包含未知符号，则可以选择是删除，忽略还是将其替换为字母“ X”。如果忽略它，它将被原样添加到输出文本中。菜单“分析选项”包含组件分析模式的设置。在这里，您可以选择在密文分析中应包含Enigma的哪些部分。在菜单“二手转子”中，您可以选择用于操作Enigma的转子。可用的转子组取决于所选的Enigma模型。在“环设置”菜单中，您可以确定每个转子上环的位置。在“插件板”菜单中，您可以为每个字母配置一个插件。所有应用的插件的组合确定一个替换，该替换显示在插件上方，作为替换字母。如果要重置插件，请按“删除所有插件”按钮。</usage>
+  <usage lang="ru">В главном разделе настроек вы можете выбрать модель Enigma. Вы можете ввести начальную настройку ротора в текстовое поле ключа и выбрать режим работы компонента: следует ли анализировать или шифровать входной текст или расшифровывать? В меню «Параметры текста» вы найдете настройки для обработки неизвестных символов (например, пробелов) и для обработки прописных и строчных букв. Обработка дел необходима, поскольку Enigma может обрабатывать только прописные буквы. Вы можете преобразовать выходные данные компонента в верхний, нижний регистр или восстановить регистр ввода текста. Если текст ввода содержит неизвестный символ, вы можете выбрать, должен ли этот символ быть удален, проигнорирован или заменен буквой «X». Если он игнорируется, он будет добавлен немодифицированный в выходной текст. Меню «Параметры анализа» содержит настройки для режима анализа компонента. Здесь вы можете выбрать, какие части Enigma должны быть включены в анализ зашифрованного текста. В меню «Используемые роторы» вы можете выбрать роторы, с которыми будет работать Enigma. Доступный набор роторов зависит от выбранной модели Enigma. В меню «Настройки звонка» вы можете определить положение колец на каждом из роторов. В меню «Плагин» вы можете настроить вилку для каждой из букв. Комбинация всех примененных штепселей определяет замену, которая отображается над заглушками в качестве алфавита замещения. Если вы хотите сбросить плагин, нажмите кнопку «Удалить все заглушки».</usage>
+  <presentation lang="en">
+    The main idea of the presentation is to provide a complete schematic layout of the Enigma M3.
+    If the presentation is not displayed, although the component was opened in presentation view, you must click the 'Activate presentation' checkbox in the lower right.
+    <newline /><newline />
+    The presentation is divided into three sections.
+    On the upper right side, you see the keyboard, the lamps and the plugboard. These are the control elements of the machine that the user interacts with when he encrypts or decrypts a text.
+    You can also see how these control elements are wired internally.
+    Under the plugboard, you can see wooden boxes that contain all reflectors (left) and rotors (right), that are available for this Enigma model.
+    You can drag them to the appropriate places in the left side of the presentation. If a place is already occupied, you first have to drag the respective rotor or reflector back into its wooden box.
+    Then you can drag a new piece to the now empty spot.
+    <newline /><newline />
+    The upper left side represents a view into the machine. There you can see the set of rotors, consisting of the reflector on the left and the three rotors on the right.
+    The presentation shows the inner wirings of the rotors and the reflector. If you rotate a rotor to a new position, the inner wiring will move accordingly.
+    Like the real Enigma rotors, the contacts on the left side of the rotors are marked with the letters A to Z to help clarifying the position of the rotor.
+    The uppermost letter is used to identify the current rotor position. It is the letter that would be visible in the real Enigma.
+    In the presentation, it is also displayed in the box at the top of the rotor.
+    The letters in red mark the position of the notch. When the rotor is stepped and the notch reaches the top position, the next rotor will also advance by one position in the following step.
+    The contacts on the right side of a rotor are marked with the number 1 to 26.
+    The red marked number indicates the current ring position, that determines the position of the notch in respect to the inner wiring of a rotor.
+    It is also displayed in the box at the bottom of the rotor.
+    You can adjust the rotor position and the ring setting with the 'up' and 'down' buttons beside the box displays.
+    When a key on Enigma is pressed, the current flowing through the rotors and the plugboard to a lamp will be pictured by a color animation of the involved wires.
+    <newline /><newline />
+    In the lower part of the presentation, the text, that is to be encrypted or decrypted, is displayed.
+    After the workspace has been started, the animation shows how each of the letters of this text is mapped to another letter by Enigma.
+    One by one, the mapped letters are entered on the paper on the lower right side of the presentation.
+    The speed of the animation can be varied in the component's settings.
+  </presentation>
+  <presentation lang="zh-CN">该演示文稿的主要思想是提供Enigma M3的完整示意图。如果未显示演示文稿，尽管已在演示文稿视图中打开了该组件，但必须单击右下角的“激活演示文稿”复选框。演示文稿分为三个部分。在右上角，您可以看到键盘，指示灯和插板。这些是用户在加密或解密文本时与之交互的机器的控制元素。您还可以查看这些控制元件在内部的接线方式。在该插件板下方，您可以看到包含此Enigma模型可用的所有反射器（左）和转子（右）的木箱。您可以将它们拖到演示文稿左侧的适当位置。如果已经有人居住，则首先必须将相应的转子或反射器拖回木箱中。然后，您可以将新作品拖到现在的空白处。左上方代表该机器的视图。在这里，您可以看到一组转子，由左侧的反射器和右侧的三个转子组成。演示显示了转子和反射器的内部布线。如果将转子旋转到新位置，则内部接线将相应移动。像真正的Enigma转子一样，转子左侧的触点都标有字母A到Z，以帮助阐明转子的位置。最上面的字母用于标识当前转子位置。这是在真正的谜中可见的字母。在演示中，它也显示在转子顶部的框中。红色字母标记凹口的位置。当转子步进并且缺口到达顶部位置时，下一转子也将在下一步骤中前进一个位置。转子右侧的触点标记有数字1到26。红色标记的数字表示当前环位置，该位置确定凹口相对于转子内部布线的位置。它也显示在转子底部的框中。您可以使用方框显示旁边的“向上”和“向下”按钮调整转子位置和环设置。当按下Enigma上的按键时，流经转子和插板的电流将通过相关电线的彩色动画来显示。在演示文稿的下部，显示了要加密或解密的文本。启动工作空间之后，动画将显示此文本的每个字母如何通过Enigma映射到另一个字母。映射的字母在演示文稿右下角的纸张上一一输入。动画的速度可以在组件的设置中进行更改。</presentation>
+  <presentation lang="ru">Основная идея презентации - предоставить полную схематическую схему Enigma M3. Если презентация не отображается, хотя компонент был открыт в представлении презентации, вы должны щелкнуть флажок «Активировать презентацию» в правом нижнем углу. Презентация разделена на три раздела. В верхней правой части вы видите клавиатуру, лампы и плагин. Это элементы управления машины, с которыми пользователь взаимодействует, когда он шифрует или расшифровывает текст. Вы также можете увидеть, как эти элементы управления подключаются внутренне. Под панелью вы можете видеть деревянные ящики, содержащие все отражатели (слева) и роторы (справа), которые доступны для этой модели Enigma. Вы можете перетащить их в соответствующие места в левой части презентации. Если место уже занято, сначала нужно перетащить соответствующий ротор или отражатель обратно в деревянный ящик. Затем вы можете перетащить новую фигуру в пустое место. Верхняя левая сторона представляет вид машины. Там вы можете увидеть набор роторов, состоящий из отражателя слева и трех роторов справа. В презентации представлены внутренние токоподводы роторов и отражателя. Если вы вращаете ротор в новое положение, внутренняя проводка будет двигаться соответственно. Как и настоящие роторы Enigma, контакты на левой стороне роторов обозначены буквами A-Z, чтобы помочь определить положение ротора. Верхняя буква используется для определения текущего положения ротора. Это письмо, которое будет видно в реальной загадке. В презентации он также отображается в поле вверху ротора. Буквы красного цвета обозначают положение выреза. Когда ротор ступенчато и выемка достигает верхнего положения, следующий ротор также будет двигаться на одно положение на следующем шаге. Контакты на правой стороне ротора обозначены цифрами от 1 до 26. Красное обозначенное число указывает текущее положение кольца, которое определяет положение выреза в отношении внутренней проводки ротора. Он также отображается в коробке внизу ротора. Вы можете отрегулировать положение ротора и настройку кольца с помощью кнопок «вверх» и «вниз» рядом с окнами. Когда нажата клавиша Enigma, ток, текущий через роторы и плагин к лампе, будет отображаться с помощью цветовой анимации задействованных проводов. В нижней части презентации отображается текст, который должен быть зашифрован или дешифрован. После того, как рабочее пространство было запущено, анимация показывает, как каждая из букв этого текста отображается на другую букву Enigma. Один за другим отображаемые буквы вводятся на бумаге в нижней правой части презентации. Скорость анимации может варьироваться в настройках компонента.</presentation>
+  <language culture="de" />
+  <introduction lang="de">
+    Die Enigma ist ein Verschlüsselungsapparat (Chiffrier-Maschine), mit dem polyalphabetische Ver- und Entschlüsselungen möglich sind.
+    Der zu verschlüsselnde Text wird über eine Tastatur Buchstabe für Buchstabe eingegeben, woraufhin der verschlüsselte Buchstabe an einem mit dem entsprechenden Buchstaben
+    versehenen aufleuchtenden Lämpchen abgelesen werden kann.
+    <newline /><newline />
+    Die kryptographische Sicherheit der Enigma beruht auf der Verwendung von mehreren Rotoren, von denen jeder einzelne eine monoalphabetische Substitution darstellt.
+    Die Rotoren sind in der Enigma hintereinander angeordnet und ein eingegebener Buchstabe wird dadurch nacheinander den entsprechenden Substitutionen unterworfen.
+    Nach jedem eingegebenen Buchstaben drehen sich die Rotoren nach einem vorgegebenen Muster weiter und ändern somit die sich ergebende Gesamtsubstitution.
+    <newline /><newline />
+    Eine weitere Komponente der Enigma ist die Umkehrwalze.
+    Diese lässt (nach einer weiteren Substitution) den durch die Rotoren verschlüsselten Buchstaben die Rotoren noch einmal in umgekehrter Richtung durchlaufen.
+    Dadurch wird die durch die Enigma realisierte Abbildung involutorisch.
+    Dies bedeutet, dass ein mit einem bestimmten Schlüssel verschlüsselter Text mit demselben Schlüssel auch wieder entschlüsselt werden kann.
+    <newline /><newline />
+    Der Schlüssel des Verfahrens setzt sich insgesamt aus der Wahl des Reflektors, der Rotoren und ihrer Anordnung zusammen.
+    <newline /><newline />
+    Zusätzlich wurden Modelle entwickelt, die um ein sogenanntes Steckerbrett erweitert wurden, mit dem Buchstaben mittels Steckverbindungen paarweise vertauscht werden können.
+    Dadurch wird vor und nach der eigentlichen Verschlüsselung noch eine weitere monoalphabetische Substitution eingefügt.
+    Bei diesen Modellen sind die angebrachten Steckerverbindungen natürlich ebenfalls Teil des Schlüssels.
+    <newline /><newline />
+    Mit der Enigma-Komponente kann man Texte nicht nur ver- und entschlüsseln, sondern auch Geheimtexte analysieren.
+  </introduction>
+  <usage lang="de">
+    Im Hauptmenu der Einstellungen kann zunächst das Enigma-Modell gewählt werden. Unter "Schlüssel" kann die Rotorlage gewählt werden, und unter "Betriebsart",
+    ob die Komponente den Text verarbeiten oder analysieren soll.
+    <newline /><newline />
+    Im Menü "Text-Optionen" befinden sich Einstellungen zur Behandlung von Sonderzeichen, Leerzeichen und der Groß-/Kleinschreibung.
+    Diese Einstellungen sind nötig, da die Enigma nur Großbuchstaben verarbeitete.
+    Unter "Groß-/Kleinschreibung" kann gewählt werden, ob die Buchstaben vor der Ausgabe komplett in Groß- bzw. Kleinbuchstaben konvertiert werden sollen
+    oder ob die ursprüngliche Schreibweise wiederhergestellt werden soll.
+    Für die Sonderzeichen kann unter "Behandlung ungültiger Zeichen" eingestellt werden, ob unbekannte Symbole ignoriert, entfernt oder durch ein 'X' ersetzt werden sollen.
+    <newline /><newline />
+    Das Menü "Analyseoptionen" beinhaltet Einstellungsmöglichkeiten für den Analyse-Modus. In diesem Menü kann entschieden werden, welche Teile der Enigma bei der Analyse mit einbezogen werden sollen.
+    <newline /><newline />
+    Im Menü "Verwendete Rotoren" können die Rotoren gewählt werden, mit denen die Enigma bestückt wird.
+    Anzahl und Bezeichnungen der zur Verfügung stehenden Rotoren hängen von dem ausgewählten Enigma-Modell ab.
+    <newline /><newline />
+    Im Menü "Ringstellung" kann die Ringstellung für jeden einzelnen Rotor bestimmt werden.
+    <newline /><newline />
+    Das Menü "Steckerbrett" bietet die Möglichkeit, das Steckerbrett für jeden Buchstaben einzeln zu konfigurieren.
+    Zusätzlich wird das den momentan eingestellten Steckverbindungen entsprechende Substitutions-Alphabet angezeigt.
+    Die Schaltfläche "Alle Steckerverbindungen entfernen" versetzt das Steckerbrett in den Ausgangszustand.
+  </usage>
+  <presentation lang="de">
+    Die Grundidee der Präsentation ist, den kompletten Schaltplan der Enigma M3 schematisch darzustellen.
+    Falls die Präsentation nicht sichtbar ist, obwohl die Präsentationsansicht der Komponente geöffnet wurde, so muss das Kontrollkästchen 'Präsentation aktivieren' rechts unten angeklickt werden.
+    <newline /><newline />
+    Die Präsentation ist in drei Bereiche gegliedert.
+    Rechts befindet sich die Oberfläche der Maschine mit Tastatur, Lampen und Steckerbrett als die für den Benutzer nach außen hin sichtbaren Bedienungselemente.
+    Gleichzeitig sind auch die Batterie und die Verkabelung der Elemente zu sehen.
+    Unter dem Steckerbrett sind Setzkästen mit allen für dieses Enigma-Modell zur Verfügung stehenden Rotoren und Walzen angebracht.
+    Diese können mit der Maus an die vorgesehenen Stellen in der Enigma auf der linken Seite der Präsentation gezogen werden.
+    <newline /><newline />
+    Die linke Seite ermöglicht einen Blick in die Maschine. Dort ist der Walzensatz zu erkennen, bestehend aus den drei Rotoren und der Umkehrwalze.
+    Die Darstellung stellt die Verdrahtung der Rotoren mit Hilfe von Verbindungslinien in einem zweidimensionalen Schema dar.
+    Eine Änderung der Stellungen der Rotoren bedeutet in dieser Darstellung, dass die Verbindungslinien ihre Position linear verändern.
+    Um die Lage der Rotoren zu verdeutlichen, werden die Kontakte auf der linken Seite der Verbindungen mit A bis Z gekennzeichnet, ähnlich wie bei einem Rotor der echten Maschine.
+    Der oberste Buchstabe stellt dabei stets die aktuelle Rotorlage dar, also denjenigen Buchstaben, der bei der Enigma durch das Fenster sichtbar wäre.
+    Die rot markierten Buchstaben geben die Position der Übertragskerbe innerhalb eines Rotors an.
+    Erreicht diese beim Fortschalten eines Rotors die oberste Position, so wird die Fortschaltung auf den nächsten Rotor übertragen und dieser wird ebenfalls um eine Position weitergedreht.
+    Die Kontakte auf der rechten Walzenseite sind mit den Zahlen 1 bis 26 markiert.
+    Die rot markierte Zahl gibt hierbei die Ringstellung an, welche die Position der Übertragskerbe bezüglich der inneren Verdrahtung eines Rotors angibt.
+    Jeder Rotor besitzt zudem Schaltflächen zur schrittweisen Änderung der Rotorlage sowie der Ringstellung.
+    Der Stromfluss durch den Rotor wird durch eine animierte Linie veranschaulicht, die den unter Spannung stehenden Draht repräsentiert.
+    <newline /><newline />
+    Im unteren Bereich wird links der zu verschlüsselnde oder entschlüsselnde Text angezeigt. Nachdem der Arbeitsbereich gestartet wurde, zeigt die Animation, wie jeder einzelne Buchstabe dieses Textes durch die
+    Enigma auf einen anderen Buchstaben abgebildet wird. Diese werden nacheinander in das Papier rechts unten eingetragen.
+    Die Geschwindigkeit der Animation kann in den Einstellungen der Komponente variiert werden.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://de.wikipedia.org/wiki/Enigma_(Maschine)" lang="de" />
+      <caption lang="de">Enigma (Wikipedia)</caption>
+      <link url="http://en.wikipedia.org/wiki/Enigma_machine" lang="en" />
+      <caption lang="en">Enigma machine (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Enigma Hillclimbing Attack</title>
+  <title lang="zh">谜团爬山攻击</title>
+  <title lang="ru">Загадочная атака на холм</title>
+  <summary lang="en">Cryptanalysis of the <i>Enigma</i> cipher</summary>
+  <summary lang="zh">谜密码的密码分析</summary>
+  <summary lang="ru">Криптоанализ шифрования Enigma</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>Enigma</i> cipher.</description>
+  <description lang="zh">该模板显示了对Enigma密码的密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Enigma.</description>
+  <keywords>Machine, Turing, World War, Rotor, Attack, Analysis, Analyzer, Breaker</keywords>
+  <keywords lang="zh">机，图灵，第二次世界大战，转子，攻击，分析，分析仪，破碎机</keywords>
+  <keywords lang="ru">Машина, Тьюринг, Мировая Война, Ротор, Атака, Анализ, Анализатор, Выключатель</keywords>
+  <title lang="de">Enigma Hillclimbing Angriff</title>
+  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit Hillclimbing</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
+  <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
+  <icon file="Enigma_Analyzer.png" />
+  <relevantPlugins>
+    <plugin name="Enigma" />
+    <plugin name="FrequencyTest" />
+    <plugin name="FriedmanTest" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$EnigmaAnalyzer$" value="Enigma-Analyse" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel Einstellungen" />
+    <replacement key="$memo$" value="Dieses Beispiel zeigt einen Ciphertext-Only-Angriff, der auf Geoff Sullivan &amp; Frode Weierud (2005) basiert. BREAKING GERMAN ARMY CIPHERS, Cryptologia, 29: 3, 193-232, DOI: 10.1080 / 01611190508951299). Es ist eine Erweiterung von Gilloglys ursprünglichem Angriff. Für jede mögliche Rotoreinstellung (Reihenfolge, Ringeinstellungen und Rotorstartpositionen) wird ein Hillclimbing-Algorithmus angewendet, um die Steckerbrett-Einstellungen wiederherzustellen. Es verwendet eine Kombination aus n-Gramm-Statistiken und dem Index of Coincidence. Dieser Angriff ist langsamer als Gilloglys Methode, aber viel effektiver. Der Angriff wurde erfolgreich gegen Originalnachrichten der Bundeswehr des Zweiten Weltkriegs angewendet, einschließlich Nachrichten mit nicht mehr als 80 Symbolen. Es wird empfohlen, zuerst den Angriff aller auf Z eingestellten Ringe auszuführen, um einen schnellen ersten Lauf zu ermöglichen, der erfolgreich sein kann, wenn kein mittlerer Rotorumsatz vorliegt, und andernfalls eine vollständige Suche (A bis Z) der richtigen Ringeinstellungen zu ermöglichen. Wenn keine dieser Analysen erfolgreich ist, kann der Angriff ausgeführt werden, wobei eine vollständige Suche (von A bis Z) sowohl für den rechten als auch für den mittleren Rotor angegeben wird. Wenn die Nachricht kurz ist (weniger als 100 Buchstaben), wird stattdessen die Verwendung des simulierten Ciphertext-Only-Angriffs empfohlen." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$EnigmaAnalyzer$" value="谜题分析" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Crib$" value="婴儿床" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Key$" value="按键设定" />
+    <replacement key="$memo$" value="此示例显示了基于Geoff Sullivan和Frode Weierud（2005）的仅密文攻击。打破德国军队的密码，Cryptologia，29：3，193-232，DOI：10.1080 / 01611190508951299）。这是Gillogly最初攻击的延伸。对于每个可能的转子设置（顺序，环设置和转子起始位置），均采用爬坡算法来恢复插板设置。它结合了n-gram统计量和符合指数。这种攻击比Gillogly的方法要慢，但效果要好得多。该攻击已成功用于来自第二次世界大战的原始德国联邦国防军消息，包括不超过80个符号的消息。建议首先对设置为Z的所有环执行攻击，以进行快速的首次运行（如果没有中等转子翻转，则可以成功进行），否则，可以完全搜索（A到Z）正确的环设置。如果这些分析都没有成功，则可以进行攻击，对右旋翼和中旋翼进行全面搜索（从A到Z）。如果消息简短（少于100个字母），我们建议改用模拟纯密文攻击。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$EnigmaAnalyzer$" value="Энигма-анализ" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Key$" value="Настройки клавиш" />
+    <replacement key="$memo$" value="Этот пример демонстрирует атаку с использованием только шифротекста, основанную на Geoff Sullivan &amp; Frode Weierud (2005) BREAKING GERMAN ARMY CIPHERS, Cryptologia, 29: 3, 193-232, DOI: 10.1080 / 01611190508951299). Это продолжение оригинальной атаки Гиллогли. Для каждой возможной настройки ротора (порядок, настройки кольца и начальные положения ротора) применяется алгоритм восхождения на холм для восстановления настроек коммутационной панели. Он использует комбинацию статистики n-граммов и Индекса совпадения. Эта атака медленнее, чем метод Гиллогли, но намного эффективнее. Атака была успешно применена к исходным сообщениям немецкой армии времен Второй мировой войны, включая сообщения, содержащие не более 80 символов. Рекомендуется сначала запустить атаку все кольца, установленные на Z, для быстрого начального запуска, который может быть успешным в случае отсутствия оборота среднего ротора, а в противном случае разрешить полный поиск (от A до Z) правильных настроек кольца. . Если ни один из этих прогонов не увенчается успехом, атака может быть запущена с указанием полного поиска (от A до Z) как для правого, так и для среднего роторов. Если сообщение короткое (менее 100 букв), вместо этого рекомендуется использовать атаку с имитацией отжига только зашифрованного текста." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$EnigmaAnalyzer$" value="Enigma Analyzer" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$FriedmanTest$" value="FriedmanTest" />
+    <replacement key="$Key$" value="Key Settings" />
+    <replacement key="$memo$" value="This example demonstrates a hillclimbing ciphertext-only attack, based on Geoff Sullivan &amp; Frode Weierud (2005) BREAKING GERMAN ARMY CIPHERS, Cryptologia, 29:3, 193-232, DOI: 10.1080/01611190508951299). It is an extension of Gillogly’s original attack. For each possible rotor settings (order, ring settings, and rotor starting positions), a hillclimbing algorithm is applied to recover the plugboard settings. It employs a combination of n-grams statistics and the Index of Coincidence. This attack is slower than Gillogly’s method but much more effective. The attack has been successfully applied against original WW II German Army messages, including messages with no more than 80 symbols. It is recommended to first run the attack all rings set to Z, for a fast initial run, that may succeed in case there was no middle rotor turnover, and otherwise, allow for a full search (A to Z) of the right ring settings. If neither of those runs succeeds, the attack can be run specifying a full search (A to Z) for both the right and middle rotors. If the message is short (less than 100 letters), it instead recommended using the simulated annealing ciphertext-only attack." />
+  </replacements>
+</sample>

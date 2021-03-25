@@ -1,0 +1,262 @@
+#!/bin/sh
+
+# This announce-text script should be run before publishing an announce
+# of a new GNU MPFR release or release candidate. It does some checking,
+# then it outputs the announce text to stdout. Information messages are
+# written to stderr.
+#
+# Warning! The release name in the announce text may contain accented
+# letters. Make sure they are preserved if your locales are not UTF-8
+# based. Moreover, you may need to modify the text.
+#
+# Specific dependencies:
+#   GNU Coreutils (sha1sum, sha256sum, date), svn, gpg, unzip, wget.
+#
+# Usage: announce-text [ <variable_settings> ]
+# where arguments can be, for instance:
+#   root=<repository_root>
+#   vers=<mpfr_version>
+#   nopgpsig=1  to disable checking of the PGP signatures.
+#   nowebsrv=1  to disable checking of the mpfr.org web server.
+#   nogforge=1  to disable checking of the tarballs on InriaForge.
+#   nognuftp=1  to disable checking of the tarballs on the GNU FTP.
+#
+# When it is run from a working copy, setting $root is not necessary.
+
+set -e
+
+tmpdir=$(mktemp -d /tmp/announce-text-XXXXXXXX)
+trap 'rm -rf $tmpdir' 0 1 2 15
+echo "Temporary directory: $tmpdir" >&2
+
+alias wget="wget -q"
+
+for i in $@
+do
+  eval "$i"
+done
+
+[ -z "$root" ] && root=$(svn info | sed -n 's/^Repository Root: //p')
+echo "Repository root: $root" >&2
+
+cd $tmpdir
+
+#vers=$(svn ls --xml "$root/tags" | xmlstarlet sel -T -t -v \
+#  "//entry[not(commit/@revision < //entry/commit/@revision)]/name" -)
+[ -z "$vers" ] && vers=$(svn ls -v "$root/tags" | perl -ne \
+  'm,^\s*(\d+)\s.*\s(\d+\.\d+\.\d+)/, && $1 > $r and ($r,$v) = ($1,$2);
+   END { print $v }')
+base=${vers%-rc*}
+echo "MPFR version: $vers" >&2
+echo "Base version: $base" >&2
+
+if [ $vers = $base ]; then
+  # This is a release (not a release candidate).
+  tagversfile="$root/tags/$vers/VERSION"
+  tagvers=$(svn cat "$tagversfile")
+  if [ $vers != "$tagvers" ]; then
+    echo "$tagversfile is incorrect or does not exist:" >&2
+    echo "got '$tagvers' instead of '$vers'" >&2
+    exit 1
+  fi
+fi
+
+www="$root/misc/www/mpfr-$base"
+echo "MPFR $vers www directory: $www" >&2
+svn ls "$www" | sort > ls1
+cat <<EOF > ls2
+index.html
+mpfr-$vers.tar.bz2
+mpfr-$vers.tar.bz2.asc
+mpfr-$vers.tar.gz
+mpfr-$vers.tar.gz.asc
+mpfr-$vers.tar.xz
+mpfr-$vers.tar.xz.asc
+mpfr-$vers.zip
+mpfr-$vers.zip.asc
+mpfr.dvi.gz
+mpfr.html
+mpfr.pdf
+mpfr.ps.gz
+EOF
+
+missing=$(diff ls1 ls2 | sed -n 's/^> //p')
+if [ -n "$missing" ]; then
+  echo "Missing files in the www directory:" $missing >&2
+  [ $vers != $base ]
+fi
+
+echo "Getting the files from the www directory..." >&2
+for i in tar.bz2 tar.gz tar.xz zip
+do
+  svn cat "$www/mpfr-$vers.$i" > "mpfr-$vers.$i"
+done
+sha1sum mpfr-$vers.* > sha1sum.out
+sha256sum mpfr-$vers.* > sha256sum.out
+unzip -jq mpfr-$vers.zip '*/NEWS'
+
+if [ -z "$nopgpsig" ]; then
+  echo "Checking the signatures..." >&2
+  for i in mpfr-$vers.*
+  do
+    svn cat "$www/$i.asc" > "$i.asc"
+    gpg --verify "$i.asc" >&2
+  done
+fi
+
+if [ -z "$nowebsrv" ]; then
+  echo "Checking the mpfr.org web server..." >&2
+  for i in $(cat ls1)
+  do
+    echo "  [$i]" >&2
+    [ -f "$i" ] || svn cat "$www/$i" > "$i"
+    wget -O file "https://www.mpfr.org/mpfr-$base/$i"
+    cmp file "$i"
+    rm file
+  done
+fi
+
+rm mpfr*
+
+if [ $vers = $base ] && [ -z "$nogforge" ]; then
+  echo "Comparing with InriaForge..." >&2
+  gforge="https://gforge.inria.fr"
+  wget -O files.html "$gforge/frs/?group_id=136"
+  for i in \
+    $(sed -n "s/.*href=\"\([^\"]*mpfr-$vers\.[^\"]*[^c]\)\">mpfr-.*/\1/p" \
+          files.html)
+  do
+    wget "$gforge$i"
+  done
+  for i in sha1sum sha256sum
+  do
+    $i mpfr-$vers.* > sums-gforge
+    diff $i.out sums-gforge >&2
+  done
+  rm mpfr-* sums-gforge
+fi
+
+if [ $vers = $base ] && [ -z "$nognuftp" ]; then
+  echo "Comparing with GNU FTP (ftp.gnu.org)..." >&2
+  for i in tar.bz2 tar.gz tar.xz zip
+  do
+    wget https://ftp.gnu.org/gnu/mpfr/mpfr-$vers.$i
+  done
+  for i in sha1sum sha256sum
+  do
+    $i mpfr-$vers.* > sums-gnu
+    diff $i.out sums-gnu >&2
+  done
+  rm mpfr-* sums-gnu
+fi
+
+# Do not use a pipe in order to check the exit status.
+#svn cat "$root/tags/$vers/NEWS" > NEWS
+
+sed -n "/^Changes .* to version ${base}:/,/^\$/p" NEWS > Changes
+if [ "$(wc -l < Changes)" -lt 3 ]; then
+  echo "The Changes file is too small:" >&2
+  cat Changes >&2
+  exit 1
+fi
+
+rname=$(sed -n "/^Changes .* to version ${base%.*}\.0:/,+1 {
+    s/.*The \(\".*\"\) release.*/\1/p
+  }" NEWS)
+
+pl=${base##*.}
+[ $pl -gt 0 ] && rname="$rname, patch level $pl"
+
+if [ $vers = $base ]; then
+  cat <<EOF
+Subject: Announce: GNU MPFR $vers is released
+
+GNU MPFR $vers ($rname), a C library for
+multiple-precision floating-point computations with correct rounding,
+is now available for download from the MPFR web site:
+
+  https://www.mpfr.org/mpfr-$vers/
+
+from InriaForge:
+
+  https://gforge.inria.fr/projects/mpfr/
+
+and from the GNU FTP site:
+
+  https://ftp.gnu.org/gnu/mpfr/
+
+Thanks very much to those who sent us bug reports and/or tested the
+release candidate.
+EOF
+else
+  rc=${vers#*-rc}
+  [ $rc -gt 1 ] && n=" $rc"
+  cat <<EOF
+Subject: GNU MPFR $base Release Candidate$n
+
+The release of GNU MPFR $base ($rname)
+is imminent. Please help to make this release as good as possible
+by downloading and testing this release candidate:
+
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.tar.xz
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.tar.bz2
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.tar.gz
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.zip
+EOF
+fi
+
+cat <<EOF
+
+The SHA1 digests:
+EOF
+cat sha1sum.out
+cat <<EOF
+
+The SHA256 digests:
+EOF
+cat sha256sum.out
+cat <<EOF
+
+The signatures:
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.tar.xz.asc
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.tar.bz2.asc
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.tar.gz.asc
+https://www.mpfr.org/mpfr-$base/mpfr-$vers.zip.asc
+
+Each tarball is signed by Vincent Lefèvre. This can be verified using
+the DSA key ID 980C197698C3739D; this key can be retrieved with:
+
+  gpg --recv-keys 980C197698C3739D
+
+or by downloading it from <https://www.vinc17.net/pgp.html>.
+The key fingerprint is:
+
+  07F3 DBBE CC1A 3960 5078  094D 980C 1976 98C3 739D
+
+The signatures can be verified with: gpg --verify <file.asc>
+You should check that the key fingerprint matches.
+
+EOF
+
+cat Changes
+
+if [ $vers = $base ]; then
+  cat <<EOF
+You can send success and failure reports to <mpfr@inria.fr>, and give
+us the canonical system name (by running the "./config.guess" script),
+the processor and the compiler version, in order to complete the
+"Platforms Known to Support MPFR" section of the MPFR $vers web page.
+
+Regards,
+EOF
+else
+  cat <<EOF
+Please send success and failure reports with "./config.guess" output
+to <mpfr@inria.fr>.
+
+If no problems are found, GNU MPFR $base should be released
+around $(date --iso-8601 --date='7 days').
+
+Regards,
+EOF
+fi

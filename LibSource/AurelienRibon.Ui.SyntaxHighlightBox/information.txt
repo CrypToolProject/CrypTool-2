@@ -1,0 +1,9 @@
+The SyntaxHighlightningBox was obtained from:
+https://syntaxhighlightbox.codeplex.com/
+
+It was originally created by AurelienRibon 
+
+We only added the C# hightlightning xml
+
+The license is the "Apache License 2.0 (Apache)"
+https://syntaxhighlightbox.codeplex.com/license

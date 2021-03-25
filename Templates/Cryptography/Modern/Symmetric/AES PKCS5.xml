@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">AES with PKCS#5</title>
+  <title lang="zh">带有PKCS＃5的AES</title>
+  <title lang="ru">AES с PKCS # 5</title>
+  <summary lang="en">Using <i>AES</i> with <i>PKCS#5</i>, where the session key is generated from a password using <i>PKCS#5</i> and the ciphertext is encoded in base64</summary>
+  <summary lang="zh">将AES与PKCS＃5一起使用，其中会话密钥是使用PKCS＃5从密码生成的，并且密文以base64编码</summary>
+  <summary lang="ru">Использование AES с PKCS # 5, где ключ сеанса генерируется из пароля с использованием PKCS # 5, а зашифрованный текст кодируется в base64</summary>
+  <description lang="en">This template shows the usage of <i>AES</i> with <i>PKCS#5</i>. <i>PKCS#5</i> is used to generate encryption keys from the given passwords.</description>
+  <description lang="zh">该模板显示了AES与PKCS＃5的结合使用。 PKCS＃5用于根据给定的密码生成加密密钥。</description>
+  <description lang="ru">Этот шаблон показывает использование AES с PKCS # 5. PKCS # 5 используется для генерации ключей шифрования из заданных паролей.</description>
+  <keywords>advanced, Daemen, Rijmen, Rijndael, symmetric, nist, password, standard</keywords>
+  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist，密码，标准</keywords>
+  <keywords lang="ru">продвинутый, Daemen, Rhymes, Rijndael, симметричный, nist, пароль, стандартный</keywords>
+  <title lang="de">AES mit PKCS#5</title>
+  <summary lang="de">Benutzung der <i>AES</i>-Chiffre mit <i>PKCS#5</i>, wobei der Sitzungsschlüssel per <i>PKCS#5</i> aus einem Passwort erzeugt wird und der Geheimtext in Base-64 ausgegeben wird</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>AES</i>-Chiffre mit <i>PKCS#5</i>. <i>PKCS#5</i> wird benutzt, um aus den eingegebenen Passwörtern Verschlüsselungsschlüssel zu gewinnen.</description>
+  <keywords lang="de">symmetrisch, passwort, standart</keywords>
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="BooleanOutput" />
+    <plugin name="MD5" />
+    <plugin name="PKCS5" />
+    <plugin name="StreamComparator" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Sender Password$" value="Sender-Passwort" />
+    <replacement key="$Receiver Password$" value="Empfänger-Passwort" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$AES Encrypt$" value="AES Verschlüsselung" />
+    <replacement key="$AES Decrypt$" value="AES Entschlüsselung" />
+    <replacement key="$Test Result$" value="Ergebnis" />
+    <replacement key="$Comparator$" value="Komparator" />
+    <replacement key="$text$" value="Der Advanced Encryption Standard (AES) ist ein symmetrisches Kryptosystem, das als Nachfolger für DES und 3DES im Oktober 2000 vom National Institute of Standards and Technology (NIST) als Standard (FIPS 197) bekanntgegeben wurde. Nach seinen Entwicklern Joan Daemen und Vincent Rijmen wird er auch Rijndael-Algorithmus genannt (gesprochen wie dt. räindahl)." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Sender Password$" value="发件人密码" />
+    <replacement key="$Receiver Password$" value="收件人密码" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$AES Encrypt$" value="AES加密" />
+    <replacement key="$AES Decrypt$" value="AES解密" />
+    <replacement key="$Test Result$" value="结果" />
+    <replacement key="$Comparator$" value="比较器" />
+    <replacement key="$text$" value="高级加密标准（AES）是一种对称密码系统，在2000年10月由美国国家标准技术研究院（NIST）作为标准（FIPS 197）宣布是DES和3DES的后继产品。在其开发者Joan Daemen和Vincent Rijmen之后，它也被称为Rijndael算法（像德语的räindahl一样发音）。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Sender Password$" value="Отправитель Пароль" />
+    <replacement key="$Receiver Password$" value="приемник Пароль" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$AES Encrypt$" value="Шифрование AES" />
+    <replacement key="$AES Decrypt$" value="Расшифровка AES" />
+    <replacement key="$Test Result$" value="результат" />
+    <replacement key="$Comparator$" value="компаратор" />
+    <replacement key="$text$" value="Стандарт расширенного шифрования (AES) представляет собой симметричную криптосистему, которая была объявлена ​​в качестве преемника DES и 3DES в октябре 2000 года Национальным институтом стандартов и технологий (NIST) в качестве стандарта (FIPS 197). После его разработчиков Джоан Даемен и Винсент Риймен он также называется алгоритмом Рийндаля (произносится как dt räindahl)." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Sender Password$" value="Sender Password" />
+    <replacement key="$Receiver Password$" value="Receiver Password" />
+    <replacement key="$StringEncoder$" value="StringEncoder" />
+    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$AES Encrypt$" value="AES Encrypt" />
+    <replacement key="$AES Decrypt$" value="AES Decrypt" />
+    <replacement key="$Test Result$" value="Test Result" />
+    <replacement key="$Comparator$" value="Comparator" />
+    <replacement key="$text$" value="In cryptography, the Advanced Encryption Standard (AES) is an encryption standard adopted by the U.S. government. The standard comprises three block ciphers, AES-128, AES-192 and AES-256, adopted from a larger collection originally published as Rijndael. Each AES cipher has a 128-bit block size, with key sizes of 128, 192 and 256 bits, respectively. The AES ciphers have been analyzed extensively and are now used worldwide, as was the case with its predecessor, the Data Encryption Standard (DES)." />
+  </replacements>
+</sample>

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Cost Functions</title>
+  <title lang="zh">成本函数</title>
+  <title lang="de">Kostenfunktionen</title>
+  <title lang="ru">Функции стоимости</title>
+  <summary lang="en">Usage of the <i>Cost Function</i> component</summary>
+  <summary lang="zh">成本函数组件的用法</summary>
+  <summary lang="de">Verwendung der <i>Kostenfunktion</i>-Komponente</summary>
+  <summary lang="ru">Использование компонента <i>Функции стоимости</i></summary>
+  <description lang="en">This template shows, how the cost function component can be used to compute different cost values (index of coincedence, entropy, n-gram score)</description>
+  <description lang="zh">该模板显示了成本函数组件如何用于计算不同的成本值（一致性指数，熵，n元语法得分）</description>
+  <description lang="de">Diese Vorlage zeigt, wie die Kostenfunktion-Komponente verwendet werden kann, um verschiedene Kostenwerte zu berechnen (Koinzidenzindex, Entropie, n-Gramm-Score)</description>
+  <description lang="ru">Этот шаблон показывает, как компонент функции стоимости может использоваться для вычисления различных значений стоимости (индекс совпадения, энтропия, оценка n-грамм)</description>
+  <keywords>Cost function, IoC, index of coincedence, entropy, n-grams, fitness</keywords>
+  <keywords lang="zh">成本函数，IoC，一致性指数，熵，n元语法，适应度</keywords>
+  <keywords lang="de">Kostenfunktion, IoC, Koinzidenzindex, Entropie, n-Gramme</keywords>
+  <keywords lang="ru">Функция стоимости, IoC, индекс совпадения, энтропия, n-грамм</keywords>
+  <icon file="Cost Function.png" />
+  <relevantPlugins>
+    <plugin name="CostFunction" />
+  </relevantPlugins>
+  <replacements lang="en">
+    <replacement key="$text$" value="Text" />
+    <replacement key="$string-decoder$" value="String-decoder" />
+    <replacement key="$cost function$" value="Cost function" />
+    <replacement key="$ioc$" value="IoC" />
+    <replacement key="$entropy$" value="Entropy" />
+    <replacement key="$n-grams$" value="n-gram score" />
+    <replacement key="$memo$" value="This template shows how the cost function component can be used to compute different cost functions.\line \line First, the index of coincedence (IoC) is calculated. Second, the Shannon entropy is calculated. Finally, the sum of n-grams, in this case bigrams, is computed." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$text$" value="文本" />
+    <replacement key="$string-decoder$" value="字符串解码器" />
+    <replacement key="$cost function$" value="成本函数" />
+    <replacement key="$ioc$" value="IoC" />
+    <replacement key="$entropy$" value="熵" />
+    <replacement key="$n-grams$" value="n克分数" />
+    <replacement key="$memo$" value="此模板显示了成本函数组件如何用于计算不同的成本函数。\line \line首先，计算一致性指数（IoC）。其次，计算香农熵。最终，计算出n-gram的总和，在这种情况下为双字母组。" />
+  </replacements>
+  <replacements lang="de">
+    <replacement key="$text$" value="Text" />
+    <replacement key="$string-decoder$" value="String-Decodierer" />
+    <replacement key="$cost function$" value="Kostenfunktion" />
+    <replacement key="$ioc$" value="IoC" />
+    <replacement key="$entropy$" value="Entropie" />
+    <replacement key="$n-grams$" value="n-Gramm-Summe" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie mit der Kostenfunktionskomponente verschiedene Kostenfunktionen berechnet werden können.\line \line Zunächst wird der Koinzidenzindex  (IoC) berechnet. Zweitens wird die Shannon-Entropie berechnet. Schließlich wird die Summe von n-Grammen, in diesem Fall Bigrammen, berechnet." />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$text$" value="Текст" />
+    <replacement key="$string-decoder$" value="Строка-декодер" />
+    <replacement key="$cost function$" value="Функция стоимости" />
+    <replacement key="$ioc$" value="IoC" />
+    <replacement key="$entropy$" value="Энтропия" />
+    <replacement key="$n-grams$" value="н-грамм" />
+    <replacement key="$memo$" value="Этот шаблон показывает, как компонент функции стоимости может использоваться для вычисления различных функций стоимости.\line \line Сначала рассчитывается индекс совпадения (IoC). Во-вторых, рассчитывается энтропия Шеннона. Наконец, сумма n-грамм, в данном случае биграммы, вычисляется." />
+  </replacements>
+</sample>

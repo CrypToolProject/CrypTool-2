@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    Grain v1 is one of seven symmetric stream ciphers that was chosen for the final eSTREAM portfolio of the ECRYPT Stream Cipher Project.
+    The cipher is designed to have a low hardware complexity and is based on two shift registers and a non-linear output function.
+    The key size is 80 bits and the size of the initialization vector is 64 bits. No attack faster than brute-force has been identified so far.
+  </introduction>
+  <introduction lang="zh-CN">Grain v1是为ECRYPT流密码项目的最终eSTREAM产品组合选择的七个对称流密码之一。该密码被设计为具有较低的硬件复杂度，并且基于两个移位寄存器和一个非线性输出功能。密钥大小为80位，初始化向量的大小为64位。到目前为止，还没有发现比蛮力还要快的攻击。</introduction>
+  <introduction lang="ru">Grain v1 является одним из семи симметричных потоковых шифров, который был выбран для окончательного портфеля eSTREAM проекта ECHREPT Stream Cipher. Шифр имеет низкую аппаратную сложность и основан на двух сдвиговых регистрах и нелинейной функции вывода. Размер ключа - 80 бит, а размер вектора инициализации - 64 бита. До сих пор не было обнаружено атаки быстрее, чем грубая сила.</introduction>
+  <usage lang="en">
+    After dragging the Grain v1 component onto your workspace, you will
+    have to attach the three input connectors 'Input', 'Key' and 'IV' to data sources.
+
+    Additionally you have to connect a text output component to the 'Output' connector.
+  </usage>
+  <usage lang="zh-CN">将Grain v1组件拖到工作区后，必须将三个输入连接器“输入”，“键”和“ IV”连接到数据源。另外，您必须将文本输出组件连接到“输出”连接器。</usage>
+  <usage lang="ru">После перетаскивания компонента Grain v1 в рабочее пространство вам необходимо будет подключить три входных разъема «Вход», «Ключ» и «IV» к источникам данных. Кроме того, вам необходимо подключить компонент вывода текста к разъему «Выход».</usage>
+  <language culture="de" />
+  <introduction lang="de">
+    Grain v1 ist eine von sieben symmetrischen Stromchiffren, die für das finale eSTREAM Portfolio des ECRYPT Stream Cipher Project gewählt wurden.
+    Die Chiffre ist so entworfen, dass sie eine geringe Hardwarekomplexität aufweist und sie basiert auf zwei Schieberegistern und einer nicht-linearen
+    Ausgabefunktion. Die Schlüssellänge beträgt 80 Bits und die Länge des Initialisierungsvektors ist 64 Bits. Es wurde bisher kein Angriff gefunden,
+    der schneller als Brute-Force ist.
+  </introduction>
+  <usage lang="de-DE">
+    Nachdem Sie die Grain v1-Komponente auf den Arbeitsbereich gezogen
+    haben, müssen Sie die Eingänge 'Eingabe', 'Schlüssel' und 'IV' mit Datenquellen verbinden.
+
+    Außerdem muss der Ausgang mit einer Textausgabe-Komponente verbunden werden.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://www.ecrypt.eu.org/stream/grainpf.html" lang="en" />
+      <caption lang="en">Grain v1 at the eSTREAM Project</caption>
+      <link url="http://www.ecrypt.eu.org/stream/grainpf.html" lang="de-DE" />
+      <caption lang="de-DE">Grain v1 beim eSTREAM Project (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Grain_(cipher)" lang="en" />
+      <caption lang="en">Grain v1 at Wikipedia</caption>
+      <link url="http://en.wikipedia.org/wiki/Grain_(cipher)" lang="de-DE" />
+      <caption lang="de-DE">Grain v1 bei Wikipedia (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

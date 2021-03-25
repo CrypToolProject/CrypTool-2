@@ -1,0 +1,19 @@
+﻿<h2>Gauß-Algorithmus</h2>
+<p>
+    Der Gauß-Algorithmus findet in einem Gitter im zweidimensionalen Raum 
+    zuverlässig einen <a href="help://SVP">kürzesten Vektor</a>. Er arbeitet ähnlich dem euklidischen 
+    Algorithmus zur Suche des größten gemeinsamen Teilers ggT zweier ganzer Zahlen, 
+    denn nach jedem Schritt verbessert sich die Basis um einen kürzeren Vektor. 
+    Dabei wird iterativ der längere Vektor b2 mit einem ganzzahligen Vielfachen des 
+    kürzeren Vektors b1 subtrahiert (siehe Abbildung). Dabei ist der Subtrahend die Komponente von b2, 
+    die in Richtung von b1 zeigt. Durch diese Operation bleibt die lineare 
+    Unabhängigkeit erhalten. Da nach der Subtraktion b2 und damit auch ||b1|| * 
+    ||b2|| immer kleiner werden und es eine endliche Anzahl an Gitterpunkten gibt, 
+    terminiert der Algorithmus in jedem Fall.</p>
+    <p>
+    <img src="ImgGauss" />
+</p>
+<p>
+    Der <a href="help://AngleVectors">Winkel</a> zwischen den beiden Vektoren beträgt am Ende zwischen 60° und 120°. 
+    Man kann leicht erkennen, dass sich eine reduzierte Basis dem 90°-Winkel 
+    annähert.</p>

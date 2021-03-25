@@ -1,0 +1,107 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+			  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+			  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 
+			  Background="White">
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+    <Span FontFamily="Georgia" FontWeight="Bold" FontSize="18.6666666666667" Foreground="#FF15428B" xml:lang="de-de">
+      <Span.TextDecorations>
+        <TextDecoration Location="Underline" />
+      </Span.TextDecorations> Bedienungsanleitung des Plugin Compute annihilators
+    </Span>
+  </Paragraph>
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="13.3333333333333" />
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span xml:lang="de-de">Das Plugin <Span FontWeight="Bold" xml:lang="en-gb">Compute annihilators</Span> dient zur Berechnug von &#58;</Span>
+  </Paragraph>
+   <List MarkerStyle="Decimal">
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="12">Z-Funktionen f&#252;r Kombinatinsgeneratoren</Run>
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="12" xml:lang="de-De">Annihilatoren einer boolsche Funktion </Run>
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="12">Annihilators einer Menge von Bitsfolgen</Run>
+      </Paragraph>
+    </ListItem>
+   
+  </List>
+   <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de">Das Plugin verf&#252;gt &#252;ber einen Eingang und zwei Ausg&#228;nge. Als Eingang werden drei Eingangstypen akzeptiert. Je nach der ausgew&#228;hlten Anwendung, wird der entsprechende  Eingangstyp erwartet. Der obere  Ausgang dient zur Ausgabe der berechneten Annihilatoren  in dem Textausgabe-Fenster <Span  FontWeight="Bold"  xml:lang="de-de">Textoutput</Span> und der  untere dient zur &#220;bergabe  der berechneten Z-Funktionen an dem Plugin <Span  FontWeight="Bold"  xml:lang="de-de">System of equations</Span>, das sie bei der Erstellung eines Gleichungssystems f&#252;r algebraische Angriffe verwendet.</Span>
+   </Paragraph>
+ 
+  <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de"> Das Panel <Span  FontWeight="Bold"  xml:lang="de-de">Algorithm Settings</Span> enth&#228;lt  folgende  Steuerelemente </Span>
+  </Paragraph>
+   <List MarkerStyle="Disc" >
+    <ListItem >
+      <Paragraph Margin="0,0,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+       <Span FontWeight="Bold" xml:lang="en-gb">Action</Span>&#58; erm&#246;glicht den Auswahl einer Anwendung.
+      </Paragraph>
+    </ListItem>
+    <ListItem >
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+           <Span FontWeight="Bold" xml:lang="en-gb">Degree</Span>&#58; bestimmt den maximalen Grad der gesuchten Annihilatoren. Wenn  degree  auf d gesetzt wird, dann werden  die Annihilatoren mit Grad &#61;&#60; d gesucht. Meistens interessiert man sich an Annihilatoren niedrigen Grades . Deswegen  startet man die Suche mit dem Grad 1. Wenn keine Annihilatoren gefunden werden, soll man den Grad erh&#246;hen und die Suche neu   starteten. Manchmal startet man die Suche ab einem gewissen Grad, wenn man weisst, dass Annihilatoren  kleineren Grades  nicht existieren.
+      </Paragraph>
+    </ListItem>
+    <ListItem >
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+       <Span FontWeight="Bold" xml:lang="en-gb"> Output Type</Span> &#58;  bestimmt,ob die Z-Funktionen angezeigt oder als Eingang f&#252;r das plugin <Span FontWeight="Bold" xml:lang="en-gb"> System of equations</Span> verwendet werden sollen.
+      </Paragraph>
+    </ListItem>
+    <ListItem >
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+       <Span FontWeight="Bold" xml:lang="en-gb"> Outputs Z </Span>&#58; dient zur Eingabe  der Ausgabeabschnitten Z=z_t...z_t+r, deren entsprechenden Z-Funktionen berechnet und ausgegeben werden sollen. Mehrere Ausgabeabschnitten Z k&#246;nnen durch eine Zeichenfolge aus (1,0, &#42;) ausgedr&#252;ckt werden. Dabei werden die Sternchen einmal als Null und einmal als Eins ausgewertet,  z.B. 1&#42;&#42;0 &#61; &#123;1000,1000,1100,1110&#125;. Aus der  eingegebenen Zeichenfolge wird auch die Anzahl der betrachteten Takten r gewonnen  r&#61;&#124;Z&#124;.
+      </Paragraph>
+    </ListItem>   
+  </List>
+  
+   <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Z-Funktionen f&#252;r einen Kombinationsgenerator</Run>  
+  </Paragraph>
+ 
+ 
+  <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de">Da die Z-Funktionen  die Annihilatoren der Mengen XZ sind,  m&#252;ssen zuerst die Mengen XZ durch das Plugin  <Span FontWeight="Bold" xml:lang="en-gb"> Compute the sets XZ</Span> berechnet und  an dem   Plugin  <Span FontWeight="Bold" xml:lang="en-gb"> Compute Annihilators</Span> weitergereicht werden. Hierf&#252;r sollen die Ausgabefunktion und die Speicherupdatefunktion in den Eing&#228;nge des Plugins compute the sets XZ eingegeben und der Ausgabetyp  <Span FontWeight="Bold" xml:lang="en-gb"> Input of other Plugin </Span> ausgew&#228;hlt werden. Im Panel  <Span FontWeight="Bold" xml:lang="en-gb"> Algorithm Settings </Span>  des Plugins  <Span FontWeight="Bold" xml:lang="en-gb"> Compute annihilators </Span> muss die Aktion  <Span FontWeight="Bold" xml:lang="en-gb"> Z-Funktions of combiner </Span> ausgew&#228;hlt und der maximale Grad der gesuchten Funktionen   <Span FontWeight="Bold" xml:lang="en-gb"> degree </Span> festgesetzt werden. F&#252;r die Ausgabe  sollen die Ausgabefolgen Z, deren entsprechenden Z-Funktionen berechnet und ausgegeben werden sollen, durch das Feld  <Span FontWeight="Bold" xml:lang="en-gb"> Outputs Z </Span>  eingegeben und ein Ausgabetyp   <Span FontWeight="Bold" xml:lang="en-gb"> Output Type </Span> ausgew&#228;hlt werden. Folgende Abbildung zeigt ein Beispiel.</Span>
+  </Paragraph>
+  <Paragraph>
+        <InlineUIContainer>
+            <Image Width="400" Height="300" Source="/ComputeAnnihilators;Component/DetailedDescription/Images/AnnZFsum.png" />
+        </InlineUIContainer>
+    </Paragraph>
+   <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Annihilators einer boolsche Funktion</Run>  
+  </Paragraph>
+ 
+  <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de">Die Funktion wird formuliert, indem die Variablen  mit xi bezeichnet, beginnend mit 1 und fortlaufend indiziert werden. Multiplikation, Xor, Negation und Klammerung werden jeweils mit *, +, ! und  ( ) dargestellt. Die Funktion wird durch das Texteingabe-Fenster  <Span FontWeight="Bold" xml:lang="en-gb"> Textinput</Span> eingegeben.
+Folgend soll die Action   <Span FontWeight="Bold" xml:lang="en-gb"> Annihilators of boolean function</Span>  ausgew&#228;hlt  und  der maximale Grad der gesuchten Annihilatoren  durch das Feld  <Span FontWeight="Bold" xml:lang="en-gb"> Degree</Span>  festgesetzt  werden. Existiert Annihilatoren vom Grad kleiner oder gleich dem ausgew&#228;hlte Grad, dann wird eine Basis der Menge aller solchen Annihilatoren berechnet und ausgegeben. Sonst muss man den Grad erh&#246;hen und erneut versuchen. Die algebraische Immunit&#228;t   ist der erste Grad, wof&#252;r Annihilatoren gefunden werden, wenn man die Suche ab 1 startet. Folgende Abbildung zeigt ein einfaches Beispiel.</Span>
+  </Paragraph>
+  <Paragraph>
+        <InlineUIContainer>
+            <Image Width="400" Height="300" Source="/ComputeAnnihilators;Component/DetailedDescription/Images/annfunc.png" />
+        </InlineUIContainer>
+    </Paragraph>
+   <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Annihilatoren einer Menge von Bitsfolgen</Run>  
+  </Paragraph>
+ 
+ 
+   <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de"> Manchmal interessiert man  sich an Funktionen, die  f&#252;r  einer gegebenen Menge von Eingaben gleich null sind. Diese Funktionen werden Annihilatoren dieser Menge genannt und  k&#246;nnen durch das Plugin <Span FontWeight="Bold" xml:lang="en-gb"> Compute annihilators</Span> aufgefunden werden. Die Bitsfolgen werden durch Sequenzen aus Nullen und Einsen dargestellt.  Die Sequenzen  sollen die gleiche L&#228;nge haben und durch Kommas getrennt werden. Sie werden durch das TexteingabeFenster <Span FontWeight="Bold" xml:lang="en-gb">Textinput</Span>  eingegeben. Weiterhin soll die Action   <Span FontWeight="Bold" xml:lang="en-gb"> Annihilators of set of Bitsequnces</Span> augew&#228;hlt  und  der maximale Grad der gesuchten Annihilatoren durch das Feld  <Span FontWeight="Bold" xml:lang="en-gb"> Degree</Span> festgesetzt werden. Folgende Abbildung zeigt ein einfaches Beispiel.</Span>
+  </Paragraph>
+   <Paragraph>
+        <InlineUIContainer>
+            <Image Width="400" Height="300" Source="/ComputeAnnihilators;Component/DetailedDescription/Images/Bitseqann.png" />
+        </InlineUIContainer>
+    </Paragraph>
+ 
+</FlowDocument>

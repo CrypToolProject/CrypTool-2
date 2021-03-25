@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    Grain v0 is a stream cipher which is based on two shift registers and a non-linear output function.
+    The key size is 80 bits and the size of the initialization vector is 64 bits. 
+  </introduction>
+  <introduction lang="zh-CN">粒度v0是基于两个移位寄存器和一个非线性输出函数的流密码。密钥大小为80位，初始化向量的大小为64位。</introduction>
+  <introduction lang="ru">Grain v0 - это потоковый шифр, основанный на двух сдвиговых регистрах и нелинейной выходной функции. Размер ключа - 80 бит, а размер вектора инициализации - 64 бита.</introduction>
+  <usage lang="en">
+    After dragging the Grain v0 component onto your workspace, you will
+    have to attach the two text input components to the connectors 'Key' and 'IV'. Also, you need to attach one "Number Input" component 
+    which indicates the keystream length in bytes.
+   
+    After that, drag into the workspace one "Text Input" component where you should enter the plaintext and one "XOR" component that is going to be
+    used to XOR the plaintext with the output of the cipher (keystream). The result of the XOR is the ciphertext.
+    Additionally you have to connect a text output component to the 'Output' connector of the cipher, which is going to represent the keystream.
+  </usage>
+  <usage lang="zh-CN">将Grain v0组件拖到工作区后，必须将两个文本输入组件连接到连接器“键”和“ IV”。另外，您需要附加一个“数字输入”组件，以字节为单位指示密钥流长度。之后，将一个“文本输入”组件拖到工作区中，在其中应输入纯文本，然后将一个“ XOR”组件拖入工作区，以将明文与密码（密钥流）输出进行异或。 XOR的结果是密文。另外，您必须将文本输出组件连接到密码的“输出”连接器，该连接器将代表密钥流。</usage>
+  <usage lang="ru">После перетаскивания компонента Grain v0 в рабочую область вам придется прикрепить два текстовых компонента ввода к ключевым словам и «разъемам» разъемов. Кроме того, вам необходимо подключить один компонент «Количество ввода», который указывает длину ключа в байтах. После этого перетащите в рабочую область один компонент «Text Input», в который вы должны ввести открытый текст и один компонент «XOR», который будет использоваться для XOR открытого текста с выходом шифрования (ключевой поток). Результатом XOR является зашифрованный текст. Кроме того, вам необходимо подключить компонент вывода текста к разъему «Выход» шифра, который будет представлять поток ключей.</usage>
+  <references>
+    <linkReference>
+      <link url="https://eprint.iacr.org/2009/109.pdf" lang="en" />
+      <caption lang="en"> Haina Zhang and Xiaoyun Wang, Cryptanalysis of Stream Cipher Grain Family
+      </caption>
+    </linkReference>
+  </references>
+</documentation>

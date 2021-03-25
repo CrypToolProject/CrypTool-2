@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Heartbleed Test</title>
+  <title lang="zh">流血测试</title>
+  <title lang="ru">Испытание на кровотечение</title>
+  <title lang="de">Heartbleed Test</title>
+  <summary lang="en">Heartbleed und Heartbeat Test</summary>
+  <summary lang="zh">心跳和心跳测试</summary>
+  <summary lang="ru">Испытание сердца и сердцебиения</summary>
+  <summary lang="de">Heartbleed und Heartbeat Test</summary>
+  <description lang="en">Here, you can test whether a server supports heartbeat and is vulnerable to the heartbleed-bug.</description>
+  <description lang="zh">在这里，您可以测试服务器是否支持心跳并且是否容易受到Heartbleed-bug的攻击。</description>
+  <description lang="ru">Здесь вы можете проверить, поддерживает ли сервер сердцебиение и уязвим для бровь.</description>
+  <description lang="de">Hier können Sie überprüfen, ob ein Server mittels des Heartbleed-Bug angreifbar ist.</description>
+  <keywords>heartbeat, heartbleed</keywords>
+  <keywords lang="zh">心跳，流血</keywords>
+  <keywords lang="ru">сердцебиение, сердцебиение</keywords>
+  <keywords lang="de">heartbeat, heartbleed</keywords>
+  <icon file="HeartbleedTest.png" />
+  <relevantPlugins>
+    <plugin name="NetworkInput" />
+    <plugin name="NetworkReceiver" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$ClientHello Message$" value="ClientHello-Nachricht" />
+    <replacement key="$ServerIP$" value="Server-IP" />
+    <replacement key="$String Decoder$" value="String-Dekodierer" />
+    <replacement key="$Network Sender$" value="Netzwerk-Sender" />
+    <replacement key="$Network Receiver$" value="Netzwerk-Empfänger" />
+    <replacement key="$Network Connection$" value="Netzwerk-Verbindung" />
+    <replacement key="$Handle Server Hello$" value="Behandle Server Hello" />
+    <replacement key="$Heartbeat Message$" value="Heartbeat-Nachricht" />
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$Find EOM$" value="Finde EOM" />
+    <replacement key="$reverse$" value="umkehren" />
+    <replacement key="$Init with False$" value="Init mit falsch" />
+    <replacement key="$Handle Heartbeat Answer$" value="Behandle Heartbeat-Antwort" />
+    <replacement key="$HeartbeatAnswer$" value="Heartbeat-Antwort" />
+    <replacement key="$HeartbleedState$" value="HeartBleed-Status" />
+    <replacement key="$chk Heartbleed$" value="chk Heartbleed" />
+    <replacement key="$length$" value="Länge" />
+    <replacement key="$HeartbeatState$" value="Heartbeat-Status" />
+    <replacement key="$Heartbeat active$" value="Heartbeat aktiv" />
+    <replacement key="$Find HB Header$" value="Finde HB-Header" />
+    <replacement key="$desc1$" value="\fs23 {\b Heartbeat und Heartbleed}\line Heartbleed ist eine gefährliche Sicherheitslücke in der Heartbeat-Implementierung der weitverbreiteten OpenSSL-Bibliothek. Sie ermöglicht dem Angreifer, Teile des Speichers auf dem Server auszulesen und so an geschützte Informationen zu gelangen.\line\line Weitere Informationen: {\b http://heartbleed.com/}" />
+    <replacement key="$desc2$" value="\fs23 {\b Was zeigt diese Vorlage?}\line Diese Vorlage testet, ob ein Server die Heartbeat-Funktion unterstützt und, falls ja, ob die Implementierung anfällig für den Heartbleed-Bug ist. Für Testzwecke werden sowohl ein anfälliger Server ({\b heartbleed.ais.uni-kassel.de}) als auch ein nicht anfälliger Server ({\b www.cryptool.org}) zur Verfügung gestellt.\line\line {\b Wie funktioniert diese Vorlage?}\line Zuerst wird eine SSL-ClientHello-Nachricht an den ausgewählten Server geschickt. Nachdem der Server mit einer ServerHello-Nachricht geantwortet hat, wird eine manipulierte Heartbeat-Nachricht an den Server geschickt. Abhängig von der Antwort des Servers kann man nun feststellen, ob Heartbeat aktiviert ist oder nicht, und ebenso, ob die verwendete Implementierung anfällig ist oder nicht." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$ClientHello Message$" value="ClientHello消息" />
+    <replacement key="$ServerIP$" value="服务器IP" />
+    <replacement key="$String Decoder$" value="字符串解码器" />
+    <replacement key="$Network Sender$" value="网络发射器" />
+    <replacement key="$Network Receiver$" value="网络接收器" />
+    <replacement key="$Network Connection$" value="网络连接" />
+    <replacement key="$Handle Server Hello$" value="管理服务器您好" />
+    <replacement key="$Heartbeat Message$" value="心跳消息" />
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$Find EOM$" value="查找EOM" />
+    <replacement key="$reverse$" value="回头" />
+    <replacement key="$Init with False$" value="初始化错误" />
+    <replacement key="$Handle Heartbeat Answer$" value="处理心跳反应" />
+    <replacement key="$HeartbeatAnswer$" value="心跳反应" />
+    <replacement key="$HeartbleedState$" value="心跳状态" />
+    <replacement key="$chk Heartbleed$" value="chk伤心欲绝" />
+    <replacement key="$length$" value="长" />
+    <replacement key="$HeartbeatState$" value="心跳状态" />
+    <replacement key="$Heartbeat active$" value="心跳活跃" />
+    <replacement key="$Find HB Header$" value="查找HB标头" />
+    <replacement key="$desc1$" value="\fs23 {\b Heartbeat and Heartbleed} \line Heartbleed是广泛使用的OpenSSL库的心跳实现中的一个危险漏洞。它使攻击者能够读取服务器上部分内存，从而访问受保护的信息\Line \line更多信息：{\b http://heartbleed.com/}" />
+    <replacement key="$desc2$" value="\fs23 {\b此模板显示什么？} \line此模板测试服务器是否支持Heartbeat功能，如果支持，则测试实现是否容易受到Heartbleed错误的影响。为了测试目的，同时提供了易受攻击的服务器（{\b heartbleed.ais.uni-kassel.de}）和不易受攻击的服务器（{\b www.cryptool.org}）。该模板如何工作？} \第一行，一条SSL ClientHello消息发送到所选服务器。服务器回复ServerHello消息后，会将经过操作的心跳消息发送到服务器。现在，根据服务器的响应，您可以确定心跳是否已激活，以及所使用的实现是否易受攻击。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$ClientHello Message$" value="сообщение привет клиента" />
+    <replacement key="$ServerIP$" value="Сервер-IP" />
+    <replacement key="$String Decoder$" value="Строка декодера" />
+    <replacement key="$Network Sender$" value="Сетевой передатчик" />
+    <replacement key="$Network Receiver$" value="Сетевой приемник" />
+    <replacement key="$Network Connection$" value="Сетевое подключение" />
+    <replacement key="$Handle Server Hello$" value="Управление сервером Hello" />
+    <replacement key="$Heartbeat Message$" value="Heartbeat сообщение" />
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$Find EOM$" value="Найти EOM" />
+    <replacement key="$reverse$" value="обратный" />
+    <replacement key="$Init with False$" value="Инициировать неправильно" />
+    <replacement key="$Handle Heartbeat Answer$" value="Относитесь к ответу сердцебиения" />
+    <replacement key="$HeartbeatAnswer$" value="Heartbeat ответ" />
+    <replacement key="$HeartbleedState$" value="Статус HeartBleed" />
+    <replacement key="$chk Heartbleed$" value="chk heartbleed" />
+    <replacement key="$length$" value="долго" />
+    <replacement key="$HeartbeatState$" value="Heartbeat-Status" />
+    <replacement key="$Heartbeat active$" value="Heartbeat aktiv" />
+    <replacement key="$Find HB Header$" value="Найти заголовок HB" />
+    <replacement key="$desc1$" value="\fs23 {\b Heartbeat и Heartbleed} \line Heartbleed - опасная дыра в безопасности при использовании широко используемой библиотеки OpenSSL. Он позволяет злоумышленнику читать части хранилища на сервере и получать защищенную информацию. \Line \line Для получения дополнительной информации: {\b http://heartbleed.com/}" />
+    <replacement key="$desc2$" value="\fs23 {\b Что отображает этот шаблон?} \line Этот шаблон проверяет, поддерживает ли сервер функцию heartbeat, и если да, то является ли реализация уязвимой для исправленной ошибки. В целях тестирования предоставляются как уязвимый сервер ({\b heartbleed.ais.uni-kassel.de}), так и небезопасный сервер ({\b www.cryptool.org}). \Line \line {\b Как работает этот шаблон?} \Line Сначала сообщение SSL ClientHello отправляется на выбранный сервер. После того как сервер отвечает сообщением ServerHello, на сервер отправляется сообщение о вредоносном сердцебиении. В зависимости от ответа сервера теперь можно определить, включено ли сердцебиение или нет, а также то, является ли используемая реализация уязвимой или нет." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$ClientHello Message$" value="ClientHello Message" />
+    <replacement key="$ServerIP$" value="ServerIP" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$Network Sender$" value="Network Sender" />
+    <replacement key="$Network Receiver$" value="Network Receiver" />
+    <replacement key="$Network Connection$" value="Network Connection" />
+    <replacement key="$Handle Server Hello$" value="Handle Server Hello" />
+    <replacement key="$Heartbeat Message$" value="Heartbeat Message" />
+    <replacement key="$Gate$" value="Gate" />
+    <replacement key="$Find EOM$" value="Find EOM" />
+    <replacement key="$reverse$" value="reverse" />
+    <replacement key="$Init with False$" value="Init with False" />
+    <replacement key="$Handle Heartbeat Answer$" value="Handle Heartbeat Answer" />
+    <replacement key="$HeartbeatAnswer$" value="Heartbeat Answer" />
+    <replacement key="$HeartbleedState$" value="HeartBleedState" />
+    <replacement key="$chk Heartbleed$" value="chk Heartbleed" />
+    <replacement key="$length$" value="length" />
+    <replacement key="$HeartbeatState$" value="HeartbeatState" />
+    <replacement key="$Heartbeat active$" value="Heartbeat active" />
+    <replacement key="$Find HB Header$" value="Find HB header" />
+    <replacement key="$desc1$" value="\fs23 {\b Heartbeat and Heartbleed}\line Heartbleed is a serious vulnerability within the Heartbeat implementation of the commonly used OpenSSL library. It allows to read the memory of the server in order to steal protected information from it.\line\line Visit {\b http://heartbleed.com/} for more information." />
+    <replacement key="$desc2$" value="\fs23 {\b What does this template do?}\line This template tests if a server supports the Heartbeat feature and whether the implementation is vulnerable to the heartbleed bug. For testing purposes we are providing both, a vulnerable server ({\b heartbleed.ais.uni-kassel.de}) and a not vulnerable server ({\b www.cryptool.org}).\line\line {\b How does this template work?}\line First, the template sends an SSL-ClientHello message to the choosen server. After the server answered with a ServerHello message, the template sends a manipulated Heartbeat message. Depending on the server's answer the template can now see whether Heartbeat is enabled or not. Also it can see if the implementation is vulnerable." />
+  </replacements>
+</sample>

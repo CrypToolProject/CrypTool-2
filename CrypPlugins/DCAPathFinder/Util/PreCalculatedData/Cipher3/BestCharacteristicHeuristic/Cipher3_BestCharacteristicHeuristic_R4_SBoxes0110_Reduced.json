@@ -1,0 +1,74 @@
+{
+  "Round": 4,
+  "ActiveSBoxes": [
+    false,
+    true,
+    true,
+    false
+  ],
+  "IsFirst": false,
+  "IsLast": false,
+  "IsBeforeLast": true,
+  "Probability": 0.025909423828125,
+  "InputDifference": 6,
+  "ExpectedDifference": 544,
+  "Characteristics": [
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        6,
+        256,
+        64,
+        544,
+        0
+      ],
+      "OutputDifferentials": [
+        4,
+        512,
+        96,
+        0
+      ],
+      "Probability": 0.0234375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        6,
+        273,
+        112,
+        544,
+        0
+      ],
+      "OutputDifferentials": [
+        7,
+        546,
+        96,
+        0
+      ],
+      "Probability": 0.00164794921875
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        6,
+        4113,
+        176,
+        544,
+        0
+      ],
+      "OutputDifferentials": [
+        11,
+        8226,
+        96,
+        0
+      ],
+      "Probability": 0.000823974609375
+    }
+  ],
+  "UnfilteredPairList": [],
+  "FilteredPairList": [],
+  "EncrypedPairList": [],
+  "SearchPolicy": 0,
+  "AbortingPolicy": 1,
+  "SelectedAlgorithm": 2
+}

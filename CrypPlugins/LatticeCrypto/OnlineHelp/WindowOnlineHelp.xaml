@@ -1,0 +1,28 @@
+﻿<Window x:Class="LatticeCrypto.OnlineHelp.WindowOnlineHelp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="{x:Static Properties:HelpLanguages.title}" Height="400" Width="600"
+        xmlns:my="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:Properties="clr-namespace:LatticeCrypto.Properties" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <Grid x:Uid="Grid_1">
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../WpfResources/LatticeCrypto.WpfResources.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition x:Uid="RowDefinition_1" Height="40" />
+            <RowDefinition x:Uid="RowDefinition_2" Height="*" />
+            <RowDefinition x:Uid="RowDefinition_3" Height="35" />
+
+        </Grid.RowDefinitions>
+        <DockPanel x:Uid="DockPanel_1" HorizontalAlignment="Stretch" Margin="5" VerticalAlignment="Top">
+            <Button x:Uid="btnHistoryBack" Name="btnHistoryBack" HorizontalAlignment="Left" Width="100" Click="btnHistoryBack_Click" Content="{x:Static Properties:HelpLanguages.btnBack}" />
+            <Button x:Uid="btnHistoryForward" Name="btnHistoryForward" HorizontalAlignment="Right" Margin="5,0,0,0" Width="100" Click="btnHistoryForward_Click" Content="{x:Static Properties:HelpLanguages.btnForward}" />
+        </DockPanel>
+        <my:WindowsFormsHost x:Uid="webbrowserhost" Grid.Row="1" Name="webbrowserhost" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+        <Button x:Uid="btnClose" Name="btnClose" Grid.Row="3" HorizontalAlignment="Right" Margin="5" Width="100" Click="btnClose_Click" Content="{x:Static Properties:HelpLanguages.btnClose}" VerticalAlignment="Center"></Button>
+    </Grid>
+    </Window>

@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>T-310</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>DDR-Chiffriergerät</value>
+  </data>
+  <data name="InputDataCaption" xml:space="preserve">
+    <value>Eingabedaten</value>
+  </data>
+  <data name="InputDataTooltip" xml:space="preserve">
+    <value>Geben Sie den Klartext (für die Verschlüsselung) oder den Geheimtext (für die Entschlüsselung) ein.</value>
+  </data>
+  <data name="InputKeyCaption1" xml:space="preserve">
+    <value>Teilschlüssel 1</value>
+  </data>
+  <data name="InputKeyTooltip1" xml:space="preserve">
+    <value>Geben Sie den T-310-Teilschlüssel 1 als Byte-Array ein. Dieser muss eine Länge von 120 Bit (15 Byte) und eine ungerade Parität haben.</value>
+  </data>
+  <data name="OutputDataCaption" xml:space="preserve">
+    <value>Ausgabedaten</value>
+  </data>
+  <data name="OutputDataTooltip" xml:space="preserve">
+    <value>Verschlüsselter Geheimtext oder entschlüsselter Klartext</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Wählen Sie die Betriebsart des Plugins.</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>Verschlüsselung</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>Entschlüsselung</value>
+  </data>
+  <data name="VersionCaption" xml:space="preserve">
+    <value>Version der T-310</value>
+  </data>
+  <data name="VersionList1" xml:space="preserve">
+    <value>T-310/50 Fernschreibchiffriergerät</value>
+  </data>
+  <data name="VersionList2" xml:space="preserve">
+    <value>T-310/51 Datenchiffriergerät</value>
+  </data>
+  <data name="VersionTooltip" xml:space="preserve">
+    <value>Die T-310 gibt es in den Ausführungen T-310/50 und T-310/51. Die Version 50 kann nur Fernschreibzeichen nach CCITT-2 konvertieren. Die Version 51 beliebige Daten.</value>
+  </data>
+  <data name="BitSelectorCaption" xml:space="preserve">
+    <value>Bit-Auswahl</value>
+  </data>
+  <data name="BitSelectorList1" xml:space="preserve">
+    <value>Höchstwertige Bits</value>
+  </data>
+  <data name="BitSelectorList2" xml:space="preserve">
+    <value>Niedrigstwertige Bits</value>
+  </data>
+  <data name="BitSelectorTooltip" xml:space="preserve">
+    <value>Bestimmt, ob bei bestimmten Vektoren das höchst- oder niedrigstwertige Bit verwendet werden soll.</value>
+  </data>
+  <data name="Key14" xml:space="preserve">
+    <value>Langzeitschlüssel 14</value>
+  </data>
+  <data name="Key15" xml:space="preserve">
+    <value>Langzeitschlüssel 15</value>
+  </data>
+  <data name="Key16" xml:space="preserve">
+    <value>Langzeitschlüssel 16</value>
+  </data>
+  <data name="Key17" xml:space="preserve">
+    <value>Langzeitschlüssel 17</value>
+  </data>
+  <data name="Key21" xml:space="preserve">
+    <value>Langzeitschlüssel 21</value>
+  </data>
+  <data name="Key26" xml:space="preserve">
+    <value>Langzeitschlüssel 26</value>
+  </data>
+  <data name="Key29" xml:space="preserve">
+    <value>Langzeitschlüssel 29</value>
+  </data>
+  <data name="Key30" xml:space="preserve">
+    <value>Langzeitschlüssel 30</value>
+  </data>
+  <data name="Key31" xml:space="preserve">
+    <value>Langzeitschlüssel 31</value>
+  </data>
+  <data name="Key32" xml:space="preserve">
+    <value>Langzeitschlüssel 32</value>
+  </data>
+  <data name="Key33" xml:space="preserve">
+    <value>Langzeitschlüssel 33</value>
+  </data>
+  <data name="LongTermKeyCaption" xml:space="preserve">
+    <value>Langzeitschlüssel</value>
+  </data>
+  <data name="LongTermKeyTooltip" xml:space="preserve">
+    <value>Langzeitschlüssel waren fest installierte Permutationen, die in der T-310-Blockchiffre (Wurmreihe D-W) verwendet wurden. Bei Bedarf konnten diese getauscht werden.</value>
+  </data>
+  <data name="InputKeyCaption2" xml:space="preserve">
+    <value>Teilschlüssel 2</value>
+  </data>
+  <data name="InputKeyTooltip2" xml:space="preserve">
+    <value>Geben Sie den T-310-Teilschlüssel 2 als Byte-Array ein. Dieser muss eine Länge von 120 Bit (15 Byte) und eine ungerade Parität haben.</value>
+  </data>
+  <data name="ErrorBothKeysEvenParity" xml:space="preserve">
+    <value>Beide Teilschlüssel sind gerade. Ungerade Schlüssel werden benötigt. Die Dokumentation bietet dazu zusätzliche Informationen.</value>
+  </data>
+  <data name="ErrorBothKeysLength" xml:space="preserve">
+    <value>Beide Teilschlüssel haben eine falsche Länge. Beide müssen eine Länge von 15 Byte (120 Bits) haben. Die Parität beider Schlüssel muss ungerade sein.</value>
+  </data>
+  <data name="ErrorBothKeysNull" xml:space="preserve">
+    <value>Es wurden keine Schlüssel-Konnektoren verbunden. Schließen Sie beide Teilschlüssel zu je 15 Byte Länge (120 Bits) an. Die Parität beider Schlüssel muss ungerade sein.</value>
+  </data>
+  <data name="ErrorEmptyConversion" xml:space="preserve">
+    <value>Nachdem die Nachricht nach CCITT-2 konvertiert wurde, sind keine Zeichen für die Aktion übrig geblieben. (Die Nachricht besteht nur aus ungültigen Zeichen)</value>
+  </data>
+  <data name="ErrorHeaderBytes" xml:space="preserve">
+    <value>Die "Magic-Number-Bytes" des Nachrichten-Headers sind ungültig. (Dieser ist folgend aufgebaut: 4 Byte 0x19, 25 Byte Initialisierungsvektor und 4 Byte 0x0F)</value>
+  </data>
+  <data name="ErrorHeaderIntegrity" xml:space="preserve">
+    <value>Der Nachrichten-Header ist ungültig.  (Dieser ist folgend aufgebaut: 4 Byte 0x19, 25 Byte Initialisierungsvektor und 4 Byte 0x0F). Die vier Byte 0x19 am Anfang und 0x0F am Ende sind korrekt.</value>
+  </data>
+  <data name="ErrorHeaderLength" xml:space="preserve">
+    <value>Der Nachrichten-Header konnte nicht gelesen werden, er ist zu kurz. Benötigte Länge: {0};  Länge der Nachricht:  {1}</value>
+  </data>
+  <data name="ErrorInputEmpty" xml:space="preserve">
+    <value>Die Eingabedaten sind leer, es kann keine Aktion durchgeführt werden.</value>
+  </data>
+  <data name="ErrorInputNull" xml:space="preserve">
+    <value>Kein Eingabe-Konnektor verfügbar. Schließen sie ein Byte[] bei Eingabedaten an.</value>
+  </data>
+  <data name="ErrorKeyEvenParity" xml:space="preserve">
+    <value>Die Parität des Teilschlüssels  {0} ist gerade. Ein ungerader Schlüssel wird benötigt. Die Dokumentation bietet dazu zusätzliche Informationen.</value>
+  </data>
+  <data name="ErrorKeyLength" xml:space="preserve">
+    <value>Der Teilschlüssel {0} muss genau 15 Byte lang sein (120 Bits). Der eingegebene Schlüssel {0} is {1} Bytes lang.</value>
+  </data>
+  <data name="ErrorKeyNull" xml:space="preserve">
+    <value>An Schlüssel {0} ist kein Eingabe-Konnektor angeschlossen. Schließen sie eine Eingabe mit einem Teilschlüssel der Länge 15 Byte (120 Bits) an. Die Parität dieses Schlüssels muss ungerade sein.</value>
+  </data>
+  <data name="ErrorUnconvertableBeginningPlural" xml:space="preserve">
+    <value>Es waren {0} nicht konvertierbare Zeichen in den Eingabedaten</value>
+  </data>
+  <data name="ErrorUnconvertableBeginningSingular" xml:space="preserve">
+    <value>Es war {0} nicht konvertierbares Zeichen in den Eingabedaten</value>
+  </data>
+  <data name="ErrorUnconvertableEndPlural" xml:space="preserve">
+    <value>; sie wurden vor dem Verschlüsseln entfernt.</value>
+  </data>
+  <data name="ErrorUnconvertableEndSingular" xml:space="preserve">
+    <value>; es wurde vor dem Verschlüsseln entfernt.</value>
+  </data>
+</root>

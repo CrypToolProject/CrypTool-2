@@ -1,0 +1,2 @@
+This is a modified version of original ExtendedNTL (https://www.shoup.net), which enables accessing particular function from .NET for usage in CrypTool 2.
+Perform a diff operation with the original source code to find out which modifications have been made.

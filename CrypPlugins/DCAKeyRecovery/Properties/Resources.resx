@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnyRoundAttackDataColHeader1" xml:space="preserve">
+    <value>key candidate</value>
+  </data>
+  <data name="AnyRoundAttackDataColHeader2" xml:space="preserve">
+    <value>Number of hits</value>
+  </data>
+  <data name="AnyRoundAttackDataColHeader3" xml:space="preserve">
+    <value>Probability</value>
+  </data>
+  <data name="AnyRoundAttackEnd" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="AnyRoundAttackRound" xml:space="preserve">
+    <value>Attacked encryption round:</value>
+  </data>
+  <data name="AnyRoundAttackRoundResults" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="AnyRoundAttackStart" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="AnyRoundAttackStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AnyRoundExpectedHitCount" xml:space="preserve">
+    <value>Expected number of hits:</value>
+  </data>
+  <data name="AnyRoundExpectedProbability" xml:space="preserve">
+    <value>Expected probability:</value>
+  </data>
+  <data name="AnyRoundMessagePairCount" xml:space="preserve">
+    <value>Count of message pairs (unfiltered/filtered):</value>
+  </data>
+  <data name="AnyRoundRecoveredRoundKey" xml:space="preserve">
+    <value>Recovered round key:</value>
+  </data>
+  <data name="AttackLastRoundHeader" xml:space="preserve">
+    <value>{0} key recovery</value>
+  </data>
+  <data name="AutomaticMode" xml:space="preserve">
+    <value>Automatic mode</value>
+  </data>
+  <data name="AutomaticModeToolTip" xml:space="preserve">
+    <value>No user input required in automatic mode</value>
+  </data>
+  <data name="BtnNextKey" xml:space="preserve">
+    <value>Skip key</value>
+  </data>
+  <data name="BtnNextMessage" xml:space="preserve">
+    <value>Skip message pair</value>
+  </data>
+  <data name="BtnSkip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="BtnStart" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="ChoiceOfAlgorithm" xml:space="preserve">
+    <value>Choice of cipher</value>
+  </data>
+  <data name="ChoiceOfAlgorithmToolTop" xml:space="preserve">
+    <value>At this point, you can select one of the ciphers contained in the list. This can be examined by differential cryptanalysis.</value>
+  </data>
+  <data name="Cipher1" xml:space="preserve">
+    <value>Cipher 1 (16 bit block size, 2 round keys, 32 bit key length)</value>
+  </data>
+  <data name="Cipher1CipherViewCol" xml:space="preserve">
+    <value>key candidate</value>
+  </data>
+  <data name="Cipher1SummaryResultViewTotalSummary" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Cipher2" xml:space="preserve">
+    <value>Cipher 2 (16 bit block size, 4 round keys, 64 bit key length)</value>
+  </data>
+  <data name="Cipher2SummaryResultViewRound1" xml:space="preserve">
+    <value>Round 1</value>
+  </data>
+  <data name="Cipher2SummaryResultViewRound2" xml:space="preserve">
+    <value>Round 2</value>
+  </data>
+  <data name="Cipher2SummaryResultViewRound3" xml:space="preserve">
+    <value>Round 3</value>
+  </data>
+  <data name="Cipher2SummaryResultViewTotalSummary" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Cipher3" xml:space="preserve">
+    <value>Cipher 3 (16 bit block size, 6 round keys, 96 bit key length)</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound1" xml:space="preserve">
+    <value>Round 1</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound2" xml:space="preserve">
+    <value>Round 2</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound3" xml:space="preserve">
+    <value>Round 3</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound4" xml:space="preserve">
+    <value>Round 4</value>
+  </data>
+  <data name="Cipher3SummaryResultViewRound5" xml:space="preserve">
+    <value>Round 5</value>
+  </data>
+  <data name="Cipher3SummaryResultViewTotalSummary" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="DifferentialInput" xml:space="preserve">
+    <value>Differential</value>
+  </data>
+  <data name="DifferentialInputToolTip" xml:space="preserve">
+    <value>Input for the differential</value>
+  </data>
+  <data name="EncryptedMessagePairsInput" xml:space="preserve">
+    <value>ciphertext message pairs</value>
+  </data>
+  <data name="EncryptedMessagePairsInputToolTip" xml:space="preserve">
+    <value>Input for the ciphertext message pairs</value>
+  </data>
+  <data name="ExpectedDifferential" xml:space="preserve">
+    <value>Expected difference</value>
+  </data>
+  <data name="ExpectedDifferentialToolTip" xml:space="preserve">
+    <value>Output for the expected difference</value>
+  </data>
+  <data name="FinishedOutput" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="FinishedOutputToolTip" xml:space="preserve">
+    <value>The output indicates to the DCA PathFinder component that the calculation has been completed.</value>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>GER</value>
+  </data>
+  <data name="LastRoundAttackCurrentCiphertext" xml:space="preserve">
+    <value>Current ciphertext:</value>
+  </data>
+  <data name="LastRoundAttackCurrentKeyCandidate" xml:space="preserve">
+    <value>Current key candidate:</value>
+  </data>
+  <data name="LastRoundAttackCurrentKeyOfAll" xml:space="preserve">
+    <value>Number of keys to be tested:</value>
+  </data>
+  <data name="LastRoundAttackCurrentPlaintext" xml:space="preserve">
+    <value>Current plaintext:</value>
+  </data>
+  <data name="LastRoundAttackDataColHeader1" xml:space="preserve">
+    <value>Iteration</value>
+  </data>
+  <data name="LastRoundAttackDataColHeader2" xml:space="preserve">
+    <value>Remaining key candidates</value>
+  </data>
+  <data name="LastRoundAttackEnd" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="LastRoundAttackExpectedDifference" xml:space="preserve">
+    <value>Expected difference:</value>
+  </data>
+  <data name="LastRoundAttackNumberOfExaminedPairs" xml:space="preserve">
+    <value>Examined plaintext/ciphertext pairs:</value>
+  </data>
+  <data name="LastRoundAttackRemainingKeyCandidates" xml:space="preserve">
+    <value>Remaining key candidates:</value>
+  </data>
+  <data name="LastRoundAttackRound" xml:space="preserve">
+    <value>Attacked encryption round:</value>
+  </data>
+  <data name="LastRoundAttackRoundResults" xml:space="preserve">
+    <value>Iterations</value>
+  </data>
+  <data name="LastRoundAttackStart" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="LastRoundAttackStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="MessageDifferenceOutput" xml:space="preserve">
+    <value>Expected difference:</value>
+  </data>
+  <data name="MessageDifferenceOutputToolTip" xml:space="preserve">
+    <value>Output for the expected difference</value>
+  </data>
+  <data name="MessageNoResult" xml:space="preserve">
+    <value>The last round keys could not be restored. This can happen if one of the previous round keys was incorrectly calculated. Possibly the parameters in the DCA PathFinder component should be selected again.</value>
+  </data>
+  <data name="NeededMessageCountOutput" xml:space="preserve">
+    <value>Number of message pairs</value>
+  </data>
+  <data name="NeededMessageCountOutputToolTip" xml:space="preserve">
+    <value>Output for the number of requested message pairs</value>
+  </data>
+  <data name="nextStepTextRun1" xml:space="preserve">
+    <value>Differential cryptanalysis is continued in the</value>
+  </data>
+  <data name="nextStepTextRun2" xml:space="preserve">
+    <value>DCA PathFinder componend</value>
+  </data>
+  <data name="PerformanceSettingsGroup" xml:space="preserve">
+    <value>Speed options</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>DCA KeyRecovery</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>This component performs the recovery of key bits from round keys.</value>
+  </data>
+  <data name="RoundKeysOutput" xml:space="preserve">
+    <value>Round keys</value>
+  </data>
+  <data name="RoundKeysOutputToolTip" xml:space="preserve">
+    <value>Output of the round keys</value>
+  </data>
+  <data name="SummaryResultViewCountOfDecryptions" xml:space="preserve">
+    <value>Number of decryptions:</value>
+  </data>
+  <data name="SummaryResultViewCountOfMessages" xml:space="preserve">
+    <value>Number of messages:</value>
+  </data>
+  <data name="SummaryResultViewCurrentRound" xml:space="preserve">
+    <value>Attacked encryption round:</value>
+  </data>
+  <data name="SummaryResultViewEndTime" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK0" xml:space="preserve">
+    <value>Restored round key k0:</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK1" xml:space="preserve">
+    <value>Restored round key k1:</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK2" xml:space="preserve">
+    <value>Restored round key k2:</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK3" xml:space="preserve">
+    <value>Restored round key k3:</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK4" xml:space="preserve">
+    <value>Restored round key k4:</value>
+  </data>
+  <data name="SummaryResultViewRecoveredK5" xml:space="preserve">
+    <value>Restored round key k5:</value>
+  </data>
+  <data name="SummaryResultViewStartTime" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="SummaryResultViewTestedKeys" xml:space="preserve">
+    <value>Tested keys:</value>
+  </data>
+  <data name="TabItemHeaderCipher" xml:space="preserve">
+    <value>Detailed view</value>
+  </data>
+  <data name="TabItemHeaderRoundSummary" xml:space="preserve">
+    <value>Round status</value>
+  </data>
+  <data name="TabItemHeaderSummary" xml:space="preserve">
+    <value>Overall status</value>
+  </data>
+  <data name="ThreadCount" xml:space="preserve">
+    <value>Threads to be used</value>
+  </data>
+  <data name="ThreadCountToolTip" xml:space="preserve">
+    <value>Specifies the number of threads to use for the calculation.</value>
+  </data>
+  <data name="ThreadSettingError" xml:space="preserve">
+    <value>The maximum number of threads for your system is {0} threads. This number is limited by your processor.</value>
+  </data>
+  <data name="TutorialSettingsGroup" xml:space="preserve">
+    <value>Tutorial options</value>
+  </data>
+  <data name="UIUpdateWhileExecution" xml:space="preserve">
+    <value>Update of the user interface during calculations</value>
+  </data>
+  <data name="UIUpdateWhileExecutionToolTip" xml:space="preserve">
+    <value>Determines whether the user interface is updated during calculations or only after the calculation has been completed. This setting affects the execution speed of the component.</value>
+  </data>
+  <data name="UnencryptedMessagePairsInput" xml:space="preserve">
+    <value>Plaintext message pairs</value>
+  </data>
+  <data name="UnencryptedMessagePairsInputToolTip" xml:space="preserve">
+    <value>Input for the plaintext message pairs</value>
+  </data>
+</root>

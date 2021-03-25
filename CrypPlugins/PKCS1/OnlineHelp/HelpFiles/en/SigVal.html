@@ -1,0 +1,18 @@
+﻿<h2>Signature validation</h2>
+
+The validation of a PKCS#1 signature starts with the decryption of the signature with the public key. The resulting data should be structured as described <a href="help://Gen_PKCS1_Sig_Tab">here</a>.
+In the next step the <a href="help://Gen_Datablock_Tab">data block</a> is extracted.</br>
+This can be done in a correct and in an incorrect way. Until the discovery of the possible attack (2006) the extraction was implemented in an incorrect way in many implementations of the validation algorithm.
+
+<ul>
+<li>
+<strong>flawed implementation</strong><br>
+In the flawed implementation the algorithm reads in the padding string and the data block of the decrypted signature, but it ignores the 'garbage' data that follows after the data block, thus making it possible to fake a signature without knowing the private key.
+</li>
+<li>
+<strong>correct implementation</strong><br>
+In a correct implementation the data after the data block and the length of the padding string are taken into account.
+</li>
+</ul>
+
+The used hash algorithm and the hash value can be extracted from the data block. Now the hash algorithm is applied to the data whose validity the signature guarantees, and the result is compared to the hash value in the data block. If they are equal, the signature is regarded as valid.

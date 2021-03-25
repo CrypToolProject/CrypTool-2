@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="DCAPathFinder.UI.Tutorial2.AnalysisSlide2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DCAPathFinder.UI.Tutorial2"
+             xmlns:controls="clr-namespace:DCAPathFinder.UI.Controls"
+             xmlns:controls1="clr-namespace:WpfMath.Controls;assembly=WpfMath"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <RotateTransform x:Key="HeaderRotate" Angle="270" />
+    </UserControl.Resources>
+    <Grid Height="525" Width="900">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <RichTextBox Grid.Row="0" IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                     FontFamily="Courier New" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center">
+                    <Run Text="{Loc Tutorial2AnalysisSlide2Header}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <ScrollViewer x:Name="scrollbar" Grid.Row="1" VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Hidden" Margin="0,0,0,0">
+
+            <Grid Height="900" Width="900">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*" />
+                    <ColumnDefinition Width="0.8*" />
+                    <ColumnDefinition Width="1.0*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Center" Margin="45,10,0,0">
+                    <controls1:FormulaControl Formula="m" Scale="25" />
+                </TextBlock>
+
+                <!-- Round 1 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="240" Grid.Row="0"
+                       Grid.Column="0" Margin="-290,-510,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}"
+                           Margin="10,0,0,665">
+                    <Run Text="{Loc R1}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundInOut x:Name="KeyRound1" Grid.Row="0" Grid.Column="0" Margin="50,0,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,90,0,0">
+                    <controls1:FormulaControl Formula="k_0" Scale="25" />
+                </TextBlock>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,140,0,0">
+                    <controls1:FormulaControl Formula="u_1 = m \oplus k_0" Scale="25" />
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,217,0,0">
+                    <controls1:FormulaControl Formula="v_1 = S(u_1)" Scale="25" />
+                </TextBlock>
+
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="50,170,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="130,170,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="210,170,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="290,170,0,0" IsClickable="False" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,275,0,0">
+                    <controls1:FormulaControl Formula="w_1 = P(v_1)" Scale="25" />
+                </TextBlock>
+
+                <controls:_16BitPermutation3RSPN x:Name="PermutationRound1" Grid.Row="0" Grid.Column="0"
+                                                 Margin="50,195,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,330,0,0">
+                    <controls1:FormulaControl Formula="k_1" Scale="25" />
+                </TextBlock>
+
+                <!-- /Round 1 -->
+                <!-- Round 2 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="240" Grid.Row="0"
+                       Grid.Column="0" Margin="-290,-30,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}"
+                           Margin="10,0,0,425">
+                    <Run Text="{Loc R2}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound2" Grid.Row="0" Grid.Column="0" Margin="50,240,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,385,0,0">
+                    <controls1:FormulaControl Formula="u_2 = w_1 \oplus k_1" Scale="25" />
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,455,0,0">
+                    <controls1:FormulaControl Formula="v_2 = S(u_2)" Scale="25" />
+                </TextBlock>
+
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="50,410,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="130,410,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="210,410,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="290,410,0,0" IsClickable="False" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,520,0,0">
+                    <controls1:FormulaControl Formula="w_2 = P(v_2)" Scale="25" />
+                </TextBlock>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,570,0,0">
+                    <controls1:FormulaControl Formula="k_2" Scale="25" />
+                </TextBlock>
+
+                <controls:_16BitPermutation3RSPN x:Name="PermutationRound2" Grid.Row="0" Grid.Column="0"
+                                                 Margin="50,435,0,0" />
+                <!-- /Round 2 -->
+                <!-- Round 3 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="235" Grid.Row="0"
+                       Grid.Column="0" Margin="-290,445,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}"
+                           Margin="10,0,0,185">
+                    <Run Text="{Loc R3}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound3" Grid.Row="0" Grid.Column="0" Margin="50,480,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,627,0,0">
+                    <controls1:FormulaControl Formula="u_3 = w_2 \oplus k_2" Scale="25" />
+                </TextBlock>
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,695,0,0">
+                    <controls1:FormulaControl Formula="v_3 = S(u_3)" Scale="25" />
+                </TextBlock>
+
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="50,650,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="130,650,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="210,650,0,0" IsClickable="False" />
+                <controls:_4BitSBox Grid.Row="0" Grid.Column="0" Margin="290,650,0,0" IsClickable="False" />
+                <controls:_16BitKeyRoundInOut x:Name="KeyRound4" Grid.Row="0" Grid.Column="0" Margin="50,665,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,755,0,0">
+                    <controls1:FormulaControl Formula="k_3" Scale="25" />
+                </TextBlock>
+                <!-- /Round 3 -->
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Center" Margin="45,840,0,0">
+                    <controls1:FormulaControl Formula="c = v_3 \oplus k_3" Scale="25" />
+                </TextBlock>
+
+
+            </Grid>
+
+
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

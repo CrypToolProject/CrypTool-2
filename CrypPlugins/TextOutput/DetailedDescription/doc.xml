@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component displays the text that is entered at its input. The input accepts not only text as input, but all data types,
+    and converts them into a format that is suitable for text output.
+  </introduction>
+  <introduction lang="zh-CN">该组件显示在其输入处输入的文本。输入不仅接受文本作为输入，还接受所有数据类型，并将它们转换为适合文本输出的格式。</introduction>
+  <introduction lang="ru">Этот компонент отображает текст, который вводится на его входе. Ввод принимает не только текст как входной, но и все типы данных и преобразует их в формат, подходящий для вывода текста.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente zeigt den an ihrem Eingang anliegenden Text an. Der Eingang akzeptiert allerdings nicht nur Text, sondern alle Datentypen,
+    und konvertiert diese in eine passende Textdarstellung.
+  </introduction>
+  <usage lang="en">
+    Connect the input of the component with the value you want to display. The input of the component is of data type <i>Object</i>, thus it accepts all other data types.
+    Depending on the data type of the given input, the component formats the displayed text in different ways:
+    <list><item>
+        If the input is of type <i>Text</i>, it is displayed unchanged.
+      </item><item>
+        If the input is of type <i>byte[]</i> or <i>DataStream</i>, it is displayed as a sequence of bytes in hexadecimal format.
+      </item><item>
+        If the input is of type <i>Boolean</i>, the displayed text is 'True' or 'False'.
+      </item><item>
+        A numeric input is converted to a string, that represents the number in decimal notation.
+      </item></list>
+    The size of the input, that the component accepts, is limited. If the entered data is bigger, the part that exceeds the limit is ignored and will not be displayed.
+    The limit can be adjusted in the settings of the component under <i>Maximum length</i>. The default value is 64 kilobytes.
+    <newline /><newline />
+    When the data on the input is updated, the normal behaviour of the component is to replace the displayed text with the new text.
+    You can change this by activating the checkbox <i>Append text input</i> in the settings. Updated data will then be appended to the current text.
+    The appended text is separated from the present text by an adjustable number of line breaks.
+    <newline /><newline />
+    You can furthermore use the setting 'Show changes' to compare the texts of two executions of the component. Here the component offers three modes of comparison: 'Show only differences', 'Show inserts and deletions', and 'Show different symbols'.
+    With 'Show only differences', the text changes are marked blue using a unix-like diff algorithm. With 'Show inserts and deletions', the text inserts are marked green and the text deletions are marked red. With 'Show different symbols', a one by one comparision of the texts is done. Here, each changed symbol is marked blue.
+    <newline /><newline /><b>'Show only differences' example:</b><newline />
+    First component run shows: The quick brown fox jumps over the lazy dog.<newline />
+    We change 'quick' to 'QUICK'.<newline />
+    Second component run shows: The <font background="66CCFF">QUICK</font> brown fox jumps over the lazy dog.<newline /><newline /><b>'Show inserts and deletions' example:</b><newline />
+    First component run shows: The quick brown fox jumps over the lazy dog.<newline />
+    We change 'quick' to 'QUICK'.<newline />
+    Second component run shows: The <font background="993300">quick</font><font background="66CC33">QUICK</font> brown fox jumps over the lazy dog.<newline /><newline /><b>'Show different symbols' example:</b><newline />
+    First component run shows: 11010110110101010101001<newline />
+    We change the text to: 11111111110101010101001<newline />
+    Second component run shows: 111<font background="66CCFF">1</font>1<font background="66CCFF">1</font>11<font background="66CCFF">1</font>10101010101001
+  </usage>
+  <usage lang="zh-CN">用要显示的值连接组件的输入。组件的输入的数据类型为Object，因此它接受所有其他数据类型。根据给定输入的数据类型，组件将以不同方式设置显示文本的格式：如果输入为文本类型，则其显示不变。如果输入的类型为byte []或DataStream，则将其显示为十六进制格式的字节序列。如果输入为布尔类型，则显示的文本为“ True”或“ False”。数字输入将转换为字符串，该字符串以十进制表示形式表示数字。组件接受的输入大小是有限的。如果输入的数据较大，则超出限制的部分将被忽略，并且不会显示。可以在最大长度下的组件设置中调整该限制。默认值为64 KB。当输入上的数据更新时，组件的正常行为是用新文本替换显示的文本。您可以通过激活设置中的附加文本输入复选框来更改此设置。更新后的数据将被添加到当前文本中。附加的文本与当前文本通过可调数量的换行符分隔。您还可以使用“显示更改”设置来比较组件两次执行的文本。在此，该组件提供了三种比较模式：“仅显示差异”，“显示插入和删除”以及“显示不同符号”。对于“仅显示差异”，使用类似Unix的diff算法将文本更改标记为蓝色。使用“显示插入和删除”，将文本插入标记为绿色，将文本删除标记为红色。使用“显示不同的符号”，可以对文本进行一对一的比较。在此，每个更改的符号都标记为蓝色。 “仅显示差异”示例：运行的第一个组件显示：快速的棕色狐狸跳过了懒狗。我们将“快速”更改为“快速”。第二部分运行显示：QUICK棕色狐狸跳过了懒狗。“显示插入和删除”示例：第一部分运行显示：快速的棕色狐狸跳过了懒狗。我们将“快速”更改为“快速”。第二个组件运行显示：quickQUICK褐狐跳过懒惰的狗。“显示不同的符号”示例：第一个组件运行显示：11010110110101010101001我们将文本更改为：11111111110101010010101001第二个组件运行显示：11111111110101010101001</usage>
+  <usage lang="ru">Подключите вход компонента к значению, которое вы хотите отобразить. Ввод компонента имеет объект типа данных, поэтому он принимает все другие типы данных. В зависимости от типа данных данного входа компонент форматирует отображаемый текст по-разному: если вход имеет тип Text, он отображается без изменений. Если вход имеет тип байта [] или DataStream, он отображается как последовательность байтов в шестнадцатеричном формате. Если вход имеет тип Boolean, отображаемый текст - «True» или «False». Числовой ввод преобразуется в строку, которая представляет число в десятичной системе. Размер ввода, который принимает компонент, ограничен. Если введенные данные больше, то часть, которая превышает предел, игнорируется и не будет отображаться. Предел можно настроить в настройках компонента под максимальной длиной. Значение по умолчанию - 64 килобайта. Когда данные на входе обновляются, нормальное поведение компонента заключается в замене отображаемого текста на новый текст. Вы можете изменить это, активировав флажок Добавить текстовый ввод в настройках. Обновленные данные будут добавлены к текущему тексту. Приложенный текст отделен от текущего текста регулируемым числом разрывов строк. Вы также можете использовать настройку «Показать изменения», чтобы сравнить тексты двух исполнений компонента. Здесь компонент предлагает три способа сравнения: «Показать только различия», «Показать вставки и удаления» и «Показывать разные символы». Если «Показать только различия», изменения текста отмечены синим цветом, используя алгоритм, подобный unix. С помощью «Показать вставки и удаления» текстовые вставки отмечены зеленым цветом, а текстовые удаления отмечены красным. С помощью «Показать разные символы» выполняется сравнение сравнений текстов по одному. Здесь каждый измененный символ отмечен синим. Пример «Показать только отличия»: показывает первый компонент: быстрый коричневый лис прыгает через ленивую собаку. Мы меняем «быстро» на «БЫСТРО». Второе шоу показывает: БЫСТРЫЙ коричневый лис прыгает по ленивой собаке. Пример «Вставки и удаления»: «Первые показания в перспективе»: Быстрая коричневая лиса прыгает по ленивой собаке. Мы меняем «быстро» на «БЫСТРО». Прогон второго компонента: Быстрая бурая лиса quickQUICK перепрыгивает через ленивую собаку. Пример «Примеры с разными символами»: показаны первые пробеги: 11010110110101010101001 Мы меняем текст на: 11111111110101010101001. Показываем второй компонент: 11111111110101010101001</usage>
+  <usage lang="de-DE">
+    Verbinden Sie den Eingang der Komponente mit dem darzustellenden Wert. Der Eingang ist vom Datentyp <i>Object</i> und akzeptiert daher alle anderen Datentypen.
+    Abhängig vom Datentyp der anliegenden Daten wird der in dieser Komponente angezeigte Text unterschiedlich formatiert:
+    <list><item>
+        Ist die Eingabe vom Typ <i>Text</i>, so wird dieser unverändert angezeigt.
+      </item><item>
+        Ist die Eingabe vom Typ <i>byte[]</i> oder <i>DataStream</i>, so wird diese als Folge von Bytes im Hexadezimalsystem angezeigt.
+      </item><item>
+        Ist die Eingabe vom Typ <i>Boolean</i>, so wird 'True' oder 'False' ausgegeben.
+      </item><item>
+        Numerische Eingaben werden in eine Zeichenkette konvertiert, die der Repäsentation der Zahl im Dezimalsystem entspricht.
+      </item></list>
+    Die Größe der Daten, die die Komponente akzeptiert, ist beschränkt. Wenn die anliegenden Daten größer sind, so wird der über das Limit hinausgehende Teil ignoriert.
+    Das Limit kann in den Einstellungen der Komponente unter dem Punkt <i>Maximale Länge</i> angepasst werden. Voreingestellt ist ein Wert von 64 Kilobytes.
+    <newline /><newline />
+    Wenn die am Eingang anliegenden Daten aktualisiert werden, so wird der bis dahin angezeigte Text normalerweise durch den neuen Text ersetzt.
+    In den Einstellungen kann man dieses Verhalten ändern. Aktivieren Sie das Kontrollkästchen <i>Eingabe anfügen</i>, damit die neu anliegenden Daten an den bisherigen Text angehängt werden.
+    Sie können angeben, durch wie viele Zeilenumbrüche der neue Text vom bestehenden Text getrennt werden soll.
+    <newline /><newline />
+    Sie können außerdem die Einstellung "Zeige Änderungen" nutzen, um Texte zweier Ausführungen der Komponente miteinander zu vergleichen.
+    Hier bietet die Komponente drei Modi: "Zeige nur Unterschiede", "Zeige Einfügungen und Löschungen" und "Zeige unterschiedliche Symbole".
+    Bei "Zeige nur Unterschiede" werden alle Textänderungen mit einem Unix-artigen "Diff"-Algorithmus verglichen. Bei "Zeige Einfügungen und Löschungen" werden Einfügungen grün und Löschungen rot markiert. Bei "Zeige unterschiedliche Symbole" wird ein symbolweiser Vergleich der Texte durchgeführt. Jedes geänderte Symbol wird blau markiert.
+    <newline /><newline /><b>"Zeige nur Unterschiede"-Beispiel:</b><newline />
+    Die erste Ausführung der Komponente zeigt: Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.<newline />
+    Sie ändern "komplett" zu "KOMPLETT".<newline />
+    Die zweite Ausführung der Komponente zeigt: Franz jagt im <font background="66CCFF">KOMPLETT</font> verwahrlosten Taxi quer durch Bayern. <newline /><newline /><b>"Zeige Einfügungen und Löschungen"-Beispiel:</b><newline />
+    Die erste Ausführung der Komponente zeigt: Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.<newline />
+    Sie ändern "komplett" zu "KOMPLETT".<newline />
+    Die zweite Ausführung der Komponente zeigt: Franz jagt im <font background="993300">komplett</font><font background="66CC33">KOMPLETT</font> verwahrlosten Taxi quer durch Bayern.<newline /><newline /><b>"Zeige unterschiedliche Symbole"-Beispiel:</b><newline />
+    Die erste Ausführung der Komponente zeigt: 11010110110101010101001<newline />
+    Sie ändern den Text zu: 11111111110101010101001<newline />
+    Die zweite Ausführung der Komponente zeigt: 111<font background="66CCFF">1</font>1<font background="66CCFF">1</font>11<font background="66CCFF">1</font>10101010101001
+  </usage>
+  <presentation lang="en">
+    By default, the component is opened in presentation view.
+    <newline /><newline />
+    The component has a status bar, that displays the number of characters and lines that the entered text consists of.
+    The content of the status bar can be adjusted by selecting the corresponding checkboxes in the settings of the component.
+    If the displayed text consists only of digits, it is interpreted as a decimal number. In this case, the status bar shows the number of its digits
+    and the number of bits of its binary representation.
+  </presentation>
+  <presentation lang="zh-CN">默认情况下，该组件在演示视图中打开。该组件具有一个状态栏，它显示输入的文本所包含的字符和行数。通过选择组件设置中的相应复选框，可以调整状态栏的内容。如果显示的文本仅包含数字，则将其解释为十进制数字。在这种情况下，状态栏显示其位数和二进制表示的位数。</presentation>
+  <presentation lang="ru">По умолчанию компонент открывается в представлении представления. Компонент имеет строку состояния, которая отображает количество символов и строк, из которых состоит введенный текст. Содержимое строки состояния можно настроить, установив соответствующие флажки в настройках компонента. Если отображаемый текст состоит только из цифр, он интерпретируется как десятичное число. В этом случае строка состояния показывает количество своих цифр и количество битов его двоичного представления.</presentation>
+  <presentation lang="de-DE">
+    Die Komponente wird standardmäßig in der Präsentationsansicht geöffnet.
+    <newline /><newline />
+    Die Komponente hat eine Statuszeile, in der die Anzahl der eingegebenen Zeichen und Zeilen angezeigt wird.
+    Durch Aktivieren der entsprechenden Kontrollkästchen in den Einstellungen der Komponente kann der Inhalt der Statuszeile angepasst werden.
+    Besteht der angezeigte Text nur aus Ziffern, so wird er als Dezimalzahl interpretiert und in der Statuszeile wird die Anzahl ihrer Ziffern und
+    die Anzahl der notwendigen Bits in ihrer Binärdarstellung angezeigt.
+  </presentation>
+  <references></references>
+</documentation>

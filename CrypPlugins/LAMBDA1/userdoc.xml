@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="de-DE" />
+  <!--<language culture="ru"/>-->
+  <introduction lang="en">
+    LAMBDA1 is a historic block cipher that has been developed in East Germany (GDR) in the late 80s.
+    Probably for reasons of time pressure the algorithm was based on the Data Encryption Standard (DES).
+    The aim was to develop a secure cipher and improve DES.
+    Known issues of DES, especially the short keys were changed. The key length is 256 bits instead of
+    56. The expendable input and output permutations of DES were omitted. The round function of the
+    cipher itself was slightly changed, by moving the round permutation after the S-Boxes.
+    <newline />
+    The block size (8 byte) as well as the other functions, permutations and S-Boxes are the same as in DES.
+    <newline /><newline />
+    Cipher Feedback Mode (CFB) is the mode of operation. Blocks are padded with zeroes, which are stripped
+    after decryption.
+    <newline /><newline />
+    The algorithm was originally intended to be used in the cipher machine T-316 GO. For unknown reasons,
+    the actual algorithm used on the T-316 was different but related to LAMBDA1.
+    Later LAMBDA1 found application in the cipher machine T-325.
+    Due to the dissolution of the GDR in 1990 it did not see widespread use.
+  </introduction>
+  <introduction lang="zh-CN">LAMBDA1是一种历史悠久的分组密码，在80年代末期在东德（GDR）开发。可能由于时间紧迫的原因，该算法基于数据加密标准（DES）。目的是开发一种安全的密码并改进DES。 DES的已知问题，尤其是短键已更改。密钥长度是256位而不是56位。DES的可扩展输入和输出排列被省略。通过移动S-Box之后的舍入排列，密码本身的舍入功能略有变化。块大小（8字节）以及其他功能，置换和S-Box与DES中的相同。密码反馈模式（CFB）是操作模式。块被零填充，解密后将被剥离。该算法最初打算在密码机T-316 GO中使用。由于未知原因，T-316上使用的实际算法有所不同，但与LAMBDA1有关。后来LAMBDA1在加密机T-325中找到了应用。由于GDR在1990年解散，因此并未得到广泛使用。</introduction>
+  <introduction lang="de-DE">
+    LAMBDA1 ist eine historische Blockhiffre, die in der Deutschen Demokratischen Republik (DDR)
+    Ende der 1980er Jahre entwickelt wurde. Wohl aus Gründen von Zeitdruck wurde als Grundlage für den Algorithmus
+    der Data Encryption Standard (DES) verwendet und weiterentwickelt. Dadurch sollten die bekannten Schwächen, insbesondere
+    der kurze Schlüssel ausgebessert werden. Die Schlüssellänge wurde von 56 auf 256 Bits erhöht.
+    Die nicht sicherheitsrelevanten Eingangs- und Ausgangs-Permutationen wurden entfernt.
+    Die Rundenfunktion wurde leicht verändert - die Rundenpermutation befindet sich nach den S-Boxen.
+    <newline />
+    Die Blockgröße (8 Byte) und die anderen Funktionen, Permutationen und S-Boxen wurden ohne Änderungen von DES übernommen.
+    <newline /><newline />
+    Der verwendete Mode-of-Operation ist der Cipher-Feedback-Mode.
+    Nicht vollständige Blöcke werden mit Nullen aufgefüllt und beim entschlüsseln wieder entfernt.
+    <newline /><newline />
+    LAMBDA1 sollte ursprünglich in der Chiffriermaschine T-316 GO zum Einsatz kommen.
+    Aus unbekannten Gründen war der tatsächlich verwendete Algorithmus auf der T-316 ein anderer,
+    der aber mit LAMBDA1 verwandt war.
+    Später wurde LAMBDA1 in einer anderen Chiffriermaschine namens T-325 verwendet.
+    Durch die Auflösung der DDR im Jahr 1990 fand dieses Verschlüsselungsverfahren keine umfassende Anwendung.
+  </introduction>
+  <usage lang="en">
+    Connect a data and key input to the machine. The key must be 32 bytes (256 bit) long. You can choose whether to encrypt or decrypt data.
+    The additional input connector is for the initialization vector. It must have the same length as the block size, which is 8 bytes (64 bit).
+    If none is provided zeros will be used.
+    <newline />
+    The algorithm accepts any data. The blocks are padded with zeros, as this was the historic
+    padding mode as well.
+    <newline />
+    If you choose to decrypt a ciphertext, the plaintext data will stripped of any trailing zeros.
+  </usage>
+  <usage lang="zh-CN">将数据和键输入连接到机器。密钥必须为32字节（256位）长。您可以选择是加密还是解密数据。附加输入连接器用于初始化向量。它必须具有与块大小相同的长度，即8字节（64位）。如果没有提供，将使用零。该算法接受任何数据。块用零填充，因为这也是历史填充模式。如果选择解密密文，则纯文本数据将去除任何尾随零。</usage>
+  <usage lang="de-DE">
+    Schließen Sie die Konnektoren für die Eingabedaten, den Schlüssel und die Ausgabedaten an. Der Schlüssel muss 32 Bytes (256 Bits) lang sein.
+    An den weiteren Eingabe-Konnektor kann der Initialisierungsvektor angegeben werden.
+    Dieser muss der Blockgröße von 8 Bytes (64 Bit) entsprechen. Falls optional keiner angegeben wird,
+    werden Nullen verwendet.
+    Es kann zwischen den Modi Ver- und Entschlüsselung gewählt werden.
+    <newline />
+    The Algorithmus akzeptiert beliebige Daten. Als Padding werden Nullen verwendet, da dies die
+    historisch vorgesehene Padding-Methode war.
+    <newline />
+    Beim Entschlüsseln werden aufgrund des Paddings alle letzten Null-Bytes entfernt.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="lambda1">
+      <link url="https://github.com/tassadarius/LAMBDA1" lang="en" />
+      <caption lang="en">Details, explanation and code of LAMBDA1 (GitHub)</caption>
+      <link url="https://github.com/tassadarius/LAMBDA1" lang="de-DE" />
+      <caption lang="de-DE">Details, Erklärungen und Code zu LAMBDA1 (GitHub - Englisch)</caption>
+    </linkReference>
+    <linkReference id="scz">
+      <link url="http://scz.bplaced.net/des.html#lambdaB" lang="en" />
+      <caption lang="en">Additional information to LAMBDA1 by Jörg Drobick (German)</caption>
+      <link url="http://scz.bplaced.net/des.html#lambdaB" lang="de-DE" />
+      <caption lang="de-DE">Zusätzliche Informationen zu LAMBDA1 von Jörg Drobick</caption>
+    </linkReference>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_Feedback_(CFB)" lang="en" />
+      <caption lang="en">Cipher Feedback Mode (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Cipher_Feedback_Mode" lang="de-DE" />
+      <caption lang="de-DE">Cipher Feedback Mode (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

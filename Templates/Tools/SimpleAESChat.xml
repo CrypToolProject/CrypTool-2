@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Simple AES Chat</title>
+  <title lang="zh">简单的AES聊天</title>
+  <title lang="ru">Простой AES-чат</title>
+  <summary lang="en">Chatting over network using AES-256 encryption</summary>
+  <summary lang="zh">使用AES-256加密在网络上聊天</summary>
+  <summary lang="ru">Общение через сеть с использованием шифрования AES-256</summary>
+  <description lang="en">This template shows how the network component of CT2 can be used to create a simple encrypted chat.</description>
+  <description lang="zh">该模板显示了如何使用CT2的网络组件来创建简单的加密聊天。</description>
+  <description lang="ru">Этот шаблон показывает, как сетевой компонент CT2 можно использовать для создания простого зашифрованного чата.</description>
+  <keywords>AES, chat, network, UDP, TCP</keywords>
+  <keywords lang="zh">AES，聊天，网络，UDP，TCP</keywords>
+  <keywords lang="ru">AES, чат, сеть, UDP, TCP</keywords>
+  <title lang="de">Einfacher AES-Chat</title>
+  <summary lang="de">Übers Netzwerk chatten mit AES-256 Verschlüsselung</summary>
+  <description lang="de">Diese Vorlage zeigt, wie die Netzwerkkomponenten von CT2 genutzt werden können, um einen einfachen verschlüsselten Chat zu bauen.</description>
+  <keywords lang="de">AES, Chat, Netzwerk, UDP, TCP</keywords>
+  <icon file="SimpleAESChat.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="NetworkInput" />
+    <plugin name="NetworkReceiver" />
+    <plugin name="SHA" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Message to send$" value="Zu sendende Nachricht" />
+    <replacement key="$Shared key$" value="Gemeinsamer Schlüssel" />
+    <replacement key="$Network receiver$" value="Netzwerk-Empfänger" />
+    <replacement key="$Network sender$" value="Netzwerk-Sender" />
+    <replacement key="$Destination IP$" value="Ziel-IP" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$Received decrypted message$" value="Entschlüsselte empfangene Nachricht" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Komponenten Netzwerk-Sender und Netzwerk-Empfänger.\line\line In der Ziel-IP wird die IP-Adresse eingegeben, an die die Nachricht geschickt werden soll.\line\line Wenn diese Vorlage in CrypTool 2 auf zwei Rechnern läuft und beide den selben geheimen Schlüssel haben, können mit AES-256 verschlüsselte Nachrichten zwischen den Rechnern ausgetauscht werden." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Message to send$" value="要发送的消息" />
+    <replacement key="$Shared key$" value="公钥" />
+    <replacement key="$Network receiver$" value="网络接收器" />
+    <replacement key="$Network sender$" value="网络发射器" />
+    <replacement key="$Destination IP$" value="目的IP" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$Received decrypted message$" value="收到解密的消息" />
+    <replacement key="$memo$" value="此模板演示网络发送方和网络接收方组件的用法\Line \line在目标IP中输入要发送消息的IP地址\Line \line如果在CrypTool 2中激活了此模板如果两台计算机都在运行并且都具有相同的密钥，则可以在两台计算机之间交换使用AES-256加密的消息。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Message to send$" value="Сообщение для отправки" />
+    <replacement key="$Shared key$" value="Общий ключ" />
+    <replacement key="$Network receiver$" value="Сетевой приемник" />
+    <replacement key="$Network sender$" value="Сетевой передатчик" />
+    <replacement key="$Destination IP$" value="Душа IP" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$Received decrypted message$" value="Расшифрованное полученное сообщение" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, как использовать компоненты сетевого передатчика и сетевого приемника. \Line \line В IP-адресе назначения введите IP-адрес, на который должно быть отправлено сообщение. \Line \line Если этот шаблон находится в CrypTool 2 on Если два компьютера запущены и оба имеют один и тот же секретный ключ, зашифрованные сообщения AES-256 могут быть обменены между компьютерами." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Message to send$" value="Message to send" />
+    <replacement key="$Shared key$" value="Shared key" />
+    <replacement key="$Network receiver$" value="Network receiver" />
+    <replacement key="$Network sender$" value="Network sender" />
+    <replacement key="$Destination IP$" value="Destination IP" />
+    <replacement key="$Converter$" value="Converter" />
+    <replacement key="$Received decrypted message$" value="Received decrypted message" />
+    <replacement key="$memo$" value="This sample demonstrates the usage of the network sender and the network receiver.\line\line In the destination IP enter the IP address you want the message to be delivered to.\line\line If you use two CrypTool 2 instances and the same secret key, you may send an AES 256 encrypted message from one PC to the other." />
+  </replacements>
+</sample>

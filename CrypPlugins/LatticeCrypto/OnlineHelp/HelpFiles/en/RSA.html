@@ -1,0 +1,48 @@
+﻿<h2>RSA-Cryptosystem</h2>
+<p>
+    The RSA method, see [RSA78], is based on the problem of prime factorization. On 
+    one side it is easy to multiply two large prime numbers with each other, thereby 
+    obtaining an RSA modulus. On the other hand it is difficult to break down any 
+    large biprime number into its two unknown large prime factors. It is therefore 
+    believed that this is a trap door function. The RSA method makes use of this 
+    problem and sets the difficulty in the factorization of the modulus n, which 
+    consists of two large prime numbers p and q.</p>
+<p>It is calculated: n = pq.</p>
+<p>
+    The public key and the private key are calculated by using the numbers e and d, 
+    for which ed = 1 mod phi(n). The Euler phi function counts how many positive integers less than or equal to n are there that are relatively prime to n. For prime numbers is phi(p) = p - 1.</p>
+    <p>
+        Besides the condition ed = 1 mod phi (n) the number e can be chosen freely, 
+        however the number should be used in such a way that the encryption is designed 
+        efficiently. To determine the multiplicative inverse d of the chosen number e 
+        the extended Euclidean algorithm can be used.</p>
+<p>Following calculation is performed in order to encrypt a plaintext m into a 
+    ciphertext c: c = m^e mod n.</p>
+<p>For decryption the inverse calculation applies: m = c^d mod n.</p>
+<p>
+    The message m must be a positive integer between 0 and n - 1 -- due to the modulo n calculation. The ciphertext c is thus also between 0 and n - 1. The RSA 
+    method is therefore a block cipher. Larger plaintexts must be split before 
+    encryption into blocks of length &lt; log2 (n).</p>
+
+        <p>
+            For RSA there are similar lattice attacks, described among others by Johan 
+            Håstad, Don Coppersmith and Nick Howgrave-Graham. However, a very small exponent 
+            e must be used. From Coppersmith and Graham exists an attack on 
+            stereotyped messages. Such a message could begin with: &quot;The new password is: 
+            ****&quot;. If the attacker knows the first part and the public key is very small, he 
+            can easily calculate the unknown part, as long as it is not too large.</p>
+<br/>
+<p>Bibliography:</p>
+<p>[Cop96] Coppersmith, D.: Finding a Small Root of a Univariate Modular Equation. 
+    In: Maurer, U. (Hrsg.): Advances in Cryptology – EUROCRYPT ’96, vol. 1070. 
+    Springer, 1996, pp. 155–165</p>
+<p>[Cop97] Coppersmith, D.: Small Solutions to Polynomial Equations, and Low 
+    Exponent RSA Vulnerabilities. In: Journal of Cryptology 10 (1997), pp. 233–260</p>
+<p>[Hås88] Håstad, J.: Solving Simultaneous Modular Equations of Low Degree. In: 
+    SIAM Journal of Computing 17 (1988), pp. 336–341</p>
+    <p>[HG97] Howgrave-Graham, N.: Finding Small Roots of Univariate Modular Equations 
+        Revisited. In: Lecture Notes in Computer Science, vol. 1355, Springer, 1997, pp. 
+        131–142</p>
+<p>[RSA78] Rivest, R. L. ; Shamir, A. ; Adleman, L.: A Method for Obtaining Digital 
+    Signatures and Public-Key Cryptosystems. In: Communications of the ACM 21 
+    (1978), no. 2, pp. 120–126</p>

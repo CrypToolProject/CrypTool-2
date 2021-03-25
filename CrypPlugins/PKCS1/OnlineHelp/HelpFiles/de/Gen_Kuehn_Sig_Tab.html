@@ -1,0 +1,34 @@
+﻿<h2>Kühn-Signatur generieren</h2>
+In diesem Tab können gefälschte Signaturen, nach der Methode wie sie Ulrich Kühn beschrieben hat, erstellt werden.
+Die Signaturen ähneln in der Struktur denen von <a href="help://Gen_Bleichenb_Sig_Tab">Bleichenbacher</a>, machen sich jedoch die Rechenkraft von
+Computern zu nutze und sind auch auf Signaturen von 1024 Bit Länge anwendbar. Auch hier liegt folgende Struktur zugrunde: '00' '01' PS '00' HI HD GG. </br>
+
+Die Unterschiede zu den Bleichenbacher-Signaturen sind im Folgenden erläutert:
+<ul>
+  <li>
+    Der Paddingstring hat eine feste Länge von acht Byte (64 Bit). Diese Länge wurde gewählt, da einige fehlerhaften Implementierungen
+    verschiedene Längen des Paddingstring voraussetzten. Maximal wurden jedoch acht Byte benötigt. Somit ist auch die Position des Hash-Identifiers (HI)
+    und des Hashwertes (HD) fix.
+  </li>
+  <li>Der angehängte Garbage wird nicht berechnet, sondern es werden einfach die restlichen Oktetts mit 'FF' (hexadezimal 0xff) aufgefüllt.</li>
+</ul>
+
+Da der Garbage (GG) nicht berechnet wird, ist eine gefälschte Signatur nicht nur durch Kubikwurzelziehen zu erlangen. Der Ansatz von Kuehn ist, dass
+man von der oben beschriebenen Struktur die Kubikwurzel zieht und das Ergebnis mit drei potenziert. Vom dem Ergebnis aus der Potenzberechnung wiederum
+vergleicht man die ersten 46 Bytes (von links) mit der zuvor erstellten Struktur. Die 46 Bytes beinhalten:
+<ul>
+  <li>'00' '01' Die führenden Oktetts - 2 Byte Länge</li>
+  <li>PS Den Paddingstring - 8 Byte Länge</li>
+  <li>'00' Das trennende Null Oktett - 1 Byte Länge</li>
+  <li>HI Den Hash-Identifier - 15 Byte Länge (SHA-1)</li>
+  <li>HD Den Hashwert - 20 Byte Länge (SHA-1)</li>
+</ul>
+
+Stimmen die signifikanten 46 Bytes nicht überein, werden die zu signierenden Daten abgeändert. Dadurch ergibt sich ein anderer Hashwert und es wird
+erneut die Kubikwurzel berechnet, das Ergebnis potenziert und verglichen. Somit wird getestet, ob der Hash-Identifier und der Hashwert beim
+Kubikwurzelziehen und anschließendem Potenzieren unverändert bleibt.
+Werden beim Vergleich keine Unterschiede der 46 Bytes erkannt, wird die erstellte Signatur von fehlerhaften Implementierungen als korrekt betrachtet.</br>
+Da bei jeder Iteration des Algorithmus aufwendige Berechnungen wie Kubikwurzelziehen und Hashwert berechnen durchgeführt werden, kann eine lange Laufzeit
+zustande kommen. Um dies zu begrenzen kann ein Limit an Iterationen angegeben werden (Eingabefeld "<a href="help://Gen_Kuehn_Iterations">Max. Anzahl an Iterationen</a>").</br></br>
+Die Darstellung der unverschlüsselten Signatur in diesem Tab stellt die Signatur nach dem Potenzieren der verschlüsselten Signatur dar, so dass es dazu
+kommen kann, dass der Garbage nicht nur aus 'FF'-Oktetten, wie oben beschrieben, besteht.

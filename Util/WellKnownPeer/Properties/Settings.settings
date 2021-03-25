@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WellKnownPeer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RootCertificate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RootCertificate.crt</Value>
+    </Setting>
+    <Setting Name="OwnKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">anonymous.p12</Value>
+    </Setting>
+    <Setting Name="OwnPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">anonymous</Value>
+    </Setting>
+    <Setting Name="WellKnownPeers" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Administrators" Type="System.String" Scope="User">
+      <Value Profile="(Default)">kopal;niko</Value>
+    </Setting>
+    <Setting Name="BannedCertificates" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

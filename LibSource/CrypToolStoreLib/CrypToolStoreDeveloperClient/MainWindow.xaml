@@ -1,0 +1,22 @@
+﻿<Window x:Class="CrypToolStoreDeveloperClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CrypToolStore Developer Client" Height="350" Width="525"
+        xmlns:controls="clr-namespace:CrypToolStoreDeveloperClient.Views">
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="64*"/>
+            <ColumnDefinition Width="453*"/>
+        </Grid.ColumnDefinitions>
+
+        <controls:HeaderView x:Name="HeaderView" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <controls:LoginView x:Name="LoginView" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <controls:MainMenuView x:Name="MainMenuView" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <controls:UserManagementView x:Name="UserManagementView" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <controls:PluginManagementView x:Name="PluginManagementView" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <controls:SourceManagementView x:Name="SourceManagementView" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <controls:ResourceManagementView x:Name="ResourceManagementView" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <controls:ResourceDataManagementView x:Name="ResourceDataManagementView" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+
+    </Grid>
+</Window>

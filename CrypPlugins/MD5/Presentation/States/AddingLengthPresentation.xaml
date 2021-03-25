@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="CrypTool.MD5.Presentation.States.AddingLengthPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="400" Width="800">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Grid>
+        <TextBlock Margin="8,84,8,0" Name="textBlock1" Text="{Loc We_now_calculate_the_length_of_our_data}" TextWrapping="Wrap" Height="74" VerticalAlignment="Top" Style="{DynamicResource textBlockStyle}" />
+        <TextBlock Height="108" Margin="8,0,8,8" Name="textBlock2" Text="{Loc In_the_next_step}" TextWrapping="Wrap" VerticalAlignment="Bottom" Style="{DynamicResource textBlockStyle}" />
+        <Label Margin="8,162,8,198" Name="label1" Content="{Binding CurrentState.LengthInBit}" FontSize="18" Style="{DynamicResource labelStyle}" />
+    </Grid>
+</UserControl>

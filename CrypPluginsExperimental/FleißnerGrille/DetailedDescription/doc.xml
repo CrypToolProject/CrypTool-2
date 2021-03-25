@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Fleißner Grille is a classic encryption algorithm, it was used as far back as the Romans.
+    <newline />
+    The Fleißnersche Grille consists of a cardboard square, from which several smaller squares are cut.
+    The template is placed on a piece of paper and each letter of the plaintext is entered in a cut square.
+    Then the template is rotated ninety degrees and the following letters are entered in the gaps.
+    The whole thing takes place four times, so that a square is created with scrambled letters. If the message is longer, a new square is started.
+    If it is shorter, the remaining gaps are filled with randomly letters.
+  </introduction>
+  <introduction lang="zh-CN">FleißnerGrille是一种经典的加密算法，最早可追溯到罗马时代。 Fleißnersche格栅由一个纸板正方形组成，从中可以切出几个较小的正方形。模板放在一张纸上，每个明文字母都在一个切割的正方形中输入。然后将模板旋转90度，并在间隙中输入以下字母。整个过程发生了四次，因此创建了一个带有乱码的正方形。如果消息较长，则开始一个新方块。如果更短，则剩余的间隙将随机填充字母。</introduction>
+  <introduction lang="ru">Fleißner Grille - классический алгоритм шифрования, который использовался еще римлянами. Решетка Fleißnersche состоит из картонной площади, из которой вырезаны несколько небольших квадратов. Шаблон помещается на листе бумаги, и каждая буква открытого текста вводится в квадрат разреза. Затем шаблон поворачивается на девяносто градусов, и в пробелы вводятся следующие буквы. Все это происходит четыре раза, так что квадрат создается с скремблированными буквами. Если сообщение длиннее, начинается новый квадрат. Если он короче, остальные пробелы заполняются случайными буквами.</introduction>
+  <introduction lang="de-DE">
+    Die Fleißnersche Schablone ist ein klassisches Verschlüsselungsverfahren, welches nach dem österreichischen Oberst Eduard Fleißner von Wostrowitz benannt ist.
+    <newline />
+    Die Fleißnersche Schablone besteht aus einem Papp-Quadrat, aus dem mehrere kleinere Quadrate ausgeschnitten sind. 
+    Die Schablone wird auf ein Blatt Papier gelegt und jeweils ein Buchstabe des Klartextes wird in ein ausgeschnittenes Quadrat eingetragen. 
+    Dann wird die Schablone um neunzig Grad gedreht und die folgenden Buchstaben werden in die Lücken eingetragen. 
+    Das Ganze erfolgt viermal, so dass ein Quadrat mit verwürfelten Buchstaben entsteht. Ist die Nachricht länger, wird ein neues Quadrat begonnen. 
+    Ist sie kürzer, werden die übrig gebliebenen Lücken mit willkürlich gewählten Buchstaben aufgefüllt.
+  </introduction>
+  <usage lang="en">
+    After dragging the FleißnerGrille component onto the workspace, you need to specify a data source that represents the text to be encrypted or decrypted. This input is mandatory.
+    <newline />
+    In the component settings you can decide whether you want to encrypt or decrypt, and you can define default values for the key and the alphabet. You can also specify whether the component should work case-sensitive or not, and how unknown symbols (characters which are not part of the alphabet) are treated.
+    <newline />
+    Optionally you can supply an alphabet and/or a key through the corresponding inputs. If supplied, these settings override the default component settings.
+  </usage>
+  <usage lang="zh-CN">将FleißnerGrille组件拖到工作区后，需要指定一个数据源，该数据源表示要加密或解密的文本。此输入是必需的。在组件设置中，您可以决定要加密还是解密，还可以定义密钥和字母的默认值。您还可以指定组件是否应该区分大小写，以及如何处理未知符号（不属于字母的字符）。您可以选择通过相应的输入提供字母和/或键。如果提供，这些设置将覆盖默认组件设置。</usage>
+  <usage lang="ru">После перетаскивания компонента FleißnerGrille в рабочую область вам нужно указать источник данных, который представляет текст, который должен быть зашифрован или дешифрован. Этот ввод является обязательным. В настройках компонента вы можете решить, хотите ли вы шифровать или дешифровать, и вы можете определить значения по умолчанию для ключа и алфавита. Вы также можете указать, должен ли компонент работать с учетом регистра или нет, и как обрабатываются неизвестные символы (символы, которые не являются частью алфавита). При желании вы можете поставить алфавит и / или клавишу через соответствующие входы. Если они установлены, эти параметры переопределяют параметры компонента по умолчанию.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die FleißnerGrille-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die den zu verschlüsselnden oder entschlüsselnden Text repräsentiert. Diese Datenquelle ist notwendig.
+    <newline />
+    In den Einstellungen für die Komponente können Sie entscheiden, ob Sie verschlüsseln oder entschlüsseln wollen, und Sie können Standardwerte für den Schlüssel und das Alphabet festlegen. Außerdem können Sie einstellen, wie die Komponente mit Groß- und Kleinschreibung umgeht und wie unbekannte Zeichen (solche, die nicht im Alphabet enthalten sind) behandelt werden.
+    <newline />
+    Optional können Sie ein Alphabet und/oder einen Schlüssel durch die entsprechenden Eingänge angeben. Sind diese Eingänge angegeben, dann haben Sie Vorrang vor den Standardeinstellungen der Komponente.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Grille_%28cryptography%29" lang="en" />
+      <caption lang="en">Fleißner Grille in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Flei%C3%9Fnersche_Schablone" lang="de-DE" />
+      <caption lang="de-DE">Fleißner Schablone in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

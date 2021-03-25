@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Communication with a SmartCard</title>
+  <title lang="zh">与智能卡通信</title>
+  <title lang="ru">Связь с смарт-картой</title>
+  <summary lang="en">Communication with a <i>SmartCard</i></summary>
+  <summary lang="zh">与智能卡通信</summary>
+  <summary lang="ru">Связь с смарт-картой</summary>
+  <description lang="en">This template shows how to communicate with a <i>SmartCard</i>.</description>
+  <description lang="zh">该模板显示了如何与智能卡通信。</description>
+  <description lang="ru">Этот шаблон показывает, как общаться с смарт-картой.</description>
+  <keywords>smart card</keywords>
+  <keywords lang="zh">智能卡</keywords>
+  <keywords lang="ru">интеллектуальная карточка</keywords>
+  <title lang="de">Kommunikation mit einer SmartCard</title>
+  <summary lang="de">Kommunikation mit einer <i>SmartCard</i></summary>
+  <description lang="de">Diese Vorlage demonstriert, wie man mit einer <i>SmartCard</i> kommunizieren kann.</description>
+  <keywords lang="de">smartcard</keywords>
+  <icon file="SmartCard.png" />
+  <relevantPlugins>
+    <plugin name="SmartCard" />
+    <plugin name="SmartInterpreter" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$TextInput$" value="Texteingabe" />
+    <replacement key="$TextOutput$" value="Textausgabe" />
+    <replacement key="$SmartInterpreter$" value="SmartCard-Interpreter" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$TextInput$" value="文字输入" />
+    <replacement key="$TextOutput$" value="文字输出" />
+    <replacement key="$SmartInterpreter$" value="智能卡口译员" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$TextInput$" value="ввод текста" />
+    <replacement key="$TextOutput$" value="вывод текста" />
+    <replacement key="$SmartInterpreter$" value="SmartCard-переводчик" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$TextInput$" value="Text Input" />
+    <replacement key="$TextOutput$" value="Text Output" />
+    <replacement key="$SmartInterpreter$" value="SmartCard Interpreter" />
+  </replacements>
+</sample>

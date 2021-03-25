@@ -1,0 +1,348 @@
+﻿<UserControl x:Class="WorkspaceManager.View.Visuals.EditorVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:visuals="clr-namespace:WorkspaceManager.View.VisualComponents"
+             xmlns:properties="clr-namespace:CrypTool.PluginBase.Properties;assembly=CrypPluginBase"
+             xmlns:local="clr-namespace:WorkspaceManager.View.Visuals"
+             xmlns:model="clr-namespace:WorkspaceManager.Model;assembly=WorkspaceManagerModel"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:misc="clr-namespace:WorkspaceManager.View.VisualComponents"
+             xmlns:CTLine="clr-namespace:WorkspaceManager.View.VisualComponents.CryptoLineView"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}" ToolTip="{Loc NewWorkspaceTooltip}"
+             PreviewKeyDown="PreviewKeyDownHandler">
+
+    <UserControl.CommandBindings>
+        <CommandBinding Command="{x:Static local:EditorVisual.AlignLeft}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.AlignRight}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.AlignTop}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.AlignBottom}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.MoveLeft}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.MoveRight}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.MoveUp}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.MoveDown}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.SpreadHorizontal}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.SpreadVertical}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.BiggestWidth}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.SmallestWidth}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.BiggestHeight}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.SmallestHeight}" Executed="LayoutCommandExecuted" CanExecute="LayoutCommandCanExecute" />
+        <CommandBinding Command="{x:Static local:EditorVisual.RearrangeAllLines}" Executed="RearrangeAllLinesCommandExecuted" CanExecute="RearrangeAllLinesCommandCanExecute" />
+    </UserControl.CommandBindings>
+
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Command="{x:Static local:EditorVisual.AlignLeft}" Header="{Loc CompLayout_AlignLeft}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/align_left.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.AlignRight}" Header="{Loc CompLayout_AlignRight}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/align_right.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.AlignTop}" Header="{Loc CompLayout_AlignTop}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/align_top.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.AlignBottom}" Header="{Loc CompLayout_AlignBottom}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/align_bottom.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            
+            <Separator/>
+
+            <MenuItem Command="{x:Static local:EditorVisual.MoveLeft}" Header="{Loc CompLayout_MoveLeft}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/move_left.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.MoveRight}" Header="{Loc CompLayout_MoveRight}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/move_right.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.MoveUp}" Header="{Loc CompLayout_MoveUp}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/move_up.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.MoveDown}" Header="{Loc CompLayout_MoveDown}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/move_down.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <Separator/>
+
+            <MenuItem Command="{x:Static local:EditorVisual.SpreadHorizontal}" Header="{Loc CompLayout_SpreadHorizontal}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/space_horizontal.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.SpreadVertical}" Header="{Loc CompLayout_SpreadVertical}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/space_vertical.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <Separator/>
+
+            <MenuItem Command="{x:Static local:EditorVisual.BiggestWidth}" Header="{Loc CompLayout_BiggestWidth}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/size_maxwidth.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.SmallestWidth}" Header="{Loc CompLayout_SmallestWidth}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/size_minwidth.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.BiggestHeight}" Header="{Loc CompLayout_BiggestHeight}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/size_maxHeight.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Command="{x:Static local:EditorVisual.SmallestHeight}" Header="{Loc CompLayout_SmallestHeight}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/size_minHeight.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <Separator/>
+
+            <MenuItem Command="{x:Static local:EditorVisual.RearrangeAllLines}" Header="{Loc Rearrange_all_lines}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/presIcon.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+        </ContextMenu>
+    </UserControl.ContextMenu>
+
+    <UserControl.Resources>
+
+        <CTLine:NegateBindingConverter x:Key="NegateBindingConverter"></CTLine:NegateBindingConverter>
+        <SolidColorBrush x:Key="SolidColorBackground" Color="#add3f5"></SolidColorBrush>
+
+        <LinearGradientBrush x:Key="LinearColorBackground" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#cfe2ff" Offset="0" />
+            <GradientStop Color="#b7d4ff" Offset="1" />
+        </LinearGradientBrush>
+        <local:testconverter x:Key="testconverter"></local:testconverter>
+
+        <LinearGradientBrush x:Key="ErrorBG" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#a51327" Offset="0" />
+            <GradientStop Color="#5c0000" Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="ButtonBG" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#81c05e" Offset="0" />
+            <GradientStop Color="#559e2d" Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="ButtonBGMouseOver" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#71dbe5" Offset="0" />
+            <GradientStop Color="#37a1bf" Offset="1" />
+        </LinearGradientBrush>       
+
+        <ControlTemplate x:Key="CtrlTemplate" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="Border" Background="{StaticResource ResourceKey=ButtonBG}" CornerRadius="4"
+                    Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" BorderBrush="#44692f" BorderThickness="1">
+                <TextBlock Text="{TemplateBinding Content}" FontWeight="Bold" Foreground="White" TextAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="{StaticResource ResourceKey=ButtonBGMouseOver}" TargetName="Border" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="BorderBrush" Value="#94ab87" TargetName="Border" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type Button}" x:Key="ActionBasicStyle">
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Style x:Key="LoadingScreenStyle" TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsLoading}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ErrorScreenStyle" TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HasLoadingError}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="{StaticResource ResourceKey=ErrorBG}"></Setter>
+        </Style>
+
+        <Style x:Key="ContentPresenterStyle" TargetType="{x:Type ContentPresenter}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsFullscreenOpen}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+                <!--<DataTrigger Binding="{Binding Path=IsFullscreenOpen}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </DataTrigger>-->
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SettingsPaneStyle"  TargetType="local:SideBarVisual">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSettingsOpen}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Visibility" Value="Collapsed"></Setter>
+        </Style>
+
+        <ContextMenu  x:Key="ContextMenu">
+            <MenuItem Click="ContextMenuClick" Header="Delete line" 
+                IsEnabled="{Binding Path=IsExecuting,Converter={StaticResource ResourceKey=NegateBindingConverter}}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/delete.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="RearrangeLineContextMenuClick" Header="Rearrange line" 
+                IsEnabled="{Binding Path=IsExecuting,Converter={StaticResource ResourceKey=NegateBindingConverter}}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/presIcon.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+
+        <Style x:Key="FromToLine" TargetType="Line">
+            <Setter Property="X1" Value="{Binding Path=VisualsHelper.SelectedPart.From.X}"></Setter>
+            <Setter Property="Y1" Value="{Binding Path=VisualsHelper.SelectedPart.From.Y}"></Setter>
+            <Setter Property="X2" Value="{Binding Path=VisualsHelper.SelectedPart.To.X}"></Setter>
+            <Setter Property="Y2" Value="{Binding Path=VisualsHelper.SelectedPart.To.Y}"></Setter>
+            <Setter Property="Tag" Value="{Binding Path=VisualsHelper.SelectedPart}"></Setter>
+            <Setter Property="StrokeThickness" Value="8"></Setter>
+            <Setter Property="Stroke" Value="#aaffffff"></Setter>
+            <Setter Property="Grid.Row" Value="1"></Setter>
+            <Setter Property="Grid.Column" Value="0"></Setter>
+            <Setter Property="ContextMenu" Value="{StaticResource ResourceKey=ContextMenu}"></Setter>
+        </Style>
+       
+    </UserControl.Resources>
+    <Grid x:Name="Root">
+        <!--##########Definitions##########-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="200">
+                <ColumnDefinition.Style>
+                    <Style TargetType="ColumnDefinition">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsSettingsOpen}" Value="True">
+                                <Setter Property="MinWidth" Value="150"></Setter>
+                                <Setter Property="MaxWidth" Value="400"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                        <Setter Property="MinWidth" Value="0"></Setter>
+                        <Setter Property="MaxWidth" Value="0"></Setter>
+                    </Style>
+                </ColumnDefinition.Style>
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--##########/Definitions##########-->
+
+        <!--##########Content Space##########-->
+        <visuals:ZoomScrollViewer x:Name="ScrollViewer" Grid.Row="1" Grid.Column="0">
+            <ItemsControl ItemsSource="{Binding Path=VisualCollection, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <visuals:ModifiedCanvas RenderTransformOrigin="0.5, 0.5" Background="{StaticResource ResourceKey=LinearColorBackground}" 
+                            PreviewMouseLeftButtonDown="MouseLeftButtonDownHandler" PreviewMouseRightButtonDown="MouseRightButtonDownHandler" 
+                            PreviewMouseMove="MouseMoveHandler" PreviewMouseLeftButtonUp="MouseLeftButtonUpHandler" MouseLeave="MouseLeaveHandler"
+                            PreviewDragEnter="PreviewDragEnterHandler" PreviewDragLeave="PreviewDragLeaveHandler" PreviewDrop="PreviewDropHandler"
+                            MouseWheel="MouseWheelHandler" PreviewMouseUp="MouseUpButtonUpHandler" Loaded="PanelLoaded">
+                            <visuals:ModifiedCanvas.LayoutTransform>
+                                <ScaleTransform ScaleX="{Binding Path=ZoomLevel, Mode=OneWay}"
+                                    ScaleY="{Binding Path=ZoomLevel, Mode=OneWay}"/>
+                            </visuals:ModifiedCanvas.LayoutTransform>
+                        </visuals:ModifiedCanvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </visuals:ZoomScrollViewer>
+        <!--##########/Content Space##########-->
+        
+        <!--##########Fullscreen##########-->
+        <ContentPresenter x:Name="FullScreen" Style="{StaticResource ResourceKey=ContentPresenterStyle}" Grid.Row="1" Grid.Column="0">
+            <ContentPresenter.Content>
+                <local:FullscreenVisual 
+                    IsFullscreenOpen="{Binding Path=IsFullscreenOpen, Mode=TwoWay}" 
+                    ComponentCollection="{Binding Path=ComponentCollection}">
+                </local:FullscreenVisual>
+            </ContentPresenter.Content>
+        </ContentPresenter>
+        <!--##########/Fullscreen##########-->
+
+        <!--##########Fullscreen##########-->
+        <local:SideBarVisual x:Name="SideBar" Style="{StaticResource ResourceKey=SettingsPaneStyle}"  Grid.Column="1" Grid.Row="1"></local:SideBarVisual>
+        <GridSplitter Visibility="{Binding ElementName=SideBar, Path=Visibility}"  Grid.Column="0" Grid.Row="1" Background="Gray" Width="2"></GridSplitter>
+        <!--##########/Fullscreen##########-->
+
+        
+        <!--##########Bottom Operations##########-->
+        <visuals:BottomBox x:Name="BottomBoxPane" AddText="AddTextHandler" AddImage="AddImageHandler" FitToScreen="FitToScreenHandler" Sort="SortHandler"
+                           Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></visuals:BottomBox>
+
+        <visuals:TextEditPanel  Grid.Row="0"  Grid.Column="0" Margin="0,0,0,0"></visuals:TextEditPanel>
+        <!--##########/Bottom Operations##########-->
+
+
+        <!--##########Loading##########-->
+        <Grid x:Name="LoadingGrid" Style="{StaticResource ResourceKey=LoadingScreenStyle}" Grid.Row="1" Grid.Column="0">
+            <TextBlock Text="{Loc Loading_}" FontFamily="DejaVu Sans" FontSize="50" FontWeight="Heavy" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        </Grid>
+        <!--##########/Loading##########-->
+
+        <!--##########Error##########-->
+        <Grid x:Name="ErrorGrid" Style="{StaticResource ResourceKey=ErrorScreenStyle}" Grid.Row="1" Grid.Column="0">
+            <Border Background="White" Margin="90,20,90,50" CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect></DropShadowEffect>
+                </Border.Effect>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image VerticalAlignment="Top" Source="/WorkspaceManager;component/View/Images/WMIcons/error01.png" Width="50" Height="50" Grid.Column="0"></Image>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="50"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Error: File loading failed" FontSize="22" FontWeight="Bold" Foreground="#770000" VerticalAlignment="Center"></TextBlock>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                            <TextBlock Text="{Binding Path=LoadingErrorText}" LineHeight="18" FontSize="14"></TextBlock>
+                        </ScrollViewer>
+                        <Button Style="{StaticResource ResourceKey=ActionBasicStyle}" Grid.Row="2" Height="25" Width="125" HorizontalAlignment="Left" Click="CopyToClipboardClick">
+                            <sys:String>Copy To Clipboard</sys:String>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <!--##########/Error##########-->
+    </Grid>
+</UserControl>

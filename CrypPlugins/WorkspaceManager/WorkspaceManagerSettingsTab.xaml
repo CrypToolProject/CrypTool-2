@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="WorkspaceManager.WorkspaceManagerSettingsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:tools="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             xmlns:Properties="clr-namespace:CrypTool.PluginBase.Properties;assembly=CrypPluginBase"
+             x:Name="Tab"
+             xmlns:WorkspaceManager="clr-namespace:WorkspaceManager" mc:Ignorable="d" d:DesignHeight="890" d:DesignWidth="632" DataContext="{Binding}">
+    <Grid>
+        <Grid.Resources>
+            <WorkspaceManager:RadioBoolToIntConverter x:Key="radioBoolToIntConverter" />
+        </Grid.Resources>
+        
+        <Image Source="/WorkspaceManager;component/View/Images/WorkspaceManagerIcon_orig.png" Opacity="0.2" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
+            <StackPanel>
+                <Label Content="{Loc WorkspaceManagerSettingsTitle}" FontWeight="Bold" FontSize="14"/>
+                <StackPanel>
+                    <Label Content="{Loc GeneralWorkspaceSettings}" FontWeight="Bold" />
+                    <CheckBox Content="{Loc Global_Progressbar}" Style="{StaticResource ResourceKey=settingsStyle}" Height="21" ToolTip="{Loc GlobalProgressBarTooltip}" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_UseGlobalProgressbar, Mode=TwoWay}"/>
+                    <CheckBox Content="{Loc Show_ComponentConnection_Proposition}" Style="{StaticResource ResourceKey=settingsStyle}" Height="21" ToolTip="{Loc Show_ComponentConnection_Proposition_Tooltip}" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_ShowComponentConnectionProposition, Mode=TwoWay}"/>
+                    <CheckBox Content="{Loc TemplateReplacement}"  Style="{StaticResource ResourceKey=settingsStyle}" Height="21" ToolTip="{Loc TemplateReplacementTooltip}" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_TemplateReplacement, Mode=TwoWay}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" Text="{Loc ComponentConnection_Delay}" HorizontalAlignment="Left"/>
+                        <Slider Width="200" Value="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_BlingDelay, Mode=TwoWay}" Minimum="0" Maximum="10" IsSnapToTickEnabled="True" Style="{StaticResource ResourceKey=settingsStyle}" Grid.Column="1" IsEnabled="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_ShowComponentConnectionProposition}" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                        <TextBox VerticalAlignment="Center" Height="20" Width="50" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_BlingDelay, Mode=TwoWay}" IsEnabled="False" Style="{StaticResource ResourceKey=settingsStyle}" Grid.Column="2" />
+                    </Grid>
+                    <Button Content="{Loc ResetCCS}" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=settingsStyle}" Click="ButtonResetCCS_Click" />
+                    <Label Content="{Loc ComponentAppearanceBehaviourGroupHeader}" FontWeight="Bold" />
+                    <RadioButton Content="{Loc DefaultComponentAppearance}" Style="{StaticResource ResourceKey=settingsStyle}" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_ComponentAppearance, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=0, Mode=TwoWay}" />
+                    <RadioButton Content="{Loc AlwaysOpenedComponentAppearance}" Style="{StaticResource ResourceKey=settingsStyle}" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_ComponentAppearance, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=1, Mode=TwoWay}"/>
+                    <RadioButton Content="{Loc AlwaysClosedComponentAppearance}" Style="{StaticResource ResourceKey=settingsStyle}" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_ComponentAppearance, Converter={StaticResource radioBoolToIntConverter}, ConverterParameter=2, Mode=TwoWay}"/>
+                </StackPanel>
+                
+                <Label Content="{Loc UserInterfaceSettings}" Grid.Row="1" FontWeight="Bold" />
+                
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="grid1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource ResourceKey=settingsStyle}" ToolTip="{Loc GUIUpdateinterval_Tooltip}" Height="25" Content="{Loc GUIUpdateinterval_Label}"/>
+                    <TextBox Grid.Row="0" Grid.Column="2" Style="{StaticResource ResourceKey=settingsStyle}" ToolTip="{Loc GUIUpdateinterval_Tooltip}" Height="25" Width="100" HorizontalAlignment="Left" Name="GuiUpdateInterval" Text="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_GuiUpdateInterval, Mode=TwoWay}" IsEnabled="False" VerticalContentAlignment="Center" />
+                    <Slider Width="200" Grid.Row="0" Grid.Column="1" ToolTip="{Loc GUIUpdateinterval_Tooltip}" Value="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_GuiUpdateInterval, Mode=TwoWay}" Minimum="1" Maximum="500" IsSnapToTickEnabled="True" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource ResourceKey=settingsStyle}" ToolTip="{Loc SleepTime_Tooltip}" Height="25" Content="{Loc SleepTime_Label}"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" Style="{StaticResource ResourceKey=settingsStyle}" ToolTip="{Loc SleepTime_Tooltip}" Height="25" Width="100" HorizontalAlignment="Left" Name="SleepTime"  Text="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_SleepTime, Mode=TwoWay}" IsEnabled="False"  VerticalContentAlignment="Center" />
+                    <Slider Width="200" Grid.Row="1" Grid.Column="1" ToolTip="{Loc SleepTime_Tooltip}" Value="{Binding Source={x:Static Properties:Settings.Default}, Path=WorkspaceManager_SleepTime, Mode=TwoWay}" Minimum="0" Maximum="5000" IsSnapToTickEnabled="True" VerticalAlignment="Center" VerticalContentAlignment="Center" />
+
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Datatypecolors_Label}" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left"/>
+
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="Integer:" Grid.Row="5" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="IntegerColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="Byte:" Grid.Row="6" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="ByteColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="Double:" Grid.Row="7" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="DoubleColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="Bool:" Grid.Row="8" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="BoolColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="Stream:" Grid.Row="9" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="StreamColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="String:" Grid.Row="10" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="StringColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="Object:" Grid.Row="11" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="11" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="ObjectColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="BigInteger:" Grid.Row="12" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="BigIntegerColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="Default:" Grid.Row="13" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="13" Grid.Column="1" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="DefaultColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Functioncolors_Label}" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left"/>
+
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Asymmetric_Label}" Grid.Row="5" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="5" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="AsymmetricColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Classic_Label}" Grid.Row="6" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="ClassicColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Symmetricblock_Label}" Grid.Row="7" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="7" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="SymmetricblockColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Tools_Label}" Grid.Row="8" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="8" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="ToolsColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Hash_Label}" Grid.Row="9" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="9" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="HashColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc AnalysisGeneric_Label}" Grid.Row="10" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="10" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="AnalysisGenericColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc AnalysisSpecific_Label}" Grid.Row="11" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="11" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="AnalysisSpecificColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Steganography_Label}" Grid.Row="12" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="12" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="SteganographyColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+                    <Label Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc Protocols_Label}" Grid.Row="13" Grid.Column="3" Height="26"  HorizontalAlignment="Left"/>
+                    <Border Style="{StaticResource ResourceKey=settingsStyle}" Margin="0,0,0,2" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" Grid.Row="13" Grid.Column="4" HorizontalAlignment="Left">
+                        <tools:ColorPicker x:Name="ProtocolsColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                    </Border>
+
+                    <Button Click="ResetColorButton_Click" Width="133" Height="25" Margin="-100,5,5,5" Grid.Row="14" Style="{StaticResource ResourceKey=settingsStyle}" Content="{Loc ResetColors_Label}" ToolTip="{Loc ResetColors_Tooltip}" Grid.ColumnSpan="2" />
+                </Grid>
+                <Label Content="{Loc Font}" FontWeight="Bold" Margin="0,5,0,0" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="256" />
+                        <ColumnDefinition Width="64" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox x:Name="FontFamilyComboBox" ItemsSource="{Binding FontFamilies, ElementName=Tab}" Grid.Column="0" Margin="5" SelectionChanged="FontFamilyComboBox_OnSelectionChanged" VerticalAlignment="Top">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontFamily="{Binding}" Text="{Binding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox x:Name="FontSizeComboBox" ItemsSource="{Binding FontSizes, ElementName=Tab}" Grid.Column="1" Margin="5" SelectionChanged="FontSizeComboBox_OnSelectionChanged" VerticalAlignment="Top" />
+                    <Label Grid.Column="2" Margin="5" Content="Test" FontFamily="{Binding SelectedItem, ElementName=FontFamilyComboBox}" FontSize="{Binding SelectedItem, ElementName=FontSizeComboBox}" />
+                </Grid>
+                <Label Height="30"/><!-- dummy label for space at the end-->
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

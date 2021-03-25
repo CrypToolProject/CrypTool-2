@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en"> 
+    This component checks whether the given number is a prime number.
+  </introduction>
+  <introduction lang="zh-CN">该组件检查给定数字是否为质数。</introduction>
+  <introduction lang="ru">Этот компонент проверяет, является ли данное число простым числом.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente testet, ob die eingegebene Zahl eine Primzahl ist.
+  </introduction>
+  <usage lang="en">
+    The input to the component is the number whose primality is to be checked. First, it uses trial division to check if the number has
+    a small prime factor. If it has no small factor, it then uses the Miller-Rabin primality test, that
+    can determine whether a given number is a prime number with a very high probability. The result of the test is presented
+    as a boolean value at the output of the component. When the result is 'false', the number is definitely composite.
+    When the result is 'true', the number is a prime number with a very high probability.
+  </usage>
+  <usage lang="zh-CN">组件的输入是要检查其素数的数字。首先，它使用试算法检查数字是否有小的素数。如果不小的因素，则使用Miller-Rabin素数检验，该检验可以确定给定数是否是极高概率的素数。测试结果在组件的输出处显示为布尔值。当结果为“假”时，数字肯定是复合的。当结果为“真”时，该数字是极有可能的质数。</usage>
+  <usage lang="ru">Вход в компонент - это число, чья первичность должна быть проверена. Во-первых, он использует пробное деление, чтобы проверить, имеет ли число небольшой первичный коэффициент. Если он не имеет большого значения, он использует тест примитива Миллера-Рабина, который может определить, является ли данное число простым числом с очень высокой вероятностью. Результат теста представлен как логическое значение на выходе компонента. Когда результат «false», число определенно составлено. Когда результат «истина», число представляет собой простое число с очень высокой вероятностью.</usage>
+  <usage lang="de-DE">
+    Diese Komponente erwartet als einzige Eingabe die zu testende Zahl. Zuerst wird geprüft, ob die zu untersuchende Zahl 
+    einen kleinen Primfaktor hat. Hat sie keinen kleinen Faktor, so wird der Miller-Rabin-Test ausgeführt, der
+    mit hoher Wahrscheinlichkeit feststellen kann, ob eine Zahl eine Primzahl ist oder nicht. Das Ergebnis des Tests wird am
+    Ausgang der Komponente als boolescher Wert ausgegeben. Wird 'falsch' ausgegeben, so ist die Zahl auf jeden Fall zusammengesetzt.
+    Wird 'wahr' ausgegeben, so ist die Zahl mit sehr hoher Wahrscheinlichkeit eine Primzahl.
+  </usage>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Miller–Rabin_primality_test" />
+      <caption lang="en">Miller–Rabin primality test</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Miller-Rabin-Test" />
+      <caption lang="de-DE">Miller-Rabin-Test</caption>
+    </linkReference>
+  </references>
+</documentation>

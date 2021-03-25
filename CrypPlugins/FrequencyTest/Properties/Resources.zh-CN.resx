@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>频率测试</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>计算字符串中字母或字母组的频率</value>
+  </data>
+  <data name="StringInputCaption" xml:space="preserve">
+    <value>要分析的字符串</value>
+  </data>
+  <data name="StringInputTooltip" xml:space="preserve">
+    <value>文字输入</value>
+  </data>
+  <data name="StringOutputCaption" xml:space="preserve">
+    <value>文字输出</value>
+  </data>
+  <data name="StringOutputTooltip" xml:space="preserve">
+    <value>字母：字母的绝对频率：字母的相对频率（％）</value>
+  </data>
+  <data name="ArrayOutputCaption" xml:space="preserve">
+    <value>清单输出</value>
+  </data>
+  <data name="ArrayOutputTooltip" xml:space="preserve">
+    <value>字母的绝对频率</value>
+  </data>
+  <data name="DictionaryOutputCaption" xml:space="preserve">
+    <value>字典输出</value>
+  </data>
+  <data name="DictionaryOutputTooltip" xml:space="preserve">
+    <value>在不同比例下发现n克及其数量</value>
+  </data>
+  <data name="AutozoomCaption" xml:space="preserve">
+    <value>自动变焦</value>
+  </data>
+  <data name="AutozoomTooltip" xml:space="preserve">
+    <value>图表应执行自动缩放吗？</value>
+  </data>
+  <data name="BoundaryFragmentsCaption" xml:space="preserve">
+    <value>词边界片段</value>
+  </data>
+  <data name="BoundaryFragmentsTooltip" xml:space="preserve">
+    <value>在单词边界是否包含带有空格的其他片段？仅与克长度&amp;gt; = 2有关。</value>
+  </data>
+  <data name="CaseSensitivityCaption" xml:space="preserve">
+    <value>字母区分大小写</value>
+  </data>
+  <data name="CaseSensitivityTooltip" xml:space="preserve">
+    <value>大写和小写应该区别对待吗？ （是否== A？）</value>
+  </data>
+  <data name="ChartHeightCaption" xml:space="preserve">
+    <value>图表高度</value>
+  </data>
+  <data name="ChartHeightTooltip" xml:space="preserve">
+    <value>这是图表高度，如果禁用了自动缩放</value>
+  </data>
+  <data name="GrammLengthCaption" xml:space="preserve">
+    <value>输入要调查的n-gram的长度。</value>
+  </data>
+  <data name="GrammLengthTooltip" xml:space="preserve">
+    <value>每组应检查多少个字符？</value>
+  </data>
+  <data name="ProcessUnknownSymbolsCaption" xml:space="preserve">
+    <value>处理未知字符</value>
+  </data>
+  <data name="ProcessUnknownSymbolsTooltip" xml:space="preserve">
+    <value>如果单词中遇到的字符不在字母表中，该怎么办？</value>
+  </data>
+  <data name="ScaleCaption" xml:space="preserve">
+    <value>放大</value>
+  </data>
+  <data name="ScaleTooltip" xml:space="preserve">
+    <value>放大图表</value>
+  </data>
+  <data name="CaseSensitivityList1" xml:space="preserve">
+    <value>不区分大小写</value>
+  </data>
+  <data name="CaseSensitivityList2" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="ProcessUnknownSymbolsList1" xml:space="preserve">
+    <value>不算</value>
+  </data>
+  <data name="ProcessUnknownSymbolsList2" xml:space="preserve">
+    <value>计数</value>
+  </data>
+  <data name="PresentationGroup" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="BoundaryFragmentsList1" xml:space="preserve">
+    <value>边界处无碎片</value>
+  </data>
+  <data name="BoundaryFragmentsList2" xml:space="preserve">
+    <value>包含片段</value>
+  </data>
+  <data name="No_data_available_yet" xml:space="preserve">
+    <value>尚无可用数据！</value>
+  </data>
+  <data name="SortFrequenciesCaption" xml:space="preserve">
+    <value>排序频率</value>
+  </data>
+  <data name="SortFrequenciesTooltip" xml:space="preserve">
+    <value>如果启用，则根据频率对图表的条形进行排序。</value>
+  </data>
+  <data name="AbsoluteValues" xml:space="preserve">
+    <value>（作为绝对值）</value>
+  </data>
+  <data name="AlphabetCaption" xml:space="preserve">
+    <value>字母</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>字母定义要计数的字符</value>
+  </data>
+  <data name="BigramFrequencies" xml:space="preserve">
+    <value>双频频率</value>
+  </data>
+  <data name="CountOverlappingCaption" xml:space="preserve">
+    <value>计数重叠</value>
+  </data>
+  <data name="CountOverlappingTooltip" xml:space="preserve">
+    <value>启用此功能后，也会计算重叠的n-gram。否则，仅计算非重叠的n-gram。</value>
+  </data>
+  <data name="EmptyAlphabetInvalidMessage" xml:space="preserve">
+    <value>字母不能为空。中止频率分析</value>
+  </data>
+  <data name="HeptagramFrequencies" xml:space="preserve">
+    <value>七卦频率</value>
+  </data>
+  <data name="HexagramFrequencies" xml:space="preserve">
+    <value>卦图频率</value>
+  </data>
+  <data name="InPercent" xml:space="preserve">
+    <value>（％）</value>
+  </data>
+  <data name="MaxNumberOfShownNGrammsCaption" xml:space="preserve">
+    <value>显示的最大n克数</value>
+  </data>
+  <data name="MaxNumberOfShownNGrammsTooltip" xml:space="preserve">
+    <value>设置图形中显示的最大n克数。</value>
+  </data>
+  <data name="nGram" xml:space="preserve">
+    <value>克频率</value>
+  </data>
+  <data name="OctagramFrequencies" xml:space="preserve">
+    <value>八卦频率</value>
+  </data>
+  <data name="PentagramFrequencies" xml:space="preserve">
+    <value>五角星频率</value>
+  </data>
+  <data name="ShowAbsoluteValuesCaption" xml:space="preserve">
+    <value>显示绝对值</value>
+  </data>
+  <data name="ShowAbsoluteValuesTooltip" xml:space="preserve">
+    <value>如果选中此设置，则频率将显示为绝对值。</value>
+  </data>
+  <data name="TetragramFrequencies" xml:space="preserve">
+    <value>四卦频率</value>
+  </data>
+  <data name="TrigramFrequencies" xml:space="preserve">
+    <value>Trigram频率</value>
+  </data>
+  <data name="UnigramFrequencies" xml:space="preserve">
+    <value>会标频率</value>
+  </data>
+  <data name="ShowTotalCaption" xml:space="preserve">
+    <value>显示总计</value>
+  </data>
+  <data name="ShowTotalTooltip" xml:space="preserve">
+    <value>如果选中此设置，则n克总数显示为绝对值。</value>
+  </data>
+</root>

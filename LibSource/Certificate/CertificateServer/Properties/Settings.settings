@@ -1,0 +1,133 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CrypTool.CertificateServer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DEFAULT_ALLOWED_CLIENTS" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="DEFAULT_AUTH_REQUIRED" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DEFAULT_CA_MONTH_EXPIRE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="DEFAULT_CA_RSA_STRENGTH" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1024</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_VERIFICATION_ENABLED" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DEFAULT_DB_HOST" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="DEFAULT_DB_NAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">certificates</Value>
+    </Setting>
+    <Setting Name="DEFAULT_DB_PASSWORD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">paporator</Value>
+    </Setting>
+    <Setting Name="DEFAULT_DB_PORT" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">3306</Value>
+    </Setting>
+    <Setting Name="DEFAULT_DB_USER" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">paporator</Value>
+    </Setting>
+    <Setting Name="DEFAULT_PCP_LISTEN_ADDRESS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="DEFAULT_PCP_LISTEN_PORT_1" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">4457</Value>
+    </Setting>
+    <Setting Name="DEFAULT_PEER_MONTH_EXPIRE" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">480</Value>
+    </Setting>
+    <Setting Name="DEFAULT_PEER_RSA_STRENGTH" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1024</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SMTP_SERVER_ADDRESS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mailout.uni-duisburg-essen.de</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SMTP_SERVER_PORT" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REGISTER_INFO_ADDRESS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pap-register@vs.uni-due.de</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_SENDER" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pap-admin@vs.uni-due.de</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REGISTRATION_SUBJECT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[peers@play Administration] A new certificate for user {AVATAR} has been requested</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REGISTRATION_BODY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Dear {AVATAR},\nyou have requested a new account for the peers@play peer-to-peer network with the following data:\n\nUsername: {AVATAR}\nEmail: {EMAIL}\nTo activate your account, you will have to copy the verification code and paste it into the appropriate formular in your peers@play application.\nPlease be sure to activate your account within the next {DAYS_TILL_EXPIRATION} days, otherwise your request will expire.\n\nYour verification code is: {CODE}
+\n\nYours peers@play team
+</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REGISTRATION_INFO_BODY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">A new Peers@Play certificate has been registered.
+\n\nUsername {AVATAR}\nEmail: {EMAIL}\nWorld: {WORLD}\n
+Program Name: {PROGRAM_NAME} ({PROGRAM_VERSION})
+</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REGISTRATION_INFO_SUBJECT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[peers@play Administration] A new certificate for user {AVATAR} has been registered</Value>
+    </Setting>
+    <Setting Name="DEFAULT_CLIENT_TIMEOUT" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="DEFAULT_DB_TIMEOUT" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REGISTER_SEND_INFO" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_PASSWORD_RESET_SUBJECT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[peers@play Administration] A password reset for user {AVATAR} has been requested</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_PASSWORD_RESET_BODY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Dear {AVATAR},\nyou have requested to reset the password for your peers@play account. You will have to copy this verification code and paste it into the appropriate formular in your peers@play application.\nPlease be sure to reset your password within the next {DAYS_TILL_EXPIRATION} days, otherwise your request will expire.\n\nYour verification code is: {CODE}\n\nYours peers@play team
+</Value>
+    </Setting>
+    <Setting Name="DEFAULT_REGISTRATION_EXPIRE_IN_DAYS" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="DEFAULT_PASSWORD_RESET_EXPIRE_IN_DAYS" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="DEFAULT_HTTPS_LISTEN_NAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="DEFAULT_HTTPS_LISTEN_PORT" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8080</Value>
+    </Setting>
+    <Setting Name="DEFAULT_PCP_LISTEN_PORT_2" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">443</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REQUEST_INFO_BODY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">A new Peers@Play certificate has been requested.
+\n\nUsername: {AVATAR}\nEmail: {EMAIL}\nWorld: {WORLD}\n
+Program Name: {PROGRAM_NAME} ({PROGRAM_VERSION})
+</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REQUEST_INFO_SUBJECT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[peers@play Administration] A new certificate for user {AVATAR} has been requested</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REQUEST_INFO_ADDRESS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pap-register@vs.uni-due.de</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_REQUEST_SEND_INFO" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DEFAULT_SMTP_ANTI_SPAM_TIME_IN_MIN" Type="System.UInt32" Scope="Application">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_AUTHORIZATION_SUBJECT" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Dear {AVATAR},\nyour registration request  has been authorized. You are now allowed to participate to the peers@play peer-to-peer network. Your registration data is:\n\nUsername: {AVATAR}\nEmail: {EMAIL}\n\nEnjoy your stay,\n\nYours peers@play team
+</Value>
+    </Setting>
+    <Setting Name="DEFAULT_EMAIL_AUTHORIZATION_BODY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[peers@play Administration] Registration for user {AVATAR} has been authorized</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

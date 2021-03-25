@@ -1,0 +1,24 @@
+﻿<h2>Angriff mit kürzeren Schlüsseln (Kühn 2003)</h2>
+
+Um eine gefälschte Signatur nach der Kühn-Methode zu erzeugen, wird zunächst der <a href="help://Gen_Datablock_Tab">Datenblock</a> wie in
+einer regulären PKCS#1-Signatur generiert.  Allerdings unterscheidet sich die <a href="help://Gen_Kuehn_Sig_Tab">Struktur</a>
+der gefälschten Signatur in folgenden Punkten:
+<ul>
+  <li>
+    Der Padding-String wird verkürzt. Somit findet sich der <a href="help://Gen_Datablock_Tab">Datenblock</a>
+    weiter links in der Signatur. Fehlerhafte Implementierungen der Validierung von Signaturen erkennen dies nicht.
+    Bei Kühn wird die Länge des Padding-String fix gewählt (46 Bytes, wenn SHA-1 als Hashalgorithmus gewählt wird).
+  </li>
+  <li>Der ungenutzte Platz am Ende der Signatur wird mit dem sogenannten Garbage aufgefüllt, welcher aus Bytes mit dem hexadezimalen Wert 0xff besteht.</li>
+</ul>
+</br>
+</br>
+<strong>Um den Angriff mit kürzeren Schlüsseln durchführen zu können, muss zuerst ein RSA-Schlüsselpaar in der entsprechenden Maske erzeugt werden.</strong></br>
+<strong>Zuerst muss der Datenblock erzeugt werden, bevor die komplette Signatur generiert werden kann!</strong>
+
+<h3>Weitere Informationen</h3>
+<p>
+    Ulrich Kühn: Side-Channel Attacks on Textbook RSA andElGamal Encryption, 2003,
+    <a href="https://link.springer.com/content/pdf/10.1007%2F3-540-36288-6_24.pdf" target="_blank">PDF</a>
+    <a href="https://iacr.org/archive/pkc2003/25670324/25670324.pdf" target="_blank">PDF</a>
+</p>

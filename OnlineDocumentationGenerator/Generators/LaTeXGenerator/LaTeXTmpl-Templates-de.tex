@@ -1,0 +1,65 @@
+\documentclass[10pt,a4paper]{scrreprt}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{tipa}
+\usepackage{amsfonts}
+\usepackage{german}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{parskip}
+\usepackage{german,longtable}
+\usepackage[export]{adjustbox}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\DisableLigatures{}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\makeatletter \setlength\@fptop{0\p@}
+\makeatother
+
+\title{Dokumentation zu den Vorlagen in CrypTool v2 (CT2)}
+\author{Das CrypTool 2-Team}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\hspace{0pt}\\[2.5cm]
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Dokumentation zu den Templates in CrypTool v2 (CT2) }\\[0.4cm]
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Autoren:} \\
+Das CrypTool 2 Team
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Version:} \\
+$VERSION$
+\end{flushright}
+\end{minipage}
+\vfill
+{\large \today}
+\end{center}
+\newpage
+\large
+Dieses Dokument gibt eine Übersicht über die in {\bf CrypTool v2} enthaltenen Vorlagen (Templates).\\\\
+Der erste Teil dieses Dokumentes (``Übersicht über die Vorlagen’’) besteht aus einer kompakten Auflistung aller Vorlagen. Zu jeder Vorlage werden Ikone, Titel und eine kurze Zusammenfassung (Summary) aufgeführt. Die Auflistung der Vorlagen erfolgt in derselben Reihenfolge, wie sie im Startcenter von CT2 gruppiert sind.\\\\
+Ab Seite \pageref{part2} wird zusätzlich zu jeder Vorlage der im Programm verwendete Balloontext, der eine längere Beschreibung der Vorlage enthält, aufgeführt.
+\newpage
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+$CONTENT$
+
+\end{document}

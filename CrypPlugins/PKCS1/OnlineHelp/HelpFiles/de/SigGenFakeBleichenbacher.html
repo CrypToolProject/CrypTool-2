@@ -1,0 +1,25 @@
+﻿<h2>Bleichenbacher-Angriff (1998)</h2>
+ Um eine gefälschte Signatur zu erzeugen, wird zunächst der <a href="help://Gen_Datablock_Tab">Datenblock</a> wie in
+ einer regulären PKCS#1-Signatur generiert. Allerdings unterscheidet sich die <a href="help://Gen_Bleichenb_Sig_Tab">Struktur</a>
+ der gefälschten Signatur in folgenden Punkten:
+ <ul>
+ <li>Der Padding-String wird verkürzt. Somit findet sich der <a href="help://Gen_Datablock_Tab">Datenblock</a> 
+ weiter links in der Signatur. Fehlerhafte Implementierungen der Validierung von Signaturen erkennen dies nicht. 
+ Wie weit der Datenblock nach links verschoben wird, kann variiert werden.</li>
+ <li>Der ungenutzte Platz am Ende der Signatur wird durch beliebige Daten, dem sogenannten Garbage, aufgefüllt.</li>
+ </ul>
+ </br></br>
+<strong>Um den Bleichenbacher-Angriff durchführen zu können, muss zuerst ein RSA-Schlüsselpaar in der entsprechenden Maske erzeugt werden.</strong></br>
+<strong>Zuerst muss der Datenblock erzeugt werden, bevor die komplette Signatur generiert werden kann!</strong>
+
+<h3>Weitere Informationen</h3>
+<p>
+    Daniel Bleichenbacher: <a href="http://link.springer.com/chapter/10.1007/BFb0055716" target="_blank">Chosen Ciphertext Attacks Against Protocols Based on the RSA Encryption Standard PKCS #1.</a>
+    In: CRYPTO '98. 1998, S. 1–12. <a href="https://link.springer.com/content/pdf/10.1007%2FBFb0055716.pdf" target="_blank">PDF</a>
+</p>
+<p>
+    Wikipedia: <a href="https://en.wikipedia.org/wiki/Adaptive_chosen-ciphertext_attack" target="_blank">Adaptive chosen-ciphertext attack</a>
+</p>
+<p>
+    Bardou et al. konnten 2012 den Bleichenbacher-Angriff in seiner Effizienz noch erheblich steigern.
+</p>

@@ -1,0 +1,69 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+			  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+			  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 
+			  Background="White">
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+    <Span FontFamily="Georgia" FontWeight="Bold" FontSize="18.6666666666667" Foreground="#FF15428B" xml:lang="de-de">
+      <Span.TextDecorations>
+        <TextDecoration Location="Underline" />
+      </Span.TextDecorations> Bedienungsanleitung des Plugin System of equations </Span>
+  </Paragraph>
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="13.3333333333333" />
+  <Paragraph  FontSize="13.3333333333333">
+    <Span xml:lang="de-de">Das Plugin <Span FontWeight="Bold"  xml:lang="en-gb">System of equations</Span>  dient zur Erstellung eines Gleichungssystems f&#252;r algebraische Angriffe auf (k,l)-Kombinationsgeneratoren. Dazu m&#252;ssen  Z-Funktionen und eine Menge an  Schl&#252;sselstrom  sowie  die  R&#252;ckkopplungspolynome und die Ausgangszellen der LFSRs bekannt sein. Die Z-Funktionen werden durch die Plugins &#34;<Span FontWeight="Bold"  xml:lang="en-gb">Compute the sets XZ</Span>&#34; und &#34;<Span FontWeight="Bold"  xml:lang="en-gb">Compute annihilators</Span>&#34; berechnet  und zum Eingang des Plugins &#34;<Span FontWeight="Bold"  xml:lang="en-gb">System of equations</Span>&#34; geschickt. Die  R&#252;ckkopplungspolynome und die Ausgangszellen der LFSRs des Kombinationsgenerators sowie die bekannten Schl&#252;sselstromabschnitte sollen nach bestimmten Regeln formuliert und mittels des  Panels  <Span FontWeight="Bold"  xml:lang="en-gb">Algorithm Settings</Span> eingegeben werden. Hierbei muss die Nummerierung der LFSRs, die  bei der Zuweisung der Variablen  xi an die LFSRs-Ausg&#228;nge beim Plugin Compute the sets XZ festgelegt wurde, weiter benutzt werden</Span>
+  </Paragraph>
+   
+  
+   <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Die R&#252;ckkopplungspolynome der LFSRs</Run>  
+  </Paragraph>
+ 
+ 
+  <Paragraph FontSize="13.3333333333333">
+   <Span xml:lang="de-de"> Die R&#252;ckkoplungspolynome der LFSRs werden mit Semikommas getrennt und in  steigender Reihenfolge in das Feld <Span FontWeight="Bold"  xml:lang="en-gb">Feedback Polynomials</Span> eingegeben &#58; P1&#59;...&#59;Pn wobei Pi das R&#252;ckkoplungspolynom des i-ten LFSRs ist. Ein R&#252;ckkopplungspolynom   wird durch die  R&#252;ckkopplungskoeffizienten  dargestellt &#58; Pi=c_1...c_l, wobei l die L&#228;nge des i-ten LFSRs ist. Der Koeffizient c_j ist gleich 1 wenn der Inhalt der j-ten Zelle r&#252;ckkoppelt wird und 0 sonst. c_1 bzw. c_l ist der Koeffizient bezogen auf die rechteste bzw. linkste Zelle. Die folgende Abbildung  veranschaulicht die Vorgehensweise.</Span>
+  </Paragraph>
+  <Paragraph>
+        <InlineUIContainer>
+            <Image Width="400" Height="300" Source="/SystemOfEquations;Component/DetailedDescription/Images/parameterinput.png" />
+        </InlineUIContainer>
+    </Paragraph>
+   <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Die Ausgangszellen der LFSRs</Run>  
+  </Paragraph>
+  <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de"> Die Ausgangszellen eines LFSRs sind die Zellen, deren Inhalte beim Takten  ausgegeben werden. Meistens wird die rechteste Zelle als Ausgang verwendet. Es ist aber  m&#246;glich, dass die Inhalte mehrerer Zellen ausgegeben werden. Die Ausgangszellen des i-ten LFSRs werden  mit dem Sequenz Si=s_1...s_l dargestellt, wobei s_j gleich 1 ist,wenn der Inhalt der j-ten Zelle ausgegeben wird und 0 anderenfalls. Diese Sequenzen werden in gleicher Weise wie  die R&#252;ckkopplungspolynome  in das Feld <Span  FontWeight="Bold"  xml:lang="de-de">Outputcells of LFSRs</Span> eingegeben &#58; S1&#59;...&#59;Sn. Die obere Abbildung  veranschaulicht die Vorgehensweise.</Span>
+  </Paragraph>
+  
+   <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Die bekannten Schl&#252;sselstromabschnitte</Run>  
+  </Paragraph>
+  <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de">Ein Schl&#252;sselstromabschnitt z_t...z_t+n l&#228;sst sich durch eine Bitsfolge (0,1) und den Zeitpunkt t definieren.  t bezeichnet, ab welchem Takt  die Folge erzeugt wurde (gestartet ab dem Initialisierungszusatnd). Daher wird ein Schl&#252;sselstromabschnitt   mit einer dezimalen Zahl t und einer Bitsfolge, getrennt durch ein Komma, dargestellt &#58; t,1010....  Verschiedene Schl&#252;sselstromabschnitte  k&#246;nnen mit  Semikommas getrennt und verwendet werden &#58; t_1,100...;t_2,101.... Hierbei m&#252;ssen jedoch die  Schl&#252;sselstromabschnitte  t_i + &#124;seq_i&#124; &#61;&#60; t_i+1 erf&#252;llen. Die Schl&#252;sselstromabschnitte sollen in das Feld <Span  FontWeight="Bold"  xml:lang="de-de">Keystreams sequences</Span> eingegeben werden. Die obere Abbildung zeigt die Eingabe der Abschnitten z_1..z_10=0101001101 und z_22..z_33=11001010010. </Span>
+  </Paragraph>
+  
+  
+     <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Zuweisung der Variablen ki an LFSRs-Zellen als Initialzustandsbits</Run>  
+  </Paragraph>
+  <Paragraph >
+    <Run FontSize="13.3333333333333">Die Variablen in das Gleichungssystem sind die Bits der Initialzust&#228;nde der LFSRs. Sie werden mit k_i bezeichnet, wobei 1 &#61;&#60; i &#61;&#60; L und L die gesamte L&#228;nge der LFSRs ist. Die  Variablen k_i werden in steigende Index-Reihenfolge in dieselbe Reihenfolge wie bei  der Variablen x_i   an der LFSRs-Zellen zugewiesen &#58; von Links nach nachts und von oben nach unten. Somit werden die LFSRs-Ausgaben korrekt die entsprechenden Variablen in der Z-Funktionen ersetzen. Die obere Abbildung verdeutlicht die Vorgehensweise. </Run>
+  </Paragraph>
+  
+    <Paragraph Margin="0,0,0,0"  FontFamily="Times New Roman" FontSize="16">
+    <Span FontFamily="Georgia" FontWeight="Bold"  Foreground="#FF15428B" xml:lang="de-de">
+      <Span.TextDecorations>
+        <TextDecoration Location="Underline" />
+      </Span.TextDecorations> Beispiel </Span>
+  </Paragraph>
+  
+   <Paragraph>
+        <InlineUIContainer>
+            <Image Width="400" Height="300" Source="/SystemOfEquations;Component/DetailedDescription/Images/example.png" />
+        </InlineUIContainer>
+    </Paragraph>
+    
+ 
+</FlowDocument>

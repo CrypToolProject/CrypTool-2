@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EncryptedVM_Assemblerr_Log_Tooltip" xml:space="preserve">
+    <value>Assembling log</value>
+  </data>
+  <data name="EncryptedVM_Assembler_Log_Name" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="EncryptedVM_Assembler_Mode_Name" xml:space="preserve">
+    <value>Load from file</value>
+  </data>
+  <data name="EncryptedVM_Assembler_Mode_Tooltip" xml:space="preserve">
+    <value>Whether to load the source code from a file or not</value>
+  </data>
+  <data name="EncryptedVM_Assembler_Name" xml:space="preserve">
+    <value>EncryptedVM Assembler</value>
+  </data>
+  <data name="EncryptedVM_Assembler_Program_Name" xml:space="preserve">
+    <value>Program</value>
+  </data>
+  <data name="EncryptedVM_Assembler_Program_Tooltip" xml:space="preserve">
+    <value>Assembled program</value>
+  </data>
+  <data name="EncryptedVM_Assembler_SourceCode_Name" xml:space="preserve">
+    <value>Source code</value>
+  </data>
+  <data name="EncryptedVM_Assembler_SourceCode_Tooltip" xml:space="preserve">
+    <value>Source code to assemble</value>
+  </data>
+  <data name="EncryptedVM_Assembler_SourcePath_Name" xml:space="preserve">
+    <value>Source code path</value>
+  </data>
+  <data name="EncryptedVM_Assembler_SourcePath_Tooltip" xml:space="preserve">
+    <value>Path to file containing the source code</value>
+  </data>
+  <data name="EncryptedVM_Assembler_Tooltip" xml:space="preserve">
+    <value>Assemble a program for an encrypted virtual machine</value>
+  </data>
+  <data name="EncryptedVM_Keygen_KeySize_Name" xml:space="preserve">
+    <value>Power of Poly Modulus (Key size)</value>
+  </data>
+  <data name="EncryptedVM_Keygen_KeySize_Tooltip" xml:space="preserve">
+    <value>The power of the polynomial modulus</value>
+  </data>
+  <data name="EncryptedVM_Keygen_Mode_Name" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="EncryptedVM_Keygen_Mode_Tooltip" xml:space="preserve">
+    <value>Whether to encrypt the program or not</value>
+  </data>
+  <data name="EncryptedVM_Keygen_Name" xml:space="preserve">
+    <value>EncryptedVM Keygen</value>
+  </data>
+  <data name="EncryptedVM_Keygen_Tooltip" xml:space="preserve">
+    <value>Generate keys for an encrypted virtual machine</value>
+  </data>
+  <data name="EncryptedVM_Machine_Cycles_Name" xml:space="preserve">
+    <value>Cycles</value>
+  </data>
+  <data name="EncryptedVM_Machine_Cycles_Tooltip" xml:space="preserve">
+    <value>Number of cycles</value>
+  </data>
+  <data name="EncryptedVM_Machine_Name" xml:space="preserve">
+    <value>EncryptedVM Machine</value>
+  </data>
+  <data name="EncryptedVM_Machine_Tooltip" xml:space="preserve">
+    <value>Virtual encrypted machine</value>
+  </data>
+  <data name="EncryptedVM_MemoryDisplay_Name" xml:space="preserve">
+    <value>EncryptedVM Memory Display</value>
+  </data>
+  <data name="EncryptedVM_MemoryDisplay_Tooltip" xml:space="preserve">
+    <value>Decrypt the memory of an EncryptedVM machine</value>
+  </data>
+  <data name="EncryptedVM_Memory_Decrypted_Name" xml:space="preserve">
+    <value>Decrypted Memory</value>
+  </data>
+  <data name="EncryptedVM_Memory_Decrypted_Tooltip" xml:space="preserve">
+    <value>The decrypted memory of the machine (or parts of it)</value>
+  </data>
+  <data name="EncryptedVM_Memory_Encrypted_Name" xml:space="preserve">
+    <value>Encrypted Memory</value>
+  </data>
+  <data name="EncryptedVM_Memory_Encrypted_Tooltip" xml:space="preserve">
+    <value>The encrypted memory of the machine</value>
+  </data>
+  <data name="EncryptedVM_Memory_Rows_Name" xml:space="preserve">
+    <value>Rows</value>
+  </data>
+  <data name="EncryptedVM_Memory_Rows_Tooltip" xml:space="preserve">
+    <value>Number of rows to decrypt</value>
+  </data>
+  <data name="EncryptionParameters_Name" xml:space="preserve">
+    <value>Parameters</value>
+  </data>
+  <data name="EncryptionParameters_Tooltip" xml:space="preserve">
+    <value>Parameters for Encoding/Encrypting/Decrypting/Decoding</value>
+  </data>
+  <data name="EvaluationKeys_Name" xml:space="preserve">
+    <value>Evaluation Keys</value>
+  </data>
+  <data name="EvaluationKeys_Tooltip" xml:space="preserve">
+    <value>Keys to perform operations on encrypted data</value>
+  </data>
+  <data name="PublicKey_Name" xml:space="preserve">
+    <value>Public Key</value>
+  </data>
+  <data name="PublicKey_Tooltip" xml:space="preserve">
+    <value>Key to encrypt data</value>
+  </data>
+  <data name="SecretKey_Name" xml:space="preserve">
+    <value>Secret Key</value>
+  </data>
+  <data name="SecretKey_Tooltip" xml:space="preserve">
+    <value>Key to decrypt data</value>
+  </data>
+  <data name="Ac_specified_multiple_times" xml:space="preserve">
+    <value>AC specified multiple times, using first occurence (line: {0})</value>
+  </data>
+  <data name="Failed_to_read_source_code_file" xml:space="preserve">
+    <value>Failed to read source code from \"{0}\"</value>
+  </data>
+  <data name="Invalid_program_no_code" xml:space="preserve">
+    <value>Invalid Program (contains no code)</value>
+  </data>
+  <data name="Invalid_program_too_much_code" xml:space="preserve">
+    <value>Invalid Program (too much code)</value>
+  </data>
+  <data name="Invalid_syntax" xml:space="preserve">
+    <value>Invalid Syntax (line: {0}, command: {1})</value>
+  </data>
+  <data name="Label_not_found" xml:space="preserve">
+    <value>Label \"{0}\" not found (line: {1}, command: {2})</value>
+  </data>
+  <data name="Label_used_multiple_times" xml:space="preserve">
+    <value>Label \"{0}\" used multiple times (line: {1}, command: {2})</value>
+  </data>
+  <data name="No_ac_defined" xml:space="preserve">
+    <value>No AC defined (line: {0})</value>
+  </data>
+  <data name="No_pc_defined" xml:space="preserve">
+    <value>No PC defined (line: {0})</value>
+  </data>
+  <data name="Pc_label_not_found" xml:space="preserve">
+    <value>Label \"{0}\" not found (line: {1})</value>
+  </data>
+  <data name="Pc_specified_multiple_times" xml:space="preserve">
+    <value>PC specified multiple times, using first occurence (line: {0})</value>
+  </data>
+  <data name="EncryptedVM_Machine_Output_Name" xml:space="preserve">
+    <value>Result</value>
+  </data>
+  <data name="EncryptedVM_Machine_Output_Tooltip" xml:space="preserve">
+    <value>Result of the program</value>
+  </data>
+  <data name="Dump_End" xml:space="preserve">
+    <value>-&gt; DUMP-END &lt;-</value>
+  </data>
+  <data name="Dump_Start" xml:space="preserve">
+    <value>-&gt; DUMP_START &lt;-</value>
+  </data>
+  <data name="End_Cycle" xml:space="preserve">
+    <value>-&gt; END-PROCESS-CYCLE &lt;-</value>
+  </data>
+  <data name="Executing_Program" xml:space="preserve">
+    <value>Executing Program...</value>
+  </data>
+  <data name="Failed_loading_program" xml:space="preserve">
+    <value>Failed to load program</value>
+  </data>
+  <data name="Finished_executing_program" xml:space="preserve">
+    <value>...Finished executing program</value>
+  </data>
+  <data name="Init_Machine" xml:space="preserve">
+    <value>Init Machine...</value>
+  </data>
+  <data name="Loading_Program" xml:space="preserve">
+    <value>Loading Program...</value>
+  </data>
+  <data name="Phase_1" xml:space="preserve">
+    <value>PHASE 1: Fetch</value>
+  </data>
+  <data name="Phase_2" xml:space="preserve">
+    <value>PHASE 2: Decode</value>
+  </data>
+  <data name="Phase_3" xml:space="preserve">
+    <value>PHASE 3: Execute</value>
+  </data>
+  <data name="Phase_4" xml:space="preserve">
+    <value>PHASE 4: Load / Store</value>
+  </data>
+  <data name="Phase_5" xml:space="preserve">
+    <value>PHASE 5: Rewrite registers / flags</value>
+  </data>
+  <data name="Start_Cycle" xml:space="preserve">
+    <value>-&gt; START-PROCESS-CYCLE &lt;-</value>
+  </data>
+  <data name="EncryptedVM_Memory_Mode_Name" xml:space="preserve">
+    <value>Run selection algorithm</value>
+  </data>
+  <data name="EncryptedVM_Memory_Mode_Tooltip" xml:space="preserve">
+    <value>Whether to display rows of the memory or the selection made by the program</value>
+  </data>
+  <data name="EncryptedVM_Memory_Program_Name" xml:space="preserve">
+    <value>Memory display program</value>
+  </data>
+  <data name="EncryptedVM_Memory_Program_Tooltip" xml:space="preserve">
+    <value>Program to display the content of the memory</value>
+  </data>
+</root>

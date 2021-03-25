@@ -1,0 +1,285 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:CrypTool_MD5_Presentation_Displays="clr-namespace:CrypTool.MD5.Presentation.Displays" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="CrypTool.MD5.Presentation.States.RoundStepPresentation"
+    Height="400" Width="800" mc:Ignorable="d" IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="colorHighlight">#FFFF8D00</Color>
+            <Color x:Key="colorNormal">Black</Color>
+            <Storyboard x:Key="LineFadeStoryboard">
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path3" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path6" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                    <SplineColorKeyFrame KeyTime="00:00:02.5000000" Value="{StaticResource colorNormal}"/>
+                    <SplineColorKeyFrame KeyTime="00:00:03" Value="#FFFF8D00"/>
+                    <SplineColorKeyFrame KeyTime="00:00:04" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path7" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:04" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path8" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:04" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:05" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path9" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:04" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:05" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path10" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:04.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:05" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06" Value="{StaticResource colorNormal}"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path11" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:04.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:05" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06" Value="{StaticResource colorNormal}"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path12" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:05.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:07" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:08" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path13" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:05.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:07" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path14" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:05.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:07" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path12_Copy" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:07" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:08" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path15" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:07" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:08" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path16" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:07" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:08" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path17" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:06.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:07" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:08" Value="Black"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path6" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+                    <SplineColorKeyFrame KeyTime="00:00:02.5000000" Value="Black"/>
+                    <SplineColorKeyFrame KeyTime="00:00:03" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path7" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02.5000000" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path8" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:04" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path9" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:04" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path5" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                    <SplineColorKeyFrame KeyTime="00:00:00" Value="White"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path2" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                	<SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path3" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                	<SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path1" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+                	<SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01" Value="#FFFF8D00"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="White"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path4" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                	<SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="{StaticResource colorHighlight}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03" Value="{StaticResource colorNormal}"/>
+                </ColorAnimationUsingKeyFrames>
+                <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="path5" Storyboard.TargetProperty="(Shape.Stroke).(SolidColorBrush.Color)">
+                	<SplineColorKeyFrame KeyTime="00:00:00" Value="Black"/>
+                	<SplineColorKeyFrame KeyTime="00:00:01.5000000" Value="{StaticResource colorNormal}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:02" Value="{StaticResource colorHighlight}"/>
+                	<SplineColorKeyFrame KeyTime="00:00:03" Value="{StaticResource colorNormal}"/>
+                </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+
+        <Path x:Name="path12_Copy" Fill="White" Stretch="Fill"  Stroke="Black" HorizontalAlignment="Right" Margin="0,0,293,39.5" Width="1" Data="M506,62 L506,351.5" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Bottom" Height="113">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <Path x:Name="path6" Fill="White" Stroke="Black" HorizontalAlignment="Left" Margin="185.5,123.5,0,0" VerticalAlignment="Top" Width="192" Height="46" Data="M0.5,0.5 L189.5,45.5"/>
+
+        <CrypTool_MD5_Presentation_Displays:RoundAndStepDisplay VerticalAlignment="Top" HorizontalAlignment="Left" DataContext="{Binding CurrentState}" Margin="8,8,0,0"/>
+
+        <Path x:Name="path15" Fill="White" Stretch="Fill"  Stroke="Black" HorizontalAlignment="Right" Margin="0,62,65,47.5" Width="1" Data="M740,62 L740,351.5"/>
+        <Path x:Name="path16" Fill="White" Stretch="Fill"  Stroke="Black" HorizontalAlignment="Right" Margin="0,60,181,47.5" Width="1" Data="M618,60 L618,351.5"/>
+        <Path x:Name="path12" Stretch="Fill"  Stroke="Black" HorizontalAlignment="Right" Margin="0,62,293,152.5" Width="1" Data="M506,62 L506,351.5" RenderTransformOrigin="0.5,0.5" Fill="White">
+            <Path.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Path.RenderTransform>
+        </Path>
+        <Path x:Name="path2" Stretch="Fill" HorizontalAlignment="Right" Margin="0,61.5,291.5,0" VerticalAlignment="Top" Width="62.5" Height="51.5" Data="M446,112 L507.5,61.5" OpacityMask="{x:Null}">
+        	<Path.Stroke>
+        		<SolidColorBrush Color="{DynamicResource colorNormal}"/>
+        	</Path.Stroke>
+        	<Path.Fill>
+        		<SolidColorBrush Color="{DynamicResource colorNormal}"/>
+        	</Path.Fill>
+        </Path>
+        <Path x:Name="path3" Stretch="Fill" HorizontalAlignment="Right" Margin="0,60,181,0" VerticalAlignment="Top" Width="169.5" Height="52.5" Data="M618,60 L449.5,111.5" OpacityMask="{x:Null}">
+        	<Path.Stroke>
+        		<SolidColorBrush Color="{DynamicResource colorNormal}"/>
+        	</Path.Stroke>
+        	<Path.Fill>
+        		<SolidColorBrush Color="{DynamicResource colorNormal}"/>
+        	</Path.Fill>
+        </Path>
+        <Path x:Name="path1" Stretch="Fill" HorizontalAlignment="Right" Margin="0,60,65,0" VerticalAlignment="Top" Width="283.5" Height="52.5" Data="M734,60 L451.5,111.5" OpacityMask="{x:Null}">
+        	<Path.Stroke>
+        		<SolidColorBrush Color="{DynamicResource colorNormal}"/>
+        	</Path.Stroke>
+        	<Path.Fill>
+        		<SolidColorBrush Color="{DynamicResource colorNormal}"/>
+        	</Path.Fill>
+        </Path>
+        <Path x:Name="path4" Fill="White" Stretch="Fill" Margin="375,58,0,0" VerticalAlignment="Top" Height="43" Data="M375,58 L375,149.5" HorizontalAlignment="Left" Width="1" Stroke="Black"/>
+        <Path x:Name="path5" Fill="White" Stretch="Fill" Margin="390.5,118,379,0" VerticalAlignment="Top" Height="1" Data="M420,134 L397.5,134" Stroke="Black"/>
+        <Path x:Name="path7" Fill="White" Stretch="Fill"  Stroke="Black" HorizontalAlignment="Left" Margin="375,137,0,0" VerticalAlignment="Top" Width="1" Height="12.5" Data="M375,150 L375,161.5"/>
+        <Path x:Name="path8" Fill="White" Stretch="Fill"   HorizontalAlignment="Left" Margin="376,184,0,0" Width="1" Data="M376,200 L376,209.5" VerticalAlignment="Top" Height="13.5" Stroke="Black"/>
+        <Path x:Name="path10" Fill="White" Stretch="Fill"  HorizontalAlignment="Left" Margin="376,0,0,136.22" VerticalAlignment="Bottom" Width="1" Height="29.78" Data="M376,246 L376,259.5" Stroke="Black"/>
+        <Path x:Name="path13" Stretch="Fill"  HorizontalAlignment="Left" Margin="376,0,0,105" VerticalAlignment="Bottom" Width="1" Height="14" Data="M376,246 L376,259.5" Stroke="Black" Fill="White"/>
+        <Path x:Name="path17" Fill="White" Stretch="Fill"  HorizontalAlignment="Left" Margin="376,0,0,56.5" VerticalAlignment="Bottom" Width="1" Height="9.5" Data="M376,246 L376,259.5" Stroke="Black"/>
+        <Path x:Name="path9" Fill="White" Stretch="Fill"  HorizontalAlignment="Left" Margin="148,188,0,186" Width="212.5" Data="M148,214 L343.5,229.5" Stroke="Black"/>
+        <Path x:Name="path11" Fill="White" Stretch="Fill"   HorizontalAlignment="Left" Margin="164,0,0,134" VerticalAlignment="Bottom" Width="180.5" Height="8" Data="M128,262 L343.5,275.5" Stroke="Black"/>
+        <Path x:Name="path14" Stretch="Fill"   Margin="392,0,294,87" VerticalAlignment="Bottom" Height="67" Data="M392,324 L505.5,269.5" Stroke="Black" Fill="White"/>
+        <CrypTool_MD5_Presentation_Displays:FunctionNameDisplay HorizontalAlignment="Right" Margin="0,97,323,0" Width="56" VerticalAlignment="Top" Height="44" FunctionName="{Binding CurrentState.RoundFunctionName}"/>
+        <CrypTool_MD5_Presentation_Displays:ShiftedCompressionVariableDisplay Margin="332,0,8,8" VerticalAlignment="Bottom" Height="50" Width="460" DataContext="{Binding CurrentState}"/>
+        <CrypTool_MD5_Presentation_Displays:CompressionVariableDisplay Margin="332,8,8,0" VerticalAlignment="Top" Height="50" Width="460" DataContext="{Binding LastState}"/>
+        <Label Margin="360.5,101,0,0" VerticalAlignment="Top" Height="35" Content="+" Style="{DynamicResource labelStyle}" BorderThickness="1" BorderBrush="Black" HorizontalContentAlignment="Center" Template="{DynamicResource functionLabelStyle}" HorizontalAlignment="Left" Width="30" FontSize="16" Background="White">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label Background="White" HorizontalAlignment="Left" Margin="360.5,149,0,0" Style="{DynamicResource labelStyle}" Width="30" Content="+" BorderBrush="Black" BorderThickness="1" FontSize="16" HorizontalContentAlignment="Center" Template="{DynamicResource functionLabelStyle}" VerticalAlignment="Top" Height="35">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label Background="White" Margin="344.5,0,393.5,113" Style="{DynamicResource labelStyle}" VerticalAlignment="Bottom" Height="35" Content="&lt;&lt;&lt;" BorderBrush="Black" BorderThickness="1" FontSize="16" HorizontalContentAlignment="Center" Template="{DynamicResource functionLabelStyle}">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label Background="White" HorizontalAlignment="Left" Margin="360.5,197,0,168" Style="{DynamicResource labelStyle}" Width="30" Content="+" BorderBrush="Black" BorderThickness="1" FontSize="16" HorizontalContentAlignment="Center" Template="{DynamicResource functionLabelStyle}">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <Label Background="White" HorizontalAlignment="Left" Margin="360.5,0,0,70" Style="{DynamicResource labelStyle}" VerticalAlignment="Bottom" Width="30" Height="35" Content="+" BorderBrush="Black" BorderThickness="1" FontSize="16" HorizontalContentAlignment="Center" Template="{DynamicResource functionLabelStyle}">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="AC" Margin="127,165.298,0,186" HorizontalAlignment="Left" Width="117.755" Value="{Binding CurrentState.AdditionConstant}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="SC" Margin="127,0,0,122.646" HorizontalAlignment="Left" Width="117.755" Value="{Binding CurrentState.ShiftConstant}" VerticalAlignment="Bottom" Height="48.702"/>
+        <CrypTool_MD5_Presentation_Displays:DataIntegerDisplay Margin="12,101,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="298" Height="46" DisplayedValues="{Binding CurrentState.DataAsIntegers}" HighlightedValue="{Binding CurrentState.MessagePartIndex}"/>
+        <Label Margin="12,165.298,669,186" Name="label1" VerticalContentAlignment="Center" Content="{Loc Addition_constant}" />
+        <Label Height="48.702" HorizontalAlignment="Left" Margin="12,0,0,119" Name="label2" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Width="119" Content="{Loc Shift_constant}" />
+        <Label Height="28" HorizontalAlignment="Left" Margin="12,73,0,0" Name="label3" VerticalAlignment="Top" Width="298" HorizontalContentAlignment="Center" Content="{Loc Selected_part_from_input_data_block}" />
+        <Label Background="White" BorderBrush="DarkGray" BorderThickness="1" FontSize="16" Height="35" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="8,0,0,52" Style="{DynamicResource labelStyle}" Template="{DynamicResource functionLabelStyle}" VerticalAlignment="Bottom" Width="30" Foreground="DarkGray">
+            <Label.Effect>
+                <DropShadowEffect Color="DarkGray" />
+            </Label.Effect> +
+        </Label>
+        <Label Height="38.909" HorizontalAlignment="Left" Margin="76,0,0,6.888" Name="label4" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Width="206" Foreground="DarkGray" Content="{Loc Rotating_left_shift}" />
+        <Label Background="White" BorderBrush="DarkGray" BorderThickness="1" FontSize="16" Height="35" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="8,0,0,10.797" Style="{DynamicResource labelStyle}" Template="{DynamicResource functionLabelStyle}" VerticalAlignment="Bottom" Width="62" Foreground="DarkGray">
+            <Label.Effect>
+                <DropShadowEffect Color="DarkGray" />
+            </Label.Effect> &lt;&lt;&lt;
+        </Label>
+        <Label Height="39" HorizontalAlignment="Left" Margin="44,0,0,47.5" Name="label5" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Width="282" Foreground="DarkGray" Content="{Loc Unsigned_integer_addition_discarding_carry_bit}" />
+        <Label Height="45.056" HorizontalAlignment="Left" Margin="251,231,0,0" Name="label6" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="94" Foreground="DarkGray" Content="{Loc shifted_by}" HorizontalContentAlignment="Center" />
+            <Label Height="45.056" Margin="374,0,304,134" Name="label7" VerticalAlignment="Bottom" VerticalContentAlignment="Center" Foreground="DarkGray" Content="{Loc shifted_value}" />
+    </Grid>
+</UserControl>

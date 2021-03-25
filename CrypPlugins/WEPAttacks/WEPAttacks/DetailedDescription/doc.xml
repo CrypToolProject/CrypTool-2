@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component implements three attacks against the secret key of the Wired Equivalent Privacy protocol (<docRef item="CrypTool.WEP.WEP" />).
+    The three attacks are FMS, KoreK and PTW: different attacks with different fundamentals and different probabilities of success.
+  </introduction>
+  <introduction lang="zh-CN">该组件针对有线等效保密协议（）的秘密密钥实施三种攻击。这三种攻击分别是FMS，KoreK和PTW：不同的攻击具有不同的基础和不同的成功概率。</introduction>
+  <introduction lang="ru">Этот компонент реализует три атаки на секретный ключ протокола Wired Equivalent Privacy (). Три атаки - это FMS, KoreK и PTW: различные атаки с разными фундаментальными особенностями и разные вероятности успеха.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente implementiert drei Angriffe auf den geheimen Schlüssel des Wired Equivalent Privacy-Protokolls (<docRef item="CrypTool.WEP.WEP" />).
+    Die drei Angriffe sind der FMS-Angriff, der KoreK-Angriff und der PTW-Angriff, die jeweils auf einem anderen Prinzip aufbauen und unterschiedliche Erfolgswahrscheinlichkeiten besitzen.
+</introduction>
+  <usage lang="en">
+    You can choose the attack from the drop-down menu in the component settings.
+    <newline /><newline />
+    The packets, that the component requires for cryptanalysis, have to be provided at the input as a data stream.
+    You can use the <docRef item="CrypTool.Internet_frame_generator.Internet_frame_generator" /> and the <docRef item="CrypTool.WEP.WEP" /> components to generate any amount of suitable packets.
+    <newinle /><newinle />
+    When the workspace is executed, the component reads all available packets and tries to discover the secret WEP key with the selected attack method.
+    If the WEP key could not be recovered with the provided packets, the component outputs the value "False" at its output.
+    This can then be evaluated by further components, that generate more packet input for this component.
+    If the key was found, the value "True" will be output, advising the attached components that no more packets are needed.
+    <newline /><newline />
+    If the amount of available packets is limited, you should activate the checkbox in the settings of the component.
+    This will advise it to read all packets on the input at once. If they are not sufficient to determine the key, the component will
+    display an appropriate message in the presentation view.
+    When all packets have been analyzed, the component will output "True" in both cases, indicating that the search is finished.
+  </usage>
+  <usage lang="zh-CN">您可以从组件设置的下拉菜单中选择攻击。组件需要进行密码分析的数据包必须在输入处作为数据流提供。您可以使用和组件生成任意数量的合适数据包。执行工作空间时，组件将读取所有可用的数据包，并尝试使用选定的攻击方法来发现WEP密钥。如果使用提供的数据包无法恢复WEP密钥，则组件将在其输出中输出值“ False”。然后，可以由其他组件对此进行评估，从而为该组件生成更多的数据包输入。如果找到了密钥，则将输出值“ True”，建议连接的组件不再需要任何数据包。如果可用数据包数量受到限制，则应激活组件设置中的复选框。这将建议它立即读取输入上的所有数据包。如果它们不足以确定键，则组件将在演示视图中显示适当的消息。分析完所有数据包后，在两种情况下组件都将输出“ True”，表示搜索已完成。</usage>
+  <usage lang="ru">Вы можете выбрать атаку из раскрывающегося меню в настройках компонента. Пакеты, которые требуется компоненту для криптоанализа, должны быть предоставлены на входе в виде потока данных. Вы можете использовать и компоненты для создания любого количества подходящих пакетов. Когда рабочая область выполняется, компонент считывает все доступные пакеты и пытается обнаружить секретный ключ WEP с выбранным методом атаки. Если ключ WEP не может быть восстановлен с предоставленными пакетами, компонент выдает значение «False» на своем выходе. Затем это может быть оценено другими компонентами, которые генерируют больше пакетов для этого компонента. Если ключ был найден, будет выводиться значение «True», сообщая прикрепленным компонентам, что больше не требуется пакетов. Если количество доступных пакетов ограничено, вы должны активировать этот флажок в настройках компонента. Это поможет ему сразу прочитать все пакеты на входе. Если их недостаточно для определения ключа, компонент отобразит соответствующее сообщение в представлении презентации. Когда все пакеты анализируются, компонент будет выводить «True» в обоих случаях, указывая, что поиск завершен.</usage>
+  <usage lang="de-DE">
+    Wählen Sie in den Einstellungen der Komponente die Angriffsart aus.
+    <newline /><newline />
+    Die von der Komponente für die Kryptoanalyse benötigten Pakete müssen am Eingang als Datenstrom eingegeben werden.
+    Sie können die <docRef item="CrypTool.Internet_frame_generator.Internet_frame_generator" />-Komponente und die <docRef item="CrypTool.WEP.WEP" />-Komponente verwenden,
+    um eine beliebige Anzahl geeigneter Pakete zu generieren.
+    <newline /><newline />
+    Wenn der Arbeitsbereich ausgeführt wird, liest die Komponente alle anliegenden Pakete ein und versucht, mit der gewählten Angriffsmethode den geheimen WEP-Schlüssel zu rekonstruieren.
+    Wenn der WEP-Schlüssel nicht gefunden wird, gibt die Komponente den booleschen Wert "False" an seinem Ausgang aus.
+    Dieses Signal kann von weiteren Komponenten als Aufforderung ausgewertet werden, weitere Pakete zur Analyse zur Verfügung zu stellen.
+    Wenn der Schlüssel gefunden wurde, so wird der Wert "True" ausgegeben, um anzuzeigen, dass die Analyse beendet ist.
+    <newline /><newline />
+    Aktivieren Sie das Kontrollkästchen in den Einstellungen der Komponente, falls die Anzahl der für die Analyse zur Verfügung stehenden Pakete beschränkt ist.
+    Dadurch wird die Komponente angewiesen, alle anliegenden Pakete auf einmal einzulesen. Wenn sie nicht ausreichen, um den WEP-Schlüssel zu bestimmen, gibt die
+    Komponente eine entsprechende Meldung in der Präsentationsansicht aus.
+    Wenn alle Pakete analysiert wurden, wird am Ausgang der Wert "True" ausgegeben, um anzuzeigen, dass die Analyse beendet ist.
+  </usage>
+  <presentation lang="en">
+    Open the presentation view of the component to see the status of the current analysis.
+    <newline /><newline />
+    The first line shows which attack is currently running.
+    The second line shows the total amount of packets that have been read so far ("Sniffed packets").
+    The third line shows, how many packets have been used for the analysis ("Used packets").
+    Both, the FMS attack and the KoreK attack use only certain encrypted data packets.
+	 
+    The FMS attack searches for special initialization vectors (IV), and
+    the KoreK attack has some additional conditions, that determine whether or not the packet can be used for analysis.
+    The PTW attack uses all packets for the analysis.
+    <newline /><newline />
+    The text box in the presentation view shows the current state of the analysis.
+    For FMS and KoreK, the first column is the index of the key byte (beginning at "00"), and the following columns are
+    the potential key bytes with their corresponding ranking in brackets.
+    For the PTW attack, the format is different.
+    There are no columns any more, but one line, in which the currently most voted value for each key byte is shown.
+    So, the first value represents the potential first key byte, the second value the potential second key byte, and so on.
+    <newline /><newline />
+    The key bytes are always shown in hexadecimal notation. 
+    If the key has been reconstructed successfully, this key will be presented to you in the normal ASCII notation, too.
+  </presentation>
+  <presentation lang="zh-CN">打开组件的演示视图以查看当前分析的状态。第一行显示当前正在运行的攻击。第二行显示了到目前为止已读取的数据包总数（“嗅探的数据包”）。第三行显示了多少个数据包已用于分析（“已使用的数据包”）。 FMS攻击和KoreK攻击均仅使用某些加密的数据包。 FMS攻击会搜索特殊的初始化向量（IV），而KoreK攻击具有一些其他条件，这些条件决定了是否可以将数据包用于分析。 PTW攻击将所有数据包用于分析。演示视图中的文本框显示了分析的当前状态。对于FMS和KoreK，第一列是密钥字节的索引（从“ 00”开始），随后的列是潜在的密钥字节，并在括号中显示相应的排名。对于PTW攻击，格式是不同的。没有更多的列了，只有一行，其中显示了每个密钥字节当前投票最多的值。因此，第一个值表示潜在的第一密钥字节，第二个值表示潜在的第二密钥字节，依此类推。密钥字节始终以十六进制表示。如果密钥已成功重建，该密钥也将以常规ASCII表示法呈现给您。</presentation>
+  <presentation lang="ru">Откройте представление представления компонента, чтобы увидеть состояние текущего анализа. Первая строка показывает, какая атака выполняется в данный момент. Вторая строка показывает общее количество пакетов, которые были прочитаны до сих пор («Sniffed packets»). В третьей строке показано, сколько пакетов было использовано для анализа («Используемые пакеты»). И атака FMS, и атака KoreK используют только определенные зашифрованные пакеты данных. Атака FMS ищет специальные векторы инициализации (IV), а атака KoreK имеет некоторые дополнительные условия, которые определяют, может ли пакет использоваться для анализа. Атака PTW использует все пакеты для анализа. Текстовое поле в представлении представления показывает текущее состояние анализа. Для FMS и KoreK первый столбец - это индекс байта ключа (начиная с «00»), а следующие столбцы - это байты потенциальных ключей с соответствующим ранжированием в скобках. Для атаки PTW формат отличается. Больше нет столбцов, но показана одна строка, в которой отображается наиболее проголосоваемое значение для каждого байта. Таким образом, первое значение представляет собой потенциальный первый байт ключа, второе значение - второй второй байтовый ключ и т. Д. Базовые байты всегда отображаются в шестнадцатеричной нотации. Если ключ был успешно восстановлен, этот ключ будет представлен вам и в обычной ASCII-нотации.</presentation>
+  <presentation lang="de-DE">
+    Öffnen Sie die Komponente in der Präsentationsansicht, um den aktuellen Status der Analyse zu erfahren.
+    <newline /><newline />
+    Die erste Zeile zeigt an, welcher Angriff gerade ausgeführt wird.
+    Die zweite Zeile gibt die Anzahl der bisher gelesenen Pakete an.
+    Die dritte Zeile zeigt an, wie viele der gelesenen Pakete für die Analyse verwendet werden konnten.
+    Der FMS-Angriff und der KoreK-Angriff können nur bestimmte verschlüsselte Pakete verwenden.
+    Der FMS-Angriff sucht nach bestimmten Initialisierungsvektoren (IV), und der KoreK-Angriff stellt noch einige weitere Anforderungen,
+    die festlegen, ob ein Paket für die Analyse geeignet ist.
+    Der PTW-Angriff kann alle Pakete verwenden.
+    <newline /><newline />
+    Im Textfeld wird der momentane Status der Analyse angezeigt.
+    Für FMS und KoreK steht in der ersten Spalte der Index des Schlüsselbytes (beginnend mit "00"),
+    und die folgenden Spalten zeigen die potentiellen Werte, die für dieses Schlüsselbyte in Frage kommen, zusammen mit der jeweiligen Gewichtung in Klammern.
+    Die Anzeige für den PTW-Angriff weicht von diesem Format ab.
+    Es wird nur eine einzelne Zeile angezeigt, in der die aktuell für am wahrscheinlichsten gehaltenen Werte der Schlüsselbytes aufgelistet werden.
+    Der erste Wert ist also das wahrscheinlichste erste Byte des Schlüssels, das zweite das wahrscheinlichste zweite Schlüsselbyte, und so weiter.
+    <newline /><newline />
+    Die Schlüsselbytes werden in hexadezimaler Schreibweise dargestellt.
+    Wenn der Schlüssel erfolgreich rekonstruiert werden konnte, wird dieser auch als ASCII-Zeichenfolge ausgegeben.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Wired_Equivalent_Privacy" lang="en" />
+      <caption lang="en">Wired Equivalent Privacy</caption>
+      <link url="http://de.wikipedia.org/wiki/Wired_Equivalent_Privacy" lang="de-DE" />
+      <caption lang="de-DE">Wired Equivalent Privacy</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://www.drizzle.com/~aboba/IEEE/rc4_ksaproc.pdf" lang="en" />
+      <caption lang="en">FMS attack (PDF)</caption>
+      <link url="http://www.drizzle.com/~aboba/IEEE/rc4_ksaproc.pdf" lang="de-DE" />
+      <caption lang="de-DE">FMS-Angriff (PDF, englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://www.netstumbler.org/f50/aircrack-yet-another-wep-cracking-tool-linux-11878/index2.html" lang="en" />
+      <caption lang="en">KoreK attack</caption>
+      <link url="http://www.netstumbler.org/f50/aircrack-yet-another-wep-cracking-tool-linux-11878/index2.html" lang="de-DE" />
+      <caption lang="de-DE">KoreK-Angriff (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://eprint.iacr.org/2007/120.pdf" lang="en" />
+      <caption lang="en">PTW attack (PDF)</caption>
+      <link url="http://eprint.iacr.org/2007/120.pdf" lang="de-DE" />
+      <caption lang="de-DE">PTW-Angriff (PDF, englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

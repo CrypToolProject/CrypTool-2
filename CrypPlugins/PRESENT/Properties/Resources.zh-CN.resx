@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>当下</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>PRESENT是一种超轻量级分组密码</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>输入值</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>要加密或解密的数据。</value>
+  </data>
+  <data name="InputKeyCaption" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>必须为10或16个字节。</value>
+  </data>
+  <data name="InputIVCaption" xml:space="preserve">
+    <value>初始化向量</value>
+  </data>
+  <data name="InputIVTooltip" xml:space="preserve">
+    <value>IV用于链接模式（CBC，CFB，OFB）。它的大小必须与块长度相同（8个字节）。</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>输出流</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>加密或解密的输出数据</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>是否要对输入数据进行加密或解密？</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>链接模式</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>选择分组密码操作模式。</value>
+  </data>
+  <data name="PaddingCaption" xml:space="preserve">
+    <value>填充模式</value>
+  </data>
+  <data name="PaddingTooltip" xml:space="preserve">
+    <value>选择一种模式来填充部分数据块。</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>电子密码书（ECB）</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>密码块链接（CBC）</value>
+  </data>
+  <data name="ModeList3" xml:space="preserve">
+    <value>密码反馈（CFB）</value>
+  </data>
+  <data name="ModeList4" xml:space="preserve">
+    <value>输出反馈（OFB）</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="Add_Roundkey" xml:space="preserve">
+    <value>添加圆键</value>
+  </data>
+  <data name="animation_speed" xml:space="preserve">
+    <value>动画速度</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>分配</value>
+  </data>
+  <data name="A_top_level_algorithmic_description_of_PRESENT" xml:space="preserve">
+    <value>PRESENT的顶级算法描述：</value>
+  </data>
+  <data name="bit_group_sbox" xml:space="preserve">
+    <value>位组{0}（位{1：d2}，{2：d2}，{3：d2}，{4：d2}）sbox：{5}-&amp;gt; {6}</value>
+  </data>
+  <data name="bit_group_xor" xml:space="preserve">
+    <value>位组{0}（位{1：d2}，{2：d2}，{3：d2}，{4：d2}）密钥xor：{5} XOR {6} = {7}</value>
+  </data>
+  <data name="Data_" xml:space="preserve">
+    <value>数据（8字节）：</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>完成了</value>
+  </data>
+  <data name="Encrypted_to" xml:space="preserve">
+    <value>加密的0x {0：x16}至0x {1：x16}</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="Encryption_Data" xml:space="preserve">
+    <value>加密：数据= 0x {0：x16}</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="Finished_generating_32_roundkeys" xml:space="preserve">
+    <value>完成生成32个圆键</value>
+  </data>
+  <data name="Key_" xml:space="preserve">
+    <value>密钥（10个字节）：</value>
+  </data>
+  <data name="Key_Extraction" xml:space="preserve">
+    <value>密钥提取</value>
+  </data>
+  <data name="Key_Schedule" xml:space="preserve">
+    <value>关键时间表</value>
+  </data>
+  <data name="Key_Schedule_" xml:space="preserve">
+    <value>密钥时间表：密钥= 0x {0：x16} {1：x4}</value>
+  </data>
+  <data name="Key_Shift" xml:space="preserve">
+    <value>键移</value>
+  </data>
+  <data name="Key_XOR" xml:space="preserve">
+    <value>Key_XOR</value>
+  </data>
+  <data name="Key_XOR_" xml:space="preserve">
+    <value>异或键（0x {1：x16}-&amp;gt; 0x {2：x16}）</value>
+  </data>
+  <data name="next_round" xml:space="preserve">
+    <value>下一轮</value>
+  </data>
+  <data name="next_step" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>总览</value>
+  </data>
+  <data name="passing_leftmost_4_bits" xml:space="preserve">
+    <value>通过S-box（{0}-&amp;gt; {1}）传递最左4位</value>
+  </data>
+  <data name="pause_resume" xml:space="preserve">
+    <value>暂停/恢复动画</value>
+  </data>
+  <data name="Permutation" xml:space="preserve">
+    <value>排列</value>
+  </data>
+  <data name="picking_the_64_left_most_bits" xml:space="preserve">
+    <value>选择最左边的64个位作为圆键{0}（0x {1：x16}）</value>
+  </data>
+  <data name="previous_round" xml:space="preserve">
+    <value>前一轮</value>
+  </data>
+  <data name="previous_step" xml:space="preserve">
+    <value>前一步</value>
+  </data>
+  <data name="rotate_key_register_61" xml:space="preserve">
+    <value>将密钥寄存器61旋转到左侧（0x {0：x16} {1：x4}-&amp;gt; 0x {2：x16} {3：x4}）</value>
+  </data>
+  <data name="Roundcounter_XOR" xml:space="preserve">
+    <value>Roundcounter XOR</value>
+  </data>
+  <data name="Round_" xml:space="preserve">
+    <value>回合：</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设定值</value>
+  </data>
+  <data name="Step_" xml:space="preserve">
+    <value>步：</value>
+  </data>
+  <data name="S_Box" xml:space="preserve">
+    <value>盒子</value>
+  </data>
+  <data name="The_PRESENT_cipher_is_an_example" xml:space="preserve">
+    <value>PRESENT密码是SP网络的一个示例，由31个回合组成。块长度为64位，并且支持80和128位的两个密钥长度-但此处仅实现推荐的80位密钥版本。</value>
+  </data>
+  <data name="Trace" xml:space="preserve">
+    <value>跟踪</value>
+  </data>
+  <data name="xor_round_counter" xml:space="preserve">
+    <value>具有密钥寄存器的异或计数器：{0} XOR {1} = {2}</value>
+  </data>
+  <data name="PaddingList1" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="PaddingList2" xml:space="preserve">
+    <value>零点</value>
+  </data>
+  <data name="PaddingList3" xml:space="preserve">
+    <value>PKCS7</value>
+  </data>
+  <data name="PaddingList4" xml:space="preserve">
+    <value>ANSIX923</value>
+  </data>
+  <data name="PaddingList5" xml:space="preserve">
+    <value>ISO10126</value>
+  </data>
+  <data name="PaddingList6" xml:space="preserve">
+    <value>1-0填充</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>PRESENT密码的可视化与CT2工作区中输入的数据无关。演示文稿的输入数据可以在“设置”标签下输入。</value>
+  </data>
+  <data name="SettingsInfoText" xml:space="preserve">
+    <value>在这里，您可以更改演示文稿中使用的键和输入（十六进制的纯文本）。可视化过程精确地加密了一个块，因此不需要其他数据（如初始化向量）。</value>
+  </data>
+</root>

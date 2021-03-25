@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddInfo" xml:space="preserve">
+    <value>Add. info:</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author:</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="CipherType" xml:space="preserve">
+    <value>Cipher type:</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="CleartextLanguage" xml:space="preserve">
+    <value>Cleartext language:</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content:</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Copy all data</value>
+  </data>
+  <data name="Copy_content" xml:space="preserve">
+    <value>Copy content data</value>
+  </data>
+  <data name="Copy_format" xml:space="preserve">
+    <value>Copy format data</value>
+  </data>
+  <data name="Copy_origin" xml:space="preserve">
+    <value>Copy origin data</value>
+  </data>
+  <data name="Dating" xml:space="preserve">
+    <value>Dating:</value>
+  </data>
+  <data name="Decipherment" xml:space="preserve">
+    <value>Decipherment</value>
+  </data>
+  <data name="DecodeDownloaderPluginCaption" xml:space="preserve">
+    <value>DECRYPT Downloader</value>
+  </data>
+  <data name="DecodeDownloaderPluginTooltip" xml:space="preserve">
+    <value>Component to download data from the DECODE database</value>
+  </data>
+  <data name="DecodeRecordCaption" xml:space="preserve">
+    <value>Record</value>
+  </data>
+  <data name="DecodeRecordTooltip" xml:space="preserve">
+    <value>DECRYPT record (data set) in json format</value>
+  </data>
+  <data name="DECRYPTSettingsTab" xml:space="preserve">
+    <value>DECRYPT</value>
+  </data>
+  <data name="DecodeViewerPluginCaption" xml:space="preserve">
+    <value>DECRYPT Viewer</value>
+  </data>
+  <data name="DecodeViewerPluginTooltip" xml:space="preserve">
+    <value>Component to view data from the DECODE database</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DECRYPT_message" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\decode_message.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Documents" xml:space="preserve">
+    <value>Documents:</value>
+  </data>
+  <data name="FileTypeHeader" xml:space="preserve">
+    <value>File type</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter:</value>
+  </data>
+  <data name="Format" xml:space="preserve">
+    <value>Format:</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id:</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images:</value>
+  </data>
+  <data name="image_not_available_for_download" xml:space="preserve">
+    <value>The creator of this record decided not to make this image available for download.</value>
+  </data>
+  <data name="InkType" xml:space="preserve">
+    <value>Ink Type:</value>
+  </data>
+  <data name="InlineCleartext" xml:space="preserve">
+    <value>Inline cleartext:</value>
+  </data>
+  <data name="InlinePlaintext" xml:space="preserve">
+    <value>Inline plaintext:</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="NameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameHeader1" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NumberOfPages" xml:space="preserve">
+    <value>Number of pages:</value>
+  </data>
+  <data name="Origin" xml:space="preserve">
+    <value>Origin:</value>
+  </data>
+  <data name="OutputDocumentCaption" xml:space="preserve">
+    <value>Document</value>
+  </data>
+  <data name="OutputDocumentTooltip" xml:space="preserve">
+    <value>Downloaded document from DECODE database</value>
+  </data>
+  <data name="OutputImageCaption" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="OutputImageTooltip" xml:space="preserve">
+    <value>Downloaded image from DECODE database</value>
+  </data>
+  <data name="Paper" xml:space="preserve">
+    <value>Paper:</value>
+  </data>
+  <data name="PlaintextLanguage" xml:space="preserve">
+    <value>Plaintext language:</value>
+  </data>
+  <data name="Receiver" xml:space="preserve">
+    <value>Receiver:</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region:</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Sender:</value>
+  </data>
+  <data name="SizeHeader" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="SymbolSet" xml:space="preserve">
+    <value>Symbol set:</value>
+  </data>
+  <data name="TitleHeader" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Transcription" xml:space="preserve">
+    <value>Transcription</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>Translation</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="UploadDateHeader" xml:space="preserve">
+    <value>Upload date</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="TestLoginData" xml:space="preserve">
+    <value>Test login data</value>
+  </data>
+  <data name="UseLoginData" xml:space="preserve">
+    <value>Use login data:</value>
+  </data>
+  <data name="SettingsInfoText" xml:space="preserve">
+    <value>If you want to access the DECODE database in CrypTool 2, you have to go to https://cl.lingfil.uu.se/decode/database and create a user account. Then, enter your credentials here:</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Could not login to the DECODE database. Please check your login credentials if you have some. You are currently only able to view publicly available records.</value>
+  </data>
+  <data name="CredentialsOK" xml:space="preserve">
+    <value>Login credentials are correct.</value>
+  </data>
+  <data name="CredentialsWrong" xml:space="preserve">
+    <value>Login credentials are wrong!</value>
+  </data>
+  <data name="CredentialsOKTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="CredentialsWrongTitle" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>You are logged in as {0}.</value>
+  </data>
+  <data name="DECRYPTDeciphererCaption" xml:space="preserve">
+    <value>DECRYPT Decipherer</value>
+  </data>
+  <data name="DECRYPTDeciphererTooltip" xml:space="preserve">
+    <value>Performs tokenization and decryption of texts using DECRYPT parsers.</value>
+  </data>
+  <data name="ResetColorButton" xml:space="preserve">
+    <value>Reset colors</value>
+  </data>
+  <data name="TextElementColors" xml:space="preserve">
+    <value>Text element colors</value>
+  </data>
+</root>

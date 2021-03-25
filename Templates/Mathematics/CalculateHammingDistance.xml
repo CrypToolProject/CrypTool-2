@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Hamming Distance</title>
+  <title lang="zh">汉明距离</title>
+  <title lang="ru">Расстояние Хэмминга</title>
+  <summary lang="en">Usage of the <i>Hamming Distance</i> components</summary>
+  <summary lang="zh">汉明距离组件的用法</summary>
+  <summary lang="ru">Использование компонентов расстояния Хэмминга</summary>
+  <description lang="en">This template shows the usage of the <i>Haming Distance</i> components.</description>
+  <description lang="zh">该模板显示了Haming Distance组件的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование компонентов Haming Distance.</description>
+  <keywords>hamming distance, codewords, binary</keywords>
+  <keywords lang="zh">汉明距离，码字，二进制</keywords>
+  <keywords lang="ru">расстояние от помех, кодовые слова, двоичные</keywords>
+  <title lang="de">Hamming-Abstand</title>
+  <summary lang="de">Benutzung der Komponente für die Berechnung des <i>Hamming-Abstands</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der Komponente für die Berechnung des <i>Hamming-Abstands</i>.</description>
+  <keywords lang="de">Hamming-Abstand, Codewort, Binär</keywords>
+  <icon file="CalculateHammingDistance.png" />
+  <relevantPlugins>
+    <plugin name="HammingDistance" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Codeword$" value="Codewort" />
+    <replacement key="$HammingDistance$" value="Hamming-Distanz" />
+    <replacement key="$Distance Value between CW1 and CW2$" value="Distanz zwischen CW1 und CW2" />
+    <replacement key="$Distance Value between CW2 and CW3$" value="Distanz zwischen CW2 und CW3" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie man die Hamming-Distanz zwischen Codeworten in CrypTool 2 berechnen kann. Die Hamming-Distanz ist die Anzahl der Bits, in denen sich die beiden Codeworte unterscheiden.\line\line Codewort1 und Codewort2 sind unterschiedlich. Daher ist ihre Hamming-Distanz größer als 0.\line Codewort2 und Codewort3 sind gleich. Daher beträgt ihre Hamming-Distanz 0." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Codeword$" value="码字" />
+    <replacement key="$HammingDistance$" value="汉明距离" />
+    <replacement key="$Distance Value between CW1 and CW2$" value="CW1和CW2之间的距离" />
+    <replacement key="$Distance Value between CW2 and CW3$" value="CW2和CW3之间的距离" />
+    <replacement key="$memo$" value="该模板演示了如何计算CrypTool 2中代码字之间的汉明距离。汉明距离是两个代码字不同的位数\Line \line Codeword1和Codeword2不同。因此，它们的汉明距离大于0。\行Codeword2和Codeword3相等。因此，它们的汉明距离为0。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Codeword$" value="кодовое слово" />
+    <replacement key="$HammingDistance$" value="расстояние Хэмминга" />
+    <replacement key="$Distance Value between CW1 and CW2$" value="Расстояние между CW1 и CW2" />
+    <replacement key="$Distance Value between CW2 and CW3$" value="Расстояние между CW2 и CW3" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, как вычислить расстояние Хэмминга между кодовыми словами в CrypTool 2. Расстояние Хэмминга - это количество бит, в котором два кодовых слова различаются. \Line \line Codeword1 и Codeword2 различны. Поэтому их расстояние Хэмминга больше 0. \code codeword2 и кодовое слово 3 одинаковы. Поэтому их расстояние Хэмминга равно 0." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Codeword$" value="Codeword" />
+    <replacement key="$HammingDistance$" value="Hamming Distance" />
+    <replacement key="$Distance Value between CW1 and CW2$" value="Distance Value between CW1 and CW2" />
+    <replacement key="$Distance Value between CW2 and CW3$" value="Distance Value between CW2 and CW3" />
+    <replacement key="$memo$" value="This template demonstrates how the hamming distance between codewords can be calculated in CrypTool 2. The hamming distance is the amount of different bits between two codewords.\line\line Here, Codeword1 and Codeword2 are different. Thus, the hamming distance is greater than 0.\line Codeword2 and Codeword3 are equal. Thus, the hamming distance is 0." />
+  </replacements>
+</sample>

@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Choose the mode of operation</value>
+  </data>
+  <data name="AnalysisUseRotorICaption" xml:space="preserve">
+    <value>Use code wheel 01</value>
+  </data>
+  <data name="AnalysisUseRotorIICaption" xml:space="preserve">
+    <value>Use code wheel 02</value>
+  </data>
+  <data name="AnalysisUseRotorIIICaption" xml:space="preserve">
+    <value>Use code wheel 03</value>
+  </data>
+  <data name="AnalysisUseRotorIVCaption" xml:space="preserve">
+    <value>Use code wheel 04</value>
+  </data>
+  <data name="AnalysisUseRotorIXCaption" xml:space="preserve">
+    <value>Use code wheel 09</value>
+  </data>
+  <data name="AnalysisUseRotorVCaption" xml:space="preserve">
+    <value>Use code wheel 05</value>
+  </data>
+  <data name="AnalysisUseRotorVICaption" xml:space="preserve">
+    <value>Use code wheel 06</value>
+  </data>
+  <data name="AnalysisUseRotorVIICaption" xml:space="preserve">
+    <value>Use code wheel 07</value>
+  </data>
+  <data name="AnalysisUseRotorVIIICaption" xml:space="preserve">
+    <value>Use code wheel 08</value>
+  </data>
+  <data name="AnalysisUseRotorXCaption" xml:space="preserve">
+    <value>Use code wheel 10</value>
+  </data>
+  <data name="AnalyzeCipherRotors1Caption" xml:space="preserve">
+    <value>Show cipher wheel 1 analyse options</value>
+  </data>
+  <data name="AnalyzeCipherrotors2caption" xml:space="preserve">
+    <value>Show cipher wheel 2 analyse options</value>
+  </data>
+  <data name="AnalyzeCipherRotors3Caption" xml:space="preserve">
+    <value>Show cipher wheel 3 analyse options</value>
+  </data>
+  <data name="AnalyzeCipherRotors4Caption" xml:space="preserve">
+    <value>Show cipher wheel 4 analyse options</value>
+  </data>
+  <data name="AnalyzeCipherrotors5caption" xml:space="preserve">
+    <value>Show cipher wheel 5 analyse options</value>
+  </data>
+  <data name="AnalyzeControlRotors1Caption" xml:space="preserve">
+    <value>Show control wheel 1 analyse options</value>
+  </data>
+  <data name="AnalyzeControlrotors2caption" xml:space="preserve">
+    <value>Show control wheel 2 analyse options</value>
+  </data>
+  <data name="AnalyzeControlRotors3Caption" xml:space="preserve">
+    <value>Show control wheel 3 analyse options</value>
+  </data>
+  <data name="AnalyzeControlRotors4Caption" xml:space="preserve">
+    <value>Show control wheel 4 analyse options</value>
+  </data>
+  <data name="AnalyzeControlrotors5caption" xml:space="preserve">
+    <value>Show control wheel 5 analyse options</value>
+  </data>
+  <data name="AnalyzeIndexRotors1Caption" xml:space="preserve">
+    <value>Show index wheel 1 analyse options</value>
+  </data>
+  <data name="AnalyzeIndexrotors2caption" xml:space="preserve">
+    <value>Show index wheel 2 analyse options</value>
+  </data>
+  <data name="AnalyzeIndexRotors3Caption" xml:space="preserve">
+    <value>Show index wheel 3 analyse options</value>
+  </data>
+  <data name="AnalyzeIndexRotors4Caption" xml:space="preserve">
+    <value>Show index wheel 4 analyse options</value>
+  </data>
+  <data name="AnalyzeIndexrotors5caption" xml:space="preserve">
+    <value>Show index wheel 5 analyse options</value>
+  </data>
+  <data name="CalculateKeypaceCaption" xml:space="preserve">
+    <value>Calculate keyspace</value>
+  </data>
+  <data name="CalculateKeypaceTooltip" xml:space="preserve">
+    <value>Calculates the keyspace of the actual settings</value>
+  </data>
+  <data name="CaseHandlingCaption" xml:space="preserve">
+    <value>Case handling</value>
+  </data>
+  <data name="CaseHandlingList1" xml:space="preserve">
+    <value>Preserve case</value>
+  </data>
+  <data name="CaseHandlingList2" xml:space="preserve">
+    <value>Convert to upper</value>
+  </data>
+  <data name="CaseHandlingList3" xml:space="preserve">
+    <value>Convert to lower</value>
+  </data>
+  <data name="CaseHandlingTooltip" xml:space="preserve">
+    <value>What should be done with upper and lower case letters?</value>
+  </data>
+  <data name="Cipher1AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for cipher wheel  1</value>
+  </data>
+  <data name="Cipher2AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for cipher wheel  2</value>
+  </data>
+  <data name="Cipher3AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for cipher wheel  3</value>
+  </data>
+  <data name="Cipher4AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for cipher wheel  4</value>
+  </data>
+  <data name="Cipher5AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for cipher wheel  5</value>
+  </data>
+  <data name="CipherGroup" xml:space="preserve">
+    <value>Alphabet maze</value>
+  </data>
+  <data name="CipherKeyCaption" xml:space="preserve">
+    <value>Cipher key</value>
+  </data>
+  <data name="CipherKeyTooltip" xml:space="preserve">
+    <value>Defines the positions of the cipher rotors</value>
+  </data>
+  <data name="CipherRotor1Caption" xml:space="preserve">
+    <value>Cipher rotor 1 (most left)</value>
+  </data>
+  <data name="CipherRotor1From" xml:space="preserve">
+    <value>Cipher rotor 1: From</value>
+  </data>
+  <data name="CipherRotor1ReverseCaption" xml:space="preserve">
+    <value>Reverse</value>
+  </data>
+  <data name="CipherRotor1Tooltip" xml:space="preserve">
+    <value>Defines the typ of the first cipher rotor</value>
+  </data>
+  <data name="CipherRotor2Caption" xml:space="preserve">
+    <value>Cipher rotor 2</value>
+  </data>
+  <data name="CipherRotor2FromCaption" xml:space="preserve">
+    <value>Cipher rotor 2: From</value>
+  </data>
+  <data name="CipherRotor2ReverseTooltip" xml:space="preserve">
+    <value>Check for plug the rotor heads up</value>
+  </data>
+  <data name="CipherRotor2Tooltip" xml:space="preserve">
+    <value>Defines the typ of the second cipher rotor</value>
+  </data>
+  <data name="CipherRotor3Caption" xml:space="preserve">
+    <value>Cipher Rotor 3</value>
+  </data>
+  <data name="CipherRotor3ToolTip" xml:space="preserve">
+    <value>Defines the type of the third cipher rotor</value>
+  </data>
+  <data name="CipherRotor4Caption" xml:space="preserve">
+    <value>Cipher Rotor 4</value>
+  </data>
+  <data name="CipherRotor4Tooltip" xml:space="preserve">
+    <value>Defines the type of the fourth cipher rotor</value>
+  </data>
+  <data name="CipherRotor5Caption" xml:space="preserve">
+    <value>Cipher Rotor 5 (most right)</value>
+  </data>
+  <data name="CipherRotor5Tooltip" xml:space="preserve">
+    <value>Defines the type of the fith cipher rotor</value>
+  </data>
+  <data name="ControlGroup" xml:space="preserve">
+    <value>Stepping maze</value>
+  </data>
+  <data name="ControlKeyCaption" xml:space="preserve">
+    <value>Control key</value>
+  </data>
+  <data name="ControlKeyTooltip" xml:space="preserve">
+    <value>Defines the positions of the control rotors</value>
+  </data>
+  <data name="ControlRotor1Caption" xml:space="preserve">
+    <value>Control rotor 1 (most right)</value>
+  </data>
+  <data name="ControlRotor1ReverseCaption" xml:space="preserve">
+    <value>Reverse</value>
+  </data>
+  <data name="ControlRotor1Tooltip" xml:space="preserve">
+    <value>Defines the typ of the first control rotor</value>
+  </data>
+  <data name="ControlRotor2Caption" xml:space="preserve">
+    <value>Control rotor 2</value>
+  </data>
+  <data name="ControlRotor2ReverseTooltip" xml:space="preserve">
+    <value>Click for plug in the rotor heads up</value>
+  </data>
+  <data name="ControlRotor2Tooltip" xml:space="preserve">
+    <value>Defines the typ of the second control rotor</value>
+  </data>
+  <data name="ControlRotor3Caption" xml:space="preserve">
+    <value>Control rotor 3</value>
+  </data>
+  <data name="ControlRotor3Tooltip" xml:space="preserve">
+    <value>Defines the type of the third control rotor</value>
+  </data>
+  <data name="ControlRotor4Caption" xml:space="preserve">
+    <value>Control rotor 4</value>
+  </data>
+  <data name="ControlRotor4ToolTip" xml:space="preserve">
+    <value>Defines the type of the fourth control rotor</value>
+  </data>
+  <data name="ControlRotor5Caption" xml:space="preserve">
+    <value>Control rotor 5 (most left)</value>
+  </data>
+  <data name="ControlRotor5ToolTip" xml:space="preserve">
+    <value>Defines the type of the fith control rotor</value>
+  </data>
+  <data name="IndexGroup" xml:space="preserve">
+    <value>Index maze</value>
+  </data>
+  <data name="IndexKeyCaption" xml:space="preserve">
+    <value>Index key</value>
+  </data>
+  <data name="IndexKeyTooltip" xml:space="preserve">
+    <value>Defines the positions of the index rotors</value>
+  </data>
+  <data name="IndexRotor1Caption" xml:space="preserve">
+    <value>Index Rotor 1 (most left)</value>
+  </data>
+  <data name="IndexRotor1Tooltip" xml:space="preserve">
+    <value>Defines the type of the first index rotor</value>
+  </data>
+  <data name="IndexRotor2Caption" xml:space="preserve">
+    <value>Index Rotor 2</value>
+  </data>
+  <data name="IndexRotor2Tooltip" xml:space="preserve">
+    <value>Defines the type of the second index rotor</value>
+  </data>
+  <data name="IndexRotor3Caption" xml:space="preserve">
+    <value>Index Rotor 3</value>
+  </data>
+  <data name="IndexRotor3Tooltip" xml:space="preserve">
+    <value>Defines the type of the third index rotor</value>
+  </data>
+  <data name="IndexRotor4Caption" xml:space="preserve">
+    <value>Index Rotor 4</value>
+  </data>
+  <data name="IndexRotor4Tooltip" xml:space="preserve">
+    <value>Defines the type of the fourth index rotor</value>
+  </data>
+  <data name="IndexRotor5Caption" xml:space="preserve">
+    <value>Index Rotor 5  (most right)</value>
+  </data>
+  <data name="IndexRotor5Tooltip" xml:space="preserve">
+    <value>Defines the type of the fith index rotor</value>
+  </data>
+  <data name="KeyspaceCaption" xml:space="preserve">
+    <value>Keyspace</value>
+  </data>
+  <data name="LetterA" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="LetterB" xml:space="preserve">
+    <value>B</value>
+  </data>
+  <data name="LetterC" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="LetterD" xml:space="preserve">
+    <value>D</value>
+  </data>
+  <data name="LetterF" xml:space="preserve">
+    <value>F</value>
+  </data>
+  <data name="LetterG" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="LetterH" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="LetterI" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="LetterJ" xml:space="preserve">
+    <value>J</value>
+  </data>
+  <data name="LetterK" xml:space="preserve">
+    <value>K</value>
+  </data>
+  <data name="LetterM" xml:space="preserve">
+    <value>M</value>
+  </data>
+  <data name="LetterN" xml:space="preserve">
+    <value>N</value>
+  </data>
+  <data name="LetterO" xml:space="preserve">
+    <value>O</value>
+  </data>
+  <data name="LetterP" xml:space="preserve">
+    <value>P</value>
+  </data>
+  <data name="LetterQ" xml:space="preserve">
+    <value>Q</value>
+  </data>
+  <data name="LetterR" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="LetterS" xml:space="preserve">
+    <value>S</value>
+  </data>
+  <data name="LetterT" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="LetterU" xml:space="preserve">
+    <value>U</value>
+  </data>
+  <data name="LetterV" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="LetterW" xml:space="preserve">
+    <value>W</value>
+  </data>
+  <data name="LetterX" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="LetterY" xml:space="preserve">
+    <value>Y</value>
+  </data>
+  <data name="LetterZ" xml:space="preserve">
+    <value>Z</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>SIGABA Known Plaintext</value>
+  </data>
+  <data name="PluginToolTip" xml:space="preserve">
+    <value>Analyzing tool for the American rotor cipher machine SIGABA with known plaintext</value>
+  </data>
+  <data name="SigabaSettings_SigabaSettings_Cipher" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="SigabaSettings_SigabaSettings_Decipher" xml:space="preserve">
+    <value>Decrypt</value>
+  </data>
+  <data name="TextOptionsGroup" xml:space="preserve">
+    <value>Text options</value>
+  </data>
+  <data name="ToCaption" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Unknown symbol handling</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Ignore (leave unmodified)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Replace with 'X'</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>What should be done with encountered characters at the input which are not in the alphabet?</value>
+  </data>
+  <data name="CipherKeyHeader" xml:space="preserve">
+    <value>Cipher key</value>
+  </data>
+  <data name="CipherRotorsHeader" xml:space="preserve">
+    <value>Cipher wheels</value>
+  </data>
+  <data name="Control1AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for control wheel  1</value>
+  </data>
+  <data name="Control2AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for control wheel  2</value>
+  </data>
+  <data name="Control3AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for control wheel  3</value>
+  </data>
+  <data name="Control4AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for control wheel  4</value>
+  </data>
+  <data name="Control5AnalysisOptionsGroup" xml:space="preserve">
+    <value>Choice for control wheel  5</value>
+  </data>
+  <data name="ControlKeyHeader" xml:space="preserve">
+    <value>Control key</value>
+  </data>
+  <data name="ControlRotorsHeader" xml:space="preserve">
+    <value>Control wheels</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>Elapsed:</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>End:</value>
+  </data>
+  <data name="IndexAnalysisUseRotorICaption" xml:space="preserve">
+    <value>Use index wheel 10</value>
+  </data>
+  <data name="IndexAnalysisUseRotorIICaption" xml:space="preserve">
+    <value>Use index wheel 20</value>
+  </data>
+  <data name="IndexAnalysisUseRotorIIICaption" xml:space="preserve">
+    <value>Use index wheel 30</value>
+  </data>
+  <data name="IndexAnalysisUseRotorIVCaption" xml:space="preserve">
+    <value>Use index wheel 40</value>
+  </data>
+  <data name="IndexAnalysisUseRotorVCaption" xml:space="preserve">
+    <value>Use index wheel 50</value>
+  </data>
+  <data name="IndexKeyHeader" xml:space="preserve">
+    <value>Index key</value>
+  </data>
+  <data name="IndexRotorHeader" xml:space="preserve">
+    <value>Index wheels</value>
+  </data>
+  <data name="Keys_secLabel" xml:space="preserve">
+    <value>Keys/Second:</value>
+  </data>
+  <data name="LetterE" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="LetterL" xml:space="preserve">
+    <value>L</value>
+  </data>
+  <data name="RemainingLabel" xml:space="preserve">
+    <value>Remaining:</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>Start:</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="RevCaption" xml:space="preserve">
+    <value>Use reverse position</value>
+  </data>
+  <data name="normalCaption" xml:space="preserve">
+    <value>normal</value>
+  </data>
+  <data name="reverseCaption" xml:space="preserve">
+    <value>reverse</value>
+  </data>
+  <data name="undefinedCaption" xml:space="preserve">
+    <value>undefined</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Top ten</value>
+  </data>
+  <data name="CipherRotor3FromCaption" xml:space="preserve">
+    <value>Cipher rotor 3: From</value>
+  </data>
+  <data name="CipherRotor4FromCaption" xml:space="preserve">
+    <value>Cipher rotor 4: From</value>
+  </data>
+  <data name="CipherRotor5FromCaption" xml:space="preserve">
+    <value>Cipher rotor 5: From</value>
+  </data>
+  <data name="ControlRotor1FromCaption" xml:space="preserve">
+    <value>Control rotor 1: From</value>
+  </data>
+  <data name="ControlRotor2FromCaption" xml:space="preserve">
+    <value>Control rotor 2: From</value>
+  </data>
+  <data name="ControlRotor3FromCaption" xml:space="preserve">
+    <value>Control rotor 3: From</value>
+  </data>
+  <data name="ControlRotor4FromCaption" xml:space="preserve">
+    <value>Control rotor 4: From</value>
+  </data>
+  <data name="ControlRotor5FromCaption" xml:space="preserve">
+    <value>Control rotor 5: From</value>
+  </data>
+  <data name="IndexRotor1FromCaption" xml:space="preserve">
+    <value>Index rotor 1: From</value>
+  </data>
+  <data name="IndexRotor2FromCaption" xml:space="preserve">
+    <value>Index rotor 2: From</value>
+  </data>
+  <data name="IndexRotor3FromCaption" xml:space="preserve">
+    <value>Index rotor 3: From</value>
+  </data>
+  <data name="IndexRotor4FromCaption" xml:space="preserve">
+    <value>Index rotor 4: From</value>
+  </data>
+  <data name="IndexRotor5FromCaption" xml:space="preserve">
+    <value>Index rotor 5: From</value>
+  </data>
+  <data name="PositionOptionsGroup" xml:space="preserve">
+    <value>Wheel positions</value>
+  </data>
+</root>

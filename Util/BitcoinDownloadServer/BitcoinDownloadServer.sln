@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinDownloadServer", "BitcoinDownloadServer\BitcoinDownloadServer.csproj", "{DBC9192F-DE69-4952-ACDE-BE82DFB0F974}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitcoinBlockChainAnalyser", "..\..\LibSource\BitcoinBlockChainAnalyser\BitcoinBlockChainAnalyser.csproj", "{8F817267-0E1B-4336-91B7-FCB7AD85CB20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBC9192F-DE69-4952-ACDE-BE82DFB0F974}.Debug|x86.ActiveCfg = Debug|x86
+		{DBC9192F-DE69-4952-ACDE-BE82DFB0F974}.Debug|x86.Build.0 = Debug|x86
+		{DBC9192F-DE69-4952-ACDE-BE82DFB0F974}.Release|x86.ActiveCfg = Release|x86
+		{DBC9192F-DE69-4952-ACDE-BE82DFB0F974}.Release|x86.Build.0 = Release|x86
+		{8F817267-0E1B-4336-91B7-FCB7AD85CB20}.Debug|x86.ActiveCfg = Debug|x86
+		{8F817267-0E1B-4336-91B7-FCB7AD85CB20}.Debug|x86.Build.0 = Debug|x86
+		{8F817267-0E1B-4336-91B7-FCB7AD85CB20}.Release|x86.ActiveCfg = Release|x86
+		{8F817267-0E1B-4336-91B7-FCB7AD85CB20}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {450FA017-892D-4714-8C8B-AC33DD02522C}
+	EndGlobalSection
+EndGlobal

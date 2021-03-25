@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="CrypTool.Plugins.FEAL.Controls.CryptRound"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:t="clr-namespace:CrypTool.Plugins.FEAL.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter" />
+        <t:InverseBooleanToVisibilityConverter x:Key="InverseBoolToVisConverter" />
+    </UserControl.Resources>
+    <Canvas Margin="0,0,0,0">
+        <!-- f rectangle and text-->
+        <Rectangle Width="100" Height="50" Margin="100,75,0,0" Stroke="Black" StrokeThickness="1.5"/>
+        <Label Width="100" FontFamily="Courier New" FontSize="18" Height="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="f" Margin="100,75,0,0"/>
+        <!-- left arrow -->
+        <Line X1="50" Y1="92" X2="50" Y2="25" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="50" Y1="92" X2="45" Y2="87" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="50" Y1="92" X2="55" Y2="87" Stroke="Black" StrokeThickness="1.5"/>
+        <!-- right line -->
+        <Line X1="250" Y1="25" X2="250" Y2="100" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="250" Y1="100" X2="250" Y2="150" Stroke="Black" StrokeThickness="1.5" />
+        <!-- middle line with arrow to next XOR -->
+        <!-- middle right arrow -->
+        <Line X1="200" Y1="100" X2="250" Y2="100" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="200" Y1="100" X2="205" Y2="95" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="200" Y1="100" X2="205" Y2="105" Stroke="Black" StrokeThickness="1.5"/>
+        <!-- middle left arrow -->
+        <Line X1="51" Y1="100" X2="100" Y2="100" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="58" Y1="100" X2="63" Y2="95" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="58" Y1="100" X2="63" Y2="105" Stroke="Black" StrokeThickness="1.5"/>
+        <!-- left XOR circle -->
+        <Ellipse Width="15" Height="15" Stroke="Black" StrokeThickness="1.5" Fill="White" Canvas.Left="43" Canvas.Top="92" />
+        <Line X1="44" Y1="100" X2="57" Y2="100" Stroke="Black" StrokeThickness="1.5" />
+        <Line X1="50" Y1="93" X2="50" Y2="106" Stroke="Black" StrokeThickness="1.5" />
+        <!-- left line -->
+        <Line X1="50" Y1="106" X2="50" Y2="150" Stroke="Black" StrokeThickness="1.5"/>
+        <!-- down crossing lines -->
+        <Line X1="50" Y1="150" X2="250" Y2="200" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }" />
+        <Line X1="50" Y1="200" X2="250" Y2="150" Stroke="Black" StrokeThickness="1.5" Visibility="{Binding Path=LastRound, Converter={StaticResource InverseBoolToVisConverter} }" />
+        <!-- key in line -->
+        <Line X1="150" Y1="50" X2="275" Y2="50" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="150" Y1="50" X2="150" Y2="75" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="150" Y1="75" X2="145" Y2="70" Stroke="Black" StrokeThickness="1.5"/>
+        <Line X1="150" Y1="75" X2="155" Y2="70" Stroke="Black" StrokeThickness="1.5"/>
+        <Label Width="30" FontFamily="Courier New" FontSize="14" Height="33" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding Path=RoundKeyName }" Canvas.Top="45" Canvas.Left="250"/>
+        <Label Width="60" FontFamily="Courier New" FontSize="14" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Content="{Binding Path=RoundKey }" Canvas.Top="38" Canvas.Left="275"/>
+        <Label Content="{Binding Path=RoundName }" Width="174" Height="40" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontFamily="Courier New" FontSize="20" Canvas.Left="2" Canvas.Top="200">
+            <Label.RenderTransform>
+                <RotateTransform Angle="270"/>
+            </Label.RenderTransform>
+        </Label>
+    </Canvas>
+</UserControl>

@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CapacityCaption" xml:space="preserve">
+    <value>Capacity</value>
+  </data>
+  <data name="CapacityTooltip" xml:space="preserve">
+    <value>Größe der Capacity in Bit</value>
+  </data>
+  <data name="DebugDataStreamTooltip" xml:space="preserve">
+    <value>Ausgabestrom für Debuginformationen</value>
+  </data>
+  <data name="DebugStreamCaption" xml:space="preserve">
+    <value>Debug-Ausgabestrom</value>
+  </data>
+  <data name="InputDataStreamTooltip" xml:space="preserve">
+    <value>Eingabedaten, deren Hashwert berechnet wird</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>Eingabedatenstrom</value>
+  </data>
+  <data name="KECCAKFunctionCaption" xml:space="preserve">
+    <value>Keccak-Version</value>
+  </data>
+  <data name="KeccakFunctionList1" xml:space="preserve">
+    <value>Keccak</value>
+  </data>
+  <data name="KeccakFunctionList2" xml:space="preserve">
+    <value>SHA3-224</value>
+  </data>
+  <data name="KeccakFunctionList3" xml:space="preserve">
+    <value>SHA3-256</value>
+  </data>
+  <data name="KeccakFunctionList4" xml:space="preserve">
+    <value>SHA3-384</value>
+  </data>
+  <data name="KeccakFunctionList5" xml:space="preserve">
+    <value>SHA3-512</value>
+  </data>
+  <data name="KECCAKFunctionTooltip" xml:space="preserve">
+    <value>Auswahl der Keccak-Variante</value>
+  </data>
+  <data name="ManualSettingsCaption" xml:space="preserve">
+    <value>Manuell einstellen</value>
+  </data>
+  <data name="ManualSettingsTooltip" xml:space="preserve">
+    <value>Keccak-Parameter manuell festlegen</value>
+  </data>
+  <data name="OutputDataStreamTooltip" xml:space="preserve">
+    <value>Ausgabedaten</value>
+  </data>
+  <data name="OutputLengthCaption" xml:space="preserve">
+    <value>Ausgabelänge</value>
+  </data>
+  <data name="OutputLengthTooltip" xml:space="preserve">
+    <value>Ausgabelänge in Bit (muss durch 8 teilbar sein)</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>Ausgabestrom</value>
+  </data>
+  <data name="ParametersCaption" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Keccak</value>
+  </data>
+  <data name="PluginDescription" xml:space="preserve">
+    <value>Keccak-Algorithmus</value>
+  </data>
+  <data name="RateCaption" xml:space="preserve">
+    <value>Bit-Rate</value>
+  </data>
+  <data name="SelectedStateSizeCaption" xml:space="preserve">
+    <value>State-Größe</value>
+  </data>
+  <data name="SelectedStateSizeTooltip" xml:space="preserve">
+    <value>Größe des States in Bit festlegen (muss mit der Summe von Bitrate und Kapazität übereinstimmen)</value>
+  </data>
+  <data name="StateSize0" xml:space="preserve">
+    <value>25 Bit</value>
+  </data>
+  <data name="StateSize1" xml:space="preserve">
+    <value>50 Bit</value>
+  </data>
+  <data name="StateSize2" xml:space="preserve">
+    <value>100 Bit</value>
+  </data>
+  <data name="StateSize3" xml:space="preserve">
+    <value>200 Bit</value>
+  </data>
+  <data name="StateSize4" xml:space="preserve">
+    <value>400 Bit</value>
+  </data>
+  <data name="StateSize5" xml:space="preserve">
+    <value>800 Bit</value>
+  </data>
+  <data name="StateSize6" xml:space="preserve">
+    <value>1600 Bit</value>
+  </data>
+  <data name="OutputMatchError" xml:space="preserve">
+    <value>Ausgabelänge muss durch 8 teilbar sein.</value>
+  </data>
+  <data name="OutputTooLongWarning" xml:space="preserve">
+    <value>Die Ausgabe ist zu lang. Sie wird auf 174.760 Bit gekürzt.</value>
+  </data>
+  <data name="RateTooltip" xml:space="preserve">
+    <value>Größe der Bit-Rate in Bit festlegen (muss durch 8 teilbar sein)</value>
+  </data>
+  <data name="StateSizeMatchError" xml:space="preserve">
+    <value>Die Summe aus Bit-Rate und Capacity muss mit der Größe des States übereinstimmen.</value>
+  </data>
+  <data name="PresentationCaption" xml:space="preserve">
+    <value>Präsentation einschalten</value>
+  </data>
+  <data name="PresentationGroupCaption" xml:space="preserve">
+    <value>Präsentation</value>
+  </data>
+  <data name="PresentationTooltip" xml:space="preserve">
+    <value>Auswählen, ob die Präsentation angezeigt werden soll.</value>
+  </data>
+  <data name="PresInitialization" xml:space="preserve">
+    <value>Initialisierung</value>
+  </data>
+  <data name="PresIntroduction" xml:space="preserve">
+    <value>Einführung</value>
+  </data>
+  <data name="PresAbsorbingPhase" xml:space="preserve">
+    <value>Absorbing-Phase</value>
+  </data>
+  <data name="PresAbsorbingPhaseExplanation" xml:space="preserve">
+    <value>Eingabeblock #{0} wird auf den r-Bit-Anteil des States geXORed. Bei genauerer Betrachtung des States kann man sehen, dass der Capacity-Anteil (unterer Teil des States) nicht verändert wird.</value>
+  </data>
+  <data name="PresAbsorbingPhaseText" xml:space="preserve">
+    <value>Jeder Block p der gepaddeten Eingabedaten wird mit einer XOR-Operation von dem Sponge-State "aufgesaugt". Die Eingabeblöcke betreffen die {0} bit des r-bit-Anteils. Der c-bit-Anteil wird nicht beeinflusst. Nach dem Aufsaugen wird die Keccak-Permutation (Keccak-f) ausgeführt, um die State-Bits zu vermischen.</value>
+  </data>
+  <data name="PresChiPhaseText" xml:space="preserve">
+    <value>Chi iteriert über jede Zeile des States.</value>
+  </data>
+  <data name="PresChiStepText" xml:space="preserve">
+    <value>Jedes Bit einer Zeile wird XOR-verknüpft mit der Konjunktion der beiden Bits zur Rechten des betrachteten Bits. Das erste von den beiden Bits wird vor der Konjunktion invertiert.</value>
+  </data>
+  <data name="PresExecution" xml:space="preserve">
+    <value>Ausführung</value>
+  </data>
+  <data name="PresExecutionInfoBitRateSize" xml:space="preserve">
+    <value>Größe der Bit-Rate: {0} Bit</value>
+  </data>
+  <data name="PresExecutionInfoCapacitySize" xml:space="preserve">
+    <value>Größe der Capacity: {0} Bit</value>
+  </data>
+  <data name="PresExecutionInfoStateSize" xml:space="preserve">
+    <value>Größe des State: {0} Bit</value>
+  </data>
+  <data name="PresExecutionMessageLength" xml:space="preserve">
+    <value>Länge der Eingabedaten: {0} Bit = {1} Byte</value>
+  </data>
+  <data name="PresExecutionNumberOfBlocks" xml:space="preserve">
+    <value>Anzahl Eingabeblöcke (Länge der gepaddeten Eingabe / Bit-Rate-Größe): {0}</value>
+  </data>
+  <data name="PresExecutionPaddedMessageLength" xml:space="preserve">
+    <value>Länge der gepaddeten Eingabe: {0} Bit = {1} Byte</value>
+  </data>
+  <data name="PresInitializationText" xml:space="preserve">
+    <value>Der Zustand (State) der Sponge-Konstruktion wird initialisiert. Jedes der {0} State-Bits wird mit dem Wert 0 initialisiert. Der State ist in zwei Teile geteilt: Capacity ({1} bit) und Bit-Rate ({2} bit). Sie können diese Parameter frei anpassen, wenn Sie als Keccak-Version in den Einstellungen die Option "Keccak" auswählen.</value>
+  </data>
+  <data name="PresInputInformation" xml:space="preserve">
+    <value>Eingabe-Information</value>
+  </data>
+  <data name="PresIotaPhaseText" xml:space="preserve">
+    <value>Iota XORed eine Runden-Konstante mit der ersten Lane (x=1, y=1).</value>
+  </data>
+  <data name="PresIotaStepText" xml:space="preserve">
+    <value>Die Runden-Konstante der aktuellen Runde ist in dem roten Rechteck zu sehen. Die grünen Blöcke stellen den alten und neuen Wert der Lane dar. Die Runden-Konstanten unterscheiden sich in jeder Runde.</value>
+  </data>
+  <data name="PresKeccakFIterations" xml:space="preserve">
+    <value>{0} Runden</value>
+  </data>
+  <data name="PresKeccakFPhase" xml:space="preserve">
+    <value>Keccak-f-Permutation</value>
+  </data>
+  <data name="PresKeccakFPhaseText" xml:space="preserve">
+    <value>Keccak-f besteht aus 12 + 2 * l Runden. Bei der eingestellten State-Größe entspricht l dem Wert {0} und die Gesamtanzahl an Runden beträgt 24. In jeder Runde werden fünf "Step-Mappings" ausgeführt, die den State auf unterschiedliche Weise permutieren. </value>
+  </data>
+  <data name="PresKeccakFStateMapping" xml:space="preserve">
+    <value>Damit die Step-Mappings einfacher dargestellt werden können, wird der State durch einen dreidimensionalen Würfel repräsentiert. Die Länge der Reihen (row) und Spalten (column) ist jeweils 5 Bit. Die Länge der Lanes hängt von der State-Größe ab (bei der ausgewählten State-Größe beträgt die Länge der Lanes {1} bit).</value>
+    <comment>für lane fällt mir keine gute Übersetzung ein... (Linie, Spur, Weg klingt alles nicht gut)</comment>
+  </data>
+  <data name="PresOverview" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="PresPiPhaseText" xml:space="preserve">
+    <value>Pi permutiert die Anordnung der Lanes. Zur anschaulichen Visualisierung sind die Koordinaten des Würfels verschoben.</value>
+  </data>
+  <data name="PresPiStepText" xml:space="preserve">
+    <value>Jede Lane außer der Lane bei x=1, y=1 (schwarz) wird an eine neue Position verschoben. Der rechte Würfel zeigt die neuen Positionen der eingefärbten Lanes. Bereits verschobene Lanes werden grau dargestellt.</value>
+  </data>
+  <data name="PresRhoPhaseText" xml:space="preserve">
+    <value>Rho iteriert über jede Lane des States.</value>
+  </data>
+  <data name="PresRhoStepText" xml:space="preserve">
+    <value>Jede Lane wird um einen bestimmten Wert (rot markiert) nach rechts rotiert. Der obere grüne Block stellt die Lane vor der Rotation dar, der untere grüne Block nach der Rotation.</value>
+  </data>
+  <data name="PresRoundOfRounds" xml:space="preserve">
+    <value>Runde {0}/{1}</value>
+  </data>
+  <data name="PresSpongeConstructionParameter" xml:space="preserve">
+    <value>Parameter der Sponge-Konstruktion</value>
+  </data>
+  <data name="PresSqueezingPhase" xml:space="preserve">
+    <value>Squeezing-Phase</value>
+  </data>
+  <data name="PresSqueezingPhaseExplanation" xml:space="preserve">
+    <value>Der {0}-bit Hashwert wird aus dem Bit-Rate-Anteil (oberer Teil des States) extrahiert.</value>
+  </data>
+  <data name="PresSqueezingPhaseText" xml:space="preserve">
+    <value>Der Hashwert wird aus dem r-bit Anteil des States extrahiert (z). Sofern die angeforderte Ausgabelänge größer ist als r, wird der State mehrfach permutiert und zwischen den Permutationen werden weitere Ausgaben extrahiert, bis die gewünschte Ausgabelänge erreicht ist.</value>
+  </data>
+  <data name="PresThetaPhaseText" xml:space="preserve">
+    <value>Theta iteriert über jede Spalte des States.</value>
+  </data>
+  <data name="PresThetaStepText" xml:space="preserve">
+    <value>Die Paritäten zweier benachbarter Spalten (türkis und hellgrün) werden XOR-verknüpft. Das Ergebnis wird XOR-verknüpft mit jedem Bit der betrachteten Spalte (grün).</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="firstPage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAoAAAAGNCAYAAACBu8BgAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB90DFA4fIXECLIMAADCOSURBVHhe7d0HtBRF2sZxE4pgxIRiQFExYAAD
+        SVHErKzpuIo5ZwxgWMXP7IIJE+oxYcSwhsU16yquGXPCtAsooohiThjrO0/TLXWb6uk0MzfU/3fOe5Tp
+        quq+c3um31tdVT2bAQAAgFdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA
+        8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdI
+        AAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggA
+        AOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADP
+        kAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQ
+        AADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAA
+        niEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJ
+        IAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEA
+        ADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZ
+        EkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAAC
+        AAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADA
+        MySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEB
+        BAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAFBV33//vTnyyCPNHHPMYWabbbbU
+        AFB/fPIAAFW1wgorOBO9pABQf3zyAABV5UryKgWA+uOTB1jy3rqyQ3WOOuoo88MPP4StNVSk7bQ2gabI
+        dS5XCgD1xycPsOS9deUKteFSpu2kNoGmiFvAQNPHJw+wuC5ORcLFVS5PAM2FersHDhzIJBCgCeOTB1hc
+        F6ci4eIqlyeA5s51XisA1B+fPMDCLWCgdlzntgJA/fHJAyx5b13ZoTqa5FFpEkjettPaBJoT1zmuAFB/
+        fPKAFK4LliKvX375xZx44ompCeBee+1lvv3227AW0HK4zncFgPrjkwekcF2wFHm8++67Zp111nG2E0W7
+        du3MHXfcEdYAWh7Xea8AUH988oAUrguWIqsrrrjCtGnTxtlGFP369TOTJ08OawAtk+vcVwCoPz55QArX
+        BUuRZurUqWbbbbd11o1innnmMRdccIH5448/wlq18eabb5rhw4ebAQMGmG7dupnFFlvMtG7d2sw555xm
+        /vnnN8sss4zp06ePOeCAA8z1119vJk2aFNasv+nTp5sHH3zQ/N///V/w/q2++upB76h9vO3btzddunQx
+        22+/vTnuuOPMXXfdZaZNmxa2UB9N9Th//fVX89Zbb5lRo0aZE044wey8885mvfXWM0sttVRwTDq2+eab
+        L/j3qquuGhz7kCFDgmP77rvvwlZqw/UZUACoPz55QArXBUtRyX333WcWX3xxZ70olBi8/vrrYY3qU6Ix
+        dOhQs+KKKzr3Xylmn312s8EGG5hrrrkmSHTqYezYsWbPPfc0bdu2dR5TWuiYe/bsaa6++uoggVXyo59d
+        Cdm6665rHnrooXBP5TS149QfDzqmM844w2y22WaFj0uhnurdd9/dvPDCC2Hr1eXap8Llt99+M6effrrp
+        1KmTadWqlbOeHRpby1NzgOxIAIEUrouNwuXHH380hx12mLN8FEoAdKH66aefwlrVpWM49dRTg94e1/7z
+        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
+        8OHBYt4fffRR8Og+TU7S858nTZoU/Fxa+kbPMj755JPNLrvsEswIdrWnKMvVpkKP1Et79KBmLBcZHwnA
+        jQQQSOG6GCmKUC9f0lIqyyyzTOZbjXvvvbezjcYKPeauEi1D4qp36aWXhiWahuZwnFqMWku5uI5Todvx
+        Z555ZqleS1e7irJcbSpET1jZc889nduj0C36c889NygPoBwSQCCF60KkKEoP3He1p8j6mDj12LjqN9Un
+        JSSNVVOvT1PSHI7z9NNPdx6jQusHVuNpJa62FWW52lTYzjvvvMSxmFHsvvvuVXkkH+AzEkAghesCpChK
+        g/e1KK+rTT3QP8tCzhoU7xqvtuKKKwa395qahx9+eJZjjUJPNamlSy65xCyxxBKmffv25uKLLw5fdWsO
+        x5l0i3b77bev2oxZV/uKslxtKuL0h0zazGYtmdOUZ2cDTR0JIJDCdfFRlKEnZ7jaVGSdEZz0NBDdxvzm
+        m2/CUk2Dbn136NDBebx67JkmyFSbEumDDz54lv1VeqRbczjONm3azFJWMX78+LBEcRMmTDADBgxwtq8o
+        y9WmwuW9994znTt3dpaPQsmynqgCID8SQCCF68KjKEOJRseOHZ3tKoHLQoP4k2atrr766sGjwKrpu+++
+        C25fH3DAAcGFWTN/V1111eBxY1no1p7rWBW6kL/wwgthyfJ0rHq0mWtfWo6nkqZ+nBrj5yo/bdq0sER+
+        OpeOOeaY1PUly3K1qUiinu6tttrKWScKnYfXXXddWANAViSAQArXRUdR1mWXXeZsV5E1ebvwwgud9RVz
+        zjln0EtYZgaremF0a1JPZNCF1rUfhWalppk+fXpwi9pVX6GZxIceeqh5//33wxr5/fLLL0FCqgk1rn0o
+        2rZtG5Z2a+rHuc466zjL77zzzkFCmZVm3qonetNNN00dcxdFWa42FZXotvZxxx3nrGeHxm9mGT4BYAYS
+        QMCii6IezZX1gmiH6hx11FHmhx9+CFurTIPYF110UWdb8UhqW+MJd9hhB2cdO9Zcc83gAjlq1Cjz/PPP
+        m08++SS4TayeSB3Hp59+Gjzb+M477zRnn3120KZuebracsUqq6wSHlFl2neWp5io92vQoEHm5ptvDupo
+        CRP9bnSB18+sY9Ys13HjxgXj9s4//3zz17/+NdMTMdJ6AKUpH+cFF1zgLK/QIwKVLD3yyCPB+Lgff/wx
+        OBb9rt9++20zevRoc8opp5i+fftWTOizRKXzPe/nqBIlgCeeeGJdPpOAT0gAAYsmYbguJHlCbWR1wgkn
+        ONtIClfburglLV9Sr2jdunV4NOnU61TkYl6tuPXWW8MjqaypHqeSOT072FWnMcJ1Tub9HFWiRNJVJ0/k
+        +UwCviABBCyui0eRyGrixIm5kwwXJYHbbruts3w9QrcR89AyNlqo2NVWLUMJdx5N9TjV21i2B88VGjYw
+        YsQI57ZKEecqUykq0a1wV528AaAhPhWAxXXhKBJ55E3ckuhWmdaIq3fCotu/mj2a1zPPPFO3nixNlsky
+        TtGlqR7nmDFjgqdjuNopEvoZ9cQQcW2vFHGuMpWikk6dOjnr5A0ADfGpACx5b125Iu/tJq155mrHFVna
+        1lg+Tdpw1a9W6MkfPXr0CJIVTZooSmPUlLRWq5cnHurR2m233cwHH3wQ7rGYpnqcGtfXq1cvZ5tZQ2Md
+        Bw8e3GDpIFe5pHCdk3k/R5Vohq+rTp7I+5kEfEACCFg0eF0P2S864FzjlfIOONdkgUqzThVF2h47dqzZ
+        b7/9EpcNyRPav5aW0RIwui2qSSPVNGXKlGCChBb3de0/b3Tp0iVI2MomfnFN8Th1/owcOTL386G16LRu
+        NWviSpyrfDwqnZN5P0dp7r33XrPlllsGE5M0C9vVhiuKfiYBH5AAAi2cZvrq1p5m92qpEC0jovXstKCw
+        LpC6oOr/NYNUt3M33HDDYDHgIUOGBImF1r1TD1i9aFykFkE+6aSTgtvjenay1kxs165dcHtbx6zxb/q3
+        bg/27NnT7LrrrsHsVq1TqCStHpricWr5ID0rV79nrdGoJE/HoF4+/c433njjIOl7/PHHWTIF8BwJIAAA
+        gGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxD
+        AggAAOAZEkAAAADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAA
+        AADPkAACAAB4hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4
+        hgQQAADAMySAAAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQAADAMySA
+        AAAAniEBBAAA8AwJIAAAgGdIAAEAADxDAggAAOAZEkAAAADPkAACAAB4hgQQzcbll19uFl10UTPbbLM5
+        A7WR9r7bgZajpfxu+d4A3Dj70Wy4vrztQG243uukQMtR79/tiy++aFZYYQWz/PLLm5dffjl8tbz4zxEP
+        wFec/VWSpZdE21Uurkxdn7jeFztauizniaJjx47ml19+CWuV59pHUqDlqPfvdsMNN/xzXxtttFH4ann2
+        z+AKwFec/VXi+mJJijhXmaTwWVoC1NK5fuakqOYfC1kTTwVajnr/buebb74/9zX//POHr5bn+/cGkISz
+        v0pcXyxJEecqkxSYybf3Jv7zVooOHTqYn376KaxZO/H9AkXZ59Hss88evlp99n4UgK84+6skSy+Jtrt6
+        ZsrU9Vn8PWrpspwndgwfPjysWTvxfQJF1etcqtd+gKaOs78Gyn7BlK3vC94nY7744gvTtm3bWd4LxeKL
+        L26+//77sGRtxPcJFFWvc6le+wGaOs7+Gij7BVO2vi94n4w544wzGrwHc801V4N///3vfw9L1oa9LwVQ
+        VL3OpXrtB2jqOPtroOwXTNn6vvD9fdIYP/XyRT+/xk3dcccdZs455/zztXbt2plvvvkmrFF90X6iAIqq
+        17lUr/0ATR1nfw2U/YIpWv/nn382r776qhk1apQZMmSI2WGHHUy3bt3Mkksuadq0aWPmmGOOYKbdUkst
+        ZXr37m0OP/xwM3r06KouGSI//PCDuemmm8wBBxxg1l57bbPEEkuYeeaZx8w999xBQtK1a1ez++67B2Pa
+        Pv74Y3PvvfcGY9t69Ohhxo8fH7aSLul9evbZZ83RRx9t1ltvPbPIIouYVq1aBYnSGmusYfbee29z5513
+        BsfY3F1xxRUNfv6//OUvwev7779/g9dPPfXU4PVasPejqCWtE6ceTy0RorXidC63bt06OL/12gknnGBe
+        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
+        QmCC
+</value>
+  </data>
+  <data name="introduction" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAoAAAAGNCAYAAACBu8BgAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EgAACxIB0t1+/AAAAAd0SU1FB90DFA4fN4XWmdIAABMmSURBVHhe7d1ryBT12wfw+psWahB2MDMzIcWI
+        DnSg6KCdqKBelL2wE50IKisoCooKwoIo6kVvKggihCKCCCo7R0VFJ62gAxF0wrQTUQSZltk8z2+f3ec/
+        u447uzN7m3Nfnw9cqPf8rt/sjuPs193ZmW0yAABCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCCEQABAIIRAAEAghEAAQCC
+        EQABAIIRAAEAghEAAQCCEQABAIIRAGFEttlmm66KYu3atdnDDz+cXXLJJdlhhx2W7b777tnkyZOzCRMm
+        ZFOmTMl22WWXbP78+dnChQuzs846K7vxxhuzxx57LPv555/bM/y77rvvvtZj7P376xTAeOToBiMSLTj8
+        +eef2W233ZZNnTp1k+c+SE2aNCl74IEH2rP9e4oeW74AxiNHNxqj7J2abbfddpP6z3/+s0mld6Z6axR6
+        H8949ssvv2SHH374Js952Ep/n/08++yz2Z577pntscce2dNPP93+6X+ln6VlaUwaW0XR48oXwHjk6EZj
+        FL04j6pGYSzm3Bpt3LgxW7BgwSbPt0odeuih7VmLzZw58//HpqDXK/2sszyNrcJHwEBEjm40RtGL86iK
+        wT300ENd2y6903rRRRdlL7/8cvb9999n69evzzZs2JD9+uuv2erVq7OPPvooW758eXb//fdn1113XTZv
+        3rzWuYEnn3xy9sUXX7RnLZbe2euspyjg5Zen349CZ75OAYxHjm40Rtk7NXWKwR177LFd2+72229vLxm9
+        559/vu9HwM8880wrGNb5CLhX/rmlAhiPHN1orDov1HV6o5s2bVrXtvvtt9/aS8aH/HNLBTAeObrRWHVe
+        qOv0Rjfet914f34AiaMbjVXnhbpOb3TjfduN9+cHkDi60Vh1Xqjr9A5zLmJd/daVpG/kvvDCC9nll1+e
+        HXLIIdmuu+6aTZw4Mdtpp52yuXPnti68nL608ccff7TGD2tU512mOdJc/ZStq59BHuegNtf31ltvZVdf
+        fXXrYtc777xzazvvtttu2f77759dcMEF2eOPP966KHYVVR7/unXrskceeSRbtGhRNnv27Gz77bfPpk+f
+        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
+        /lJBU9l7aYz0wpT/4saoq8yo15/mKnuxLVtn2Rx1+st6B62yx7g5y5Yt65on3Qbtnnvuyb7++uvW5Th+
+        /PHH1u257rzzzmzhwoWFt+nqrc09ljrbKanTX9Y7aJU9xs2Jsp2TK6+8cpOe9LHueeed1/piSPp2cLpE
+        TPo1/TmdK1j0sW++oKnsvTRG0cF3lFWmqGcU1U/R+KLanKKxRVWkaFydGla6gf/RRx9dOFfd6lU0pqg2
+        p2hsURUpGlenhhVlOyfpuS5atKiwp2pBU9l7aYyig+8oq0xRzyiqn6LxRbU5RWOLqkjRuDpVxapVq7JZ
+        s2YVzlenehWNKarNKRpbVEWKxtWpKiJs546NGzdmN91000DvZA5S0FT2Xhqj7OOfulVm1Osv+7gqqfuR
+        V53+st5Bq+wxlvnpp5+y448/vnDu3po6dWp28cUXt76xWbR8c4+lznZK6vSX9Q5aZY+xzHjfzr1ef/31
+        1kfaRfMUVTof9MYbb9zk59BU9l5gq5cuTZJuxL948eJs7733bn0BYfvtt89mzJiRLViwILv66quz5cuX
+        Z+vWrWt3UEXE7ZxC7NKlS1thMD3nKVOmtJ53unvIEUcckS1ZsqT1BZLOc86Hv8mTJ7d+Bk0kAALAANav
+        X98VAOfNm9deAs0jAALAAF599dWuAHjhhRe2l0DzCIAAUCKdI7nffvt1BcCXXnqpvRSaRwAEgAJr167N
+        Pv744+yuu+7Kpk+f3hX+TjjhhPYoaCYBEIBQPvnkk+yUU07Jpk2bVnqh56JKl8xZvXp1ezZoJgEQgFDm
+        zp1bGOwGqX333Tf78ssv2zNBcwmAAIQyZ86cwnDXr9LlcK699trWx8IwHgiAAISSrv2Xbn+XLmhdFPZS
+        TZw4sXXeX7o49h133JGtWbOm3Q3jgwAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgAEIwACAAQjAAIABCMAAgA
+        EIwACAAQjAAIABBKlv0PiWXihEWpf90AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="PresAutorun" xml:space="preserve">
+    <value>Autoschritt</value>
+  </data>
+  <data name="PresAutorunSpeed" xml:space="preserve">
+    <value>Tempo</value>
+  </data>
+  <data name="PresNewState" xml:space="preserve">
+    <value>Neuer State</value>
+  </data>
+  <data name="PresNext" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="PresNextBlock" xml:space="preserve">
+    <value>Überspringe f</value>
+  </data>
+  <data name="PresNextStep" xml:space="preserve">
+    <value>Überspringe Schritt</value>
+  </data>
+  <data name="PresOldState" xml:space="preserve">
+    <value>Alter State</value>
+  </data>
+  <data name="PresOutputHash" xml:space="preserve">
+    <value>Hash Ausgabe</value>
+  </data>
+  <data name="PresSkipIntroduction" xml:space="preserve">
+    <value>Einführung überspringen</value>
+  </data>
+  <data name="PresState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="PresOutputLengthError" xml:space="preserve">
+    <value>Die angegebene Ausgabelänge wird nicht von der Präsentation unterstützt. Bitte eine Ausgabelänge wählen, die kleiner oder gleich der ausgewählten Bit Rate ist.</value>
+  </data>
+  <data name="PresStateSizeError" xml:space="preserve">
+    <value>Die ausgewählte Größe für den State wird nicht von der Präsentation unterstützt. Bitte eine State Größe von mindestens 200 Bit auswählen.</value>
+  </data>
+  <data name="PresStepPresentationNotAvailable" xml:space="preserve">
+    <value>Die Präsentation von {0} ist nur bei einer State Größe von 1600 Bit möglich.</value>
+  </data>
+  <data name="PresRotationOffset" xml:space="preserve">
+    <value>Rotations-Offset:</value>
+  </data>
+  <data name="PresPresentation" xml:space="preserve">
+    <value>Präsentation</value>
+  </data>
+  <data name="KeccakFunctionList6" xml:space="preserve">
+    <value>SHAKE128</value>
+  </data>
+  <data name="KeccakFunctionList7" xml:space="preserve">
+    <value>SHAKE256</value>
+  </data>
+  <data name="SuffixBitsCaption" xml:space="preserve">
+    <value>Domain-Separation Bits</value>
+  </data>
+  <data name="SuffixBitsInvalidError" xml:space="preserve">
+    <value>Der Domain-Separation Bit-String enthält ungültige Zeichen. Es sind nur binäre Zeichen (0 und 1) erlaubt.</value>
+  </data>
+  <data name="SuffixBitsTooLongError" xml:space="preserve">
+    <value>Die maximale Länge des Domain-Separation Bit-Strings beträgt 8 Bit.</value>
+  </data>
+  <data name="SuffixBitsTooltip" xml:space="preserve">
+    <value>Festlegen eines bis zu 8 Bit langen Bit-Strings, welcher hinter die Eingabe angehängt wird und zur Domänen-Trennung verwendet wird.</value>
+  </data>
+  <data name="Bit" xml:space="preserve">
+    <value>Bit</value>
+  </data>
+</root>

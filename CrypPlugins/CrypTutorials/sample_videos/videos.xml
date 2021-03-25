@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<videos>
+	<video>
+		<id>1</id>
+		<title lang="en">CrypTool 2 Tutorium - How to use a Caesar cipher</title>
+		<title lang="de">CrypTool 2 Tutorium - Wie man eine Caesar-Chiffre verwendet</title>
+		<description lang="en">This video demonstrates the basic handling of the graphical user interface called WorkspaceManager.<newline/>
+It also shows how to create a Caesar cipher and encrypt a plaintext and how to decrypt a ciphertext using this classical cipher.</description>
+		<description lang="de">Dieses Video demonstriert die grundlegende Handhabung des graphischen Benutzerinterfaces WorkspaceManager.<newline/>
+Es zeigt außerdem, wie man eine Caesar-Chiffre erstellt, einen Klartext verschlüsselt und einen Geheimtext entschlüsselt.</description>
+		<icon>http://raspberry.vs.uni-due.de:8080/ct2/caesar.png</icon>
+		<url>http://raspberry.vs.uni-due.de:8080/ct2/CT2_Tutorium.wmv</url>
+		<timestamp>1341494133</timestamp>
+		<category>1</category>
+	</video>
+	<video>
+		<id>2</id>
+		<title lang="en">CrypTool 2 Tutorium - How to use a Caesar cipher II</title>
+		<title lang="de">CrypTool 2 Tutorium - Wie man eine Caesar-Chiffre verwendet II</title>
+		<description lang="en">This video demonstrates the basic handling of the graphical user interface called WorkspaceManager.<newline/>
+It also shows how to create a Caesar cipher and encrypt a plaintext and how to decrypt a ciphertext using this classical cipher.</description>
+		<description lang="de">Dieses Video demonstriert die grundlegende Handhabung des graphischen Benutzerinterfaces WorkspaceManager.<newline/>
+Es zeigt außerdem, wie man eine Caesar-Chiffre erstellt und einen Klartext verschlüselt und einen Geheimtext entschlüsselt.</description>
+		<icon>http://raspberry.vs.uni-due.de:8080/ct2/caesar.png</icon>
+		<url>http://raspberry.vs.uni-due.de:8080/ct2/CT2_Tutorium.wmv</url>
+		<timestamp>1341494133</timestamp>
+		<category>4</category>
+	</video>
+</videos>

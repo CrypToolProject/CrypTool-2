@@ -1,0 +1,567 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="buttonCryptanalysis" xml:space="preserve">
+    <value>Kryptoanalyse</value>
+  </data>
+  <data name="buttonDecrypt" xml:space="preserve">
+    <value>Entschlüsseln</value>
+  </data>
+  <data name="buttonEncrypt" xml:space="preserve">
+    <value>Verschlüsseln</value>
+  </data>
+  <data name="buttonFindClosestVector" xml:space="preserve">
+    <value>Finde nächsten Vektor</value>
+  </data>
+  <data name="buttonGenerateNewCryptosystem" xml:space="preserve">
+    <value>Generiere neue Schlüssel</value>
+  </data>
+  <data name="buttonGenerateNewLattice" xml:space="preserve">
+    <value>Generiere neues Gitter</value>
+  </data>
+  <data name="labelCiphertext" xml:space="preserve">
+    <value>Geheimtext:</value>
+  </data>
+  <data name="labelKeyLength" xml:space="preserve">
+    <value>Schlüssellänge:</value>
+  </data>
+  <data name="labelLatticeBasis" xml:space="preserve">
+    <value>Gegebene Gitterbasis</value>
+  </data>
+  <data name="labelModulus" xml:space="preserve">
+    <value>Modulus:</value>
+  </data>
+  <data name="labelMultiplier" xml:space="preserve">
+    <value>Multiplikator:</value>
+  </data>
+  <data name="labelMultiplierInverse" xml:space="preserve">
+    <value>Multiplikator Inverses:</value>
+  </data>
+  <data name="labelPlainText" xml:space="preserve">
+    <value>Klartext:</value>
+  </data>
+  <data name="labelPrivateKey" xml:space="preserve">
+    <value>Privater Schlüssel:</value>
+  </data>
+  <data name="labelPublicKey" xml:space="preserve">
+    <value>Öffentlicher Schlüssel:</value>
+  </data>
+  <data name="labelReducedLatticeBasis" xml:space="preserve">
+    <value>Reduzierte Gitterbasis</value>
+  </data>
+  <data name="labelTargetPoint" xml:space="preserve">
+    <value>Zielpunkt</value>
+  </data>
+  <data name="menuLanguage" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="tabAttackMerkleHellman" xml:space="preserve">
+    <value>Merkle-Hellman Knapsack</value>
+  </data>
+  <data name="tabAttackRSA" xml:space="preserve">
+    <value>RSA (Angriff auf stereotype Nachrichten)</value>
+  </data>
+  <data name="tabCryptanalysis" xml:space="preserve">
+    <value>Gitterbasierte Angriffe gegen...</value>
+  </data>
+  <data name="tabGaussAlgorithm" xml:space="preserve">
+    <value>Gauß-Algorithmus</value>
+  </data>
+  <data name="tabIntroduction" xml:space="preserve">
+    <value>Einführung</value>
+  </data>
+  <data name="tabLatticeBasics" xml:space="preserve">
+    <value>Gitter Grundlagen</value>
+  </data>
+  <data name="tabLLLAlgorithm" xml:space="preserve">
+    <value>LLL-Algorithmus</value>
+  </data>
+  <data name="titleMainWindow" xml:space="preserve">
+    <value>Lernprogramm zur gitterbasierten Kryptographie</value>
+  </data>
+  <data name="errorNoLatticeEntered" xml:space="preserve">
+    <value>Bitte geben Sie ein neues Gitter ein.</value>
+  </data>
+  <data name="errorOnlyIntegersAllowed" xml:space="preserve">
+    <value>Es sind nur ganze Zahlen erlaubt!</value>
+  </data>
+  <data name="errorVectorsDependent" xml:space="preserve">
+    <value>Die Vektoren müssen linear unabhängig sein!</value>
+  </data>
+  <data name="titleEnterLattice" xml:space="preserve">
+    <value>Neues Gitter</value>
+  </data>
+  <data name="buttonAbort" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="buttonEnterLatticeManually" xml:space="preserve">
+    <value>Manuelle Eingabe</value>
+  </data>
+  <data name="menuExit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="menuFile" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="labelLengthBasisVectors" xml:space="preserve">
+    <value>Länge der Basisvektoren:</value>
+  </data>
+  <data name="labelSuccessiveMinima" xml:space="preserve">
+    <value>Sukzessive Minima:</value>
+  </data>
+  <data name="buttonMarkAsUnknown" xml:space="preserve">
+    <value>Als unbekannt markieren -&gt;</value>
+  </data>
+  <data name="labelKnownPlainText" xml:space="preserve">
+    <value>Bekannter Klartext:</value>
+  </data>
+  <data name="labelModulusN" xml:space="preserve">
+    <value>Modulus N:</value>
+  </data>
+  <data name="labelPrimeP" xml:space="preserve">
+    <value>Primzahl p:</value>
+  </data>
+  <data name="labelPrimeQ" xml:space="preserve">
+    <value>Primzahl q:</value>
+  </data>
+  <data name="labelPrivateExponentD" xml:space="preserve">
+    <value>Privater Exponent d:</value>
+  </data>
+  <data name="labelPublicExponentE" xml:space="preserve">
+    <value>Öffentlicher Exponent e:</value>
+  </data>
+  <data name="labelResultUnknownPlainText" xml:space="preserve">
+    <value>Ergebnis / Unbekannter Klartext:</value>
+  </data>
+  <data name="labelVisualizationForDim2" xml:space="preserve">
+    <value>Visualisierung nur für Dimension 2</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="errorGeneratingSuperincSequence" xml:space="preserve">
+    <value>Es konnte keine stark steigende Sequenz generiert werden.</value>
+  </data>
+  <data name="errorNoSolutionFound" xml:space="preserve">
+    <value>Es wurde keine Lösung gefunden.</value>
+  </data>
+  <data name="infoMarkKnownPlaintext" xml:space="preserve">
+    <value>Bitte markieren Sie im Feld „Klartext“ den bekannten Teil der Nachricht.</value>
+  </data>
+  <data name="information" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="labelCurrentBlock" xml:space="preserve">
+    <value>Aktueller Block:</value>
+  </data>
+  <data name="labelFoundVector" xml:space="preserve">
+    <value>Gefundener Vektor:</value>
+  </data>
+  <data name="labelPlainTextBinary" xml:space="preserve">
+    <value>Klartext (binär):</value>
+  </data>
+  <data name="labelPlainTextUTF8" xml:space="preserve">
+    <value>Klartext (UTF8):</value>
+  </data>
+  <data name="labelAbort" xml:space="preserve">
+    <value>Abbruch:</value>
+  </data>
+  <data name="errorMessageTooLong" xml:space="preserve">
+    <value>Für diesen Angriff muss die Länge der Nachricht kleiner als N sein!</value>
+  </data>
+  <data name="errorNoTargetPoint" xml:space="preserve">
+    <value>Bitte geben Sie einen Zielpunkt ein.</value>
+  </data>
+  <data name="labelAngleBasisVectors" xml:space="preserve">
+    <value>Winkel zwischen den Basisvektoren:</value>
+  </data>
+  <data name="labelAngleReducedVectors" xml:space="preserve">
+    <value>Winkel zwischen den reduzierten Vektoren:</value>
+  </data>
+  <data name="labelCodomain" xml:space="preserve">
+    <value>Wertebereich</value>
+  </data>
+  <data name="labelFrom" xml:space="preserve">
+    <value>Von:</value>
+  </data>
+  <data name="labelTo" xml:space="preserve">
+    <value>bis:</value>
+  </data>
+  <data name="errorNoCodomain" xml:space="preserve">
+    <value>Bitte geben Sie einen gültigen Wertebereich ein.</value>
+  </data>
+  <data name="errorFromBiggerThanTo" xml:space="preserve">
+    <value>Der Wert "Von" muss kleiner sein als der Wert "Bis".</value>
+  </data>
+  <data name="errorCodomainTooSmall" xml:space="preserve">
+    <value>Der Wertebereich ist zu klein.</value>
+  </data>
+  <data name="errorFailedToGenerateLattice" xml:space="preserve">
+    <value>Es konnte leider kein Gitter generiert werden. Bitte vergrößern Sie den Wertebereich.</value>
+  </data>
+  <data name="errorSameLattice" xml:space="preserve">
+    <value>Das Gitter wurde noch nicht verändert.</value>
+  </data>
+  <data name="tooltipAdjustLatticeVectors" xml:space="preserve">
+    <value>Gittervektoren anpassen</value>
+  </data>
+  <data name="tooltipCopyLatticeToClipboard" xml:space="preserve">
+    <value>Gitter in Zwischenablage kopieren</value>
+  </data>
+  <data name="tooltipInsertLatticeFromClipboard" xml:space="preserve">
+    <value>Gitter aus Zwischenablage einfügen</value>
+  </data>
+  <data name="tooltipLoadLatticeFromFile" xml:space="preserve">
+    <value>Gitter aus Datei laden</value>
+  </data>
+  <data name="tooltipMoveLattice" xml:space="preserve">
+    <value>Gitter verschieben</value>
+  </data>
+  <data name="tooltipSaveLatticeToFile" xml:space="preserve">
+    <value>Gitter in Datei speichern</value>
+  </data>
+  <data name="tooltipToggleLog" xml:space="preserve">
+    <value>Log ein-/ausblenden</value>
+  </data>
+  <data name="tooltipZoomInLattice" xml:space="preserve">
+    <value>In Gitter hineinzoomen</value>
+  </data>
+  <data name="tooltipZoomOutLattice" xml:space="preserve">
+    <value>Aus Gitter herauszoomen</value>
+  </data>
+  <data name="errorLoadingFile" xml:space="preserve">
+    <value>Fehler beim Öffnen der Datei!</value>
+  </data>
+  <data name="errorParsingLattice" xml:space="preserve">
+    <value>Fehler beim Einlesen des Gitters!</value>
+  </data>
+  <data name="errorSavingFile" xml:space="preserve">
+    <value>Fehler beim Speichern der Datei!</value>
+  </data>
+  <data name="labelDeterminant" xml:space="preserve">
+    <value>Determinante / Volumen:</value>
+  </data>
+  <data name="tabFindCVP" xml:space="preserve">
+    <value>Finde nächsten Vektor</value>
+  </data>
+  <data name="tooltipHermiteUpperBound" xml:space="preserve">
+    <value>Obere Schranke für minimalen Vektor (Hermite-Konstante)</value>
+  </data>
+  <data name="LatticeSettings" xml:space="preserve">
+    <value>Gitterbasierte Kryptographie</value>
+  </data>
+  <data name="labelDensity" xml:space="preserve">
+    <value>Gitterdichte / Rel. zur optimalen Dichte:</value>
+  </data>
+  <data name="tabStart" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="labelUnimodularTransformationMatrix" xml:space="preserve">
+    <value>Unimodulare Transformationsmatrix</value>
+  </data>
+  <data name="errorBadLattice" xml:space="preserve">
+    <value>Das Gitter ist sehr schlecht darstellbar, da sich die Längen der Vektoren um mehr als den Faktor 1000 unterscheiden.</value>
+  </data>
+  <data name="tabCryptography" xml:space="preserve">
+    <value>Gitterbasierte Verschlüsselungssysteme</value>
+  </data>
+  <data name="tabGGH" xml:space="preserve">
+    <value>Goldreich–Goldwasser–Halevi (GGH)</value>
+  </data>
+  <data name="labelPrivateKeyR" xml:space="preserve">
+    <value>Privater Schlüssel R</value>
+  </data>
+  <data name="labelPublicKeyB" xml:space="preserve">
+    <value>Öffentlicher Schlüssel B</value>
+  </data>
+  <data name="labelErrorVector" xml:space="preserve">
+    <value>Störvektor e:</value>
+  </data>
+  <data name="buttonGenerateNewErrorVector" xml:space="preserve">
+    <value>Generiere neuen Störvektor</value>
+  </data>
+  <data name="labelParameterL" xml:space="preserve">
+    <value>Parameter l:</value>
+  </data>
+  <data name="errorDecryptionError" xml:space="preserve">
+    <value>Dechiffrierfehler ({0})</value>
+  </data>
+  <data name="labelRowVectors" xml:space="preserve">
+    <value>Verwende Zeilenvektoren:</value>
+  </data>
+  <data name="buttonTranspose" xml:space="preserve">
+    <value>Transponieren</value>
+  </data>
+  <data name="buttonDefineNewLattice" xml:space="preserve">
+    <value>Setze neues Gitter</value>
+  </data>
+  <data name="labelModuloQ" xml:space="preserve">
+    <value>Modulo q:</value>
+  </data>
+  <data name="labelPrivateKeyS" xml:space="preserve">
+    <value>Privater Schlüssel s</value>
+  </data>
+  <data name="labelPublicKeyA" xml:space="preserve">
+    <value>Öffentlicher Schlüssel A</value>
+  </data>
+  <data name="labelPublicKeyB2" xml:space="preserve">
+    <value>Öffentlicher Schlüssel b</value>
+  </data>
+  <data name="tabLWE" xml:space="preserve">
+    <value>Learning with Errors (LWE)</value>
+  </data>
+  <data name="buttonGenerateNewRandomVector" xml:space="preserve">
+    <value>Generiere neuen Zufallsvektor</value>
+  </data>
+  <data name="labelRandomVectorR" xml:space="preserve">
+    <value>Zufallsvektor r:</value>
+  </data>
+  <data name="labelSubsetU" xml:space="preserve">
+    <value>Teilmenge u = r * A:</value>
+  </data>
+  <data name="labelBitwiseEncryption" xml:space="preserve">
+    <value>Der Einfachheit halber wird immer nur ein einzelnes Bit verschlüsselt.</value>
+  </data>
+  <data name="tabCVP" xml:space="preserve">
+    <value>Nächster Vektor Problem (CVP)</value>
+  </data>
+  <data name="tabSVP" xml:space="preserve">
+    <value>Kürzester Vektor Problem (SVP)</value>
+  </data>
+  <data name="labelAlpha" xml:space="preserve">
+    <value>Alpha:</value>
+  </data>
+  <data name="labelBlockSizeL" xml:space="preserve">
+    <value>Blocklänge l:</value>
+  </data>
+  <data name="labelEnterNotSquareLattice" xml:space="preserve">
+    <value>Eingabe als m x n Matrix</value>
+  </data>
+  <data name="labelReductionStep" xml:space="preserve">
+    <value>Reduktionsschritt ({0}/{1}):</value>
+  </data>
+  <data name="tooltipSetTargetPoint" xml:space="preserve">
+    <value>Zielpunkt setzen</value>
+  </data>
+  <data name="labelClosestVector" xml:space="preserve">
+    <value>Nächster Vektor:</value>
+  </data>
+  <data name="labelShortestDistance" xml:space="preserve">
+    <value>Kürzeste Entfernung:</value>
+  </data>
+  <data name="labelAllInfosForCurrentLattice" xml:space="preserve">
+    <value>Alle Informationen zum aktuellen Gitter</value>
+  </data>
+  <data name="labelLatticeBasisOnly" xml:space="preserve">
+    <value>Nur die Gitterbasis</value>
+  </data>
+  <data name="labelPleaseChoose" xml:space="preserve">
+    <value>Bitte auswählen:</value>
+  </data>
+  <data name="labelReducedBasisOnly" xml:space="preserve">
+    <value>Nur die reduzierte Gitterbasis</value>
+  </data>
+  <data name="labelSaveCurrentLattice" xml:space="preserve">
+    <value>Speichern des aktuellen Gitters</value>
+  </data>
+  <data name="buttonSetErrorVector" xml:space="preserve">
+    <value>Setze Störvektor e</value>
+  </data>
+  <data name="buttonSetPrivateKeyR" xml:space="preserve">
+    <value>Setze privaten Schlüssel R</value>
+  </data>
+  <data name="buttonSetPublicKeyB" xml:space="preserve">
+    <value>Setze öffentlichen Schlüssel B</value>
+  </data>
+  <data name="errorPrivateAndPublicKeyDoNotFit" xml:space="preserve">
+    <value>Der private und der öffentliche Schlüssel passen nicht zusammen.</value>
+  </data>
+  <data name="errorWrongGGHCryptosystem" xml:space="preserve">
+    <value>Bitte geben Sie ein korrektes GGH-Kryptosystem mit Dimension {0} ein oder lassen Sie sich ein neues generieren.</value>
+  </data>
+  <data name="errorCipherWrongFormat" xml:space="preserve">
+    <value>Der Geheimtext hat ein ungültiges Format!</value>
+  </data>
+  <data name="errorNoCipher" xml:space="preserve">
+    <value>Bitte geben Sie einen Geheimtext ein!</value>
+  </data>
+  <data name="errorNoMessage" xml:space="preserve">
+    <value>Bitte geben Sie eine zu verschlüsselnde Nachricht ein!</value>
+  </data>
+  <data name="labelEstimationR" xml:space="preserve">
+    <value>Abschätzung für Maximalwert r eines Vektors b mit minimaler Länge:</value>
+  </data>
+  <data name="labelMinimalVector" xml:space="preserve">
+    <value>Ausgabe des minimalen Vektors:</value>
+  </data>
+  <data name="buttonDefineNewCryptosystem" xml:space="preserve">
+    <value>Setze neues Kryptosystem</value>
+  </data>
+  <data name="buttonEnterCryptosystemManually" xml:space="preserve">
+    <value>Manuelle Eingabe</value>
+  </data>
+  <data name="errorEuclidModR" xml:space="preserve">
+    <value>Modulus und Multiplikator müssen teilerfremd sein.</value>
+  </data>
+  <data name="errorModBiggerSum" xml:space="preserve">
+    <value>Der Modulus muss größer als die Summe aller Elemente des privaten Schlüssels sein.</value>
+  </data>
+  <data name="errorNoCryotosystemEntered" xml:space="preserve">
+    <value>Bitte geben Sie ein neues Kryptosystem ein.</value>
+  </data>
+  <data name="errorPrivateKeyNotSuperincreasing" xml:space="preserve">
+    <value>Die Elemente des privaten Schlüssels müssen stark ansteigend sein. Jedes Element muss größer als die Summe seiner Vorgänger sein.</value>
+  </data>
+  <data name="errorSameCryptosystem" xml:space="preserve">
+    <value>Das Kryptosystem wurde noch nicht verändert.</value>
+  </data>
+  <data name="errorWrongVectorFormat" xml:space="preserve">
+    <value>Der eingegebene private Schlüssel hat ein falsches Format. Bitte geben Sie einen korrekten Vektor ein.</value>
+  </data>
+  <data name="titleEnterMerkleHellman" xml:space="preserve">
+    <value>Neues Merkle-Hellman-Kryptosystem</value>
+  </data>
+  <data name="defaultMessageGGH" xml:space="preserve">
+    <value>Dieser Text ist geheim</value>
+  </data>
+  <data name="defaultMessageRSA" xml:space="preserve">
+    <value>Das neue Passwort lautet: 1234</value>
+  </data>
+  <data name="labelPrivateKeyR1" xml:space="preserve">
+    <value>Inverse R^(-1) des privaten Schlüssels R</value>
+  </data>
+  <data name="labelPublicKeyB1" xml:space="preserve">
+    <value>Inverse B^(-1) des öffentlichen Schlüssels B</value>
+  </data>
+  <data name="buttonStart" xml:space="preserve">
+    <value>Starten</value>
+  </data>
+  <data name="labelMode" xml:space="preserve">
+    <value>Modus:</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Gitterbasierte Kryptographie</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Gitterbasierte Kryptographie</value>
+  </data>
+  <data name="content" xml:space="preserve">
+    <value>Inhalt</value>
+  </data>
+</root>

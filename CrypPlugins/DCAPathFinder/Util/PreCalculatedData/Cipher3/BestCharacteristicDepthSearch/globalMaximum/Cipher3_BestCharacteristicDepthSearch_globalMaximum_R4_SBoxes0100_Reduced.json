@@ -1,0 +1,108 @@
+{
+  "Round": 4,
+  "ActiveSBoxes": [
+    false,
+    false,
+    true,
+    false
+  ],
+  "IsFirst": false,
+  "IsLast": false,
+  "IsBeforeLast": true,
+  "Probability": 0.01702880859375,
+  "InputDifference": 4,
+  "ExpectedDifference": 512,
+  "Characteristics": [
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        4,
+        272,
+        96,
+        512,
+        0
+      ],
+      "OutputDifferentials": [
+        6,
+        544,
+        64,
+        0
+      ],
+      "Probability": 0.0087890625
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        4,
+        257,
+        80,
+        512,
+        0
+      ],
+      "OutputDifferentials": [
+        5,
+        514,
+        64,
+        0
+      ],
+      "Probability": 0.00439453125
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        4,
+        4368,
+        224,
+        512,
+        0
+      ],
+      "OutputDifferentials": [
+        14,
+        8736,
+        64,
+        0
+      ],
+      "Probability": 0.000823974609375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        4,
+        4113,
+        176,
+        512,
+        0
+      ],
+      "OutputDifferentials": [
+        11,
+        8226,
+        64,
+        0
+      ],
+      "Probability": 0.000823974609375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        4,
+        4112,
+        160,
+        512,
+        0
+      ],
+      "OutputDifferentials": [
+        10,
+        8224,
+        64,
+        0
+      ],
+      "Probability": 0.002197265625
+    }
+  ],
+  "UnfilteredPairList": [],
+  "FilteredPairList": [],
+  "EncrypedPairList": [],
+  "SearchPolicy": 1,
+  "AbortingPolicy": 0,
+  "SelectedAlgorithm": 2
+}

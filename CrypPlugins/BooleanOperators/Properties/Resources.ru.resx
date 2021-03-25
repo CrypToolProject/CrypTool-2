@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginBBO_Caption" xml:space="preserve">
+    <value>Логический двоичный оператор</value>
+  </data>
+  <data name="PluginBBO_Tooltip" xml:space="preserve">
+    <value>Логический двоичный оператор</value>
+  </data>
+  <data name="PluginBIE_Caption" xml:space="preserve">
+    <value>Оператор Boolean If-Else</value>
+  </data>
+  <data name="PluginBIE_Tooltip" xml:space="preserve">
+    <value>Оператор Boolean If-Else</value>
+  </data>
+  <data name="PluginBI_Caption" xml:space="preserve">
+    <value>Логический вход</value>
+  </data>
+  <data name="PluginBI_Tooltip" xml:space="preserve">
+    <value>Логический вход</value>
+  </data>
+  <data name="PluginBN_Caption" xml:space="preserve">
+    <value>Boolean Not Operator</value>
+  </data>
+  <data name="PluginBN_Tooltip" xml:space="preserve">
+    <value>Boolean Not Operator</value>
+  </data>
+  <data name="PluginBO_Caption" xml:space="preserve">
+    <value>Логический вывод</value>
+  </data>
+  <data name="PluginBO_Tooltip" xml:space="preserve">
+    <value>Логический вывод</value>
+  </data>
+  <data name="BBO_InputACaption" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BBO_InputATooltip" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BBO_InputBCaption" xml:space="preserve">
+    <value>InputB</value>
+  </data>
+  <data name="BBO_InputBTooltip" xml:space="preserve">
+    <value>InputB</value>
+  </data>
+  <data name="BBO_OutputCaption" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="BBO_OutputTooltip" xml:space="preserve">
+    <value>вывод</value>
+  </data>
+  <data name="BIE_InputCaption" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BIE_InputTooltip" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BIE_Output_trueCaption" xml:space="preserve">
+    <value>Output_true</value>
+  </data>
+  <data name="BIE_Output_trueTooltip" xml:space="preserve">
+    <value>output true</value>
+  </data>
+  <data name="BIE_Output_falseCaption" xml:space="preserve">
+    <value>Output_false</value>
+  </data>
+  <data name="BIE_Output_falseTooltip" xml:space="preserve">
+    <value>вывод false</value>
+  </data>
+  <data name="BI_OutputCaption" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="BI_OutputTooltip" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="BN_InputCaption" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BN_InputTooltip" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BN_OutputCaption" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="BN_OutputTooltip" xml:space="preserve">
+    <value>выход отрицается</value>
+  </data>
+  <data name="BO_InputCaption" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BO_InputTooltip" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="BBO_DefaultFlagACaption" xml:space="preserve">
+    <value>Флаг по умолчанию A</value>
+  </data>
+  <data name="BBO_DefaultFlagATooltip" xml:space="preserve">
+    <value>Если флажок установлен, флаг A будет установлен в</value>
+  </data>
+  <data name="BBO_DefaultFlagBCaption" xml:space="preserve">
+    <value>Флаг по умолчанию B</value>
+  </data>
+  <data name="BBO_DefaultFlagBTooltip" xml:space="preserve">
+    <value>Если флажок установлен, флаг B будет установлен в</value>
+  </data>
+  <data name="BBO_OperatorTypeCaption" xml:space="preserve">
+    <value>Тип оператора</value>
+  </data>
+  <data name="BBO_OperatorTypeTooltip" xml:space="preserve">
+    <value>Тип оператора</value>
+  </data>
+  <data name="BBO_UpdateOnlyAtBothInputsChangedCaption" xml:space="preserve">
+    <value>Обновление нуждается в обоих входах</value>
+  </data>
+  <data name="BBO_UpdateOnlyAtBothInputsChangedTooltip" xml:space="preserve">
+    <value>Если этот флажок установлен, этот плагин обновит свой статус только в том случае, если оба входа изменились</value>
+  </data>
+  <data name="BI_ValueCaption" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
+  <data name="BI_ValueTooltip" xml:space="preserve">
+    <value>Задайте логическое значение</value>
+  </data>
+  <data name="BBO_OperatorTypeList1" xml:space="preserve">
+    <value>А ТАКЖЕ</value>
+  </data>
+  <data name="BBO_OperatorTypeList2" xml:space="preserve">
+    <value>ИЛИ</value>
+  </data>
+  <data name="BBO_OperatorTypeList3" xml:space="preserve">
+    <value>NAND</value>
+  </data>
+  <data name="BBO_OperatorTypeList4" xml:space="preserve">
+    <value>NOR</value>
+  </data>
+  <data name="BBO_OperatorTypeList5" xml:space="preserve">
+    <value>бЕСПЛАТНО</value>
+  </data>
+  <data name="BI_ValueList1" xml:space="preserve">
+    <value>Ложь</value>
+  </data>
+  <data name="BI_ValueList2" xml:space="preserve">
+    <value>Правда</value>
+  </data>
+  <data name="False" xml:space="preserve">
+    <value>Ложь</value>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>Правда</value>
+  </data>
+</root>

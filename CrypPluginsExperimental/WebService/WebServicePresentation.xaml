@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="WebService.WebServicePresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+   Height="Auto" Width="Auto"  mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="496" d:DesignWidth="694">
+   
+    <Grid>
+        <Slider Height="38.341" Margin="0,0,5,0" Name="slider1" VerticalAlignment="Top" IsSelectionRangeEnabled="False" IsMoveToPointEnabled="False" IsDirectionReversed="False" ValueChanged="slider1_ValueChanged" HorizontalAlignment="Right" Width="221.711" />
+        <TabControl Name="tabControl1" BorderBrush="Transparent" Background="AliceBlue" Margin="8,5,12,0">
+            <TabItem Header="Compiler" Name="_compilerTab" IsSelected="True" Background="AliceBlue">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <Grid>
+                     <Button Height="23" Margin="16.67,0,0,107.549" Name="compileButton" VerticalAlignment="Bottom" Click="CompileButtonClickEventHandler" ToolTip="Kompiliert die erstellte Methode" HorizontalAlignment="Left" Width="70.021">Compile</Button>
+                    <Label Height="38.341" HorizontalAlignment="Left" Margin="16.67,0,0,399" Name="label1" VerticalAlignment="Bottom" Width="120" Foreground="DarkBlue">Method Header</Label>
+                    <TextBox Margin="110,0,0,30.009" Name="textBox3" IsReadOnly="True" Height="100.02" VerticalAlignment="Bottom" />
+                    <TextBlock Margin="110,0,3,0" Name="textBlock1" VerticalAlignment="Top" Background="White" FlowDirection="LeftToRight" Height="66"> <TextBlock.TextDecorations><TextDecoration Location="OverLine"><TextDecoration.Pen><Pen /></TextDecoration.Pen></TextDecoration></TextBlock.TextDecorations></TextBlock>
+                    <RichTextBox Margin="109.22,68.592,0,190.057" Name="richTextBox1" BorderBrush="White" TextChanged="richTextBox1_TextChanged" IsHitTestVisible="True" Focusable="True" AcceptsTab="True" VerticalScrollBarVisibility="Hidden" AutoWordSelection="False" HorizontalAlignment="Left" Width="554" />
+                    <Label Height="25.005" Margin="0,0,0,75.737" Name="label2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="108.197">Compiler Result:</Label>
+                    <Label Height="28" HorizontalAlignment="Left" Margin="16.67,70.014,0,0" Name="label3" VerticalAlignment="Top" Width="120" BorderBrush="Blue" Foreground="Blue" >Method Body</Label>
+                    <TextBlock Height="45.728" Margin="110,0,3,144.329" Name="textBlock2" VerticalAlignment="Bottom" Background="White" />
+                </Grid>
+                   </ScrollViewer>
+            </TabItem>
+            <TabItem Name="_wsdlTab" Header="WSDL" IsSelected="True" IsEnabled="True" Background="AliceBlue">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid>
+                        <TreeView Name="_wsdlTreeView" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible" Width="Auto" Height="Auto" ></TreeView>
+                </Grid>
+                 </ScrollViewer>
+            </TabItem>
+            <TabItem IsSelected="True" Name="_animationTab" Header="Animation" Background="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ScrollViewer Name="_animationScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  Height="436" Width="660">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                        <ScrollViewer Name="_scrollViewer">
+                            <TreeView Name="_animationTreeView" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="41,0,0,0" Width="Auto" Height="425" />
+                        </ScrollViewer>
+                        <GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch"  Grid.Column="1" ResizeBehavior="PreviousAndNext"   Width="5" Background="#FFBCBCBC"/>
+
+
+                    <TextBox  Name="_animationStepsTextBox" Grid.Column="2" Margin="6,0,6,69" HorizontalScrollBarVisibility="Auto" />
+
+                        <Canvas Margin="25,0,6,-5" Grid.Column="2" VerticalAlignment="Bottom" Height="77">
+
+                            <Button Height="23" Name="button1" Width="75" Click="Button1Click3EventHandler" VerticalContentAlignment="Center" Canvas.Left="16" Canvas.Top="17" HorizontalAlignment="Center" Grid.Column="2" Margin="0,0,103,22" VerticalAlignment="Bottom" HorizontalContentAlignment="Center">Play</Button>
+                        <Button Name="resetButton" Width="75" Height="23.338" Click="ResetButtonClickEventHandler" VerticalContentAlignment="Center" Canvas.Left="109" Canvas.Top="17" HorizontalAlignment="Right" Grid.Column="2" Margin="0,0,6,22" VerticalAlignment="Bottom">Reset</Button>
+                        </Canvas>
+                        <Image Height="29" HorizontalAlignment="Left" Name="_arrowImage" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/WebService;component/Images/Arrow.jpg" Opacity="1" ClipToBounds="True" OpacityMask="Black" Margin="6,0,0,0" />
+                    </Grid>
+                   </ScrollViewer>
+            </TabItem>
+            <TabItem Name="_securityTraceTab" IsSelected="True" Header="WS-Security Trace" Background="AliceBlue">
+                
+                    <TextBox Name="txtTrace" FontFamily="Courier New" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="631" Height="422" />
+                
+            </TabItem>
+
+            </TabControl>
+
+        </Grid>
+
+</UserControl>

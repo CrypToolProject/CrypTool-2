@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    The <b>Transposition Analyzer</b> component offers four different methods for the computer aided analysis of ciphertexts that were generated with the <b>Transposition</b> component:
+    the "Brute-Force Algorithm", the "Crib Analysis", the "Genetic Algorithm", and the "Hillclimbing Algorithm".
+    All methods offer settings for the connected <b>Transposition</b> component and list the results in a table.
+    Moreover, the results are evaluated by a <b>CostFunction</b> component that can be connected to this component, and the results are then ordered according to their cost value.
+    Please read the descriptions of these components for further information.
+
+    <section headline="Brute-Force Algorithm">
+      The brute-force method is one of the easiest methods when trying to decode an encrypted message.
+      Its principle is to decode the ciphertext with every possible key and assign a score value to the resulting plaintext. Then the text with the best score is in most cases the original plaintext.
+      <newline />
+      As the brute-force method tries all possible keys, the correct key is certainly among them. But there is a disadvantage: In most cases, the key space is too big, so that the search would take way too much time, even for modern computers.
+      For a columnar transposition with n columns, there are for example n! different keys.
+    </section><section headline="Crib Analysis">
+      A "crib" is a short piece of the plaintext that is already known to the attacker. Thus, the "Crib Analysis" belongs to the category of the known-plaintext attacks. By analyzing the text with the crib, it is possible
+      to greatly reduce the key space. By how much the key space can be reduced depends on the quality of the crib.
+      This component requires a crib of arbitrary length, that is certain to be included in the plaintext message.
+    </section><section headline="Genetic Algorithm">
+      The genetic algorithm simulates an "evolution" of keys. From a starting population of keys new keys will be generated and, according to Darwins "Theory of Evolution", only the fittest will survive into the next generation.
+      The genetic algorithm starts by creating N random keys of length P, which are stored in the list MAXLIST. Now the ciphertext that is to be analyzed is decoded with each key from MAXLIST and its cost value is calculated.
+		  Subsequently, the keys are ordered according to their cost values. The worst N/2 keys are deleted from MAXLIST. All the remaining keys are paired up into key pairs. Then, from the two keys of each key pair (Par1, Par2)
+      there are two new identical keys Child1 and Child2 created, which are then altered in the following way:<newline /><enum><item><list><item>Generate a random number n ∈ [1, P-1].</item><item>The numbers at the first n positions of the keys Child1 and Child2 remain unchanged.</item><item>The numbers at the positions n to P of the keys Child1 and Child2 are arranged according to the same numbers in the other parent key.</item></list></item><item><list><item>Generate random numbers n1, n2, n3, n4 ∈ [1, P].</item><item>The numbers at the positions n1 and n2 in Child1 and the numbers at the positions n3 and n4 in Child2 are swapped.</item></list></item></enum>
+
+      Now the cost values of the child keys Child1 and Child2 are calculated and the keys are stored in MAXLIST. Again, the list is sorted according to the cost values and the N/2 worst keys are deleted.
+      This is repeated until the maximum number of iterations is reached.
+    </section><section headline="Hillclimbing Algorithm">
+      The hillclimbing algorithm generates a random key and decrypts the ciphertext with this key and the resulting plaintext is evaluated with a cost function. 
+      Then a small random change is made on the key and the procedure is repeated with this new key.
+      If the new plaintext has a worse value than the previous plaintext, the new key is discarded. But if the new plaintext has a better cost value, the new key is adopted as the new current key.
+      This procedure is repeated many times. Thus, only changes that generate an improved key are accepted. In this respect, the algorithm reminds of a mountain climber who only takes steps that lead him upwards.
+    </section></introduction>
+  <introduction lang="zh-CN">换位分析器组件提供了四种不同的方法来对由换位组件生成的密文进行计算机辅助分析：“蛮力算法”，“婴儿床分析”，“遗传算法”和“爬山算法”。所有方法都为连接的Transposition组件提供设置，并在表中列出结果。此外，结果由可连接到该组件的CostFunction组件评估，然后根据其成本值对结果进行排序。请阅读这些组件的说明以获取更多信息。尝试解码加密消息时，蛮力方法是最简单的方法之一。它的原理是使用每个可能的密钥对密文进行解码，并为所得的明文分配分数。那么，得分最高的文本在大多数情况下是原始明文。当蛮力方法尝试所有可能的键时，正确的键肯定在其中。但是有一个缺点：在大多数情况下，密钥空间太大，因此即使对于现代计算机，搜索也会花费太多时间。对于具有n列的柱状换位，例如有n！不同的键。 “婴儿床”是攻击者已知的一小段纯文本。因此，“婴儿床分析”属于已知明文攻击的类别。通过使用婴儿床分析文本，可以大大减少按键空间。可减少多少钥匙空间取决于婴儿床的质量。该组件需要一个任意长度的婴儿床，一定要包含在明文消息中。遗传算法模拟密钥的“演变”。根据达尔文的《进化论》，从一堆密钥开始将生成新密钥，只有优胜劣汰才能生存到下一代。遗传算法从创建长度为P的N个随机密钥开始，这些密钥存储在列表MAXLIST中。现在，将使用MAXLIST中的每个密钥对要分析的密文进行解码，并计算其成本值。随后，根据密钥的成本值对密钥进行排序。最差的N / 2键从MAXLIST中删除。其余所有密钥都配对为密钥对。然后，从每个密钥对的两个密钥（Par1，Par2）中创建两个新的相同密钥Child1和Child2，然后按以下方式对其进行更改：生成随机数n∈[1，P-1]。子键Child1和Child2的前n个位置的数字保持不变。子键Child1和Child2的n至P位置的数字根据另一个父键中的相同数字排列。生成随机数n1，n2，n3 ，n4∈[1，P]。Child1中n1和n2位置的数字与Child2中n3和n4位置的数字被交换。现在，将计算子项Child1和Child2的成本值，并将这些项存储在MAXLIST中。同样，根据成本值对列表进行排序，并删除N / 2个最坏的键。重复此过程，直到达到最大迭代次数为止。爬山算法会生成一个随机密钥，并使用该密钥解密密文，然后使用成本函数评估所得的明文。然后对密钥进行小的随机更改，并使用此新密钥重复此过程。如果新明文的值比以前的明文差，则丢弃新密钥。但是，如果新的明文具有更好的成本价值，则将新密钥用作新的当前密钥。重复此过程很多次。因此，仅接受生成改进密钥的更改。在这方面，该算法使人想起了一个登山者，他仅采取将他引向上方的步骤。</introduction>
+  <introduction lang="ru">Компонент Transposition Analyzer предлагает четыре различных метода компьютерного анализа зашифрованных текстов, которые были созданы с помощью компонента Transposition: «Алгоритм Brute-Force», «Анализ кривых», «Генетический алгоритм» и «Алгоритм Hillclimbing». Все методы предлагают настройки для подключенного компонента Transposition и перечисляют результаты в таблице. Более того, результаты оцениваются компонентом CostFunction, который может быть подключен к этому компоненту, и затем результаты упорядочиваются в соответствии с их стоимостью. Прочтите описание этих компонентов для получения дополнительной информации. Метод грубой силы является одним из самых простых методов при попытке декодирования зашифрованного сообщения. Его принцип состоит в том, чтобы декодировать зашифрованный текст с каждым возможным ключом и назначать значение оценки для полученного открытого текста. Тогда текст с лучшим результатом в большинстве случаев является исходным открытым текстом. Поскольку метод грубой силы пытается использовать все возможные ключи, правильный ключ, безусловно, среди них. Но есть недостаток: в большинстве случаев ключевое пространство слишком велико, так что поиск займет слишком много времени, даже для современных компьютеров. Для столбчатой ​​транспозиции с n столбцами существуют, например, n! разные ключи. «Шпаргалка» - это короткая часть открытого текста, которая уже известна злоумышленнику. Таким образом, «Анализ Crib» относится к категории атак типа «открытый». Анализируя текст с помощью кроватки, можно значительно уменьшить ключевое пространство. На сколько можно уменьшить ключевое пространство, зависит от качества кроватки. Для этого компонента требуется шпаргалка произвольной длины, которая наверняка будет включена в сообщение открытого текста. Генетический алгоритм имитирует «эволюцию» ключей. Из стартовой популяции ключей будут созданы новые ключи, и, согласно Дарвину «Теория эволюции», только самые сильные выживут в следующем поколении. Генетический алгоритм начинается с создания N случайных ключей длины P, которые хранятся в списке MAXLIST. Теперь зашифрованный текст, который должен быть проанализирован, декодируется каждым ключом из MAXLIST и вычисляется его стоимость. Впоследствии ключи упорядочиваются в соответствии с их стоимостью. Худшие ключи N / 2 удаляются из MAXLIST. Все остальные ключи соединены парными парами. Затем из двух ключей каждой пары ключей (Par1, Par2) создаются две новые идентичные ключи Child1 и Child2, которые затем изменяются следующим образом: Создайте случайное число n ∈ [1, P-1]. номера в первых n положениях ключей Child1 и Child2 остаются неизменными. Числа в положениях n до P ключей Child1 и Child2 расположены в соответствии с теми же номерами в другом родительском ключе. Генерирующие случайные числа n1, n2, n3 , n4 ∈ [1, P]. Числа в позициях n1 и n2 в Child1 и числа в позициях n3 и n4 в Child2 меняются местами. Теперь вычисляются значения стоимости дочерних ключей Child1 и Child2, а ключи хранятся в MAXLIST. Опять же, список сортируется в соответствии со значениями стоимости, а худшие ключи N / 2 удаляются. Это повторяется до тех пор, пока не будет достигнуто максимальное количество итераций. Алгоритм Hillclimbing генерирует случайный ключ и расшифровывает зашифрованный текст с помощью этого ключа, а полученный открытый текст оценивается с помощью функции стоимости. Затем на клавише выполняется небольшое случайное изменение, и процедура повторяется с этим новым ключом. Если новый открытый текст имеет худшее значение, чем предыдущий открытый текст, новый ключ отбрасывается. Но если новый открытый текст имеет более высокую стоимость, новый ключ принимается как новый текущий ключ. Эта процедура повторяется много раз. Таким образом, принимаются только изменения, которые генерируют улучшенный ключ. В этом отношении алгоритм напоминает альпиниста, который только предпринимает шаги, которые ведут его вверх.</introduction>
+  <usage lang="en">
+    The component has one output for the result with the best score. It has two inputs, one for the text that is to be analyzed, and one for a "crib". The "crib" input is only relevant if the crib analysis mode is selected.
+    The analysis works both for texts, whose length is not a multiple of the key length, as well as for texts, that have been padded to reach a length that is a multiple of the key length.
+    <newline />
+    You must choose the analysis mode in the settings of the component. As each mode has a different set of parameters, the settings panel will change dynamically after changing the mode selector.
+    <newline /><section headline="Brute-Force Algorithm">
+      If you select the brute-force algorithm, you must provide the key size, up to which the algorithm is supposed to search.
+      Moreover, you can select against which kinds of transpositions the algorithm should check.
+    </section><section headline="Crib Analysis">
+      If you select crib analysis, you must provide the size of the key space.
+    </section><section headline="Genetic Algorithm">
+      If you select the genetic algorithm, you must provide the size of the key space. Moreover, you can enter the number of iterations for the genetic algorithm.
+      The field "Repetitions" determines, how often to generate new random numbers for a new evolution.
+    </section><section headline="Hillclimbing Algorithm">
+      If you select the hillclimbing algorithm, you must provide the size of the key space. In the field "Repetitions", you can enter how often the algorithm should be restarted with a new random key.
+      The number of iterations that should be executed for a random key can be entered in the field "Iterations".
+    </section></usage>
+  <usage lang="zh-CN">该组件具有一个输出，该结果具有最佳分数。它有两个输入，一个用于要分析的文本，一个用于“小床”。只有选择了婴儿床分析模式时，“婴儿床”输入才有意义。该分析适用于长度不是键长的倍数的文本，也适用于已填充到长度是键长的倍数的文本。您必须在组件的设置中选择分析模式。由于每种模式都有一组不同的参数，因此更改模式选择器后，设置面板将动态更改。如果选择蛮力算法，则必须提供该算法应搜索的密钥大小。此外，您可以选择算法应针对哪种变位进行检查。如果选择婴儿床分析，则必须提供密钥空间的大小。如果选择遗传算法，则必须提供密钥空间的大小。此外，您可以输入遗传算法的迭代次数。 “重复次数”字段确定为新的演化生成新的随机数的频率。如果选择爬山算法，则必须提供密钥空间的大小。在“重复次数”字段中，您可以输入使用新的随机密钥重新启动算法的频率。可以在“迭代次数”字段中输入应该为随机密钥执行的迭代次数。</usage>
+  <usage lang="ru">Компонент имеет один результат для результата с лучшим результатом. Он имеет два входа, один для текста, который должен быть проанализирован, и один для «кроватки». Вход «кроватки» подходит только в том случае, если выбран режим анализа кроватки. Анализ работает как для текстов, длина которых не кратная длине ключа, так и для текстов, которые были дополнены, чтобы достичь длины, кратной длине ключа. Вы должны выбрать режим анализа в настройках компонента. Поскольку каждый режим имеет другой набор параметров, панель настроек будет меняться динамически после изменения селектора режимов. Если вы выберете алгоритм грубой силы, вы должны указать размер ключа, до которого должен искать поиск алгоритм. Кроме того, вы можете выбрать, какие виды транспозиций должен проверять алгоритм. Если вы выбираете анализ кроватки, вы должны указать размер пространства ключа. Если вы выберете генетический алгоритм, вы должны указать размер пространства ключа. Более того, вы можете ввести число итераций для генетического алгоритма. Поле «Повторения» определяет, как часто генерировать новые случайные числа для новой эволюции. Если вы выберете алгоритм Hillclimbing, вы должны указать размер пространства ключа. В поле «Повторения» вы можете указать, как часто алгоритм должен быть перезапущен с помощью нового случайного ключа. Количество итераций, которые должны выполняться для случайного ключа, можно ввести в поле «Итерации».</usage>
+  <presentation lang="en">
+    In the upper region, the presentation shows status information for the component: starting time, expected end time, remaining time, elapsed time, and how many keys per second are being checked.
+    <newline />
+    Below that is a table with the ten best results. The first column shows the ranking number under "#". In the column "Value" you see the score value that the cost function assigns to this entry.
+    In the "Key" column you see the key that produced this result, and finally the "Text" column contains the plaintext that resulted from this key.
+    <newline />
+    You can send any of the listed plaintexts to the output of the component by double clicking it.
+  </presentation>
+  <presentation lang="zh-CN">在上部区域中，显示内容显示了该组件的状态信息：开始时间，预期结束时间，剩余时间，经过时间以及每秒检查多少个键。下面是具有十个最佳结果的表。第一列显示“＃”下的排名编号。在“值”列中，您可以看到成本函数分配给该条目的得分值。在“键”列中，您可以看到产生此结果的键，最后，“文本”列中包含由该键产生的明文。您可以通过双击将列出的任何纯文本发送到组件的输出。</presentation>
+  <presentation lang="ru">В верхней области в презентации отображается информация о статусе компонента: время начала, ожидаемое время окончания, оставшееся время, прошедшее время и количество проверок в секунду. Ниже приведена таблица с десятью лучшими результатами. В первом столбце показан номер ранжирования в поле «#». В столбце «Значение» вы увидите значение оценки, которое функция затрат присваивает этой записи. В столбце «Ключ» вы видите ключ, который произвел этот результат, и, наконец, столбец «Текст» содержит открытый текст, полученный в результате этого ключа. Вы можете отправить любой из перечисленных открытых текстов на выход компонента, дважды щелкнув по нему.</presentation>
+  <language culture="de" />
+  <introduction lang="de">
+		Die Komponente <b>Transpositions-Analyse</b> bietet vier verschiedene Methoden zur Computer-gestützten Analyse von Geheimtexten an, die mit der Komponente <b>Transposition</b> verschlüsselt wurden:
+    den "Brute-Force-Algorithmus", die "Crib-Analyse", den "Genetischen Algorithmus" und den "Hill-Climbing-Algorithmus".
+		Alle Methoden liefern Einstellungen für die angeschlossene <b>Transpositions</b>-Komponente und listen die Ergebnisse tabellarisch auf.
+		Die Ergebnisse werden außerdem von einer an diese Komponente anschließbaren <b>Kostenfunktions</b>-Komponente bewertet, und die besten Ergebnisse werden in der Tabelle an den Anfang gestellt.
+		Für weitere Informationen lesen Sie bitte die Beschreibungen dieser Komponenten.
+
+		<section headline="Brute-Force-Algorithmus">
+		Die Brute-Force-Methode ist eine der einfachsten Methoden, eine verschlüsselte Nachricht zu entschlüsseln.
+		Der Grundgedanke dieser Methode ist, den Geheimtext mit jedem möglichen Schlüssel zu entschlüsseln und mit Hilfe einer Kostenfunktion zu bewerten, welche der entschlüsselten Nachrichten am ehesten dem ursprünglichen Klartext entspricht.
+		<newline />
+		Da bei der Brute-Force-Attacke alle möglichen Schlüssel ausprobiert werden, ist auf jeden Fall auch der richtige Schlüssel dabei. Der Nachteil ist allerdings, dass der Schlüsselraum meist so groß ist, dass die Suche selbst für moderne
+    Computer viel zu lange dauern würde.
+		Beispielsweise müssen für eine Spaltentransposition mit n Spalten bereits n! (Fakultät) verschiedene Schlüssel getestet werden.
+		</section><section headline="Crib-Analyse">
+		Das Wort "crib" bezeichnet bei dieser Methode ein Stück des Klartextes, das dem Angreifer bereits bekannt ist. Die Crib-Analyse gehört daher zur Kategorie der Known-Plaintext-Angriffe. Durch die Analyse des Textes mit Hilfe des "cribs"
+    ist es möglich, den in Frage kommenden Schlüsselraum um ein Vielfaches zu reduzieren. Wie hoch dieser Vorteil gegenüber dem Brute-Force-Algorithmus ist, hängt stark von der Qualität des "cribs" ab.
+		Die hier vorgestellte Komponente benötigt ein "crib" beliebiger Länge, das mit einer Wahrscheinlichkeit von 100% in der Nachricht enthalten ist.
+		</section><section headline="Genetischer Algorithmus">
+		Der genetische Algorithmus simuliert eine "Evolution" von Schlüsseln. Aus einer Start-Population von Schlüsseln entstehen neue Schlüssel und gemäß der Darwinschen Evolutionstheorie überleben nur die "Passendsten". 
+		Der genetische Algorithmus beginnt damit, eine Anzahl N zufälliger Schlüssel der Lange P zu erzeugen, welche in eine Liste MAXLIST gespeichert werden. Mit jedem der Schlüssel aus MAXLIST wird der zu analysierende Geheimtext
+    entschlüsselt und der Kostenwert berechnet. Anschließend werden die Schlüssel nach ihrem Kostenwert sortiert. Die schlechtesten N/2 Schlüssel werden aus MAXLIST gelöscht. Nun werden die verbleibenden Schlüssel in Zweierschlüsselpaare
+    unterteilt. Aus den beiden Schlüssel (Par1 und Par2) jedes Schlüsselpaars werden jeweils ein identischer Schlüssel Child1 und Child2 generiert. Die beiden Schlüssel Child1 und Child2 werden wie folgt verändert:<newline /><enum><item><list><item>Die Zufallszahl n ∈ [1, P-1] wird erzeugt.</item><item>Die Zahlen an den ersten n Positionen der Schlüssel Child1 und Child2 bleiben unverändert.</item><item>Die Zahlen an den Positionen n bis P der Schlüssel Child1 und Child2 werden nach dem Auftreten derselben Zahlen des anderen Elternteils angeordnet.</item></list></item><item><list><item>Die Zufallszahlen n1, n2, n3, n4 ∈ [1, P] werden erzeugt.</item><item>Die Zahlen an den Positionen n1 und n2 in Child1 und die Zahlen an den Positionen n3 und n4 in Child2 werden vertauscht.</item></list></item></enum>
+
+		Zu den "Kinderschlüsseln" Child1 und Child2 von jedem Schlüsselpaar wird der jeweilige Kostenwert berechnet und in MAXLIST gespeichert. Nun werden erneut alle Schlüssel nach ihrem Kostenwert sortiert.
+		Solange die maximale Anzahl an Durchläufen nicht erreicht ist, werden erneut die N/2 schlechtesten Schlüssel gelöscht. Aus den verbleibenden Schlüsseln werden erneut "Kinderschlüssel" erstellt.
+		</section><section headline="Hill-Climbing-Algorithmus">
+      Der Hill-Climbing-Algorithmus generiert einen zufälligen Schlüssel und entschlüsselt damit den Geheimtext. Der resutierende Klartext wird mit einer Kostenfunktion bewertet. Dann wird eine kleine zufällige Änderung am Schlüssel
+      vorgenommen und mit dem neuen Schlüssel wird der Vorgang wiederholt. Hat der neue Klartext eine schlechtere Bewertung als der vorhergehende Klartext, so wird der neue Schlüssel verworfen. Ist der neue Klartext dagegen besser bewertet,
+      wird der neue Schlüssel als der aktuelle Schlüssel übernommen. Dieser Vorgang wird viele Male wiederholt. Da immer nur Änderungen übernommen werden, die einer Verbesserung des Schlüssels entsprechen, ähnelt der Algorithmus einem Bergsteiger,
+      der immer nur bergauf geht.
+    </section></introduction>
+  <usage lang="de">
+    Die Komponente besitzt einen Ausgang zur Ausgabe des am besten bewerteten Ergebnisses, und zwei Eingänge. Ein Eingang ist für den zu analysierenden Geheimtext gedacht, der mit der Komponente <b>Transposition</b> verschlüsselt wurde.
+    Die Analyse funktioniert sowohl für Texte, deren Länge kein Vielfaches der Schlüssellänge ist, als auch für Texte, die durch Anhängen von Füllzeichen auf ein Vielfaches der Schlüssellänge verlängert wurden (Padding).
+    Der zweite Eingang ist für die Eingabe eines "cribs" und daher nur für den Crib-Analyse-Algorithmus relevant.
+		<newline />
+		In den Einstellungen der Komponente kann zunächst der Analyse-Algorithmus gewählt werden. Da diese Algorithmen jeweils andere Einstellungen benötigen, verändert sich das Menü entsprechend dynamisch nach der Eingabe.
+		<newline /><section headline="Brute-Force-Algorithmus">
+		Für den Brute-Force-Algorithmus kann zunächst unter dem Punkt "Schlüsselgröße" festgelegt werden, bis zu welcher Schlüssellänge der Algorithmus die Schlüssel überprüfen soll.
+    Außerdem kann gewählt werden, welche Arten von Transpositionen getestet werden sollen.  
+		</section><section headline="Crib-Analyse">
+		Für die Crib-Analyse kann unter dem Punkt "Schlüsselgröße" die Größe des Schlüsselraums festgelegt werden. 
+		</section><section headline="Genetischer Algorithmus">
+		Beim genetischen Algorithmus kann unter dem Punkt "Schlüsselgröße" die Größe des Schlüsselraums festgelegt werden. Des Weiteren kann unter "Iterationen" gewählt werden, wie tief die Evolution sein soll. 
+    Die Anzahl der "Wiederholungen" besagt, wie oft neue Zufallszahlen für eine neue Evolution gebildet werden sollen.
+		</section><section headline="Hill-Climbing-Algorithmus">
+      Beim Hill-Climbing-Algorithmus kann unter dem Punkt "Schlüsselgröße" die Größe des Schlüsselraums festgelegt werden. Im Feld "Wiederholungen" kann man angeben, wie oft der Algorithmus mit einem neuen,
+      zufälligen Startwert wiederholt werden soll. Die Anzahl der Iterationen, die der Algorithmus für einen zufälligen Startwert durchführen soll, wird im Feld "Iterationen" angegeben.
+    </section></usage>
+  <presentation lang="de">
+		Die Präsentation zeigt im oberen Bereich Statusinformationen der Komponente an: Startzeit, wahrscheinliche Endzeit, verbleibende Zeit, bereits vergangene Zeit, und wie viele Schlüssel pro Sekunde überprüft werden.
+		<newline />
+		Darunter befindet sich eine Tabelle mit den zehn besten Ergebnissen. In der ersten Spalte der Tabelle stehen unter "#" die Ränge der Einträge. In der Spalte "Wert" steht der Wert, den die Kostenfunktion diesem Eintrag zugewiesen hat.
+    In der Spalte "Schlüssel" steht der für dieses Ergebnis ermittelte Schlüssel. In der Spalte "Text" steht schließlich der mit diesem Schlüssel ermittelte Klartext.
+		<newline />
+		Durch einen Doppelklick auf ein beliebiges Ergebnis wird dieses als Ausgabe der Komponente verwendet.
+	</presentation>
+  <references>
+    <linkReference>
+      <link url="http://de.wikipedia.org/wiki/Transposition_(Kryptographie)" lang="de" />
+      <caption lang="de">Transposition (Wikipedia)</caption>
+      <link url="http://en.wikipedia.org/wiki/Transposition_cipher" lang="en" />
+      <caption lang="en">Transposition cipher (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

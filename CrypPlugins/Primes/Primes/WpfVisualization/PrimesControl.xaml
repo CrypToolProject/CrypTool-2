@@ -1,0 +1,110 @@
+﻿<UserControl x:Class="Primes.WpfVisualization.PrimesControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:navi="clr-namespace:Primes.WpfVisualization.Navigation"
+    xmlns:controls="clr-namespace:Primes.WpfControls.Start"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.PrimesControl"
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../WpfResources/Primes.WpfResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate TargetType="MenuItem" x:Key="miBackTmpl">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
+                    </Grid.ColumnDefinitions>
+                    <Image Source="../Resources/icons/resultset_previous.png" Grid.Column="0" />
+                    <TextBlock Grid.Column="1" Text="{TemplateBinding Header}" VerticalAlignment="Center"></TextBlock>
+                </Grid>
+            </ControlTemplate>
+            <ControlTemplate TargetType="MenuItem" x:Key="miForwardTmpl">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{TemplateBinding Header}" VerticalAlignment="Center"></TextBlock>
+                    <Image Source="../Resources/icons/resultset_next.png" Grid.Column="1" />
+                </Grid>
+            </ControlTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource CTBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" Name="cdleft" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+            <Grid Name="pnlLeft" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <navi:Navigation HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="navigator" Grid.Row="1" MinWidth="250" />
+
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="20,0,20,10" Grid.Row="2" Click="miClose_Click" Content="{x:Static lang:PrimesControl.btnclose}" Name="btnClose" Visibility="Hidden"></Button>
+            </Grid>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="3" HorizontalContentAlignment="Center" Margin="0,0,0,0" ResizeBehavior="PreviousAndNext" />
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <DockPanel Grid.Row="0">
+                <Menu Height="22" Name="menu1" DockPanel.Dock="Top" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                    <MenuItem Header="{x:Static lang:PrimesControl.miback}" Name="miBack" Click="miHistory_Click" Template="{StaticResource miBackTmpl}">
+                        <MenuItem.Style>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="OverridesDefaultStyle" Value="False" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="TextBlock.Foreground" Value="Gray" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                    <TextBlock Width="2" />
+                    <MenuItem Header="{x:Static lang:PrimesControl.miforward}" Name="miForward" Click="miHistory_Click" Template="{StaticResource miForwardTmpl}" >
+                        <MenuItem.Style>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="OverridesDefaultStyle" Value="False" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="TextBlock.Foreground" Value="Gray" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                    <TextBlock Width="2" />
+                    <TextBlock Width="2" />
+                    <MenuItem Header="{x:Static lang:PrimesControl.miclose}" Name="miClose" Click="miClose_Click" Visibility="Hidden" >
+                    </MenuItem>
+                </Menu>
+                <SelectableTextBlock Name="lblTitel" Margin="10,0,0,0" Padding="5,0,5,0" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Text="{x:Static lang:PrimesControl.title_start}" />
+                <Image Name="imghelp" Cursor="Hand" Source="../Resources/icons/help32.gif" Width="24" Height="24" HorizontalAlignment="Left" MouseLeftButtonDown="ImageHelpClick" VerticalAlignment="Center" />
+            </DockPanel>
+            <ContentControl Grid.Row="1" Name="ContentArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0">
+                <controls:StartControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="StartControl" />
+            </ContentControl>
+        </Grid>
+    </Grid>
+
+</UserControl>

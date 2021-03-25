@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>转换器</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>将输入转换为另一种类型</value>
+  </data>
+  <data name="InputOneCaption" xml:space="preserve">
+    <value>输入值</value>
+  </data>
+  <data name="InputOneTooltip" xml:space="preserve">
+    <value>输入。</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>输出量</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>输出。</value>
+  </data>
+  <data name="ConverterCaption" xml:space="preserve">
+    <value>转换成</value>
+  </data>
+  <data name="ConverterTooltip" xml:space="preserve">
+    <value>选择输出类型</value>
+  </data>
+  <data name="InputEncodingSettingCaption" xml:space="preserve">
+    <value>输入编码</value>
+  </data>
+  <data name="InputEncodingSettingTooltip" xml:space="preserve">
+    <value>选择输入字节数组或流的预期字符编码。</value>
+  </data>
+  <data name="FormatAmerCaption" xml:space="preserve">
+    <value>格式</value>
+  </data>
+  <data name="FormatAmerTooltip" xml:space="preserve">
+    <value>选择是否通过德语或美式语法识别双精度值。德语：“ 1.234.567,89”；美国人：“ 1,234,567.89”</value>
+  </data>
+  <data name="NumericCaption" xml:space="preserve">
+    <value>数字</value>
+  </data>
+  <data name="NumericTooltip" xml:space="preserve">
+    <value>选择是否将输入解释为数值</value>
+  </data>
+  <data name="PresentationFormatSettingCaption" xml:space="preserve">
+    <value>PresentationFormatSetting</value>
+  </data>
+  <data name="PresentationFormatSettingTooltip" xml:space="preserve">
+    <value>选择将用于显示输出数据的格式。</value>
+  </data>
+  <data name="EncodingSettingList1" xml:space="preserve">
+    <value>UTF-8</value>
+  </data>
+  <data name="EncodingSettingList2" xml:space="preserve">
+    <value>UTF-7</value>
+  </data>
+  <data name="EncodingSettingList3" xml:space="preserve">
+    <value>UTF-16</value>
+  </data>
+  <data name="EncodingSettingList4" xml:space="preserve">
+    <value>UTF-32</value>
+  </data>
+  <data name="EncodingSettingList5" xml:space="preserve">
+    <value>ASCII码</value>
+  </data>
+  <data name="EncodingSettingList6" xml:space="preserve">
+    <value>ISO8859-15</value>
+  </data>
+  <data name="FormatAmerList1" xml:space="preserve">
+    <value>德语</value>
+  </data>
+  <data name="FormatAmerList2" xml:space="preserve">
+    <value>美国人</value>
+  </data>
+  <data name="NumericList1" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="NumericList2" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="PresentationFormatSettingList1" xml:space="preserve">
+    <value>文本</value>
+  </data>
+  <data name="PresentationFormatSettingList2" xml:space="preserve">
+    <value>十六进制</value>
+  </data>
+  <data name="PresentationFormatSettingList3" xml:space="preserve">
+    <value>Base64</value>
+  </data>
+  <data name="ReverseOrderCaption" xml:space="preserve">
+    <value>反向字节顺序</value>
+  </data>
+  <data name="ReverseOrderTooltip" xml:space="preserve">
+    <value>在将字节提供给输出之前，请先反转其顺序。</value>
+  </data>
+  <data name="EndiannessCaption" xml:space="preserve">
+    <value>字节序</value>
+  </data>
+  <data name="EndiannessList1" xml:space="preserve">
+    <value>大端</value>
+  </data>
+  <data name="EndiannessList2" xml:space="preserve">
+    <value>小端</value>
+  </data>
+  <data name="EndiannessTooltip" xml:space="preserve">
+    <value>当输入是字节数组时，指定输入字节的字节序。</value>
+  </data>
+  <data name="EncodingSettingList7" xml:space="preserve">
+    <value>Windows-1252</value>
+  </data>
+  <data name="OutputEncodingSettingCaption" xml:space="preserve">
+    <value>输出编码</value>
+  </data>
+  <data name="OutputEncodingSettingTooltip" xml:space="preserve">
+    <value>选择输出字节数组或流的字符编码。</value>
+  </data>
+  <data name="TypesList1" xml:space="preserve">
+    <value>串</value>
+  </data>
+  <data name="TypesList2" xml:space="preserve">
+    <value>整型</value>
+  </data>
+  <data name="TypesList3" xml:space="preserve">
+    <value>短</value>
+  </data>
+  <data name="TypesList4" xml:space="preserve">
+    <value>字节</value>
+  </data>
+  <data name="TypesList5" xml:space="preserve">
+    <value>双</value>
+  </data>
+  <data name="TypesList6" xml:space="preserve">
+    <value>大整数</value>
+  </data>
+  <data name="TypesList7" xml:space="preserve">
+    <value>字节[]</value>
+  </data>
+  <data name="TypesList8" xml:space="preserve">
+    <value>密码流</value>
+  </data>
+  <data name="FormatCaption" xml:space="preserve">
+    <value>数值格式</value>
+  </data>
+  <data name="FormatTooltip" xml:space="preserve">
+    <value>提供格式字符串，用于指定通用.NET格式的数字类型的转换。如果您不知道这意味着什么，请保留空白。</value>
+  </data>
+  <data name="TypesList9" xml:space="preserve">
+    <value>布尔</value>
+  </data>
+  <data name="DigitsCaption" xml:space="preserve">
+    <value>位数</value>
+  </data>
+  <data name="DigitsGroupCaption" xml:space="preserve">
+    <value>位数组大小</value>
+  </data>
+  <data name="DigitsGroupTooltip" xml:space="preserve">
+    <value>输入将数据流划分为的数字组的大小。</value>
+  </data>
+  <data name="DigitsTooltip" xml:space="preserve">
+    <value>输入数据流组成的数字。</value>
+  </data>
+  <data name="TypesList10" xml:space="preserve">
+    <value>uint []</value>
+  </data>
+  <data name="DigitsBaseCaption" xml:space="preserve">
+    <value>数字基</value>
+  </data>
+  <data name="DigitsBaseTooltip" xml:space="preserve">
+    <value>输入用于从/向UInt []转换的数字基数</value>
+  </data>
+  <data name="DigitsDefinitionCaption" xml:space="preserve">
+    <value>将数字定义为</value>
+  </data>
+  <data name="DigitsDefinitionList1" xml:space="preserve">
+    <value>数字串</value>
+  </data>
+  <data name="DigitsDefinitionList2" xml:space="preserve">
+    <value>字节间隔</value>
+  </data>
+  <data name="DigitsDefinitionTooltip" xml:space="preserve">
+    <value>指定要如何定义从/向UInt []转换的数字：可以是任意字符序列或连续字节值的间隔。</value>
+  </data>
+  <data name="DigitsEndiannessCaption" xml:space="preserve">
+    <value>字节序</value>
+  </data>
+  <data name="DigitsEndiannessTooltip" xml:space="preserve">
+    <value>从/向UInt []转换时，指定字节顺序。</value>
+  </data>
+  <data name="DigitsGroup" xml:space="preserve">
+    <value>UInt的数字[]</value>
+  </data>
+  <data name="DigitsOffsetCaption" xml:space="preserve">
+    <value>字节偏移</value>
+  </data>
+  <data name="DigitsOffsetTooltip" xml:space="preserve">
+    <value>输入与数字“零”相对应的字节值的偏移量。</value>
+  </data>
+</root>

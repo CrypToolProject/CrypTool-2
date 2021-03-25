@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>No Action</value>
+  </data>
+  <data name="ActionList10" xml:space="preserve">
+    <value>XOR-Connect Images</value>
+  </data>
+  <data name="ActionList11" xml:space="preserve">
+    <value>Create Image</value>
+  </data>
+  <data name="ActionList12" xml:space="preserve">
+    <value>Crop Image</value>
+  </data>
+  <data name="ActionList13" xml:space="preserve">
+    <value>XOR GrayscaleImages</value>
+  </data>
+  <data name="ActionList14" xml:space="preserve">
+    <value>Black and White</value>
+  </data>
+  <data name="ActionList15" xml:space="preserve">
+    <value>Image Contrast</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>Flip Image</value>
+  </data>
+  <data name="ActionList3" xml:space="preserve">
+    <value>Gray Scale</value>
+  </data>
+  <data name="ActionList4" xml:space="preserve">
+    <value>Smooth Image</value>
+  </data>
+  <data name="ActionList5" xml:space="preserve">
+    <value>Resize Image</value>
+  </data>
+  <data name="ActionList6" xml:space="preserve">
+    <value>Rotate Image</value>
+  </data>
+  <data name="ActionList7" xml:space="preserve">
+    <value>Invert Image</value>
+  </data>
+  <data name="ActionList8" xml:space="preserve">
+    <value>And-Connect Images</value>
+  </data>
+  <data name="ActionList9" xml:space="preserve">
+    <value>Or-Connect Images</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Select the action you want to perform on the images.</value>
+  </data>
+  <data name="ContrastCaption" xml:space="preserve">
+    <value>Contrast</value>
+  </data>
+  <data name="ContrastTooltip" xml:space="preserve">
+    <value>Enter the value of the contrast.</value>
+  </data>
+  <data name="DegreesCaption" xml:space="preserve">
+    <value>Degrees</value>
+  </data>
+  <data name="DegreesTooltip" xml:space="preserve">
+    <value>Enter the degrees for the rotation.</value>
+  </data>
+  <data name="FlipTypeCaption" xml:space="preserve">
+    <value>Flip</value>
+  </data>
+  <data name="FlipTypeList1" xml:space="preserve">
+    <value>Horizontal</value>
+  </data>
+  <data name="FlipTypeList2" xml:space="preserve">
+    <value>Vertical</value>
+  </data>
+  <data name="FlipTypeTooltip" xml:space="preserve">
+    <value>Flip the image horizontally or vertically</value>
+  </data>
+  <data name="InputImage1Caption" xml:space="preserve">
+    <value>InputImage1</value>
+  </data>
+  <data name="InputImage1Caption2" xml:space="preserve">
+    <value>InputImage2</value>
+  </data>
+  <data name="InputImage1Tooltip" xml:space="preserve">
+    <value>This is the standard image used for the processing.</value>
+  </data>
+  <data name="InputImage1Tooltip2" xml:space="preserve">
+    <value>This is the second image, only used for and-, or-, xor-functions.</value>
+  </data>
+  <data name="OutputFileFormatCaption" xml:space="preserve">
+    <value>Output File Format</value>
+  </data>
+  <data name="OutputFileFormatTooltip" xml:space="preserve">
+    <value>Select the format of the output file.</value>
+  </data>
+  <data name="OutputImageCaption" xml:space="preserve">
+    <value>OutputImage</value>
+  </data>
+  <data name="OutputImageTooltip" xml:space="preserve">
+    <value>This is the processed image.</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>ImageProcessor</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Processes and saves an image</value>
+  </data>
+  <data name="SizeXCaption" xml:space="preserve">
+    <value>SizeX</value>
+  </data>
+  <data name="SizeXTooltip" xml:space="preserve">
+    <value>Enter the value of horizontal pixels.</value>
+  </data>
+  <data name="SizeYCaption" xml:space="preserve">
+    <value>SizeY</value>
+  </data>
+  <data name="SizeYTooltip" xml:space="preserve">
+    <value>Enter the value of vertical pixels.</value>
+  </data>
+  <data name="SliderX1Caption" xml:space="preserve">
+    <value>Slider X1</value>
+  </data>
+  <data name="SliderX1Tooltip" xml:space="preserve">
+    <value>Enter the value of left margin.</value>
+  </data>
+  <data name="SliderX2Caption" xml:space="preserve">
+    <value>Slider X2</value>
+  </data>
+  <data name="SliderX2Tooltip" xml:space="preserve">
+    <value>Enter the value of right margin.</value>
+  </data>
+  <data name="SliderY1Caption" xml:space="preserve">
+    <value>Slider Y1</value>
+  </data>
+  <data name="SliderY1Tooltip" xml:space="preserve">
+    <value>Enter the value of top margin.</value>
+  </data>
+  <data name="SliderY2Caption" xml:space="preserve">
+    <value>Slider Y2</value>
+  </data>
+  <data name="SliderY2Tooltip" xml:space="preserve">
+    <value>Enter the value of bottom margin.</value>
+  </data>
+  <data name="SmoothCaption" xml:space="preserve">
+    <value>Smooth</value>
+  </data>
+  <data name="SmoothTooltip" xml:space="preserve">
+    <value>Enter the smooth value.</value>
+  </data>
+  <data name="ThresholdCaption" xml:space="preserve">
+    <value>Threshold</value>
+  </data>
+  <data name="ThresholdTooltip" xml:space="preserve">
+    <value>Enter the value of the threshold.</value>
+  </data>
+</root>

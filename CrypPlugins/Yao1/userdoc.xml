@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    There are two millionaires, Alice and Bob. They want to know who is richer, but they don´t want to disclose to each other how much money they own.
+    This problem is solved by Yao´s millionaire protocol. It was proposed by the computer scientist Andrew Yao in 1982.
+    <newline /><newline />
+    CrypTool implements the protocol with the three components Yao1, Yao2 and Yao3.
+    Yao1 and Yao2 represent actions that are executed by Alice, Yao3 is executed by Bob.
+  </introduction>
+  <introduction lang="zh-CN">有两个百万富翁，爱丽丝和鲍勃。他们想知道谁更富有，但他们不想彼此透露自己拥有多少钱。姚明的百万富翁协议解决了这个问题。它是由计算机科学家Andrew Yao在1982年提出的。CrypTool使用Yao1，Yao2和Yao3这三个组件来实现该协议。 Yao1和Yao2表示由Alice执行的动作，Yao3由Bob执行。</introduction>
+  <introduction lang="ru">Есть два миллионера, Алиса и Боб. Они хотят знать, кто богаче, но они не хотят раскрывать друг другу, сколько денег у них есть. Эта проблема решена протоколом миллионеров Яо. Это было предложено компьютерным ученым Эндрю Яо в ​​1982 году. CrypTool реализует протокол с тремя компонентами Yao1, Yao2 и Yao3. Yao1 и Yao2 представляют действия, которые выполняются Алисой, Yao3 исполняется Бобом.</introduction>
+  <introduction lang="de-DE">
+    Die beiden Millionäre Alice und Bob wollen herausfinden, wer von ihnen reicher ist, ohne dem anderen dabei mitteilen zu müssen, wie reich sie genau sind.
+    Dieses Problem wird auch "Yaos Millionärsproblem" genannt. Der Informatiker Andrew Yao schlug 1982 ein Protokoll zur Lösung des Problems dar.
+    <newline /><newline />
+    Das Protokoll wird in CrypTool durch die drei Komponenten Yao1, Yao2 und Yao3 implementiert.
+    Yao1 und Yao2 stellen Aktionen dar, die von Alice ausgeführt werden, Yao3 wird von Bob ausgeführt.
+  </introduction>
+  <usage lang="en">
+    This component implements the first step of the protocol on Alice's side.
+    <newline /><newline />
+    Alice and Bob must agree on an upper limit m, that is bigger than the amount of money that each of them owns.
+    The value of m must be entered to the component on the input 'Maximal money'.
+    Bob generates a random number x that he encrypts with Alice's public RSA key. From that, he subtracts the amount of his wealth and sends the result to Alice. The value must be entered on the input 'D'.
+    The component then calculates for all integers i from $0$ to $m-1$ the values $Y(i) = dec(D+i)$, where dec is the decryption with Alice's private RSA key. The resulting list Y is then displayed sequentially on the output of the component.
+  </usage>
+  <usage lang="zh-CN">该组件在爱丽丝方面实现了协议的第一步。爱丽丝和鲍勃必须商定一个上限m，该上限大于他们各自拥有的金额。 m的值必须输入到“最大金额”输入中的组件中。鲍勃生成一个随机数x，并用爱丽丝的公共RSA密钥加密。然后，他减去自己的财富，然后将结果发送给爱丽丝。该值必须在输入“ D”上输入。然后，组件为从$ 0 $到$ m-1 $的所有整数i计算值$ Y（i）= dec（D + i）$，其中dec是使用Alice的私有RSA密钥进行的解密。然后将结果列表Y顺序显示在组件的输出上。</usage>
+  <usage lang="ru">Этот компонент реализует первый шаг протокола на стороне Алисы. Алиса и Боб должны договориться о верхнем пределе m, который больше, чем сумма денег, которую каждый из них владеет. Значение m должно быть введено в компонент на вкладке «Максимальные деньги». Боб генерирует случайное число х, которое он шифрует с помощью открытого ключа RSA Алисы. Из этого он вычитает сумму своего богатства и отправляет результат Алисе. Значение должно вводиться на входе «D». Затем компонент вычисляет для всех целых чисел i от $ 0 $ до $ m-1 $ значения $ Y (i) = dec (D + i) $, где dec - дешифрование с помощью частного ключа RSA Алисы. Полученный список Y затем последовательно отображается на выходе компонента.</usage>
+  <usage lang="de-DE">
+    Diese Komponente implementiert den ersten Schritt des Protokolls auf Alices Seite.
+    <newline /><newline />
+    Alice und Bob müssen vorab eine obere Schranke m vereinbaren, unterhalb derer das Vermögen der beiden liegt.
+    Geben Sie die obere Schranke am Eingang 'Maximaler Betrag' an.
+    Bob erzeugt eine Zufallszahl x, die er mit Alices öffentlichem RSA-Schlüssel verschlüsselt. Davon zieht er sein Vermögen ab und schickt diesen Wert zu Alice. Der Wert muss am Eingang 'D' der Komponente eingegeben werden.
+    Die Komponente berechnet dann für alle Zahlen i von $0$ bis $m-1$ die Zahlen $Y(i) = dec(D+i)$, wobei dec die Entschlüsselung mit Alices privatem RSA-Schlüssel darstellt. Die resultierende Liste Y wird sequentiell am Ausgang der
+    Komponente ausgegeben.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Yao's_Millionaires'_Problem" lang="en" />
+      <caption lang="en">Yao's Millionaires' Problem (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Yaos_Millionärsproblem" lang="de-DE" />
+      <caption lang="de-DE">Yaos Millionärsproblem (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://www.proproco.co.uk/million.pdf" lang="en" />
+      <caption lang="en">Yao´s Millionaires' problem (PDF)</caption>
+      <link url="http://www.proproco.co.uk/million.pdf" lang="de-DE" />
+      <caption lang="de-DE">Yaos Millionärsproblem (PDF, englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

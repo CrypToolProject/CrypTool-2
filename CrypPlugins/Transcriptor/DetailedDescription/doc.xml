@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    With the help of the Transcriptor it is possible to convernt an image with a ciphertext to a computer processable ciphertext.
+    Afterwards the text can be used for further analyzes.
+  </introduction>
+  <introduction lang="zh-CN">借助转录器，可以将具有密文的图像会聚为计算机可处理的密文。之后，该文本可用于进一步分析。</introduction>
+  <introduction lang="ru">С помощью Transcriptor можно преобразовать изображение с зашифрованным текстом в компьютерный обрабатываемый зашифрованный текст. Впоследствии текст можно использовать для дальнейшего анализа.</introduction>
+  <introduction lang="de-DE">
+    Mit Hilfe des Transkriptors kann man ein Bild, welches einen Chiffretext enthält, zu einem im Computer verarbeitbaren Chiffretext umwandeln.
+    Anschließend kann man diesen Text weiteren Analysen unterziehen.
+  </introduction>
+  <usage lang="en">
+    With <docRef item="FileInput.FileInputClass" /> you can load the picture, which contains the symbols into the Transcriptor.
+    The Roman alphabet in big letters is the default alphabet for transcription. It's also possible to use other alphabets with the <docRef item="CrypTool.Alphabets.Alphabet" /> component.
+    Use <docRef item="TextOutput.TextOutput" /> to display the text.
+    <newline /><newline />
+    Once the workspace has been started, you can interact with the Transcriptor. You can mark a symbol by dragging a rectangle over it.
+    The selected symbol is then displayed in the selection. Now you can press the "New symbol" button and the icon is displayed in the list:
+    <newline /><img src="Transcriptor/DetailedDescription/Liste_eng.png" /><newline />
+    It is also possible to add spaces in the text. This is done by dragging a rectangle over the place and clicking the "Add space" button. If the mouse is
+    held over a rectangle a tooltip with the represented character and figure appears:
+    <newline /><img src="Transcriptor/DetailedDescription/Tooltip.png" /><newline />
+
+    Symbols can also be deleted by holding the Ctrl key and clicking on the rectangle. You can even delete an entire group of symbols by holding the
+    Ctrl key and double-clicking the symbol in the list. Once you are done, you can press the "Generate" button and the text is displayed.
+
+    <section headline="Semi-automatic">
+      In semi-automatic mode similar looking symbols will be added automatically if you add a new symbol. The symbol in the selection is
+      compared with the entire image and a cross-correlation coefficient <ref id="wikipedia" /> is calculated for each section. A perfect match is 100%, and absolutely no
+      match 0%. With the threshold you can set a value from which a symbol is to be accepted. Symbols that were not found can be added by
+      double clicking on its icon in the list. In this mode the order in which the symbols are marked doesn't matter.
+      After all symbols are marked you have to click on the "1st symbol" button and click on the first symbol in each row.
+      This can also be made undone by clicking on a rectangle that is already highlighted.
+    </section><section headline="Manually">
+      The manually mode is intended for specially formatted text. The text is printed by the order in which the symbols are marked.
+      Therefore the "1st symbol" button is not required and is disabled. In addition, automatically finding the same symbols is
+      deactivated  in this mode. Symbols which are already known have to be added with a double-click on the corresponding icon in the list.
+    </section></usage>
+  <usage lang="zh-CN">使用，您可以加载图片，其中包含符号到转录器中。大写字母的罗马字母是转录的默认字母。也可以在组件中使用其他字母。用于显示文本。启动工作空间后，您可以与Transcriptor进行交互。您可以通过在符号上拖动一个矩形来标记它。然后，所选符号将显示在选择中。现在，您可以按“新符号”按钮，并且该图标将显示在列表中：也可以在文本中添加空格。这是通过在位置上拖动一个矩形并单击“添加空间”按钮来完成的。如果将鼠标悬停在矩形上，则会显示带有所表示字符和图形的工具提示：也可以通过按住Ctrl键并单击矩形来删除符号。您甚至可以通过按住Ctrl键并双击列表中的符号来删除整个符号组。完成后，您可以按“生成”按钮，并显示文本。在半自动模式下，如果添加新符号，相似外观的符号将自动添加。将选择中的符号与整个图像进行比较，并为每个部分计算互相关系数。完美匹配是100％，绝对不匹配是0％。使用阈值，您可以设置一个可接受符号的值。可以通过双击列表中的图标来添加未找到的符号。在此模式下，标记符号的顺序无关紧要。标记所有符号后，您必须单击“第一个符号”按钮，然后单击每行中的第一个符号。也可以通过单击已突出显示的矩形来撤消此操作。手动模式适用于特殊格式的文本。文本按标记符号的顺序打印。因此，“第一个符号”按钮不是必需的，而是被禁用的。此外，在此模式下，将禁用自动查找相同的符号。必须通过双击列表中的相应图标来添加已知符号。</usage>
+  <usage lang="ru">С помощью вы можете загрузить изображение, содержащее символы в Transcriptor. Латинский алфавит в больших буквах является алфавитом по умолчанию для транскрипции. Также возможно использовать другие алфавиты с компонентом. Используйте для отображения текста. После того, как рабочее пространство запущено, вы можете взаимодействовать с Transcriptor. Вы можете пометить символ, перетащив прямоугольник над ним. Затем выбранный символ отображается в списке. Теперь вы можете нажать кнопку «Новый символ», и значок появится в списке: также возможно добавить пробелы в текст. Это делается путем перетаскивания прямоугольника над местом и нажатия кнопки «Добавить пробел». Если мышь удерживается над прямоугольником, появляется всплывающая подсказка с представленным символом и рисунком: Символы также можно удалить, удерживая клавишу Ctrl и нажав на прямоугольник. Вы даже можете удалить целую группу символов, удерживая клавишу Ctrl и дважды щелкнув символ в списке. Когда вы закончите, вы можете нажать кнопку «Создать», и текст будет отображаться. В полуавтоматическом режиме похожие символы будут добавляться автоматически, если вы добавите новый символ. Символ в выборе сравнивается со всем изображением, а коэффициент взаимной корреляции вычисляется для каждого раздела. Совершенный матч - 100%, и абсолютно не соответствует 0%. С порогом вы можете установить значение, из которого должен быть принят символ. Символы, которые не были найдены, могут быть добавлены двойным щелчком по его значку в списке. В этом режиме порядок, в котором отмечены символы, не имеет значения. После того, как все символы отмечены, вы должны нажать кнопку «1-й символ» и нажать на первый символ в каждой строке. Это также можно отменить, щелкнув по выделенному прямоугольнику. Ручной режим предназначен для специально отформатированного текста. Текст печатается по порядку, в котором отмечены символы. Поэтому кнопка «1-й символ» не требуется и отключена. Кроме того, автоматически поиск одинаковых символов деактивируется в этом режиме. Знаки, которые уже известны, необходимо добавить с помощью двойного щелчка по соответствующему значку в списке.</usage>
+  <usage lang="de-DE">
+    Mit der <docRef item="FileInput.FileInputClass" />  kann man das Bild, welches die Symbole enthält, in den Transkriptor laden. Standardmäßig wird das lateinische
+    Alphabet in Großbuchstaben für das Transkribieren verwendet. Es ist aber auch möglich, andere Alphabete zu benutzen,
+    indem man <docRef item="CrypTool.Alphabets.Alphabet" /> verwendet. Um den Text später auszugeben, verwendet man die <docRef item="TextOutput.TextOutput" />.
+  <newline /><newline />
+    Sobald der Workspace gestartet worden ist, kann man mit dem Transkriptor interagieren. Man markiert ein Symbol indem man ein
+    Rechteck darüber zieht. Das ausgewählte Symbol wird dann in der Auswahl dargestellt. Jetzt kann man auf die "Neues Symbol"-Taste
+    drücken und das Symbol wird in der Liste dargestellt:
+    <newline /><img src="Transcriptor/DetailedDescription/Liste_de.png" /><newline />
+    Es können auch Leerzeichen in dem Text hinzugefügt werden indem ein Rechteck über die Stelle gezogen wird und anschließend auf die
+    "Leerzeichen"-Taste geklickt wird. Wenn die Maus über ein Rechteck gehalten wird, erscheint ein Tooltip mit dem repräsentierten Buchstaben
+    und Bild:
+    <img src="Transcriptor/DetailedDescription/Tooltip.png" /><newline />
+
+    Symbole können auch wieder gelöscht werden indem man die Strg-Taste gedrückt hält und auf das Rechteck klickt. Es können auch ganze Gruppen
+    von Symbolen gelöscht werden indem man die Strg-Taste gedrückt hält und in der Liste auf ein Symbol doppelklickt.
+    Sobald man fertig ist, kann man auf die "Generieren"-Taste drücken und der Text wird ausgegeben.
+
+    <section headline="Semi-Autoamtisch">
+      Im Semi-Automatischen Modus werden beim Hinzufügen eines neuen Symbols automatisch ähnlich aussehende Symbole hinzugefügt.
+      Dabei wird das Symbol in der Auswahl mit dem gesamten Bild verglichen und ein Korrelationskoeffizient <ref id="wikipedia" /> zu jeden Abschnitt gebildet.
+      Eine perfekte Übereinstimmung ergibt 100% und absolut keine Übereinstimmung 0%. Mit der Grenze kann man einstellen, ab welchen Wert ein Abschnitt akzeptiert werden soll.
+      Symbole die nicht gefunden wurden, können mit einem Doppelklick auf das entsprechende Symbol in die Liste hinzugefügt werden.
+      Die Reihenfolge in dem die Symbole markiert werden spielt keine Rolle. Nach dem alle Symbole markiert sind, muss noch auf die 1. Symbol-Taste
+      gedrückt werden und jeweils das erste Rechteck in einer Zeile angeklickt werden. Dies kann auch rückgängig gemacht werden indem man wieder auf ein
+      Rechteck klickt welches bereits markiert ist.
+
+    </section><section headline="Manuell">
+      Der Manuelle Modus ist für speziell formatierte Texte gedacht. Der Text wird in der Reihenfolge ausgegeben in der die Symbole markiert werden.
+      Die "1. Symbol"-Taste wird deshalb hier nicht benötigt und ist daher ausgeblendet. Außerdem ist das automatische Finden gleicher Symbole in
+      diesen Modus deaktiviert. Bereits bekannte Symbole müssen bei erneutem Auftreten mit einem Doppelklick auf das entsprechende Symbol zu der
+      Liste hinzugefügt werden.
+    </section></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Cross-correlation" lang="en" />
+      <caption lang="en">Cross-correlation (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Korrelationskoeffizient" lang="de-DE" />
+      <caption lang="de-DE">Korrelationskoeffizient (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

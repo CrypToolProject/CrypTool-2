@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Cube Attack</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Cube Attack</value>
+  </data>
+  <data name="OutputSuperpolyCaption" xml:space="preserve">
+    <value>Вывод суперполисов</value>
+  </data>
+  <data name="OutputSuperpolyTooltip" xml:space="preserve">
+    <value>Выход расположенных линейно независимых суперполисов, индексов куба и соответствующих ему выходных битов</value>
+  </data>
+  <data name="OutputKeyBitsCaption" xml:space="preserve">
+    <value>Ключевые бит</value>
+  </data>
+  <data name="OutputKeyBitsTooltip" xml:space="preserve">
+    <value>Этот результат обеспечивает результат бит секретного ключа.</value>
+  </data>
+  <data name="CubeattackBlackboxCaption" xml:space="preserve">
+    <value>Мастер для CubeAttack</value>
+  </data>
+  <data name="CubeattackBlackboxTooltip" xml:space="preserve">
+    <value>Мастер для CubeAttack</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>действие</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Выберите модификацию кубической атаки</value>
+  </data>
+  <data name="ConstTestCaption" xml:space="preserve">
+    <value>Постоянные тесты</value>
+  </data>
+  <data name="ConstTestTooltip" xml:space="preserve">
+    <value>Количество тестов для проверки того, является ли суперполя постоянным значением или нет</value>
+  </data>
+  <data name="EnableLogMessagesCaption" xml:space="preserve">
+    <value>Включение сообщений журнала</value>
+  </data>
+  <data name="EnableLogMessagesTooltip" xml:space="preserve">
+    <value>Когда этот флажок включен, во время предварительной обработки будет показано много сообщений журнала.</value>
+  </data>
+  <data name="LinTestCaption" xml:space="preserve">
+    <value>Тесты линейности</value>
+  </data>
+  <data name="LinTestTooltip" xml:space="preserve">
+    <value>Количество тестов линейности для проверки линейности суперполи</value>
+  </data>
+  <data name="MaxCubeCaption" xml:space="preserve">
+    <value>Максимальный размер куба</value>
+  </data>
+  <data name="MaxCubeTooltip" xml:space="preserve">
+    <value>Максимальный размер суммирующего куба</value>
+  </data>
+  <data name="OpenFilenameCaption" xml:space="preserve">
+    <value>Имя файла</value>
+  </data>
+  <data name="OpenFilenameTooltip" xml:space="preserve">
+    <value>Выберите файл, который хотите открыть. Структура файла: superpoly cube-indexes output-bit Пример: 1 + x0 + x5 2,6 1</value>
+  </data>
+  <data name="OutputBitCaption" xml:space="preserve">
+    <value>Выходной бит</value>
+  </data>
+  <data name="OutputBitTooltip" xml:space="preserve">
+    <value>Выбирает выходной бит черного ящика, который должен быть оценен</value>
+  </data>
+  <data name="PublicVarCaption" xml:space="preserve">
+    <value>Размер публичного бита</value>
+  </data>
+  <data name="PublicVarTooltip" xml:space="preserve">
+    <value>Открытые входные биты (IV или открытый текст) атакованной криптосистемы</value>
+  </data>
+  <data name="ReadSuperpolysFromFileCaption" xml:space="preserve">
+    <value>Чтение суперполей из файла</value>
+  </data>
+  <data name="ReadSuperpolysFromFileTooltip" xml:space="preserve">
+    <value>При включенном флажке суперполисты будут загружены из выбранного файла и могут быть оценены в онлайн-фазе.</value>
+  </data>
+  <data name="SecretVarCaption" xml:space="preserve">
+    <value>Размер секретного бита</value>
+  </data>
+  <data name="SecretVarTooltip" xml:space="preserve">
+    <value>Длина ключа атакованной криптосистемы</value>
+  </data>
+  <data name="SetPublicBitsCaption" xml:space="preserve">
+    <value>Ручной ввод открытых бит</value>
+  </data>
+  <data name="SetPublicBitsTooltip" xml:space="preserve">
+    <value>Возможные входы «0» (установить бит в значение 0), «1» (установить бит в значение 1) и «*» (суммировать значение 0/1 бит)</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>предварительная обработка</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>В сети</value>
+  </data>
+  <data name="ActionList3" xml:space="preserve">
+    <value>Ручной ввод открытых бит</value>
+  </data>
+  <data name="EnableLogMessagesList1" xml:space="preserve">
+    <value>Включить сообщения журнала?</value>
+  </data>
+  <data name="ReadSuperpolysFromFileList1" xml:space="preserve">
+    <value>Чтение суперполей из файла</value>
+  </data>
+</root>

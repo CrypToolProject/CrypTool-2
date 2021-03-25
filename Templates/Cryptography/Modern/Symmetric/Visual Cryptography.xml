@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Visual Cryptography</title>
+  <summary lang="en">Usage of the <i>Visual Cryptography</i> component</summary>
+  <description lang="en">
+	This template shows how to use the Visual Cryptography component to encrypt a text using visual cryptography.
+  </description>
+  <keywords>encryption, decryption, visual, Naor, Shamir</keywords>
+  
+  <title lang="de">Visuelle Kryptography</title>
+  <summary lang="de">Anwendung der Visuellen Kryptographie</summary>
+  <description lang="de">
+	Diese Vorlage beschreibt wie die Visuelle-Kryptographie-Komponente in CrypTool 2 benutzt werden kann.
+  </description>
+  <keywords lang="de">Verschlüsselung, Entschlüsselung, Visuell, Naor, Shamir</keywords>
+  
+  <icon file="VisualCryptography.png" />
+  
+  <relevantPlugins>
+    <plugin name="Visual Cryptography" />
+  </relevantPlugins>
+  
+  <replacements lang="de">
+    <!-- todo -->
+  </replacements>
+  
+  <replacements lang="en">
+    <!-- todo -->
+  </replacements>
+</sample>

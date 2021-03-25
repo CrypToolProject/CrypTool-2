@@ -1,0 +1,65 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:CrypTool.AnalysisMonoalphabeticSubstitution.Properties"
+    xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+    x:Class="CrypTool.AnalysisMonoalphabeticSubstitution.AssignmentPresentation" 
+    mc:Ignorable="d"
+    d:DesignHeight="263">
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{x:Static properties:Resources.LocalLabel}" ResultListCaption="{x:Static properties:Resources.TopTenLabel}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.StartLabel}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.EndLabel}" x:Name="EndTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.ElapsedLabel}" x:Name="ElapsedTime" />
+            <!--Empty for layouting purposes:-->
+            <crypanalysisviewcontrol:ViewLabel />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.TotalKeysLabel}" x:Name="TotalKeys" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.KeysPerSecLabel}" x:Name="KeysPerSecond" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
+            <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                <GridView>
+                    <GridViewColumn Header="#" DisplayMemberBinding="{Binding Ranking}" Width="25">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.ValueHeader}" DisplayMemberBinding="{Binding Value}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.AttackHeader}" DisplayMemberBinding="{Binding Attack}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.KeyHeader}" DisplayMemberBinding="{Binding Key}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.TextHeader}" DisplayMemberBinding="{Binding Text}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+        </crypanalysisviewcontrol:CrypAnalysisResultListView>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>

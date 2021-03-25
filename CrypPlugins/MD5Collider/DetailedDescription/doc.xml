@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The MD5 collider component allows you to create two blocks of differing binary data which either hash to the same MD5 value or can be used as part of data hashing to the same MD5 value. These blocks will always be exactly 128 bytes long. They are output as byte[] and stream objects. The component takes two optional inputs.
+    <newline />
+    This component is a port of the "fast collision generator" version 1.0.0.5 by Marc Stevens. The original C++ source code and more information are available at <ref id="FCG" />.
+  </introduction>
+  <introduction lang="zh-CN">MD5对撞机组件允许您创建两个不同的二进制数据块，这些块可以散列为相同的MD5值，或者可以用作数据散列为相同的MD5值的一部分。这些块将始终正好为128个字节长。它们作为byte []和流对象输出。该组件有两个可选输入。此组件是Marc Stevens的“快速碰撞生成器” 1.0.0.5版的端口。原始C ++源代码和更多信息，请参见。</introduction>
+  <introduction lang="ru">Компонент коллайдера MD5 позволяет создавать два блока с разными двоичными данными, которые либо хешируются с тем же значением MD5, либо могут использоваться как часть хэширования данных с тем же значением MD5. Эти блоки будут иметь длину всего 128 байтов. Они выводятся как byte [] и потоковые объекты. Компонент принимает два дополнительных входа. Этот компонент представляет собой порт «быстрого генератора столкновений» версии 1.0.0.5 от Марка Стивенса. Исходный исходный код C ++ и дополнительная информация доступны по адресу.</introduction>
+  <introduction lang="de-DE">
+    Mit der MD5-Kollisionskomponente kann man zwei unterschiedliche Blöcke von Binärdaten erzeugen, die entweder denselben MD5-Wert haben oder die als Teilstück genutzt werden können, um auf den gleichen MD5-Wert abzubilden. Diese Blöcke sind genau 128 Bytes lang. Sie werden als byte[] und als Stromobjekt ausgegeben. Die Komponente nimmt zwei optionale Eingaben entgegen.
+    <newline />
+    Diese Komponente ist eine Portierung des "fast collision generator" Version 1.0.0.5 von Marc Stevens. Der originale C++ Sourcecode und weitere Informationen sind unter <ref id="FCG" /> verfügbar.
+</introduction>
+  <usage lang="en">
+    The first input is a <b>random seed</b>. If this input is connected, you get a reproducible result: Two runs of the collider with the same random seed will generate the same binary output in approximately the same running time. If left unconnected, the output and running time will be different for each execution.
+    <newline />
+    As a second input, an optional <b>"prefix" parameter</b>  can be given. If this parameter is omitted, you will simply receive two blocks of output that hash to the same MD5 value. Due to the nature of MD5, appending identical data to both of these blocks will still result in same MD5 value for each of the combined blocks. However, prepending identical data to the blocks will break the collision.
+    <newline />
+    If you want to prepend data to build your collision data, you should set this data as the prefix parameter. It must have a length that is a multiple of 64 bytes. When it is set to a non-empty value, an intermediate hash value is calculated from the input and used in the computation instead of the default starting IHV, resulting in different output blocks which will not hash to the same MD5 value on their own. However, if you concatenate any two generated blocks B1 and B2 to the given prefix data P so that you receive two new blocks (P || B1) and (P || B2), they will have the same MD5. You can then append more identical data without breaking the collision. Thus, using the prefix parameter, you may create colliding blocks (Prefix || C1 || Postfix), (Prefix || C2 || Postfix) with identical pre- and postfixes.
+  </usage>
+  <usage lang="zh-CN">第一个输入是随机种子。如果连接了此输入，则将得到可重复的结果：具有相同随机种子的两次对撞机运行将在大约相同的运行时间中生成相同的二进制输出。如果未连接，则每次执行的输出和运行时间将不同。作为第二个输入，可以提供一个可选的“ prefix”参数。如果省略此参数，您将仅收到两个哈希为相同MD5值的输出块。由于MD5的性质，将相同的数据附加到这两个块中仍然会导致每个组合块的MD5值相同。但是，在块之前添加相同的数据将打破冲突。如果要添加数据以构建碰撞数据，则应将此数据设置为prefix参数。它的长度必须是64个字节的倍数。当将其设置为非空值时，将从输入中计算出一个中间哈希值，并将其用于计算中，而不是使用默认的起始IHV，从而导致不同的输出块不会单独哈希为相同的MD5值。但是，如果将任何两个生成的块B1和B2连接到给定的前缀数据P，以便接收到两个新块（P || B1）和（P || B2），则它们将具有相同的MD5。然后，您可以附加更多相同的数据而不会破坏冲突。因此，使用prefix参数，您可以创建具有相同前缀和后缀的冲突块（前缀|| C1 ||后缀），（前缀|| C2 ||后缀）。</usage>
+  <usage lang="ru">Первый вход - случайное семя. Если этот вход подключен, вы получите воспроизводимый результат: два прогона коллайдера с одним и тем же случайным семенем будут генерировать один и тот же двоичный выход примерно за одно и то же время работы. Если они не подключены, время вывода и время работы будут разными для каждого исполнения. В качестве второго ввода может быть задан необязательный параметр «префикс». Если этот параметр опущен, вы просто получите два блока вывода, хеш которых совпадает с одним значением MD5. Из-за природы MD5 добавление идентичных данных в оба этих блока будет по-прежнему приводить к одному и тому же значению MD5 для каждого из комбинированных блоков. Однако, добавление идентичных данных в блоки приведет к разрыву столкновения. Если вы хотите добавить данные для создания данных о столкновении, вы должны установить эти данные в качестве параметра префикса. Он должен иметь длину, кратную 64 байтам. Когда он установлен на непустое значение, промежуточное значение хеш-функции вычисляется из ввода и используется в вычислении вместо начального запуска IHV, что приводит к разным выходным блокам, которые не будут иметь значение хэша для одного и того же значения MD5 сами по себе. Однако, если вы объединяете любые два сгенерированных блока B1 и B2 с данными префикса P, чтобы вы получили два новых блока (P || B1) и (P || B2), они будут иметь тот же MD5. Затем вы можете добавить более идентичные данные, не нарушая столкновение. Таким образом, используя префиксный параметр, вы можете создавать конфликтующие блоки (префикс || C1 || Postfix), (префикс || C2 || Postfix) с идентичными пре-и постфиксами.</usage>
+  <usage lang="de-DE">
+    Die erste Eingabe ist ein <b>Zufallswert</b>. Ist diese Eingabe verbunden, erhält man ein reproduzierbares Ergebnis: Zwei Läufe der Kollisionskomponente mit demselben Zufallswert führen zur Erzeugung derselben Binärausgabe in einer vergleichbaren Laufzeit. Falls dieser Eingang nicht verbunden ist, wird die Ausgabe und die Laufzeit für jede Ausführung unterschiedlich sein.
+    <newline />
+    Die zweite Eingabe ist der optionale "Präfix"-Parameter. Falls dieser Parameter ausgelassen wird, erhält man lediglich zwei Ausgabeblöcke, die auf denselben MD5-Wert abbilden. Aufgrund der Natur von MD5 ergibt ein Anhängen identischer Daten an diese beiden Blöcke für den kombinierten Datenblock denselben Hash-Wert. Allerdings führt ein Einfügen von identischen Daten vor den Anfang der Blöcke zu einem Bruch der Kollision.
+    <newline />
+    Falls Sie Daten vor den Anfang einfügen möchten, um die Kollisionsdaten zu erzeugen, sind diese Daten als Präfix-Parameter anzugeben. Diese Daten müssen ein Vielfaches von 64 Bytes als Länge haben. Falls sie auf einen nicht-leeren Wert gesetzt werden, wird ein Hash-Zwischenwert von dieser Eingabe berechnet und dieser wird in der Berechnung anstatt des standardmäßigen IHV-Startwerts genutzt, was zu verschiedenen Ausgabeblöcken führt, die für sich genommen nicht auf denselben MD5-Wert hashen. Wenn jedoch zwei beliebige Ausgabeblöcke B1 und B2 mit dem gegebenen Präfixdaten P zusammengefügt werden, so dass zwei neue Blöcke (P || B1) und (P || B2) entstehen, werden diese denselben MD5-Wert haben. Es können dann weitere identische Daten angehängt werden, ohne die Kollision zu brechen.   
+  </usage>
+  <presentation lang="en">
+    The presentation shows the progress of the computation process. This includes the number of tries and matches.
+  </presentation>
+  <presentation lang="zh-CN">该演示显示了计算过程的进度。这包括尝试和匹配的次数。</presentation>
+  <presentation lang="ru">Презентация показывает ход процесса вычисления. Это включает количество попыток и совпадений.</presentation>
+  <presentation lang="de-DE">
+    Die Präsentation zeigt den Fortschritt der Berechnung. Dazu gehören die Anzahl der Versuche und der Treffer.
+  </presentation>
+  <references>
+    <linkReference id="FCG">
+      <link lang="en" url="http://www.win.tue.nl/hashclash/" />
+      <caption lang="en">The "Fast Collision Generator" project.</caption>
+      <caption lang="de">Das "Fast Collision Generator"-Projekt.</caption>
+    </linkReference>
+  </references>
+</documentation>

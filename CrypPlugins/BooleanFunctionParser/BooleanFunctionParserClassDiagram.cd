@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CrypTool.BooleanFunctionParser.BooleanFunctionParser">
+    <Position X="4.5" Y="1" Width="2.75" />
+    <Members>
+      <Method Name="BooleanFunctionParser" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="DynamicPropertiesChanged" Hidden="true" />
+      <Method Name="GuiLogMessage" Hidden="true" />
+      <Method Name="Initialize" Hidden="true" />
+      <Method Name="methodGetValue" Hidden="true" />
+      <Method Name="methodSetValue" Hidden="true" />
+      <Method Name="OnPropertyChanged" Hidden="true" />
+      <Method Name="Pause" Hidden="true" />
+      <Method Name="PostExecution" Hidden="true" />
+      <Method Name="PreExecution" Hidden="true" />
+      <Method Name="ProgressChanged" Hidden="true" />
+      <Method Name="settings_OnGuiLogNotificationOccured" Hidden="true" />
+      <Method Name="settings_PropertyChanged" Hidden="true" />
+      <Method Name="Stop" Hidden="true" />
+      <Method Name="textBoxInput_TextChanged" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>gACggIIAHDUQBQSgpAAIAEAgiAKAAxUAsECEBEgmxAA=</HashCode>
+      <FileName>BooleanFunctionParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="CrypTool.PluginBase.IPlugin">
+    <Position X="7.5" Y="1" Width="2.25" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

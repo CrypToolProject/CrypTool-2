@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE category SYSTEM "..\wizard.dtd"[]>
+<category image="Transposition">
+  <name lang="en">Transposition</name>
+  <name lang="zh-CN">换位</name>
+  <name lang="ru">перестановка</name>
+  <description lang="en">
+Transposition is a classic algorithm to encrypt plaintext or to decrypt ciphertext.
+By selecting this, you can analyze some ciphertext that was encrypted with the Transposition algorithm.
+  </description>
+  <description lang="zh-CN">换位是加密明文或解密密文的经典算法。通过选择此选项，您可以分析使用“转置”算法加密的一些密文。</description>
+  <description lang="ru">Транспозиция - классический алгоритм шифрования открытого текста или дешифрования зашифрованного текста. Выбрав это, вы можете проанализировать некоторый зашифрованный текст, который был зашифрован алгоритмом Transposition.</description>
+  <description lang="de">
+Die Transposition ist ein klassisches Verschlüsselungsverfahren.
+Wählen Sie diesen Punkt, um einen mit dem Transpositions-Verfahren verschlüsselten Text zu analysieren.
+  </description>
+  <headline lang="en">Transposition Analysis</headline>
+  <headline lang="zh-CN">换位分析</headline>
+  <headline lang="ru">Анализ транспонирования</headline>
+  <headline lang="de">Transposition-Analyse</headline>
+  <task lang="en">Choose which method you want to use for analyzing the Transposition encrypted text.</task>
+  <task lang="zh-CN">选择要用于分析“转置”加密文本的方法。</task>
+  <task lang="ru">Выберите, какой метод вы хотите использовать для анализа зашифрованного текста Transposition.</task>
+  <task lang="de">Wählen Sie, welche Methode Sie für die Analyse des mit der Transposition verschlüsselten Textes verwenden wollen.</task>
+  <input image="Transposition">
+    <name lang="en">Brute-force</name>
+    <name lang="zh-CN">蛮力</name>
+    <name lang="ru">грубая сила</name>
+    <description lang="en">
+Select this to analyze the ciphertext using the brute-force method. This means, that every possible key gets tested.
+This method is ciphertext-only.
+    </description>
+    <description lang="zh-CN">选择此项以使用蛮力方法分析密文。这意味着，每个可能的密钥都会受到测试。此方法是仅密文。</description>
+    <description lang="ru">Выберите это, чтобы проанализировать зашифрованный текст, используя метод грубой силы. Это означает, что каждый возможный ключ тестируется. Этот метод является только зашифрованным текстом.</description>
+    <description lang="de">
+      Wählen Sie diesen Punkt, um den Geheimtext mit der "Brute-force"-Methode zu analysieren. Das bedeutet, dass jeder mögliche Schlüssel ausprobiert wird.
+      Diese Methode benötigt für die Analyse nur den Geheimtext ("Ciphertext-only-Angriff").
+    </description>
+    <headline lang="en">Transposition Brute-force Analysis</headline>
+    <headline lang="zh-CN">换位蛮力分析</headline>
+    <headline lang="ru">Анализ переноса грубой силы</headline>
+    <headline lang="de">Transposition Brute-force-Analyse</headline>
+    <task lang="en">Input the ciphertext that was encrypted by using the Transposition algorithm.</task>
+    <task lang="zh-CN">输入使用转置算法加密的密文。</task>
+    <task lang="ru">Введите зашифрованный текст, который был зашифрован с использованием алгоритма транспонирования.</task>
+    <task lang="de">Geben Sie den Geheimtext ein, der mit dem Transpositions-Algorithmus verschlüsselt wurde.</task>
+    <inputBox plugin="$Ciphertext$" property="Text" visibleLines="5">
+      <description lang="en">Ciphertext:</description>
+      <description lang="zh-CN">密文：</description>
+      <description lang="ru">зашифрованный:</description>
+      <description lang="de">Geheimtext:</description>
+      <defaultvalue>rr ntiieornhhi btpehrmctrpctaiai uy a rctaunhi. heti eti e i o c ioydn i pS::wdg/poh oyrs r dni  ondnfn( oya ofa)sdrte mthhttsri lxa rfuinMalivcidhrsi ca sctr
+ctnpokntinthtoneaoetyhpoluoi hclrsrors eo rre tpxseetfpeh,oo  a mlbin etarssn nrn c
+rtei.iaic]cg,aic m cowtss i twam cou c h dogs,hee i motatttd nsgatyjets ea'ttrnietoy[ep.erisipyaasipstfy iethyslxieohe sherfcnalsstctou t en ierhtcdhcacfounctpo p vfodto /ii/ToneIpp poh h pbc ie  atc narg aretcg ato ientpao tTs  esh.ea tuns heonetaeune.uh/kawrs_r</defaultvalue>
+    </inputBox>
+    <comboBox plugin="Transposition" property="ReadIn" defaultValue="0" group="settings">
+      <description lang="en">Read in:</description>
+      <description lang="zh-CN">读入：</description>
+      <description lang="ru">Читайте в:</description>
+      <description lang="de">Einlesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="Transposition" property="Permutation" defaultValue="1" group="settings">
+      <description lang="en">Permutation:</description>
+      <description lang="zh-CN">排列：</description>
+      <description lang="ru">Перестановка:</description>
+      <description lang="de">Permutation:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="Transposition" property="ReadOut" defaultValue="0" group="settings">
+      <description lang="en">Read out:</description>
+      <description lang="zh-CN">读出：</description>
+      <description lang="ru">Зачитать:</description>
+      <description lang="de">Auslesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <sampleViewer image="Transposition" file="Cryptanalysis\Classic\Transposition_Bruteforce_Analyzer.cwm">
+      <name lang="en">Brute-force Analysis</name>
+      <name lang="zh-CN">蛮力分析</name>
+      <name lang="ru">Анализ грубой силы</name>
+      <name lang="de">Brute-force-Analyse</name>
+      <description lang="en">Brute-force Analysis</description>
+      <description lang="zh-CN">蛮力分析</description>
+      <description lang="ru">Анализ грубой силы</description>
+      <description lang="de">Brute-force-Analyse</description>
+      <headline lang="en">Transposition Brute-force Analysis</headline>
+      <headline lang="zh-CN">换位蛮力分析</headline>
+      <headline lang="ru">Анализ переноса грубой силы</headline>
+      <headline lang="de">Transposition Brute-force-Analyse</headline>
+      <task lang="en">Please wait while brute-forcing.</task>
+      <task lang="zh-CN">请稍等片刻。</task>
+      <task lang="ru">Подождите, пока вы будете насильно.</task>
+      <task lang="de">Bitte warten, während die "Brute-force"-Methode ausgeführt wird.</task>
+      <presentation plugin="$TranspositionAnalyser$" width="50%" height="50%">
+        <description lang="en">Analyzer:</description>
+        <description lang="zh-CN">分析仪：</description>
+        <description lang="ru">Анализатор:</description>
+        <description lang="de">Analysierer:</description>
+      </presentation>
+      <presentation plugin="$Revealed Plaintext$" width="100%" height="150">
+        <description lang="en">Deciphered Ciphertext:</description>
+        <description lang="zh-CN">解密的密文：</description>
+        <description lang="ru">Расшифрованный шифрованный текст:</description>
+        <description lang="de">Entschlüsselter Geheimtext:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <input image="Transposition">
+    <name lang="en">Genetic</name>
+    <name lang="zh-CN">遗传的</name>
+    <name lang="ru">генетический</name>
+    <name lang="de">Genetisch</name>
+    <description lang="en">
+Select this to analyze the ciphertext using genetic algorithms. This can be faster than bruteforcing.
+This method is ciphertext-only.
+    </description>
+    <description lang="zh-CN">选择此选项可使用遗传算法分析密文。这可能比暴力破解要快。此方法是仅密文。</description>
+    <description lang="ru">Выберите это, чтобы проанализировать зашифрованный текст с использованием генетических алгоритмов. Это может быть быстрее, чем грубая сила. Этот метод является только зашифрованным текстом.</description>
+    <description lang="de">Wählen Sie diesen Punkt, um den Geheimtext mit genetischen Methoden zu analysieren. Diese Methode kann schneller sein als die "Brute-force"-Methode.
+Diese Methode benötigt für die Analyse nur den Geheimtext ("Ciphertext-only-Angriff").
+    </description>
+    <headline lang="en">Transposition Genetic Analysis</headline>
+    <headline lang="zh-CN">转座遗传分析</headline>
+    <headline lang="ru">Транспозиционный генетический анализ</headline>
+    <headline lang="de">Transposition genetische Analyse</headline>
+    <task lang="en">Input the ciphertext that was encrypted by using the Transposition algorithm.</task>
+    <task lang="zh-CN">输入使用转置算法加密的密文。</task>
+    <task lang="ru">Введите зашифрованный текст, который был зашифрован с использованием алгоритма транспонирования.</task>
+    <task lang="de">Geben Sie den Geheimtext ein, der mit dem Transpositions-Algorithmus verschlüsselt wurde.</task>
+    <inputBox plugin="$Ciphertext$" property="Text" visibleLines="5">
+      <description lang="en">Ciphertext:</description>
+      <description lang="zh-CN">密文：</description>
+      <description lang="ru">зашифрованный:</description>
+      <description lang="de">Geheimtext:</description>
+      <defaultvalue> arirtn  tdsnioh sardnestctur l  rucMcifinrp p fttc/p/nnnrtteeenhiltihccspraeiry  xtenp.,e   ib  oa syn  pr:igao]rhnnioryhoboehmrrot a ueapceufihhoiatlen tcso nn 
+:edipct oiaothp up rltrcsio r trsathe ot em iie rindricStw./ihp,pc  pw s  tancg rhcoa, en attt  sgeyttseetenete[h.aispcpao hcbti  tcmao ce ggthi tmoaTt nhaajus aottiuo.e/ews_Ig ihm ocseiaw  rua td soeeipo tsdes.t en h'nraenyupkrriryys sdy enyfx oa fesctlmthost naeftnhlccuhti avcd
+ nikoioasp fiiohnl(eyeoh)fra shtt iexirhidaavodcsoc sorotioTte</defaultvalue>
+    </inputBox>
+    <comboBox plugin="Transposition" property="ReadIn" defaultValue="0" group="settings">
+      <description lang="en">Read in:</description>
+      <description lang="zh-CN">读入：</description>
+      <description lang="ru">Читайте в:</description>
+      <description lang="de">Einlesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="Transposition" property="Permutation" defaultValue="1" group="settings">
+      <description lang="en">Permutation:</description>
+      <description lang="zh-CN">排列：</description>
+      <description lang="ru">Перестановка:</description>
+      <description lang="de">Permutation:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="Transposition" property="ReadOut" defaultValue="1" group="settings">
+      <description lang="en">Read out:</description>
+      <description lang="zh-CN">读出：</description>
+      <description lang="ru">Зачитать:</description>
+      <description lang="de">Auslesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <sampleViewer image="Transposition" file="Cryptanalysis\Classic\Transposition_Genetic_Analyzer.cwm">
+      <name lang="en">Genetic Analysis</name>
+      <name lang="zh-CN">遗传分析</name>
+      <name lang="ru">Генетический анализ</name>
+      <name lang="de">Genetische Analyse</name>
+      <description lang="en">Genetic Analysis</description>
+      <description lang="zh-CN">遗传分析</description>
+      <description lang="ru">Генетический анализ</description>
+      <description lang="de">Genetische Analyse</description>
+      <headline lang="en">Transposition Genetic Analysis</headline>
+      <headline lang="zh-CN">转座遗传分析</headline>
+      <headline lang="ru">Транспозиционный генетический анализ</headline>
+      <headline lang="de">Transposition genetische Analyse</headline>
+      <task lang="en">Please wait while analyzing.</task>
+      <task lang="zh-CN">请等待分析。</task>
+      <task lang="ru">Подождите, пока вы будете анализировать.</task>
+      <task lang="de">Bitte warten, während analysiert wird.</task>
+      <presentation plugin="$TranspositionAnalyser$" width="50%" height="50%">
+        <description lang="en">Analyzer:</description>
+        <description lang="zh-CN">分析仪：</description>
+        <description lang="ru">Анализатор:</description>
+        <description lang="de">Analysierer:</description>
+      </presentation>
+      <presentation plugin="$Revealed Plaintext$" width="100%" height="150">
+        <description lang="en">Deciphered Ciphertext:</description>
+        <description lang="zh-CN">解密的密文：</description>
+        <description lang="ru">Расшифрованный шифрованный текст:</description>
+        <description lang="de">Entschlüsselter Geheimtext:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+  <input image="Transposition">
+    <name lang="en">Crib</name>
+    <name lang="zh-CN">婴儿床</name>
+    <name lang="ru">детская кроватка</name>
+    <description lang="en">
+Select this to analyze the ciphertext using a crib. A crib is a piece of cleartext of the original message.
+This is a known-plaintext attack.
+    </description>
+    <description lang="zh-CN">选择此选项可使用婴儿床分析密文。婴儿床是原始邮件的明文。这是已知的明文攻击。</description>
+    <description lang="ru">Выберите это, чтобы проанализировать зашифрованный текст с помощью кроватки. Шпаргалка - это фрагмент открытого текста исходного сообщения. Это атака известного текста.</description>
+    <description lang="de">Wählen Sie diesen Punkt, um den Geheimtext mit Hilfe eines "Crib" zu analysieren. Ein "Crib" ist ein bekanntes Stück Klartext der ursprünglichen Nachricht. 
+Diese Methode benötigt für die Analyse einen Teil des Klartextes ("Known-plaintext-Angriff").
+    </description>
+    <headline lang="en">Transposition Crib Analysis</headline>
+    <headline lang="zh-CN">换位婴儿床分析</headline>
+    <headline lang="ru">Анализ кросс-позиции</headline>
+    <headline lang="de">Transposition Crib-Analyse</headline>
+    <task lang="en">Input the ciphertext that was encrypted by using the Transposition algorithm and your crib.</task>
+    <task lang="zh-CN">输入使用转置算法和婴儿床加密的密文。</task>
+    <task lang="ru">Введите зашифрованный текст, который был зашифрован с использованием алгоритма транспонирования и вашей кроватки.</task>
+    <task lang="de">Geben Sie den Geheimtext ein, der mit dem Transpositions-Algorithmus verschlüsselt wurde, und den "Crib".</task>
+    <inputBox plugin="$Ciphertext$" property="Text" visibleLines="5">
+      <description lang="en">Ciphertext:</description>
+      <description lang="zh-CN">密文：</description>
+      <description lang="ru">зашифрованный:</description>
+      <description lang="de">Geheimtext:</description>
+      <defaultvalue>rr ntiieornhhi btpehrmctrpctaiai uy a rctaunhi. heti eti e i o c ioydn i pS::wdg/poh oyrs r dni  ondnfn( oya ofa)sdrte mthhttsri lxa rfuinMalivcidhrsi ca sctr
+ctnpokntinthtoneaoetyhpoluoi hclrsrors eo rre tpxseetfpeh,oo  a mlbin etarssn nrn c
+rtei.iaic]cg,aic m cowtss i twam cou c h dogs,hee i motatttd nsgatyjets ea'ttrnietoy[ep.erisipyaasipstfy iethyslxieohe sherfcnalsstctou t en ierhtcdhcacfounctpo p vfodto /ii/ToneIpp poh h pbc ie  atc narg aretcg ato ientpao tTs  esh.ea tuns heonetaeune.uh/kawrs_r</defaultvalue>
+    </inputBox>
+    <inputBox plugin="$Crib$" property="Text" visibleLines="5">
+      <description lang="en">Crib (Known plaintext):</description>
+      <description lang="zh-CN">婴儿床（已知明文）：</description>
+      <description lang="ru">Crib (Известный открытый текст):</description>
+      <description lang="de">Crib (Bekannter Klartext):</description>
+      <defaultvalue>transposition</defaultvalue>
+    </inputBox>
+    <comboBox plugin="Transposition" property="ReadIn" defaultValue="0" group="settings">
+      <description lang="en">Read in:</description>
+      <description lang="zh-CN">读入：</description>
+      <description lang="ru">Читайте в:</description>
+      <description lang="de">Einlesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="Transposition" property="Permutation" defaultValue="1" group="settings">
+      <description lang="en">Permutation:</description>
+      <description lang="zh-CN">排列：</description>
+      <description lang="ru">Перестановка:</description>
+      <description lang="de">Permutation:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <comboBox plugin="Transposition" property="ReadOut" defaultValue="1" group="settings">
+      <description lang="en">Read out:</description>
+      <description lang="zh-CN">读出：</description>
+      <description lang="ru">Зачитать:</description>
+      <description lang="de">Auslesen:</description>
+      <item content="by row" lang="en" />
+      <item lang="zh-CN" content="按行" />
+      <item lang="ru" content="по ряду" />
+      <item content="Zeilenweise" lang="de" />
+      <item content="by column" lang="en" />
+      <item lang="zh-CN" content="按列" />
+      <item lang="ru" content="по столбцам" />
+      <item content="Spaltenweise" lang="de" />
+    </comboBox>
+    <sampleViewer image="Transposition" file="Cryptanalysis\Classic\Transposition_Crib_Analyzer.cwm">
+      <name lang="en">Crib Analysis</name>
+      <name lang="zh-CN">婴儿床分析</name>
+      <name lang="ru">Анализ кроватки</name>
+      <name lang="de">Crib-Analyse</name>
+      <description lang="en">Crib Analysis</description>
+      <description lang="zh-CN">婴儿床分析</description>
+      <description lang="ru">Анализ кроватки</description>
+      <description lang="de">Crib-Analyse</description>
+      <headline lang="en">Transposition Crib Analysis</headline>
+      <headline lang="zh-CN">换位婴儿床分析</headline>
+      <headline lang="ru">Анализ кросс-позиции</headline>
+      <headline lang="de">Transposition Crib-Analyse</headline>
+      <task lang="en">Please wait while analyzing.</task>
+      <task lang="zh-CN">请等待分析。</task>
+      <task lang="ru">Подождите, пока вы будете анализировать.</task>
+      <task lang="de">Bitte warten, während analysiert wird.</task>
+      <presentation plugin="$TranspositionAnalyser$" width="50%" height="50%">
+        <description lang="en">Analyzer:</description>
+        <description lang="zh-CN">分析仪：</description>
+        <description lang="ru">Анализатор:</description>
+        <description lang="de">Analysierer:</description>
+      </presentation>
+      <presentation plugin="$Revealed Plaintext$" width="100%" height="150">
+        <description lang="en">Deciphered Ciphertext:</description>
+        <description lang="zh-CN">解密的密文：</description>
+        <description lang="ru">Расшифрованный шифрованный текст:</description>
+        <description lang="de">Entschlüsselter Geheimtext:</description>
+      </presentation>
+    </sampleViewer>
+  </input>
+</category>

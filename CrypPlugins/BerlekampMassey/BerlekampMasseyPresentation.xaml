@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="CrypTool.BerlekampMassey.BerlekampMasseyPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto">
+    <Grid Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Name="cdLabel" Content="{Loc LabelFeedbackPolynomial}" />
+            <TextBlock Name="cdText" />
+            <Label Name="lLabel" Content="{Loc LabelMinimalLength}" />
+            <TextBlock Name="lText" />
+        </StackPanel>
+        
+        
+        <!--<TextBox Name="cdText" Grid.Row="2" Grid.Column="2" IsReadOnly="True" />
+        <TextBox Name="lText" Grid.Row="1" Grid.Column="2" IsReadOnly="True" />-->
+    </Grid>
+</UserControl>

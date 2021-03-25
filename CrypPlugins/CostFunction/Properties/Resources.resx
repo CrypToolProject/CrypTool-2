@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Text Input</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Enter your text here.</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Text Output</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Your text will be sent here.</value>
+  </data>
+  <data name="ValueCaption" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="ValueTooltip" xml:space="preserve">
+    <value>The value of the function will be sent here</value>
+  </data>
+  <data name="ControlSlaveCaption" xml:space="preserve">
+    <value>SDES Slave</value>
+  </data>
+  <data name="ControlSlaveTooltip" xml:space="preserve">
+    <value>Direct access to SDES.</value>
+  </data>
+  <data name="BytesToUseCaption" xml:space="preserve">
+    <value>Bytes to use</value>
+  </data>
+  <data name="BytesToUseTooltip" xml:space="preserve">
+    <value>Which amount of bytes should be used for calculating?</value>
+  </data>
+  <data name="CaseInsensitivCaption" xml:space="preserve">
+    <value>Case insensitive</value>
+  </data>
+  <data name="CaseInsensitivTooltip" xml:space="preserve">
+    <value>If checked, the regular expression will be used in a case-insensitive manner.</value>
+  </data>
+  <data name="FunctionTypeCaption" xml:space="preserve">
+    <value>Function type</value>
+  </data>
+  <data name="FunctionTypeTooltip" xml:space="preserve">
+    <value>Select the type of function</value>
+  </data>
+  <data name="RegExCaption" xml:space="preserve">
+    <value>Regular Expression</value>
+  </data>
+  <data name="RegExTooltip" xml:space="preserve">
+    <value>Regular Expression match as text string</value>
+  </data>
+  <data name="RegExHexCaption" xml:space="preserve">
+    <value>Regular Expression (Hex)</value>
+  </data>
+  <data name="RegExHexTooltip" xml:space="preserve">
+    <value>Regular Expression match encoded in hex</value>
+  </data>
+  <data name="StatisticsCorpusCaption" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="StatisticsCorpusTooltip" xml:space="preserve">
+    <value>Select one of the predefined languages, or choose a custom text file that contains a typical text in a language of your choice.</value>
+  </data>
+  <data name="entropyCaption" xml:space="preserve">
+    <value>Select an entropy function</value>
+  </data>
+  <data name="entropyTooltip" xml:space="preserve">
+    <value>Select an entropy function</value>
+  </data>
+  <data name="weighttableCaption" xml:space="preserve">
+    <value>Fitness Weight Table to use</value>
+  </data>
+  <data name="weighttableTooltip" xml:space="preserve">
+    <value>Select a fitness weight table</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Cost Function</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Cost Function</value>
+  </data>
+  <data name="BytesOffsetCaption" xml:space="preserve">
+    <value>Bytes offset</value>
+  </data>
+  <data name="BytesOffsetTooltip" xml:space="preserve">
+    <value>Which amount of bytes should be skipped before applying regex?</value>
+  </data>
+  <data name="StatisticsCorpusList1" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="StatisticsCorpusList2" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="StatisticsCorpusList3" xml:space="preserve">
+    <value>custom (...)</value>
+  </data>
+  <data name="entropyList1" xml:space="preserve">
+    <value>External (NativeCryptography, default)</value>
+  </data>
+  <data name="entropyList2" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="weighttableList1" xml:space="preserve">
+    <value>Matthews</value>
+  </data>
+  <data name="weighttableList2" xml:space="preserve">
+    <value>Toemeh-Arumugam</value>
+  </data>
+  <data name="weighttableList3" xml:space="preserve">
+    <value>Custom Weight table (*.csv)</value>
+  </data>
+  <data name="BlocksizeCaption" xml:space="preserve">
+    <value>Blocksize</value>
+  </data>
+  <data name="BlocksizeTooltip" xml:space="preserve">
+    <value>How many characters should be combined to one block?</value>
+  </data>
+  <data name="NGramSizeCaption" xml:space="preserve">
+    <value>N-Gram size</value>
+  </data>
+  <data name="NGramSizeTooltip" xml:space="preserve">
+    <value>Size of the n-grams to use</value>
+  </data>
+  <data name="Entropy" xml:space="preserve">
+    <value>Entropy</value>
+  </data>
+  <data name="IOC" xml:space="preserve">
+    <value>Index of Coincedence</value>
+  </data>
+  <data name="NGramsLog2" xml:space="preserve">
+    <value>N-Grams Log2</value>
+  </data>
+  <data name="RegEx" xml:space="preserve">
+    <value>Regular Expression</value>
+  </data>
+  <data name="UseSpacesCaption" xml:space="preserve">
+    <value>Use spaces</value>
+  </data>
+  <data name="UseSpacesTooltip" xml:space="preserve">
+    <value>If selected, text frequency statistics containing spaces are used</value>
+  </data>
+  <data name="LanguageCaption" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>Use n-grams of this language for the costfunction.</value>
+  </data>
+</root>

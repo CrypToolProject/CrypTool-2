@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component implements text steganography which hides a secret message inside cover text, see <ref id="steganographywiki" /> for more information about steganography. <newline />
+    The secret message can be hidden using several techniques. This includes: using zero-width spaces, capital letters and marking letters with special characters. 
+  </introduction>
+  <introduction lang="zh-CN">该组件实现了文本隐写术，该隐匿术将秘密消息隐藏在封面文本内，有关隐写术的更多信息，请参见。可以使用多种技术隐藏秘密消息。这包括：使用零宽度空格，大写字母和用特殊字符标记字母。</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente implementiert Text-Steganographie, die eine geheime Nachricht in einem Covertext versteckt. Weitere Informationen zur Steganographie finden Sie unter <ref id="steganographywiki" />. <newline />
+    Die geheime Nachricht kann mit verschiedenen Verfahren versteckt werden. Dies umfasst: Verwenden von Leerzeichen ohne Breite, Großbuchstaben und Markieren von Buchstaben mit Sonderzeichen.
+  </introduction>
+  <usage lang="en">
+    This component requires two inputs for the hiding process: a secret message and a cover text which can be used to hide the secret message. You need two text input components to enter the secret message and the cover text. Following are the conditions for the cover text in order to encode the whole secret message correctly according to the mode chosen in the settings:
+    <newline /><section headline="Zero-width spaces: ">
+      There are no restrictions when using this technique. The secret message can contain any character using the UTF8 encoding and the cover text could have any length. 
+      </section><newline /><section headline="Capital letters text: ">
+      In order to hide the whole message correctly, the cover text should include all the letters of the message distributed and in the same order. The secret message should only contain letters and spaces, other characters like punctuation marks and numbers will be ignored.
+    </section><newline /><section headline="Capital letters binary: ">
+      With this mode, any character can be hidden. The hiding capacity depends only on the number of letters in the cover text, numbers and other characters are not used. Therefore, to hide all of the message correctly, the number of letters in the
+      cover text should be equal to or greater than the number of bits in the secret message.
+    </section><newline /><section headline="Marking letters text: ">
+      Just like in the capital letters text mode, the cover text should include all the letters of the message distributed and in the same order. The secret message should only contain letters and spaces, other characters like punctuation marks and numbers will be ignored.
+    </section><newline /><section headline="Marking letters binary: ">
+      To hide all of the message correctly, the number of letters in the cover text should be equal to or greater than the number of bits in the secret message.
+    </section><newline /><newline />
+    In case the hiding capacity of the provided cover text isn't enough, a warning will be displayed in the text steganography component. 
+    The output here is the stego text, therefore the text output component can be used to display the text. <newline />
+    When extracting a message the component only requires the stego text as an input. However, you have to use the same settings that were used to hide the secret message in order to extract it from the stego text successfully. The output here is the extracted secret message which can be displayed using a text output component. <newline /></usage>
+  <usage lang="zh-CN">此组件需要两个输入来进行隐藏过程：秘密消息和可用于隐藏秘密消息的封面文本。您需要两个文本输入组件来输入秘密消息和封面文本。以下是封面文字的条件，以便根据设置中选择的模式正确编码整个秘密消息：使用此技术时没有任何限制。秘密消息可以使用UTF8编码包含任何字符，并且封面文本可以具有任何长度。为了正确隐藏整个消息，封面文字应包括所有已分发消息的字母，并且顺序相同。机密消息应仅包含字母和空格，其他字符（如标点符号和数字）将被忽略。使用此模式，可以隐藏任何字符。隐藏能力仅取决于封面文字中的字母数量，不使用数字和其他字符。因此，要正确隐藏所有消息，封面文本中的字母数应等于或大于秘密消息中的位数。就像在大写字母文本模式下一样，封面文本应包括所有已分发消息的字母，并且顺序相同。机密消息应仅包含字母和空格，其他字符（如标点符号和数字）将被忽略。为了正确隐藏所有消息，封面文本中的字母数应等于或大于秘密消息中的位数。如果提供的封面文字的隐藏能力不足，则会在文字隐写术组件中显示警告。这里的输出是Stego文本，因此文本输出组件可用于显示文本。提取消息时，组件仅需要隐蔽文本作为输入。但是，您必须使用与隐藏秘密消息相同的设置，才能成功从秘密文本中提取秘密消息。此处的输出是提取的秘密消息，可以使用文本输出组件显示该消息。</usage>
+  <usage lang="de-DE">
+    Diese Komponente benötigt zwei Eingaben für das Verstecken: eine geheime Nachricht und einen Covertext, mit dem die geheime Nachricht versteckt werden kann. Sie benötigen hier zwei Texteingabekomponenten, um die geheime Nachricht und den Covertext einzugeben. Es folgen die Bedingungen für den Covertext, um die gesamte geheime Nachricht gemäß dem in den Einstellungen gewählten Modus korrekt zu codieren:    
+    <newline /><section headline="Leerzeichen ohne Breite: ">
+      Bei Verwendung dieses Verfahrens gibt es keine Einschränkungen. Die geheime Nachricht kann beliebige Zeichen enthalten, die die UTF8-Codierung verwenden, und der Covertext kann eine beliebige Länge haben.
+    </section><newline /><section headline="Capital letters text: ">
+      Um die gesamte Nachricht korrekt zu verstecken, sollte der Covertext alle Buchstaben der Nachricht verteilt und in derselben Reihenfolge enthalten. Die geheime Nachricht sollte nur Buchstaben und Leerzeichen enthalten, andere Zeichen wie Satzzeichen und Zahlen werden ignoriert.
+    </section><newline /><section headline="Capital letters binary: ">
+      In diesem Modus kann jedes Zeichen versteckt werden. Die Versteckkapazität hängt nur von der Anzahl der Buchstaben im Covertext ab, Zahlen und andere Zeichen werden nicht verwendet. Um die gesamte Nachricht korrekt zu verstecken, muss also die Anzahl der Buchstaben im Covertext gleich oder größer als die Anzahl der Bits in der geheimen Nachricht sein.
+    </section><newline /><section headline="Marking letters text: ">
+      Genau wie im Großbuchstaben-Modus sollte der Covertext alle Buchstaben der Nachricht verteilt und in derselben Reihenfolge enthalten. Die geheime Nachricht sollte nur Buchstaben und Leerzeichen enthalten, andere Zeichen wie Satzzeichen und Zahlen werden ignoriert.
+    </section><newline /><section headline="Marking letters binary: ">
+      Um die gesamte Nachricht korrekt zu verstecken, sollte die Anzahl der Buchstaben im Covertext gleich oder größer als die Anzahl der Bits in der geheimen Nachricht sein.
+    </section><newline /><newline />
+    Falls die Versteckkapazität des bereitgestellten Covertextes nicht ausreicht, wird in der Text-Steganografie Komponente eine Warnung angezeigt.
+    Die Ausgabe hier ist der Stego-Text, daher kann die Textausgabekomponente verwendet werden, um den Text anzuzeigen. <newline />
+    Beim Extrahieren einer Nachricht benötigt die Komponente nur den Stego-Text als Eingabe. Sie müssen jedoch dieselben Einstellungen verwenden, die zum Verstecken der geheimen Nachricht verwendet wurden, um sie erfolgreich aus dem Stego-Text zu extrahieren. Die Ausgabe hier ist die extrahierte geheime Nachricht, die unter Verwendung einer Textausgabekomponente angezeigt werden kann. <newline /></usage>
+  <presentation lang="en">
+    The presentation of this component displays the stego text while highlighting the changes that were made to the original cover text. 
+  </presentation>
+  <presentation lang="zh-CN">该组件的演示文稿显示了隐藏文本，同时突出显示了对原始封面文本所做的更改。</presentation>
+  <presentation lang="de-DE">
+    Die Preäsentation dieser Komponente zeigt den Stego-Text, währenddessen werden die Änderungen hervorgehoben, die am ursprünglichen Cover-Text vorgenommen wurden.
+  </presentation>
+  <references>
+    <linkReference id="steganographywiki">
+      <link url="https://en.wikipedia.org/wiki/Steganography" lang="en" />
+      <caption lang="en">Steganography (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Steganographie" lang="de-DE" />
+      <caption lang="de-DE">Steganographie (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

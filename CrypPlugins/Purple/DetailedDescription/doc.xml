@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    <i>Purple</i> is an electromechanical cipher machine which was used by Japanese diplomats during World War II.
+    <newline /><newline />
+    It works on a principle similar to that of the Enigma: The plaintext is entered on a keyboard. Each pressed key will close an electric circuit, that leads from the keyboard through several permutation units to the output unit.
+    After each encrypted letter, the inner permutation units are advanced according to certain rules.
+    <newline /><newline />
+    In contrast to the Enigma, the permutations are not realized with rotors but with stepping switches, that were also used in telephone systems at the time.
+    The <i>Purple</i> used four stepping switches. Each switch had 25 positions and a certain number of inputs and outputs. Each of the 25 positions of the switch realized a permutation of the input signals by connecting them to
+    the outputs in different ways.
+    <newline /><newline />
+    Three of the stepping switches have 20 inputs and outputs, one has 6.
+    When a letter is entered on the keyboard, it first goes through the input permutation. If it is mapped to one of the letters "AEIOUY", it will be passed in the next step to the 6-stepping switch and then to the output permutation,
+    which is the inverse permutation of the input permutation.
+    <newline /><newline />
+    If the input permutation maps the letter to a letter other than "AEIOUY", it is passed through the three 20-stepping switches, always in the same order: first switch #1, then #2 and #3.
+    The output of switch #3 then goes to the output permutation.
+    <newline /><newline />
+    After each pressed key, the stepping switches are advanced according to certain rules. When a switch is advanced, it goes from position n to position n+1 thus realizing a new permutation.
+    When the switch is in position 25, it returns to position 1 in the next step.
+    <newline /><newline />
+    The stepping switches advance with different speeds: The 6-switch is advanced after every pressed key. While one of the 20-switches is advanced fast (after every key), one is advanced with medium speed (only after the fast one reaches
+    position 25) and one advances with slow speed (only after the medium speed switch reaches position 25). The user can decide, which of the three 20-switches is the slow, the medium and the fast one.
+    The key consists of the starting positions of the four switches, the speed assignments and the configuration of a plugboard, that realizes the input and output permutation.
+    <newline /><newline />
+    The American cryptologist William Friedman and his team broke the <i>Purple</i>, which is generally viewed as one of the greatest achievements in the history of cryptology. They were able to reconstruct the encryption principle
+    of <i>Purple</i> only from intercepted ciphertexts without any prior knowledge of its inner workings, and built a replication of the machine. The name <i>Purple</i> was the codename assigned to it by the American cryptologists. The Japanese
+    inventors called the machine "<i>97-shiki O-bun In-ji-ki</i>" (Alphabetical Typewriter '97).
+  </introduction>
+  <introduction lang="zh-CN">紫色是一台机电密码机，在二战期间被日本外交官使用。它的工作原理与Enigma类似：在键盘上输入明文。每个按下的键将闭合电路，该电路从键盘通过多个排列单元通向输出单元。在每个加密字母之后，内部置换单元会根据某些规则进行扩展。与Enigma相反，排列不是通过转子实现的，而是通过步进开关实现的，当时的电话系统也使用步进开关。紫色使用了四个步进开关。每个开关有25个位置以及一定数量的输入和输出。开关的25个位置中的每个位置都通过以不同方式将输入信号连接到输出来实现输入信号的排列。步进开关中的三个有20个输入和输出，一个有6个。当在键盘上输入一个字母时，它首先经过输入排列。如果将其映射到字母“ AEIOUY”之一，则将在下一步中将其传递到6步开关，然后传递到输出排列，这是输入排列的逆排列。如果输入排列将字母映射到“ AEIOUY”以外的字母，则它将通过三个20步开关，始终以相同的顺序传递：首先开关＃1，然后是＃2和＃3。然后，开关＃3的输出进入输出排列。每按下一个键后，步进开关就会按照某些规则前进。当开关前进时，它从位置n转到位置n + 1，从而实现了新的排列。当开关位于位置25时，下一步将返回位置1。步进开关以不同的速度前进：每次按下键后6档都会前进。虽然20个开关中的一个快速前进（在每个键之后），但一个以中速前进（仅在快速的一个到达位置25之后），另一个以慢速前进（仅在中速开关到达位置25之后）。用户可以决定三个20个开关中的哪一个是慢速开关，中速开关和快速开关。该键包括四个开关的起始位置，速度分配和插板配置，可实现输入和输出排列。美国密码学家威廉·弗里德曼（William Friedman）和他的团队打破了《紫色》，这通常被认为是密码学史上最伟大的成就之一。他们仅能从被拦截的密文中重建出Purple的加密原理，而无需事先了解其内部工作原理，并构建了该机器的复制品。紫色是美国密码学家分配给它的代号。日本发明者称该机器为“ 97-Shiki O-bun In-ji-ki”（字母打字机&amp;#39;97）。</introduction>
+  <introduction lang="ru">Фиолетовый - электромеханическая шифровальная машина, которая использовалась японскими дипломатами во время Второй мировой войны. Он работает по принципу, аналогичному принципу Enigma: открытый текст вводится на клавиатуре. Каждая нажатая кнопка закрывает электрическую цепь, которая ведет от клавиатуры через несколько блоков перестановки к выходному блоку. После каждой зашифрованной буквы внутренние блоки перестановки продвигаются в соответствии с определенными правилами. В отличие от Enigma, перестановки не реализуются с роторами, а с шаговыми переключателями, которые также использовались в телефонных системах в то время. Фиолетовый использовал четыре ступенчатых переключателя. Каждый коммутатор имел 25 позиций и определенное количество входов и выходов. Каждое из 25 положений коммутатора реализовало перестановку входных сигналов, подключив их к выходам по-разному. Три шаговых переключателя имеют 20 входов и выходов, один имеет 6. Когда буква вводится на клавиатуре, она сначала переходит через входную перестановку. Если он сопоставляется с одной из букв «AEIOUY», он будет передан на следующем шаге на 6-ступенчатый переключатель, а затем на выходную перестановку, которая является обратной перестановкой входной перестановки. Если входная перестановка сопоставляет букву с буквой, отличной от «AEIOUY», она передается через три 20-ступенчатых переключателя, всегда в том же порядке: первый переключатель №1, затем № 2 и № 3. Выход переключателя № 3 затем переходит к перестановке выходных данных. После каждой нажатой клавиши шаговые переключатели продвигаются в соответствии с определенными правилами. Когда переключатель продвинут, он переходит из положения n в положение n + 1, тем самым реализуя новую перестановку. Когда переключатель находится в положении 25, он возвращается в положение 1 на следующем шаге. Пошаговые переключатели продвигаются с разной скоростью: 6-переключатель продвигается после каждой нажатой клавиши. В то время как один из 20 переключателей продвигается быстро (после каждой клавиши), один продвигается со средней скоростью (только после того, как быстрый достигает 25), а один продвигается с низкой скоростью (только после того, как переключатель средней скорости достигнет положения 25). Пользователь может решить, какой из трех 20-переключателей является медленным, средним и быстрым. Ключ состоит из начальных положений четырех переключателей, назначений скорости и конфигурации плагина, который реализует перестановку ввода и вывода. Американский криптолог Уильям Фридман и его команда сломали фиолетовый, который обычно рассматривается как одно из величайших достижений в истории криптологии. Им удалось восстановить принцип шифрования Purple только из перехваченных зашифрованных текстов без каких-либо предварительных знаний о его внутренних работах и ​​построить репликацию машины. Название Purple было кодовым именем, присвоенным ему американскими криптологами. Японские изобретатели назвали машину «97-шики О-бун Ин-джи-ки» (Алфавитная пишущая машинка «97»).</introduction>
+  <introduction lang="de-DE">
+    <i>Purple</i> ist eine elektromechanische Verschlüsselungsmaschine, die von japanischen Diplomaten vor und während des zweiten Weltkriegs eingesetzt wurde.
+	  <newline /><newline />
+	  Das Funktionsprinzip ist ähnlich wie das der Enigma: Der zu verschlüsselnde Klartext wird über eine Tastatur eingegeben. Jeder Tastendruck schließt einen Stromkreis, der von der Tastatur durch mehrere Permutationseinheiten
+    und schließlich zur Ausgabeeinheit verläuft.
+	  Nach jedem ausgegebenen Buchstaben werden die internen Permutationseinheiten nach gewissen Regeln weitergeschaltet.
+	  <newline /><newline />
+	  Im Gegensatz zur Enigma werden die Permutationen allerdings nicht durch Rotoren realisiert, sondern durch spezielle Vermittlungsschalter, wie sie damals auch für die Vermittlung von Telefongesprächen eingesetzt wurden.
+    Die <i>Purple</i> verwendet vier Vermittlungsschalter, von denen jeder 25 Positionen und eine bestimmte Anzahl von Ein- und Ausgängen hat. In jeder der 25 Positionen wird dabei eine andere Permutation der Eingänge realisiert
+    und an die Ausgänge weitergeleitet.
+	  <newline /><newline />
+	  Drei der Vermittlungsschalter haben 20 Ein- und Ausgänge und einer hat 6 Ein- und Ausgänge.
+	  Nachdem ein Buchstabe über die Tastatur eingegeben wurde, wird er zuerst einer Eingangspermutation unterworfen. Wird er durch diese auf einen der Buchstaben "AEIOUY" abgebildet, so wird er als nächstes an den 6er-Vermittlungsschalter
+    und dessen Ausgabe dann an die Ausgangspermutation weitergegeben. Die Ausgangspermutation ist hierbei stets die Umkehrung der Eingangspermutation.
+	  <newline /><newline />
+	  Bildet die Eingangspermutation die Eingabe auf einen anderen Buchstaben als "AEIOUY" ab, so wird der Buchstabe durch die drei 20er-Vermittlungsschalter geleitet, und zwar immer in derselben Reihenfolge: erst durch Schalter #1,
+    dessen Ausgabe durch Schalter #2, und dann durch Schalter #3. Die Ausgabe von Schalter #3 geht dann wieder durch die Ausgangspermutation.
+	  <newline /><newline />
+	  Nach jedem Tastendruck werden die Vermittlungsschalter nach gewissen Regeln weitergeschaltet. Wenn ein Schalter weitergeschaltet wird, so springt er von Position n zur Position n+1 und realisiert dadurch eine neue Permutation.
+    Ist er bei Position 25 angelangt, so springt er beim nächsten Mal zur Position 1 zurück.
+	  <newline /><newline />
+	  Die Vermittlungsschalter werden in unterschiedlichen Geschwindigkeiten weitergeschaltet: Der 6er-Schalter wird nach jedem Tastendruck weitergeschaltet, während von den drei 20er-Schaltern einer schnell (nach jedem Tastendruck),
+    einer mit mittlerer Geschwindigkeit (nach jedem Überlauf des schnellen) und einer langsam (nach jedem Überlauf des mittleren) weiterschaltet. Da der Benutzer selbst bestimmen kann, wie die drei Geschwindigkeiten den drei 20er-Schaltern
+    zugeordnet werden sollen, ist dies ebenso Teil des Schlüssels wie die Startpositionen aller vier Schalter sowie die durch ein Steckerbrett realisierte Eingangs- und Ausgangspermutation.
+	  <newline /><newline /><i>Purple</i> wurde von dem amerikanischen Kryptologen William Friedman und seinen Mitarbeitern gebrochen, was als eine der größten Leistungen in der Kryptologie gilt, da es ihnen gelang, das Verschlüsselungsprinzip
+    alleine aus den abgefangenen Geheimtexten und ohne Kenntnis des inneren Aufbaus der <i>Purple</i> zu rekonstruieren und die Maschine nachzubauen. Der Name <i>Purple</i> ist hierbei nur der von den amerikanischen Kryptologen verwendete
+    Codename. Die japanischen Konstrukteure nannten die Maschine "<i>97-shiki O-bun In-ji-ki</i>" (Alphabetische Schreibmaschine 97). 
+  </introduction>
+  <usage lang="en">
+    The <i>Purple</i> component has the two operation modes <i>Encryption</i> and <i>Decryption</i>, which can be selected in the settings of the component.
+    In <i>Encryption</i> mode, the component expects the plaintext as a string on its input, in <i>Decryption</i> mode, it expects the ciphertext.
+    <newline /><newline />
+    In the settings, you can also enter the key for the encryption or decryption.
+    In the textfield <i>Alphabet</i>, you must enter a string that is a permutation of the 26 letters. This permutation defines the input and output permutation, that the plugboard of the <i>Purple</i> implements.
+    The first 6 letters of this string will be mapped to the letters "AEIOUY" and will pass through the 6-switch during encryption. The remaining letters will be encrypted with the three 20-switches.
+    <newline /><newline />
+    In the section <i>Position</i>, you can specify the starting positions of the four stepping switches. Each switch has 25 possible positions that are numbered from 1 to 25.
+    <newline /><newline />
+    In the section <i>Speed</i> you can determine the speeds of the three 20-switches. You must enter a permutation of the numbers 1, 2 and 3, where "1" means slow speed, "2" means medium speed, and "3" means fast speed.
+    Thus "231" means, that switch #1 will advance with medium speed ("2"), switch #2 with fast speed ("3"), and switch #3 with slow speed ("1").
+    <newline /><newline />
+    In the section <i>Text options</i> you can determine how the component should handle characters in the input, that are not part of the standard alphabet A-Z used by the <i>Purple</i>.
+    They can be ignored, in which case the stepping switches will not be advanced. If you select "Copy", the unknown character will be passed unchanged to the output and the switches are advanced regularly.
+    This option is useful, when a ciphertext contains illegible characters. They can then be represented as "?". Simply ignoring them would mess up the decryption from the illegible character onwards.
+    Finally, you have the option to replace an unknown character by a placeholder character.
+    <newline /><newline />
+    In the section <i>Output formatting</i> you can determine how the output of the component should be formatted. You can either keep the formatting of the input text, delete all white spaces, or group it in blocks of 5 characters.
+    <newline /><newline />
+    Finally, you can determine the case sensitivity of the component. You can either convert the output to uppercase or lowercase, or keep the spelling of the input text.
+  </usage>
+  <usage lang="zh-CN">紫色组件具有加密和解密两种操作模式，可以在组件的设置中选择它们。在“加密”模式下，该组件期望纯文本作为其输入的字符串，在“解密”模式下，该组件期望该密文。在设置中，您还可以输入用于加密或解密的密钥。在文本字段字母中，您必须输入一个由26个字母组成的字符串。此排列定义了Purple插件板实现的输入和输出排列。该字符串的前6个字母将映射为字母“ AEIOUY”，并在加密过程中通过6开关。其余字母将使用三个20开关进行加密。在位置部分中，可以指定四个步进开关的起始位置。每个开关有25个可能的位置，编号从1到25。在“速度”部分中，您可以确定三个20个开关的速度。您必须输入数字1、2和3的排列，其中“ 1”表示慢速，“ 2”表示中速，“ 3”表示快速。因此，“ 231”表示开关＃1将以中等速度（“ 2”）前进，开关＃2将以高速（“ 3”）前进，开关＃3将以慢速（“ 1”）前进。在“文本选项”部分，您可以确定组件应如何处理输入中的字符，这些字符不属于Purple使用的标准字母AZ。它们可以忽略，在这种情况下，步进开关将不会前进。如果选择“复制”，未知字符将原封不动地传递到输出，并且开关会定期前进。当密文包含难以辨认的字符时，此选项很有用。然后可以将它们表示为“？”。简单地忽略它们会破坏从难以辨认的字符开始的解密。最后，您可以选择用占位符替换未知字符。在“输出格式”部分中，您可以确定如何格式化组件的输出。您可以保留输入文本的格式，删除所有空白，或将其分组为5个字符。最后，您可以确定组件的区分大小写。您可以将输出转换为大写或小写，或保留输入文本的拼写。</usage>
+  <usage lang="ru">Компонент Purple имеет два режима работы: «Шифрование и дешифрование», которые могут быть выбраны в настройках компонента. В режиме шифрования компонент ожидает открытый текст как строку на своем входе, в режиме дешифрования он ожидает шифрованный текст. В настройках вы также можете ввести ключ для шифрования или дешифрования. В текстовом поле «Азбука» вы должны ввести строку, которая является перестановкой из 26 букв. Эта перестановка определяет входную и выходную перестановку, которые реализует плагин Purple. Первые 6 букв этой строки будут сопоставлены буквам «AEIOUY» и будут проходить через 6-переключатель во время шифрования. Остальные буквы будут зашифрованы тремя 20-переключателями. В разделе «Положение» вы можете указать начальные позиции четырех ступенчатых переключателей. Каждый переключатель имеет 25 возможных позиций, которые пронумерованы от 1 до 25. В разделе «Скорость» вы можете определить скорости трех 20-переключателей. Вы должны ввести перестановку чисел 1, 2 и 3, где «1» означает медленную скорость, «2» означает среднюю скорость, а «3» означает быструю скорость. Таким образом, «231» означает, что переключатель №1 будет продвигаться со средней скоростью («2»), переключателем №2 с быстрой скоростью («3») и переключателем № 3 с низкой скоростью («1»). В разделе «Параметры текста» вы можете определить, как компонент должен обрабатывать символы на входе, которые не являются частью стандартного алфавита AZ, используемого фиолетовым. Их можно игнорировать, и в этом случае шаговые переключатели не будут продвинуты. Если вы выберете «Копировать», неизвестный символ будет передан без изменений на выход, а переключатели будут расширены регулярно. Эта опция полезна, когда зашифрованный текст содержит неразборчивые символы. Затем они могут быть представлены как «?». Просто игнорирование их испортило бы дешифрование от неразборчивого персонажа. Наконец, вы можете заменить неизвестный символ символом-заполнителем. В разделе «Форматирование вывода» вы можете определить способ форматирования вывода компонента. Вы можете сохранить форматирование входного текста, удалить все пробелы или сгруппировать его в блоках из 5 символов. Наконец, вы можете определить чувствительность к регистру компонента. Вы можете преобразовать вывод в верхний или нижний регистр или сохранить написание текста ввода.</usage>
+  <usage lang="de-DE">
+    Die <i>Purple</i>-Komponente hat zwei Betriebsarten, <i>Verschlüsselung</i> und <i>Entschlüsselung</i>, zwischen denen in den Einstellungen des Plugins gewählt werden kann.
+    In der Betriebsart <i>Verschlüsselung</i> wird der zu verschlüsselnde Klartext als Zeichenfolge am Eingang der Komponente angelegt, in der Betriebsart <i>Entschlüsselung</i> der Geheimtext.
+    <newline /><newline />
+    In den Einstellungen wird auch der zu verwendende Schlüssel eingegeben: Im Textfeld <i>Alphabet</i> wird eine Permutation der 26 Buchstaben erwartet, die die durch das Steckerbrett realisierte Eingangspermutation definiert.
+    Die ersten 6 Buchstaben der hier angegebenen Zeichenfolge werden auf die Buchstaben "AEIOUY" abgebildet und durchlaufen bei der Verschlüsselung den 6er-Vermittlungsschalter. Die restlichen Buchstaben werden daher durch die drei
+    20er-Vermittlungsschalter verschlüsselt. 
+    <newline /><newline />
+    In der Rubrik <i>Position</i> können die Startpositionen der vier Vermittlungsschalter festgelegt werden, wobei jeder Schalter 25 Positionen hat, die von 1 bis 25 durchnummeriert sind.
+    <newline /><newline />
+    In der Rubrik <i>Geschwindigkeit</i> kann angegeben werden, mit welcher Geschwindigkeit die drei 20er-Schalter weitergeschaltet werden sollen. Als Eingabe wird hier eine Permutation der Zahlen 1, 2 und 3 erwartet, wobei "1" langsame 
+    Geschwindigkeit bedeutet, "2" mittlere Geschwindigkeit und "3" schnelle Geschwindigkeit. Die Eingabe "231" heißt dann, dass der Vermittlungsschalter #1 mit mittlerer Geschwindigkeit ("2") betrieben wird, Vermittlungsschalter #2
+    schnell ("3") und Vermittlungsschalter #3 langsam ("1").
+    <newline /><newline />
+    In der Rubrik <i>Text-Optionen</i> kann eingestellt werden, wie auf Zeichen in der Eingabe reagiert werden soll, die nicht Bestandteil des von der <i>Purple</i> verwendeten Standardalphabets A-Z sind. Werden unbekannte Zeichen ignoriert,
+    so werden die Vermittlungsschalter beim Lesen dieses Zeichens nicht weitergeschaltet. Wird "kopieren" gewählt, so wird das unbekannte Zeichen unverändert an die Ausgabe weitergegeben und die Vermittlungsschalter werden um eine Position
+    weitergeschaltet. Dies ist nützlich, wenn ein zu entschlüsselnder Geheimtext unleserliche Zeichen enthält, die z.B. durch ein "?" dargestellt werden. Würde dieses bei der Entschlüsselung einfach ignoriert werden, so würde der Geheimtext
+    ab dem weggelassenen Zeichen falsch decodiert werden. Schließlich gibt es noch die Option, ein unbekanntes Zeichen in der Ausgabe durch ein Platzhalterzeichen zu ersetzen.
+    <newline /><newline />
+    Unter dem Punkt <i>Ausgabeformatierung</i> kann ausgewählt werden, wie die Ausgabe der Komponente aufbearbeitet werden soll. Es gibt die Möglichkeit, entweder die Formatierung des Eingabetextes beizubehalten,
+    alle Leerraumzeichen (Leerzeichen, Tabulator, Zeilenumbruch) zu löschen oder die Ausgabe in Blöcken zu 5 Zeichen zu formatieren.
+    <newline /><newline />
+    Schließlich kann noch die Behandlung der Groß-/Kleinschreibung gewählt werden. Man kann die Ausgabe komplett in Groß- oder Kleinbuchstaben konvertieren oder die Schreibweise des Eingangstextes beibehalten.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Purple_(cipher_machine)" />
+      <caption lang="en">Purple (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/PURPLE" />
+      <caption lang="de-DE">Purple (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

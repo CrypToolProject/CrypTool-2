@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Transposition Brute-Force Analysis</title>
+  <title lang="zh">换位蛮力分析</title>
+  <title lang="ru">Анализ переноса грубой силы</title>
+  <summary lang="en">Cryptanalysis of the <i>Transposition</i> cipher using brute-force</summary>
+  <summary lang="zh">使用蛮力对换位密码进行密码分析</summary>
+  <summary lang="ru">Криптоанализ шифрования Transposition с использованием грубой силы</summary>
+  <description lang="en">This template shows the cryptanalysis of the single <i>Transposition</i> cipher with the <i>Transposition Analyzer</i> using brute-force. It is a ciphertext-only attack, as no part of the plaintext is known in advance.</description>
+  <description lang="zh">该模板显示了使用“转位分析器”使用蛮力对单个“转位”密码进行的密码分析。这是仅密文攻击，因为事先不知道明文的任何部分。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ одиночного Transposition cipher с Transposition Analyzer с использованием грубой силы. Это атака только с зашифрованным текстом, поскольку никакая часть открытого текста не известна заранее.</description>
+  <keywords>Transposition, Permutation, Bruteforce, Brute-force, Attack, Analysis</keywords>
+  <keywords lang="zh">换位，置换，蛮力，蛮力，攻击，分析</keywords>
+  <keywords lang="ru">Транспонирование, Перестановка, Bruteforce, Грубая сила, Атака, Анализ</keywords>
+  <title lang="de">Transposition Brute-Force-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>Transpositionsverschlüsselung</i> mit Brute-Force</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der einstufigen <i>Transpositionsverschlüsselung</i> mit der Komponente <i>Transpositions-Analyse</i> mittels Brute-Force. Es handelt sich hierbei um eine Ciphertext-only-Analyse, da keine Informationen über den Klartext bekannt sind.</description>
+  <keywords lang="de">Angriff</keywords>
+  <icon file="Transposition.png" />
+  <relevantPlugins>
+    <plugin name="CostFunction" />
+    <plugin name="Transposition" />
+    <plugin name="TranspositionAnalyser" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$TranspositionAnalyser$" value="Transpositions-Analyse" />
+    <replacement key="$Converter$" value="Konvertierer" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$TranspositionAnalyser$" value="换位分析" />
+    <replacement key="$Converter$" value="转换器" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$TranspositionAnalyser$" value="Транспозиций-анализ" />
+    <replacement key="$Converter$" value="преобразование" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
+    <replacement key="$TranspositionAnalyser$" value="TranspositionAnalyzer" />
+    <replacement key="$Converter$" value="Converter" />
+  </replacements>
+</sample>

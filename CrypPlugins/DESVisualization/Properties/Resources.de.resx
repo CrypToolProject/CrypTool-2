@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DESVisualizationCaption" xml:space="preserve">
+    <value>DES-Visualisierung</value>
+  </data>
+  <data name="DESVisualizationTooltip" xml:space="preserve">
+    <value>Visualisierung der DES-Verschlüsselung</value>
+  </data>
+  <data name="inputKeyDescription" xml:space="preserve">
+    <value>Eingabe des Schlüssels für die Verschlüsselung</value>
+  </data>
+  <data name="inputKeyName" xml:space="preserve">
+    <value>Schlüsseleingabe</value>
+  </data>
+  <data name="inputTextDescription" xml:space="preserve">
+    <value>Eingabe des Klartextes, der verschlüsselt werden soll</value>
+  </data>
+  <data name="inputTextName" xml:space="preserve">
+    <value>Klartexteingabe</value>
+  </data>
+  <data name="institute" xml:space="preserve">
+    <value>Universität Mannheim</value>
+  </data>
+  <data name="IntroBottom" xml:space="preserve">
+    <value>Blockchiffre-Visualisierung</value>
+  </data>
+  <data name="outputCiphertextDescription" xml:space="preserve">
+    <value>Ausgabe des Geheimtextes nach Anwendung der DES-Verschlüsselung</value>
+  </data>
+  <data name="outputCiphertextName" xml:space="preserve">
+    <value>Geheimtextausgabe</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>aktiv</value>
+  </data>
+  <data name="Bit32" xml:space="preserve">
+    <value>32 Bit</value>
+  </data>
+  <data name="Bit48" xml:space="preserve">
+    <value>48 Bit</value>
+  </data>
+  <data name="Bit6" xml:space="preserve">
+    <value>6 Bit</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>Geheimtext</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>Spalte:</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>Daten</value>
+  </data>
+  <data name="DataKey" xml:space="preserve">
+    <value>Schlüssel (64 Bit):</value>
+  </data>
+  <data name="DataMessage" xml:space="preserve">
+    <value>Nachricht (64 Bit):</value>
+  </data>
+  <data name="DiffInfo" xml:space="preserve">
+    <value>Klick Ok zum Flippen markierter Bits</value>
+  </data>
+  <data name="DiffusionVisualizer" xml:space="preserve">
+    <value>Zeige Diffusionsanzeige</value>
+  </data>
+  <data name="FinalCiphertext" xml:space="preserve">
+    <value>Geheimtext (64  Bit):</value>
+  </data>
+  <data name="FunctionLabel" xml:space="preserve">
+    <value>Funktion f(K  ,R  )
+Runde      /16</value>
+  </data>
+  <data name="HistoryText" xml:space="preserve">
+    <value>- 1972 begann das NBS (National Bureau of Standards) einen für jeden 
+  zugänglichen Verschlüsselungsstandard zu suchen bzw. entwickeln.
+  Darunter war ein Algorithmus, der auf dem IBM-Projekt "Lucifer" basierte.
+
+- Um die Sicherheit des Algorithmus zu testen wurde die NSA (National Security
+  Agency) um Hilfe gebeten.
+
+- Nach Änderungen an der Schlüssellänge und den S-Boxen wurde dieser
+  Algorithmus am 23. November 1976 zum Data Encryption Standard.
+
+- Am 2. Oktober 2000 wurde der DES durch den belgischen Algorithmus 
+  "Rijndael" ersetzt, der den AES (Advanced Encryption Standard) darstellt.</value>
+  </data>
+  <data name="InfoText" xml:space="preserve">
+    <value>DES ist ein Blockchiffrieralgorithmus, der 64 Bit-Klartextblöcke mit einem
+64 Bit-Schlüssel ver- bzw. entschlüsselt.
+Jedes 8. Bit (least significant bit) im Schlüssel wird als Paritätsbit genutzt.
+Diese acht Bits werden vom Algorithmus nicht verwendet. Daraus ergibt sich
+eine effektive Schlüssellänge von nur 56 Bit. 
+
+Der Algorithmus besteht nur aus Permutationen und Substitutionen. Der
+gesamte Ablauf benötigt insgesamt 16 Runden, die in einem Feistel-Netzwerk
+organisiert sind.
+
+Damit sind Ver- und Entschlüsselung sehr ähnliche Prozesse.</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Eingabe:</value>
+  </data>
+  <data name="Intro" xml:space="preserve">
+    <value>Einführung</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="KeyAddition" xml:space="preserve">
+    <value>Schlüsseladdition</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Nachricht</value>
+  </data>
+  <data name="NextStep" xml:space="preserve">
+    <value>Nächster Schritt</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Ausgabe:</value>
+  </data>
+  <data name="OutputAll" xml:space="preserve">
+    <value>Ausgabe aller S-Boxen:</value>
+  </data>
+  <data name="PrevStep" xml:space="preserve">
+    <value>Schritt zurück</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Runde</value>
+  </data>
+  <data name="Round1" xml:space="preserve">
+    <value>Runde 1</value>
+  </data>
+  <data name="Round16" xml:space="preserve">
+    <value>Runde 16</value>
+  </data>
+  <data name="RoundData" xml:space="preserve">
+    <value>Runde                              L                                                    R</value>
+  </data>
+  <data name="Roundfunction" xml:space="preserve">
+    <value>Rundenfunktion</value>
+  </data>
+  <data name="RoundKey" xml:space="preserve">
+    <value>Rundenschlüssel</value>
+  </data>
+  <data name="RoundKeyData" xml:space="preserve">
+    <value>Runde                                     Rundenschlüssel</value>
+  </data>
+  <data name="RoundShift" xml:space="preserve">
+    <value>Runde:   1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16 
+Shifts:     1   1   2   2   2   2   2   2   1    2     2     2     2     2     2     1</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Reihe:</value>
+  </data>
+  <data name="Runde_16" xml:space="preserve">
+    <value>Runde {0}/16</value>
+  </data>
+  <data name="SBoxesLabel" xml:space="preserve">
+    <value>S-Boxen</value>
+  </data>
+  <data name="SkipStep" xml:space="preserve">
+    <value>Überspringe Schritt</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Zusammenfassung</value>
+  </data>
+  <data name="Background" xml:space="preserve">
+    <value>Hintergrund</value>
+  </data>
+  <data name="BitwiseXOROperation" xml:space="preserve">
+    <value>Bitweise XOR-Operation</value>
+  </data>
+  <data name="CyclicShift" xml:space="preserve">
+    <value>Zyklischer Shift</value>
+  </data>
+  <data name="DESEncryption" xml:space="preserve">
+    <value>DES-Verschlüsselung</value>
+  </data>
+  <data name="DiffusionVisualizerHide" xml:space="preserve">
+    <value>Verstecke Diffusionsanzeige</value>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>Allgemeine Informationen</value>
+  </data>
+  <data name="GeneralStructure" xml:space="preserve">
+    <value>Allgemeine Struktur</value>
+  </data>
+  <data name="InputData" xml:space="preserve">
+    <value>Eingabedaten</value>
+  </data>
+  <data name="Introduction" xml:space="preserve">
+    <value>Einführung</value>
+  </data>
+  <data name="KeySchedule" xml:space="preserve">
+    <value>Key-Schedule-Algorithmus</value>
+  </data>
+  <data name="PermutationFunction" xml:space="preserve">
+    <value>Permutationsfunktion</value>
+  </data>
+  <data name="SkipRound" xml:space="preserve">
+    <value>Überspringe Runde</value>
+  </data>
+  <data name="DiffOkLabel" xml:space="preserve">
+    <value>Bestätige das Flippen der ausgewählten Bits.</value>
+  </data>
+  <data name="SBoxResultLong" xml:space="preserve">
+    <value>→ Ergebnis für die S-Box-Anwendung</value>
+  </data>
+  <data name="SBoxJumpButton" xml:space="preserve">
+    <value>Springe zum Operationsende</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>Tausche Hex-Binär</value>
+  </data>
+  <data name="ChapterTextDES" xml:space="preserve">
+    <value>- Die "DES-Verschlüsselung" ist der zweite Hauptteil des Algorithmus: Hier wird
+  die Nachricht innerhalb von 16 Runden verschlüsselt.
+
+- Die Knöpfe in den untersten beiden Reihen zeigen dir zusätzlich, wo du dich
+  gerade befindest: Solange du dich in diesem zweiten Hauptteil des DES
+  befindest, ist einer der Knöpfe "IP", "DES" oder "FP" blau hinterlegt.</value>
+  </data>
+  <data name="ChapterTextKS" xml:space="preserve">
+    <value>- Der "Key Schedule" ist der erste Hauptteil des Algorithmus: Hier wird aus  
+  dem gegebenen Schlüssel ein Schlüssel für jede Runde des DES generiert
+  (diese Rundenschlüssel werden im zweiten Hauptteil des DES, der den
+  eigentlichen Verschlüsselungsprozess darstellt, benutzt).
+
+- Die Knöpfe in den untersten beiden Reihen haben zwei Aufgaben: Sie geben 
+  an, wo du dich gerade befindest, und sie erlauben eine direkte Navigation:
+  Solange du dich in diesem ersten Hauptteil des DES befindest, ist der Knopf
+  "Key Schedule" in der zweituntersten Reihe blau hinterlegt.</value>
+  </data>
+</root>

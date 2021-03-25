@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+
+  <title lang="en">Spanish Strip Cipher Analyzer</title>
+  <summary lang="en">Usage of the <i>Spanish Strip Cipher Analyzer</i> </summary>
+  <description lang="en">This template shows the usage of the Spanish Strip Cipher Analyzer</description>
+  <keywords></keywords>
+
+  <title lang="de">Spanische Strip-Chiffre Analyzer</title>
+  <summary lang="de">Benutzung der <i>Spanischen Strip-Chiffre Analyzer</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der spanischen Strip-Chiffre Analyzer</description>
+  <keywords lang="de"></keywords>
+
+  <icon file="SpanishStripCipherAnalysis.png" />
+  <relevantPlugins>
+    <plugin name="SpanishStripCipherAnalysis" />
+  </relevantPlugins>
+
+</sample>

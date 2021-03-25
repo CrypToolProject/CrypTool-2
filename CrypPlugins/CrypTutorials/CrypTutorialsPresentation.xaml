@@ -1,0 +1,524 @@
+﻿<UserControl x:Class="CrypTool.CrypTutorials.CrypTutorialsPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+             xmlns:Controls="clr-namespace:CrypTool.CrypTutorials"
+             xmlns:tut="clr-namespace:CrypTool.CrypTutorials"
+             d:DesignHeight="500" d:DesignWidth="1200" Background="#ccc" ToolTip="{Loc PluginTooltip}"
+             DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="Background" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#eee" Offset="0.0"/>
+                    <GradientStop Color="#ccc" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="Background3" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#e1e1e1" Offset="0.0"/>
+                    <GradientStop Color="Transparent" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="Background4" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#e5e5e5" Offset="0.0"/>
+                    <GradientStop Color="#88e5e5e5" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundIsSelected" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#d2f0d4" Offset="0.0"/>
+                    <GradientStop Color="#33e2efe3" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundMouseOver" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#d2e8f0" Offset="0.0"/>
+                    <GradientStop Color="#44deeaee" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="bg" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#9ed9ff" Offset="0.0"/>
+                    <GradientStop Color="#81a4c0" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <VisualBrush x:Key="Background2" TileMode="None" Stretch="None" AlignmentX="Center" AlignmentY="Center">
+            <VisualBrush.Visual>
+                <TextBlock  Margin="20,10,0,0" Text="c" FontSize="115" Foreground="{StaticResource ResourceKey=bg}" Opacity="0.4"
+                    FontFamily="/CrypTutorials;component/#CrypTool2">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0" ShadowDepth="0"></DropShadowEffect>
+                </TextBlock.Effect>
+                </TextBlock>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <VisualBrush x:Key="VideoBackground" TileMode="None" Stretch="None" AlignmentX="Center" AlignmentY="Center">
+            <VisualBrush.Visual>
+                <TextBlock  Margin="20,10,0,0" Text="c" FontSize="100" Foreground="{StaticResource ResourceKey=bg}" TextAlignment="Center"
+                FontFamily="/CrypTutorials;component/#CrypTool2"></TextBlock>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <VisualBrush x:Key="HelpBrush" TileMode="None" Stretch="None" AlignmentX="Left" AutoLayoutContent="True">
+            <VisualBrush.Visual>
+                <Grid Background="#11ffffff">
+                    <TextBlock FontStyle="Italic" Opacity="0.4"  Text="Suche" Margin="5,0,0,0"></TextBlock>
+                </Grid>
+            </VisualBrush.Visual>
+        </VisualBrush>
+
+        <tut:IsNullConverter x:Key="IsNullConverter"></tut:IsNullConverter>
+
+        <tut:RandomMaxConverter x:Key="RandomMaxConverter"></tut:RandomMaxConverter>
+
+        <ControlTemplate x:Key="CtrlTemplate" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="Border" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                <Image RenderOptions.BitmapScalingMode="Linear" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag.Source}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"></Image>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#55222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#aa222222" TargetName="Border" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type Button}" x:Key="OperationCloseStyle">
+            <Setter Property="ToolTip" Value="{Loc CloseComponentTooltip}"></Setter>
+            <Setter Property="Height" Value="35"></Setter>
+            <Setter Property="Width" Value="35"></Setter>
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="MinHeight" Value="23"/>
+            <Setter Property="MinWidth" Value="75"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="Border"  
+                            CornerRadius="6" 
+                            BorderThickness="1"
+                            Background="#993a5563">
+                            <ContentPresenter 
+                                Margin="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#00a8ff" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource ResourceKey=Background}">
+
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.Resources>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="SnapsToDevicePixels" Value="true" />
+                    <Setter Property="OverridesDefaultStyle" Value="true" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="Root" Background="{StaticResource ResourceKey=Background3}" HorizontalAlignment="Stretch" Padding="5" Margin="1">
+                                    <Grid>
+
+                                        <Border Padding="5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="51"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                    <!--<RowDefinition Height="*"></RowDefinition>-->
+                                                </Grid.RowDefinitions>
+                                                <Border Width="45" Height="45" VerticalAlignment="Top" BorderBrush="#ddd" BorderThickness="1.5" CornerRadius="4" Background="#aaa">
+                                                    <Image Source="{Binding Path=Icon}" Width="40" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
+                                                </Border>
+
+                                                <Grid Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Left">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="auto"></RowDefinition>
+                                                        <RowDefinition Height="auto"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <TextBlock FontSize="25" Foreground="#666" x:Name="Title" VerticalAlignment="Center"
+                                                           TextTrimming="CharacterEllipsis" Text="{Binding Path=Title}"
+                                                           FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz">
+
+                                                    </TextBlock>
+                                                    <TextBlock Grid.Row="1" Foreground="#888" FontSize="10" Text="{Binding Path=Timestamp, StringFormat={}{0:r}}"></TextBlock>
+                                                </Grid>
+
+                                                <!--<TextBlock Grid.Column="1" Grid.Row="1"  HorizontalAlignment="Left" 
+                                           Foreground="#333" TextAlignment="Justify" TextWrapping="Wrap" TextTrimming="WordEllipsis" Margin="10,20,0,0" FontWeight="ExtraLight" FontSize="14"
+                                           Text="{Binding Path=Description}" LineHeight="20" LineStackingStrategy="BlockLineHeight" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Description}"></TextBlock>-->
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Root" Property="Background" Value="{StaticResource ResourceKey=BackgroundMouseOver}"></Setter>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Root" Property="Background" Value="{StaticResource ResourceKey=BackgroundIsSelected}"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+                <Style x:Key="ComponentListStyle" TargetType="{x:Type ListView}">
+                    <Style.Resources>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent"/>
+                    </Style.Resources>
+                    <Setter Property="Padding" Value="0"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" Grid.Row="1">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <!--<Setter Property="ItemTemplate" Value="{StaticResource ResourceKey=ItemTemplate}"></Setter>-->
+                </Style>
+
+                <Style x:Key="ItemContainerStyle" TargetType="TreeViewItem">
+                    <Setter Property="Background" Value="Khaki" />
+                    <Setter Property="Foreground" Value="DarkSlateGray" />
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="FontStyle" Value="Italic" />
+                    <Setter Property="FontSize" Value="14" />
+                    <Setter Property="BorderBrush" Value="DarkGray" />
+                </Style>
+
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition>
+                    <ColumnDefinition.Style>
+                        <Style TargetType="ColumnDefinition">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=VideoListView, Path=SelectedItem, Converter={StaticResource ResourceKey=IsNullConverter}}" Value="True">
+                                    <Setter Property="MaxWidth" Value="0"></Setter>
+                                    <Setter Property="MinWidth" Value="0"></Setter>
+                                    <Setter Property="Width" Value="0"></Setter>
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="MaxWidth" Value="350"></Setter>
+                            <Setter Property="MinWidth" Value="200"></Setter>
+                            <Setter Property="Width" Value="250"></Setter>
+                        </Style>
+                    </ColumnDefinition.Style>
+                </ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Rectangle Grid.ColumnSpan="3" Fill="#11222222"></Rectangle>
+
+            <Grid Background="{StaticResource ResourceKey=Background2}"></Grid>
+
+            <TextBlock Margin="20,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="CrypTool Tutorial Videos" FontSize="22" Foreground="#666"
+                            FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz">
+                        <TextBlock.Effect>
+                            <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" ></DropShadowEffect>
+                        </TextBlock.Effect>
+            </TextBlock>
+
+            <Grid Grid.Column="1" Grid.Row="1" Visibility="Visible" Background="#80ffffff">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontSize="30" Foreground="#666" x:Name="Title" VerticalAlignment="Center" TextWrapping="Wrap" 
+                                            TextTrimming="CharacterEllipsis" Text="{Binding ElementName=VideoListView, Path=SelectedItem.Title}"
+                                            FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz"></TextBlock>
+
+                    <TextBlock Grid.Row="2" HorizontalAlignment="Left" 
+                               Foreground="#333" TextAlignment="Justify" TextWrapping="Wrap" TextTrimming="WordEllipsis" Margin="0,20,0,0" FontWeight="ExtraLight" FontSize="14"
+                               Text="{Binding ElementName=VideoListView, Path=SelectedItem.Description}" LineHeight="20" 
+                               LineStackingStrategy="BlockLineHeight" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Description}"></TextBlock>
+                    
+                    <Button Grid.Row="1" Margin="0,5,0,5" Click="Button_Click">
+                        <Image Source="/CrypTutorials;component/play.png" HorizontalAlignment="Center" SnapsToDevicePixels="True" Height="30"></Image>
+                    </Button>
+
+                    <TextBlock Grid.Row="3" Foreground="#888" FontSize="10" Margin="0,20,0,0" Text="{Binding ElementName=VideoListView, Path=SelectedItem.Timestamp, StringFormat={}{0:r}}"></TextBlock>
+                </Grid>
+            </Grid>
+
+            <TextBox TextChanged="TextBox_TextChanged" Grid.Column="1" Grid.ColumnSpan="2" Margin="10">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value=" ">
+                                <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                        <Setter Property="Background" Value="#11ffffff"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border Background="#44FFFFFF" Padding="5" CornerRadius="6" BorderBrush="#aaa" BorderThickness="0.5">
+                                        <ScrollViewer Background="{TemplateBinding Background}" x:Name="PART_ContentHost" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Grid Grid.Row="1" Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>                               
+                <ListView  x:Name="VideoListView" Grid.Row="1" Style="{StaticResource ResourceKey=ComponentListStyle}" ItemsSource="{Binding Path=Videos}"
+                              SelectionMode="Single"  SelectionChanged="SelectionChanged" MouseDoubleClick="VideoListView_MouseDoubleClick"></ListView>
+            </Grid>
+            
+
+            <Grid Grid.Row="1" Background="#bbffffff">
+                <Border Margin="5,10,5,10" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                    <StackPanel >
+                        <TextBlock  Text="Kategorien" FontSize="15" Foreground="#888"  Margin="2" TextAlignment="Center"
+                        FontFamily="Tahoma" Grid.ColumnSpan="2">
+                            <TextBlock.Effect>
+                                <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" ></DropShadowEffect>
+                            </TextBlock.Effect>
+                        </TextBlock>
+
+                        <TreeView Name="viewsTreeView" ItemsSource="{Binding Path=Categories}" SelectedItemChanged="viewsTreeView_SelectedItemChanged"
+                                  BorderBrush="Transparent" Background="Transparent" Padding="0" Margin="0">
+                            <TreeView.Resources>
+                                <Style TargetType="{x:Type ToggleButton}">
+                                    <Setter Property="Focusable" Value="False"/>
+                                    <Setter Property="Width" Value="16"/>
+                                    <Setter Property="Height" Value="16"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                                <Border Name="Root" Background="Transparent">
+                                                    <Image x:Name="img" Source="/CrypTutorials;component/open.png" 
+                                                           HorizontalAlignment="Center" SnapsToDevicePixels="True" Height="12"></Image>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="img" Property="Source" Value="/CrypTutorials;component/close.png"></Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+
+                                <Style TargetType="TreeViewItem">
+                                    <Setter Property="Padding" Value="3" />
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    <Setter Property="VerticalContentAlignment" Value="Top" />
+                                    <Setter Property="Background" Value="{StaticResource ResourceKey=Background4}" />
+                                    <Setter Property="BorderThickness" Value="1" />
+                                    <Setter Property="BorderBrush" Value="#ccc"></Setter>
+                                    <Setter Property="Cursor" Value="Arrow" />
+                                    <Setter Property="IsTabStop" Value="False" />
+                                    <Setter Property="Margin" Value="0,3,0,3" />
+                                    <Setter Property="FontSize" Value="15"></Setter>
+                                    <Setter Property="Foreground" Value="#333"></Setter>
+                                    <Setter Property="FontFamily" Value="Corbel"></Setter>
+                                    <Setter Property="IsExpanded" Value="True"></Setter>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Border Grid.ColumnSpan="3" Grid.Row="0" x:Name="Bd" CornerRadius="3" SnapsToDevicePixels="true" 
+                                                            Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                                            BorderThickness="{TemplateBinding BorderThickness}"></Border>
+                                                    <Border Grid.Column="2" Background="#aabbbbbb" CornerRadius="5" BorderBrush="#555" BorderThickness="0.5"
+                                                            Padding="5,0,5,0" Margin="0,0,3,0" VerticalAlignment="Center">
+                                                        <TextBlock FontFamily="Corbel" FontSize="16" Text="{Binding Path=Count}" 
+                                                                   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="WhiteSmoke">
+                                                            <TextBlock.Effect>
+                                                                <DropShadowEffect BlurRadius="2" ShadowDepth="0"></DropShadowEffect>
+                                                            </TextBlock.Effect>
+                                                        </TextBlock>
+                                                    </Border>
+                                                    <ToggleButton x:Name="Expander" ClickMode="Press" Margin="2" 
+                                                                  IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                                    <Border Grid.Column="1" Padding="{TemplateBinding Padding}">
+                                                        <ContentPresenter x:Name="PART_Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" ContentSource="Header"/>
+                                                    </Border>
+                                                    <ItemsPresenter x:Name="ItemsHost" HorizontalAlignment="Stretch" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsExpanded" Value="false">
+                                                        <Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+                                                    </Trigger>
+                                                    <Trigger Property="HasItems" Value="false">
+                                                        <Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="true">
+                                                        <Setter Property="Background" TargetName="Bd" Value="#333"/>
+                                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                                                    </Trigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsSelected" Value="true"/>
+                                                            <Condition Property="IsSelectionActive" Value="false"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="Background" TargetName="Bd" Value="#555"/>
+                                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                                                    </MultiTrigger>
+                                                    <Trigger Property="IsEnabled" Value="false">
+                                                        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                                <HierarchicalDataTemplate DataType="{x:Type tut:Category}" ItemsSource="{Binding Path=Children}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--<CheckBox Margin="2" Name="checkBox1"/>-->
+                                        <Border Padding="2">
+                                            <TextBlock Text="{Binding Path=Name}"></TextBlock>
+                                        </Border>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.Resources>
+                        </TreeView>
+
+                        
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Rectangle Grid.Row="1" Grid.Column="1" Width="1" HorizontalAlignment="Right" Fill="#22222222"></Rectangle>
+            <GridSplitter Grid.Row="1" Grid.Column="1" Width="4" HorizontalAlignment="Right" Background="#01ffffff"></GridSplitter>
+            <Rectangle Grid.Row="1" Grid.Column="1" Width="1" HorizontalAlignment="Right" Fill="#22222222"></Rectangle>
+            <Grid Grid.RowSpan="3" Grid.ColumnSpan="4" Visibility="{Binding ElementName=Player, Path=Visibility}" Background="#01ffffff">
+
+                <tut:VideoPlayer x:Name="Player" Grid.Row="1" Visibility="Collapsed">
+                </tut:VideoPlayer>
+
+                <Button Style="{StaticResource ResourceKey=OperationCloseStyle}" Click="CloseClick" Panel.ZIndex="9001">
+                    <Button.Tag>
+                        <Image Source="/CrypTutorials;component/delete.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                    </Button.Tag>
+                </Button>
+            </Grid>
+        </Grid>
+        <Border x:Name="NetworkErrorPanel" Visibility="Collapsed" Background="#88555555" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Could not connect to server" FontSize="70" Foreground="#aaa"
+                            FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" ></DropShadowEffect>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Border>
+
+        <Border x:Name="XMLParseError" Visibility="Collapsed" Background="#88555555" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Could not parse XML-META file from server" FontSize="70" Foreground="#aaa"
+                            FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.2" ></DropShadowEffect>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Border>
+
+        <Border x:Name="VLCInitError" Visibility="Collapsed" Background="{StaticResource ResourceKey=Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Border Background="#44ffffff">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="/CrypTutorials;component/largeVLC.png" Width="250" Height="250" HorizontalAlignment="Center" SnapsToDevicePixels="True" Grid.Row="0"></Image>
+                        <TextBlock FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz" FontSize="100" 
+                                   Foreground="#f79300" Text="VLC not found" HorizontalAlignment="Center"></TextBlock>
+                        <TextBlock FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz" FontSize="33"
+                                   Foreground="#745a34" HorizontalAlignment="Center">
+                            Please Install VLC-Player to Continue 
+                            <Hyperlink NavigateUri="http://www.videolan.org/index.html" RequestNavigate="Hyperlink_RequestNavigate">
+                                - www.videolan.org -
+                            </Hyperlink>
+                            
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+                    <Border Padding="10" BorderBrush="#bbb" Background="#ccc" CornerRadius="10" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+                        <Image Source="/CrypTutorials;component/Crystal_folder.png" Width="64" Height="64" HorizontalAlignment="Center" SnapsToDevicePixels="True" Grid.Row="0"></Image>
+                    </Border>
+                    <TextBlock FontFamily="pack://application:,,,/CrypPluginBase;component/Miscellaneous/#Yanone Kaffeesatz" FontSize="50" VerticalAlignment="Center" Padding="5"
+                                   Foreground="#745a34" Text="Or Select Working Directory Manually" HorizontalAlignment="Center"></TextBlock>
+                </StackPanel>
+            </Grid>
+
+        </Border>
+    </Grid>
+</UserControl>

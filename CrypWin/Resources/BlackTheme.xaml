@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CrypTool.CrypWin">
+
+    <!-- Shared brushes -->
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.Foreground}" Color="#DDD" />
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.DisabledForeground}" Color="#777" />
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.SunkenBackground}" Color="Black" /> <!--444444-->
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.DisabledSunkenBackground}" Color="Black" /> <!--404040-->
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.Highlight}" Color="Black" /> <!--808080-->
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.DisabledHighlight}" Color="#505050" />
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.RaisedHighlight}" Color="#888888" />
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.Shadow}" Color="#101010" />
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.DisabledShadow}" Color="#303030" />
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.RaisedShadow}" Color="#000000" /> <!--  -->
+
+    <LinearGradientBrush x:Key="{x:Static local:PropertyGridResources.PropertyGridBackground}" EndPoint="0.5,1.0" StartPoint="0.5,0">
+        <GradientStop Color="#FF232323" Offset="0"/>
+        <GradientStop Color="#FF000000" Offset="1"/>
+        <GradientStop Color="#FF393939" Offset="0.48"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="{x:Static local:PropertyGridResources.CommonBackground}" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0.0" Color="#585858" />
+        <GradientStop Offset="1.2" Color="#282828" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="{x:Static local:PropertyGridResources.CommonDisabled}" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0.0" Color="#585858" />
+        <GradientStop Offset="1.2" Color="#383838" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="Down" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0.0" Color="#505050" />
+        <GradientStop Offset="1.2" Color="#303030" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="MouseOver" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0.0" Color="#686868" />
+        <GradientStop Offset="1.2" Color="#282828" />
+    </LinearGradientBrush>
+
+
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.BorderDisabled}" Color="#282828"/>
+    
+    <!-- PropertyGrid brushes -->
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.PropertyGridTitle}" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.ExpanderBackgroundBrush}" Color="#00FFFFFF"/>
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.ExpanderForegroundBrush}" Color="Black"/>
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.PropertiesBackgroundBrush}" Color="#FF333333"/>
+    <SolidColorBrush x:Key="{x:Static local:PropertyGridResources.HeaderBorderBrush}" Color="Black"/> <!--FF161616-->
+
+    <LinearGradientBrush x:Key="{x:Static local:PropertyGridResources.HeaderBackgroundBrush}" EndPoint="0.508,0.893" StartPoint="0.508,0.107">
+        <GradientStop Color="#FF2B2B2B" Offset="0"/>
+        <GradientStop Color="#FF4E4E4E" Offset="1"/>
+        <GradientStop Color="#FF474747" Offset="0.519"/>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="{x:Static local:PropertyGridResources.Checked}" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0.0" Color="#2B80FF" />
+        <GradientStop Offset="1.2" Color="#82D9FF" />
+    </LinearGradientBrush>
+
+    
+</ResourceDictionary>

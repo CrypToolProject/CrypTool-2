@@ -1,0 +1,463 @@
+﻿<UserControl x:Class="ImageSteganographyVisualization.LSBPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             MinHeight="350" MinWidth="550" Margin="0">
+    <Grid Name="LSBFrame" MinHeight="350" MinWidth="550" Background="White">
+
+        <Grid Name="MainMenu">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100*"/>
+                <RowDefinition Height="200*"/>
+                <RowDefinition Height="100*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Least Significant Bit (LSB)" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="23" FontWeight="Bold"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="90*"/>
+                    <ColumnDefinition Width="10*" />
+                    <ColumnDefinition Width="160*" />
+                    <ColumnDefinition Width="90*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="1 " Grid.Row="1" Grid.Column="1"/>
+                <Label Content="2 " Grid.Row="2" Grid.Column="1"/>
+                <Label Content="3 "  Grid.Row="3" Grid.Column="1"/>
+                <Label Content="4 " Grid.Row="4" Grid.Column="1"/>
+                <Button Content="{ Loc LSBMainMenu1 }" Margin="5" Click="ShowIntroViewClick" Grid.Row="1" Grid.Column="2"/>
+                <Button Name="SeeChooseBitsButton" Content="{ Loc LSBMainMenu2 }" Grid.Row="2" Grid.Column="2" Margin="5" IsEnabled="False" Click="ShowChooseBitsViewClick" />
+                <Button Name="SeePixelConversionButton" Content="{ Loc LSBMainMenu3 }" Grid.Row="3" Grid.Column="2" Margin="5" IsEnabled="False" Click="PixelConversionViewClick"/>
+                <Button Name="SeeHidingAndCapacityButton" Content="{ Loc LSBMainMenu4 }" Grid.Row="4" Grid.Column="2" Margin="5" IsEnabled="False" Click="ShowHidingAndCapacityInfoViewClick"/>
+            </Grid>
+            <TextBlock Name="StartHint" Text="{Loc HintPrompt}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextWrapping="Wrap" Margin="3"/>
+            <TextBlock Name="ChooseBitsHint" Text="{Loc HintPrompt2}" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" TextWrapping="Wrap" Margin="3"/>
+
+        </Grid>
+
+        <Grid Name="IntroView" Visibility="Hidden" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="290*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+            <Grid Name="LowerPanel" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="{Loc BackToMainMenu }" IsEnabled="True" Click="BackToMainMenuClick"/>
+                <Button Name="PrevIntro" Grid.Column="1" Content="{Loc PreviousButton }" IsEnabled="False" Click="PrevIntroButtonClick"/>
+                <Button Name="NextIntro" Grid.Column="2" Content="{Loc NextButton }" Click="NextIntroButtonClick"/>
+            </Grid>
+            <Grid Name="Intro0" Grid.Row="0" Visibility="Visible" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="270*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Loc SteganographyLabel}" FontSize="20" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Text="1.1" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="1" Margin="5, 20">
+                    <TextBox Text="{ Loc Intro0Text1 }" FontSize="16" TextWrapping="Wrap" TextAlignment="Justify" IsReadOnly="True" Background="Transparent" BorderThickness="0" />
+                    <TextBox Text="{ Loc Intro0Text2 }" FontSize="16" TextWrapping="Wrap" TextAlignment="Justify" Margin="0, 5" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox Text="{ Loc Intro0Text3 }" FontSize="16" TextWrapping="Wrap" TextAlignment="Justify" Margin="0, 5"  IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox Text="{ Loc Intro0Text4 }" FontSize="16" TextWrapping="Wrap" TextAlignment="Justify" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+            <Grid Name="Intro1" Grid.Row="0" Visibility="Hidden" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="190*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Loc SteganographyModelLabel}" FontSize="20" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Text="1.2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <StackPanel Margin="0, 10" Grid.Row="1" >
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro1Text1 }" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro1Text2 }" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                </StackPanel>
+                <Image Name="ModelImage" Grid.Row="2"/>
+            </Grid>
+            <Grid Name="Intro2" Grid.Row="0" Margin="20" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="170*"/>
+                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{ Loc Intro2LSBTitle }" FontSize="20" FontWeight="Bold"/>
+                <TextBlock Grid.Row="0" Text="1.3" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="1" Margin="0, 10">
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro2LSBText1 }" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro2LSBText2 }" Margin="0, 5" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro2LSBText3 }" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBlock />
+                </StackPanel>
+                <Image Grid.Row="2" Name="ConversionExampleImage" Stretch="None"/>
+            </Grid>
+            <Grid Name="Intro3" Grid.Row="0" Margin="20" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*"/>
+                    <RowDefinition Height="250*"/>
+                </Grid.RowDefinitions>
+                <TextBox TextWrapping="Wrap" FontSize="20" Text="{ Loc Intro3LSBTitle }" FontWeight="Bold" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                <TextBlock Grid.Row="0" Text="1.4" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right"/>
+                <StackPanel Grid.Row="1" >
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro3LSBText1 }" Margin="0, 5" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro3LSBText2 }"  IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro3LSBText3 }" Margin="0, 5" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                    <TextBox TextWrapping="Wrap" FontSize="16" Text="{ Loc Intro3LSBText4 }" IsReadOnly="True" Background="Transparent" BorderThickness="0"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <Grid Name="ChooseBitsView" Background="White"  Visibility="Hidden" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="290*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="{Loc BackToMainMenu }" IsEnabled="True" Click="BackToMainMenuClick"/>
+                <Button Grid.Column="1" Content="{Loc ApplyChangesButton }" IsEnabled="True" Click="ApplyChangesClick"/>
+                <Button Grid.Column="2" Name="GoToPixelConversion" Content="{Loc SeePixelConversionButton }" Click="PixelConversionViewClick"/>
+            </Grid>
+            <Grid Grid.Row="0" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30*" />
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="170*"/>
+                </Grid.RowDefinitions>
+                <Label  FontSize="20" FontWeight="Bold" Content="{Loc ChooseBitsViewTitle}"/>
+                <Label  FontSize="20" FontWeight="Bold" Content="2" HorizontalAlignment="Right"/>
+                <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" FontSize="12" Margin="10, 10" Text="{Loc ChooseBitsViewText1}"/>
+                <Grid Grid.Row="2" Grid.Column="1" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="55*"/>
+                        <ColumnDefinition Width="350*"/>
+                        <ColumnDefinition Width="55*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Name="RedBits" Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Button Name="R7" Grid.Column="0" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="R6" Grid.Column="1" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="R5" Grid.Column="2" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="R4" Grid.Column="3" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="R3" Grid.Column="4" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="R2" Grid.Column="5" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="R1" Grid.Column="6" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="R0" Grid.Column="7" Grid.Row="1" Content="1" Background="Cyan" BorderBrush="Black" Click="BitClick"/>
+                        </Grid>
+                        <Grid Name="GreenBits" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Button Name="G7" Grid.Column="0" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="G6" Grid.Column="1" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="G5" Grid.Column="2" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="G4" Grid.Column="3" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="G3" Grid.Column="4" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="G2" Grid.Column="5" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="G1" Grid.Column="6" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="G0" Grid.Column="7" Grid.Row="1" Content="1" Background="Cyan" BorderBrush="Black" Click="BitClick"/>
+                        </Grid>
+                        <Grid Name="BlueBits" Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Button Name="B7" Grid.Column="0" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="B6" Grid.Column="1" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="B5" Grid.Column="2" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="B4" Grid.Column="3" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="B3" Grid.Column="4" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="B2" Grid.Column="5" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="B1" Grid.Column="6" Grid.Row="1" Content="0" Background="White" BorderBrush="Black" Click="BitClick"/>
+                            <Button Name="B0" Grid.Column="7" Grid.Row="1" Content="1" Background="Cyan" BorderBrush="Black" Click="BitClick"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Red" Grid.Row="0" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        <Label Content="Green" Grid.Row="1" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                        <Label Content="Blue" Grid.Row="2" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+            
+        </Grid>
+
+        <Grid Name="PixelConversionView" Background="White" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*"/>
+                <RowDefinition Height="290*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+            <Label Content="{Loc PixelConversionViewTitle}" FontSize="20" FontWeight="Bold" />
+            <Label Content="3" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="0, 0, 20, 0"/>
+            <Grid Grid.Row="1" Margin="10, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="200*"/>
+                    <ColumnDefinition Width="310*" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="185*"/>
+                        <RowDefinition Height="65*"/>
+                        <RowDefinition Height="50*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock />
+                        <TextBlock TextWrapping="Wrap" Text="{ Loc ConversionViewText1 }" Margin="3,0" FontSize="12"/>
+                        <TextBlock TextWrapping="Wrap" Text="{ Loc ConversionViewText2 }" Margin="3,0" FontSize="12"/>
+                        <TextBlock Name="CurrentPixelText" />
+                        <TextBlock Name="HeaderPixelTB" Text="Header Pixel" Visibility="Hidden"/>
+                    </StackPanel>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="140*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="PrevPixelButton" Content="&lt;" IsEnabled="False" Click="PrevPixelClick" Margin="5, 20"/>
+                        <Button Name="NextPixelButton" Grid.Column="2" Content="&gt;" Click="NextPixelClick" Margin="5, 20"/>
+                        <Grid Grid.Column ="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBox Name ="PixelX" Text="{Loc XCoTextArea}" Grid.Column="1" Grid.Row="0" FontStyle="Italic" FontWeight="Light" GotFocus="TextBoxClicked"/>
+                            <TextBox Name="PixelY" Text="{Loc YCoTextArea}" Grid.Column="1" Grid.Row="1" FontStyle="Italic" FontWeight="Light" GotFocus="TextBoxClicked"/>
+                            <Button Grid.Row="2" Grid.Column="1" Content="{Loc ApplyButton}" Click="ManualCoordinatesEnteredClick"/>
+                        </Grid>
+                    </Grid>
+                    <StackPanel Name="InvalidXYMessage" Grid.Row="2" Visibility="Hidden" Margin="0, 5, 0, 0 ">
+                        <TextBlock Text="{Loc InvalidInputPrompt}" FontSize="11" Foreground="Red"/>
+                        <TextBlock Name="ValidXY" FontSize="11"/>
+                    </StackPanel>
+
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="140*"/>
+                        <RowDefinition Height="170*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="110*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15*"/>
+                            <RowDefinition Height="110*"/>
+                            <RowDefinition Height="15*" />
+                        </Grid.RowDefinitions>
+                        <Rectangle Name="PixelBeforeSample" Grid.Row="1" Grid.Column="1" Fill="Aquamarine"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40*"/>
+                            <RowDefinition Height="130*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="{Loc BitsBeforeLabel}" HorizontalAlignment="Center" />
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Right">
+                                <TextBlock/>
+                                <TextBlock Text="{Loc RedValueLabel}" HorizontalAlignment="Right" Margin="5" />
+                                <TextBlock Text="{Loc GreenValueLabel}"  HorizontalAlignment="Right" Margin="5" />
+                                <TextBlock Text="{Loc BlueValueLabel}"  HorizontalAlignment="Right" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                                <TextBlock/>
+                                <TextBlock Name="RValueBitsBefore" HorizontalAlignment="Left" Margin="5" />
+                                <TextBlock Name="GValueBitsBefore" HorizontalAlignment="Center" Margin="5" />
+                                <TextBlock Name="BValueBitsBefore" HorizontalAlignment="Center" Margin="5" />
+                            </StackPanel>
+
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="110*"/>
+                            <ColumnDefinition Width="20*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15*"/>
+                            <RowDefinition Height="110*"/>
+                            <RowDefinition Height="15*" />
+                        </Grid.RowDefinitions>
+                        <Rectangle Name="PixelAfterSample" Grid.Row="1" Grid.Column="1"  Fill="MistyRose"/>
+                    </Grid>
+                    
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40*"/>
+                            <RowDefinition Height="130*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="{Loc BitsAfterLabel}" HorizontalAlignment="Center" />
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" HorizontalAlignment="right">
+                                <TextBlock/>
+                                <TextBlock Text="{Loc RedValueLabel}" HorizontalAlignment="Right" Margin="5" />
+                                <TextBlock Text="{Loc GreenValueLabel}"  HorizontalAlignment="Right" Margin="5" />
+                                <TextBlock Text="{Loc BlueValueLabel}"  HorizontalAlignment="Right" Margin="5" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                                <TextBlock/>
+                                <TextBlock Name="RValueBitsAfter" HorizontalAlignment="Left" Margin="5" />
+                                <TextBlock Name="GValueBitsAfter" HorizontalAlignment="Left" Margin="5" />
+                                <TextBlock Name="BValueBitsAfter" HorizontalAlignment="Left" Margin="5" />
+                            </StackPanel>
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="{Loc BackToMainMenu}" Click="BackToMainMenuClick"/>
+                <Button Grid.Column="2" Content="{Loc ChooseBitsButton}" Click="ShowChooseBitsViewClick"/>
+            </Grid>
+        </Grid>
+        <Grid Name="HidingAndCapacityView" Visibility="Hidden" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="280*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{Loc HidingAndCapacityTitle}" FontSize="20" FontWeight="Bold" Margin="5, 2"/>
+            <Label  FontSize="20" FontWeight="Bold" Content="4" HorizontalAlignment="Right" Margin="0, 0, 20, 0"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300*"/>
+                    <ColumnDefinition Width="250*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="10, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Loc MessageInfoLabel}" FontSize="15" FontWeight="Bold"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
+                        <TextBlock Name="MessageLengthTB" Margin="0, 1" VerticalAlignment="Center"/>
+                        <ComboBox  SelectionChanged="CBUnitChanged" Loaded="CBLoaded" Name="MessageLengthCB"  VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Grid.Row="2" Text="{Loc ImageInfoLabel}" FontSize="15" FontWeight="Bold"/>
+                    <TextBlock Grid.Row="3" Name="WidthTB" Margin="0, 1"/>
+                    <TextBlock Grid.Row="4" Name="HeightTB" Margin="0, 1"/>
+                    <TextBlock Grid.Row="5" Name="BitsChosenTB" Margin="0, 1" TextWrapping="Wrap"/>
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" VerticalAlignment="Top">
+                        <TextBlock Name="HidingCapacityTB" Margin="0, 1"  VerticalAlignment="Center"/>
+                        <ComboBox  SelectionChanged="CBUnitChanged" Loaded="CBLoaded" Name="HidingCapacityCB" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <TextBlock Grid.Row="7" Name="PercentageCapacityLabel"/>
+                    
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25*"/>
+                        <ColumnDefinition Width="175*"/>
+                        <ColumnDefinition Width="25*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Name="CoverImage" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Content="{Loc BackToMainMenu}" Click="BackToMainMenuClick"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

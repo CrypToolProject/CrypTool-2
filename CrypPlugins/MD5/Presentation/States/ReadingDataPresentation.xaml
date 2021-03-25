@@ -1,0 +1,19 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="CrypTool.MD5.Presentation.States.ReadingDataPresentation"
+    Height="400" Width="800" mc:Ignorable="d">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<Grid>
+        <TextBlock Margin="8,12,8,0" x:Name="textBox1" TextWrapping="Wrap" Height="43" VerticalAlignment="Top" Style="{DynamicResource textBlockStyle}" ><Run Text="{Loc We_continue_by_reading_the_next_block_of_data_}"/></TextBlock>
+        <TextBlock Height="35" Margin="8,97,8,0" x:Name="textBlock1" Text="{Loc So_far__we_have_processed}" TextWrapping="Wrap" VerticalAlignment="Top" Style="{DynamicResource textBlockStyle}" RenderTransformOrigin="0.5,0.5" />
+		<Label Margin="389,136,0,0" x:Name="label1" Content="{Binding CurrentState.BytesHashed}" FontSize="18" Style="{DynamicResource labelStyle}" VerticalAlignment="Top" Height="40" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" />
+        <TextBlock Margin="8,0,8,181" x:Name="textBlock2" Text="{Loc bytes_of_data_}" TextWrapping="Wrap" Height="39" VerticalAlignment="Bottom" Style="{DynamicResource textBlockStyle}" RenderTransformOrigin="0.5,0.5" />
+        <TextBlock Height="95" Margin="8,0,8,8" x:Name="textBlock3" TextWrapping="Wrap" VerticalAlignment="Bottom" Style="{DynamicResource textBlockStyle}" ><Run Text="{Loc The_compression_function_of_MD5_processes_data_in_blocks_of_64_bytes_}"/></TextBlock>
+	</Grid>
+</UserControl>

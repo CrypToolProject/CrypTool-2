@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="CrypTool.WEPAttacks.WEPAttacksPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="Auto" Width="Auto" Margin="0">
+    <Grid Height="Auto" Width="Auto" Margin="0" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Background="WhiteSmoke">
+            <Label Name="labelAttack" Content="{Loc Attack_None}" />
+            <Label Name="labelCollectedPackets" Content="{Loc Sniffed_packets}" />
+            <Label Name="labelUsedIVs" Content="{Loc Used_packets}" />
+        </StackPanel>
+        
+        <TextBox Name="textBox" Grid.Row="1" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
+            
+        </TextBox>
+    </Grid>
+</UserControl>

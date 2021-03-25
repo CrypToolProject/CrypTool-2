@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Text Encoding (E.g. Base64)</title>
+  <title lang="zh">文字编码（例如Base64）</title>
+  <title lang="ru">Текстовое кодирование (например, Base64)</title>
+  <summary lang="en">
+    <i>Encoding text</i> in different formats (base64, hexadecimal, ...)</summary>
+  <summary lang="zh">以不同格式（base64，十六进制等）编码文本</summary>
+  <summary lang="ru">Кодирование текста в разных форматах (base64, шестнадцатеричный, ...)</summary>
+  <description lang="en">With this template different encoding techniques can be demonstrated. With the current parameters, the inputted text (ASCII) is encoded to base64 [1]. To do so, the inputted text is first encoded to bytes according to the ASCII character encoding [2]. These bytes are then encoded with base64 (and output as text).<newline />
+For different encodings, the paramters of the <b>Decoder</b> and/or <b>Encoder</b> components need to be adjusted. Currently, the <b>Decoder</b> component supports input in the follwing formats: <i>text</i>, <i>binary</i> [3], <i>octal</i> [4], <i>decimal</i> [5], <i>hexadecimal</i> [6] and <i>base64</i> [1]. The <b>Encoder</b> component supports the same formats for the output. Whenever text is selected, a character encoding is additional required, i.e. how characters are encoded in bytes. Both components support the following character encodings: <i>UTF-7</i> [7], <i>UTF-8</i> [8], <i>UTF-16</i> [9], <i>UTF-32</i> [10], <i>ASCII</i> [2], <i>ISO8859-15</i> [11] and <i>Windows-1252</i> [12].<newline /><newline />
+Sources:<newline />
+ [1] <external ref="http://en.wikipedia.org/wiki/Base64" /><newline />
+ [2] <external ref="http://en.wikipedia.org/wiki/ASCII" /><newline />
+ [3] <external ref="http://en.wikipedia.org/wiki/Binary_code" /><newline />
+ [4] <external ref="http://en.wikipedia.org/wiki/Octal" /><newline />
+ [5] <external ref="http://en.wikipedia.org/wiki/Decimal" /><newline />
+ [6] <external ref="http://en.wikipedia.org/wiki/Hexadecimal" /><newline />
+ [7] <external ref="http://en.wikipedia.org/wiki/UTF-7" /><newline />
+ [8] <external ref="http://en.wikipedia.org/wiki/UTF-8" /><newline />
+ [9] <external ref="http://en.wikipedia.org/wiki/UTF-16" /><newline />
+[10] <external ref="http://en.wikipedia.org/wiki/UTF-32" /><newline />
+[11] <external ref="http://en.wikipedia.org/wiki/ISO8859-15" /><newline />
+[12] <external ref="http://en.wikipedia.org/wiki/Windows-1252" /></description>
+  <description lang="zh">使用此模板，可以演示不同的编码技术。使用当前参数，将输入的文本（ASCII）编码为base64 [1]。为此，首先根据ASCII字符编码[2]将输入的文本编码为字节。这些字节然后使用base64编码（并以文本形式输出）。对于不同的编码，需要调整解码器和/或编码器组件的参数。当前，解码器组件支持以下格式的输入：文本，二进制[3]，八进制[4]，十进制[5]，十六进制[6]和base64 [1]。编码器组件支持相同的输出格式。无论何时选择文本，都需要附加字符编码，即，如何以字节为单位编码字符。这两个组件均支持以下字符编码：UTF-7 [7]，UTF-8 [8]，UTF-16 [9]，UTF-32 [10]，ASCII [2]，ISO8859-15 [11]和Windows- 1252 [12]。来源：[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]</description>
+  <description lang="ru">С помощью этого шаблона можно продемонстрировать различные методы кодирования. С текущими параметрами введенный текст (ASCII) кодируется в base64 [1]. Для этого введенный текст сначала кодируется в байты в соответствии с кодировкой символов ASCII [2]. Затем эти байты кодируются с помощью base64 (и выводятся как текст). Для разных кодировок необходимо отрегулировать параметры компонентов декодера и / или кодировщика. В настоящее время компонент декодера поддерживает ввод в следующих форматах: текст, двоичный [3], восьмеричный [4], десятичный [5], шестнадцатеричный [6] и base64 [1]. Компонент Encoder поддерживает те же форматы для вывода. Всякий раз, когда текст выбран, требуется кодировка символов, то есть как символы кодируются в байтах. Оба компонента поддерживают следующие кодировки символов: UTF-7 [7], UTF-8 [8], UTF-16 [9], UTF-32 [10], ASCII [2], ISO8859-15 [11] и Windows- 1252 [12]. Источники: [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]</description>
+  <keywords>Encoding, Decoding, Character, Base64, ASCII, UTF, HEX, ISO8859, 1252</keywords>
+  <keywords lang="zh">编码，解码，字符，Base64，ASCII，UTF，HEX，ISO8859、1252</keywords>
+  <keywords lang="ru">Кодирование, декодирование, символ, Base64, ASCII, UTF, HEX, ISO8859, 1252</keywords>
+  <title lang="de">Textcodierung (z.B. Base-64)</title>
+  <summary lang="de">
+    <i>Codierung von Text</i> in verschiedene Formate (Base-64, Hexadezimal, ...)</summary>
+  <description lang="de">Mit dieser Vorlage können verschiedene Codierungstechniken angewendet werden. Mit den voreingestellten Parametern wird der eingegebene Text (ASCII) in Base-64 umcodiert [1]. Dafür werden die Zeichen des Textes zunächst anhand der ASCII-Zeichencodierung [2] in Bytes gewandelt. Diese Bytes werden daraufhin mit Base-64 codiert (und wieder als Text ausgegeben).<newline />
+
+Für andere Codierungen müssen die Parameter der <b>Decoder</b>- und/oder <b>Encoder</b>-Komponenten angepasst werden. Derzeit unterstützt die <b>Decoder</b>-Komponente Eingaben in den folgenden Formaten: <i>Text</i>, <i>Binär</i> [3], <i>Oktal</i> [4], <i>Dezimal</i> [5], <i>Hexadezimal</i> [6] und <i>Base-64</i> [1]. Die <b>Encoder</b>-Komponente unterstützt die gleichen Format für die Ausgabe. Beide Komponenten unterstützen bei der Auswahl "Text" folgende Zeichencodierungen (d.h. wie einzelne Zeichen in Bytes codiert werden): <i>UTF-7</i> [7], <i>UTF-8</i> [8], <i>UTF-16</i> [9], <i>UTF-32</i> [10], <i>ASCII</i> [2], <i>ISO8859-15</i> [11] und <i>Windows-1252</i> [12].<newline /><newline />
+Quellen:<newline />
+ [1] <external ref="http://de.wikipedia.org/wiki/Base64" /><newline />
+ [2] <external ref="http://de.wikipedia.org/wiki/American_Standard_Code_for_Information_Interchange" /><newline />
+ [3] <external ref="http://de.wikipedia.org/wiki/Bin%C3%A4rcode" /><newline />
+ [4] <external ref="http://de.wikipedia.org/wiki/Oktalsystem" /><newline />
+ [5] <external ref="http://de.wikipedia.org/wiki/Dezimalsystem" /><newline />
+ [6] <external ref="http://de.wikipedia.org/wiki/Hexadezimalsystem" /><newline />
+ [7] <external ref="http://de.wikipedia.org/wiki/UTF-7" /><newline />
+ [8] <external ref="http://de.wikipedia.org/wiki/UTF-8" /><newline />
+ [9] <external ref="http://de.wikipedia.org/wiki/UTF-16" /><newline />
+[10] <external ref="http://de.wikipedia.org/wiki/UTF-32" /><newline />
+[11] <external ref="http://de.wikipedia.org/wiki/ISO_8859-15" /><newline />
+[12] <external ref="http://de.wikipedia.org/wiki/ISO_8859-1#Windows-1252" /></description>
+  <keywords lang="de">Encoding, Decoding, Character, Base64, ASCII, UTF, HEX, ISO8859, 1252</keywords>
+  <icon file="enc.png" />
+  <replacements lang="de">
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Output$" value="Ausgabe" />
+    <replacement key="$Encoder$" value="Kodierer" />
+    <replacement key="$Decoder$" value="Dekodierer" />
+    <replacement key="$Output (hexadecimal)$" value="Ausgabe (hexadezimal)" />
+    <replacement key="$memo$" value="Mit dieser Vorlage können verschiedene Kodierungsmethoden demonstriert werden. Die {\b Eingabe} auf der linken Seite wird zuerst als Text (ASCII) dekodiert und in Binärkodierung ausgegeben. Der {\b Kodierer} kodiert die binären Daten dann in das Base-64-Format. Im Parameterfenster der Komponente können auch andere Kodierungsvarianten eingestellt werden." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Output$" value="输出" />
+    <replacement key="$Encoder$" value="编码器" />
+    <replacement key="$Decoder$" value="解码器" />
+    <replacement key="$Output (hexadecimal)$" value="输出（十六进制）" />
+    <replacement key="$memo$" value="可以使用此模板演示各种编码方法。首先将左侧的{\b输入}解码为文本（ASCII），然后以二进制编码输出。 {\b编码器}然后以Base-64格式编码二进制数据。也可以在组件的参数窗口中设置其他编码变量。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Output$" value="издание" />
+    <replacement key="$Encoder$" value="кодировщик" />
+    <replacement key="$Decoder$" value="декодер" />
+    <replacement key="$Output (hexadecimal)$" value="Выход (шестнадцатеричный)" />
+    <replacement key="$memo$" value="С помощью этого шаблона можно продемонстрировать различные методы кодирования. Вход {\b} слева сначала декодируется как текст (ASCII) и выводится в двоичном коде. Кодировка {\b encoder} кодирует двоичные данные в базовом 64 формате. В окне параметров компонента также могут быть установлены другие варианты кодирования." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Input$" value="Input" />
+    <replacement key="$Output$" value="Output" />
+    <replacement key="$Encoder$" value="Encoder" />
+    <replacement key="$Decoder$" value="Decoder" />
+    <replacement key="$Output (hexadecimal)$" value="Output (hexadecimal)" />
+    <replacement key="$memo$" value="With this template different encoding techniques can be demonstrated. The {\b Input} on the left side is first decoded as text (ASCII) and outputted as binary data. The {\b Encoder} then encodes this binary data as Base-64. In the parameter panel, other coding-combinations can be set." />
+  </replacements>
+</sample>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Playfair is a symmetric encryption algorithm invented by Charles Wheatstone in 1854. It is named after Lord Playfair who promoted the use of the cipher.
+  </introduction>
+  <introduction lang="zh-CN">Playfair是由Charles Wheatstone在1854年发明的对称加密算法。它以促进使用密码的Playfair勋爵的名字命名。</introduction>
+  <introduction lang="ru">Playfair - симметричный алгоритм шифрования, изобретенный Чарльзом Уитстоном в 1854 году. Он назван в честь лорда Playfair, который продвигал использование шифрования.</introduction>
+  <introduction lang="de-DE">
+    Playfair ist ein symmetrisches Verschlüsselungsverfahren, das 1854 von Charles Wheatstone erfunden wurde. Der Name geht auf Lord Playfair zurück, der den Einsatz des Verfahrens vorantrieb.
+  </introduction>
+  <usage lang="en">
+    The <b>Playfair Analyzer</b> component expects a ciphertext that was encrypted with the Playfair cipher on its input <b>Ciphertext</b>. The component analyzes the ciphertext with a Hill Climbing algorithm
+    and sends the plaintext with the highest score to its output <b>Plaintext</b> and the corresponding key to its output <b>Key</b>.
+    <newline />
+    In the component settings you can change the maximum number of iterations (restarts) for the Hill Climbing algorithm. If you set the number to 0, the component will run indefinitely.
+    You can also adjust the maximum length of the ciphertext that should be used for analysis. If the ciphertext is very long, it is often sufficient to use only a fraction of it for analysis.
+    This speeds up the algorithm considerably.
+  </usage>
+  <usage lang="zh-CN">Playfair分析器组件期望在其输入密文上使用Playfair密码加密的密文。该组件使用Hill Climbing算法分析密文，并将得分最高的明文发送到其输出明文，并将相应的密钥发送到其输出Key。在组件设置中，您可以更改Hill Climbing算法的最大迭代次数（重新启动）。如果将数字设置为0，则组件将无限期运行。您还可以调整用于分析的密文的最大长度。如果密文很长，通常仅需使用一小部分进行分析就足够了。这大大加快了算法的速度。</usage>
+  <usage lang="ru">Компонент анализатора Playfair ожидает шифрованный текст, который был зашифрован с помощью шифрования Playfair на его входном шифрованном тексте. Компонент анализирует зашифрованный текст с помощью алгоритма Hill Climbing и отправляет открытый текст с наивысшим результатом на свой вывод Plaintext и соответствующий ключ к его выходному ключу. В настройках компонента вы можете изменить максимальное количество итераций (перезапуска) для алгоритма Hill Climbing. Если вы установите число 0, компонент будет работать бесконечно. Вы также можете настроить максимальную длину зашифрованного текста, который должен использоваться для анализа. Если зашифрованный текст очень длинный, часто достаточно использовать лишь часть его для анализа. Это значительно ускоряет алгоритм.</usage>
+  <usage lang="de-DE">
+    Die <b>Playfair-Analyse</b>-Komponente erwartet an ihrem Eingang <b>Geheimtext</b> einen mit der Playfair-Chiffre verschlüsselten Geheimtext. Die Komponente analysiert den Geheimtext mit einem
+    Hill-Climbing-Algorithmus und gibt den am besten bewertete Klartexte an ihrem Ausgang <b>Klartext</b> und den dazugehörigen Schlüssel am Ausgang <b>Schlüssel</b> aus.
+    <newline />
+    In den Einstellungen für die Komponente können Sie angeben, wieviele Iterationen (Neustarts) der Hill-Climbing-Algorithmus durchführen soll. Wenn hier der Wert 0 angegeben wird, macht die Komponente
+    unendlich viele Iterationen. Ausserdem kann man die maximale Länge des Geheimtextes angeben, der für die Analyse verwendet werden soll. Wenn der Geheimtext sehr lang ist, genügt es oft, nur einen Teil davon
+    für die Analyse zu benutzen. Dies beschleunigt den Algorithmus erheblich.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Playfair_cipher" lang="en" />
+      <caption lang="en">Playfair in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Playfair" lang="de-DE" />
+      <caption lang="de-DE">Playfair in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Linear Congruential Generator</title>
+  <title lang="zh">线性同余生成器</title>
+  <title lang="ru">Линейный конгруэнтный генератор</title>
+  <summary lang="en">Usage of the <i>Linear Congruential Generator</i></summary>
+  <summary lang="zh">线性同余生成器的用法</summary>
+  <summary lang="ru">Использование линейного конгруэнтного генератора</summary>
+  <description lang="en">This template shows the usage of the <i>Linear Congruential Generator</i>.</description>
+  <description lang="zh">该模板显示了线性同余生成器的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование линейного конгруэнтного генератора.</description>
+  <keywords>pseudorandom, PRNG, LCG, congruence, recurrence</keywords>
+  <keywords lang="zh">伪随机，PRNG，LCG，全等，复发</keywords>
+  <keywords lang="ru">псевдослучайный, PRNG, LCG, конгруэнтность, повторение</keywords>
+  <title lang="de">Linearer Kongruenzen-Generator</title>
+  <summary lang="de">Benutzung des <i>Linearen Kongruenzen-Generators</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>Linearen Kongruenzen-Generators</i>.</description>
+  <keywords lang="de">pseudozufall, PRNG, LCG, Kongruenz, Rekurrenz</keywords>
+  <icon file="math.png" />
+  <replacements lang="de">
+    <replacement key="$TextOutput$" value="Textausgabe" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man einen linearen Kongruenzen-Generator (LCG) bauen kann. Der LCG ist eine der ältesten und bekanntesten Methoden zur Erzeugung von Pseudo-Zufallszahlen. Die mathematische Theorie hinter dem LCG ist leicht zu verstehen, und LCGs können schnell und problemlos implementiert werden.\line Der Generator wird definiert durch die rekursive Definition:\line {\b X_{n+1} = (a * X_n + c ) mod m}\line\line Die zu erwartende Folge für {\b a=3}, {\b X=5} und {\b m=31} ist:\line {\b 0,5,20,3,14,16,22,9,1,8,29,30,2,11,7,26,21,6,23,12,10,4,17,25,18,28,27,24,15,19}" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$TextOutput$" value="文字输出" />
+    <replacement key="$memo$" value="该模板显示了如何构建线性同余生成器（LCG）。 LCG是生成伪随机数的最古老，最著名的方法之一。 LCG背后的数学理论很容易理解，LCG可以快速轻松地实现\Line生成器由递归定义定义：\line {\b X_ {n + 1} =（a * X_n + c） mod m} \line \line {\ba = 3}，{\b X = 5}和{\bm = 31}的预期顺序为：\line {\b 0,5,20,3,14， 16,22,9,1,8,29,30,2,11,7,26,21,6,23,12,10,4,17,25,18,28,27,24,15,19}" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$TextOutput$" value="вывод текста" />
+    <replacement key="$memo$" value="Этот шаблон показывает, как построить линейный конгруэнц-генератор (LCG). LCG является одним из старейших и наиболее известных методов генерации псевдослучайных чисел. Математическая теория LCG легко понять, и LCG могут быть реализованы быстро и легко. \Line Генератор определяется рекурсивным определением: \line {\b X_ {n + 1} = (a * X_n + c) mod m} \line \line Ожидаемая последовательность для {\ba = 3}, {\b X = 5} и {\bm = 31} равна: \line {\b 0,5,20,3,14, 16,22,9,1,8,29,30,2,11,7,26,21,6,23,12,10,4,17,25,18,28,27,24,15,19}" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$TextOutput$" value="TextOutput" />
+    <replacement key="$memo$" value="This sample demonstrates building a linear congruential generator (LCG). A LCG represents one of the oldest and best-known pseudorandom number generator algorithms. The theory behind them is easy to understand, and they are easily implemented and fast.\line The generator is defined by the recurrence relation:\line {\b X_{n+1} = (a * X_n + c ) mod m}\line\line The expected sequence with {\b a=3}, {\b X=5} and {\b m=31} is:\line {\b 0,5,20,3,14,16,22,9,1,8,29,30,2,11,7,26,21,6,23,12,10,4,17,25,18,28,27,24,15,19}" />
+  </replacements>
+</sample>

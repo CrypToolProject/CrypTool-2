@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppendStr" xml:space="preserve">
+    <value>Zufügen</value>
+  </data>
+  <data name="BasicStr" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="CCMinCaption" xml:space="preserve">
+    <value>Minimierung von Konfliktklauseln</value>
+  </data>
+  <data name="CCMinTooltip" xml:space="preserve">
+    <value>Reduziert die Größe einer gelernten Konfliktklausel</value>
+  </data>
+  <data name="ClauseDecayCaption" xml:space="preserve">
+    <value>Klauselaktivität Abfall</value>
+  </data>
+  <data name="ClauseDecayTooltip" xml:space="preserve">
+    <value>Faktor für den Abfall der Variablenaktivität</value>
+  </data>
+  <data name="ClearOutputCaption" xml:space="preserve">
+    <value>Ausgabe löschen</value>
+  </data>
+  <data name="ClearOutputTooltip" xml:space="preserve">
+    <value>Festlegen, ob die Konsolenausgabe vor erneuter Ausführung gelöscht werden soll</value>
+  </data>
+  <data name="CoreOptionsGroup" xml:space="preserve">
+    <value>Solver-Optionen</value>
+  </data>
+  <data name="DeepStr" xml:space="preserve">
+    <value>Tiefgehend</value>
+  </data>
+  <data name="DimacsCaption" xml:space="preserve">
+    <value>Dimacs</value>
+  </data>
+  <data name="DimacsTooltip" xml:space="preserve">
+    <value>CNF nur vereinfachen anstatt zu lösen</value>
+  </data>
+  <data name="ElimCaption" xml:space="preserve">
+    <value>Eliminiere Variablen</value>
+  </data>
+  <data name="ElimTooltip" xml:space="preserve">
+    <value>Führe Eliminierung von Variablen durch</value>
+  </data>
+  <data name="FullStr" xml:space="preserve">
+    <value>Vollständig</value>
+  </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>Eingabe</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>CNF in Textform</value>
+  </data>
+  <data name="LimitedStr" xml:space="preserve">
+    <value>Eingeschränkt</value>
+  </data>
+  <data name="LubyCaption" xml:space="preserve">
+    <value>Luby-Sequenz</value>
+  </data>
+  <data name="LubyTooltip" xml:space="preserve">
+    <value>Benutze die Luby-Neustartsequenz</value>
+  </data>
+  <data name="MoreStr" xml:space="preserve">
+    <value>Detailliert</value>
+  </data>
+  <data name="NoneStr" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="OffStr" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="OnStr" xml:space="preserve">
+    <value>An</value>
+  </data>
+  <data name="OutputatResultTooltip" xml:space="preserve">
+    <value>Die Ergebnisausgabe des Solvers</value>
+  </data>
+  <data name="OutputConsoleCaption" xml:space="preserve">
+    <value>Konsolenausgabestrom</value>
+  </data>
+  <data name="OutputConsoleTooltip" xml:space="preserve">
+    <value>Die Konsolenausgabe des Solvers</value>
+  </data>
+  <data name="OutputOptionsGroup" xml:space="preserve">
+    <value>Ausgabeoptionen</value>
+  </data>
+  <data name="OutputResultCaption" xml:space="preserve">
+    <value>Ergebnisausgabestrom</value>
+  </data>
+  <data name="PhaseSavingCaption" xml:space="preserve">
+    <value>Stufe des 'phase saving'</value>
+  </data>
+  <data name="PhaseSavingTooltip" xml:space="preserve">
+    <value>Weist jeder Entscheidungsvariable ihren zuletzt durch die 'boolean constraint propagation' zugewiesenen Wert zu.</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>SAT-Solver</value>
+  </data>
+  <data name="PluginDescription" xml:space="preserve">
+    <value>Testet die Erfüllbarkeit einer booleschen Formel</value>
+  </data>
+  <data name="PreprocessCaption" xml:space="preserve">
+    <value>Präprozessor</value>
+  </data>
+  <data name="PreprocessorOptionsGroup" xml:space="preserve">
+    <value>Präprozessor-Optionen</value>
+  </data>
+  <data name="PreprocessTooltip" xml:space="preserve">
+    <value>Vorbearbeitung ein-/ausschalten (Vereinfachung der CNF)</value>
+  </data>
+  <data name="RandomFreqCaption" xml:space="preserve">
+    <value>Zufallsrate</value>
+  </data>
+  <data name="RandomFreqTooltip" xml:space="preserve">
+    <value>Rate, mit der die Entscheidungsheuristik eine zufällige Variable wählt (muss zwischen 0.0 und 1.0 liegen, default=0)</value>
+  </data>
+  <data name="RandomInitCaption" xml:space="preserve">
+    <value>Randomisiere Anfangsaktivität</value>
+  </data>
+  <data name="RandomInitTooltip" xml:space="preserve">
+    <value>Initialisiere alle Variablen mit zufälligen Aktivitätswerten</value>
+  </data>
+  <data name="RCheckCaption" xml:space="preserve">
+    <value>Klauselprüfung</value>
+  </data>
+  <data name="RCheckTooltip" xml:space="preserve">
+    <value>Prüfe, ob eine Klausel bereits impliziert ist</value>
+  </data>
+  <data name="RFirstCaption" xml:space="preserve">
+    <value>Neustartintervall</value>
+  </data>
+  <data name="RFirstTooltip" xml:space="preserve">
+    <value>Grundintervall, nach wie vielen Konflikten der Solver das erste Mal neu startet (0 - maxint, default=100)</value>
+  </data>
+  <data name="RIncCaption" xml:space="preserve">
+    <value>Neustartintervall Anstiegsfaktor</value>
+  </data>
+  <data name="RIncTooltip" xml:space="preserve">
+    <value>Faktor, mit dem das Neustartintervall nach einem Neustart multipliziert wird (muss größer als 1.0 sein, default=2)</value>
+  </data>
+  <data name="SilentStr" xml:space="preserve">
+    <value>Still</value>
+  </data>
+  <data name="SomeStr" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="SubLimitCaption" xml:space="preserve">
+    <value>Subsumptionsgrenze</value>
+  </data>
+  <data name="SubLimitTooltip" xml:space="preserve">
+    <value>Prüfe nicht auf Subsumption bei Klauseln größer als diesem Wert (-1 - maxint, default=1000, -1 bedeutet keine Grenze)</value>
+  </data>
+  <data name="VarDecayCaption" xml:space="preserve">
+    <value>Variablenaktivität Abfall</value>
+  </data>
+  <data name="VarDecayTooltip" xml:space="preserve">
+    <value>Faktor für den Abfall der Variablenaktivität</value>
+  </data>
+  <data name="VerbosityCaption" xml:space="preserve">
+    <value>Ausführlichkeit</value>
+  </data>
+  <data name="VerbosityTooltip" xml:space="preserve">
+    <value>Grad der Ausführlichkeit</value>
+  </data>
+  <data name="NoStr" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="YesStr" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+</root>

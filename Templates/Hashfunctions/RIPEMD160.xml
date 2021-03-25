@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">RIPEMD160</title>
+  <title lang="zh">RIPEMD160</title>
+  <title lang="ru">ripemd160</title>
+  <summary lang="en">Usage of the <i>RIPEMD160</i> hash function</summary>
+  <summary lang="zh">RIPEMD160哈希函数的用法</summary>
+  <summary lang="ru">Использование хэш-функции RIPEMD160</summary>
+  <description lang="en">This template shows the usage of the <i>RIPEMD160</i> hash function.</description>
+  <description lang="zh">该模板显示了RIPEMD160哈希函数的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование хэш-функции RIPEMD160.</description>
+  <keywords>Hash, RIPEMD, Dobbertin, TrueCrypt</keywords>
+  <keywords lang="zh">哈希，RIPEMD，Dobbertin，TrueCrypt</keywords>
+  <keywords lang="ru">Хэш, RIPEMD, Добберт, TrueCrypt</keywords>
+  <title lang="de">RIPEMD160</title>
+  <summary lang="de">Benutzung der <i>RIPEMD160</i>-Hash-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>RIPEMD160</i>-Hash-Funktion.</description>
+  <keywords lang="de">hash</keywords>
+  <icon file="RIPEMD160.png" />
+  <relevantPlugins>
+    <plugin name="RIPEMD160" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Hash$" value="Hashwert" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Hash$" value="哈希值" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Hash$" value="Hashwert" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Input$" value="Input" />
+    <replacement key="$Hash$" value="Hash value" />
+  </replacements>
+</sample>

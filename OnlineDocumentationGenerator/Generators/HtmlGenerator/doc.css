@@ -1,0 +1,148 @@
+﻿body {
+	margin: 0;
+	padding: 10;
+	font-family: Verdana, sans-serif, Helvetica,  Arial ;
+	font-size: 12px;
+}
+
+h2,h3 {
+	font-family: Verdana, sans-serif, Helvetica,  Arial ;
+	color: black;
+	text-decoration:underline;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+
+h1 {
+	font-size: 21px;
+}
+
+
+h2 {
+	font-size: 16px;
+}
+
+h3 {
+	font-size: 15px;
+}
+
+hr {
+	width: 100%;
+	margin-left:0px;
+}
+
+.section{
+	margin-left:30px;
+	margin-right:30px;
+	width: 95%;
+	text-align: justify;
+	float: left;
+}
+
+.boximage img
+{
+	width:48;
+	height:48;
+}
+
+a:link {
+	text-decoration:		underlined;
+	color:					blue;
+
+}
+a:visited {
+	text-decoration:		underlined;
+	color:					blue;
+}
+a:hover {
+	text-decoration:		underlined;
+	color:					blue;
+}
+a:active {
+	text-decoration:		none;
+	color:					blue;
+}
+a:focus {
+	text-decoration:		none;
+	color:					blue;
+}
+
+.highlighted { background: yellow; }
+
+a.button3d:visited
+{
+	color:RoyalBlue;
+}
+
+a.button3d:active
+{
+	color:RoyalBlue;
+}
+
+a.button3d:link
+{
+	color:RoyalBlue;
+}
+
+a.button3d{
+	color: RoyalBlue;
+	background: lightgrey;
+	width: 180px;
+	padding: 5px 5px;
+	text-align: center;
+	border-top: #A0A0A0 2px solid;
+	border-left: #A0A0A0 2px solid;
+	border-bottom: #A0A0A0 2px solid;
+	border-right: #A0A0A0 2px solid; 
+	font-family: Tahoma;
+	font-size: 0.95em;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1.5;
+}
+
+
+a.button3d_active{
+	color: blue;	
+	background: white;
+	width: 180px;
+	padding: 5px 5px;
+	text-align: center;
+	border-top: blue 2px solid;
+	border-left: blue 2px solid;
+	border-bottom: #3399FF 2px solid;
+	border-right: #3399FF 2px solid; 
+	font-family: Tahoma;
+	font-size: 0.95em;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1.5;
+}
+
+
+a.button3d:hover{
+	border-bottom: blue 2px solid;
+	border-right: blue 2px solid;
+	border-top: #3399FF 2px solid;
+	border-left: #3399FF 2px solid;
+	padding: 5px 5px;
+}
+
+a.button3d_active:hover{
+	border-bottom: blue 2px solid;
+	border-right: blue 2px solid;
+	border-top: #3399FF 2px solid;
+	border-left: #3399FF 2px solid;
+	padding: 5px 5px;
+}
+
+
+ol.references {
+    counter-reset:ref;
+    list-style-type:none;
+}
+ol.references li:before {
+    content: "["counter(ref)"]";
+    counter-increment:ref;
+}

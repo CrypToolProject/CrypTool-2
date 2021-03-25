@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>MD5</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>MD5-Hashfunktion</value>
+  </data>
+  <data name="InputDataCaption" xml:space="preserve">
+    <value>Eingabedatenstrom</value>
+  </data>
+  <data name="InputDataTooltip" xml:space="preserve">
+    <value>Eingabedaten, deren Hashwert berechnet wird</value>
+  </data>
+  <data name="OutputDataStreamCaption" xml:space="preserve">
+    <value>Hashwert</value>
+  </data>
+  <data name="OutputDataStreamTooltip" xml:space="preserve">
+    <value>Hashwert als Ausgabedatenstrom</value>
+  </data>
+  <data name="OutputDataCaption" xml:space="preserve">
+    <value>Hashwert</value>
+  </data>
+  <data name="OutputDataTooltip" xml:space="preserve">
+    <value>Hashwert als Byte-Array</value>
+  </data>
+  <data name="End_of_Block__" xml:space="preserve">
+    <value>Blockende &gt;&gt;&gt;&gt;</value>
+  </data>
+  <data name="End_of_Round__" xml:space="preserve">
+    <value>Rundenende &gt;&gt;&gt;</value>
+  </data>
+  <data name="Next__" xml:space="preserve">
+    <value>Weiter &gt;&gt;</value>
+  </data>
+  <data name="Round_" xml:space="preserve">
+    <value>Runde:</value>
+  </data>
+  <data name="Step_" xml:space="preserve">
+    <value>Schritt:</value>
+  </data>
+  <data name="We_have_added_the_length_at_the_end_of_our_data_buffer" xml:space="preserve">
+    <value>Die Länge wurde an das Ende des Datenblockes angehängt</value>
+  </data>
+  <data name="We_have_added_the_padding_bytes_and_our_data_now_looks_like_this" xml:space="preserve">
+    <value>Die Auffüll-Bytes wurden angehängt und unsere Daten sehen nun so aus:</value>
+  </data>
+  <data name="__Previous" xml:space="preserve">
+    <value>&lt;&lt; Zurück</value>
+  </data>
+  <data name="We_now_calculate_the_length_of_our_data" xml:space="preserve">
+    <value>Nun berechnen wir die Länge unserer Daten (ohne die Auffüll-Bytes des vorherigen Schrittes) in Bits:</value>
+  </data>
+  <data name="In_the_next_step" xml:space="preserve">
+    <value>Im nächsten Schritt schreiben wir diesen Wert in Little-Endian-Darstellung in die nächsten 8 Bytes unseres Datenpuffers.</value>
+  </data>
+  <data name="The_algorithm_is_not_yet_initialized" xml:space="preserve">
+    <value>Der Algorithmus ist noch nicht initialisiert. Bitte verbinden Sie das Plugin mit einem Eingabe-Datenstrom und starten die Ausführung. Stellen Sie sicher, dass die Präsentation sichtbar ist, wenn das MD5-Plugin aktiviert wird.</value>
+  </data>
+  <data name="We_are_now_starting_round" xml:space="preserve">
+    <value>Wir beginnen nun mit Runde</value>
+  </data>
+  <data name="of_4" xml:space="preserve">
+    <value>von 4.</value>
+  </data>
+  <data name="Each_round_has_16_steps" xml:space="preserve">
+    <value>Jede Runde hat 16 Schritte, die unsere temporären Variablen A - D abändern.</value>
+  </data>
+  <data name="There_are_4_non_linear_inner_round_functions" xml:space="preserve">
+    <value>Es gibt 4 nichtlineare Funktionen der inneren Runden, F, G, H und I. Sie sind ein zentraler Bestandteil der Berechnungen, die in jedem Rundenschritt durchgeführt werden. In dieser Runde verwenden wir die Funktion</value>
+  </data>
+  <data name="Addition_constant" xml:space="preserve">
+    <value>Additions-Konstante</value>
+  </data>
+  <data name="After_that__we_append_multiple_zero_bytes_to_our_data_" xml:space="preserve">
+    <value>Danach fügen wir mehrere Null-Bytes an die Daten an. Wir fügen so viele Null-Bytes an, dass die Länge des Datenblocks 8 Bytes weniger als das nächste Vielfache von 64 ist. Dadurch können wir noch 8 weitere Bytes an die Daten anhängen und ein Vielfaches von 64 als unsere Datenlänge erhalten.</value>
+  </data>
+  <data name="and_start_the_padding_process_by_appending_one_single__1__bit" xml:space="preserve">
+    <value>und beginnen mit dem Auffüllen, indem wir ein einzelnes '1'-Bit am Ende der Daten anfügen. Da wir mit Oktetten arbeiten, entspricht dies dem Anfügen eines Bytes mit dem binären Wert 10000000 bzw. dem Hexwert 0x80 ans Ende unserer Daten.</value>
+  </data>
+  <data name="bytes_in_the_previous_step_" xml:space="preserve">
+    <value>Bytes im letzten Schritt gelesen haben, nehmen wir an, dass wir das Ende der Daten erreicht haben.</value>
+  </data>
+  <data name="bytes_of_data" xml:space="preserve">
+    <value>Daten-Bytes eingelesen.</value>
+  </data>
+  <data name="bytes_of_data_" xml:space="preserve">
+    <value>Daten-Bytes verarbeitet.</value>
+  </data>
+  <data name="bytes_of_data_left_in_our_buffer" xml:space="preserve">
+    <value>Daten-Bytes in unserem Puffer</value>
+  </data>
+  <data name="Rotating_left_shift" xml:space="preserve">
+    <value>rotierende Linksverschiebung</value>
+  </data>
+  <data name="Selected_part_from_input_data_block" xml:space="preserve">
+    <value>Ausgewählter Teil des Eingabe-Datenblocks</value>
+  </data>
+  <data name="shifted_by" xml:space="preserve">
+    <value>verschieben um</value>
+  </data>
+  <data name="shifted_value" xml:space="preserve">
+    <value>verschobener Wert</value>
+  </data>
+  <data name="Shift_constant" xml:space="preserve">
+    <value>Shift-Konstante</value>
+  </data>
+  <data name="Since_we_read_only" xml:space="preserve">
+    <value>Da wir nur</value>
+  </data>
+  <data name="So_far__we_have_processed" xml:space="preserve">
+    <value>Bisher haben wir</value>
+  </data>
+  <data name="MD5State_Algorithm_uninitialized" xml:space="preserve">
+    <value>Algorithmus ist nicht initialisiert</value>
+  </data>
+  <data name="MD5State_Finished_padding" xml:space="preserve">
+    <value>Auffüllen beendet</value>
+  </data>
+  <data name="MD5State_Starting_the_compression" xml:space="preserve">
+    <value>Beginn der Kompression</value>
+  </data>
+  <data name="MD5State_Starting_a_compression_round" xml:space="preserve">
+    <value>Beginn einer Kompressionsrunde</value>
+  </data>
+  <data name="MD5State_Before_compression_step" xml:space="preserve">
+    <value>Vor dem Kompressionsschritt</value>
+  </data>
+  <data name="MD5State_Performing_compression_step" xml:space="preserve">
+    <value>Durchführung des Kompressionsschrittes</value>
+  </data>
+  <data name="MD5State_Finished_compression_round" xml:space="preserve">
+    <value>Kompressionsrunde beendet</value>
+  </data>
+  <data name="MD5State_Finalizing_compression" xml:space="preserve">
+    <value>Finalizing compression</value>
+  </data>
+  <data name="MD5State_Finished_compression" xml:space="preserve">
+    <value>Kompression beendet</value>
+  </data>
+  <data name="MD5State_Finished" xml:space="preserve">
+    <value>Beendet</value>
+  </data>
+  <data name="MD5State_Unknown_state" xml:space="preserve">
+    <value>Unbekannter Zustand</value>
+  </data>
+  <data name="MD5State_Initialization" xml:space="preserve">
+    <value>Initialisierung</value>
+  </data>
+  <data name="MD5State_Reading_data" xml:space="preserve">
+    <value>Lese Daten</value>
+  </data>
+  <data name="MD5State_Read_data" xml:space="preserve">
+    <value>Daten wurden gelesen</value>
+  </data>
+  <data name="MD5State_Beginning_padding_process" xml:space="preserve">
+    <value>Beginn des Auffüllens</value>
+  </data>
+  <data name="MD5State_Adding_the_padding_bytes" xml:space="preserve">
+    <value>Auffüll-Bytes werden hinzugefügt</value>
+  </data>
+  <data name="MD5State_Adding_the_data_length" xml:space="preserve">
+    <value>Datenlänge wird angefügt</value>
+  </data>
+  <data name="MD5State_Added_the_data_length" xml:space="preserve">
+    <value>Datenlänge wurde angefügt</value>
+  </data>
+  <data name="The_compression_function_of_MD5_processes_data_in_blocks_of_64_bytes_" xml:space="preserve">
+    <value>Die Kompressions-Funktion von MD5 verarbeitet Daten in Blöcken von 64 Bytes. Wir wollen genügend Daten einlesen, um die Kompressions-Funktion aufrufen zu können und lesen daher Daten ein, bis wir 64 Bytes erhalten haben.</value>
+  </data>
+  <data name="The_compression_function_operates_on_32_bit_integers_" xml:space="preserve">
+    <value>Die Kompressions-Funktion arbeitet mit 32-Bit-Integerzahlen. Sie verwendet 4 temporäre Variablen A, B, C und D, die wir mit den Werten von H1 - H4 initialisieren:</value>
+  </data>
+  <data name="The_data_block_we_have_read_looks_like_this" xml:space="preserve">
+    <value>Der eingelesene Datenblock sieht so aus:</value>
+  </data>
+  <data name="The_first_thing_we_do_is_initialize_our_accumulators" xml:space="preserve">
+    <value>Zuerst initialisieren wir unseren Akkumulator mit seinen Startwerten, den oben dargestellten Konstanten.</value>
+  </data>
+  <data name="The_variables_H1_H4_are_our_accumulator_variables" xml:space="preserve">
+    <value>Die Variablen H1 - H4 sind unsere Akkumulator-Variablen. Während der Hashwert-Berechnung aktualisieren wir sie nach jeder Ausführung der Kompressions-Funktion. Wenn wir damit fertig sind, enthalten sie den endgültigen MD5-Hashwert.</value>
+  </data>
+  <data name="Unsigned_integer_addition_discarding_carry_bit" xml:space="preserve">
+    <value>vorzeichenlose Ganzzahl-Addition ohne Carry-Bit</value>
+  </data>
+  <data name="We_also_split_our_512_bit_data_block_into_16_" xml:space="preserve">
+    <value>Wir teilen unseren 512-Bit-Datenblock auf in 16 Little-Endian-Integer mit je 32 Bit:</value>
+  </data>
+  <data name="We_can_now_begin_the_padding_process_" xml:space="preserve">
+    <value>Nun können wir mit dem Auffüll-Vorgang beginnen, der zwei Funktionen erfüllt:
+
+• Wir können die Länge der Daten erhöhen, bis wir wieder ein Vielfaches der Blockgrösse von 64 Bytes erreicht haben
+
+• Wir können die Gesamtlänge der Daten in die Hashwert-Berechnung miteinbeziehen.</value>
+  </data>
+  <data name="We_continue_by_calling_the_compression_function_for_this_input" xml:space="preserve">
+    <value>Wir fahren fort mit dem Aufruf der Kompressions-Funktion für diese Eingabe.</value>
+  </data>
+  <data name="We_continue_by_reading_the_next_block_of_data_" xml:space="preserve">
+    <value>Wir fahren fort, indem wir den nächsten Datenblock einlesen.</value>
+  </data>
+  <data name="We_have_finished_all_16_steps_of_this_round_" xml:space="preserve">
+    <value>Alle 16 Schritte dieser Runde sind nun beendet.</value>
+  </data>
+  <data name="We_have_finished_padding_and_have" xml:space="preserve">
+    <value>Das Auffüllen wurde beendet und wir haben noch</value>
+  </data>
+  <data name="We_have_finished_with_the_last_round_of_the_compression_" xml:space="preserve">
+    <value>Wir haben die letzte Kompressions-Runde beendet. Nun müssen wir unsere Akkumulatoren aktualisieren, indem wir einfach die Variablen A - D addieren.</value>
+  </data>
+  <data name="We_have_finished_with_the_last_round_of_the_compression_function" xml:space="preserve">
+    <value>Wir haben die letzte Runde der Kompressions-Funktion beendet. Wir nehmen die Resultate der Kompressions-Funktion, die temporären Variablen A - D, und addieren sie zu den Akkumulatoren H1 - H4.</value>
+  </data>
+  <data name="We_have_now_finished_compression_of_the_last_block_of_data" xml:space="preserve">
+    <value>Wir haben nun die Kompression des letzten Datenblockes beendet. Unser Hash-Akkumulator sieht nun so aus:</value>
+  </data>
+  <data name="We_have_read_a_total_of" xml:space="preserve">
+    <value>Wir haben insgesamt</value>
+  </data>
+  <data name="We_now_start_the_compression_function_for_our_next_data_block_" xml:space="preserve">
+    <value>Nun beginnen wir mit der Kompressions-Funktion für den nächsten Datenblock,</value>
+  </data>
+  <data name="We_obtain_our_final_result_the_actual_MD5_hash_value" xml:space="preserve">
+    <value>Wir erhalten unser Endergebnis, den eigentlichen MD5-Hashwert, durch einfaches Hintereinanderschreiben des Akkumulators in Lower-Endian-Darstellung:</value>
+  </data>
+  <data name="We_take_the_incomplete_block_of_data_that_we_ve_read_" xml:space="preserve">
+    <value>Wir nehmen den unvollständigen Datenblock, den wir eingelesen haben,</value>
+  </data>
+  <data name="MD5State_Added_the_padding_bytes" xml:space="preserve">
+    <value>Auffüll-Bytes wurden hinzugefügt</value>
+  </data>
+</root>

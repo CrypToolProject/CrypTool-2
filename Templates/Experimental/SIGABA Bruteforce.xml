@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">SIGABA Brute-Force Analysis</title>
+  <title lang="zh">蛮力分析</title>
+  <title lang="ru">СЕКЦИЯ bruteforce Анализ</title>
+  <summary lang="en">Cryptanalysis of the <i>SIGABA</i> using bruteforce</summary>
+  <summary lang="zh">使用蛮力对SIGABA进行密码分析</summary>
+  <summary lang="ru">Криптоанализ SIGABA с использованием bruteforce</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>SIGABA</i> using bruteforce.</description>
+  <description lang="zh">该模板显示了使用bruteforce对SIGABA进行的密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ SIGABA с использованием bruteforce.</description>
+  <keywords>SGIABA, USA, Navy</keywords>
+  <keywords lang="zh">美国SGIABA，海军</keywords>
+  <keywords lang="ru">SGIABA, США, флот</keywords>
+  <title lang="de">SIGABA Analyse nach dem Prinzip der erschöpfenden Schlüsselsuche</title>
+  <summary lang="de">Kryptoanalyse der <i>SIGABA</i> nach dem Prinzip der erschöpfenden Schlüsselsuche</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SIGABA</i> nach dem Prinzip der erschöpfenden Schlüsselsuche.</description>
+  <keywords lang="de">SIGABA, USA, Navy</keywords>
+  <icon file="SIGABA Bruteforce.png" />
+  <relevantPlugins>
+    <plugin name="TextInput" />
+    <plugin name="TextOutput" />
+    <plugin name="KeySearcher" />
+    <plugin name="Sigaba" />
+    <plugin name="SigabaBruteforce" />
+  </relevantPlugins>
+</sample>

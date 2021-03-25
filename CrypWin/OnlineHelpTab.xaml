@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="CrypTool.CrypWin.OnlineHelpTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600" ToolTip="{Loc Help}">
+    <UserControl.Resources>
+        <BitmapImage x:Key="Icon" UriSource="images/help32.png"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="35" Width="105" Background="Transparent" VerticalAlignment="Center">       
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="35"/>
+            </Grid.ColumnDefinitions>
+            <Button ToolTip="{Loc HelpBackward}"  Name="BackButton" Width="35" Height="35" Grid.Column="0" Click="BackButton_Click">
+                <Image Source="Resources\backward.png" />
+            </Button>
+            <Button ToolTip="{Loc HelpForward}" Name="ForwardButton" Width="35" Height="35" Grid.Column="1" Click="ForwardButton_Click">
+                <Image Source="Resources\forward.png"/>
+            </Button>
+            <Button ToolTip="{Loc HelpHome}" Name="HomeButton" Width="35" Height="35" Grid.Column="2" Click="HomeButton_Click">
+                <Image Source="Resources\home.png" />
+            </Button>
+        </Grid>
+        <WebBrowser Name="webBrowser" Grid.Row="1" />
+    </Grid>
+</UserControl>

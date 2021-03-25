@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="WatermarkCreatorSettings_ModificationType_ExtractText" xml:space="preserve">
+    <value>Извлечь скрытый водяной знак из изображения</value>
+  </data>
+  <data name="WatermarkCreatorSettings_ModificationType_EmbedInvisibleText" xml:space="preserve">
+    <value>Вставить невидимый водяной знак в изображение</value>
+  </data>
+  <data name="WatermarkCreatorSettings_ModificationType_EmbedText" xml:space="preserve">
+    <value>Вставить видимый текст в изображение</value>
+    <comment>E,g, copyright notice</comment>
+  </data>
+  <data name="ImageCaption" xml:space="preserve">
+    <value>Образ</value>
+  </data>
+  <data name="ImageTooltip" xml:space="preserve">
+    <value>Изображение, которое должно использоваться для вставки / извлечения цифрового водяного знака.</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Создатель водяных знаков</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Записывает или извлекает цифровой водяной знак изображения</value>
+  </data>
+  <data name="ModificationTypeDes" xml:space="preserve">
+    <value>Выберите, какая модификация должна быть применена к входному изображению</value>
+  </data>
+  <data name="BotLoc" xml:space="preserve">
+    <value>Найдите водяной знак в нижней части изображения</value>
+  </data>
+  <data name="BoxSizeDes" xml:space="preserve">
+    <value>Чем больше коробка, тем выше коррекция ошибок, тем более твердый водяной знак, но меньше данных можно сохранить.</value>
+  </data>
+  <data name="BoxSizeCap" xml:space="preserve">
+    <value>Размер коробки</value>
+  </data>
+  <data name="WatermarkLocationDes" xml:space="preserve">
+    <value>Выберите место, где водяной знак будет помещен на изображение.</value>
+  </data>
+  <data name="OpacityDes" xml:space="preserve">
+    <value>Непрозрачность водяного знака. Более высокое значение означает большую непрозрачность и более сильный водяной знак, хотя он также станет более заметным. Максимальное значение - 1000. Для хорошего результата рекомендуется значение больше или равно 500.</value>
+  </data>
+  <data name="ErrorCorrectionDes" xml:space="preserve">
+    <value>Задайте количество байтов, используемых для исправления ошибок</value>
+  </data>
+  <data name="ErrorCorrectionCap" xml:space="preserve">
+    <value>Исправление ошибки</value>
+  </data>
+  <data name="FontTypeCap" xml:space="preserve">
+    <value>Тип шрифта</value>
+  </data>
+  <data name="ModificationTypeCap" xml:space="preserve">
+    <value>Тип модификации</value>
+  </data>
+  <data name="OpacityCap" xml:space="preserve">
+    <value>Непрозрачность водяного знака</value>
+  </data>
+  <data name="OtherLoc" xml:space="preserve">
+    <value>Выберите пользовательское местоположение</value>
+  </data>
+  <data name="Seed" xml:space="preserve">
+    <value>Установите случайное число, которое будет использоваться как семя</value>
+  </data>
+  <data name="Seed1" xml:space="preserve">
+    <value>Семя 1</value>
+  </data>
+  <data name="Seed2" xml:space="preserve">
+    <value>Семя 2</value>
+  </data>
+  <data name="TextSizeMaxDes" xml:space="preserve">
+    <value>Максимальный размер текста, который будет использоваться при встраивании водяного знака. Внутри выбирается максимально возможный размер, который соответствует всему тексту на изображении в одной строке.</value>
+    <comment>Size will be adjusted dynamically to fit the watermark into the image. You just need to define the maximum size.</comment>
+  </data>
+  <data name="TextSizeMaxCap" xml:space="preserve">
+    <value>Максимальный размер текста</value>
+  </data>
+  <data name="TopLoc" xml:space="preserve">
+    <value>Найдите в верхней части изображения</value>
+  </data>
+  <data name="WatermarkLocationCap" xml:space="preserve">
+    <value>Расположение водяного знака</value>
+  </data>
+  <data name="AdvancedModeCap" xml:space="preserve">
+    <value>Использовать расширенный режим</value>
+  </data>
+  <data name="AdvancedModeDes" xml:space="preserve">
+    <value>Вы хотите использовать расширенный режим, который предлагает больше настроек для пользователя?</value>
+  </data>
+  <data name="FontTypeDes" xml:space="preserve">
+    <value>Тип шрифта, который используется для водяного знака</value>
+  </data>
+  <data name="LocationPercentageCap" xml:space="preserve">
+    <value>Пользовательское расположение водяного знака</value>
+  </data>
+  <data name="LocationPercentageDes" xml:space="preserve">
+    <value>Позволяет вручную установить местоположение водяного знака. Чем дальше справа вы поместите слайдер, тем дальше вверх по воде будет перемещаться водяной знак.</value>
+  </data>
+  <data name="NoPictureError" xml:space="preserve">
+    <value>Предоставьте действительное изображение в качестве носителя для водяного знака, используя компонент ввода файлов</value>
+  </data>
+  <data name="NoTextError" xml:space="preserve">
+    <value>Укажите строку, которая будет добавлена ​​к изображению в виде водяного знака, используя компонент ввода текста</value>
+  </data>
+  <data name="TextCaption" xml:space="preserve">
+    <value>Встроенный текст</value>
+  </data>
+  <data name="TextTooltip" xml:space="preserve">
+    <value>Извлеченный текст, встроенный в изображение</value>
+  </data>
+  <data name="WatermarkCaption" xml:space="preserve">
+    <value>водяной знак</value>
+  </data>
+  <data name="WatermarkImageCaption" xml:space="preserve">
+    <value>Изображение с водяным знаком</value>
+  </data>
+  <data name="WatermarkImageTooltip" xml:space="preserve">
+    <value>Изображение с текстом, добавленным к нему как водяной знак</value>
+  </data>
+  <data name="WatermarkTooltip" xml:space="preserve">
+    <value>Текст, который будет добавлен к изображению в виде водяного знака</value>
+  </data>
+  <data name="AdvancedModeList1" xml:space="preserve">
+    <value>нет</value>
+  </data>
+  <data name="AdvancedModeList2" xml:space="preserve">
+    <value>да</value>
+  </data>
+</root>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- Very important: "name" attribute defines the syntax name that will be used by the HighlihterManager -->
+<Syntax name="CSharp">
+	<!-- Words rules will only highlight the provided words -->
+	<HighlightWordsRule name="Blue words">
+		<Words>
+			abstract as base bool break byte case catch char checked class const continue decimal default Delegat do double else enum event explicit extern false finally fixed float for foreach goto if implicit in int interface internal entspricht lock long new null object out override params private protected public readonly ref return sbyte sealed short sizeof stackalloc static string struct switch this throw true try typeof uint ulong unchecked unsafe ushort using virtual void volatile while
+		</Words>
+		<IgnoreCase>false</IgnoreCase>
+		<Foreground>#0000FF</Foreground>
+		<FontWeight>Bold</FontWeight>
+		<FontStyle>Normal</FontStyle>
+	</HighlightWordsRule>
+
+	<!-- Line rules will highlight the LineStart token as well as the rest of the line -->
+	<HighlightLineRule name="Comments">
+		<LineStart>//</LineStart>
+		<IgnoreCase>false</IgnoreCase>
+		<Foreground>#006400</Foreground>
+		<FontWeight>Normal</FontWeight>
+		<FontStyle>Normal</FontStyle>
+	</HighlightLineRule>
+
+	<!-- Advanced rules use a regular expression to find what they must highlight -->
+	<!-- Do not overuse them, as they have a great computer time cost --> 
+	<AdvancedHighlightRule name="Comments">
+		<Expression>\".*\"</Expression>
+		<IgnoreCase>false</IgnoreCase>
+		<Foreground>#0000FF</Foreground>
+		<FontWeight>Normal</FontWeight>
+		<FontStyle>Normal</FontStyle>
+	</AdvancedHighlightRule>
+</Syntax>

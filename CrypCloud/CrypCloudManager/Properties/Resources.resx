@@ -1,0 +1,396 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="connected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\connected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disconnected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\disconnected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tab_Caption" xml:space="preserve">
+    <value>CrypCloud</value>
+  </data>
+  <data name="_Password_label" xml:space="preserve">
+    <value>Password: </value>
+  </data>
+  <data name="_Email_label" xml:space="preserve">
+    <value>Email: </value>
+  </data>
+  <data name="_Type" xml:space="preserve">
+    <value>Job Type :</value>
+  </data>
+  <data name="_BackBtn" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="_AbortBtn" xml:space="preserve">
+    <value>Abort</value>
+  </data>
+  <data name="_WorkspacePath" xml:space="preserve">
+    <value>Workspace :</value>
+  </data>
+  <data name="_NextBtn" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="_Password_confirm_label" xml:space="preserve">
+    <value>Confirm: </value>
+  </data>
+  <data name="_ConnectingError" xml:space="preserve">
+    <value>Something went wrong :(</value>
+  </data>
+  <data name="_Connecting_label" xml:space="preserve">
+    <value>Connection to server. Please wait</value>
+  </data>
+  <data name="_CreateAccount_enterAccountData" xml:space="preserve">
+    <value>Please enter your account data below.</value>
+  </data>
+  <data name="_CreateAccount_successHeader" xml:space="preserve">
+    <value>Account successfully requested.</value>
+  </data>
+  <data name="_CreateAccount_successText" xml:space="preserve">
+    <value>Account successfully requested.</value>
+  </data>
+  <data name="_CreateAccount_Title" xml:space="preserve">
+    <value>Create a new account </value>
+  </data>
+  <data name="_CreateJob_Description_label" xml:space="preserve">
+    <value>Description: </value>
+  </data>
+  <data name="_CreateJob_Header" xml:space="preserve">
+    <value>Create a new job</value>
+  </data>
+  <data name="_CreateJob_Name_label" xml:space="preserve">
+    <value>Name: </value>
+  </data>
+  <data name="_CreateJob_uploadBtn" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="_CreateJob_WorkspacePath_label" xml:space="preserve">
+    <value>Path to workspace: </value>
+  </data>
+  <data name="_enterVerificationCode" xml:space="preserve">
+    <value>Please enter the verification code.</value>
+  </data>
+  <data name="_JobList_btn_createNew" xml:space="preserve">
+    <value>Create new job</value>
+  </data>
+  <data name="_JobList_btn_delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="_JobList_btn_open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="_JobList_btn_refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="_JobList_col_Creator" xml:space="preserve">
+    <value>Creator</value>
+  </data>
+  <data name="_JobList_col_Name" xml:space="preserve">
+    <value>Job name</value>
+  </data>
+  <data name="_JobList_col_Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="_JobList_Header" xml:space="preserve">
+    <value>CrypCloud – Job List</value>
+  </data>
+  <data name="_Login_btn_connect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="_Login_header" xml:space="preserve">
+    <value>CrypCloud</value>
+  </data>
+  <data name="_Login_link_createNewAccount" xml:space="preserve">
+    <value>Create a new account</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>CrypCloud Manager</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>A P2P based volunteer cloud solution</value>
+  </data>
+  <data name="_Login_link_ForgotPassword" xml:space="preserve">
+    <value>Forgot password</value>
+  </data>
+  <data name="_Login_subheader" xml:space="preserve">
+    <value>A P2P based volunteer cloud solution</value>
+  </data>
+  <data name="_ResetPW_enterData" xml:space="preserve">
+    <value>Enter your account data below to reset your password.</value>
+  </data>
+  <data name="_ResetPW_enterVerificationData" xml:space="preserve">
+    <value>We have send an verification email to the email address of the account. </value>
+  </data>
+  <data name="_ResetPW_Header" xml:space="preserve">
+    <value>Reset Password</value>
+  </data>
+  <data name="_ResetPW_successHeader" xml:space="preserve">
+    <value>Password Reset Successful</value>
+  </data>
+  <data name="_ResetPW_successText" xml:space="preserve">
+    <value>Your password has been reset. You may now login with your new password.</value>
+  </data>
+  <data name="_verificationCode_label" xml:space="preserve">
+    <value>Verification Code: </value>
+  </data>
+  <data name="_VerifyBtn" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="_Username_label" xml:space="preserve">
+    <value>Name: </value>
+  </data>
+  <data name="_JobList_col_Id" xml:space="preserve">
+    <value>Job ID</value>
+  </data>
+  <data name="Stop_Running_Jobs_Before_Logout" xml:space="preserve">
+    <value>Logout failed. Please stop all running jobs.</value>
+  </data>
+  <data name="_JobList_bitmask" xml:space="preserve">
+    <value>Bitmask:</value>
+  </data>
+  <data name="_JobList_jobDescription" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="_JobList_jobName" xml:space="preserve">
+    <value>Job name:</value>
+  </data>
+  <data name="_JobList_btn_logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="AmountOfWorker_Settings" xml:space="preserve">
+    <value>Amount of workers:</value>
+  </data>
+  <data name="CrypCloudSettings" xml:space="preserve">
+    <value>CrypCloud</value>
+  </data>
+  <data name="_JobList_btn_download" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="_JobList_col_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="_JobList_EpochProgress" xml:space="preserve">
+    <value>Epoch:</value>
+  </data>
+  <data name="_ResetPW_enterVerificationData_2" xml:space="preserve">
+    <value>Please enter the verification code and your new password below.</value>
+  </data>
+  <data name="_Confirm_Job_Deletion_Text" xml:space="preserve">
+    <value>The job will be permanently removed from the cloud. The result and progress will be lost. Are you sure? </value>
+  </data>
+  <data name="_Confirm_Job_Deletion_Title" xml:space="preserve">
+    <value>Confirm job deletion.</value>
+  </data>
+  <data name="_Remember_me" xml:space="preserve">
+    <value>Save login data</value>
+  </data>
+  <data name="_JobList_LoggedInAs" xml:space="preserve">
+    <value>Logged in as:</value>
+  </data>
+  <data name="_infoVerificationCode" xml:space="preserve">
+    <value>A verification code was sent to the provided email address.</value>
+  </data>
+  <data name="_JobList_helpText" xml:space="preserve">
+    <value>Click on one of the open buttons to participate in a job.</value>
+  </data>
+  <data name="_JobList_JobId" xml:space="preserve">
+    <value>Job ID:</value>
+  </data>
+  <data name="EnableOpenCL" xml:space="preserve">
+    <value>Enable OpenCL</value>
+  </data>
+  <data name="OpenCLDevice" xml:space="preserve">
+    <value>OpenCL device:</value>
+  </data>
+  <data name="WritePerformanceLog" xml:space="preserve">
+    <value>Write performance log</value>
+  </data>
+  <data name="_JobList_col_JobSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="LogLevel" xml:space="preserve">
+    <value>Log level:</value>
+  </data>
+  <data name="_Remember_me_tooltip" xml:space="preserve">
+    <value>Username and password will be saved encrypted and restored at the next startup of CrypCloud.</value>
+  </data>
+  <data name="JobList_btn_delete_tooltip" xml:space="preserve">
+    <value>Delete the job from CrypCloud</value>
+  </data>
+  <data name="_JobList_btn_createNew_tooltip" xml:space="preserve">
+    <value>Create a new job and upload it to CrypCloud</value>
+  </data>
+  <data name="_JobList_btn_refresh_tooltip" xml:space="preserve">
+    <value>Refresh the joblist by requesting joblists of neighbor peers</value>
+  </data>
+  <data name="JobList_btn_download_tooltip" xml:space="preserve">
+    <value>Download the job from CrypCloud</value>
+  </data>
+  <data name="JobList_btn_logout_tooltip" xml:space="preserve">
+    <value>Closes the connection to CrypCloud</value>
+  </data>
+  <data name="JobList_btn_open_tooltip" xml:space="preserve">
+    <value>Open the job to participate in calculations. To start the computation in the newly opened workspace press the Play button.</value>
+  </data>
+  <data name="_IPAddress" xml:space="preserve">
+    <value>IP Address</value>
+  </data>
+  <data name="_PeerId" xml:space="preserve">
+    <value>Peer Id</value>
+  </data>
+  <data name="_Port" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="anonymous" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\anonymous.p12;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_copyJobInformation" xml:space="preserve">
+    <value>Copy job information</value>
+  </data>
+  <data name="_JobList_instructions" xml:space="preserve">
+    <value>a) The list above contains long-running jobs which can be solved faster by running parallel sub-jobs. So different people can contribute by running the same job and computing different sub-jobs on their computers.
+b) Select a job in the list and click "Open" to contribute.
+d) After clicking "Open" the according job is downloaded and opened in a new CT2 workspace tab.
+e) Please click "Play" (F5) to run the downloaded CT2 workspace in the new tab. The CrypCloud component in the workspace then shares the results with all other participating contributors.
+If someone of the contributors found a solution, this solution is also shared with all others and is immediately visible. There is no information shared about the contributors themselves.
+The list below contains all peers (IP-address and port), which this computer is currently connected to.</value>
+  </data>
+  <data name="_Login_anonymous" xml:space="preserve">
+    <value>To login without registration use "anonymous/anonymous".</value>
+  </data>
+  <data name="_copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="_JobList_col_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="CrypCloudSettingsTitle" xml:space="preserve">
+    <value>CrypCloud settings</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+</root>

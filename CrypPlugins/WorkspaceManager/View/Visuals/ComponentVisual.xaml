@@ -1,0 +1,851 @@
+﻿<UserControl x:Class="WorkspaceManager.View.Visuals.ComponentVisual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:state="clr-namespace:WorkspaceManager.View.Base"
+             xmlns:local="clr-namespace:WorkspaceManager.View.Visuals"
+             xmlns:ic="clr-namespace:WorkspaceManager.View.Visuals"
+             xmlns:model="clr-namespace:WorkspaceManager.Model;assembly=WorkspaceManagerModel"
+             xmlns:dragdrop="clr-namespace:DragDropListBox"
+             xmlns:base="clr-namespace:CrypTool.PluginBase.Miscellaneous;assembly=CrypPluginBase"
+             xmlns:bin="clr-namespace:WorkspaceManager.View.Visuals"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Click="ContextMenuClick" Header="{Loc PresentationTooltip}" Tag="presentation" IsEnabled="{Binding Path=HasComponentPresentation, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/presentation.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Click="ContextMenuClick" Header="{Loc SettingsTooltip}" Tag="setting">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/setting.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Click="ContextMenuClick" Header="{Loc LogTooltip}" Tag="log">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/log.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Click="ContextMenuClick" Header="{Loc DataTooltip}" Tag="data">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/data.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Click="ContextMenuClick" Header="{Loc HelpTooltip}" Tag="help">
+                <MenuItem.Icon>
+                    <Image Width="18" Height="18" Source="/WorkspaceManager;component/View/Images/ComponentIcons/help.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <Separator />
+            <MenuItem Click="ContextMenuClick" Header="{Loc Bring_to_FrontTooltip}" Tag="top">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/WorkspaceManager;component/View/Images/ComponentIcons/Arrow-stop-up-48.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="ContextMenuClick" Header="{Loc ElevateTooltip}" Tag="up">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/WorkspaceManager;component/View/Images/ComponentIcons/Arrow-up-48.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="ContextMenuClick" Header="{Loc ReduceTooltip}" Tag="down">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/WorkspaceManager;component/View/Images/ComponentIcons/Arrow-down-48.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+            
+
+            <MenuItem Click="ContextMenuClick" Header="{Loc Move_to_BackTooltip}" Tag="bottom">
+                <MenuItem.Icon>
+                    <Image Width="16" Height="16" Source="/WorkspaceManager;component/View/Images/ComponentIcons/Arrow-stop-down-48.png" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <UserControl.RenderTransform>
+        <TranslateTransform X="{Binding Path=Position.X}" Y="{Binding Path=Position.Y}"></TranslateTransform>
+    </UserControl.RenderTransform>
+    <UserControl.Resources>
+        <local:testconverter x:Key="testconverter"></local:testconverter>
+        <local:StateFullscreenConverter x:Key="StateFullscreenConverter"></local:StateFullscreenConverter>
+        <local:StateConverter x:Key="StateConverter"></local:StateConverter>
+        <local:EnsureMinHeightConverter x:Key="EnsureMinHeightConverter"></local:EnsureMinHeightConverter>
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBoxBase}">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=SouthConnectorCollection.Count}" Value="0"></Condition>
+                        <Condition Binding="{Binding Path=IsConnectorDragStarted}" Value="false"></Condition>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="(Grid.RenderTransform).(TranslateTransform.Y)"
+                                                 To="-20" Duration="0:0:0.1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                    <MultiDataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="(Grid.RenderTransform).(TranslateTransform.Y)"
+                                                 To="0" Duration="0:0:0.1" />
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.ExitActions>
+                </MultiDataTrigger>
+            </Style.Triggers>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TranslateTransform></TranslateTransform>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="ClipToBounds" Value="False"></Setter>
+            <Setter Property="Foreground" Value="#666"></Setter>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <DockPanel LastChildFill="True" ClipToBounds="False">
+                            <Rectangle DockPanel.Dock="Left" x:Name="Border" Visibility="Hidden" Fill="#888" Width="2" Height="auto"></Rectangle>
+                            <Rectangle DockPanel.Dock="Top" x:Name="Border2" Visibility="Hidden" Fill="#888" Height="2" Width="auto"></Rectangle>
+                            <Border Margin="0" x:Name="PART_ContentHost" ClipToBounds="False"/>
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="False">
+                                <Setter Property="Visibility" Value="Hidden" TargetName="Border"></Setter>
+                                <Setter Property="Visibility" Value="Hidden" TargetName="Border2"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border"></Setter>
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border2"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border"></Setter>
+                                <Setter Property="Visibility" Value="Visible" TargetName="Border2"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ProgressBarStyle" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Grid MinHeight="14">
+                            <Border
+                                Name="PART_Track" 
+                                Background="Transparent"
+                                BorderBrush="Transparent" />
+                            <Border 
+                                Name="PART_Indicator" 
+                                CornerRadius="2" 
+                                Background="{TemplateBinding Foreground}" 
+                                BorderBrush="#CCC" 
+                                BorderThickness="1" 
+                                HorizontalAlignment="Left" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Thumb}" x:Key="InvisibleThumbStyle">
+            <Style.Triggers>
+                <DataTrigger Value="False">
+                    <DataTrigger.Binding>
+                        <MultiBinding Converter="{StaticResource ResourceKey=StateFullscreenConverter}">
+                            <Binding Path="State"></Binding>
+                            <Binding Path="IsFullscreen"></Binding>
+                        </MultiBinding>
+                    </DataTrigger.Binding>
+                    <Setter Property="Panel.ZIndex" Value="100"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Panel.ZIndex" Value="-1"></Setter>
+            <Setter Property="Focusable" Value="True"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid Background="Transparent"></Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Thumb}" x:Key="DragThumbStyle">
+            <Style.Triggers>
+                <DataTrigger Value="true">
+                    <DataTrigger.Binding>
+                            <Binding Path="IsSelected"></Binding>
+                    </DataTrigger.Binding>
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Focusable" Value="True"></Setter>
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Visibility" Value="Collapsed"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border CornerRadius="3" Background="#66ffffff"></Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Thumb}" x:Key="InvisibleThumbStyleSecond">
+            <Setter Property="Cursor" Value="Hand"></Setter>
+            <Setter Property="Focusable" Value="True"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid Background="Transparent"></Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Thumb}" x:Key="ScaleThumb">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="13"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="VerticalAlignment" Value="Bottom"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate x:Name="TemplateBtn" TargetType="Thumb">
+                        <Grid Background="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="2" Grid.Row="0" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="1" Grid.Row="1" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="2" Grid.Row="1" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="0" Grid.Row="2" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="1" Grid.Row="2" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                            <Rectangle Width="3" Height="3" Fill="WhiteSmoke" Stroke="#777" StrokeThickness="1" Grid.Column="2" Grid.Row="2" RenderOptions.EdgeMode="Unspecified"></Rectangle>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="templateDrag">
+            <TextBlock Text="{Loc Drag}"></TextBlock>
+        </DataTemplate>
+
+        <ControlTemplate x:Key="CtrlTemplate" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="Border" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                <Image RenderOptions.BitmapScalingMode="Linear" Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag.Source}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"></Image>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#55222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#aa222222" TargetName="Border" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="{x:Type Button}" x:Key="ActionBasicStyle">
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="OperationBasicStyle">
+            <Setter Property="Height" Value="12"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Style x:Key="PresentationBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="Visibility" Value="Visible"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HasComponentPresentation, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SettingBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="Visibility" Value="Visible"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HasComponentSetting, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Value="false">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style TargetType="{x:Type Button}" x:Key="OperationMaxMinStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=State, Converter={StaticResource ResourceKey=StateConverter}, Mode=OneWay}" Value="False">
+                    <Setter Property="ToolTip" Value="{Loc MaximizeTooltip}"></Setter>
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <state:BinComponentAction>LastState</state:BinComponentAction>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Tag">
+                        <Setter.Value>
+                            <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/max.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding Path=State, Converter={StaticResource ResourceKey=StateConverter}, Mode=OneWay}" Value="True">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <model:BinComponentState>Min</model:BinComponentState>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Tag">
+                <Setter.Value>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/minimize.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTip" Value="{Loc MinimizeTooltip}"></Setter>
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="OperationCloseStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Editor.IsExecuting}" Value="True">
+                    <Setter Property="IsEnabled" Value="False"></Setter>
+                    <Setter Property="Opacity" Value="0.5"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="ToolTip" Value="{Loc CloseComponentTooltip}"></Setter>
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="OperationFullscreenStyle">
+            <Setter Property="ToolTip" Value="Fullscreen"></Setter>
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <!--<Style TargetType="{x:Type Button}" x:Key="RepeatableButtonStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsRepeatable, Mode=OneWay}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="Content" Value="{x:Null}"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Repeat, Mode=OneWay}" Value="False">
+                    <Setter Property="Tag">
+                        <Setter.Value>
+                            <Image Source="/WorkspaceManager;component/View/Image/pause.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <sys:Boolean>True</sys:Boolean>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Tag">
+                <Setter.Value>
+                    <Image Source="/WorkspaceManager;component/View/Image/play.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Content">
+                <Setter.Value>
+                    <sys:Boolean>False</sys:Boolean>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ToolTip" Value="{Loc RepeatTooltip}"></Setter>
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>-->
+
+        <Style TargetType="{x:Type ToggleButton}" x:Key="ICMButtonStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsICMaster, Mode=OneWay}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                    <Setter Property="Tag" Value="{x:Null}"></Setter>
+                    <Setter Property="Content" Value="{x:Null}"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="ToolTip" Value="{Loc Show_IControlsTooltip}"></Setter>
+            <Setter Property="Height" Value="16"></Setter>
+            <Setter Property="Width" Value="16"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Style x:Key="WindowStyle" TargetType="{x:Type Border}">
+            <Style.Triggers>
+                <DataTrigger Value="False">
+                    <DataTrigger.Binding>
+                        <MultiBinding Converter="{StaticResource ResourceKey=StateFullscreenConverter}">
+                            <Binding Path="State"></Binding>
+                            <Binding Path="IsFullscreen"></Binding>
+                        </MultiBinding>
+                    </DataTrigger.Binding>
+                    <Setter Property="Height" Value="80"></Setter>
+                    <Setter Property="Width" Value="80"></Setter>
+                    <Setter Property="MinHeight" Value="80"></Setter>
+                    <Setter Property="MinWidth" Value="80"></Setter>
+                </DataTrigger>
+                <DataTrigger Value="True">
+                    <DataTrigger.Binding>
+                        <MultiBinding Converter="{StaticResource ResourceKey=StateFullscreenConverter}">
+                            <Binding Path="State"></Binding>
+                            <Binding Path="IsFullscreen"></Binding>
+                        </MultiBinding>
+                    </DataTrigger.Binding>
+                    <Setter Property="Height" Value="{Binding Path=WindowHeight}"></Setter>
+                    <Setter Property="Width" Value="{Binding Path=WindowWidth}"></Setter>
+                    <Setter Property="MinHeight" Value="{Binding Path=ActivePresentation.MinHeight, 
+                        Converter={StaticResource ResourceKey=EnsureMinHeightConverter}, ConverterParameter=150}"></Setter>
+                    <Setter Property="MinWidth" Value="{Binding Path=ActivePresentation.MinWidth,  
+                        Converter={StaticResource ResourceKey=EnsureMinHeightConverter}, ConverterParameter=200}"></Setter>
+
+                    <Setter Property="MaxHeight" Value="{Binding Path=ActivePresentation.MaxHeight}"></Setter>
+                    <Setter Property="MaxWidth" Value="{Binding Path=ActivePresentation.MaxWidth}"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="{Binding Path=BackgroundBrushColor}"></Setter>
+            <Setter Property="BorderBrush" Value="{Binding Path=BorderBrushColor}"></Setter>
+        </Style>
+
+        <Style x:Key="ActionBorderStyle" TargetType="{x:Type Border}">
+            <Style.Triggers>
+                <DataTrigger Value="True">
+                    <DataTrigger.Binding>
+                        <MultiBinding Converter="{StaticResource ResourceKey=StateFullscreenConverter}">
+                            <Binding Path="State"></Binding>
+                            <Binding Path="IsFullscreen"></Binding>
+                        </MultiBinding>
+                    </DataTrigger.Binding>
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </DataTrigger>
+                <DataTrigger Value="False">
+                    <DataTrigger.Binding>
+                        <MultiBinding Converter="{StaticResource ResourceKey=StateFullscreenConverter}">
+                            <Binding Path="State"></Binding>
+                            <Binding Path="IsFullscreen"></Binding>
+                        </MultiBinding>
+                    </DataTrigger.Binding>
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="DragBorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="5"></Setter>
+            <Setter Property="BorderBrush" Value="Transparent"></Setter>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="BorderThickness" Value="1"></Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsConnectorDragStarted}" Value="True">
+                    <Setter Property="BorderBrush" Value="#99FFFFFF"></Setter>
+                    <Setter Property="Background" Value="#55FFFFFF"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="ContentPresenterStyle" TargetType="{x:Type ContentPresenter}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsFullscreen}" Value="True">
+                    <Setter Property="Content" Value="{Binding Path=Icon, Mode=OneTime}"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Content" Value="{Binding Path=ActivePresentation, UpdateSourceTrigger=PropertyChanged}"></Setter>
+        </Style>
+
+        <x:Array Type="{x:Type Button}" x:Key="Actions">
+            <Button ToolTip="{Loc PresentationTooltip}" Style="{StaticResource ResourceKey=PresentationBtnStyle}" Click="ActionHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/presentation.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Presentation</model:BinComponentState>
+            </Button>
+
+            <Button ToolTip="{Loc SettingsTooltip}" Style="{StaticResource ResourceKey=SettingBtnStyle}" Click="ActionHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/setting.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Setting</model:BinComponentState>
+            </Button>
+
+            <Button ToolTip="{Loc LogTooltip}" Style="{StaticResource ResourceKey=ActionBasicStyle}" Click="ActionHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/log.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Log</model:BinComponentState>
+            </Button>
+
+            <Button ToolTip="{Loc DataTooltip}" Style="{StaticResource ResourceKey=ActionBasicStyle}" Click="ActionHandler" >
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/data.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <model:BinComponentState>Data</model:BinComponentState>
+            </Button>
+            
+            <Button ToolTip="{Loc HelpTooltip}" Style="{StaticResource ResourceKey=ActionBasicStyle}" Click="ActionHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/help.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"></Image>
+                </Button.Tag>
+                <sys:String>Info</sys:String>
+            </Button>
+        </x:Array>
+
+        <x:Array Type="{x:Type ButtonBase}" x:Key="Operations">
+            <ToggleButton x:Name="IControlButton" Style="{StaticResource ResourceKey=ICMButtonStyle}" IsChecked="{Binding Path=IsICPopUpOpen, Mode=TwoWay}">
+                <ToggleButton.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/thunder.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </ToggleButton.Tag>
+            </ToggleButton>
+
+            <!--<Button Style="{StaticResource ResourceKey=RepeatableButtonStyle}" Click="RepeatHandler"></Button>-->
+
+            <Button Style="{StaticResource ResourceKey=OperationMaxMinStyle}" Click="ActionHandler"></Button>
+
+            <Button Style="{StaticResource ResourceKey=OperationFullscreenStyle}" Click="OpenClickHandler">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/full.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </Button.Tag>
+            </Button>
+
+            <Button Style="{StaticResource ResourceKey=OperationCloseStyle}" Click="CloseClick">
+                <Button.Tag>
+                    <Image Source="/WorkspaceManager;component/View/Images/ComponentIcons/delete.png" HorizontalAlignment="Center" SnapsToDevicePixels="True"/>
+                </Button.Tag>
+            </Button>
+        </x:Array>
+
+        <Style x:Key="SelectGridStyle" TargetType="Grid">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                    <!--<DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1" Duration="0:0:0.1" />
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1" Duration="0:0:0.1" />
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="1" Duration="0:0:0.1" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 To="1.5" Duration="0:0:0.1" />
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="(Grid.RenderTransform).(ScaleTransform.ScaleY)"
+                                                 To="1.5" Duration="0:0:0.1" />
+                                <DoubleAnimation Timeline.DesiredFrameRate="5"
+                                                 Storyboard.TargetProperty="Opacity"
+                                                 To="0" Duration="0:0:0.1" />
+                                
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>-->
+                </DataTrigger>
+            </Style.Triggers>
+            <!--<Setter Property="Opacity" Value="0"></Setter>-->
+            <Setter Property="Visibility" Value="Collapsed"></Setter>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform></ScaleTransform>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+      <bin:WidthConverter x:Key="WidthConverter"></bin:WidthConverter>
+        
+        <Style x:Key="IconPresentationStyle" TargetType="Image">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Path=State, Mode=OneWay}">
+                            <Condition.Value>
+                                <model:BinComponentState>Min</model:BinComponentState>
+                            </Condition.Value>
+                        </Condition>
+
+                        <Condition Binding="{Binding Path=HasComponentPresentation, Mode=OneWay}" Value="True"></Condition>
+                    </MultiDataTrigger.Conditions>
+                    <Setter Property="Visibility" Value="Visible"></Setter>
+                </MultiDataTrigger>
+            </Style.Triggers>
+            <Setter Property="Visibility" Value="Collapsed"></Setter>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <Grid x:Name="Root">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Style="{StaticResource ResourceKey=SelectGridStyle}" RenderTransformOrigin="0.5,0.5" Margin="0" Background="#88FFFFFF" IsHitTestVisible="False">
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="5" Opacity="0.35"></DropShadowEffect>
+            </Grid.Effect>
+            <Path Data="M 0,0 L 0,5 L 0,0 L 5,0 L 0,0" StrokeThickness="2" Stroke="#666" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="2"></Path>
+            <Path Data="M 5,5 L 0,5 L 5,5 L 5,0 L 5,5" StrokeThickness="2" Stroke="#666" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="2"></Path>
+            <Path Data="M 0,5 L 0,0 L 0,5 L 5,5 L 0,5" StrokeThickness="2" Stroke="#666" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="2"></Path>
+            <Path Data="M 5,0 L 0,0 L 5,0 L 5,5 L 5,0" StrokeThickness="2" Stroke="#666" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="2"></Path>
+        </Grid>
+
+
+        <Thumb x:Name="ScaleThumb" Style="{StaticResource ResourceKey=ScaleThumb}"  Margin="0,0,5,5" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                               Cursor="SizeNWSE" DragDelta="ScaleDragDeltaHandler"></Thumb>
+        
+        <!--<Thumb x:Name="ScaleThumb2" Style="{StaticResource ResourceKey=ScaleThumb}"  Margin="0,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right"
+                               Cursor="SizeNWSE" DragDelta="ScaleDragDeltaHandler">
+            <Thumb.LayoutTransform>
+                <RotateTransform Angle="-90"></RotateTransform>
+            </Thumb.LayoutTransform>
+        </Thumb>
+        
+        <Thumb x:Name="ScaleThumb3" Style="{StaticResource ResourceKey=ScaleThumb}"  Margin="5,0,0,5" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                               Cursor="SizeNWSE" DragDelta="ScaleDragDeltaHandler">
+            <Thumb.LayoutTransform>
+                <RotateTransform Angle="-270"></RotateTransform>
+            </Thumb.LayoutTransform>
+        </Thumb>
+
+        <Thumb x:Name="ScaleThumb4" Style="{StaticResource ResourceKey=ScaleThumb}"  Margin="5,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"
+                               Cursor="SizeNWSE" DragDelta="ScaleDragDeltaHandler">
+            <Thumb.LayoutTransform>
+                <RotateTransform Angle="-180"></RotateTransform>
+            </Thumb.LayoutTransform>
+        </Thumb>
+
+        <Grid RenderTransformOrigin="0.5,0.5" Margin="0" IsHitTestVisible="False">
+            <Rectangle Style="{StaticResource ResourceKey=ErrorEllStyle}">
+                <Rectangle.Effect>
+                    <BlurEffect Radius="30"></BlurEffect>
+                </Rectangle.Effect>
+            </Rectangle>
+        </Grid>-->
+
+        <Grid Grid.Row="0">
+            <!--##########Definitions##########-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="18"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="18"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="18"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!--##########/Definitions##########-->
+        
+            <!--##########Docking Panels##########-->
+            <Border Style="{StaticResource ResourceKey=DragBorderStyle}" Grid.Column="0" Grid.Row="1">
+                <ItemsControl x:Name="West" ItemsSource="{Binding Path=WestConnectorCollection}" 
+                              PreviewDrop="PreviewDropHandler" Tag="West">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <local:NSWEStackPanel Orientation="Vertical" PanelOrientation="West" Background="#01000000"></local:NSWEStackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+
+            <Border Style="{StaticResource ResourceKey=DragBorderStyle}" Grid.Column="2" Grid.Row="1"> 
+                <ItemsControl x:Name="East" ItemsSource="{Binding Path=EastConnectorCollection}" 
+                              PreviewDrop="PreviewDropHandler" Tag="East">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <local:NSWEStackPanel Orientation="Vertical" PanelOrientation="East" Background="#01000000"></local:NSWEStackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+
+            <Border Style="{StaticResource ResourceKey=DragBorderStyle}" Grid.Column="1" Grid.Row="0">
+                <ItemsControl x:Name="North" ItemsSource="{Binding Path=NorthConnectorCollection}" 
+                              PreviewDrop="PreviewDropHandler" Tag="North">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <local:NSWEStackPanel Orientation="Horizontal" PanelOrientation="North" Background="#01000000"></local:NSWEStackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+
+            <Border Style="{StaticResource ResourceKey=DragBorderStyle}" Grid.Column="1" Grid.Row="2">
+                <ItemsControl x:Name="South" ItemsSource="{Binding Path=SouthConnectorCollection}" 
+                              PreviewDrop="PreviewDropHandler" Tag="South">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <local:NSWEStackPanel Orientation="Horizontal" PanelOrientation="South" Background="#01000000"></local:NSWEStackPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Border>
+
+            <!--##########/Docking Panels##########-->
+
+            <Thumb x:Name="TopRightDrag" Style="{StaticResource ResourceKey=DragThumbStyle}"
+                               DragDelta="PositionDragDeltaHandler" Grid.Column="2" Grid.Row="0">
+            </Thumb>
+
+            <Thumb x:Name="TopLeftDrag" Style="{StaticResource ResourceKey=DragThumbStyle}"
+                               DragDelta="PositionDragDeltaHandler" Grid.Column="0" Grid.Row="0">
+            </Thumb>
+
+            <Thumb x:Name="BottomLeftDrag" Style="{StaticResource ResourceKey=DragThumbStyle}"
+                               DragDelta="PositionDragDeltaHandler" Grid.Column="0" Grid.Row="2">
+            </Thumb>
+
+
+            <!--##########Window##########-->
+            <Border CornerRadius="5" BorderThickness="2" BorderBrush="#444" Grid.Row="1" Grid.Column="1">
+                <Border x:Name="Window" Style="{StaticResource ResourceKey=WindowStyle}" 
+                        CornerRadius="2" BorderThickness="3">
+                    <Grid>
+                        <Grid>
+                            <!--##########Definitions##########-->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="16"></RowDefinition>
+                                <!--<RowDefinition Height="16"></RowDefinition>-->
+                            </Grid.RowDefinitions>
+                            <!--##########/Definitions##########-->
+
+                            <!--##########Window Titlebar##########-->
+                            <Rectangle Fill="{Binding ElementName=Window, Path=BorderBrush}" Height="16" VerticalAlignment="Top" Grid.Column="0" Grid.Row="0"></Rectangle>
+
+                            <DockPanel LastChildFill="True" Grid.Column="0" Grid.Row="0">
+
+                                <Border Background="{Binding ElementName=Window, Path=BorderBrush}" Style="{StaticResource ResourceKey=ActionBorderStyle}" Padding="0,0,7,0" CornerRadius="0,0,10,0" DockPanel.Dock="Left">
+                                    <ItemsControl x:Name="ActionsItemsControl" ItemsSource="{StaticResource ResourceKey=Actions}">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel Orientation="Horizontal"></StackPanel>
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </Border>
+
+                                <ItemsControl x:Name="OperationsItemsControl" ItemsSource="{StaticResource ResourceKey=Operations}" HorizontalAlignment="Right" VerticalAlignment="Top" DockPanel.Dock="Right">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"></StackPanel>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+
+                                <Grid>
+                                    <TextBlock Text="{Binding Path=FunctionName}" FontFamily="Consolas" FontWeight="ExtraBold" TextTrimming="CharacterEllipsis" TextAlignment="Center" Foreground="#666"></TextBlock>
+
+                                    <Thumb x:Name="TitleThumb" Style="{StaticResource ResourceKey=InvisibleThumbStyleSecond}" Grid.Column="0" Grid.Row="1"
+                                    DragDelta="PositionDragDeltaHandler" DragCompleted="DragCompletedHandler"></Thumb>
+                                </Grid>
+
+                            </DockPanel>
+                            <!--##########/Window Titlebar##########-->
+
+                            <!--##########Content##########-->
+
+                            <ContentPresenter Style="{StaticResource ResourceKey=ContentPresenterStyle}" Grid.Column="0" Grid.Row="1">
+
+                            </ContentPresenter>
+                            <!--##########/Content##########-->
+
+                            <Thumb x:Name="ContentThumb" Style="{StaticResource ResourceKey=InvisibleThumbStyle}" Grid.Column="0" Grid.Row="1"
+                               DragDelta="PositionDragDeltaHandler">
+                            </Thumb>
+
+                            <ContentPresenter x:Name="Notifier" Content="{Binding Path=LogNotifier}" Grid.Column="0" Grid.Row="2"></ContentPresenter>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Border>
+            <!--##########/Window##########-->
+        </Grid>
+
+        <Image Style="{StaticResource ResourceKey=IconPresentationStyle}" Height="25" Width="25" Margin="0,37,25,0" IsHitTestVisible="False"
+                               VerticalAlignment="Top" HorizontalAlignment="Right" Source="/WorkspaceManager;component/View/Images/ComponentIcons/presIcon.png"></Image>
+
+        <!--##########Name##########-->
+        <local:CustomTextBox x:Name="NameTextBox" Style="{StaticResource ResourceKey=TextBoxStyle}" ToolTip="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}"
+                             Text="{Binding Path=CustomName, Mode=TwoWay}" Width="{Binding ElementName=Window, Path=ActualWidth}" IsSelected="{Binding Path=IsSelected}"
+                             Grid.Row="2"></local:CustomTextBox>
+        <!--##########/Name##########-->
+        <ic:IControlVisual Connectors="{Binding Path=IControlCollection}" IsOpen="{Binding Path=IsICPopUpOpen, Mode= TwoWay}" 
+                              PlacementTarget="{Binding ElementName=OperationsItemsControl}" Placement="Top"></ic:IControlVisual>
+    </Grid>
+</UserControl>

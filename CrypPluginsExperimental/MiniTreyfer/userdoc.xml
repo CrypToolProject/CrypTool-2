@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">    
+    
+    MiniTreyfer is the mini-version of Treyfer cipher with only 16-bit plaintext and 16-bit key. 
+    It is primarily developed to automatically acquire a slid-pair for further use in the slide attacks.
+    
+  </introduction>
+  <introduction lang="zh-CN">MiniTreyfer是Treyfer密码的迷你版本，只有16位纯文本和16位密钥。它的主要开发目的是自动获取一个滑副，以进一步用于滑行攻击。</introduction>
+  <introduction lang="ru">MiniTreyfer - это мини-версия шифрования Treyfer с 16-разрядным открытым текстом и 16-разрядным ключом. В основном он разработан для автоматического получения слайдовой пары для дальнейшего использования в слайд-атаках.</introduction>
+  <introduction lang="de-DE"></introduction>
+  <usage lang="en">
+    
+    The MiniTreyfer works by first creating a random 16-bit key as a reference. This key is generated using random number generator.
+    Then the plugin starts generating pairs of plaintext and ciphertext such that the plaintext is encrypted using Treyfer cipher into ciphertext bits.
+    The plugin terminates when it finds a pair of plaintext-ciphertext that uses the previously generated key for encryption. This pair is nothing but a slid pair and is the output of the plugin.
+    
+  </usage>
+  <usage lang="zh-CN">MiniTreyfer的工作方式是首先创建一个随机的16位密钥作为参考。该密钥是使用随机数生成器生成的。然后，插件开始生成成对的明文和密文，以便使用Treyfer密文将明文加密为密文位。插件在找到一对使用先前生成的密钥进行加密的纯文本-密文时终止。这对只是滑动对，是插件的输出。</usage>
+  <usage lang="ru">MiniTreyfer работает, сначала создавая случайный 16-битный ключ в качестве ссылки. Этот ключ генерируется с использованием генератора случайных чисел. Затем плагин начинает генерировать пары открытого текста и зашифрованного текста таким образом, что открытый текст зашифровывается с использованием Treyfer-шифра в биты зашифрованного текста. Плагин завершается, когда он находит пару незашифрованного шифрованного текста, который использует ранее сгенерированный ключ для шифрования. Эта пара - не что иное, как скользкая пара и является выходом плагина.</usage>
+  <usage lang="de-DE"></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>.
+  </references>
+</documentation>

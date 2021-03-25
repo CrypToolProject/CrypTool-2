@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    The columnar transposition requires a codeword or a permuted number sequence as key. A matrix is generated, that has the same number of columns as the length of the key, and as many rows as are necessary to enter the entire plaintext
+    into the cells of the matrix. Then the key is written over the columns of the matrix, one letter (or number) per column, and the plaintext is entered into the cells of the matrix, row by row.
+    If the plaintext does not completely fill the last row of the matrix, the empty cells are either filled with placeholder characters (complete transposition), or they are left empty and are ignored in the further encryption process
+    (incomplete transposition). If the key is a codeword, the columns are numbered according to the alphabetical order of the letters of the codeword. The ciphertext is then read out of the matrix row by row in the sequence of the numbering of the rows.
+    <newline />
+    For the decryption process the receiver of the ciphertext creates an empty matrix and writes the known key over the columns of the matrix. The columns are then numbered in the same way as in the encryption process.
+    The ciphertext is then entered column by column in the columns of the matrix in the order of the column numbers. The plaintext can then be read out of the matrix row by row from top to bottom. In case of the incomplete transposition, one has to take 
+    into account the number of empty cells in the last row of the matrix. When the ciphertext is entered rowwise, these cells must be left empty. The number Z of non-empty cells in the last row can be calculated from the message length M and the
+    length K of the key:
+    <newline />
+    Z = M mod K
+  </introduction>
+  <introduction lang="zh-CN">柱状换位需要一个码字或一个排列的数字序列作为键。生成一个矩阵，该矩阵具有与键的长度相同的列数，并且具有将整个明文输入到矩阵的单元格所需的行数。然后，将密钥写在矩阵的各列上，每列一个字母（或数字），并将明文逐行输入到矩阵的单元格中。如果明文没有完全填满矩阵的最后一行，则空白单元格将用占位符填充（完成转置），或者将它们留空，并在进一步的加密过程中将其忽略（不完整转置）。如果键是代码字，则根据代码字字母的字母顺序对列进行编号。然后，按行编号的顺序逐行从矩阵中读出密文。对于解密过程，密文的接收者创建一个空矩阵，并将已知密钥写入矩阵的列中。然后以与加密过程中相同的方式对列进行编号。然后，以列号的顺序在矩阵的列中逐列输入密文。然后可以从上到下逐行从矩阵中读取明文。如果换位不完全，则必须考虑矩阵最后一行中空单元的数量。当按行输入密文时，必须将这些单元格留空。可以从消息长度M和密钥的长度K计算最后一行中非空单元格的数量Z：Z = M mod K</introduction>
+  <introduction lang="ru">Для столбчатой ​​транспозиции в качестве ключа требуется кодовое слово или перестановленная последовательность чисел. Генерируется матрица, которая имеет такое же количество столбцов, как длина ключа, и столько строк, сколько необходимо для ввода всего открытого текста в ячейки матрицы. Затем ключ записывается по столбцам матрицы, по одной букве (или числу) на столбец, а открытый текст вводится в ячейки матрицы по строкам. Если открытый текст не заполняет последнюю строку матрицы, пустые ячейки либо заполняются символами-заполнителями (полная транспонирование), либо они остаются пустыми и игнорируются в дальнейшем процессе шифрования (неполная транспозиция). Если ключ является кодовым словом, столбцы нумеруются в соответствии с алфавитным порядком букв кодового слова. Зашифрованный текст затем считывается из матрицы по строкам в последовательности нумерации строк. Для процесса дешифрования приемник зашифрованного текста создает пустую матрицу и записывает известный ключ по столбцам матрицы. Затем столбцы нумеруются так же, как и в процессе шифрования. Затем зашифрованный текст вводится столбцом по столбцу в столбцах матрицы в порядке номеров столбцов. Затем открытый текст можно считывать из матрицы по строкам сверху вниз. В случае неполной транспозиции нужно учитывать количество пустых ячеек в последней строке матрицы. Когда введен шифрованный текст, эти ячейки должны быть пустыми. Число Z непустых ячеек в последней строке может быть вычислено из длины сообщения M и длины K ключа: Z = M mod K</introduction>
+  <usage lang="en">
+    The encryption by transposition can be divided into three steps:
+
+    <enum><item>read the plaintext into the matrix</item><item>transpose the columns/rows</item><item>read the ciphertext out of the matrix</item></enum>
+
+    For each of these operations you can decide whether they should act on rows or columns of the matrix by adjusting it in the settings of the component.
+    If you select to enter the ciphertext rowwise into the matrix, the ciphertext is entered into the rows from left to right, otherwise it is entered into the columns from top to bottom.
+    Thus there are 8 possibilities to enter the ciphertext into the matrix, of which the complimentary settings generate identical results, leaving only 4 different results (for example read in by <b>column</b>, permute by <b>column</b> and read out by <b>row</b>
+    will produce the same output as read in by <b>row</b>, permute by <b>row</b> and read out by <b>column</b>).
+    <newline /><newline />
+    In the settings of the component you can also select whether it should work in encryption or in decryption mode.
+    When you choose decryption, the rows or columns will not be orderd according to the permutation that results from the keyword, but by its inverse.
+    Furthermore, the reading-in and reading-out operations are swapped, allowing for the same operation settings for the encryption process as for the decryption process.
+  </usage>
+  <usage lang="zh-CN">通过换位加密可以分为三个步骤：将明文读入矩阵，将列转置/行，将密文移出矩阵。对于这些操作中的每一个，您都可以通过调整它们来决定是对矩阵的行还是对列进行操作。组件的设置。如果选择将密文按行输入到矩阵中，则将密文从左到右输入到行中，否则，将密文从上到下输入到列中。因此，有8种可能将密文输入到矩阵中，其中的互补设置会产生相同的结果，仅留下4种不同的结果（例如按列读取，按列置换和按行读取将产生与读取相同的输出按行排列，按列排列）。在组件的设置中，您还可以选择它应以加密还是解密模式工作。选择解密时，行或列的排列顺序将不会根据关键字的排列顺序而定，而是根据其反向排列。此外，读和写操作被交换，从而允许用于加密过程的与解密过程相同的操作设置。</usage>
+  <usage lang="ru">Шифрование путем транспонирования можно разделить на три этапа: прочитать открытый текст в матрице, чтобы столбцы / строки очистить зашифрованный текст из матрицы. Для каждой из этих операций вы можете решить, должны ли они действовать на строки или столбцы матрицы, отрегулировав ее в настройки компонента. Если вы решите ввести зашифрованный текст в матрицу, зашифрованный текст вводится в строки слева направо, в противном случае он вводится в столбцы сверху вниз. Таким образом, есть восемь возможностей ввода зашифрованного текста в матрицу, из которых дополнительные настройки генерируют идентичные результаты, оставляя только 4 разных результата (например, чтение по столбцу, перестановка по столбцу и считывание по строке приведет к тому же выводу, что и чтение in by row, переставлять по строке и считывать по столбцу). В настройках компонента вы также можете выбрать, должно ли оно работать в режиме шифрования или в режиме дешифрования. Когда вы выбираете дешифрование, строки или столбцы не будут упорядочены в соответствии с перестановкой, которая возникает из ключевого слова, а наоборот. Кроме того, операции чтения и считывания меняются местами, что позволяет использовать те же самые рабочие параметры для процесса шифрования, что и для процесса дешифрования.</usage>
+  <presentation lang="en">
+    The presentation view of the component displays the three steps of the transposition.
+    First, the keyword is shown in the center and its letters are numbered in alphabetical sequence, thus giving the sorting order of the rows/columns.
+    The plaintext is then displayed on the left side of the presentation view, and later, after the third step, the resulting ciphertext will be shown on the right side.<newline />
+    Next, the matrix cells are filled with the plaintext characters.<newline />
+    After that, the rows/columns of the matrix are permuted according to the keyword-induced sorting order. The component will mark the two rows/columns it presently swaps as blinking.
+    Then the ciphertext will be read out of the matrix and appended to result on the right side of the matrix.<newline />
+    The three different phases of the process are also indicated by a label in the lower left of the display and a change of the background color.
+    In the settings you can also adjust the speed of the presentation and the way the characters should be displayed during the processing (as ASCII or as hexadecimal numbers).
+  </presentation>
+  <presentation lang="zh-CN">组件的显示视图显示了转换的三个步骤。首先，关键字显示在中间，并且其字母按字母顺序编号，从而给出了行/列的排序顺序。然后，将纯文本显示在演示视图的左侧，然后在第三步之后，将在右侧显示生成的密文。接下来，矩阵单元格用明文字符填充。之后，根据关键字引起的排序顺序对矩阵的行/列进行置换。该组件会将当前交换的两行/列标记为闪烁。然后将从矩阵中读取密文，并将其附加到矩阵的右侧。该过程的三个不同阶段也由显示屏左下方的标签和背景颜色的变化指示。在设置中，您还可以调整演示的速度和处理过程中字符的显示方式（ASCII或十六进制数字）。</presentation>
+  <presentation lang="ru">В представлении презентации компонента отображаются три этапа транспозиции. Во-первых, ключевое слово отображается в центре, а его буквы нумеруются в алфавитном порядке, что дает порядок сортировки строк / столбцов. Открытый текст затем отображается в левой части представления представления, а позже, после третьего шага, результирующий зашифрованный текст будет показан с правой стороны. Затем ячейки матрицы заполняются символами открытого текста. После этого строки / столбцы матрицы переставляются в соответствии с упорядоченным порядком сортировки по ключевым словам. Компонент будет отмечать две строки / столбцы, которые он сейчас меняет, мигает. Затем зашифрованный текст будет считан из матрицы и добавлен к результату в правой части матрицы. Три разных этапа процесса также обозначаются ярлыком в левом нижнем углу дисплея и сменой цвета фона. В настройках вы также можете настроить скорость презентации и способ отображения символов во время обработки (как ASCII или как шестнадцатеричные числа).</presentation>
+  <language culture="de" />
+  <introduction lang="de">
+    Die Spaltentransposition benutzt als Schlüssel ein Codewort oder eine permutierte Zahlenfolge. Mit Hilfe des Schlüssels wird eine Matrix erzeugt, die die Länge des Schlüssels als Spaltenanzahl aufweist.
+    Dann wird der Schlüssel über die Matrix geschrieben und die Buchstaben des Klartextes werden zeilenweise in diese eingetragen. Sollte die Matrix nicht komplett ausgefüllt sein, werden entweder in die leeren Zellen Platzhalter
+    einfügt (vollständige Transposition), oder sie bleiben frei und werden im weiteren Verlauf nicht beachtet (unvollständige Transposition). Wird ein Codewort als Schlüssel benutzt, werden die Spalten der Matrix nach der alphabetischen
+    Reihenfolge der Buchstaben des Codewortes nummeriert. Anschließend wird die Matrix spaltenweise in der Reihenfolge der Spaltennummerierung ausgelesen.
+    <newline />
+    Zur Entschlüsselung des Geheimtextes erstellt der Empfänger eine leere Matrix und schreibt den bekannten Schlüssel über diese. Nach dem gleichen Verfahren wie beim Verschlüsseln werden die Spalten der Matrix nummeriert.
+    Der Geheimtext wird vom Empfänger spaltenweise nach der Nummerierung in die Matrix eingetragen und kann dann zeilenweise ausgelesen werden. Bei der unvollständigen Transposition muss darauf geachtet werden, wie viele Zellen der
+    Matrix in der letzten Zeile bei der Verschlüsselung leer waren bzw. nicht beachtet wurden und beim Eintragen des Geheimtextes frei gelassen werden müssen. Die Anzahl Z der beschriebenen Zellen der letzten Zeile kann man aus der
+    Länge N der Nachricht und der Länge S des Schlüssels berechnen:
+    <newline />
+    Z = N mod S
+  </introduction>
+  <usage lang="de">
+    Der Prozess der Verschlüsselung durch die Transposition wird in drei Operationen unterteilt:
+
+    <enum><item>das Einlesen in die Matrix</item><item>die Transposition der Spalten/Reihen</item><item>das Auslesen aus der Matrix</item></enum>
+
+    Für jede dieser Operationen kann in den Einstellungen gewählt werden, ob diese reihen- oder spaltenweise erfolgen soll. Erfolgt die Einlese-Operation reihenweise, wird der Klartext von links nach rechts in die Matrix eingetragen;
+    erfolgt sie spaltenweise, wird von oben nach unten eingelesen.
+    Dadurch ergeben sich theoretisch acht verschiedene Möglichkeiten zur Einstellung. Allerdings liefern komplementäre Einstellungen jeweils dasselbe Ergebnis, so dass es real nur vier verschiedene Ergebnisse gibt (z.B. <b>spaltenweise</b> einlesen, <b>spaltenweise</b> Permutation
+    und <b>zeilenweise</b> auslesen ergibt dieselbe Ausgabe wie <b>zeilenweise</b> einlesen, <b>zeilenweise</b> Permutation und <b>spaltenweise</b> auslesen).
+    <newline /><newline />
+    In der Einstellung "Aktion" kann gewählt werden, ob ver- oder entschlüsselt werden soll.
+    Wenn "Entschlüsseln" gewählt ist, werden die Zeilen bzw. Spalten nicht gemäß der sich aus dem Schlüsselwort ergebenden Permutation, sondern der zu dieser inversen Permutation geordnet.
+    Außerdem werden die Ein- und Auslese-Operation vertauscht.
+    Dadurch ist es möglich, für die Entschlüsselung dieselben Operationseinstellungen wie für die Verschlüsselung zu verwenden.
+  </usage>
+  <presentation lang="de">
+    Die Präsentation stellt die drei Operationen nacheinander dar. Zunächst wird in der Mitte das Schlüsselwort eingeblendet sowie die sich aus dem Schlüsselwort ergebende Sortierreihenfolge. Links davon erscheint der Klartext und
+    rechts in der dritten Operation der verschlüsselte Text.<newline />
+    In der Einlese-Operation wird die Matrix mit dem Klartext befüllt.<newline />
+    Danach erfolgt die Transposition der Spalten/Reihen. Zwei Spalten/Reihen, die vertauscht werden sollen, werden markiert, ausgeblendet, vertauscht und wieder eingeblendet.
+    Die Auslese-Operation erfolgt ähnlich wie das Einlesen. Eine Spalte/Reihe der Matrix wird ausgeblendet und dem Ausgabetext rechts hinzugefügt.<newline />
+    Die Wechsel der einzelnen Operationen werden durch einen Wechsel der Hintergrundfarbe angedeutet. Die aktuelle Operation wird unten links in einem Anzeigefeld angezeigt.
+    In den Einstellungen kann die Geschwindigkeit der Präsentation und die Darstellungsform der Zeichen (ASCII oder hexadezimal) gewählt werden.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://de.wikipedia.org/wiki/Transposition_(Kryptographie)" lang="de" />
+      <caption lang="de">Transposition (Wikipedia)</caption>
+      <link url="http://en.wikipedia.org/wiki/Transposition_cipher" lang="en" />
+      <caption lang="en">Transposition cipher (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

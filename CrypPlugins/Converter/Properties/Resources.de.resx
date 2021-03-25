@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Konvertierer</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Konvertiert die Eingabe in einen anderen Typ</value>
+  </data>
+  <data name="InputOneCaption" xml:space="preserve">
+    <value>Eingabe</value>
+  </data>
+  <data name="InputOneTooltip" xml:space="preserve">
+    <value>Eingabe</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>Ausgabe</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>Ausgabe</value>
+  </data>
+  <data name="ConverterCaption" xml:space="preserve">
+    <value>Konvertieren in</value>
+  </data>
+  <data name="ConverterTooltip" xml:space="preserve">
+    <value>Wählen Sie den Typ der Ausgabe</value>
+  </data>
+  <data name="InputEncodingSettingCaption" xml:space="preserve">
+    <value>Zeichencodierung Eingabe</value>
+  </data>
+  <data name="InputEncodingSettingTooltip" xml:space="preserve">
+    <value>Wählen Sie die erwartete Zeichencodierung der Eingabe (falls Byte-Array oder Datenstrom).</value>
+  </data>
+  <data name="FormatAmerCaption" xml:space="preserve">
+    <value>Fließkomma-Format</value>
+  </data>
+  <data name="FormatAmerTooltip" xml:space="preserve">
+    <value>Sollen Fließkommazahlen nach deutscher (1.234.567,89) oder amerikanischer (1,234,567.89) Schreibweise interpretiert werden?</value>
+  </data>
+  <data name="NumericCaption" xml:space="preserve">
+    <value>Numerisch</value>
+  </data>
+  <data name="NumericTooltip" xml:space="preserve">
+    <value>Sollen die Eingabewerte, soweit möglich, numerisch interpretiert werden?</value>
+  </data>
+  <data name="PresentationFormatSettingCaption" xml:space="preserve">
+    <value>Ausgabeformat</value>
+  </data>
+  <data name="PresentationFormatSettingTooltip" xml:space="preserve">
+    <value>Wählen Sie das Format, das für die Datenausgabe verwendet werden soll.</value>
+  </data>
+  <data name="EncodingSettingList1" xml:space="preserve">
+    <value>UTF-8</value>
+  </data>
+  <data name="EncodingSettingList5" xml:space="preserve">
+    <value>ASCII</value>
+  </data>
+  <data name="EncodingSettingList2" xml:space="preserve">
+    <value>UTF-7</value>
+  </data>
+  <data name="EncodingSettingList3" xml:space="preserve">
+    <value>UTF-16</value>
+  </data>
+  <data name="EncodingSettingList4" xml:space="preserve">
+    <value>UTF-32</value>
+  </data>
+  <data name="EncodingSettingList6" xml:space="preserve">
+    <value>ISO8859-15</value>
+  </data>
+  <data name="FormatAmerList1" xml:space="preserve">
+    <value>deutsch</value>
+  </data>
+  <data name="FormatAmerList2" xml:space="preserve">
+    <value>amerikanisch</value>
+  </data>
+  <data name="NumericList1" xml:space="preserve">
+    <value>nein</value>
+  </data>
+  <data name="NumericList2" xml:space="preserve">
+    <value>ja</value>
+  </data>
+  <data name="PresentationFormatSettingList1" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="PresentationFormatSettingList2" xml:space="preserve">
+    <value>Hex</value>
+  </data>
+  <data name="PresentationFormatSettingList3" xml:space="preserve">
+    <value>Base64</value>
+  </data>
+  <data name="ReverseOrderCaption" xml:space="preserve">
+    <value>Bytefolge umdrehen</value>
+  </data>
+  <data name="ReverseOrderTooltip" xml:space="preserve">
+    <value>Soll die Reihenfolge der Bytes vor der Ausgabe umgedreht werden?</value>
+  </data>
+  <data name="EndiannessCaption" xml:space="preserve">
+    <value>Byte-Wertigkeit</value>
+  </data>
+  <data name="EndiannessList1" xml:space="preserve">
+    <value>Big-Endian</value>
+  </data>
+  <data name="EndiannessList2" xml:space="preserve">
+    <value>Little-Endian</value>
+  </data>
+  <data name="EndiannessTooltip" xml:space="preserve">
+    <value>Geben Sie die Wertigkeit der Eingabe-Bytes an, wenn die Eingabe ein Byte-Array ist.</value>
+  </data>
+  <data name="EncodingSettingList7" xml:space="preserve">
+    <value>Windows-1252</value>
+  </data>
+  <data name="OutputEncodingSettingCaption" xml:space="preserve">
+    <value>Zeichencodierung Ausgabe</value>
+  </data>
+  <data name="OutputEncodingSettingTooltip" xml:space="preserve">
+    <value>Wählen Sie die Zeichencodierung der Ausgabe (falls Byte-Array oder Datenstrom).</value>
+  </data>
+  <data name="TypesList1" xml:space="preserve">
+    <value>string</value>
+  </data>
+  <data name="TypesList2" xml:space="preserve">
+    <value>int</value>
+  </data>
+  <data name="TypesList3" xml:space="preserve">
+    <value>short</value>
+  </data>
+  <data name="TypesList4" xml:space="preserve">
+    <value>byte</value>
+  </data>
+  <data name="TypesList5" xml:space="preserve">
+    <value>double</value>
+  </data>
+  <data name="TypesList6" xml:space="preserve">
+    <value>BigInteger</value>
+  </data>
+  <data name="TypesList7" xml:space="preserve">
+    <value>byte[]</value>
+  </data>
+  <data name="TypesList8" xml:space="preserve">
+    <value>CrypToolstream</value>
+  </data>
+  <data name="FormatCaption" xml:space="preserve">
+    <value>Numerisches Format</value>
+  </data>
+  <data name="FormatTooltip" xml:space="preserve">
+    <value>Gib eine Formatzeichenkette im allgemeinen .NET-Format an um die Konvertierung eines numerischen Typs zu spezifizieren. Leer lassen, wenn du nicht weißt was das bedeutet.</value>
+  </data>
+  <data name="DigitsCaption" xml:space="preserve">
+    <value>Ziffern</value>
+  </data>
+  <data name="DigitsGroupCaption" xml:space="preserve">
+    <value>Ziffernblockgröße</value>
+  </data>
+  <data name="DigitsGroupTooltip" xml:space="preserve">
+    <value>Geben Sie die Größe der Zifferngruppen an, in die der Datenstrom zerlegt werden soll.</value>
+  </data>
+  <data name="DigitsTooltip" xml:space="preserve">
+    <value>Geben Sie die Ziffern an, aus denen der Datenstrom besteht.</value>
+  </data>
+  <data name="TypesList10" xml:space="preserve">
+    <value>uint[]</value>
+  </data>
+  <data name="TypesList9" xml:space="preserve">
+    <value>bool</value>
+  </data>
+  <data name="DigitsBaseCaption" xml:space="preserve">
+    <value>Zahlenbasis</value>
+  </data>
+  <data name="DigitsBaseTooltip" xml:space="preserve">
+    <value>Geben Sie die Zahlenbasis an, die zur Konvertierung von/nach UInt[] verwendet werden soll.</value>
+  </data>
+  <data name="DigitsDefinitionCaption" xml:space="preserve">
+    <value>Definiere Ziffern als</value>
+  </data>
+  <data name="DigitsDefinitionList1" xml:space="preserve">
+    <value>Zeichenkette</value>
+  </data>
+  <data name="DigitsDefinitionList2" xml:space="preserve">
+    <value>Byte-Intervall</value>
+  </data>
+  <data name="DigitsDefinitionTooltip" xml:space="preserve">
+    <value>Geben Sie an, wie Sie die Ziffern für die Konvertierung von/nach UInt[] definieren wollen: entweder als als beliebig wählbare Zeichenkette oder als ein Intervall aufeinanderfolgender Bytewerte.</value>
+  </data>
+  <data name="DigitsEndiannessCaption" xml:space="preserve">
+    <value>Byte-Wertigkeit</value>
+  </data>
+  <data name="DigitsEndiannessTooltip" xml:space="preserve">
+    <value>Geben Sie die Wertigkeit bei der Konvertierung von bzw. in UInt[] an.</value>
+  </data>
+  <data name="DigitsGroup" xml:space="preserve">
+    <value>Ziffern für UInt[]</value>
+  </data>
+  <data name="DigitsOffsetCaption" xml:space="preserve">
+    <value>Byte-Offset</value>
+  </data>
+  <data name="DigitsOffsetTooltip" xml:space="preserve">
+    <value>Geben Sie den Offset des Bytewertes an, der als die Ziffer "Null" interpretiert werden soll.</value>
+  </data>
+</root>

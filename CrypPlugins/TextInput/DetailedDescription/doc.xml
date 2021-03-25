@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component allows you to enter text.
+  </introduction>
+  <introduction lang="zh-CN">该组件允许您输入文本。</introduction>
+  <introduction lang="ru">Этот компонент позволяет вводить текст.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente ermöglicht die Eingabe von Text.
+  </introduction>
+  <usage lang="en">
+    If the component is opened in presentation view, it shows a text field that accepts user input.
+    Click into the text field to activate it and enter text at the cursor position via the keyboard or with <i>copy and paste</i>.
+    When the workspace is executed, the entered text will be sent to the output of the component, from where other components can
+    access and further process it.
+  </usage>
+  <usage lang="zh-CN">如果在演示视图中打开了该组件，它将显示一个接受用户输入的文本字段。单击进入文本字段以将其激活，然后通过键盘或通过复制和粘贴在光标位置输入文本。当执行工作空间时，输入的文本将发送到组件的输出，其他组件可以从中访问并进一步处理它。</usage>
+  <usage lang="ru">Если компонент открывается в представлении представления, он отображает текстовое поле, которое принимает вход пользователя. Щелкните в текстовом поле, чтобы активировать его, и введите текст в позицию курсора с помощью клавиатуры или с копией и вставкой. Когда рабочая область будет выполнена, введенный текст будет отправлен на выход компонента, откуда другие компоненты могут получить доступ и продолжить его обработку.</usage>
+  <usage lang="de-DE">
+    Wenn die Komponente in der Präsentationsansicht geöffnet ist, wird ein Textfeld angezeigt, das Eingaben durch den Benutzer akzeptiert.
+    Klicken Sie in das Textfeld, um es zu aktivieren und geben Sie an der Position des erscheinenden Cursors den gewünschten Text über die Tastatur oder
+    mittels <i>Copy &amp; Paste</i> ein. Wenn der Arbeitsbereich gestartet wird, wird der eingegebene Text am Ausgang der Komponente ausgegeben
+    und kann so von anderen Komponenten weiterverarbeitet werden.
+  </usage>
+  <presentation lang="en">
+    By default, the component is opened in presentation view.
+    <newline /><newline />
+    The component has a status bar, that displays the number of characters and lines that the entered text consists of.
+    The content of the status bar can be adjusted by selecting the corresponding checkboxes in the settings of the component.
+  </presentation>
+  <presentation lang="zh-CN">默认情况下，该组件在演示视图中打开。该组件具有一个状态栏，它显示输入的文本所包含的字符和行数。通过选择组件设置中的相应复选框，可以调整状态栏的内容。</presentation>
+  <presentation lang="ru">По умолчанию компонент открывается в представлении представления. Компонент имеет строку состояния, которая отображает количество символов и строк, из которых состоит введенный текст. Содержимое строки состояния можно настроить, установив соответствующие флажки в настройках компонента.</presentation>
+  <presentation lang="de-DE">
+    Die Komponente wird standardmäßig in der Präsentationsansicht geöffnet.
+    <newline /><newline />
+    Die Komponente hat eine Statuszeile, in der die Anzahl der eingegebenen Zeichen und Zeilen angezeigt wird. 
+    Durch Aktivieren der entsprechenden Kontrollkästchen in den Einstellungen der Komponente kann der Inhalt der Statuszeile angepasst werden.
+  </presentation>
+  <references></references>
+</documentation>

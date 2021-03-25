@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+  The BB84-KeyGenerator is part of the BB84 protocol implemented in CrypTool 2. It simulates the generation of a secret key that is shared between the two parties of the protocol.
+  </introduction>
+  <introduction lang="zh-CN">BB84-KeyGenerator是CrypTool 2中实现的BB84协议的一部分。它模拟协议双方之间共享的秘密密钥的生成。</introduction>
+  <introduction lang="ru">BB84-KeyGenerator является частью протокола BB84, реализованного в CrypTool 2. Он имитирует генерацию секретного ключа, который разделяется между двумя сторонами протокола.</introduction>
+  <introduction lang="de-DE">    
+	Der BB84-Schlüsselgenerator ist Teil des in CrypTool 2 implementierten BB84-Protokolls. Er simuliert die Berechnung des gemeinsamen Schlüssels 
+	zwischen den beiden Parteien des Protokolls und sollte auch auf beiden Seiten eingefügt werden. 
+  </introduction>
+  <usage lang="en">
+	This plugin needs a bit string as input describing either the key Alice sent or the one Bob received. Furthermore, it needs the base strings of both sides. When executing
+	the parts of the key where the corresponding parts in both base strings match are written into a new string. This string is then sent to the output of the plugin. 
+	If there weren't any errors the execution of this plugin results in the same key for both, Alice and Bob. 
+  </usage>
+  <usage lang="zh-CN">该插件需要一个位字符串作为输入，描述Alice发送的密钥或Bob收到的密钥。此外，它需要两侧的基弦。执行键的两个基本字符串中对应部分匹配的部分时，会将其写入新字符串。然后将此字符串发送到插件的输出。如果没有任何错误，则此插件的执行将为Alice和Bob产生相同的密钥。</usage>
+  <usage lang="ru">Этот плагин нуждается в битовой строке в качестве ввода, описывающей либо отправку ключа Алисы, либо полученную Боба. Кроме того, ему нужны базовые строки с обеих сторон. При выполнении частей ключа, где соответствующие части в обеих базовых строках совпадают, записываются в новую строку. Затем эта строка отправляется на выход плагина. Если ошибок не было, выполнение этого плагина приводит к тому же ключу для обоих, Алисы и Боба.</usage>
+  <usage lang="de-DE">
+	Als Eingabe benötigt dieses Plugin einen String aus Bits, welcher entweder den von Alice gesendeten oder den von Bob empfangenden Schlüssel darstellt.
+	Außerdem werden die Basen-Strings beider Parteien benötigt. Bei der Ausführung werden die Stellen des Schlüssels, bei denen die entsprechenden Stellen 
+	in den Basen-Strings übereinstimmen, in einen neuen String übertragen, welcher letztlich ausgegeben wird. Somit haben Alice und Bob bei fehlerloser 
+	Übertragung nach der Ausführung dieses Plugins die gleichen Schlüssel.
+  </usage>
+  <presentation lang="en">
+	When in presentation mode the plugin shows an animation which visualizes the progress of the executed algorithm. At first, the key string is shown, 
+	below it the base strings of both parties fade in. The columns where two bases are equal get then highlighted green and the resulting final key appears below.
+	In the case of no common bases a message appears describing that error. <newline />
+	The animation speed can be changed in the plugin settings.
+  </presentation>
+  <presentation lang="zh-CN">在演示模式下，插件显示动画，该动画可视化所执行算法的进度。首先，显示了密钥字符串，在其下方淡入了双方的基本字符串。然后，两个基数相等的列将突出显示为绿色，并在下面显示最终的密钥。如果没有共同基础，则会出现一条消息，描述该错误。可以在插件设置中更改动画速度。</presentation>
+  <presentation lang="ru">Когда в режиме презентации плагин показывает анимацию, которая визуализирует ход выполнения алгоритма. Сначала показана ключевая строка, под ней затухают базовые строки обеих сторон. Столбцы, в которых находятся две базы, становятся зелеными, а итоговый конечный ключ отображается ниже. В случае отсутствия общих оснований появляется сообщение с описанием этой ошибки. Скорость анимации может быть изменена в настройках плагина.</presentation>
+  <presentation lang="de-DE">
+	Im Präsentationsmodus wird im Plugin eine Animation abgespielt, welche die Vorgehensweise des ausgeführten Algorithmus verbildlicht. 
+	Zuerst wird die Zeichenfolge des Schlüssels aufgeführt, darunter die der Photonenbasen beider Parteien. Die Stellen, an denen die Basen übereinstimmen, 
+	werden im Anschluss grün eingefärbt und der daraus resultierende finale Schlüssel wird eingeblendet. Im unwahrscheinlichen Fall, dass keine gemeinsamen 
+	Basen vorhanden sind, erscheint eine Fehlermeldung, die diesen Fehler beschreibt.<newline />
+	In den Einstellungen kann die Animationsgeschwindigkeit der Präsentation verändert werden.
+
+  </presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/BB84" />
+      <caption lang="en">BB84 (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Quantenschlüsselaustausch#BB84-Protokoll" />
+      <caption lang="de-DE">BB84 (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Quantum_key_distribution" />
+      <caption lang="en">Quantum key distribution (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Quantenschlüsselaustausch" />
+      <caption lang="de-DE">Quantenschlüsselaustausch (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

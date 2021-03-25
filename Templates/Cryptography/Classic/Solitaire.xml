@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Solitaire Cipher</title>
+  <title lang="zh">纸牌密码</title>
+  <title lang="ru">Пасьянс-шифр</title>
+  <summary lang="en">Usage of the <i>Solitaire</i> cipher</summary>
+  <summary lang="zh">纸牌密码的用法</summary>
+  <summary lang="ru">Использование шифрования Solitaire</summary>
+  <description lang="en">This template shows how to encrypt a text with the Solitaire cipher using a keyword. Using the options of the component, you can also encrypt or decrypt texts using a given deckstate, a random deckstate, ascending decks or descending decks.</description>
+  <description lang="zh">该模板显示了如何使用关键字使用单人密码对文本进行加密。使用组件的选项，您还可以使用给定的甲板状态，随机甲板状态，上升甲板或下降甲板来加密或解密文本。</description>
+  <description lang="ru">Этот шаблон показывает, как зашифровать текст с помощью шифрования Solitaire с помощью ключевого слова. Используя параметры компонента, вы также можете шифровать или дешифровать тексты с использованием определенного состояния, случайного палубы, восходящих колод или нисходящих колод.</description>
+  <keywords>solitaire, cipher, encryption, decryption, secret, cards, deck</keywords>
+  <keywords lang="zh">纸牌，密码，加密，解密，秘密，卡，卡片组</keywords>
+  <keywords lang="ru">пасьянс, шифр, шифрование, дешифрование, секрет, карты, колода</keywords>
+  <title lang="de">Solitaire-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Solitaire</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man einen Klartext mit der Solitaire-Chiffre und einem Schlüsselwort verschlüsseln kann. Unter Verwendung der Einstellungen der Solitaire-Komponente kann man Texte mittels eines gegebenen, eines zufälligen oder eines auf- oder absteigend sortierten Kartenstapels ver- oder entschlüsseln.</description>
+  <keywords lang="de">solitaire, cipher, encryption, decryption, secret, cards, deck</keywords>
+  <icon file="solitaire.jpg" />
+  <relevantPlugins>
+    <plugin name="Solitaire" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Password$" value="Passwort" />
+    <replacement key="$Given state$" value="Gegebener Kartenstapel" />
+    <replacement key="$Key stream$" value="Schlüsselstrom" />
+    <replacement key="$Initial deckstate$" value="Initialer Kartenstapel" />
+    <replacement key="$Current deckstate$" value="Aktueller Kartenstapel" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Password$" value="密码" />
+    <replacement key="$Given state$" value="给定纸牌" />
+    <replacement key="$Key stream$" value="密钥流" />
+    <replacement key="$Initial deckstate$" value="初始牌组" />
+    <replacement key="$Current deckstate$" value="当前卡片组" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Password$" value="пароль" />
+    <replacement key="$Given state$" value="Учитывая кучу карточек" />
+    <replacement key="$Key stream$" value="ключ тока" />
+    <replacement key="$Initial deckstate$" value="Инициалы Kartstapel" />
+    <replacement key="$Current deckstate$" value="Текущая колода карт" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Password$" value="Password" />
+    <replacement key="$Given state$" value="Given state" />
+    <replacement key="$Key stream$" value="Key stream" />
+    <replacement key="$Initial deckstate$" value="Initial deckstate" />
+    <replacement key="$Current deckstate$" value="Current deckstate" />
+  </replacements>
+</sample>

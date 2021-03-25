@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Playfair Analysis</title>
+  <title lang="zh">公平竞赛分析</title>
+  <title lang="ru">Анализ Playfair</title>
+  <summary lang="en">Cryptanalysis of the <i>Playfair</i> cipher</summary>
+  <summary lang="zh">Playfair密码的密码学分析</summary>
+  <summary lang="ru">Криптоанализ шифрования Playfair</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>Playfair</i> cipher with the <i>Playfair Analyzer</i> component. It is a ciphertext-only attack, as no part of the plaintext is known in advance.</description>
+  <description lang="zh">此模板显示使用Playfair Analyzer组件对Playfair密码进行的密码分析。这是仅密文攻击，因为事先不知道明文的任何部分。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Playfair с компонентом анализатора Playfair. Это атака только с зашифрованным текстом, поскольку никакая часть открытого текста не известна заранее.</description>
+  <keywords>Playfair, Attack, Analysis</keywords>
+  <keywords lang="zh">公平竞赛，进攻，分析</keywords>
+  <keywords lang="ru">Playfair, атака, анализ</keywords>
+  <title lang="de">Playfair-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>Playfair</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Playfair</i>-Chiffre mit der Komponente <i>Playfair-Analyse</i>. Es handelt sich hierbei um eine Ciphertext-only-Analyse, da keine Informationen über den Klartext bekannt sind.</description>
+  <keywords lang="de">Angriff, Analyse</keywords>
+  <icon file="Playfair.png" />
+  <relevantPlugins>
+    <plugin name="Playfair" />
+    <plugin name="PlayfairAnalyzer" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Revealed Key$" value="Gefundener Schlüssel" />
+    <replacement key="$PlayfairAnalyzer$" value="Playfair-Analyse" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert einen Ciphertext-only-Angriff auf die Playfair-Chiffre. Der oben angegebene Geheimtext wird an die Playfair-Analyse-Komponente geschickt, welche den wahrscheinlichsten Klartext anhand eines heuristischen Ansatzes ermittelt (simulierte Abkühlung).\line\line Der zugehörige Klartext ist in englischer Sprache. Bitte beachten Sie, dass bei Playfair für jeden Schlüssel mehrere äquivalente Schlüssel existieren, die alle denselben Geheimtext erzeugen.\line\line Im Einstellungsbereich der Analyse-Komponente können Sie die Anzahl an verwendeten CPUs (&quot;Threads&quot;) setzen.\line\line Der gefundene Klartext sollte mit &quot;THE PLAYFAIR CIPHER ...&quot; beginnen." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$Revealed Key$" value="找到钥匙" />
+    <replacement key="$PlayfairAnalyzer$" value="公平竞赛分析" />
+    <replacement key="$memo$" value="该模板演示了对Playfair密码的仅密文攻击。上面给出的密文被发送到Playfair分析组件，该组件使用启发式方法（模拟冷却）确定最可能的纯文本\Line \line关联的纯文本为英文。请注意，在Playfair中，每个键都有几个等效的键，所有键都生成相同的密文。\Line \line您可以设置在分析组件的设置区域中使用的CPU数量（``线程&amp;#39;&amp;#39;）。找到的任何明文均应以“ PLAYFAIR CIPHER ...”开头。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Revealed Plaintext$" value="Найден простой текст" />
+    <replacement key="$Revealed Key$" value="Ключ найден" />
+    <replacement key="$PlayfairAnalyzer$" value="Плайфаир-анализ" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует атаку только зашифрованным текстом на шифр Playfair. Открытый текст выше зашифрован с помощью компонента Playfair, а полученный зашифрованный текст отправляется компоненту Playfair Analysis. \line\line Обратите внимание, что Playfair имеет несколько эквивалентных ключей для каждого ключа." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Revealed Plaintext$" value="Decrypted plaintext" />
+    <replacement key="$Revealed Key$" value="Found key" />
+    <replacement key="$PlayfairAnalyzer$" value="Playfair Analyzer" />
+    <replacement key="$memo$" value="This template demonstrates a ciphertext-only attack on the Playfair cipher. The ciphertext above is sent to the Playfair Analyzer which detects the most likely plaintext using a heuristic approach (simulated annealing).\line\line The corresponding plaintext is in English language. Please note that in Playfair for every key there exist several equivalent keys that generate the same ciphertext.\line\line In the settings panel for the analyzer component, you can set the number of CPUs (threads) to be used.\line\line The revealed plaintext should start with &quot;THE PLAYFAIR CIPHER ...&quot;." />
+  </replacements>
+</sample>

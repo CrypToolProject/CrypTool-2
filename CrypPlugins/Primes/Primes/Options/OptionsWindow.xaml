@@ -1,0 +1,26 @@
+﻿<Window x:Uid="Window_1" x:Class="Primes.Options.OptionsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:loc="clr-namespace:Primes.Options"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.Options"
+    Title="Optionen" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Width="550" Height="235" Icon="../Resources/icons/application_edit.png">
+
+    <StackPanel x:Uid="StackPanel_1">
+        <StackPanel.Resources>
+            <ResourceDictionary x:Uid="ResourceDictionary_1">
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary x:Uid="ResourceDictionary_2" Source="Resources/Shared.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackPanel.Resources>
+        <Grid Height="170">
+            <loc:OptionsUserControl x:Uid="options" x:Name="options" />
+        </Grid>
+        <DockPanel x:Uid="DockPanel_1" FlowDirection="RightToLeft" Margin="5">
+            <Button x:Uid="btnCancel" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Width="70" Name="btnCancel" Click="btn_Click" Content="{x:Static lang:Options.options_btncancel}"></Button>
+            <Button x:Uid="btnSave" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Width="70" Name="btnSave" Click="btn_Click" Visibility="Collapsed">Übernehmen</Button>
+            <Button x:Uid="btnOk" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5" Width="70" Name="btnOk" Click="btn_Click">Ok</Button>
+        </DockPanel>
+    </StackPanel>
+
+</Window>

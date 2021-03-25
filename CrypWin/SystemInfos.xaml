@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="CrypTool.CrypWin.SystemInfos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600" ToolTip="{Loc SysinfosTooltip}"
+             IsVisibleChanged="UserControl_IsVisibleChanged">
+    <UserControl.Resources>
+        <BitmapImage x:Key="Icon" UriSource="images/about.png"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Image Source="/CrypWin;component/images/systemInfos.png" Opacity="0.2" />
+
+        <DataGrid Name="InfoGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" RowBackground="#2A58587C" Background="#00000000" AlternatingRowBackground="#2AB1B1D8" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{Loc Copy_this_row_to_clipboard}" Command="ApplicationCommands.Copy" />
+                    <MenuItem Header="{Loc Copy_everything_to_clipboard}" Click="MenuItem_Click" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#"  Binding="{Binding Id}" CanUserReorder="False" Width="Auto" />
+                <DataGridTextColumn Header="{Loc Description}"  Binding="{Binding Description}" CanUserReorder="False" Width="Auto" />
+                <DataGridTextColumn Header="{Loc Value}"  Binding="{Binding Value}" CanUserReorder="False" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>       
+    </Grid>
+</UserControl>

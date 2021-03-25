@@ -1,0 +1,165 @@
+--------------------------------------------------------------------------------
+Testvektoren von CrypTool1
+--------------------------------------------------------------------------------
+
+Plaintext:
+BEIDERDISKUSSIONDERSICHERHEITEINESVERSCHLUESSELUNGSVERFAHRENSSOLLTEMANIMMERDAVONAUSGEHENDASSDERANGREIFERDASVERFAHRENKENNTABERNICHTDENSCHLUESSELDIEGOLDENEREGELDERKRYPTOGRAPHIEHEISSTUNTERSCHAETZENIEMALSDENKRYPTOANALYTIKEREINVERFAHRENFUERDESSENSICHERHEITMANAUFDIEGEHEIMHALTUNGDESALGORITHMUSANGEWIESENISTHATSCHWEREMAENGEL
+
+--------------------------------------------------------------------------------
+Monoalphabetische Substitution
+--------------------------------------------------------------------------------
+
+Key: CFILORUXADGJMPSVYBEHKNQTWZ
+
+Ciphertext:
+FOALOBLAEGKEEASPLOBEAIXOBXOAHOAPOENOBEIXJKOEEOJKPUENOBRCXBOPEESJJHOMCPAMMOBLCNSPCKEUOXOPLCEELOBCPUBOAROBLCENOBRCXBOPGOPPHCFOBPAIXHLOPEIXJKOEEOJLAOUSJLOPOBOUOJLOBGBWVHSUBCVXAOXOAEEHKPHOBEIXCOHZOPAOMCJELOPGBWVHSCPCJWHAGOBOAPNOBRCXBOPRKOBLOEEOPEAIXOBXOAHMCPCKRLAOUOXOAMXCJHKPULOECJUSBAHXMKECPUOQAOEOPAEHXCHEIXQOBOMCOPUOJ
+
+--------------------------------------------------------------------------------
+Caesar
+--------------------------------------------------------------------------------
+
+Key: G (6)
+
+Ciphertext:
+HKOJKXJOYQAYYOUTJKXYOINKXNKOZKOTKYBKXYINRAKYYKRATMYBKXLGNXKTYYURRZKSGTOSSKXJGBUTGAYMKNKTJGYYJKXGTMXKOLKXJGYBKXLGNXKTQKTTZGHKXTOINZJKTYINRAKYYKRJOKMURJKTKXKMKRJKXQXEVZUMXGVNOKNKOYYZATZKXYINGKZFKTOKSGRYJKTQXEVZUGTGREZOQKXKOTBKXLGNXKTLAKXJKYYKTYOINKXNKOZSGTGALJOKMKNKOSNGRZATMJKYGRMUXOZNSAYGTMKCOKYKTOYZNGZYINCKXKSGKTMKR
+
+--------------------------------------------------------------------------------
+Vigenere
+--------------------------------------------------------------------------------
+
+Key: QWERTZUIOPASDFGHJKLYXCVBNM
+
+Ciphertext:
+RAMUXQXQGZUKVNUUMOCQFECFETUEXVBMYAJTRKFMRBNCDCIWIHFHUNJRAQYVGHODOYKTJXTKJGMENHEJELLFYPSCDSVXJLAKYEOGDGRDTWWMXQZIVGEFNJTUCKMCOPDDUFTARJVGFCSHSWOIOLPYWBBPZSRSUHHVKJLGDIOYUFVOROSCFUNUHZJAVJVGUMHOEFLJSHUCOCKMMZCFEWRREXNQYTRWLSBLAPLFOGIGHQHZIJLDHAWRHWUMKPCWLLXWAEVQWALVBLBIZIUFJIKZJVRMOKOIZGIWRXXVCMGTNAVYNHCCNFTGMFZMUJKVE
+
+--------------------------------------------------------------------------------
+Playfair
+--------------------------------------------------------------------------------
+
+Key: QWERTZUIOPASDFGHJKLYXCVBNM
+(5x5 Matrix, Pre-format text OFF, Ignore duplicates ON)
+
+Ciphertext:
+EIDLRTLDKVSKDUFRLIWFZBLQQYIDQROBWDBWWFQCKIWDDWKIMFKWRTGSYQRBDDIYXETBFCPBBTEFSCFRSZDAQLRBFSDDLIQFMFTRODRTFSKWRTGSYQRBLWMMQGEIORZBXQLIVFQCKIWDDWBLDIFPBLRBRTTDIBLIWYONGPPFQFZXDILQUDGWOVQRWFQCDQQPRBDICGKDLIVYONGPZFCFYXEPLWTROBBWOYHCTRRYIWEFWDDWVFZBLQQYIDPTFCSZGFDIDTLQPBCHXEOVAFWDDHFPEOQXVPDSMFREDIDWBOGWCHWGQCERTRCGRBDTY
+
+--------------------------------------------------------------------------------
+ADFGVX
+--------------------------------------------------------------------------------
+
+Key: QWERTZUIOPASDFGHJKLYXCVBNM
+     WYRZ0HQEPTXL75I9NCVD16MS82JAG3UOBF4K  (Schlüssel für die Matrix)
+
+Ciphertext:
+AAFGAFVFAXADXAAGAVDVGVAFXFXXXGGDVXDDVAVFDADFVVFVADFVDDDGDXXFDGDDFGXDAXVDGGDDDGDVXDDGADVDDAFFAXFADXFDADFGVFDFDDDGVGGDDDVAFDXDDDVDVGDXDFDGDGXVVXDFXFFGDFGAAVAXDAFDFFAGVVADAFFXXVVXFGFADDFDVFFXGGFDADDDDGGAFAGXVDFXXGFXGDGVGDGFGXGDDDAFDFDGDXXDFXDFGDXXAAXDDDXVDVFXGXXDFAXFXDXADFGAFFAFGDDGAADFFXDDDAXXXAXAXFXGXVFVFGFDFDVAXGGAFGDGGAXDDVAFFDFDADVXGVDDFGAFGVDVFXADFGDXGGFDDGDDDFXXVXGDGXDFDXXXGXVFXDXXXFDADDXGGDGGDVDDXFAAVGGDDDDFXFDVDGVDFXFDVGADDDDGXVFFVXFFVVFFXXXXXDDGDGVVAXFFDXXGVDGFFDGAAVFDDFAGFVVGGDDVVXAGDGVDFGDVAGDDVVDDGAGGDVVDFADDVXFDDXDFFGFGFFDXDGDXDDDDDGGDDVFXVDXGDXDAVXGGXDFGAXDDAAXAGXAFDXXDVXFVFFFXDGXGFDVXGGGDFFVGAGVGDXVVDDXFGVDDFXXVGV
+
+--------------------------------------------------------------------------------
+XOR
+--------------------------------------------------------------------------------
+
+Key: 01 23 45 67 89 AB CD EF
+
+Ciphertext (hex):
+43 66 0c 23 cc f9 89 a6 52 68 10 34 da e2 82 a1 45 66 17 34 c0 e8 85 aa 53 6b 00 2e dd ee 84 a1 44 70 13 22 db f8 8e a7 4d 76 00 34 da ee 81 ba 4f 64 16 31 cc f9 8b ae 49 71 00 29 da f8 82 a3 4d 77 00 2a c8 e5 84 a2 4c 66 17 23 c8 fd 82 a1 40 76 16 20 cc e3 88 a1 45 62 16 34 cd ee 9f ae 4f 64 17 22 c0 ed 88 bd 45 62 16 31 cc f9 8b ae 49 71 00 29 c2 ee 83 a1 55 62 07 22 db e5 84 ac 49 77 01 22 c7 f8 8e a7 4d 76 00 34 da ee 81 ab 48 66 02 28 c5 ef 88 a1 44 71 00 20 cc e7 89 aa 53 68 17 3e d9 ff 82 a8 53 62 15 2f c0 ee 85 aa 48 70 16 33 dc e5 99 aa 53 70 06 2f c8 ee 99 b5 44 6d 0c 22 c4 ea 81 bc 45 66 0b 2c db f2 9d bb 4e 62 0b 26 c5 f2 99 a6 4a 66 17 22 c0 e5 9b aa 53 65 04 2f db ee 83 a9 54 66 17 23 cc f8 9e aa 4f 70 0c 24 c1 ee 9f a7 44 6a 11 2a c8 e5 8c ba 47 67 0c 22 ce ee 85 aa 48 6e 0d 26 c5 ff 98 a1 46 67 00 34 c8 e7 8a a0 53 6a 11 2f c4 fe 9e ae 4f 64 00 30 c0 ee 9e aa 4f 6a 16 33 c1 ea 99 bc 42 6b 12 22 db ee 80 ae 44 6d 02 22 c5
+
+--------------------------------------------------------------------------------
+Transposition Einfach
+--------------------------------------------------------------------------------
+
+Key: QWERTZUIOPASDFGHJKLYXCVBNM
+     (line by line: Input, column by column: Permute Output, apply the respective inverse permutation: aus, Show intermediate dialog with the inverse permutation: an)
+
+Ciphertext:
+DEEEFLRATNHIURODESOERHUNHVVRTGNTEEUAESNAAOESFMLSITFASNDRNEHNGRNRGRHKHYEMWHNRIIESRNFTRSSLANEGNEENISCLSKLRIIRGSCUEENNSKEUIERSINBLHDAAGCISNHAUYEISAEIHTSEDAENHDTSEMGEDEEHNOHOLEDNIPMVEEHEGDFCRTYFDHEBEEODDETORGSENUMENEHAEISARSAEHEUPUIMMDEAUVSESASEGESVSEHEPTKILSILMRREINRARWEIHSECRCLSIELEIRNAELEADEANKESNRSTZECTEDEARTGILRTAT
+
+--------------------------------------------------------------------------------
+Transposition Doppelt
+--------------------------------------------------------------------------------
+
+Key: QWERTZUIOPASDFGHJKLYXCVBNM (line by line: Input, column by column: Permute Output)
+     MNBVCXYLKJHGFDSAPOIUZTREWQ (line by line: Input, column by column: Permute Output)
+     (apply the respective inverse permutation: aus, Show intermediate dialog with the inverse permutation: an)
+
+Ciphertext:
+DOKEIIEDEPLEETDRRCEFNENATOFEISSITUIEEFNNFSSGRHAAETLTETCNETASRAHFILDHHNARAGRARGEAOEEHRTREHRUHDYEEWNRLWCNDMRMSEEUNGEKSHEAECSISRNSIOBSSERHENANENERVSNDVSEIATGMVELLUINSLEESDLRRERNSIGSDESIERNARLNYHHASHSTUGSEUEDSEIEAENSEAEFIGEKNTRKHNEEEMNTOAHNUELOHECZEEHEEHDDUTSCSSYNRTNEPKITVAIRADEUUREIHSHLBAVGMIIAEGRNGIMCESRDAEMMSIEPOILLD
+
+--------------------------------------------------------------------------------
+Scytale
+--------------------------------------------------------------------------------
+
+Key: 5
+
+Ciphertext:
+BLHEFETTNDIEDIIDMEEEEANMGRNSAEDICLHIMHSESMLDIKEUEMURENHSDSKASASRLIVEYTOOLPUNNDTNDAIOGEUEADRSGNESGOASIELLACHDYLHEETGENNIORDEKRHAREIESERTISGEHTDEIMEELNUIRDVSNAEEAENRRNSGKFGVRRAEEEYHWRIPRISFTEECEONSHRGFELDRUNUAAEIESPRSSVHDTSEIEHERESALFHSTUAEESNHINCGRSSHSESIWVNTCEEKUHRRENEEFNTRMANEHAHTREERASINEBCTGNEHMESRAALSNENOITALCZU
+
+--------------------------------------------------------------------------------
+RC2
+--------------------------------------------------------------------------------
+
+Key: AB (8 Bit)
+
+Ciphertext (hex):
+8d 5e b3 2c 64 84 14 bc 45 ea c1 72 4a 2c 76 1f ac 86 d9 d3 a9 cc cf 06 fb 5d aa 0f 85 53 c2 04 9b 18 b3 c0 6c 36 cc 48 bd 4c 55 a4 94 0b d7 44 e1 5e c1 87 19 29 47 83 98 db 8d 9d ff 2e 29 0f 82 08 5c e0 95 4d 64 4d d7 f8 eb 24 4a 87 26 14 7b 97 46 82 74 66 88 9d 04 a5 30 a9 bf 15 83 3c 37 a3 06 bf 50 59 9a 3e 13 24 0d 2a 1b 6d e5 04 38 ec ad 0e 5c 18 9b 38 f4 98 1e 83 bd 30 23 ca 4d 21 03 30 42 29 86 ee 20 90 eb 0a e3 8c d6 1a 55 d9 7e cd 16 4a b6 e6 58 aa 9a 42 20 82 5a 18 2a f0 95 52 7f 64 51 e3 10 1b b5 70 81 68 81 2d 5c d5 95 59 c6 4b 1d e1 b5 07 a7 df e2 57 9a 16 f3 68 a1 6a b5 24 20 7f 6e 01 f4 13 ea 57 8f db 38 97 89 94 be 81 5d d7 c0 1f 00 e7 22 87 87 73 1d a0 ca 60 d6 03 21 28 e3 86 9b db 74 32 0f ba 73 d9 c7 e2 b5 c1 26 ae 9a f1 cf 34 73 48 a2 a2 00 78 35 c7 7d 52 d4 5b 21 0d f0 7a 5b 1d ce 07 69 37 2a 86 e0 21 83 2e 6e 90 ee 46 e3 5a 94 af 04 11 80 7b 57 fb 2b 29 24 14 94 68 cb 81 a1 6a 48 2b 2c 45 59 78 70 62 e4 17 e3 ec 3a a6 73 1f
+
+--------------------------------------------------------------------------------
+RC4
+--------------------------------------------------------------------------------
+
+Key: AB (8 Bit)
+
+Ciphertext (hex):
+b9 a8 49 3f d3 11 37 11 1f 37 87 34 34 c4 c6 14 c6 0b 46 06 3d a6 36 d0 38 34 a8 e5 62 b4 42 6b 69 36 31 86 1c 3f c9 67 57 41 0f 1c 3a 21 71 e7 a0 75 15 41 32 97 9e 78 93 12 52 19 ef a4 19 f0 0f 52 d2 2d 9a ce 6f 61 1d bd 44 97 a2 6b 4b b4 9b e0 10 20 2b 98 3a 4b f8 81 af 2f 4b 5f d4 79 a3 09 bd a6 93 55 27 00 ee 86 02 2f 21 96 7d af 7c d4 0c c7 8f b7 84 e6 e2 28 99 ba 5a 2d 5d f9 58 fd 0a e8 cf 10 47 a9 b7 62 ac 1c b2 25 35 a3 38 ff 86 a6 cb 77 bb 4a 19 69 09 f7 c3 62 93 2c 27 89 3f 5e 82 8b 15 dc 0a 55 cf 6a fd 69 22 72 4e c3 0b 04 8f 49 69 bf f9 97 a5 8b a5 a2 9d a5 2e 22 ce 39 c0 f8 0a 17 4e f9 90 cf 57 69 db 64 a3 b8 2e cf 0a a1 41 d8 1e d9 66 a6 60 cc 3a 5b 9d 05 6c 60 d5 5a 86 4e e9 09 62 8d 01 0e fe ec 0b 92 23 40 f3 df 25 72 1d ee f3 2d 9c e1 bb 02 c4 e7 66 ef 69 7e fa bf 19 36 2d 9e ce 73 b0 1e 68 5d 54 14 9c 32 72 9d 56 a0 ed 5d 95 d7 95 28 96 4a 81 2a 84 0f 7c f7 fe dd 9a 52 76 7a 28 cc 76 9a 70 15 eb 85 e8 01 52 8b ab c9 bd
+
+--------------------------------------------------------------------------------
+DES (ECB)
+--------------------------------------------------------------------------------
+
+Key: 01 23 45 67 89 AB CD EF (64 Bit)
+
+Ciphertext (hex):
+19 bc 8e 76 61 34 fd 5d 39 54 d2 85 b3 a6 fd d1 6a c4 66 cb 21 7e b4 10 2e 40 82 f7 41 0d 57 50 35 2f 51 a0 3d c5 d9 fa 92 f1 ba 78 97 08 43 78 d1 2b e2 84 a2 11 b3 fb be bd fb 69 43 47 05 80 7c 8d a8 dd 8c 93 eb 44 96 f8 30 c3 56 6a 27 72 5f c5 e3 0a 73 ab 75 c3 a7 9a fa b0 8d a8 56 01 85 9d 3a 2e 8f bb d9 38 72 f2 68 bf a3 ce 1b 91 5e 1f ca 21 03 cd fa 90 32 b3 93 df f1 95 f2 cb 94 22 9a c2 d8 2c 54 8c 56 bf 22 37 40 d4 d1 a3 82 24 ca e9 fe 48 98 a7 3b 92 59 8d 2b b8 4f 88 29 cf e3 07 bf 0b 7e 4e 54 1e 66 85 f3 da 1c 30 79 3a ed 94 4c 01 7e 7c 87 3e 7c ff ab 6d 10 43 1d 06 a5 7a ce cc e9 3d d9 d6 4b d2 86 15 74 04 cf 0c 9b 3f ad e9 0b fa 5a 71 a2 51 48 6b aa 3e c9 37 72 9e 6c c4 a2 5f 1f 37 41 9f b1 dd 15 66 84 59 d1 77 67 9c 30 a7 da d4 e4 76 c2 93 45 46 20 aa 05 e9 b2 d7 66 3a cd ad 98 ad f2 e9 b2 bb 4e ff 6c 05 61 5b ae 3c 70 22 94 2f 9b fc e1 00 20 24 d6 d8 e0 6b d5 c0 80 9e e5 c8 a5 71 fb 9d 42 38 9d 9d 19 0b 11 2b 36 f3 d0 10 56 b2 05 3e
+
+--------------------------------------------------------------------------------
+DES (CBC)
+--------------------------------------------------------------------------------
+
+Key: 01 23 45 67 89 AB CD EF (64 Bit)
+
+Ciphertext (hex):
+19 bc 8e 76 61 34 fd 5d 98 52 04 bb 3a d7 9a 7b 10 79 08 23 be e7 0a 64 6f c8 c1 b2 7a 76 2e b6 10 f7 fc 10 e1 ee a3 cf 76 b7 8e 41 56 36 5a 28 6d ce 9c 85 72 4b 6b 33 d3 5a 2a 7a cc 58 83 a3 44 57 c7 48 cf a5 95 c1 6b 52 a8 bb 18 06 1a 81 16 18 95 ad 4b f4 0f 60 a8 89 17 5e 43 a6 94 6c 0c 79 9b 4c 90 55 ce 4e 56 08 01 fb 03 86 e6 2c c0 88 b7 89 8e 35 53 ef e8 8e 3a 94 ab 0b d1 bd 76 87 08 9c a2 b1 27 4f a9 48 ef 21 7c 3f 39 a8 36 dd e0 64 e1 eb c7 21 a4 dd ba bd cc 36 25 c6 df 07 49 68 f1 96 ea e0 d3 5d cb 29 55 54 8a 63 dd f5 e4 8f 20 ad 11 98 f4 8e 97 8d 05 c0 5c 0e a9 07 c5 c0 fd 93 18 11 6c e5 2b ae e4 fc b6 4e 55 b9 80 4a 5f 4f 41 3e 9e 91 03 bd 65 97 7c 7e 9d e9 86 87 d9 59 ae d9 17 e2 d5 8f 57 13 a3 6f b4 3d 22 2b 95 e4 08 85 9e 84 87 87 91 2f f5 78 58 96 a3 1f c8 6a 5f 23 b1 2f f3 e7 4f 7d 7d 5c 16 a1 df 89 ff e2 f6 fb 6a 80 e1 45 24 b5 c5 02 a2 24 9e ac 56 2c f5 1f a2 0e 48 5e 8a 25 3d f9 e9 af 82 f1 e2 4c 1d 6d 87 ce 1b a5 1b 12 5b df
+
+--------------------------------------------------------------------------------
+Triple DES (EBC)
+--------------------------------------------------------------------------------
+
+Key: 01 23 45 67 89 AB CD EF FE DC BA 98 76 54 32 10 (128 Bit)
+
+Ciphertext (hex):
+c5 af 0d 9f b0 f0 0e cc 86 20 eb 1f 2b 69 af bc 75 57 29 c3 b6 ce c9 0d 96 be 8a 2e 4d 08 15 7e 3c 6d 12 28 3e 55 2c fd c9 7d d5 41 14 e7 13 e1 b2 b8 8b 0a d3 fb df 03 86 28 9d 6a e3 c2 b1 12 98 e6 e9 32 99 70 dc c2 97 36 e6 44 2e 22 4e 76 8e 54 62 50 95 2f a7 a7 63 81 da 0a 7d d8 92 e7 d5 48 33 7c 1b 35 39 cc eb c2 a6 19 a4 86 a7 e4 03 cc 92 b0 a6 7b a5 f8 d8 75 96 fc 6d a1 6e 34 b5 5c cd 8c 20 b9 3a 33 19 d4 a6 26 41 e1 f3 6e e1 04 f2 1d a0 6f 2a 86 69 eb 52 cd 26 2c 0a 59 de f2 8a 56 9d 8c ee c9 1a 1b 8b be e1 a5 14 d9 d5 6e 8a b7 ce c8 e0 9c 46 56 8f a0 7c 5b 2c 49 9b 68 42 43 d8 52 92 c9 36 10 48 8b fe 28 a0 ce 8e 1a 93 14 a2 43 f8 ed 17 e0 6b cf 9f 50 dc d5 94 86 75 68 40 a4 80 51 da 76 66 e6 1a 45 9b 31 43 b2 69 9e 98 c5 e3 8f a1 a0 ea 59 9c 11 bb 48 ec 02 bb e5 16 7f 72 5a 58 84 65 cf 7b 47 aa f1 fd 4e e9 05 56 b4 61 f2 f0 73 48 29 15 fd da 17 ab 2d b3 62 aa eb 2e fe 08 a2 24 04 cb 83 9e ec 76 3b c2 eb 5c 17 7f f5 99 0d 86 62 37 eb fa 4a
+
+--------------------------------------------------------------------------------
+Triple DES (CBC)
+--------------------------------------------------------------------------------
+
+Key: 01 23 45 67 89 AB CD EF FE DC BA 98 76 54 32 10 (128 Bit)
+
+Ciphertext (hex):
+c5 af 0d 9f b0 f0 0e cc 94 80 cf 46 00 db a5 74 49 3f c0 f3 b8 0e 60 a4 1e a5 64 37 aa 8f e6 3b dc 62 e0 6c 97 10 2e 45 08 75 01 db 6b b3 dd ff a0 d1 20 33 87 1c 28 5a 2d 14 ab e0 62 5f cf 13 ab b0 9c 6f 1f 06 da c0 79 ef 30 9f 06 93 de bc 6f ce 90 33 dc 88 c2 4b 23 a9 7b 51 6a 2c b7 ba 92 34 10 48 2b 8c 76 7d 05 bc 22 7a ad b2 d9 71 a1 8d 14 c9 df aa f8 0e 74 8a 30 27 13 9d bc d7 2f cd 93 05 5e 41 53 11 b5 f5 ba 67 60 e7 9c b3 b8 c9 a2 51 95 16 c6 5e 55 dd 81 93 dd a7 0e ef f7 93 5b 60 64 44 66 37 60 ed 9a 1d 2b b4 eb 3e d3 eb 1e f9 2d 73 4f 8e eb 9b cd 71 79 bf 9e 1d 28 d1 17 87 a5 59 a8 8f 67 10 80 74 b8 59 82 d5 88 6d 98 8e 29 a1 53 0f 20 bd e5 74 49 22 7c cf 0b 4a 52 ce a2 57 4a 27 59 23 ce bf 09 93 22 7d bd 8c 2d bc 98 81 fd e2 43 d8 bf 1d 95 27 8e 70 72 11 b7 0a cf 67 74 f2 9d fc 25 e5 d6 14 9a 65 19 b7 90 02 d6 4c ed b6 b8 d6 93 73 8b 7e 07 e0 31 62 49 7e d1 d6 4e e6 de e8 49 8e 1f db 58 3c 7f 71 81 e8 5f bc 94 c5 6f 2e bf 0b a4 26 f9 ca
+
+--------------------------------------------------------------------------------
+Rijndael (AES)
+--------------------------------------------------------------------------------
+
+Key: 01 23 45 67 89 AB CD EF FE DC BA 98 76 54 32 10 (128 Bit)
+
+Ciphertext (hex):
+cf 14 3e 4b ab d2 8b 4f 7b b6 ec 92 f3 4c 5f cf b6 91 7a ad 2c 9d e9 99 31 5f 46 c5 6a 31 a6 80 5e c6 7d 61 5b 87 b7 5c f9 a3 ae c5 fc b0 63 24 7f a9 29 27 b5 cf c9 b2 66 aa da 14 77 f5 d3 f1 cc 92 31 34 be 85 55 dc dc 75 d8 93 d0 7f 2c aa 9b 4a 71 30 40 c9 da a2 a2 d3 d2 81 e5 11 de 18 e1 26 07 62 3b cd 50 7a fb 74 b8 0e 6c 1a 98 26 43 b5 93 a7 f0 57 85 6e 87 a0 26 72 f4 7f f5 62 6b 84 58 ee 12 21 b2 47 ee ab 01 0b 7a a9 68 0c 24 b5 2b ac 90 ce fb 4e a7 fe fc 76 21 d0 fa dd 2d 19 b6 d7 49 dd f0 8c 7d 88 ee ee 43 30 76 65 58 f9 28 d2 8a 38 f8 2c 51 05 92 eb ad 6b 2b 28 d1 be ed 1e 1d 25 b8 81 fd a0 34 d9 7c 86 48 e2 cb f1 4b 22 9c 00 a4 2d 8a 8a 19 4b 00 dd 78 8d 78 a8 06 4d 83 25 87 e0 12 21 00 6f 31 e4 5f 1d 58 a4 f4 8c 02 61 c8 d2 40 29 5d 2b e1 48 f8 17 53 21 80 0f ce d4 14 c1 b6 23 5d 34 d0 68 80 16 5c 15 68 37 d1 f2 d6 8a d6 67 17 0d 7b b0 d8 df db ce 7d 9d ca 07 12 ac 75 30 1b 0b 54 3c 6a 73 55 8e 81 b2 03 e3 a9 e7 a5 88 86 2f 70 20 ce b2
+
+--------------------------------------------------------------------------------
+Twofish
+--------------------------------------------------------------------------------
+
+Key: 01 23 45 67 89 AB CD EF FE DC BA 98 76 54 32 10 (128 Bit)
+
+Ciphertext (hex):
+08 9e 9c 53 d9 78 81 4b f1 7e 39 a6 3b 48 30 bc 19 70 49 7d 5a 21 98 ee fc 2a e4 16 c5 3b 39 53 66 32 1d 70 91 23 e3 02 9f fa e9 d7 74 05 48 45 5a 72 95 17 c9 45 bb d4 6d d2 1a 9a be 8b fc ac a2 37 79 c0 f7 1d 0c c5 68 c8 7b c8 4d 20 da a0 eb 81 0d 5a dc 0a 85 10 09 c3 92 62 3a e8 97 a4 5d db ce eb d1 2a f7 90 ff 94 d8 f0 a0 d7 18 7c 81 95 db 2a 2d bc 20 62 b8 9e e9 97 e5 83 ae 0a 22 01 c8 8f 99 f8 44 4c fe e6 84 d7 77 b0 39 14 15 a2 91 92 91 da e5 04 85 82 9c 4f b0 52 68 b6 8f 3b aa 47 96 94 9b b2 23 75 4a ae e0 15 7c 28 b3 45 49 57 59 31 8a a0 f9 6f 9c a5 26 3b 1f 7e 1f 01 f1 54 88 bb 86 ea 4d 8a 2e ea 5e 13 df 89 f4 1d 8a 71 67 72 e6 a0 3f 82 d4 63 c5 3c 88 f1 41 60 17 44 a4 34 c2 c1 4b e5 6a 30 0f 47 68 9b 6c 47 d2 4a 84 26 0b 9b d2 11 8b b6 b6 9a 57 ce 6f e8 6b 98 9e 43 cd be c5 6e a6 9e 20 7b 4e 9b 6d a0 ff 35 84 a8 c6 fc 67 9d e8 15 bf ba 44 a2 d6 dd ae a8 11 1a 67 f1 ab 1c a3 bd 42 a5 0b d3 56 26 99 4b b4 26 eb a7 be cd 2a 5a 2b 05 3c 50 
+

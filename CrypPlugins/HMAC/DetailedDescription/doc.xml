@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    In cryptography, a keyed-hash message authentication code (HMAC) is a specific construction for calculating a message authentication code (MAC) involving a cryptographic hash function in combination with a secret cryptographic key.
+    As with any MAC, it may be used to simultaneously verify both the data integrity and the authentication of a message. Any cryptographic hash function, such as MD5 or SHA-1, may be used in the calculation of an HMAC.
+    The cryptographic strength of the HMAC depends upon the cryptographic strength of the underlying hash function and on the size and quality of the key.
+    <newline /><newline />
+    The size of the output of HMAC is the same as that of the underlying hash function (128 or 160 bits in the case of MD5 or SHA-1, respectively).
+    <newline /><newline />
+    The definition and analysis of the HMAC construction was first published in 1996 by Mihir Bellare, Ran Canetti, and Hugo Krawczyk.
+    FIPS PUB 198 generalizes and standardizes the use of HMACs. HMAC-SHA1 and HMAC-MD5 are used within the IPsec and TLS protocols.
+  </introduction>
+  <introduction lang="zh-CN">在密码学中，密钥哈希消息认证码（HMAC）是一种特定的结构，用于计算包含密码哈希函数和秘密密钥的消息认证码（MAC）。与任何MAC一样，它可用于同时验证数据完整性和消息身份验证。任何密码哈希函数（例如MD5或SHA-1）均可用于HMAC的计算。 HMAC的加密强度取决于基础哈希函数的加密强度以及密钥的大小和质量。 HMAC的输出大小与基础哈希函数的大小相同（对于MD5或SHA-1，分别为128或160位）。 HMAC结构的定义和分析由Mihir Bellare，Ran Canetti和Hugo Krawczyk于1996年首次发表。 FIPS PUB 198概括并标准化了HMAC的使用。 HMAC-SHA1和HMAC-MD5在IPsec和TLS协议中使用。</introduction>
+  <introduction lang="ru">В криптографии код аутентификации сообщения с ключом-хэшем (HMAC) является конкретной конструкцией для вычисления кода аутентификации сообщения (MAC), включающего криптографическую хэш-функцию в сочетании с секретным криптографическим ключом. Как и в случае любого MAC, он может использоваться для одновременной проверки целостности данных и аутентификации сообщения. Любая криптографическая хеш-функция, такая как MD5 или SHA-1, может использоваться при вычислении HMAC. Криптографическая сила HMAC зависит от криптографической силы базовой хэш-функции и от размера и качества ключа. Размер вывода HMAC такой же, как у базовой хэш-функции (128 или 160 бит в случае MD5 или SHA-1, соответственно). Определение и анализ конструкции HMAC было впервые опубликовано в 1996 году Михиром Белларе, Ран Канетти и Уго Кравчиком. FIPS PUB 198 обобщает и стандартизирует использование HMAC. HMAC-SHA1 и HMAC-MD5 используются в протоколах IPsec и TLS.</introduction>
+  <introduction lang="de-DE">
+    Ein Keyed-Hash Message Authentication Code (HMAC) ist eine Art Message Authentication Code (MAC), dessen Konstruktion auf einer kryptographischen Hash-Funktion in Verbindung mit einem geheimen Schlüssel basiert.
+    Wie jeder MAC kann er sowohl die Integrität als auch die Authentizität einer Nachricht gewährleisten. Prinzipiell kann jede kryptographische Hashfunktion für die Berechnung eines HMAC verwendet werden.
+    Die kryptographische Stärke des HMAC hängt von der kryptographischen Stärke der zugrunde liegenden Hashfunktion und der Größe und Qualität des verwendeten Schlüssels ab.
+    <newline /><newline />
+    Die Ausgabe von HMAC hat dieselbe Größe wie die Ausgabe der zugrunde liegenden Hashfunktion (128 Bits für MD5, 160 Bits für SHA-1).
+    <newline /><newline />
+    Die Definition und Analyse der HMAC-Konstruktion wurde erstmals 1996 von Mihir Bellare, Ran Canetti und Hugo Krawczyk veröffentlicht.
+    HMACs werden in RFC 2104 sowie im NIST Standard FIPS 198 spezifiziert und kommen in IPSec und TLS zum Einsatz.
+  </introduction>
+  <usage lang="en">
+    In the settings of the component, you can select the hash function that the HMAC algorithm should use.
+    The data of which to calculate the hash value has to be entered at the input "Input stream" as a data stream.
+    The key must be provided as a byte array of arbitrary length at the input labeled "Key".
+    The calculated hash value is available at the outputs of the component as a data stream and as a byte array.
+    The length of the hash value depends on the selected hash function and corresponds to the length of the hash value that this function produces.
+  </usage>
+  <usage lang="zh-CN">在组件的设置中，可以选择HMAC算法应使用的哈希函数。必须在输入“输入流”中输入要计算哈希值的数据作为数据流。必须在标有“ Key”的输入处以任意长度的字节数组形式提供键。计算得出的哈希值在组件的输出处作为数据流和字节数组可用。哈希值的长度取决于所选的哈希函数，并且与该函数生成的哈希值的长度相对应。</usage>
+  <usage lang="ru">В настройках компонента вы можете выбрать хеш-функцию, которую должен использовать алгоритм HMAC. Данные для вычисления хэш-значения должны вводиться на входе «Входной поток» в виде потока данных. Ключ должен быть представлен как байтовый массив произвольной длины на входе с надписью «Key». Вычисленное значение хэша доступно на выходах компонента как поток данных и как массив байтов. Длина значения хеша зависит от выбранной хэш-функции и соответствует длине хэш-значения, которое производит эта функция.</usage>
+  <usage lang="de-DE">
+    Wählen Sie in den Einstellungen der Komponente die Hashfunktion aus, auf der der verwendete HMAC-Algorithmus basieren soll.
+    Geben Sie die Daten, deren Hashwert berechnet werden soll, als Datenstrom am Eingang "Eingabedatenstrom" ein.
+    Der Schlüssel wird als Byte-Array beliebiger Länge am entsprechend benannten Eingang erwartet.
+    Der berechnete Hashwert wird an den Ausgängen der Komponente als Datenstrom und als Byte-Array ausgegeben.
+    Die Länge des Hashwertes hängt von der ausgewählten Hashfunktion ab und entspricht der Länge des Hashwertes, den diese Hashfunktion produziert.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Hash-based_message_authentication_code" lang="en" />
+      <caption lang="en">Hash-based message authentication code (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Keyed-Hash_Message_Authentication_Code" lang="de-DE" />
+      <caption lang="en">Keyed-Hash Message Authentication Code (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="fips">
+      <link url="http://csrc.nist.gov/publications/fips/fips198/fips-198a.pdf" lang="en" />
+      <caption lang="en">FIPS: The Keyed-Hash Message Authentication Code (PDF)</caption>
+      <link url="http://csrc.nist.gov/publications/fips/fips198/fips-198a.pdf" lang="de-DE" />
+      <caption lang="en">FIPS: The Keyed-Hash Message Authentication Code (PDF, englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

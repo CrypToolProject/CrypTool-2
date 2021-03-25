@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    RC4 is the most widely used software stream cipher and is used in popular protocols such as SSL and WEP. It was designed by Ron Rivest of RSA Security in 1987.
+  </introduction>
+  <introduction lang="zh-CN">RC4是使用最广泛的软件流密码，并用于流行的协议（例如SSL和WEP）中。它是由RSA Security的Ron Rivest在1987年设计的。</introduction>
+  <introduction lang="ru">RC4 является наиболее широко используемым программным потоковым шифром и используется в популярных протоколах, таких как SSL и WEP. Он был разработан Рон Ривест из RSA Security в 1987 году.</introduction>
+  <introduction lang="de-DE">
+    RC4 ist die am weitesten verbreitete Stromchiffre, die in bekannten Prokollen wie SSL und WEP eingesetzt wird. Das Verfahren wurde 1987 von Ron Rivest (RSA Security) entwickelt.
+  </introduction>
+  <usage lang="en">
+    After dragging the RC4 component onto the workspace, you need to specify two data sources: one that represents the text to be encrypted or decrypted, and one that represents the key. Both sources are mandatory.
+  </usage>
+  <usage lang="zh-CN">将RC4组件拖到工作区后，您需要指定两个数据源：一个代表要加密或解密的文本，另一个代表密钥。这两个来源都是强制性的。</usage>
+  <usage lang="ru">После перетаскивания компонента RC4 в рабочую область вам нужно указать два источника данных: один, который представляет текст, который будет зашифрован или дешифрован, и тот, который представляет ключ. Оба источника являются обязательными.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die RC4-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie zwei Datenquellen definieren: Eine repräsentiert die zu verschlüsselnden oder entschlüsselnden Daten, die andere repräsentiert den Schlüssel. Beide Datenquellen sind notwendig.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/RC4" lang="en" />
+      <caption lang="en">RC4 in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/RC4" lang="de-DE" />
+      <caption lang="de-DE">RC4 in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

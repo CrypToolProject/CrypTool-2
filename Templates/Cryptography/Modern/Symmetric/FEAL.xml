@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">FEAL Cipher</title>
+  <title lang="zh">FEAL密码</title>
+  <title lang="ru">шифровать FEAL</title>
+  <summary lang="en">Usage of the <i>FEAL</i> cipher</summary>
+  <summary lang="zh">FEAL密码的用法</summary>
+  <summary lang="ru">Использование шифрования FEAL</summary>
+  <description lang="en">FEAL (Fast Data Encipherment Algorithm) is a block cipher and is one of the symmetrical Feistel ciphers. The goal of the development, which emanated from the Japanese telephone company Nippon Telegraph and Telephone (NTT), was to achieve an efficient implementation of an encryption algorithm in software even for small microcontrollers and thus an alternative to the Data Encryption Standard (DES ) to accomplish. DES can only be implemented comparatively inefficiently in software. <newline /><newline />
+In the years after its development in 1987, FEAL served primarily as a test object for various types of attack scenarios on encryption algorithms. In particular, it served to advance the development of the essential analysis methods, differential cryptanalysis and linear cryptanalysis. FEAL itself is considered broken in the original versions like FEAL-4 and FEAL-8 and should therefore not be used. <newline /><newline />
+Source: <external ref="https://de.wikipedia.org/wiki/FEAL" /></description>
+  <description lang="zh">FEAL（快速数据加密算法）是一种分组密码，是对称的Feistel密码之一。由日本电话公司日本电报电话公司（NTT）发起的开发目标是，即使在小型微控制器中，也能在软件中高效实现加密算法，从而替代数据加密标准（DES）。完成。 DES只能以相对低效的方式在软件中实现。在1987年发展起来的几年中，FEAL主要用作各种类型的加密算法攻击场景的测试对象。特别是，它有助于推动基本分析方法，差分密码分析和线性密码分析的发展。 FEAL本身在FEAL-4和FEAL-8等原始版本中被视为已损坏，因此不应使用。资源：</description>
+  <description lang="ru">FEAL (алгоритм быстрого шифрования данных) является блочным шифром и является одним из симметричных шифров Фейстеля. Целью разработки, разработанной японской телефонной компанией Nippon Telegraph and Telephone (NTT), было добиться эффективной реализации алгоритма шифрования в программном обеспечении даже для небольших микроконтроллеров и, таким образом, альтернативы стандарту шифрования данных (DES). ) создать. DES может быть сравнительно неэффективно реализован в программном обеспечении. <newline /><newline />
+В годы, прошедшие после разработки в 1987 году, FEAL служил в первую очередь тестовым объектом для различных типов сценариев атак на алгоритмы шифрования. В частности, это способствовало развитию основных методов анализа, дифференциального криптоанализа и линейного криптоанализа. Сам FEAL считается сломанным в оригинальных версиях, таких как FEAL-4 и FEAL-8, и поэтому не должен использоваться. <newline /><newline />
+Источник: <external ref="https://de.wikipedia.org/wiki/FEAL" /></description>
+  <keywords>symmetric, japan, block, Feistel</keywords>
+  <keywords lang="zh">对称，日本，块，Feistel</keywords>
+  <keywords lang="ru">симметричный, япония, блок</keywords>
+  <title lang="de">FEAL-Chiffre</title>
+  <summary lang="de">Benutzung der <i>FEAL</i>-Chiffre</summary>
+  <description lang="de">FEAL (Fast Data Encipherment Algorithm) ist eine Blockchiffre und zählt zu den symmetrischen Feistelchiffren. Das Ziel bei der Entwicklung, die von dem japanischen Telefonkonzern Nippon Telegraph and Telephone (NTT) ausging, war, eine effiziente Implementierung eines Verschlüsselungsalgorithmus in Software auch für kleine Mikrocontroller zu erreichen und damit eine Alternative zu dem von amerikanischen Behörden entwickelten Data Encryption Standard (DES) zu schaffen. DES ist in Software nur vergleichsweise ineffizient zu implementieren.<newline /><newline />
+FEAL diente in den Jahren nach seiner Entwicklung 1987 vor allem als Testobjekt für verschiedenartige Angriffszenarien auf Verschlüsselungsalgorithmen. Insbesondere diente er dazu, die heute wesentlichen Analyseverfahren, die differentielle Kryptoanalyse und die lineare Kryptoanalyse, in ihrer Entwicklung voranzubringen. FEAL selbst gilt, in den ursprünglichen Versionen wie FEAL-4 und FEAL-8, als gebrochen und sollte daher nicht eingesetzt werden. <newline /><newline />
+Quelle: <external ref="https://de.wikipedia.org/wiki/FEAL" /></description>
+  <keywords lang="de">symmetrisch, block</keywords>
+  <icon file="FEAL.png" />
+  <relevantPlugins>
+    <plugin name="FEAL" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel (Hex)" />
+    <replacement key="$Message Encoder$" value="Nachrichten-Codierer" />
+    <replacement key="$Message Decoder$" value="Nachrichten-Decodierer" />
+    <replacement key="$Key Decoder$" value="Schlüssel-Decodierer" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$text$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
+    <replacement key="$memo$" value="Mit dieser Komponente können Sie einen beliebigen Text, der in die Komponente {\b Klartext} auf der linken Seite eingegeben werden muss, mit der {\b FEAL}-Komponente verschlüsseln. Der resultierende verschlüsselte Text wird in der Komponente {\b Geheimtext} auf der rechten Seite angezeigt, nachdem die Vorlage durch Klicken der &quot;Starten&quot;-Schaltfläche ausgeführt wurde. Die {\b FEAL}-Komponente arbeitet mit binären Werten, d.h. Bytes. Daher wird der eingegebene Text zuerst mit der Komponente {\b Nachrichten-Decodierer} in Bytes konvertiert. Mit den gegebenen Einstellungen wird der Text im ASCII-Format interpretiert. Die so erhaltenen Bytes werden mit {\b FEAL} verschlüsselt und man erhält eine weitere Bytefolge. Diese wird dann mit Hilfe der {\b Nachrichten-Codierer}-Komponente ins hexadezimale Format konvertiert und ausgegeben. Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in die Komponente {\b Klartext} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat in der Komponente {\b Nachrichten-Decodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b FEAL}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format in der Komponente {\b Nachrichten-Codierer} muss auf Text und die Kodierung auf &quot;ASCII&quot; gesetzt werden." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Key$" value="密钥（十六进制）" />
+    <replacement key="$Message Encoder$" value="讯息编码器" />
+    <replacement key="$Message Decoder$" value="讯息解码器" />
+    <replacement key="$Key Decoder$" value="密钥解码器" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$text$" value="弗朗兹（Franz）乘坐一辆完全残破的出租车在巴伐利亚州内搜寻。" />
+    <replacement key="$memo$" value="使用此组件，您可以使用{\b FEAL}组件加密必须在左侧的{\b Klartext}组件中输入的任何文本。在通过单击“开始”按钮执行模板之后，生成的加密文本将显示在右侧的{\b密文}组件中。 {\b FEAL}组件使用二进制值（即字节）。因此，首先使用组件{\b Message Decoder}将输入的文本转换为字节。使用给定的设置，文本将以ASCII格式解释。以这种方式获得的字节用{\b FEAL}加密，您将获得另一个字节序列。然后将其转换为十六进制格式，并在{\b消息编码器}组件的帮助下输出。该模板也可以用于解密消息。为此，必须首先将加密的十六进制值复制到{\b Klartext}组件中。然后必须进行以下调整：（1）组件{\b消息解码器}中的输入格式必须设置为“十六进制”； （2）在{\b FEAL}组件中，必须将操作设置为“解密”； （3）必须将组件{\b Message Encoder}中的格式设置为文本，并将编码设置为“ ASCII”。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Key$" value="Ключ (hex)" />
+    <replacement key="$Message Encoder$" value="Новости кодировщик" />
+    <replacement key="$Message Decoder$" value="декодер сообщений" />
+    <replacement key="$Key Decoder$" value="Ключ-декодер" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$text$" value="Франц охотится на полностью забытое такси через Баварию." />
+    <replacement key="$memo$" value="Этот компонент позволяет вам шифровать любой текст, который необходимо ввести в компоненте {\b plain text} с левой стороны, с помощью компонента {\b FEAL}. Полученный зашифрованный текст отображается в компоненте {\b Ciphertext} справа после запуска шаблона, нажав кнопку «Пуск». Компонент {\b FEAL} работает с двоичными значениями, то есть байтами. Поэтому исходный текст сначала преобразуется в байты с помощью компонента {\b Message Decoder}. С заданными настройками текст интерпретируется в формате ASCII. Результирующие байты зашифровываются с помощью {\b FEAL} и получается другая последовательность байтов. Затем он преобразуется в шестнадцатеричный формат с использованием компонента {\b message encoder} и вывода. Этот шаблон также можно использовать для дешифрования сообщений. Для этого зашифрованные шестнадцатеричные значения сначала должны быть скопированы в компонент {\b plaintext}. Затем необходимо выполнить следующие настройки: (1) Формат ввода в компоненте {\b декодер сообщений} должен быть установлен в &amp;quot;шестнадцатеричный&amp;quot;; (2) В компоненте {\b FEAL} действие должно быть установлено на «Расшифровка»; (3) Формат в компоненте {\b Message Encoder} должен быть установлен в текст, а кодировка - в «ASCII»." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key (Hex values)" />
+    <replacement key="$Message Encoder$" value="Message Encoder" />
+    <replacement key="$Message Decoder$" value="Message Decoder" />
+    <replacement key="$Key Decoder$" value="Key Decoder" />
+    <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$text$" value="The quick brown fox jumps over the lazy dog." />
+    <replacement key="$memo$" value="With this template you can use the {\b FEAL} component to encrypt an arbitrary text entered in the {\b Plaintext} component on the left side. The resulting encrypted text is displayed in the {\b Ciphertext} component on the right side after hitting the Play button. The {\b FEAL} component works on binary values, i.e. bytes. Thus, the inputted text is first converted to bytes with the {\b Message decoder} component. With the current settings, it is interpreted as ASCII. The resulting bytes are then encrypted with {\b FEAL}, yielding another sequence of bytes. These bytes are then simply printed as hexadecimal values with the help of the {\b Message encoder} component. Note that you can also decrypt messages with this template. To do so, you first copy the encrypted hexadecimal values to the {\b Plaintext}. Then you have to change the following: (1) Set Input format of the {\b Message decoder} to Hexadecimal; (2) Set Action of {\b FEAL} to Decrypt; (3) Set Format of the {\b Message encoder} to Text and the encoding to ASCII." />
+  </replacements>
+</sample>

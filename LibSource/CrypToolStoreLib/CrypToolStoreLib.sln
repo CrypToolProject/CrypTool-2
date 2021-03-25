@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrypToolStoreLib", "CrypToolStoreLib\CrypToolStoreLib.csproj", "{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrypToolStoreDeveloperClient", "CrypToolStoreDeveloperClient\CrypToolStoreDeveloperClient.csproj", "{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrypToolStoreBuildSystem", "CrypToolStoreBuildSystem\CrypToolStoreBuildSystem.csproj", "{8F4ABD94-6D6E-49CC-87A6-889846233994}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomBuildTasks", "CustomBuildTasks\CustomBuildTasks.csproj", "{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Debug|x64.ActiveCfg = Debug|x64
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Debug|x64.Build.0 = Debug|x64
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Debug|x86.ActiveCfg = Debug|x86
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Debug|x86.Build.0 = Debug|x86
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Release|x64.ActiveCfg = Release|x64
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Release|x64.Build.0 = Release|x64
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Release|x86.ActiveCfg = Release|x86
+		{40B855E9-5AF4-49EA-9A99-268F9AD14DFE}.Release|x86.Build.0 = Release|x86
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Debug|x64.ActiveCfg = Debug|x64
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Debug|x64.Build.0 = Debug|x64
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Debug|x86.ActiveCfg = Debug|x86
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Debug|x86.Build.0 = Debug|x86
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Release|x64.ActiveCfg = Release|x64
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Release|x64.Build.0 = Release|x64
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Release|x86.ActiveCfg = Release|x86
+		{AC89A28A-71EE-4BD1-84AB-9F8438DBD32E}.Release|x86.Build.0 = Release|x86
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Debug|x64.ActiveCfg = Debug|x64
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Debug|x64.Build.0 = Debug|x64
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Debug|x86.ActiveCfg = Debug|x86
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Debug|x86.Build.0 = Debug|x86
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Release|x64.ActiveCfg = Release|x64
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Release|x64.Build.0 = Release|x64
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Release|x86.ActiveCfg = Release|x86
+		{445B7F08-D2D3-40EC-BB21-FBBB16003EDF}.Release|x86.Build.0 = Release|x86
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Debug|x64.ActiveCfg = Debug|x64
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Debug|x64.Build.0 = Debug|x64
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Debug|x86.ActiveCfg = Debug|x86
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Debug|x86.Build.0 = Debug|x86
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Release|x64.ActiveCfg = Release|x64
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Release|x64.Build.0 = Release|x64
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Release|x86.ActiveCfg = Release|x86
+		{8F4ABD94-6D6E-49CC-87A6-889846233994}.Release|x86.Build.0 = Release|x86
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Debug|x64.ActiveCfg = Debug|x64
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Debug|x64.Build.0 = Debug|x64
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Debug|x86.ActiveCfg = Debug|x86
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Debug|x86.Build.0 = Debug|x86
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Release|x64.ActiveCfg = Release|x64
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Release|x64.Build.0 = Release|x64
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Release|x86.ActiveCfg = Release|x86
+		{6A5B6AB9-ADB2-451C-8A6D-C38056533F74}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

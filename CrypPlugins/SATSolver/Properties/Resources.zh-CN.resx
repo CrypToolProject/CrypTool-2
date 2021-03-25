@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppendStr" xml:space="preserve">
+    <value>附加</value>
+  </data>
+  <data name="BasicStr" xml:space="preserve">
+    <value>基本的</value>
+  </data>
+  <data name="CCMinCaption" xml:space="preserve">
+    <value>冲突条款最小化</value>
+  </data>
+  <data name="CCMinTooltip" xml:space="preserve">
+    <value>减小学习到的冲突条款的大小</value>
+  </data>
+  <data name="ClauseDecayCaption" xml:space="preserve">
+    <value>子句活动衰减因子</value>
+  </data>
+  <data name="ClauseDecayTooltip" xml:space="preserve">
+    <value>设置子句活动的衰减因子（必须在0.0到1.0之间，默认值= 0.999）</value>
+  </data>
+  <data name="ClearOutputCaption" xml:space="preserve">
+    <value>清除输出</value>
+  </data>
+  <data name="ClearOutputTooltip" xml:space="preserve">
+    <value>设置是否在每次执行后清除控制台输出</value>
+  </data>
+  <data name="CoreOptionsGroup" xml:space="preserve">
+    <value>求解器选项</value>
+  </data>
+  <data name="DeepStr" xml:space="preserve">
+    <value>深</value>
+  </data>
+  <data name="DimacsCaption" xml:space="preserve">
+    <value>迪马克斯</value>
+  </data>
+  <data name="DimacsTooltip" xml:space="preserve">
+    <value>不解决，只是简化CNF</value>
+  </data>
+  <data name="ElimCaption" xml:space="preserve">
+    <value>消除变量</value>
+  </data>
+  <data name="ElimTooltip" xml:space="preserve">
+    <value>执行变量消除</value>
+  </data>
+  <data name="FullStr" xml:space="preserve">
+    <value>充分</value>
+  </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>输入值</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>输入CNF作为文本</value>
+  </data>
+  <data name="LimitedStr" xml:space="preserve">
+    <value>有限</value>
+  </data>
+  <data name="LubyCaption" xml:space="preserve">
+    <value>鲁比序列</value>
+  </data>
+  <data name="LubyTooltip" xml:space="preserve">
+    <value>使用luby重新启动序列</value>
+  </data>
+  <data name="MoreStr" xml:space="preserve">
+    <value>详细</value>
+  </data>
+  <data name="NoneStr" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="OffStr" xml:space="preserve">
+    <value>关</value>
+  </data>
+  <data name="OnStr" xml:space="preserve">
+    <value>上</value>
+  </data>
+  <data name="OutputatResultTooltip" xml:space="preserve">
+    <value>求解器的结果输出</value>
+  </data>
+  <data name="OutputConsoleCaption" xml:space="preserve">
+    <value>输出控制台流</value>
+  </data>
+  <data name="OutputConsoleTooltip" xml:space="preserve">
+    <value>求解器的控制台输出</value>
+  </data>
+  <data name="OutputOptionsGroup" xml:space="preserve">
+    <value>输出选项</value>
+  </data>
+  <data name="OutputResultCaption" xml:space="preserve">
+    <value>输出结果流</value>
+  </data>
+  <data name="PhaseSavingCaption" xml:space="preserve">
+    <value>阶段保存水平</value>
+  </data>
+  <data name="PhaseSavingTooltip" xml:space="preserve">
+    <value>将每个决策变量分配给布尔约束传播最后强制的值</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>SAT解算器</value>
+  </data>
+  <data name="PluginDescription" xml:space="preserve">
+    <value>测试布尔公式的可满足性</value>
+  </data>
+  <data name="PreprocessCaption" xml:space="preserve">
+    <value>预处理器</value>
+  </data>
+  <data name="PreprocessorOptionsGroup" xml:space="preserve">
+    <value>预处理选项</value>
+  </data>
+  <data name="PreprocessTooltip" xml:space="preserve">
+    <value>开启/关闭预处理（简化CNF）</value>
+  </data>
+  <data name="RandomFreqCaption" xml:space="preserve">
+    <value>随机频率</value>
+  </data>
+  <data name="RandomFreqTooltip" xml:space="preserve">
+    <value>变量决策启发式尝试选择随机变量的频率（必须在0.0到1.0之间，默认为0）</value>
+  </data>
+  <data name="RandomInitCaption" xml:space="preserve">
+    <value>随机化初始活动</value>
+  </data>
+  <data name="RandomInitTooltip" xml:space="preserve">
+    <value>将所有变量初始化为随机值</value>
+  </data>
+  <data name="RCheckCaption" xml:space="preserve">
+    <value>条款检查</value>
+  </data>
+  <data name="RCheckTooltip" xml:space="preserve">
+    <value>检查子句是否已经隐含</value>
+  </data>
+  <data name="RFirstCaption" xml:space="preserve">
+    <value>基本重启间隔</value>
+  </data>
+  <data name="RFirstTooltip" xml:space="preserve">
+    <value>求解程序执行了多少次冲突后的基本间隔（0-maxint，默认= 100）</value>
+  </data>
+  <data name="RIncCaption" xml:space="preserve">
+    <value>重新启动间隔增加系数</value>
+  </data>
+  <data name="RIncTooltip" xml:space="preserve">
+    <value>重新启动后重新启动间隔乘以的因子（必须大于1.0，默认值= 2）</value>
+  </data>
+  <data name="SilentStr" xml:space="preserve">
+    <value>无声</value>
+  </data>
+  <data name="SomeStr" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="SubLimitCaption" xml:space="preserve">
+    <value>纳入限制</value>
+  </data>
+  <data name="SubLimitTooltip" xml:space="preserve">
+    <value>不要检查是否包含大于此子句的子句（-1-maxint，default = 1000，-1表示没有限制）</value>
+  </data>
+  <data name="VarDecayCaption" xml:space="preserve">
+    <value>可变活动衰减因子</value>
+  </data>
+  <data name="VarDecayTooltip" xml:space="preserve">
+    <value>设置可变活动的衰减因子（必须在0.0到1.0之间，默认值= 0.95）</value>
+  </data>
+  <data name="VerbosityCaption" xml:space="preserve">
+    <value>细度</value>
+  </data>
+  <data name="VerbosityTooltip" xml:space="preserve">
+    <value>设置详细程度</value>
+  </data>
+  <data name="NoStr" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="YesStr" xml:space="preserve">
+    <value>是</value>
+  </data>
+</root>

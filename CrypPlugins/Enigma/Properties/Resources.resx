@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InputGramsCaption" xml:space="preserve">
+    <value>n-gram dictionary</value>
+  </data>
+  <data name="InputGramsTooltip" xml:space="preserve">
+    <value>Dictionary with gram counts (string -&gt; [absolute, percentaged, log2])</value>
+  </data>
+  <data name="TextInputCaption" xml:space="preserve">
+    <value>Text input</value>
+  </data>
+  <data name="TextInputTooltip" xml:space="preserve">
+    <value>Input a text to be encrypted or decrypted by the Enigma machine</value>
+  </data>
+  <data name="TextOutputCaption" xml:space="preserve">
+    <value>Text output</value>
+  </data>
+  <data name="TextOutputTooltip" xml:space="preserve">
+    <value>The processed text, encrypted or decrypted by the Enigma machine</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Enigma</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Polyalphabetic rotor-cipher machine</value>
+  </data>
+  <data name="CaseHandlingCaption" xml:space="preserve">
+    <value>Case handling</value>
+  </data>
+  <data name="CaseHandlingTooltip" xml:space="preserve">
+    <value>What should be done with upper and lower case letters?</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Please provide the initial rotor setting for each rotor, e.g. ABCD. Note that the slowest rotor is on the left and the fastest rotor is on the right. Only the Enigma M4 ("Shark") uses four rotors.</value>
+  </data>
+  <data name="ModelCaption" xml:space="preserve">
+    <value>Enigma model</value>
+  </data>
+  <data name="ModelTooltip" xml:space="preserve">
+    <value>Please select which Enigma model you want to use. This setting influences the available rotors and their inner wiring.</value>
+  </data>
+  <data name="ModelTPCaption" xml:space="preserve">
+    <value>Enigma model</value>
+  </data>
+  <data name="ModelTPTooltip" xml:space="preserve">
+    <value>Please select which Enigma model you want to use. This setting influences the available rotors and their inner wiring.</value>
+  </data>
+  <data name="PlugBoardCaption" xml:space="preserve">
+    <value>Substitution:</value>
+  </data>
+  <data name="PlugBoardTooltip" xml:space="preserve">
+    <value>Displays the current substitution</value>
+  </data>
+  <data name="PlugBoardLetterTooltip" xml:space="preserve">
+    <value>Select the letter for connecting this plug.</value>
+  </data>
+  <data name="PresentationSpeedCaption" xml:space="preserve">
+    <value>Presentation speed</value>
+  </data>
+  <data name="PresentationSpeedTooltip" xml:space="preserve">
+    <value>Change the pace of the presentation</value>
+  </data>
+  <data name="ReflectorCaption" xml:space="preserve">
+    <value>Reflector</value>
+  </data>
+  <data name="ReflectorTooltip" xml:space="preserve">
+    <value>Select the used reflector. If you don't want to use a reflector, select none here.</value>
+  </data>
+  <data name="ResetPlugboardCaption" xml:space="preserve">
+    <value>Remove all plugs</value>
+  </data>
+  <data name="ResetPlugboardTooltip" xml:space="preserve">
+    <value>By pressing this button the plugboard is reset to its empty state, i.e. all plugs are removed</value>
+  </data>
+  <data name="Ring1Caption" xml:space="preserve">
+    <value>Ring 1 (right)</value>
+  </data>
+  <data name="Ring1Tooltip" xml:space="preserve">
+    <value>Select the the offset for ring 1</value>
+  </data>
+  <data name="Ring2Caption" xml:space="preserve">
+    <value>Ring 2</value>
+  </data>
+  <data name="Ring2Tooltip" xml:space="preserve">
+    <value>Select the the offset for ring 2</value>
+  </data>
+  <data name="Ring3Caption" xml:space="preserve">
+    <value>Ring 3</value>
+  </data>
+  <data name="Ring3Tooltip" xml:space="preserve">
+    <value>Select the the offset for ring 3</value>
+  </data>
+  <data name="Ring4Caption" xml:space="preserve">
+    <value>Ring 4 (left)</value>
+  </data>
+  <data name="Ring4Tooltip" xml:space="preserve">
+    <value>Select the the offset for ring 4</value>
+  </data>
+  <data name="Rotor1Caption" xml:space="preserve">
+    <value>Rotor 1 (fastest/right)</value>
+  </data>
+  <data name="Rotor1Tooltip" xml:space="preserve">
+    <value>Select the rotor used on the right (fastest) position.</value>
+  </data>
+  <data name="Rotor2Caption" xml:space="preserve">
+    <value>Rotor 2</value>
+  </data>
+  <data name="Rotor2Tooltip" xml:space="preserve">
+    <value>Select the rotor used on the second position.</value>
+  </data>
+  <data name="Rotor3Caption" xml:space="preserve">
+    <value>Rotor 3</value>
+  </data>
+  <data name="Rotor3Tooltip" xml:space="preserve">
+    <value>Select the rotor used on the third position.</value>
+  </data>
+  <data name="Rotor4Caption" xml:space="preserve">
+    <value>Rotor 4 (slowest/left)</value>
+  </data>
+  <data name="Rotor4Tooltip" xml:space="preserve">
+    <value>Select the rotor used on the fourth position. If you want to use only three rotors, select none here.</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Unknown symbol handling</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>What should be done with characters in the input that are not included in the alphabet?</value>
+  </data>
+  <data name="CaseHandlingList1" xml:space="preserve">
+    <value>Preserve case</value>
+  </data>
+  <data name="CaseHandlingList2" xml:space="preserve">
+    <value>Convert to upper</value>
+  </data>
+  <data name="CaseHandlingList3" xml:space="preserve">
+    <value>Convert to lower</value>
+  </data>
+  <data name="ModelList1" xml:space="preserve">
+    <value>Commercial Enigma A/B - since 1924</value>
+  </data>
+  <data name="ModelList2" xml:space="preserve">
+    <value>Commercial Enigma D</value>
+  </data>
+  <data name="ModelList3" xml:space="preserve">
+    <value>Reichsbahn (Rocket) - since 1941</value>
+  </data>
+  <data name="ModelList4" xml:space="preserve">
+    <value>Enigma I / M3</value>
+  </data>
+  <data name="ModelList5" xml:space="preserve">
+    <value>M4 (Shark)</value>
+  </data>
+  <data name="ModelList6" xml:space="preserve">
+    <value>K-Model</value>
+  </data>
+  <data name="ModelList7" xml:space="preserve">
+    <value>G (Defense model)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Ignore (leave unmodified)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Replace with 'X'</value>
+  </data>
+  <data name="PlugboardGroup" xml:space="preserve">
+    <value>Plugboard</value>
+  </data>
+  <data name="PresentationGroup" xml:space="preserve">
+    <value>Presentation</value>
+  </data>
+  <data name="RingSettingsGroup" xml:space="preserve">
+    <value>Ring settings</value>
+  </data>
+  <data name="TextOptionsGroup" xml:space="preserve">
+    <value>Text options</value>
+  </data>
+  <data name="UsedRotorsGroup" xml:space="preserve">
+    <value>Rotors used</value>
+  </data>
+  <data name="Ringstellung_" xml:space="preserve">
+    <value>Ring settings:</value>
+  </data>
+  <data name="Rotorlage_" xml:space="preserve">
+    <value>Rotor position:</value>
+  </data>
+  <data name="Please_stop_the_Workspace_for_Presentation" xml:space="preserve">
+    <value>Please stop the Workspace for Presentation!</value>
+  </data>
+  <data name="Reflector1" xml:space="preserve">
+    <value>UKW A</value>
+  </data>
+  <data name="Reflector10" xml:space="preserve">
+    <value>Not available for this model.</value>
+  </data>
+  <data name="Reflector2" xml:space="preserve">
+    <value>UKW B (2. November 1937)</value>
+  </data>
+  <data name="Reflector3" xml:space="preserve">
+    <value>UKW C (since 1940/41)</value>
+  </data>
+  <data name="Reflector4" xml:space="preserve">
+    <value>UKW (D)</value>
+  </data>
+  <data name="Reflector5" xml:space="preserve">
+    <value>UKW (Rocket) -- since 7th Feb. 1941</value>
+  </data>
+  <data name="Reflector6" xml:space="preserve">
+    <value>UKW B "thin" -- since 1st Feb. 1942</value>
+  </data>
+  <data name="Reflector7" xml:space="preserve">
+    <value>UKW C "thin" -- since 1st July 1943</value>
+  </data>
+  <data name="Reflector8" xml:space="preserve">
+    <value>UKW (K) -- since Feb. 1939</value>
+  </data>
+  <data name="Reflector9" xml:space="preserve">
+    <value>UKW (G)</value>
+  </data>
+  <data name="RotorA1" xml:space="preserve">
+    <value>I (since 1930)</value>
+  </data>
+  <data name="RotorA10" xml:space="preserve">
+    <value>II (C) -- since 1924</value>
+  </data>
+  <data name="RotorA11" xml:space="preserve">
+    <value>III (C) -- since 1924</value>
+  </data>
+  <data name="RotorA12" xml:space="preserve">
+    <value>I (D)</value>
+  </data>
+  <data name="RotorA13" xml:space="preserve">
+    <value>II (D)</value>
+  </data>
+  <data name="RotorA14" xml:space="preserve">
+    <value>III (D)</value>
+  </data>
+  <data name="RotorA15" xml:space="preserve">
+    <value>I (Rocket) -- since 7th Feb. 1941</value>
+  </data>
+  <data name="RotorA16" xml:space="preserve">
+    <value>II (Rocket) -- since 7th Feb. 1941</value>
+  </data>
+  <data name="RotorA17" xml:space="preserve">
+    <value>III (Rocket) -- since 7th Feb. 1941</value>
+  </data>
+  <data name="RotorA18" xml:space="preserve">
+    <value>I (K) -- since Feb. 1939</value>
+  </data>
+  <data name="RotorA19" xml:space="preserve">
+    <value>II (K) -- since Feb. 1939</value>
+  </data>
+  <data name="RotorA2" xml:space="preserve">
+    <value>II (since 1930)</value>
+  </data>
+  <data name="RotorA20" xml:space="preserve">
+    <value>III (K) -- since Feb. 1939</value>
+  </data>
+  <data name="RotorA21" xml:space="preserve">
+    <value>I (G)</value>
+  </data>
+  <data name="RotorA22" xml:space="preserve">
+    <value>II (G)</value>
+  </data>
+  <data name="RotorA23" xml:space="preserve">
+    <value>III (G)</value>
+  </data>
+  <data name="RotorA3" xml:space="preserve">
+    <value>III (since 1930)</value>
+  </data>
+  <data name="RotorA4" xml:space="preserve">
+    <value>IV (since 1938, M3 "Heer")</value>
+  </data>
+  <data name="RotorA5" xml:space="preserve">
+    <value>V (since 1938, M3 "Heer")</value>
+  </data>
+  <data name="RotorA6" xml:space="preserve">
+    <value>VI (since 1939, M3/M4)</value>
+  </data>
+  <data name="RotorA7" xml:space="preserve">
+    <value>VII (since 1939, M3/M4)</value>
+  </data>
+  <data name="RotorA8" xml:space="preserve">
+    <value>VIII (since 1939, M3/M4)</value>
+  </data>
+  <data name="RotorA9" xml:space="preserve">
+    <value>I (C) -- since 1924</value>
+  </data>
+  <data name="RotorB1" xml:space="preserve">
+    <value>Not available for this model.</value>
+  </data>
+  <data name="RotorB2" xml:space="preserve">
+    <value>Beta -- since 1st Feb. 1942</value>
+  </data>
+  <data name="RotorB3" xml:space="preserve">
+    <value>Gamma -- since 1st July 1943</value>
+  </data>
+  <data name="EnigmaPresentationFrame_ChangeStatus_Presentation_aktive" xml:space="preserve">
+    <value>Presentation active</value>
+  </data>
+  <data name="EnigmaPresentationFrame_ChangeStatus_Presentation_ready" xml:space="preserve">
+    <value>Presentation ready</value>
+  </data>
+  <data name="EnigmaPresentationFrame_ChangeStatus" xml:space="preserve">
+    <value>Workspace active, Presentation turned off</value>
+  </data>
+  <data name="EnigmaPresentationFrame_ChangeStatus_Präsentation_turned_off" xml:space="preserve">
+    <value>Presentation turned off</value>
+  </data>
+  <data name="EnigmaPresentationFrame_visbileCheckbox_Checked_Restart_Workspace" xml:space="preserve">
+    <value>Restart Workspace</value>
+  </data>
+  <data name="PresentationActivation" xml:space="preserve">
+    <value>Activate Presentation</value>
+  </data>
+  <data name="KeyInputCaption" xml:space="preserve">
+    <value>Key input</value>
+  </data>
+  <data name="KeyInputTooltip" xml:space="preserve">
+    <value>Input an Enigma key containing the rotors to use, the rings to use, and the plugboard connections.</value>
+  </data>
+  <data name="InitialRotorPosCaption" xml:space="preserve">
+    <value>Initial rotor setting</value>
+  </data>
+  <data name="InitialRotorPosTooltip" xml:space="preserve">
+    <value>Enter the initial position of the rotors (for example AAAA).</value>
+  </data>
+</root>

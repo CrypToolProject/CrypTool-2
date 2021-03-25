@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>Extract</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Choose an action</value>
+  </data>
+  <data name="ApplyButton" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ApplyChangesButton" xml:space="preserve">
+    <value>Apply changes</value>
+  </data>
+  <data name="BackToMainMenu" xml:space="preserve">
+    <value>Back to main menu</value>
+  </data>
+  <data name="BitmaskTooltip" xml:space="preserve">
+    <value>Choose a bitmask that defines which bits should be used for the hiding process</value>
+  </data>
+  <data name="BitsAfterLabel" xml:space="preserve">
+    <value>RGB bits after</value>
+  </data>
+  <data name="BitsBeforeLabel" xml:space="preserve">
+    <value>RGB bits before</value>
+  </data>
+  <data name="BitsChosenLabel" xml:space="preserve">
+    <value>Number of bits chosen to hide the secret message:</value>
+  </data>
+  <data name="BlueBitMaskLabel" xml:space="preserve">
+    <value>Blue bitmask</value>
+  </data>
+  <data name="BluePBLabel" xml:space="preserve">
+    <value>Blue bit planes</value>
+  </data>
+  <data name="BlueValueLabel" xml:space="preserve">
+    <value>Blue value: </value>
+  </data>
+  <data name="BPCSMainMenu1" xml:space="preserve">
+    <value>Understand how the algorithm works</value>
+  </data>
+  <data name="BPCSMainMenu2" xml:space="preserve">
+    <value>See hiding process</value>
+  </data>
+  <data name="BPCSMainMenu3" xml:space="preserve">
+    <value>See pixel conversion</value>
+  </data>
+  <data name="BPCSMainMenu4" xml:space="preserve">
+    <value>See different bit planes</value>
+  </data>
+  <data name="ChooseBitsButton" xml:space="preserve">
+    <value>Choose other bits</value>
+  </data>
+  <data name="ChooseBitsViewText1" xml:space="preserve">
+    <value>Click on the bits that should be used to hide the message bits</value>
+  </data>
+  <data name="ChooseBitsViewTitle" xml:space="preserve">
+    <value>Choose Bits View</value>
+  </data>
+  <data name="ColorOrderCaption" xml:space="preserve">
+    <value>Color order </value>
+  </data>
+  <data name="ColorOrderTooltip" xml:space="preserve">
+    <value>Select with help of the different possible color ordering, how the bit planes should be ordered</value>
+  </data>
+  <data name="ComplexityCaption" xml:space="preserve">
+    <value>Complexity Threshold</value>
+  </data>
+  <data name="ComplexityLabel" xml:space="preserve">
+    <value>Complexity: </value>
+  </data>
+  <data name="ComplexityTooltip" xml:space="preserve">
+    <value>Select a threshold for the complexity value, which is used to determine whether a block is complex or not. This value should be between 0 and 1</value>
+  </data>
+  <data name="ConjugatedLabel" xml:space="preserve">
+    <value>Conjugated: </value>
+  </data>
+  <data name="ConjugationText" xml:space="preserve">
+    <value>P is the original message block, Wc is the checkboard pattern which increases the complexity, and P* is the conjugated version of the message block P. </value>
+  </data>
+  <data name="ConversionViewText1" xml:space="preserve">
+    <value>The hiding procedure is now done, you can see the ouput image in the picture output component.</value>
+  </data>
+  <data name="ConversionViewText2" xml:space="preserve">
+    <value>You can see the conversion of the pixels by entering the x and y coordinates in the text box below, or by using the arrows to browse through the pixels.</value>
+  </data>
+  <data name="CurrentComplexBlockNrLabel" xml:space="preserve">
+    <value>Current complex block number: </value>
+  </data>
+  <data name="CurrentImageBlockNrLabel" xml:space="preserve">
+    <value>Current image block number: </value>
+  </data>
+  <data name="CurrentMessageBlockNrLabel" xml:space="preserve">
+    <value>Current message block numer: </value>
+  </data>
+  <data name="CurrentPixelLabel" xml:space="preserve">
+    <value> Current pixel</value>
+  </data>
+  <data name="GreenBitMaskLabel" xml:space="preserve">
+    <value>Green bitmask</value>
+  </data>
+  <data name="GreenPBLabel" xml:space="preserve">
+    <value>Green bit planes</value>
+  </data>
+  <data name="GreenValueLabel" xml:space="preserve">
+    <value>Green value: </value>
+  </data>
+  <data name="HiderBlocksPanelText1" xml:space="preserve">
+    <value>Image block on the right is replaced with the message block on the left</value>
+  </data>
+  <data name="HidingAndCapacityTitle" xml:space="preserve">
+    <value> Overview and Hiding Capacity Information</value>
+  </data>
+  <data name="HidingCapacityText" xml:space="preserve">
+    <value>Hiding capacity: </value>
+  </data>
+  <data name="HidingProcessViewTitle" xml:space="preserve">
+    <value>Hiding Process</value>
+  </data>
+  <data name="HintPrompt" xml:space="preserve">
+    <value>Hint: Start the program with the "Play" button in the ribbon bar. This enables the button "Choose bits" above.</value>
+  </data>
+  <data name="HintPrompt2" xml:space="preserve">
+    <value>Choose the hiding bits in order to perform the hiding process and activate the other views. </value>
+  </data>
+  <data name="HintPrompt3" xml:space="preserve">
+    <value>Hint: Start the program with the "Play" button in the ribbon bar. This executes the hiding process and enables the buttons to access the other views.</value>
+  </data>
+  <data name="ImageBlocksInfoText1" xml:space="preserve">
+    <value>Total number of image blocks:</value>
+  </data>
+  <data name="ImageBlocksInfoText2" xml:space="preserve">
+    <value>Number of complex image blocks: </value>
+  </data>
+  <data name="ImageHeightLabel" xml:space="preserve">
+    <value>Image height: </value>
+  </data>
+  <data name="ImageInfoLabel" xml:space="preserve">
+    <value>Image information: </value>
+  </data>
+  <data name="ImageWidthLabel" xml:space="preserve">
+    <value>Image width: </value>
+  </data>
+  <data name="InputImageCaption" xml:space="preserve">
+    <value>Image input</value>
+  </data>
+  <data name="InputImageTooltip" xml:space="preserve">
+    <value>Upload an image in which the secret message should be hidden or from which the secret message should be extracted</value>
+  </data>
+  <data name="InputMessageCaption" xml:space="preserve">
+    <value>Message input</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>Enter a text which you want to hide in an image</value>
+  </data>
+  <data name="Intro0Text1" xml:space="preserve">
+    <value>Steganography is the procedure of hiding secret data inside non-secret files to conceal the fact that a secret message is being communicated.</value>
+  </data>
+  <data name="Intro0Text2" xml:space="preserve">
+    <value>The term combines the greek words steganós which means hidden and graph which means writing.</value>
+  </data>
+  <data name="Intro0Text3" xml:space="preserve">
+    <value>The procedure aims to encode data in a way that is so subtle such thatthe changes cannot be noticed.</value>
+  </data>
+  <data name="Intro0Text4" xml:space="preserve">
+    <value>Steganogrphy can be combined with cryptography to add an additional layer of security when communicating sensitive data.</value>
+  </data>
+  <data name="Intro1Text1" xml:space="preserve">
+    <value>This diagram shows how the steganography procedure normaly works over an insecure communication channel.</value>
+  </data>
+  <data name="Intro1Text2" xml:space="preserve">
+    <value>The secret message can be encrypted (ciphertext) or plaintext.</value>
+  </data>
+  <data name="Intro2BPCSText1" xml:space="preserve">
+    <value>BPCS algorithm was introduced to overcome the shortcomings of traditional steganography techniques with limited data hiding capacity. This technique can hide up to 50% of the cover image data amount without much distortion in the visual appearance of the original image.</value>
+  </data>
+  <data name="Intro2BPCSText2" xml:space="preserve">
+    <value>In BPCS, a multi-valued image consisting of 24-bit pixels can bedecomposed into a set of 24 binary pictures (bit planes).</value>
+  </data>
+  <data name="Intro2BPCSText3" xml:space="preserve">
+    <value>These planes are divided into 8 x 8 pixel blocks, the blocks are then classified into noise like regions and informative regions, </value>
+  </data>
+  <data name="Intro2BPCSText4" xml:space="preserve">
+    <value>Noise like regions (complex regions) can be replaced with 8 x 8 bit blocks of the secret message which should also be complex. If the message block is not complex it should be conjugated to keep the complexity level of the image block, </value>
+  </data>
+  <data name="Intro2BPCSTitle" xml:space="preserve">
+    <value>BPCS Algorithm</value>
+  </data>
+  <data name="Intro2LSBText1" xml:space="preserve">
+    <value>In the LSB algorithm, the bits of the secret message replace the least significant bits (LSB) of the pixel bits of the input cover image.</value>
+  </data>
+  <data name="Intro2LSBText2" xml:space="preserve">
+    <value>Changing the LSB of a pixel's red, blue and green channels results in a difference that is almost impossible to detect with the naked eye, therefore there would be no suspicion that a secret message is hidden in the image.</value>
+  </data>
+  <data name="Intro2LSBText3" xml:space="preserve">
+    <value>Example: encoding the message bits 111 in the following pixel:</value>
+  </data>
+  <data name="Intro2LSBTitle" xml:space="preserve">
+    <value>LSB Algorithm</value>
+  </data>
+  <data name="Intro3BPCSTitle" xml:space="preserve">
+    <value>Noise-like vs. Informative Regions Examples</value>
+  </data>
+  <data name="Intro3LSBText1" xml:space="preserve">
+    <value>This is going to be an interactive visualization where you are able to choose the bits that the secret message bits will replace and see the difference between choosing the MSB and LSB for example.</value>
+  </data>
+  <data name="Intro3LSBText2" xml:space="preserve">
+    <value>After choosing the bits and executing the program, you can browse through the pixels and see how the replacing process changed each pixel.</value>
+  </data>
+  <data name="Intro3LSBText3" xml:space="preserve">
+    <value>The last 3 pixels are used to store information for the extraction process, including: length of the secret message and bits used to encode.</value>
+  </data>
+  <data name="Intro3LSBText4" xml:space="preserve">
+    <value>Using only the LSB to hide data, the algorithm can hide up to width * height * 3 bits (minus 72 bits for hiding the header information).</value>
+  </data>
+  <data name="Intro3LSBTitle" xml:space="preserve">
+    <value>More Information before We Start</value>
+  </data>
+  <data name="Intro4BPCSTitle" xml:space="preserve">
+    <value>Conjugation Illustration</value>
+  </data>
+  <data name="InvalidComplexityThresholdInput" xml:space="preserve">
+    <value>Invalid input for complexity threshold, value should be between 0 and 1</value>
+  </data>
+  <data name="InvalidInputPrompt" xml:space="preserve">
+    <value>Invalid input, please enter value: </value>
+  </data>
+  <data name="LSBMainMenu1" xml:space="preserve">
+    <value>Understand how the algorithm works</value>
+  </data>
+  <data name="LSBMainMenu2" xml:space="preserve">
+    <value>Choose bits for hiding process</value>
+  </data>
+  <data name="LSBMainMenu3" xml:space="preserve">
+    <value>See pixel conversion</value>
+  </data>
+  <data name="LSBMainMenu4" xml:space="preserve">
+    <value>Overview and hiding capacity information</value>
+  </data>
+  <data name="MessageBlocksInfoText1" xml:space="preserve">
+    <value>Total number of message blocks: </value>
+  </data>
+  <data name="MessageBlocksInfoText2" xml:space="preserve">
+    <value>Message size: </value>
+  </data>
+  <data name="MessageInfoLabel" xml:space="preserve">
+    <value>Message information: </value>
+  </data>
+  <data name="MessageLengthExtractLabel" xml:space="preserve">
+    <value>Message length: </value>
+  </data>
+  <data name="MessageLengthLabel" xml:space="preserve">
+    <value>Message length: </value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>LSB Steganography</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>BPCS Steganography</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Choose a mode</value>
+  </data>
+  <data name="NextButton" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NoImageLogMessage" xml:space="preserve">
+    <value>Please upload an image</value>
+  </data>
+  <data name="NoPresentationPrompt" xml:space="preserve">
+    <value>No presentation to be shown</value>
+  </data>
+  <data name="NotEnoughHidingCapacity" xml:space="preserve">
+    <value>The hiding capcity is less than the size of the secret message, therefore not the whole message was hidden in the image. </value>
+  </data>
+  <data name="NoTextLogMessage" xml:space="preserve">
+    <value>Please enter a message to hide</value>
+  </data>
+  <data name="OutputImageCaption" xml:space="preserve">
+    <value>Image output</value>
+  </data>
+  <data name="OutputImageTooltip" xml:space="preserve">
+    <value>This is the image with secret message encoded</value>
+  </data>
+  <data name="OutputMessageCaption" xml:space="preserve">
+    <value>Message output</value>
+  </data>
+  <data name="OutputMessageTooltip" xml:space="preserve">
+    <value>This is the extracted message</value>
+  </data>
+  <data name="PercentageCapacityLabel" xml:space="preserve">
+    <value>Hiding capacity percentage: </value>
+  </data>
+  <data name="PixelConversionViewTitle" xml:space="preserve">
+    <value> Pixel Conversion </value>
+  </data>
+  <data name="PlaneLabel" xml:space="preserve">
+    <value>Plane layer: </value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Image Steganography</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Hide a secret message in an image</value>
+  </data>
+  <data name="PointLabel" xml:space="preserve">
+    <value>Point</value>
+  </data>
+  <data name="PreviousButton" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="RedBitMaskLabel" xml:space="preserve">
+    <value>Red bitmask</value>
+  </data>
+  <data name="RedPBLabel" xml:space="preserve">
+    <value>Red bit planes</value>
+  </data>
+  <data name="RedValueLabel" xml:space="preserve">
+    <value>Red value: </value>
+  </data>
+  <data name="SeePixelConversionButton" xml:space="preserve">
+    <value>See pixel conversion</value>
+  </data>
+  <data name="SeeSlide4Text" xml:space="preserve">
+    <value>see slide 1.4.</value>
+  </data>
+  <data name="SeeSlide5Text" xml:space="preserve">
+    <value>see slide 1.5.</value>
+  </data>
+  <data name="ShowAllBlocksButton" xml:space="preserve">
+    <value>Show all image blocks</value>
+  </data>
+  <data name="ShowButton" xml:space="preserve">
+    <value>show</value>
+  </data>
+  <data name="ShowHiderBlocksButton" xml:space="preserve">
+    <value>Show complex blocks</value>
+  </data>
+  <data name="ShowPresentationPrompt" xml:space="preserve">
+    <value>To show the presentation here, click on the "Settings" icon above and enable the checkbox "Show presentation". Changing settings is only possible, if the template is stopped.</value>
+  </data>
+  <data name="ShowPresentationSettingsCaption" xml:space="preserve">
+    <value>Show presentation</value>
+  </data>
+  <data name="ShowPresentationSettingsTooltip" xml:space="preserve">
+    <value>Show presentation of the hiding process</value>
+  </data>
+  <data name="SkipIntroButton" xml:space="preserve">
+    <value>Skip intro</value>
+  </data>
+  <data name="StartButton" xml:space="preserve">
+    <value>Let's Start</value>
+  </data>
+  <data name="SteganographyLabel" xml:space="preserve">
+    <value>Steganography</value>
+  </data>
+  <data name="SteganographyModelLabel" xml:space="preserve">
+    <value>Steganography Model</value>
+  </data>
+  <data name="StegModelUrl" xml:space="preserve">
+    <value>images/model_en.png</value>
+  </data>
+  <data name="XCoTextArea" xml:space="preserve">
+    <value> x coordinate</value>
+  </data>
+  <data name="YCoTextArea" xml:space="preserve">
+    <value> y coordinate</value>
+  </data>
+</root>

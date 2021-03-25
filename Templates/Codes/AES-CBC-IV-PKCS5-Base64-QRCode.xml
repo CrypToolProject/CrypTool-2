@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">AES (CBC) with PKCS#5 and IV, Output as QR Code</title>
+  <title lang="zh">带有PKCS＃5和IV的AES（CBC），输出为QR码</title>
+  <title lang="ru">AES (CBC) с PKCS # 5 и IV, выводятся как QR-код</title>
+  <summary lang="en">Usage of the <i>AES</i> cipher in CBC mode with an initialization vector, where the session key is generated from a password using <i>PKCS#5</i> and the ciphertext is encoded in base64 and finally stored in a QR Code</summary>
+  <summary lang="zh">带有初始化向量的CBC模式下AES密码的使用，其中会话密钥是使用PKCS＃5从密码生成的，并且密文在base64中进行编码并最终存储在QR码中</summary>
+  <summary lang="ru">Использование шифрования AES в режиме CBC с вектором инициализации, где ключ сеанса генерируется из пароля с использованием PKCS # 5, а шифрованный текст кодируется в base64 и, наконец, сохраняется в QR-коде</summary>
+  <description lang="en">In this template we provide a quick way to encrypt plaintext with AES [1] by using a simple password (which is converted to an AES key by using PKCS#5 [2]).
+	The result is base64-encoded and stored in a QR Code.
+	Decryption is also possible with this template: First the AES <b>component</b> needs to be switched to "Decrypt" and the <b>Switch</b> component must be set to <i>True</i>.
+	With the help of the <b>Switch</b> component, the data takes a different path, i.e. for decryption we first need to base64 decode it, 
+	while when encrypting we encode it in base64 after encryption.
+	Finally, start the template and put an encrypted QR Code in front of your webcam until the <b>Visual decoder</b> component decodes it.
+	<newline /><newline />
+	Additionally, this template uses a random initialization vector (IV) to strengthen the security of the message.
+	The IV is also encoded in base64 and prepended to the encrypted message. On the receiving side, the received IV is
+	decoded and used to decrypt the message. Using a random IV for every message yields always different ciphertexts even when sending the same plaintext.
+  <newline /><newline />
+Sources:<newline />
+[1] <external ref="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" /><newline />
+[2] <external ref="http://tools.ietf.org/html/rfc2898" /></description>
+  <description lang="zh">在此模板中，我们提供了一种使用简单密码（通过使用PKCS＃5 [2]转换为AES密钥）和AES [1]加密明文的快速方法。结果经过base64编码并存储在QR码中。使用此模板也可以进行解密：首先，需要将AES组件切换为“解密”，并且必须将Switch组件设置为True。在Switch组件的帮助下，数据采用了不同的路径，即，对于解密，我们首先需要对base64进行解码，而在加密时，加密后我们将其编码为base64。最后，启动模板，并将加密的QR码放在网络摄像头前面，直到Visual解码器组件对其进行解码为止。此外，此模板使用随机初始化向量（IV）来增强消息的安全性。 IV也以base64编码，并加在加密的消息之前。在接收方，对接收到的IV进行解码，并用于解密消息。即使发送相同的明文，对每条消息使用随机IV也会产生始终不同的密文。资料来源：[1] [2]</description>
+  <description lang="ru">В этом шаблоне мы предлагаем быстрый способ шифрования открытого текста с помощью AES [1] с помощью простого пароля (который преобразуется в ключ AES с помощью PKCS # 5 [2]). Результат кодируется base64 и сохраняется в QR-коде. Расширение также возможно с помощью этого шаблона: сначала компонент AES необходимо переключить на «Расшифровать», а компонент Switch должен быть установлен на «Истина». С помощью компонента Switch данные берут другой путь, то есть для дешифрования нам сначала нужно выполнить декодирование base64, а при шифровании мы кодируем его в base64 после шифрования. Наконец, запустите шаблон и поместите зашифрованный QR-код перед вашей веб-камерой, пока компонент визуального декодера не расшифрует его. Кроме того, этот шаблон использует случайный вектор инициализации (IV) для усиления безопасности сообщения. IV также кодируется в base64 и добавляется к зашифрованному сообщению. На принимающей стороне принятый IV декодируется и используется для дешифрования сообщения. Использование случайного IV для каждого сообщения дает всегда разные зашифрованные тексты даже при отправке одного и того же открытого текста. Источники: [1] [2]</description>
+  <keywords>advanced, Daemen, Rijmen, Rijndael, symmetric, nist, pkcs, password, base64, qrcode</keywords>
+  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist，pkcs，密码，base64，qrcode</keywords>
+  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, симметричный, nist, pkcs, пароль, base64, qrcode</keywords>
+  <title lang="de">AES (CBC) mit PKCS#5 und IV, Ausgabe als QR-Code</title>
+  <summary lang="de">Benutzung der <i>AES</i>-Chiffre im CBC-Modus mit einem Initialisierungsvektor, wobei der Sitzungsschlüssel
+	per <i>PKCS#5</i> aus einem Passwort erzeugt wird und der Geheimtext in Base-64 codiert und als QR-Code ausgegeben wird</summary>
+  <description lang="de">Mit dieser Vorlage ist es möglich, einen Eingabetext mit Hilfe eines Passwortes zu verschlüsseln. 
+	Für die Verschlüsselung wird AES [1] verwendet; und um aus dem Passwort einen geeigneten AES-Schlüssel zu generieren, wird PKCS#5 [2] 
+	verwendet. Das verschlüsselte Ergebnis wird als Base-64-codierter QR-Code ausgegeben.<newline /><newline />
+	Auch das Entschlüsseln einer solchen Nachricht ist mit dieser Vorlage möglich: Zunächst muss die AES-<b>Komponente</b> auf "Entschlüsseln" und die <b>Switch</b>-Komponente auf <i>Wahr</i> geschaltet werden. 
+	Mit Hilfe der <b>Switch</b>-Komponente wird der Datenpfad für das Ver- bzw. Entschlüsseln jeweils entsprechend angepasst: Bei der Entschlüsselung muss die Eingabe zunächst 
+	Base-64-decodiert und bei der Verschlüsselung muss die Ausgabe noch Base-64-codiert werden.
+	Starten Sie nun diese Vorlage und halten Sie einen mit dieser Vorlage erstellen QR-Code vor Ihre Webcam, bis die <b>Visueller Decodierer</b>-Komponente diesen erkennt.
+	<newline /><newline />
+	In dieser Vorlage wird zur Steigerung der Sicherheit zusätzlich ein zufälliger Initialisierungsvektor (IV) für jede Nachricht verwendet. Der IV wird dabei auch Base-64-codiert und der eigentlichen (verschlüsselten) Nachricht vorangestellt. Beim Empfänger wird der IV decodiert und zum Entschlüsseln der Nachricht verwendet. Durch die Verwendung eines zufälligen IVs für jede neue Nachricht erhält man immer unterschiedliche verschlüsselte Texte, selbst wenn die Klartextnachricht gleich sein sollte.
+	<newline /><newline />
+Quellen:<newline />
+[1] <external ref="http://de.wikipedia.org/wiki/Advanced_Encryption_Standard" /><newline />
+[2] <external ref="http://tools.ietf.org/html/rfc2898" /></description>
+  <keywords lang="de">Daemen, Rijmen, Rijndael, symmetrisch, nist, pkcs, password, base64</keywords>
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="BooleanInput" />
+    <plugin name="Gate" />
+    <plugin name="PKCS5" />
+    <plugin name="RandomNumberGenerator" />
+    <plugin name="VisualDecoder" />
+    <plugin name="VisualEncoder" />
+    <plugin name="Webcam" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Camera$" value="Kamera" />
+    <replacement key="$Output$" value="Ausgabe" />
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Message$" value="Nachricht" />
+    <replacement key="$Password$" value="Passwort" />
+    <replacement key="$Base64 Decoder$" value="Base64-Decodierer" />
+    <replacement key="$Base64 Encoder$" value="Base64-Encodierer" />
+    <replacement key="$Switch$" value="Schalter" />
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$Length$" value="Länge" />
+    <replacement key="$Random IV$" value="Zufalls-IV" />
+    <replacement key="$IV Length$" value="IV-Länge" />
+    <replacement key="$IV Decoder$" value="IV-Decodierer" />
+    <replacement key="$Extract Message$" value="Extrahiere Nachricht" />
+    <replacement key="$Extract IV$" value="Extrahiere IV" />
+    <replacement key="$Visual Decoder$" value="Visueller Dekodierer" />
+    <replacement key="$Visual Encoder$" value="Visueller Kodierer" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$memo$" value="Diese Vorlage bietet die Möglichkeit, einen Klartext mit einem einfachen Passwort mittels AES schnell und einfach zu verschlüsseln. Hierbei wird das Passwort durch PKCS5 in einen AES-Schlüssel konvertiert. Das Ergebnis ist Base64-kodiert, um z.B. einfach mit Copy &amp; Paste in eine E-Mail kopiert werden zu können. Die Entschlüsselung ist mit dieser Vorlage auch möglich: Der verschlüsselte, Base64-kodierte Text muss in die Komponente {\b Eingabe} kopiert werden. Dann muss die {\b AES}-Komponente auf &quot;Entschlüsselung&quot; gestellt werden und die {\b Schalter}-Komponente auf {\b Wahr}. Durch das Umschalten der {\b Schalter}-Komponente nehmen die Daten einen anderen Pfad, denn für die Entschlüsselung müssen sie zuerst Base64-dekodiert werden, während sie bei der Verschlüsselung erst danach Base64-kodiert werden.\line AES wird im CBC-Modus verwendet und der benötigte Initialisierungsvektor (IV) wird zufällig erzeugt. Da der IV ebenfalls zum Empfänger übertragen werden muss, wird er auch Base64-kodiert und der Nachricht vorangestellt. Die gesamte Nachricht hat also die Form &quot;Base64(IV) || Base64(AES(Klartext))&quot;. Der Empfänger extrahiert dann zuerst den IV und entschlüsselt mit ihm den Rest der Nachricht." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Camera$" value="相机" />
+    <replacement key="$Output$" value="输出" />
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Message$" value="信息" />
+    <replacement key="$Password$" value="密码" />
+    <replacement key="$Base64 Decoder$" value="Base64解码器" />
+    <replacement key="$Base64 Encoder$" value="Base64编码器" />
+    <replacement key="$Switch$" value="开关" />
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$Length$" value="长" />
+    <replacement key="$Random IV$" value="随机IV" />
+    <replacement key="$IV Length$" value="IV长度" />
+    <replacement key="$IV Decoder$" value="IV解码器" />
+    <replacement key="$Extract Message$" value="提取信息" />
+    <replacement key="$Extract IV$" value="提取物IV" />
+    <replacement key="$Visual Decoder$" value="视觉解码器" />
+    <replacement key="$Visual Encoder$" value="视觉编码器" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$memo$" value="该模板提供了使用AES使用简单密码快速轻松地加密纯文本的可能性。密码由PKCS5转换为AES密钥。结果经过Base64编码，因此可以轻松地使用复制和粘贴将其复制到电子邮件中。使用此模板也可以解密：必须将加密的Base64编码文本复制到组件{\b Input}中。然后必须将{\b AES}组件设置为“解密”，并将{\b switch}组件设置为{\b true}。通过切换{\b switch}组件，数据采用了不同的路径，因为对于解密，必须首先对其进行Base64解码，而对于加密，则仅对其进行Base64编码。使用，并随机生成所需的初始化向量（IV）。由于IV也必须发送给接收者，因此它也经过Base64编码，并放在消息的前面。整个消息的格式为“ Base64（IV）|| Base64（AES（纯文本））”。接收者然后首先提取IV，并使用它来解密其余的消息。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Camera$" value="камера" />
+    <replacement key="$Output$" value="издание" />
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Message$" value="сообщение" />
+    <replacement key="$Password$" value="пароль" />
+    <replacement key="$Base64 Decoder$" value="Base64 декодер" />
+    <replacement key="$Base64 Encoder$" value="Base64-Encodierer" />
+    <replacement key="$Switch$" value="переключатель" />
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$Length$" value="долго" />
+    <replacement key="$Random IV$" value="Случайная IV" />
+    <replacement key="$IV Length$" value="IV Long" />
+    <replacement key="$IV Decoder$" value="IV декодер" />
+    <replacement key="$Extract Message$" value="Извлечь сообщение" />
+    <replacement key="$Extract IV$" value="Экстракт IV" />
+    <replacement key="$Visual Decoder$" value="Визуальный декодер" />
+    <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$memo$" value="Этот шаблон обеспечивает возможность быстрого и простого шифрования простого текста с помощью простого пароля с использованием AES. Здесь пароль преобразуется PKCS5 в ключ AES. В результате Base64-кодируется, так что его можно легко скопировать в электронное письмо с помощью Copy &amp;amp; Paste. Расшифровка также возможна с помощью этого шаблона: закодированный закодированный текст base64 должен быть скопирован в компонент {\b input}. Затем компонент {\b AES} должен быть установлен на «дешифрование» и компонент {\b switch} на {\b true}. Переключение компонента {\b switch} приводит к тому, что данные принимают другой путь, потому что для дешифрования они должны сначала быть закодированы в Base64, а затем зашифрованы для шифрования Base64. \Line AES будет в режиме CBC и требуемый вектор инициализации (IV) генерируется случайным образом. Так как IV также должен быть передан приемнику, он также кодируется Base64 и имеет префикс для сообщения. Таким образом, все сообщение имеет форму «Base64 (IV) || Base64 (AES (обычный текст))». Затем получатель извлекает IV и расшифровывает остальную часть сообщения." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Camera$" value="Camera" />
+    <replacement key="$Output$" value="Output" />
+    <replacement key="$Input$" value="Input" />
+    <replacement key="$Message$" value="Message" />
+    <replacement key="$Password$" value="Password" />
+    <replacement key="$Base64 Decoder$" value="Base64 Decoder" />
+    <replacement key="$Base64 Encoder$" value="Base64 Encoder" />
+    <replacement key="$Switch$" value="Switch" />
+    <replacement key="$Gate$" value="Gate" />
+    <replacement key="$Length$" value="Length" />
+    <replacement key="$Random IV$" value="Random IV" />
+    <replacement key="$IV Decoder$" value="IV Decoder" />
+    <replacement key="$IV Length$" value="IV Length" />
+    <replacement key="$Extract Message$" value="Extract Message" />
+    <replacement key="$Extract IV$" value="Extract IV" />
+    <replacement key="$Visual Decoder$" value="Visual Decoder" />
+    <replacement key="$Visual Encoder$" value="Visual Encoder" />
+    <replacement key="$StringDecoder$" value="String Decoder" />
+    <replacement key="$memo$" value="In this sample we provide a quick way to encrypt plaintext with AES by using a simple password (which is converted to an AES key by using PKCS5). The result is base64-encoded for easy copy &amp; paste e.g. to an email. Decryption is also possible with this template: The encrypted base64-encoded text needs to be copied to the {\b Input} component. Then the {\b AES} component needs to be switched to &quot;Decrypt&quot; and the {\b Switch} component must be set to True. With the help of the {\b Switch} component, the data takes a different path, i.e. for decryption we first need to base64-decode it, while when encrypting we encode it in base64 after encryption.\line AES is used in CBC mode and the required Initialization Vector (IV) is created randomly. Since the IV must also be sent to the receiver, it is also base64-encoded and prepended to the message, i.e. the entire message is &quot;base64(IV) || base64(aes(plaintext))&quot;. On the receiving side, the IV is first chopped of the message and used to decrypt the rest of the message." />
+  </replacements>
+</sample>

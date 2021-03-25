@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BlocksizeCaption" xml:space="preserve">
+    <value>Blockgröße</value>
+  </data>
+  <data name="BlocksizeTooltip" xml:space="preserve">
+    <value>Geben Sie die verwendete Blockgröße an.</value>
+  </data>
+  <data name="btnAll" xml:space="preserve">
+    <value>Alles entschlüsseln</value>
+  </data>
+  <data name="btnAuto" xml:space="preserve">
+    <value>Automatische Suche</value>
+  </data>
+  <data name="btnLblP1" xml:space="preserve">
+    <value>Byte ändern</value>
+  </data>
+  <data name="btnLblP1End" xml:space="preserve">
+    <value>Zu Phase 2 gehen</value>
+  </data>
+  <data name="btnLblP1Init" xml:space="preserve">
+    <value>Anfrage senden</value>
+  </data>
+  <data name="btnLblP2" xml:space="preserve">
+    <value>Nächstes Byte probieren</value>
+  </data>
+  <data name="btnLblP2End" xml:space="preserve">
+    <value>Zu Phase 3 gehen</value>
+  </data>
+  <data name="btnLblP2Init" xml:space="preserve">
+    <value>Suche beginnen</value>
+  </data>
+  <data name="btnLblP3Decrypt" xml:space="preserve">
+    <value>Byte entschlüsseln</value>
+  </data>
+  <data name="btnLblP3End" xml:space="preserve">
+    <value>Klartext generieren</value>
+  </data>
+  <data name="btnLblP3Find" xml:space="preserve">
+    <value>Aktuelles Byte ändern</value>
+  </data>
+  <data name="btnLblP3IncPad" xml:space="preserve">
+    <value>Padding erhöhen</value>
+  </data>
+  <data name="btnNext" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="CipherInputCaption" xml:space="preserve">
+    <value>Geheimtext</value>
+  </data>
+  <data name="CipherInputTooltip" xml:space="preserve">
+    <value>Eingabe des Geheimtextes</value>
+  </data>
+  <data name="descDone" xml:space="preserve">
+    <value>Klartext erhalten. Der Angriff wurde erfolgreich beendet!</value>
+  </data>
+  <data name="descFinishAll" xml:space="preserve">
+    <value>Bitte warten Sie bis die Nachricht komplett entschlüsselt wurde.</value>
+  </data>
+  <data name="descP1Done" xml:space="preserve">
+    <value>Phase 1 beendet! Valides Padding gefunden.</value>
+  </data>
+  <data name="descP1Init" xml:space="preserve">
+    <value>Phase 1: Finde eine Nachricht mit einem gültigen Padding. Schicke die unveränderte Nachricht, um zu überprüfen, ob schon ein gültiges Padding existiert.</value>
+  </data>
+  <data name="descP1Task" xml:space="preserve">
+    <value>Das Padding ist falsch. Ändere das letzte Byte, bis das Padding gültig ist.</value>
+  </data>
+  <data name="descP2Done" xml:space="preserve">
+    <value>Phase 2 beendet! Das erste Padding-Byte wurde gefunden. Paddinglänge:</value>
+  </data>
+  <data name="descP2DoneSpecial" xml:space="preserve">
+    <value>Phase 2 beendet! Die ersten 7 Bytes beeinflussen das Padding nicht, also muss die Paddinglänge 1 sein.</value>
+  </data>
+  <data name="descP2Init" xml:space="preserve">
+    <value>Phase 2: Finde das erste Padding-Byte. Ändere die Bytes des Geheimtextes von links nach rechts. Wenn das Padding ungültig wird, muss ein Padding-Byte geändert worden sein.</value>
+  </data>
+  <data name="descP2Task" xml:space="preserve">
+    <value>Das geänderte Byte gehörte anscheinend nicht zum Padding. Probiere das nächste Byte aus!</value>
+  </data>
+  <data name="descP3Dec" xml:space="preserve">
+    <value>Byte entschlüsselt! Erhöhe das Padding, um die Entschlüsselung fortzusetzen.</value>
+  </data>
+  <data name="descP3DecDone" xml:space="preserve">
+    <value>Das Byte wurde entschlüsselt. Erhöhe das Padding, um die Entschlüsselung fortzusetzen.</value>
+  </data>
+  <data name="descP3DecPadDone" xml:space="preserve">
+    <value>Alle Padding-Bytes wurden entschlüsselt! Erhöhe das Padding, um die Entschlüsselung fortzusetzen.</value>
+  </data>
+  <data name="descP3Done" xml:space="preserve">
+    <value>Die Nachricht wurde komplett entschlüsselt! Klicke auf den "Weiter"-Button, um den Klartext zu erhalten.</value>
+  </data>
+  <data name="descP3FindDone" xml:space="preserve">
+    <value>Gültiges Padding gefunden! Byte kann entschlüsselt werden.</value>
+  </data>
+  <data name="descP3FindTask" xml:space="preserve">
+    <value>Aufgabe: Ändere das ausgewählte Byte so lange, bis der gewünschte Wert gefunden wurde. Wenn der Wert gefunden wurde, wird das Padding automatisch gültig.</value>
+  </data>
+  <data name="descP3Init" xml:space="preserve">
+    <value>Phase 3: Entschlüssle die Nachricht. Beginne mit der Entschlüsselung der Padding-Bytes.</value>
+  </data>
+  <data name="descPadIn" xml:space="preserve">
+    <value>Antwort vom Padding-Orakel</value>
+  </data>
+  <data name="langCheck" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="PaddingOracleInputCaption" xml:space="preserve">
+    <value>Padding gültig</value>
+  </data>
+  <data name="PaddingOracleInputTooltip" xml:space="preserve">
+    <value>Gültigkeit des Paddings</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Padding-Orakel-Angriff</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Angriff auf eine verschlüsselte Nachricht mit einem Padding-Orakel</value>
+  </data>
+  <data name="ResultOutputCaption" xml:space="preserve">
+    <value>Manipulierter Geheimtext</value>
+  </data>
+  <data name="ResultOutputTooltip" xml:space="preserve">
+    <value>Ausgabe des manipulierten Geheimtextes</value>
+  </data>
+  <data name="ttBtnAll" xml:space="preserve">
+    <value>Entschlüssle automatisch die komplette Nachricht.</value>
+  </data>
+  <data name="ttBtnAuto" xml:space="preserve">
+    <value>Suche automatisch nach dem nächsten gültigen Wert.</value>
+  </data>
+  <data name="ttBtnNext" xml:space="preserve">
+    <value>Führe den nächsten Angriffsschritt aus.</value>
+  </data>
+  <data name="ttBtnReturn" xml:space="preserve">
+    <value>Letzte Aktion rückgängig machen.</value>
+  </data>
+  <data name="ttBtnReturnPhase" xml:space="preserve">
+    <value>Kehre zum Beginn der aktuellen Phase zurück.</value>
+  </data>
+  <data name="ttCipherBlock" xml:space="preserve">
+    <value>Der verschlüsselte Informationsblock.</value>
+  </data>
+  <data name="ttCorruptedBlock" xml:space="preserve">
+    <value>Der korrumpierte Initialisierungsblock (Initialisierungsblock XOR Overlay).</value>
+  </data>
+  <data name="ttDecBlock" xml:space="preserve">
+    <value>Der entschlüsselte Initialisierungsblock (erst am Ende vollständig bekannt). XORed mit dem ursprünglichen Initialisierungblock ergibt den Klartext.</value>
+  </data>
+  <data name="ttOverlayBlock" xml:space="preserve">
+    <value>Das Overlay um den Initialisierungsblock zu modifizieren.</value>
+  </data>
+  <data name="ttPlainBlock" xml:space="preserve">
+    <value>Der resultierende Klartext, wenn man D2 mit dem korrumpierten Initialisierungsblock XORed.</value>
+  </data>
+  <data name="ttPrelBlock" xml:space="preserve">
+    <value>Der verschlüsselte Initialisierungsblock.</value>
+  </data>
+  <data name="ttSentRequests" xml:space="preserve">
+    <value>Anzahl gesendeter Anfragen an den Server.</value>
+  </data>
+  <data name="ttViewByte" xml:space="preserve">
+    <value>Es können nur 8 byte gleichzeitig dargestellt werden. Sollte die Blocklänge größer als 8 sein, so können die anderen Bytes mit Hilfe des Scrollbalkens angezeigt werden.</value>
+  </data>
+  <data name="ttViewByteDesc" xml:space="preserve">
+    <value>Angezeigte Bytes</value>
+  </data>
+  <data name="lblAttackLogic" xml:space="preserve">
+    <value>Angriffslogik</value>
+  </data>
+  <data name="lblComplete" xml:space="preserve">
+    <value>FERTIG</value>
+  </data>
+  <data name="lblInput" xml:space="preserve">
+    <value>Eingabe</value>
+  </data>
+  <data name="lblInvalid" xml:space="preserve">
+    <value>UNGÜLTIG</value>
+  </data>
+  <data name="lblOutput" xml:space="preserve">
+    <value>Ausgabe</value>
+  </data>
+  <data name="lblRequests" xml:space="preserve">
+    <value>Orakel-Anfragen:</value>
+  </data>
+  <data name="lblValid" xml:space="preserve">
+    <value>GÜLTIG</value>
+  </data>
+</root>

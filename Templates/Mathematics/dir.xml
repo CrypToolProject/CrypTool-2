@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<directory order="4">
+  <name lang="en">Mathematics</name>
+  <name lang="zh">数学</name>
+  <name lang="ru">Математика</name>
+  <name lang="de">Mathematisch</name>
+  <summary lang="en">The folder "Mathematics" contains templates with mathematical functions.</summary>
+  <summary lang="zh">文件夹“数学”包含具有数学功能的模板。</summary>
+  <summary lang="ru">В папке «Математика» содержатся шаблоны с математическими функциями.</summary>
+  <summary lang="de">Das Verzeichnis "Mathematisch" enthält Vorlagen mit einzelnen mathematischen Funktionen.</summary>
+  <icon file="math.png" />
+</directory>

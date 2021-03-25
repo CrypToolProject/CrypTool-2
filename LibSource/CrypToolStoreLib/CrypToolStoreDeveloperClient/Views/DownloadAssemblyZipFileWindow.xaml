@@ -1,0 +1,19 @@
+﻿<Window x:Class="CrypToolStoreDeveloperClient.Views.DownloadAssemblyZipFileWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Downoad Assembly Zip File" Height="150" Width="500">
+    <Grid Background="AliceBlue" Width="500" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>           
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="430"/>
+        </Grid.ColumnDefinitions>
+        
+        <ProgressBar Name="ProgressBar" Background="White" Grid.Column="1" Grid.Row="0" Height="25"/>
+        <TextBlock Name="ProgressText" Background="Transparent" Grid.Column="1" Grid.Row="0"  Foreground="Black" TextAlignment="Center" VerticalAlignment="Center">Download Progress</TextBlock>    
+        <Button Name="DownloadButton" Background="White" Click="DownloadButton_Click" Grid.Column="1" Grid.Row="1" Height="25" Width="100" HorizontalAlignment="Right">Download</Button>
+    </Grid>
+</Window>

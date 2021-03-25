@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>T-310</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>德意志民主共和国使用的历史密码机</value>
+  </data>
+  <data name="InputDataCaption" xml:space="preserve">
+    <value>输入数据</value>
+  </data>
+  <data name="InputDataTooltip" xml:space="preserve">
+    <value>输入纯文本（用于加密）或密文（用于解密）</value>
+  </data>
+  <data name="InputKeyCaption1" xml:space="preserve">
+    <value>子项1</value>
+  </data>
+  <data name="InputKeyTooltip1" xml:space="preserve">
+    <value>输入T-310子项作为二进制数据。它必须正好为120位（15字节）长，并且其奇偶校验必须为奇数。</value>
+  </data>
+  <data name="OutputDataCaption" xml:space="preserve">
+    <value>输出数据</value>
+  </data>
+  <data name="OutputDataTooltip" xml:space="preserve">
+    <value>生成的密文（加密时）或明文（解密时）</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>是否要对输入数据进行加密或解密？</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="VersionCaption" xml:space="preserve">
+    <value>T-310的版本</value>
+  </data>
+  <data name="VersionList1" xml:space="preserve">
+    <value>T-310 / 50电传加密</value>
+  </data>
+  <data name="VersionList2" xml:space="preserve">
+    <value>T-310 / 51数据加密</value>
+  </data>
+  <data name="VersionTooltip" xml:space="preserve">
+    <value>模具T310可用于T-310 / 50和T-310 / 51型号。版本50只能解密CCITT-2编码的字符。版本51的任何数据。</value>
+  </data>
+  <data name="BitSelectorCaption" xml:space="preserve">
+    <value>位选择器</value>
+  </data>
+  <data name="BitSelectorList1" xml:space="preserve">
+    <value>最高有效位</value>
+  </data>
+  <data name="BitSelectorList2" xml:space="preserve">
+    <value>最低有效位</value>
+  </data>
+  <data name="BitSelectorTooltip" xml:space="preserve">
+    <value>选择是否应使用某些向量的最高或最低有效位</value>
+  </data>
+  <data name="Key14" xml:space="preserve">
+    <value>长期钥匙14</value>
+  </data>
+  <data name="Key15" xml:space="preserve">
+    <value>长期钥匙15</value>
+  </data>
+  <data name="Key16" xml:space="preserve">
+    <value>长期钥匙16</value>
+  </data>
+  <data name="Key17" xml:space="preserve">
+    <value>长期钥匙17</value>
+  </data>
+  <data name="Key21" xml:space="preserve">
+    <value>长期钥匙21</value>
+  </data>
+  <data name="Key26" xml:space="preserve">
+    <value>长期钥匙26</value>
+  </data>
+  <data name="Key29" xml:space="preserve">
+    <value>长期钥匙29</value>
+  </data>
+  <data name="Key30" xml:space="preserve">
+    <value>长期钥匙30</value>
+  </data>
+  <data name="Key31" xml:space="preserve">
+    <value>长期钥匙31</value>
+  </data>
+  <data name="Key32" xml:space="preserve">
+    <value>长期钥匙32</value>
+  </data>
+  <data name="Key33" xml:space="preserve">
+    <value>长期键33</value>
+  </data>
+  <data name="LongTermKeyCaption" xml:space="preserve">
+    <value>长期关键</value>
+  </data>
+  <data name="LongTermKeyTooltip" xml:space="preserve">
+    <value>长期密钥是T-310分组密码（Wurmreihe DW）中使用的特殊置换。它们固定在机器上，但可以更改。</value>
+  </data>
+  <data name="InputKeyCaption2" xml:space="preserve">
+    <value>子项2</value>
+  </data>
+  <data name="InputKeyTooltip2" xml:space="preserve">
+    <value>输入T-310子项作为二进制数据。它必须正好为120位（15字节）长，并且其奇偶校验必须为奇数。</value>
+  </data>
+  <data name="ErrorBothKeysEvenParity" xml:space="preserve">
+    <value>两个键都是偶数。需要奇数键。查看文档以获取更多信息。</value>
+  </data>
+  <data name="ErrorBothKeysLength" xml:space="preserve">
+    <value>两个密钥的长度都不正确，请在两个连接器上提供15个字节（120位）的密钥。这两个密钥必须具有奇数奇偶校验。</value>
+  </data>
+  <data name="ErrorBothKeysNull" xml:space="preserve">
+    <value>未连接任何密钥，请在两个连接器上提供15字节（120位）密钥。这两个密钥必须具有奇数奇偶校验。</value>
+  </data>
+  <data name="ErrorEmptyConversion" xml:space="preserve">
+    <value>将消息转换为CCITT-2字符编码后，没有消息的任何字符。 （该消息完全由无效字符组成）</value>
+  </data>
+  <data name="ErrorHeaderBytes" xml:space="preserve">
+    <value>消息头的“幻数字节”无效（它由4个字节的0x19、25个字节的初始化矢量和4个字节的0x0F组成）</value>
+  </data>
+  <data name="ErrorHeaderIntegrity" xml:space="preserve">
+    <value>消息头无效。 （它由4个字节的0x19、25个字节的初始化向量和4个字节的0x0F组成）。开头的4个字节0x19和结尾的0x0F有效。</value>
+  </data>
+  <data name="ErrorHeaderLength" xml:space="preserve">
+    <value>无法解析消息头，它太短。所需长度：{0}；给定长度：{1}</value>
+  </data>
+  <data name="ErrorInputEmpty" xml:space="preserve">
+    <value>输入连接器为空，无法执行任何操作。</value>
+  </data>
+  <data name="ErrorInputNull" xml:space="preserve">
+    <value>未连接任何输入，请连接一个byte []作为输入。</value>
+  </data>
+  <data name="ErrorKeyEvenParity" xml:space="preserve">
+    <value>密钥{0}的奇偶校验是偶数。需要一个奇数键。查看文档以获取更多信息。</value>
+  </data>
+  <data name="ErrorKeyLength" xml:space="preserve">
+    <value>密钥{0}必须恰好为15个字节长（120位）。给定的密钥{0}的长度为{1}个字节。</value>
+  </data>
+  <data name="ErrorKeyNull" xml:space="preserve">
+    <value>密钥{0}未连接，请提供一个15字节（120位）的奇偶校验密钥。</value>
+  </data>
+  <data name="ErrorUnconvertableBeginningPlural" xml:space="preserve">
+    <value>给定消息中有{0}个不可转换的字符</value>
+  </data>
+  <data name="ErrorUnconvertableBeginningSingular" xml:space="preserve">
+    <value>给定消息中有{0}个不可转换的字符</value>
+  </data>
+  <data name="ErrorUnconvertableEndPlural" xml:space="preserve">
+    <value>;它们在加密之前被截断了。</value>
+  </data>
+  <data name="ErrorUnconvertableEndSingular" xml:space="preserve">
+    <value>;在加密之前已被截断。</value>
+  </data>
+</root>

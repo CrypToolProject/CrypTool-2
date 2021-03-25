@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package de.ct2.ipc.messages;
+//option go_package = "github.com/golang/protobuf/protoc-gen-go/descriptor;descriptor";
+option java_package = "org.cryptool.ipc.messages";
+option java_outer_classname = "Ct2IpcMessages";
+option csharp_namespace = "CrypTool.Plugins.Ipc.Messages";
+option objc_class_prefix = "ct2ipc";
+option cc_enable_arenas = true;
+
+// wrapper message
+
+message Ct2IpcMessage { // container for other messages
+  int64 sequenceNumber = 1; //
+  int32 messageType = 2;
+  bytes body = 3;
+}
+
+// control messages
+
+message Ct2Hello {  // type 1
+   int32 protocolVersion = 1;
+  string programName = 2;
+  string programVersion = 3;
+  
+}
+
+message Ct2Shutdown {  // type 2
+  string reason = 1;
+}
+
+// other messages
+
+
+message Ct2Values { // type 3
+  repeated int32 pinId = 1;
+  repeated string value = 2;
+}
+
+message Ct2LogEntry { // type 4
+ enum LogLevel {
+    CT2ERROR = 0;
+    CT2WARNING = 1;
+    CT2INFO = 2;
+    CT2DEBUG = 3;
+    CT2BALLOON = 4;
+  }
+  LogLevel logLevel = 1;
+  string entry = 2;
+}
+
+message Ct2Progress { // type 5
+  double maxValue = 1;
+  double currentValue = 2;
+}
+
+message Ct2Goodbye {  // type 6
+  int32 exitCode = 1;
+  string exitMessage = 2;
+}
+

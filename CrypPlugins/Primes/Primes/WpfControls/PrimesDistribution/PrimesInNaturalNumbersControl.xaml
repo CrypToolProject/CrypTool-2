@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Primes.WpfControls.PrimesDistribution.PrimesInNaturalNumbersControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:numberline="clr-namespace:Primes.WpfControls.PrimesDistribution.Numberline"
+    xmlns:numberrect="clr-namespace:Primes.WpfControls.PrimesDistribution.NumberRectangle"
+    xmlns:ulam="clr-namespace:Primes.WpfControls.PrimesDistribution.Spirals"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Distribution"
+    xmlns:graph="clr-namespace:Primes.WpfControls.PrimesDistribution.Graph"
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <DockPanel Margin="10">
+        <TabControl Grid.Row="1" Name="tbctrl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="tbctrl_SelectionChanged">
+            <comps:HelpTabItem x:Name="tabItemNumberline" Header="{x:Static lang:Distribution.tabitemnumberline}" HelpButtonClick="tabitem_HelpButtonClick">
+                <DataTemplate>
+                    <numberline:NumberlineControl x:Name="NumberLineCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </DataTemplate>
+            </comps:HelpTabItem>
+            <comps:HelpTabItem x:Name="tabItemNumbergrid" Header="{x:Static lang:Distribution.tabitemnumbergrid}" HelpButtonClick="tabitem_HelpButtonClick">
+                <DataTemplate>
+                    <numberrect:NumberRectangleControl x:Name="NumberRectCtrl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </DataTemplate>
+            </comps:HelpTabItem>
+            <comps:HelpTabItem x:Name="tabItemGraph" Header="{x:Static lang:Distribution.tabitemgraph}" HelpButtonClick="tabitem_HelpButtonClick">
+                <DataTemplate>
+                    <graph:GraphControl x:Name="graphcontrol" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </DataTemplate>
+            </comps:HelpTabItem>
+            <comps:HelpTabItem x:Name="tabItemUlam" Header="{x:Static lang:Distribution.tabitemulam}" HelpButtonClick="tabitem_HelpButtonClick">
+                <DataTemplate>
+                    <ulam:PrimesprialControl x:Name="spiralCtrl" />
+                </DataTemplate>
+            </comps:HelpTabItem>
+            <!--<comps:HelpTabItem x:Name="tabItemGoldbach" Header="{x:Static lang:Distribution.tabitemgoldbach}" HelpButtonClick="tabitem_HelpButtonClick">
+                <goldbach:GoldbachControl x:Name="goldbachCtrl" />
+            </comps:HelpTabItem>-->
+        </TabControl>
+    </DockPanel>
+
+</UserControl>

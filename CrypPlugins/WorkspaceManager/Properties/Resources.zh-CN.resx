@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AnalysisGeneric_Label" xml:space="preserve">
+    <value>分析/通用：</value>
+  </data>
+  <data name="AnalysisSpecific_Label" xml:space="preserve">
+    <value>分析/具体：</value>
+  </data>
+  <data name="Asymmetric_Label" xml:space="preserve">
+    <value>不对称：</value>
+  </data>
+  <data name="BBox_Add_Image_to_Workspace_Tooltip" xml:space="preserve">
+    <value>将图像添加到工作区</value>
+  </data>
+  <data name="BBox_Add_Text_to_Workspace_Tooltip" xml:space="preserve">
+    <value>将备忘录（用于描述）添加到工作空间</value>
+  </data>
+  <data name="BBox_Fit_to_Screen_Tooltip" xml:space="preserve">
+    <value>自动调整工作区的缩放，以便可以最大程度地看到所有组件（Ctrl + F）</value>
+  </data>
+  <data name="BBox_Sort_Caption" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="BBox_Sort_Tooltip" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="Benchmark_Label" xml:space="preserve">
+    <value>基准测试</value>
+  </data>
+  <data name="Benchmark_Tooltip" xml:space="preserve">
+    <value>执行引擎是否应该每秒对执行的功能进行基准测试？</value>
+  </data>
+  <data name="Classic_Label" xml:space="preserve">
+    <value>经典：</value>
+  </data>
+  <data name="Class_Not_Found" xml:space="preserve">
+    <value>找不到课程</value>
+  </data>
+  <data name="DataTooltip" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="Datatypecolors_Label" xml:space="preserve">
+    <value>数据类型颜色：</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>除错</value>
+  </data>
+  <data name="DebugCheckedFalseTooltip" xml:space="preserve">
+    <value>显示调试</value>
+  </data>
+  <data name="DebugCheckedTrueTooltip" xml:space="preserve">
+    <value>隐藏调试</value>
+  </data>
+  <data name="Delete_all_messages" xml:space="preserve">
+    <value>删除所有讯息</value>
+  </data>
+  <data name="Delete_all_messagesTooltip" xml:space="preserve">
+    <value>清除日志面板</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="ErrorCheckedFalseTooltip" xml:space="preserve">
+    <value>显示错误</value>
+  </data>
+  <data name="ErrorCheckedTrueTooltip" xml:space="preserve">
+    <value>隐藏错误</value>
+  </data>
+  <data name="Functioncolors_Label" xml:space="preserve">
+    <value>功能颜色：</value>
+  </data>
+  <data name="GUIUpdateinterval_Label" xml:space="preserve">
+    <value>GUI更新间隔：</value>
+  </data>
+  <data name="GUIUpdateinterval_Tooltip" xml:space="preserve">
+    <value>设置执行期间更新GUI元素的间隔</value>
+  </data>
+  <data name="Hash_Label" xml:space="preserve">
+    <value>杂凑：</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="InfoCheckedFalseTooltip" xml:space="preserve">
+    <value>显示信息</value>
+  </data>
+  <data name="InfoCheckedTrueTooltip" xml:space="preserve">
+    <value>隐藏信息</value>
+  </data>
+  <data name="LogTooltip" xml:space="preserve">
+    <value>日志记录</value>
+  </data>
+  <data name="Main_Settings" xml:space="preserve">
+    <value>主要</value>
+  </data>
+  <data name="MaximizeTooltip" xml:space="preserve">
+    <value>最大化</value>
+  </data>
+  <data name="MinimizeTooltip" xml:space="preserve">
+    <value>最小化</value>
+  </data>
+  <data name="No_data" xml:space="preserve">
+    <value>没有数据</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>工作空间</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>CT2工作区的图形编辑器</value>
+  </data>
+  <data name="PresentationTooltip" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="Protocols_Label" xml:space="preserve">
+    <value>协议：</value>
+  </data>
+  <data name="RepeatTooltip" xml:space="preserve">
+    <value>重复</value>
+  </data>
+  <data name="ResetColors_Label" xml:space="preserve">
+    <value>重置颜色</value>
+  </data>
+  <data name="ResetColors_Tooltip" xml:space="preserve">
+    <value>将所有颜色重置为其默认值。</value>
+  </data>
+  <data name="SettingsTooltip" xml:space="preserve">
+    <value>设定值</value>
+  </data>
+  <data name="Show_IControlsTooltip" xml:space="preserve">
+    <value>显示嵌入式组件</value>
+  </data>
+  <data name="SleepTime_Label" xml:space="preserve">
+    <value>睡觉时间：</value>
+  </data>
+  <data name="SleepTime_Tooltip" xml:space="preserve">
+    <value>设置函数执行之间的睡眠时间（以毫秒为单位）</value>
+  </data>
+  <data name="Steganography_Label" xml:space="preserve">
+    <value>隐写术：</value>
+  </data>
+  <data name="Symmetricblock_Label" xml:space="preserve">
+    <value>对称块：</value>
+  </data>
+  <data name="SynchronousEvents_Label" xml:space="preserve">
+    <value>同步事件</value>
+  </data>
+  <data name="SynchronousEvents_Tooltip" xml:space="preserve">
+    <value>设置执行引擎的事件处理行为</value>
+  </data>
+  <data name="Tools_Label" xml:space="preserve">
+    <value>工具：</value>
+  </data>
+  <data name="unnamed_project" xml:space="preserve">
+    <value>新项目</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="WarningCheckedFalseTooltip" xml:space="preserve">
+    <value>显示警告</value>
+  </data>
+  <data name="WarningCheckedTrueTooltip" xml:space="preserve">
+    <value>隐藏警告</value>
+  </data>
+  <data name="WorkspaceManagerSettings" xml:space="preserve">
+    <value>工作空间</value>
+  </data>
+  <data name="HelpTooltip" xml:space="preserve">
+    <value>救命</value>
+  </data>
+  <data name="Align_Center" xml:space="preserve">
+    <value>居中对齐</value>
+  </data>
+  <data name="Align_Justify" xml:space="preserve">
+    <value>对齐对齐</value>
+  </data>
+  <data name="Align_Left" xml:space="preserve">
+    <value>左对齐</value>
+  </data>
+  <data name="Align_Right" xml:space="preserve">
+    <value>右对齐</value>
+  </data>
+  <data name="Bold" xml:space="preserve">
+    <value>胆大</value>
+  </data>
+  <data name="Bullets" xml:space="preserve">
+    <value>项目符号</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>切</value>
+  </data>
+  <data name="Decrease_Indent" xml:space="preserve">
+    <value>减少缩进</value>
+  </data>
+  <data name="Enter_Name" xml:space="preserve">
+    <value>输入名字</value>
+  </data>
+  <data name="Grow_Font" xml:space="preserve">
+    <value>增加字体</value>
+  </data>
+  <data name="Increase_Indent" xml:space="preserve">
+    <value>增加缩进</value>
+  </data>
+  <data name="Italic" xml:space="preserve">
+    <value>斜体</value>
+  </data>
+  <data name="Lock" xml:space="preserve">
+    <value>锁</value>
+  </data>
+  <data name="Numbering" xml:space="preserve">
+    <value>编号</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>糊</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>准备</value>
+  </data>
+  <data name="Shrink_Font" xml:space="preserve">
+    <value>缩小字体</value>
+  </data>
+  <data name="Underline" xml:space="preserve">
+    <value>强调</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>撤消</value>
+  </data>
+  <data name="Unlock" xml:space="preserve">
+    <value>开锁</value>
+  </data>
+  <data name="Colors" xml:space="preserve">
+    <value>色彩</value>
+  </data>
+  <data name="Component_Overview" xml:space="preserve">
+    <value>组件概述</value>
+  </data>
+  <data name="Drag" xml:space="preserve">
+    <value>拖动</value>
+  </data>
+  <data name="Loading_" xml:space="preserve">
+    <value>载入中...</value>
+  </data>
+  <data name="NewWorkspaceTooltip" xml:space="preserve">
+    <value>这是一个新的工作区。</value>
+  </data>
+  <data name="ConversionAmbig" xml:space="preserve">
+    <value>转换为不同的数据类型，可能会产生歧义</value>
+  </data>
+  <data name="ConversionNone" xml:space="preserve">
+    <value>无效的连接。</value>
+  </data>
+  <data name="ConversionOK" xml:space="preserve">
+    <value>好！</value>
+  </data>
+  <data name="ConversionSame" xml:space="preserve">
+    <value>数据类型匹配。</value>
+  </data>
+  <data name="ConversionStop" xml:space="preserve">
+    <value>停！</value>
+  </data>
+  <data name="ConversionWarning" xml:space="preserve">
+    <value>警告！</value>
+  </data>
+  <data name="ConversionSelf" xml:space="preserve">
+    <value>无法连接到自身。</value>
+  </data>
+  <data name="CloseComponentTooltip" xml:space="preserve">
+    <value>关闭组件</value>
+  </data>
+  <data name="Executing___" xml:space="preserve">
+    <value>执行中...</value>
+  </data>
+  <data name="BinSettingsVisual_BinSettingsVisual_No_Settings_available_" xml:space="preserve">
+    <value>该组件没有参数</value>
+  </data>
+  <data name="ElevateTooltip" xml:space="preserve">
+    <value>提升</value>
+  </data>
+  <data name="ReduceTooltip" xml:space="preserve">
+    <value>降低</value>
+  </data>
+  <data name="Bring_to_FrontTooltip" xml:space="preserve">
+    <value>来到前面</value>
+  </data>
+  <data name="Move_to_BackTooltip" xml:space="preserve">
+    <value>移回</value>
+  </data>
+  <data name="EditingDisabled" xml:space="preserve">
+    <value>执行期间某些编辑功能被禁用</value>
+  </data>
+  <data name="Toggle_Plugin_Parameters" xml:space="preserve">
+    <value>使用此工作区的选定组件的设置打开/关闭栏（Ctrl + I）</value>
+  </data>
+  <data name="Save_File" xml:space="preserve">
+    <value>保存存档</value>
+  </data>
+  <data name="Open_File" xml:space="preserve">
+    <value>打开文件</value>
+  </data>
+  <data name="Show_ComponentConnection_Proposition" xml:space="preserve">
+    <value>显示组件连接命题</value>
+  </data>
+  <data name="Show_ComponentConnection_Proposition_Tooltip" xml:space="preserve">
+    <value>握住连接线时显示最常用的组件</value>
+  </data>
+  <data name="ComponentAppearanceBehaviourGroupHeader" xml:space="preserve">
+    <value>组件的标准外观</value>
+  </data>
+  <data name="ComponentAppearanceBehaviourGroupTooltip" xml:space="preserve">
+    <value>选择应该如何显示新放置的组件可视化</value>
+  </data>
+  <data name="DefaultComponentAppearance" xml:space="preserve">
+    <value>由组件预先确定的外观</value>
+  </data>
+  <data name="AlwaysOpenedComponentAppearance" xml:space="preserve">
+    <value>一直开着</value>
+  </data>
+  <data name="AlwaysClosedComponentAppearance" xml:space="preserve">
+    <value>始终关闭</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="ResetCCS" xml:space="preserve">
+    <value>重置组件连接统计信息</value>
+  </data>
+  <data name="ComponentConnection_Delay" xml:space="preserve">
+    <value>组件连接建议延迟：</value>
+  </data>
+  <data name="ComponentConnection_Delay_Tooltip" xml:space="preserve">
+    <value>在出现带有组件建议的弹出窗口之前，将鼠标指针保持在相同位置的时间</value>
+  </data>
+  <data name="WorkspaceManagerClass_Open_Loading_Model___0_" xml:space="preserve">
+    <value>载入模型：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Open_Could_not_load_Model___0_" xml:space="preserve">
+    <value>无法加载模型：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Save_Saving_Model___0_" xml:space="preserve">
+    <value>正在保存模型：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Save_Could_not_save_Model___0_" xml:space="preserve">
+    <value>无法保存模型：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Undo_Can_not_undo___0_" xml:space="preserve">
+    <value>无法撤消：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Redo_Can_not_redo___0_" xml:space="preserve">
+    <value>无法重做：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Print_Printing_document___0___now" xml:space="preserve">
+    <value>立即打印文档“ {0}”</value>
+  </data>
+  <data name="WorkspaceManagerClass_Print_Printed__0__pages_of_document___1__" xml:space="preserve">
+    <value>文档&amp;#39;{1}&amp;#39;的{0}页已打印</value>
+  </data>
+  <data name="WorkspaceManagerClass_Print_Exception_while_printing___0_" xml:space="preserve">
+    <value>打印时异常：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Execute_Model_now_" xml:space="preserve">
+    <value>立即执行模型！</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_" xml:space="preserve">
+    <value>GuiUpdateInterval不能&amp;lt;= 0；使用GuiUpdateInterval = 1</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Could_not_set_GuiUpdateInterval___0_" xml:space="preserve">
+    <value>无法设置GuiUpdateInterval：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_SleepTime" xml:space="preserve">
+    <value>睡眠时间不能小于0；使用睡眠时间= 0</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Could_not_set_SleepTime___0_" xml:space="preserve">
+    <value>无法设置睡眠时间：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Execute_Exception_during_the_execution___0_" xml:space="preserve">
+    <value>执行期间发生异常：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_waitingStop_Stopping_execution_" xml:space="preserve">
+    <value>停止执行。</value>
+  </data>
+  <data name="WorkspaceManagerClass_waitingStop_Exception_during_the_stopping_of_the_execution___0_" xml:space="preserve">
+    <value>停止执行期间发生异常：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Dispose_Exception_during_stopping_of_the_ExecutionEngine___0_" xml:space="preserve">
+    <value>停止执行引擎时发生异常：{0}</value>
+  </data>
+  <data name="WorkspaceManagerClass_Dispose_Exception_during_disposing_of_the_Model___0_" xml:space="preserve">
+    <value>处置模型期间发生异常：{0}</value>
+  </data>
+  <data name="GlobalProgressBar_Description" xml:space="preserve">
+    <value>{0}之后计算完成（要停止工作空间，请按停止按钮或输入新数据以开始新的计算）</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>TextInput和TextOutput组件使用的默认工作空间字体</value>
+  </data>
+  <data name="Global_Progressbar" xml:space="preserve">
+    <value>全球进度栏</value>
+  </data>
+  <data name="CompLayout_AlignBottom" xml:space="preserve">
+    <value>底部对齐</value>
+  </data>
+  <data name="CompLayout_AlignLeft" xml:space="preserve">
+    <value>左对齐</value>
+  </data>
+  <data name="CompLayout_AlignRight" xml:space="preserve">
+    <value>右对齐</value>
+  </data>
+  <data name="CompLayout_AlignTop" xml:space="preserve">
+    <value>对齐顶部</value>
+  </data>
+  <data name="CompLayout_BiggestHeight" xml:space="preserve">
+    <value>最大身高</value>
+  </data>
+  <data name="CompLayout_BiggestWidth" xml:space="preserve">
+    <value>最大宽度</value>
+  </data>
+  <data name="CompLayout_MoveDown" xml:space="preserve">
+    <value>下移</value>
+  </data>
+  <data name="CompLayout_MoveLeft" xml:space="preserve">
+    <value>向左移动</value>
+  </data>
+  <data name="CompLayout_MoveRight" xml:space="preserve">
+    <value>向右移</value>
+  </data>
+  <data name="CompLayout_MoveUp" xml:space="preserve">
+    <value>提升</value>
+  </data>
+  <data name="CompLayout_SmallestHeight" xml:space="preserve">
+    <value>最小高度</value>
+  </data>
+  <data name="CompLayout_SmallestWidth" xml:space="preserve">
+    <value>最小宽度</value>
+  </data>
+  <data name="CompLayout_SpreadHorizontal" xml:space="preserve">
+    <value>水平传播</value>
+  </data>
+  <data name="CompLayout_SpreadVertical" xml:space="preserve">
+    <value>垂直传播</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>第二</value>
+  </data>
+  <data name="Rearrange_all_lines" xml:space="preserve">
+    <value>重新排列所有行</value>
+  </data>
+  <data name="TemplateReplacement" xml:space="preserve">
+    <value>模板占位符替换</value>
+  </data>
+  <data name="TemplateReplacementTooltip" xml:space="preserve">
+    <value>启用/禁用用CrypTool 2中当前所选语言的文本替换模板占位符，例如$ something $</value>
+  </data>
+  <data name="FontTooltip" xml:space="preserve">
+    <value>更改用于TextInput和TextOutput组件的标准字体（类型，大小）</value>
+  </data>
+  <data name="GlobalProgressBarTooltip" xml:space="preserve">
+    <value>启用/禁用WorkspaceManager顶部显示的全局进度条</value>
+  </data>
+  <data name="GeneralWorkspaceSettings" xml:space="preserve">
+    <value>常规工作区设置</value>
+  </data>
+  <data name="UserInterfaceSettings" xml:space="preserve">
+    <value>用户界面设置</value>
+  </data>
+  <data name="WorkspaceManagerSettingsTitle" xml:space="preserve">
+    <value>工作区设置</value>
+  </data>
+</root>

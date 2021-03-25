@@ -1,0 +1,108 @@
+{
+  "Round": 4,
+  "ActiveSBoxes": [
+    true,
+    true,
+    false,
+    true
+  ],
+  "IsFirst": false,
+  "IsLast": false,
+  "IsBeforeLast": true,
+  "Probability": 0.023895263671875,
+  "InputDifference": 11,
+  "ExpectedDifference": 8226,
+  "Characteristics": [
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        11,
+        4113,
+        176,
+        8226,
+        0
+      ],
+      "OutputDifferentials": [
+        11,
+        8226,
+        176,
+        0
+      ],
+      "Probability": 0.0032958984375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        11,
+        4096,
+        128,
+        8226,
+        0
+      ],
+      "OutputDifferentials": [
+        8,
+        8192,
+        176,
+        0
+      ],
+      "Probability": 0.01171875
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        11,
+        273,
+        112,
+        8226,
+        0
+      ],
+      "OutputDifferentials": [
+        7,
+        546,
+        176,
+        0
+      ],
+      "Probability": 0.000823974609375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        11,
+        256,
+        64,
+        8226,
+        0
+      ],
+      "OutputDifferentials": [
+        4,
+        512,
+        176,
+        0
+      ],
+      "Probability": 0.005859375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        11,
+        272,
+        96,
+        8226,
+        0
+      ],
+      "OutputDifferentials": [
+        6,
+        544,
+        176,
+        0
+      ],
+      "Probability": 0.002197265625
+    }
+  ],
+  "UnfilteredPairList": [],
+  "FilteredPairList": [],
+  "EncrypedPairList": [],
+  "SearchPolicy": 0,
+  "AbortingPolicy": 1,
+  "SelectedAlgorithm": 2
+}

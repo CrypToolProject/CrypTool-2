@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    PKCS (Public-Key Cryptography Standards) is a set of standards for public-key cryptography developed by RSA Laboratories since 1991.
+    Their aim is to support the development and use of asymmetric cryptosystems.
+    <newline /><newline />
+    The PKCS#5 standard describes a password-based key derivation, that allows to generate a very safe key from a possibly not so safe key.
+    By using a salt value and the iterated application of a hash function, the generated key is hardened against dictionary attacks and attacks with rainbow tables.
+  </introduction>
+  <introduction lang="zh-CN">PKCS（公共密钥密码学标准）是RSA实验室自1991年以来开发的一套公共密钥密码学标准。其目的是支持非对称密码系统的开发和使用。 PKCS＃5标准描述了基于密码的密钥派生，它允许从可能不太安全的密钥中生成非常安全的密钥。通过使用salt值和哈希函数的迭代应用程序，可以增强生成的密钥以抵抗字典攻击和彩虹表攻击。</introduction>
+  <introduction lang="ru">PKCS (общедоступные криптографические стандарты) представляет собой набор стандартов для криптографии с открытым ключом, разработанный RSA Laboratories с 1991 года. Их цель - поддерживать разработку и использование асимметричных криптосистем. В стандарте PKCS # 5 описывается вывод на основе пароля, который позволяет генерировать очень безопасный ключ из, возможно, не столь безопасного ключа. Используя значение соли и итерированное приложение хэш-функции, сгенерированный ключ затвердевает от атак со словарями и атак с радужными таблицами.</introduction>
+  <introduction lang="de-DE">
+    PKCS (Public-Key Cryptography Standards; deutsch Kryptographiestandards für öffentliche Schlüssel) bezeichnet eine Reihe von kryptographischen Spezifikationen, die von den RSA-Laboratorien ab 1991 entwickelt wurden, 
+    um die Entwicklung und Verbreitung asymmetrischer Kryptosysteme zu beschleunigen.
+    <newline /><newline />
+    Im PKCS#5-Standard wird unter anderem beschrieben, wie man ausgehend von einem möglicherweise unsicheren Schlüsselwort einen sehr sicheren Schlüssel generieren kann.
+    Durch die Verwendung eines Salt-Wertes und der wiederholten Anwendung einer Hash-Funktion auf das Passwort wird ein Schlüssel generiert, der unempfindlicher gegen Wörterbuch-Angriffe und Rainbow Tables ist.
+  </introduction>
+  <usage lang="en">
+    Enter a key of arbitrary length at the input "Key" of the component. The input accepts strings, byte arrays and data streams.
+    If you enter a string, it is converted into a byte array for internal use according to the character encoding that is given in the settings of the component.
+    <newline /><newline />
+    If you want to use a salt value, you can enter it at the "Salt" input. It also accepts strings, byte arrays and data streams.
+    <newline /><newline />
+    Select the hash function you want to use in the settings. The selected hash function is applied to the combination of key and salt several times. You can adjust the number of iterations in the settings.
+    The more iterations are executed, the longer it will take to calculate a key. However, the safer the generated key is against attacks, the higher the effort for an attacker will be.
+    <newline /><newline />
+    The generated hash value will be available at the outputs of the component as a byte array and as a data stream, from where it can be used as a key by subsequent encryption components.
+    As different encryption methods require different key sizes, you can adjust the length of the output key in the settings. Enter the number of bits that the key should have. The number must be a multiple of 8.
+  </usage>
+  <usage lang="zh-CN">在组件的输入“键”中输入任意长度的键。输入接受字符串，字节数组和数据流。如果输入字符串，则会根据组件设置中给出的字符编码将其转换为字节数组供内部使用。如果要使用盐值，则可以在“盐”输入中输入它。它还接受字符串，字节数组和数据流。在设置中选择要使用的哈希函数。所选的哈希函数将多次应用于键和盐的组合。您可以在设置中调整迭代次数。执行的迭代次数越多，计算密钥所需的时间就越长。但是，生成的密钥抵抗攻击越安全，攻击者的工作量就越大。生成的哈希值将以字节数组和数据流的形式在组件的输出处提供，从那里可将其用作后续加密组件的密钥。由于不同的加密方法需要不同的密钥大小，因此您可以在设置中调整输出密钥的长度。输入密钥应具有的位数。该数字必须是8的倍数。</usage>
+  <usage lang="ru">Введите ключ произвольной длины на вход «Ключ» компонента. Ввод принимает строки, байтовые массивы и потоки данных. Если вы вводите строку, она преобразуется в массив байтов для внутреннего использования в соответствии с кодировкой символов, заданной в настройках компонента. Если вы хотите использовать значение соли, вы можете ввести его на вкладке «Соль». Он также принимает строки, байтовые массивы и потоки данных. Выберите хеш-функцию, которую вы хотите использовать в настройках. Выбранная хеш-функция применяется к комбинации ключа и соли несколько раз. Вы можете настроить количество итераций в настройках. Чем больше выполняется итераций, тем больше времени потребуется для вычисления ключа. Тем не менее, чем безопаснее генерируемый ключ против атак, тем выше будет усилие для злоумышленника. Сгенерированное хэш-значение будет доступно на выходах компонента в виде байтового массива и в виде потока данных, откуда он может использоваться в качестве ключа последующими компонентами шифрования. Поскольку разные методы шифрования требуют разных размеров ключей, вы можете отрегулировать длину выходного ключа в настройках. Введите количество бит, которое должен иметь ключ. Номер должен быть кратным 8.</usage>
+  <usage lang="de-DE">
+    Geben Sie am Eingang "Schlüssel" ein Schlüsselwort ein. Dieses kann beliebig lang sein. Der Eingang akzeptiert Zeichenketten, Byte-Arrays und Datenströme.
+    Falls Sie eine Zeichenkette eingeben, so wird diese anhand der in den Einstellungen angegebenen Zeichenkodierung für die weitere interne Verarbeitung in eine Folge von Bytes konvertiert.
+    <newline /><newline />
+    Falls Sie einen Salt-Wert verwenden möchten, so geben Sie diesen am Eingang "Salt" an. Auch hier werden Zeichenketten, Byte-Arrays und Datenströme beliebiger Länge akzeptiert.
+    <newline /><newline />
+    Wählen Sie in den Einstellungen eine Hash-Funktion. Die gewählte Hash-Funktion wird dann so oft auf die Kombination aus Schlüsselwort und Salt angewendet, wie durch die Anzahl der Iterationen in den Einstellungen vorgegeben ist.
+    Je größer die Anzahl der Iterationen ist, desto länger dauert die Berechnung des Schlüssels, aber desto sicherer ist er auch, da sich der Aufwand auch für einen Angreifer vervielfacht.
+    <newline /><newline />
+    Der generierte Hash-Wert wird am Ausgang der Komponente als Datenstrom oder als Byte-Array zur Verfügung gestellt und kann als Schlüssel für eine nachgeschaltete Verschlüsselungskomponente verwendet werden.
+    Da verschiedene Verschlüsselungsverfahren verschiedene Schlüsselgrößen verlangen, besteht die Möglichkeit, die Größe des ausgegebenen Schlüssels anzugeben.
+    Geben Sie dazu in den Einstellungen die gewünschte Schlüssellänge in Bits an. Die angegebene Zahl muss ein Vielfaches von 8 sein.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/PKCS" lang="en" />
+      <caption lang="en">PKCS (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/PKCS" lang="de-DE" />
+      <caption lang="de-DE">PKCS (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="rfc">
+      <link url="http://tools.ietf.org/html/rfc2898" lang="en" />
+      <caption lang="en">RFC2898: PKCS #5 - Password-Based Cryptography Specification</caption>
+      <link url="http://tools.ietf.org/html/rfc3447" lang="de-DE" />
+      <caption lang="de-DE">RFC2898: PKCS #5 - Password-Based Cryptography Specification (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

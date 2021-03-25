@@ -1,0 +1,33 @@
+﻿<Window x:Class="LatticeCrypto.Views.MerkleHellmanViewManualInputView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Properties="clr-namespace:LatticeCrypto.Properties"
+        Title="{x:Static Properties:Languages.titleEnterMerkleHellman}" SizeToContent="Height" Width="350" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    
+    <StackPanel>
+        <Grid Name="cryptoGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelPrivateKey}" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Name="privateKey" Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" />
+            <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelModulus}" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Name="mod" Grid.Row="1" Grid.Column="1" />
+            <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelMultiplier}" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Name="r" Grid.Row="2" Grid.Column="1" />
+        </Grid>
+        <SelectableTextBlock Name="errorText" Text="{x:Static Properties:Languages.errorSameCryptosystem}" Width="250" Height="50" TextWrapping="Wrap" Margin="10,10"/>
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="15,10,15,15">
+            <Button Content="OK" Name="buttonOK" Click="ButtonOK_Click" Width="80" HorizontalAlignment="Right" Margin="0,0,20,0"/>
+           <Button Content="{x:Static Properties:Languages.buttonAbort}" Name="ButtonCancel" Click="ButtonCancel_Click" Width="80"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,8 @@
+﻿<UserControl x:Class="BooleanOperators.ButtonInputPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    MinWidth="70" MinHeight="70">
+    
+    <Button Name="myButton" Content="{Loc False}" Background="Tomato"  Height="50" Width="50" Click="ExecuteThisMethodWhenButtonIsClicked" />
+    
+</UserControl>

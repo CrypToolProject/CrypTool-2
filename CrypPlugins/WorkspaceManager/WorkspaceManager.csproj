@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{949B4294-2894-43B4-BD73-E0B031F5434F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkspaceManager</RootNamespace>
+    <AssemblyName>WorkspaceManager</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\CrypBuild\Debug\CrypPlugins</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Debug\CrypPlugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Test\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WPFToolkit.Extended, Version=1.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Lib\WPFToolkit.Extended.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.ru.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.ru.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RadioBoolToIntConverter.cs" />
+    <Compile Include="View\Base\Enums.cs" />
+    <Compile Include="View\Base\DragDropHelper\DragDropHelper.cs" />
+    <Compile Include="View\Base\DragDropHelper\DraggedAdorner.cs" />
+    <Compile Include="View\Base\DragDropHelper\InsertionAdorner.cs" />
+    <Compile Include="View\Base\DragDropHelper\Utilities.cs" />
+    <Compile Include="View\Base\Interfaces\IRouting.cs" />
+    <Compile Include="View\Base\Interfaces\IZOrdering.cs" />
+    <Compile Include="View\Base\ObservableDictionary.cs" />
+    <Compile Include="View\Base\PluginSettingsContainer.cs" />
+    <Compile Include="View\Base\RectanglePacker.cs" />
+    <Compile Include="View\Base\Util.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\CryptoLineView.xaml.cs">
+      <DependentUpon>CryptoLineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VisualComponents\TextEditPanel.xaml.cs">
+      <DependentUpon>TextEditPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VisualComponents\BottomBox.xaml.cs">
+      <DependentUpon>BottomBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VisualComponents\CryptoLineView\IntersectPoint.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Algorithms.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Bag.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\CollectionBase.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Comparers.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Hash.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\ListBase.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\OrderedSet.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Pair.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\ReadOnlyCollectionBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\ReadOnlyListBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\RedBlack.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Set.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Strings.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Triple.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\PowerCollections\Util.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\QuadTree\IHasRect.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\QuadTree\QuadTree.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\QuadTree\QuadTreeNode.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\StackFrameDijkstra\Dijkstra.cs" />
+    <Compile Include="View\VisualComponents\CryptoLineView\FromTo.cs" />
+    <Compile Include="View\VisualComponents\ModifiedCanvas\ModifiedCanvas.cs" />
+    <Compile Include="View\VisualComponents\UsageStatisticPopup.xaml.cs">
+      <DependentUpon>UsageStatisticPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VisualComponents\ZoomScrollViewer.xaml.cs">
+      <DependentUpon>ZoomScrollViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\ComponentVisual.xaml.cs">
+      <DependentUpon>ComponentVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\ConnectorVisual.xaml.cs">
+      <DependentUpon>ConnectorVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\DataVisual.xaml.cs">
+      <DependentUpon>DataVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\EditorVisual.xaml.cs">
+      <DependentUpon>EditorVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\FullscreenVisual.xaml.cs">
+      <DependentUpon>FullscreenVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\IControlVisual\IControlVisual.xaml.cs">
+      <DependentUpon>IControlVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\IControlVisual\Slot.xaml.cs">
+      <DependentUpon>Slot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\ImageVisual.xaml.cs">
+      <DependentUpon>ImageVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\LogNotifier.xaml.cs">
+      <DependentUpon>LogNotifier.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\LogVisual.xaml.cs">
+      <DependentUpon>LogVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\SettingsVisual.xaml.cs">
+      <DependentUpon>SettingsVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\SideBarVisual.xaml.cs">
+      <DependentUpon>SideBarVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Visuals\TextVisual.xaml.cs">
+      <DependentUpon>TextVisual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkspaceManagerClass.cs" />
+    <Compile Include="WorkspaceManagerSettings.cs" />
+    <Compile Include="WorkspaceManagerSettingsTab.xaml.cs">
+      <DependentUpon>WorkspaceManagerSettingsTab.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrypCore\CrypCore.csproj">
+      <Project>{FF5D473C-0716-4D3E-9078-2EBD979F94C6}</Project>
+      <Name>CrypCore</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
+      <Name>CrypPluginBase</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\LibSource\KeyTextBox\KeyTextBox.csproj">
+      <Project>{FD4214D8-FFB9-406F-9202-BB5EC0645E8F}</Project>
+      <Name>KeyTextBox</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\OnlineDocumentationGenerator\OnlineDocumentationGenerator.csproj">
+      <Project>{0698CD9D-DAD6-41AE-9E0A-FB00959FE8B1}</Project>
+      <Name>OnlineDocumentationGenerator</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WorkspaceManagerModel\WorkspaceManagerModel.csproj">
+      <Project>{C35A6E71-D6FE-478B-A12D-FAD54FC4EDC9}</Project>
+      <Name>WorkspaceManagerModel</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\VisualComponents\CryptoLineView\CryptoLineView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VisualComponents\TextEditPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VisualComponents\BottomBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VisualComponents\UsageStatisticPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VisualComponents\ZoomScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Visuals\ComponentVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\ConnectorVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\DataVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\EditorVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\FullscreenVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\IControlVisual\IControlVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\IControlVisual\Slot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\ImageVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\LogNotifier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\LogVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\SettingsVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\SideBarVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Visuals\TextVisual.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WorkspaceManagerSettingsTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.ru.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="View\Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\doc.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="DetailedDescription\Images\bild1.png" />
+    <Resource Include="DetailedDescription\Images\componentbrowser.png" />
+    <Resource Include="DetailedDescription\Images\enigma1.png" />
+    <Resource Include="DetailedDescription\Images\enigma2.png" />
+    <Resource Include="DetailedDescription\Images\enigma3.png" />
+    <Resource Include="DetailedDescription\Images\enigma4.png" />
+    <Resource Include="DetailedDescription\Images\parameters.png" />
+    <Resource Include="DetailedDescription\Images\playstop.png" />
+    <Resource Include="DetailedDescription\Images\text and image.png" />
+    <Resource Include="DetailedDescription\Images\textinout.png" />
+    <Resource Include="DetailedDescription\Images\textlist.png" />
+    <Resource Include="DetailedDescription\Images\thunderbolt.png" />
+    <Resource Include="DetailedDescription\Images\thunderbolt2.png" />
+    <Resource Include="DetailedDescription\Images\Unbenannt.png" />
+    <Resource Include="DetailedDescription\Images\Unbenannt2.png" />
+    <Resource Include="DetailedDescription\Images\Unbenannt3.png" />
+    <Resource Include="DetailedDescription\Images\Unbenannt4.png" />
+    <Resource Include="DetailedDescription\Images\Unbenannt5.png" />
+    <Resource Include="DetailedDescription\Images\zoom.png" />
+    <Resource Include="DetailedDescription\Images\suggestionlist.png" />
+    <Resource Include="DetailedDescription\Images\textandimage.png" />
+    <Resource Include="DetailedDescription\Images\layouthelpers_de.png" />
+    <Resource Include="DetailedDescription\Images\layouthelpers_en.png" />
+    <Content Include="View\Images\Bak\WorkspaceManagerIcon.png" />
+    <Content Include="View\Images\Bak\WorkspaceManagerIcon_Nils.png" />
+    <Content Include="View\Images\Bak\WorkspaceManagerIcon_orig.ico" />
+    <Content Include="View\Images\Bak\WorkspaceManagerIcon_orig.png" />
+    <Content Include="View\Images\Bak\WorkspaceManager_Nils.ico" />
+    <Resource Include="View\Images\ComponentIcons\align_bottom.png" />
+    <Resource Include="View\Images\ComponentIcons\align_left.png" />
+    <Resource Include="View\Images\ComponentIcons\align_right.png" />
+    <Resource Include="View\Images\ComponentIcons\align_top.png" />
+    <Resource Include="View\Images\ComponentIcons\size_maxheight.png" />
+    <Resource Include="View\Images\ComponentIcons\size_maxwidth.png" />
+    <Resource Include="View\Images\ComponentIcons\size_minheight.png" />
+    <Resource Include="View\Images\ComponentIcons\size_minwidth.png" />
+    <Resource Include="View\Images\ComponentIcons\space_horizontal.png" />
+    <Resource Include="View\Images\ComponentIcons\space_vertical.png" />
+    <Resource Include="View\Images\ComponentIcons\move_down.png" />
+    <Resource Include="View\Images\ComponentIcons\move_left.png" />
+    <Resource Include="View\Images\ComponentIcons\move_right.png" />
+    <Resource Include="View\Images\ComponentIcons\move_up.png" />
+    <Content Include="View\Images\License.txt" />
+    <Resource Include="View\Images\WMIcons\progress_bg.png" />
+    <Resource Include="View\Images\bg-setting.png" />
+    <Resource Include="View\Images\ComponentIcons\Arrow-down-48.png" />
+    <Resource Include="View\Images\ComponentIcons\Arrow-stop-down-48.png" />
+    <Resource Include="View\Images\ComponentIcons\Arrow-stop-up-48.png" />
+    <Resource Include="View\Images\ComponentIcons\Arrow-up-48.png" />
+    <Resource Include="View\Images\ComponentIcons\data.png" />
+    <Resource Include="View\Images\ComponentIcons\delete.png" />
+    <Resource Include="View\Images\ComponentIcons\full.png" />
+    <Resource Include="View\Images\ComponentIcons\help.png" />
+    <Resource Include="View\Images\ComponentIcons\log.png" />
+    <Resource Include="View\Images\ComponentIcons\max.png" />
+    <Resource Include="View\Images\ComponentIcons\min.png" />
+    <Resource Include="View\Images\ComponentIcons\minimize.png" />
+    <Resource Include="View\Images\ComponentIcons\presentation.png" />
+    <Resource Include="View\Images\ComponentIcons\presIcon.png" />
+    <Resource Include="View\Images\ComponentIcons\setting.png" />
+    <Resource Include="View\Images\ComponentIcons\thunder.png" />
+    <Resource Include="View\Images\LogIcons\debug.png" />
+    <Resource Include="View\Images\LogIcons\error2.png" />
+    <Resource Include="View\Images\LogIcons\info.png" />
+    <Resource Include="View\Images\LogIcons\warn.png" />
+    <Resource Include="View\Images\TextIcons\charactergrowfont.png" />
+    <Resource Include="View\Images\TextIcons\charactershrinkfont.png" />
+    <Resource Include="View\Images\TextIcons\editcopy.png" />
+    <Resource Include="View\Images\TextIcons\editcut.png" />
+    <Resource Include="View\Images\TextIcons\editpaste.png" />
+    <Resource Include="View\Images\TextIcons\editredo.png" />
+    <Resource Include="View\Images\TextIcons\editundo.png" />
+    <Resource Include="View\Images\TextIcons\fileopen.png" />
+    <Resource Include="View\Images\TextIcons\filesave.png" />
+    <Resource Include="View\Images\TextIcons\listbullets.png" />
+    <Resource Include="View\Images\TextIcons\listnumbering.png" />
+    <Resource Include="View\Images\TextIcons\paragraphcenterjustify.png" />
+    <Resource Include="View\Images\TextIcons\paragraphdecreaseindentation.png" />
+    <Resource Include="View\Images\TextIcons\paragraphfulljustify.png" />
+    <Resource Include="View\Images\TextIcons\paragraphincreaseindentation.png" />
+    <Resource Include="View\Images\TextIcons\paragraphleftjustify.png" />
+    <Resource Include="View\Images\TextIcons\paragraphrightjustify.png" />
+    <Resource Include="View\Images\WMIcons\addimg-small.png" />
+    <Resource Include="View\Images\WMIcons\addtxt-small.png" />
+    <Resource Include="View\Images\WMIcons\error01.png" />
+    <Resource Include="View\Images\WMIcons\f2s-small.png" />
+    <Resource Include="View\Images\WMIcons\increase.png" />
+    <Resource Include="View\Images\WMIcons\ok01.png" />
+    <Resource Include="View\Images\WMIcons\pluginSetting-small.png" />
+    <Resource Include="View\Images\WMIcons\reduce.png" />
+    <Resource Include="View\Images\WMIcons\warn01.png" />
+    <Resource Include="View\Images\WorkspaceManagerIcon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

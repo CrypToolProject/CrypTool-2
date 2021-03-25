@@ -1,0 +1,9 @@
+﻿<Window x:Class="Primes.Standalone.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vis="clr-namespace:Primes.WpfVisualization;assembly=Primes"
+    Title="Die Welt der Primzahlen" Height="494" Width="816" WindowState="Maximized">
+  <Grid>
+    <vis:PrimesControl Name="primesControl"  />
+  </Grid>
+</Window>

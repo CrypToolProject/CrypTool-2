@@ -1,0 +1,7 @@
+﻿<UserControl x:Class="CrypTool.Plugins.MD5Collider.Presentation.QuickWatchPresentationContainer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:presentation="clr-namespace:CrypTool.Plugins.MD5Collider.Presentation" x:Name="ucContainer">
+    <Viewbox>
+        <presentation:QuickWatchPresentation Collider="{Binding Collider,ElementName=ucContainer}" Background="AntiqueWhite" />
+    </Viewbox>
+</UserControl>

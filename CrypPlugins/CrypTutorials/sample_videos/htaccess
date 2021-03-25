@@ -1,0 +1,10 @@
+# Microsoft multimedia
+AddType video/x-ms-asf .asf .asx
+AddType audio/x-ms-wma .wma
+AddType audio/x-ms-wax .wax
+AddType video/x-ms-wmv .wmv
+AddType video/x-ms-wvx .wvx
+AddType video/x-ms-wm .wm
+AddType video/x-ms-wmx .wmx
+AddType application/x-ms-wmz .wmz
+AddType application/x-ms-wmd .wmd

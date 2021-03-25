@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Text steganography with capital letters (binary mode)</title>
+  <title lang="zh">带有大写字母的文字隐写术（二进制模式）</title>
+  <summary lang="en">Hide and extract a message in and from another text</summary>
+  <summary lang="zh">隐藏和提取其他文本中的消息</summary>
+  <description lang="en">This is a text steganography technique where a secret message is hidden by changing the letters of the message in the cover text to uppercase.</description>
+  <description lang="zh">这是一种文本隐写术技术，其中通过将封面文本中的消息字母更改为大写字母来隐藏秘密消息。</description>
+  <keywords lang="en">Steganography, Text Steganography, Capital letters</keywords>
+  <keywords lang="zh">隐写术，文字隐写术，大写字母</keywords>
+  <title lang="de">Text Steganographie mit Großbuchstaben (binärer Modus)</title>
+  <summary lang="de">Geheime Nachrichten in einem Text verstecken und wieder extrahieren</summary>
+  <description lang="de">Das ist eine Text-Steganographie Technik, wo eine geheime Nachricht in einem Text versteckt wird indem die Buchstaben der geheimen Nachricht im Covertext großgeschrieben werden.</description>
+  <keywords lang="de">Steganographie, Text-Steganographie, Großbuchstaben</keywords>
+  <icon file="TextSteganography.png" />
+  <relevantPlugins>
+    <plugin name="TextSteganography" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$secretmessage$" value="Geheime Nachricht" />
+    <replacement key="$covertext$" value="He ordered his regular breakfast. Two eggs sunnyside up, hash browns, and two strips of bacon. He continued to look at the menu wondering if this would be the day he added something new. This was also part of the routine. A few seconds of hesitation to see if something else would be added to the order before demuring and saying that would be all. It was the same exact meal that he had ordered every day for the past two years." />
+    <replacement key="$steghide$" value="Verstecken" />
+    <replacement key="$stegextract$" value="Extrahieren" />
+    <replacement key="$extractedmessage$" value="Extrahierte Nachricht" />
+    <replacement key="$secretmessagetext$" value="secret message" />
+    <replacement key="$memotext$" value="Dieser Modus der Text-Steganographie konvertiert die geheime Nachricht in Bits und konvertiert die Buchstaben im Covertext in Großbuchstaben, wo das Bit 1 am gleichen Index im Bitstring ist oder es bleibt eine Kleinbuchstabe wenn das Bit 0 ist. Also um die gesamte Nachricht zu verstecken, sollte die Anzahl der Buchstaben im Covertext gleich oder größer als die Anzahl der Bits in der geheimen Nachricht sein. \line \line In unserem Beispiel, die geheime Nachricht beginnt mit &quot;se&quot;, was in ASCII 0x73 und 0x65 ist und in binärer Form &quot;01110011&quot; und &quot;01100101&quot; ist.  Dann wird die Binärform jedes Zeichens umgekehrt, somit erhalten wir: &quot;11 00 11 10  10 10 01 10&quot;.  Die Konvertierung der ersten 16 (Nicht-Blankstellen) der Buchstaben des Covertexts sieht damit so aus: \line He ordered his regu         [originaler Covertext] \line he ordered his regu          [Covertext kleingeschrieben] \line HE orDEReD hIs rEGu       [angepasster Covertext anhand des Bitstroms] \line 11 0011101 010 0110       [Bitstrom, der benutzt wird um den Covertext anzupassen]" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$secretmessage$" value="秘密讯息" />
+    <replacement key="$covertext$" value="他点了常规早餐。两个鸡蛋向阳面朝上，散成褐色，和两片培根。他继续看菜单，想知道这是否是他添加新内容的日子。这也是例行程序的一部分。几秒钟的犹豫，看看是否有其他东西会添加到订单中，然后再撤消并说这就是全部。这与他过去两年每天订购的一顿饭完全一样。" />
+    <replacement key="$steghide$" value="隐藏" />
+    <replacement key="$stegextract$" value="提取" />
+    <replacement key="$extractedmessage$" value="提取的消息" />
+    <replacement key="$secretmessagetext$" value="秘密讯息" />
+    <replacement key="$memotext$" value="这种文本隐写术模式将秘密消息转换为位，并将封面文本中的字母转换为大写字母，其中位1在位字符串中的索引相同，或者如果位为0，则保留小写字母。因此，要隐藏整个消息，封面文字中的字母数应等于或大于秘密消息中的位数。 \line \line在我们的示例中，秘密消息以“ se”开头，在ASCII中为0x73和0x65，在二进制中为“ 01110011”和“ 01100101”。然后将每个字符的二进制形式取反，从而得到：“ 11 00 11 10 10 10 10 01 10”。封面文字的字母的前16个（非空格）的转换如下：\他下令regu [原始封面文字] \他下令regu [以小写字母覆盖文字] \该行他的rEGu [根据[位流] \第11行0011101 010 0110 [用于修改封面文字的位流]" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$secretmessage$" value="Secret message" />
+    <replacement key="$covertext$" value="He ordered his regular breakfast. Two eggs sunnyside up, hash browns, and two strips of bacon. He continued to look at the menu wondering if this would be the day he added something new. This was also part of the routine. A few seconds of hesitation to see if something else would be added to the order before demuring and saying that would be all. It was the same exact meal that he had ordered every day for the past two years." />
+    <replacement key="$steghide$" value="Hide" />
+    <replacement key="$stegextract$" value="Extract" />
+    <replacement key="$extractedmessage$" value="Extracted message" />
+    <replacement key="$secretmessagetext$" value="secret message" />
+    <replacement key="$memotext$" value="This mode of text steganography converts the secret message to bits and converts the letters in the cover text to uppercase when the bit is 1 at the same index in the bitstring or leaves the letter in lowercase when the bit is 0 at that index. Therefore, to hide all of the message correctly, the number of letters in the cover text should be equal to or greater than the number of bits in the secret message. \line \line In our example, the secret message starts with &quot;se&quot;, what in ASCII is 0x73 and 0x65 and in binary form it is &quot;01110011&quot; and &quot;01100101&quot;.  Then the binary sequence of each secret character is reversed, so we get the bitstream: &quot;11 00 11 10  10 10 01 10&quot;.  The conversions for the first 16 (non blank) cover-text letters then look like this: \line He ordered his regu         [original cover text] \line he ordered his regu          [cover text in lowercase] \line HE orDEReD hIs rEGu       [cover text adapted according to the bitstream] \line 11 0011101 010 0110       [bitstream used for adapting the case of the letters]" />
+  </replacements>
+</sample>

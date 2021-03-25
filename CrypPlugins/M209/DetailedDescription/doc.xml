@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The M-209 is a portable, mechanical cipher machine used by the US military primarily in World War II.
+    <newline /><newline />
+    The key of the M-209 consists of an external and an internal key. The external key is given by the starting positions of the rotors, that can be adjusted on the exterior of the machine.
+    The internal key consists of the positions of the effective pins on the rotors and the positions of the lugs on the 27 bars of the drum. The pins and lugs can only be changed when the machine is opened.
+    As changing the internal key is more complicated than changing the external key, the internal key was changed less often than the external key.
+  </introduction>
+  <introduction lang="zh-CN">M-209是便携式的机械密码机，主要在第二次世界大战中被美军使用。 M-209的钥匙由一个外部钥匙和一个内部钥匙组成。外键由转子的起始位置给定，可以在机器的外部进行调整。内部键由转子上有效销的位置和鼓形27杆上的凸耳的位置组成。销钉和凸耳仅在机器打开时才能更改。由于更改内部密钥比更改外部密钥更为复杂，因此内部密钥的更改频率少于外部密钥。</introduction>
+  <introduction lang="ru">M-209 - это портативная механическая шифровальная машина, используемая военными США в первую очередь во Второй мировой войне. Ключ M-209 состоит из внешнего и внутреннего ключа. Внешний ключ задается начальными положениями роторов, которые могут регулироваться на внешней стороне машины. Внутренний ключ состоит из положений эффективных штифтов на роторах и положения выступов на 27 барах барабана. Штифты и выступы могут быть изменены только при открытии машины. Поскольку изменение внутреннего ключа сложнее, чем изменение внешнего ключа, внутренний ключ был изменен реже, чем внешний ключ.</introduction>
+  <introduction lang="de-DE">
+    Die M-209 ist eine tragbare mechanische Rotor-Chiffriermaschine, die hauptsächlich während des Zweiten Weltkriegs vom US-Militär eingesetzt wurde.
+    <newline /><newline />
+    Der Schlüssel der M-209 besteht aus einem externen und einem internen Schlüssel. Der externe Schlüssel gibt die Anfangsstellung der Rotoren an und kann an der Maschine von außen eingestellt werden.
+    Der interne Schlüssel besteht aus der Angabe der Positionen der aktiven Stifte an den Rotoren und der Verteilung der Schieber an den 27 Stangen des Stangenrades. Die Stifte und Schieber können nur
+    durch einen Eingriff in die innere Mechanik der Maschine geändert werden. Da die Änderung des internen Schlüssels komplizierter war, wurde dieser seltener als der externe Schlüssel geändert.
+  </introduction>
+  <usage lang="en">
+    After dragging the M-209 component onto the workspace, you need to specify a data source that represents the text to be encrypted or decrypted. This data source is mandatory.
+    <newline />
+    In the component settings you can decide whether you want to encrypt or decrypt, and you can define the initial rotor setting (the external key).
+    <newline /><newline />
+    The internal key can also be specified in the settings of the component. Enter the effective pins on a rotor as a sequence of those letters, whose pin should be in the effective position, for example "ABDFGMX".
+    The drum of the M-209 contains 27 bars. Each bar carries two lugs, that can be placed in one of 6 positions, or in a neutral position (0). In the settings, you can enter the positions of the two lugs for each bar as a
+    pair of numbers, for example "15" means that the lugs are placed in positions 1 and 5; "03" means that one lug is in the neutral position and the other in position 3.
+    The neutral position can also be omitted: instead of "30", you can simply enter the value "3" and the second lug is automatically placed at the neutral position.
+    <newline /><newline />
+    Manually transferring the internal key of one M-209 component to the settings of another M-209 component is very laborious, but there is an alternative way to achieve this.
+    The internal key can also be entered at the input labeled <b>"Input internal key"</b>. Connect the output labeled <b>"Output internal key"</b> of the encrypting M-209 component with the input labeled <b>"Input internal key"</b>
+    of the decrypting M-209 component. The decrypting M-209 then adopts the internal key of the encrypting M-209.
+    <newline /><newline />
+    The security of the M-209 depends mainly on the quality of the internal key. The M-209 manual <ref id="manual" /> lists some criteria that a secure key must meet. The component is able to create a random internal key, that meets the security criteria.
+    Click on the button labeled <b>"Generate internal key"</b> in the settings of the component. The effective pins and the lug positions (and thus the internal key) in the settings of the component are then filled in with the
+    automatically generated values.
+    <newline /><newline />
+    Internal keys for the M-209 are stored in secret key lists. To make sure that an internal key was correctly transferred from the key list to the M-209 machine, the key list contains a control value for each key.
+    In order to check the control value with the M-209, the external key has to be set to "AAAAAA" and the letter 'A' has to be encrypted 26 times. If the resulting ciphertext corresponds to the control value,
+    the internal key was correctly transferred to the M-209. The component provides the control value for the given internal key on its output <b>"Key Check"</b>.
+    If you activate the checkbox labeled <b>"Output key sheet"</b> in the settings, this output will additionally provide a formatted key sheet for the internal key.
+  </usage>
+  <usage lang="zh-CN">将M-209组件拖到工作区后，您需要指定一个数据源，该数据源表示要加密或解密的文本。此数据源是必需的。在组件设置中，您可以决定要加密还是解密，还可以定义初始转子设置（外部密钥）。内部密钥也可以在组件的设置中指定。在转子上输入有效的销钉，作为这些字母的序列，其销钉应位于有效位置，例如“ ABDFGMX”。 M-209的鼓包含27巴。每个条带有两个凸耳，可以将其放置在6个位置之一或中性位置（0）中。在设置中，您可以为每个条输入两个凸耳的位置，以一对数字的形式显示，例如“ 15”表示凸耳位于位置1和5；否则，凸耳位于位置1和5。 “ 03”表示一个凸耳处于中间位置，另一个凸耳处于位置3。也可以省略中间位置：代替“ 30”，您只需输入值“ 3”，第二个凸耳会自动放置在中立位置。手动将一个M-209组件的内部密钥转移到另一个M-209组件的设置非常费力，但是有另一种方法可以实现。也可以在标有“输入内部键”的输入处输入内部键。将加密的M-209组件的标记为“输出内部密钥”的输出与解密的M-209组件的标记为“输入内部密钥”的输入连接。然后，解密M-209采用加密M-209的内部密钥。 M-209的安全性主要取决于内部密钥的质量。 M-209手册列出了安全密钥必须满足的一些条件。该组件能够创建一个符合安全标准的随机内部密钥。单击组件设置中标记为“ Generate internal key”的按钮。然后使用自动生成的值填充组件设置中的有效引脚和凸耳位置（以及内部键）。 M-209的内部密钥存储在秘密密钥列表中。为了确保内部密钥已正确地从密钥列表传输到M-209机器，密钥列表包含每个密钥的控制值。为了使用M-209检查控制值，必须将外部密钥设置为“ AAAAAA”，并且必须对字母“ A”进行26次加密。如果生成的密文与控制值相对应，则内部密钥已正确传输到M-209。该组件在其输出“密钥检查”中提供给定内部密钥的控制值。如果在设置中激活标记为“输出键表”的复选框，则此输出还将另外提供内部键的格式化键表。</usage>
+  <usage lang="ru">После перетаскивания компонента M-209 в рабочую область вам нужно указать источник данных, который представляет текст, который должен быть зашифрован или дешифрован. Этот источник данных является обязательным. В настройках компонента вы можете решить, хотите ли вы шифровать или расшифровать, и вы можете определить начальную настройку ротора (внешний ключ). Внутренний ключ также может быть указан в настройках компонента. Введите эффективные контакты на роторе в виде последовательности этих букв, вывод которых должен находиться в эффективном положении, например «ABDFGMX». Барабан M-209 содержит 27 баров. Каждый стержень имеет два наконечника, которые могут быть размещены в одном из 6 положений или в нейтральном положении (0). В настройках вы можете ввести позиции двух выступов для каждого бара в виде пары чисел, например «15» означает, что выступы располагаются в позициях 1 и 5; «03» означает, что один выступ находится в нейтральном положении, а другой в положении 3. Нейтральное положение также может быть опущено: вместо «30» вы можете просто ввести значение «3», а второй выступ автоматически помещается на нейтральное положение. Ручная передача внутреннего ключа одного компонента M-209 в настройки другого компонента M-209 очень трудоемкая, но есть альтернативный способ достижения этого. Внутренний ключ также можно ввести на входе с надписью «Входной внутренний ключ». Подключите выходной сигнал с надписью «Выходной внутренний ключ» компонента шифрования M-209 с входом с надписью «Внутренний входной сигнал» дешифрующего компонента M-209. Затем расшифровывающий M-209 принимает внутренний ключ шифрования M-209. Безопасность M-209 зависит в основном от качества внутреннего ключа. В руководстве M-209 перечислены некоторые критерии, с которыми должен отвечать безопасный ключ. Компонент может создать случайный внутренний ключ, соответствующий критериям безопасности. Нажмите кнопку «Сгенерировать внутренний ключ» в настройках компонента. Затем действующие контакты и позиции наконечника (и, следовательно, внутренний ключ) в настройках компонента заполняются автоматически генерируемыми значениями. Внутренние ключи для M-209 хранятся в списках секретных ключей. Чтобы убедиться, что внутренний ключ был правильно перенесен из списка ключей на машину M-209, список клавиш содержит контрольное значение для каждого ключа. Чтобы проверить контрольное значение с помощью M-209, внешний ключ должен быть установлен на «AAAAAA», а буква «A» должна быть зашифрована 26 раз. Если полученный шифротекст соответствует управляющему значению, внутренний ключ был правильно перенесен на M-209. Компонент предоставляет управляющее значение для данного внутреннего ключа на его выходе «Проверка ключа». Если вы активируете флажок «Выходной лист» в настройках, этот выход дополнительно предоставит отформатированный ключевой лист для внутреннего ключа.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die M-209-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die die zu verschlüsselnden oder entschlüsselnden Daten repräsentiert. Diese Datenquelle ist notwendig.
+    <newline /><newline />
+    In den Einstellungen für die Komponente können Sie entscheiden, ob Sie verschlüsseln oder entschlüsseln wollen, und Sie können die initiale Rotorstellung definieren (den externen Schlüssel).
+    <newline /><newline />
+    Der interne Schlüssel kann ebenfalls in den Einstellungen angegeben werden. Geben Sie die aktiven Stifte für jeden Rotor als eine Folge der Buchstaben an, an dessen Positionen der Stift aktiv sein soll, z.B. "ABDFGMX".
+    Das Stangenrad der M-209 enthält 27 Stangen, wobei auf jeder der Stangen zwei Schieber angebracht sind. Diese können an einer von 6 Positionen oder an einer neutralen Position (0) angebracht werden. Geben Sie in den Einstellungen
+    für jede Stange die zwei Positionen als ein Zahlenpaar an, z.B. "15" bedeutet, dass die Schieber auf den Positionen 1 und 5 sind; "03" bedeutet, dass ein Schieber auf der neutralen Position und einer auf Position 3 ist.
+    Die Angabe der neutralen Position kann auch weggelassen werden: statt "30" kann man auch nur "3" eingeben, der zweite Schieber wird dann automatisch auf die neutrale Position gesetzt.
+    <newline /><newline />
+    Die Übertragung des internen Schlüssels von einer M-209-Komponente zu einer anderen über die Einstellungen ist sehr aufwändig. Der interne Schlüssel kann daher alternativ auch über den Eingang <b>"Eingabe interner Schlüssel"</b> angegeben werden.
+    Verbinden Sie dazu den Ausgang <b>"Ausgabe interner Schlüssel"</b> der verschlüsselnden M-209-Komponente mit dem Eingang <b>"Eingabe interner Schlüssel"</b> der entschlüsselnden M-209-Komponente. Die entschlüsselnde Komponente übernimmt dann
+    den internen Schlüssel von der verschlüsselnden Komponente.
+    <newline /><newline />
+    Die Sicherheit der M-209 hängt vor allem von der Qualität des internen Schlüssels ab. Das Handbuch der M-209 <ref id="manual" /> gibt eine Reihe von Kriterien an, die ein sicherer Schlüssel erfüllen muss. Die Komponente ist in der Lage, einen zufälligen
+    internen Schlüssel zu generieren, der diesen Sicherheitskriterien entspricht. Klicken Sie dafür auf die Schaltfläche <b>"generiere internen Schlüssel"</b> in den Einstellungen der Komponente.
+    Die aktiven Stifte und die Schieberpositionen (also der interne Schlüssel) in den Einstellungen werden dann mit den automatisch erzeugten Werten belegt.
+    <newline /><newline />
+    Interne Schlüssel für die M-209 werden in geheimen Schlüssellisten verwaltet. Um sicher zu stellen, dass ein interner Schlüssel korrekt von der Schlüsselliste in die Maschine übertragen wurde, 
+    ist zu jedem internen Schlüssel in der Schlüsselliste ein Kontrollwert angegeben. Um diesen Kontrollwert mit der M-209 nachzuvollziehen, muss der externe Schlüssel auf "AAAAAA" gesetzt werden
+    und danach der Buchstabe 'A' 26 mal verschlüsselt werden. Stimmt der resultierende Klartext mit dem Kontrollwert aus der Schlüsselliste überein, so wurde der interne Schlüssel korrekt übertragen.
+    Die Komponente gibt den Kontrollwert für den eingestellten internen Schlüssel am Ausgang <b>"Schlüsseltest"</b> aus.
+    Wenn Sie in den Einstellungen das Kontrollkästchen <b>"Ausgabe des Schlüsselblattes"</b> aktivieren, wird an diesem Ausgang zusätzlich noch der interne Schlüssel als formatiertes Schlüsselblatt ausgegeben.
+  </usage>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/M-209" lang="en" />
+      <caption lang="en">M209 in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/M-209" lang="de-DE" />
+      <caption lang="de-DE">M209 in Wikipedia</caption>
+    </linkReference>
+    <linkReference id="manual">
+      <link url="http://www.ilord.com/m209manual.html" lang="en" />
+      <caption lang="en">M209 Manual</caption>
+      <link url="http://www.ilord.com/m209manual.html" lang="de-DE" />
+      <caption lang="de-DE">M209-Handbuch (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

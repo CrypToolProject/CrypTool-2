@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="CrypTool.MD5.Presentation.Displays.DataBlockDisplay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:CrypTool.MD5.Presentation.Converters">
+    <UserControl.Resources>
+        <converters:BytesToStringConverter x:Key="bytesToStringConverter"/>
+    </UserControl.Resources>
+    <Viewbox>
+        <Label Content="{Binding Data,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}},Converter={StaticResource bytesToStringConverter}}"/>
+    </Viewbox>
+</UserControl>

@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="CrypTool.MD5.Presentation.Displays.FunctionNameDisplay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="62" Width="58" Background="White" BorderThickness="1" BorderBrush="Black">
+    <UserControl.Effect>
+        <DropShadowEffect/>
+    </UserControl.Effect>
+    <Border><Label Content="{Binding FunctionName,RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}}}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16"/></Border>
+</UserControl>

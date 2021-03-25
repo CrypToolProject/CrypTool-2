@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Oblivious Transfer Protocol is an important cryptographic primitive. It was introduced by Michael O. Rabin in 1981.
+    It describes how a sender (Alice) can send some information to a receiver (Bob), but still remain oblivious as to what information was sent.
+    <newline /><newline />
+    The Oblivious Transfer Protocol implemented by CrypTool can be described like this:
+    Alice has a database of messages. Bob wants to retrieve one of the entries, but doesn't want Alice to know, which entry he requested.
+    Alice is prepared to send the requested entry to Bob, but she doesn't want Bob to get more than this one entry per request.
+    <newline /><newline />
+    The Oblivious Transfer Protocol meets these requirements. It requires Alice to supply the keys for an RSA encryption. Alice and Bob follow these steps:
+
+    <list><item><b>Step 1:</b>
+        Alice creates a list x of random numbers.
+        The list must have the same number of entries as the database and the numbers must be smaller than the modulus N of the RSA key. Alice sends x to Bob.
+      </item><item><b>Step 2:</b>
+        Bob chooses the index i, which is the index of the database entry he wants to request from Alice.
+        He generates a random number k that serves to blind the index i for Alice: He calculates v = x[i] + encode(k) with Alice's public key and sends it to Alice.
+      </item><item><b>Step 3:</b>
+        For each entry m[j] in her database, Alice calculates the value m[j] + decode(v-x[j]) using her private key and sends the resulting list to Bob.
+        For entry number i, this evaluates to m[i]+k, but as Alice doesn't know k, she can't tell which entry that is.
+      </item><item><b>Step 4:</b>
+        Bob receives Alice's list and selects entry i, which is m[i]+k. He subtracts k and is left with m[i], the entry of Alice's database that he requested.
+        Without the private key, Bob can't reconstruct any other values of Alice's list.
+      </item></list><newline />
+    This component implements actions of Bob.
+  </introduction>
+  <introduction lang="zh-CN">遗忘传输协议是重要的密码原语。它是由Michael O. Rabin于1981年提出的。它描述了发送方（Alice）如何可以向接收方（Bob）发送一些信息，但是对于发送什么信息仍然不了解。 CrypTool实现的遗忘传输协议可以这样描述：Alice有一个消息数据库。 Bob想要检索其中一个条目，但不希望Alice知道他请求了哪个条目。爱丽丝准备将请求的条目发送给鲍勃，但她不希望鲍勃在每个请求中获得的条目都超过此。遗忘传输协议满足这些要求。它要求Alice提供用于RSA加密的密钥。爱丽丝和鲍勃执行以下步骤：步骤1：爱丽丝创建一个随机数列表x。该列表必须具有与数据库相同的条目数，并且该数目必须小于RSA密钥的模数N。爱丽丝将x发送给鲍勃。步骤2：Bob选择索引i，这是他要向Alice请求的数据库条目的索引。他生成一个随机数k，该数字用于使Alice的索引i变为盲目：他使用Alice的公钥计算v = x [i] + encode（k）并将其发送给Alice。步骤3：对于爱丽丝数据库中的每个条目m [j]，爱丽丝使用她的私钥计算值m [j] + encode（vx [j]）并将结果列表发送给鲍勃。对于条目号i，其计算结果为m [i] + k，但是由于Alice不知道k，因此她无法确定是哪个条目。步骤4：Bob接收Alice的列表并选择条目i，即m [i] + k。他减去k，剩下m [i]，这是他要求的Alice数据库的条目。没有私钥，Bob无法重建Alice列表的任何其他值。该组件实现Bob的动作。</introduction>
+  <introduction lang="ru">Протокол незабываемого перевода является важным криптографическим примитивом. Он был представлен Майклом О. Рабином в 1981 году. В нем описывается, как отправитель (Алиса) может отправить некоторую информацию получателю (Бобу), но все равно не замечает, какая информация была отправлена. Протокол Oblivious Transfer, реализованный CrypTool, может быть описан следующим образом: у Алисы есть база данных сообщений. Боб хочет получить одну из записей, но не хочет, чтобы Алиса знала, какую запись он запросил. Алиса готова отправить запрошенную запись Бобу, но она не хочет, чтобы Боб получил больше одной записи за запрос. Протокол «Забытый перевод» отвечает этим требованиям. Это требует, чтобы Алиса предоставляла ключи для шифрования RSA. Алиса и Боб выполните следующие шаги: Шаг 1: Алиса создает список х случайных чисел. Список должен иметь такое же количество записей, что и база данных, а числа должны быть меньше, чем модуль N ключа RSA. Алиса отправляет x Бобу. Шаг 2: Боб выбирает индекс i, который является индексом записи базы данных, которую он хочет запросить у Алисы. Он генерирует случайное число k, которое служит для слепого индекса i для Алисы: он вычисляет v = x [i] + encode (k) с открытым ключом Алисы и отправляет его Алисе. Шаг 3: Для каждой записи m [j] в своей базе данных Алиса вычисляет значение m [j] + decode (vx [j]) с помощью своего закрытого ключа и отправляет полученный список Бобу. Для входного номера i это оценивается как m [i] + k, но, поскольку Алиса не знает k, она не может определить, какая запись. Шаг 4: Боб получает список Алисы и выбирает запись i, которая является m [i] + k. Он вычитает k и остается с m [i], входом в базу данных Алисы, которую он запросил. Без частного ключа Боб не может восстановить любые другие значения списка Алисы. Этот компонент реализует действия Боба.</introduction>
+  <introduction lang="de-DE">
+    Das Oblivious Transfer-Protokoll ist ein kryptographisches Protokoll, das 1981 von Michael O. Rabin vorgeschlagen wurde.
+    Es beschreibt, wie ein Sender (Alice) eine Information an einen Empfänger (Bob) schicken kann, bei dem dem Sender verborgen bleibt, welche Information geschickt wurde.
+    <newline /><newline />
+    Das in CrypTool implementierte Oblivious Transfer-Protokoll kann folgendermaßen beschrieben werden:
+    Alice hat eine Sammlung von Nachrichten. Bob will eine dieser Nachrichten von Alice erhalten, aber er will nicht, dass Alice erfährt, welche der Nachrichten er angefragt hat.
+    Alice ist bereit, Bob die gewünschte Nachricht zu schicken, aber sie will vermeiden, dass Bob bei seiner Anfrage Informationen über die übrigen Nachrichten erhält.
+    <newline /><newline />
+    Das Oblivious Transfer-Protokoll erfüllt diese Anforderungen. Alice muss dazu einen RSA-Schlüssel generieren. Alice und Bob befolgen dann diese Schritte:
+
+    <list><item><b>Schritt 1:</b>
+        Alice erzeugt eine Liste x von Zufallszahlen.
+        Die Anzahl der Zufallszahlen muss der Anzahl der von Alice vorgehaltenen Nachrichten entsprechen.
+        Außerdem muss jede der Zahlen kleiner als der Modulus N von Alices RSA-Schlüssel sein. Alice schickt diese Liste dann an Bob.
+      </item><item><b>Schritt 2:</b>
+        Bob wählt einen Index i, der angibt, welche Nachricht er von Alice erhalten möchte.
+        Er erzeugt eine Zufallszahl k, die zur Verschleierung des Indexes dient: Er berechnet v = x[i] + encode(k) mit Alices öffentlichem Schlüssel und schickt v an Alice.
+      </item><item><b>Schritt 3:</b>
+        Für jede ihrer Nachrichten m[j] berechnet Alice den Wert m[j] + decode(v-x[j]) unter Verwendung ihres privaten RSA-Schlüssels und schickt die resultierenden Werte an Bob.
+        Für den i-ten Eintrag ergibt dies gerade m[i]+k, aber da Alice k nicht kennt, weiß sie nicht, um welchen Eintrag es sich handelt.
+      </item><item><b>Schritt 4:</b>
+        Bob empfängt Alices Liste und wählt den i-ten Eintrag, m[i]+k. Er subtrahiert k und erhält mit m[i] die von ihm angefragte Nachricht.
+        Da er Alices privaten Schlüssel nicht kennt, kann Bob keine weiteren Nachrichten aus Alices Liste rekonstruieren.
+      </item></list><newline />
+    Diese Komponente implementiert Aktionen von Bob.
+  </introduction>
+  <usage lang="en">
+    Enter Alice's public RSA key at the inputs "N" and "e".
+    On input "x", Alice must enter the list of random numbers, that she has generated, as an array of BigInteger numbers.
+    The index of the message, that Bob wants to request from Alice, can be specified at the input "b".
+    From the given inputs, the component calculates the values "k" and "v" from step 2 of the protocol and provides the results at the corresponding outputs as BigInteger numbers.
+  </usage>
+  <usage lang="zh-CN">在输入“ N”和“ e”上输入Alice的公共RSA密钥。在输入“ x”上，Alice必须输入其生成的随机数列表，作为BigInteger数的数组。鲍勃想从爱丽丝那里请求消息的索引，可以在输入“ b”处指定。根据给定的输入，组件从协议的步骤2计算值“ k”和“ v”，并将结果作为BigInteger编号提供给相应的输出。</usage>
+  <usage lang="ru">Введите открытый ключ RSA Alice на входах «N» и «e». На входе «x» Алиса должна ввести список случайных чисел, которые она сгенерировала, в виде массива чисел BigInteger. Индекс сообщения, который Боб хочет запросить у Алисы, может быть указан на входе «b». Из данных входов компонент вычисляет значения «k» и «v» из шага 2 протокола и предоставляет результаты на соответствующих выходах в виде чисел BigInteger.</usage>
+  <usage lang="de-DE">
+    Geben Sie an den Eingängen "N" und "e" den öffentlichen RSA-Schlüssel von Alice an.
+    Am Eingang "x" muss Alice die Liste der von ihr erstellten Zufallszahlen an Bob übergeben. Die Liste wird als ein Array von BigInteger-Zahlen erwartet.
+    Am Eingang "b" muss der Index der Nachricht angegeben werden, die Bob von Alice erhalten will.
+    Die Komponente berechnet aus den Eingaben die Werte "k" und "v" aus Schritt 2 des Protokolls und gibt diese an den entsprechenden Ausgängen als BigInteger-Zahlen aus.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Oblivious_transfer" lang="en" />
+      <caption lang="en">Oblivious transfer (Wikipedia)</caption>
+      <link url="http://en.wikipedia.org/wiki/Oblivious_transfer" lang="de" />
+      <caption lang="de">Oblivious Transfer (Wikipedia, englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://bezadis.ics.upjs.sk/old/CryptoSymposium/files/paper9.pdf" lang="en" />
+      <caption lang="en">Oblivious transfer 1-n (PDF)</caption>
+      <link url="http://bezadis.ics.upjs.sk/old/CryptoSymposium/files/paper9.pdf" lang="de" />
+      <caption lang="de">Oblivious Transfer 1-n (PDF, englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

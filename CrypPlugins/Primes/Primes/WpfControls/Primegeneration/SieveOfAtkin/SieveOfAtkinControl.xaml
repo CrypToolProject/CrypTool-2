@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primegeneration.SieveOfAtkin.SieveOfAtkinControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Generation"
+    xmlns:this="clr-namespace:Primes.WpfControls.Primegeneration.SieveOfAtkin">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <!--
+      <GroupBox Grid.Row="0" Header="{x:Static lang:PrimesGeneration.soa_generateprimesto}">
+      <comps:InputSingleControl x:Name="isc" InputRangeControlType="Horizontal" FreeTextboxWidth="200" ShowCalcInput="False" />
+      </GroupBox>
+      -->
+        <this:SieveOfAtkin x:Name="soa" Grid.Row="1" />
+    </Grid>
+
+</UserControl>

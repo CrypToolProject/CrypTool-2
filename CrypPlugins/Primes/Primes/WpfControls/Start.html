@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+		  body
+		  {
+		  	font-family:Arial,Verdana,Georgia;
+		  	font-size:smaller;
+            background-color: #EBEFF6;
+		  }
+		</style>
+	</head>
+	<body>
+	<h2>Welcome to the World of Primes</h2>
+
+  <p align="justify">
+
+  This component gives an overview over the properties and applications of prime numbers.<br />
+  A prime number is a natural number >= 2, which is divisible only by 1 and itself.
+  So prime numbers are a special subset of the natural numbers and what makes them especially interesting is the fact,
+  that every natural number can be expressed as the product of prime numbers in a unique way.
+  <br />
+
+  Over the centuries many mathematicians have examined the properties of the prime numbers, but up to this day there
+  are still many unanswered questions about those 'building blocks' of the natural numbers.
+
+  Prime numbers play an important role in cryptography.
+  When you order something in an online shop or transfer money by online banking it is a pair of two very big prime numbers
+  that makes your transactions safe and prevents unauthorized people from intercepting and reading your account details or credit card number.<br /><br />
+
+  This component is divided into five sections that can be selected via the navigation on the left.<br /><br >
+
+  <hr /><br />
+  In the section <strong>Factorization</strong> you can find functions for calculating the prime factors of a natural number.
+  According to the fundamental theorem of arithmetic by Gauss, every natural number can be factored uniquely into prime factors.
+  The number 6 for example is uniquely factored into 6 = 2 * 3.<br />
+  The two prime numbers 2 and 3 are the building blocks of the number 6. The factorization is unique, there is no other possibility to write 6 as
+  the product of prime numbers. The result of breaking up a number into its prime factors is called the "prime factorization".
+  <br /><br />
+
+  <ul>
+
+  <li>
+  The first method is the <a href="exec://Factor_Bf">brute-force factorization</a>. It is the easiest method, but it
+  is also very ineffective for big numbers. The factors of a number are found by sequentially trying all possible factors.
+  The found factors are displayed in a factor tree.<br /><br />
+  </li>
+
+  <li>
+  The <a href="exec://Factor_QS">quadratic sieve</a> is one of the fastest methods for factoring a number.
+  It makes use of mathematical principles that date back on the french mathematician Pierre de Fermat. The method is more complex and mathematically more sophisticated than trial division. Therefore an example is presented in the online help for the quadratic sieve.<br /><br />
+  </li>
+
+  </ul>
+
+  <hr /><br />
+
+  In the section <strong>Primality test</strong> you can find three methods which allow you to test if a given number is a prime number.
+  The RSA cryptosystem requires two prime numbers with more than 150 digits each. Primality tests are used for
+  finding such big prime numbers.
+
+  <ul>
+
+  <li>
+  <a href="exec://Primetest_Sieve">The sieve of Eratosthenes</a> was invented by the greek mathematician Eratosthenes around 200 BC.
+  It not only tests whether a number is prime, it also generates a list of all prime numbers up to the tested number.
+  <br /><br />
+  </li>
+
+  <li>
+  The <a href="exec://Primetest_Miller">Miller-Rabin primality test</a> is the test that is most often used.
+	It is also based on <a href="http://de.wikipedia.org/wiki/Kleiner_fermatscher_Satz" target="_blank">Fermat's Little Theorem</a>.
+	Because of the nature of this test, mistakes are possible; for example the method may produce a result which is supposedly prime, but is in fact composite.
+  <br /><br />
+  </li>
+
+  <li>
+  <a href="exec://Primetest_Sieve">The Sieve of Atkin</a> was developed by the mathematician Atkin and is an optimization of the sieve of Eratosthenes.
+  <br /><br />
+  </li>
+
+  </ul>
+
+  <hr /><br />
+
+  In the section <a href="exec://Primesgeneration">Generation of primes</a> you can experiment with quadratic formulas.
+  Some quadratic formulas generate more prime numbers than others, but no quadratic formula generates prime numbers for all input values.
+  Eulers famous quadratic polynomial – x<sup>2</sup> + x + 41 – generates prime numbers for x = 0 ... 39.
+  <br /><br />
+
+  <hr /><br />
+
+  In the section <strong>Distribution of primes</strong> you can experiment with some visualizations of the distribution of the prime numbers.
+  <br />The following functions are available:
+
+  <ul>
+
+  <li>
+  On the <a href="exec://PrimeDistrib_Numberline">Number line</a> the natural numbers are represented as points. The prime numbers are displayed as blue dots, all other numbers as black dots. When you move the mouse pointer over a number, some properties of that number are displayed and different number theoretical functions are evaluated.
+  <br /><br />
+  </li>
+
+  <li>
+  On the <a href="exec://PrimeDistrib_Numberrec">Number grid</a> the natural numbers are displayed in a two dimensional grid. The prime numbers are displayed as red squares.
+  You can adapt the number of rows and columns of the grid (up to 100 rows/columns), so that you can examine different patterns.
+  <br /><br />
+  </li>
+
+  <li>
+  In the dialog <a href="exec://Graph">Number of primes</a> you can draw the graphs of three functions that count the number of prime numbers up to a given number.
+  Two of the functions are approximations that were found by Carl Friedrich Gauss. They don't give the exact number but estimates that are very good.
+  The third function counts the exact number of primes and the resulting graph looks therefore like a series of steps. The calculation of this 'step function' is
+  very time consuming.
+  <br /><br />
+  </li>
+
+  <li>
+  During a boring presentation, the mathematician Stanisław Ulam started writing the natural numbers on a graphed paper in the shape of a spiral. He then marked all the prime numbers and to his surprise he found, that many of the prime numbers lay on diagonals. You can recreate the spiral in this dialog with various adjustable parameters. The spiral is called <a href="exec://PrimeDistrib_Ulam">Ulam's sprial</a> after its inventor.
+  <br /><br />
+  </li>
+
+  </ul>
+
+  <hr /><br />
+
+  The section <strong>Number theory</strong> presents some number-theoretic functions that play an important role in cryptography.
+  <br />You can examine the following four aspects:
+
+  <ul>
+
+  <li>
+  <a href="exec://PowerMod">Powering</a> presents a visualization of the calculation of the powers of a number in a residue class ring.
+  They play an important role in many cryptographic methods (e.g. RSA), as they can be calculated very fast and easy, whereas the inverse operation,
+  i.e. calculating the discrete logarithm of a number, is very difficult and no efficient algorithms are known.
+  <br /><br />
+  </li>
+
+  <li>
+  You can examine several <a href="exec://NumberTheoryFunctions">Number-theoretic functions</a> by generating tabular lists of their function values.
+  <br /><br />
+  </li>
+
+  <li>
+  <a href="exec://PrimitivRoot">Primitive roots</a> are of great importance in cryptography.
+  Whenever two communiction partners want to exchange confidential information and use a symmetric key,
+  they have to negotiate a so called session key that may only be known to them. If the session key is exchanged
+  over an open channel, precautions must be taken that no third person can intercept the key. This can
+  be ensured if the two communication partners use the <a href="http://en.wikipedia.org/wiki/Diffie-Hellman_key_exchange" target="_blank">Diffie-Hellman key exchange</a>,
+  which makes use of the properties of primitive roots.
+  <br /><br />
+  </li>
+
+  <li>
+  <a href="exec://PrimeDistrib_Goldbach">Goldbach's conjecture</a> says, that every even number greater than 2 can be expressed uniquely as the sum of two primes. 
+  It was formulated in 1742 by the mathematician Christian Goldbach in a letter to Leonhard Euler.
+  Many mathematicians have tried to prove or disprove the conjecture, but to date no one has achieved this.
+  Proof of the truth of Goldbach's conjecture is one of the great unsolved problems in mathematics. 
+  This section provides a visual impression of the conjecture.
+  <br /><br />
+  </li>
+
+  </ul>
+
+  </p>
+
+  </body>
+</html>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+
+    Grain v0 is a symmetric stream cipher which is based on two shift registers and a non-linear output function.
+    The key size is 80 bits and the size of the initialization vector is 64 bits.
+    According to the cipher's attack, we need to set the internal state of the LFSR in the final clock to zero state and then select NFSR randomly.
+    Then in reverse we compute the keystream and the initial states of NFSR and LFSR. The frequency of 1s and 0s in the keystream, in the cases where we are dealing with a weak initialization
+    process is 1/2 + 2^-6.3. Otherwise, each bit in the keystream has a probability of 1/2 for a "1".
+    Attack terminates if the LFSR bits in positions 64 to 79 are 1.
+
+  </introduction>
+  <introduction lang="zh-CN">粒度v0是一个对称流密码，它基于两个移位寄存器和一个非线性输出函数。密钥大小为80位，初始化向量的大小为64位。根据密码的攻击，我们需要将最终时钟的LFSR的内部状态设置为零状态，然后随机选择NFSR。然后相反地，我们计算密钥流以及NFSR和LFSR的初始状态。在我们处理弱初始化过程的情况下，密钥流中1s和0s的频率为1/2 + 2 ^ -6.3。否则，密钥流中的每个位对于“ 1”的概率为1/2。如果位置64至79的LFSR位为1，则攻击终止。</introduction>
+  <introduction lang="ru">Grain v0 является симметричным потоковым шифрованием, который основан на двух сдвиговых регистрах и нелинейной выходной функции. Размер ключа - 80 бит, а размер вектора инициализации - 64 бита. Согласно атаке шифрования, нам нужно установить внутреннее состояние LFSR в последние часы на нулевое состояние, а затем выбрать NFSR случайным образом. Затем в обратном порядке мы вычисляем ключевой поток и начальные состояния NFSR и LFSR. Частота 1s и 0s в ключевом потоке в тех случаях, когда мы имеем дело со слабым процессом инициализации, равна 1/2 + 2 ^ -6.3. В противном случае каждый бит в ключевом потоке имеет вероятность 1/2 для «1». Атака прекращается, если бит LFSR в положениях с 64 по 79 равен 1.</introduction>
+  <introduction lang="de-DE"></introduction>
+  <usage lang="en">
+    After dragging the GrainV0Attack component onto your workspace, you will have to attach a text input connector to data sources, which corresponds to
+    the NFSR in the final clocking. You can add the data of the non-linear register manually or with a random generator. We need to mention here
+    that the last method would take 20 minutes until you'll have the results.
+    
+    Then you have to connect three text output components to the 'Output' connectors, which correspond to the LFSR and NFSR at the initial state.
+    NFSR bits in the output component indicate the secret key. LFSR bits indicate the IV. If you have chosen the random generator to fill the NFSR in the last state,
+    then you have to add in the outputs of the attack two other text inputs which represent the right NFSR in the 160th state which gives a weak initialization 
+    process and the NFSR that is currently being tested from the random generator.
+    After that, drag into the workspace the Grain v0 cipher which takes as inputs the 2 outputs of the Grain v0 attack (Key and IV) and gives as output the
+    keystream. Bring into the workspace the component "Frequency test" and connect the cipher's output with that in order to see the frequencies of 1s and 0s.
+
+   
+  </usage>
+  <usage lang="zh-CN">将GrainV0Attack组件拖到工作区后，您将必须将文本输入连接器连接到数据源，该连接器与最终时钟中的NFSR相对应。您可以手动或使用随机生成器添加非线性寄存器的数据。在这里我们需要提及的是，最后一种方法将需要20分钟才能获得结果。然后，您必须将三个文本输出组件连接到“输出”连接器，它们在初始状态下对应于LFSR和NFSR。输出组件中的NFSR位指示密钥。 LFSR位指示IV。如果您选择了随机生成器来填充最后一个状态的NFSR，则必须在攻击的输出中添加其他两个文本输入，它们代表第160个状态的正确NFSR，这会导致初始化过程较弱，并且NFSR目前正在从随机数发生器中进行测试。之后，将Grain v0密码拖到工作区中，该密码以Grain v0攻击的2个输出（密钥和IV）作为输入，并提供密钥流作为输出。将“频率测试”组件放入工作区，并将密码输出与该输出连接，以查看1s和0s的频率。</usage>
+  <usage lang="ru">После перетаскивания компонента GrainV0Attack в рабочее пространство вам нужно будет подключить текстовый входной разъем к источникам данных, что соответствует NFSR в окончательной синхронизации. Вы можете добавить данные нелинейного регистра вручную или со случайным генератором. Мы должны упомянуть здесь, что последний метод займет 20 минут, пока вы не получите результаты. Затем вам нужно подключить три текстовых выходных компонента к разъемам «Выход», которые соответствуют LFSR и NFSR в исходном состоянии. Биты NFSR в выходном компоненте указывают секретный ключ. Биты LFSR указывают на IV. Если вы выбрали случайный генератор для заполнения NFSR в последнем состоянии, тогда вам нужно добавить в выходы атаки два других текстовых ввода, которые представляют собой правый NFSR в 160-ом состоянии, что дает слабый процесс инициализации и NFSR, что в настоящее время тестируется из случайного генератора. После этого перетащите в рабочую область Grain v0 cipher, который принимает в качестве входных данных 2 выхода атаки Grain v0 (Key и IV) и дает в качестве выходного файла поток ключей. Ввести в рабочую область компонент «Частотный тест» и подключить выход шифрования с тем, чтобы видеть частоты 1s и 0s.</usage>
+  <usage lang="de-DE"></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://eprint.iacr.org/2009/109.pdf" lang="en" />
+      <caption lang="en">Cryptanalysis of Stream Cipher Grain Family</caption>
+    </linkReference>
+  </references>
+</documentation>

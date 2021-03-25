@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Hill cipher was published in 1929 in the journal <i>American Mathematical Monthly</i> and is named after its inventor Lester S. Hill.
+    It is a polygraphic substitution cipher based on linear algebra.
+    <newline /><newline />
+    The Hill cipher uses an invertible n x n matrix as key. The elements of the matrix are numbers from 0 to 25.
+    For encrypting a text, the text is split into blocks of n characters.
+    Each block can be interpreted as an n-dimensional vector by replacing the letters in a block with numbers: A=0, B=1, ..., Z=25.
+    This vector is multiplied with the matrix and the resulting vector modulo 26 is translated back into a block of n characters.
+    This is repeated for all blocks of the plaintext, and the ciphertext is then the concatenation of the encrypted blocks.
+    <newline /><newline />
+    The decryption process uses the same procedure as the encryption, but applies the inversion of the key matrix.
+</introduction>
+  <introduction lang="zh-CN">Hill密码于1929年发表在《美国数学月刊》上，并以其发明家Lester S. Hill的名字命名。它是基于线性代数的测谎替换密码。希尔密码使用可逆nxn矩阵作为密钥。矩阵的元素是从0到25的数字。对于加密文本，该文本被分为n个字符的块。通过将块中的字母替换为数字，可以将每个块解释为n维向量：A = 0，B = 1，...，Z = 25。该向量与矩阵相乘，结果向量模26被转换回n个字符的块。对所有明文块重复此过程，然后将密文连接到已加密的块。解密过程使用与加密相同的过程，但是应用密钥矩阵的求逆。</introduction>
+  <introduction lang="ru">Шиф Хилла был опубликован в 1929 году в журнале American Mathematical Monthly и назван в честь его изобретателя Лестера С. Хилла. Это полиграфический шифр замещения, основанный на линейной алгебре. Шифр Хилла использует в качестве ключа обратимую матрицу nxn. Элементами матрицы являются числа от 0 до 25. Для шифрования текста текст разбивается на блоки из n символов. Каждый блок можно интерпретировать как n-мерный вектор, заменяя буквы в блоке номерами: A = 0, B = 1, ..., Z = 25. Этот вектор умножается на матрицу, и полученный вектор по модулю 26 переводится обратно в блок из n символов. Это повторяется для всех блоков открытого текста, а зашифрованный текст является конкатенацией зашифрованных блоков. Процесс дешифрования использует ту же процедуру, что и шифрование, но применяет инверсию ключевой матрицы.</introduction>
+  <introduction lang="de-DE">
+    Die Hill-Chiffre wurde erstmals 1929 in der Zeitschrift <i>American Mathematical Monthly</i> veröffentlicht und ist nach ihrem Erfinder Lester S. Hill benannt.
+    Sie ist eine polygraphische Substitutions-Chiffre und beruht auf Prinzipien der linearen Algebra.
+    <newline /><newline />
+    Die Hill-Chiffre verwendet eine invertierbare n x n-Matrix als Schlüssel, deren Elemente Zahlen von 0 bis 25 sind.
+    Um einen Text zu verschlüsseln, wird dieser fortlaufend in Blöcke mit je n Buchstaben aufgeteilt.
+    Jeder Block kann nun als ein n-elementiger Vektor aufgefasst werden, indem die Buchstaben durch Zahlen ersetzt werden: A=0, B=1, ..., Z=25.
+    Dieser Vektor wird mit der Matrix multipliziert und der resultierende Vektor modulo 26 wird wieder in einen Block von n Buchstaben übersetzt.
+    Dies wird für alle Blöcke des Klartextes wiederholt, und die Aneinanderreihung der so verschlüsselten Blöcke ergibt den Geheimtext.
+    <newline /><newline />
+    Für die Entschlüsselung des Geheimtextes wird dieser Vorgang mit der inversen Matrix durchgeführt.    
+  </introduction>
+  <usage lang="en">
+    In the settings of the component, you can select whether it should encrypt or decrypt the input text.
+    <newline /><newline />
+    The encryption matrix can be entered in the settings or at the "Matrix" input of the component.
+    In the settings, the matrix can be specified as a comma-separated list of numbers (for example "1,0,0,0,1,0,0,0,1" for the 3x3 identity matrix).
+    However, on the input "Matrix" a BigInteger array is expected.
+	 If the "Matrix" input is not connected, the matrix that is defined in the settings will be used.
+    As the matrix has to be a square matrix, the number of values given in the matrix definition has to be a square number.
+    The component checks whether the given matrix is invertible. If it is not invertible, the component will halt and issue an error message.
+    <newline /><newline />
+    If you want to use an alphabet that differs from the standard alphabet, you can enter it in the settings of the component.
+    Note, that the matrix elements have to be numbers that are smaller than the number of letters in the specified alphabet.
+    <newline /><newline />
+    Enter the text, that is to be encrypted or decrypted, on the input labeled "Input".
+    If the text contains characters, that are not part of the specified alphabet, the component halts and issues an error message.
+  </usage>
+  <usage lang="zh-CN">在组件的设置中，您可以选择是加密还是解密输入文本。可以在设置中或组件的“矩阵”输入中输入加密矩阵。在设置中，可以将矩阵指定为逗号分隔的数字列表（例如3x3恒等矩阵的“ 1,0,0,0,1,0,0,0,1”）。但是，在输入“矩阵”上，应使用BigInteger数组。如果未连接“矩阵”输入，则将使用设置中定义的矩阵。由于矩阵必须是平方矩阵，因此矩阵定义中给出的值的数量必须是平方数。该组件检查给定矩阵是否可逆。如果它不是不可逆的，则组件将停止并发出错误消息。如果要使用与标准字母不同的字母，则可以在组件的设置中输入它。注意，矩阵元素必须是小于指定字母中字母数量的数字。在标有“输入”的输入上输入要加密或解密的文本。如果文本包含不属于指定字母的字符，则该组件将暂停并发出错误消息。</usage>
+  <usage lang="ru">В настройках компонента вы можете выбрать, следует ли шифровать или расшифровывать вводный текст. Матрица шифрования может быть введена в настройках или на входе «Матрица» компонента. В настройках матрица может быть указана как список номеров, разделенных запятыми (например, «1,0,0,0,1,0,0,0,1» для матрицы 3x3). Однако на входе «Матрица» ожидается массив BigInteger. Если вход «Матрица» не подключен, будет использоваться матрица, определенная в настройках. Поскольку матрица должна быть квадратной матрицей, число значений, заданных в определении матрицы, должно быть квадратным числом. Компонент проверяет, является ли данная матрица обратимой. Если он не обратим, компонент остановится и выдаст сообщение об ошибке. Если вы хотите использовать алфавит, который отличается от стандартного алфавита, вы можете ввести его в настройках компонента. Обратите внимание, что элементы матрицы должны быть числами, которые меньше числа букв в указанном алфавите. Введите текст, который должен быть зашифрован или дешифрован, на входе с надписью «Вход». Если текст содержит символы, которые не являются частью указанного алфавита, компонент останавливается и выдает сообщение об ошибке.</usage>
+  <usage lang="de-DE">
+    Geben Sie in den Einstellungen der Komponente an, ob die Eingabe verschlüsselt oder entschlüsselt werden soll.
+    <newline /><newline />
+    Die Verschlüsselungsmatrix kann entweder in den Einstellungen oder über den "Matrix"-Eingang der Komponente angegeben werden.
+    In den Einstellungen kann die Matrix als durch Kommas getrennte Folge von Zahlen angegeben werden (z.B. "1,0,0,0,1,0,0,0,1" für die 3x3-Einheitsmatrix), am "Matrix"-Eingang wird dagegen ein BigInteger-Array erwartet.
+    Wird der "Matrix"-Eingang nicht verbunden, so wird die in den Einstellungen definierte Matrix verwendet.
+    Da die Matrix quadratisch sein muss, muss die Anzahl der angegebenen Zahlen eine Quadratzahl sein.
+    Die Komponente testet vor der Verwendung der Matrix, ob diese invertierbar ist und bricht die Bearbeitung andernfalls ab.
+    <newline /><newline />
+    Die Komponente kann auch ein vom Standardalphabet abweichendes Alphabet verwenden. Dieses kann in den Einstellungen der Komponente angegeben werden.
+    Beachten Sie, dass die Matrixelemente Zahlen sein müssen, die kleiner als die Anzahl der Buchstaben des angegebenen Alphabets sind.
+    <newline /><newline />
+    Am Eingang "Eingabe" wird der zu verschlüsselnde oder entschlüsselnde Text erwartet. Enthält die Eingabe Zeichen, die nicht im angegebenen Alphabet vorkommen,
+    so wird die Ausführung mit einer Fehlermeldung abgebrochen.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Hill_cipher" lang="en" />
+      <caption lang="en">Hill Cipher in Wikipedia</caption>
+      <link url="http://en.wikipedia.org/wiki/Hill_cipher" lang="de" />
+      <caption lang="de">Hill-Chiffre in der Wikipedia (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

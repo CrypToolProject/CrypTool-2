@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    A webcam is a camera device, that is integrated in the computer or connected via an interface. This component captures images from a connected webcam in specified time intervals and provides the recorded pictures.
+  </introduction>
+  <introduction lang="zh-CN">网络摄像头是一种摄像头设备，它集成在计算机中或通过接口连接。该组件以指定的时间间隔从连接的网络摄像头捕获图像并提供记录的图片。</introduction>
+  <introduction lang="ru">Веб-камера - это устройство камеры, встроенное в компьютер или подключенное через интерфейс. Этот компонент фиксирует изображения с подключенной веб-камеры в определенные промежутки времени и предоставляет записанные снимки.</introduction>
+  <introduction lang="de-DE">
+    Eine Webcam ist eine im Computer integrierte oder über eine Schnittstelle angeschlossene Kamera.
+    Diese Komponente zeichnet Bilder über eine angeschlosssene Webcam in bestimmten Intervallen auf und stellt sie für die weitere Verarbeitung zur Verfügung.
+  </introduction>
+  <usage lang="en">
+    After you drag the component onto the workspace, you may select in the settings which of the detected cameras you want to use.
+    Additionally, you can choose the time interval for the forwarding, and the quality of the pictures.
+    <newline /><newline />
+    Pictures are recorded, if the according boolean input is <i>true</i>.
+  </usage>
+  <usage lang="zh-CN">将组件拖到工作区后，可以在设置中选择要使用的检测到的摄像机。此外，您可以选择转发的时间间隔和图片质量。如果相应的布尔输入为true，则记录图片。</usage>
+  <usage lang="ru">После перетаскивания компонента в рабочую область вы можете выбрать в настройках, какие из обнаруженных камер вы хотите использовать. Кроме того, вы можете выбрать временной интервал для пересылки и качество изображений. Изображения записываются, если соответствующий логический вход является истинным.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die Komponente auf den Arbeitsbereich gezogen haben, können Sie in den Einstellungen auswählen, welche der erkannten Kameras verwendet werden soll.
+    Außerdem können Sie das Intervall für die Weiterleitung und die Aufnahmequalität der Bilder einstellen.
+    <newline /><newline />
+    Einzelbilder werden aufgenommen, wenn der entsprechende boolesche Eingangswert <i>wahr</i> ist.
+  </usage>
+  <presentation lang="en">
+    The presentation shows the live picture of the camera.
+  </presentation>
+  <presentation lang="zh-CN">演示文稿显示了摄像机的实时图片。</presentation>
+  <presentation lang="ru">В презентации представлена ​​живая фотография камеры.</presentation>
+  <presentation lang="de-DE">
+    Die Präsentation zeigt das Livebild der Kamera.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Webcam" lang="en" />
+      <caption lang="en">Webcam</caption>
+      <link url="http://de.wikipedia.org/wiki/Webcam" lang="de-DE" />
+      <caption lang="de-DE">Webcam</caption>
+    </linkReference>
+  </references>
+</documentation>

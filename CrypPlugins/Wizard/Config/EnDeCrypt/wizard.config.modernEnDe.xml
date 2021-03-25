@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE category SYSTEM "..\wizard.dtd"[]>
+<!-- This is the XML file defining the modern encryption/decryption categories a user can select from. -->
+<category image="Modern">
+  <name lang="en">Modern Encryption/Decryption</name>
+  <name lang="zh-CN">现代加密/解密</name>
+  <name lang="ru">Современное шифрование / дешифрование</name>
+  <name lang="de">Moderne Verschlüsselungsverfahren</name>
+  <description lang="en">Selecting this allows you to encrypt a plaintext or decrypt a ciphertext with a modern algorithm. You can choose which algorithm you want to use for doing this.</description>
+  <description lang="zh-CN">选择此项可以使用现代算法加密明文或解密密文。您可以选择要使用的算法。</description>
+  <description lang="ru">Выбор этого позволяет зашифровать открытый текст или расшифровать зашифрованный текст с помощью современного алгоритма. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
+  <description lang="de-DE">Wählen Sie diesen Punkt, um mit Hilfe eines modernen Verschlüsselungsverfahrens einen Klartext zu verschlüsseln oder einen Geheimtext zu entschlüsseln. Das zu verwendende Verfahren kann von Ihnen ausgewählt werden.</description>
+  <!-- This is the step's headline. It should be short, but precise. -->
+  <headline lang="en">Type Selection</headline>
+  <headline lang="zh-CN">类型选择</headline>
+  <headline lang="ru">Выбор типа</headline>
+  <headline lang="de">Auswahl des Typs</headline>
+  <!-- This is the step's description. -->
+  <task lang="en">Select which kind of modern encryption/decryption algorithm you want to use.</task>
+  <task lang="zh-CN">选择您要使用哪种现代加密/解密算法。</task>
+  <task lang="ru">Выберите, какой именно алгоритм шифрования / дешифрования вы хотите использовать.</task>
+  <task lang="de">Wählen Sie, welches moderne Verschlüsselungverfahren Sie verwenden wollen.</task>
+  <!-- Symmetric Encryption/Decryption Category -->
+  <file resource="Wizard.Config.EnDeCrypt.wizard.config.modernSymEnDe.xml" />
+  <!-- Asymmetric Encryption/Decryption Category -->
+  <category image="Asym">
+    <name lang="en">Asymmetric Encryption/Decryption</name>
+    <name lang="zh-CN">非对称加密/解密</name>
+    <name lang="ru">Асимметричное шифрование / дешифрование</name>
+    <name lang="de">Asymmetrische Verschlüsselungsverfahren</name>
+    <description lang="en">Selecting this allows you to encrypt a plaintext or decrypt a ciphertext with an asymmetric algorithm. Asymmetric algorithms are those, where you have two different keys, one for encryption and one for decryption. You can choose which algorithm you want to use for doing this.</description>
+    <description lang="zh-CN">选择此项可以使用非对称算法加密明文或解密密文。非对称算法是指具有两个不同密钥的算法，一个用于加密，另一个用于解密。您可以选择要使用的算法。</description>
+    <description lang="ru">Выбрав это, вы можете зашифровать открытый текст или расшифровать зашифрованный текст с помощью асимметричного алгоритма. Асимметричными алгоритмами являются те, где у вас есть два разных ключа: один для шифрования и один для дешифрования. Вы можете выбрать, какой алгоритм вы хотите использовать для этого.</description>
+    <description lang="de-DE">Wählen Sie diesen Punkt, um mit Hilfe eines asymmetrischen Verschlüsselungsverfahrens einen Klartext zu verschlüsseln oder einen Geheimtext zu entschlüsseln. Bei der asymmetrischen Verschlüsselung werden zwei verschiedene Schlüssel verwendet, einer für die Verschlüsselung und einer für die Entschlüsselung. Das zu verwendende Verschlüsselungsverfahren kann von Ihnen ausgewählt werden.</description>
+    <headline lang="en">Algorithm Selection</headline>
+    <headline lang="zh-CN">算法选择</headline>
+    <headline lang="ru">Выбор алгоритма</headline>
+    <headline lang="de">Algorithmenauswahl</headline>
+    <task lang="en">Select a asymmetric encryption/decryption algorithm.</task>
+    <task lang="zh-CN">选择非对称加密/解密算法。</task>
+    <task lang="ru">Выберите асимметричный алгоритм шифрования / дешифрования.</task>
+    <task lang="de">Wählen Sie ein asymmetrisches Verschlüsselungsverfahren.</task>
+    <!-- RSA input -->
+    <category image="RSA">
+      <name lang="en">RSA</name>
+      <name lang="zh-CN">RSA</name>
+      <name lang="ru">RSA</name>
+      <description lang="en">RSA is an asymmetric (public-key) algorithm to encrypt plaintext or to decrypt ciphertext.
+RSA stands for Rivest, Shamir and Adleman who first publicly described it.
+It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public-key cryptography.
+RSA is widely used in electronic commerce protocols, and is believed to be secure given sufficiently long keys and using of up-to-date implementations.
+      </description>
+      <description lang="zh-CN">RSA是用于加密明文或解密密文的非对称（公钥）算法。 RSA代表Rivest，Shamir和Adleman，他们首先公开描述了它。它是已知的第一个适用于签名和加密的算法，并且是公钥密码学的第一个重大进步。 RSA被广泛用于电子商务协议中，并且被认为具有足够长的密钥并使用最新的实现是安全的。</description>
+      <description lang="ru">RSA - это асимметричный (открытый ключ) алгоритм для шифрования открытого текста или для дешифрования зашифрованного текста. RSA означает Ривеста, Шамира и Адлемана, которые впервые публично описали его. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции, и считается, что он защищен при использовании достаточно длинных ключей и использовании современных реализаций.</description>
+      <description lang="de">RSA ist ein asymmetrischer (Public-Key) Algorithmus, um Klartext zu verschlüsseln oder Geheimtext zu entschlüsseln.
+RSA steht für Rivest, Shamir und Adleman, die dieses Verfahren zum ersten Mal öffentlich beschrieben.
+Es ist der erste Algorithmus der sowohl für Signierung als auch für Verschlüsselung benutzt werden konnte, und er war einer der ersten großen Fortschritte in der Public-Key-Kryptographie.
+RSA ist in kommerziellen Protokollen weit verbreitet und gilt bei genügend langen Schlüsseln und unter Verwendung aktueller Implementierungen als sicher.
+      </description>
+      <headline lang="en">RSA</headline>
+      <headline lang="zh-CN">RSA</headline>
+      <headline lang="ru">RSA</headline>
+      <task lang="en">Choose whether you want to use RSA for encryption or decryption</task>
+      <task lang="zh-CN">选择是否要使用RSA进行加密或解密</task>
+      <task lang="ru">Выберите, хотите ли вы использовать RSA для шифрования или дешифрования</task>
+      <task lang="de">Wählen Sie, ob RSA zur Verschlüsselung oder zur Entschlüsselung verwendet werden soll</task>
+      <input image="RSA">
+        <name lang="en">RSA Encryption</name>
+        <name lang="zh-CN">RSA加密</name>
+        <name lang="ru">Шифрование RSA</name>
+        <name lang="de">RSA-Verschlüsselung</name>
+        <description lang="en">Select this, to use RSA for encrypting a text message or a number.</description>
+        <description lang="zh-CN">选择此项，以使用RSA加密短信或电话号码。</description>
+        <description lang="ru">Выберите это, чтобы использовать RSA для шифрования текстового сообщения или номера.</description>
+        <description lang="de">Wählen Sie diesen Punkt, um eine Textnachricht oder eine Zahl mit Hilfe von RSA zu verschlüsseln.</description>
+        <headline lang="en">RSA Encryption Input</headline>
+        <headline lang="zh-CN">RSA加密输入</headline>
+        <headline lang="ru">Вход для шифрования RSA</headline>
+        <headline lang="de">RSA-Verschlüsselungseingabe</headline>
+        <task lang="en">Here, you can input the plaintext and the public key to use for encryption.</task>
+        <task lang="zh-CN">在这里，您可以输入用于加密的明文和公共密钥。</task>
+        <task lang="ru">Здесь вы можете ввести открытый текст и открытый ключ для шифрования.</task>
+        <task lang="de">Hier können Sie den Klartext und den zu benutzenden öffentlichen Schlüssel zur Verschlüsselung eingeben.</task>
+        <pluginSetter plugin="$RSAKeyGenerator$" property="Source">1</pluginSetter>
+        <pluginSetter plugin="$RSAKeyGenerator$" property=".D">0</pluginSetter>
+        <inputBox plugin="$RSAKeyGenerator$" property=".N" group="Key" width="20%">
+          <description lang="en">N (common part of keypair):</description>
+          <description lang="zh-CN">N（密钥对的常见部分）：</description>
+          <description lang="ru">N (общая часть keypair):</description>
+          <description lang="de">N (gemeinsamer Teil des Schlüsselpaars):</description>
+          <defaultvalue>299</defaultvalue>
+        </inputBox>
+        <inputBox plugin="$RSAKeyGenerator$" property=".E" group="Key" width="20%">
+          <description lang="en">e (public part of keypair):</description>
+          <description lang="zh-CN">e（密钥对的公共部分）：</description>
+          <description lang="ru">e (общественная часть ключевой пары):</description>
+          <description lang="de">e (öffentlicher Teil des Schlüsselpaars):</description>
+          <defaultvalue>23</defaultvalue>
+        </inputBox>
+        <inputBox plugin="$Plaintext$" property="Text" visibleLines="10" alignment="Left" width="90%">
+          <description lang="en">Text message to encrypt:</description>
+          <description lang="zh-CN">要加密的短信：</description>
+          <description lang="ru">Текстовое сообщение для шифрования:</description>
+          <description lang="de">Zu verschlüsselnde Textnachricht:</description>
+          <defaultvalue lang="en">In cryptography, RSA (which stands for Rivest, Shamir and Adleman who first publicly described it) is an algorithm for public-key cryptography.[1] It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public-key cryptography. RSA is widely used in electronic commerce protocols, and is believed to be secure given sufficiently long keys and the use of up-to-date implementations.</defaultvalue>
+          <defaultvalue lang="zh-CN">在密码术中，RSA（代表Rivest，Shamir和Adleman首次公开描述它）是一种用于公钥密码术的算法。[1]它是已知的第一个适用于签名和加密的算法，并且是公钥密码学的第一个重大进步。 RSA被广泛用于电子商务协议中，并且被认为具有足够长的密钥和使用最新实现的安全性。</defaultvalue>
+          <defaultvalue lang="ru">В криптографии RSA (которая выступает за Rivest, Shamir и Adleman, которая впервые публично описала это), является алгоритмом криптографии с открытым ключом [1]. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной торговли, и считается, что он безопасен, учитывая достаточно длинные ключи и использование современных реализаций.</defaultvalue>
+        </inputBox>
+        <sampleViewer image="RSA" file="Cryptography\Modern\Asymmetric\RSA_Encryption.cwm">
+          <name lang="en">RSA Encryption Output</name>
+          <name lang="zh-CN">RSA加密输出</name>
+          <name lang="ru">Выход шифрования RSA</name>
+          <name lang="de">RSA-Verschlüsselung: Ausgabe</name>
+          <description lang="en">RSA Encryption Output</description>
+          <description lang="zh-CN">RSA加密输出</description>
+          <description lang="ru">Выход шифрования RSA</description>
+          <description lang="de">RSA-Verschlüsselung: Ausgabe</description>
+          <headline lang="en">RSA Encryption Output</headline>
+          <headline lang="zh-CN">RSA加密输出</headline>
+          <headline lang="ru">Выход шифрования RSA</headline>
+          <headline lang="de">RSA-Verschlüsselung: Ausgabe</headline>
+          <task lang="en">Here, you can see the RSA encryption output.</task>
+          <task lang="zh-CN">在这里，您可以看到RSA加密输出。</task>
+          <task lang="ru">Здесь вы можете увидеть выход шифрования RSA.</task>
+          <task lang="de">Hier können Sie die RSA-Verschlüsselungsausgabe sehen.</task>
+          <presentation plugin="$Ciphertext$" width="90%" alignment="Left">
+            <description lang="en">Ciphertext (in Hex):</description>
+            <description lang="zh-CN">密文（十六进制）：</description>
+            <description lang="ru">Шифрованный текст (в Hex):</description>
+            <description lang="de">Geheimtext (in Hex):</description>
+          </presentation>
+        </sampleViewer>
+      </input>
+      <input image="RSA">
+        <name lang="en">RSA Decryption</name>
+        <name lang="zh-CN">RSA解密</name>
+        <name lang="ru">Расшифровка RSA</name>
+        <name lang="de">RSA-Entschlüsselung</name>
+        <description lang="en">Select this, to use RSA for decrypting a text message or a number.</description>
+        <description lang="zh-CN">选择此项，以使用RSA解密短信或电话号码。</description>
+        <description lang="ru">Выберите это, чтобы использовать RSA для дешифрования текстового сообщения или числа.</description>
+        <description lang="de">Wählen Sie diesen Punkt, um eine Textnachricht oder eine Zahl mit Hilfe von RSA zu entschlüsseln.</description>
+        <headline lang="en">RSA Decryption Input</headline>
+        <headline lang="zh-CN">RSA解密输入</headline>
+        <headline lang="ru">Вход для расшифровки RSA</headline>
+        <headline lang="de">RSA-Entschlüsselungseingabe</headline>
+        <task lang="en">Here, you can input the plaintext and the private key to use for decryption.</task>
+        <task lang="zh-CN">在这里，您可以输入明文和私钥以用于解密。</task>
+        <task lang="ru">Здесь вы можете ввести открытый текст и закрытый ключ для использования для дешифрования.</task>
+        <task lang="de">Hier können Sie den Klartext und den zu benutzenden privaten Schlüssel zur Entschlüsselung eingeben.</task>
+        <pluginSetter plugin="$RSAKeyGenerator$" property="Source">1</pluginSetter>
+        <pluginSetter plugin="$RSAKeyGenerator$" property=".E">0</pluginSetter>
+        <inputBox plugin="$RSAKeyGenerator$" property=".N" group="Key" width="20%">
+          <description lang="en">N (common part of keypair):</description>
+          <description lang="zh-CN">N（密钥对的常见部分）：</description>
+          <description lang="ru">N (общая часть keypair):</description>
+          <description lang="de">N (gemeinsamer Teil des Schlüsselpaars):</description>
+          <defaultvalue>299</defaultvalue>
+        </inputBox>
+        <inputBox plugin="$RSAKeyGenerator$" property=".D" group="Key" width="20%">
+          <description lang="en">d (private part of keypair):</description>
+          <description lang="zh-CN">d（密钥对的私有部分）：</description>
+          <description lang="ru">d (частная часть keypair):</description>
+          <description lang="de">d (privater Teil des Schlüsselpaars):</description>
+          <defaultvalue>23</defaultvalue>
+        </inputBox>
+        <inputBox plugin="$Ciphertext$" property="Text" visibleLines="10" alignment="Left" width="90%">
+          <description lang="en">Text message to decrypt (in Hex):</description>
+          <description lang="zh-CN">要解密的短信（十六进制）：</description>
+          <description lang="ru">Текстовое сообщение для дешифрования (в Hex):</description>
+          <description lang="de">Zu entschlüsselnde Textnachricht (in Hex):</description>
+          <defaultvalue>60000F01C1007A00A0004B0087007400F9006700A0000201870068004B001500C10024003C004100C10028001801680069007A006800C100FD00740002010F019200FD00C100F000F900A000C1002400690076009300FD0074001500C1003C006800020156006900A000C10002010F019200C100410092003E009300560002010F01C10018016800F900C100F0006900A000FD007400C10087007500EC003E0069007A003E004B00C10092009300FD007A00A0006900EC0093009200C10069007400CA00C1006900FD00C10002010F01C10002013E006700F900A0006900740068005600C100F000F900A000C10087007500EC003E0069007A00CE003D0093004B00C1007A00A0004B0087007400F9006700A0000201870068004B00B8005B005F00FE00C10060007400C1006900FD00C100740068009300C100F0006900A000FD007400C10002013E006700F900A0006900740068005600C1003D000F01F90018010F01C1007400F900C100EC009300C100FD007500690074000201EC003E009300C100F000F900A000C100FD00690067000F0169000F016700C1000201FD00C100180193003E003E00C1000201FD00C10093000F017A00A0004B00870074006900F9000F011500C10002010F019200C10018010201FD00C100F9000F019300C100F900F000C100740068009300C100F0006900A000FD007400C1006700A000930002017400C10002019200760002010F017A009300FD00C10069000F01C10087007500EC003E0069007A00C1003D0093004B00C1007A00A0004B0087007400F9006700A0000201870068004B00B800C10024003C004100C1006900FD00C10018016900920093003E004B00C1007500FD0093009200C10069000F01C10093003E0093007A007400A000F9000F0169007A00C1007A00F900560056009300A0007A009300C1008700A000F9007400F9007A00F9003E00FD001500C10002010F019200C1006900FD00C100EC0093003E0069009300760093009200C1007400F900C100EC009300C100FD0093007A007500A0009300C10067006900760093000F01C100FD007500F000F00069007A00690093000F0174003E004B00C1003E00F9000F016700C1003D0093004B00FD00C10002010F019200C100740068009300C1007500FD009300C100F900F000C10075008700CE007400F900CE009200020174009300C1006900560087003E009300560093000F017400020174006900F9000F01FD00B8</defaultvalue>
+        </inputBox>
+        <sampleViewer image="RSA" file="Cryptography\Modern\Asymmetric\RSA_Decryption.cwm">
+          <name lang="en">RSA Decryption Output</name>
+          <name lang="zh-CN">RSA解密输出</name>
+          <name lang="ru">Выход расшифровки RSA</name>
+          <name lang="de">RSA-Entschlüsselung: Ausgabe</name>
+          <description lang="en">RSA Decryption Output</description>
+          <description lang="zh-CN">RSA解密输出</description>
+          <description lang="ru">Выход расшифровки RSA</description>
+          <description lang="de">RSA-Entschlüsselung: Ausgabe</description>
+          <headline lang="en">RSA Decryption Output</headline>
+          <headline lang="zh-CN">RSA解密输出</headline>
+          <headline lang="ru">Выход расшифровки RSA</headline>
+          <headline lang="de">RSA-Entschlüsselung: Ausgabe</headline>
+          <task lang="en">Here, you can see the RSA decryption output.</task>
+          <task lang="zh-CN">在这里，您可以看到RSA解密输出。</task>
+          <task lang="ru">Здесь вы можете увидеть выход расшифровки RSA.</task>
+          <task lang="de">Hier können Sie die RSA-Entschlüsselungsausgabe sehen.</task>
+          <presentation plugin="$Plaintext$" width="90%" alignment="Left">
+            <description lang="en">Plaintext:</description>
+            <description lang="zh-CN">纯文本：</description>
+            <description lang="ru">Простой текст:</description>
+            <description lang="de">Klartext:</description>
+          </presentation>
+          <presentation plugin="$Plaintext$" width="30%" alignment="Left">
+            <description lang="en">Decrypted Text:</description>
+            <description lang="zh-CN">解密文字：</description>
+            <description lang="ru">Расшифрованный текст:</description>
+            <description lang="de">Entschlüsselter Text:</description>
+          </presentation>
+        </sampleViewer>
+      </input>
+      <sampleViewer image="RSA" file="Cryptography\Modern\Asymmetric\RSA_KeyGenerator.cwm">
+        <name lang="en">RSA Key Generation</name>
+        <name lang="zh-CN">RSA密钥生成</name>
+        <name lang="ru">Генерация ключей RSA</name>
+        <name lang="de">RSA-Schlüsselgenerator</name>
+        <description lang="en">Select this, to generate a random key for use with the RSA algorithm.</description>
+        <description lang="zh-CN">选择此项，以生成用于RSA算法的随机密钥。</description>
+        <description lang="ru">Выберите это, чтобы создать случайный ключ для использования с алгоритмом RSA.</description>
+        <description lang="de">Wählen Sie diesen Punkt, um einen zufälligen Schlüssel zur Benutzung mit dem RSA-Algorithmus zu generieren.</description>
+        <headline lang="en">RSA Key Generation</headline>
+        <headline lang="zh-CN">RSA密钥生成</headline>
+        <headline lang="ru">Генерация ключей RSA</headline>
+        <headline lang="de">RSA Schlüsselerzeugung</headline>
+        <task lang="en">Here you can see a random generated RSA keypair. (N, e) is the public key and (N, d) is the private key.</task>
+        <task lang="zh-CN">在这里，您可以看到随机生成的RSA密钥对。 （N，e）是公钥，（N，d）是私钥。</task>
+        <task lang="ru">Здесь вы можете увидеть случайную сгенерированную пару ключей RSA. (N, e) является открытым ключом и (N, d) является закрытым ключом.</task>
+        <task lang="de">Hier können Sie ein zufällig erzeugtes RSA Schlüsselpaar sehen. (N, e) ist der öffentliche Schlüssel und (N, d) ist der private Schlüssel.</task>
+        <presentation plugin="N">
+          <description lang="en">N (common part of keypair):</description>
+          <description lang="zh-CN">N（密钥对的常见部分）：</description>
+          <description lang="ru">N (общая часть keypair):</description>
+          <description lang="de">N (gemeinsamer Teil des Schlüsselpaars):</description>
+        </presentation>
+        <presentation plugin="e">
+          <description lang="en">e (public part of keypair):</description>
+          <description lang="zh-CN">e（密钥对的公共部分）：</description>
+          <description lang="ru">e (общественная часть ключевой пары):</description>
+          <description lang="de">e (öffentlicher Teil des Schlüsselpaars):</description>
+        </presentation>
+        <presentation plugin="d">
+          <description lang="en">d (private part of keypair):</description>
+          <description lang="zh-CN">d（密钥对的私有部分）：</description>
+          <description lang="ru">d (частная часть keypair):</description>
+          <description lang="de">d (privater Teil des Schlüsselpaars):</description>
+        </presentation>
+      </sampleViewer>
+    </category>
+  </category>
+</category>

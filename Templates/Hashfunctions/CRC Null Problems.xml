@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">CRC Null Problems</title>
+  <title lang="zh">CRC空问题</title>
+  <title lang="ru">CRC Нулевые проблемы</title>
+  <summary lang="en">Problems with null values in the <i>CRC</i> checksum function</summary>
+  <summary lang="zh">CRC校验和函数中的空值问题</summary>
+  <summary lang="ru">Проблемы с нулевыми значениями в хэш-функции CRC</summary>
+  <description lang="en">In some configurations of the <i>CRC</i> algorithm prepending or appending zero bytes to the input data will cause no change in the CRC value.</description>
+  <description lang="zh">在CRC算法的某些配置中，在输入数据之前或之后添加零字节将不会导致CRC值发生变化。</description>
+  <description lang="ru">В некоторых конфигурациях алгоритма CRC, добавляя или добавляя нулевые байты к входным данным, не будет изменяться значение CRC.</description>
+  <keywords>hash</keywords>
+  <keywords lang="zh">杂凑</keywords>
+  <keywords lang="ru">гашиш</keywords>
+  <title lang="de">CRC Nullprobleme</title>
+  <summary lang="de">Probleme mit Nullbytes bei <i>CRC</i></summary>
+  <description lang="de">In einigen Konfigurationen des <i>CRC</i>-Algorithmus werden Nullbytes, die den Eingangsdaten voran- oder nachgestellt werden, nicht erkannt und resultieren in demselben CRC-Prüfwert.</description>
+  <keywords lang="de">hash</keywords>
+  <icon file="CRC.png" />
+  <relevantPlugins>
+    <plugin name="CRC" />
+    <plugin name="Concatenate" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Input with correct CRC check value$" value="Eingabe mit korrektem CRC-Wert" />
+    <replacement key="$Zero bytes suffix$" value="Zero-Bytes-Suffix" />
+    <replacement key="$Zero bytes prefix$" value="Zero-Bytes-Präfix" />
+    <replacement key="$CRC value (hexadecimal)$" value="CRC-Wert (hexadezimal)" />
+    <replacement key="$String Decoder$" value="String-Kodierer" />
+    <replacement key="$String Encoder$" value="String-Dekodierer" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$memo1$" value="Das Anhängen eines oder mehrerer Nullbytes an einen Datenblock, der mit einem korrekten CRC-Wert versehen ist, wird den CRC-Wert nicht verändern." />
+    <replacement key="$memo2$" value="Wenn der Startwert der ausgewählten CRC-Methode Null ist, haben führende Nullbytes in den Eingbedaten keine Auswirkung auf den sich ergebenden CRC-Wert." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Input with correct CRC check value$" value="输入正确的CRC值" />
+    <replacement key="$Zero bytes suffix$" value="零字节后缀" />
+    <replacement key="$Zero bytes prefix$" value="零字节前缀" />
+    <replacement key="$CRC value (hexadecimal)$" value="CRC值（十六进制）" />
+    <replacement key="$String Decoder$" value="字符串编码器" />
+    <replacement key="$String Encoder$" value="字符串解码器" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$memo1$" value="将一个或多个零字节添加到已提供正确CRC值的数据块不会更改CRC值。" />
+    <replacement key="$memo2$" value="如果所选CRC方法的起始值为零，则输入数据中的前导零字节对所得的CRC值没有影响。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Input with correct CRC check value$" value="Вход с правильным значением CRC" />
+    <replacement key="$Zero bytes suffix$" value="Нулевые байты-суффиксы" />
+    <replacement key="$Zero bytes prefix$" value="Префикс нулевых байт" />
+    <replacement key="$CRC value (hexadecimal)$" value="Значение CRC (шестнадцатеричное)" />
+    <replacement key="$String Decoder$" value="Строка кодировщик" />
+    <replacement key="$String Encoder$" value="Строка декодера" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$memo1$" value="Присоединение одного или нескольких нулевых байтов к блоку данных, который имеет правильное значение CRC, не изменит значение CRC." />
+    <replacement key="$memo2$" value="Если начальное значение выбранного CRC-метода равно нулю, ведущие нулевые байты на входах не будут влиять на полученное значение CRC." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Input$" value="Input" />
+    <replacement key="$Input with correct CRC check value$" value="Input with correct CRC check value" />
+    <replacement key="$Zero bytes suffix$" value="Zero bytes suffix" />
+    <replacement key="$Zero bytes prefix$" value="Zero bytes prefix" />
+    <replacement key="$CRC value (hexadecimal)$" value="CRC value (hexadecimal)" />
+    <replacement key="$String Decoder$" value="String Decoder" />
+    <replacement key="$String Encoder$" value="String Encoder" />
+    <replacement key="$Concatenate$" value="Concatenate" />
+    <replacement key="$memo1$" value="Appending one or more zero bytes to a data block that is padded with a correct CRC value will not change the  CRC value." />
+    <replacement key="$memo2$" value="If the start value of the selected CRC method is zero, leading zeros in the input data have no effect on the resulting CRC check value." />
+  </replacements>
+</sample>

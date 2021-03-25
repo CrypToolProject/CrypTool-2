@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Avalanche (Hash Functions)</title>
+  <title lang="zh">雪崩（哈希函数）</title>
+  <title lang="ru">Лавина (хеш-функции)</title>
+  <summary lang="en">This template demonstrates the avalanche effect in general hash functions.</summary>
+  <summary lang="zh">该模板演示了常规哈希函数中的雪崩效应。</summary>
+  <summary lang="ru">Этот шаблон демонстрирует эффект лавины в общих хэш-функциях.</summary>
+  <description lang="en">This template shows how the Avalanche Visualization component can be used to demonstrate the avalanche effect in general hash functions.</description>
+  <description lang="zh">此模板显示了雪崩可视化组件如何用于在常规哈希函数中演示雪崩效果。</description>
+  <description lang="ru">Этот шаблон показывает, как компонент визуализации лавины можно использовать для демонстрации эффекта лавины в общих хеш-функциях.</description>
+  <keywords lang="en">Avalanche, Analysis, hash functions</keywords>
+  <keywords lang="zh">雪崩，分析，哈希函数</keywords>
+  <keywords lang="ru">Лавина, анализ, хэш-функции</keywords>
+  <title lang="de">Avalanche (Hashverfahren)</title>
+  <summary lang="de">Diese Vorlage demonstriert den Avalanche-Effekt bei Hashverfahren.</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man mit der Komponente 'Avalanche-Visualisierung' den Avalanche-Effekt bei Hashverfahren demonstrieren kann.</description>
+  <keywords lang="de">Avalanche, Analyse, Hashverfahren</keywords>
+  <icon file="Avalanche.PNG" />
+  <relevantPlugins>
+    <plugin name="AvalancheVisualization" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Avalanche Visualization$" value="Avalanche-Visualisierung" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Generated Data$" value="Generierte Daten" />
+    <replacement key="$Memo$" value="Diese Vorlage veranschaulicht den Avalanche-Effekt bei Hashverfahren.\line\line Nach &quot;Starten&quot; wird der aus dem Klartext resultierende initiale Hashwert angezeigt. Verändern Sie nun den Klartext, erhalten Sie einen entsprechenden neuen Hashwert. Anschließend werden beide Hashwerte hinsichtlich des Avalanche-Effekts verglichen. Auf der Präsentation sind neben dem Wert des Avalanche-Effekts auch andere relevante statistische Daten zu finden." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Avalanche Visualization$" value="雪崩可视化" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Generated Data$" value="产生的数据" />
+    <replacement key="$Memo$" value="此模板说明了具有哈希处理的雪崩效果\Line \line在“开始”之后，将显示由纯文本产生的初始哈希值。如果现在更改纯文本，您将收到一个相应的新哈希值。然后针对雪崩效应比较两个哈希值。除了雪崩效应的值外，还可以在演示文稿中找到其他相关的统计数据。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Avalanche Visualization$" value="Avalanche визуализация" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Generated Data$" value="Сгенерированные данные" />
+    <replacement key="$Memo$" value="Этот шаблон иллюстрирует эффект лавины в хэшировании. \Line \line После «Пуск» отображается начальное хеш-значение, полученное из обычного текста. Если вы измените открытый текст, вы получите новое значение хэш-функции. Впоследствии оба значения хэша сравниваются с лавинным эффектом. В дополнение к значению лавинного эффекта на презентации можно найти другие соответствующие статистические данные." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Avalanche Visualization$" value="Avalanche Visualization" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Generated Data$" value="Generated Data" />
+    <replacement key="$Memo$" value="This template helps visualize the avalanche effect on hash functions.\line\line After pressing &quot;Play&quot; the initial hash value resulting from the plaintext is shown. If you modify the plaintext you will get a new hash value. Subsequently, the two hash values obtained are compared and the corresponding avalanche effect is shown. Besides the value of the avalanche effect itself other relevant statistical data is displayed." />
+  </replacements>
+</sample>

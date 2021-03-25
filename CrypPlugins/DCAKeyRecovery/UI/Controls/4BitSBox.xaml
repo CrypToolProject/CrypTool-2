@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="DCAKeyRecovery.UI.Controls._4BitSBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DCAKeyRecovery.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="45" d:DesignWidth="60">
+    <Canvas Margin="0,0,0,0">
+        <!-- InputBits -->
+        <!--
+        <Line X1="7.5" Y1="0" X2="7.5" Y2="45" Stroke="Black" StrokeThickness="2.0" />
+        <Line X1="22.5" Y1="0" X2="22.5" Y2="45" Stroke="Black" StrokeThickness="2.0" />
+        <Line X1="37.5" Y1="0" X2="37.5" Y2="45" Stroke="Black" StrokeThickness="2.0" />
+        <Line X1="52.5" Y1="0" X2="52.5" Y2="45" Stroke="Black" StrokeThickness="2.0" />
+        -->
+        <!-- /InputBits -->
+        <!-- Box -->
+        <Rectangle Width="60" Height="45" Margin="0,0,0,0" Stroke="{Binding OutputColor, Mode=OneWay}" StrokeThickness="2.0"/>
+        <!-- /Box -->
+        <Label Width="60" FontFamily="Courier New" FontSize="18" Height="45" Foreground="{Binding OutputColor, Mode=OneWay}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="SBox" Margin="0,0,0,0"/>
+        <!-- OutputBits -->
+        <!-- 
+        <Line X1="7.5" Y1="45" X2="7.5" Y2="90" Stroke="Black" StrokeThickness="2.0" />
+        <Line X1="22.5" Y1="45" X2="22.5" Y2="90" Stroke="Black" StrokeThickness="2.0" />
+        <Line X1="37.5" Y1="45" X2="37.5" Y2="90" Stroke="Black" StrokeThickness="2.0" />
+        <Line X1="52.5" Y1="45" X2="52.5" Y2="90" Stroke="Black" StrokeThickness="2.0" />
+        -->
+        <!-- /OutputBits -->
+
+    </Canvas>
+</UserControl>

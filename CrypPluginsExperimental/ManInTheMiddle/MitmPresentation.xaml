@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="ManInTheMiddle.MitmPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     Height="Auto" Width="Auto" MinWidth="640" MinHeight="480" Loaded="UserControl_Loaded">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="482*" />
+            <ColumnDefinition Width="158*" />
+        </Grid.ColumnDefinitions>
+        <TreeView Margin="8.857,109,12,15" Name="treeView" Grid.ColumnSpan="2" SelectedItemChanged="TreeViewSelectedItemChangedEventHandler" />
+        <ListBox Height="70" Margin="8.857,33,53,0" Name="lbSignSteps" VerticalAlignment="Top" />
+        <Label HorizontalAlignment="Left" Margin="8.857,12,0,0" Name="label1" Width="120" Height="28" VerticalAlignment="Top">Information:</Label>
+    </Grid>
+</UserControl>

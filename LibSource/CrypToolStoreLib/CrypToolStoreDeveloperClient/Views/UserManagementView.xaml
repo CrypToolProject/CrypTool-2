@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="CrypToolStoreDeveloperClient.Views.UserManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="DevelopersListView" Width="800" Height="300" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Path=Username}" Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Firstname" DisplayMemberBinding="{Binding Path=Firstname}" Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Lastname" DisplayMemberBinding="{Binding Path=Lastname}" Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Path=Email}" Width="140">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="IsAdmin" DisplayMemberBinding="{Binding Path=IsAdmin}" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Modify" Width="180">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="75"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Background="White" CommandParameter="{Binding Path=Username}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Click="Update_Click">Update</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=Username}" Width="70" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Click="Delete_Click">Delete</Button>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="CreateNewUserButton" Background="White" Grid.Row="2" Width="100" Height="25" HorizontalAlignment="Center" Click="CreateNewUserButton_Click">Create new user</Button>
+    </Grid>
+</UserControl>

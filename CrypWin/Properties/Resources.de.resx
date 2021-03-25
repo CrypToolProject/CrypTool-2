@@ -1,0 +1,988 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CrypTool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\CrypTool.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="No_update_available_" xml:space="preserve">
+    <value>Kein Update verfügbar</value>
+  </data>
+  <data name="Checking_for_updates___" xml:space="preserve">
+    <value>Suche nach Updates...</value>
+  </data>
+  <data name="Update_available_" xml:space="preserve">
+    <value>Updates verfügbar</value>
+  </data>
+  <data name="Downloading_update___" xml:space="preserve">
+    <value>Lade Update...</value>
+  </data>
+  <data name="Update_ready_to_install_" xml:space="preserve">
+    <value>Update bereit zur Installation</value>
+  </data>
+  <data name="Update_ready_to_install__would_you_like_to_install_it_now_" xml:space="preserve">
+    <value>Update bereit zur Installation. Jetzt durchführen?</value>
+  </data>
+  <data name="CrypTool_2_0_Update" xml:space="preserve">
+    <value>CrypTool 2 Update</value>
+  </data>
+  <data name="Update_available__would_you_like_to_download_" xml:space="preserve">
+    <value>Update verfügbar, möchten Sie dieses runterladen?</value>
+  </data>
+  <data name="_Open_CrypTool_2_0" xml:space="preserve">
+    <value>&amp;Öffne CrypTool 2</value>
+  </data>
+  <data name="_Normal_Priority" xml:space="preserve">
+    <value>&amp;Normale Priorität</value>
+  </data>
+  <data name="_Idle_Priority" xml:space="preserve">
+    <value>&amp;Leerlauf Priorität</value>
+  </data>
+  <data name="_High_Priority" xml:space="preserve">
+    <value>&amp;Hohe Priorität</value>
+  </data>
+  <data name="_Realtime_Priority" xml:space="preserve">
+    <value>&amp;Echtzeit Priorität</value>
+  </data>
+  <data name="_Below_Normal_Priority" xml:space="preserve">
+    <value>&amp;Unter normaler Priorität</value>
+  </data>
+  <data name="_Above_Normal_Priority" xml:space="preserve">
+    <value>&amp;Über normaler Priorität</value>
+  </data>
+  <data name="_Exit" xml:space="preserve">
+    <value>&amp;Ende</value>
+  </data>
+  <data name="Change__Priority" xml:space="preserve">
+    <value>Ändere &amp;Priorität</value>
+  </data>
+  <data name="Classic_Ciphers" xml:space="preserve">
+    <value>Klassische Verfahren</value>
+  </data>
+  <data name="Symmetric" xml:space="preserve">
+    <value>Symmetrisch</value>
+  </data>
+  <data name="Added_plugin___0__" xml:space="preserve">
+    <value>Plugin "{0}" hinzugefügt</value>
+  </data>
+  <data name="Assembly___0___loaded_" xml:space="preserve">
+    <value>Assembly "{0}" geladen.</value>
+  </data>
+  <data name="Information_Message" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="Error_Message" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="_Messages___0__filtered_" xml:space="preserve">
+    <value> Nachrichten ({0} gefiltert)</value>
+  </data>
+  <data name="_Messages" xml:space="preserve">
+    <value> Nachrichten</value>
+  </data>
+  <data name="Hide_Errors" xml:space="preserve">
+    <value>Verstecke Fehler</value>
+  </data>
+  <data name="Show_Errors" xml:space="preserve">
+    <value>Zeige Fehler</value>
+  </data>
+  <data name="Show_Warnings" xml:space="preserve">
+    <value>Zeige Warnungen</value>
+  </data>
+  <data name="Hide_Warnings" xml:space="preserve">
+    <value>Verstecke Warnungen</value>
+  </data>
+  <data name="Hide_Infos" xml:space="preserve">
+    <value>Verstecke Hinweise</value>
+  </data>
+  <data name="Show_Infos" xml:space="preserve">
+    <value>Zeige Hinweise</value>
+  </data>
+  <data name="Hide_Debugs" xml:space="preserve">
+    <value>Verstecke Debugnachrichten</value>
+  </data>
+  <data name="Show_Debugs" xml:space="preserve">
+    <value>Zeige Debugnachrichten</value>
+  </data>
+  <data name="Hide_Balloons" xml:space="preserve">
+    <value>Verstecke Sprechblasennachrichten</value>
+  </data>
+  <data name="Show_Balloons" xml:space="preserve">
+    <value>Zeige Sprechblasennachrichten</value>
+  </data>
+  <data name="There_are_still_running_tasks__templates_in_Play_mode___Do_you_really_want_to_exit_CrypTool_2__" xml:space="preserve">
+    <value>Mehrere Arbeitsflächen sind noch im Play-Mode. Möchten Sie CrypTool 2 wirklich beenden?</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="Load_this_file_" xml:space="preserve">
+    <value>Lade diese Datei.</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Hinweis</value>
+  </data>
+  <data name="CrypTool_2_0_has_been_backgrounded_due_to_running_tasks_" xml:space="preserve">
+    <value>CrypTool 2 wurde wegen laufender Aufgaben im Hintergrund versteckt.</value>
+  </data>
+  <data name="System_Infos" xml:space="preserve">
+    <value>Systeminformationen</value>
+  </data>
+  <data name="Plugin_type__" xml:space="preserve">
+    <value>Art des Plugins: </value>
+  </data>
+  <data name="Save_file" xml:space="preserve">
+    <value>Datei speichern</value>
+  </data>
+  <data name="Open_file" xml:space="preserve">
+    <value>Datei öffnen</value>
+  </data>
+  <data name="Error_loading_file" xml:space="preserve">
+    <value>Fehler beim Laden von Datei</value>
+  </data>
+  <data name="File__0__doesn_t_exist_" xml:space="preserve">
+    <value>Datei {0} existiert nicht!</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="ContextHelp" xml:space="preserve">
+    <value>Kontexthilfe</value>
+  </data>
+  <data name="Paste" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="PlayDemo" xml:space="preserve">
+    <value>Starte Demo</value>
+  </data>
+  <data name="StopDemo" xml:space="preserve">
+    <value>Stoppe Demo</value>
+  </data>
+  <data name="Maximize" xml:space="preserve">
+    <value>Maximieren</value>
+  </data>
+  <data name="Fullscreen" xml:space="preserve">
+    <value>Vollbild</value>
+  </data>
+  <data name="Load_new_plugins" xml:space="preserve">
+    <value>Lade neue Plugins</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>CrypCloud</value>
+  </data>
+  <data name="AutoUpdater" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Check_for_updates_now" xml:space="preserve">
+    <value>Suche jetzt nach Updates</value>
+  </data>
+  <data name="You_have_currently_the_latest_version_installed_" xml:space="preserve">
+    <value>Sie haben derzeit die neuste Version von CrypTool 2 installiert.</value>
+  </data>
+  <data name="Checking_failed__cannot_contact_server__0" xml:space="preserve">
+    <value>Suche fehlgeschlagen, kann den Server nicht kontaktieren: {0}</value>
+  </data>
+  <data name="Download_update_now" xml:space="preserve">
+    <value>Lade Updates jetzt runter</value>
+  </data>
+  <data name="Update_available___0" xml:space="preserve">
+    <value>Update verfügbar: {0}</value>
+  </data>
+  <data name="Downloading_update___0_____" xml:space="preserve">
+    <value>Lade Update ({0})...</value>
+  </data>
+  <data name="Restart_and_install_now" xml:space="preserve">
+    <value>Jetzt neu starten und installieren...</value>
+  </data>
+  <data name="Update___0___ready_to_install_" xml:space="preserve">
+    <value>Update bereit zur Installation: {0}</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stoppen</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="RBHeader_File" xml:space="preserve">
+    <value>Datei</value>
+  </data>
+  <data name="RBTooltip_File" xml:space="preserve">
+    <value>Hauptsteuerung des CrypTool 2-Arbeitsbereichs</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Drucken</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="RBHeader_RedoUndo" xml:space="preserve">
+    <value>Wiederholen/Rückgängig</value>
+  </data>
+  <data name="Asymmetric" xml:space="preserve">
+    <value>Asymmetrisch</value>
+  </data>
+  <data name="Checksum" xml:space="preserve">
+    <value>Prüfsumme</value>
+  </data>
+  <data name="Specific" xml:space="preserve">
+    <value>Spezifisch</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Werkzeuge</value>
+  </data>
+  <data name="Standalone" xml:space="preserve">
+    <value>Selbständig</value>
+  </data>
+  <data name="Generators" xml:space="preserve">
+    <value>Generatoren</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Eingabe</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Ausgabe</value>
+  </data>
+  <data name="Throughput" xml:space="preserve">
+    <value>Durchlauf</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="_0_Messages_" xml:space="preserve">
+    <value>0 Nachrichten</value>
+  </data>
+  <data name="Exit_CrypTool_" xml:space="preserve">
+    <value>Beende CrypTool</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="Save_As_" xml:space="preserve">
+    <value>Speichern als...</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Starten</value>
+  </data>
+  <data name="RBTooltip_Start" xml:space="preserve">
+    <value>Starte den aktuellen Arbeitsbereich (F5)</value>
+  </data>
+  <data name="RBTooltip_Stop" xml:space="preserve">
+    <value>Stoppe den aktuellen Arbeitsbereich (Shift + F5)</value>
+  </data>
+  <data name="Dynamic_controls_of_the_current_plugin_editor_" xml:space="preserve">
+    <value>Dynamische Steuerung des derzeitigen Plug-In Editors</value>
+  </data>
+  <data name="Plugin_editor_" xml:space="preserve">
+    <value>Plug-In Editor</value>
+  </data>
+  <data name="Select_samples_and_start_demo_mode_" xml:space="preserve">
+    <value>Wähle Projekte und starte den Demo-Modus</value>
+  </data>
+  <data name="In_demo_mode_a_selected_set_of_samples_is_repeatedly_executed_" xml:space="preserve">
+    <value>Im Demo-Modus wird eine Menge von Projekten in einer Schleife ausgeführt</value>
+  </data>
+  <data name="RBHeader_Demo" xml:space="preserve">
+    <value>Demo-Modus</value>
+  </data>
+  <data name="How_long_should_a_sample_be_kept_running_before_opening_next_one_" xml:space="preserve">
+    <value>Wie lange sollte ein Projekt geöffnet sein? (in Sekunden)</value>
+  </data>
+  <data name="Stop_Demo_Mode_" xml:space="preserve">
+    <value>Stoppe Demo-Modus</value>
+  </data>
+  <data name="RBHeader_Extras" xml:space="preserve">
+    <value>Extras</value>
+  </data>
+  <data name="Management_functions_for_CrypTool_2_" xml:space="preserve">
+    <value>Verwaltungsfunktionen für CrypTool 2</value>
+  </data>
+  <data name="Manages_the_integrated_network_connection_" xml:space="preserve">
+    <value>An verteilter Kryptoanalyse mithilfe der CrypCloud teilnehmen</value>
+  </data>
+  <data name="SettingsTooltip" xml:space="preserve">
+    <value>Konfiguration von CrypTool 2</value>
+  </data>
+  <data name="RBTooltip_Help" xml:space="preserve">
+    <value>Hilfe für CrypTool 2 (F1)</value>
+  </data>
+  <data name="Redo_or_Undo_your_last_changes_" xml:space="preserve">
+    <value>Letztere Änderungen rückgängig machen oder wiederholen</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="RBTooltip_Editing" xml:space="preserve">
+    <value>Bearbeitungsfunktionen für den aktuellen Arbeitsbereich</value>
+  </data>
+  <data name="RBHeader_Editing" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="Cut" xml:space="preserve">
+    <value>Ausschneiden</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="RBHeader_View" xml:space="preserve">
+    <value>Ansicht</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="System_Infos_" xml:space="preserve">
+    <value>Systeminformationen</value>
+  </data>
+  <data name="Components" xml:space="preserve">
+    <value>Komponenten</value>
+  </data>
+  <data name="Modern_Ciphers_" xml:space="preserve">
+    <value>Moderne Verfahren</value>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Sonstige</value>
+  </data>
+  <data name="Hash_Functions_" xml:space="preserve">
+    <value>Hash-Funktionen</value>
+  </data>
+  <data name="Cryptanalysis" xml:space="preserve">
+    <value>Kryptoanalyse</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistiken</value>
+  </data>
+  <data name="Differential" xml:space="preserve">
+    <value>Differenz</value>
+  </data>
+  <data name="Editor_Specific_" xml:space="preserve">
+    <value>Projektspezifisch</value>
+  </data>
+  <data name="Templates" xml:space="preserve">
+    <value>Vorlagen</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="Hide_Errors_" xml:space="preserve">
+    <value>Verstecke Fehler</value>
+  </data>
+  <data name="Hide_Warnings_" xml:space="preserve">
+    <value>Verstecke Warnungen</value>
+  </data>
+  <data name="Hide_Infos_" xml:space="preserve">
+    <value>Verstecke Hinweise</value>
+  </data>
+  <data name="Show_Debugs_" xml:space="preserve">
+    <value>Zeige Debugnachrichten</value>
+  </data>
+  <data name="Show_Balloons_" xml:space="preserve">
+    <value>Zeige Sprechblasennachrichten</value>
+  </data>
+  <data name="Clear_LogWindow_" xml:space="preserve">
+    <value>Alle Nachrichten löschen</value>
+  </data>
+  <data name="Export_to_HTML_" xml:space="preserve">
+    <value>Exportiere zu HTML</value>
+  </data>
+  <data name="Nr" xml:space="preserve">
+    <value>Nr</value>
+  </data>
+  <data name="LogLevel" xml:space="preserve">
+    <value>LogLevel</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="Plugin" xml:space="preserve">
+    <value>Plug-In</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Revision</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Nachricht</value>
+  </data>
+  <data name="No_updates_available_" xml:space="preserve">
+    <value>Keine Updates verfügbar.</value>
+  </data>
+  <data name="Please_report_any_bugs_you_may_encounter_on_our_website_" xml:space="preserve">
+    <value>Bitte helfen Sie uns, CrypTool 2 zu verbessern.</value>
+  </data>
+  <data name="Feel_free_to_contribute_to_this_project_" xml:space="preserve">
+    <value>Wir freuen uns über Feedback auf unserer Webseite.</value>
+  </data>
+  <data name="For_more_information_" xml:space="preserve">
+    <value>Weitere Informationen auf unserer Webseite:</value>
+  </data>
+  <data name="Balloons" xml:space="preserve">
+    <value>Sprechblasen</value>
+  </data>
+  <data name="Debugs" xml:space="preserve">
+    <value>Debugnachrichten</value>
+  </data>
+  <data name="Warnings" xml:space="preserve">
+    <value>Warnungen</value>
+  </data>
+  <data name="Infos" xml:space="preserve">
+    <value>Hinweise</value>
+  </data>
+  <data name="Errors" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="RBHeader_Execute" xml:space="preserve">
+    <value>Ausführen</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="Balloon_Message" xml:space="preserve">
+    <value>Sprechblasennachricht</value>
+  </data>
+  <data name="Warning_Message" xml:space="preserve">
+    <value>Warnungsnachricht</value>
+  </data>
+  <data name="Debug_Message" xml:space="preserve">
+    <value>Debugnachricht</value>
+  </data>
+  <data name="Contact_Us_" xml:space="preserve">
+    <value>Kontakt aufnehmen / Fehler melden</value>
+  </data>
+  <data name="Visit_Homepage" xml:space="preserve">
+    <value>Homepage besuchen</value>
+  </data>
+  <data name="Update_ready_to_install__would_you_like_to_remove_it" xml:space="preserve">
+    <value>Wollen Sie das verfügbare Update löschen?</value>
+  </data>
+  <data name="Startcenter" xml:space="preserve">
+    <value>Startcenter</value>
+  </data>
+  <data name="Startcenter_Tooltip" xml:space="preserve">
+    <value>Öffnet das Startcenter</value>
+  </data>
+  <data name="CrypToolStore_Tooltip" xml:space="preserve">
+    <value>Öffnet den CrypTool-Store</value>
+  </data>
+  <data name="Steganography" xml:space="preserve">
+    <value>Steganographie</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Release Notes:</value>
+  </data>
+  <data name="Can_t_get_unique_ID___0_" xml:space="preserve">
+    <value>Kann eindeutige ID nicht feststellen: {0}</value>
+  </data>
+  <data name="Protocols" xml:space="preserve">
+    <value>Protokolle</value>
+  </data>
+  <data name="_Search" xml:space="preserve">
+    <value>      Suche</value>
+  </data>
+  <data name="RBHeader_Add" xml:space="preserve">
+    <value>Einfügen</value>
+  </data>
+  <data name="Fit_to_Screen" xml:space="preserve">
+    <value>an Bildschirmgröße anpassen</value>
+  </data>
+  <data name="AddImage" xml:space="preserve">
+    <value>Bild</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Protokoll</value>
+  </data>
+  <data name="RBTooltip_Execute" xml:space="preserve">
+    <value>Ausführungssteuerung für den aktuellen Arbeitsbereich</value>
+  </data>
+  <data name="AddText" xml:space="preserve">
+    <value>Text</value>
+  </data>
+  <data name="Zoom" xml:space="preserve">
+    <value>Vergrößerung</value>
+  </data>
+  <data name="Do_you_want_to_save_the_changes_you_made_in_the_project" xml:space="preserve">
+    <value>Wollen Sie die im Projekt vorgenommenen Änderungen in der Datei "{0}" speichern?</value>
+  </data>
+  <data name="Do_you_want_to_save_your_new_project" xml:space="preserve">
+    <value>Wollen Sie Ihr neues Projekt speichern?</value>
+  </data>
+  <data name="GeneratingWaitMessage" xml:space="preserve">
+    <value>Bitte warten... Online-Hilfe wird erzeugt.</value>
+  </data>
+  <data name="Generating_Documentation_Title" xml:space="preserve">
+    <value>Dokumentation wird erzeugt</value>
+  </data>
+  <data name="Online_Help" xml:space="preserve">
+    <value>Online-Hilfe</value>
+  </data>
+  <data name="Question" xml:space="preserve">
+    <value>Frage</value>
+  </data>
+  <data name="Unsaved_changes" xml:space="preserve">
+    <value>Ungesicherte Änderungen</value>
+  </data>
+  <data name="Unsaved_workspace" xml:space="preserve">
+    <value>ungesicherte Arbeitsfläche</value>
+  </data>
+  <data name="DateHeader" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="MessageHeader" xml:space="preserve">
+    <value>Bemerkung</value>
+  </data>
+  <data name="TitleHeader" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Are_you_sure_" xml:space="preserve">
+    <value>Sind Sie sicher?</value>
+  </data>
+  <data name="Are_you_sure_you_want_to_send_this_message_to_the_CrypToo_developers_" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie diese Nachricht an die CrypTool 2-Entwickler schicken wollen?</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Contact_Developers" xml:space="preserve">
+    <value>Kontakt aufnehmen / Fehler melden</value>
+  </data>
+  <data name="Copy_everything_to_clipboard" xml:space="preserve">
+    <value>Alles in die Zwischenablage kopieren</value>
+  </data>
+  <data name="Copy_this_row_to_clipboard" xml:space="preserve">
+    <value>Diese Zeile in die Zwischenablage kopieren</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="Error_trying_to_send_the_message" xml:space="preserve">
+    <value>Fehler beim Senden der Nachricht: {0}. Bitte versuchen Sie es später noch einmal oder besuchen Sie unsere Webseite.</value>
+  </data>
+  <data name="Input_failure" xml:space="preserve">
+    <value>Eingabefehler</value>
+  </data>
+  <data name="Interval" xml:space="preserve">
+    <value>Intervall</value>
+  </data>
+  <data name="Please_fill_in_all_required_fields" xml:space="preserve">
+    <value>Bitte füllen Sie alle benötigten Felder aus!</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+  <data name="Sending_done" xml:space="preserve">
+    <value>Senden erfolgreich</value>
+  </data>
+  <data name="Sending_failed" xml:space="preserve">
+    <value>Senden fehlgeschlagen</value>
+  </data>
+  <data name="SI_Administrative_Rights" xml:space="preserve">
+    <value>Administrationsrechte</value>
+  </data>
+  <data name="SI_Build_Time" xml:space="preserve">
+    <value>Erstellungszeit</value>
+  </data>
+  <data name="SI_Build_Type" xml:space="preserve">
+    <value>Erstellungstyp</value>
+  </data>
+  <data name="SI_Common_Language_Runtime_Version" xml:space="preserve">
+    <value>Common Language Runtime-Version (.NET-Version)</value>
+  </data>
+  <data name="SI_CrypTool_Version" xml:space="preserve">
+    <value>CrypTool-Version</value>
+  </data>
+  <data name="SI_Current_Culture" xml:space="preserve">
+    <value>Spracheinstellung</value>
+  </data>
+  <data name="SI_Host_Name" xml:space="preserve">
+    <value>Rechnername</value>
+  </data>
+  <data name="SI_Installation_Type" xml:space="preserve">
+    <value>Installationstyp</value>
+  </data>
+  <data name="SI_Machine_Name" xml:space="preserve">
+    <value>Maschinenname</value>
+  </data>
+  <data name="SI_Operating_System" xml:space="preserve">
+    <value>Betriebssystem</value>
+  </data>
+  <data name="SI_Processors" xml:space="preserve">
+    <value>Prozessoren</value>
+  </data>
+  <data name="SI_Unique_Identifier" xml:space="preserve">
+    <value>Eindeutiger Bezeichner</value>
+  </data>
+  <data name="SI_User_Name" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Betreff:</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="Your_E_Mail_address__optional" xml:space="preserve">
+    <value>Ihre E-Mail-Adresse (optional):</value>
+  </data>
+  <data name="Your_message" xml:space="preserve">
+    <value>Ihre Nachricht:</value>
+  </data>
+  <data name="Your_message_has_been_delivered" xml:space="preserve">
+    <value>Ihre Nachricht wurde übermittelt. Vielen Dank!</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="Close_All" xml:space="preserve">
+    <value>Alle schließen</value>
+  </data>
+  <data name="Close_All_except_this" xml:space="preserve">
+    <value>Alle außer diesem schließen</value>
+  </data>
+  <data name="This_is_a_template" xml:space="preserve">
+    <value>Das ist ein Template</value>
+  </data>
+  <data name="HelpBackward" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="HelpForward" xml:space="preserve">
+    <value>Vor</value>
+  </data>
+  <data name="HelpHome" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Boolean" xml:space="preserve">
+    <value>Boolean</value>
+  </data>
+  <data name="CrypTutorial" xml:space="preserve">
+    <value>Kryptotutorien</value>
+  </data>
+  <data name="UpdaterTooltip" xml:space="preserve">
+    <value>Verfügbare Updates für CrypTool 2</value>
+  </data>
+  <data name="WritingInTemplatesNotAllowed" xml:space="preserve">
+    <value>Das Schreiben im Vorlageordner ist nicht erlaubt. Sie werden in Ihr Heimverzeichnis weitergeleitet.</value>
+  </data>
+  <data name="TemplateUseDifferentDirectory" xml:space="preserve">
+    <value>Bitte speichern Sie Ihre Änderungen in einem anderen Verzeichnis.</value>
+  </data>
+  <data name="SI_Runtime_Path" xml:space="preserve">
+    <value>Laufzeitpfad</value>
+  </data>
+  <data name="RBHeader_CrypTutorial" xml:space="preserve">
+    <value>Kryptotutorien</value>
+  </data>
+  <data name="RBTooltip_Add" xml:space="preserve">
+    <value>Bilder oder Texte in den  aktuellen Arbeitsbereich einfügen</value>
+  </data>
+  <data name="RBTooltip_AddImg" xml:space="preserve">
+    <value>Bild in den  aktuellen Arbeitsbereich einfügen</value>
+  </data>
+  <data name="RBTooltip_AddText" xml:space="preserve">
+    <value>Text in den aktuellen  Arbeitsbereich einfügen</value>
+  </data>
+  <data name="RBTooltip_CrypTutorial" xml:space="preserve">
+    <value>Verfügbare Kryptotutorien</value>
+  </data>
+  <data name="RBTooltip_Load" xml:space="preserve">
+    <value>Arbeitsbereich laden (Strg + O)</value>
+  </data>
+  <data name="RBTooltip_Log" xml:space="preserve">
+    <value>Log-Fenster ein-/ausblenden (Strg + L)</value>
+  </data>
+  <data name="RBTooltip_New" xml:space="preserve">
+    <value>Neuen Arbeitsbereich oder Wizard öffnen (Strg + N)</value>
+  </data>
+  <data name="RBTooltip_Print" xml:space="preserve">
+    <value>Aktuellen Arbeitsbereich drucken (Strg + P)</value>
+  </data>
+  <data name="RBTooltip_Save" xml:space="preserve">
+    <value>Aktuellen Arbeitsbereich speichern (Strg + S)</value>
+  </data>
+  <data name="RBTooltip_View" xml:space="preserve">
+    <value>Fenster ein- und ausblenden</value>
+  </data>
+  <data name="Licenses" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="View_Licenses" xml:space="preserve">
+    <value>Lizenzen anschauen</value>
+  </data>
+  <data name="CrypToolLicenses" xml:space="preserve">
+    <value>CrypTool 2 und alle seine Komponenten unterliegen der Apache Lizenz 2.0, wenn nicht anders angegeben</value>
+  </data>
+  <data name="FileLost" xml:space="preserve">
+    <value>Konnte Tab für die Datei {0} nicht wiederherstellen, da die Datei verloren wurde!</value>
+  </data>
+  <data name="Couldnt_create_tab_of_Type" xml:space="preserve">
+    <value>Konnte den Tab vom Typ {0} nicht erstellen: {1}</value>
+  </data>
+  <data name="LicensesTooltip" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="SI_no" xml:space="preserve">
+    <value>nein</value>
+  </data>
+  <data name="SI_Product_Name" xml:space="preserve">
+    <value>Produktname</value>
+  </data>
+  <data name="SI_System_Time" xml:space="preserve">
+    <value>Systemzeit</value>
+  </data>
+  <data name="SI_yes" xml:space="preserve">
+    <value>ja</value>
+  </data>
+  <data name="SysinfosTooltip" xml:space="preserve">
+    <value>Systeminformationen</value>
+  </data>
+  <data name="GeneratingLaTeXWaitMessage" xml:space="preserve">
+    <value>Bitte warten... LaTeX-Dokumentation wird erzeugt.</value>
+  </data>
+  <data name="StatisticsWaitMessage" xml:space="preserve">
+    <value>Bitte warten... Konnektoren-Statistiken werden erzeugt!</value>
+  </data>
+  <data name="Generating_Statistics_Title" xml:space="preserve">
+    <value>Bitte warten... Konnektoren-Statistik wird erzeugt.</value>
+  </data>
+  <data name="Copy_Title" xml:space="preserve">
+    <value>Titel kopieren</value>
+  </data>
+  <data name="Dataflow" xml:space="preserve">
+    <value>Datenfluss</value>
+  </data>
+  <data name="DataInputOutput" xml:space="preserve">
+    <value>Daten-Ein-/Ausgabe</value>
+  </data>
+  <data name="Generic" xml:space="preserve">
+    <value>Generisch</value>
+  </data>
+  <data name="DistractionFree" xml:space="preserve">
+    <value>Ablenkungsfreiheit (an/aus)</value>
+  </data>
+  <data name="HideMenu" xml:space="preserve">
+    <value>Menü verstecken (an/aus)</value>
+  </data>
+  <data name="There_is_still_one_running_task" xml:space="preserve">
+    <value>Eine Arbeitsfläche ist noch im Play-Mode. Möchten Sie CrypTool 2 wirklich beenden?</value>
+  </data>
+  <data name="SI_CertHash" xml:space="preserve">
+    <value>SHA-1-Hash des Zertifikats (X509v3-Format)</value>
+  </data>
+  <data name="SI_EffectiveDate" xml:space="preserve">
+    <value>Datum Gültigkeitsbeginn des Zertifikats</value>
+  </data>
+  <data name="SI_ExpirationDate" xml:space="preserve">
+    <value>Datum Gültigkeitsende des Zertifikats</value>
+  </data>
+  <data name="SI_IsSigned" xml:space="preserve">
+    <value>CrypTool 2 ist signiert</value>
+  </data>
+  <data name="SI_IssuerName" xml:space="preserve">
+    <value>Name des Ausstellers des Zertifikats</value>
+  </data>
+  <data name="SI_KeyAlgorithm" xml:space="preserve">
+    <value>OID des Schlüssel-Algorithmus</value>
+  </data>
+  <data name="SI_SerialNumber" xml:space="preserve">
+    <value>Seriennummer des Zertifikats</value>
+  </data>
+  <data name="SI_Subject" xml:space="preserve">
+    <value>Antragsteller des Zertifikats</value>
+  </data>
+  <data name="SI_ValidCertificate" xml:space="preserve">
+    <value>Valides Zertifikat</value>
+  </data>
+  <data name="SI_PublicKey" xml:space="preserve">
+    <value>Öffentlicher Schlüssel des Antragstellers</value>
+  </data>
+  <data name="ToolTip_Copy" xml:space="preserve">
+    <value>Kurzinfo kopieren</value>
+  </data>
+  <data name="Homepage" xml:space="preserve">
+    <value>https://www.CrypTool.org/CrypTool2</value>
+  </data>
+  <data name="SI_System_Type" xml:space="preserve">
+    <value>Systemtyp</value>
+  </data>
+  <data name="SI_System_Type_32" xml:space="preserve">
+    <value>32 Bit-Betriebssystem</value>
+  </data>
+  <data name="SI_System_Type_64" xml:space="preserve">
+    <value>64 Bit-Betriebssystem</value>
+  </data>
+  <data name="GeneratingFunctionListWaitMessage" xml:space="preserve">
+    <value>Bitte warten... Funktionsliste wird erzeugt.</value>
+  </data>
+  <data name="GeneratingTemplateInfoWaitMessage" xml:space="preserve">
+    <value>Bitte warten... Vorlagen-Informationen werden erzeugt.</value>
+  </data>
+  <data name="Generating_TemplateInfo_Title" xml:space="preserve">
+    <value>Bitte warten... Vorlagen-Informationen werden erzeugt.</value>
+  </data>
+  <data name="SI_Processor_Name" xml:space="preserve">
+    <value>Prozessorname</value>
+  </data>
+  <data name="SI_CommandLine" xml:space="preserve">
+    <value>Kommandozeile</value>
+  </data>
+  <data name="Java_could_not" xml:space="preserve">
+    <value>Konnte java.exe nicht starten. Wahrscheinlich kein Java installiert.</value>
+  </data>
+  <data name="Java_Version" xml:space="preserve">
+    <value>Java-Version</value>
+  </data>
+  <data name="CrypToolStore" xml:space="preserve">
+    <value>CrypTool-Store</value>
+  </data>
+  <data name="ProcessType" xml:space="preserve">
+    <value>Prozesstyp</value>
+  </data>
+  <data name="LoadedReferencedAssembly" xml:space="preserve">
+    <value>Geladene/referenzierte Assembly</value>
+  </data>
+  <data name="SI_Or_newer" xml:space="preserve">
+    <value>oder neuer</value>
+  </data>
+  <data name="DECRYPTProject" xml:space="preserve">
+    <value>DECRYPT-Projekt</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="Codes" xml:space="preserve">
+    <value>Kodierungen</value>
+  </data>
+  <data name="RandomNumbers" xml:space="preserve">
+    <value>Zufallszahlen</value>
+  </data>
+  <data name="LogWindow" xml:space="preserve">
+    <value>Protokoll-/Log-Fenster:</value>
+  </data>
+</root>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">DES Known-Plaintext Analysis</title>
+  <title lang="zh">DES已知明文分析</title>
+  <title lang="ru">DES Известный-простой анализ</title>
+  <summary lang="en">Cryptanalysis of the <i>DES</i> algorithm using the <i>KeySearcher</i> component and a known plaintext</summary>
+  <summary lang="zh">使用KeySearcher组件和已知的纯文本对DES算法进行密码分析</summary>
+  <summary lang="ru">Криптоанализ алгоритма DES с использованием компонента KeySearcher и известного открытого текста</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>DES</i> algorithm using the <i>KeySearcher</i> component and a known plaintext.</description>
+  <description lang="zh">该模板显示了使用KeySearcher组件和已知的纯文本对DES算法进行的密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма DES с использованием компонента KeySearcher и известного открытого текста.</description>
+  <keywords>Data Encryption Standard, symmetric, 56, NSA, standard, keysearcher, Attack, Analysis</keywords>
+  <keywords lang="zh">数据加密标准，对称，56，NSA，标准，keysearcher，攻击，分析</keywords>
+  <keywords lang="ru">Стандарт шифрования данных, симметричный, 56, NSA, стандарт, keyearcher, Attack, Analysis</keywords>
+  <title lang="de">DES Known-Plaintext-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>DES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>DES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes.</description>
+  <keywords lang="de">symmetrisch, Data Encryption Standard, Standard, NSA, 56, Keysearcher, Angriff</keywords>
+  <icon file="DES.png" />
+  <relevantPlugins>
+    <plugin name="CostFunction" />
+    <plugin name="DES" />
+    <plugin name="KeySearcher" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$StringEncoder$" value="String-Kodierer" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
+    <replacement key="$memo$" value="In dieser Vorlage versucht die {\b Schlüsselsucher}-Komponente denjenigen {\b DES}-Schlüssel zu finden, mit dem ein Klartext verschlüsselt wurde, um den gegebenen Geheimtext zu erzeugen. Sie führt eine Brute-Force-Suche auf dem Schlüsselraum durch und benutzt ein Wort, von dem bekannt ist, dass es im Klartext vorkommt, um den korrekten Schlüssel zu identifizieren. Das bekannte Wort kann in den Einstellungen der {\b Schlüsselsucher}-Komponente angegeben werden. Es wird allerdings nicht der gesamte Schlüsselraum von {\b DES} durchsucht, sondern nur eine Teilmenge. Die Teilmenge kann in den Einstellungen der {\b Schlüsselsucher}-Komponente mit einem regulären Ausdruck spezifiziert werden.\line\line Der zu untersuchende Schlüsselraum in diesem Beispiel wird durch das Muster\line \tab\tab\tab {\b 11-11-11-11-11-*[13579BDF]-*[13579BDF]-*[13579BDF]}\line definiert, demzufolge die 5 ersten Bytes den Wert 11 haben sollen und die 3 letzten Bytes ungerade sein sollen. Der resultierende Schlüsselraum enthält somit nur 2^21 Schlüssel." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$KeySearcher$" value="关键搜索" />
+    <replacement key="$memo$" value="在此模板中，{\b密钥查找器}组件尝试查找使用明文加密的{\b DES}密钥，以便生成给定的密文。它在密钥空间上进行蛮力搜索，并使用一个明显的单词来识别正确的密钥。可以在{\b键查找器}组件的设置中指定已知单词。但是，不是搜索{\b DES}的整个键空间，而是仅搜索一个子集。子集可以在{\b key finder}组件的设置中使用正则表达式指定\Line \line在此示例中要检查的键空间由模式\line \tab \tab \tab {\b 11-11给出-11-11-11-* [13579BDF]-* [13579BDF]-* [13579BDF]} \定义了\行，根据该行，前5个字节应为11，后3个字节应为奇数。因此，生成的键空间仅包含2 ^ 21个键。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$KeySearcher$" value="ключ поиска" />
+    <replacement key="$memo$" value="В этом шаблоне компонент {\b key finder} пытается найти ключ {\b DES}, который использовался для шифрования открытого текста для получения заданного зашифрованного текста. Она выполняет поиск грубой силы в ключевом пространстве и использует слово, известное как обычный текст, для определения правильного ключа. Знакомое слово может быть указано в настройках компонента {\b key finder}. Однако не выполняется поиск всего пространства ключей {\b DES}, а только подмножество. Подмножество может быть указано в настройках компонента {\b key finder} с регулярным выражением. \Line \line Ключевое пространство, которое нужно изучить в этом примере, представлено шаблоном \line \tab \tab \tab {\b 11-11 -11-11-11 - * [13579BDF] - * [13579BDF] - * [13579BDF]} \line определяет, что 5 первых байтов должны быть 11, а последние 3 байта должны быть нечетными. Таким образом, полученное пространство ключей содержит только 2 ^ 21 ключа." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
+    <replacement key="$StringDecoder$" value="String Decoder" />
+    <replacement key="$StringEncoder$" value="String Encoder" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$KeySearcher$" value="KeySearcher" />
+    <replacement key="$memo$" value="In this template, the {\b KeySearcher} component tries to find the {\b DES} key that was used to encrypt a plaintext to produce the given ciphertext. It uses brute-force to search the key space and a word that is known to occur in the plaintext (&quot;Encryption&quot;) to identify the correct key. The known word can be entered in the settings of the {\b KeySearcher} component. It does however not examine the entire key space of {\b DES}, but only a subset of it. The subset can be specified as a regular expression in the settings of the {\b KeySearcher} component.\line\line The key space to be examined in this example is given by the pattern\line \tab\tab\tab {\b 11-11-11-11-11-*[13579BDF]-*[13579BDF]-*[13579BDF]},\line which means, that the first 5 bytes are set to 11 and the last 3 bytes are assumed to be odd. The resulting key space thus contains only 2^21 keys." />
+  </replacements>
+</sample>

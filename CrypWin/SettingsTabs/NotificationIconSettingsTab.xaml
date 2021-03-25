@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="CrypTool.CrypWin.SettingsTabs.NotificationIconSettingsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" 
+             xmlns:p="clr-namespace:CrypTool.CrypWin.Properties" xmlns:Resources="clr-namespace:CrypTool.CrypWin.SettingsTabs.Resources" d:DesignHeight="300" d:DesignWidth="600">
+    <Grid>        
+        <Image Source="/CrypWin;component/images/bigBalloons.png" Style="{StaticResource ResourceKey=settingsStyle}" Opacity="0.1" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="stackPanel">
+                <Label Content="{Loc NotificationIconSettingsTitle}" FontWeight="Bold" FontSize="14"/>
+                <Label Content="{Loc MessageSettings}" FontWeight="Bold" />
+                <CheckBox Content="{Loc Show_balloon_log_messages_in_balloon}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=ShowBalloonLogMessagesInBalloon, Mode=TwoWay}" Height="16" Name="showBalloonMessagesCheckBox" ToolTip="{Loc Show_balloon_log_messages_in_balloon_tooltip}" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <CheckBox Content="{Loc Show_error_log_messages_in_balloon}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=ShowErrorLogMessagesInBalloon, Mode=TwoWay}" Height="16" Name="showErrorMessagesCheckBox" ToolTip="{Loc Show_error_log_messages_in_balloon_tooltip}" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <CheckBox Content="{Loc Show_info_log_messages_in_balloon}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=ShowInfoLogMessagesInBalloon, Mode=TwoWay}" Height="16" Name="showInfoMessagesCheckBox" ToolTip="{Loc Show_info_log_messages_in_balloon_tooltip}" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <CheckBox Content="{Loc Show_warning_log_messages_in_balloon}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=ShowWarningLogMessagesInBalloon, Mode=TwoWay}" Height="16" Name="showWarningMessagesCheckBox" ToolTip="{Loc Show_warning_log_messages_in_balloon_tooltip}" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <CheckBox Content="{Loc Show_debug_log_messages_in_balloon}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=ShowDebugLogMessagesInBalloon, Mode=TwoWay}" Height="16" Name="showDebugMessagesCheckBox" ToolTip="{Loc Show_debug_log_messages_in_balloon_tooltip}" Style="{StaticResource ResourceKey=settingsStyle}" />
+                <StackPanel Orientation="Horizontal" Style="{StaticResource ResourceKey=settingsStyle}" ToolTip="{Loc BalloonDuration_Tooltip}">
+                    <Label Content="{Loc Show_balloon_for_}"/>
+                    <TextBox Name="balloonTime" Height="23" Width="40" TextChanged="TextBox_TextChanged" />
+                    <Label Content="{Loc seconds_}"/>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

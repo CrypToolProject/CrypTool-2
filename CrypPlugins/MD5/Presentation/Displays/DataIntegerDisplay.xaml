@@ -1,0 +1,28 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:CrypTool_MD5_Presentation_Displays="clr-namespace:CrypTool.MD5.Presentation.Displays"
+    xmlns:Converters1="clr-namespace:CrypTool.Plugins.MD5.Presentation.Converters" x:Class="CrypTool.MD5.Presentation.Displays.DataIntegerDisplay"
+	Name="DataIntegerUserControl" Width="624" Height="64">
+    <UserControl.Resources>
+        <Converters1:HighlightIndexToBrushConverter x:Key="highlightConverter"/>
+    </UserControl.Resources>
+    <UniformGrid Columns="8" Rows="2" DataContext="{Binding DisplayedValues,ElementName=DataIntegerUserControl}">
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="0" Value="{Binding .[0]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=0}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="1" Value="{Binding .[1]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=1}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="2" Value="{Binding .[2]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=2}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="3" Value="{Binding .[3]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=3}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="4" Value="{Binding .[4]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=4}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="5" Value="{Binding .[5]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=5}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="6" Value="{Binding .[6]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=6}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="7" Value="{Binding .[7]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=7}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="8" Value="{Binding .[8]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=8}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="9" Value="{Binding .[9]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=9}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="10" Value="{Binding .[10]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=10}"/>
+        <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="11" Value="{Binding .[11]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=11}"/>
+		<CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="12" Value="{Binding .[12]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=12}"/>
+		<CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="13" Value="{Binding .[13]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=13}"/>
+		<CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="14" Value="{Binding .[14]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=14}"/>
+                <CrypTool_MD5_Presentation_Displays:LabelledIntegerDisplay Caption="15" Value="{Binding .[15]}" Background="{Binding HighlightedValue,ElementName=DataIntegerUserControl,Converter={StaticResource highlightConverter},ConverterParameter=15}"/>
+	</UniformGrid>
+</UserControl>

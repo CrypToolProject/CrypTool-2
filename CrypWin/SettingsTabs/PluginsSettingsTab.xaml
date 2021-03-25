@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="CrypTool.CrypWin.SettingsTabs.PluginsSettingsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:SettingsTabs="clr-namespace:CrypTool.CrypWin.SettingsTabs" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600" xmlns:my="clr-namespace:Startcenter;assembly=Startcenter">
+    <Grid>
+        <Image Source="/CrypWin;component/images/LogoBlau.png" Opacity="0.1" />
+        
+        <Grid Visibility="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=SettingsTabs:PluginsSettingsTab, AncestorLevel=1}, Path=IsVisible}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <Label Content="{Loc ComponentSettings}" FontWeight="Bold" FontSize="14"/>
+                <Label Content="{Loc EnableDisableComponents}" FontWeight="Bold" />
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="10"/>
+                        <Setter Property="Padding" Value="5,0,5,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Content="{Loc Select_all}" Click="SelectAll_Click" />
+                <Button Content="{Loc Deselect_all}" Click="DeselectAll_Click" />
+                <Button Content="{Loc Invert_selection}" Click="Invert_Click" />
+            </StackPanel>
+
+            <ListView Grid.Row="2" Name="PluginListBox" ItemsSource="{Binding}" Background="#00000000">
+                
+                <ListView.Resources>
+                    <ContextMenu x:Key="ItemContextMenu">
+                        <MenuItem Header="{Loc Copy_line}" Tag="copy_line" CommandParameter="{Binding}" Click="ContextMenuHandler" />
+                        <MenuItem Header="{Loc Copy_all}" Tag="copy_all" CommandParameter="{Binding}" Click="ContextMenuHandler" />
+                    </ContextMenu>
+                </ListView.Resources>
+                
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.View>
+                    <GridView AllowsColumnReorder="True">
+                        
+                        <GridViewColumn Header="{Loc HeaderDisabled}">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=Disabled}" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="{Loc HeaderPluginName}" DisplayMemberBinding="{Binding Path=Pluginname}"></GridViewColumn>
+                        <GridViewColumn Header="{Loc HeaderDescription}" DisplayMemberBinding="{Binding Path=Plugindescription}"></GridViewColumn>
+                        <GridViewColumn Header="{Loc HeaderAssembly}" DisplayMemberBinding="{Binding Path=Assemblyname}"></GridViewColumn>
+                        
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+</UserControl>

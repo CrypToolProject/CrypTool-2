@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component analyzes a text that was encrypted with the <docRef item="CrypTool.Caesar.Caesar">Caesar</docRef> cipher.
+    It decodes the given ciphertext with all possible keys and compares the frequencies of the letters and the bigrams of the resulting plaintexts
+    with the known frequencies of a natural language.
+  </introduction>
+  <introduction lang="zh-CN">此组件分析使用凯撒密码加密的文本。它使用所有可能的密钥对给定的密文进行解码，并将所得明文的字母和二元组的频率与自然语言的已知频率进行比较。</introduction>
+  <introduction lang="ru">Этот компонент анализирует текст, который был зашифрован с помощью цезарного шифра. Он расшифровывает данный зашифрованный текст со всеми возможными ключами и сравнивает частоты букв и биграмм полученных открытых текстов с известными частотами естественного языка.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente analysiert einen mit dem <docRef item="CrypTool.Caesar.Caesar">Caesar</docRef>-Verfahren verschlüsselten Text, indem sie
+    einen Geheimtext mit allen möglichen Schlüsseln entschlüsselt und die Häufigkeit der Buchstaben und der Bigramme
+    der resultierenden Klartexte mit den bekannten Häufigkeiten einer natürlichen Sprache vergleicht.
+  </introduction>
+  <usage lang="en">
+    The input "Encrypted text" expects a text encrypted with the <docRef item="CrypTool.Caesar.Caesar">Caesar</docRef> cipher.
+    The input "Frequency List" expects a string representing the letter frequency of the given ciphertext.
+    You can use the <docRef item="CrypTool.FrequencyTest.FrequencyTest" /> component to create this string.
+    You must also select the supposed language of the underlying plaintext.
+    The ciphertext will then be analyzed using the letter and bigram frequencies of the selected language.
+    The analysis result will be sent to the ouput of the component as an integer. 
+    This integer indicates the probable shift value that was used for the Caesar encryption.
+</usage>
+  <usage lang="zh-CN">输入“加密的文本”需要使用凯撒密码加密的文本。输入“频率列表”需要一个字符串，该字符串表示给定密文的字母频率。您可以使用组件创建此字符串。您还必须选择基础纯文本的假定语言。然后，将使用所选语言的字母和双字母组频率分析密文。分析结果将作为整数发送到组件的输出。该整数表示用于Caesar加密的可能的偏移值。</usage>
+  <usage lang="ru">Ввод «Зашифрованный текст» ожидает текст, зашифрованный с помощью цезарного шифра. Вход «Частотный список» ожидает строку, представляющую частоту букв данного зашифрованного текста. Вы можете использовать этот компонент для создания этой строки. Вы также должны выбрать предполагаемый язык базового открытого текста. Затем зашифрованный текст будет анализироваться с использованием буквенных и бикрамных частот выбранного языка. Результат анализа будет отправлен на вывод компонента как целое. Это целое число указывает вероятное значение сдвига, которое использовалось для шифрования Цезаря.</usage>
+  <usage lang="de-DE">
+    Geben Sie am Eingang "verschlüsselter Text" einen mit dem <docRef item="CrypTool.Caesar.Caesar">Caesar</docRef>-Verfahren verschlüsselten Text ein.
+    Am Eingang "Häufigkeitsliste" wird eine Zeichenkette erwartet, die eine durch Zeilenumbrüche getrennte Liste der Buchstabenhäufigkeiten darstellt,
+    wie sie zum Beispiel durch die <docRef item="CrypTool.FrequencyTest.FrequencyTest">Frequenzanalyse</docRef>-Komponente generiert wird.
+    Wählen Sie in den Einstellungen der Komponente die Sprache aus, in der der Geheimtext vermutlich geschrieben wurde. 
+    Der Geheimtext wird dann auf Grundlage der Buchstaben- und Bigrammhäufigkeiten der ausgewählten Sprache analysiert.
+    Das Analyseresultat wird am Ausgang der Komponente als eine Zahl ausgegeben, die der Verschiebung durch die Caesar-Verschlüsselung entspricht.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Caesar_cipher" lang="en" />
+      <caption lang="en">Caesar cipher</caption>
+      <link url="http://de.wikipedia.org/wiki/Caesar-Verschl%C3%BCsselung" lang="de-DE" />
+      <caption lang="de-DE">Caesar-Verschlüsselung</caption>
+    </linkReference>
+  </references>
+</documentation>

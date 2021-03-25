@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Take a Picture Using the Webcam</title>
+  <title lang="zh">使用网络摄像头拍照</title>
+  <title lang="ru">Сделать фото</title>
+  <summary lang="en">Take a Picture using the webcam</summary>
+  <summary lang="zh">使用网络摄像头拍照</summary>
+  <summary lang="ru">Сделать фото</summary>
+  <description lang="en">This template shows how to take a picture with the camera component and the webcam (e.g. for scanning a QR code).</description>
+  <description lang="zh">该模板显示了如何使用相机组件和网络摄像头拍照（例如，用于扫描QR码）。</description>
+  <description lang="ru">Этот шаблон показывает, как сделать снимок с помощью компонента камеры (например, для сканирования QR-кода).</description>
+  <keywords>picture, photo, camera</keywords>
+  <keywords lang="zh">图片，照片，照相机</keywords>
+  <keywords lang="ru">фото, фото</keywords>
+  <title lang="de">Foto erstellen</title>
+  <summary lang="de">Ein Foto mit der Webcam erstellen</summary>
+  <description lang="de">Diese Vorlage zeigt das Erstellen eines Fotos mittels der Kamerakomponente und der Webcam (z.B. um einen QR-Code zu scannen).</description>
+  <keywords lang="de">kamera, foto</keywords>
+  <icon file="TakePicture.png" />
+  <relevantPlugins>
+    <plugin name="BooleanInput" />
+    <plugin name="PictureOutput" />
+    <plugin name="Webcam" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Take Picture$" value="Bild aufnehmen" />
+    <replacement key="$Camera$" value="Kamera" />
+    <replacement key="$Picture Output$" value="Bildausgabe" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Take Picture$" value="拍照片" />
+    <replacement key="$Camera$" value="相机" />
+    <replacement key="$Picture Output$" value="影像输出" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Take Picture$" value="Сделайте снимок" />
+    <replacement key="$Camera$" value="камера" />
+    <replacement key="$Picture Output$" value="вывода изображения" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Take Picture$" value="Take Picture" />
+    <replacement key="$Camera$" value="Camera" />
+    <replacement key="$Picture Output$" value="Picture Output" />
+  </replacements>
+</sample>

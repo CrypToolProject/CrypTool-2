@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    In cryptography, the Advanced Encryption Standard (AES), also known as Rijndael, is a block cipher adopted as an encryption standard by the U.S. government.
+    It has been analyzed extensively and is now used worldwide, as was the case with its predecessor, the Data Encryption Standard <docRef item="CrypTool.Plugins.Cryptography.Encryption.DES">(DES)</docRef>. 
+    AES was announced by National Institute of Standards and Technology (NIST) as U.S. FIPS PUB 197 (FIPS 197) <ref id="fips197" /> on November 26, 2001 after a 5-year standardization process. 
+    It became effective as a standard May 26, 2002. As of 2006, AES is one of the most popular algorithms used in symmetric key cryptography.
+    <newline />
+    Rijdael is considered secure; only after 10 years after its standardisation the first – theoretical interesting, but with no practical relevance – attack has been discovered <ref id="RelatedKeyCrypt" />.
+    Strictly speaking, AES is not precisely Rijndael (although in practice they are used interchangeably) as Rijndael supports a larger range of block and key sizes; 
+    AES has a fixed block size of 128 bits and a key size of 128, 192, or 256 bits, whereas Rijndael can be specified with key and block sizes in any multiple of 32 bits, 
+    with a minimum of 128 bits and a maximum of 256 bits.
+    <newline /><newline /><i>
+      Source: <ref id="wikipedia" /></i></introduction>
+  <introduction lang="zh-CN">在密码学中，高级加密标准（AES），也称为Rijndael，是美国政府采用的分组密码作为加密标准。它的前身数据加密标准（DES）受到了广泛的分析，现已在全球范围内使用。经过5年的标准化进程后，美国国家标准技术研究院（NIST）于2001年11月26日宣布AES为US FIPS PUB 197（FIPS 197）。它自2002年5月26日起生效。自2006年起，AES是对称密钥密码术中使用最广泛的算法之一。 Rijdael被认为是安全的；仅在标准化10年后，才发现了第一个-理论上很有趣，但没有实际意义的攻击。严格来说，AES并不是Rijndael（尽管实际上可以互换使用），因为Rijndael支持更大范围的块和密钥大小。 AES的固定块大小为128位，密钥大小为128、192或256位，而Rijndael可以指定密钥和块大小为32位的任意倍数，最少128位，最大256位位。资源：</introduction>
+  <introduction lang="ru">В криптографии, стандарт расширенного шифрования (AES), также известный как Rijndael, является блочным шифром, принятым правительством США стандартом шифрования. Он был широко проанализирован и теперь используется во всем мире, как это было в случае с его предшественником, стандартом шифрования данных (DES). AES был объявлен Национальным институтом стандартов и технологий (NIST) в качестве US FIPS PUB 197 (FIPS 197) 26 ноября 2001 года после 5-летнего процесса стандартизации. Он стал эффективным в качестве стандарта 26 мая 2002 года. Начиная с 2006 года, AES является одним из самых популярных алгоритмов, используемых в криптографии с симметричным ключом. Rijdael считается безопасным; только через 10 лет после его стандартизации первый - теоретический интересный, но без практической значимости - обнаружена атака. Строго говоря, AES не является точно Rijndael (хотя на практике они используются взаимозаменяемо), поскольку Rijndael поддерживает более широкий диапазон размеров блоков и ключей; AES имеет фиксированный размер блока 128 бит и размер ключа 128, 192 или 256 бит, тогда как Rijndael может быть задан с размером клавиш и блоков в любом количестве из 32 бит с минимальным количеством бит и не более 256 бит биты. Источник:</introduction>
+  <introduction lang="de-DE">
+    Der Advanced Encryption Standard (AES) ist ein symmetrisches Kryptosystem, das als Nachfolger für <docRef item="CrypTool.Plugins.Cryptography.Encryption.DES">DES</docRef> und 3DES im Oktober 2000 vom National Institute of Standards and Technology (NIST)
+    als Standard (FIPS 197) <ref id="fips197" /> bekanntgegeben wurde. Nach seinen Entwicklern Joan Daemen und Vincent Rijmen wird er auch <i>Rijndael</i>-Algorithmus genannt (gesprochen wie dt. <i>räindahl</i>).
+    <newline />
+    Der Rijndael-Algorithmus besitzt eine variable Blockgröße von 128, 192 oder 256 Bits und eine variable Schlüssellänge von 128, 192 oder 256 Bits.
+    Rijndael bietet ein sehr hohes Maß an Sicherheit; erst mehr als 10 Jahre nach seiner Standardisierung wurde der erste, theoretisch interessante, praktisch aber nicht relevante,
+    Angriff gefunden <ref id="RelatedKeyCrypt" />. Streng genommen ist AES nicht Rijndael, da bei AES die Blocklänge auf 128 Bit eingeschränkt wurde, während die Wahl der Schlüssellänge von 128, 192 oder 256 Bits unverändert übernommen worden ist. 
+    Die Bezeichnungen der drei AES-Varianten AES-128, AES-192 und AES-256 beziehen sich jeweils auf die gewählte Schlüssellänge.
+    <newline />
+    Der Algorithmus ist frei verfügbar und darf ohne Lizenzgebühren eingesetzt sowie in Soft- und Hardware implementiert werden. AES ist in den USA für staatliche Dokumente mit höchster Geheimhaltungsstufe zugelassen.
+    <newline /><newline /><i>
+      Quelle: <ref id="wikipedia" /></i></introduction>
+  <usage lang="en">
+    In the settings of the component, you can select whether the component should be operated in Rijndael mode or in AES mode. In Rijndael mode, you can additionally select the block size.
+    In AES mode, the block size is fixed at 128 bits. Apart from that, both algorithms provide the same settings.
+    <newline /><newline />
+    The AES component has the two operation modes "Encryption" and "Decryption". You can switch between the modes in the settings of the component.
+    <newline /><newline /><section headline="Encryption">
+      In "Encryption" mode, the component expects the plaintext as a data stream on the input labeled "Input".
+      AES works with a block size of 128 bits (16 bytes), Rijndael with 128 bits (16 bytes), 192 bits (24 bytes) or 256 bits (32 bytes). If the size of the input is not a multiple of the block size, as many bytes as are necessary to achieve
+      a multiple of the block size are padded. You can choose between several padding methods in the settings of the component.
+      When decrypting a ciphertext, it is important to select the same padding method as was used for encryption.
+      Otherwise the last block will be deciphered wrongly or not at all.
+      The key is expected as a byte array on the input labeled "Key".
+      In the settings of the component, you can determine the size of the key: 128 bits, 192 bits or 256 bits.
+      If the selected key size does not correspond to the size of the entered key, a warning will be issued and the key is either padded with null bytes or
+      reduced to the required size.
+      The encrypted data block is then sent to the output of the component as a data stream.
+      <newline /><newline /></section><section headline="Decryption">
+      In "Decryption" mode, the component expects the ciphertext that is to be decrypted on the input labeled "Input".
+      The size of the input must be a multiple of the block size. Otherwise, the component stops with an error message.
+      The key is entered in the same way as in "Encryption" mode.
+      Finally, the plaintext will be sent to the output of the component as a data stream.
+      <newline /><newline /></section><section headline="Cryptographic Mode">
+      Block ciphers divide their input data into blocks of a fixed size and apply the encryption or decryption function on the blocks of the input.
+      The chaining mode determines the way in which consecutive blocks, after being encrypted or decryted, are combined in order to achieve better security or error tolerance.
+      The AES component offers the following block chaining modes: ECB (Electronic Code Book), CBC (Cipher Block Chaining), CFB (Cipher Feedback) and OFB (Output Feedback).
+      Select the appropriate chaining mode in the settings of the component.
+      <newline />
+      In ECB mode, each block is encrypted separately. In the other modes however, a plaintext block is combined with the previous ciphertext block.
+      As there is no previous block for the first block, we must provide one for these modes. This extra block is given by the initialization vector (IV), which must be provided as a byte array
+      on the input of the component. Thus the size of the IV must correspond to the block size. If the provided IV is too short, it is filled with null bytes. If it is too long, it is truncated.
+      If no IV is given, the component will assume an IV consisting of null bytes.
+    </section></usage>
+  <usage lang="zh-CN">在组件的设置中，可以选择是以Rijndael模式还是以AES模式操作组件。在Rijndael模式下，您还可以选择块大小。在AES模式下，块大小固定为128位。除此之外，两种算法都提供相同的设置。 AES组件具有“加密”和“解密”两种操作模式。您可以在组件设置中的模式之间切换。在“加密”模式下，组件期望纯文本作为输入中标有“输入”的数据流。 AES的块大小为128位（16字节），Rijndael的块大小为128位（16字节），192位（24字节）或256位（32字节）。如果输入的大小不是块大小的倍数，则填充达到块大小的倍数所需的尽可能多的字节。您可以在组件的设置中选择几种填充方法。解密密文时，选择与加密相同的填充方法很重要。否则，最后一块将被错误地解密或根本不会被解密。该键应作为标有“键”的输入上的字节数组。在组件的设置中，您可以确定密钥的大小：128位，192位或256位。如果所选密钥的大小与输入的密钥的大小不匹配，则会发出警告，并且该密钥将填充为空字节或减小为所需的大小。然后将加密的数据块作为数据流发送到组件的输出。在“解密”模式下，组件期望在标记为“输入”的输入上解密的密文。输入的大小必须是块大小的倍数。否则，组件将停止并显示一条错误消息。密钥的输入方式与“加密”模式下的输入方式相同。最后，纯文本将作为数据流发送到组件的输出。分组密码将其输入数据划分为固定大小的块，并将加密或解密功能应用于输入的块。链接模式确定了对连续块进行加密或解密后对其进行组合的方式，以实现更好的安全性或容错性。 AES组件提供以下块链接模式：ECB（电子代码簿），CBC（密码块链接），CFB（密码反馈）和OFB（输出反馈）。在组件的设置中选择适当的链接模式。在ECB模式下，每个块分别加密。但是，在其他模式下，明文块与先前的密文块组合在一起。由于第一个块没有先前的块，因此我们必须为这些模式提供一个。此额外的块由初始化向量（IV）给出，该向量必须在组件的输入上作为字节数组提供。因此，IV的大小必须与块大小相对应。如果提供的IV太短，则将其填充为空字节。如果太长，它将被截断。如果没有给出IV，则组件将假定IV由空字节组成。</usage>
+  <usage lang="ru">В настройках компонента вы можете выбрать, должен ли компонент работать в режиме Rijndael или в режиме AES. В режиме Rijndael вы можете дополнительно выбрать размер блока. В режиме AES размер блока фиксируется на 128 бит. Кроме того, оба алгоритма предоставляют одинаковые настройки. Компонент AES имеет два режима работы: «Шифрование» и «Расшифровка». Вы можете переключаться между режимами в настройках компонента. В режиме «Шифрование» компонент ожидает открытый текст как поток данных на входе с надписью «Вход». AES работает с размером блока 128 бит (16 байт), Rijndael с 128 битами (16 байт), 192 битами (24 байта) или 256 бит (32 байта). Если размер ввода не кратен размеру блока, столько байтов, сколько необходимо для достижения кратного размера блока, дополняются. В настройках компонента вы можете выбирать между несколькими способами заполнения. При расшифровке зашифрованного текста важно выбрать тот же метод заполнения, который использовался для шифрования. В противном случае последний блок будет дешифрован неправильно или вообще отсутствует. Ключ ожидается как массив байтов на входе с надписью «Ключ». В настройках компонента вы можете определить размер ключа: 128 бит, 192 бит или 256 бит. Если выбранный размер ключа не соответствует размеру введенного ключа, будет выдано предупреждение, а ключ будет заполнен нулевыми байтами или уменьшен до требуемого размера. Зашифрованный блок данных затем отправляется на выход компонента в виде потока данных. В режиме «Расшифровка» компонент ожидает, что зашифрованный текст будет дешифрован на входе с надписью «Вход». Размер ввода должен быть кратным размеру блока. В противном случае компонент останавливается с сообщением об ошибке. Ключ вводится так же, как в режиме «Шифрование». Наконец, открытый текст будет отправлен на выход компонента в виде потока данных. Блочные шифры делят свои входные данные на блоки фиксированного размера и применяют функцию шифрования или дешифрования на блоках ввода. Режим цепочки определяет способ объединения последовательных блоков после их зашифрования или декомпозиции для обеспечения большей безопасности или допуска допуска ошибок. Компонент AES предлагает следующие режимы цепочки блоков: ECB (электронная кодовая книга), CBC (цепочка блоков шифрования), CFB (обратная связь с шифрованием) и OFB (выходная обратная связь). Выберите подходящий режим цепочки в настройках компонента. В режиме ECB каждый блок зашифровывается отдельно. Однако в других режимах блок открытого текста объединяется с предыдущим блоком зашифрованного текста. Поскольку для первого блока нет предыдущего блока, мы должны предоставить один для этих режимов. Этот дополнительный блок задается вектором инициализации (IV), который должен быть представлен как байтовый массив на входе компонента. Таким образом, размер IV должен соответствовать размеру блока. Если предоставленный IV слишком короткий, он заполняется нулевыми байтами. Если он слишком длинный, он усечен. Если нет IV, компонент будет принимать IV, состоящий из нулевых байтов.</usage>
+  <usage lang="de-DE">
+    Wählen Sie in den Einstellungen der Komponente, ob sie im AES-Modus oder im Rijndael-Modus betrieben werden soll. Im Rijndael-Modus besteht zusätzlich die Möglichkeit, die Blockgröße einzustellen.
+    Bei AES ist diese auf 128 Bits festgelegt. Abgesehen davon haben beide Algorithmen dieselben Einstellungsmöglichkeiten.
+    <newline /><newline />
+    Die Komponente hat die zwei Betriebsarten "Verschlüsselung" und "Entschlüsselung", zwischen denen in den Einstellungen der Komponente umgeschaltet werden kann.
+    <newline /><newline /><section headline="Verschlüsselung">
+      In der Betriebsart "Verschlüsselung" erwartet die Komponente als Eingabe den zu verschlüsselnden Klartext als Datenstrom am Eingang "Eingabe".
+      AES arbeitet mit einer Blockgröße von 128 Bits (16 Bytes), Rijndael mit 128 Bits (16 Bytes), 192 Bits (24 Bytes) oder 256 Bits (32 Bytes).
+      Ist die Länge der Eingabe kein Vielfaches der Blockgröße, so müssen vor der Verschlüsselung so viele Bytes angehängt werden, bis sie ohne Rest in Blöcke der Blockgröße zerlegt werden kann.
+      Diesen Vorgang nennt man 'Padding'. In den Einstellungen kann man zwischen verschiedenen Padding-Methoden wählen.
+      Es ist wichtig, dass bei der Entschlüsselung eines Chiffretextes in den Einstellungen dieselbe Padding-Methode eingestellt wird, die bei der Verschlüsselung verwendet wurde,
+      da der letzte Block sonst falsch oder gar nicht entschlüsselt wird.
+      Der Schlüssel wird als Byte-Array am Eingang "Schlüssel" erwartet. In den Einstellungen kann
+      die Größe des zu verwendenden Schlüssels bestimmt werden: 128 Bits, 192 Bits oder 256 Bits. Stimmt die Größe des eingegebenen
+      Schlüssels nicht mit dieser Einstellung überein, so wird eine Warnung ausgegeben und der Schlüssel entweder mit Nullbytes aufgefüllt
+      oder auf die korrekte Größe beschnitten. Der verschlüsselte Datenblock wird dann am Ausgang der Komponente als Datenstrom zur Verfügung gestellt.
+      <newline /><newline /></section><section headline="Entschlüsselung">
+      In der Betriebsart "Entschlüsselung" erwartet die Komponente den zu entschlüsselnden Geheimtext als Datenstrom am Eingang "Eingabe".
+      Die Länge der Eingabe muss hierbei ein Vielfaches der Blockgröße sein, andernfalls wird die Berechnung mit einer
+      Fehlermeldung abgebrochen. Der Schlüssel wird wie bei der Entschlüsselung eingegeben. Der entschlüsselte Klartext
+      wird dann schließlich am Ausgang der Komponente als Datenstrom bereitgestellt.
+      <newline /><newline /></section><section headline="Kryptographischer Modus">
+      Blockverschlüsselungsverfahren unterteilen die Eingabedaten in Blöcke festgelegter Größen und
+      wenden die Ver-/Entschlüsselungsfunktion dann fortlaufend auf diese Blöcke an. Der "kryptographische Modus", in dem
+      eine Blockchiffre betrieben wird, gibt an, wie die Ergebnisse der Ver- bzw. Entschlüsselung aufeinanderfolgender Blöcke
+      miteinander kombiniert werden, um z.B. größere Sicherheit oder Fehlertoleranz zu erzielen. Die AES-Komponente bietet
+      die kryptographischen Modi ECB (Electronic Code Book), CBC (Cipher Block Chaining), CFB (Cipher Feedback) und OFB (Output Feedback)
+      an, die in den Einstellungen ausgewählt werden können.
+      <newline />
+      Beim ECB-Modus wird dabei jeder Block separat verschlüsselt. Bei den anderen Modi hingegen
+      wird die Verschlüsselung eines Klartextblocks zusätzlich mit dem vorangehenden Geheimtextblock verknüpft. Da für den ersten
+      Klartextblock kein vorangehender Geheimtextblock existiert, wird dieser mit einem Initialisierungsvektor verknüpft.
+      Dieser muss die verwendete Blockgröße haben und wird am zugehörigen Eingang der Komponente
+      als Byte-Array eingegeben. Ein zu kurzer Initialisierungsvektor wird mit Nullbytes aufgefüllt, ein zu langer auf die Blockgröße
+      beschnitten. Wird der Eingang nicht verbunden, so wird ein Initialisierungsvektor bestehend aus Nullbytes verwendet.
+    </section></usage>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" lang="en" />
+      <caption lang="en">AES (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Advanced_Encryption_Standard" lang="de-DE" />
+      <caption lang="de-DE">AES (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="fips197">
+      <link url="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf" lang="en" />
+      <caption lang="en">FIPS PUB 197: the official AES standard</caption>
+      <link url="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf" lang="de-DE" />
+      <caption lang="de-DE">Offizielle Spezifikation des AES vom NIST</caption>
+    </linkReference>
+    <linkReference id="RelatedKeyCrypt">
+      <link url="http://cryptolux.uni.lu/mediawiki/uploads/1/1a/Aes-192-256.pdf" lang="en" />
+      <caption lang="en">Related-key Cryptanalysis of the Full AES-192 and AES-256 (PDF)</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,164 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+			  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+			  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			  xmlns:misc="clr-namespace:CrypTool.PluginBase.Miscellaneous;assembly=CrypPluginBase"
+			  Background="White">
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span FontFamily="Georgia" FontWeight="Bold" FontSize="18.6666666666667" Foreground="#FF15428B" xml:lang="fr-fr">
+      <Span.TextDecorations>
+        <TextDecoration Location="Underline" />
+      </Span.TextDecorations> XOR Cipher
+    </Span>
+  </Paragraph>
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" />
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <misc:DescriptionHyperlink NavigateUri="http://en.wikipedia.org/wiki/Exclusive_disjunction">http://en.wikipedia.org/wiki/Exclusive_disjunction</misc:DescriptionHyperlink>
+  </Paragraph>
+
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" />
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span xml:lang="en-gb">The key for this encryption algorithm consists of a sequence of bits. The key bits are combined bit by bit with the bits of the plaintext by means of an exclusive-OR (XOR). As with the encryption using Vigen&#232;re or Vernam the key is applied cyclically.</Span>
+  </Paragraph>
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span xml:lang="en-gb">Decryption works in the same way, i.e. the exclusive-OR operation is repeated. The XOR operation is a mapping which is equal to its inverse (involution). This means that</Span>
+    <Span FontFamily="Courier New" FontSize="13.3333333333333" xml:lang="en-gb">a</Span>
+    <Span xml:lang="en-gb">= ((</Span>
+    <Span FontFamily="Courier New" FontSize="13.3333333333333" xml:lang="en-gb">a</Span>
+    <Span xml:lang="en-gb">XOR</Span>
+    <Span FontFamily="Courier New" FontSize="13.3333333333333" xml:lang="en-gb">b</Span>
+    <Span xml:lang="en-gb">) XOR</Span>
+    <Span FontFamily="Courier New" FontSize="13.3333333333333" xml:lang="en-gb">b</Span>
+    <Span xml:lang="en-gb">) applies for any boolean values</Span>
+    <Span FontFamily="Courier New" FontSize="13.3333333333333" xml:lang="en-gb">a</Span>
+    <Span xml:lang="en-gb">and</Span>
+    <Span FontFamily="Courier New" FontSize="13.3333333333333" xml:lang="en-gb" xml:space="preserve"> b </Span>
+    <Span xml:lang="en-gb">(a would here be a bit of the cleartext, b a bit of the key).</Span>
+  </Paragraph>
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span xml:lang="en-gb">This formula can be easily checked using the boolean table provided below. The exclusive-OR works out a new boolean value from two boolean values (FALSE = 0 and TRUE = 1). The table below shows all possibilities:</Span>
+  </Paragraph>
+  <Table CellSpacing="1" Margin="0,0,0,0">
+    <Table.Columns>
+      <TableColumn Width="40" />
+      <TableColumn Width="48" />
+      <TableColumn Width="84" />
+    </Table.Columns>
+    <TableRowGroup>
+      <TableRow>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">
+              <Span.TextDecorations>
+                <TextDecoration Location="Underline" />
+              </Span.TextDecorations> a
+            </Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">
+              <Span.TextDecorations>
+                <TextDecoration Location="Underline" />
+              </Span.TextDecorations> b
+            </Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">
+              <Span.TextDecorations>
+                <TextDecoration Location="Underline" />
+              </Span.TextDecorations> a XOR b
+            </Span>
+          </Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">0</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">0</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">0</Span>
+          </Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">0</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">1</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">1</Span>
+          </Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">1</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">0</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">1</Span>
+          </Paragraph>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">1</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">1</Span>
+          </Paragraph>
+        </TableCell>
+        <TableCell Padding="1,1,1,1" BorderThickness="1,1,1,1" BorderBrush="#FF000000">
+          <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+            <Span xml:lang="de-de">0</Span>
+          </Paragraph>
+        </TableCell>
+      </TableRow>
+    </TableRowGroup>
+  </Table>
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span xml:lang="en-gb">Thus, if both boolean values are different the exclusive-OR delivers the boolean value TRUE, otherwise FALSE. The XOR operation delivers the same result as the addition of two bit modulo 2.</Span>
+  </Paragraph>
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span xml:lang="en-gb">The key entry allows to enter only 2048 hex digits (1024 bytes). You can enter longer keys using a file with the Vernam encryption method.</Span>
+  </Paragraph>
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span FontWeight="Bold" xml:lang="en-gb">
+      <Span.TextDecorations>
+        <TextDecoration Location="Underline" />
+      </Span.TextDecorations> Analysis
+    </Span>
+  </Paragraph>
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Run xml:lang="en-gb">This encryption algorithm can be broken easily with a ciphertext-only attack.</Run>
+  </Paragraph>
+</FlowDocument>

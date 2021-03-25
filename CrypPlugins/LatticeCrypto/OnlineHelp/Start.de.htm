@@ -1,0 +1,105 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        body
+        {
+            font-family: Arial,Verdana,Georgia;
+            font-size: smaller;
+            background-color: #EBEFF6;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        Gitterbasierte Kryptographie</h2>
+    <p>
+        In diesem Kryptotutorial lernen Sie Gitter kennen und erfahren über ihren Einsatz in der Kryptographie, 
+        insbesondere der Kryptoanalyse. Diese Einführung soll die Grundlagen vermitteln, mithilfe derer Sie die 
+        nachfolgenden Kapitel besser verstehen lernen.
+    </p>
+    <p>
+        <strong>Gitter</strong><br> Ein Gitter besteht aus linear unabhängigen Vektoren, die miteinander linear kombiniert werden, 
+        und dadurch Gitterpunkte erzeugen. Der Unterschied zwischen Gittern und einem "normalen" Vektorraum besteht 
+        darin, dass die Vektoren ganzzahlig kombiniert werden.<br>
+        Nimmt man alle Vektoren zusammen, bezeichnet man diese als Basis für das Gitter. Diese Basis kann auch in 
+        Form einer Matrix aufgeschrieben werden. Die Vektoren können z.B. in Spaltenschreibweise 
+        aufgeschrieben werden. Die Vektoren spannen so genannte Parallelepipede auf, im zwei-dimensionalen Fall sind dies Parallelogramme. 
+        Das Volumen dieses Parallelepipeds ist gleich dem Absolutbetrag der Determinante. 
+        <br><br>
+        Beachten Sie bitte, dass in diesem Kryptotutorial alle Werte ganzzahlig sind. Dies ist keine Voraussetzung 
+        für Gitter. Da aber in der Kryptographie häufig mit großen Ganzzahlen gerechnet wird, werden auch hier 
+        Ganzzahlen verwendet. Der Nutzen dieser Einschränkung zeigt sich in den späteren Kapiteln 
+        "Merkle-Hellman" und "RSA".
+    </p>
+    <p>
+        <strong>Gitterprobleme</strong><br> Eine wichtige Eigenschaft von Gittern ist, dass sie 
+        verschiedene Basen haben können, die alle das gleiche  Gitter erzeugen. Diese Basen haben dann auch 
+        alle die gleiche Gitterdeterminante. Im Zusammenhang mit Gittern sind aber vor allem solche Vektoren interessant,
+        die eine minimale Länge besitzen. Dieses Problem wird Shortest Vector Problem (SVP) genannt. 
+        Gesucht werden dabei die so genannten "Sukzessiven Minima".<br>
+        Das erste Minimum ist dabei der kürzeste Vektor. Alle weiteren sind dazu linear unabhängig und wiederum 
+        so kurz wie möglich. Eine obere Schranke für den kürzesten Vektor wird durch die Hermite-Konstante. Der 
+        kürzeste Vektor ist auch interessant für die Packungsdichte eines Gitters. Dabei werden Kreise um jeden 
+        Gitterpunkt konstruiert, welche so groß wie möglich sind, ohne dass sie sich gegenseitig überdecken 
+        (sowohl der Hermite-Kreis als auch die Packungskreise können in den Einstellungen freigeschaltet werden).
+        Es lässt sich gut beobachten, dass die Vektoren nach einer Reduktion sehr viel orthogonaler zueinander sind, 
+        im Idealfall haben sie sogar den Winkel 90&deg;.<br>
+        Ein weiteres interessantes Problem ist das Closest Vector Problem (CVP). Hier wird ein beliebiger Punkt 
+        vorgegeben und es soll ein Gitterpunkt gesucht werden, der diesem Punkt am nächsten ist.
+    </p>
+    <p>
+        <strong>Gitterreduktion</strong><br> Es gibt zwei wichtige Verfahren, welche die Suche nach 
+        kürzesten Vektoren realisieren. Zum einen ist dies der Gauß-Algorithmus für die Dimension 2 und 
+        zum anderen der LLL-Algorithmus, benannt nach Arjen Lenstra, Hendrik Lenstra und L&aacute;szl&oacute; Lov&aacute;sz, 
+        für eine beliebige Gitterdimension.<br>
+        Der Gauß-Algorithmus arbeitet ähnlich dem euklidischen Algorithmus zur Suche des größten gemeinsamen Teilers 
+        (ggT) zweier ganzer Zahlen. Durch Kombination und Subtraktion der beiden Vektoren 
+        verbessert sich die Basis nach jedem Iterationsschritt um einen kürzeren Vektor.
+        Der LLL-Algorithmus arbeitet ähnlich dem Gauß-Algorithmus, liefert in höheren Dimensionen 
+        aber nur 
+        noch eine Approximation (Annäherung) an den kürzesten Vektor. Ein wichtiger Bestandteil des 
+        Algorithmus ist die Gram-Schmidt-Orthogonalisierung.<br>
+    </p>
+    <p align="justify">
+        <strong>Kryptoanalyse</strong><br> Nachdem der LLL-Algorithmus 1982 veröffentlicht wurde, 
+        fanden sich zahlreiche Einsatzmöglichkeiten, unter anderem in der Kryptoanalyse. So wurde das 
+        von Ralph C. Merkle und Martin E. Hellman 1978 entwickelte und nach ihnen benannte Kryptosystem 
+        eindrucksvoll mithilfe von Gittern vollständig gebrochen. Das Merkle-Hellman-Kryptosystem basierte auf 
+        dem Rucksackproblem, welches im Allgemeinen sehr schwer zu lösen ist. Im Konkreten zeigte sich jedoch, 
+        dass das Entschlüsseln einer Chiffre in Kombination mit dem öffentlichen Schlüssel als Suche nach einem kürzesten Vektor 
+        umformuliert werden konnte.<br>
+        Das bekannteste, asymmetrische Verschlüsselungsverfahren RSA, benannt nach Ronald L. Rivest, Adi Shamir und Leonard Adleman, 
+        wurde etwa zur gleichen Zeit wie das von Merkle und Hellman entwickelt. Es basiert auf dem Problem der Primfaktorzerlegung von großen Zahlen. 
+        Mithilfe von Gittern hat Don Coppersmith gezeigt, dass bestimmte Arten von Nachrichten, bei denen ein Teil 
+        der Nachricht bekannt ist, entschlüsselt werden können. Diese Nachrichten sind so genannte "stereotype Nachrichten", 
+        wie z.B. "Ihre neue PIN lautet: ****". Der erste Teil der Nachricht kann immer gleich sein und daher dem Angreifer bekannt. 
+        Voraussetzung für den Angriff ist, dass der öffentliche Exponent e sehr klein ist, z.B. 3.<br> 
+        Eine weitere Angriffsmöglichkeit ist ein teilweise bekannter privater Schlüssel. Auch hier kann mithilfe von Gittern ein Angriff gestartet werden.
+        Im Gegensatz zum Merkle-Hellman-Kryptosystem konnte das RSA-Verfahren nicht gebrochen werden und gilt daher (mit einigen 
+        Bedingungen an die Parameter) bis heute als sicher.
+    </p>
+    <p align="justify">
+        <strong>Gitterbasierte Kryptosysteme</strong><br>
+        Kryptosysteme, die auf Basis von Gittern arbeiten, machen sich die Gitterprobleme, im Besonderen, Shortest Vector Problem (SVP) und Closest Vector Problem (CVP), zunutze. Es handelt sich hierbei, wie bei RSA, um asymmetrische Public-Key-Kryptosysteme.<br>
+        Die Grundlagen für die gitterbasierte Kryptographie wurden 1996 von Miklos Ajtai 
+        geschaffen, indem er aufzeigte, wie Gitter für die Kryptographie genutzt werden 
+        könnten. Wenig später veröffentlichte Ajtai zusammen Cynthia Dwork 1997 das 
+        Ajtai-Dwork-Kryptosystem, welches die Sicherheit in das Finden des kürzesten 
+        Vektors legte. Im selben Jahr veröffentlichen Oded Goldreich, Shafi Goldwasser 
+        und Shai Halevi das GGH-Kryptosystem. Es wurde von Daniele Micciancio verbessert 
+        und dadurch erst praxistauglich gemacht. Die Sicherheit von GGH beruhte auf der 
+        Schwierigkeit das CVP zu lösen. Es war außerdem möglich, Nachrichten mithilfe 
+        des GGH-Signaturverfahren zu signieren. Beide Kryptosysteme, sowohl Ajtai-Dwork 
+        als auch GGH, wurden erfolgreich angegriffen und gebrochen.<br>
+Das Kryptosystem NTRU (als Abkürzung von &quot;Number Theory Research Unit&quot;) wurde 1998 von Jeffrey Hoffstein, Jill Pipher und Joseph H. Silverman vorgestellt. Es sind sowohl Verschlüsselungen (NTRUEncrypt) als auch elektronische Signaturen (NTRUSign) möglich. Die Sicherheit von NTRU liegt im Lösen des SVP. Als Besonderheit gilt zum einen die schnelle Ver- und Entschlüsselung und zum anderen der Umstand, dass (im Gegensatz zu RSA) bisher noch kein Quantenalgorithmus bekannt ist, der NTRU in Polynomialzeit bricht.<br>
+        Das neueste, gitterbasierte Kryptosystem ist Learning with Errors (kurz LWE), welches von Oded Regev in 2005 veröffentlicht wurde. Es basiert ebenfalls auf schwer zu lösenden Gitterproblemen, wie dem SVP.<br>
+Im Vergleich zu etablierten Public-Key-Verfahren wie RSA haben gitterbasierte Kryptosysteme häufig mit längeren Schlüssellängen und auch größeren Chiffren zu kämpfen. Dagegen haben sie oft den Vorteil, dass sie schneller sind und im Gegensatz zu RSA (noch) nicht durch den Einsatz von Quantencomputern angreifbar sind.
+    </p>
+    <p>
+        Hinweis: Dieses Plugin verwendet Ikonen, welche einer Creative Commons Attribution NonCommercial licence (BY-NC) Lizenz unterliegen.
+        Zu den Designern dieser Ikonen gehören "iconshock.com", "gentleface.com" und "wpzoom.com".
+    </p>
+</body>
+</html>

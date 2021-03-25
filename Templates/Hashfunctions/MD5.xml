@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">MD5</title>
+  <title lang="zh">MD5</title>
+  <title lang="ru">MD5</title>
+  <summary lang="en">Usage of the <i>MD5</i> hash function</summary>
+  <summary lang="zh">MD5哈希函数的用法</summary>
+  <summary lang="ru">Использование хэш-функции MD5</summary>
+  <description lang="en">This template shows the usage of the <i>MD5</i> hash function.</description>
+  <description lang="zh">该模板显示了MD5哈希函数的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование хэш-функции MD5.</description>
+  <keywords>message, digest, Hash, Rivest</keywords>
+  <keywords lang="zh">信息，摘要，哈希，Rivest</keywords>
+  <keywords lang="ru">сообщение, дайджест, Hash, Rivest</keywords>
+  <title lang="de">MD5</title>
+  <summary lang="de">Benutzung der <i>MD5</i>-Hash-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>MD5</i>-Hash-Funktion.</description>
+  <keywords lang="de">hash</keywords>
+  <icon file="MD5.png" />
+  <relevantPlugins>
+    <plugin name="MD5" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Hash Value$" value="Hashwert" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Hash Value$" value="哈希值" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Hash Value$" value="Hashwert" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Input$" value="Input" />
+    <replacement key="$Hash Value$" value="Hash value" />
+  </replacements>
+</sample>

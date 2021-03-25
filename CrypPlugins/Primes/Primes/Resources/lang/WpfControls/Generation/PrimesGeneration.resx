@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="isNotPrime" xml:space="preserve">
+    <value>not a prime number</value>
+  </data>
+  <data name="isPrime" xml:space="preserve">
+    <value>prime number</value>
+  </data>
+  <data name="ntimesm_btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ntimesm_btnExecute" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="ntimesm_digits" xml:space="preserve">
+    <value>digits</value>
+  </data>
+  <data name="ntimesm_errordigits" xml:space="preserve">
+    <value>More than {0} digits are not allowed.</value>
+  </data>
+  <data name="ntimesm_input" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="ntimesm_numbers" xml:space="preserve">
+    <value>numbers with</value>
+  </data>
+  <data name="polynomrange_btnCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="polynomrange_btnExecute" xml:space="preserve">
+    <value>Execute</value>
+  </data>
+  <data name="polynomrange_choosevaluesrnd" xml:space="preserve">
+    <value>Choose random values for x</value>
+  </data>
+  <data name="polynomrange_foreachformulars" xml:space="preserve">
+    <value>For each function</value>
+  </data>
+  <data name="polynomrange_numberofcalculations" xml:space="preserve">
+    <value>Number of calculations</value>
+  </data>
+  <data name="polynomrange_numberofformulars" xml:space="preserve">
+    <value>Number of functions</value>
+  </data>
+  <data name="polynom_values" xml:space="preserve">
+    <value>Values for x</value>
+  </data>
+  <data name="rnd10100" xml:space="preserve">
+    <value>10 x 100 digits</value>
+  </data>
+  <data name="rnd1020" xml:space="preserve">
+    <value>10 x 20 digits</value>
+  </data>
+  <data name="rnd1050" xml:space="preserve">
+    <value>10 x 50 digits</value>
+  </data>
+  <data name="rndntimesm" xml:space="preserve">
+    <value>n x m digits</value>
+  </data>
+  <data name="rndPrimes" xml:space="preserve">
+    <value>Create random primes in the range...</value>
+  </data>
+  <data name="rndQuadratic" xml:space="preserve">
+    <value>Quadratic polynomials for generating primes</value>
+  </data>
+  <data name="rndQuadraticEuler" xml:space="preserve">
+    <value>Test Euler's polynomial</value>
+  </data>
+  <data name="rndQuadraticFormular" xml:space="preserve">
+    <value>Test a particular polynomial</value>
+  </data>
+  <data name="rndQuadraticRnd" xml:space="preserve">
+    <value>Test random polynomials</value>
+  </data>
+  <data name="rndQuadraticSystematic" xml:space="preserve">
+    <value>Test polynomials systematically</value>
+  </data>
+  <data name="soa_generateprimesto" xml:space="preserve">
+    <value>Generate all primes to</value>
+  </data>
+  <data name="statAvgCountPrimes" xml:space="preserve">
+    <value>The average number of primes is {0} ({1}%).</value>
+  </data>
+  <data name="statFunctionsLeast" xml:space="preserve">
+    <value>Functions that generated the least number of primes:</value>
+  </data>
+  <data name="statFunctionsLeastInterval" xml:space="preserve">
+    <value>Functions that generated the least number of primes in the interval:</value>
+  </data>
+  <data name="statFunctionsMost" xml:space="preserve">
+    <value>Functions that generated the most number of primes:</value>
+  </data>
+  <data name="statFunctionsMostInterval" xml:space="preserve">
+    <value>Functions that generated the most number of primes in the interval:</value>
+  </data>
+  <data name="statFunctionsMostMisc" xml:space="preserve">
+    <value>Functions that generated the most number of different primes:</value>
+  </data>
+  <data name="statFunctionsMostMiscInterval" xml:space="preserve">
+    <value>Functions that generated the most number of different primes in the interval:</value>
+  </data>
+  <data name="statGenerated" xml:space="preserve">
+    <value>{0} different primes were generated, {2} total ({1} %).</value>
+  </data>
+  <data name="statGeneratedAbsolut" xml:space="preserve">
+    <value>{1} out of {0} numbers are prime numbers ({2}%).</value>
+  </data>
+  <data name="statNonPrimes" xml:space="preserve">
+    <value>No more prime numbers found</value>
+  </data>
+  <data name="statRnd" xml:space="preserve">
+    <value>{0} functions were examined</value>
+  </data>
+  <data name="statRndInterval" xml:space="preserve">
+    <value>{0} functions in the interval [{1}, {2}] were examined</value>
+  </data>
+  <data name="soa_actualnumber" xml:space="preserve">
+    <value>Consider the number {0}.</value>
+  </data>
+  <data name="soa_firstifmatch" xml:space="preserve">
+    <value>{0} mod 60 = {1}. Search all solutions of 4 * x² + y² = {2}.</value>
+  </data>
+  <data name="soa_firstsolutionfound" xml:space="preserve">
+    <value>Found a solution. 4 * {0}² + {1}² = {2}. Mark {3} as {4}.</value>
+  </data>
+  <data name="soa_fithsolutionfound" xml:space="preserve">
+    <value>{0} is a multiple of {1} and thus not a prime.</value>
+  </data>
+  <data name="soa_fourthsolutionfound" xml:space="preserve">
+    <value>{0} was identified as a prime. Remove multiples of {1}.</value>
+  </data>
+  <data name="soa_initvsieve" xml:space="preserve">
+    <value>All numbers from 1 to {0} are marked as non-primes.</value>
+  </data>
+  <data name="soa_isnotprime" xml:space="preserve">
+    <value>"is not a prime number"</value>
+  </data>
+  <data name="soa_isprime" xml:space="preserve">
+    <value>"is a prime number"</value>
+  </data>
+  <data name="soa_secondifmatch" xml:space="preserve">
+    <value>{0} mod 60 = {1}. Search all solutions of 3 * x² + y² = {2}.</value>
+  </data>
+  <data name="soa_secondsolutionfound" xml:space="preserve">
+    <value>Found a solution. 3 * {0}² + {1}² = {2}. Mark {3} as {4}.</value>
+  </data>
+  <data name="soa_startsieve" xml:space="preserve">
+    <value>Start sieving. Consider numbers mod 60.</value>
+  </data>
+  <data name="soa_thirdifmatch" xml:space="preserve">
+    <value>{0} mod 60 = {1}. Search all solutions of 3 * x² - y² = {2}.</value>
+  </data>
+  <data name="soa_thirdsolutionfound" xml:space="preserve">
+    <value>Found a solution. 3 * {0}² - {1}² = {2}. Mark {3} as {4}.</value>
+  </data>
+  <data name="polynomname_polynom" xml:space="preserve">
+    <value>Enter coefficients of a particular polynomial</value>
+  </data>
+  <data name="polynomname_polynomeuler" xml:space="preserve">
+    <value>Enter parameters for Euler's polynomial</value>
+  </data>
+  <data name="polynomname_polynomrnd" xml:space="preserve">
+    <value>Enter parameters for the random polynomials</value>
+  </data>
+  <data name="polynomname_polynomsyst" xml:space="preserve">
+    <value>Enter parameters for the systematic test</value>
+  </data>
+</root>

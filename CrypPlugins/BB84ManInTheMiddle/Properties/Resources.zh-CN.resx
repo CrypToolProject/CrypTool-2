@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="res_AnimationSpeedCaption" xml:space="preserve">
+    <value>动画速度</value>
+  </data>
+  <data name="res_AnimationSpeedTooltip" xml:space="preserve">
+    <value>改变动画的速度</value>
+  </data>
+  <data name="res_BasesInputCaption" xml:space="preserve">
+    <value>基数输入</value>
+  </data>
+  <data name="res_BasesInputTooltip" xml:space="preserve">
+    <value>输入随机光子</value>
+  </data>
+  <data name="res_KeyOutputCaption" xml:space="preserve">
+    <value>按键输出</value>
+  </data>
+  <data name="res_KeyOutputTooltip" xml:space="preserve">
+    <value>显示获得的密钥</value>
+  </data>
+  <data name="res_MITMCaption" xml:space="preserve">
+    <value>BB84中间人</value>
+  </data>
+  <data name="res_MITMTooltip" xml:space="preserve">
+    <value>试图监视BB84协议中的交换密钥</value>
+  </data>
+  <data name="res_PhotonInputCaption" xml:space="preserve">
+    <value>光子输入</value>
+  </data>
+  <data name="res_PhotonInputTooltip" xml:space="preserve">
+    <value>从公共频道捕获的光子</value>
+  </data>
+  <data name="res_PhotonOutputCaption" xml:space="preserve">
+    <value>光子输出</value>
+  </data>
+  <data name="res_PhotonOutputTooltip" xml:space="preserve">
+    <value>试图转发的光子</value>
+  </data>
+  <data name="res_Setting3Tooltip" xml:space="preserve">
+    <value>更改基于EX的解码模式</value>
+  </data>
+  <data name="res_Settings1Caption" xml:space="preserve">
+    <value>光子“ |” ：</value>
+  </data>
+  <data name="res_Settings1Tooltip" xml:space="preserve">
+    <value>更改基于PLUS解码的模式</value>
+  </data>
+  <data name="res_Settings2Caption" xml:space="preserve">
+    <value>光子“-”：</value>
+  </data>
+  <data name="res_Settings2Tooltip" xml:space="preserve">
+    <value>更改基于PLUS解码的模式</value>
+  </data>
+  <data name="res_Settings3Caption" xml:space="preserve">
+    <value>光子“ /”：</value>
+  </data>
+  <data name="res_Settings4Caption" xml:space="preserve">
+    <value>光子“ \”：</value>
+  </data>
+  <data name="res_Settings4Tooltip" xml:space="preserve">
+    <value>更改模式以基于EX解码</value>
+  </data>
+  <data name="res_SleepingMessage" xml:space="preserve">
+    <value>中间的人正在睡觉</value>
+  </data>
+  <data name="res_StatusCaption" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="res_StatusListen" xml:space="preserve">
+    <value>听</value>
+  </data>
+  <data name="res_StatusSleep" xml:space="preserve">
+    <value>睡觉</value>
+  </data>
+  <data name="res_StatusTooltip" xml:space="preserve">
+    <value>设置中间的人是否在听</value>
+  </data>
+  <data name="res_WaitingIterationsCaption" xml:space="preserve">
+    <value>等待迭代</value>
+  </data>
+  <data name="res_WaitingIterationsTooltip" xml:space="preserve">
+    <value>设置动画开始前的迭代次数</value>
+  </data>
+</root>

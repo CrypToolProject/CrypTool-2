@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This plugin checks if an incoming message has a correct (PKCS#7) padding.<newline />
+    In this padding scheme, the padding is appended after the message with as many bytes
+    as required, and each byte has as value the total padding length. As an example it is assumed
+    that the message 61 62 63 shall be padded to 8 bytes. The PKCS#7 scheme then goes: The
+    number of required padding bytes (&gt; 0) is encoded with binary encoding in one byte. This
+    byte is used one or several times to pad the message. Example: 61 62 63 05 05 05 05 05.
+    <newline />
+    The plugin then returns either true or false, depending on the result of the check.
+    <newline />
+    Notice: The plugin expects a 2-block message of anz size, so it automatically deletes the first block (aka the first half of the message).
+
+  </introduction>
+  <introduction lang="zh-CN">此插件检查传入消息是否具有正确的（PKCS＃7）填充。在这种填充方案中，填充是在消息之后附加所需数量的字节，并且每个字节的总填充长度为值。作为示例，假设消息61 62 63将被填充为8个字节。然后使用PKCS＃7方案：所需填充字节数（&amp;gt; 0）用一个字节中的二进制编码进行编码。使用此字节一次或多次来填充消息。示例：61 62 63 05 05 05 05 0505。然后，插件将根据检查结果返回true或false。注意：该插件需要一个2块大小为z的消息，因此它将自动删除第一个块（也就是消息的前半部分）。</introduction>
+  <introduction lang="ru">Этот плагин проверяет, имеет ли входящее сообщение правильное (PKCS # 7) дополнение. В этой схеме дополнений добавление добавляется после сообщения с таким количеством байтов, сколько требуется, и каждый байт имеет в качестве значения общую длину заполнения. В качестве примера предполагается, что сообщение 61 62 63 должно быть дополнено до 8 байтов. Затем выполняется схема PKCS # 7: количество требуемых байтов заполнения (&amp;gt; 0) кодируется двоичным кодированием в один байт. Этот байт используется один или несколько раз для заполнения сообщения. Пример: 61 62 63 05 05 05 05 05. Затем плагин возвращает либо true, либо false, в зависимости от результата проверки. Примечание. Плагин ожидает 2-блочное сообщение размера anz, поэтому он автоматически удаляет первый блок (ака первой половины сообщения).</introduction>
+  <introduction lang="de-DE">
+    Dieses Plugin überprüft, ob eine Nachricht ein gültiges (PKCS#7-konformes) Padding hat.<newline />
+    Bei diesem Padding-Schema wird das Padding an das Ende der Nachricht gehängt. Es werden so viele
+    Padding-Bytes hinzugefügt, dass es nur volle Nachrichten-Blöcke gibt. Die Werte der Padding-Bytes
+    entsprechen dabei der Gesamt-Padding-Länge. Als Beispiel gehen wir davon aus, dass wir die Nachricht
+    61 62 63 padden müssen, um eine 8-Byte lange Nachricht zu erhalten. Da wir dazu 5 Padding-Bytes brauchen,
+    lautet die gepaddete Nachricht 61 62 63 05 05 05 05 05.
+    <newline />
+    Dieses Plugin gibt entweder true oder false zurück, abhängig vom Ergebnis der Überprüfung.
+    <newline />
+    Hinweis: Dieses Plugin erwartet eine Nachricht mit 2 Blöcken, d.h. der erste Block (die erste Hälfte der Nachricht) wird automatisch gelöscht.
+  </introduction>
+  <usage lang="en">
+    This plugin is intended to be used with the Padding Oracle Attack Plugin, although it can be used with other plugins as well.
+    It just requires a (decrypted) message as input.
+  </usage>
+  <usage lang="zh-CN">该插件旨在与Padding Oracle Attack插件一起使用，尽管它也可以与其他插件一起使用。它仅需要（解密）消息作为输入。</usage>
+  <usage lang="ru">Этот плагин предназначен для использования с Padding Oracle Attack Plugin, хотя он может использоваться и с другими плагинами. Он просто требует в качестве ввода (дешифрованного) сообщения.</usage>
+  <usage lang="de-DE">
+    Dieses Plugin wurde ursprünglich für das Padding Oracle Attack Plugin entwickelt. Es kann jedoch auch mit anderen Plugins benutzt werden.
+    Das Plugin benötigt nur eine (entschlüsselte) Nachricht als Input.
+  </usage>
+  <presentation lang="en">
+    The presentation view displays the second half (second block) of the input message. It also adds a green border to display which bytes should have the same value, according to the last byte.
+    The validity of the padding is also displayed in the presentation.
+    The presentation can only display 8 bytes at a time. If the message exceeds this value, the plugin allows the user to view all bytes by providing a scroll-functionality.
+  </presentation>
+  <presentation lang="zh-CN">演示视图显示输入消息的后半部分（第二个块）。它还根据最后一个字节添加绿色边框以显示哪些字节应具有相同的值。填充的有效性也显示在演示文稿中。演示文稿一次只能显示8个字节。如果消息超出此值，则该插件允许用户通过提供滚动功能来查看所有字节。</presentation>
+  <presentation lang="ru">В представлении представления отображается вторая половина (второй блок) входного сообщения. Он также добавляет зеленую границу для отображения, какие байты должны иметь одинаковое значение, в соответствии с последним байтом. Действительность заполнения также отображается в презентации. Презентация может отображать только 8 байтов за раз. Если сообщение превышает это значение, плагин позволяет пользователю просматривать все байты, предоставляя функциональные возможности прокрутки.</presentation>
+  <presentation lang="de-DE">
+    Die Präsentations-Ansicht zeigt die zweite Hälfte bzw. den zweiten Block der Input-Nachricht an. Es fügt zusätzlich einen grünen Rahmen hinzu, der darstellt, welche Bytes denselben Wert haben
+    sollten. Diese Information basiert auf dem Wert des letzten Bytes. Die Gültigkeit des Paddings ist auch in der Präsentation dargestellt.
+    Die Präsentation kann nur 8 Bytes gleichzeitig darstellen. Sollte die Nachricht diese Länge überschreiten, so kann der User trotzdem alle Bytes durch die Scroll-Funktion betrachten.
+  </presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/PKCS" lang="en" />
+      <caption lang="en">Public-Key Cryptography Standards (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/PKCS" lang="de-DE" />
+      <caption lang="de-DE">Public-Key Cryptography Standards (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="rsalabs">
+      <link url="http://www.rsa.com/rsalabs/node.asp?id=2129" lang="en" />
+      <caption lang="en">PKCS #7: Cryptographic Message Syntax Standard</caption>
+      <link url="http://www.rsa.com/rsalabs/node.asp?id=2129" lang="de-DE" />
+      <caption lang="de-DE">PKCS #7: Cryptographic Message Syntax Standard (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,24 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:CrypTool_MD5_Presentation_Displays="clr-namespace:CrypTool.MD5.Presentation.Displays" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" x:Class="CrypTool.MD5.Presentation.States.StartingRoundPresentation"
+    Height="400" Width="800" mc:Ignorable="d">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="StyleDictionary.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Grid>
+            
+    	<CrypTool_MD5_Presentation_Displays:RoundAndStepDisplay VerticalAlignment="Top" HorizontalAlignment="Right" Height="46.373" DataContext="{Binding CurrentState}"/>
+    	<TextBlock Margin="8,62,0,0" Style="{StaticResource textBlockStyle}" VerticalAlignment="Top" Text="{Loc We_are_now_starting_round}" HorizontalAlignment="Left" Width="279" Height="38.373"/>
+    	<TextBlock Margin="285,62,0,0" Style="{StaticResource textBlockStyle}" VerticalAlignment="Top" Text="{Binding CurrentState.Round}" Height="38.373" HorizontalAlignment="Left" Width="36"/>
+    	<TextBlock Margin="325,62,291,0" Style="{StaticResource textBlockStyle}" VerticalAlignment="Top" Text="{Loc of_4}"/>
+    	<TextBlock Margin="8,104.373,8,0" Style="{StaticResource textBlockStyle}" VerticalAlignment="Top" Height="30.373"><Run Text="{Loc Each_round_has_16_steps}"/></TextBlock>
+    	<TextBlock Margin="8,168.746,8,144.881" Style="{StaticResource textBlockStyle}"><Run Text="{Loc There_are_4_non_linear_inner_round_functions}"/></TextBlock>
+    	<CrypTool_MD5_Presentation_Displays:FunctionNameDisplay Margin="314,0,320,104.881" VerticalAlignment="Bottom" Height="36" FunctionName="{Binding CurrentState.RoundFunctionName}"/>
+            
+    </Grid>
+</UserControl>

@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BlocksizeCaption" xml:space="preserve">
+    <value>块大小</value>
+  </data>
+  <data name="BlocksizeTooltip" xml:space="preserve">
+    <value>输入使用的块大小。</value>
+  </data>
+  <data name="btnAll" xml:space="preserve">
+    <value>完全解密</value>
+  </data>
+  <data name="btnAuto" xml:space="preserve">
+    <value>自动搜寻</value>
+  </data>
+  <data name="btnLblP1" xml:space="preserve">
+    <value>更改字节</value>
+  </data>
+  <data name="btnLblP1End" xml:space="preserve">
+    <value>转到第二阶段</value>
+  </data>
+  <data name="btnLblP1Init" xml:space="preserve">
+    <value>发送请求</value>
+  </data>
+  <data name="btnLblP2" xml:space="preserve">
+    <value>下一个字节</value>
+  </data>
+  <data name="btnLblP2End" xml:space="preserve">
+    <value>转到第3阶段</value>
+  </data>
+  <data name="btnLblP2Init" xml:space="preserve">
+    <value>开始寻找</value>
+  </data>
+  <data name="btnLblP3Decrypt" xml:space="preserve">
+    <value>解密字节</value>
+  </data>
+  <data name="btnLblP3End" xml:space="preserve">
+    <value>恢复纯文本</value>
+  </data>
+  <data name="btnLblP3Find" xml:space="preserve">
+    <value>更改当前字节</value>
+  </data>
+  <data name="btnLblP3IncPad" xml:space="preserve">
+    <value>增加填充</value>
+  </data>
+  <data name="btnNext" xml:space="preserve">
+    <value>下一个</value>
+  </data>
+  <data name="CipherInputCaption" xml:space="preserve">
+    <value>密码输入</value>
+  </data>
+  <data name="CipherInputTooltip" xml:space="preserve">
+    <value>密文输入</value>
+  </data>
+  <data name="descDone" xml:space="preserve">
+    <value>明文已恢复。攻击成功完成。</value>
+  </data>
+  <data name="descFinishAll" xml:space="preserve">
+    <value>邮件正在解密时，请等待。</value>
+  </data>
+  <data name="descP1Done" xml:space="preserve">
+    <value>第一阶段完成！找到有效的填充。</value>
+  </data>
+  <data name="descP1Init" xml:space="preserve">
+    <value>阶段1：找到一条解密为有效填充的消息。发送未更改的消息以查看是否存在有效的填充。</value>
+  </data>
+  <data name="descP1Task" xml:space="preserve">
+    <value>任务：更改最后一个字节，直到填充有效。</value>
+  </data>
+  <data name="descP2Done" xml:space="preserve">
+    <value>第二阶段完成！找到第一个填充字节！填充长度：</value>
+  </data>
+  <data name="descP2DoneSpecial" xml:space="preserve">
+    <value>第二阶段完成！前7个字节不影响填充，因此填充长度必须为1！</value>
+  </data>
+  <data name="descP2Init" xml:space="preserve">
+    <value>阶段2：找到第一个填充字节。从左到右更改字节。如果填充无效，则必须更改填充字节。</value>
+  </data>
+  <data name="descP2Task" xml:space="preserve">
+    <value>更改的字节不属于填充。尝试下一个字节！</value>
+  </data>
+  <data name="descP3Dec" xml:space="preserve">
+    <value>字节解密！增加填充以继续解密。</value>
+  </data>
+  <data name="descP3DecDone" xml:space="preserve">
+    <value>该字节已解密。增加填充以继续解密。</value>
+  </data>
+  <data name="descP3DecPadDone" xml:space="preserve">
+    <value>所有填充字节已解密。增加填充以继续解密。</value>
+  </data>
+  <data name="descP3Done" xml:space="preserve">
+    <value>邮件已解密！单击以查看原始的纯文本。</value>
+  </data>
+  <data name="descP3FindDone" xml:space="preserve">
+    <value>找到有效的填充！字节可以解密。</value>
+  </data>
+  <data name="descP3FindTask" xml:space="preserve">
+    <value>任务：更改字节，直到消息解密为所需值！如果找到正确的值，则填充将变为有效。</value>
+  </data>
+  <data name="descP3Init" xml:space="preserve">
+    <value>阶段3：解密邮件。从解密填充字节开始。</value>
+  </data>
+  <data name="descPadIn" xml:space="preserve">
+    <value>来自填充Oracle的回复</value>
+  </data>
+  <data name="langCheck" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="PaddingOracleInputCaption" xml:space="preserve">
+    <value>填充有效</value>
+  </data>
+  <data name="PaddingOracleInputTooltip" xml:space="preserve">
+    <value>填充的有效性</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>填充Oracle攻击</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>使用填充Oracle攻击加密的消息</value>
+  </data>
+  <data name="ResultOutputCaption" xml:space="preserve">
+    <value>操纵密码输出</value>
+  </data>
+  <data name="ResultOutputTooltip" xml:space="preserve">
+    <value>受控密码的输出</value>
+  </data>
+  <data name="ttBtnAll" xml:space="preserve">
+    <value>自动解密完整的消息。</value>
+  </data>
+  <data name="ttBtnAuto" xml:space="preserve">
+    <value>自动搜索下一个有效值。</value>
+  </data>
+  <data name="ttBtnNext" xml:space="preserve">
+    <value>执行下一步。</value>
+  </data>
+  <data name="ttBtnReturn" xml:space="preserve">
+    <value>撤消上一次执行的操作。</value>
+  </data>
+  <data name="ttBtnReturnPhase" xml:space="preserve">
+    <value>返回当前阶段的开始。</value>
+  </data>
+  <data name="ttCipherBlock" xml:space="preserve">
+    <value>加密的信息块。</value>
+  </data>
+  <data name="ttCorruptedBlock" xml:space="preserve">
+    <value>损坏的初始化块（原始C1 XOR O）。</value>
+  </data>
+  <data name="ttDecBlock" xml:space="preserve">
+    <value>解密后的初始化块（最后完全知道）。与原始初始化块C1的XORd产生明文P2。</value>
+  </data>
+  <data name="ttOverlayBlock" xml:space="preserve">
+    <value>用于修改初始化块的叠加层。</value>
+  </data>
+  <data name="ttPlainBlock" xml:space="preserve">
+    <value>将D2与原始初始化块C1和O进行XOR运算时得到的明文。</value>
+  </data>
+  <data name="ttPrelBlock" xml:space="preserve">
+    <value>加密的初始化块。</value>
+    <comment>Presentation Tooltip for the Preliminary Block</comment>
+  </data>
+  <data name="ttSentRequests" xml:space="preserve">
+    <value>发送到服务器的请求数量</value>
+  </data>
+  <data name="ttViewByte" xml:space="preserve">
+    <value>该插件一次仅显示8个字节。如果块大小超过8个字节，则可以使用滚动条显示隐藏的字节。</value>
+  </data>
+  <data name="ttViewByteDesc" xml:space="preserve">
+    <value>当前查看字节</value>
+  </data>
+  <data name="lblAttackLogic" xml:space="preserve">
+    <value>攻击逻辑</value>
+  </data>
+  <data name="lblComplete" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="lblInput" xml:space="preserve">
+    <value>输入值</value>
+  </data>
+  <data name="lblInvalid" xml:space="preserve">
+    <value>无效</value>
+  </data>
+  <data name="lblOutput" xml:space="preserve">
+    <value>输出量</value>
+  </data>
+  <data name="lblRequests" xml:space="preserve">
+    <value>Oracle请求：</value>
+  </data>
+  <data name="lblValid" xml:space="preserve">
+    <value>有效</value>
+  </data>
+</root>

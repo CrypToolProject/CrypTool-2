@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primetest.MillerRabin.MillerRabinControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Primetest"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resources/shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <GroupBox Margin="7" Grid.Row="0" Header="{x:Static lang:Primetest.mr_options}">
+            <StackPanel>
+                <DockPanel>
+                    <RadioButton Grid.Row="0" Grid.Column="0" IsChecked="True" Margin="7" Name="rbRandom" Click="rbClick" Content="{x:Static lang:Primetest.mr_rbchoosearnd}">
+                    </RadioButton>
+                    <RadioButton Grid.Row="1" Grid.Column="0" Margin="7" Name="rbSystematic" Click="rbClick" Content="{x:Static lang:Primetest.mr_rbchooseasys}"></RadioButton>
+                </DockPanel>
+                <Grid Name="pnlRandom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <SelectableTextBlock Grid.Row="0" Grid.Column="0" Margin="0,6,0,0" Text="{x:Static lang:Primetest.mr_countrounds}"></SelectableTextBlock>
+                    <comps:InputSingleControl Grid.Row="0" Grid.Column="1" x:Name="iscRounds" InputRangeControlType="Horizontal" ShowButtons="False" ShowCalcInput="False" Margin="0,4,0,0" FreeText="10" />
+                    <SelectableTextBlock Grid.Row="1" Grid.Column="0" Margin="0,6,0,0" Text="{x:Static lang:Primetest.mr_choosearnd}"></SelectableTextBlock>
+                    <comps:InputSingleControl Grid.Row="1" Grid.Column="1" x:Name="iscBaseRandom" InputRangeControlType="Horizontal" ShowButtons="False" ShowCalcInput="False" Margin="0,4,0,0" FreeText="1000" />
+                </Grid>
+                <DockPanel Name="pnlSystematic" Visibility="Collapsed">
+                    <SelectableTextBlock Margin="0,5,0,0" Text="{x:Static lang:Primetest.mr_chooseasys}"></SelectableTextBlock>
+                    <comps:InputRangeControl x:Name="ircSystematic" ShowButtons="False" InputRangeControlType="Horizontal" ShowCalcInput="False" SecondParameterPresent="False" Title="" />
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <comps:LogControl x:Name="log" Grid.Row="1" Margin="7" />
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The cost function assigns numeric values to given texts. The type of the cost function (coincidence, entropy,
+    bigramme (log2), bigram (sinkov), bigram (percentual), regular expression, weighted bigrams/trigrams)
+    may be set by the user through a setting. By using the numeric values one can detect if a given text contains
+    natural language. Cost functions are used in cryptanalysis to compare the results of deciphering
+    texts to find the original text out of millions of deciphered texts.
+  </introduction>
+  <introduction lang="zh-CN">cost函数将数字值分配给给定的文本。用户可以通过设置来设置成本函数的类型（重合度，熵，二元（log2），二元（sinkov），二元（百分比），正则表达式，加权二元/三元组）。通过使用数字值，可以检测给定文本是否包含自然语言。在密码分析中使用成本函数来比较解密文本的结果，以从数百万个解密文本中找到原始文本。</introduction>
+  <introduction lang="ru">Функция стоимости назначает числовые значения заданным текстам. Тип функции стоимости (совпадение, энтропия, bigramme (log2), bigram (sinkov), bigram (процентное), регулярное выражение, взвешенные биграммы / триграммы) может быть задано пользователем через настройку. Используя числовые значения, можно определить, содержит ли данный текст естественный язык. Функции затрат используются в криптоанализе для сравнения результатов расшифровки текстов, чтобы найти исходный текст из миллионов расшифрованных текстов.</introduction>
+  <introduction lang="de-DE">
+    Die Kostenfunktion weist gegebenen Textkörpern numerische Werte zu. Die Art der Kostenfunktion
+    (Koinzidenzindex, Entropie, Bigramm (log2), Bigramm (Sinkov), Bigramm (Prozentual), Reguläre Ausdrücke,
+    Gewichtete Bigramme/Trigramme) kann durch den Benutzer mittels Einstellung verändert werden. Mit Hilfe
+    des zugewiesenen numerischen Wertes kann z.B. festgestellt werden, ob ein gegebener Textkörper natürliche
+    Sprache beinhaltet. So werden Kostenfunktionen bei der Kryptoanalyse genutzt, um die Ergebnisse der
+    Entschlüsselungen miteinander zu vergleichen und den ursprünglichen Klartext aus Millionen von entschlüsselten
+    Texten herauszufinden.
+  </introduction>
+  <usage lang="en">
+    The cost function may be used as a standalone or as an extension of the <docRef item="KeySearcher.KeySearcher" />. The user has to set 
+    the type of the cost function using a setting. Depending on the type of the cost function additional settings 
+    and parameters may be set by the user. The length of the part of the text which should be used for calculating 
+    the result of the cost function may also be set. The cost function returns a numeric value (depending on 
+    the type of the cost function this is an integer or a floating point number) as output.
+  </usage>
+  <usage lang="zh-CN">成本函数可以用作独立函数或的扩展。用户必须使用设置来设置成本函数的类型。根据成本函数的类型，用户可以设置其他设置和参数。也可以设置用于计算成本函数结果的文本部分的长度。成本函数返回一个数值（取决于成本函数的类型，它是整数或浮点数）作为输出。</usage>
+  <usage lang="ru">Функция стоимости может использоваться как автономная или как расширение. Пользователь должен задать тип функции стоимости с помощью параметра. В зависимости от типа функции стоимости дополнительные настройки и параметры могут быть установлены пользователем. Также может быть задана длина части текста, которая должна использоваться для вычисления результата функции стоимости. Функция стоимости возвращает числовое значение (в зависимости от типа функции стоимости - это целое число или число с плавающей запятой) в качестве вывода.</usage>
+  <usage lang="de-DE">
+    Die Kostenfunktion kann entweder für sich oder als Erweiterung des <docRef item="KeySearcher.KeySearcher" /> genutzt werden.
+    Der Benutzer muss einstellen, um welche Art der Kostenfunktion es sich handelt.
+    In den Einstellungen können auch weitere Parameter, abhängig von der gewählten Kostenfunktion, angepasst werden.
+    Außerdem kann die Länge des Textausschnitts eingestellt werden, die genutzt werden soll, um die Berechnung
+    der Kostenfunktion durchzuführen. Die Kostenfunktion liefert einen numerischen Wert (je nach Art und Weise
+    der Funktion eine Ganzzahl oder eine Fließkommazahl) als Ausgabe.
+  </usage>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Index_of_coincidence" />
+      <caption lang="en">Index of coincidence</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Koinzidenzindex" />
+      <caption lang="de-DE">Koinzidenzindex</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Entropy_%28information_theory%29" />
+      <caption lang="en">Entropy (information theory)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Entropie_%28Informationstheorie%29" />
+      <caption lang="de-DE">Entropie (Informationstheorie)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Regular_expression" />
+      <caption lang="en">Regular expression</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Regul%C3%A4rer_Ausdruck" />
+      <caption lang="de-DE">Regulärer Ausdruck</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/N-gram" />
+      <caption lang="en">n-gram</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/N-Gramm" />
+      <caption lang="de-DE">N-Gramm</caption>
+    </linkReference>
+  </references>
+</documentation>

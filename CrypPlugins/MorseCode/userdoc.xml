@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component converts a given text in Morse code or
+    a given sequence of Morse codes back into readable text.
+    It can also play the sound of a given Morse code message.
+  </introduction>
+  <introduction lang="zh-CN">该组件将给定的摩尔斯电码文本或摩尔斯电码序列转换回可读的文本。它还可以播放给定的摩尔斯电码消息的声音。</introduction>
+  <introduction lang="ru">Этот компонент преобразует данный текст в код Морзе или заданную последовательность кодов Морзе обратно в читаемый текст. Он также может воспроизводить звук заданного кодового сообщения Морзе.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente wandelt einen eingegebenen Text in Morsezeichen um oder
+    konvertiert Morsezeichen wieder in lesbaren Text.
+    Außerdem kann sie eine Nachricht in Morsezeichen als Tonfolge abspielen.
+  </introduction>
+  <usage lang="en">
+    The component has three operation modes.
+    <newline /><newline />
+    If "Encode" mode is selected, it reads a text message at its input and converts it into Morse code.
+    The dots and dashes of the Morse code are represented by the characters "." and "-".
+    The Morse codes of adjacent characters in the input text are separated by a space character.
+    The end of a word is marked with the character "/".
+    The resulting Morse code text is sent to the output of the component.
+    <newline />
+    The component is case insensitive. Incoming text is converted to uppercase, before it is translated into Morse code.
+    If the input text contains a character for which there is no Morse code, a question mark will be output instead.
+    <newline /><newline />
+    In "Decode" mode, the component expects a text consisting of Morse code at its input. The text should be formatted according to the rules of the "Encode" section.
+    If the text contains an illegal Morse code, a question mark will be output instead.
+    <newline /><newline />
+    In "Play" mode, the component expects again a text consisting of Morse code as input.
+    When the workspace is started, it will play the sound of the Morse code message.
+    In this case, the component generates no text output.
+  </usage>
+  <usage lang="zh-CN">该组件具有三种操作模式。如果选择了“编码”模式，它将在其输入处读取一条文本消息并将其转换为摩尔斯电码。摩尔斯电码的点和破折号用字符“。”表示。和“-”。输入文本中相邻字符的摩尔斯电码用空格字符分隔。单词的结尾用字符“ /”标记。生成的摩尔斯电码文本将发送到组件的输出。该组件不区分大小写。传入的文本在转换为摩尔斯电码之前先转换为大写。如果输入文本包含没有摩尔斯电码的字符，则会输出问号。在“解码”模式下，组件在其输入处期望包含莫尔斯电码的文本。文本应根据“编码”部分的规则设置格式。如果文本中包含非法的摩尔斯电码，则会输出问号。在“播放”模式下，组件再次需要包含摩尔斯电码的文本作为输入。当工作空间启动时，它将播放摩尔斯电码消息的声音。在这种情况下，该组件不会生成任何文本输出。</usage>
+  <usage lang="ru">Компонент имеет три режима работы. Если выбран режим «Кодировка», он считывает текстовое сообщение на своем входе и преобразует его в код Морзе. Точки и штрихи кода Морзе представлены символами «.». а также &amp;quot;-&amp;quot;. Коды Морзе смежных символов во входном тексте разделяются символом пробела. Конец слова отмечен символом «/». Полученный текст кода Морзе отправляется на выход компонента. Компонент нечувствителен к регистру. Входящий текст преобразуется в верхний регистр, прежде чем он будет переведен в код Морзе. Если входной текст содержит символ, для которого нет кода Морзе, вместо него будет выводиться вопросительный знак. В режиме «Декодирование» компонент ожидает ввода текста, состоящего из кода Морзе. Текст должен быть отформатирован в соответствии с правилами раздела «Кодировка». Если текст содержит незаконный код Морзе, вместо него будет выводиться вопросительный знак. В режиме «Воспроизвести» компонент снова ожидает текст, содержащий код Морзе в качестве входного сигнала. Когда рабочая область запущена, она будет воспроизводить звук кодового сообщения Морзе. В этом случае компонент не генерирует текстового вывода.</usage>
+  <usage lang="de-DE">
+    Die Komponente hat drei Betriebsarten.
+    <newline /><newline />
+    In der Betriebsart "Encodieren" liest sie den an ihrem Eingang anliegenden Text und kodiert ihn in Morsezeichen.
+    Punkte und Striche der Morsezeichen werden durch die Zeichen "." und "-" dargestellt.
+    Die Morsezeichen aufeinanderfolgender Buchstaben im Eingabetext werden durch ein Leerzeichen getrennt.
+    Wortenden werden durch das Zeichen "/" markiert.
+    Der resultierende Morsezeichen-Text wird am Ausgang der Komponente ausgegeben.
+    <newline />
+    Der Eingabetext wird vor der Kodierung in Großbuchstaben konvertiert, so dass die Groß-/Kleinschreibung des Eingabetextes keine Rolle spielt.
+    Ein Zeichen des Eingabetextes, für das kein Morsezeichen existiert, wird als Fragezeichen ausgegeben.
+    <newline /><newline />
+    In der Betriebsart "Decodieren" erwartet die Komponente einen Morsezeichen-Text, der entsprechend den Angaben des "Encodieren"-Abschnittes formatiert ist.
+    Enthält der Text ein Morsezeichen, das nicht existiert, so wird ein Fragezeichen ausgegeben.
+    <newline /><newline />
+    In der Betriebsart "Abspielen" erwartet die Komponente ebenfalls einen Morsezeichen-Text als Eingabe.
+    Wenn der Arbeitsbereich gestartet wird, spielt die Komponente die Morsezeichen als Tonfolgen ab.
+    Eine Textausgabe wird in diesem Fall nicht erzeugt.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Morse_code" lang="en" />
+      <caption lang="en">Morse code (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Morsezeichen" lang="de-DE" />
+      <caption lang="de-DE">Morsezeichen (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

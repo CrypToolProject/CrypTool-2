@@ -1,0 +1,10 @@
+﻿List of CrypTool 2 Functions
+Version: $VERSION$
+Generation Date: $DATE$
+
+Legend:
+C	Function is available as a component
+T	Function is demonstrated in a template.
+N	Function is available in the navigation bar.
+W	Function is available in the wizard.
+

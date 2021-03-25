@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component displays a configurable progress bar in its presentation view.
+  </introduction>
+  <introduction lang="zh-CN">该组件在其演示视图中显示一个可配置的进度栏。</introduction>
+  <introduction lang="ru">Этот компонент отображает настраиваемый индикатор выполнения в представлении представления.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente stellt in ihrer Präsentationsansicht einen konfigurierbaren Fortschrittsbalken dar.
+  </introduction>
+  <usage lang="en">
+    The component has two inputs. On both inputs, it expects integer values.
+    On the input <it>Maximum</it>, the maximum value it has to expect on the input <it>Value</it> must be provided. This value corresponds to 100%, the value for which the progress bar will appear completely filled.
+    The value that is provided at the input <it>Value</it> is compared to the maximum value, and the displayed progress bar will be filled up to the resulting percentage.
+  </usage>
+  <usage lang="zh-CN">该组件有两个输入。在两个输入上，它都期望整数值。在输入的最大值上，必须提供输入值所期望的最大值。该值对应于100％，进度条将完全填充该值。将输入值处提供的值与最大值进行比较，显示的进度条将被填充到所产生的百分比。</usage>
+  <usage lang="ru">Компонент имеет два входа. На обоих входах он ожидает целочисленные значения. На входе Maximum должно быть указано максимальное значение, которое оно должно ожидать от входного значения. Это значение соответствует 100%, значение, для которого индикатор выполнения будет полностью заполнен. Значение, которое предоставляется на входном значении, сравнивается с максимальным значением, а отображаемый индикатор выполнения заполняется до получаемого процента.</usage>
+  <usage lang="de-DE">
+    Die Komponente hat zwei Eingänge. An beiden Eingängen werden ganzzahlige Werte erwartet.
+    Am Eingang <it>Maximum</it> muss der maximal zu erwartende Wert angegeben werden, der 100% entspicht und bei dem der Fortschrittsbalken vollständig ausgefüllt ist.
+    Am Eingang <it>Wert</it> wird der aktuelle darzustellende Wert erwartet. Der Fortschrittsbalken in der Präsentationsansicht der Komponente wird zu dem Prozentsatz ausgefüllt, dem dieser Wert im Vergleich zum Maximum etnspricht.
+  </usage>
+  <presentation lang="en">
+    Open the component in presentation view in order to display the progress bar.
+  </presentation>
+  <presentation lang="zh-CN">在演示文稿视图中打开组件，以显示进度栏。</presentation>
+  <presentation lang="ru">Откройте компонент в представлении презентации, чтобы отобразить индикатор выполнения.</presentation>
+  <presentation lang="de-DE">
+    Um den Fortschrittsbalken darzustellen, muss die Komponente in der Präsentationsansicht geöffnet sein.
+  </presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Progress_bar" />
+      <caption lang="en">Progress bar</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Fortschrittsbalken" />
+      <caption lang="de-DE">Fortschrittsbalken</caption>
+    </linkReference>
+  </references>
+</documentation>

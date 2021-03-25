@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="CrypTool.Plugins.MD5Collider.Presentation.QuickWatchPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:converters="clr-namespace:CrypTool.Plugins.MD5Collider.Presentation.Converters"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:properties="clr-namespace:CrypTool.Plugins.MD5Collider.Properties"
+    x:Name="ucQuickWatchPresentation"
+    Height="100" Width="270" DataContext="{Binding Collider,ElementName=ucQuickWatchPresentation}" Background="AntiqueWhite">
+    <UserControl.Resources>
+        <converters:TimeSpanConverter x:Key="timeSpanConverter"/>
+        <converters:LongToStringWithDecimalSeparatorConverter x:Key="longConverter"/>
+    </UserControl.Resources>
+    <Grid Margin="5, 5, 5, 5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <!--
+        <Label FontSize="16">Status:</Label>
+        <Label Grid.Column="1" Content="{Binding Status}" FontSize="16" />
+        -->
+
+        <Label Grid.Row="0" FontSize="16" Content="{x:Static properties:Resources.Time_}" />
+        <Label Grid.Row="0" Grid.Column="1" FontSize="16" Content="{Binding ElapsedTime, Converter={StaticResource timeSpanConverter}}"/>
+
+        <Label Grid.Row="1" FontSize="16" Content="{x:Static properties:Resources.Match_}" />
+        <ProgressBar Grid.Row="1" Grid.Column="2" Value="{Binding MatchProgress}" Maximum="{Binding MatchProgressMax}"/>
+
+
+        <Label Grid.Row="2" FontSize="16" Content="{x:Static properties:Resources.Tries_}" />
+        <Label Grid.Row="3" Grid.Column="1" FontSize="16" Content="{Binding CombinationsTried, Converter={StaticResource longConverter}}"/>
+    </Grid>
+</UserControl>

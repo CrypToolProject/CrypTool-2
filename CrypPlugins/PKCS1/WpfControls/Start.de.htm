@@ -1,0 +1,53 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+		  body
+		  {
+		  	font-family:Arial,Verdana,Georgia;
+		  	font-size:smaller;
+            background-color: #EBEFF6;
+		  }
+		</style>
+	</head>
+	<body>
+	<h2>Angriffe auf PKCS#1-Signaturen (Bleichenbacher und Kühn)</h2>
+	<p align="justify">
+	PKCS#1-Signaturen basieren auf dem RSA-Verschlüsselungsverfahren. Der Angriff von Daniel Bleichenbacher zielt nicht
+	auf das Verschlüsselungsverfahren selbst, sondern auf Implementierungsfehler, die in mehreren RSA-Klassenbibliotheken
+	zu finden waren. Der Angriff wurde 1998 publiziert. Inzwischen wurde die Spezifikation für die Signaturen verändert
+   und die betroffenen Klassenbibliotheken ausgebessert.
+	</p>
+	<p align="justify">
+	<strong>Digitale Signaturen</strong></br>
+	Digitale Signaturen werden benutzt, um die Authentizität von Daten nachzuweisen. Zum Beispiel kann einer Nachricht
+	ein Sender zugeordnet werden.</br>
+	Signaturen basieren auf asymmetrischen Verschlüsselungsverfahren (in diesem Fall dem RSA-Verfahren), die 
+	einen öffentlichen und einen privaten Schlüssel verwenden.
+	</br></br>
+	Bei der Generierung der Signatur werden nicht die kompletten zu signierenden Daten mit dem privaten Schlüssel 
+	verschlüsselt. Es wird zunächst ein Hashwert der Daten gebildet. Dieser Hashwert wird dann mit anderen Daten
+	in ein standardisiertes Format (beschrieben in den PKCS Spezifikationen) gebracht und dann verschlüsselt.</br>
+	Die erzeugte Signatur kann dann mit der Klartextnachricht an den Empfänger übermittelt werden. Der Verifikationsprozeß
+	auf Empfängerseite beginnt damit, dass zunächst die empfangene Signatur mit dem öffentlichen Schlüssel des Senders
+	entschlüsselt wird. Aus den entschlüsselten Daten wird nun die verwendete Hashfunktion (diese Information befindet
+	sich in den hinzugefügten Daten) und der Hashwert ausgelesen. Aus der mitgesandten Klartextnachricht wird nun ein
+	Hashwert gebildet und mit dem aus der Signatur extrahierten Hashwert verglichen. Stimmen diese überein, gilt die 
+	Nachricht als authentisch.
+	</p>
+	<p align="justify">
+	<strong>Bleichenbacher-Angriff (1998)</strong></br>
+	Der Bleichenbacher-Angriff ermöglicht es, unter bestimmten Voraussetzungen, Signaturen zu fälschen. Diese gefälschten
+	Signaturen werden bei fehlerhafter Implementierung, wie in PKCS#1 Version 1.5 beschrieben, als valide anerkannt. 
+	Wie bereits oben erwähnt, ist die Spezifikation bearbeitet (aktuell PKCS#1 Version 2.1) und die produktiv eingesetzten
+	Implementierungen sollten diese fehlerhafte Validierung nicht mehr beinhalten. </br>
+	</p>
+  <p align="justify">
+  <strong>Angriff mit kürzeren Schlüsseln (Kühn-Angriff 2003)</strong></br>
+  Im Gegensatz zum Bleichenbacher-Angriff (3072 Bits lange Schlüssel) zielt der Angriff von Kühn auf kürzere Schlüssel (1024 Bits). Dieser Angriff
+  macht sich die Rechenkraft von Computern zunutze. Hier wird nicht berechnet wie eine gefälschte Signatur aussehen muss, sondern
+  es wird ein Algorithmus durchlaufen, bis das entsprechende Ergebnis generiert ist.</br>
+  </p>
+	</body>
+</html>

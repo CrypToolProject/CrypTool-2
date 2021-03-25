@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Date" xml:space="preserve">
+    <value>日期：</value>
+  </data>
+  <data name="LoadingRSSFeed" xml:space="preserve">
+    <value>加载RSS feed</value>
+  </data>
+  <data name="MainFunctions" xml:space="preserve">
+    <value>主要功能</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>新闻</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>请耐心等待...</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>起始中心</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>轻松访问Startcenter中的CT2功能</value>
+  </data>
+  <data name="RecentFiles" xml:space="preserve">
+    <value>最近打开的工作区</value>
+  </data>
+  <data name="Templates" xml:space="preserve">
+    <value>范本</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>标题：</value>
+  </data>
+  <data name="This_is_an_AnotherEditor_file_" xml:space="preserve">
+    <value>这是不推荐使用的AnotherEditor的项目文件</value>
+  </data>
+  <data name="This_is_a_WorkspaceManager_file_" xml:space="preserve">
+    <value>这是一个工作区编辑器文件</value>
+  </data>
+  <data name="This_is_a_standalone_component_" xml:space="preserve">
+    <value>这是一个独立的组件</value>
+  </data>
+  <data name="This_is_a_template" xml:space="preserve">
+    <value>这是一个项目模板</value>
+  </data>
+  <data name="Connect_to_the_distributed_computing_platform_" xml:space="preserve">
+    <value>连接到分布式计算平台</value>
+  </data>
+  <data name="Create_a_new_workspace_with_the_graphical_editor_" xml:space="preserve">
+    <value>使用图形编辑器创建新的工作区</value>
+  </data>
+  <data name="Read_the_online_documentation_" xml:space="preserve">
+    <value>阅读在线文档</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>输入一个或多个搜索词。按Ctrl + R更新模板列表</value>
+  </data>
+  <data name="Show_this_welcome_screen_at_CrypTool_2_0_startup_" xml:space="preserve">
+    <value>启动时显示此欢迎屏幕</value>
+  </data>
+  <data name="Use_the_wizard_to_easily_try_some_CrypTool_2_0_features_" xml:space="preserve">
+    <value>使用向导轻松尝试一些CrypTool 2功能</value>
+  </data>
+  <data name="Visit_the_official_CrypTool_2_0_website_" xml:space="preserve">
+    <value>访问官方CrypTool 2网站</value>
+  </data>
+  <data name="Welcome_to_CrypTool_2_0" xml:space="preserve">
+    <value>欢迎使用CrypTool2。有两种快速入门的方法：单击“主要功能”部分中的向导按钮以进行导览，或在“模板”部分中加载预定义的工作流程之一，以演示加密方案中的程序功能。</value>
+  </data>
+  <data name="_Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="ClearList" xml:space="preserve">
+    <value>清除最近打开的模板列表</value>
+  </data>
+  <data name="RSS_error_Message" xml:space="preserve">
+    <value>RSS错误</value>
+  </data>
+  <data name="Exception" xml:space="preserve">
+    <value>例外</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除此项</value>
+  </data>
+  <data name="StartTemplate" xml:space="preserve">
+    <value>开始此项</value>
+  </data>
+  <data name="Follow_us_on_Facebook_" xml:space="preserve">
+    <value>在Facebook上访问我们</value>
+  </data>
+  <data name="CrypTutorials" xml:space="preserve">
+    <value>观看有关CrypTool 2的视频</value>
+  </data>
+  <data name="CTBookFilename" xml:space="preserve">
+    <value>CT-Book-zh.pdf</value>
+  </data>
+  <data name="Open_the_ct_book_" xml:space="preserve">
+    <value>打开CrypTool书</value>
+  </data>
+  <data name="CollapseAll" xml:space="preserve">
+    <value>全部收缩</value>
+  </data>
+  <data name="ExpandAll" xml:space="preserve">
+    <value>展开全部</value>
+  </data>
+  <data name="CopyDescription" xml:space="preserve">
+    <value>复制说明</value>
+  </data>
+  <data name="OpenTemplate" xml:space="preserve">
+    <value>开启范本</value>
+  </data>
+  <data name="CrypToolStore" xml:space="preserve">
+    <value>CrypTool商店</value>
+  </data>
+  <data name="OpenCrypToolStore" xml:space="preserve">
+    <value>打开CrypTool商店</value>
+  </data>
+  <data name="Visit_official_YouTube_channel" xml:space="preserve">
+    <value>访问官方YouTube频道：您将学习如何使用CrypTool 2并添加自己的功能</value>
+  </data>
+  <data name="YoutubeVideos" xml:space="preserve">
+    <value>YouTube视频</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>类别：</value>
+  </data>
+  <data name="DoubleClickToOpen" xml:space="preserve">
+    <value>（双击打开）</value>
+  </data>
+  <data name="View_CT2_Tutorial" xml:space="preserve">
+    <value>在YouTube上观看有关CrypTool 2的教程视频</value>
+  </data>
+</root>

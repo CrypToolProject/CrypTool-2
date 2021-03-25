@@ -1,0 +1,20 @@
+version: 1.0.{build}
+build:
+  verbosity: minimal
+  
+environment:
+  matrix:
+    - BUILD_TYPE: Release
+      COMPILER: MSVC19
+      PLATFORM: x64
+    - BUILD_TYPE: Release
+      COMPILER: MSVC19
+      PLATFORM: Win32
+
+build_script:
+  - if [%COMPILER%]==[MSVC19] cd msvc\vs19
+  - if [%COMPILER%]==[MSVC19] msbuild.bat gc lib x64 Release +tests
+
+test_script:
+  - if [%COMPILER%]==[MSVC19] cd msvc\vs19\mpir-tests
+  - if [%COMPILER%]==[MSVC19] python %cd%\run-tests.py 0

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    RIPEMD (RACE Integrity Primitives Evaluation Message Digest) is a cryptographic hash function that was published by Hans Dobbertin, Antoon Bosselaers and Bart Preneel in 1996.
+    RIPEMD-160 is an improved version of the original RIPEMD. It calculates a hash value of 160 bits (20 bytes) length from its input of arbitrary length.
+    RIPEMD-160 operates on blocks of 512 bits and executes two parallel functions, each with 5 rounds. 
+    The algorithm is optimized for 32-bit processors and is used by the encryption program TrueCrypt and in the address generation of the digital currency Bitcoin.
+  </introduction>
+  <introduction lang="zh-CN">RIPEMD（RACE完整性基元评估消息摘要）是一种加密哈希函数，由Hans Dobbertin，Antoon Bosselaers和Bart Preneel于1996年发布。RIPEMD-160是原始RIPEMD的改进版本。它从其任意长度的输入中计算出160位（20字节）长度的哈希值。 RIPEMD-160在512位的块上运行，并执行两个并行功能，每个功能有5个回合。该算法针对32位处理器进行了优化，并由加密程序TrueCrypt和数字货币比特币的地址生成使用。</introduction>
+  <introduction lang="ru">RIPEMD (дайджест оценки примитивов при оценке целостности RACE) - это криптографическая хэш-функция, опубликованная Хансом Доббертином, Antoon Bosselaers и Bart Preneel в 1996 году. RIPEMD-160 - улучшенная версия оригинального RIPEMD. Он вычисляет хеш-значение длиной 160 бит (20 байтов) от его ввода произвольной длины. RIPEMD-160 работает на блоках по 512 бит и выполняет две параллельные функции, каждая с 5 раундами. Алгоритм оптимизирован для 32-разрядных процессоров и используется программой шифрования TrueCrypt и в генерации адресов цифровой валюты Bitcoin.</introduction>
+  <introduction lang="de-DE">
+    RIPEMD (RACE Integrity Primitives Evaluation Message Digest) ist eine kryptographische Hash-Funktion und wurde 1996 von Hans Dobbertin, Antoon Bosselaers und Bart Preneel veröffenlicht.
+    RIPEMD-160 ist eine verbesserte Version von RIPEMD, und generiert für Eingaben beliebiger Länge einen Hashwert mit einer Länge von 160 Bits (20 Bytes).
+    RIPEMD-160 arbeitet auf 512-Bit-Blöcken und führt zwei parallele Funktionen mit jeweils fünf Runden aus. 
+    Der Algorithmus ist optimiert für 32-Bit-Prozessoren und wird unter anderem in dem Verschlüsselungsprogramm TrueCrypt und in der Adressgenerierung der Internetwährung Bitcoin eingesetzt.
+  </introduction>
+  <usage lang="en">
+    The component expects the data of which to calculate the hash value as a data stream on the input labeled "Input stream".
+    The resulting hash value is provided at the outputs of the component as a byte array and as a data stream.
+  </usage>
+  <usage lang="zh-CN">该组件期望将其哈希值作为标记为“输入流”的输入上的数据流计算出来的数据。生成的哈希值在组件的输出处作为字节数组和数据流提供。</usage>
+  <usage lang="ru">Компонент ожидает, что данные для вычисления хеш-значения в качестве потока данных на входе с надписью «Входной поток». Полученное хеш-значение предоставляется на выходах компонента в виде байтового массива и в виде потока данных.</usage>
+  <usage lang="de-DE">
+    Die Komponente erwartet die Daten, deren Hashwert berechnet werden soll, als Datenstrom am Eingang "Eingabedatenstrom".
+    Der resultierende Hashwert wird an den Ausgängen der Komponente als Datenstrom und als Byte-Array bereitgestellt.
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/RIPEMD" lang="en" />
+      <caption lang="en">RIPEMD (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/RIPEMD-160" lang="de-DE" />
+      <caption lang="de-DE">RIPEMD-160 (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="rfc">
+      <link url="http://homes.esat.kuleuven.be/~bosselae/ripemd160.html" lang="en" />
+      <caption lang="en">The hash function RIPEMD-160</caption>
+      <link url="http://homes.esat.kuleuven.be/~bosselae/ripemd160.html" lang="de-DE" />
+      <caption lang="de-DE">The hash function RIPEMD-160 (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

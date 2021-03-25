@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>NLFSR</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Nichtlinear rückgekoppeltes Schieberegister</value>
+  </data>
+  <data name="InputTapSequenceCaption" xml:space="preserve">
+    <value>Feedback-Funktion</value>
+  </data>
+  <data name="InputTapSequenceTooltip" xml:space="preserve">
+    <value>Feedback-Funktion als Zeichenkette, z.B. x0 * x2 + x1 + 1</value>
+  </data>
+  <data name="InputSeedCaption" xml:space="preserve">
+    <value>Startwert</value>
+  </data>
+  <data name="InputSeedTooltip" xml:space="preserve">
+    <value>Startwert des NLFSR in binärer Darstellung.</value>
+  </data>
+  <data name="InputClockBoolCaption" xml:space="preserve">
+    <value>Takt</value>
+  </data>
+  <data name="InputClockBoolTooltip" xml:space="preserve">
+    <value>Optionaler Takteingang. Das NLFSR schreitet nur fort, wenn das Taktsignal hohen Pegel hat.</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>Textausgabe</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>Gibt die Ausgabe als Zeichenfolge aus, deren Länge der Anzahl der Runden entspricht. Verwenden Sie diesen Ausgang, wenn kein Takt anliegt.</value>
+  </data>
+  <data name="OutputBoolCaption" xml:space="preserve">
+    <value>Boolesche Ausgabe</value>
+  </data>
+  <data name="OutputBoolTooltip" xml:space="preserve">
+    <value>Boolesche Ausgabe des NLFSR. Verwenden Sie diese Ausgabe, wenn ein Taktsignal anliegt.</value>
+  </data>
+  <data name="OutputBoolArrayCaption" xml:space="preserve">
+    <value>Zustandsausgabe als Boolesches Array</value>
+  </data>
+  <data name="OutputBoolArrayTooltip" xml:space="preserve">
+    <value>Boolesche Ausgabe des NLFSR. Verwenden Sie diese Ausgabe, wenn ein Taktsignal anliegt.</value>
+  </data>
+  <data name="OutputClockingBitCaption" xml:space="preserve">
+    <value>zusätzliches Ausgabebit</value>
+  </data>
+  <data name="OutputClockingBitTooltip" xml:space="preserve">
+    <value>zusätzliches Ausgabebit</value>
+  </data>
+  <data name="AlwaysCreateOutputCaption" xml:space="preserve">
+    <value>Ausgabe immer erzeugen</value>
+  </data>
+  <data name="AlwaysCreateOutputTooltip" xml:space="preserve">
+    <value>Wenn dieses Kontrollkästchen aktiviert ist, wird ein Ausgabebit auch generiert, wenn der Takt niedrigen Pegel hat. Dieses ist dann das Bit des letzten Taktzyklus.</value>
+  </data>
+  <data name="ClockingBitCaption" xml:space="preserve">
+    <value>zusätzliches Ausgabebit #</value>
+  </data>
+  <data name="ClockingBitTooltip" xml:space="preserve">
+    <value>Welches Bit soll als zusätzlich ausgegeben werden (z.B. zur Verwendung als Taktsignal)?</value>
+  </data>
+  <data name="NoQuickwatchCaption" xml:space="preserve">
+    <value>Präsentation nicht anzeigen</value>
+  </data>
+  <data name="NoQuickwatchTooltip" xml:space="preserve">
+    <value>Wenn dieses Kontrollkästchen aktiviert ist, wird keine Präsentation angezeigt und die Performance wird besser.</value>
+  </data>
+  <data name="PolynomialCaption" xml:space="preserve">
+    <value>Feedback-Funktion</value>
+  </data>
+  <data name="PolynomialTooltip" xml:space="preserve">
+    <value>Definiere die Feedback-Funktion, z.B. x0 * x2 + x1 + 1.</value>
+  </data>
+  <data name="RoundsCaption" xml:space="preserve">
+    <value>Runden</value>
+  </data>
+  <data name="RoundsTooltip" xml:space="preserve">
+    <value>Wie viele Bits sollen generiert werden? Hinweis: Dies trifft nur zu, wenn kein externes Taktsignal anliegt.</value>
+  </data>
+  <data name="SaveCurrentStateCaption" xml:space="preserve">
+    <value>Speichere den Zustand des NLFSR</value>
+  </data>
+  <data name="SaveCurrentStateTooltip" xml:space="preserve">
+    <value>Wenn dieses Kontrollkästchen aktiviert ist, wird der momentane Zustand beim Öffnen eines Arbeitsbereiches wiederhergestellt.</value>
+  </data>
+  <data name="SeedCaption" xml:space="preserve">
+    <value>Startwert</value>
+  </data>
+  <data name="SeedTooltip" xml:space="preserve">
+    <value>Definiere die Startbelegung des NLFSR (z.B. 11100).</value>
+  </data>
+  <data name="UseBoolClockCaption" xml:space="preserve">
+    <value>Verwende externes Taktsignal</value>
+  </data>
+  <data name="UseBoolClockTooltip" xml:space="preserve">
+    <value>Wenn dieses Kontrollkästchen aktiviert ist, wird ein externes Taktsignal verwendet.</value>
+  </data>
+  <data name="UseClockingBitCaption" xml:space="preserve">
+    <value>Generiere zusätzliches Ausgabebit</value>
+  </data>
+  <data name="UseClockingBitTooltip" xml:space="preserve">
+    <value>Wenn dieses Kontrollkästchen aktiviert ist, wird ein zusätzliches Ausgabebit generiert.</value>
+  </data>
+  <data name="initNLFSRCaption" xml:space="preserve">
+    <value>Zeichne NLFSR</value>
+  </data>
+  <data name="initNLFSRTooltip" xml:space="preserve">
+    <value>Initialisiert NLFSR und zeichnet die Präsentation. Wird benötigt, um die Präsentation von NLFSR vor Beginn der Ausführung darzustellen.</value>
+  </data>
+  <data name="AlwaysCreateOutputList1" xml:space="preserve">
+    <value>Ausgabe immer erzeugen?</value>
+  </data>
+  <data name="ClockGroup" xml:space="preserve">
+    <value>Takteigenschaften</value>
+  </data>
+  <data name="ClockingBitGroup" xml:space="preserve">
+    <value>zusätzliches Ausgabebit</value>
+  </data>
+  <data name="NoQuickwatchList1" xml:space="preserve">
+    <value>Präsentation anzeigen?</value>
+  </data>
+  <data name="No_Quickwatch_data_right_now_" xml:space="preserve">
+    <value>Momentan keine Daten zur Präsentation vorhanden.</value>
+  </data>
+  <data name="SaveCurrentStateList1" xml:space="preserve">
+    <value>Momentanen Zustand speichern?</value>
+  </data>
+  <data name="UseBoolClockList1" xml:space="preserve">
+    <value>Externen Takt verwenden?</value>
+  </data>
+  <data name="UseClockingBitList1" xml:space="preserve">
+    <value>Zusätzliches Ausgabebit generieren?</value>
+  </data>
+</root>

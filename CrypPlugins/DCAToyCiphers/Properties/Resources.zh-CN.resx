@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BtnSwitchView" xml:space="preserve">
+    <value>切换检视</value>
+  </data>
+  <data name="ChoiceOfAlgorithm" xml:space="preserve">
+    <value>算法选择</value>
+  </data>
+  <data name="ChoiceOfAlgorithmToolTop" xml:space="preserve">
+    <value>在这里，您可以选择列表中包含的一种密码。然后可以通过差分密码分析对其进行检查。</value>
+  </data>
+  <data name="ChoiceOfMode" xml:space="preserve">
+    <value>加密/解密</value>
+  </data>
+  <data name="ChoiceOfModeToolTop" xml:space="preserve">
+    <value>根据所选的操作选项，对数据进行加密或解密。</value>
+  </data>
+  <data name="Cipher1" xml:space="preserve">
+    <value>密码1：16位块大小，2个圆形密钥，32位密钥长度</value>
+  </data>
+  <data name="Cipher1LblHeading" xml:space="preserve">
+    <value>密码1</value>
+  </data>
+  <data name="Cipher1LblInputBlock" xml:space="preserve">
+    <value>输入块</value>
+  </data>
+  <data name="Cipher1LblOutputBlock" xml:space="preserve">
+    <value>输出块</value>
+  </data>
+  <data name="Cipher1LblText" xml:space="preserve">
+    <value>此块密码适用于16位块。使用总共两个回合密钥执行一轮加密。在加密回合中执行以下步骤：密钥添加，替换和密钥添加。圆形密钥长16位，每个S盒处理4位。因此，密钥长度为32位。</value>
+  </data>
+  <data name="Cipher2" xml:space="preserve">
+    <value>密码2：16位块大小，4个圆形密钥，64位密钥长度</value>
+  </data>
+  <data name="Cipher2LblHeading" xml:space="preserve">
+    <value>密码2</value>
+  </data>
+  <data name="Cipher2LblInputBlock" xml:space="preserve">
+    <value>输入块</value>
+  </data>
+  <data name="Cipher2LblOutputBlock" xml:space="preserve">
+    <value>输出块</value>
+  </data>
+  <data name="Cipher2LblText" xml:space="preserve">
+    <value>此块密码适用于16位块。执行三个加密回合，从而总共使用四个回合密钥。在上一轮加密中使用了两个回合密钥。每个回合包含三个子步骤：密钥添加，替换和置换–在最后一轮中，省略置换，并添加最后一轮密钥。圆形密钥长16位，每个S盒处理4位。因此，密钥长度为64位。</value>
+  </data>
+  <data name="Cipher3" xml:space="preserve">
+    <value>密码3：16位块大小，6个圆形密钥，96位密钥长度</value>
+  </data>
+  <data name="Cipher3LblHeading" xml:space="preserve">
+    <value>密码3</value>
+  </data>
+  <data name="Cipher3LblInputBlock" xml:space="preserve">
+    <value>输入块</value>
+  </data>
+  <data name="Cipher3LblOutputBlock" xml:space="preserve">
+    <value>输出块</value>
+  </data>
+  <data name="Cipher3LblText" xml:space="preserve">
+    <value>此块密码适用于16位块。执行5次加密回合，总共使用六个回合密钥。在最后的加密回合中，使用了两个回合密钥。每个回合包含三个子步骤：密钥添加，替换和置换–在最后一轮中，置换展开并添加最后一轮密钥。圆形密钥长16位，每个S盒处理4位。因此，密钥长度为96位。</value>
+  </data>
+  <data name="Cipher4" xml:space="preserve">
+    <value>密码4：4位块大小，4个圆形密钥，16位密钥长度</value>
+  </data>
+  <data name="Cipher4LblHeading" xml:space="preserve">
+    <value>密码4</value>
+  </data>
+  <data name="Cipher4LblInputBlock" xml:space="preserve">
+    <value>输入块</value>
+  </data>
+  <data name="Cipher4LblOutputBlock" xml:space="preserve">
+    <value>输出块</value>
+  </data>
+  <data name="Cipher4LblText" xml:space="preserve">
+    <value>此块密码适用于4位块。执行三个加密回合，从而总共使用四个回合密钥。在上一轮加密中使用了两个回合密钥。每个回合包含两个子步骤：密钥添加和替换。在最后一轮中，然后添加了最后一轮密钥。 lap键的长度为4位，S盒的每个键为4位。因此，密钥长度为16位。</value>
+  </data>
+  <data name="Cipher5" xml:space="preserve">
+    <value>FEAL-4</value>
+  </data>
+  <data name="CipherDetails" xml:space="preserve">
+    <value>细节</value>
+  </data>
+  <data name="CipherView" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="DescPermutation" xml:space="preserve">
+    <value>排列将输入位的固定位置i交换为输出中的位置j。下表描述了排列，第一行代表输入中某个位的位置，第二行代表输出中相应位的位置。</value>
+  </data>
+  <data name="DescSBox" xml:space="preserve">
+    <value>S盒将固定输入位替换为其他输出位。下表描述了SBox，其中第一行代表输入位的值，第二行代表输出位。</value>
+  </data>
+  <data name="HeaderPermutation" xml:space="preserve">
+    <value>排列表：</value>
+  </data>
+  <data name="HeaderSBox" xml:space="preserve">
+    <value>S盒表：</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>输入值</value>
+  </data>
+  <data name="KeyError" xml:space="preserve">
+    <value>指定的密钥不够长。请检查此密码的要求。</value>
+  </data>
+  <data name="KeyInput" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="KeyInputTooltip" xml:space="preserve">
+    <value>按键输入</value>
+  </data>
+  <data name="MessageError" xml:space="preserve">
+    <value>输入的消息太小或太大。请检查此密码的要求。</value>
+  </data>
+  <data name="MessageInput" xml:space="preserve">
+    <value>纯文本/密文</value>
+  </data>
+  <data name="MessageInputTooltip" xml:space="preserve">
+    <value>输入纯文本/密文（取决于所选的操作模式）</value>
+  </data>
+  <data name="MessageOutput" xml:space="preserve">
+    <value>纯文本/密文</value>
+  </data>
+  <data name="MessageOutputTooltip" xml:space="preserve">
+    <value>输入纯文本/密文（取决于所选的操作模式）</value>
+  </data>
+  <data name="Mode1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="Mode2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="OperatingOptions" xml:space="preserve">
+    <value>操作方式</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>输出量</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>DCA玩具密码</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>该组件包含用于加密的多个对称块密码。密码非常简单且简短，无法证明密码原理或密码分析方法。</value>
+  </data>
+  <data name="TablePermutationInput" xml:space="preserve">
+    <value>输入中的位置</value>
+  </data>
+  <data name="TablePermutationOutput" xml:space="preserve">
+    <value>输出位置</value>
+  </data>
+</root>

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Primes.Navigation.Navigation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Properties="clr-namespace:Primes.Properties"
+    Height="300" Width="300" MinWidth="300" Loaded="UserControl_Loaded" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderThickness="1" CornerRadius="2" TextBlock.Foreground="Black" TextBlock.TextAlignment="Left" Padding="3" HorizontalAlignment="Stretch">
+                <ContentPresenter RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="BorderBrush" Value="LightBlue" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="#EFEFEF" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <StackPanel Name="stackPanel1" Orientation="Vertical" HorizontalAlignment="Stretch">
+        <Expander Header="{Loc Algorithms}" Height="23" Name="expander1" Width="300" HorizontalAlignment="Left" Expanded="expander1_Collapsed" Collapsed="expander1_Collapsed" IsExpanded="False" BorderThickness="2" BorderBrush="#EFEFEF"></Expander>
+        <StackPanel Name="stackPanel2" HorizontalAlignment="Stretch" Margin="10,10,0,0">
+            <Button Height="23" Content="Faktorisierung" Name="btnFaktorisierung" Width="290" HorizontalAlignment="Left" Template="{StaticResource ButtonTemplate}"></Button>
+            <Button Height="23" Content="Primzahlentest" Name="btnFactor2" Width="290" HorizontalAlignment="Left" Template="{StaticResource ButtonTemplate}"></Button>
+        </StackPanel>
+        <Expander Header="Verteilung von Primzahlen" Height="23" Name="expander2" Width="300" HorizontalAlignment="Left" Expanded="expander1_Collapsed" Collapsed="expander1_Collapsed"></Expander>
+        <StackPanel Name="stackPanel3" HorizontalAlignment="Stretch" Margin="10,10,0,0">
+            <Button Height="23" Content="Radiant Primes" Name="btnRadiantPrimes" Width="291" HorizontalAlignment="Left" Template="{StaticResource ButtonTemplate}"></Button>
+            <Button Height="23" Content="Anzahl der Primzahlen" Name="btnFactor3" Width="290" HorizontalAlignment="Left" Template="{StaticResource ButtonTemplate}"></Button>
+        </StackPanel>
+    </StackPanel>
+
+</UserControl>

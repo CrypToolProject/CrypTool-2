@@ -1,0 +1,153 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	          xmlns:misc="clr-namespace:CrypTool.PluginBase.Miscellaneous;assembly=CrypPluginBase"
+	          Background="White">
+    
+    <Paragraph>
+        <Run FontSize="18.6666666666667" xml:lang="de-de">
+            <Run.TextDecorations>
+                <TextDecoration Location="Underline" />
+            </Run.TextDecorations> Das Smartcard Plugin
+        </Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Das Smartcard Plugin dient dazu, einzelne Kommandos an eine Chipkarte zu senden. Dabei bedient es sich der PC/SC Schnittstelle in Windows. Die PC/SC Schnittstelle ist als eine native Windows API implementiert. Um Funktionen dieser API in managed code nutzen zu können, müssen die in .NET gekapselt werden ("Wrapping").</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="16" xml:lang="de-de">PC/SC (personal computer / smartcard)</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Die PC/SC Schnittstelle ist eine standardisierte Schnittstelle zur Unterstützung von Chipkartenterminals. In Windows wird diese Schnittstelle über die Windows Smartcard Client API (WinSCard) bereit gestellt. Die Kommunikation findet dabei über den Smart Card Resource Manager Service (SCardSvr) statt. Der Resource Manager verwaltet die verschiedenen angeschlossenen Chipkartenterminals mit Hilfe von herstellerspezifischen PC/SC - Terminal Treibern.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Die PC/SC Schnittstelle stellt u.a Funktionen bereit</Run>
+    </Paragraph>
+    <List MarkerStyle="Disc">
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">zum Auflisten sowie Abfragen bestimmter Eigenschaften angeschlossener und verfügbarer Leser</Run>
+            </Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">zur Herstellung einer Verbindung zu einem Leser sowie die exklusive Belegung/Freigabe eines solchen</Run>
+            </Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">zum Senden von Kommandos an die im Leser befindliche Chipkarte</Run>
+            </Paragraph>
+        </ListItem>
+    </List>
+    <Paragraph>
+        <Run xml:lang="de-de">Neben der Windows-Implementierung existiert eine PC/SC kompatible Schnittstelle u.a. für Linux und MacOS (PCSC-Lite).</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="16" xml:lang="de-de">Smartcard Kommandos</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de" xml:space="preserve">Zum Absetzen von Kommandos ruft das Smartcard-Plugin die Funktion SCardTransmit auf, der das Kommando in Form eines BYTE-Arrays übergeben wird. Das Smartcard-Modul, wie auch die PC/SC Schnittstelle reicht das Kommando einfach nur weiter an die Chipkarte und reicht die entsprechende Antwort von der Chipkarte zurück an das aufrufende Programm.  Daher soll an dieser Stelle nur kurz auf die Struktur der Kommandos eingegangen werden.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de" xml:space="preserve">Ein Kommando wird in Form einer APDU (Application Protocol Data Unit) an die Smartcard übertragen. Die Kommandos, sowie die benötigten Rahmenbedingungen sind dabei weitestgehend in der Norm ISO-7816 definiert. Die Antwort von einer Smartcard wird als RAPDU (Response Application Protocol Data Unit)  bezeichnet. </Run>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Source="/SmartCard;Component/DetailedDescription/Images/apdu.gif" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph>
+        <Run xml:lang="de-de">Eine APDU gliedert sich in den Header und in den Body. Dabei enthält der Header im Wesentlichen Steuerungsdaten, wie die Auswahl des Kommandos und dazugehörige optionale Parameter. Im Body einer APDU befindet sich als optionaler Teil die vom Kommando zu verarbeitenden Daten, sowie, ebenfalls optional, die erwartete Länge der Antwortdaten.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Der Header gliedert sich in folgende vier Bytes:</Run>
+    </Paragraph>
+    <List MarkerStyle="Disc">
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">CLA - Byte: Das Class-Byte beschreibt den Typ des Kommandos und legt diverse Randbedingungen fest</Run>
+            </Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">INS - Byte: Das Instruction Byte beschreibt, wechles Smartcard Kommando ausgeführt</Run>
+            </Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">P1 und P2 Byte: Diese beiden Bytes geben optionale Parameter zur Ausführung des Kommandos an. Sie sind somit für jede Instruktion unterschiedlich.</Run>
+            </Paragraph>
+        </ListItem>
+    </List>
+    <Paragraph>
+        <Run xml:lang="de-de">Der Body gliedert sich in folgende Bytes:</Run>
+    </Paragraph>
+    <List MarkerStyle="Disc">
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">Lc - Byte: Das Lc Byte gibt die Länge des nachfolgenden Datenfeldes an. Falls ein größeres Datenfeld mit übergeben werden soll, kann das sog. Erweiterete Längenformat verwendet werden, indem das Lc-Byte durch insgesamt 3 Bytes ersetzt wird, die die Länge des Datenfeldes angeben. Die mögliche Größe des Datenfeldes ist in der Praxis beschränkt durch den Eingangspuffer der Smartcard.</Run>
+            </Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">Data field: Das Datenfeld hat eine variable Länge und enthält i.d.R. die vom Kommando zu verarbeitenden Daten. Die Länge des Datenfeldes wird im Lc-Byte beschrieben. Das Datenfeld ist optional und muss vorhanden sein, falls ein Lc-Byte angegeben wurde.</Run>
+            </Paragraph>
+        </ListItem>
+        <ListItem>
+            <Paragraph>
+                <Run xml:lang="de-de">Le-Byte: Das Le-Byte beschreibt die Länge der zu erwartenden Antwortdaten von der Smartcard. Das Byte ist optional, und darf nur verwendet werden, falls auch Antwortdaten erwartet werden. Stimmen die Länge der Antwortdaten nicht mit der im Le-Byte erwarteten überein, liefert die Smartcard eine Fehlermeldung zurück. Ist man sich nicht über die genaue Länge der Antwortdaten im Klaren, kann im Le-Byte '0x00' angegeben werden. Wird das Lc-Byte im erweitereten Längenformat angegeben, dann muss das Le Byte ebenfalls im erweiterten Längenformat angegeben werden. Es besteht dann aus zwei Bytes, die die Länge angeben.</Run>
+            </Paragraph>
+        </ListItem>
+    </List>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Source="/SmartCard;Component/DetailedDescription/Images/rapdu.gif" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph>
+        <Run xml:lang="de-de">Die RAPDU ist etwas einfacher aufgebaut und besteht ebenfalls aus einem obligatorischen und einem optionalen Teil. Der obligatorische Teil ist hierbei der sog. Trailer, der aus zwei Bytes besteht, die das Statuswort repräsentieren. Dieses Statuswort beschreibt, ob ein Kommando erfolgreich abgearbeitet wurde, oder im Fehlerfall, welcher Fehler während der Verarbeitung aufgetreten ist. In seltenen Fällen enthält das Statuswort auch Daten, die gleichzeitig das erfolgreiche Ausführen eines Befehls implizieren. Das Kommando zur Abfrage des Status einer PIN auf einer Smartcard beispielsweise liefert als Antwort kein Datenfeld und als Statuswort '0x63 0xCX', wobei X den Stand des Fehlbedienungszählers darstellt.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Da Datenfeld ist wie bereits erwähnt optional. Eine Längenangabe, wie in der APDU das Lc-Byte gibt es dabei nicht. Das Datenfeld entspricht eben der Antwort der Smartcard gekürzt um die letzten beiden Bytes (das Statuswort).</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="16" xml:lang="de-de">Schnittstellen</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Das Smartcartcard Plugin verfügt über zwei Schnittstellen als Dateneingang, sowie eine Schnittstelle als Datenausgang.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="14.6666666666667" xml:lang="de-de">String Data Input</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Dieser Dateneingang dient dazu, das auszuführende Kommando an das Plugin zu übergeben. Als Datentyp wurde hierbei String gewählt, um die Eingabedaten in lesbarer Form darstellen zu können. Dabei wird jedes Halbbyte durch das sie repräsentierenede hexadezimale Zeichen als String dargestellt. Eine APDU der Form '0x00 0xA4 0x00 0x00 0x00' wird somit durch folgenden String dargestellt: "00A4000000".</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="14.6666666666667" xml:lang="de-de">String LogString</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Um genau nachverfolgen zu können, welcher Befehl and das Plugin und darüber an die Smartcard gesendet wurde, und welche Antwort die Smartcard generiert hat, gibt der Ausgang LogString sowohl APDU, als auch RAPDU übersichtlich formatiert und lesbar aus. Die dargestellten Bytefolgenden werden darin analog zum Dateneingang als String dargestellt.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run FontSize="14.6666666666667" xml:lang="de-de">Byte[] Response</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de">Der Ausgang Response gibt die gesamte RAPDU des übergebenen Kommandos als Byte-Array aus. Dieser Ausgang kann bei Kommandofolgen zur Weiterverarbeitung verwendet werden.</Run>
+    </Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de" xml:space="preserve" /></Paragraph>
+    <Paragraph>
+        <Run xml:lang="de-de" xml:space="preserve" /></Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Source="/SmartCard;Component/DetailedDescription/Images/beispiel.png" />
+        </InlineUIContainer>
+    </Paragraph>
+    
+</FlowDocument>

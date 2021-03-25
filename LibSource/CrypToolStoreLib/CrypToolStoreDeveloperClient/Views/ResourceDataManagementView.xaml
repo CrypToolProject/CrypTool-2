@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="CrypToolStoreDeveloperClient.Views.ResourceDataManagementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="1200">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ResourceDatasListView" Width="1100" Height="300" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Resource Id" DisplayMemberBinding="{Binding Path=ResourceId}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Resource Version" DisplayMemberBinding="{Binding Path=ResourceVersion}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Has Data" DisplayMemberBinding="{Binding Path=HasData}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Upload Date" DisplayMemberBinding="{Binding Path=UploadDate}" Width="80">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Publish State" DisplayMemberBinding="{Binding Path=PublishState}" Width="110">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>                    
+                    <GridViewColumn Header="Modify" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="120"/>
+                                        <ColumnDefinition Width="120"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="30"/>
+                                    </Grid.RowDefinitions>
+                                    <Button Background="White" CommandParameter="{Binding Path=ResourceVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0" Click="UploadResourceDataZipFile_Click">Upload data</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=ResourceVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="0" Click="DownloadResourceDataZipFile_Click">Download data</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=ResourceVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Click="Delete_Click">Delete</Button>
+                                    <Button Background="White" CommandParameter="{Binding Path=ResourceVersion}" Width="115" Height="25" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Click="UpdatePublishState_Click">Publish state</Button>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Name="CreateNewResourceDataButton" Background="White" Grid.Row="2" Width="150" Height="25" HorizontalAlignment="Center" Click="CreateNewResourceDataButton_Click">Create new Resource Data</Button>
+    </Grid>
+</UserControl>

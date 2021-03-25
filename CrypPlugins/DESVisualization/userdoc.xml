@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Data Encryption Standard (DES) is a symmetric cryptosystem that was announced by the US government in cooperation with the National Bureau of Standards (NBS) in 1976 as official standard (FIPS 46) <ref id="NIST" />.
+    <newline /><newline />
+    DES is a block cipher based on a modified Feistel cipher with a block length of 64 bits. Therefore the algorithm encrypts and decrypts a block of 64 bits (= 8 bytes) with a 64 bit long key.
+    For the decryption of a ciphertext the same key is used as for the encryption.
+    Formally the key is also 64 bits long. But each 8th bit of a byte represents a parity bit. This means that the first seven bits of each byte determine the last bit.
+    As the FIPS standard did not enforce to check the parity bit, almost all real implementations didn't check it -- they just ignored it. One can only choose 56 of the 64 bits.
+    So cryptographers say, that the (effective) key length is 56 bits.
+    Today, due to the short key length, the security of DES is no longer considered sufficient.
+    The involvement of the NSA in the design of the algorithm also nourished suspicions about a backdoor.
+  </introduction>
+  <introduction lang="zh-CN">数据加密标准（DES）是美国政府与国家标准局（NBS）合作于1976年发布的对称密码系统，作为正式标准（FIPS 46）。 DES是基于修改后的Feistel密码的块密码，其块长为64位。因此，该算法使用64位长的密钥对64位（= 8字节）的块进行加密和解密。为了解密密文，使用与加密相同的密钥。正式的密钥也是64位长。但是字节的每个第8位代表一个奇偶校验位。这意味着每个字节的前七个位确定最后一个位。由于FIPS标准没有强制检查奇偶校验位，因此几乎所有实际的实现都没有检查它-他们只是忽略了它。一个人只能选择64位中的56位。因此，密码学家说，（有效）密钥长度为56位。如今，由于密钥长度短，DES的安全性已不再足够。 NSA参与算法设计也引起了人们对后门的怀疑。</introduction>
+  <introduction lang="ru">Стандарт шифрования данных (DES) является симметричной криптосистемой, которая была объявлена ​​правительством США в сотрудничестве с Национальным бюро стандартов (NBS) в 1976 году в качестве официального стандарта (FIPS 46). DES - это блок-шифр, основанный на модифицированном шифре Файстеля с длиной блока 64 бит. Поэтому алгоритм шифрует и дешифрует блок из 64 бит (= 8 байтов) с помощью 64-битного длинного ключа. Для дешифрования зашифрованного текста используется тот же ключ, что и для шифрования. Формально ключ также имеет длину 64 бит. Но каждый восьмой бит байта представляет бит четности. Это означает, что первые семь бит каждого байта определяют последний бит. Поскольку стандарт FIPS не применял проверку бит четности, почти все реальные реализации не проверяли его - они просто проигнорировали его. Можно выбрать только 56 из 64 бит. Поэтому криптографы говорят, что (эффективная) длина ключа составляет 56 бит. Сегодня из-за короткой длины ключа безопасность DES больше не считается достаточной. Участие NSA в разработке алгоритма также вызвало подозрения в отношении бэкдора.</introduction>
+  <introduction lang="de-DE">
+    Der Data Encryption Standard (DES) ist ein symmetrisches Verschlüsselungsverfahren, das von der US-Regierung in Zusammenarbeit mit dem National Bureau of Standards (NBS) 1976 als 
+    offizieller Standard (FIPS 46) <ref id="NIST" /> bekanntgegeben wurde.
+    <newline /><newline />
+    Der DES ist eine Blockchiffre, genauer eine leicht modifizierte Feistelchiffre, mit einer Blocklänge von 64 Bit. Der Algorithmus ver- und entschlüsselt folglich einen 64 Bit Datenblock
+    unter Berücksichtigung eines 64 Bit Schlüssels. Die Entschlüsselung eines Geheimtextes erfolgt mit demselben Schlüssel, der für die Verschlüsselung verwendet wurde.
+    Die formale Länge des Schlüssels beträgt ebenfalls 64 Bits. Jedes achte Bit ist allerdings ein sogenanntes Paritätsbit und ermöglicht eine Korrektur von Speicher- und Übertragungsfehlern.
+    Daraus folgt, dass die ersten sieben Bits eines Bytes laut Definition das achte Bit festlegen. Da der FIPS-Standard es nicht verlangte, wurde das Paritätsbit jedoch in fast keiner realen Implementierung überprüft, es wurde einfach ignoriert. 
+    Innerhalb eines DES-Schlüssels sind also nur 56 der 64 Bits frei wählbar.
+    Deshalb spricht man von einer (effektiven) Schlüssellänge von 56 Bit.
+    Heute wird der DES schon aufgrund der kurzen Schlüssellänge von nur 56 Bits nicht mehr als ausreichend sicher erachtet.
+    Auch wegen der Beteiligung der NSA am Design des Algorithmus gab es immer wieder Spekulationen über seine Sicherheit.
+  </introduction>
+  <usage lang="en">
+    The DES encryption algorithm works with a 64 bit (8 bytes) block for the plaintext as well as the key.
+    As the plugin's goal is the actual visualization of the DES algorithm, it does not offer the usage of padding or modes of operation. This means that the plugin expects exactly one block with 64 bits as plaintext.
+    <newline /><newline /><section headline="Encryption">
+      The component expects the plaintext as a byte array on the input labeled "Plaintext" and a key as a byte array on the input labeled "Key".
+      If the selected size of the input data does not correspond to a 8 byte array, an error message will be issued and the execution stops.
+      To keep the usage simple, the plugin doesn't check the correctness of the parity bits used in the key.
+      The encrypted data block is sent to the output of the component also as a byte array.
+    </section></usage>
+  <usage lang="zh-CN">DES加密算法使用64位（8字节）的明文和密钥块。由于该插件的目标是DES算法的实际可视化，因此它不提供对padding或操作模式的使用。这意味着该插件期望一个64位的纯文本块。该组件期望纯文本作为输入上标有“ Plaintext”的字节数组，期望键作为输入上标有“ Key”的字节数组。如果输入数据的所选大小与8字节数组不对应，将发出错误消息，并停止执行。为了简化用法，插件不检查密钥中使用的奇偶校验位的正确性。加密的数据块也作为字节数组发送到组件的输出。</usage>
+  <usage lang="ru">Алгоритм шифрования DES работает с блоком 64 бит (8 байтов) для открытого текста, а также с ключом. Поскольку целью плагина является фактическая визуализация алгоритма DES, он не предлагает использование дополнений или режимов работы. Это означает, что плагин ожидает ровно один блок с 64 битами в качестве открытого текста. Компонент ожидает открытый текст как массив байтов на входе с надписью «Plaintext» и ключ в виде байтового массива на входе с надписью «Key». Если выбранный размер входных данных не соответствует 8-байтовому массиву, будет выдано сообщение об ошибке, и выполнение прекратится. Чтобы упростить использование, плагин не проверяет правильность битов четности, используемых в ключе. Зашифрованный блок данных отправляется на выход компонента также как массив байтов.</usage>
+  <usage lang="de-DE">
+    Beim DES-Verschlüsselungsalgorithmus hat sowohl der Datenblock als auch der Schlüssel eine Länge von 64 Bits (8 Bytes).
+    Da das eigentliche Ziel des Plugins die Visualisierung des DES-Algorithmus ist, wurden Methoden des Padding und Betriebsmodi nicht integriert. Das bedeutet, dass das Plugin genau einen Block mit 64 Bits als Klartext
+    erwartet.
+    <newline /><newline /><section headline="Verschlüsselung">
+      Die Komponente erwartet als Eingabe den zu verschlüsselnden Klartext als Byte-Array am Eingang "Klartext" und den Schlüssel als Byte-Array am Eingang "Schlüssel". 
+      Stimmt die Größe der Eingabedaten nicht mit einem 8 Byte-Array überein, so wird eine Fehlermeldung ausgegeben und die Ausführung wird beendet.
+      Aus Gründen der Einfachheit werden die Paritätsbits des Schlüssels nicht auf Korrektheit überprüft.
+      Der Geheimtext wird als Byte-Array zum Ausgang der Komponente gesendet.
+    </section></usage>
+  <presentation lang="en">
+    The focus of this component is on its presentation mode. Here, the structure and the different operations within the encryption algorithm are visualized.
+    Thereby the understanding of the DES encryption should be promoted. This plugin can be used for educational purposes to enable a simple introduction to basic cryptographic operations, for
+    example permutations and S-boxes. Additionally the overall structure of the DES encryption is illustrated based on graphical representations. Thus, the properties of the DES with its
+    advantages and disadvantages can be clarified without mentioning complex mathematical definitions and proofs.
+    By using the plugin it is also possible to see important building concepts of block ciphers and Feistel ciphers in action. This includes the Feistel network and the
+    related key schedule algorithm.
+    <section headline="Diffusion Visualization">
+      An important function the presentation provides is the ability to illustrate the diffusion property of the DES. The impact on the diffusion of individual operations and thus all rounds
+      is presented in a clear and understandable way.
+      Therefore, the plugin contains the ability to flip individual input bits and show the impact over the entire encryption process. The resulting changes,
+      this means the swapped bits, are highlighted in red color if they differ from the original bits. It is possible to flip any individual input bit at any time in the presentation.
+    </section></presentation>
+  <presentation lang="zh-CN">该组件的重点在于其演示模式。在此，加密算法中的结构和不同操作将可视化。因此，应该促进对DES加密的理解。此插件可用于教育目的，以简单介绍基本密码操作，例如排列和S-box。另外，基于图形表示来说明DES加密的总体结构。因此，可以在不提及复杂的数学定义和证明的情况下阐明DES的优点和缺点。通过使用该插件，还可以看到实际使用的分组密码和Feistel密码的重要构建概念。这包括Feistel网络和相关的密钥调度算法。演示文稿提供的一个重要功能是能够说明DES的扩散特性。以清晰易懂的方式介绍了对单个操作的传播以及因此而造成的影响。因此，该插件具有翻转单个输入位并显示对整个加密过程的影响的功能。如果更改后的位与原始位不同，则产生的更改（即已交换的位）将以红色突出显示。在演示中的任何时候都可以翻转任何单独的输入位。</presentation>
+  <presentation lang="ru">Основное внимание в этом компоненте уделяется режиму презентации. Здесь визуализируются структура и различные операции в алгоритме шифрования. Таким образом, следует поощрять понимание шифрования DES. Этот плагин можно использовать в образовательных целях, чтобы обеспечить простое введение в основные криптографические операции, например, перестановки и S-боксы. Кроме того, общая структура DES-шифрования проиллюстрирована на основе графических представлений. Таким образом, свойства DES с его преимуществами и недостатками могут быть выяснены без упоминания сложных математических определений и доказательств. Используя плагин, также можно увидеть важные идеи построения блочных шифров и шифров Фейстеля. Это включает в себя сеть Feistel и соответствующий алгоритм расписания. Важной функцией, которую предоставляет презентация, является возможность проиллюстрировать свойство диффузии DES. Влияние на распространение отдельных операций и, следовательно, на все раунды представляется четким и понятным образом. Таким образом, плагин содержит возможность переворачивать отдельные входные биты и показывать влияние на весь процесс шифрования. Получающиеся изменения, это означает, что обменные биты выделены красным цветом, если они отличаются от исходных бит. В любой момент презентации можно перевернуть любой отдельный входной бит.</presentation>
+  <presentation lang="de-DE">
+    Der Fokus der Komponente liegt auf seinem Präsentationsmodus. Hier werden die Struktur und die verschiedenen Operationen innerhalb des Algorithmus visualisiert.
+    Dadurch soll das Verständnis der DES-Verschlüsselung gefördert werden. Dieses Plugin kann somit bevorzugt in der Lehre angewendet werden, um einen leichteren Einstieg in
+    kryptographische Grundoperationen, zum Beispiel Permutationen und S-Boxen, zu ermöglichen. Zusätzlich werden anhand von grafischen Darstellungen die allgemeine Struktur des DES
+    und seine Funktionsweise veranschaulicht. Somit können die Eigenschaften des DES mit seinen Vor- und Nachteilen verdeutlicht werden, ohne rein mathematische Definitionen und Beweise anzuführen.
+    Mithilfe des Plugins lassen sich ebenfalls wichtige Grundbausteine von Blockchiffren sowie Feistelchiffren in Aktion betrachten. Dazu gehört das Feistel-Netzwerk und der
+    damit verbundene Key-Schedule-Algorithmus.
+    <section headline="Diffusion-Visualisierung">
+      Eine wichtige Funktion innerhalb der Präsentation ist die Darstellung der Diffusionseigenschaft des DES. Damit lassen sich die Auswirkungen von einzelnen Operationen und somit ganzen Runden
+      eindeutig und nachvollziehbar darstellen.
+      Das Plugin enthält dazu die Möglichkeit, einzelne Eingabebits zu flippen und sich die Auswirkungen über die gesamte Verschlüsselung hinweg anzuschauen. Die dadurch entstehenden Veränderungen,
+      das bedeutet die vertauschten Bits, werden in der Farbe Rot gegenüber den ursprünglichen Bits hervorgehoben. Das Flippen einzelner Eingabebits ist zu jeder Zeit in der Präsentation möglich.
+    </section></presentation>
+  <references>
+    <linkReference id="wikipedia">
+      <link url="http://en.wikipedia.org/wiki/Data_Encryption_Standard" lang="en" />
+      <caption lang="en">Data Encryption Standard (Wikipedia)</caption>
+      <link url="http://de.wikipedia.org/wiki/Data_Encryption_Standard" lang="de-DE" />
+      <caption lang="de-DE">Data Encryption Standard (Wikipedia)</caption>
+    </linkReference>
+    <linkReference id="NIST">
+      <link url="http://csrc.nist.gov/publications/fips/fips46-3/fips46-3.pdf" lang="en" />
+      <caption lang="en">DES Specification by NIST (PDF)</caption>
+      <link url="http://csrc.nist.gov/publications/fips/fips46-3/fips46-3.pdf" lang="de-DE" />
+      <caption lang="de-DE">DES-Spezifikation des NIST (englisch, PDF)</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="Primes.WpfControls.Primegeneration.InputControlPolynom"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:comps="clr-namespace:Primes.WpfControls.Components"
+    xmlns:lang="clr-namespace:Primes.Resources.lang.WpfControls.Generation"
+    Loaded="UserControl_Loaded">
+
+    <GroupBox Name="gbTitle">
+        <StackPanel>
+            <DockPanel Name="pnlImage" />
+            <Grid Name="pnlFactors" ShowGridLines="False">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.1*" />
+                    <ColumnDefinition Width="0.9*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <comps:InputRangeControl
+                InputRangeControlType="Vertical"
+                SecondParameterPresent="False"
+                FreeTextboxWidth="100" ShowCalcInput="True" ShowFreeInput="True" x:Name="rangeinputcontrol" ButtonCancelIsEnabled="False"
+                Title="{x:Static lang:PrimesGeneration.polynom_values}" BorderColor="Black" />
+        </StackPanel>
+    </GroupBox>
+
+</UserControl>

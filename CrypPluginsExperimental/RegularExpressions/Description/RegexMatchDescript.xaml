@@ -1,0 +1,29 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" Foreground="#FF15428B">
+        <Span FontFamily="Georgia" FontWeight="Bold" FontSize="18.6666666666667">
+            <Span.TextDecorations>
+                <TextDecoration Location="Underline" />
+            </Span.TextDecorations> Regular Expression Match
+        </Span>
+    </Paragraph>
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" Foreground="#FF15428B" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" Foreground="#FF15428B">
+        <Span Foreground="#FF0000FF">
+            <Hyperlink NavigateUri="http://en.wikipedia.org/wiki/regex" ToolTip="Click to Open">
+                <Hyperlink.TextDecorations>
+                    <TextDecoration Location="Underline" />
+                </Hyperlink.TextDecorations> http://en.wikipedia.org/wiki/regex
+            </Hyperlink>
+        </Span>
+    </Paragraph>
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" Foreground="#FF15428B" />
+    <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" Foreground="#FF15428B">
+        <Span xml:lang="en-gb" xml:space="preserve">This tool provides you to check the containment of a string or a pattern of regular expressions in an inputtext, giving a boolean output. </Span>
+    </Paragraph>
+    <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" Foreground="#FF15428B">
+        <Span xml:lang="en-gb" />
+    </Paragraph>
+    <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16" Foreground="#FF15428B">
+        <Span xml:lang="en-gb"></Span>
+    </Paragraph>
+</FlowDocument>

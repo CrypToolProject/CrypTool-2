@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Paillier Cipher with Addition</title>
+  <title lang="zh">Paillier密码加上</title>
+  <title lang="ru">Шифр Пайлера с добавлением</title>
+  <summary lang="en">Usage of the <i>Pailler</i> cipher with addition</summary>
+  <summary lang="zh">加上Pailler密码的用法</summary>
+  <summary lang="ru">Использование шифра Пайлера с добавлением</summary>
+  <description lang="en">This template shows the usage of the <i>Pailler</i> cipher with addition.</description>
+  <description lang="zh">此模板显示了Pailler密码加法的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование шифра Pailler с добавлением.</description>
+  <keywords>homomorphic, Eurocrypt, Damgard, Jurik, asymmetric</keywords>
+  <keywords lang="zh">同态，Eurocrypt，Damgard，Jurik，不对称</keywords>
+  <keywords lang="ru">гомоморфный, Eurocrypt, Damgard, Jurik, асимметричный</keywords>
+  <title lang="de">Paillier-Chiffre mit Addition</title>
+  <summary lang="de">Benutzung der <i>Paillier</i>-Chiffre mit Addition</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Paillier</i>-Chiffre mit Addition.</description>
+  <keywords lang="de">homomorph, asymmetrisch</keywords>
+  <icon file="Pailler_Add.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="Comparators" />
+    <plugin name="Paillier" />
+    <plugin name="PaillierKeyGenerator" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$KeyGenerator$" value="Schlüsselgenerator" />
+    <replacement key="$Encrypt$" value="Verschlüsselung" />
+    <replacement key="$Decrypt$" value="Entschlüsselung" />
+    <replacement key="$Decrypted Sum$" value="Entschlüsselte Summe" />
+    <replacement key="$BooleanOutput$" value="Boolesche Ausgabe" />
+    <replacement key="$Comparator$" value="Vergleicher" />
+    <replacement key="$Add$" value="Addition" />
+    <replacement key="$Summand$" value="Summand" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$KeyGenerator$" value="密钥生成器" />
+    <replacement key="$Encrypt$" value="加密" />
+    <replacement key="$Decrypt$" value="解密" />
+    <replacement key="$Decrypted Sum$" value="解密的总和" />
+    <replacement key="$BooleanOutput$" value="布尔输出" />
+    <replacement key="$Comparator$" value="比较器" />
+    <replacement key="$Add$" value="加成" />
+    <replacement key="$Summand$" value="求和" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$KeyGenerator$" value="генератор ключей" />
+    <replacement key="$Encrypt$" value="кодирование" />
+    <replacement key="$Decrypt$" value="дешифрование" />
+    <replacement key="$Decrypted Sum$" value="Расшифрованная сумма" />
+    <replacement key="$BooleanOutput$" value="Логический вывод" />
+    <replacement key="$Comparator$" value="компаратор" />
+    <replacement key="$Add$" value="прибавление" />
+    <replacement key="$Summand$" value="слагаемое" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$KeyGenerator$" value="KeyGenerator" />
+    <replacement key="$Encrypt$" value="Encrypt" />
+    <replacement key="$Decrypt$" value="Decrypt" />
+    <replacement key="$Decrypted Sum$" value="Decrypted Sum" />
+    <replacement key="$BooleanOutput$" value="BooleanOutput" />
+    <replacement key="$Comparator$" value="Comparator" />
+    <replacement key="$Add$" value="Add" />
+    <replacement key="$Summand$" value="Summand" />
+  </replacements>
+</sample>

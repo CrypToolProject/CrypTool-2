@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Vernam Cipher</title>
+  <title lang="zh">听到密码</title>
+  <title lang="ru">Вернама Cipher</title>
+  <title lang="de">Vernam-Chiffre</title>
+  <summary lang="en">Usage of the <i>Vernam</i> cipher</summary>
+  <summary lang="zh">Vernam密码的用法</summary>
+  <summary lang="ru">Использование шифрования Вернама</summary>
+  <summary lang="de">Benutzung der <i>Vernam</i>-Chiffre</summary>
+  <description lang="en">
+  Vernam is symmetrical stream cipher which was originally invented by Gilbert Vernam in 1917
+  <newline />
+  In the Vernam Cipher an alphanumeric plaintext is combined with a chosen alphanumeric key-text to generate a ciphertext. 
+  This combination results from shifting each character of the plaintext cyclically by the corresponding value of the keytext-character.
+  So if e.g. the plaintext is "a" and the keytext "c" and our alphabet is the basic one from a-z, the character "a" would be shifted by 3 and result into "d"    </description>
+  <description lang="zh">Vernam是对称流密码，最初由Gilbert Vernam于1917年发明。在Vernam密码中，将字母数字纯文本与所选的字母数字密钥文本组合在一起以生成密文。这种组合是由于将明文的每个字符周期性地移动关键文本字符的相应值而导致的。因此，例如，如果明文为“ a”，关键文本为“ c”，而我们的字母是从az开始的基本字母，则字符“ a”将被移动3并转换为“ d”</description>
+  <description lang="ru">Вернам - симметричный потоковый шифр, который был первоначально изобретен Гилбертом Вернамом в 1917 году. В Vernam Cipher алфавитно-цифровой текст объединяется с выбранным буквенно-цифровым ключевым текстом для генерации зашифрованного текста. Эта комбинация является результатом циклического переключения каждого символа открытого текста на соответствующее значение ключевого символа. Итак, если, например, открытый текст - это «a», а ключевой текст «c», и наш алфавит является основным из az, символ «a» будет сдвинут на 3 и приведет к «d»,</description>
+  <description lang="de">Vernam ist eine symmetrische Stromchiffre, die 1917 von Gilbert Vernam erfunden wurde
+<newline />
+Bei der Vernam-Chiffre wird ein alphanumerischer Klartext mit einem alphanumerischem Schlüsseltext kombiniert um einen verschlüsselten Text zu erhalten.
+Die Kombination der Texte geschieht durch zyklisches Verschieben jedes einzelnen Buchstabens des Klartextes um den Wert des jeweiligen Buchstabens des Schlüsseltextes.
+Wenn z.B. der Klartext "a" und der Schlüsseltext "c" lautet und das Alphabet aus den Zeichen a-z besteht, würde der Buchstabe "a" um 3 Stellen verschoben werden und verschlüsselt "d" ergeben.
+  </description>
+  <keywords>Vernam, OTP, One-time pad</keywords>
+  <keywords lang="zh">Vernam，OTP，一次性垫</keywords>
+  <keywords lang="ru">Вернама</keywords>
+  <keywords lang="de">Vernam</keywords>
+  <icon file="VernamCipher.png" />
+  <relevantPlugins>
+    <plugin name="Vernam" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Vernam Cipher$" value="Vernam-Chiffre" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$Secret Key$" value="Geheimer Schlüssel" />
+    <replacement key="$text$" value="FRANZ JAGT IM KOMPLETT VERWAHRLOSTEN TAXI QUER DURCH BAYERN" />
+    <replacement key="$key$" value="ZHBVCXSERTZUIKMNBVGTZUIOLKMNBVGFTZUHBNVCDSEGKRCSUSMQPGLKZSX" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Vernam Cipher$" value="维南·希夫尔" />
+    <replacement key="$Alphabet$" value="字母" />
+    <replacement key="$Secret Key$" value="密钥" />
+    <replacement key="$text$" value="横跨巴伐利亚的完全稀释的出租车上的弗朗茨狩猎" />
+    <replacement key="$key$" value="ZHBVCXSERTZUIKMNBVGTZUIOLKMNBVGFTZUHBNVCDSEGKRCSUSMQPGLKZSX" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Vernam Cipher$" value="Вернама-Chiffre" />
+    <replacement key="$Alphabet$" value="Алфавит" />
+    <replacement key="$Secret Key$" value="Секретный ключ" />
+    <replacement key="$text$" value="ФРАНЦ СЧИТАЕТ ПОЛНОСТЬЮ ТАКСИ КРЕСТ ЧЕРЕЗ БАВАРИУ" />
+    <replacement key="$key$" value="ZHBVCXSERTZUIKMNBVGTZUIOLKMNBVGFTZUHBNVCDSEGKRCSUSMQPGLKZSX" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$Vernam Cipher$" value="Vernam Cipher" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$Secret Key$" value="Secret Key" />
+    <replacement key="$text$" value="THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG" />
+    <replacement key="$key$" value="ZHBVCXSERTZUIKMNBVGTZUIOLKMNBVGFTZUHBNVCDSE" />
+  </replacements>
+</sample>

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    Decimalization is the process of creating a decimal number from a binary number. Furthermore certain characteristics of the 
+    binary data should be transferred to the decimal, e.g. a uniform distribution of the digits and unpredictability of the digits. This plugin realizes
+    different decimalization processes within the CrypTool 2 environment.
+  </introduction>
+  <introduction lang="zh-CN">小数化是从二进制数创建十进制数的过程。此外，应将二进制数据的某些特征转换为小数，例如数字的均匀分布和数字的不可预测性。该插件可在CrypTool 2环境中实现不同的十进制处理。</introduction>
+  <introduction lang="ru">Decimalization - это процесс создания десятичного числа из двоичного числа. Кроме того, некоторые характеристики двоичных данных должны быть перенесены в десятичную, например, равномерное распределение цифр и непредсказуемость цифр. Этот плагин реализует различные процессы децимализации в среде CrypTool 2.</introduction>
+  <usage lang="en">
+    The form of the input data is a byte array. The output formats are a string and an integer array.
+    Each field of the integer array contains a digit of the output decimal.
+    The decimalication process and the number of decimal output digits can be adjusted in the configuration panel.  
+    If there is not enough binary input data to generate a decimal with a certain amount of digits, the CrypTool 2
+    environment gets a message from the plugin.
+  </usage>
+  <usage lang="zh-CN">输入数据的形式为字节数组。输出格式是字符串和整数数组。整数数组的每个字段都包含一个输出十进制数字。十进制化过程和十进制输出位数可以在配置面板中进行调整。如果没有足够的二进制输入数据来生成具有一定位数的小数，则CrypTool 2环境会从插件获取消息。</usage>
+  <usage lang="ru">Форма входных данных представляет собой массив байтов. Форматы вывода - это строка и целочисленный массив. Каждое поле целочисленного массива содержит цифру выходного десятичного числа. Процесс дезаминации и количество десятичных выходных цифр можно настроить на панели конфигурации. Если для генерации десятичного числа с определенным количеством цифр недостаточно двоичных входных данных, среда CrypTool 2 получает сообщение от плагина.</usage>
+  <presentation lang="en">
+    The plugin offers the following decimalization methods:
+    <newline /><newline /><b>(1) Visa</b><newline />
+    The first step of the Visa method is the conversion of the binary input to a sequence of hexadecimals.
+    After this conversion each digit of the sequence is considered from left to right and if it is below A it will
+    be appended to the output until the required number of output digits is reached.
+    If there are too few hexadecimal digits below A, the sequence of hexadecimals is treated another time. This time all digits 
+    above or equal A are considered. The value of the digit will be subtracted by A and it gets appended to the output until 
+    the claimed nummber of decimal digits is reached. This step only creates digits between 0 and 5. <newline />
+    If the binary input is too short to create the requested amount of decimal 
+    digits a warning will be sent to the CrypTool 2 environment.<newline />
+    A variant of the Visa method is the modified Visa method. If the binary input is too short another binary input is requested
+    to get the required amount of decimals. This decimalization method is not implemented yet.
+    <newline /><newline /><u>Example</u><newline /><newline />
+    Binary Number: 1011 1001 0100 0101 1111 1010<newline />
+    Hexadecimal: B945FA<newline />
+    Decimal: 9451<newline /><newline />
+    This example of the Visa method creates a decimal with 4 digits from the given binary data.
+    The first step consists of the transformation of the binary data into a hexadecimal. This process is done from left
+    to right and 4 bits yield a hexadecimal digit. The result of the transformation is B945FA.
+    Starting with the most left hexadecimal digit, each hexadecimal digit of the sequence, which has a value below A, is considered
+    for the decimal. The following number is created: 945. Due to a lack of enough hexadecimal digits, which 
+    have a value below A, the intermediate decimal has only 3 instead of 4 digits. Now, the hexadecimal digits, which are
+    above or equal A, are considered to get the last decimal digit. Thus, the digit B is choosen, it is reduced by A, and it is appended
+    to the decimal. The result is the decimal 9451.
+    <newline /><newline /><b>(2) IBM</b><newline />
+    The IBM method is similar to the Visa method. The binary input is converted to a sequence of hexadecimals.
+    Starting from the beginning of the sequence each digit will be added to the output until the claimed number of
+    decimal digits is reached. If the value of a hexadecimal digit is above or equal A it will be mapped to a digit in the 
+    range from 0 to 9. This mapping is done according to a table. This table can be adjusted within the configuration panel 
+    of the plugin. <newline />
+    The plugin sends a warning to the CrypTool 2 environment if the binary input is too short to realize the 
+    requested number of decimal numbers.
+    <newline /><newline /><u>Example</u><newline /><newline />
+    Binary Number: 1011 1001 0100 0101 1111 1010<newline />
+    Hexadecimal: B945FA<newline />
+    Decimal: 1945<newline /><newline />
+    This example of the IBM method creates a decimal with 4 digits from the given binary data.
+    The first step consists of the transformation of the binary data into a hexadecimal. This process is done from left
+    to right and 4 bits yield a hexadecimal digit. The result of the transformation is B945FA. Starting with the most left 
+    hexadecimal digit, each hexadecimal digit of the sequence is considered for the decimal. The first 4 
+    hexadecimal digits yield the decimal. All hexadecimal digits above
+    or equal A are mapped on a digit below A. In this case the mapping is A to 0, B to 1, C to 2, D to 3, E to 4, and F to 5.
+    The result is the decimal 1945.
+    <newline /><newline /><b>(3) Modulo</b><newline />
+    The modulo method considers the binary input as positive integer. This number will be reduced modulo 10^k, where k 
+    represents the requested number of decimal digits. The result of the calculation is the output. <newline />
+    The plugin sends an error notification to the CrypTool 2 environment if the binary input or an intermediate result
+    exceeds the range of the used BigInteger implementation. If the binary input is too short to realize the
+    requested number of decimal numbers a warning notification is sent.
+    <newline /><newline /><u>Example</u><newline /><newline />
+    Binary Number: 1011 1001 0100 0101 1111 1010<newline />
+    Integer: 12142074<newline />
+    Decimal: 2074<newline /><newline />
+    This example of the modulo method creates a decimal with 4 digits from the given binary data.
+    The binary input is considered as positive integer 12142074. The reduction of the integer by 10^4 yields 2074.
+    Therefore the result is 2074.
+    <newline /><newline /><b>(4) Multiplication</b><newline />
+    The multiplication method considers the binary input as positive integer. This number is divided by 2^n, where n represents
+    the number of bits of the binary input. The result is then multiplied by 10^k, where k represents the requested number
+    of decimal digits. The rounded down result is the decimal output.
+    The plugin sends an error notification to the CrypTool 2 environment if the binary input or an intermediate result
+    exceeds the range of the used BigInteger implementation.
+    <newline /><newline /><u>Example</u><newline /><newline />
+    Binary Number: 1011 1001 0100 0101 1111 1010<newline />
+    Integer: 12142074<newline />
+    Decimal: 7237<newline /><newline />
+    This example of the multiplication method creates a decimal with 4 digits from the given binary data.
+    The binary input is considered as positive integer 12142074. This integer is divided by 2^24. The quotient
+    is multiplied by 10^4 and adjusted downward. Thus, the result is 7237.
+    <newline /><newline /><newline /><b>Quality of Decimalization Methods</b><newline />
+    The quality of the decimalization methods is measured by the deviation from a uniform distribution of the decimals.
+    A condition is that the binary input is uniform distributed. Therefore, an ideal decimalization method would create
+    all decimals of k-arity with the same probability.<newline />
+    On that note the quality of the IBM method is low because decimals with mapped digits have a higher probability.
+    The same conclusion can be made for the Visa method if there is only a short amount of binary input. However,
+    if the amount of binary input is big enough, no hexadecimal digits are mapped. Therefore, no decimal digit has a
+    higher probability than another one and the Visa method achieves a high quality. <newline />
+    Furthermore the modulo and the multiplication method have a high quality. <newline />
+    A detailed evaluation of the quality of the single decimalization methods can be found in the referenced paper.<ref id="Dec" /></presentation>
+  <presentation lang="zh-CN">该插件提供以下十进制方法：（1）Visa方法Visa方法的第一步是将二进制输入转换为十六进制序列。进行此转换后，将从左到右考虑序列的每个数字，如果它在A之下，它将被附加到输出中，直到达到所需的输出数字为止。如果A下方的十六进制数字太少，则将十六进制序列再次处理。这次考虑了大于或等于A的所有数字。该数字的值将减去A，并将其附加到输出中，直到达到要求的十进制数字。此步骤仅创建0到5之间的数字。如果二进制输入太短而无法创建请求的十进制数字，则会向CrypTool 2环境发送警告。 Visa方法的一种变体是修改后的Visa方法。如果二进制输入太短，则要求另一个二进制输入以获得所需的小数位数。此十进制方法尚未实现。示例二进制数：1011 1001 0100 0101 1111 1010十六进制：B945FA十进制：9451此Visa方法的示例从给定的二进制数据中创建一个包含4位数字的十进制。第一步包括将二进制数据转换为十六进制。此过程从左到右完成，4位产生一个十六进制数字。转换的结果是B945FA。从最左边的十六进制数字开始，该序列的每个十六进制数字（其值都小于A）被视为十进制。将创建以下数字：945.由于缺少足够的十六进制数字（其值小于A），因此中间十进制数只有3位而不是4位。现在，大于或等于A的十六进制数字被视为获得最后一个十进制数字。因此，选择了数字B，将其减少了A，并附加到小数点后。结果为十进制9451。（2）IBM IBM方法类似于Visa方法。二进制输入将转换为十六进制序列。从序列的开头开始，每个数字将被添加到输出中，直到达到要求的十进制数字。如果十六进制数字的值大于或等于A，它将被映射到0到9范围内的数字。此映射是根据表格完成的。可以在插件的配置面板中调整此表。如果二进制输入太短而无法实现请求的十进制数，则插件会向CrypTool 2环境发送警告。示例二进制数：1011 1001 0100 0101 1111 1010十六进制：B945FA十进制：1945此IBM方法示例从给定的二进制数据中创建一个具有4位数字的十进制。第一步包括将二进制数据转换为十六进制。此过程从左到右完成，4位产生一个十六进制数字。转换的结果是B945FA。从最左边的十六进制数字开始，将序列的每个十六进制数字视为十进制。前四个十六进制数字产生十进制数。高于或等于A的所有十六进制数字都映射到A之下的数字。在这种情况下，映射是A到0，B到1，C到2，D到3，E到4和F到5。结果是十进制1945。（3）模模方法将二进制输入视为正整数。此数字将以10 ^ k为模减少，其中k代表所请求的十进制数字。计算的结果是输出。如果二进制输入或中间结果超出了所用BigInteger实现的范围，则插件会将错误通知发送到CrypTool 2环境。如果二进制输入太短而无法实现所请求的十进制数，则会发送警告通知。示例二进制数：1011 1001 0100 0101 1111 1010整数：12142074小数：2074此模方法的示例从给定的二进制数据中创建一个具有4位数字的十进制。二进制输入被视为正整数12142074。将该整数减10 ^ 4将得出2074。因此结果为2074。（4）乘法乘法方法将二进制输入视为正整数。该数字除以2 ^ n，其中n表示二进制输入的位数。然后将结果乘以10 ^ k，其中k代表所请求的十进制数字。四舍五入的结果是十进制输出。如果二进制输入或中间结果超出了所用BigInteger实现的范围，则插件会将错误通知发送到CrypTool 2环境。示例二进制数：1011 1001 0100 0101 1111 1010整数：12142074小数：7237此乘法方法的示例从给定的二进制数据中创建一个具有4位数字的十进制。二进制输入被视为正整数12142074。该整数除以2 ^ 24。商乘以10 ^ 4并向下调整。因此，结果是7237。小数方法的质量通过与小数点均匀分布的偏差来度量小数方法的质量。条件是二进制输入是均匀分布的。因此，理想的十进制方法将以相同的概率创建k-arity的所有小数。值得注意的是，IBM方法的质量很差，因为带有映射数字的小数更有可能出现。如果只有少量的二进制输入，则对于Visa方法可以得出相同的结论。但是，如果二进制输入量足够大，则不会映射任何十六进制数字。因此，没有一个十进制数字比另一个数字具有更高的概率，并且Visa方法可以实现高质量。此外，模和乘法方法具有高质量。有关单个十进制方法的质量的详细评估，请参见参考文件。</presentation>
+  <presentation lang="ru">Плагин предлагает следующие методы децимализации: (1) Visa Первым шагом метода Visa является преобразование двоичного ввода в последовательность шестнадцатеричных. После этого преобразования каждая цифра последовательности рассматривается слева направо, а если она ниже А, она добавляется к выходу до тех пор, пока не будет достигнуто требуемое количество выходных цифр. Если числа меньше шестнадцатеричных цифр ниже А, последовательность гексадецималов обрабатывается в другое время. В этот раз учитываются все цифры выше или равные A. Значение цифры будет вычтено А, и оно будет добавлено к выходу до тех пор, пока не будет достигнута заявленная цифра десятичных цифр. Этот шаг создает только цифры от 0 до 5. Если двоичный вход слишком короткий, чтобы создать запрошенное количество десятичных цифр, предупреждение будет отправлено в среду CrypTool 2. Вариантом визового метода является модифицированный метод Visa. Если двоичный вход слишком короткий, другой двоичный вход запрашивается для получения требуемого количества десятичных знаков. Этот метод дезамализации еще не реализован. Пример Двоичный номер: 1011 1001 0100 0101 1111 1010 Шестнадцатеричный: B945FA Десятичный: 9451 Этот пример метода Visa создает десятичную цифру с 4 цифрами от данных двоичных данных. Первый шаг состоит в преобразовании двоичных данных в шестнадцатеричный. Этот процесс выполняется слева направо, а 4 бита - шестнадцатеричной цифрой. Результатом преобразования является B945FA. Начиная с самой левой шестнадцатеричной цифры, каждая шестнадцатеричная цифра последовательности, которая имеет значение ниже A, рассматривается для десятичной. Создается следующий номер: 945. Из-за отсутствия достаточных шестнадцатеричных цифр, которые имеют значение ниже A, промежуточный десятичный знак имеет только 3 вместо 4 цифр. Теперь считаются шестнадцатеричные цифры, которые выше или равны A, чтобы получить последнюю десятичную цифру. Таким образом, выбирается цифра B, она уменьшается на A и добавляется к десятичной. Результатом является десятичное число 9451. (2) IBM. Метод IBM похож на метод Visa. Двоичный вход преобразуется в последовательность гексадецимал. Начиная с начала последовательности каждая цифра будет добавлена ​​к выходу до тех пор, пока не будет достигнут заявленный номер десятичных цифр. Если значение шестнадцатеричной цифры выше или равно A, оно будет отображаться в цифре в диапазоне от 0 до 9. Это сопоставление выполняется в соответствии с таблицей. Эта таблица может быть настроена на панели конфигурации плагина. Плагин отправляет предупреждение в среду CrypTool 2, если двоичный вход слишком короткий, чтобы реализовать запрошенное число десятичных чисел. Пример Двоичный номер: 1011 1001 0100 0101 1111 1010 Шестнадцатеричный: B945FA Десятичный: 1945 Этот пример метода IBM создает десятичную цифру с 4 цифрами от данных двоичных данных. Первый шаг состоит в преобразовании двоичных данных в шестнадцатеричный. Этот процесс выполняется слева направо, а 4 бита - шестнадцатеричной цифрой. Результатом преобразования является B945FA. Начиная с самой левой шестнадцатеричной цифры, каждая шестнадцатеричная цифра последовательности считается десятичной. Первые 4 шестнадцатеричных цифры дают десятичную дробь. Все шестнадцатеричные цифры выше или равны A отображаются на цифре ниже A. В этом случае отображение составляет от A до 0, от B до 1, от C до 2, от D до 3, от E до 4 и от F до 5. Результатом является decimal 1945. (3) Modulo Метод modulo рассматривает двоичный вход как положительное целое число. Это число будет уменьшено по модулю 10 ^ k, где k представляет запрошенное число десятичных цифр. Результатом вычисления является выход. Плагин отправляет уведомление об ошибке в среду CrypTool 2, если двоичный вход или промежуточный результат превышают диапазон используемой реализации BigInteger. Если двоичный вход слишком короткий, чтобы реализовать запрошенное число десятичных чисел, отправляется предупреждающее уведомление. Пример Двоичный номер: 1011 1001 0100 0101 1111 1010 Целое число: 12142074 Десятичное число: 2074 Этот пример метода modulo создает десятичное число с 4 цифрами от данных двоичных данных. Бинарный вход считается положительным целым числом 12142074. Уменьшение целого числа на 10 ^ 4 дает 2074. Следовательно, результат равен 2074. (4) Умножение Метод умножения рассматривает двоичный вход как положительное целое число. Это число делится на 2 ^ n, где n представляет количество бит двоичного входа. Затем результат умножается на 10 ^ k, где k представляет запрошенное число десятичных цифр. Результат округления - это десятичный вывод. Плагин отправляет уведомление об ошибке в среду CrypTool 2, если двоичный вход или промежуточный результат превышают диапазон используемой реализации BigInteger. Пример Двоичный номер: 1011 1001 0100 0101 1111 1010 Целое число: 12142074 Десятичное число: 7237 Этот пример метода умножения создает десятичную цифру с 4 цифрами от данных двоичных данных. Двоичный вход считается положительным целым числом 12142074. Это целое число делится на 2 ^ 24. Фактор умножается на 10 ^ 4 и корректируется вниз. Таким образом, результат равен 7237. Качество методов децимализации Качество методов децимализации измеряется отклонением от равномерного распределения десятичных знаков. Условие состоит в том, что двоичный вход равномерно распределен. Поэтому идеальный метод дезамализации создавал бы все десятичные числа k-арности с той же вероятностью. В этой заметке качество метода IBM низкое, поскольку десятичные числа с отображаемыми цифрами имеют более высокую вероятность. Такой же вывод можно сделать для метода Visa, если имеется только малая часть двоичного ввода. Однако, если количество двоичного входа достаточно велико, шестнадцатеричные цифры не отображаются. Поэтому никакая десятичная цифра не имеет более высокую вероятность, чем другая, и метод Visa достигает высокого качества. Кроме того, метод модуляции и умножения имеет высокое качество. Подробную оценку качества отдельных методов дезамализации можно найти в справочной статье.</presentation>
+  <introduction lang="de-DE">
+    Der Prozess der Dezimalisierung erstellt Dezimalzahlen aus binären Zahlen. Dabei sollen gewisse Eigenschaften, 
+    beispielsweise eine Gleichverteilung oder die Nichtvorhersagbarkeit der Ziffern, von der binären Zahl auf 
+    die Dezimalzahl übertragen werden. Dieses Plugin ermöglicht den Einsatz verschiedener Verfahren der Dezimalisierung 
+    innerhalb der CrypTool 2-Umgebung.
+  </introduction>
+  <usage lang="de-DE">
+    Das Dezimalisierungs-Plugin nimmt die binären Eingabedaten in Form eines Byte-Arrays entgegen. Als Ausgabeformate stehen einerseits 
+    ein String mit der Dezimalzahl und andererseits ein Integer-Array zur Verfügung. Die einzelnen Felder des Integer-Arrays 
+    enthalten die Ziffern der erstellten Dezimalzahl. Im Einstellungspanel lässt sich die Anzahl der Ziffern der zu 
+    erstellenden Dezimalzahl sowie das zu verwendende Dezimalisierungsverfahren einstellen. Stehen nicht genügend Binärdaten 
+    als Eingabe des Plugins für die Größe der Dezimalzahl zur Verfügung, wird eine Warnung ausgegeben.
+  </usage>
+  <presentation lang="de-DE">
+    Die folgenden vier Verfahren können zur Dezimalisierung von Binärzahlen verwendet werden:
+    <newline /><newline /><b>(1) Visa</b><newline />
+    Bei dem Visa-Verfahren werden im ersten Schritt die binären Eingabedaten in hexadezimale Ziffern überführt. 
+    Nach dieser Konvertierung werden der Reihe nach Ziffern, die kleiner als A sind, aus der Folge der hexadezimalen 
+    Ziffern ausgewählt und nacheinandner als Ziffern der Dezimalzahl übernommen. Besitzt die Dezimalzahl nach diesem Schritt noch
+    nicht die gewünschte Anzahl von Ziffern, wird die hexadezimale Zahlenfolge ein weiteres Mal der Reihe nach und
+    von vorne beginnend betrachtet. Diesmal werden nur Ziffern, die einen Wert größer gleich A haben ausgewählt, um
+    den Wert A verringert und an das Ende der Dezimalzahl übernommen. In diesem zweiten Schritt können nur die Ziffern
+    0 bis 5 erzeugt werden. <newline />
+    Liefern die binären Eingabedaten eine zu kleine 
+    hexadezimale Ziffernfolge für die gewünschte Anzahl von dezimalen Ziffern, wird der CrypTool 2-Umgebung eine Warnung<newline />
+    Eine Variante des Visa-Verfahrens ist das modifizierte Visa-Verfahren. Diese Methode erfordert eine weitere Menge
+    binärer Eingabedaten falls die ersten Binärdaten nicht genügend hexadezimale Ziffern kleiner A liefern. Das modifzierte
+    Visa-Verfahren wurde noch nicht implementiert.
+    gesendet.
+    <newline /><newline /><u>Beispiel</u><newline /><newline />
+    Binärzahl: 1011 1001 0100 0101 1111 1010 <newline />
+    Hexadezimalzahl: B945FA <newline />
+    Dezimalzahl: 9451 <newline /><newline />
+    In diesem Beispiel zum Visa-Verfahren soll aus der gegebenen Binärzahl eine 4-stellige Dezimalzahl erstellt werden.
+    Dazu werden im ersten Schritt von links nach rechts jeweils 4 Bits der Binärzahl in eine hexadezimale Ziffer umgewandelt.
+    Das Ergebnis lautet B945FA. Nun werden von der hexadezimalen Zahl von links nach rechts Ziffern, die einen Wert kleiner als
+    A haben, ausgewählt. Es entsteht folgende Dezimalzahl: 945. Da die Dezimalzahl bis jetzt nur 3 anstatt 4 Ziffern aufweist und
+    die hexadezimale Zahl keine weiteren Ziffern kleiner A besitzt, werden nun die Ziffern größer gleich A der 
+    hexadezimalen Zahl von links nach rechts betrachtet. Dadurch wird die Ziffer B um A reduziert und an die bisherige 
+    Dezimalzahl angefügt. Die Dezimalzahl 9451 ist das Ergebnis.
+    <newline /><newline /><b>(2) IBM</b><newline />
+    Das IBM-Verfahren ähnelt dem Visa-Verfahren. Die binären Eingabedaten werden in eine hexadezimale Ziffernfolge konvertiert.
+    Aus der Ziffernfolge werden von vorne beginnend und der Reihe nach Ziffern in die zu erstellende Dezimalzahl übernommen.
+    Ist der Wert der hexadezimalen Ziffer größer gleich A, wird anhand einer Tabelle dieser Wert in einen Wert kleiner A
+    überführt. Diese Abbildungstabelle lässt sich im Einstellungspanel des Plugins bearbeiten. <newline />
+    Liefern die binären Eingabedaten 
+    eine zu kleine hexadezimale Ziffernfolge für die gewünschte Anzahl von dezimalen Ziffern, wird der CrypTool 2-Umgebung 
+    eine Warnung gesendet.
+    <newline /><newline /><u>Beispiel</u><newline /><newline />
+    Binärzahl: 1011 1001 0100 0101 1111 1010 <newline />
+    Hexadezimalzahl: B945FA <newline />
+    Dezimalzahl: 1945 <newline /><newline />
+    In diesem Beispiel zum IBM-Verfahren soll aus der gegebenen Binärzahl eine 4-stellige Dezimalzahl erstellt werden.
+    Dazu werden im ersten Schritt von links nach rechts jeweils 4 Bits der Binärzahl in eine hexadezimale Ziffer umgewandelt.
+    Das Ergebnis lautet B945FA. Die ersten 4 Ziffern der hexadezimalen Zahl ergeben die gesuchte 4-stellige Dezimalzahl. 
+    Dabei werden die hexadezimalen Ziffern A auf 0, B auf 1, C auf 2, D auf 3, E auf 4 und F auf 5 abgebildet. Das Ergebnis
+    der Dezimalisierung is 1945.
+    <newline /><newline /><b>(3) Modulo</b><newline />
+    Das Modulo-Verfahren betrachtet die binären Eingabedaten als positive Ganzzahl. Diese Zahl wird Modulo 10^k gerechnet, wobei
+    k die Anzahl der gewünschten Ziffern der Dezimalzahl repräsentiert. Das Ergebnis dieser Berechnung wird 
+    als Dezimalzahl ausgegeben. <newline /> 
+    Überschreiten die binären Eingabedaten den Wertebereich der genutzten BigInteger Implementierung
+    oder wird während einer Berechnung dieser Wertebereich überschritten, wird der CrypTool 2-Umgebung eine Fehlermeldung gesendet.
+    Bei unzureichender Größe des binären Inputs für die gewünschte Anzahl dezimaler Ziffern wird eine Warnung ausgegeben.
+    <newline /><newline /><u>Beispiel</u><newline /><newline />
+    Binärzahl: 1011 1001 0100 0101 1111 1010 <newline />
+    Ganzzahl: 12142074 <newline />
+    Dezimalzahl: 2074 <newline /><newline />
+    In diesem Beispiel zum Modulo-Verfahren soll aus der gegebenen Binärzahl eine 4-stellige Dezimalzahl erstellt werden.
+    Die binären Eingabedaten werden als ganze Zahl 12142074 aufgefasst. Danach wird 12142074 Modulo 10^4 gerechnet. Als
+    Ergebnis erhält man die Dezimalzahl 2074.
+    <newline /><newline /><b>(4) Multiplikation</b><newline />
+    Das Multiplikationsverfahren betrachtet die binären Eingabedaten als positive Ganzzahl. Diese Zahl wird durch 2^n dividiert, 
+    wobei n die Größe der Eingabedaten in Bits repräsentiert. Anschließend wird das Ergebnis dieser Berechnung mit 10^k multipliziert,
+    wobei k die Anzahl der Ziffern der gewünschten Dezimalzahl darstellt. Das abgerundetete Resultat wird als
+    Dezimalzahl ausgegeben. <newline />
+    Überschreiten die binären Eingabedaten den Wertebereich der genutzten BigInteger Implementierung
+    oder wird während einer Berechnung dieser Wertebereich überschritten, wird der CrypTool 2-Umgebung eine Fehlermeldung gesendet.
+    <newline /><newline /><u>Beispiel</u><newline /><newline />
+    Binärzahl: 1011 1001 0100 0101 1111 1010 <newline />
+    Ganzzahl: 12142074 <newline />
+    Dezimalzahl: 7237 <newline /><newline />
+    In diesem Beispiel zum Modulo-Verfahren soll aus der gegebenen Binärzahl eine 4-stellige Dezimalzahl erstellt werden.
+    Die binären Eingabedaten werden als ganze Zahl 12142074 aufgefasst. Anschließend wird 12142074 durch 2^24 geteilt.
+    Der Quotient wird mit 10^4 multipliziert und abgerundet. Als Ergebnis erhält man die Dezimalzahl 7237.
+    <newline /><newline /><newline /><b>Qualität der Dezimalisierungsverfahren</b><newline />
+    Die Qualität der Dezimalisierungsverfahren soll durch den Grad der Gleichverteilung der Dezimalzahlen, ausgehend von der 
+    Annahme, dass die binären Eingabedaten gleichverteilt sind, bestimmt werden. Bei einer idealen Methode zur Dezimalisierung
+    von Binärdaten wären alle k-stelligen Dezimalzahlen gleich wahrscheinlich. <newline />
+    In diesem Sinne hat das IBM-Verfahren eine geringe Qualität, da Dezimalzahlen mit Ziffern auf die, die hexadezimalen Ziffern
+    A - F abgebildet werden, eine höhere Wahrscheinlichkeit haben. Diesselbe Schlussfolgerung trifft auf das Visa-Verfahren zu,
+    falls eine geringe Menge an binären Eingabedaten zur Verfügung steht. Ist dagegen die Menge der binären Eingabedaten
+    groß genug, muss keine hexadezimale Ziffer aus dem Bereich A - F in den Bereich 0 - 9 abgebildet werden. Dadurch tritt keine
+    dezimale Ziffer mit einer höheren Wahrscheinlichkeit auf und das Visa-Verfahren erreicht eine hohe Qualität. <newline />
+    Des Weiteren weisen das Modulo- und das Multiplikationsverfahren eine hohe Qualität auf. <newline />
+    Eine genaue Betrachtung der Wahrscheinlichkeiten und der einzelnen Verfahren zur Dezimalisierung befindet sich in der
+	 Ausarbeitung auf das im Abschnitt <b>Referenzen</b> verwiesen wird.<ref id="Dec" /></presentation>
+  <references lang="de-DE">
+    <linkReference id="Dec">
+      <caption lang="de-DE">Koy, H./ Blank, M.: Qualität von Dezimalisierungsverfahren. Januar 2010.</caption>
+      <caption lang="en">Koy, H./ Blank, M.: Qualität von Dezimalisierungsverfahren (Quality of Decimalization Methods). Januar 2010.</caption>
+    </linkReference>
+  </references>
+</documentation>

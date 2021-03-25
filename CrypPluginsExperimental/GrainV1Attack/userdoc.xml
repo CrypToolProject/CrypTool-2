@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">    
+  
+    Grain v1 is a symmetric stream cipher which is based on two shift registers and a non-linear output function. 
+    The key size is 80 bits and the size of the initialization vector is 64 bits.
+    According to the attack, we need to set the internal state of the LFSR in the final clock to zero state and then select NFSR randomly.
+    Then in reverse we compute the keystream, LFSR, NFSR.
+    Attack terminates if the LFSR bits in positions 64 to 79 are 1.
+    The same attack algorithm is applied to Grain v0 cipher as well; the difference between these two ciphers is in the terms of the variables
+    in equations that define the NFSR and the filter function (the function that defines the LFSR is the same for both of the ciphers).
+  
+  </introduction>
+  <introduction lang="zh-CN">粒度v1是基于两个移位寄存器和非线性输出函数的对称流密码。密钥大小为80位，初始化向量的大小为64位。根据攻击，我们需要将最终时钟中的LFSR的内部状态设置为零状态，然后随机选择NFSR。然后相反地，我们计算密钥流LFSR，NFSR。如果位置64到79的LFSR位为1，则攻击终止。这两个密码的区别在于定义NFSR和滤波器函数的方程式中的变量（两个密码的定义LFSR的函数相同）。</introduction>
+  <introduction lang="ru">Grain v1 - симметричный потоковый шифр, основанный на двух регистрах сдвига и нелинейной выходной функции. Размер ключа - 80 бит, а размер вектора инициализации - 64 бита. Согласно атаке, нам нужно установить внутреннее состояние LFSR в последние часы на нулевое состояние, а затем выбрать NFSR случайным образом. Затем в обратном порядке мы вычисляем ключевой поток, LFSR, NFSR. Атака прекращается, если бит LFSR в положениях с 64 по 79 равен 1. Тот же алгоритм атаки применяется к шифру Grain v0; разница между этими двумя шифрами заключается в терминах переменных в уравнениях, которые определяют NFSR и функцию фильтра (функция, которая определяет LFSR, одинакова для обоих шифров).</introduction>
+  <introduction lang="de-DE"></introduction>
+  <usage lang="en">
+    After dragging the GrainV1Attack component onto your workspace, you will have to attach a "Random Generator" to data sources, which is used to
+    generate the NFSR in the final clocking randomly. 
+    
+    Then you have to connect three text output components to the 'Output' connectors, which correspond to: the LFSR at the initial state, 
+    NFSR at the initial state, and NFSR in the 160th clocking.
+    NFSR bits in the output component indicate the secret key.
+    LFSR bits from positions 0 to 63 in the output component indicate the IV.
+
+  </usage>
+  <usage lang="zh-CN">将GrainV1Attack组件拖到您的工作区后，您将必须在数据源上附加一个“随机生成器”，用于在最终时钟中随机生成NFSR。然后，您必须将三个文本输出组件连接到“输出”连接器，它们分别对应于：初始状态的LFSR，初始状态的NFSR和第160个时钟的NFSR。输出组件中的NFSR位指示密钥。输出组件中位置0至63的LFSR位指示IV。</usage>
+  <usage lang="ru">После перетаскивания компонента GrainV1Attack на ваше рабочее пространство вам нужно будет подключить «Random Generator» к источникам данных, который используется для генерации NFSR в конечном такте в случайном порядке. Затем вам нужно подключить три текстовых выходных компонента к разъемам «Выход», которые соответствуют: LFSR в начальном состоянии, NFSR в исходном состоянии и NFSR в 160-м такте. Биты NFSR в выходном компоненте указывают секретный ключ. Биты LFSR от позиций 0 до 63 в выходном компоненте указывают на IV.</usage>
+  <usage lang="de-DE"></usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://eprint.iacr.org/2009/109.pdf" lang="en" />
+      <caption lang="en">Cryptanalysis of Stream Cipher Grain Family</caption>
+    </linkReference>
+  </references>
+</documentation>

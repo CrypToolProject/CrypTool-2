@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    The <i>IDP Analyzer</i> component implements an attack on a ciphertext that was encrypted with the double columnar transposition (DCT). It makes use of the <b>IDP</b> (Index of digraphic potential) method that was developed by George Lasry in 2013, 
+    when he successfully solved the famous challenge cipher from Klaus Schmeh.
+    <newline /><newline />
+    A DCT consists of the application of two simple columnar transpositions (SCT), each having its own key. The success of the IDP method relies on the fact, that it can provide a measurement of the quality of the second key without 
+    knowing the first key. By calculating the IDP score for each potential keyphrase in a dictionary, the <i>IDP Analyzer</i> component is able to determine a promising candidate. It then undoes the second SCT that results from this keyphrase 
+    and produces an intermediate ciphertext, that is basically also just a SCT and which can easily be solved in a second step with a classic Hill Climbing attack.
+  </introduction>
+  <introduction lang="zh-CN">IDP分析器组件对用双列换位（DCT）加密的密文实施攻击。它利用了乔治·拉斯里（George Lasry）在2013年成功解决了克劳斯·施梅（Klaus Schmeh）著名的挑战密码的IDP方法。 DCT包含两个简单的列式换位（SCT）的应用，每个都有其自己的密钥。 IDP方法的成功取决于以下事实：它可以在不知道第一个密钥的情况下提供第二个密钥的质量的度量。通过计算字典中每个潜在关键词的IDP分数，IDP分析器组件可以确定有前途的候选者。然后，它将取消由该关键短语产生的第二个SCT，并产生一个中间密文，该密文基本上也只是一个SCT，可以在第二步中通过经典的Hill Climbing攻击轻松解决。</introduction>
+  <introduction lang="ru">Компонент IDP-анализатора реализует атаку на зашифрованный текст, который был зашифрован с помощью двойной столбчатой ​​транспозиции (DCT). Он использует метод IDP (Index of digraphic потенциал), разработанный Джорджем Ласри в 2013 году, когда он успешно решил знаменитый пробный шифр от Клауса Шмеха. DCT состоит из применения двух простых столбчатых транспозиций (SCT), каждый из которых имеет свой собственный ключ. Успех метода IDP основан на том, что он может обеспечить измерение качества второго ключа, не зная первого ключа. Вычисляя оценку IDP для каждой потенциальной ключевой фразы в словаре, компонент IDP Analyzer может определить перспективного кандидата. Затем он отменяет второй SCT, который является результатом этой ключевой фразы, и создает промежуточный зашифрованный текст, который в основном также является SCT и который можно легко решить на втором этапе с помощью классической атаки Hill Climbing.</introduction>
+  <usage lang="en">
+    The component has two inputs and one output. On the first input, it expects the ciphertext as a byte array.
+    <newline /><newline />
+    The component can operate in two different modes, "Dictionary Search" or "Hill Climbing". You can switch between the two modes in the settings of the component.
+    For a successful analysis, the component also needs to know in what language the ciphertext is written. You can adjust the language in the settings of the component.
+    <newline /><newline />
+    In "Dictionary Search" mode, an array of keywords is expected at the second input of the component (typically provided by a <i>Dictionary</i> component).
+    The <i>IDP Analyzer</i> component will then produce an intermediate ciphertext for each keyword by undoing the SCT on the ciphertext, that would result from the present keyword.
+    It then tries to sort the columns of the intermediate ciphertext in a straightforward way and examines the bigrams, that would occur in this order of columns.
+    If the bigrams that occur this way are frequent in the selected language, the attained score will be high and the examined keyword is a good candidate for decryption.
+    <newline />
+    In the settings of the component, you can enter limits for the sizes of the two keys of the DCT. Those words of the dictionary whose size does not lie in the interval for key 2 are ignored.
+    <newline /><newline />
+    In "Hill Climbing" mode, the keywords are not retrieved from a dictionary, but are generated randomly. A Hill Climbing round starts with a randomly generated keyword whose IDP score is calculated. Small changes are then applied to the present keyword
+    and the new IDP score is calculated. If it has a better score, the new keyword is kept and the process is repeated with the new keyword. If the score is worse, it is dismissed and the process is repeated with the old keyword.
+    <newline />
+    In the settings of the component you can determine the number of iterations of one Hill Climbing round and the total number of rounds. In this mode, you can't enter upper and lower limits for the key sizes. Instead, you must enter the exact
+    sizes of the keys.
+    <newline /><newline />
+    In both modes, the intermediate ciphertext with the best IDP score found is sent to the output as a byte array.
+  </usage>
+  <usage lang="zh-CN">该组件有两个输入和一个输出。在第一个输入上，它期望密文为字节数组。该组件可以在两种不同的模式下运行：“字典搜索”或“爬山”。您可以在组件的设置中在两种模式之间切换。为了成功进行分析，组件还需要知道密文以哪种语言编写。您可以在组件的设置中调整语言。在“字典搜索”模式下，期望在组件的第二个输入处（通常由字典组件提供）关键字数组。然后，IDP分析器组件将通过撤消该密文上的SCT来为每个关键字生成一个中间密文，该中间密文将由当前关键字产生。然后，它尝试以一种直接的方式对中间密文的列进行排序，并检查以该列顺序发生的二元组。如果以这种方式出现的双字词在选定的语言中很常见，则获得的分数将很高，并且所检查的关键字是解密的良好候选者。在组件的设置中，您可以输入DCT两个键的大小限制。字典中那些大小不位于键2间隔内的单词将被忽略。在“爬山”模式下，关键字不是从字典中检索的，而是随机生成的。爬坡比赛从随机生成的关键字开始，该关键字的IDP得分已计算出来。然后对当前关键字进行小的更改，并计算新的IDP得分。如果得分更高，则保留新关键字，并使用新关键字重复该过程。如果分数较差，则将其消除，并使用旧关键字重复该过程。在组件的设置中，您可以确定一个“爬山”回合的迭代次数和总回合数。在此模式下，您无法输入密钥大小的上限和下限。相反，您必须输入密钥的确切大小。在这两种模式下，找到的IDP得分最高的中间密文将作为字节数组发送到输出。</usage>
+  <usage lang="ru">Компонент имеет два входа и один выход. На первом входе он ожидает, что зашифрованный текст будет байтовым массивом. Компонент может работать в двух разных режимах: «Поиск словаря» или «Восхождение по холму». Вы можете переключаться между двумя режимами в настройках компонента. Для успешного анализа компонент также должен знать, на каком языке написан зашифрованный текст. Вы можете настроить язык в настройках компонента. В режиме «Поиск словаря» на втором входе компонента (как правило, предоставляется компонент словаря) ожидается массив ключевых слов. Затем компонент анализатора IDP будет создавать промежуточный зашифрованный текст для каждого ключевого слова, отменив SCT на зашифрованном тексте, который возникнет из текущего ключевого слова. Затем он пытается простым образом сортировать столбцы промежуточного зашифрованного текста и анализирует биграммы, которые будут встречаться в этом порядке столбцов. Если биграмы, которые происходят таким образом, часто встречаются на выбранном языке, достигнутый балл будет высоким, а ключевое слово checked является хорошим кандидатом для дешифрования. В настройках компонента вы можете ввести лимиты для размеров двух клавиш DCT. Те слова словаря, размер которых не лежит в интервале для ключа 2, игнорируются. В режиме «Hill Climbing» ключевые слова не извлекаются из словаря, а генерируются случайным образом. Холмистый раунд начинается с случайного сгенерированного ключевого слова, чья оценка IDP вычисляется. Затем к текущему ключевому слову применяются небольшие изменения, и рассчитывается новый счет IDP. Если он имеет лучший балл, новое ключевое слово сохраняется и процесс повторяется с новым ключевым словом. Если оценка хуже, она отклоняется и процесс повторяется со старым ключевым словом. В настройках компонента вы можете определить количество итераций одного раунда Hill Climbing и общее количество раундов. В этом режиме вы не можете вводить верхние и нижние пределы для размеров клавиш. Вместо этого вы должны ввести точные размеры ключей. В обоих режимах промежуточный зашифрованный текст с лучшим найденным счетом IDP отправляется на выход в виде байтового массива.</usage>
+  <presentation lang="en">
+    In the upper region, the presentation shows status information for the component: starting time, expected end time, remaining time, elapsed time, and how many keys per second are being checked.
+    <newline />
+    Below that is a table with the ten best results. The first column shows the ranking number under "#". In the column "Value" you see the IDP score value that is assigned to this entry.
+    In the "Key" column you see the key phrase that produced this result, and finally the "Text" column contains the intermediate ciphertext that resulted from this key phrase.
+    <newline />
+    You can send any of the listed intermediate ciphertexts to the output of the component by double clicking it.
+  </presentation>
+  <presentation lang="zh-CN">在上部区域中，显示内容显示了该组件的状态信息：开始时间，预期结束时间，剩余时间，经过时间以及每秒检查多少个键。下面是具有十个最佳结果的表。第一列显示“＃”下的排名编号。在“值”列中，您将看到分配给该条目的IDP得分值。在“关键字”列中，您可以看到产生此结果的关键字，最后，“文本”列中包含由此关键字产生的中间密文。您可以通过双击将任何列出的中间密文发送到组件的输出。</presentation>
+  <presentation lang="ru">В верхней области в презентации отображается информация о статусе компонента: время начала, ожидаемое время окончания, оставшееся время, прошедшее время и количество проверок в секунду. Ниже приведена таблица с десятью лучшими результатами. В первом столбце показан номер ранжирования в поле «#». В столбце «Значение» вы видите значение счета IDP, присвоенное этой записи. В столбце «Ключ» вы видите ключевую фразу, которая произвела этот результат, и, наконец, столбец «Текст» содержит промежуточный зашифрованный текст, который является результатом этой ключевой фразы. Вы можете отправить любой из перечисленных промежуточных зашифрованных текстов на вывод компонента, дважды щелкнув по нему.</presentation>
+  <language culture="de" />
+  <introduction lang="de">
+    Die Komponente <i>IDP-Analyse</i> implementiert einen Angriff auf einen mit der doppelten Spaltentransposition verschlüsselten Geheimtext. Der Angriff basiert auf der <b>IDP</b>-Methode (Index of digraphic potential), die 2013 von
+    George Lasry entwickelt wurde, als er die bekannte Challenge-Chiffre von Klaus Schmeh lösen konnte.
+    <newline /><newline />
+    Die doppelte Spaltentransposition besteht aus der Hintereinanderausführung von zwei einfachen Spaltentranspositionen, wobei jede Stufe ihren eigenen Schlüssel verwendet.
+    Der Erfolg der IDP-Methode basiert darauf, dass sie eine Einschätzung über den Schlüssel der zweiten Stufe abgeben kann, ohne den Schlüssel der ersten Stufe zu kennen.
+    Die Komponente berechnet den IDP-Wert für alle potentielle Schlüsselworte in einem Wörterbuch und kann dadurch vielversprechende Kandidaten herausfiltern.
+    Es macht dann die einfache Spaltentransposition mit dem gefundenen Schlüsselkandidaten rückgängig und der resultierende Zwischen-Geheimtext, bei dem es sich nun nur noch um einen mit der einfachen Spaltentransposition verschlüsselten Text handelt,
+    wird ausgegeben und kann in einem weiteren Schritt mit geeigneten Methoden (z.B. einem Hill-Climbing-Angriff) weiter analysiert werden.
+  </introduction>
+  <usage lang="de">
+    Die Komponente hat zwei Eingänge und einen Ausgang. Am ersten Eingang wird der Geheimtext als Byte-Array erwartet.
+    <newline /><newline />
+    Man kann die Komponente in zwei Betriebsarten verwendet werden, nämlich der "Wörterbuch-Suche" und "Hill Climbing", zwischen denen in den Einstellungen der Komponente umgeschaltet werden kann.
+    Für eine erfolgreiche Analyse muss die Komponente auch wissen, in welcher Sprache der Geheimtext geschrieben wurde. Die Sprache kann in den Einstellungen der Komponente gewählt werden.
+    <newline /><newline />
+    Bei der "Wörterbuch-Suche" wird am zweiten Eingang der Komponente eine Liste von Schlüsselworten erwartet (typischerweise von einer <i>Wörterbuch</i>-Komponente zur Verfügung gestellt).
+    Die <i>IDP-Analyse</i>-Komponente erzeugt dann für jedes Schlüsselwort einen Zwischen-Geheimtext, indem es die Umkehrung der sich aus diesem Schlüsselwort ergebenden einfachen Spaltentransposition auf den Geheimtext anwendet.
+    Danach wird versucht, die Spalten des Zwischen-Geheimtextes so zu sortieren, dass die sich dadurch ergebenden Bigramme in aufeinanderfolgenden Spalten möglichst häufig in natürlichem Englisch vorkommen.
+    Je besser der hier erzielte Wert ist, ein desto besserer Kandidat für das zweite Schlüsselwort der doppelten Spaltentransposition ist das untersuchte Schlüsselwort.
+    <newline />
+    In den Einstellungen der Komponente kann man die unteren und oberen Grenzen für die Größen der zu untersuchenden Schlüsselworte angeben.
+    Diejenigen Worte des Wörterbuchs, deren Größe nicht in die Intervallgrenzen für Schlüssel 2 fallen, werden ignoriert.
+    <newline /><newline />
+    Bei der "Hill Climbing"-Methode werden die Schlüsselworte nicht aus einem Wörterbuch ausgelesen, sondern werden zufällig generiert.
+    Eine Runde des "Hill Climbing" beginnt mit der Erzeugung eines zufälligen Schlüsselwortes, dessen IDP-Wert berechnet wird. Dann werden an diesem Schlüsselwort kleine Änderungen vorgenommen, und der IDP-Wert dieses neuen Schlüssels wird berechnet.
+    Ist der neue IDP-Wert besser, so behält man das neue Schlüsselwort und der Vorgang wird mit diesem wiederholt. Ist der Wert schlechter, so wird das neue Schlüsselwort verworfen und mit dem alten weiter gearbeitet.
+    <newline />
+    In den Einstellungen kann man die Anzahl der Runden-Iterationen und die Gesamtzahl der Runden angeben. In dieser Betriebsart kann man keine oberen und unteren Schranken für die Schlüsselgrößen angeben, sondern muss die zu untersuchenden
+    Schlüsselgrößen exakt eingeben.
+    <newline /><newline />
+    In beiden Betriebsarten wird der Zwischen-Geheimtext, der zum besten gefundenen Wert gehört, am Ausgang als Byte-Array ausgegeben.
+  </usage>
+  <presentation lang="de">
+		Die Präsentation zeigt im oberen Bereich Statusinformationen der Komponente an: Startzeit, wahrscheinliche Endzeit, verbleibende Zeit, bereits vergangene Zeit, und wie viele Schlüssel pro Sekunde überprüft werden.
+		<newline />
+		Darunter befindet sich eine Tabelle mit den zehn besten Ergebnissen. In der ersten Spalte der Tabelle stehen unter "#" die Ränge der Einträge. In der Spalte "Wert" steht der IDP-Wert, der diesem Eintrag zugewiesen wurde.
+    In der Spalte "Schlüsselwort" steht der für dieses Ergebnis ermittelte Schlüssel. In der Spalte "Text" steht schließlich der mit diesem Schlüssel ermittelte Zwischen-Geheimtext.
+		<newline />
+		Durch einen Doppelklick auf ein beliebiges Ergebnis wird dieses als Ausgabe der Komponente verwendet.
+	</presentation>
+  <references>
+    <linkReference>
+      <link url="http://www.tandfonline.com/doi/full/10.1080/01611194.2014.915269" lang="de" />
+      <caption lang="de">Lasry, Kopal &amp; Wacker: Solving the Double Transposition Challenge with a Divide-and-Conquer Approach (Cryptologia, Volume 38,  Issue 3, 2014)</caption>
+      <link url="http://www.tandfonline.com/doi/full/10.1080/01611194.2014.915269" lang="en" />
+      <caption lang="en">Lasry, Kopal &amp; Wacker: Solving the Double Transposition Challenge with a Divide-and-Conquer Approach (Cryptologia, Volume 38,  Issue 3, 2014)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://de.wikipedia.org/wiki/Transposition_(Kryptographie)" lang="de" />
+      <caption lang="de">Transposition (Wikipedia)</caption>
+      <link url="http://en.wikipedia.org/wiki/Transposition_cipher" lang="en" />
+      <caption lang="en">Transposition cipher (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

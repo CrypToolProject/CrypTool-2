@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DESVisualizationCaption" xml:space="preserve">
+    <value>可视化</value>
+  </data>
+  <data name="DESVisualizationTooltip" xml:space="preserve">
+    <value>可视化的DES加密</value>
+  </data>
+  <data name="inputKeyDescription" xml:space="preserve">
+    <value>输入用于加密的密钥</value>
+  </data>
+  <data name="inputKeyName" xml:space="preserve">
+    <value>按键输入</value>
+  </data>
+  <data name="inputTextDescription" xml:space="preserve">
+    <value>输入要加密的文字</value>
+  </data>
+  <data name="inputTextName" xml:space="preserve">
+    <value>纯文本输入</value>
+  </data>
+  <data name="institute" xml:space="preserve">
+    <value>曼海姆大学</value>
+  </data>
+  <data name="IntroBottom" xml:space="preserve">
+    <value>块密码可视化</value>
+  </data>
+  <data name="outputCiphertextDescription" xml:space="preserve">
+    <value>使用DES算法加密后输出密文</value>
+  </data>
+  <data name="outputCiphertextName" xml:space="preserve">
+    <value>密文输出</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>活性</value>
+  </data>
+  <data name="Bit32" xml:space="preserve">
+    <value>32位</value>
+  </data>
+  <data name="Bit48" xml:space="preserve">
+    <value>48位</value>
+  </data>
+  <data name="Bit6" xml:space="preserve">
+    <value>6位</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>密文</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>明确</value>
+  </data>
+  <data name="Column" xml:space="preserve">
+    <value>柱：</value>
+  </data>
+  <data name="Data" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="DataKey" xml:space="preserve">
+    <value>密钥（64位）：</value>
+  </data>
+  <data name="DataMessage" xml:space="preserve">
+    <value>消息（64位）：</value>
+  </data>
+  <data name="DiffInfo" xml:space="preserve">
+    <value>单击确定翻转选中的位</value>
+  </data>
+  <data name="DiffusionVisualizer" xml:space="preserve">
+    <value>显示扩散可视化器</value>
+  </data>
+  <data name="FinalCiphertext" xml:space="preserve">
+    <value>密文（64位）：</value>
+  </data>
+  <data name="FunctionLabel" xml:space="preserve">
+    <value>函数f（K，R）舍入/ 16</value>
+  </data>
+  <data name="HistoryText" xml:space="preserve">
+    <value>-1973年，国家标准局（NBS）开始开发或搜索用于数据加密和解密的官方标准算法。一种可能的候选者是基于IBM的“ Lucifer”的算法。 -为了检查和验证此算法的安全性，向国家安全局（NSA）寻求帮助。 -更改密钥长度和使用的S-box之后，该算法于1976年11月23日成为正式的数据加密标准。-2000年10月2日，DES被比利时的“ Rijndael”算法取代，该算法成为AES（高级加密标准） ）。</value>
+  </data>
+  <data name="InfoText" xml:space="preserve">
+    <value>DES是一种现代的对称密钥块密码，它使用64位密钥将一个64位消息块加密为64位密文。每个第8位（最低有效位）仅用于检查奇偶校验，然后将其丢弃。该算法实际上并没有使用这8个最低有效位，因此加密的有效密钥长度仅为56位。该算法的整体结构具有16个相同的处理阶段，称为回合。这些回合在Feistel网络中进行组织（一系列与替代置换网络相似的链接数学运算）。这确保了解密和加密是非常相似的过程。</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>输入：</value>
+  </data>
+  <data name="Intro" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="KeyAddition" xml:space="preserve">
+    <value>按键添加</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>输出：</value>
+  </data>
+  <data name="OutputAll" xml:space="preserve">
+    <value>输出所有S盒：</value>
+  </data>
+  <data name="PrevStep" xml:space="preserve">
+    <value>上一个步</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>回合</value>
+  </data>
+  <data name="Round1" xml:space="preserve">
+    <value>第1轮</value>
+  </data>
+  <data name="Round16" xml:space="preserve">
+    <value>第16回合</value>
+  </data>
+  <data name="RoundData" xml:space="preserve">
+    <value>圆LR</value>
+  </data>
+  <data name="Roundfunction" xml:space="preserve">
+    <value>圆形功能</value>
+  </data>
+  <data name="RoundKey" xml:space="preserve">
+    <value>圆键</value>
+  </data>
+  <data name="RoundKeyData" xml:space="preserve">
+    <value>一轮一轮钥匙</value>
+  </data>
+  <data name="RoundShift" xml:space="preserve">
+    <value>回合：1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16班次：1 1 2 2 2 2 2 2 2 1 2 2 2 2 2 2 1</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>行：</value>
+  </data>
+  <data name="Runde_16" xml:space="preserve">
+    <value>回合{0} / 16</value>
+  </data>
+  <data name="SBoxesLabel" xml:space="preserve">
+    <value>S盒</value>
+  </data>
+  <data name="SkipStep" xml:space="preserve">
+    <value>跳过步骤</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>概要</value>
+  </data>
+  <data name="Background" xml:space="preserve">
+    <value>背景</value>
+  </data>
+  <data name="BitwiseXOROperation" xml:space="preserve">
+    <value>按位异或运算</value>
+  </data>
+  <data name="CyclicShift" xml:space="preserve">
+    <value>循环移位</value>
+  </data>
+  <data name="DESEncryption" xml:space="preserve">
+    <value>DES加密</value>
+  </data>
+  <data name="DiffusionVisualizerHide" xml:space="preserve">
+    <value>隐藏扩散可视化器</value>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>一般信息</value>
+  </data>
+  <data name="GeneralStructure" xml:space="preserve">
+    <value>总体结构</value>
+  </data>
+  <data name="InputData" xml:space="preserve">
+    <value>输入数据</value>
+  </data>
+  <data name="Introduction" xml:space="preserve">
+    <value>介绍</value>
+  </data>
+  <data name="KeySchedule" xml:space="preserve">
+    <value>关键时间表</value>
+  </data>
+  <data name="PermutationFunction" xml:space="preserve">
+    <value>排列功能</value>
+  </data>
+  <data name="SkipRound" xml:space="preserve">
+    <value>跳过回合</value>
+  </data>
+  <data name="NextStep" xml:space="preserve">
+    <value>下一步</value>
+  </data>
+  <data name="DiffOkLabel" xml:space="preserve">
+    <value>确认翻转所选位。</value>
+  </data>
+  <data name="SBoxResultLong" xml:space="preserve">
+    <value>→S-box申请结果</value>
+  </data>
+  <data name="SBoxJumpButton" xml:space="preserve">
+    <value>跳转到当前操作的结尾</value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>开关十六进制</value>
+  </data>
+  <data name="ChapterTextDES" xml:space="preserve">
+    <value>-“ DES加密”是算法的第二个主要部分：此处，消息在16个回合中被加密。 -底部两行中的按钮也显示您的位置：只要您在DES的第二个主要部分中，按钮“ IP”，“ DES”或“ FP”之一就是蓝色。</value>
+  </data>
+  <data name="ChapterTextKS" xml:space="preserve">
+    <value>-“密钥时间表”是算法的第一个主要部分：此处，给定的密钥用于为每一轮DES生成一个密钥（然后，这些轮密钥在DES的第二个主要部分中使用，这是实际的加密过程）。 -底部两行中的按钮有两个用途：它们显示您的位置，并允许直接导航。 -只要您在DES的第一个主要部分中，第二行中的“密钥计划”按钮就会为蓝色（以向您显示您的位置）。</value>
+  </data>
+</root>

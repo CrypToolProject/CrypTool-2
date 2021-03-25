@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="CrypTool.Plugins.DECRYPTTools.DECRYPTSettingsTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" xmlns:Properties="clr-namespace:CrypTool.PluginBase.Properties;assembly=CrypPluginBase" 
+             xmlns:tools="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+             d:DesignHeight="400" d:DesignWidth="500">
+    <Grid>
+        <StackPanel VerticalAlignment="Top" Margin="5">
+            <Image Source="logo.png" Width="250" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+            <TextBlock TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Width="400" Text="{Loc SettingsInfoText}" Margin="5,5,5,5"/>
+            <Grid Width="500" HorizontalAlignment="Left">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="220" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0" Content="{Loc Username}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="12" Height="30" Margin="0,5"  />
+                <TextBox Name="UsernameTextbox" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0" TextChanged="UsernameTextbox_OnTextChanged" Margin="5,5,5,5" Width="200"/>
+
+                <Label Grid.Column="0" Grid.Row="1" Content="{Loc Password}" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="12" Height="30" Margin="0,5"  />
+                <PasswordBox Name="PasswordTextbox" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" PasswordChanged="PasswordTextbox_OnPasswordChanged" Margin="5,5,5,5" Width="200"/>
+            </Grid>
+
+            <Button Name="TestLoginDataButton" HorizontalAlignment="Left" Margin="5,5,5,5" Content="{Loc TestLoginData}" Click="TestLoginDataButton_OnClick" />
+
+            <Label Content="{Loc TextElementColors}"/>
+            <Grid Width="Auto" HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Tag:" Grid.Row="0" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                <Border  Margin="5,5,5,5" Grid.Row="0" Grid.Column="1"  BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" HorizontalAlignment="Left">
+                    <tools:ColorPicker x:Name="TagElementColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                </Border>
+
+                <Label Content="Null:" Grid.Row="1" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                <Border Margin="5,5,5,5" Grid.Row="1" Grid.Column="1" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26"  HorizontalAlignment="Left">
+                    <tools:ColorPicker x:Name="NullElementColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                </Border>
+
+                <Label Content="Regular:" Grid.Row="0" Grid.Column="2" Height="26"  HorizontalAlignment="Left"/>
+                <Border Margin="5,5,5,5" Grid.Row="0" Grid.Column="3" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" HorizontalAlignment="Left">
+                    <tools:ColorPicker x:Name="RegularElementColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                </Border>
+
+                <Label Content="Nomenclature:" Grid.Row="1" Grid.Column="2" Height="26"  HorizontalAlignment="Left"/>
+                <Border Margin="5,5,5,5" Grid.Row="1" Grid.Column="3" BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" HorizontalAlignment="Left">
+                    <tools:ColorPicker x:Name="NomenclatureElementColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                </Border>
+
+                <Label Content="Comment:" Grid.Row="2" Grid.Column="0" Height="26"  HorizontalAlignment="Left"/>
+                <Border Margin="5,5,5,5" Grid.Row="2" Grid.Column="1"  BorderThickness="1" BorderBrush="Gray" Width="80" Height="26" HorizontalAlignment="Left">
+                    <tools:ColorPicker x:Name="CommentColor" SelectedColorChanged="CrPickerSelectedColorChanged" Width="50"></tools:ColorPicker>
+                </Border>
+
+                <Button Name="ResetColorButton" Content="{Loc ResetColorButton}" Grid.Row="2" Grid.Column="3" Height="25" HorizontalAlignment="Left" Click="ResetColorButton_Click"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

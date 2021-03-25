@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AES" xml:space="preserve">
+    <value>AES</value>
+  </data>
+  <data name="AfterRoundSubtitle" xml:space="preserve">
+    <value>回合后</value>
+  </data>
+  <data name="AvalancheEffect" xml:space="preserve">
+    <value>雪崩效应</value>
+  </data>
+  <data name="AvalancheTooltip" xml:space="preserve">
+    <value>加密密码和哈希函数中雪崩效应的可视化</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="CategoryTooltip" xml:space="preserve">
+    <value>选择所需的类别。</value>
+  </data>
+  <data name="CheckAvalanche" xml:space="preserve">
+    <value>回合后检查雪崩效果...</value>
+  </data>
+  <data name="ClassicCipher" xml:space="preserve">
+    <value>经典密码</value>
+  </data>
+  <data name="ClassicCipherSubtitle" xml:space="preserve">
+    <value>（经典密码）</value>
+  </data>
+  <data name="ClearButton" xml:space="preserve">
+    <value>明确</value>
+  </data>
+  <data name="ContinueButton" xml:space="preserve">
+    <value>继续</value>
+  </data>
+  <data name="Decimal" xml:space="preserve">
+    <value>小数</value>
+  </data>
+  <data name="DES" xml:space="preserve">
+    <value>的</value>
+  </data>
+  <data name="DisplayInfo" xml:space="preserve">
+    <value>将输入显示为：</value>
+  </data>
+  <data name="DisplayInformation" xml:space="preserve">
+    <value>将输入显示为：</value>
+  </data>
+  <data name="DoneButton" xml:space="preserve">
+    <value>完成了</value>
+  </data>
+  <data name="EncryptionInitialMsg" xml:space="preserve">
+    <value>初始消息的加密</value>
+  </data>
+  <data name="EncryptionModifiedMsg" xml:space="preserve">
+    <value>修改邮件的加密</value>
+  </data>
+  <data name="ExplanationText" xml:space="preserve">
+    <value>输入更改可以通过直接修改外部输入源来完成。</value>
+  </data>
+  <data name="FlippedBits" xml:space="preserve">
+    <value>翻转位</value>
+  </data>
+  <data name="GroupName" xml:space="preserve">
+    <value>测试雪崩效果</value>
+  </data>
+  <data name="HashFunction" xml:space="preserve">
+    <value>散列函数</value>
+  </data>
+  <data name="Hex" xml:space="preserve">
+    <value>十六进制</value>
+  </data>
+  <data name="HomeTitle" xml:space="preserve">
+    <value>可视化雪崩效应</value>
+  </data>
+  <data name="InputData" xml:space="preserve">
+    <value>输入数据</value>
+  </data>
+  <data name="InputKey" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>回车键</value>
+  </data>
+  <data name="InputMessage" xml:space="preserve">
+    <value>消息/哈希值</value>
+  </data>
+  <data name="InputMessageTooltip" xml:space="preserve">
+    <value>输入消息或哈希值</value>
+  </data>
+  <data name="InputTitleAES" xml:space="preserve">
+    <value>更改输入数据AES-</value>
+  </data>
+  <data name="InstructionsPrep" xml:space="preserve">
+    <value>准备方法：</value>
+  </data>
+  <data name="InstructionsPrepBullet1" xml:space="preserve">
+    <value>使用密钥和消息条目。</value>
+  </data>
+  <data name="InstructionsPrepBullet2" xml:space="preserve">
+    <value>提供十六进制格式的密钥：16、24或32字节（AES）-8字节（DES）。</value>
+  </data>
+  <data name="InstructionsPrepBullet3" xml:space="preserve">
+    <value>输入数据最初显示为：十六进制和二进制格式（AES）-二进制格式（DES）。</value>
+  </data>
+  <data name="InstructionsPrepBullet4" xml:space="preserve">
+    <value>修改初始输入（仅在显示“更改输入数据”屏幕时有效。如果已经在每个回合之后检查雪崩效果，则也不会考虑来自外部输入的修改）。</value>
+  </data>
+  <data name="InstructionsPrepBullet5" xml:space="preserve">
+    <value>检查雪崩效果。</value>
+  </data>
+  <data name="InstructionsPrepSubtitle" xml:space="preserve">
+    <value>AES，DES</value>
+  </data>
+  <data name="InstructionsTitle" xml:space="preserve">
+    <value>使用说明</value>
+  </data>
+  <data name="InstructionsUnprep" xml:space="preserve">
+    <value>未准备的方法：</value>
+  </data>
+  <data name="InstructionsUnprepBullet1" xml:space="preserve">
+    <value>“未准备的方法”类别中的方法在Avalanche插件中没有额外的实现。因此，该插件仅通过比较初始和更改后的外部输入来评估雪崩效果。这是非常通用的。这里仅使用消息条目。</value>
+  </data>
+  <data name="InstructionsUnprepBullet2" xml:space="preserve">
+    <value>最初以以下格式显示的输入数据：十六进制格式（哈希函数和现代密码）-文本格式（经典密码）。</value>
+  </data>
+  <data name="InstructionsUnprepBullet3" xml:space="preserve">
+    <value>修改初始输入（对于经典和现代密码，由Avalanche插件评估的消息的长度可能不会更改）。</value>
+  </data>
+  <data name="InstructionsUnprepSubtitle" xml:space="preserve">
+    <value>通用哈希函数，经典密码，现代密码</value>
+  </data>
+  <data name="Intro" xml:space="preserve">
+    <value>当输入的微小变化导致加密文本发生重大变化时，将获得良好的雪崩效果。您可以在设置中选择要测试其雪崩效应的算法类别。</value>
+  </data>
+  <data name="KeyLength" xml:space="preserve">
+    <value>键长</value>
+  </data>
+  <data name="KeyLengthTooltip" xml:space="preserve">
+    <value>选择AES的密钥长度。</value>
+  </data>
+  <data name="ModernCipher" xml:space="preserve">
+    <value>现代密码</value>
+  </data>
+  <data name="OutputStream" xml:space="preserve">
+    <value>输出量</value>
+  </data>
+  <data name="OutputStreamDescription" xml:space="preserve">
+    <value>生成统计数据</value>
+  </data>
+  <data name="OverviewButton" xml:space="preserve">
+    <value>总体概述</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>雪崩可视化</value>
+  </data>
+  <data name="PreparedCaption" xml:space="preserve">
+    <value>准备方法</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>选拔</value>
+  </data>
+  <data name="SelectionTooltipPrep" xml:space="preserve">
+    <value>从“准备的方法”类别中选择要测试其雪崩效果的方法。</value>
+  </data>
+  <data name="SingleBitCheckBox" xml:space="preserve">
+    <value>启用更改单个位</value>
+  </data>
+  <data name="SkipInstructions" xml:space="preserve">
+    <value>跳过说明</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>文本</value>
+  </data>
+  <data name="Title_AES128" xml:space="preserve">
+    <value>雪崩效应AES-128</value>
+  </data>
+  <data name="Title_AES192" xml:space="preserve">
+    <value>雪崩效应AES-192</value>
+  </data>
+  <data name="Title_AES256" xml:space="preserve">
+    <value>雪崩效应AES-256</value>
+  </data>
+  <data name="UnpreparedCaption" xml:space="preserve">
+    <value>未准备好的方法</value>
+  </data>
+  <data name="BinaryRep" xml:space="preserve">
+    <value>二进制表示</value>
+  </data>
+  <data name="BinaryValues" xml:space="preserve">
+    <value>二进制值</value>
+  </data>
+  <data name="ChangesText" xml:space="preserve">
+    <value>修改输入以继续演示。消息和密钥更改可以通过两种方式进行：</value>
+  </data>
+  <data name="ChangesTextBullet1" xml:space="preserve">
+    <value>直接修改外部输入提要。</value>
+  </data>
+  <data name="ChangesTextBullet2" xml:space="preserve">
+    <value>单击单个位-仅在选中复选框后才可能。</value>
+  </data>
+  <data name="CipherStateInitMsg" xml:space="preserve">
+    <value>初始输入的加密状态</value>
+  </data>
+  <data name="CipherStateModMsg" xml:space="preserve">
+    <value>修改后的输入的加密状态</value>
+  </data>
+  <data name="ClickOnBits" xml:space="preserve">
+    <value>单击您想要翻转的位。</value>
+  </data>
+  <data name="FlippedBits_" xml:space="preserve">
+    <value>翻转位</value>
+  </data>
+  <data name="InitialKeyHex" xml:space="preserve">
+    <value>初始键（十六进制）</value>
+  </data>
+  <data name="InitialMessageHex" xml:space="preserve">
+    <value>初始消息（十六进制）</value>
+  </data>
+  <data name="InitialMsg" xml:space="preserve">
+    <value>初始味精</value>
+  </data>
+  <data name="ModifiedKey" xml:space="preserve">
+    <value>修改密钥</value>
+  </data>
+  <data name="ModifiedMessage" xml:space="preserve">
+    <value>修改后的讯息</value>
+  </data>
+  <data name="ModifiedMsg" xml:space="preserve">
+    <value>修改后的味精</value>
+  </data>
+  <data name="Initial_Key" xml:space="preserve">
+    <value>初始金钥</value>
+  </data>
+  <data name="Initial_Message" xml:space="preserve">
+    <value>初始讯息</value>
+  </data>
+  <data name="LeftHalf" xml:space="preserve">
+    <value>左半</value>
+  </data>
+  <data name="NoChanges" xml:space="preserve">
+    <value>根本没有发生任何变化！</value>
+  </data>
+  <data name="OnlyLeft" xml:space="preserve">
+    <value>更改仅发生在密码的左半部！</value>
+  </data>
+  <data name="OnlyRight" xml:space="preserve">
+    <value>更改仅发生在密码的右半部分！</value>
+  </data>
+  <data name="RightHalf" xml:space="preserve">
+    <value>右半</value>
+  </data>
+  <data name="StatsBullet1" xml:space="preserve">
+    <value>位翻转（在{0}中）。 {1}％的雪崩效应</value>
+  </data>
+  <data name="StatsBullet1_Plural" xml:space="preserve">
+    <value>位翻转（从{0}中移出）。 {1}％的雪崩效应</value>
+  </data>
+  <data name="StatsBullet2" xml:space="preserve">
+    <value>最长相同位序列的长度：{0}。偏移量{1}。</value>
+  </data>
+  <data name="StatsBullet3" xml:space="preserve">
+    <value>最长翻转位序列的长度：{0}。偏移量{1}。</value>
+  </data>
+  <data name="StatsBullet4" xml:space="preserve">
+    <value>每个字节的平均不同位数：{0}</value>
+  </data>
+  <data name="FlippedBytes" xml:space="preserve">
+    <value>更改的字节</value>
+  </data>
+  <data name="InitialKeyColon" xml:space="preserve">
+    <value>初始密钥：</value>
+  </data>
+  <data name="InitialKeyDES" xml:space="preserve">
+    <value>初始密钥（64位）：</value>
+  </data>
+  <data name="InitialMessageColon" xml:space="preserve">
+    <value>初始消息：</value>
+  </data>
+  <data name="InitialMessageDES" xml:space="preserve">
+    <value>初始消息（64位）：</value>
+  </data>
+  <data name="InputTitleDES" xml:space="preserve">
+    <value>更改输入数据DES</value>
+  </data>
+  <data name="ModKeyColon" xml:space="preserve">
+    <value>修改密钥：</value>
+  </data>
+  <data name="ModMessageColon" xml:space="preserve">
+    <value>修改后的消息：</value>
+  </data>
+  <data name="UnchangedBits" xml:space="preserve">
+    <value>不变的位</value>
+  </data>
+  <data name="UnchangedBytes" xml:space="preserve">
+    <value>不变字节</value>
+  </data>
+  <data name="Binary" xml:space="preserve">
+    <value>二元</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>密文（十六进制）</value>
+  </data>
+  <data name="EncryptionInit" xml:space="preserve">
+    <value>初始化的加密。消息（bin）</value>
+  </data>
+  <data name="EncryptionMod" xml:space="preserve">
+    <value>mod的加密。消息（bin）</value>
+  </data>
+  <data name="HashFunctionInit" xml:space="preserve">
+    <value>初始哈希值</value>
+  </data>
+  <data name="HashFunctionMod" xml:space="preserve">
+    <value>修改后的哈希值</value>
+  </data>
+  <data name="HashFunctionSubtitle" xml:space="preserve">
+    <value>（哈希函数）</value>
+  </data>
+  <data name="ModernCipherSubtitle" xml:space="preserve">
+    <value>（现代密码）</value>
+  </data>
+  <data name="OverviewAES128" xml:space="preserve">
+    <value>经过所有AES-128加密后的结果</value>
+  </data>
+  <data name="OverviewAES192" xml:space="preserve">
+    <value>经过所有AES-192加密后的结果</value>
+  </data>
+  <data name="OverviewAES256" xml:space="preserve">
+    <value>所有AES-256加密后的加密结果</value>
+  </data>
+  <data name="OverviewDES" xml:space="preserve">
+    <value>所有DES回合后的加密结果</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>％已更改</value>
+  </data>
+  <data name="PercentageFlipped" xml:space="preserve">
+    <value>翻转位的百分比</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>回合</value>
+  </data>
+  <data name="AfterRound" xml:space="preserve">
+    <value>回合{0}之后：{1}</value>
+  </data>
+  <data name="EncryptionInitialMsgOut" xml:space="preserve">
+    <value>初始输入的加密：{0}</value>
+  </data>
+  <data name="EncryptionModifiedlMsgOut" xml:space="preserve">
+    <value>修改后的输入的加密：{0}</value>
+  </data>
+  <data name="InitialHashOutput" xml:space="preserve">
+    <value>初始哈希值：{0}</value>
+  </data>
+  <data name="ModHashOutput" xml:space="preserve">
+    <value>修改后的哈希值：{0}</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>输出量</value>
+  </data>
+  <data name="OutputInitialDESKey" xml:space="preserve">
+    <value>初始DES密钥：{0}</value>
+  </data>
+  <data name="OutputInitialDESMsg" xml:space="preserve">
+    <value>初始DES消息：{0}</value>
+  </data>
+  <data name="OutputModifiedDESKey" xml:space="preserve">
+    <value>修改后的DES密钥：{0}</value>
+  </data>
+  <data name="OutputModifiedDESMsg" xml:space="preserve">
+    <value>修改后的DES消息：{0}</value>
+  </data>
+  <data name="OutputStats1" xml:space="preserve">
+    <value>翻转位：{0}。雪崩效应：{1}％{2}</value>
+  </data>
+  <data name="OutputStats2" xml:space="preserve">
+    <value>最长相同位序列的长度：{0}。偏移量：{1}。{2}</value>
+  </data>
+  <data name="OutputStats3" xml:space="preserve">
+    <value>最长翻转位序列的长度：{0}。偏移量：{1}。{2}</value>
+  </data>
+  <data name="OutputStatsClassic1" xml:space="preserve">
+    <value>更改的字节：{0}。雪崩效应：{1}％{2}</value>
+  </data>
+  <data name="OutputStatsClassic2" xml:space="preserve">
+    <value>最长相同字节序列的长度：{0}。偏移量{1}。{2}</value>
+  </data>
+  <data name="OutputStatsClassic3" xml:space="preserve">
+    <value>最长更改的字节序列的长度：{0}。偏移量{1}。{2}</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>产生的数据</value>
+  </data>
+  <data name="StatsClassicBullet1" xml:space="preserve">
+    <value>字节已更改（在{0}中）。 {1}％的雪崩效应</value>
+  </data>
+  <data name="StatsClassicBullet1_Plural" xml:space="preserve">
+    <value>字节已更改（在{0}中）。 {1}％的雪崩效应</value>
+  </data>
+  <data name="StatsClassicBullet2" xml:space="preserve">
+    <value>最长相同字节序列的长度：{0}。偏移量{1}。</value>
+  </data>
+  <data name="StatsClassicBullet3" xml:space="preserve">
+    <value>最长更改的字节序列的长度：{0}。偏移量{1}。</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>修改后的消息（{0}个字符）必须与初始消息（{1}个字符）一样长。</value>
+  </data>
+  <data name="KeyLength128" xml:space="preserve">
+    <value>密钥必须具有16个字节。</value>
+  </data>
+  <data name="KeyLength192" xml:space="preserve">
+    <value>密钥必须具有24个字节。</value>
+  </data>
+  <data name="KeyLength256" xml:space="preserve">
+    <value>密钥必须具有32个字节。</value>
+  </data>
+  <data name="KeyLengthDES" xml:space="preserve">
+    <value>密钥必须具有8个字节。</value>
+  </data>
+  <data name="University" xml:space="preserve">
+    <value>曼海姆大学</value>
+  </data>
+  <data name="End" xml:space="preserve">
+    <value>演示结束！</value>
+  </data>
+  <data name="OutputInitialAESKey" xml:space="preserve">
+    <value>初始AES密钥：{0}</value>
+  </data>
+  <data name="OutputInitialAESMsg" xml:space="preserve">
+    <value>初始AES消息：{0}</value>
+  </data>
+  <data name="OutputModifiedAESKey" xml:space="preserve">
+    <value>修改后的AES密钥：{0}</value>
+  </data>
+  <data name="OutputModifiedAESMsg" xml:space="preserve">
+    <value>修改后的AES消息：{0}</value>
+  </data>
+  <data name="DESderivedFromInit" xml:space="preserve">
+    <value>{0}源自初始输入的最终DES密文：{1}</value>
+  </data>
+  <data name="DESderivedFromMod" xml:space="preserve">
+    <value>来自修改后的输入的最终DES密文：{0}</value>
+  </data>
+  <data name="AESDerivedFromInit" xml:space="preserve">
+    <value>{0}源自初始输入的最终AES密文：{1}</value>
+  </data>
+  <data name="AESDerivedFromMod" xml:space="preserve">
+    <value>来自修改后的输入的最终AES密文：{0}</value>
+  </data>
+  <data name="HashFunctionInitBin" xml:space="preserve">
+    <value>初始哈希值（二进制）</value>
+  </data>
+  <data name="HashFunctionModBin" xml:space="preserve">
+    <value>修改后的哈希值（二进制）</value>
+  </data>
+  <data name="Instructions" xml:space="preserve">
+    <value>使用说明</value>
+  </data>
+  <data name="InstructionsPrepDescription" xml:space="preserve">
+    <value>在Avalanche插件中实现了“ Prepared methods”类别中的方法。因此，该插件不仅可以显示加密功能（最后一步）的结果，还可以显示所有中间步骤的变化。</value>
+  </data>
+  <data name="ShowChangeTitleAES" xml:space="preserve">
+    <value>显示更改的输入数据AES-</value>
+  </data>
+  <data name="ShowChangeTitleDES" xml:space="preserve">
+    <value>显示更改的输入数据DES</value>
+  </data>
+  <data name="Title_DES" xml:space="preserve">
+    <value>雪崩效应DES</value>
+  </data>
+  <data name="ChangedInput" xml:space="preserve">
+    <value>更改输入</value>
+  </data>
+  <data name="OutputNotMod" xml:space="preserve">
+    <value>输入未修改。</value>
+  </data>
+  <data name="OutputNotModAESKey" xml:space="preserve">
+    <value>AES密钥未修改。</value>
+  </data>
+  <data name="OutputNotModAESMsg" xml:space="preserve">
+    <value>AES消息未修改。</value>
+  </data>
+  <data name="OutputNotModDESKey" xml:space="preserve">
+    <value>DES密钥未修改。</value>
+  </data>
+  <data name="OutputNotModDESMsg" xml:space="preserve">
+    <value>DES消息未修改。</value>
+  </data>
+  <data name="SelectionTooltipUnprep" xml:space="preserve">
+    <value>从“未准备的方法”类别中选择您要测试其雪崩效应的方法。</value>
+  </data>
+  <data name="black_white" xml:space="preserve">
+    <value>黑，白</value>
+  </data>
+  <data name="Contrast" xml:space="preserve">
+    <value>对比</value>
+  </data>
+  <data name="ContrastTooltip" xml:space="preserve">
+    <value>为饼图选择对比度。</value>
+  </data>
+  <data name="red_green" xml:space="preserve">
+    <value>红/绿</value>
+  </data>
+</root>

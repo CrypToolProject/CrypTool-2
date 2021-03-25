@@ -1,0 +1,53 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+		  body
+		  {
+		  	font-family:Arial,Verdana,Georgia;
+		  	font-size:smaller;
+            background-color: #EBEFF6;
+		  }
+		</style>
+	</head>
+	<body>
+	<h2>Attacks on PKCS#1 signatures (Bleichenbacher and Kuehn)</h2>
+	<p align="justify">
+	PKCS#1 signatures are based on the RSA encryption scheme.
+	The attack devised by Daniel Bleichenbacher does not attack the encryption scheme, but flawed implementations of the signature 
+	validation that were present in several RSA class libraries.
+	The attack was published in 1998.
+	Since then the signature specifications and the affected libraries have been corrected.
+	</p>
+	<p align="justify">
+	<strong>Digital signatures</strong></br>
+	Digital signatures are used to check the authenticity of a digital message or to guarantee the identity of the sender.
+	Signatures are based on asymmetrical encryption schemes (in this case RSA), that use a public and a private key.
+	</br></br>
+	To generate a signature of a message it is not necessary to encrypt the complete message with the private key.
+	Instead, a hash value of the message is calculated. Together with some other informations this hash value is then formatted
+	in a special way (as described by the PKCS specifications). Only this formatted data block is then encrypted with the
+	private key.</br>
+	The digital message is then transfered to the receiver together with the resulting signature.
+	The receiver can now validate the authenticity of the data by first decrypting the signature with the
+	public key of the sender. From the decrypted signature the sender can read the used hash function and the
+	corresponding hash value of the original message. Now the sender can himself calculate the hash value of
+	the original message and compare it to the hash value in the signature. If they are equal, the message
+	is regarded as authentic.
+	</p>
+	<p align="justify">
+	<strong>Bleichenbacher attack (1998)</strong></br>
+	The Bleichenbacher attack allows, under certain circumstances, to forge a signature.
+	If the signature validation process is implemented according to PKCS#1 version 1.5, such a forged signature
+	is accepted as valid.
+	This attack is not applicable against implementations that comply to the revised specification PKCS#1 version 2.1.</br>
+	</p>
+  <p align="justify">
+  <strong>Attack with shorter keys (Kuehn attack 2003)</strong></br>
+  In contrast to the Bleichenbacher attack (key lengths of 3072 bits) the Kuehn attack aims at shorter keys (1024 bits).
+  Instead of explicitly calculating a forged signature the Kuehn attack tries to find a valid signature by manipulating the message.
+  Thus it heavily relies on computing power.</br>
+  </p>
+	</body>
+</html>

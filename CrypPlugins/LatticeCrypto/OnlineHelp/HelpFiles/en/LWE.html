@@ -1,0 +1,77 @@
+﻿<h2>LWE Crypto System</h2>
+
+<p>
+<i>Learning With Errors</i> (LWE) is a problem that was introduced by Oded Regev in 2005 [Reg05].
+It can be defined as follows:
+</p>
+
+<p>
+Let m, n and q be integers and X a (normal) random distribution over Zq.
+Given is the pair (A, b), with a random quadratic matrix A over Zq^(m x n) and a vector b = As + e, where s is a random vector over Zq^n and e is an error vector over Zq^m, whose elements are selected according to the distribution X.
+Then the LWE problem is to determine the vector s.
+</p>
+
+<p>
+In other words, from a set of 'approximated' linear equations find the vector s in Zq^n (see the following example).
+If no error vector e was used, the linear equations could be solved with the Gaussian elimination method.
+However, the approximation makes this problem much more difficult.
+</p>
+
+<img src="ImgLWE1" />
+
+<p>
+The equations are correct apart from a small error value, for example 1, which was added. In this example the vector is s = [5 7 11].
+</p>
+
+<p>
+The error distribution is a normal distribution that is rounded up to the next integer and taken modulo q.
+The standard deviation is sigma = alpha * q, with alpha > 0.
+For an example of such a distribution see figure 2, taken from [Reg10].
+</p>
+
+<img src="ImgLWE2" />
+
+<p>The error distribution is given as q = 113 and alpha = 0.05.</p>
+
+<p>
+The private key is s, the public key is b = As + e, where A is random and e is generated according to the distribution X.
+For encryption, a random vector r in {0,1}^m is generated.
+It is used to determine a subset of A, as not the entire matrix A is used for the encryption process.
+In the next step, calculate u = r^T * A.
+Now the ciphertext can be generated: c = r^T * b + Bit * [q / 2] (floor function).
+The encryption is executed bitwise.
+Depending on the value of the plaintext bit, [q / 2] is either added or not.
+The sender sends (u, c) to the owner of the private key.
+He can determine whether c - u*s is closer to 0 or [q / 2].
+If it is closer to 0, then the plaintext bit was 0, otherwise 1.
+</p>
+
+<p>
+The LWE cryptosystem was designed as a single-bit encryption.
+This means that when encrypting a plaintext vector, each bit has to be encrypted separately.
+A multi-bit variant was presented by Tore Kasper Frederiksen in 2010 [Fre10].
+Frederiksen introduces three new parameters t, r and l.
+For a binary encryption, choose t = 2 and for the optimization vector let r = 1.
+The third parameter gives the size of the plaintext vector.
+If the message is bigger than l, it must be divided into blocks.
+
+In the multi-bit variant, the private key is no longer a vector s from Zq^n, but a matrix from Zq^(n x l).
+The error vector e also becomes a matrix E from Zq^(m x l).
+The public key is B = As+E mod q.
+For encryption, a random vector r from {-1,0,1}^m is generated.
+Encryption and decryption are then performed analogously to the single-bit encryption by Regev.
+</p>
+
+<br/>
+
+<p>Sources:</p>
+
+<p>
+[Fre10] Frederiksen, T. K.: A Multi-bit Threshold Variant of Regev’s LWE-based Cryptosystem. 2010. – Working Paper, Aarhus University
+</p>
+<p>
+[Reg05] Regev, O.: On Lattices, Learning with Errors, Random Linear Codes, and Cryptography. In: Proceedings of the 37th Annual ACM Symposium on Theory of Computing, ACM, 2005 (STOC ’05), p. 84-93
+</p>
+<p>
+[Reg10] Regev, O.: The Learning with Errors Problem (Invited Survey). In: Proceedings of the 2010 IEEE 25th Annual Conference on Computational Complexity, IEEE Computer Society, 2010 (CCC ’10), p. 191-204
+</p>

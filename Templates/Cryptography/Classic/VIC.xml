@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">VIC Cipher</title>
+  <title lang="zh">VIC密码</title>
+  <summary lang="en">Usage of the <i>VIC</i> cipher</summary>
+  <summary lang="zh">VIC密码的用法</summary>
+  <description lang="en">
+  The VIC cipher was a pencil and paper cipher used by the Soviet spy Reino Häyhänen, codenamed "VICTOR". <newline />
+  If the cipher were to be given a modern technical name, it would be known as a "straddling bipartite monoalphabetic substitution superenciphered by modified double transposition."However, by general classification it is part of the Nihilist family of ciphers. 
+  Source: <external ref="https://en.wikipedia.org/wiki/VIC_cipher" /></description>
+  <description lang="zh">VIC密码是苏联间谍ReinoHäyhänen使用的铅笔和纸密码，代号为“ VICTOR”。如果要给该密码起一个现代的技术名称，它将被称为“通过修饰的双置换而跨过的跨界二元单字母取代。”但是，按一般分类，它是Nihilist密码家族的一部分。资源：</description>
+  <keywords>VIC, VICTOR, Substitution, monoalphabetic substitution, straddling checkerboard, transposition, columnar transposition</keywords>
+  <keywords lang="zh">VIC，VICTOR，替代，单字母替代，跨界棋盘格，换位，柱状换位</keywords>
+  <icon file="VCI.png" />
+  <relevantPlugins>
+    <plugin name="VIC" />
+  </relevantPlugins>
+  <replacements lang="en">
+    <replacement key="$dateTextBox$" value="Date in a continental format." />
+    <replacement key="$date$" value="391945" />
+    <replacement key="$dateMemo$" value="Date in a continental format means that e.g. 3rd september 1945 is 391945. Minimum length should be 5 digits." />
+    <replacement key="$passwordTextBox$" value="Password" />
+    <replacement key="$password$" value="подумать" />
+    <replacement key="$passwordMemo$" value="Password must consist of at least 7 unique characters." />
+    <replacement key="$phraseTextBox$" value="Phrase of at least 20 characters long excluding spaces and interpunction." />
+    <replacement key="$phrase$" value="Расцветали яблони и груши Поплыли туманы над рекой Выходила на берег Катюша На высокий берег на крутой Выходила на берег Катюша На высокий берег на крутой" />
+    <replacement key="$phraseMemo$" value="Phrase consisting of at least 20 unique letters. A good example also used in the original messages enciphered with VIC cipher is a short passage from a folk song." />
+    <replacement key="$numberTextBox$" value="Number" />
+    <replacement key="$number$" value="12" />
+    <replacement key="$numberMemo$" value="1 or 2 digit number. This number must be between 0 and 33, however optimal value is around 10-13. Originally, agent's number was used." />
+    <replacement key="$initializingStringTextBox$" value="Initalizing string" />
+    <replacement key="$initializingString$" value="53815" />
+    <replacement key="$initializingStringMemo$" value="Initializing String must be consisting only of digits and at least 5 digits long. This string is also inserted to end of the output string at a position determined by the last digit of Date." />
+    <replacement key="$inputTextBox$" value="Plaintext Input" />
+    <replacement key="$input$" value="Калинка, калинка, калинка моя! В саду ягода малинка, малинка моя! Ах, под сосною, под зеленою, Спать положите вы меня! Ай-люли, люли, ай-люли, люли, Спать положите вы меня." />
+    <replacement key="$inputPlaintextMemo$" value="Plaintext/Ciphertext Input to be processed by the VIC cipher" />
+    <replacement key="$componentTextBox$" value="VIC Cipher" />
+    <replacement key="$outputTextBox$" value="Output of the VIC cipher. Enciphered/Plain text" />
+    <replacement key="$memo$" value="This is a template showcasing the usage of the VIC cipher.     As you can see, VIC cipher needs to have 5 different      inputs for the key and one for the plaintext. Please,     read all the captions for the keys to make sure you enter the key parts in correct format." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$dateTextBox$" value="日期以大陆格式显示。" />
+    <replacement key="$date$" value="391945" />
+    <replacement key="$dateMemo$" value="大陆格式的日期表示，例如1945年9月3日是391945。最小长度应为5位数字。" />
+    <replacement key="$passwordTextBox$" value="密码" />
+    <replacement key="$password$" value="思考" />
+    <replacement key="$passwordMemo$" value="密码必须至少包含7个唯一字符。" />
+    <replacement key="$phraseTextBox$" value="词组至少20个字符，不包括空格和标点符号。" />
+    <replacement key="$phrase$" value="苹果树和梨花盛开雾在河上漂浮出在卡秋莎河岸上在陡峭的河岸上出在卡秋莎河岸上在陡峭的河岸上" />
+    <replacement key="$phraseMemo$" value="词组至少包含20个唯一字母。在用VIC密码加密的原始消息中也使用的一个很好的例子是一首民歌的简短段落。" />
+    <replacement key="$numberTextBox$" value="数" />
+    <replacement key="$number$" value="12" />
+    <replacement key="$numberMemo$" value="1或2位数字。该数字必须介于0到33之间，但是最佳值为10-13左右。最初使用的是座席号码。" />
+    <replacement key="$initializingStringTextBox$" value="诱人的字符串" />
+    <replacement key="$initializingString$" value="53815" />
+    <replacement key="$initializingStringMemo$" value="初始化字符串必须仅由数字组成，且长度至少为5位。此字符串也将插入到输出字符串的末尾，该位置由Date的最后一位数字确定。" />
+    <replacement key="$inputTextBox$" value="纯文本输入" />
+    <replacement key="$input$" value="卡林卡，卡林卡，我的卡林卡！花园里有一个覆盆子，我的覆盆子！啊，在松树下，在绿色下，你让我入睡！ Ay-lyuli，lyuli，ai-lyuli，lyuli，你让我入睡。" />
+    <replacement key="$inputPlaintextMemo$" value="VIC密码处理的纯文本/密文输入" />
+    <replacement key="$componentTextBox$" value="VIC密码" />
+    <replacement key="$outputTextBox$" value="VIC密码的输出。加密/明文" />
+    <replacement key="$memo$" value="这是一个模板，展示了VIC密码的用法。如您所见，VIC密码需要5个不同的密钥输入和1个明文输入。请阅读所有键的标题，以确保您以正确的格式输入键部分。" />
+  </replacements>
+</sample>

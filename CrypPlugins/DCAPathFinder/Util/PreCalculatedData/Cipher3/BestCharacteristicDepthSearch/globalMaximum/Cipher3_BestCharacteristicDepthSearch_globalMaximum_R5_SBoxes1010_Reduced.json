@@ -1,0 +1,142 @@
+{
+  "Round": 5,
+  "ActiveSBoxes": [
+    false,
+    true,
+    false,
+    true
+  ],
+  "IsFirst": false,
+  "IsLast": true,
+  "IsBeforeLast": false,
+  "Probability": 0.009372711181640625,
+  "InputDifference": 1,
+  "ExpectedDifference": 4112,
+  "Characteristics": [
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        1,
+        16,
+        32,
+        2,
+        4112
+      ],
+      "OutputDifferentials": [
+        2,
+        32,
+        16,
+        10
+      ],
+      "Probability": 0.006591796875
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        1,
+        4097,
+        144,
+        2,
+        4112
+      ],
+      "OutputDifferentials": [
+        9,
+        8194,
+        16,
+        10
+      ],
+      "Probability": 0.000274658203125
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        1,
+        4352,
+        192,
+        2,
+        4112
+      ],
+      "OutputDifferentials": [
+        12,
+        8704,
+        16,
+        10
+      ],
+      "Probability": 0.00054931640625
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        1,
+        4368,
+        224,
+        2,
+        4112
+      ],
+      "OutputDifferentials": [
+        14,
+        8736,
+        16,
+        10
+      ],
+      "Probability": 0.00020599365234375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        1,
+        16,
+        8194,
+        9,
+        4112
+      ],
+      "OutputDifferentials": [
+        2,
+        144,
+        4097,
+        10
+      ],
+      "Probability": 0.000823974609375
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        1,
+        16,
+        8736,
+        14,
+        4112
+      ],
+      "OutputDifferentials": [
+        2,
+        224,
+        4368,
+        10
+      ],
+      "Probability": 0.00061798095703125
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        1,
+        16,
+        546,
+        7,
+        4112
+      ],
+      "OutputDifferentials": [
+        2,
+        112,
+        273,
+        10
+      ],
+      "Probability": 0.000308990478515625
+    }
+  ],
+  "UnfilteredPairList": [],
+  "FilteredPairList": [],
+  "EncrypedPairList": [],
+  "SearchPolicy": 1,
+  "AbortingPolicy": 0,
+  "SelectedAlgorithm": 2
+}

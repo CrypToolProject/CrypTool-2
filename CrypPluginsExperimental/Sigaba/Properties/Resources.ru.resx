@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>действие</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>шифровать</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>расшифровывать</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Выберите режим работы</value>
+  </data>
+  <data name="CaseHandlingCaption" xml:space="preserve">
+    <value>Обработка корпуса</value>
+  </data>
+  <data name="CaseHandlingList1" xml:space="preserve">
+    <value>Запасной корпус</value>
+  </data>
+  <data name="CaseHandlingList2" xml:space="preserve">
+    <value>Преобразовать в верхнюю</value>
+  </data>
+  <data name="CaseHandlingList3" xml:space="preserve">
+    <value>Преобразовать в нижний</value>
+  </data>
+  <data name="CaseHandlingTooltip" xml:space="preserve">
+    <value>Что нужно делать с помощью строчных и строчных букв?</value>
+  </data>
+  <data name="CipherGroup" xml:space="preserve">
+    <value>Лабиринт лабиринта</value>
+  </data>
+  <data name="CipherKeyCaption" xml:space="preserve">
+    <value>Ключ шифрования</value>
+  </data>
+  <data name="CipherKeyTooltip" xml:space="preserve">
+    <value>Определяет начальные положения роторов шифрования</value>
+  </data>
+  <data name="CipherRotor1Caption" xml:space="preserve">
+    <value>Шифр 1 (самый левый)</value>
+  </data>
+  <data name="CipherRotor1Tooltip" xml:space="preserve">
+    <value>Определяет тип первого ротора шифрования</value>
+  </data>
+  <data name="CipherRotor2Caption" xml:space="preserve">
+    <value>Шифр 2</value>
+  </data>
+  <data name="CipherRotor2Tooltip" xml:space="preserve">
+    <value>Определяет тип второго ротора шифрования</value>
+  </data>
+  <data name="CipherRotor3Caption" xml:space="preserve">
+    <value>Шифр 3</value>
+  </data>
+  <data name="CipherRotor3Tooltip" xml:space="preserve">
+    <value>Определяет тип третьего ротора шифрования</value>
+  </data>
+  <data name="CipherRotor4Caption" xml:space="preserve">
+    <value>Шифр 4</value>
+  </data>
+  <data name="CipherRotor4Tooltip" xml:space="preserve">
+    <value>Определяет тип четвертого ротора шифрования</value>
+  </data>
+  <data name="CipherRotor5Caption" xml:space="preserve">
+    <value>Шифр 5 (самый правый)</value>
+  </data>
+  <data name="CipherRotor5Tooltip" xml:space="preserve">
+    <value>Определяет тип пятого ротора шифрования</value>
+  </data>
+  <data name="ControlGroup" xml:space="preserve">
+    <value>Шаговый лабиринт</value>
+  </data>
+  <data name="ControlKeyCaption" xml:space="preserve">
+    <value>Клавиша управления</value>
+  </data>
+  <data name="ControlKeyTooltip" xml:space="preserve">
+    <value>Определяет начальные положения управляющих роторов</value>
+  </data>
+  <data name="ControlRotor1Caption" xml:space="preserve">
+    <value>Управляющее колесо 1 (самое правое)</value>
+  </data>
+  <data name="ControlRotor1Tooltip" xml:space="preserve">
+    <value>Определяет тип первого управляющего колеса</value>
+  </data>
+  <data name="ControlRotor2Caption" xml:space="preserve">
+    <value>Управляющее колесо 2</value>
+  </data>
+  <data name="ControlRotor2Tooltip" xml:space="preserve">
+    <value>Определяет тип второго управляющего колеса</value>
+  </data>
+  <data name="ControlRotor3Caption" xml:space="preserve">
+    <value>Управляющее колесо 3</value>
+  </data>
+  <data name="ControlRotor3Tooltip" xml:space="preserve">
+    <value>Определяет тип третьего управляющего колеса</value>
+  </data>
+  <data name="ControlRotor4Caption" xml:space="preserve">
+    <value>Управляющее колесо 4</value>
+  </data>
+  <data name="ControlRotor4Tooltip" xml:space="preserve">
+    <value>Определяет тип четвертого управляющего колеса</value>
+  </data>
+  <data name="ControlRotor5Caption" xml:space="preserve">
+    <value>Управляющее колесо 5 (большинство слева)</value>
+  </data>
+  <data name="ControlRotor5Tooltip" xml:space="preserve">
+    <value>Определяет тип пятого управляющего колеса</value>
+  </data>
+  <data name="IndexGroup" xml:space="preserve">
+    <value>Лабиринт индекса</value>
+  </data>
+  <data name="IndexKeyCaption" xml:space="preserve">
+    <value>Ключ индекса</value>
+  </data>
+  <data name="IndexKeyTooltip" xml:space="preserve">
+    <value>Определяет начальные позиции индексных колес</value>
+  </data>
+  <data name="IndexRotor1Caption" xml:space="preserve">
+    <value>Индексированное колесо 1 (большинство слева)</value>
+  </data>
+  <data name="IndexRotor1Tooltip" xml:space="preserve">
+    <value>Определяет тип первого индексного колеса</value>
+  </data>
+  <data name="IndexRotor2Caption" xml:space="preserve">
+    <value>Индексный диск 2</value>
+  </data>
+  <data name="IndexRotor2Tooltip" xml:space="preserve">
+    <value>Определяет тип второго индексного колеса</value>
+  </data>
+  <data name="IndexRotor3Caption" xml:space="preserve">
+    <value>Индексное колесо 3</value>
+  </data>
+  <data name="IndexRotor3Tooltip" xml:space="preserve">
+    <value>Определяет тип третьего индексного колеса</value>
+  </data>
+  <data name="IndexRotor4Caption" xml:space="preserve">
+    <value>Указательное колесо 4</value>
+  </data>
+  <data name="IndexRotor4Tooltip" xml:space="preserve">
+    <value>Определяет тип четвертого колесика индекса</value>
+  </data>
+  <data name="IndexRotor5Caption" xml:space="preserve">
+    <value>Указательное колесо 5 (самое правое)</value>
+  </data>
+  <data name="IndexRotor5Tooltip" xml:space="preserve">
+    <value>Определяет тип пятого колесика индекса</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>раздел</value>
+  </data>
+  <data name="PluginToolTip" xml:space="preserve">
+    <value>Американский роторный шифратор</value>
+  </data>
+  <data name="PositionOptionsGroup" xml:space="preserve">
+    <value>Позиции запуска ротора</value>
+  </data>
+  <data name="PresentationGroup" xml:space="preserve">
+    <value>презентация</value>
+  </data>
+  <data name="PresentationSpeedCaption" xml:space="preserve">
+    <value>скорость</value>
+  </data>
+  <data name="PresentationSpeedTooltip" xml:space="preserve">
+    <value>Отрегулируйте скорость анимации презентации</value>
+  </data>
+  <data name="RotorA1" xml:space="preserve">
+    <value>Кодовое колесо 01</value>
+  </data>
+  <data name="RotorA10" xml:space="preserve">
+    <value>Кодовое колесо 10</value>
+  </data>
+  <data name="RotorA2" xml:space="preserve">
+    <value>Кодовое колесо 02</value>
+  </data>
+  <data name="RotorA3" xml:space="preserve">
+    <value>Колесо диска 03</value>
+  </data>
+  <data name="RotorA4" xml:space="preserve">
+    <value>Кодовое колесо 04</value>
+  </data>
+  <data name="RotorA5" xml:space="preserve">
+    <value>Кодовое колесо 05</value>
+  </data>
+  <data name="RotorA6" xml:space="preserve">
+    <value>Кодовое колесо 06</value>
+  </data>
+  <data name="RotorA7" xml:space="preserve">
+    <value>Кодовое колесо 07</value>
+  </data>
+  <data name="RotorA8" xml:space="preserve">
+    <value>Кодовое колесо 08</value>
+  </data>
+  <data name="RotorA9" xml:space="preserve">
+    <value>Кодовое колесо 09</value>
+  </data>
+  <data name="RotorB1" xml:space="preserve">
+    <value>Индексное колесо 10</value>
+  </data>
+  <data name="RotorB2" xml:space="preserve">
+    <value>Индексное колесо 20</value>
+  </data>
+  <data name="RotorB3" xml:space="preserve">
+    <value>Индексное колесо 30</value>
+  </data>
+  <data name="RotorB4" xml:space="preserve">
+    <value>Указательное колесо 40</value>
+  </data>
+  <data name="RotorB5" xml:space="preserve">
+    <value>Индексное колесо 50</value>
+  </data>
+  <data name="RotorReverseCaption" xml:space="preserve">
+    <value>Задний ход</value>
+  </data>
+  <data name="RotorReverseTooltip" xml:space="preserve">
+    <value>Установите флажок, чтобы вернуть этот ротор.</value>
+  </data>
+  <data name="TestRotor" xml:space="preserve">
+    <value>Контрольное колесо</value>
+  </data>
+  <data name="TextOptionsGroup" xml:space="preserve">
+    <value>Параметры текста</value>
+  </data>
+  <data name="TypeCaption" xml:space="preserve">
+    <value>Тип аппарата</value>
+  </data>
+  <data name="TypeTooltip" xml:space="preserve">
+    <value>Выберите тип Sigaba</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>Неизвестная обработка символов</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>Игнорировать (оставить без изменений)</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>Заменить на «X»</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>Что делать с входными символами, которые не находятся в алфавите?</value>
+  </data>
+</root>

@@ -1,0 +1,213 @@
+<h2>Faktorisierung mit dem quadratischen Sieb</h2>
+
+Das quadratische Sieb ist eines der schnellsten Verfahren zur Faktorisierung einer nat&uuml;rlichen Zahl n. Hier werden mathematische Erkenntnisse eingesetzt, die auf den franz&ouml;sischen Mathematiker Pierre de Fermat zur&uuml;ckgehen. Das Verfahren ist aufw&auml;ndiger und mathematisch anspruchsvoller als die Probedivision. Darum wird hier ein Beispiel aufgef&uuml;hrt.<br /><br />
+Das quadratische Sieb nutzt Eigenschaften aus der Kongruenzrechnung. Um die Vorgehensweise verst&auml;ndlich zu machen, wird zun&auml;chst der Begriff Kongruenz definiert.
+
+<h4>Kongruenz</h4>
+Zwei ganze Zahlen a und b hei&szlig;en kongruent modulo n &hArr; n teilt a-b.
+<br/><br/>
+Man schreibt hierf&uuml;r: a &equiv; b (mod n).
+<br /><br />
+Das Rechnen mit Kongruenzen ist dem Rechnen mit ganzen Zahlen sehr &auml;hnlich. Einen &Uuml;berblick gibt <a href="http://de.wikipedia.org/wiki/Kongruenz_%28Zahlentheorie%29" target="_blank">Wikipedia</a>.
+
+<h4>Die Idee des quadratischen Siebs</h4>
+Findet man zwei ganze Zahlen a und b, f&uuml;r die gilt<br/><br/>
+a<sup>2</sup> &equiv; b<sup>2</sup> (mod n) und a &#8802; b (mod n), (*)<br/><br/>
+dann k&ouml;nnen mit <i>ggT(a + b, n)</i> und <i>ggT(a - b, n)</i> Faktoren von n gefunden werden.<br/>
+Das quadratische Sieb ist ein Algorithmus, der die beiden Zahlen a und b findet.
+
+<h4>Beispiel</h4>
+Der Algorithmus findet a und b auf verschiedenen Wegen.
+Die Zahl a wird dabei so bestimmt, dass sie die Quadratwurzel einer ganzen Zahl ist. Eine solche Zahl wird <i>Quadratzahl</i> genannt.
+Um die Zahl b so zu bestimmen, dass sie auch eine Quadratzahl ist, sind einige zus&auml;tzliche Berechnungen notwendig. Das Vorgehen wird im Folgenden anhand eines
+Beispiels erkl&auml;rt. Die zu faktorisierende Zahl wird mit <i>n</i> bezeichnet.<br /><br />
+Sei <i>n</i> = 2041 = 13 * 157.
+Zun&auml;chst bestimmt man die Quadratwurzel von n: &radic;<i>n</i> = 45,177... &asymp; 46.<br />
+Man bildet eine Folge F<sub>1</sub> von Quadratzahlen a<sup>2</sup> und eine Folge F<sub>2</sub> der Differenzen a<sup>2</sup> - n.<br />
+
+<table border="1" cellpadding="5">
+<tr>
+  <td>a<sup>2</sup></td>
+  <td>46<sup>2</sup></td>
+  <td>47<sup>2</sup></td>
+  <td>48<sup>2</sup></td>
+  <td>49<sup>2</sup></td>
+  <td>50<sup>2</sup></td>
+  <td>51<sup>2</sup></td>
+</tr>
+<tr>
+  <td>a<sup>2</sup> - <i>n</i></td>
+  <td>46<sup>2</sup> - 2041 = 2116 - 2041 = 75</td>
+  <td>168</td>
+  <td>263</td>
+  <td>360</td>
+  <td>459</td>
+  <td>560</td>
+</tr>
+</table>
+<br />
+Wenn eine Zahl a<sup>2</sup>-n der Folge F<sub>2</sub> eine Quadratzahl ist, dann setzt man b<sup>2</sup> = a<sup>2</sup>-n und es gilt:<br />
+a<sup>2</sup> &equiv; b<sup>2</sup> (mod <i>n</i>).
+<br /><br />
+Im Beispiel ist keine der Zahlen in F<sub>2</sub> eine Quadratzahl. In diesem Fall untersucht man, ob ein Produkt von Elementen aus F<sub>2</sub>
+eine Quadratzahl ergibt. Hier ist 75 * 168 * 360 * 560 = 50400<sup>2</sup> eine Quadratzahl.
+a ergibt sich aus dem Produkt 46 * 47 * 49 * 51.
+
+Damit ist a = 5402838 und b = 50400. <br /><br />
+Somit sind beide Kriterien aus (*) erf&uuml;llt, denn es gilt:<br />
+a<sup>2</sup> &equiv; b<sup>2</sup> (mod <i>n</i>) &rArr; 5402838<sup>2</sup> &equiv; 50400<sup>2</sup> (mod 2041) und <br />
+a &#8802; b (mod <i>n</i>) &rArr; 5402838 &#8802; 50400 (mod 2041).<br /><br />
+Man reduziert a und b modulo n (a mod n = 5402838 mod 2041 = 311, b mod n = 50400 mod 2041 = 1416) und findet die Teiler von n:<br /><br />
+ggT(1416 + 311, 2041) = 157 und ggT(1416 - 311, 2041) = 13.
+<br /><br />
+In diesem Beispiel wurden die Folgen F<sub>1</sub> und F<sub>2</sub> durch Ausprobieren gefunden. Offen ist die Frage, wie man sie allgemein bestimmen kann.
+
+
+<h4>Der Algorithmus</h4>
+Das quadratische Sieb besteht aus vier wesentlichen Schritten, die im Folgenden anhand eines Beispiels erkl&auml;rt werden.
+<ol>
+	<li>Die Folge F<sub>1</sub> ergibt sich durch die Bestimmung eines Siebintervalls. Die Gr&ouml;&szlig;e S des Intervalls ist vorgegeben durch S = e<sup>&radic;(ln <i>n</i> * ln ln <i>n</i>)</sup>. Man verwendet f&uuml;r die Folge solche a, f&uuml;r die gilt:<br />
+| a - 	&radic;<i>n</i> | < S<br /><br />
+Bezogen auf das Beispiel ist S = 51,123... . Damit ergibt sich das Siebintervall [-5, +96].<br />
+Die Folgenglieder von F<sub>2</sub> werden entsprechend der Folgenglieder von F<sub>1</sub> berechnet.<br /><br />
+	</li>
+	<li>Im ersten Schritt wird durch die Berechnung von F<sub>1</sub> sichergestellt, dass die Werte f&uuml;r a in jedem Fall Quadratzahlen sind. Um solche Werte f&uuml;r b zu finden, werden in diesem Schritt Vorbereitungen getroffen.<br />
+	Man bestimmt eine obere Schranke B mit B = e<sup>1/2 * &radic;(ln <i>n</i> * ln ln <i>n</i>)</sup> und berechnet alle Primzahlen bis zu dieser Zahl. Die so berechnete Menge der Primzahlen hei&szlig;t <i>Faktorbasis</i> und wird mit F(B) bezeichnet.<br />
+	Nun folgt der <i>Siebschritt</i>. Ist das i-te Element f<sub>i</sub> aus F<sub>2</sub> durch das k-te Element p<sub>k</sub> der Faktorbasis teilbar, so sind auch alle Vielfachen von f<sub>i</sub> durch p<sub>k</sub> teilbar. &Auml;hnlich wie beim <a href="help://Primetest_SieveOfEratosthenes">Sieb des Eratosthenes</a> werden also die Elemente der Folge F<sub>2</sub> ausgesiebt, indem sie durch die Elemente der Faktorbasis geteilt werden. Ein Element aus F<sub>2</sub>, das sich so vollst&auml;ndig faktorisieren l&auml;sst, hei&szlig;t <i>glatt bez&uuml;glich F(B)</i>. Nur diejenigen Elemente aus F<sub>2</sub>, die glatt bez&uuml;glich F(B) sind, werden im weiteren Vorgehen betrachtet.<br /><br />
+	Bezogen auf das Beipiel ist B = 7,15 &asymp; 7. F(B) ist also {2,3,5,7}. Mit dem Siebschritt ergeben sich folgende Werte:<br /><br />
+
+    <table border="1" cellpadding="5">
+    <tr>
+      <th>
+        a<sup>2</sup> - <i>n</i>
+      </th>
+      <th>
+        Faktorisierung
+      </th>
+      <th>
+        Ist glatt bez&uuml;glich F(B)
+      </th>
+    </tr>
+    <tr>
+      <td>75</td>
+      <td>3 * 5<sup>2</sup></td>
+      <td>ja</td>
+    </tr>
+    <tr>
+      <td>168</td>
+      <td>2<sub>3</sub> * 3 * 7</td>
+      <td>ja</td>
+    </tr>
+    <tr>
+      <td>263</td>
+      <td>263 (263 ist eine Primzahl)</td>
+      <td>nein</td>
+    </tr>
+    <tr>
+      <td>360</td>
+      <td>2<sup>3</sup> * 3<sup>2</sup> * 5</td>
+      <td>ja</td>
+    </tr>
+    <tr>
+      <td>459</td>
+      <td>3<sup>3</sup> * 17</td>
+      <td>nein</td>
+    </tr>
+    <tr>
+      <td>560</td>
+      <td>2<sup>4</sup> * 5 * 7</td>
+      <td>ja</td>
+    </tr>
+    </table>
+	 <br />
+	Im n&auml;chsten Schritt werden also nur die glatten Werte 75, 168, 360 und 560 betrachtet.<br /><br />
+  </li>
+  <li>
+    Da alle hier betrachteten Elemente aus F<sub>2</sub> glatt bez&uuml;glich F(B) sind, wird sichergestellt, dass Quadratzahlen effizient gefunden werden k&ouml;nnen.
+    Dazu betrachtet man die Exponenten der Faktorisierung in <i>Exponentenvektoren</i>. F&uuml;r 75 = 3 * 5<sup>2</sup> w&auml;re der Exponentenvektor (0,1,2,0).
+	 Die Faktoren 2 und 7 kommen in der Faktorisierung von 75 nicht vor, der Faktor 3 einmal und der Faktor 5 zweimal.<br />
+	 <br />
+	 Auf das Beispiel bezogen ergeben sich folgenden Exponentenvektoren:<br />
+	 <br />
+    <table border="1" cellpadding="5">
+    <tr >
+      <th rowspan="2"> a<sup>2</sup> - <i>n</i> </th>
+      <th rowspan="2"> Faktorisierung </th>
+      <th colspan="4"> Exponentenvektor </th>
+    </tr>
+    <tr >
+      <th> 2 </th>
+      <th> 3 </th>
+      <th> 5 </th>
+      <th> 7 </th>
+    </tr>
+
+    <tr>
+      <td>75</td>
+      <td>3 * 5<sup>2</sup></td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>168</td>
+      <td>2<sub>3</sub> * 3 * 7</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>360</td>
+      <td>2<sup>3</sup> * 3<sup>2</sup> * 5</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>560</td>
+      <td>2<sup>4</sup> * 5 * 7</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    </table>
+	 <br />
+
+    Bei der Multiplikation zweier Zahlen werden deren Exponentenvektoren addiert. Man sucht nun also ein Produkt von glatten Elementen, bei dem
+    alle Exponenten gerade sind und erh&auml;lt so eine Quadratzahl.<br />
+	 F&uuml;r das Beispiel ist b<sup>2</sup> = 75 * 168 * 360 * 560
+    = (3 * 5<sup>2</sup>) * (2<sup>3</sup> * 3 * 7) * (2<sup>3</sup> * 3<sup>2</sup> * 5) * (2<sup>4</sup> * 5 * 7)
+    = (2<sup>3+3+4</sup>) * (3<sup>1+1+2</sup>)* (5<sup>2+1+1</sup>) * (7<sup>1+1</sup>)
+    = (2<sup>10</sup>) * (3<sup>4</sup>) * (5<sup>4</sup>) * (7<sup>2</sup>)
+    = (2<sup>5</sup> * 3<sup>2</sup> * 5<sup>2</sup> * 7)<sup>2</sup>
+    = 50400<sup>2</sup>
+    also eine gesuchte Quadratzahl.<br /><br />
+  </li>
+  <li>
+    Im letzten Schritt werden nun noch die Bedingungen aus (*) &uuml;berpr&uuml;ft. Wie oben aufgef&uuml;hrt sind mit<br />
+    a<sup>2</sup> &equiv; b<sup>2</sup> (mod <i>n</i>) &rArr; 5402838<sup>2</sup> &equiv; 50400<sup>2</sup> (mod 2041) und <br />
+    a &#8802; b(mod <i>n</i>) &rArr; 5402838 &#8802; 50400 (mod 2041)<br />
+    die Bedingungen erf&uuml;llt und es k&ouml;nnen Teiler von <i>n</i> berechnet werden.<br />
+  </li>
+</ol>
+<br />
+Die Ergebnisse sind sehr stark von <i>n</i> abh&auml;ngig. Falls n das Produkt nur zweier Primfaktoren ist, dann werden diese, wie im Beispiel gezeigt, gefunden.
+Besteht <i>n</i> aus mehr Primfaktoren, dann sind die Ergebnisse nicht unbedingt Primzahlen. Ist das der Fall, muss das quadratische Sieb nochmals auf
+diese Faktoren angewendet werden. Au&szlig;erdem kann es auch vorkommen, dass nicht sofort eine Quadratzahl gefunden wird, die die Bedingungen aus (*) erf&uuml;llt.
+Auch in diesem Fall muss das quadratische Sieb nochmals ausgef&uuml;hrt werden.<br />
+<br />
+Die Gr&ouml;&szlig;e der Faktorbasis und des Siebintervalls ist von der Gr&ouml;&szlig;e von n abh&auml;ngig. Bei 50-stelligen Zahlen enth&auml;lt die Faktorbasis etwa 3.000 Primzahlen,
+das Siebintervall hat eine Gr&ouml;&szlig;e von 200.000. Bei 120-stelligen Zahlen sind in der Faktorbasis 245.000 Primzahlen enthalten und die Gr&ouml;&szlig;e des
+Siebintervalls betr&auml;gt 245.000.000. Die Berechnungen dauern sehr lange und sind von einem einzelnen PC nicht in annehmbarer Zeit zu bewerkstelligen.
+Darum wird das quadratische Sieb in der Praxis auf mehreren Rechnern gleichzeitig berechnet.
+Aus diesem Grund sind in diesem Modul nur Zahlen bis 10.000 als Eingabe m&ouml;glich. Die Faktorisierung gr&ouml;&szlig;erer Zahlen w&uuml;rde zu
+lange dauern und sehr un&uuml;bersichtlich werden.<br />
+<br />
+Das quadratische Sieb in "Die Welt der Primzahlen" teilt sich in die im Beispiel aufgef&uuml;hrten vier Schritte auf.
+Zun&auml;chst werden die Faktorbasis, das Siebintervall und die Folgen F<sub>1</sub> und F<sub>2</sub> berechnet. Im Anschluss werden alle glatten Werte
+bez&uuml;glich der Faktorbasis ermittelt. Im dritten Schritt wird die Quadratzahl b<sup>2</sup> berechnet. Im letzten Schritt werden die Bedingungen &uuml;berpr&uuml;ft
+und die Faktoren von <i>n</i> berechnet.

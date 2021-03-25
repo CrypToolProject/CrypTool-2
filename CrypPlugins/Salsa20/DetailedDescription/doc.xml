@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    Salsa20 is one of seven symmetric stream ciphers that was chosen for the final eSTREAM portfolio of the ECRYPT Stream Cipher Project.
+    It requires a 64 bits initialization vector (IV) and either a 128 or 256 bits secret key. The cipher is based on a strong cryptographic hash function that
+    generates hash values consisting of 64 bytes.
+    For each IV Salsa20 produces a sequence of at most 2^64 hash values. Thus, the maximum length of the key stream that Salsa20 can generate per IV is 64 * 2^64 = 2^70 bytes long.
+    No attack faster than brute-force has been identified so far.
+  </introduction>
+  <introduction lang="zh-CN">Salsa20是为ECRYPT流密码项目的最终eSTREAM产品组合选择的七个对称流密码之一。它需要一个64位的初始化向量（IV）和一个128位或256位的秘密密钥。该密码基于强大的加密哈希函数，该函数生成由64个字节组成的哈希值。 Salsa20为每个IV生成最多2 ^ 64个哈希值的序列。因此，Salsa20每个IV可以生成的密钥流的最大长度为64 * 2 ^ 64 = 2 ^ 70字节长。到目前为止，还没有发现比蛮力还要快的攻击。</introduction>
+  <introduction lang="ru">Salsa20 является одним из семи симметричных потоковых шифров, который был выбран для окончательного портфеля eSTREAM проекта ECHREPT Stream Cipher. Для этого требуется вектор инициализации 64 бит (IV) и либо секретный ключ 128 или 256 бит. Шифр основан на сильной криптографической хэш-функции, которая генерирует хеш-значения, состоящие из 64 байтов. Для каждого IV Salsa20 получается последовательность не более 2 ^ 64 хэш-значений. Таким образом, максимальная длина ключевого потока, который Salsa20 может генерировать на IV, составляет 64 * 2 ^ 64 = 2 ^ 70 байтов. До сих пор не было обнаружено атаки быстрее, чем грубая сила.</introduction>
+  <usage lang="en">
+    After dragging the Salsa20 component onto your workspace, you will
+    have to attach the three input connectors 'Input', 'Key' and 'IV' to data sources.
+
+    Additionally you have to connect a text output component to the 'Output' connector.
+  </usage>
+  <usage lang="zh-CN">将Salsa20组件拖到工作区后，必须将三个输入连接器“输入”，“键”和“ IV”连接到数据源。另外，您必须将文本输出组件连接到“输出”连接器。</usage>
+  <usage lang="ru">После перетаскивания компонента Salsa20 в рабочее пространство вам необходимо будет подключить три входных разъема «Вход», «Ключ» и «IV» к источникам данных. Кроме того, вам необходимо подключить компонент вывода текста к разъему «Выход».</usage>
+  <language culture="de-DE" />
+  <introduction lang="de-DE">
+    Salsa20 ist eine von sieben symmetrischen Stromchiffren, die für das finale eSTREAM Portfolio des ECRYPT Stream Cipher Project gewählt wurden.
+    Sie benötigt einen 64 Bits Initialisierungsvektor (IV) und entweder einen 128 oder 256 Bits Schlüssel.
+    Die Chiffre basiert auf einer starken kryptographischen Hash-Funktion, die Hashwerte von 64 Bytes Länge erzeugt.
+    Für jeden IV generiert Salsa20 eine Folge von maximal 2^64 dieser Hashwerte. Daher ist der Schlüsselstrom, der aus einem IV erzeugt werden kann, maximal 64 * 2^64 = 2^70 Bytes lang. 
+    Es wurde bisher kein Angriff gefunden, der schneller als Brute-Force ist.
+  </introduction>
+  <usage lang="de-DE">
+    Nachdem Sie die Salsa20-Komponente auf den Arbeitsbereich gezogen
+    haben, müssen Sie die Eingänge 'Eingabe', 'Schlüssel' und 'IV' mit Datenquellen verbinden.
+
+    Außerdem muss der Ausgang mit einer Textausgabe-Komponente verbunden werden.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://www.ecrypt.eu.org/stream/salsa20pf.html" lang="en" />
+      <caption lang="en">Salsa20 at the eSTREAM Project</caption>
+      <link url="http://www.ecrypt.eu.org/stream/salsa20pf.html" lang="de-DE" />
+      <caption lang="de-DE">Salsa20 beim eSTREAM Project (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Salsa20" lang="en" />
+      <caption lang="en">Salsa20 at Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/RC4" lang="de-DE" />
+      <caption lang="de-DE">Salsa20 bei Wikipedia (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

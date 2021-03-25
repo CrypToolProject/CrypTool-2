@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>MD5</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>MD5哈希函数</value>
+  </data>
+  <data name="InputDataCaption" xml:space="preserve">
+    <value>输入流</value>
+  </data>
+  <data name="InputDataTooltip" xml:space="preserve">
+    <value>输入要散列的数据</value>
+  </data>
+  <data name="OutputDataStreamCaption" xml:space="preserve">
+    <value>散列值</value>
+  </data>
+  <data name="OutputDataStreamTooltip" xml:space="preserve">
+    <value>将哈希值的数据输出为Stream</value>
+  </data>
+  <data name="OutputDataCaption" xml:space="preserve">
+    <value>散列值</value>
+  </data>
+  <data name="OutputDataTooltip" xml:space="preserve">
+    <value>将散列值的数据输出为字节数组</value>
+  </data>
+  <data name="End_of_Block__" xml:space="preserve">
+    <value>块尾&amp;gt;&amp;gt;&amp;gt;&amp;gt;</value>
+  </data>
+  <data name="End_of_Round__" xml:space="preserve">
+    <value>回合结束&amp;gt;&amp;gt;&amp;gt;</value>
+  </data>
+  <data name="Next__" xml:space="preserve">
+    <value>下一个&amp;gt;&amp;gt;</value>
+  </data>
+  <data name="Round_" xml:space="preserve">
+    <value>回合：</value>
+  </data>
+  <data name="Step_" xml:space="preserve">
+    <value>步：</value>
+  </data>
+  <data name="We_have_added_the_length_at_the_end_of_our_data_buffer" xml:space="preserve">
+    <value>我们在数据缓冲区的末尾添加了长度</value>
+  </data>
+  <data name="We_have_added_the_padding_bytes_and_our_data_now_looks_like_this" xml:space="preserve">
+    <value>我们添加了填充字节，现在我们的数据如下所示：</value>
+  </data>
+  <data name="__Previous" xml:space="preserve">
+    <value>&amp;lt;&amp;lt;上一页</value>
+  </data>
+  <data name="We_now_calculate_the_length_of_our_data" xml:space="preserve">
+    <value>现在，我们以位为单位计算数据的长度（没有上一步的填充字节）：</value>
+  </data>
+  <data name="In_the_next_step" xml:space="preserve">
+    <value>在下一步中，我们将此值的小尾数表示形式写入数据缓冲区的后8个字节中。</value>
+  </data>
+  <data name="The_algorithm_is_not_yet_initialized" xml:space="preserve">
+    <value>该算法尚未初始化。请连接输入流并启动工作空间的流程。确保激活MD5插件时该演示文稿可见。</value>
+  </data>
+  <data name="We_are_now_starting_round" xml:space="preserve">
+    <value>我们现在开始</value>
+  </data>
+  <data name="of_4" xml:space="preserve">
+    <value>的4。</value>
+  </data>
+  <data name="Each_round_has_16_steps" xml:space="preserve">
+    <value>每轮有16个步骤，可更改我们的临时变量A-D。</value>
+  </data>
+  <data name="There_are_4_non_linear_inner_round_functions" xml:space="preserve">
+    <value>有四个称为F，G，H和I的非线性内部舍入函数。它们是每个舍入步骤中执行的计算的核心部分。在本轮中，我们使用</value>
+  </data>
+  <data name="Addition_constant" xml:space="preserve">
+    <value>加常数</value>
+  </data>
+  <data name="After_that__we_append_multiple_zero_bytes_to_our_data_" xml:space="preserve">
+    <value>之后，我们将多个零字节附加到我们的数据中。我们选择零字节的数量，以使完整数据块的长度比下一个64的倍数短8个字节。这使我们可以再向数据追加8个字节，并达到64的精确倍数。作为我们的数据长度。</value>
+  </data>
+  <data name="and_start_the_padding_process_by_appending_one_single__1__bit" xml:space="preserve">
+    <value>并通过在数据末尾附加一个“ 1”位来开始填充过程。由于我们使用八位位组，因此等于在数据末尾添加了一个二进制值10000000的字节，该值等于十六进制值0x80。</value>
+  </data>
+  <data name="bytes_in_the_previous_step_" xml:space="preserve">
+    <value>在上一步的字节数中，我们得出的结论是我们到达了数据末尾。</value>
+  </data>
+  <data name="bytes_of_data" xml:space="preserve">
+    <value>数据字节。</value>
+  </data>
+  <data name="bytes_of_data_" xml:space="preserve">
+    <value>数据字节。</value>
+  </data>
+  <data name="bytes_of_data_left_in_our_buffer" xml:space="preserve">
+    <value>缓冲区中剩余的数据字节数</value>
+  </data>
+  <data name="Rotating_left_shift" xml:space="preserve">
+    <value>旋转左移</value>
+  </data>
+  <data name="Selected_part_from_input_data_block" xml:space="preserve">
+    <value>从输入数据块中选择的零件</value>
+  </data>
+  <data name="shifted_by" xml:space="preserve">
+    <value>转移了</value>
+  </data>
+  <data name="shifted_value" xml:space="preserve">
+    <value>转移值</value>
+  </data>
+  <data name="Shift_constant" xml:space="preserve">
+    <value>移位常数</value>
+  </data>
+  <data name="Since_we_read_only" xml:space="preserve">
+    <value>由于我们只读</value>
+  </data>
+  <data name="So_far__we_have_processed" xml:space="preserve">
+    <value>到目前为止，我们已经处理了</value>
+  </data>
+  <data name="MD5State_Algorithm_uninitialized" xml:space="preserve">
+    <value>算法未初始化</value>
+  </data>
+  <data name="MD5State_Finished_padding" xml:space="preserve">
+    <value>填充完成</value>
+  </data>
+  <data name="MD5State_Starting_the_compression" xml:space="preserve">
+    <value>开始压缩</value>
+  </data>
+  <data name="MD5State_Starting_a_compression_round" xml:space="preserve">
+    <value>开始压缩回合</value>
+  </data>
+  <data name="MD5State_Before_compression_step" xml:space="preserve">
+    <value>压缩步骤之前</value>
+  </data>
+  <data name="MD5State_Performing_compression_step" xml:space="preserve">
+    <value>执行压缩步骤</value>
+  </data>
+  <data name="MD5State_Finished_compression_round" xml:space="preserve">
+    <value>成品压缩弹</value>
+  </data>
+  <data name="MD5State_Finalizing_compression" xml:space="preserve">
+    <value>完成压缩</value>
+  </data>
+  <data name="MD5State_Finished_compression" xml:space="preserve">
+    <value>压缩完成</value>
+  </data>
+  <data name="MD5State_Finished" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="MD5State_Unknown_state" xml:space="preserve">
+    <value>未知状态</value>
+  </data>
+  <data name="MD5State_Initialization" xml:space="preserve">
+    <value>初始化</value>
+  </data>
+  <data name="MD5State_Reading_data" xml:space="preserve">
+    <value>读取数据</value>
+  </data>
+  <data name="MD5State_Read_data" xml:space="preserve">
+    <value>读取数据</value>
+  </data>
+  <data name="MD5State_Beginning_padding_process" xml:space="preserve">
+    <value>开始填充过程</value>
+  </data>
+  <data name="MD5State_Adding_the_padding_bytes" xml:space="preserve">
+    <value>添加填充字节</value>
+  </data>
+  <data name="MD5State_Added_the_padding_bytes" xml:space="preserve">
+    <value>添加了填充字节</value>
+  </data>
+  <data name="MD5State_Adding_the_data_length" xml:space="preserve">
+    <value>添加数据长度</value>
+  </data>
+  <data name="MD5State_Added_the_data_length" xml:space="preserve">
+    <value>增加了数据长度</value>
+  </data>
+  <data name="The_compression_function_of_MD5_processes_data_in_blocks_of_64_bytes_" xml:space="preserve">
+    <value>MD5的压缩功能以64字节的块处理数据。我们的目标是读取足够的数据，以便我们随后可以立即调用压缩函数。因此，我们将继续读取尽可能多的字节，直到有64个字节为止。</value>
+  </data>
+  <data name="The_compression_function_operates_on_32_bit_integers_" xml:space="preserve">
+    <value>压缩功能对32位整数进行操作。压缩期间使用4个临时变量A，B，C和D。我们使用H1-H4中的值初始化它们：</value>
+  </data>
+  <data name="The_data_block_we_have_read_looks_like_this" xml:space="preserve">
+    <value>我们已读取的数据块如下所示：</value>
+  </data>
+  <data name="The_first_thing_we_do_is_initialize_our_accumulators" xml:space="preserve">
+    <value>我们要做的第一件事是将累加器初始化为它们的初始值，这些初始值是您可以在上面看到的固定常数。</value>
+  </data>
+  <data name="The_variables_H1_H4_are_our_accumulator_variables" xml:space="preserve">
+    <value>变量H1-H4是我们的累加器变量。在执行散列时，我们将在每次执行压缩函数后更改它们。完成后，它们将包含最终的MD5哈希值。</value>
+  </data>
+  <data name="Unsigned_integer_addition_discarding_carry_bit" xml:space="preserve">
+    <value>无符号整数加法丢弃进位位</value>
+  </data>
+  <data name="We_also_split_our_512_bit_data_block_into_16_" xml:space="preserve">
+    <value>我们还将512位数据块拆分为16个低位字节整数，每个32位：</value>
+  </data>
+  <data name="We_can_now_begin_the_padding_process_" xml:space="preserve">
+    <value>现在，我们可以开始填充过程，它有两个目的：•它使我们有机会增加数据的长度，直到再次遇到长度为64字节的倍数的块为止。 •它使我们能够将数据的总长度计入最终的哈希值。</value>
+  </data>
+  <data name="We_continue_by_calling_the_compression_function_for_this_input" xml:space="preserve">
+    <value>我们继续为此输入调用压缩函数。</value>
+  </data>
+  <data name="We_continue_by_reading_the_next_block_of_data_" xml:space="preserve">
+    <value>我们继续读取下一个数据块。</value>
+  </data>
+  <data name="We_have_finished_all_16_steps_of_this_round_" xml:space="preserve">
+    <value>我们已经完成了本轮的所有16个步骤。</value>
+  </data>
+  <data name="We_have_finished_padding_and_have" xml:space="preserve">
+    <value>我们已经完成填充并有</value>
+  </data>
+  <data name="We_have_finished_with_the_last_round_of_the_compression_" xml:space="preserve">
+    <value>我们完成了最后一轮压缩。现在是时候更新我们的累加器了。我们只需将变量A-D添加到变量中即可。</value>
+  </data>
+  <data name="We_have_finished_with_the_last_round_of_the_compression_function" xml:space="preserve">
+    <value>我们已经完成了最后一轮的压缩功能。最后，我们采用压缩函数步骤的结果，我们的临时变量A-D，并将它们添加到累加器H1-H4中。</value>
+  </data>
+  <data name="We_have_now_finished_compression_of_the_last_block_of_data" xml:space="preserve">
+    <value>现在，我们已经完成了对最后一个数据块的压缩。我们的哈希累加器如下所示：</value>
+  </data>
+  <data name="We_have_read_a_total_of" xml:space="preserve">
+    <value>我们总共阅读了</value>
+  </data>
+  <data name="We_now_start_the_compression_function_for_our_next_data_block_" xml:space="preserve">
+    <value>现在，我们为下一个数据块启动压缩功能，</value>
+  </data>
+  <data name="We_obtain_our_final_result_the_actual_MD5_hash_value" xml:space="preserve">
+    <value>通过简单地累加累加器的低端表示，可以得出最终结果，即实际的MD5哈希值：</value>
+  </data>
+  <data name="We_take_the_incomplete_block_of_data_that_we_ve_read_" xml:space="preserve">
+    <value>我们将读取的数据不完整，</value>
+  </data>
+</root>

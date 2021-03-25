@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The KeySearcher can be used to brute-force symmetric algorithms. Brute-forcing means to test every existing key of a key space to obtain the correct key to break a cipher.
+    Currently the KeySearcher supports AES, DES and SDES for brute-forcing.
+    <section headline="Technical background">
+      This component uses the newly implemented technology called IControl. IControls are special nodes on a CrypTool 2 component. Compared to the normal inputs and outputs the IControl uses direct method calls to communicate with other components.
+      This is much faster than the normal inputs and outputs because the CrypTool environment does not need to copy data from one component to another. The KeySearcher is able to communicate with AES, DES and SDES and with
+      the CostFunction component through IControl interfaces. So the key-searching process can be sped up considerably.
+    </section></introduction>
+  <introduction lang="zh-CN">KeySearcher可用于强力对称算法。暴力破解意味着测试密钥空间中的每个现有密钥，以获得正确的密钥来破解密码。目前，KeySearcher支持AES，DES和SDES进行暴力破解。该组件使用新实施的技术，称为IControl。 IControl是CrypTool 2组件上的特殊节点。与正常的输入和输出相比，IControl使用直接方法调用来与其他组件进行通信。这比普通的输入和输出要快得多，因为CrypTool环境不需要将数据从一个组件复制到另一个组件。 KeySearcher能够通过IControl接口与AES，DES和SDES以及CostFunction组件进行通信。因此，可以大大加快关键字搜索的过程。</introduction>
+  <introduction lang="ru">KeySearcher можно использовать для симметричных алгоритмов грубой силы. Brute-forcing означает проверку каждого существующего ключа ключевого пространства для получения правильного ключа для разрыва шифрования. В настоящее время KeySearcher поддерживает AES, DES и SDES для принудительного принуждения. Этот компонент использует недавно внедренную технологию под названием IControl. IControls являются специальными узлами на компоненте CrypTool 2. По сравнению с обычными входами и выходами IControl использует прямые вызовы методов для связи с другими компонентами. Это намного быстрее, чем обычные входы и выходы, потому что среде CrypTool не нужно копировать данные из одного компонента в другой. KeySearcher может взаимодействовать с AES, DES и SDES и компонентом CostFunction через интерфейсы IControl. Таким образом, процесс поиска ключей может значительно ускориться.</introduction>
+  <usage lang="en">
+    The component has two IControl interfaces. The first one has to be connected to the algorithm which should be brute-forced (currently AES, DES or SDES). The second one has to be connected to a CostFunction component.
+    The KeySearcher can now control the decryption algorithm and uses the cost function to generate an output list of the most probable keys.
+    <newline /><newline />
+    In the configuration bar the user can enter a KeyPattern.
+    This pattern is a regular expression representing the key space to brute-force. Example: 1-1-1-1-1-**-**-** for SDES means that the KeySearcher sets the first 6 bits of a SDES key to 1 and changes only the * (* is a wildcard in a KeyPattern).
+    Depending on the connected algorithm, the KeyPattern will be set to the default pattern for the algorithm automatically. The second important thing the user can set in the configuration bar is the amount of
+    cores which the KeySearcher is allowed to use.
+    <section headline="Peer-to-peer distribution">
+      This component can also be used to demonstrate a distributed attack on any supported symmetric algorithm. To use this feature, enable it in the settings pane by clicking "Use Peer-to-Peer network".
+      The key space will then be equally distributed among participating CrypTool 2 instances. Keys are calculated in so-called chunks, whose size you can choose before starting the job. The chunk size specifies the amount
+      of keys calculated in each turn. If you are an experienced user, you can display peer-to-peer network related information by clicking "Display verbose information". You may find further information about the peer-to-peer network,
+      how to use it and what it is capable of, in the P2PEditor section. It can be opened by clicking the button with a globe icon labelled P2P in the top pane.
+    </section></usage>
+  <usage lang="zh-CN">该组件具有两个IControl接口。第一个必须连接到应该采用暴力破解的算法（当前为AES，DES或SDES）。第二个必须连接到CostFunction组件。 KeySearcher现在可以控制解密算法，并使用cost函数生成最可能的密钥的输出列表。在配置栏中，用户可以输入KeyPattern。此模式是一个正则表达式，表示暴力破解的关键空间。示例：SDES的1-1-1-1-1-**-**-**表示KeySearcher将SDES密钥的前6位设置为1，并且仅更改*（*是KeyPattern中的通配符）。根据所连接的算法，KeyPattern将自动设置为该算法的默认模式。用户可以在配置栏中设置的第二个重要事项是允许KeySearcher使用的内核数量。该组件还可以用于演示对任何受支持的对称算法的分布式攻击。要使用此功能，请通过单击“使用对等网络”在设置窗格中启用它。然后，密钥空间将在参与的CrypTool 2实例之间平均分配。密钥以所谓的块计算，您可以在开始作业之前选择其大小。块大小指定每回合计算的密钥数量。如果您是经验丰富的用户，则可以通过单击“显示详细信息”来显示对等网络相关信息。您可以在P2PEditor部分中找到有关对等网络，如何使用它以及功能的更多信息。可以通过在顶部窗格中单击带有标记为P2P的地球图标的按钮来打开它。</usage>
+  <usage lang="ru">Компонент имеет два интерфейса IControl. Первый должен быть связан с алгоритмом, который должен быть грубым (в настоящее время AES, DES или SDES). Второй должен быть подключен к компоненту CostFunction. Теперь KeySearcher может управлять алгоритмом дешифрования и использует функцию стоимости для генерации выходного списка наиболее вероятных ключей. В панели конфигурации пользователь может ввести KeyPattern. Этот шаблон является регулярным выражением, представляющим ключевое пространство для грубой силы. Пример: 1-1-1-1-1 - ** - ** - ** для SDES означает, что KeySearcher устанавливает первые 6 бит ключа SDES в 1 и изменяет только * (* является подстановочным знаком в KeyPattern ). В зависимости от подключенного алгоритма, KeyPattern будет автоматически настроен на шаблон по умолчанию для алгоритма. Вторая важная вещь, которую пользователь может установить на панели конфигурации, - это количество ядер, которые разрешено использовать KeySearcher. Этот компонент также может использоваться для демонстрации распределенной атаки на любой поддерживаемый симметричный алгоритм. Чтобы использовать эту функцию, включите ее в панели настроек, нажав «Использовать одноранговую сеть». Тогда ключевое пространство будет равномерно распределено между участвующими экземплярами CrypTool 2. Ключи вычисляются в так называемых кусках, размер которых вы можете выбрать перед началом работы. Размер блока определяет количество ключей, вычисленных за каждый ход. Если вы опытный пользователь, вы можете отображать сетевую информацию, относящуюся к одноранговой сети, нажав «Отобразить подробную информацию». В разделе P2PEditor вы можете найти дополнительную информацию о сети одноранговой сети, о том, как ее использовать и на что она способна. Его можно открыть, нажав кнопку с иконкой глобуса с надписью P2P в верхней панели.</usage>
+  <presentation lang="en">
+    The KeySearcher component offers a presentation showing the "Keys per second" and the expected ending time of the brute-forcing. It also shows a list with the best decryption results (using the connected cost-function to calculate a value).
+    If you enable the peer-to-peer-based KeySearcher, the visualization will be expanded and displays additional information about the distributed calculation and its results.
+  </presentation>
+  <presentation lang="zh-CN">KeySearcher组件提供了一个演示，其中显示了“每秒密钥”和暴力破解的预期结束时间。它还显示了具有最佳解密结果的列表（使用连接的成本函数来计算值）。如果启用基于对等的KeySearcher，则可视化将被扩展并显示有关分布式计算及其结果的其他信息。</presentation>
+  <presentation lang="ru">Компонент KeySearcher предлагает презентацию, показывающую «Ключи в секунду» и ожидаемое время окончания принудительного принуждения. Он также отображает список с лучшими результатами дешифрования (используя связанную функцию стоимости для вычисления значения). Если вы включите одноранговую систему KeySearcher, визуализация будет расширена и отобразится дополнительная информация о распределенном расчете и ее результатах.</presentation>
+  <introduction lang="de-DE">
+    Die Schlüsselsucher-Komponente kann für den Brute-Force-Angriff auf symmetrische Verschlüsselungen verwendet werden. Bei einem Brute-Force-Angriff werden sämtliche Schlüssel des Schlüsselraumes untersucht, um den korrekten
+    Schlüssel zu finden. Momentan unterstützt die Komponente den Angriff auf die Verfahren AES, DES und SDES.
+    
+    <section headline="Technischer Hintergrund">
+      Diese Komponente verwendet sogenannte IControls zur Kommunikation mit anderen Komponenten. Im Gegensatz zu den normalen Eingabe- und Ausgabe-Konnektoren kann die Schlüsselsucher-Komponente dadurch direkt auf Methoden der angeschlossenen
+      Komponenten zugreifen. Dies erlaubt einen effizienteren Datenaustausch zwischen den beteiligten Komponenten und sorgt so für eine deutlich effektivere Durchsuchung des Schlüsselraumes. Die Schlüsselsucher-Komponente kann über IControls
+      mit den Chiffrier-Komponenten AES, DES und SDES sowie mit der Kostenfunktions-Komponente kommunizieren.
+    </section></introduction>
+  <usage lang="de-DE">
+    Die Komponente hat zwei IControl-Interfaces. Das erste muss mit der Verschlüsselungsmethode verbunden werden, dessen Schlüsselraum durchsucht werden soll. Momentan können hier AES, DES und SDES angeschlossen werden.
+    Das zweite muss mit einer Kostenfunktions-Komponente verbunden werden.
+    Die Schlüsselsucher-Komponente kann dann die Verschlüsselungs-Komponente direkt ansteuern und verwendet die Kostenfunktions-Komponente, um eine Liste der vielversprechendsten Schlüssel zu erstellen.
+    <newline /><newline />
+    In den Einstellungen der Komponente kann ein regulärer Ausdruck als Muster für die zu untersuchenden Schlüssel angegeben werden.
+    Beispiel: 1-1-1-1-1-**-**-** für SDES bedeutet, dass die Schlüsselsucher-Komponente die ersten 6 Bits des SDES-Schlüssels auf 1 setzt und nur die mit dem Platzhalterzeichen * gekennzeichneten Positionen variiert.
+    Abhängig von der angeschlossenen Verschlüsselungs-Komponente wird das Schlüsselmuster automatisch mit einem passenden Startwert vorbelegt.
+    Außerdem kann der Benutzer in den Einstellungen angeben, wie viele Prozessoren die Komponente für die Schlüsselsuche einsetzen darf.
+    <section headline="Netzwerk-basierter Angriff">
+      Diese Komponente kann auch für einen verteilten Angriff auf einen der unterstützten symmetrischen Algorithmen verwendet werden. Dazu müssen Sie in den Einstellungen der Komponente die Option "Verwende Netzwerk" aktivieren.
+      Der Schlüsselraum wird dann gleichmäßig unter den teilnehmenden Instanzen von CrypTool 2 aufgeteilt. Die Schlüssel werden hierbei in Blöcke aufgeteilt, deren Größe in den Einstellungen festgelegt werden kann.
+      Die Blöckgröße gibt dabei an, wie viele Schlüssel in jedem Durchgang getestet werden.
+      Als erfahrener Benutzer können Sie sich weitere Informationen zum Netzwerk-basierten Angriff durch Aktivierung der Option "Ausführliche Informationen" anzeigen lassen.
+    </section></usage>
+  <presentation lang="de-DE">
+    In der Präsentationsansicht der Komponente wird angezeigt, wie viele Schlüssel pro Sekunde untersucht werden und wie viel Zeit für die Berechnungen voraussichtlich noch benötigt wird.
+    Außerdem wird eine Liste der besten Entschlüsselungsergebnisse (bewertet von der angeschlossenen Kostenfunktions-Komponente) angezeigt.
+    Falls die Netzwerk-basierte Schlüsselsuche aktiviert ist, werden zusätzliche Informationen über die verteilte Berechnung und ihre Resultate dargestellt.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Brute-force_search" lang="en" />
+      <caption lang="en">Brute-Force-Search in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Brute-Force-Methode" lang="de" />
+      <caption lang="de">Brute-Force-Methode in Wikipedia</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Cost_function" lang="en" />
+      <caption lang="en">Cost-Function (optimization) in Wikipedia</caption>
+      <link url="http://de.wikipedia.org/wiki/Bewertungsfunktion" lang="de" />
+      <caption lang="de">Bewertungsfunktion in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

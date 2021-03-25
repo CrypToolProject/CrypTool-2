@@ -1,0 +1,348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlgorithmSettingsGroup" xml:space="preserve">
+    <value>Настройки алгоритма криптоанализа</value>
+  </data>
+  <data name="AnalaysisModeTooltip" xml:space="preserve">
+    <value>Автоматический или полуавтоматический режим</value>
+  </data>
+  <data name="AnalysisModeCaption" xml:space="preserve">
+    <value>Режим анализа</value>
+  </data>
+  <data name="Analyzer" xml:space="preserve">
+    <value>анализатор</value>
+  </data>
+  <data name="BestList" xml:space="preserve">
+    <value>Bestlist</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>зашифрованный:</value>
+  </data>
+  <data name="CiphertextAlphabet" xml:space="preserve">
+    <value>Зашифрованный алфавит:</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>зашифрованный</value>
+  </data>
+  <data name="CiphertextFormatCaption" xml:space="preserve">
+    <value>Формат зашифрованного текста</value>
+  </data>
+  <data name="CiphertextFormatTooltip" xml:space="preserve">
+    <value>Это определяет формат зашифрованного текста (отдельные буквы, группы чисел или через запятую)</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>Зашифрованный текст для анализа</value>
+  </data>
+  <data name="SymbolSeparated" xml:space="preserve">
+    <value>Разграниченный</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>Скопируйте все строки</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>Копировать ключ</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>Скопировать выбранную строку</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>Скопировать текст</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>Копировать значение</value>
+  </data>
+  <data name="CostFactorMultiplicatorCaption" xml:space="preserve">
+    <value>Мультипликатор коэффициента стоимости</value>
+  </data>
+  <data name="CostValue_0" xml:space="preserve">
+    <value>Стоимость: {0}</value>
+  </data>
+  <data name="CyclesCaption" xml:space="preserve">
+    <value>циклы</value>
+  </data>
+  <data name="CyclesTooltip" xml:space="preserve">
+    <value>Максимальное количество циклов анализа, которые будут выполнены</value>
+  </data>
+  <data name="DictionaryCaption" xml:space="preserve">
+    <value>толковый словарь</value>
+  </data>
+  <data name="DictionaryTooltip" xml:space="preserve">
+    <value>Прилагаемый словарь используется во время криптоанализа для поиска и блокировки уже открытых открытых текстовых слов.</value>
+  </data>
+  <data name="DifferentHomophones" xml:space="preserve">
+    <value>Длина зашифрованного текста равна {0}, а зашифрованный текст содержит {1} различных гомофонов.</value>
+  </data>
+  <data name="FindLockWords" xml:space="preserve">
+    <value>Найти / заблокировать слова</value>
+  </data>
+  <data name="FixedTemperatureCaption" xml:space="preserve">
+    <value>Фиксированная температура</value>
+  </data>
+  <data name="FullAutomatic" xml:space="preserve">
+    <value>автоматическая</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>ключ</value>
+  </data>
+  <data name="KeyLetterDistribution" xml:space="preserve">
+    <value>Распределение ключей</value>
+  </data>
+  <data name="LanguageCaption" xml:space="preserve">
+    <value>язык</value>
+  </data>
+  <data name="LanguageSettingsGroup" xml:space="preserve">
+    <value>Языковые настройки</value>
+  </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>Этот язык будет использоваться функцией стоимости</value>
+  </data>
+  <data name="MaxWordLengthCaption" xml:space="preserve">
+    <value>Максимальная длина слова</value>
+  </data>
+  <data name="MaxWordLengthTooltip" xml:space="preserve">
+    <value>Максимальная длина каждого слова для автоматической блокировки</value>
+  </data>
+  <data name="MinWordLengthCaption" xml:space="preserve">
+    <value>Минимальная длина слова</value>
+  </data>
+  <data name="MinWordLengthTooltip" xml:space="preserve">
+    <value>Минимальная длина каждого слова для автоматической блокировки</value>
+  </data>
+  <data name="NumberGroups" xml:space="preserve">
+    <value>Числовые группы</value>
+  </data>
+  <data name="Plaintext" xml:space="preserve">
+    <value>Выявленный открытый текст:</value>
+  </data>
+  <data name="PlaintextMapping" xml:space="preserve">
+    <value>Отображение открытого текста:</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>Простой текст</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>Новые открытые кандидаты с более высокими баллами показаны здесь</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Анализатор гомофонического замещения</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Анализатор для криптоанализа шифров гомофонического замещения</value>
+  </data>
+  <data name="ResetLockedLetters" xml:space="preserve">
+    <value>Сброс заблокированных писем</value>
+  </data>
+  <data name="RestartsCaption" xml:space="preserve">
+    <value>Перезапуск</value>
+  </data>
+  <data name="RestartsTooltip" xml:space="preserve">
+    <value>Сколько раз должен быть перезапущен алгоритм анализа?</value>
+  </data>
+  <data name="SemiAutomatic" xml:space="preserve">
+    <value>Полуавтомат</value>
+  </data>
+  <data name="SingleLetters" xml:space="preserve">
+    <value>Отдельные буквы</value>
+  </data>
+  <data name="TextFormatGroup" xml:space="preserve">
+    <value>Текстовый формат</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>Выявленный открытый текст</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>Bestlist</value>
+  </data>
+  <data name="UseSpacesCaption" xml:space="preserve">
+    <value>Используйте пробелы</value>
+  </data>
+  <data name="UseSpacesTooltip" xml:space="preserve">
+    <value>Если активирован, анализатор предполагает наличие пробелов в открытом тексте</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>Costvalue</value>
+  </data>
+  <data name="WordCountToFindCaption" xml:space="preserve">
+    <value>Количество слов, чтобы найти</value>
+  </data>
+  <data name="WordCountToFindTooltip" xml:space="preserve">
+    <value>Определяет минимальное количество слов, которые нужно найти в открытом тексте, чтобы автоматическая блокировка блокировала соответствующие символы</value>
+  </data>
+  <data name="WordLockerGroup" xml:space="preserve">
+    <value>Слово шкафчик</value>
+  </data>
+  <data name="LetterLabel" xml:space="preserve">
+    <value>Письмо</value>
+  </data>
+  <data name="MaxLabel" xml:space="preserve">
+    <value>Максимальное количество</value>
+  </data>
+  <data name="MinLabel" xml:space="preserve">
+    <value>Минимальное количество</value>
+  </data>
+  <data name="FoundWordsCaption" xml:space="preserve">
+    <value>Найденные слова</value>
+  </data>
+  <data name="FoundWordsTooltip" xml:space="preserve">
+    <value>Найденные слова на основе подключенного словаря показаны здесь</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Выявленный ключ</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Новые ключевые кандидаты с более высокими баллами показаны здесь</value>
+  </data>
+  <data name="Comma" xml:space="preserve">
+    <value>запятая</value>
+  </data>
+  <data name="FullStop" xml:space="preserve">
+    <value>точка</value>
+  </data>
+  <data name="Semicolon" xml:space="preserve">
+    <value>точка с запятой</value>
+  </data>
+  <data name="SeparatorCaption" xml:space="preserve">
+    <value>сепаратор</value>
+  </data>
+  <data name="SeparatorTooltip" xml:space="preserve">
+    <value>Разделитель, который используется для разбиения зашифрованного текста на отдельные буквы или группы букв.</value>
+  </data>
+  <data name="Space" xml:space="preserve">
+    <value>пространства</value>
+  </data>
+  <data name="Analyze" xml:space="preserve">
+    <value>Начать анализ</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>ватит анализировать</value>
+  </data>
+  <data name="UseNullsCaption" xml:space="preserve">
+    <value>Используйте нули</value>
+  </data>
+  <data name="UseNullsTooltip" xml:space="preserve">
+    <value>Если активирован, анализатор принимает нулевые значения в зашифрованном тексте</value>
+  </data>
+  <data name="KeepLinebreaksCaption" xml:space="preserve">
+    <value>Держите разрывы строк</value>
+  </data>
+  <data name="KeepLinebreaksTooltip" xml:space="preserve">
+    <value>Если активирован, анализатор сохраняет исходные разрывы строк данного текста</value>
+  </data>
+</root>

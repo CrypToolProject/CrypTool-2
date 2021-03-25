@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The RSA Key Generator component offers multiple ways of generating the public and private keys needed for the RSA algorithm.
+  </introduction>
+  <introduction lang="zh-CN">RSA密钥生成器组件提供了多种生成RSA算法所需的公钥和私钥的方式。</introduction>
+  <introduction lang="ru">Компонент генератора ключей RSA предлагает несколько способов генерации открытых и закрытых ключей, необходимых для алгоритма RSA.</introduction>
+  <introduction lang="de-DE">
+    Die RSA-Schlüsselgenerator-Komponente bietet mehrere Möglichkeiten zur Erzeugung der für die RSA-Verschlüsselung benötigten öffentlichen und privaten Schlüssel an.
+  </introduction>
+  <usage lang="en">
+    In the settings of the component, you can choose between four different ways of producing the RSA keys:<newline /><list><item><b>Enter primes manually</b>: Here you have to enter two prime numbers <b>p</b> and <b>q</b> and the public key component <b>e</b>. The private key component <b>d</b> will be calculated from these values.
+      </item><item><b>Enter keys manually</b>: Here you have to enter the key components <b>N</b>, <b>e</b> and <b>d</b>.
+      </item><item><b>Generate random primes</b>: The component will generate two random prime numbers and calculate from them the key components. The size of the prime numbers can be
+        influenced by specifying an upper limit or the number of bits the prime numbers should have.
+      </item><item><b>X.509 Certificate</b>: The RSA keys are available in the form of a X.509 certificate. Enter the path to the certificate file and a possibly required password.
+      </item></list>
+
+    The values of the public and private key components <b>N</b>, <b>e</b> and <b>d</b> are provided at the outputs of the RSA Key Generator component.
+
+  
+</usage>
+  <usage lang="zh-CN">在组件的设置中，可以选择四种不同的生成RSA密钥的方式：手动输入素数：在这里，您必须输入两个素数p和q以及公钥组件e。根据这些值计算私钥成分d。手动输入密钥：在这里，您必须输入密钥分量N，e和d。生成随机素数：该组件将生成两个随机素数，并从中计算出关键分量。质数的大小可以通过指定质数的上限或位数来影响。 X.509证书：RSA密钥以X.509证书的形式提供。输入证书文件的路径和可能需要的密码。在RSA密钥生成器组件的输出处提供了公共和私有密钥组件N，e和d的值。</usage>
+  <usage lang="ru">В настройках компонента вы можете выбрать между четырьмя различными способами создания ключей RSA: введите простые числа вручную: здесь вы должны ввести два простых числа p и q и компонент открытого ключа e. Из этих значений будет вычисляться компонент частного ключа d. Введите ключи вручную: здесь вы должны ввести ключевые компоненты N, e и d. Генерировать случайные простые числа: компонент будет генерировать два случайных простых числа и вычислять из них ключевые компоненты. На размер простых чисел может влиять задание верхнего предела или количества битов, которые должны иметь простые числа. Сертификат X.509: ключи RSA доступны в виде сертификата X.509. Введите путь к файлу сертификата и, возможно, требуемый пароль. Значения компонентов открытого и закрытого ключей N, e и d предоставляются на выходах компонента RSA Key Generator.</usage>
+  <usage lang="de-DE">
+    In den Einstellungen der Komponente kann ausgewählt werden, auf welche Art die RSA-Schlüssel erzeugt werden sollen.
+    Hier stehen vier Möglichkeiten zur Auswahl:<newline /><list><item><b>manuelle Eingabe der Primzahlen</b>: Hier müssen zwei konkrete Primzahlen <b>p</b> und <b>q</b> und der Wert für die öffentliche Schlüsselkomponente <b>e</b> angegeben werden. Die private Schlüsselkomponente <b>d</b>
+        wird aus diesen Werten berechnet.
+      </item><item><b>manuelle Eingabe des Schlüssels</b>: Hier werden die Werte für die Schlüsselkomponenten <b>N</b>, <b>e</b> und <b>d</b> eingegeben.
+      </item><item><b>Primzahlen zufällig erzeugen</b>: Die Komponente erzeugt zwei zufällige Primzahlen <b>p</b> und <b>q</b> und berechnet daraus die Schlüsselkomponenten. Die Größenordnung der Primzahlen kann
+        entweder durch eine obere Schranke oder durch die Anzahl der Bits der Primzahlen angegeben werden.
+      </item><item><b>X.509-Zertifikat</b>: Der RSA-Schlüssel liegt in Form eines X.509-Zertifikates vor. Geben Sie den Pfad zur Zertifikatsdatei und das eventuell benötigte Passwort an.
+      </item></list>
+
+    Die Komponente stellt die Werte <b>N</b>, <b>e</b> und <b>d</b> für die öffentlichen und privaten RSA-Schlüssel an den entsprechenden Ausgängen zur Verfügung.
+  </usage>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/RSA" />
+      <caption lang="en">RSA in the English wikipedia</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/RSA-Kryptosystem" />
+      <caption lang="de-DE">RSA-Kryptosystem in der deutschen Wikipedia</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/X.509" />
+      <caption lang="en">X.509 certificates in the English wikipedia</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/X.509" />
+      <caption lang="de-DE">X.509-Zertifikate in der deutschen Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,126 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:properties="clr-namespace:CrypTool.CrypAnalysisViewControl.Properties"
+    xmlns:local="clr-namespace:CrypTool.CrypAnalysisViewControl">
+
+    <Style TargetType="{x:Type local:SectionViewLabelsControl}" BasedOn="{StaticResource {x:Type ItemsControl}}">
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid Height="26" VerticalAlignment="Top">
+                        <Label Content="{Binding Caption, Mode=OneWay}" Padding="5" />
+                        <Label Content="{Binding Value, Mode=OneWay}" Padding="5,5,20,5" HorizontalContentAlignment="Right" />
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type local:CrypAnalysisViewControl}" BasedOn="{StaticResource {x:Type ContentControl}}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Viewbox DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:CrypAnalysisViewControl}}}">
+                        <Grid Width="646">
+                            <StackPanel>
+                                <local:SectionControl SectionBackground="#AFFFD4C1" SectionHeaderBackground="#FFE56B00" SectionHeaderCaption="{Binding ResultHeaderCaption}">
+                                    <local:SectionViewLabelsControl ItemsSource="{Binding ResultHeaderLabels}" MinHeight="60" />
+                                </local:SectionControl>
+
+                                <local:SectionControl SectionBackground="#AFE2FFCE" SectionHeaderBackground="#FF479308" SectionHeaderCaption="{Binding ResultListCaption}">
+                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                </local:SectionControl>
+
+                                <local:SectionControl SectionBackground="#AFE2E2E2" SectionHeaderBackground="#FF525252" SectionHeaderCaption="{Binding ResultProgressCaption}">
+                                    <local:SectionViewLabelsControl ItemsSource="{Binding ResultProgressLabels}" MinHeight="60" />
+                                </local:SectionControl>
+
+                                <ItemsControl ItemsSource="{Binding AdditionalSections}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Grid>
+                    </Viewbox>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <RotateTransform x:Key="SectionHeaderRotate" Angle="270" />
+    <Style x:Key="SectionHeaderBorder" TargetType="Border">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="LayoutTransform" Value="{StaticResource SectionHeaderRotate}" />
+    </Style>
+    <Style x:Key="SectionHeaderLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Width" Value="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType=Border}}" />
+    </Style>
+
+    <Style TargetType="{x:Type local:SectionControl}" BasedOn="{StaticResource {x:Type ContentControl}}">
+        <Style.Triggers>
+            <Trigger Property="IsSectionVisible" Value="false">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="SectionHeaderCaption" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Border BorderBrush="Silver" BorderThickness="2,1,2,1" DataContext="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:SectionControl}}}">
+                        <Grid Background="{Binding SectionBackground}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Style="{StaticResource SectionHeaderBorder}" Background="{Binding SectionHeaderBackground}" Grid.Column="0" Grid.RowSpan="2">
+                                <Label Content="{Binding SectionHeaderCaption}" Style="{StaticResource SectionHeaderLabel}" />
+                            </Border>
+
+                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Content}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ContextMenu x:Key="ItemContextMenu">
+        <MenuItem Header="{x:Static properties:Resources.Copy_value}" CommandParameter="{Binding}" Command="{x:Static local:CrypAnalysisResultListView.ClickContextMenuCopyValue}" />
+        <MenuItem Header="{x:Static properties:Resources.Copy_key}" CommandParameter="{Binding}" Command="{x:Static local:CrypAnalysisResultListView.ClickContextMenuCopyKey}" />
+        <MenuItem Header="{x:Static properties:Resources.Copy_text}" CommandParameter="{Binding}" Command="{x:Static local:CrypAnalysisResultListView.ClickContextMenuCopyText}" />
+        <MenuItem Header="{x:Static properties:Resources.Copy_line}" CommandParameter="{Binding}" Command="{x:Static local:CrypAnalysisResultListView.ClickContextMenuCopyLine}" />
+        <MenuItem Header="{x:Static properties:Resources.Copy_all}" CommandParameter="{Binding}" Command="{x:Static local:CrypAnalysisResultListView.ClickContextMenuCopyAll}" />
+    </ContextMenu>
+
+    <Style TargetType="{x:Type ListViewItem}" x:Key="ListViewItemContainerStyle">
+        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}"/>
+    </Style>
+
+    <Style TargetType="{x:Type local:CrypAnalysisResultListView}">
+        <Setter Property="FontFamily" Value="Courier New"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="Height" Value="250" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ListViewItemContainerStyle}" />
+    </Style>
+</ResourceDictionary>

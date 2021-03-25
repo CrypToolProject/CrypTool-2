@@ -1,0 +1,23 @@
+﻿<h2>Signaturvalidierung</h2>
+Bei der Validierung einer PKCS#1-Signatur wird eine Operation mit dem öffentlichen Schlüssel durchgeführt.
+Das Ergebnis dieser Operation sollte eine Struktur aufweisen, wie <a href="help://Gen_PKCS1_Sig_Tab">hier</a> beschrieben.
+Als nächster Schritt wird der <a href="help://Gen_Datablock_Tab">Datenblock</a> ausgelesen.</br>
+Dieses Extrahieren des Datenblock kann auf eine korrekte oder auf eine fehlerhafte Art und Weise geschehen. Die fehlerhafte
+Implementierung war bis zum Entdecken des möglichen Angriffs (2006) in vielen Anwendungen zu finden.
+<ul>
+<li>
+<strong>fehlerhafte Implementierung</strong>
+Bei dieser Implementierung werden die Daten der entschlüsselten Signatur bis nach dem Paddingstring gelesen. 
+Der folgende Datenblock wird extrahiert und die Validierung fortgesetzt. Die Daten nach dem Datenblock, sowie die Länge
+des Paddingstring werden nicht berücksichtigt. Durch diese und weitere Voraussetzungen ist es möglich, Signaturen zu
+fälschen, ohne den privaten Schlüssel zu kennen.
+</li>
+<li>
+<strong>korrekte Implementierung</strong>
+Bei einer korrekten Implementierung werden die Daten nach dem Datenblock und die Länge des Paddingstring berücksichtigt.
+</li>
+</ul>
+
+Wenn der Datenblock ausgelesen ist, ist daraus der in der Signatur verwendete Hashalgorithmus und der generierte Hashwert
+ erkennbar. Jetzt wird der Hashalgorithmus auf die Klartextdaten, von denen die Signatur erstellt wurde, angewandt und
+ mit dem Hashwert aus der Signatur verglichen. Stimmen die beiden Werte überein, wird die Signatur als valide angesehen.

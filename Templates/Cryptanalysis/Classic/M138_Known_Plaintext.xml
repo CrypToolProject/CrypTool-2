@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">M-138 Known-Plaintext Attack</title>
+  <title lang="zh">M-138已知明文攻击</title>
+  <title lang="ru">M-138 Известный-Обыкновенный удар</title>
+  <summary lang="en">Cryptanalysis of the <i>M-138</i> using a known-plaintext attack</summary>
+  <summary lang="zh">使用已知明文攻击对M-138进行密码分析</summary>
+  <summary lang="ru">Криптоанализ М-138 с использованием атаки с открытым текстом</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>M-138</i> using a known-plaintext attack.</description>
+  <description lang="zh">该模板显示了使用已知明文攻击对M-138进行的密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ M-138 с использованием атаки известного типа.</description>
+  <keywords>M-138, Known-Plaintext, Known Plaintext, M138</keywords>
+  <keywords lang="zh">M-138，已知明文，已知明文，M138</keywords>
+  <keywords lang="ru">М-138, Известный-Обычный, Известный Plaintext, M138</keywords>
+  <title lang="de">Known-Plaintext Angriff auf M-138</title>
+  <summary lang="de">Kryptoanalyse der <i>M-138</i> mit Hilfe eines Known-Plaintext Angriffs</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>M-138</i> mit einem Known-Plaintext Angriff.</description>
+  <keywords lang="de">M-138, M138, Known-Plaintext, Bekannter Klartext</keywords>
+  <icon file="M138.png" />
+  <relevantPlugins>
+    <plugin name="M138Analyzer" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$M-138 Analyzer$" value="M-138-Analysierer" />
+    <replacement key="$memo1$" value="Geben Sie hier ein Klartext/Geheimtext-Paar als Eingabe für die Komponente &quot;M-138-Analysierer&quot; an." />
+    <replacement key="$memo2$" value="Diese Vorlage demonstriert einen Known-Plaintext-Angriff auf die M-138." />
+    <replacement key="$memo3$" value="Als Ergebnis erhält man eine Liste von möglichen Schlüsseln, die den gegebenen Klartext auf den gegebenen Geheimtext abbilden. Für jeden möglichen Offset wird eine Schlüsselmenge im Format\line\line Streifen1, Streifen2, ... / Offset\line\line ausgegeben. Falls es Positionen gibt, in denen mehrere Streifen verwendet werden könnten, hat die Ausgabe folgendes Format:\line\line Streifen1, [Streifen2|Streifen3], ... / Offset\line\line Dies bedeutet, dass in Position 2 des Schlüssels sowohl Streifen2 als auch Streifen3 möglich sind." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$M-138 Analyzer$" value="M-138分析仪" />
+    <replacement key="$memo1$" value="输入明文/密文对作为“ M-138分析仪”组件的输入。" />
+    <replacement key="$memo2$" value="该模板演示了对M-138的已知纯文本攻击。" />
+    <replacement key="$memo3$" value="结果是将给定的纯文本映射到给定的密文的可能密钥的列表。对于每个可能的偏移量，将以\line \line stripe1，stripe2，... / offset \line \line格式输出一组键。如果在某些位置可以使用多个条带，则输出格式如下：\line \line strip1，[strip2 | strip3]，... / offset \line \line这意味着在键的位置2 Stripes2和Stripes3是可能的。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$M-138 Analyzer$" value="анализатор М-138" />
+    <replacement key="$memo1$" value="Введите пару открытого текста / зашифрованного текста в качестве входа в компонент анализатора M-138." />
+    <replacement key="$memo2$" value="Этот шаблон демонстрирует известную атаку открытого текста на M-138." />
+    <replacement key="$memo3$" value="Результатом является список возможных ключей, которые сопоставляют данный открытый текст с данным зашифрованным текстом. Для каждого возможного смещения набор ключей выводится в формате \line \line Strip1, Strip2, ... / Offset \line \line. Если есть позиции, в которых можно использовать несколько полосок, вывод будет иметь следующий формат: \line \line strip1, [strip2 | strip3], ... / offset \line \line Это означает, что в позиции 2 ключа оба Streifen2 и Streifen3 возможны." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$M-138 Analyzer$" value="M-138 Analyzer" />
+    <replacement key="$memo1$" value="The user can set a pair of ciphertext and plaintext as inputs for the component &quot;M-138 Analyzer&quot;." />
+    <replacement key="$memo2$" value="This template shows a known-plaintext attack on M-138." />
+    <replacement key="$memo3$" value="As a result, the user receives a set of possible keys that map the given plaintext to the given ciphertext. For each possible offset, one set of keys is given by the format\line\line strip1, strip2, ... / offset\line\line In case there are positions where multiple strips could be used, the output will have the following format:\line\line strip1, [strip2|strip3], ... / offset\line\line This means that on position 2 of the key both, strip2 and strip3, are possible." />
+  </replacements>
+</sample>

@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>输入文本</value>
+  </data>
+  <data name="InputTextDescription" xml:space="preserve">
+    <value>输入要由Fialka机器处理的字符串。</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>输出文字</value>
+  </data>
+  <data name="OutputTextDescription" xml:space="preserve">
+    <value>输出要由Fialka机器处理的字符串。</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>菲亚卡</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>多字母转子密码机</value>
+  </data>
+  <data name="RotorCoreOffsetSelection" xml:space="preserve">
+    <value>核心偏移</value>
+  </data>
+  <data name="RotorCoreSelection" xml:space="preserve">
+    <value>核心订单</value>
+  </data>
+  <data name="RotorCoreSideSelection" xml:space="preserve">
+    <value>核心方面</value>
+  </data>
+  <data name="RotorOffsetSelection" xml:space="preserve">
+    <value>转子偏移</value>
+  </data>
+  <data name="RotorOrderSelection" xml:space="preserve">
+    <value>转子订购</value>
+  </data>
+  <data name="SelectMachineCountryLayoutCaption" xml:space="preserve">
+    <value>国家布局</value>
+  </data>
+  <data name="SelectMachineCountryLayoutTooltip" xml:space="preserve">
+    <value>选择国家/地区布局。</value>
+  </data>
+  <data name="SelectMachineKeyboardMappingCaption" xml:space="preserve">
+    <value>键盘对应</value>
+  </data>
+  <data name="SelectMachineKeyboardMappingTooltip" xml:space="preserve">
+    <value>选择键盘映射。</value>
+  </data>
+  <data name="SelectMachineModelCaption" xml:space="preserve">
+    <value>Fialka模型</value>
+  </data>
+  <data name="SelectMachineModelTooltip" xml:space="preserve">
+    <value>选择机器型号类型。</value>
+  </data>
+  <data name="SelectMachineNumLockTypeCaption" xml:space="preserve">
+    <value>数字键盘（的第一个键</value>
+  </data>
+  <data name="SelectMachineNumLockTypeTooltip" xml:space="preserve">
+    <value>选择数字锁定类型。</value>
+  </data>
+  <data name="SelectMachineOperationModeCaption" xml:space="preserve">
+    <value>操作模式</value>
+  </data>
+  <data name="SelectMachineOperationModeTooltip" xml:space="preserve">
+    <value>选择操作模式。</value>
+  </data>
+  <data name="SelectMachinePrintHeadMappingCaption" xml:space="preserve">
+    <value>打印头映射</value>
+  </data>
+  <data name="SelectMachinePrintHeadMappingTooltip" xml:space="preserve">
+    <value>选择打印头映射。</value>
+  </data>
+  <data name="SelectRotorSeriesCaption" xml:space="preserve">
+    <value>转子系列</value>
+  </data>
+  <data name="SelectRotorSeriesTooltip" xml:space="preserve">
+    <value>选择国家特定的转子系列。</value>
+  </data>
+  <data name="SelectRotorTypesCaption" xml:space="preserve">
+    <value>转子类型</value>
+  </data>
+  <data name="SelectRotorTypesTooltip" xml:space="preserve">
+    <value>选择转子类型。</value>
+  </data>
+  <data name="PunchCard" xml:space="preserve">
+    <value>打卡</value>
+  </data>
+  <data name="RotorRingOffsetSelection" xml:space="preserve">
+    <value>环偏移</value>
+  </data>
+  <data name="MachineSettings" xml:space="preserve">
+    <value>Fialka机器设置</value>
+  </data>
+  <data name="SelectMachineTxtOpModeCaption" xml:space="preserve">
+    <value>文字操作模式</value>
+  </data>
+  <data name="SelectMachineTxtOpModeTooltip" xml:space="preserve">
+    <value>选择M-125-3机器的文本操作模式。</value>
+  </data>
+  <data name="SettingsRestoreCaption" xml:space="preserve">
+    <value>恢复初始密钥</value>
+  </data>
+  <data name="SettingsRestoreTooltip" xml:space="preserve">
+    <value>初始密钥（在加密之前设置）何时恢复工作流程。</value>
+  </data>
+  <data name="Rotor1Caption" xml:space="preserve">
+    <value>R01</value>
+  </data>
+  <data name="SelectRotor1OrderTooltip" xml:space="preserve">
+    <value>选择转子1的顺序（从左开始在鼓中的位置）。</value>
+  </data>
+  <data name="SelectRotor1OffsetTooltip" xml:space="preserve">
+    <value>选择转子在位置1的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore1Tooltip" xml:space="preserve">
+    <value>选择铁心1的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor1CoreSideTooltip" xml:space="preserve">
+    <value>选择核心1的一侧。</value>
+  </data>
+  <data name="SelectRotor1CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心1的偏移量。</value>
+  </data>
+  <data name="RotorRing1OffsetTooltip" xml:space="preserve">
+    <value>选择位置1处的转子环偏移。</value>
+  </data>
+  <data name="Rotor2Caption" xml:space="preserve">
+    <value>R02</value>
+  </data>
+  <data name="SelectRotor2OrderTooltip" xml:space="preserve">
+    <value>选择转子2的顺序（滚筒中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor2OffsetTooltip" xml:space="preserve">
+    <value>选择转子在位置2的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore2Tooltip" xml:space="preserve">
+    <value>选择铁心2的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor2CoreSideTooltip" xml:space="preserve">
+    <value>选择核心2的一侧。</value>
+  </data>
+  <data name="SelectRotor2CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心2的偏移量。</value>
+  </data>
+  <data name="RotorRing2OffsetTooltip" xml:space="preserve">
+    <value>在位置2中选择转子的环偏移。</value>
+  </data>
+  <data name="Rotor3Caption" xml:space="preserve">
+    <value>R03</value>
+  </data>
+  <data name="SelectRotor3OrderTooltip" xml:space="preserve">
+    <value>选择转子3的顺序（滚筒中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor3OffsetTooltip" xml:space="preserve">
+    <value>选择转子在位置3的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore3Tooltip" xml:space="preserve">
+    <value>选择铁心3的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor3CoreSideTooltip" xml:space="preserve">
+    <value>选择核心3的一侧。</value>
+  </data>
+  <data name="SelectRotor3CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心3的偏移量。</value>
+  </data>
+  <data name="RotorRing3OffsetTooltip" xml:space="preserve">
+    <value>在位置3中选择转子的环偏移。</value>
+  </data>
+  <data name="Rotor4Caption" xml:space="preserve">
+    <value>R04</value>
+  </data>
+  <data name="SelectRotor4OrderTooltip" xml:space="preserve">
+    <value>选择转子4的顺序（滚筒中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor4OffsetTooltip" xml:space="preserve">
+    <value>选择转子在位置4的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore4Tooltip" xml:space="preserve">
+    <value>选择芯4的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor4CoreSideTooltip" xml:space="preserve">
+    <value>选择核心4的一侧。</value>
+  </data>
+  <data name="SelectRotor4CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心4的偏移量。</value>
+  </data>
+  <data name="RotorRing4OffsetTooltip" xml:space="preserve">
+    <value>在位置4中选择转子的环偏移。</value>
+  </data>
+  <data name="Rotor5Caption" xml:space="preserve">
+    <value>R05</value>
+  </data>
+  <data name="SelectRotor5OrderTooltip" xml:space="preserve">
+    <value>选择转子5的顺序（滚筒中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor5OffsetTooltip" xml:space="preserve">
+    <value>选择转子在位置5的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore5Tooltip" xml:space="preserve">
+    <value>选择铁心5的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor5CoreSideTooltip" xml:space="preserve">
+    <value>选择核心5的一侧。</value>
+  </data>
+  <data name="SelectRotor5CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心5的偏移量。</value>
+  </data>
+  <data name="RotorRing5OffsetTooltip" xml:space="preserve">
+    <value>在位置5中选择转子的环偏移。</value>
+  </data>
+  <data name="Rotor6Caption" xml:space="preserve">
+    <value>R06</value>
+  </data>
+  <data name="SelectRotor6OrderTooltip" xml:space="preserve">
+    <value>选择转子6的顺序（从左开始在鼓中的位置）。</value>
+  </data>
+  <data name="SelectRotor6OffsetTooltip" xml:space="preserve">
+    <value>选择转子在位置6的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore6Tooltip" xml:space="preserve">
+    <value>选择铁心6的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor6CoreSideTooltip" xml:space="preserve">
+    <value>选择核心6的一侧。</value>
+  </data>
+  <data name="SelectRotor6CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心6的偏移量。</value>
+  </data>
+  <data name="RotorRing6OffsetTooltip" xml:space="preserve">
+    <value>在位置6中选择转子的环偏移。</value>
+  </data>
+  <data name="Rotor7Caption" xml:space="preserve">
+    <value>R07</value>
+  </data>
+  <data name="SelectRotor7OrderTooltip" xml:space="preserve">
+    <value>选择转子7的顺序（在鼓中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor7OffsetTooltip" xml:space="preserve">
+    <value>在位置7中选择转子的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore7Tooltip" xml:space="preserve">
+    <value>选择铁心7的位置（滚筒中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor7CoreSideTooltip" xml:space="preserve">
+    <value>选择核心7的一侧。</value>
+  </data>
+  <data name="SelectRotor7CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心7的偏移量。</value>
+  </data>
+  <data name="RotorRing7OffsetTooltip" xml:space="preserve">
+    <value>选择位置7处的转子环偏移。</value>
+  </data>
+  <data name="Rotor8Caption" xml:space="preserve">
+    <value>R08</value>
+  </data>
+  <data name="SelectRotor8OrderTooltip" xml:space="preserve">
+    <value>选择转子8的顺序（滚筒中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor8OffsetTooltip" xml:space="preserve">
+    <value>选择转子在位置8的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore8Tooltip" xml:space="preserve">
+    <value>选择铁心8的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor8CoreSideTooltip" xml:space="preserve">
+    <value>选择核心8的一侧。</value>
+  </data>
+  <data name="SelectRotor8CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心8的偏移量。</value>
+  </data>
+  <data name="RotorRing8OffsetTooltip" xml:space="preserve">
+    <value>在位置8中选择转子的环偏移。</value>
+  </data>
+  <data name="Rotor9Caption" xml:space="preserve">
+    <value>R09</value>
+  </data>
+  <data name="SelectRotor9OrderTooltip" xml:space="preserve">
+    <value>选择转子9的顺序（滚筒中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor9OffsetTooltip" xml:space="preserve">
+    <value>在位置9中选择转子的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore9Tooltip" xml:space="preserve">
+    <value>选择铁心9的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor9CoreSideTooltip" xml:space="preserve">
+    <value>选择核心9的一侧。</value>
+  </data>
+  <data name="SelectRotor9CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心9的偏移量。</value>
+  </data>
+  <data name="RotorRing9OffsetTooltip" xml:space="preserve">
+    <value>在位置9选择转子的环偏移。</value>
+  </data>
+  <data name="Rotor10Caption" xml:space="preserve">
+    <value>R10</value>
+  </data>
+  <data name="SelectRotor10OrderTooltip" xml:space="preserve">
+    <value>选择转子10的顺序（滚筒中从左开始的位置）。</value>
+  </data>
+  <data name="SelectRotor10OffsetTooltip" xml:space="preserve">
+    <value>在位置10中选择转子的偏移量。</value>
+  </data>
+  <data name="SelectRotorCore10Tooltip" xml:space="preserve">
+    <value>选择铁心10的位置（鼓中转子的位置）。</value>
+  </data>
+  <data name="SelectRotor10CoreSideTooltip" xml:space="preserve">
+    <value>选择核心10的一侧。</value>
+  </data>
+  <data name="SelectRotor10CoreOffsetTooltip" xml:space="preserve">
+    <value>选择核心10的偏移量。</value>
+  </data>
+  <data name="RotorRing10OffsetTooltip" xml:space="preserve">
+    <value>选择位置10处的转子环偏移。</value>
+  </data>
+  <data name="PunchCard1Caption" xml:space="preserve">
+    <value>01</value>
+  </data>
+  <data name="PunchCard1Tooltip" xml:space="preserve">
+    <value>联系人1.的打卡映射。</value>
+  </data>
+  <data name="PunchCard2Caption" xml:space="preserve">
+    <value>02</value>
+  </data>
+  <data name="PunchCard2Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射2。</value>
+  </data>
+  <data name="PunchCard3Caption" xml:space="preserve">
+    <value>03</value>
+  </data>
+  <data name="PunchCard3Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射3。</value>
+  </data>
+  <data name="PunchCard4Caption" xml:space="preserve">
+    <value>04</value>
+  </data>
+  <data name="PunchCard4Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射4。</value>
+  </data>
+  <data name="PunchCard5Caption" xml:space="preserve">
+    <value>05</value>
+  </data>
+  <data name="PunchCard5Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射5。</value>
+  </data>
+  <data name="PunchCard6Caption" xml:space="preserve">
+    <value>06</value>
+  </data>
+  <data name="PunchCard6Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射6。</value>
+  </data>
+  <data name="PunchCard7Caption" xml:space="preserve">
+    <value>07</value>
+  </data>
+  <data name="PunchCard7Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射7。</value>
+  </data>
+  <data name="PunchCard8Caption" xml:space="preserve">
+    <value>08</value>
+  </data>
+  <data name="PunchCard8Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射8。</value>
+  </data>
+  <data name="PunchCard9Caption" xml:space="preserve">
+    <value>09</value>
+  </data>
+  <data name="PunchCard9Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射9。</value>
+  </data>
+  <data name="PunchCard10Caption" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="PunchCard10Tooltip" xml:space="preserve">
+    <value>联系人10的打孔卡映射。</value>
+  </data>
+  <data name="PunchCard11Caption" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="PunchCard11Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射11。</value>
+  </data>
+  <data name="PunchCard12Caption" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="PunchCard12Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射12。</value>
+  </data>
+  <data name="PunchCard13Caption" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="PunchCard13Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射13。</value>
+  </data>
+  <data name="PunchCard14Caption" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="PunchCard14Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射14。</value>
+  </data>
+  <data name="PunchCard15Caption" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="PunchCard15Tooltip" xml:space="preserve">
+    <value>联系人的打孔卡映射15。</value>
+  </data>
+  <data name="PunchCard16Caption" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="PunchCard16Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射16。</value>
+  </data>
+  <data name="PunchCard17Caption" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="PunchCard17Tooltip" xml:space="preserve">
+    <value>联系人的打孔卡映射17。</value>
+  </data>
+  <data name="PunchCard18Caption" xml:space="preserve">
+    <value>18岁</value>
+  </data>
+  <data name="PunchCard18Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射18。</value>
+  </data>
+  <data name="PunchCard19Caption" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="PunchCard19Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射19。</value>
+  </data>
+  <data name="PunchCard20Caption" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="PunchCard20Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射20。</value>
+  </data>
+  <data name="PunchCard21Caption" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="PunchCard21Tooltip" xml:space="preserve">
+    <value>联系人21的打卡映射。</value>
+  </data>
+  <data name="PunchCard22Caption" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="PunchCard22Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射22。</value>
+  </data>
+  <data name="PunchCard23Caption" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="PunchCard23Tooltip" xml:space="preserve">
+    <value>联系人的打卡映射23。</value>
+  </data>
+  <data name="PunchCard24Caption" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="PunchCard24Tooltip" xml:space="preserve">
+    <value>联系人24的打卡映射。</value>
+  </data>
+  <data name="PunchCard25Caption" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="PunchCard25Tooltip" xml:space="preserve">
+    <value>联系人25的打卡映射。</value>
+  </data>
+  <data name="PunchCard26Caption" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="PunchCard26Tooltip" xml:space="preserve">
+    <value>联系人26的打卡映射。</value>
+  </data>
+  <data name="PunchCard27Caption" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="PunchCard27Tooltip" xml:space="preserve">
+    <value>联系人27的打卡映射。</value>
+  </data>
+  <data name="PunchCard28Caption" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="PunchCard28Tooltip" xml:space="preserve">
+    <value>触点28的打孔卡映射。</value>
+  </data>
+  <data name="PunchCard29Caption" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="PunchCard29Tooltip" xml:space="preserve">
+    <value>联系人29的打卡映射。</value>
+  </data>
+  <data name="PunchCard30Caption" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="PunchCard30Tooltip" xml:space="preserve">
+    <value>联系人30的打卡映射。</value>
+  </data>
+  <data name="ResetPunchCardCaption" xml:space="preserve">
+    <value>设定身分</value>
+  </data>
+  <data name="ResetPunchCardTooltip" xml:space="preserve">
+    <value>将打孔卡替换重置为标识（设置三角形）。</value>
+  </data>
+  <data name="ResetRotorCoreOffsetCaption" xml:space="preserve">
+    <value>空偏移</value>
+  </data>
+  <data name="ResetRotorCoreOffsetTooltip" xml:space="preserve">
+    <value>将转子芯偏移设置为0。</value>
+  </data>
+  <data name="ResetRotorCoreOrderCaption" xml:space="preserve">
+    <value>基本职位</value>
+  </data>
+  <data name="ResetRotorCoreOrderTooltip" xml:space="preserve">
+    <value>将型芯订购到基本位置。</value>
+  </data>
+  <data name="ResetRotorCoreSidesCaption" xml:space="preserve">
+    <value>核心侧聋</value>
+  </data>
+  <data name="ResetRotorCoreSidesTooltip" xml:space="preserve">
+    <value>将核心面设置为默认值（面1）。</value>
+  </data>
+  <data name="ResetRotorOffsetBaseCaption" xml:space="preserve">
+    <value>基本职位</value>
+  </data>
+  <data name="ResetRotorOffsetBaseTooltip" xml:space="preserve">
+    <value>将转子偏移量设置为基本位置。</value>
+  </data>
+  <data name="ResetRotorOffsetNullCaption" xml:space="preserve">
+    <value>空偏移</value>
+  </data>
+  <data name="ResetRotorOffsetNullTooltip" xml:space="preserve">
+    <value>将转子偏移设置为0。</value>
+  </data>
+  <data name="ResetRotorOrderCaption" xml:space="preserve">
+    <value>基本职位</value>
+  </data>
+  <data name="ResetRotorOrderTooltip" xml:space="preserve">
+    <value>将转子订购到基本位置。</value>
+  </data>
+  <data name="SettingsInputhandlerCaption" xml:space="preserve">
+    <value>输入处理</value>
+  </data>
+  <data name="SettingsInputhandlerTooltip" xml:space="preserve">
+    <value>无效输入将如何处理？</value>
+  </data>
+  <data name="SettingsOutputUpdateCaption" xml:space="preserve">
+    <value>输出更新</value>
+  </data>
+  <data name="SettingsOutputUpdateTooltip" xml:space="preserve">
+    <value>选择何时更新输出。</value>
+  </data>
+  <data name="VisibilityCaption" xml:space="preserve">
+    <value>隐藏设定</value>
+  </data>
+  <data name="VisibilityTooltip" xml:space="preserve">
+    <value>显示/隐藏该组中的元素。</value>
+  </data>
+  <data name="OutputKeyCaption" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="OutputKeyDescription" xml:space="preserve">
+    <value>密钥设置在加密后结束。</value>
+  </data>
+  <data name="CountryLayoutList1" xml:space="preserve">
+    <value>波兰</value>
+  </data>
+  <data name="CountryLayoutList2" xml:space="preserve">
+    <value>东德</value>
+  </data>
+  <data name="CountryLayoutList3" xml:space="preserve">
+    <value>捷克斯洛伐克</value>
+  </data>
+  <data name="OperationModeList1" xml:space="preserve">
+    <value>普通（O）</value>
+  </data>
+  <data name="OperationModeList2" xml:space="preserve">
+    <value>加密（3）</value>
+  </data>
+  <data name="OperationModeList3" xml:space="preserve">
+    <value>解密（P）</value>
+  </data>
+  <data name="PrintHeadMappingList1" xml:space="preserve">
+    <value>西里尔字母（PУC）</value>
+  </data>
+  <data name="PrintHeadMappingList2" xml:space="preserve">
+    <value>拉丁（ЛAT）</value>
+  </data>
+  <data name="SettingsInputhandlerList1" xml:space="preserve">
+    <value>去掉</value>
+  </data>
+  <data name="SettingsInputhandlerList2" xml:space="preserve">
+    <value>用@标记</value>
+  </data>
+  <data name="SettingsInputhandlerList3" xml:space="preserve">
+    <value>保持不变</value>
+  </data>
+  <data name="SettingsRestoreList1" xml:space="preserve">
+    <value>执行后</value>
+  </data>
+  <data name="SettingsRestoreList2" xml:space="preserve">
+    <value>停止按</value>
+  </data>
+  <data name="SettingsRestoreList3" xml:space="preserve">
+    <value>输入已更改</value>
+  </data>
+  <data name="SettingsRestoreList4" xml:space="preserve">
+    <value>决不</value>
+  </data>
+  <data name="TextOperationModeList1" xml:space="preserve">
+    <value>字母（Б）</value>
+  </data>
+  <data name="TextOperationModeList2" xml:space="preserve">
+    <value>混合（C）</value>
+  </data>
+  <data name="TextOperationModeList3" xml:space="preserve">
+    <value>数字（Ц）</value>
+  </data>
+</root>

@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="action_select" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="action_select_tooltip" xml:space="preserve">
+    <value>该操作定义输入数据将被加密还是解密。</value>
+  </data>
+  <data name="ad_caption" xml:space="preserve">
+    <value>关联数据</value>
+  </data>
+  <data name="ad_tooltip" xml:space="preserve">
+    <value>除了输入数据外，CCM和GCM模式还可以使用所谓的关联数据进行身份验证。</value>
+  </data>
+  <data name="ansix923" xml:space="preserve">
+    <value>ANSI X.923</value>
+  </data>
+  <data name="authentication_error" xml:space="preserve">
+    <value>消息无法验证！</value>
+  </data>
+  <data name="blockmode_select" xml:space="preserve">
+    <value>操作模式</value>
+  </data>
+  <data name="blockmode_select_tooltip" xml:space="preserve">
+    <value>对于加密和解密，可以选择所选分组密码的操作模式。</value>
+  </data>
+  <data name="cbc" xml:space="preserve">
+    <value>密码块链接模式（CBC）</value>
+  </data>
+  <data name="ccm" xml:space="preserve">
+    <value>CBC-MAC模式（CCM）计数器</value>
+  </data>
+  <data name="cfb" xml:space="preserve">
+    <value>密码反馈模式（CFB）</value>
+  </data>
+  <data name="ctr" xml:space="preserve">
+    <value>计数器模式（CTR）</value>
+  </data>
+  <data name="datasegment_length_input" xml:space="preserve">
+    <value>数据段长度（以字节为单位）</value>
+  </data>
+  <data name="datasegment_length_input_tooltip" xml:space="preserve">
+    <value>对于CFB模式，仅密文的一部分，即所谓的数据段，将用于下一个块。其长度不得超过所选分组密码的分组大小。</value>
+  </data>
+  <data name="data_segment_overflow_warning" xml:space="preserve">
+    <value>数据段的长度太长。实际长度为：</value>
+  </data>
+  <data name="decrypt" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="ecb" xml:space="preserve">
+    <value>电子密码本模式（ECB）</value>
+  </data>
+  <data name="encrypt" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="gcm" xml:space="preserve">
+    <value>伽罗瓦/计数器模式（GCM）</value>
+  </data>
+  <data name="icontrol_caption" xml:space="preserve">
+    <value>分组密码</value>
+  </data>
+  <data name="icontrol_tooltip" xml:space="preserve">
+    <value>所选的分组密码将在所选的操作模式下用于加密或解密。</value>
+  </data>
+  <data name="iso10126" xml:space="preserve">
+    <value>ISO 10126</value>
+  </data>
+  <data name="iv_caption" xml:space="preserve">
+    <value>初始化向量</value>
+  </data>
+  <data name="iv_tooltip" xml:space="preserve">
+    <value>除了ECB模式外，每种操作模式都需要为其第一个块或计数器设置一个初始化值。</value>
+  </data>
+  <data name="key_caption" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="key_tooltip" xml:space="preserve">
+    <value>该密钥将用于所选的分组密码。它的长度由所选的分组密码确定。</value>
+  </data>
+  <data name="long_ad_warning" xml:space="preserve">
+    <value>提供的关联数据太长，已被修剪：</value>
+  </data>
+  <data name="long_input_warning" xml:space="preserve">
+    <value>提供的输入文本太长，已被修剪：</value>
+  </data>
+  <data name="long_iv_warning" xml:space="preserve">
+    <value>提供的初始化向量过长，已被裁剪：</value>
+  </data>
+  <data name="long_key_warning" xml:space="preserve">
+    <value>提供的密钥太长，已被修剪：</value>
+  </data>
+  <data name="missing_blockcipher_warning" xml:space="preserve">
+    <value>未选择分组密码。不能加密或解密！</value>
+  </data>
+  <data name="none" xml:space="preserve">
+    <value>没有</value>
+  </data>
+  <data name="ofb" xml:space="preserve">
+    <value>输出反馈模式（OFB）</value>
+  </data>
+  <data name="onezeros" xml:space="preserve">
+    <value>1-0填充</value>
+  </data>
+  <data name="padding_select" xml:space="preserve">
+    <value>填充</value>
+  </data>
+  <data name="padding_select_tooltip" xml:space="preserve">
+    <value>如果输入文本太短，则填充会扩展输入文本。 ECB和CBC模式要求输入的长度是分组密码的分组大小的倍数。</value>
+  </data>
+  <data name="pkcs7" xml:space="preserve">
+    <value>PKCS＃7</value>
+  </data>
+  <data name="plugin_caption" xml:space="preserve">
+    <value>块模式可视化器</value>
+  </data>
+  <data name="plugin_tooltip" xml:space="preserve">
+    <value>Blockmode Visualizer可以在不同的操作模式下执行对称分组密码，并以图形方式可视化其操作原理。</value>
+  </data>
+  <data name="short_ad_warning" xml:space="preserve">
+    <value>提供的关联数据太短，并用零填充：</value>
+  </data>
+  <data name="short_input_warning" xml:space="preserve">
+    <value>输入文本太短，并用零填充：</value>
+  </data>
+  <data name="short_iv_warning" xml:space="preserve">
+    <value>提供的初始化向量太短，并用零填充：</value>
+  </data>
+  <data name="short_key_warning" xml:space="preserve">
+    <value>提供的密钥太短，并用零填充：</value>
+  </data>
+  <data name="not_yet_implemented_exception" xml:space="preserve">
+    <value>所选的块模式尚未实现。</value>
+  </data>
+  <data name="tag_input_caption" xml:space="preserve">
+    <value>验证标签输入</value>
+  </data>
+  <data name="tag_input_tooltip" xml:space="preserve">
+    <value>此输入接受仅用于以CCM或GCM模式验证消息的消息验证标签。</value>
+  </data>
+  <data name="tag_length" xml:space="preserve">
+    <value>标签长度（以字节为单位）</value>
+  </data>
+  <data name="tag_length_overflow_warning" xml:space="preserve">
+    <value>消息认证标签的长度超过了块大小。实际长度为：</value>
+  </data>
+  <data name="tag_length_tooltip" xml:space="preserve">
+    <value>消息认证标签的长度不得超过所选分组密码的分组大小。</value>
+  </data>
+  <data name="tag_output_caption" xml:space="preserve">
+    <value>认证标签输出</value>
+  </data>
+  <data name="tag_output_tooltip" xml:space="preserve">
+    <value>消息认证标签仅在CCM或GCM模式下生成。</value>
+  </data>
+  <data name="text_input_caption" xml:space="preserve">
+    <value>输入文本</value>
+  </data>
+  <data name="text_input_tooltip" xml:space="preserve">
+    <value>该输入接受用于加密的明文或接受用于解密的密文。</value>
+  </data>
+  <data name="text_output_caption" xml:space="preserve">
+    <value>输出文字</value>
+  </data>
+  <data name="text_output_tooltip" xml:space="preserve">
+    <value>此输出显示加密后的密文或解密后的明文。</value>
+  </data>
+  <data name="xts" xml:space="preserve">
+    <value>带有调整和密文盗用（XTS）的XEX</value>
+  </data>
+  <data name="zeros" xml:space="preserve">
+    <value>零点</value>
+  </data>
+  <data name="pres_headline_conjunction" xml:space="preserve">
+    <value>在里面</value>
+  </data>
+  <data name="pres_headline_cbc" xml:space="preserve">
+    <value>哥伦比亚广播公司</value>
+  </data>
+  <data name="pres_headline_ccm" xml:space="preserve">
+    <value>CCM</value>
+  </data>
+  <data name="pres_headline_cfb" xml:space="preserve">
+    <value>循环流化床</value>
+  </data>
+  <data name="pres_headline_ctr" xml:space="preserve">
+    <value>点击率</value>
+  </data>
+  <data name="pres_headline_decryption" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="pres_headline_ecb" xml:space="preserve">
+    <value>欧洲央行</value>
+  </data>
+  <data name="pres_headline_encryption" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="pres_headline_gcm" xml:space="preserve">
+    <value>GCM</value>
+  </data>
+  <data name="pres_headline_mode" xml:space="preserve">
+    <value>模式</value>
+  </data>
+  <data name="pres_headline_ofb" xml:space="preserve">
+    <value>银行</value>
+  </data>
+  <data name="pres_headline_xts" xml:space="preserve">
+    <value>XTS</value>
+  </data>
+</root>

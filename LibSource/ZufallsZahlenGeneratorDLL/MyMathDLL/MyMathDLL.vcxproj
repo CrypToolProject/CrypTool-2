@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bits.c" />
+    <ClCompile Include="chisq.c" />
+    <ClCompile Include="choose_rng.c" />
+    <ClCompile Include="countx.c" />
+    <ClCompile Include="dab_birthdays1.c" />
+    <ClCompile Include="dab_bytedistrib.c" />
+    <ClCompile Include="dab_dct.c" />
+    <ClCompile Include="dab_filltree.c" />
+    <ClCompile Include="dab_filltree2.c" />
+    <ClCompile Include="dab_monobit2.c" />
+    <ClCompile Include="dab_opso2.c" />
+    <ClCompile Include="dieharder_rng_types.c" />
+    <ClCompile Include="dieharder_test_types.c" />
+    <ClCompile Include="diehard_2dsphere.c" />
+    <ClCompile Include="diehard_3dsphere.c" />
+    <ClCompile Include="diehard_birthdays.c" />
+    <ClCompile Include="diehard_bitstream.c" />
+    <ClCompile Include="diehard_count_1s_byte.c" />
+    <ClCompile Include="diehard_count_1s_stream.c" />
+    <ClCompile Include="diehard_craps.c" />
+    <ClCompile Include="diehard_dna.c" />
+    <ClCompile Include="dieharder_functions.c" />
+    <ClCompile Include="diehard_operm5.c" />
+    <ClCompile Include="diehard_opso.c" />
+    <ClCompile Include="diehard_oqso.c" />
+    <ClCompile Include="diehard_parking_lot.c" />
+    <ClCompile Include="diehard_rank_32x32.c" />
+    <ClCompile Include="diehard_rank_6x8.c" />
+    <ClCompile Include="diehard_runs.c" />
+    <ClCompile Include="diehard_squeeze.c" />
+    <ClCompile Include="diehard_sums.c" />
+    <ClCompile Include="Execute_test.c" />
+    <ClCompile Include="histogram.c" />
+    <ClCompile Include="kstest.c" />
+    <ClCompile Include="marsaglia_tsang_gcd.c" />
+    <ClCompile Include="marsaglia_tsang_gorilla.c" />
+    <ClCompile Include="DieHarderDLL.c" />
+    <ClCompile Include="output.c" />
+    <ClCompile Include="parse.c" />
+    <ClCompile Include="prob.c" />
+    <ClCompile Include="random_seed.c" />
+    <ClCompile Include="rank.c" />
+    <ClCompile Include="rgb_bitdist.c" />
+    <ClCompile Include="rgb_kstest_test.c" />
+    <ClCompile Include="rgb_lagged_sums.c" />
+    <ClCompile Include="rgb_lmn.c" />
+    <ClCompile Include="rgb_minimum_distance.c" />
+    <ClCompile Include="rgb_operm.c" />
+    <ClCompile Include="rgb_permutations.c" />
+    <ClCompile Include="rgb_persist.c" />
+    <ClCompile Include="rgb_timing.c" />
+    <ClCompile Include="rijndael-alg-fst.c" />
+    <ClCompile Include="rngav.c" />
+    <ClCompile Include="rngs_gnu_r.c" />
+    <ClCompile Include="rng_aes.c" />
+    <ClCompile Include="rng_ca.c" />
+    <ClCompile Include="rng_dev_arandom.c" />
+    <ClCompile Include="rng_dev_random.c" />
+    <ClCompile Include="rng_dev_urandom.c" />
+    <ClCompile Include="rng_file_input.c" />
+    <ClCompile Include="rng_file_input_raw.c" />
+    <ClCompile Include="rng_jenkins.c" />
+    <ClCompile Include="rng_kiss.c" />
+    <ClCompile Include="rng_stdin_input_raw.c" />
+    <ClCompile Include="rng_superkiss.c" />
+    <ClCompile Include="rng_uvag.c" />
+    <ClCompile Include="rng_XOR.c" />
+    <ClCompile Include="run_all_tests.c" />
+    <ClCompile Include="run_test.c" />
+    <ClCompile Include="sample.c" />
+    <ClCompile Include="static_get_bits.c" />
+    <ClCompile Include="std_test.c" />
+    <ClCompile Include="sts_monobit.c" />
+    <ClCompile Include="sts_runs.c" />
+    <ClCompile Include="sts_serial.c" />
+    <ClCompile Include="Timer.c" />
+    <ClCompile Include="timing.c" />
+    <ClCompile Include="version.c" />
+    <ClCompile Include="Vtest.c" />
+    <ClCompile Include="Xtest.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="brg_endian.h" />
+    <ClInclude Include="brg_types.h" />
+    <ClInclude Include="copyright.h" />
+    <ClInclude Include="dab_birthdays1.h" />
+    <ClInclude Include="dab_bytedistrib.h" />
+    <ClInclude Include="dab_dct.h" />
+    <ClInclude Include="dab_filltree.h" />
+    <ClInclude Include="dab_filltree2.h" />
+    <ClInclude Include="dab_monobit2.h" />
+    <ClInclude Include="dab_opso2.h" />
+    <ClInclude Include="dieharder_rng_types.h" />
+    <ClInclude Include="dieharder_test_types.h" />
+    <ClInclude Include="diehard_2dsphere.h" />
+    <ClInclude Include="diehard_3dsphere.h" />
+    <ClInclude Include="diehard_birthdays.h" />
+    <ClInclude Include="diehard_bitstream.h" />
+    <ClInclude Include="diehard_count_1s_byte.h" />
+    <ClInclude Include="diehard_count_1s_stream.h" />
+    <ClInclude Include="diehard_craps.h" />
+    <ClInclude Include="diehard_dna.h" />
+    <ClInclude Include="diehard_operm5.h" />
+    <ClInclude Include="diehard_opso.h" />
+    <ClInclude Include="diehard_oqso.h" />
+    <ClInclude Include="diehard_parking_lot.h" />
+    <ClInclude Include="diehard_rank_32x32.h" />
+    <ClInclude Include="diehard_rank_6x8.h" />
+    <ClInclude Include="diehard_runs.h" />
+    <ClInclude Include="diehard_squeeze.h" />
+    <ClInclude Include="diehard_sums.h" />
+    <ClInclude Include="Dtest.h" />
+    <ClInclude Include="libdieharder.h" />
+    <ClInclude Include="marsaglia_tsang_gcd.h" />
+    <ClInclude Include="marsaglia_tsang_gorilla.h" />
+    <ClInclude Include="DieHarderDLL.h" />
+    <ClInclude Include="parse.h" />
+    <ClInclude Include="rgb_bitdist.h" />
+    <ClInclude Include="rgb_kstest_test.h" />
+    <ClInclude Include="rgb_lagged_sums.h" />
+    <ClInclude Include="rgb_lmn.h" />
+    <ClInclude Include="rgb_minimum_distance.h" />
+    <ClInclude Include="rgb_operm.h" />
+    <ClInclude Include="rgb_permutations.h" />
+    <ClInclude Include="rgb_persist.h" />
+    <ClInclude Include="rgb_timing.h" />
+    <ClInclude Include="rijndael-alg-fst.h" />
+    <ClInclude Include="skein.h" />
+    <ClInclude Include="skein_port.h" />
+    <ClInclude Include="std_test.h" />
+    <ClInclude Include="sts_monobit.h" />
+    <ClInclude Include="sts_runs.h" />
+    <ClInclude Include="sts_serial.h" />
+    <ClInclude Include="tests.h" />
+    <ClInclude Include="verbose.h" />
+    <ClInclude Include="Vtest.h" />
+    <ClInclude Include="Xtest.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{90A71DA9-3A45-4F84-AD1A-9F63958742AB}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MyMathDLL</RootNamespace>
+    <ProjectName>ZufallsGeneratorenDLL</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\CrypBuild\Debug</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\CrypBuild\Release</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;MYMATHDLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <CompileAs>CompileAsC</CompileAs>
+      <AdditionalIncludeDirectories>C:\gsl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\Uni\BacherlorArbeit\diehardersave\dieharder\include\dieharder;C:\gsl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cblas_d.lib;gsl_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;MYMATHDLL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\gsl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\gsl\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cblas.lib;gsl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

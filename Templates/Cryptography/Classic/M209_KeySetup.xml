@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">M209 Key Setup</title>
+  <title lang="zh">M209按键设置</title>
+  <title lang="ru">Настройка M209</title>
+  <summary lang="en">Usage of the <i>M209</i> cipher machine</summary>
+  <summary lang="zh">M209密码机的用法</summary>
+  <summary lang="ru">Использование шифровальной машины M209</summary>
+  <description lang="en">This template shows how the internal key of the <i>M209</i> cipher machine can be set up.</description>
+  <description lang="zh">该模板显示了如何设置M209密码机的内部密钥。</description>
+  <description lang="ru">Этот шаблон показывает, как можно настроить внутренний ключ шифровального аппарата M209.</description>
+  <keywords>Machine, World War, Rotor, internal, key</keywords>
+  <keywords lang="zh">机械，第二次世界大战，转子，内部，钥匙</keywords>
+  <keywords lang="ru">Машина, мировая война, ротор, внутренний, ключ</keywords>
+  <title lang="de">M209-Chiffre Schlüsseleingabe</title>
+  <summary lang="de">Schlüsseleingabe bei der <i>M209</i>-Chiffriermaschine</summary>
+  <description lang="de">Diese Vorlage zeigt, wie der interne Schlüssel der <i>M209</i>-Chiffriermaschine eingestellt werden kann.</description>
+  <keywords lang="de">Maschine, Weltkrieg, interner, Schlüssel</keywords>
+  <icon file="M209_EncryptDecrypt.jpg" />
+  <relevantPlugins>
+    <plugin name="M209" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Internal Key$" value="Interner Schlüssel" />
+    <replacement key="$Internal Key (formatted)$" value="Interner Schlüssel (formatiert)" />
+    <replacement key="$M209 Decryption$" value="M209 Entschlüsselung" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie man den internen Schlüssel der M-209 über den Eingang &quot;Eingabe interner Schlüssel&quot; der Komponente setzen kann. Das Format des internen Schlüssels ist, wie oben zu sehen ist, eine durch Komma getrennte Liste der aktiven Stifte der Rotoren, gefolgt von den Schieberpositionen für die 27 Stangen.\line\line Im angegebenen Beispiel hat der erste Rotor die aktiven Stifte B, C, E, J, O, P, S, T, U, V, X und Y. Auf der ersten Stange ist ein Schieber auf Position 1 und der andere auf der neutralen Position. Auf der letzten Stange sind die Schieber auf den Positionen 4 und 5." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Internal Key$" value="内部钥匙" />
+    <replacement key="$Internal Key (formatted)$" value="内部密钥（格式化）" />
+    <replacement key="$M209 Decryption$" value="M209解密" />
+    <replacement key="$memo$" value="该模板演示了如何通过组件的“输入内部键”输入来设置M-209的内部键。如上所示，内部键的格式是转子的活动销的逗号分隔列表，后跟27个杆的滑动位置\Line \line在给定的示例中，第一个转子具有活动销B，C ，E，J，O，P，S，T，U，V，X和Y。在第一个杆上，一个滑块位于位置1，另一个滑块位于中立位置。在最后一根杆上，滑块位于位置4和5。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Internal Key$" value="Внутренний ключ" />
+    <replacement key="$Internal Key (formatted)$" value="Внутренний ключ (отформатирован)" />
+    <replacement key="$M209 Decryption$" value="Расшифровка M209" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, как установить внутренний ключ M-209 через вход ввода внутреннего ключа компонента. Формат внутреннего ключа, как показано выше, представляет собой список активных контактов роторов, разделенных запятыми, за которыми следуют положения ползунка для 27 стержней. \Line \line В приведенном примере первый ротор имеет активные контакты B, C , E, J, O, P, S, T, U, V, X и Y. На первом стержне находится ползунок в положении 1, а другой в нейтральном положении. На последнем полюсе находятся слайды на позициях 4 и 5." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Internal Key$" value="Internal Key" />
+    <replacement key="$Internal Key (formatted)$" value="Internal Key (formatted)" />
+    <replacement key="$M209 Decryption$" value="M209 Decryption" />
+    <replacement key="$memo$" value="This template demonstrates how the internal key of the M-209 can be set by entering it on the input &quot;Input internal key&quot; of the M-209 component. The format of the internal key, as seen above, is a comma-separated list of the effective pins for the rotors followed by the lug positions for the 27 bars.\line\line In the given example, the first rotor has the effective pins B, C, E, J, O, P, S, T, U, V, X and Y. The first bar has one lug on position 1 and the other lug on the neutral position. On the last bar, the lugs are on positions 4 and 5." />
+  </replacements>
+</sample>

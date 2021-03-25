@@ -1,0 +1,97 @@
+<h2>Eulersche &phi;-Funktion</h2>
+
+Die Eulersche &phi;-Funktion ist eine zahlentheoretische Funktion. Sie gibt für jede natürliche Zahl n die Anzahl der zu ihr teilerfremden natürlichen Zahlen an.
+<br />
+Ihre Definition lautet:<br />
+<img src="eulerphi" />
+<br />
+Der Name der Funktion geht auf <a href="http://de.wikipedia.org/wiki/Leonhard_Euler" target="_blank">Leonhard Euler</a> zurück, der diese Funktion erstmals mit dem <a href="http://de.wikipedia.org/wiki/Kleiner_Fermat" target="_blank">kleinen Satz von Fermat</a> in Verbindung brachte.
+<br />
+Es gilt:
+<ul>
+<li>&phi;(n) &le; n-1 für alle n &isin; N und</li>
+<li>&phi;(n) = n-1 &hArr; n ist Primzahl.</li>
+</ul>
+<br />
+Man kann also sagen, je kleiner &phi;(n) im Vergleich zu n-1 ist, desto mehr Teiler hat n.
+Umgekehrt kann man &phi;(n) als Gradmesser dafür ansehen, wie nahe eine natürliche Zahl der Eigenschaft kommt,
+prim zu sein (natürlich ist die Primalität einer Zahl eine klare Ja/Nein-Eigenschaft):
+<br />
+<table border=1>
+<tr>
+<td>N</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td>N-1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+<tr>
+<td>&phi;(n)</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>6</td>
+<td>4</td>
+<td>6</td>
+<td>4</td>
+<td>10</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Grad</td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+</table>
+<br />
+
+&phi;(n) kann am einfachsten berechnet werden, wenn die Primfaktorzerlegung von n bekannt ist (n = p<sub>1</sub><sup>a<sub>1</sub></sup> * ... * p<sub>k</sub><sup>a<sub>k</sub></sup>). Dann ist
+<br />
+<img src="eulerphiproduct" />
+<br />
+Daher ist &phi;(n) = n-1, falls n eine Primzahl ist.
+<br />
+<br />
+
+&phi;(n) ist eine der wichtigsten zahlentheoretischen Funktionen. Je genauer man sie kennt, umso mehr weiß man über Primzahlen und ihre Verteilung.
+Da n &isin; N genau dann prim ist, wenn &phi;(n) = n-1, gilt: Alle Lösungen der Gleichung &phi;(n) = n-1 zu finden, bedeutet, die Primzahlenfolge angeben zu können.
+<br />
+<br />
+Link: <a href="http://de.wikipedia.org/wiki/Eulersche_Phi-Funktion" target="_blank">http://de.wikipedia.org/wiki/Eulersche_Phi-Funktion</a><br />
+Link: <a href="http://de.wikipedia.org/wiki/Leonhard_Euler" target="_blank">http://de.wikipedia.org/wiki/Leonhard_Euler</a>

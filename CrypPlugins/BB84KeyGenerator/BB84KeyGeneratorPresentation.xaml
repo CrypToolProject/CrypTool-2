@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="BB84KeyGenerator.BB84KeyGeneratorPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="Transparent"
+             SnapsToDevicePixels="True"  
+             HorizontalAlignment="Stretch"  
+             VerticalAlignment="Stretch"
+             Height="Auto" Width="Auto">
+    <Canvas x:Name="allCanvas" Width="365" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Image Source="/BB84KeyGenerator;component/images/backgroundCalculator.jpg" Width="365" Height="200" Canvas.Top="0" Canvas.Bottom="0" Visibility="Visible"></Image>
+        <Canvas x:Name="mainCanvas" Width="365" Height="200" HorizontalAlignment="Left">
+            <Canvas x:Name="textBlockCanvas" Canvas.Top="10" Canvas.Left="10">
+                <TextBlock Name="inputKeyBox" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="365" Height="30" TextAlignment="Left"  FontFamily="Lucida Console" FontSize="25" FontWeight="Bold"></TextBlock>
+                <TextBlock Name="firstBasesBox" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="365" Height="30" TextAlignment="Left"  FontFamily="Lucida Console" FontSize="25" FontWeight="Bold" Canvas.Top="35"></TextBlock>
+                <TextBlock Name="secondBasesBox" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="365" Height="30" TextAlignment="Left"  FontFamily="Lucida Console" FontSize="25" FontWeight="Bold" Canvas.Top="70"></TextBlock>
+                <TextBlock Name="commonKeyBox" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="365" Height="30"  TextAlignment="Left"  FontFamily="Lucida Console" FontSize="25" FontWeight="Bold" Canvas.Top="105"></TextBlock>
+                <TextBlock Name="messageBox" Canvas.Left="-10" Text="{Loc res_NoCommonBasesMessage}" IsEnabled="False" VerticalAlignment="Center" HorizontalAlignment="Center" Width="365" Height="30"  TextAlignment="Center"  FontFamily="Lucida Console" FontSize="25" FontWeight="Bold" Visibility="Hidden" Canvas.Top="105"></TextBlock>
+            </Canvas>
+
+            <Canvas x:Name="overlayCanvas" Canvas.Top="5" Canvas.Left="1" Visibility="Hidden">
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="10"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="25.6"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="41.2"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="56.8"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="72.4"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="88"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="103.6"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="119.2"></Rectangle>
+
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="134.8"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="150.4"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="166"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="181.6"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="197.2"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="212.8"></Rectangle>
+                <Rectangle Width="14" Height="100" Fill="Green" Opacity="0.3" Canvas.Left="228.4"></Rectangle>
+            </Canvas>
+        </Canvas>
+    </Canvas>
+
+    <UserControl.Resources>
+        <Storyboard x:Key="fadeInInputKeyBox">
+            <DoubleAnimation From="0" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="inputKeyBox" Completed="completedFadeInInputKeyBox"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeInFirstBasesBox">
+            <DoubleAnimation From="0" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="firstBasesBox" Completed="completedFadeInFirstBasesBox"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeInSecondBasesBox">
+            <DoubleAnimation From="0" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="secondBasesBox" Completed="completedFadeInSecondBasesBox"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeInCommonKeyBox">
+            <DoubleAnimation From="0" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="commonKeyBox" Completed="completedFadeInCommonKeyBox" ></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeInOverlayBoxes">
+            <DoubleAnimation From="0" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="overlayCanvas" Completed="completedFadeOverlayBoxes"></DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+    
+</UserControl>

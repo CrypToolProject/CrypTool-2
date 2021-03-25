@@ -1,0 +1,350 @@
+﻿<UserControl x:Class="BB84PhotonDecoder.BB84PhotonDecoderPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"  
+             Background="Transparent"
+            SnapsToDevicePixels="True" 
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    Height="Auto" Width="Auto">
+    <Canvas x:Name="allCanvas" Width="365" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Image Source="/BB84PhotonDecoder;component/images/backgroundDecoding.jpg" Width="365" Height="200" Canvas.Top="0" Canvas.Bottom="0" Visibility="Visible"></Image>
+ 
+        <Canvas x:Name="mainCanvas" Width="365" Height="200" HorizontalAlignment="Left">
+
+            <Canvas x:Name="baseQueueCross1" Canvas.Left="160" Canvas.Top="130">
+
+                <Line  X1="10" Y1="10" X2="50" Y2="50" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="10" Y1="50" X2="50" Y2="10" Stroke="Black" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="cross1move"></TranslateTransform>
+                        <ScaleTransform ScaleX="0.5" ScaleY="0.5"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+            <Canvas x:Name="baseQueueCross2" Canvas.Left="200" Canvas.Top="130">
+
+                <Line  X1="10" Y1="10" X2="50" Y2="50" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="10" Y1="50" X2="50" Y2="10" Stroke="Black" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="cross2move"></TranslateTransform>
+                        <ScaleTransform ScaleX="0.5" ScaleY="0.5"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+            <Canvas x:Name="baseQueueCross3" Canvas.Left="240" Canvas.Top="130">
+
+                <Line  X1="10" Y1="10" X2="50" Y2="50" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="10" Y1="50" X2="50" Y2="10" Stroke="Black" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="cross3move"></TranslateTransform>
+                        <ScaleTransform ScaleX="0.5" ScaleY="0.5"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+
+            <Canvas x:Name="baseQueuePlus1" Canvas.Left="160" Canvas.Top="130">
+
+                <Line  X1="30" Y1="8" X2="30" Y2="52" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="8" Y1="30" X2="52" Y2="30" Stroke="Black" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="plus1move"></TranslateTransform>
+                        <ScaleTransform ScaleX="0.5" ScaleY="0.5"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+            <Canvas x:Name="baseQueuePlus2" Canvas.Left="200" Canvas.Top="130">
+
+                <Line  X1="30" Y1="8" X2="30" Y2="52" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="8" Y1="30" X2="52" Y2="30" Stroke="Black" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="plus2move"></TranslateTransform>
+                        <ScaleTransform ScaleX="0.5" ScaleY="0.5"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+            <Canvas x:Name="baseQueuePlus3" Canvas.Left="240" Canvas.Top="130">
+
+                <Line  X1="30" Y1="8" X2="30" Y2="52" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="8" Y1="30" X2="52" Y2="30" Stroke="Black" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="plus3move"></TranslateTransform>
+                        <ScaleTransform ScaleX="0.5" ScaleY="0.5"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+
+            <Canvas x:Name="imageCross" Canvas.Left="160" Canvas.Top="30">
+
+                <Line  X1="10" Y1="10" X2="50" Y2="50" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="10" Y1="50" X2="50" Y2="10" Stroke="Black" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup x:Name="transformGroupCross">
+                        <TranslateTransform x:Name="bottomCross"></TranslateTransform>
+                        <ScaleTransform x:Name="bottomCrossScale"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+
+            <Canvas x:Name="imagePlus" Canvas.Left="160" Canvas.Top="30">
+                <Line  X1="30" Y1="8" X2="30" Y2="52" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="8" Y1="30" X2="52" Y2="30" Stroke="Black" StrokeThickness="4" />
+                <Canvas.RenderTransform>
+                    <TransformGroup x:Name="transformGroupPlus">
+                        <TranslateTransform x:Name="bottomPlus"></TranslateTransform>
+                        <ScaleTransform x:Name="bottomPlusScale"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+
+            <Canvas x:Name="imageLeftVertical" Canvas.Top="30" Canvas.Left="0" >
+                <Line  X1="30" Y1="10" X2="30" Y2="50" Stroke="MediumVioletRed" StrokeThickness="4" />
+
+                <Canvas.RenderTransform>
+                    <TransformGroup x:Name="transformGroupZero">
+                        <TranslateTransform x:Name="leftVertical"></TranslateTransform>
+                        <ScaleTransform x:Name="leftVerticalScale"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+            </Canvas>
+
+            <Canvas x:Name="imageLeftHorizontal" Canvas.Top="30" Canvas.Left="0">
+                <Line X1="10" Y1="30" X2="50" Y2="30" Stroke="MediumVioletRed" StrokeThickness="4" />
+
+
+
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="leftHorizontal"></TranslateTransform>
+                        <ScaleTransform x:Name="leftHorizontalScale"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+            <Canvas x:Name="imageLeftTopLeftDiagonal" Canvas.Top="30" Canvas.Left="0">
+                <Line X1="10" Y1="10" X2="50" Y2="50" Stroke="MediumVioletRed" StrokeThickness="4" />
+
+
+
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="leftTopLeftDiagonal"></TranslateTransform>
+                        <ScaleTransform x:Name="leftTopLeftDiagonalScale"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+
+            <Canvas x:Name="imageLeftTopRightDiagonal" Canvas.Top="30" Canvas.Left="0">
+                <Line X1="10" Y1="50" X2="50" Y2="10" Stroke="MediumVioletRed" StrokeThickness="4" />
+
+
+
+                <Canvas.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="leftTopRightDiagonal"></TranslateTransform>
+                        <ScaleTransform x:Name="leftTopRightDiagonalScale"></ScaleTransform>
+                    </TransformGroup>
+                </Canvas.RenderTransform>
+
+            </Canvas>
+
+            <Canvas x:Name="imageRightZero" Canvas.Top="35" Canvas.Left="225">
+                <Ellipse  Stretch="Fill" Width="25" Height="40" Fill="Transparent" Stroke="Black" StrokeThickness="4"  Canvas.Top="5" Canvas.Left="7" ></Ellipse>
+                <Line X1="0" Y1="0" X2="0" Y2="15" Stroke="Black" StrokeThickness="3" />
+                <Line X1="0" Y1="0" X2="13" Y2="0" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="0" X2="40" Y2="15" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="0" X2="27" Y2="0" Stroke="Black" StrokeThickness="3" />
+
+                <Line X1="0" Y1="50" X2="0" Y2="35" Stroke="Black" StrokeThickness="3" />
+                <Line X1="0" Y1="50" X2="13" Y2="50" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="50" X2="27" Y2="50" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="50" X2="40" Y2="35" Stroke="Black" StrokeThickness="3" />
+                <Canvas.RenderTransform>
+                    <TranslateTransform x:Name="rightZero"></TranslateTransform>
+                </Canvas.RenderTransform>
+            </Canvas>
+
+            <Canvas x:Name="imageRightOne" Canvas.Top="35" Canvas.Left="225">
+                <Line X1="0" Y1="0" X2="0" Y2="15" Stroke="Black" StrokeThickness="3" />
+                <Line X1="0" Y1="0" X2="13" Y2="0" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="0" X2="40" Y2="15" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="0" X2="27" Y2="0" Stroke="Black" StrokeThickness="3" />
+
+                <Line X1="0" Y1="50" X2="0" Y2="35" Stroke="Black" StrokeThickness="3" />
+                <Line X1="0" Y1="50" X2="13" Y2="50" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="50" X2="27" Y2="50" Stroke="Black" StrokeThickness="3" />
+                <Line X1="40" Y1="50" X2="40" Y2="35" Stroke="Black" StrokeThickness="3" />
+
+                <Line  X1="22" Y1="8" X2="22" Y2="42" Stroke="Black" StrokeThickness="4" />
+                <Line  X1="12" Y1="23" X2="22" Y2="9" Stroke="Black" StrokeThickness="4" />
+                <Canvas.RenderTransform>
+                    <TranslateTransform x:Name="rightOne"></TranslateTransform>
+                </Canvas.RenderTransform>
+            </Canvas>
+
+            <Canvas x:Name="imageError" Canvas.Left="182" Canvas.Top="3" >
+                <Line X1="10" Y1="0" X2="7" Y2="15" Stroke="Red" StrokeThickness="2" />
+                <Line X1="7" Y1="15" X2="15" Y2="8" Stroke="Red" StrokeThickness="2" />
+                <Line X1="15" Y1="8" X2="12" Y2="24" Stroke="Red" StrokeThickness="2" />
+                <Line X1="12" Y1="24" X2="8" Y2="20" Stroke="Red" StrokeThickness="2" />
+                <Line X1="12" Y1="24" X2="18" Y2="20" Stroke="Red" StrokeThickness="2" />                
+
+                <Line X1="25" Y1="0" X2="22" Y2="15" Stroke="Red" StrokeThickness="2" />
+                <Line X1="22" Y1="15" X2="30" Y2="8" Stroke="Red" StrokeThickness="2" />
+                <Line X1="30" Y1="8" X2="27" Y2="24" Stroke="Red" StrokeThickness="2" />
+                <Line X1="27" Y1="24" X2="23" Y2="20" Stroke="Red" StrokeThickness="2" />
+                <Line X1="27" Y1="24" X2="33" Y2="20" Stroke="Red" StrokeThickness="2" />
+
+                <Line X1="-5" Y1="0" X2="-8" Y2="15" Stroke="Red" StrokeThickness="2" />
+                <Line X1="-8" Y1="15" X2="0" Y2="8" Stroke="Red" StrokeThickness="2" />
+                <Line X1="0" Y1="8" X2="-3" Y2="24" Stroke="Red" StrokeThickness="2" />
+                <Line X1="-3" Y1="24" X2="-7" Y2="20" Stroke="Red" StrokeThickness="2" />
+                <Line X1="-3" Y1="24" X2="3" Y2="20" Stroke="Red" StrokeThickness="2" />
+                
+                <Canvas.RenderTransform>
+                    <ScaleTransform ScaleX="0.6" ScaleY="0.5"></ScaleTransform>
+                </Canvas.RenderTransform>
+            </Canvas>
+
+            
+
+
+        </Canvas>
+    </Canvas>
+
+    <UserControl.Resources>
+
+        <Storyboard x:Key="movementRight" SpeedRatio="0.6" >
+            <DoubleAnimation From="3" To="95" AutoReverse="False" RepeatBehavior="1x"  Storyboard.TargetProperty="X" 
+                             Storyboard.TargetName="rightZero" Completed="completedMovementRight"></DoubleAnimation>
+            <DoubleAnimation From="0" To="95" AutoReverse="False" RepeatBehavior="1x"  Storyboard.TargetProperty="X" 
+                             Storyboard.TargetName="rightOne" ></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="movementLeft" SpeedRatio="0.6" >
+            <DoubleAnimation From="0" To="160" AutoReverse="False" RepeatBehavior="1x"  Storyboard.TargetProperty="X" 
+                             Storyboard.TargetName="leftVertical" Completed="completedMovementLeft"></DoubleAnimation>
+            <DoubleAnimation From="0" To="160" AutoReverse="False" RepeatBehavior="1x"  Storyboard.TargetProperty="X" 
+                             Storyboard.TargetName="leftHorizontal"></DoubleAnimation>
+            <DoubleAnimation From="0" To="160" AutoReverse="False" RepeatBehavior="1x"  Storyboard.TargetProperty="X" 
+                             Storyboard.TargetName="leftTopLeftDiagonal"></DoubleAnimation>
+            <DoubleAnimation From="0" To="160" AutoReverse="False" RepeatBehavior="1x"  Storyboard.TargetProperty="X" 
+                             Storyboard.TargetName="leftTopRightDiagonal"></DoubleAnimation>
+        </Storyboard>
+
+        
+
+        <Storyboard x:Key="moveCrossBaseQueues" SpeedRatio="0.6">
+            <DoubleAnimation From="80" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="X"
+                             Storyboard.TargetName="cross1move"></DoubleAnimation>
+            <DoubleAnimation From="80" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="X"
+                             Storyboard.TargetName="cross2move" Completed="completedQueueMovement"></DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="movePlusBaseQueues" SpeedRatio="0.6">
+            <DoubleAnimation From="80" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="X"
+                             Storyboard.TargetName="plus1move"></DoubleAnimation>
+            <DoubleAnimation From="80" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="X"
+                             Storyboard.TargetName="plus2move"></DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="scalingLeft" SpeedRatio="0.6" >
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleX"
+                             Storyboard.TargetName="leftVerticalScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleY"
+                             Storyboard.TargetName="leftVerticalScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleX"
+                             Storyboard.TargetName="leftHorizontalScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleY"
+                             Storyboard.TargetName="leftHorizontalScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleX"
+                             Storyboard.TargetName="leftTopLeftDiagonalScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleY"
+                             Storyboard.TargetName="leftTopLeftDiagonalScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleX"
+                             Storyboard.TargetName="leftTopRightDiagonalScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleY"
+                             Storyboard.TargetName="leftTopRightDiagonalScale"></DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="scalingBottom" SpeedRatio="1.3" >
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleX"
+                             Storyboard.TargetName="bottomCrossScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleY"
+                             Storyboard.TargetName="bottomCrossScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleX"
+                             Storyboard.TargetName="bottomPlusScale"></DoubleAnimation>
+            <DoubleAnimation From="0.5" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="ScaleY"
+                             Storyboard.TargetName="bottomPlusScale"></DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="movementBottom" SpeedRatio="1.3" >
+            <DoubleAnimation From="200" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Y"
+                             Storyboard.TargetName="bottomCross" ></DoubleAnimation>
+            <DoubleAnimation From="200" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Y"
+                             Storyboard.TargetName="bottomPlus" ></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadePlus"  >
+            <DoubleAnimation From="1" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="imagePlus" Completed="completedFadePlus"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeCross"  >
+            <DoubleAnimation From="1" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="imageCross"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeLeftVertical"  >
+            <DoubleAnimation From="1" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="imageLeftVertical" ></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeLeftHorizontal"  >
+            <DoubleAnimation From="1" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="imageLeftHorizontal" ></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeLeftTopLeftDiagonal"  >
+            <DoubleAnimation From="1" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="imageLeftTopLeftDiagonal" ></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeLeftTopRightDiagonal"  >
+            <DoubleAnimation From="1" To="0" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1" 
+                             Storyboard.TargetName="imageLeftTopRightDiagonal" ></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeInRightZero">
+            <DoubleAnimation From="0" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1"
+                             Storyboard.TargetName="imageRightZero"></DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Key="fadeInRightOne">
+            <DoubleAnimation From="0" To="1" AutoReverse="False" RepeatBehavior="1x" Storyboard.TargetProperty="Opacity" Duration="0:0:1"
+                             Storyboard.TargetName="imageRightOne"></DoubleAnimation>
+        </Storyboard>
+        
+        <Storyboard x:Key="lightning">
+            <DoubleAnimation From="0" To="1" AutoReverse="True" RepeatBehavior="3x" Storyboard.TargetProperty="Opacity" Duration="0:0:0.2"
+                             Storyboard.TargetName="imageError"></DoubleAnimation>
+        </Storyboard>
+    </UserControl.Resources>
+
+</UserControl>

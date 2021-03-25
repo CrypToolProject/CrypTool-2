@@ -1,0 +1,243 @@
+﻿<UserControl x:Class="DCAPathFinder.UI.Tutorial3.AttackKeyRound5"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DCAPathFinder.UI.Tutorial3"
+             xmlns:controls="clr-namespace:DCAPathFinder.UI.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="400">
+    <UserControl.Resources>
+        <RotateTransform x:Key="HeaderRotate" Angle="270" />
+    </UserControl.Resources>
+    <Grid Height="700" Width="1200">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <RichTextBox IsReadOnly="True" Background="Transparent" BorderThickness="0" FontFamily="Courier New"
+                     Grid.Row="0" Grid.Column="0" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"
+                     Margin="0,0,0,0">
+            <FlowDocument>
+                <Paragraph TextAlignment="Center">
+                    <Run Text="{Loc Tutorial3AttackRound5HeaderRun1}" /><Run Text="{Loc Tutorial3AttackRound5HeaderRun2}" BaselineAlignment="Subscript" FontSize="15" /><Run Text="{Loc Tutorial3AttackRound5HeaderRun3}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+
+        <ScrollViewer x:Name="scrollviewerCipher" Grid.Row="1" VerticalScrollBarVisibility="Visible"
+                      HorizontalScrollBarVisibility="Hidden" Margin="0,0,0,0">
+            <Grid Height="1400" Width="900">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.3*" />
+                    <ColumnDefinition Width="0.6*" />
+                    <ColumnDefinition Width="1.4*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Round 1 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="240" Grid.Row="0"
+                       Grid.Column="0" Margin="-280,-1010,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}"
+                           Margin="0,0,0,1160">
+                    <Run Text="{Loc R1}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundInOut x:Name="KeyRound1" Grid.Row="0" Grid.Column="0" Margin="50,0,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,82.5,0,0">
+                    <Run Text="k" /><Run Text="0" BaselineAlignment="Subscript" FontSize="15" />
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,145,0,0">
+                    <Run Text="u" /><Run Text="1" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,217,0,0">
+                    <Run Text="v" /><Run Text="1" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round1" Grid.Row="0" Grid.Column="0" Margin="50,170,0,0" />
+                <controls:_4BitSBox x:Name="SBox3Round1" Grid.Row="0" Grid.Column="0" Margin="130,170,0,0" />
+                <controls:_4BitSBox x:Name="SBox2Round1" Grid.Row="0" Grid.Column="0" Margin="210,170,0,0" />
+                <controls:_4BitSBox x:Name="SBox1Round1" Grid.Row="0" Grid.Column="0" Margin="290,170,0,0" />
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation"
+                       Margin="0,250,0,0" HorizontalAlignment="Left" />
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound1" Grid.Row="0" Grid.Column="0"
+                                               Margin="50,195,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,325,0,0">
+                    <Run Text="k" /><Run Text="1" BaselineAlignment="Subscript" FontSize="15" />
+                </TextBlock>
+                <!-- /Round 1 -->
+
+                <!-- Round 2 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="240" Grid.Row="0"
+                       Grid.Column="0" Margin="-280,-530,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}"
+                           Margin="0,0,0,922">
+                    <Run Text="{Loc R2}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound2" Grid.Row="0" Grid.Column="0" Margin="50,240,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,387,0,0">
+                    <Run Text="u" /><Run Text="2" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,455,0,0">
+                    <Run Text="v" /><Run Text="2" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round2" Grid.Row="0" Grid.Column="0" Margin="50,410,0,0" />
+                <controls:_4BitSBox x:Name="SBox3Round2" Grid.Row="0" Grid.Column="0" Margin="130,410,0,0" />
+                <controls:_4BitSBox x:Name="SBox2Round2" Grid.Row="0" Grid.Column="0" Margin="210,410,0,0" />
+                <controls:_4BitSBox x:Name="SBox1Round2" Grid.Row="0" Grid.Column="0" Margin="290,410,0,0" />
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation"
+                       Margin="0,480,0,0" HorizontalAlignment="Left" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,565,0,0">
+                    <Run Text="k" /><Run Text="2" BaselineAlignment="Subscript" FontSize="15" />
+                </TextBlock>
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound2" Grid.Row="0" Grid.Column="0"
+                                               Margin="50,435,0,0" />
+                <!-- /Round 2 -->
+
+                <!-- Round 3 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="240" Grid.Row="0"
+                       Grid.Column="0" Margin="-280,-50,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}"
+                           Margin="0,0,0,682">
+                    <Run Text="{Loc R3}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound3" Grid.Row="0" Grid.Column="0" Margin="50,480,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,627,0,0">
+                    <Run Text="u" /><Run Text="3" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,695,0,0">
+                    <Run Text="v" /><Run Text="3" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round3" Grid.Row="0" Grid.Column="0" Margin="50,650,0,0" />
+                <controls:_4BitSBox x:Name="SBox3Round3" Grid.Row="0" Grid.Column="0" Margin="130,650,0,0" />
+                <controls:_4BitSBox x:Name="SBox2Round3" Grid.Row="0" Grid.Column="0" Margin="210,650,0,0" />
+                <controls:_4BitSBox x:Name="SBox1Round3" Grid.Row="0" Grid.Column="0" Margin="290,650,0,0" />
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation"
+                       Margin="0,740,0,0" HorizontalAlignment="Left" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,805,0,0">
+                    <Run Text="k" /><Run Text="3" BaselineAlignment="Subscript" FontSize="15" />
+                </TextBlock>
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound3" Grid.Row="0" Grid.Column="0"
+                                               Margin="50,675,0,0" />
+                <!-- /Round 3 -->
+
+                <!-- Round 4 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="240" Grid.Row="0"
+                       Grid.Column="0" Margin="-280,430,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25"
+                           HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}"
+                           Margin="0,0,0,440">
+                    <Run Text="{Loc R4}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound4" Grid.Row="0" Grid.Column="0" Margin="50,720,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,867,0,0">
+                    <Run Text="u" /><Run Text="4" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20"
+                           HorizontalAlignment="Left" Margin="0,935,0,0">
+                    <Run Text="v" /><Run Text="4" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round4" Grid.Row="0" Grid.Column="0" Margin="50,890,0,0" />
+                <controls:_4BitSBox x:Name="SBox3Round4" Grid.Row="0" Grid.Column="0" Margin="130,890,0,0" />
+                <controls:_4BitSBox x:Name="SBox2Round4" Grid.Row="0" Grid.Column="0" Margin="210,890,0,0" />
+                <controls:_4BitSBox x:Name="SBox1Round4" Grid.Row="0" Grid.Column="0" Margin="290,890,0,0" />
+
+                <Label FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" Content="Permutation"
+                       Margin="0,980,0,0" HorizontalAlignment="Left" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25"
+                           HorizontalAlignment="Left" Margin="0,1045,0,0">
+                    <Run Text="k" /><Run Text="4" BaselineAlignment="Subscript" FontSize="15" />
+                </TextBlock>
+
+                <controls:_16BitPermutationTBC x:Name="PermutationRound4" Grid.Row="0" Grid.Column="0" Margin="50,915,0,0" />
+                <!-- /Round 4 -->
+
+                <!-- Round 5 -->
+                <Image Source="/DCAPathFinder;component/images/curlyBracet.png" Height="235" Grid.Row="0" Grid.Column="0" Margin="-280,905,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="0" FontSize="25" HorizontalAlignment="Left" LayoutTransform="{StaticResource HeaderRotate}" Margin="0,0,0,205">
+                    <Run Text="{Loc R5}" />
+                </TextBlock>
+
+                <controls:_16BitKeyRoundOut x:Name="KeyRound5" Grid.Row="0" Grid.Column="0" Margin="50,960,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="20" HorizontalAlignment="Left" Margin="0,1107,0,0">
+                    <Run Text="u" /><Run Text="5" BaselineAlignment="Subscript" FontSize="10" />
+                </TextBlock>
+
+                <controls:_4BitSBox x:Name="SBox4Round5" Grid.Row="0" Grid.Column="0" Margin="50,1130,0,0" />
+                <controls:_4BitSBox x:Name="SBox3Round5" Grid.Row="0" Grid.Column="0" Margin="130,1130,0,0" />
+                <controls:_4BitSBox x:Name="SBox2Round5" Grid.Row="0" Grid.Column="0" Margin="210,1130,0,0" />
+                <controls:_4BitSBox x:Name="SBox1Round5" Grid.Row="0" Grid.Column="0" Margin="290,1130,0,0" />
+
+                <controls:_16BitKeyRoundInOut x:Name="KeyRound6" Grid.Row="0" Grid.Column="0" Margin="50,1145,0,0" />
+
+                <TextBlock FontFamily="Courier New" Grid.Row="0" Grid.Column="1" FontSize="25" HorizontalAlignment="Left" Margin="0,1230,0,0">
+                    <Run Text="k" /><Run Text="5" BaselineAlignment="Subscript" FontSize="15" />
+                </TextBlock>
+                <!-- /Round 5 -->
+
+                <RichTextBox Grid.Row="0" Grid.Column="2" IsReadOnly="True" Background="Transparent"
+                             BorderThickness="0" FontFamily="Courier New" FontSize="20" VerticalAlignment="Top"
+                             Margin="0,20,0,0">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="{Loc Tutorial3AttackKeyRound5Content1Run1}" /><Run Text="{Loc Tutorial3AttackKeyRound5Content1Run2}" BaselineAlignment="Subscript" FontSize="15" /><Run Text="{Loc Tutorial3AttackKeyRound5Content1Run3}" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="{Loc Tutorial3AttackKeyRound5Content1Run4}" />
+                            <LineBreak />
+                            <LineBreak />
+                            <Run Text="{Loc Tutorial3AttackKeyRound5Content1Run5}" />
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

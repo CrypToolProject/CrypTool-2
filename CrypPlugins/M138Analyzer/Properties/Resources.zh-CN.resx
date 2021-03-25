@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>使用的密文</value>
+  </data>
+  <data name="CurrentAnalysedKeylengthLabel" xml:space="preserve">
+    <value>当前分析的偏移量：</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>经过时间：</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>预计结束时间：</value>
+  </data>
+  <data name="LanguageList1" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="FastConvergeCaption" xml:space="preserve">
+    <value>快速收敛</value>
+  </data>
+  <data name="FastConvergeTooltip" xml:space="preserve">
+    <value>选择是否应使用“快速收敛”。可以在在线帮助中找到说明。</value>
+  </data>
+  <data name="LanguageList2" xml:space="preserve">
+    <value>德语</value>
+  </data>
+  <data name="MethodList2" xml:space="preserve">
+    <value>部分已知的纯文本</value>
+  </data>
+  <data name="HillClimbRestartsCaption" xml:space="preserve">
+    <value>重新启动次数</value>
+  </data>
+  <data name="HillClimbRestartsTooltip" xml:space="preserve">
+    <value>设置每个偏移量的重新启动次数。</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="KeyLengthCaption" xml:space="preserve">
+    <value>键长</value>
+  </data>
+  <data name="KeyLengthTooltip" xml:space="preserve">
+    <value>设置用于分析的密钥长度。</value>
+  </data>
+  <data name="KeyLengthHeader" xml:space="preserve">
+    <value>抵消</value>
+  </data>
+  <data name="CalculatedKeyCaption" xml:space="preserve">
+    <value>计算键</value>
+  </data>
+  <data name="CalculatedKeyTooltip" xml:space="preserve">
+    <value>找到最好的钥匙</value>
+  </data>
+  <data name="KeysPerSecondAverageLabel" xml:space="preserve">
+    <value>平均密钥/秒：</value>
+  </data>
+  <data name="KeysPerSecondCurrentLabel" xml:space="preserve">
+    <value>当前密钥/秒：</value>
+  </data>
+  <data name="MethodList1" xml:space="preserve">
+    <value>已知明文</value>
+  </data>
+  <data name="LanguageCaption" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="LanguageTooltip" xml:space="preserve">
+    <value>选择最有可能使用明文书写的语言。</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>事实</value>
+  </data>
+  <data name="MaxOffsetCaption" xml:space="preserve">
+    <value>最大偏移</value>
+  </data>
+  <data name="MaxOffsetTooltip" xml:space="preserve">
+    <value>设置要分析的最大偏移量。</value>
+  </data>
+  <data name="MethodCaption" xml:space="preserve">
+    <value>方法</value>
+  </data>
+  <data name="MethodTooltip" xml:space="preserve">
+    <value>选择用于攻击密码的方法。</value>
+  </data>
+  <data name="MinOffsetCaption" xml:space="preserve">
+    <value>最小偏移</value>
+  </data>
+  <data name="MinOffsetTooltip" xml:space="preserve">
+    <value>设置要分析的最小偏移</value>
+  </data>
+  <data name="MethodList3" xml:space="preserve">
+    <value>爬山</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>纯文本</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>使用已知的明文</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>M-138分析仪</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>对M-138的攻击选择，详细解释了二手爬坡</value>
+  </data>
+  <data name="ResultTextCaption" xml:space="preserve">
+    <value>产生的纯文本</value>
+  </data>
+  <data name="ResultTextTooltip" xml:space="preserve">
+    <value>使用找到的最佳关键字生成的纯文本</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>开始时间：</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>纯文本</value>
+  </data>
+  <data name="TopTenL" xml:space="preserve">
+    <value>排名最高的键</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>密文</value>
+  </data>
+  <data name="StripsCaption" xml:space="preserve">
+    <value>带子</value>
+  </data>
+  <data name="StripsTooltip" xml:space="preserve">
+    <value>输入条带作为字符串，其中每一行定义一个条带。</value>
+  </data>
+  <data name="LanguageList3" xml:space="preserve">
+    <value>西班牙文</value>
+  </data>
+  <data name="RemainingLabel" xml:space="preserve">
+    <value>剩余的：</value>
+  </data>
+  <data name="OffsetHeader" xml:space="preserve">
+    <value>抵消</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>复制所有行</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>复制键</value>
+  </data>
+  <data name="Copy_keyphrase" xml:space="preserve">
+    <value>复制关键短语</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>复制所选行</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>复制文字</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>复制值</value>
+  </data>
+  <data name="MethodList4" xml:space="preserve">
+    <value>模拟退火</value>
+  </data>
+  <data name="HighscoreBeepCaption" xml:space="preserve">
+    <value>高分蜂鸣</value>
+  </data>
+  <data name="HighscoreBeepTooltip" xml:space="preserve">
+    <value>如果找到新的高分，请发出声音。前10秒的高分将被忽略。</value>
+  </data>
+  <data name="KillCounterCaption" xml:space="preserve">
+    <value>杀死计数器</value>
+  </data>
+  <data name="KillCounterTooltip" xml:space="preserve">
+    <value>在经过几次迭代后没有找到更好的值时，应该放弃搜索吗？</value>
+  </data>
+</root>

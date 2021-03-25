@@ -1,0 +1,195 @@
+<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" 
+			  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+			  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 
+			  Background="White">
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Times New Roman" FontSize="16">
+    <Span FontFamily="Georgia" FontWeight="Bold" FontSize="18.6666666666667" Foreground="#FF15428B" xml:lang="de-de">
+      <Span.TextDecorations>
+        <TextDecoration Location="Underline" />
+      </Span.TextDecorations> Bedienungsanleitung des Plugin Compute the sets XZ
+    </Span>
+  </Paragraph>
+  
+  <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Times New Roman" FontSize="13.3333333333333" />
+  <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+    <Span xml:lang="de-de">Das Plugin <Span FontWeight="Bold" xml:lang="en-gb">Compute the stes XZ</Span> dient zur Berechnung der  Mengen XZ, die f&#252;r algebraische angriffe auf Stromchiffren gebraucht werden.</Span>
+  </Paragraph>
+  
+  <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Inhaltsverzeichnis</Run>
+  </Paragraph>
+  <List MarkerStyle="Decimal">
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="12">Algebraische Angriffe</Run>
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="12" xml:lang="de-De"> Nichlineare Kombinatinsgeneratoren </Run>
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="12">Die Mengen XZ</Run>
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="12">Formulierung der Funktionen des Kombinationsgenerator</Run>
+      </Paragraph>
+    </ListItem>
+  </List>
+  
+   <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Algebraische Angriffe auf Kombinationsgeneratoren</Run>  
+  </Paragraph>
+ 
+ 
+  <Paragraph>
+    <Run FontSize="13.3333333333333">Die Idee von algebraischen Angriffen besteht darin, den Schl&#252;sselstrom mit der Initialisierung der zu Grundeliegenden Register in Relation zu setzen und hieraus durch L&#246;sen eines Gleichungssystems den geheimen Schl&#252;ssel zu ermitteln. Ein offensichtliche Ansatz zur Erstellung eines Gleichungssystem, das f&#252;r algebraische Angriffe verwendet wird, ist die Verwendung von Gleichungen f&#40;K_t&#41;&#61;z_t, wobei f die nichtlineare Kombinationsfunktion des Kombinationsgenerators ist. Das Problem bei diesem Ansatz ist, dass der Grad der Gleichungen h&#246;her  als n&#246;tig sein kann, was die L&#246;sung des Gleichungssystems schwieriger macht. Ein besserer Ansatz wurde von Armknecht entwickelt. Dabei wird das Gleichungssystem in folgenden Schritte durchgef&#252;hrt &#58; </Run>
+  </Paragraph>
+ 
+  
+    <List MarkerStyle="Decimal">
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="13.3333333333333">Die Mengen XZ berechnen.</Run>
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="13.3333333333333" xml:lang="de-De"> Die Annihilatoren der Mengen XZ berechnen. Diese werden Z-Funktionen genannt.</Run>
+      </Paragraph>
+    </ListItem>
+    <ListItem>
+      <Paragraph>
+        <Run FontSize="13.3333333333333">Z-Funktionen und bekannten Schl&#252;sselstrom verwenden, um das angestrebte Gleichungssystem zu erstellen.</Run>
+      </Paragraph>
+    </ListItem>
+  </List>
+   <Paragraph>
+   <Run FontSize="13.3333333333333">Jeder der drei Schritte wird von einem Plugin durchgef&#252;hrt</Run>  
+  </Paragraph>
+  
+  <List MarkerStyle="Disc" >
+    <ListItem >
+      <Paragraph Margin="0,0,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+        Das Plugin  <Span FontWeight="Bold" xml:lang="en-gb">compute the stes XZ</Span> berechnet die Mengen XZ.
+      </Paragraph>
+    </ListItem>
+    <ListItem >
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+         Das Plugin  <Span FontWeight="Bold" xml:lang="en-gb">Compute annihilators</Span> berechnet die Annihilatoren der Mengen XZ.
+      </Paragraph>
+    </ListItem>
+    <ListItem >
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+        Das Plugin  <Span FontWeight="Bold" xml:lang="en-gb">System of equations</Span> erstellt  ein Gleichungssystem f&#252;r algebraische Angriffe auf Kombinationsgeneratoren.
+      </Paragraph>
+    </ListItem>
+   
+  </List>
+  
+  
+  <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Nichlineare Kombinationsgeneratoren</Run>
+  </Paragraph>
+  <Paragraph>
+    <Run FontSize="13.3333333333333">Kombinationsgeneratoren sind Schl&#252;sselstromgeneratoren, die mit Hilfe von LFSRs konstruirt werden. Dabei werden mehrere LFSRs-Ausg&#228;nge und  Bits aus einem zus&#228;zlichem Speicher durch eine nichtlineare boolsche Funktion f  Kombiniert. Diese Funktion wird Kombinationsfunktion genannt. Ein Kombinationsgenerator mit k LFSR-Ausg&#228;ngen und einem Speicher der Gr&#246;&#223;e l wird (k,l)-Kombinationsgenerator genannt. Wenn ein Kombinationsgenerator kein Speicher besetzt, wird als einfache Kombinationgenrator bezeichnet. In jedem Takt wird ein Schl&#252;sselstrombit durch die Kombinationsfunktion ausgegegben und die Speicherinhalt wird durch eine Funktion &#936;, welche Speicherupdatefunktion hei&#223;t, neu berechnet. Die Eingabe der Funktion &#936; ist auch die LFSRs-Ausg&#228;nge und die Speicherbits. Folgende Abbildung stellt das Modell von Kombinationsgeneratoren dar   </Run>
+  </Paragraph>
+  <Paragraph>
+        <InlineUIContainer>
+            <Image Width="240" Height="170" Source="/ComputeXZ;Component/DetailedDescription/Images/combiner.png" />
+        </InlineUIContainer>
+    </Paragraph>
+ 
+  
+  
+  <Paragraph>
+    <Run FontWeight="Bold" FontSize="12">Die Mengen XZ</Run>
+  </Paragraph>
+  <Paragraph>
+    <Run FontSize="13.3333333333333">Die Mengen XZ bestehen aus allen Eingaben X=X_1...X_r &#40;aus der LFSRs-Seite&#41; der Kombinationsfunktion, die eine Schl&#252;sselstromabschnit Z&#61;z_1...z_r zur Folge haben. Folgende Abbildung stellt die Mengen XZ dar.</Run>
+  </Paragraph>
+   <Paragraph>
+        <InlineUIContainer>
+            <Image Width="300" Height="200" Source="/ComputeXZ;Component/DetailedDescription/Images/XZ2.png" />
+        </InlineUIContainer>
+    </Paragraph>
+ <Paragraph>
+    Das Plugin <Span FontWeight="Bold" xml:lang="en-gb">Compute the stes XZ</Span>
+  </Paragraph>
+  <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de"> Das Plugin <Span FontWeight="Bold" xml:lang="en-gb">Compute the stes XZ</Span> berechnet  die Mengen XZ f&#252;r einen Kominationsgenerator. Hierf&#252;r m&#252;ssen die Kombinationsfunktion, die Speicherupdatefunktion und die Schl&#252;sselstromfolge Z, deren entsprechenden Mengen XZ ausgegeben sollen, einzugeben. Die beide Funktionen werden durch die Eing&#228;nge des Plugins und Z durch das Panel <Span FontWeight="Bold" xml:lang="en-gb">Algorithm Settings</Span> eingegeben. Dabei sollen die Funktionen  nach bestimmten Regeln formuliert werden. Folgende Abbildung zeigt ein Beispiel von Mengen XZ, berechnet durch das Plugin Compute the stes XZ.</Span>
+  </Paragraph>
+   <Paragraph>
+        <InlineUIContainer>
+            <Image Width="450" Height="250" Source="/ComputeXZ;Component/DetailedDescription/Images/XZ3.png" />
+        </InlineUIContainer>
+    </Paragraph>
+    <Paragraph>
+        <Run FontWeight="Bold" FontSize="12">Formulierung der Funktionen des kombinationsgenerators f&#252;r das Plugin Compute the sets XZ</Run>
+  </Paragraph>
+  <Paragraph>
+    <Run FontSize="13.3333333333333"> Die Kombinationsfunktion und Speicherupdatefunktion sollen nach folgenden Regeln formuliert werden&#58;</Run>
+  </Paragraph>
+  <List MarkerStyle="Disc" Margin="0,0,0,0" Padding="0,0,0,0">
+    <ListItem Margin="48,0,0,0">
+      <Paragraph Margin="0,0,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+         Die LFSRs-Ausgaben  werden mit x_i  und die Speicherbits mit m_i bezeichnet.
+      </Paragraph>
+    </ListItem>
+     <ListItem Margin="48,0,0,0">
+      <Paragraph Margin="0,0,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+         Die Indexe werden direkt neben x bzw. m geschrieben&#58;   xi  bzw. mi .
+      </Paragraph>
+    </ListItem>
+    <ListItem Margin="48,0,0,0">
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+        Die Variablen werden beginnend mit 1 und fortlaufend indiziert werden &#58; bei einem (k,l)-Kombinationsgenerator werden die Variablen  (x1,...,xk,m1,..,ml) genannt.
+      </Paragraph>
+    </ListItem>
+    <ListItem Margin="48,0,0,0">
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+       Multiplikation, Xor, Negation und Klammerung werden jeweils mit  *, +, ! und ( ) dargestellt.
+      </Paragraph>
+    </ListItem>
+     <ListItem Margin="48,0,0,0">
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left" FontFamily="Times New Roman" FontSize="16">
+       Eine arbitraire Numerierung der LFSRs soll gew&#228;hlt werden. Dann werden die Variablen x1..xk bzw. m1..ml an der LFSRs-Ausg&#228;nge bzw. an Speicherzellen von Oben nach  unten und von Links nach rechts bzw. von Links nach rechts zugewiesen. Die gleiche Reihenfolge muss  bei der Zuweisung der Variablen ki an der LFSRs-Zellen bei dem Plugin  <Span FontWeight="Bold" xml:lang="en-gb"> System of equations</Span> benutzt werden. Folgende Abbildung veranschaulicht die Vorgehensweise.
+      </Paragraph>
+    </ListItem>  
+  </List>
+   <Paragraph>
+        <InlineUIContainer>
+            <Image Width="700" Height="300" Source="/ComputeXZ;Component/DetailedDescription/Images/inputfunc.png" />
+        </InlineUIContainer>
+       </Paragraph> 
+    <Paragraph FontSize="13.3333333333333">
+    <Span xml:lang="de-de">Das Panel <Span FontWeight="Bold" xml:lang="en-gb">   Algorithm Settings </Span> enth&#228;lt folgende steuerelemenete&#58;</Span>
+  </Paragraph>
+  
+     <Paragraph>
+     <InlineUIContainer>
+      <Image Width="180" Height="197" Source="/ComputeXZ;Component/DetailedDescription/Images/XZset.png" />
+    </InlineUIContainer>
+     </Paragraph>
+     
+    <List MarkerStyle="Disc" Margin="0,0,0,0" Padding="0,0,0,0">
+     <ListItem >
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+       <Span FontWeight="Bold" xml:lang="en-gb"> Outputs Z </Span>&#58; dient zur Eingabe  der Ausgabeabschnitten Z=z_t...z_t+r, deren entsprechenden Mengen XZ  ausgegeben werden sollen. Mehrere Ausgabeabschnitten Z k&#246;nnen durch eine Zeichenfolge aus (1,0, &#42;) ausgedr&#252;ckt werden. Dabei werden die Sternchen einmal als Null und einmal als Eins ausgewertet,  z.B. 1&#42;&#42;0 &#61; &#123;1000,1000,1100,1110&#125;. Aus der  eingegebenen Zeichenfolge wird auch die Anzahl der betrachteten Takten r gewonnen  r&#61;&#124;Z&#124;.
+      </Paragraph>
+    </ListItem>
+     <ListItem >
+      <Paragraph Margin="0,6.67,0,6.67" TextAlignment="Left"  FontSize="13.3333333333333">
+       <Span FontWeight="Bold" xml:lang="en-gb"> Output Type</Span> &#58;  bestimmt, ob die mengen XZ in dem Textausgabe-Fenster <Span FontWeight="Bold" xml:lang="en-gb"> Textoutput</Span> angezeigt oder als Eingang f&#252;r das plugin <Span FontWeight="Bold" xml:lang="en-gb"> Compute annihilators</Span> verwendet werden sollen.
+      </Paragraph>
+    </ListItem>
+     
+  </List>
+ 
+</FlowDocument>

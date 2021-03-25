@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="CrypTool.Plugins.UserCode.UserCodePresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shbox="clr-namespace:AurelienRibon.Ui.SyntaxHighlightBox;assembly=AurelienRibon.Ui.SyntaxHighlightBox"
+             Height="Auto" Width="Auto" Margin="0" DataContext="{Binding}">
+    <Grid Height="Auto" Width="Auto" Margin="0">
+        <shbox:SyntaxHighlightBox IsLineNumbersMarginVisible="True" Name="TextBox" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+        <!--<TextBox Name="TextBox"
+                 AcceptsTab="True"
+                 TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                 AcceptsReturn="True"
+                 IsUndoEnabled="True"
+                 FontFamily="Courier New" FontSize="15" FontWeight="Bold" Foreground="Black">
+            <TextBox.Template>
+                <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                    <Border Padding="2" BorderThickness="1" Background="White">
+                        <Grid>
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </TextBox.Template>
+        </TextBox>-->
+    </Grid>
+</UserControl>

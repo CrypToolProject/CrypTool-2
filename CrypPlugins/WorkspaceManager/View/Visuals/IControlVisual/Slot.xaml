@@ -1,0 +1,194 @@
+﻿<UserControl x:Class="WorkspaceManager.View.Visuals.Slot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WorkspaceManager.View.Visuals"
+             mc:Ignorable="d" DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="Background" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#fefefe" Offset="0.0"/>
+                    <GradientStop Color="#dddddd" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundMouseOver" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#fefefe" Offset="0.0"/>
+                    <GradientStop Color="#cccccc" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="BackgroundSelected" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#dddddd" Offset="0.0"/>
+                    <GradientStop Color="#fefefe" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+        
+        <LinearGradientBrush x:Key="BackgroundOpen" StartPoint="0,0" EndPoint="0,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#77aaaaaa" Offset="0.0"/>
+                    <GradientStop Color="#77fefefe" Offset="1.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="IconBackground" StartPoint="0,0" EndPoint="1,1">
+            <GradientBrush.GradientStops>
+                <GradientStopCollection>
+                    <GradientStop Color="#527094" Offset="1.0"/>
+                    <GradientStop Color="#81b3db" Offset="0.0"/>
+                </GradientStopCollection>
+            </GradientBrush.GradientStops>
+        </LinearGradientBrush> 
+
+        <DataTemplate x:Key="ComboBoxDataTemplate" DataType="{x:Type Ellipse}">
+            <Border x:Name="Border" Width="45" Height="45" BorderBrush="#b8b8b8" BorderThickness="0.8" CornerRadius="5" Padding="7" Background="{StaticResource ResourceKey=Background}">
+                <Image Opacity="0.6" Source="{Binding Path=Icon.Source}"></Image>
+            </Border>
+            <DataTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="{StaticResource ResourceKey=BackgroundMouseOver}"></Setter>
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <ControlTemplate x:Key="ToggleTemplate" TargetType="{x:Type ToggleButton}">
+            <Border Name="Root" Background="{TemplateBinding Background}" CornerRadius="0,0,5,5">
+                <Ellipse Fill="Black" Width="7.5" Height="7.5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="2"></Ellipse>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Root" Property="Background" Value="{StaticResource ResourceKey=BackgroundOpen}"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
+            <Grid>
+                <Border x:Name="Border" Width="45" Height="45" Padding="4" BorderBrush="#b8b8b8" BorderThickness="0.8" CornerRadius="5" DataContext="{TemplateBinding SelectedItem}"
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Background="{StaticResource ResourceKey=Background}">
+                    <Border CornerRadius="5" Background="{StaticResource ResourceKey=IconBackground}" Padding="3">
+                        <Image Opacity="1" Source="{Binding Path=Icon.Source}" MouseLeftButtonDown="MouseLeftButtonDownHandler"></Image>
+                    </Border>
+                </Border>
+                <ToggleButton Background="Transparent" Height="12" VerticalAlignment="Bottom"
+                              Template="{StaticResource ResourceKey=ToggleTemplate}" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}">
+                </ToggleButton>
+                <local:CustomPopUp x:Name="Popup"
+                     IsOpen="{TemplateBinding IsDropDownOpen}"
+                     ItemPanel="{Binding ElementName=ItemHost}"
+                     Index="{TemplateBinding SelectedIndex}"
+                     AllowsTransparency="True"
+                     Focusable="False"
+                     PopupAnimation="Fade"
+                     Placement="Bottom" VerticalOffset="-45">
+                    <Grid x:Name="DropDown"
+                          SnapsToDevicePixels="True"
+                          MinWidth="{TemplateBinding ActualWidth}"
+                          MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                        <Border x:Name="DropDownBorder" BorderThickness="1">
+                        </Border>
+                        <ScrollViewer SnapsToDevicePixels="True">
+                            <StackPanel x:Name="ItemHost" Orientation="Horizontal" IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+                        </ScrollViewer>
+                    </Grid>
+                </local:CustomPopUp>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsDropDownOpen" Value="True">
+                    <Setter TargetName="Border" Property="Background" Value="{StaticResource ResourceKey=BackgroundSelected}"></Setter>
+                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"></Condition>
+                        <Condition Property="IsDropDownOpen" Value="False"></Condition>
+                    </MultiTrigger.Conditions>
+                    <Setter TargetName="Border" Property="Background" Value="{StaticResource ResourceKey=BackgroundMouseOver}"></Setter>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"></SolidColorBrush>
+            </Style.Resources>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=ComboBoxTemplate}"></Setter>
+            <Setter Property="ItemTemplate" Value="{StaticResource ResourceKey=ComboBoxDataTemplate}"></Setter>
+        </Style>
+
+        <!--<x:Array Type="{x:Type Ellipse}" x:Key="data">
+            <Ellipse Width="10" Height="10" Fill="BlueViolet"></Ellipse>
+            <Ellipse x:Name="Ell"  Width="10" Height="10" Fill="Goldenrod"></Ellipse>
+            <Ellipse Width="10" Height="10" Fill="Bisque"></Ellipse>
+            <Ellipse Width="10" Height="10" Fill="Red"></Ellipse>
+        </x:Array>-->
+        <ControlTemplate x:Key="CtrlTemplate" TargetType="{x:Type ButtonBase}">
+            <Border x:Name="Border" BorderThickness="1" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                <ContentPresenter VerticalAlignment="Center">
+                    
+                </ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="#55222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#aa222222" TargetName="Border" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="#77222222" TargetName="Border" />
+                    <Setter Property="BorderBrush" Value="#cc222222" TargetName="Border" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+        <Style TargetType="{x:Type Button}" x:Key="OperationBasicStyle">
+            <Setter Property="Height" Value="12"></Setter>
+            <Setter Property="Width" Value="12"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Template" Value="{StaticResource ResourceKey=CtrlTemplate}"></Setter>
+        </Style>
+
+        <Path x:Key="Cross" Stroke="Red" StrokeThickness="2" HorizontalAlignment="Center">
+            <Path.Data>
+                <PathGeometry>
+                    <PathGeometry.Figures>
+                        <PathFigure StartPoint="0,0">
+                            <LineSegment Point="5,5"/>
+                        </PathFigure>
+                        <PathFigure StartPoint="0,5">
+                            <LineSegment Point="5,0"/>
+                        </PathFigure>
+                    </PathGeometry.Figures>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+    </UserControl.Resources>
+
+    <Grid>
+        <ComboBox x:Name="SlotBox" Width="45" Height="45" Style="{StaticResource ResourceKey=ComboBoxStyle}" 
+                  ItemsSource="{Binding Path=Types}" SelectedItem="{Binding Path=SelectedType, Mode= TwoWay}"
+                  ToolTip="{Binding Path=SelectedType.ToolTip}">
+            <ComboBox.ItemContainerStyle>
+                <Style>
+                    <Setter Property="Control.ToolTip" Value="{Binding ToolTip}" />
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+        
+        <Button Width="13" Height="13" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="3" Background="Red" Click="ClickHandler" Opacity="0.6" 
+                Style="{StaticResource ResourceKey=OperationBasicStyle}">
+            <ContentPresenter Content="{StaticResource ResourceKey=Cross}"></ContentPresenter>
+        </Button>
+    </Grid>
+
+</UserControl>

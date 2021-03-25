@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">QR Code Encryption</title>
+  <title lang="zh">QR码加密</title>
+  <title lang="ru">Кодирование QR-кода</title>
+  <summary lang="en">Usage of the <i>QR Code</i> Encryption</summary>
+  <summary lang="zh">QR码加密的用法</summary>
+  <summary lang="ru">Использование шифрования QR-кода</summary>
+  <description lang="en">This template shows the usage of the <i>QR Code</i> Encryption and Decryption with an 256-Bit AES Key and an 128-Bit IV.</description>
+  <description lang="zh">此模板显示了带有256位AES密钥和128位IV的QR码加密和解密的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование шифрования и дешифрования QR-кода с помощью 256-битного ключа AES и 128-битного IV.</description>
+  <keywords>QR Code Encryption</keywords>
+  <keywords lang="zh">QR码加密</keywords>
+  <keywords lang="ru">Кодирование QR-кода</keywords>
+  <title lang="de">QR-Code-Verschlüsselung</title>
+  <summary lang="de">Benutzung der <i>QR-Code</i>-Verschlüsselung</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>QR-Code</i>-Verschlüsselung und -Entschlüsselung mit einem 256-Bit AES-Schlüssel und einem 128-Bit IV.</description>
+  <keywords lang="de">QR Code Verschlüsselung</keywords>
+  <icon file="QRCodeEncryption.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="PKCS5" />
+    <plugin name="PrimesGenerator" />
+    <plugin name="RandomNumberGenerator" />
+    <plugin name="VariableLoad" />
+    <plugin name="VariableStore" />
+    <plugin name="VisualDecoder" />
+    <plugin name="VisualEncoder" />
+    <plugin name="Webcam" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Camera$" value="Kamera" />
+    <replacement key="$Visual Decoder$" value="Visueller Dekodierer" />
+    <replacement key="$Visual Encoder$" value="Visueller Kodierer" />
+    <replacement key="$Encrypted QR Code$" value="Verschlüsselter QR-Code" />
+    <replacement key="$Decrypted QR Code$" value="Entschlüsselter QR-Code" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$AES Key$" value="AES-Schlüssel" />
+    <replacement key="$Random Key$" value="Zufallsschlüssel" />
+    <replacement key="$Random Number$" value="Zufallszahl" />
+    <replacement key="$Random Prime$" value="Zufallsprimzahl" />
+    <replacement key="$Random number for AES-Key$" value="Zufallszahl für AES-Schlüssel" />
+    <replacement key="$Encryption$" value="Verschlüsselung" />
+    <replacement key="$Decryption$" value="Entschlüsselung" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Camera$" value="相机" />
+    <replacement key="$Visual Decoder$" value="视觉解码器" />
+    <replacement key="$Visual Encoder$" value="视觉编码器" />
+    <replacement key="$Encrypted QR Code$" value="加密的QR码" />
+    <replacement key="$Decrypted QR Code$" value="解密的QR码" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$AES Key$" value="AES密钥" />
+    <replacement key="$Random Key$" value="随机密钥" />
+    <replacement key="$Random Number$" value="随机数" />
+    <replacement key="$Random Prime$" value="随机素数" />
+    <replacement key="$Random number for AES-Key$" value="AES密钥的随机数" />
+    <replacement key="$Encryption$" value="加密" />
+    <replacement key="$Decryption$" value="解密" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Camera$" value="камера" />
+    <replacement key="$Visual Decoder$" value="Визуальный декодер" />
+    <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
+    <replacement key="$Encrypted QR Code$" value="Зашифрованный QR-код" />
+    <replacement key="$Decrypted QR Code$" value="Расшифрованный QR-код" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$AES Key$" value="ключ AES" />
+    <replacement key="$Random Key$" value="случайный ключ" />
+    <replacement key="$Random Number$" value="случайное число" />
+    <replacement key="$Random Prime$" value="случайный премьер" />
+    <replacement key="$Random number for AES-Key$" value="Случайное число для ключа AES" />
+    <replacement key="$Encryption$" value="кодирование" />
+    <replacement key="$Decryption$" value="дешифрование" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Camera$" value="Camera" />
+    <replacement key="$Visual Decoder$" value="Visual Decoder" />
+    <replacement key="$Visual Encoder$" value="Visual Encoder" />
+    <replacement key="$Encrypted QR Code$" value="Encrypted QR Code" />
+    <replacement key="$Decrypted QR Code$" value="Decrypted QR Code" />
+    <replacement key="$Converter$" value="Converter" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$AES Key$" value="AES Key" />
+    <replacement key="$Random Key$" value="Random Key" />
+    <replacement key="$Random Number$" value="Random Number" />
+    <replacement key="$Random Prime$" value="Random Prime" />
+    <replacement key="$Random number for AES-Key$" value="Random number for AES-Key" />
+    <replacement key="$Encryption$" value="Encryption" />
+    <replacement key="$Decryption$" value="Decryption" />
+  </replacements>
+</sample>

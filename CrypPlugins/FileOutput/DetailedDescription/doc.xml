@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    This component writes the data on its input data stream to a file of the file system.
+  </introduction>
+  <introduction lang="zh-CN">该组件将其输入数据流上的数据写入文件系统的文件。</introduction>
+  <introduction lang="ru">Этот компонент записывает данные о потоке входных данных в файл файловой системы.</introduction>
+  <introduction lang="de-DE">
+    Diese Komponente schreibt den an ihrem Eingang anliegenden Datenstrom in eine Datei des Filesystems.
+  </introduction>
+  <usage lang="en">
+    You must specify the name of the file you want to write to by clicking on the 'Save file' button in the settings of the component.
+    This will open a file dialog, with which you can select a file or enter a new file name.
+    When the workspace is started, the component writes the data stream on its input to the specified file.
+    <newline /><newline />
+    In the settings you can also specify whether the data, that is written to the file, is to be appended to the file (in case the file already exists),
+    or whether the file should be overwritten. If the data is to be appended, it can be separated from the existing data by an adjustable number of line breaks.
+  </usage>
+  <usage lang="zh-CN">您必须通过在组件设置中单击“保存文件”按钮来指定要写入的文件的名称。这将打开一个文件对话框，您可以在其中选择文件或输入新文件名。当工作空间启动时，组件将其输入上的数据流写入指定的文件。在设置中，您还可以指定是否将写入文件的数据追加到文件中（如果文件已经存在），或者是否应覆盖文件。如果要附加数据，则可以通过可调数量的换行符将其与现有数据分开。</usage>
+  <usage lang="ru">Вы должны указать имя файла, который хотите записать, нажав кнопку «Сохранить файл» в настройках компонента. Откроется диалоговое окно файла, с помощью которого вы можете выбрать файл или ввести новое имя файла. Когда рабочая область запущена, компонент записывает поток данных на свой вход в указанный файл. В настройках вы также можете указать, должны ли быть добавлены данные, которые записываются в файл, в файл (в случае, если файл уже существует) или файл должен быть перезаписан. Если данные должны быть добавлены, их можно отделить от существующих данных с помощью регулируемого количества разрывов строк.</usage>
+  <usage lang="de-DE">
+    Geben Sie in den Einstellungen der Komponente den Namen der Datei an, in die Sie die anliegenden Daten schreiben möchten. Klicken Sie hierzu auf die Schaltfläche 'Datei speichern'.
+    Daraufhin öffnet sich ein Dateiauswahldialog, mit dem Sie die gewünschte Datei wählen können.
+    Wenn der Arbeitsbereich gestartet wurde, schreibt die Komponente den an ihrem Eingang anliegenden 'Eingabedatenstrom' in die angegebene Datei.
+    <newline /><newline />
+    In den Einstellungen der Komponente kann noch angegeben werden, ob die geschriebenen Daten an die Datei angehängt werden sollen, falls diese bereits existiert, oder ob die
+    Datei überschrieben werden soll. Falls sie angehängt werden sollen, kann man außerdem festlegen, wie viele Zeilenumbrüche vor dem Anhängen der Daten eingefügt werden sollen.
+  </usage>
+  <presentation lang="en">
+    The presentation view of the component has three columns. The left column shows the file position in hexadecimal notation.
+    In the middle column, the data beginning at this position is printed, also in hexadecimal notation, 16 bytes per row.
+    In the right column, these 16 bytes, interpreted as characters, are displayed as a string.
+    Nonprintable characters are replaced by a dot.
+    <newline /><newline />
+    By clicking into the middle or the right column, you can select one or more bytes or characters. The corresponding characters or bytes in the other
+    column will then also appear highlighted.
+  </presentation>
+  <presentation lang="zh-CN">组件的演示视图有三列。左列以十六进制表示形式显示文件位置。在中间列中，也以十六进制格式打印从该位置开始的数据，每行16字节。在右列中，这16个字节（解释为字符）显示为字符串。不可打印的字符由点代替。通过单击中间或右列，可以选择一个或多个字节或字符。另一列中相应的字符或字节也将突出显示。</presentation>
+  <presentation lang="ru">Представление представления компонента имеет три столбца. В левом столбце показана позиция файла в шестнадцатеричной системе. В среднем столбце печатаются данные, начинающиеся с этой позиции, также в шестнадцатеричной нотации, 16 байт в строке. В правом столбце эти 16 байтов, интерпретируемые как символы, отображаются в виде строки. Непечатаемые символы заменяются точкой. Нажав на средний или правый столбцы, вы можете выбрать один или несколько байтов или символов. Соответствующие символы или байты в другом столбце также будут выделены.</presentation>
+  <presentation lang="de-DE">
+    Die Präsentationsansicht der Komponente hat drei Spalten. In der linken Spalte wird die Dateiposition in hexadezimaler Notation angegeben.
+    In der mittleren Spalte sind die an dieser Dateiposition beginnenden Daten hexadezimal dargestellt, wobei pro Zeile 16 Bytes angezeigt werden.
+    In der rechten Spalte werden diese 16 Bytes als Zeichenkette interpretiert. Zeichen, die nicht darstellbar sind, werden durch einen Punkt ersetzt.
+    <newline /><newline />
+    Durch Klicken in die mittlere oder rechte Spalte ist es möglich, ein oder mehrere Bytes oder Zeichen zu selektieren. Die entsprechenden Zeichen bzw. Bytes in der
+    anderen Spalte werden dann ebenfalls markiert.
+  </presentation>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/File_dialog" lang="en" />
+      <caption lang="en">File dialog</caption>
+      <link url="http://en.wikipedia.org/wiki/File_dialog" lang="de-DE" />
+      <caption lang="de-DE">File dialog (englisch)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Hex_editor" lang="en" />
+      <caption lang="en">Hex editor</caption>
+      <link url="http://de.wikipedia.org/wiki/Hex-Editor" lang="de-DE" />
+      <caption lang="de-DE">Hex-Editor</caption>
+    </linkReference>
+  </references>
+</documentation>

@@ -1,0 +1,213 @@
+<h2>Factorization with the quadratic sieve</h2>
+
+The quadratic sieve is one of the fastest methods for factoring a natural number n. It makes use of mathematical principles that date back on the French mathematician Pierre de Fermat. The method is more complex and mathematically more sophisticated than trial division. Therefore, an example is presented here.<br /><br />
+The quadratic sieve makes use of congruences, so we first introduce the concept of congruences.
+
+<h4>Congruence</h4>
+Two whole numbers a and b are congruent modulo n &hArr; n divides a-b.
+<br/><br/>
+One writes: a &equiv; b (mod n).
+<br /><br />
+Calculating with congruences is very similar to calculating with whole numbers. You can find an overview at <a href="http://en.wikipedia.org/wiki/Congruence_relation" target="_blank">Wikipedia</a>.
+
+<h4>The idea of the quadratic sieve</h4>
+If one can find two whole numbers a and b with<br /><br />
+a<sup>2</sup> &equiv; b<sup>2</sup> (mod n) and a &#8802; b (mod n), (*)<br/><br/>
+then one can find factors of n with <i>gcd(a + b, n)</i> and <i>gcd(a - b, n)</i>.<br/>
+The quadratic sieve is an algorithm for finding numbers a and b with this property.
+
+<h4>Example</h4>
+The algorithm finds a and b in different ways.
+Determine a such that it is the square root of a whole number.
+To determine b such that it is a square number, we need some more calculations.
+The procedure is illustrated with an example. Let <i>n</i> be the number we want to factor.<br /><br />
+<i>n</i> = 2041 = 13 * 157.
+First, determine the square root of n. 	&radic;<i>n</i> = 45.177... &asymp; 46.<br />
+Generate a series F<sub>1</sub> of square numbers a<sup>2</sup> and a series F<sub>2</sub> of differences a<sup>2</sup> - n.<br />
+
+<table border="1" cellpadding="5">
+<tr>
+  <td>a<sup>2</sup></td>
+  <td>46<sup>2</sup></td>
+  <td>47<sup>2</sup></td>
+  <td>48<sup>2</sup></td>
+  <td>49<sup>2</sup></td>
+  <td>50<sup>2</sup></td>
+  <td>51<sup>2</sup></td>
+</tr>
+<tr>
+  <td>a<sup>2</sup> - <i>n</i></td>
+  <td>46<sup>2</sup> - 2041 = 2116 - 2041 = 75</td>
+  <td>168</td>
+  <td>263</td>
+  <td>360</td>
+  <td>459</td>
+  <td>560</td>
+</tr>
+</table>
+<br />
+If a number a<sup>2</sup>-n in the series F<sub>2</sub> is a square, then let b<sup>2</sup> = a<sup>2</sup>-n and we have:<br />
+a<sup>2</sup> &equiv; b<sup>2</sup> (mod <i>n</i>).
+<br /><br />
+In the example, none of the numbers in F<sub>2</sub> is a square. In that case, one checks if a product of elements of F<sub>2</sub>
+is a square. Here we have 75 * 168 * 360 * 560 = 50400<sup>2</sup>.
+a is the product 46 * 47 * 49 * 51.
+
+Thus we have a = 5402838 and b = 50400. <br /><br />
+So both conditions of (*) are fulfilled:<br />
+a<sup>2</sup> &equiv; b<sup>2</sup> (mod <i>n</i>) &rArr; 5402838<sup>2</sup> &equiv; 50400<sup>2</sup> (mod 2041) and <br />
+a &#8802; b (mod <i>n</i>) &rArr; 5402838 &#8802; 50400 (mod 2041).<br /><br />
+Now reduce a and b modulo n (a mod n = 5402838 mod 2041 = 311, b mod n = 50400 mod 2041 = 1416) and find the divisors of n:<br /><br />
+gcd(1416 + 311, 2041) = 157 and gcd(1416 - 311, 2041) = 13.
+<br /><br />
+In this example the series F<sub>1</sub> and F<sub>2</sub> were found by trial and error.
+Finding suitable series for general a and b is a nontrivial task.
+
+
+<h4>The algorithm</h4>
+The quadratic sieve algorithm consists of four essential steps that are explained in the following by an example.
+<ol>
+	<li>The series F<sub>1</sub> is given by the sieve interval. The size S of the interval is given by S = e<sup>&radic;(ln <i>n</i> * ln ln <i>n</i>)</sup>.
+	For the series, one chooses a such that: <br />
+| a - 	&radic;<i>n</i> | &lt; S<br /><br />
+In our example we have S = 51.123... . This results in the sieve interval [-5, +96].<br />
+The series elements of F<sub>2</sub> are determined according to the series elements of F<sub>1</sub>.<br /><br />
+	</li>
+	<li>In the first step we make sure that the values for a are square numbers by the calculation of F<sub>1</sub>. Preparations are made in this step to find such values for b.<br />
+
+	Set an upper limit B = e<sup>1/2 * &radic;(ln <i>n</i> * ln ln <i>n</i>)</sup> and determine all prime numbers up to this limit. The resulting set of prime numbers is called the <i>factor base</i> and is designated F(B).<br />
+	The next step is the <i>sieving step</i>. If the i-th element f<sub>i</sub> of F<sub>2</sub> is divisible by the k-th element p<sub>k</sub> of the factor base, then all multiples of f<sub>i</sub> are divisible by p<sub>k</sub>. So, similar to the <a href="help://Primetest_SieveOfEratosthenes">Sieve of Eratosthenes</a>, the elements of the series F<sub>2</sub> are sieved by dividing them by the elements of the factor base. An element of F<sub>2</sub> that can be completely factored is called <i>F(B)-smooth</i>.
+	Only those elements of F<sub>2</sub> that are F(B)-smooth are considered in the following steps.<br /><br />
+	In the example we have B = 7.15 &asymp; 7. So F(B) is {2,3,5,7}. The sieving step results in the following values:<br /><br />
+
+    <table border="1" cellpadding="5">
+    <tr>
+      <th>
+        a<sup>2</sup> - <i>n</i>
+      </th>
+      <th>
+        Factorization
+      </th>
+      <th>
+        Is F(B)-smooth
+      </th>
+    </tr>
+    <tr>
+      <td>75</td>
+      <td>3 * 5<sup>2</sup></td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>168</td>
+      <td>2<sub>3</sub> * 3 * 7</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>263</td>
+      <td>263 (263 is a prime number)</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>360</td>
+      <td>2<sup>3</sup> * 3<sup>2</sup> * 5</td>
+      <td>yes</td>
+    </tr>
+    <tr>
+      <td>459</td>
+      <td>3<sup>3</sup> * 17</td>
+      <td>no</td>
+    </tr>
+    <tr>
+      <td>560</td>
+      <td>2<sup>4</sup> * 5 * 7</td>
+      <td>yes</td>
+    </tr>
+    </table>
+	 <br />
+	 In the next step, only the smooth values 75, 168, 360, and 560 are taken into account.<br /><br />
+  </li>
+  <li>
+    As all considered elements of F<sub>2</sub> are F(B)-smooth, it is guaranteed that square numbers can be found efficiently.
+	 Therefore, write the exponents of the factorization as <i>exponent vectors</i>. For 75 = 3 * 5<sup>2</sup> we have an exponent vector of (0,1,2,0).
+	 The factors 2 and 7 do not occur in the factorization of 75, factor 3 once and factor 5 twice.<br />
+	 <br />
+	 The example produces the following exponent vectors:<br />
+	 <br />
+    <table border="1" cellpadding="5">
+    <tr >
+      <th rowspan="2"> a<sup>2</sup> - <i>n</i> </th>
+      <th rowspan="2"> Factorization </th>
+      <th colspan="4"> Exponent vector </th>
+    </tr>
+    <tr >
+      <th> 2 </th>
+      <th> 3 </th>
+      <th> 5 </th>
+      <th> 7 </th>
+    </tr>
+
+    <tr>
+      <td>75</td>
+      <td>3 * 5<sup>2</sup></td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>168</td>
+      <td>2<sub>3</sub> * 3 * 7</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>360</td>
+      <td>2<sup>3</sup> * 3<sup>2</sup> * 5 </td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>560</td>
+      <td>2<sup>4</sup> * 5 * 7</td>
+      <td>4</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    </table>
+	 <br />
+
+	 The multiplication of two numbers results in the addition of the exponent vectors. We are looking for a product of smooth elements which has only even exponents and thus is a square number.<br />
+	 In the example we have b<sup>2</sup> = 75 * 168 * 360 * 560
+    = (3 * 5<sup>2</sup>) * (2<sup>3</sup> * 3 * 7) * (2<sup>3</sup> * 3<sup>2</sup> * 5) * (2<sup>4</sup> * 5 * 7)
+    = (2<sup>3+3+4</sup>) * (3<sup>1+1+2</sup>)* (5<sup>2+1+1</sup>) * (7<sup>1+1</sup>)
+    = (2<sup>10</sup>) * (3<sup>4</sup>) * (5<sup>4</sup>) * (7<sup>2</sup>)
+    = (2<sup>5</sup> * 3<sup>2</sup> * 5<sup>2</sup> * 7)<sup>2</sup>
+    = 50400<sup>2</sup>
+    is a square.<br /><br />
+  </li>
+  <li>
+  	 In the last step, we check the conditions of (*). As noted above, with<br />
+    a<sup>2</sup> &equiv; b<sup>2</sup> (mod <i>n</i>) &rArr; 5402838<sup>2</sup> &equiv; 50400<sup>2</sup> (mod 2041) and <br />
+    a &#8802; b(mod <i>n</i>) &rArr; 5402838 &#8802; 50400 (mod 2041)<br />
+    the conditions are fulfilled and the divisors of <i>n</i> can be calculated.<br />
+  </li>
+</ol>
+<br />
+The results depend very strongly on <i>n</i>. If n is the product of only two prime factors, those will be found. If <i>n</i> consists of more prime factors,
+the results are not necessarily prime numbers. In this case, the quadratic sieve has to be applied again on these factors. It could also be, that one does not
+immediately find a square number, that meets the conditions (*). Also in this case, the quadratic sieve has to be run again.<br />
+<br />
+The size of the factor base and the sieve interval depends on the size of n. If n has 50 decimal digits, the factor base consists of about 3,000 prime numbers and the sieve interval has a size of about 200,000. If n has 120 digits, the factor base consists of 245,000 prime numbers and the sieve interval has a size of 245,000,000.
+The calculations need then a very long time and a single PC is not suited for doing these calculations in an acceptable time frame.
+In practical implementations, the quadratic sieve is often implemented to run on several computers in parallel.
+In this dialog only numbers up to 10,000 are allowed. The factorization of bigger numbers would take too long and become too complicated.<br />
+<br />
+The quadratic sieve in "World of Primes" is divided in the four steps of the example.
+First, the factor base, the sieve interval and the series F<sub>1</sub> and F<sub>2</sub> are determined. Then, all smooth values
+with respect to the factor base are calculated. In the third step, the square number b<sup>2</sup> is determined, and in the last step,
+the conditions are checked and the factors of <i>n</i> are calculated.

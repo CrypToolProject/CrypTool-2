@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3D890E75-8ACE-4780-8E5B-E7D94052834E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CrypTool.Plugins.ChaCha</RootNamespace>
+    <AssemblyName>ChaCha</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>..\..\CrypBuild\Release\CrypPlugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\CrypBuild\Debug\CrypPlugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|x64'">
+    <OutputPath>..\..\..\CrypBuild\Test\</OutputPath>
+    <PlatformTarget>x64</PlatformTarget>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChaChaSettings.cs" />
+    <Compile Include="ChaCha.cs" />
+    <Compile Include="Localization\de_DE.xaml.cs">
+      <DependentUpon>de_DE.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\en_US.xaml.cs">
+      <DependentUpon>en_US.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContentTemplate\PageContentTemplate.xaml.cs">
+      <DependentUpon>PageContentTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContentTemplate\PageNavigationTemplate.xaml.cs">
+      <DependentUpon>PageNavigationTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ContentTemplate\ViewboxButton.xaml.cs">
+      <DependentUpon>ViewboxButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\BitFlips.cs" />
+    <Compile Include="Helper\Converter\Add.cs" />
+    <Compile Include="Helper\Converter\ASCII.cs" />
+    <Compile Include="Helper\Converter\BigIntegerToHexWithVersion.cs" />
+    <Compile Include="Helper\Converter\BitsToBytes.cs" />
+    <Compile Include="Helper\Converter\BooleanAndVisibility.cs" />
+    <Compile Include="Helper\Converter\BooleanOr.cs" />
+    <Compile Include="Helper\Converter\BytesToHex.cs" />
+    <Compile Include="Helper\Converter\Chunkify.cs" />
+    <Compile Include="Helper\Converter\CompareStrings.cs" />
+    <Compile Include="Helper\Converter\DiffusionBytesConverter.cs" />
+    <Compile Include="Helper\Converter\DiffusionCounterConverter.cs" />
+    <Compile Include="Helper\Converter\DoubleToPercentage.cs" />
+    <Compile Include="Helper\Converter\HexToBytes.cs" />
+    <Compile Include="Helper\Converter\Invert.cs" />
+    <Compile Include="Helper\Converter\IsEven.cs" />
+    <Compile Include="Helper\Converter\KeyLengthToChunkedWidth.cs" />
+    <Compile Include="Helper\Converter\KeyLengthToWidth.cs" />
+    <Compile Include="Helper\Converter\LittleEndian.cs" />
+    <Compile Include="Helper\Converter\MultiSequentialValueConverter.cs" />
+    <Compile Include="Helper\Converter\ReverseBytes.cs" />
+    <Compile Include="Helper\Converter\SequentialValueConverter.cs" />
+    <Compile Include="Helper\Converter\SubtractOne.cs" />
+    <Compile Include="Helper\Converter\UInt32ToHex.cs" />
+    <Compile Include="Helper\Converter\ZeroBasedIndexToOneBasedIndex.cs" />
+    <Compile Include="Helper\Formatter.cs" />
+    <Compile Include="Helper\GetAmountOfDigits.cs" />
+    <Compile Include="Helper\RelayCommand.cs" />
+    <Compile Include="Helper\Validation\DiffusionInputValidationRule.cs" />
+    <Compile Include="Helper\Validation\HexValidationRule.cs" />
+    <Compile Include="Helper\Validation\RangeChecker.cs" />
+    <Compile Include="Helper\Validation\StringLengthValidationRule.cs" />
+    <Compile Include="Helper\Validation\UserInputValidationRule.cs" />
+    <Compile Include="Model\ChaChaHashValue.cs" />
+    <Compile Include="Model\QRStep.cs" />
+    <Compile Include="Model\QRValue.cs" />
+    <Compile Include="Model\StateValue.cs" />
+    <Compile Include="Model\VisualQRStep.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <DependentUpon>Resources.de.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Styles\Border.xaml.cs">
+      <DependentUpon>Border.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Button.xaml.cs">
+      <DependentUpon>Button.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\FrameworkElement.xaml.cs">
+      <DependentUpon>FrameworkElement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\ItemsControl.xaml.cs">
+      <DependentUpon>ItemsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Label.xaml.cs">
+      <DependentUpon>Label.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Paragraph.xaml.cs">
+      <DependentUpon>Paragraph.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Path.xaml.cs">
+      <DependentUpon>Path.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\RichTextBox.xaml.cs">
+      <DependentUpon>RichTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\TableCell.xaml.cs">
+      <DependentUpon>TableCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\TextBlock.xaml.cs">
+      <DependentUpon>TextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\TextBox.xaml.cs">
+      <DependentUpon>TextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Styles\Viewbox.xaml.cs">
+      <DependentUpon>Viewbox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ByteUtil.cs" />
+    <Compile Include="Validation.cs" />
+    <Compile Include="Version.cs" />
+    <Compile Include="ViewModel\ActionViewModelBase.cs" />
+    <Compile Include="ViewModel\ChaChaHashViewModel.cs" />
+    <Compile Include="ViewModel\ChaChaPresentationViewModel.cs" />
+    <Compile Include="ViewModel\Components\ActionCreator.cs" />
+    <Compile Include="ViewModel\Components\ChaChaHashActionCreator.cs" />
+    <Compile Include="ViewModel\Components\Diffusion.cs" />
+    <Compile Include="ViewModel\Components\IActionCreator.cs" />
+    <Compile Include="ViewModel\Components\IActionNavigation.cs" />
+    <Compile Include="ViewModel\Components\IActionTag.cs" />
+    <Compile Include="ViewModel\Components\IChaCha.cs" />
+    <Compile Include="ViewModel\Components\IDiffusion.cs" />
+    <Compile Include="ViewModel\Components\INavigation.cs" />
+    <Compile Include="ViewModel\Components\ITitle.cs" />
+    <Compile Include="ViewModel\Components\QRIOActionCreator.cs" />
+    <Compile Include="ViewModel\Components\QRStepOperationActionCreator.cs" />
+    <Compile Include="ViewModel\Components\StateActionCreator.cs" />
+    <Compile Include="ViewModel\DiffusionViewModel.cs" />
+    <Compile Include="ViewModel\OverviewViewModel.cs" />
+    <Compile Include="ViewModel\StartViewModel.cs" />
+    <Compile Include="ViewModel\StateMatrixInitViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\ActionViewBase.cs" />
+    <Compile Include="View\ChaChaHash.xaml.cs">
+      <DependentUpon>ChaChaHash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChaChaPresentation.xaml.cs">
+      <DependentUpon>ChaChaPresentation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Diffusion.xaml.cs">
+      <DependentUpon>Diffusion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Overview.xaml.cs">
+      <DependentUpon>Overview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Start.xaml.cs">
+      <DependentUpon>Start.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StateMatrixInit.xaml.cs">
+      <DependentUpon>StateMatrixInit.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25DB2B47-A457-4EC2-960B-395CE07AE093}</Project>
+      <Name>CrypPluginBase</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="userdoc.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Localization\de_DE.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Localization\en_US.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ContentTemplate\PageContentTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ContentTemplate\PageNavigationTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ContentTemplate\ViewboxButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Border.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Button.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\FrameworkElement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Index.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\ItemsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Label.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Paragraph.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Path.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\RichTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TableCell.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\TextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\Viewbox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ChaChaHash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ChaChaPresentation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Diffusion.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Overview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Start.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\StateMatrixInit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\en_user_interface_hash_diffusion_active.PNG" />
+    <Resource Include="Images\en_user_interface_hash_diffusion_active_xor.PNG" />
+    <Resource Include="Images\de_user_interface_hash_diffusion_active.PNG" />
+    <Resource Include="Images\de_user_interface_hash_diffusion_active_xor.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\en_user_interface_hash_diffusion_active_xor_800x433.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\de_user_interface_hash_diffusion_active_800x433.PNG" />
+    <Resource Include="Images\de_user_interface_hash_diffusion_active_xor_800x433.PNG" />
+    <Resource Include="Images\en_user_interface_hash_diffusion_active_800x433.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\de_user_interface_hash.PNG" />
+    <Resource Include="Images\de_user_interface_hash_800x433.PNG" />
+    <Resource Include="Images\de_user_interface_hash_800x433_sections.PNG" />
+    <Resource Include="Images\en_user_interface_hash.PNG" />
+    <Resource Include="Images\en_user_interface_hash_800x433.PNG" />
+    <Resource Include="Images\en_user_interface_hash_800x433_sections.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ChaCha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\de_user_interface_hash_750x406_sections.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\en_user_interface_hash_750x406_sections.PNG" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,235 @@
+﻿<UserControl x:Class="CrypTool.Plugins.KKDFSHA256.KKDFSHA256Pres"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KKDFSHA256"
+             MinHeight="420" MinWidth="640" MaxHeight="420" MaxWidth="640" IsEnabled="True">
+    <Grid Name="gridMain" Width="640">
+        <Canvas>
+            <RichTextBox Name="txtStep" Margin="510,400,0,0" Width="160" Height="15" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="14" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <!-- Remarks to the plugIn with explanations  -->
+            <!-- <Label Name="lblExplanationSectionHeading" Content="{Loc PresExplanationSectionHeading}" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Visible"/> -->
+            <RichTextBox Name="lblExplanationSectionHeading" Margin="220,-10,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="230" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Visible" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <!-- <TextBlock Name="txtExplanationSectionText" TextWrapping="Wrap" Width="640" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,60,0,0" Visibility="Hidden" /> -->
+            <RichTextBox Name="txtExplanationSectionText" Margin="0,40,0,0" Width="660" Height="400" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Visible">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources> 
+            </RichTextBox>
+
+            <!-- Title of Presentation -->
+            <!-- <TextBlock  Name="lblTitleHeading" Text="{Loc PresTitleHeading}" TextWrapping="Wrap" FontFamily="Courier New" FontSize="35" FontWeight="Bold" Margin="0,100,0,0" Height="400" Width="640" TextAlignment="Center" Visibility="Hidden"/> -->
+            <RichTextBox Name="lblTitleHeading" Margin="20,100,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="180" Width="600" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+            <!-- Heading of section introduction -->
+            <!-- <Label Name="lblIntroductionSectionHeading" Content="{Loc PresIntroductionSectionHeadingNum}" FontFamily="Courier New" FontSize="35" FontWeight="Bold" Height="400" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/> -->
+            <RichTextBox Name="lblIntroductionSectionHeading" Margin="20,150,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="150" Width="600" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+            <!-- Section introduction-->
+            <!-- <Label Name="lblIntroductionHeading" Content="{Loc PresIntroductionSectionHeading}" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/>
+            <TextBlock Name="txtIntroductionText" TextWrapping="Wrap" Width="640" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,60,0,0" Visibility="Hidden"/> -->
+            <RichTextBox Name="lblIntroductionHeading" Margin="230,-10,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="230" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="txtIntroductionText" Margin="0,40,0,0" Width="640" Height="300" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+            <!-- Heading of section construction -->
+            <!-- <Label Name="lblConstructionSectionHeading" Content="{Loc PresConstructionSectionHeadingNum}" FontFamily="Courier New" FontSize="35" FontWeight="Bold" Height="400" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/> -->
+            <!-- Section construction -->
+            <!-- <Label Name="lblConstructionHeading" Content="{Loc PresConstructionSectionHeading}" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/> -->
+            <!-- <TextBlock Name="txtConstructionText1" TextWrapping="Wrap" Width="640" Text="{Loc PresConstructionPart1Text}" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,60,0,0" Visibility="Hidden"/> -->
+            <RichTextBox Name="lblConstructionSectionHeading" Margin="20,150,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="150" Width="600" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="lblConstructionHeading" Margin="230,-10,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="230" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="txtConstructionText1" Margin="0,40,0,0" Width="640" Height="300" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+  
+            <!-- <Image Name="imgConstructionScheme" Source="/KKDFSHA256;component/images/pres/KKDFSHA256_Schema.png" Width="400" Height="250" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="125"  Visibility="Hidden"/> -->
+            <!-- <TextBlock Name="txtConstructionScheme" Text="{Loc PresConstructionScheme}" Width="640" Height="250" FontWeight="Bold" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,120,0,0" Visibility="Hidden"/>
+            <TextBlock Name="txtConstructionText2" TextWrapping="Wrap" Width="640" Text="{Loc PresConstructionPart2Text}" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,160,0,0" Visibility="Hidden"/>
+            <TextBlock Name="txtConstructionText3" TextWrapping="Wrap" Width="640" Text="{Loc PresConstructionPart3Text}" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,60,0,0" Visibility="Hidden"/> -->
+            <Image Name="imgConstructionKKDFSHA256" Source="/KKDFSHA256;component/images/pres/KKDFSHA256.png" Width="600" Height="400" Visibility="Hidden" Stretch="Uniform" Margin="0,30,0,0"/> 
+
+            <RichTextBox Name="txtConstructionScheme" Margin="-20,100,0,0" Width="700" Height="300" FontWeight="Bold" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="txtConstructionText2" Margin="0,150,0,0" Width="640" Height="300" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="txtConstructionText3" Margin="0,40,0,0" Width="640" Height="300" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+            <!-- Heading of section iteration -->
+            <!-- <Label Name="lblIterationSectionHeading" Content="{Loc PresIterationSectionHeadingNum}" FontFamily="Courier New" FontSize="35" FontWeight="Bold" Height="400" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/> -->
+            <RichTextBox Name="lblIterationSectionHeading" Margin="20,150,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="150" Width="600" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <!-- Section iteration -->
+            <!-- <Label Name="lblIterationHeading" Content="{Loc PresIterationSectionHeading}" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/>
+            <TextBlock Name="txtIterationRounds" TextWrapping="Wrap" Width="640" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="0,50,0,0" Visibility="Hidden"/>
+            <TextBlock Name="txtIterationDebugOutput" TextWrapping="Wrap" Width="400" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="220,170,0,0" Visibility="Hidden"/> -->
+            <RichTextBox Name="lblIterationHeading" Margin="200,-10,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="40" Width="300" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="txtIterationRounds" Margin="0,40,0,0" Width="640" Height="150" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="txtIterationDebugOutput" Margin="240,200,0,0" Width="420" Height="130" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+
+            <Image Name="imgIteration" Source="/KKDFSHA256;component/images/pres/Iteration.png" Width="300" Height="200" Visibility="Hidden" Stretch="None" Margin="-50,170,0,0"/>
+            <!-- Error-->
+            <!-- <TextBlock Name="txtError" TextWrapping="Wrap" Text="{Loc PresErrorText}" Width="640" FontFamily="Courier New" FontSize="17" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,200,0,0" Visibility="Hidden"/> -->
+            <RichTextBox Name="txtError" Margin="0,40,0,0" Width="640" Height="300" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+            <!-- Heading finished -->
+            <!-- <Label Name="lblFinishedSectionHeading" Content="{Loc PresFinishedSectionHeading}" FontFamily="Courier New" FontSize="35" FontWeight="Bold" Height="400" Width="640" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden"/>
+            <TextBlock Name="txtFinished" TextWrapping="Wrap" Text="{Loc PresFinishedText}" Width="640" FontFamily="Courier New" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,250,0,0" Visibility="Hidden"/> -->
+            <RichTextBox Name="lblFinishedSectionHeading" Margin="20,150,0,0" FontFamily="Courier New" FontSize="30" FontWeight="Bold" Height="50" Width="600" IsReadOnly="true" Background="Transparent" BorderThickness="0" Visibility="Hidden" >
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Padding" Value="0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+            <RichTextBox Name="txtFinished" Margin="0,200,0,0" Width="680" Height="150" IsReadOnly="true" Background="Transparent" BorderThickness="0" FontSize="17" FontFamily="Courier New" Visibility="Hidden">
+                <RichTextBox.Resources>
+                    <Style TargetType="{x:Type Paragraph}">
+                        <Setter Property="Margin" Value="0,0,0,0"/>
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+
+        </Canvas>
+        <StackPanel Name="spStartRestartButtons" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="Hidden">
+            <Button Content="{Loc PresStart}" Height="30" Name="buttonStart" Click="buttonStart_Click" Margin="10,5" Padding="10,0" HorizontalAlignment="Center" IsEnabled="False" />
+            <Button Content="{Loc PresRestart}" Height="30" Name="buttonRestart" Click="buttonRestart_Click" Margin="10,5" Padding="10,0" HorizontalAlignment="Center" IsEnabled="False" />
+        </StackPanel>
+        <StackPanel Name="spButtons" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="Hidden">
+            <Button Height="30" Name="buttonPrev" Click="buttonPrev_Click" Margin="10,5" Padding="10,0" HorizontalAlignment="Center" IsEnabled="False">
+                <Image Source="/KKDFSHA256;component/images/prev-button.png"/>
+            </Button>
+            <Button Height="30" Name="buttonNext" Click="buttonNext_Click" Margin="10,5" Padding="10,0" HorizontalAlignment="Center" IsEnabled="False" >
+                <Image Source="/KKDFSHA256;component/images/next-button.png"/>
+            </Button>
+            <Button Content="{Loc PresIntro}" Height="30" Name="buttonSkipIntro" Click="buttonSkip_Click" Margin="10,5" Padding="10,0" HorizontalAlignment="Center" IsEnabled="False" />
+        </StackPanel>
+        <!-- 
+        <StackPanel Name="spButtons" Margin="0,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Orientation="Horizontal" Visibility="Hidden">
+            <Button Content="{Loc PresIntro}" Height="30" Name="buttonSkipIntro" Click="buttonSkip_Click" Margin="10,5" Padding="10,0" HorizontalAlignment="Center" IsEnabled="False" />
+            <Button Content="{Loc PresNext}" Height="30" Name="buttonNext" Click="buttonNext_Click" Margin="10,5" Padding="10,0" HorizontalAlignment="Center" IsEnabled="False" />
+        </StackPanel>
+        -->
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">M-138 Ciphertext Only Attack</title>
+  <title lang="zh">M-138仅密文攻击</title>
+  <title lang="ru">M-138 Только шифрованный текст</title>
+  <summary lang="en">Cryptanalysis of the <i>M-138</i> using a Ciphertext only Attack</summary>
+  <summary lang="zh">使用仅密文攻击对M-138进行密码分析</summary>
+  <summary lang="ru">Криптоанализ M-138 с использованием только атаки Ciphertext</summary>
+  <description lang="en">This template shows the cryptanalysis of the <i>M-138</i> using a Ciphertext only attack.</description>
+  <description lang="zh">该模板显示了仅使用密文攻击的M-138密码分析。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ M-138 с использованием атаки только Ciphertext.</description>
+  <keywords>M-138, Hill-Climbing, Ciphertext only</keywords>
+  <keywords lang="zh">M-138，爬山，仅密文</keywords>
+  <keywords lang="ru">M-138, Hill-Climbing, только Ciphertext</keywords>
+  <title lang="de">Ciphertext-Only Angriff auf M-138</title>
+  <summary lang="de">Kryptoanalyse der <i>M-138</i> mit Hilfe eines Ciphertext-Only Angriffs</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>M-138</i> mit einem Ciphertext-Only Angriff.</description>
+  <keywords lang="de">M-138, Hill-Climbing, Ciphertext-Only, Geheimtext</keywords>
+  <icon file="M138.png" />
+  <relevantPlugins>
+    <plugin name="M138Analyzer" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$M-138 Analyzer$" value="M-138-Analysierer" />
+    <replacement key="$memo1$" value="Diese Vorlage demonstriert einen Ciphertext-Only-Angriff mit einem Hill-Climbing-Algorithmus auf die M-138.\line\line Klartext und Streifen sind optionale Eingänge des M-138-Analysierers. In der &quot;Geheimtext&quot;-Komponente kann der zu analysierende Geheimtext eingegeben werden. Wenn keine Streifen angegeben werden, wird eine vordefinierte Auswahl von 25 Streifen verwendet. Jeder Streifen enthält eine Permutation der 26 Buchstaben." />
+    <replacement key="$memo2$" value="In den Einstellungen der Komponente &quot;M-138-Analysierer&quot; können Parameter wie die Schlüssellänge, zu testende Offsets und die vermutete Sprache des Klartextes angegeben werden. Die Komponente gibt die besten gefundenen Schlüssel mit den zugehörigen Klartexten aus. Die Auswertung geschieht mit Trigrammen, Tetragrammen und den relativen Buchstabenhäufigkeiten." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$M-138 Analyzer$" value="M-138分析仪" />
+    <replacement key="$memo1$" value="此模板演示了使用M-138上的爬山算法进行的仅密文攻击。\Line \line纯文本和条纹是M-138分析仪的可选输入。可以在“密文”组件中输入要分析的密文。如果未指定条带，则使用25条带的预定义选择。每个带包含26个字母的排列。" />
+    <replacement key="$memo2$" value="在“ M-138分析仪”组件的设置中，可以指定诸如密钥长度，要测试的偏移量和纯文本的假定语言之类的参数。该组件输出与关联的纯文本一起找到的最佳键。评估使用三字组，四字组和相对字母频率。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$M-138 Analyzer$" value="анализатор М-138" />
+    <replacement key="$memo1$" value="Этот шаблон демонстрирует атаку только с зашифрованным текстом с алгоритмом скалолазания на M-138. \Line \line Обычный текст и полосы являются дополнительными входами анализатора M-138. В компоненте «зашифрованный текст» можно ввести зашифрованный текст для анализа. Если полосы не указаны, используется предопределенный выбор из 25 полос. Каждая полоса содержит перестановку 26 букв." />
+    <replacement key="$memo2$" value="В настройках компонента «M-138 Analyzer» могут быть указаны такие параметры, как длина ключа, смещения, подлежащие тестированию, и предполагаемый язык обычного текста. Компонент выводит лучшие найденные ключи с соответствующими текстовыми текстами. Оценка проводится с помощью триграмм, тетраграмм и частот относительных символов." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Key$" value="Key" />
+    <replacement key="$M-138 Analyzer$" value="M-138 Analyzer" />
+    <replacement key="$memo1$" value="This template shows a ciphertext-only attack on M-138 using a hillclimbing algorithm.\line\line Plaintext and strips are optional inputs for the M-138 Analyzer. The component &quot;Ciphertext&quot; contains a ciphertext to be analyzed. If no strips are given a default set of 25 strips is used. Each strip contains a permutation of a 26-alphabet." />
+    <replacement key="$memo2$" value="In the settings of the component &quot;M-138 Analyzer&quot;, the user can define options (parameters) like keylength and offsets to be tested and the language the plaintext is supposed to be written in. The component's output provides the found keys and their corresponding plaintext with the best values. These were evaluated using trigrams, quadgrams, and relative occurrence of characters." />
+  </replacements>
+</sample>

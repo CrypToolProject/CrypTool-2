@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="KeySearcherPresentation.Controls.LocalQuickWatchPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:properties="clr-namespace:KeySearcher.Properties"
+    xmlns:con="clr-namespace:KeySearcher.Converter"
+    xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+    x:Name="LocalQuickWatch">
+
+    <UserControl.Resources>
+        <con:ByteArrayToUtf8StringConverter x:Key="ByteArrayToUtf8StringConverter" />
+    </UserControl.Resources>
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{x:Static properties:Resources.Local_}" ResultListCaption="{x:Static properties:Resources.Top_Ten_}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Start_}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.End_}" x:Name="EndTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Elapsed_}" x:Name="ElapsedTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Remaining_}" x:Name="TimeLeft" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Tested_Bits_}" x:Name="TestedBits" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{x:Static properties:Resources.Keys_Sec_}" x:Name="KeysPerSecond" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+            <crypanalysisviewcontrol:SectionControl SectionHeaderCaption="OpenCL" IsSectionVisible="{Binding IsOpenCLEnabled}"
+                                                    SectionHeaderBackground="#FF3B8EA4" SectionBackground="#AF73B7A6">
+                <crypanalysisviewcontrol:SectionViewLabelsControl>
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_sec_OpenCL_}" x:Name="KeysPerSecondOpenCL" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Keys_sec_CPU_}" x:Name="KeysPerSecondCPU" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Devices_}" x:Name="Devices" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Work_Items_}" x:Name="WorkItems" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc Ration_}" x:Name="Ratio" />
+                </crypanalysisviewcontrol:SectionViewLabelsControl>
+            </crypanalysisviewcontrol:SectionControl>
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+
+        <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding Entries}" ResultItemAction="HandleResultItemAction">
+            <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                <GridView>
+                    <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Ranking}" Width="25">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.Value}" DisplayMemberBinding="{Binding Path=Value}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.Key}" DisplayMemberBinding="{Binding Path=Key}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.Text}" DisplayMemberBinding="{Binding Path=Text, Converter={StaticResource ByteArrayToUtf8StringConverter}}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+        </crypanalysisviewcontrol:CrypAnalysisResultListView>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>

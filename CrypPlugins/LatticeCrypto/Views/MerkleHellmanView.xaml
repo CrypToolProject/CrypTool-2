@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="LatticeCrypto.Views.MerkleHellmanView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ViewModels1="clr-namespace:LatticeCrypto.ViewModels"
+             xmlns:Properties="clr-namespace:LatticeCrypto.Properties" mc:Ignorable="d" >
+
+    <UserControl.DataContext>
+        <ViewModels1:MerkleHellmanViewModel/>
+    </UserControl.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="rowMarkleHellman"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Name="rowLog" Height="55"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="0,20,0,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Orientation="Horizontal" >
+                        <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelKeyLength}"/>
+                        <TextBox Text="{Binding ElementName=scrollBar, Path=Value, Mode=TwoWay}" Width="25" VerticalAlignment="Center" Margin= "5,0,0,0"/>
+                        <ScrollBar Name="scrollBar" Maximum="15" Minimum="2" Value="5" SmallChange="1" LargeChange="2" RenderTransformOrigin="0.5,0.5" Margin= "5,0,0,0">
+                            <ScrollBar.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="180"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </ScrollBar.RenderTransform>
+                        </ScrollBar>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                    <Button Content="{x:Static Properties:Languages.buttonGenerateNewCryptosystem}" Margin="0,10,0,0" Click="Button_Click"/>
+                        <Button Content="{x:Static Properties:Languages.buttonEnterCryptosystemManually}" Margin="20,10,0,0" Click="Button_Click_1" />
+                        </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelPrivateKey}" Grid.Row="0" Grid.Column="0"/>
+                    <TextBox Text="{Binding PrivateKey, Mode=OneWay}" IsReadOnly="True" Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" />
+                    <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelPublicKey}" Grid.Row="1" Grid.Column="0"/>
+                    <TextBox Text="{Binding PublicKey, Mode=OneWay}" IsReadOnly="True" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" />
+                    <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelModulus}" Grid.Row="2" Grid.Column="0"/>
+                    <TextBox Text="{Binding Mod, Mode=OneWay}" IsReadOnly="True" Grid.Row="2" Grid.Column="1"/>
+                    <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelMultiplier}" Grid.Row="3" Grid.Column="0"/>
+                    <TextBox Text="{Binding R, Mode=OneWay}" IsReadOnly="True" Grid.Row="3" Grid.Column="1"/>
+                    <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelMultiplierInverse}" Grid.Row="4" Grid.Column="0"/>
+                    <TextBox Text="{Binding RI, Mode=OneWay}" IsReadOnly="True" Grid.Row="4" Grid.Column="1"/>
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="0,10,0,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                        <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelMode}"/>
+                        <ComboBox Name="cbModus" Margin="10,0,20,0">
+                            <ComboBoxItem Content="{x:Static Properties:Languages.buttonEncrypt}" IsSelected="True"/>
+                            <ComboBoxItem Content="{x:Static Properties:Languages.buttonDecrypt}"/>
+                            <ComboBoxItem Content="{x:Static Properties:Languages.buttonCryptanalysis}"/>
+                        </ComboBox>
+                        <Button Name="btnStart" Content="{x:Static Properties:Languages.buttonStart}" Click="btnStart_Click" />
+                    </StackPanel>
+
+                    <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelPlainText}" Grid.Row="1" Grid.Column="0" />
+                    <TextBox Name="message" Text="{Binding Message, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"/>
+
+                    <SelectableTextBlock Padding="5" Text="{x:Static Properties:Languages.labelCiphertext}" Grid.Row="1" Grid.Column="1"/>
+                    <TextBox Text="{Binding Cipher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                    
+                    <!--<TextBox.Text>
+                            <Binding Path="Cipher" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <Utilities:VectorNDValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>-->
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+        <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Height="5" ResizeDirection="Rows" Background="DarkGray" MouseDoubleClick="GridSplitter_MouseDoubleClick" ShowsPreview="True"/>
+        <Grid Grid.Row="2">
+            <RichTextBox Name="History" Background="LightGray" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Auto" TextChanged="History_TextChanged" />
+        </Grid>
+    </Grid>
+</UserControl>

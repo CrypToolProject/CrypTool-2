@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="PKCS1.WpfControls.SigVal.SigValControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lang="clr-namespace:PKCS1.Resources.lang.Gui"
+    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <!-- Controls -->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <GroupBox Grid.Row="0" Margin="0,0,0,0" Name="gbImpl">
+                    <GroupBox.Header>
+                        <x:Static Member="lang:SigValCtrl.verifySig"></x:Static>
+                    </GroupBox.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <SelectableTextBlock Padding="5" Grid.Row="0" >
+                                <x:Static Member="lang:SigValCtrl.sigToTest"></x:Static>
+                            </SelectableTextBlock>
+                            <RadioButton Grid.Row="1" Name="rbSigPkcs" Margin="5,5,5,5" Checked="rbSigPkcs_Checked">
+                                <x:Static Member="lang:SigValCtrl.rsaSig"></x:Static></RadioButton>
+                            <RadioButton Grid.Row="2" Name="rbSigBlei" Margin="5,5,5,5" Checked="rbSigBlei_Checked">
+                                <x:Static Member="lang:SigValCtrl.bleichenbSig"></x:Static></RadioButton>
+                            <RadioButton Grid.Row="3" Name="rbSigKuehn" Margin="5,5,5,5" Checked="rbSigKuehn_Checked">
+                                <x:Static Member="lang:SigValCtrl.kuehnSig"></x:Static></RadioButton>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <SelectableTextBlock Padding="5" Grid.Row="0" >
+                                <x:Static Member="lang:SigValCtrl.impl"></x:Static></SelectableTextBlock>
+                            <RadioButton Grid.Row="1" Name="rbVal" Margin="5,5,5,5" Checked="rbVal_Checked">
+                                <x:Static Member="lang:SigValCtrl.implCorrect"></x:Static></RadioButton>
+                            <RadioButton Grid.Row="2" Name="rbValWithFlaw" Margin="5,5,5,5" Checked="rbValWithFlaw_Checked">
+                                <x:Static Member="lang:SigValCtrl.implFlaw"></x:Static></RadioButton>
+                            <Button Grid.Row="3" Name="bValidate" Margin="5,5,5,5" Height="25" MinWidth="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="bValidate_Click">
+                                <x:Static Member="lang:SigValCtrl.verifySig"></x:Static></Button>
+                        </Grid>                        
+                    </Grid>
+                </GroupBox>
+                <DockPanel Grid.Row="1">
+                    <SelectableTextBlock Padding="5" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,5,5">
+                        <x:Static Member="lang:SigValCtrl.result"></x:Static></SelectableTextBlock>
+                    <Image Name="imgResult" Height="26" Width="24" Source="../../Resources/icons/equal.png" Visibility="Hidden" />
+                    <SelectableTextBlock Padding="5" Name="lblResult" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,5,5"> </SelectableTextBlock>
+                    <SelectableTextBlock Padding="5" Name="lblHashAlgo" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,5,5,5"></SelectableTextBlock>
+                </DockPanel>
+            </Grid>
+            <!-- Display Signatures -->
+            <GroupBox Grid.Row="1" Margin="0,15,0,0">
+                <GroupBox.Header>
+                    <x:Static Member="lang:SigValCtrl.signature"></x:Static>
+                </GroupBox.Header>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                    <SelectableTextBlock Padding="5" Grid.Row="0">
+                        <x:Static Member="lang:SigValCtrl.encSig"></x:Static></SelectableTextBlock>
+                <TextBox Grid.Row="1" Name="tbSignatureEnc" TextWrapping="Wrap" MaxWidth="450" MinHeight="80"  IsReadOnly="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5" />
+                    <SelectableTextBlock Padding="5" Grid.Row="2">
+                        <x:Static Member="lang:SigValCtrl.decSig"></x:Static></SelectableTextBlock>
+                <TextBox Grid.Row="3" Name="tbSignatureDec" TextWrapping="Wrap" MaxWidth="450" MinHeight="80" IsReadOnly="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,5,5,5" />
+            </Grid>
+            </GroupBox>            
+        </Grid>
+    </ScrollViewer>
+</UserControl>

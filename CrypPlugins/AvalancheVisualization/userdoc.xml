@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The avalanche effect is a property good cryptographic algorithms and hash functions should exhibit. <ref id="Wikipedia" /><newline /><newline />
+    The avalanche effect property is used as a parameter to measure the reaction a minimal change in the input text or key has on the generated output.
+    <newline />
+    In other words, small changes in the plaintext should result in a significant change of the ciphertext.
+    <newline />
+    A strong avalanche effect indicates a single bit change on the input propagates rapidly throughout the encryption process or hash function, creating a certain degree of randomness in the cipher or hash value.
+    <newline />
+    The whole point is that two slightly different inputs should yield results as different as possible from each other.
+    Consequently, making it difficult for cryptanalysts to break the algorithm. This is why it is a highly desired property secure algorithms should have.
+    <newline />
+    The plugin seeks to provide an understanding of the avalanche effect property in an illustrative way.
+    For this purpose you can make input changes and subsequently check how strong this property is for the chosen algorithm.
+
+  </introduction>
+  <introduction lang="zh-CN">雪崩效应是良好的加密算法和散列函数应具有的特性。雪崩效果属性用作测量反应的参数，该反应是输入文本或键对生成的输出的最小变化。换句话说，明文的细微变化应导致密文的显着变化。雪崩效应很强，表明输入的单个位更改在整个加密过程或哈希函数中迅速传播，从而在密码或哈希值中产生了一定程度的随机性。重点是，两个略有不同的输入应该产生彼此尽可能不同的结果。因此，密码分析者很难破解该算法。这就是为什么它是安全算法应具有的高度期望的特性。该插件试图以一种说明性的方式提供对雪崩效应属性的理解。为此，您可以更改输入，然后检查所选算法的此属性的强度。</introduction>
+  <introduction lang="ru">Эффект лавины - это хороший алгоритм шифрования, который должен проявляться. Свойство свойства лавинности используется в качестве параметра для измерения реакции, минимальное изменение входного текста или клавиши на сгенерированном выходе. Другими словами, небольшие изменения в открытом тексте должны приводить к существенному изменению зашифрованного текста. Сильный лавинный эффект указывает на то, что однократное изменение бит на входе быстро распространяется по всему процессу шифрования или хеш-функции, создавая определенную степень случайности в шифра или хеш-значении. Все дело в том, что два слегка разных входа должны давать результаты как можно более разные друг от друга. Следовательно, это затрудняет криптоаналитикам для разрушения алгоритма. Вот почему это очень желаемое свойство, которое должны иметь алгоритмы безопасности. Плагин стремится дать иллюстрацию понимание свойства эффекта лавины. Для этого вы можете внести изменения ввода и впоследствии проверить, насколько сильно это свойство для выбранного алгоритма.</introduction>
+  <introduction lang="de-DE">
+    Der Avalanche-Effekt (Lawineneffekt) bezeichnet eine Eigenschaft, welche gute kryptographische Algorithmen sowie Hash-Funktionen aufweisen. <ref id="Wikipedia" /><newline /><newline />
+    Der Avalanche-Effekt wird als Parameter zur Messung der Auswirkung einer minimalen Eingabeänderung auf die Ausgabe benutzt.
+    <newline />
+    In anderen Worten, kleine Veränderungen im Klartext sollen zu einer großen Veränderung im Chiffretext führen.
+    <newline />
+    Ein starker Avalanche-Effekt deutet darauf hin, dass sich eine Änderung eines einzelnen Input-Bits schnell durch das ganze Verschlüsselungs- bzw. Hash-Verfahren ausbreitet. Dadurch wird eine gewisse Zufälligkeit der Chiffre bzw. des Hash-Wertes erzeugt.
+    <newline />
+    Das Ziel besteht darin, dass zwei nur leicht abweichende Eingaben, völlig unterschiedliche Ausgaben erzeugen.
+    Somit wird das Brechen des Algorithmus erschwert. Aus diesem Grund ist der Avalanche-Effekt eine wünschenswerte Eigenschaft, die sichere Algorithmen haben sollten.
+    <newline />
+    Der Zweck des Plugins ist es, ein Verständnis für die Avalanche-Effekt-Eigenschaft mittels einer Präsentation zu vermitteln.
+    Hierfür kann man gezielte Änderungen der Eingabe vornehmen und anschließend die Stärke dieser Eigenschaft für das ausgewählte Verfahren prüfen.
+  </introduction>
+  <usage lang="en">
+
+    The avalanche plugin has two input entries (key and message) and one output exit.
+    <newline />
+    The component is divided in two main categories; unprepared and prepared methods.
+    Input and functionality of the plugin vary slightly, depending on the category selected.
+    <newline /><newline /><section headline="Prepared methods">
+      Both message and key input entries are used.
+      <newline />
+      The avalanche plugin knows the selected method in detail (AES or DES).
+      Here, you can check the avalanche effect after every single round of the encryption process.
+      <newline />
+      For AES the key should be 16, 24, or 32 Bytes long, depending on the selected key length (128, 192, or 256). For DES it should be 8 Bytes long.
+      <newline />
+      After pressing Play you can modify the initial message and/or key in two ways:
+      <newline /><list><item>Directly on the external input feed.</item><item>Flipping of single bits within the avalanche plugin itself.</item></list></section><newline /><section headline="Unprepared methods">
+      Only the message input entry is used.
+      <newline />
+      The input is received after it has gone through a cryptographic process or hash function implemented by other CT2 plugins.
+      This is why the length of the input is determined by the external plugins being used.
+      <newline />
+      There are three options after selecting the category "Unprepared methods": hash functions, classic ciphers, and modern ciphers.
+      <newline />
+      One of these options is selected according to the type of the connected external plugin.
+      For instance, if you'd like to check the avalanche effect of SHA-1, then the option "hash functions" should be selected.
+      <newline />
+      For practical reasons there are different templates available for the respective categories.
+      <newline />
+      After pressing Play you can modify the initial message by making changes directly on the input feed.
+
+
+    </section></usage>
+  <usage lang="zh-CN">雪崩插件有两个输入项（键和消息）和一个输出出口。该组件分为两个主要类别；未准备和准备好的方法。插件的输入和功能会略有不同，具体取决于所选类别。消息和键输入条目均被使用。雪崩插件详细了解所选方法（AES或DES）。在这里，您可以在每轮加密过程之后检查雪崩效果。对于AES，密钥应为16、24或32字节长，具体取决于所选的密钥长度（128、192或256）。对于DES，它应该为8个字节长。按下Play之后，您可以通过两种方式修改初始消息和/或键：直接在外部输入源上。雪崩插件本身内的单个位翻转。仅使用消息输入条目。输入经过其他CT2插件实现的加密过程或哈希函数后，便会收到输入。这就是为什么输入的长度由所使用的外部插件确定的原因。选择类别“未准备的方法”后，有三个选项：哈希函数，经典密码和现代密码。根据连接的外部插件的类型选择这些选项之一。例如，如果您想检查SHA-1的雪崩效果，则应选择“哈希函数”选项。出于实际原因，可以为各个类别使用不同的模板。按下播放后，您可以通过直接在输入提要上进行更改来修改初始消息。</usage>
+  <usage lang="ru">Лавинный плагин имеет две входные записи (ключ и сообщение) и один выход. Компонент разделен на две основные категории; неподготовленные и подготовленные методы. Ввод и функциональность плагина варьируются незначительно, в зависимости от выбранной категории. Используются записи ввода сообщения и ввода ключа. Лавинный плагин знает выбранный метод подробно (AES или DES). Здесь вы можете проверить эффект лавины после каждого раунда процесса шифрования. Для AES ключ должен иметь длину 16, 24 или 32 байта в зависимости от выбранной длины ключа (128, 192 или 256). Для DES это должно быть 8 байтов. После нажатия кнопки «Воспроизведение» вы можете изменить начальное сообщение и / или клавишу двумя способами: непосредственно на внешнем входном канале. Скопление отдельных битов внутри самого лавинного плагина. Используется только запись ввода сообщения. Ввод получен после того, как он прошел криптографический процесс или хеш-функцию, реализованную другими плагинами CT2. Вот почему длина ввода определяется внешними подключаемыми модулями. После выбора категории «Неподготовленные методы» есть три варианта: хэш-функции, классические шифры и современные шифры. Один из этих параметров выбирается в соответствии с типом подключенного внешнего плагина. Например, если вы хотите проверить лавинный эффект SHA-1, тогда следует выбрать опцию «хэш-функции». По практическим причинам существуют разные шаблоны для соответствующих категорий. После нажатия кнопки «Воспроизвести» вы можете изменить исходное сообщение, внеся изменения непосредственно на входной канал.</usage>
+  <usage lang="de-DE">
+    Das Avalanche-Plugin verfügt über zwei Eingaben (Schlüssel und Nachricht) und eine Ausgabe.
+    <newline />
+    Die Komponente ist in zwei Haupt-Kategorien geteilt, nicht-aufbereitete und aufbereitete Verfahren.
+    Die Eingabe und Funktionalität des Plugins unterscheiden sich entsprechend der ausgewählten Kategorie geringfügig.
+    <newline /><newline /><section headline="Aufbereitete Verfahren">
+      Sowohl die Nachricht- als auch die Schlüssel-Eingaben werden verwendet.
+      <newline />
+      Das Avalanche Plugin kennt das ausgewählte Verfahren im Detail (AES oder DES).
+      Hier kann man den Avalanche-Effekt für jede einzelne Runde des Verschlüsselungsverfahrens beobachten.
+      <newline />
+      Für AES sollte der eingegebene Schlüssel 16, 24 oder 32 Bytes lang sein, entsprechend der ausgewählten Schlüssellänge (128, 192, oder 256). Für DES sollte er 8 Bytes lang sein.
+      <newline /><newline />
+      Nachdem Play gedrückt wird, können Änderungen der initialen Nachricht- und Schlüsseleingaben auf unterschiedliche Weise vorgenommen werden:
+
+      <newline /><list><item>Direkt am externen Input.</item><item>Flippen einzelner Bits innerhalb des Avalanche-Plugins.</item></list></section><newline /><newline /><section headline="Nicht-aufbereitete Verfahren">
+      Hier wird nur die Nachrichten-Eingabe verwendet.
+      <newline />
+      Die Eingabedaten werden aus dem Ergebnis anderer CT2-Plugins bezogen.
+      Deshalb wird die Länge des Inputs durch die externen Plugins, die gerade benutzt werden, bestimmt.
+      <newline />
+      Unter der Kategorie "Nicht-aufbereitete Verfahren" gibt es drei Optionen: Hash-Funktionen, klassische Verschlüsselungsverfahren und moderne Verschlüsselungsverfahren. Eine der Optionen wird
+      ausgewählt, je nachdem, welchen Typ das annektierte externe Plugin hat.
+      Möchte man beispielsweise den Avalanche-Effekt von SHA-1 testen, ist die Option "Hash-Funktionen" auszuwählen.
+      <newline />
+      Einfachheitshalber sind Vorlagen für die jeweiligen Kategorien vorhanden.
+      <newline />
+      Nachdem Play gedrückt wird, kann man die initiale Nachricht modifizieren, indem man Veränderungen direkt am externen Nachrichten-Input vornimmt.
+    </section></usage>
+  <presentation lang="en">
+    The goal of the plugin is to visualize how a small input change affects the chosen cipher or hash function.
+    As soon as the plugin receives the first input, a screen with short instructions shows up. You can also skip the instructions by checking the checkbox on the home view.
+    <newline /><newline /><section headline="Prepared methods">
+
+      After the instructions, the initial input data of AES can be seen in a matrix with its hex values and its corresponding binary representation.
+      In the case of DES the input data is initially shown in binary format.
+      <newline />
+      Afterwards, changes in the input can be made as described in the usage section.
+      When clicking on a single bit it flips from "0" to "1" or viceversa and it turns red.
+      You can also undo the action by using the Clear button, which makes all flipped bits return to its initial state.
+      <newline />
+      After the initial input has been modified, a new view emerges depicting the differences between initial and modified input.
+      Here you can have the information be displayed in different formats (binary, decimal, or hex).
+      On the lower part of the window a sequence of buttons indicates you can now check the avalanche effect after every AES or DES round.
+      <newline />
+      While checking the different rounds you can see the current state of the encryption in binary values for both the initial and the modified input.
+      The differences between the two bit sequences (flipped bits) are highlighted in color.
+      <newline />
+      A section with bullet points provides some statistical data based on the comparison carried out.
+      This information includes:
+      <list><item>Number of flipped bits and avalanche effect</item><item>Length of longest identical bit sequence</item><item>Length of longest flipped bit sequence</item><item>Average number of differing bits per byte</item></list><newline />
+
+      On another section of the window you can see a pie chart illustrating the ratio between the flipped bits (depicted in red) and the unchanged bits (depicted in green).
+
+      <newline />
+      Upon pressing the General Overview button, you can see the cipher after every encryption round and the affected bits (depicted in red). For AES the general overview is only shown in hex format because its binary representation
+      contains too many bits to be displayed in a neat and clear way. for both encryption standards there is also information on the percentage of flipped bits after each round (seen as "% changed" in the general overview for DES and as "% of flipped bits" in the general overview for AES).
+
+      <newline />
+      If you want to make new changes or undo the ones already made you can go back to the initial input data by clicking on the Input Data button.
+    </section><newline /><newline /><section headline="Unprepared methods">
+      The unprepared methods have, besides the intructions view, only one view where all the bit comparison takes place.
+
+      After the instructions you get to see the initial input.
+      Right after modificating the initial message, the changed message is also shown on the window, next to the first one.
+      The Information can be displayed in hex and decimal. For classic ciphers it can additionally be displayed in text format.
+
+      After the plugin has received the second input, the statistical data (as seen in the previous section) can also bee seen on the window, as well as the pie chart.
+      Only in the case of classic ciphers the information displayed doesn't refer to bit, but to byte changes.
+    </section></presentation>
+  <presentation lang="zh-CN">插件的目标是可视化小的输入变化如何影响所选的密码或哈希函数。插件收到第一个输入后，将显示一个带有简短说明的屏幕。您也可以通过选中主视图上的复选框来跳过说明。在指令之后，可以在矩阵中以其十六进制值和相应的二进制表示形式看到AES的初始输入数据。对于DES，输入数据最初以二进制格式显示。之后，可以按照用法部分中的描述进行输入更改。单击单个位时，它会从“ 0”翻转到“ 1”，反之亦然，然后变成红色。您也可以使用“清除”按钮来撤消操作，这会使所有翻转的位返回其初始状态。修改初始输入后，将出现一个新视图，描述初始输入和修改后的输入之间的差异。您可以在此处以不同的格式（二进制，十进制或十六进制）显示信息。在窗口的下部，一系列按钮指示您现在可以在每轮AES或DES发射后检查雪崩效果。在检查不同的回合时，您可以以初始值和修改后的输入的二进制值查看加密的当前状态。两个位序列（翻转位）之间的差异以彩色突出显示。带有项目符号点的部分基于所进行的比较提供了一些统计数据。该信息包括：翻转位的数量和雪崩效应最长相同位序列的长度最长翻转位序列的长度每字节不同位的平均数量在窗口的另一部分，您可以看到一个饼状图，说明了翻转位之间的比率（用红色表示） ）和未更改的位（以绿色表示）。按下General Overview（常规概述）按钮后，您可以在每个加密回合后看到密码和受影响的位（以红色显示）。对于AES，一般概述仅以十六进制格式显示，因为它的二进制表示形式包含太多位，无法以整洁清晰的方式显示。对于这两种加密标准，在每轮之后还提供了有关翻转位百分比的信息（在DES概述中，显示为“已更改百分比”，在AES概述中，显示为“已转换比特的百分比”）。如果要进行新的更改或撤消已进行的更改，可以单击“输入数据”按钮返回到初始输入数据。除指令视图之外，未准备的方法仅具有一个进行所有位比较的视图。在说明之后，您将看到初始输入。修改初始消息后，更改后的消息也立即显示在窗口中，紧挨着第一个消息。信息可以用十六进制和十进制显示。对于经典密码，它可以另外以文本格式显示。插件收到第二个输入后，统计数据（如上一节所示）也可以在窗口和饼图中看到。仅在使用经典密码的情况下，显示的信息不是针对位，而是针对字节更改。</presentation>
+  <presentation lang="ru">Цель плагина - визуализировать, как небольшое изменение ввода влияет на выбранный шифр или хеш-функцию. Как только плагин получает первый вход, появляется экран с короткими инструкциями. Вы также можете пропустить инструкции, установив флажок в домашнем представлении. После инструкций начальные входные данные AES можно увидеть в матрице с шестнадцатеричными значениями и соответствующим бинарным представлением. В случае DES исходные данные первоначально отображаются в двоичном формате. После этого изменения ввода могут быть сделаны, как описано в разделе использования. Когда вы нажимаете на один бит, он переворачивается с «0» на «1» или наоборот, и он становится красным. Вы также можете отменить действие, используя кнопку «Очистить», которая заставляет все перевернутые биты возвращаться в исходное состояние. После того, как начальный вход был изменен, появляется новое представление с изображением различий между начальным и измененным вводами. Здесь вы можете отображать информацию в разных форматах (двоичный, десятичный или шестнадцатеричный). В нижней части окна последовательность кнопок указывает, что теперь вы можете проверить эффект лавины после каждого раунда AES или DES. При проверке разных раундов вы можете видеть текущее состояние шифрования в двоичных значениях как для начального, так и для измененного ввода. Различия между двумя битовыми последовательностями (перевернутыми битами) выделяются цветом. Раздел с точками пули предоставляет некоторые статистические данные на основе проведенного сравнения. Эта информация включает в себя: количество перевернутых битов и эффект лавины. Длина самой длинной идентичной последовательности бит. Длина самой длинной перевернутой последовательности бит. Количество различных бит на байт. В другом разделе окна вы можете увидеть круговую диаграмму, иллюстрирующую соотношение между перевернутыми битами (изображено красным цветом ) и неизменные биты (изображены зеленым цветом). После нажатия кнопки «Общий обзор» вы можете увидеть шифр после каждого раунда шифрования и затронутых битов (изображено красным). Для AES общий обзор показан только в шестнадцатеричном формате, поскольку его двоичное представление содержит слишком много битов, которые будут отображаться аккуратным и понятным образом. для обоих стандартов шифрования также имеется информация о проценте перевернутых битов после каждого раунда (рассматривается как «% изменено» в общем обзоре для DES и как «% перевернутых бит» в общем обзоре для AES). Если вы хотите внести новые изменения или отменить уже сделанные, вы можете вернуться к исходным входным данным, нажав кнопку «Входные данные». Неподготовленные методы имеют, помимо представления intructions, только один вид, где происходит сравнение бит. После инструкций вы увидите первый вход. Сразу после внесения изменений в исходное сообщение измененное сообщение также отображается в окне рядом с первым. Информация может отображаться в шестнадцатеричном и десятичном формате. Для классических шифров его можно дополнительно отобразить в текстовом формате. После того, как плагин получил второй вход, статистические данные (как показано в предыдущем разделе) также можно увидеть в окне, а также круговую диаграмму. Только в случае классических шифров отображаемая информация не относится к биту, а к байтам.</presentation>
+  <presentation lang="de-DE">
+    Das Ziel des Plugins besteht darin, die Auswirkung kleiner Änderungen in der Eingabe auf das ausgewählte Verfahren zu visualisieren.
+    Sobald das Plugin den ersten Input erhält, taucht eine neue Maske mit einer kurzen Anleitung auf.
+    Man kann die Anleitung überspringen, indem man die Checkbox auf der Startseite aktiviert.
+
+    <newline /><newline /><section headline="Aufbereitete Verfahren">
+
+      Nach der Anleitung können die initialen Eingabedaten von AES in Form einer Matrix sowohl im Hex-Format als auch im Binär-Format angezeigt werden.
+      Bei DES werden die Eingabedaten zuerst im Binär-Format angezeigt.
+      <newline />
+      Danach können Änderungen am Input, wie im Abschnitt "Benutzung" beschrieben, vorgenommen werden.
+      Sobald ein einzelnes Bit geklickt wird, ändert sich sein Zustand von "0" zu "1" oder umgekehrt und es wird rot.
+      Man kann die Änderung auch rückgängig machen, indem man auf den Löschen-Button klickt. Diese Aktion führt dazu, dass alle Bits zu ihrem ursprünglichen Zustand zurückkehren.
+      <newline />
+      Nachdem der initiale Input verändert worden ist, erscheint eine neue Maske, welche die Unterschiede zwischen initialem und modifiziertem Input darstellt.
+      Hier kann man sich die Eingabedaten in unterschiedlichen Formaten anzeigen lassen (binär, dezimal oder hex).
+      Mittels der Folge von Buttons im unteren Fenster-Bereich kann man den Avalanche-Effekt nach jeder AES- bzw. DES-Runde testen.
+      <newline />
+      Während man durch die verschiedenen Runden läuft, kann man sich den aktuellen Zustand des Verschlüsselungsprozesses im Binär-Format anschauen, sowohl für den ursprünglichen als auch für
+      den modifizierten Input.
+      Die Unterschiede zwischen den beiden Bit-Sequenzen (geflippte Bits) werden farblich hervorgehoben.
+
+      <newline />
+      Es werden einige statistische Daten über den ausgeführten Vergleich aufgelistet.
+      Die Daten enthalten das Folgende:
+      <list><item>Anzahl der geflippten Bits und Avalanche-Effekt</item><item>Länge der längsten Sequenz identischer Bits</item><item>Länge der längsten Sequenz geflippter Bits</item><item>Durchschnittliche Anzahl unterschiedlicher Bits pro Byte</item></list><newline />
+      Außerdem wird mit einem Kuchendiagramm das Verhältnis zwischen geflippten Bits (in rot) und unveränderten Bits (in grün) dargestellt.
+      <newline />
+      Sobald der Allgemeine-Übersicht-Button gedrückt wird, kann man das Chiffrat nach jeder Verschlüsselungsrunde sowie die betroffenen Bits ansehen (in rot dargestellt).
+      Die allgemeine Übersicht wird für AES nur im Hex-Format angezeigt, weil die Binärdarstellung zu viel Platz in Anspruch nimmt und es schnell unübersichtlich werden kann.
+      Für die beiden Block-Chiffren gibt es Informationen zum prozentualen Anteil der geflippten Bits nach jeder Runde (zu finden unter "% Änderung" auf der allgemeinen Übersicht für DES und unter "% geflippter Bits" auf der allgemeinen Übersicht für AES).
+
+      <newline />
+      Man hat auch die Möglichkeit, entweder neue Veränderungen vorzunehmen oder die bereits gemachten Änderungen rückgängig zu machen. Dafür muss man auf den Eingabedaten-Button klicken, der zum ursprünglichen Input zurückführt.
+
+    </section><newline /><newline /><section headline="Nicht-aufbereitete Verfahren">
+      Die nicht-aufbereiteten Verfahren haben neben der Anleitungs-Maske nur eine einzige Maske, auf der der Bit-Vergleich stattfindet.
+
+      Nach der Anleitung wird der initiale Input angezeigt.
+      Sobald eine Änderung am Input vorgenommen wird, wird die veränderte Nachricht neben der initialen Nachricht angezeigt.
+
+      Die Informationen können im Hex- und Dezimal-Format angezeigt werden. Für klassische Verfahren können sie zusätzlich im Text-Format angezeigt werden.
+
+      Nachdem das Plugin die veränderte Nachricht erhalten hat, werden ebenfalls die statistischen Daten (wie im vorigen Abschnitt) und das Kuchendiagramm angezeigt.
+
+      Nur bei klassischen Verfahren beziehen sich die statistischen Daten nicht auf Bit-, sondern auf Byte-Veränderungen.
+
+    </section></presentation>
+  <references>
+    <linkReference id="Wikipedia">
+      <link url="https://en.wikipedia.org/wiki/Avalanche_effect" lang="en" />
+      <caption lang="en">Avalanche effect (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Lawineneffekt_(Kryptographie)" lang="de-DE" />
+      <caption lang="de-DE">Avalanche-Effekt (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

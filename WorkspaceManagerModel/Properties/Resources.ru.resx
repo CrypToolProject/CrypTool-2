@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ExecutionEngine_Execute_Exception_occured_during_startup_of_Workspace___0_" xml:space="preserve">
+    <value>Исключение произошло во время запуска рабочей области: {0}</value>
+  </data>
+  <data name="ExecutionEngine_BenchmarkTimeout_Executing_at__0_0_0__Plugins_sec_" xml:space="preserve">
+    <value>Выполнение в {0: 0,0} плагинов \ сек.</value>
+  </data>
+  <data name="ExecutionEngine_CheckGui_Exception_occured_during_update_of_GUI_of_Workspace___0__" xml:space="preserve">
+    <value>Исключение произошло во время обновления GUI рабочей области: {0}</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Start_stopping_ExecutionEngine" xml:space="preserve">
+    <value>Начать остановку ExecutionEngine</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Waiting_for_all_threads_to_stop" xml:space="preserve">
+    <value>Ожидание остановки всех потоков</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Thread__0__did_not_stop_in__1__miliseconds_and_will_be_aborted_now_" xml:space="preserve">
+    <value>Тема {0} не остановилась в {1} миллисекундах и теперь будет прервана.</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Exception_during_waiting_for_thread___0___to_stop___1_" xml:space="preserve">
+    <value>Исключение во время ожидания потока &amp;#39;{0}&amp;#39; для остановки: {1}</value>
+  </data>
+  <data name="ExecutionEngine_Stop_All_threads_stopped" xml:space="preserve">
+    <value>Все потоки остановлены</value>
+  </data>
+  <data name="ExecutionEngine_Stop_WorkspaceModel_states_resetted" xml:space="preserve">
+    <value>Состояние WorkspaceModel сбрасывается</value>
+  </data>
+  <data name="ExecutionEngine_Stop_ExecutionEngine_successfully_stopped" xml:space="preserve">
+    <value>ExecutionEngine успешно остановлен</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Exception_occured_during_stopping_of_Workspace___0__" xml:space="preserve">
+    <value>Исключение произошло при остановке рабочей области: {0}</value>
+  </data>
+  <data name="ExecutionEngine_Stop_Aborting___0___now" xml:space="preserve">
+    <value>Отмена «{0}» сейчас</value>
+  </data>
+  <data name="ConnectorModel_PropertyChangedOnPlugin_Error_occured_during_propagating_of_new_value_of___0___of_Output___1_____2_" xml:space="preserve">
+    <value>Ошибка при распространении нового значения &amp;#39;{0}&amp;#39; Output &amp;#39;{1}&amp;#39;: {2}</value>
+  </data>
+  <data name="PluginModel_Execute_Number_of__0__too_big_for__1____2_" xml:space="preserve">
+    <value>Количество {0} слишком велико для {1}: {2}</value>
+  </data>
+  <data name="PluginModel_Execute_An_error_occured_while_setting_value_of_connector___0___of___1_____2_" xml:space="preserve">
+    <value>Произошла ошибка при установке значения «{0}» в &amp;#39;{1}&amp;#39;: {2}</value>
+  </data>
+  <data name="PluginModel_Execute_An_error_occured_while_executing____0______1__" xml:space="preserve">
+    <value>Произошла ошибка при выполнении &amp;#39;{0}&amp;#39;: {1}</value>
+  </data>
+  <data name="PluginModel_Execute_An_error_occured_while_executing___0______1_" xml:space="preserve">
+    <value>Произошла ошибка при выполнении &amp;#39;{0}&amp;#39;: {1}</value>
+  </data>
+  <data name="CopyOperation_Execute_Could_not_restore_the_setting___0___of_plugin___1__" xml:space="preserve">
+    <value>Не удалось восстановить настройку &amp;#39;{0}&amp;#39; плагина &amp;#39;{1}&amp;#39;</value>
+  </data>
+  <data name="CopyOperation_Execute_Error_while_initializing___0__" xml:space="preserve">
+    <value>Ошибка при инициализации &amp;#39;{0}&amp;#39;</value>
+  </data>
+  <data name="CopyOperation_Execute_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_" xml:space="preserve">
+    <value>Ошибка при восстановлении IControl Connection между &amp;#39;{0}&amp;#39; до &amp;#39;{1}&amp;#39;. Рабочая область, безусловно, не будет работать.</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_Could_not_restore_the_setting___0___of_plugin___1__" xml:space="preserve">
+    <value>Не удалось восстановить настройку &amp;#39;{0}&amp;#39; плагина &amp;#39;{1}&amp;#39;</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_A_property_with_name___0___of_type___1___does_not_exist_in___2___3___but_a_ConnectorModel_exists_in_the_PluginModel__Delete_the_ConnectorModel_now_" xml:space="preserve">
+    <value>Свойство с именем &amp;#39;{0}&amp;#39; типа &amp;#39;{1}&amp;#39; не существует в &amp;#39;{2}: {3}&amp;#39;, но ConnectorModel существует в модуле PluginModel. Удалите теперь ConnectorModel.</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_A_ConnectorModel_for_the_plugins_property___0___of_type___1___does_not_exist_in_the_PluginModel_of___2___3____Create_a_ConnectorModel_now_" xml:space="preserve">
+    <value>A ConnectorModel для свойства plugins &amp;#39;{0}&amp;#39; типа &amp;#39;{1}&amp;#39; не существует в модуле Plugin &amp;#39;{2}: {3}&amp;#39;. Создайте теперь ConnectorModel.</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_Error_while_initializing____0__" xml:space="preserve">
+    <value>Ошибка при инициализации &amp;#39;{0}&amp;#39;</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_Error_while_restoring_IControl_Connection_between___0___to___1____Workspace_surely_will_not_work_well_" xml:space="preserve">
+    <value>Ошибка при восстановлении IControl Connection между &amp;#39;{0}&amp;#39; до &amp;#39;{1}&amp;#39;. Рабочая область, безусловно, не будет работать.</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_" xml:space="preserve">
+    <value>ImageModel без данных (байтовый массив == null || байтовый массив пуст) не может быть восстановлен. Удалите его сейчас.</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_TextModel" xml:space="preserve">
+    <value>TextModel без данных (байтовый массив == null || байтовый массив пуст) не может быть восстановлен. Удалите его сейчас.</value>
+  </data>
+  <data name="ModelPersistance_restoreSettings_ImageModel" xml:space="preserve">
+    <value>ImageModel без данных (байтовый массив == null || байтовый массив пуст) не может быть восстановлен. Удалите его сейчас.</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Could_not_create_instance_of___0_" xml:space="preserve">
+    <value>Не удалось создать экземпляр: {0}</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_create_a_Color_with__0__Channels_" xml:space="preserve">
+    <value>Невозможно создать цвет с {0} каналами!</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Expected_1_or_2_types_for_list__But_found___0_" xml:space="preserve">
+    <value>Ожидаемые 1 или 2 типа для списка; Но найдено: {0}</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_create_a_Point_with__0__Coordinates_" xml:space="preserve">
+    <value>Невозможно создать точку с координатами {0}!</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Could_not_deserialize_model_element___0___of_type___1__" xml:space="preserve">
+    <value>Не удалось десериализовать элемент модели &amp;#39;{0}&amp;#39; типа &amp;#39;{1}&amp;#39;</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_find_list_field___0___of___1__" xml:space="preserve">
+    <value>Не удается найти поле списка &amp;#39;{0}&amp;#39; из &amp;#39;{1}&amp;#39;</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Can_not_find_field___0___of___1__" xml:space="preserve">
+    <value>Не удается найти поле &amp;#39;{0}&amp;#39; из &amp;#39;{1}&amp;#39;</value>
+  </data>
+  <data name="XMLSerialization_Deserialize_Could_not_restore_reference_beteen_model_element___0___and_its_reference_with_id___1__" xml:space="preserve">
+    <value>Не удалось восстановить ссылку на элемент модели &amp;#39;{0}&amp;#39; и его ссылку с id &amp;#39;{1}</value>
+  </data>
+  <data name="An_Error_occured_while_stopping_0_1" xml:space="preserve">
+    <value>Ошибка при остановке «{0}»: {1}</value>
+  </data>
+  <data name="An_Error_occured_while_post_0_1" xml:space="preserve">
+    <value>Произошла ошибка при выполнении PostExecution {0}: {1}</value>
+  </data>
+  <data name="An_Error_occured_while_pre_0_1" xml:space="preserve">
+    <value>Произошла ошибка при выполнении PreExecution из {0}: {1}</value>
+  </data>
+</root>

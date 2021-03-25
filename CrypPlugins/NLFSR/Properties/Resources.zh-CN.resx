@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>零距离</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>非线性反馈移位寄存器</value>
+  </data>
+  <data name="InputTapSequenceCaption" xml:space="preserve">
+    <value>反馈功能</value>
+  </data>
+  <data name="InputTapSequenceTooltip" xml:space="preserve">
+    <value>反馈函数为字符串，例如x0 * x2 + x1 + 1</value>
+  </data>
+  <data name="InputSeedCaption" xml:space="preserve">
+    <value>种子</value>
+  </data>
+  <data name="InputSeedTooltip" xml:space="preserve">
+    <value>NLFSR的种子以二进制表示。</value>
+  </data>
+  <data name="InputClockBoolCaption" xml:space="preserve">
+    <value>时钟</value>
+  </data>
+  <data name="InputClockBoolTooltip" xml:space="preserve">
+    <value>可选时钟输入。仅当时钟为真时，NLFSR才会前进。</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>字符串输出</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>将输出位生成为长度为=舍入的字符串。使用此输出而无需时钟输入。</value>
+  </data>
+  <data name="OutputBoolCaption" xml:space="preserve">
+    <value>布尔输出</value>
+  </data>
+  <data name="OutputBoolTooltip" xml:space="preserve">
+    <value>NLFSR布尔输出。将此输出与时钟输入一起使用。</value>
+  </data>
+  <data name="OutputBoolArrayCaption" xml:space="preserve">
+    <value>Boolean []输出</value>
+  </data>
+  <data name="OutputBoolArrayTooltip" xml:space="preserve">
+    <value>NLFSR布尔输出。将此输出与时钟输入一起使用。</value>
+  </data>
+  <data name="OutputClockingBitCaption" xml:space="preserve">
+    <value>附加输出位</value>
+  </data>
+  <data name="OutputClockingBitTooltip" xml:space="preserve">
+    <value>附加输出位。</value>
+  </data>
+  <data name="AlwaysCreateOutputCaption" xml:space="preserve">
+    <value>始终创建输出</value>
+  </data>
+  <data name="AlwaysCreateOutputTooltip" xml:space="preserve">
+    <value>启用此复选框后，即使时钟设置为false，也会生成输出。输出位将是最后一个时钟周期的位。</value>
+  </data>
+  <data name="ClockingBitCaption" xml:space="preserve">
+    <value>附加输出位＃</value>
+  </data>
+  <data name="ClockingBitTooltip" xml:space="preserve">
+    <value>哪一位应作为附加输出生成？例如作为时钟位。</value>
+  </data>
+  <data name="NoQuickwatchCaption" xml:space="preserve">
+    <value>不显示简报</value>
+  </data>
+  <data name="NoQuickwatchTooltip" xml:space="preserve">
+    <value>启用此复选框后，将不会显示任何演示文稿，并且性能会更好。</value>
+  </data>
+  <data name="PolynomialCaption" xml:space="preserve">
+    <value>反馈功能</value>
+  </data>
+  <data name="PolynomialTooltip" xml:space="preserve">
+    <value>定义反馈功能，例如x0 * x2 + x1 + 1</value>
+  </data>
+  <data name="RoundsCaption" xml:space="preserve">
+    <value>回合</value>
+  </data>
+  <data name="RoundsTooltip" xml:space="preserve">
+    <value>应生成多少位？注意：仅在不使用布尔时钟的情况下适用。</value>
+  </data>
+  <data name="SaveCurrentStateCaption" xml:space="preserve">
+    <value>保存NLFSR的状态</value>
+  </data>
+  <data name="SaveCurrentStateTooltip" xml:space="preserve">
+    <value>启用此复选框后，打开.cte后将恢复当前状态。</value>
+  </data>
+  <data name="SeedCaption" xml:space="preserve">
+    <value>种子</value>
+  </data>
+  <data name="SeedTooltip" xml:space="preserve">
+    <value>定义LFSR的种子。例如11100</value>
+  </data>
+  <data name="UseBoolClockCaption" xml:space="preserve">
+    <value>使用BoolClock</value>
+  </data>
+  <data name="UseBoolClockTooltip" xml:space="preserve">
+    <value>启用此复选框后，将使用BoolClock。</value>
+  </data>
+  <data name="UseClockingBitCaption" xml:space="preserve">
+    <value>生成添加。输出位</value>
+  </data>
+  <data name="UseClockingBitTooltip" xml:space="preserve">
+    <value>启用此复选框后，将生成附加输出位。</value>
+  </data>
+  <data name="initNLFSRCaption" xml:space="preserve">
+    <value>抽签NLFSR</value>
+  </data>
+  <data name="initNLFSRTooltip" xml:space="preserve">
+    <value>初始化NLFSR并绘制演示文稿。用于在按播放之前查看NLFSR。</value>
+  </data>
+  <data name="AlwaysCreateOutputList1" xml:space="preserve">
+    <value>总是产生输出？</value>
+  </data>
+  <data name="ClockGroup" xml:space="preserve">
+    <value>时钟属性</value>
+  </data>
+  <data name="ClockingBitGroup" xml:space="preserve">
+    <value>附加输出位</value>
+  </data>
+  <data name="NoQuickwatchList1" xml:space="preserve">
+    <value>显示演示文稿？</value>
+  </data>
+  <data name="No_Quickwatch_data_right_now_" xml:space="preserve">
+    <value>现在没有数据可显示。</value>
+  </data>
+  <data name="SaveCurrentStateList1" xml:space="preserve">
+    <value>保存当前状态？</value>
+  </data>
+  <data name="UseBoolClockList1" xml:space="preserve">
+    <value>使用外部时钟？</value>
+  </data>
+  <data name="UseClockingBitList1" xml:space="preserve">
+    <value>产生额外的输出位？</value>
+  </data>
+</root>

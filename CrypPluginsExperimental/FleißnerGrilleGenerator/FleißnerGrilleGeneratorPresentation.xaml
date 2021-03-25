@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="CrypTool.Plugins.FleißnerGrilleGenerator.FleißnerGrilleGeneratorPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="1160" d:DesignWidth="950">
+    <Grid>
+        <Canvas Name="mainmain" Height="1160" Width="950" HorizontalAlignment="Left">
+            <Label Canvas.Left="47" Canvas.Top="30" Content="" Height="45" Name="describeLabel" FontSize="32" FontFamily="Arial" />
+            <Label Canvas.Left="47" Canvas.Top="90" Content="" Height="45" Name="describe2Label" FontSize="32" FontFamily="Arial" />
+            <Label Canvas.Left="47" Canvas.Top="180" Content="Grille: " Height="45" Name="grilleLabel" FontSize="32" FontFamily="Arial" Width="850" />
+            <WrapPanel Canvas.Left="50" Canvas.Top="225" Height="850" Name="grilleWrapPanel" Width="850"></WrapPanel>                 
+        </Canvas>    
+    </Grid>
+</UserControl>

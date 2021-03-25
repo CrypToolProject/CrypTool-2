@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">
+    The quadratic sieve (QS) is a modern integer factorization algorithm. Factorization is the breaking down of a number into its prime divisors. For numbers bigger than ca. 100 decimal digits, the QS algorithm is currently
+    the 2nd fastest algorithm after the general number field sieve (GNFS). Today QS is still the fastest algorithm for big integers under ca. 100 decimal digits.
+
+    <section headline="Complexity">
+      The running time of the quadratic sieve algorithm to factor an integer of size n is (using O-notation):       
+      $$O(\exp(\log(n) \cdot \log(n) \cdot \log(n))$$
+    </section><section headline="About this component">
+      This component is a wrapper for the quadratic sieve C implementation Msieve written by Jason Stratos Papadopoulos. The C code is integrated into a 32bit dll and
+      is loaded during the startup phase of CrypTool 2. The dll also extends the functionality of the Msieve algorithm with multi threading. The original Msieve itself is a console application.
+      If you want to get further information about Msieve please have a look at the author's website on SourceForge at <ref id="msieve" />.
+    </section></introduction>
+  <introduction lang="zh-CN">二次筛（QS）是一种现代的整数分解算法。因式分解是将数字分解为其主要除数。对于大于ca的数字。 QS算法是100个十进制数字，是目前通用数字字段筛（GNFS）之后第二快的算法。如今，QS仍然是最快的算法。 100个十进制数字。二次筛算法分解大小为n的整数的运行时间为（使用O-表示法）：$$ O（\ exp（\ log（n）\ cdot \ log（n）\ cdot \ log（n）） $$该组件是由Jason Stratos Papadopoulos编写的二次筛C实现Msieve的包装程序，该C代码集成到32位dll中，并在CrypTool 2的启动阶段中加载。该dll还扩展了Msieve算法的功能。 Msieve本身是一个控制台应用程序，如果您想获得有关Msieve的更多信息，请访问SourceForge上的作者网站。</introduction>
+  <introduction lang="ru">Квадратичное сито (QS) представляет собой современный алгоритм целочисленной факторизации. Факторизация - это разбиение числа на простые делители. Для чисел, больших, чем ок. 100 десятичных цифр, алгоритм QS в настоящее время является вторым самым быстрым алгоритмом после ситового поля общего числа (GNFS). Сегодня QS по-прежнему является самым быстрым алгоритмом для больших целых чисел под ок. 100 десятичных цифр. Время работы алгоритма квадратичного сита для вычисления целого числа размера n (с использованием O-нотации): $$ O (\ exp (\ log (n) \ cdot \ log (n) \ cdot \ log (n)) $$ Этот компонент является оболочкой для реализации квадратичного сита C Msieve, написанной Джейсоном Стратосом Пападопулосом. Код C интегрирован в 32-разрядную DLL и загружается во время фазы запуска CrypTool 2. DLL также расширяет функциональность алгоритма Msieve с несколькими потоками. Оригинальное Msieve - консольное приложение. Если вы хотите получить дополнительную информацию о Msieve, пожалуйста, взгляните на сайт автора на SourceForge.</introduction>
+  <usage lang="en">
+    This component has a BigNumber input. Here the user has to enter a BigNumber. He can use a <docRef item="CrypTool.Plugins.Numbers.NumberInput" /> component and enter a number or an arithmetic expression like $2^{12}+17+2^{32}$.
+    However, the input number must consist of less than 275 decimal digits, otherwise the component will reject it.
+    The component has only one output. The component puts an array of BigIntegers (the prime factors) to this output. In the configuration bar the user can set the number of CPUs to be used by the quadratic sieve component
+    (It is only possible to select as many CPUs as the user's system offers).
+    The quadratic sieve caches the found relations of the number.
+    The user can choose if this cache should be deleted at a new startup or not by using the check box in the configuration bar.
+  </usage>
+  <usage lang="zh-CN">该组件具有BigNumber输入。用户必须在此处输入一个BigNumber。他可以使用组件并输入数字或算术表达式，例如$ 2 ^ {12} + 17 + 2 ^ {32} $。但是，输入的数字必须少于275个十进制数字，否则组件将拒绝它。该组件只有一个输出。该组件将BigIntegers（主要因子）数组放入此输出。用户可以在配置栏中设置二次筛组件要使用的CPU数量（只能选择用户系统提供的CPU数量）。二次筛缓存找到的数字关系。用户可以使用配置栏中的复选框来选择是否在新启动时删除此缓存。</usage>
+  <usage lang="ru">Этот компонент имеет вход BigNumber. Здесь пользователь должен ввести BigNumber. Он может использовать компонент и вводить число или арифметическое выражение, подобное $ 2 ^ {12} + 17 + 2 ^ {32} $. Однако входной номер должен состоять из менее 275 десятичных цифр, иначе компонент отклонит его. Компонент имеет только один выход. Компонент помещает массив BigIntegers (первичные факторы) в этот вывод. В панели конфигурации пользователь может установить количество процессоров, которые будут использоваться квадратичным ситовым компонентом (только можно выбрать столько процессоров, сколько предлагает система пользователя). Квадратичное сито кэширует найденные отношения числа. Пользователь может выбрать, следует ли удалять этот кеш при новом запуске или нет, используя флажок на панели конфигурации.</usage>
+  <presentation lang="en">
+    The quadratic sieve component offers a QuickWatchRepresentation.
+    This representation can be found by clicking the components presentation icon.
+    Here the user can see the estimated end time, the current state of the sieving process and the already found prime factors.
+    Also a key figure (relations) is visible. Relations are collected by the Msieve algorithm for factorization.
+    The user sees the needed number of relations and the actual found number.
+    As soon as the quadratic sieve has found enough relations the sieving is finished.
+  </presentation>
+  <presentation lang="zh-CN">二次筛组件提供QuickWatchRepresentation。通过单击组件演示图标可以找到该表示形式。用户可以在此处看到估计的结束时间，筛分过程的当前状态以及已经找到的主要因素。关键数字（关系）也可见。通过Msieve算法收集关系以进行因式分解。用户看到所需的关系数和实际找到的数。一旦二次筛找到足够的关系，筛分即告完成。</presentation>
+  <presentation lang="ru">Квадратичный ситовый компонент предлагает QuickWatchRepresentation. Это представление можно найти, щелкнув значок презентации компонентов. Здесь пользователь может видеть расчетное время окончания, текущее состояние процесса просеивания и уже найденные основные факторы. Также видна ключевая фигура (отношения). Отношения собираются алгоритмом Msieve для факторизации. Пользователь видит необходимое количество отношений и фактическое найденное число. Как только квадратное сито обнаружило достаточные отношения, просеивание закончено.</presentation>
+  <language culture="de" />
+  <introduction lang="de">
+    Das quadratische Sieb (QS) ist ein moderner Algorithmus zur Faktorisierung großer natürlicher Zahlen. Bei der Faktorisierung einer Zahl wird diese in ihre Primfaktoren zerlegt. 
+    Momentan ist das QS für Zahlen mit mehr als 100 Dezimalstellen nach dem allgemeinen Zahlkörpersieb (GNFS) das zweitschnellste Faktorisierungsverfahren, für Zahlen mit bis zu 100 Dezimalstellen
+    ist es immer noch das schnellste bekannte Verfahren.
+
+    <section headline="Komplexität">
+      Die Laufzeit des QS-Algorithmus für die Faktorisierung einer Zahl der Größe n ist (in O-Notation):
+      $$O(\exp(\log(n) \cdot \log(n) \cdot \log(n))$$
+    </section><section headline="Über diese Komponente">
+      Diese Komponente ist ein Wrapper für Msieve, eine Implementierung in C des quadratischen Siebs von Jason Stratos Papadopoulos. Der kompilierte C-Code liegt als 32-Bit-DLL vor.
+      Beim Start wird diese von CrypTool 2 geladen. Die DLL erweitert die Funktionalität von Msieve um Multithreading. Msieve ist ursprünglich eine Konsolenanwendung.
+      Für weitere Informationen über Msieve gehen Sie bitte auf die Website des Autors auf SourceForge: <ref id="msieve" />.
+    </section></introduction>
+  <usage lang="de">
+    Die Komponente hat einen Eingang, an dem die zu faktorisierende Zahl als BigNumber anliegen muss. Dies kann z.B. mittels der <docRef item="CrypTool.Plugins.Numbers.NumberInput" />-Komponente geschehen, über die Zahlen oder auch
+    arithmetische Ausdrücke wie $2^{12}+17+2^{32}$ eingegeben werden können. Allerdings akzeptiert die QS-Komponente nur Zahlen mit weniger als 275 Dezimalstellen als Eingabe.
+    Die Komponente hat nur einen Ausgang. An diesem wird ein Array von BigInteger-Zahlen, nämlich den gefundenen Primfaktoren, ausgegeben. In den Einstellungen der Komponente kann man die Anzahl der für die Faktorisierung zu verwendenden CPUs
+    angeben, wobei als Maximum automatisch die Anzahl der vorhandenen CPUs des Systems angegeben ist.
+    Die vom quadratischen Sieb für eine Zahl gefundenen Relationen werden zwischengespeichert. In den Einstellungen können Sie angeben, ob die Zwischenergebnisse bei einem neuen Start der Komponente gelöscht oder wiederverwendet werden sollen.
+  </usage>
+  <presentation lang="de">
+    In der Präsentation der Komponente werden die voraussichtliche Dauer der Berechnungen und der momentane Status des Siebvorgangs sowie die bisher gefundenen Primfaktoren angezeigt.
+    Außerdem wird die Anzahl der bisher gefundenen und der von Msieve für die Faktorisierung benötigten Relationen angezeigt.
+    Sobald das quadratische Sieb genügend Relationen gefunden hat, wird der Siebvorgang beendet.
+  </presentation>
+  <references>
+    <linkReference id="msieve">
+      <link url="http://sourceforge.net/projects/msieve/" lang="en" />
+      <caption lang="en">Msieve SourceForge page</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Quadratic_sieve" lang="en" />
+      <caption lang="en">Quadratic sieve in Wikipedia</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Integer_factorization" lang="en" />
+      <caption lang="en">Integer factorization in Wikipedia</caption>
+    </linkReference>
+  </references>
+</documentation>

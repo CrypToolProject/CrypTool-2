@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="CrypTool.MD5.Presentation.Displays.RoundAndStepDisplay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="50" Width="298" Background="AliceBlue">
+    <Grid>
+        <Label FontSize="16" HorizontalAlignment="Left" Width="70" Height="50" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Loc Round_}" />
+        <Label Margin="76,0,0,0" Content="{Binding Round}" Width="70" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+        <Label HorizontalAlignment="Left" Width="70" Content="{Binding RoundStep}" Margin="228,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+        <Label FontSize="16" Margin="152,0,0,0" HorizontalAlignment="Left" Width="70" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Loc Step_}" />
+    </Grid>
+</UserControl>

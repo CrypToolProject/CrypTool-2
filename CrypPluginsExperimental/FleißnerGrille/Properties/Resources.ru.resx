@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACCEPTED_NEW" xml:space="preserve">
+    <value>«Принимал новый трафарет от пользователя:»</value>
+  </data>
+  <data name="ActionModeCaption" xml:space="preserve">
+    <value>Режим</value>
+  </data>
+  <data name="ActionModeList1" xml:space="preserve">
+    <value>шифровать</value>
+  </data>
+  <data name="ActionModeList2" xml:space="preserve">
+    <value>расшифровывать</value>
+  </data>
+  <data name="ActionModeTooltip" xml:space="preserve">
+    <value>Выберите действие алгоритма</value>
+  </data>
+  <data name="ActionRandomCaption" xml:space="preserve">
+    <value>Случайное письмо</value>
+  </data>
+  <data name="ActionRandomList1" xml:space="preserve">
+    <value>Большое письмо</value>
+  </data>
+  <data name="ActionRandomList2" xml:space="preserve">
+    <value>Нижнее письмо</value>
+  </data>
+  <data name="ActionRandomList3" xml:space="preserve">
+    <value>Большая и нижняя буква</value>
+  </data>
+  <data name="ActionRandomTooltip" xml:space="preserve">
+    <value>заполнить оставшиеся поля решетки произвольными буквами</value>
+  </data>
+  <data name="ActionRotateCaption" xml:space="preserve">
+    <value>Поворот</value>
+  </data>
+  <data name="ActionRotateList1" xml:space="preserve">
+    <value>Оставил</value>
+  </data>
+  <data name="ActionRotateList2" xml:space="preserve">
+    <value>Правильно</value>
+  </data>
+  <data name="ActionRotateTooltip" xml:space="preserve">
+    <value>направление вращения решетки</value>
+  </data>
+  <data name="ActionSettingsGroup" xml:space="preserve">
+    <value>настройки</value>
+  </data>
+  <data name="GRILLE" xml:space="preserve">
+    <value>«Сетка»</value>
+  </data>
+  <data name="GrilleGroup" xml:space="preserve">
+    <value>сетка</value>
+  </data>
+  <data name="GrilleStringTooltip" xml:space="preserve">
+    <value>фактическая решетка из алгоритма</value>
+  </data>
+  <data name="IGNORING_EMPTY" xml:space="preserve">
+    <value>«Игнорирование пустого шаблона от пользователя! Используя предыдущий трафарет:</value>
+  </data>
+  <data name="InputStringCaption" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="INPUTSTRING_IS_EMPTY" xml:space="preserve">
+    <value>&amp;quot;InputString ist empty или null&amp;quot;</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>вывод</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Сетка Fleißner</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Fleißner Grille - классический транспозиционный шифр с решеткой</value>
+  </data>
+  <data name="PresentationGroup" xml:space="preserve">
+    <value>презентация</value>
+  </data>
+  <data name="PresentationSpeedCaption" xml:space="preserve">
+    <value>скорость</value>
+  </data>
+  <data name="PresentationSpeedTooltip" xml:space="preserve">
+    <value>корректировка скорости презентации</value>
+  </data>
+  <data name="SQUARE_GRILLE" xml:space="preserve">
+    <value>«квадратная решетка» меньше длины &amp;quot;</value>
+  </data>
+  <data name="SQUARE_GRILLE1" xml:space="preserve">
+    <value>«квадратный трафарет»)</value>
+  </data>
+  <data name="THERE_MUST_BE" xml:space="preserve">
+    <value>«должно быть, по крайней мере,</value>
+  </data>
+  <data name="With_A" xml:space="preserve">
+    <value>&amp;quot;(С&amp;quot;</value>
+  </data>
+  <data name="FAILURE" xml:space="preserve">
+    <value>&amp;quot;FAILURE:&amp;quot;</value>
+  </data>
+  <data name="GRILLE_FROM_USER" xml:space="preserve">
+    <value>Решетка от пользователя:</value>
+  </data>
+</root>

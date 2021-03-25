@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>选择算法动作</value>
+  </data>
+  <data name="Bar10Caption" xml:space="preserve">
+    <value>酒吧＃10</value>
+  </data>
+  <data name="Bar10Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar11Caption" xml:space="preserve">
+    <value>酒吧＃11</value>
+  </data>
+  <data name="Bar11Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar12Caption" xml:space="preserve">
+    <value>12号酒吧</value>
+  </data>
+  <data name="Bar12Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar13Caption" xml:space="preserve">
+    <value>酒吧＃13</value>
+  </data>
+  <data name="Bar13Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar14Caption" xml:space="preserve">
+    <value>酒吧＃14</value>
+  </data>
+  <data name="Bar14Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar15Caption" xml:space="preserve">
+    <value>15号酒吧</value>
+  </data>
+  <data name="Bar15Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar16Caption" xml:space="preserve">
+    <value>16号酒吧</value>
+  </data>
+  <data name="Bar16Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar17Caption" xml:space="preserve">
+    <value>酒吧＃17</value>
+  </data>
+  <data name="Bar17Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar18Caption" xml:space="preserve">
+    <value>酒吧＃18</value>
+  </data>
+  <data name="Bar18Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar19Caption" xml:space="preserve">
+    <value>酒吧＃19</value>
+  </data>
+  <data name="Bar19Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar1Caption" xml:space="preserve">
+    <value>酒吧＃1</value>
+  </data>
+  <data name="Bar1Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar20Caption" xml:space="preserve">
+    <value>酒吧＃20</value>
+  </data>
+  <data name="Bar20Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar21Caption" xml:space="preserve">
+    <value>酒吧＃21</value>
+  </data>
+  <data name="Bar21Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar22Caption" xml:space="preserve">
+    <value>酒吧＃22</value>
+  </data>
+  <data name="Bar22Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar23Caption" xml:space="preserve">
+    <value>酒吧＃23</value>
+  </data>
+  <data name="Bar23Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar24Caption" xml:space="preserve">
+    <value>酒吧＃24</value>
+  </data>
+  <data name="Bar24Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar25Caption" xml:space="preserve">
+    <value>酒吧＃25</value>
+  </data>
+  <data name="Bar25Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar26Caption" xml:space="preserve">
+    <value>酒吧＃26</value>
+  </data>
+  <data name="Bar26Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar27Caption" xml:space="preserve">
+    <value>酒吧＃27</value>
+  </data>
+  <data name="Bar27Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar2Caption" xml:space="preserve">
+    <value>酒吧＃2</value>
+  </data>
+  <data name="Bar2Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar3Caption" xml:space="preserve">
+    <value>酒吧＃3</value>
+  </data>
+  <data name="Bar3Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar4Caption" xml:space="preserve">
+    <value>酒吧＃4</value>
+  </data>
+  <data name="Bar4Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar5Caption" xml:space="preserve">
+    <value>酒吧＃5</value>
+  </data>
+  <data name="Bar5Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar6Caption" xml:space="preserve">
+    <value>酒吧＃6</value>
+  </data>
+  <data name="Bar6Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar7Caption" xml:space="preserve">
+    <value>7号酒吧</value>
+  </data>
+  <data name="Bar7Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar8Caption" xml:space="preserve">
+    <value>酒吧＃8</value>
+  </data>
+  <data name="Bar8Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="Bar9Caption" xml:space="preserve">
+    <value>酒吧＃9</value>
+  </data>
+  <data name="Bar9Tooltip" xml:space="preserve">
+    <value>请激活滑块，例如24</value>
+  </data>
+  <data name="BarGroup" xml:space="preserve">
+    <value>吊耳位置</value>
+  </data>
+  <data name="BlockCaption" xml:space="preserve">
+    <value>格式化输出块</value>
+  </data>
+  <data name="BlockTooltip" xml:space="preserve">
+    <value>将组件的输出格式化为5个字符的块？</value>
+  </data>
+  <data name="CaseHandlingCaption" xml:space="preserve">
+    <value>案件处理</value>
+  </data>
+  <data name="CaseHandlingList1" xml:space="preserve">
+    <value>保留大小写</value>
+  </data>
+  <data name="CaseHandlingList2" xml:space="preserve">
+    <value>转换为上</value>
+  </data>
+  <data name="CaseHandlingList3" xml:space="preserve">
+    <value>转换为较低</value>
+  </data>
+  <data name="CaseHandlingTooltip" xml:space="preserve">
+    <value>大写和小写字母应该怎么做？</value>
+  </data>
+  <data name="FormattedCheckCaption" xml:space="preserve">
+    <value>输出按键表</value>
+  </data>
+  <data name="FormattedCheckTooltip" xml:space="preserve">
+    <value>如果激活此复选框，则将内部键的格式化键表连同控制值一起发送到“键检查”输出。否则，仅输出控制值。</value>
+  </data>
+  <data name="InputInternalKeyCaption" xml:space="preserve">
+    <value>输入内部键</value>
+  </data>
+  <data name="InputInternalKeyTooltip" xml:space="preserve">
+    <value>内部键的输入，由活动转子销的逗号分隔位置和接线片位置组成。</value>
+  </data>
+  <data name="KeyCheckCaption" xml:space="preserve">
+    <value>密钥检查</value>
+  </data>
+  <data name="KeyCheckTooltip" xml:space="preserve">
+    <value>由26个字母“ A”组成的明文用外部密钥“ AAAAAA”加密。生成的密文用于检查内部密钥的正确性。</value>
+  </data>
+  <data name="ModelCaption" xml:space="preserve">
+    <value>模型</value>
+  </data>
+  <data name="ModelList1" xml:space="preserve">
+    <value>6个转子</value>
+  </data>
+  <data name="ModelList2" xml:space="preserve">
+    <value>5个转子</value>
+  </data>
+  <data name="ModelTooltip" xml:space="preserve">
+    <value>选择机器型号。</value>
+  </data>
+  <data name="OutputInternalKeyCaption" xml:space="preserve">
+    <value>输出内部键</value>
+  </data>
+  <data name="OutputInternalKeyTooltip" xml:space="preserve">
+    <value>内部钥匙的输出，包括活动的转子销和凸耳在凸耳上的位置。</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>文字输出</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>使用M209密码处理后的字符串</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>M209</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>第二次世界大战的经典密码机（美国）</value>
+  </data>
+  <data name="RandomKeyCaption" xml:space="preserve">
+    <value>产生内部金钥</value>
+  </data>
+  <data name="RandomKeyGroup" xml:space="preserve">
+    <value>内部钥匙</value>
+  </data>
+  <data name="RandomKeyTooltip" xml:space="preserve">
+    <value>按下此按钮可生成一个随机的内部键，该内部键由引脚和接线片的位置组成。</value>
+  </data>
+  <data name="Rotor1Caption" xml:space="preserve">
+    <value>1号转子</value>
+  </data>
+  <data name="Rotor1Tooltip" xml:space="preserve">
+    <value>请写所有活动引脚，例如ABCD。</value>
+  </data>
+  <data name="Rotor2Caption" xml:space="preserve">
+    <value>2号转子</value>
+  </data>
+  <data name="Rotor2Tooltip" xml:space="preserve">
+    <value>请写所有活动引脚，例如ABCD</value>
+  </data>
+  <data name="Rotor3Caption" xml:space="preserve">
+    <value>3号转子</value>
+  </data>
+  <data name="Rotor3Tooltip" xml:space="preserve">
+    <value>请写所有活动引脚，例如ABCD</value>
+  </data>
+  <data name="Rotor4Caption" xml:space="preserve">
+    <value>4号转子</value>
+  </data>
+  <data name="Rotor4Tooltip" xml:space="preserve">
+    <value>请写所有活动引脚，例如ABCD</value>
+  </data>
+  <data name="Rotor5Caption" xml:space="preserve">
+    <value>5号转子</value>
+  </data>
+  <data name="Rotor5Tooltip" xml:space="preserve">
+    <value>请写所有活动引脚，例如ABCD</value>
+  </data>
+  <data name="Rotor6Caption" xml:space="preserve">
+    <value>6号转子</value>
+  </data>
+  <data name="Rotor6Tooltip" xml:space="preserve">
+    <value>请写所有活动引脚，例如ABCD</value>
+  </data>
+  <data name="StartwertCaption" xml:space="preserve">
+    <value>键（初始转子设置）</value>
+  </data>
+  <data name="StartwertTooltip" xml:space="preserve">
+    <value>请提供每个转子的初始转子设置，例如ABCDEF</value>
+  </data>
+  <data name="TextCaption" xml:space="preserve">
+    <value>文字输入</value>
+  </data>
+  <data name="TextOptionsGroup" xml:space="preserve">
+    <value>文字选项</value>
+  </data>
+  <data name="TextTooltip" xml:space="preserve">
+    <value>输入文本</value>
+  </data>
+  <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
+    <value>未知符号处理</value>
+  </data>
+  <data name="UnknownSymbolHandlingList1" xml:space="preserve">
+    <value>忽略（保留未修改的内容）</value>
+  </data>
+  <data name="UnknownSymbolHandlingList2" xml:space="preserve">
+    <value>去掉</value>
+  </data>
+  <data name="UnknownSymbolHandlingList3" xml:space="preserve">
+    <value>替换为“ X”</value>
+  </data>
+  <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
+    <value>非明文字母中的输入字符应该怎么做？</value>
+  </data>
+  <data name="WheelGroup" xml:space="preserve">
+    <value>引脚位置</value>
+  </data>
+  <data name="ZSpaceCaption" xml:space="preserve">
+    <value>用“ Z”代替空格</value>
+  </data>
+  <data name="ZSpaceTooltip" xml:space="preserve">
+    <value>在加密过程中，将空格字符替换为“ Z”，在解密过程中，将空格字符替换为“ Z”。</value>
+  </data>
+</root>

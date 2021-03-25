@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdvancedSettingsGroup" xml:space="preserve">
+    <value>高级设置</value>
+  </data>
+  <data name="AlphabetCaption" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="AlphabetGroup" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>完整使用的字母</value>
+  </data>
+  <data name="CaseSensitiveCaption" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="CaseSensitiveTooltip" xml:space="preserve">
+    <value>区分大小写字母。</value>
+  </data>
+  <data name="ChooseAlphabetCaption" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="ChooseAlphabetTooltip" xml:space="preserve">
+    <value>选择语言</value>
+  </data>
+  <data name="CTAlphabetCaption" xml:space="preserve">
+    <value>密文语言</value>
+  </data>
+  <data name="CTAlphabetGroup" xml:space="preserve">
+    <value>密文语言</value>
+  </data>
+  <data name="CTAlphabetTooltip" xml:space="preserve">
+    <value>完整使用的密文语言</value>
+  </data>
+  <data name="CTChooseAlphabetCaption" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="CTChooseAlphabetTooltip" xml:space="preserve">
+    <value>选择密文语言</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>单字母替代分析仪</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>密码分析单字母替换密码</value>
+  </data>
+  <data name="PTAlphabetCaption" xml:space="preserve">
+    <value>明文语言</value>
+  </data>
+  <data name="PTAlphabetGroup" xml:space="preserve">
+    <value>明文语言</value>
+  </data>
+  <data name="PTAlphabetTooltip" xml:space="preserve">
+    <value>完整使用的纯文本语言</value>
+  </data>
+  <data name="PTChooseAlphabetCaption" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="PTChooseAlphabetTooltip" xml:space="preserve">
+    <value>选择纯文本语言</value>
+  </data>
+  <data name="SeparateAlphabetsCaption" xml:space="preserve">
+    <value>单独的纯文本/密文语言</value>
+  </data>
+  <data name="SeparateAlphabetsTooltip" xml:space="preserve">
+    <value>对明文和密文使用不同的语言</value>
+  </data>
+  <data name="CTCaseSensitiveCaption" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="CTCaseSensitiveTooltip" xml:space="preserve">
+    <value>区分大小写字母。</value>
+  </data>
+  <data name="PTCaseSensitiveCaption" xml:space="preserve">
+    <value>区分大小写</value>
+  </data>
+  <data name="PTCaseSensitiveTooltip" xml:space="preserve">
+    <value>区分大小写字母。</value>
+  </data>
+  <data name="CiphertextAlphabetCaption" xml:space="preserve">
+    <value>密文字母</value>
+  </data>
+  <data name="CiphertextAlphabetTooltip" xml:space="preserve">
+    <value>密文字母</value>
+  </data>
+  <data name="CiphertextCaption" xml:space="preserve">
+    <value>密文</value>
+  </data>
+  <data name="CiphertextTooltip" xml:space="preserve">
+    <value>加密文字</value>
+  </data>
+  <data name="LanguagedictionaryCaption" xml:space="preserve">
+    <value>字典</value>
+  </data>
+  <data name="LanguagedictionaryTooltip" xml:space="preserve">
+    <value>假定的明文语言字典</value>
+  </data>
+  <data name="PlaintextAlphabetCaption" xml:space="preserve">
+    <value>明文字母</value>
+  </data>
+  <data name="PlaintextAlphabetOutputCaption" xml:space="preserve">
+    <value>明文字母</value>
+  </data>
+  <data name="PlaintextAlphabetOutputTooltip" xml:space="preserve">
+    <value>带有字母的明文字母以解密密文</value>
+  </data>
+  <data name="PlaintextAlphabetTooltip" xml:space="preserve">
+    <value>假定为明文字母</value>
+  </data>
+  <data name="PlaintextCaption" xml:space="preserve">
+    <value>纯文本</value>
+  </data>
+  <data name="PlaintextTooltip" xml:space="preserve">
+    <value>解密文字</value>
+  </data>
+  <data name="ReferencetextCaption" xml:space="preserve">
+    <value>参考文字</value>
+  </data>
+  <data name="ReferencetextTooltip" xml:space="preserve">
+    <value>示例文本以提取假定的纯文本语言的字母频率</value>
+  </data>
+  <data name="TreatmentInvalidCharsCaption" xml:space="preserve">
+    <value>无效字符</value>
+  </data>
+  <data name="TreatmentInvalidCharsTooltip" xml:space="preserve">
+    <value>处理无效字符。</value>
+  </data>
+  <data name="UseDefaultWordSeparatorCaption" xml:space="preserve">
+    <value>默认单词分隔符</value>
+  </data>
+  <data name="UseDefaultWordSeparatorTooltip" xml:space="preserve">
+    <value>使用默认的单词分隔符（空白）进行字典攻击或手动设置分隔符</value>
+  </data>
+  <data name="ChooseInvalidCharsList1" xml:space="preserve">
+    <value>忽视</value>
+  </data>
+  <data name="ChooseInvalidCharsList2" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="ChooseInvalidCharsList3" xml:space="preserve">
+    <value>用。。。来代替 ？</value>
+  </data>
+  <data name="ElapsedLabel" xml:space="preserve">
+    <value>过去：</value>
+  </data>
+  <data name="EndLabel" xml:space="preserve">
+    <value>结束：</value>
+  </data>
+  <data name="KeyHeader" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="LocalLabel" xml:space="preserve">
+    <value>本地</value>
+  </data>
+  <data name="StartLabel" xml:space="preserve">
+    <value>开始：</value>
+  </data>
+  <data name="TextHeader" xml:space="preserve">
+    <value>文本</value>
+  </data>
+  <data name="TopTenLabel" xml:space="preserve">
+    <value>前十</value>
+  </data>
+  <data name="ValueHeader" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="dic_attack_finished" xml:space="preserve">
+    <value>字典攻击在{0:00}小时{1:00}分钟{2:00}秒内完成。</value>
+  </data>
+  <data name="error_alphabet_length" xml:space="preserve">
+    <value>密文字母比明文字母包含更多的字母。密文字母：“ {0}”（{1}个字母）明文字母：“ {2}”（{3}个字母）现在也使用明文字母作为密文字母。</value>
+  </data>
+  <data name="error_ciphertext" xml:space="preserve">
+    <value>获取密文时出错。</value>
+  </data>
+  <data name="error_dictionary" xml:space="preserve">
+    <value>获取英语词典文件时出错</value>
+  </data>
+  <data name="gen_attack_finished" xml:space="preserve">
+    <value>基因攻击在{0:00}小时{1:00}分钟{2:00}秒内完成。</value>
+  </data>
+  <data name="gen_attack_testedkeys" xml:space="preserve">
+    <value>经过遗传攻击的已测试密钥数：{0}</value>
+  </data>
+  <data name="no_ciphertext" xml:space="preserve">
+    <value>没有设置密文。</value>
+  </data>
+  <data name="no_ciphertext_alphabet" xml:space="preserve">
+    <value>没有设置密文字母。</value>
+  </data>
+  <data name="no_dictionary" xml:space="preserve">
+    <value>未设置语言词典。</value>
+  </data>
+  <data name="no_lang_freq" xml:space="preserve">
+    <value>没有可用的语言频率。</value>
+  </data>
+  <data name="no_ngram_file" xml:space="preserve">
+    <value>没有可用的ngram文件。</value>
+  </data>
+  <data name="no_plaintext_alphabet" xml:space="preserve">
+    <value>没有设置明文字母。</value>
+  </data>
+  <data name="no_reference_text" xml:space="preserve">
+    <value>没有参考文字。</value>
+  </data>
+  <data name="AttackHeader" xml:space="preserve">
+    <value>攻击</value>
+  </data>
+  <data name="DicAttackDisplay" xml:space="preserve">
+    <value>d</value>
+  </data>
+  <data name="GenAttackDisplay" xml:space="preserve">
+    <value>G</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>复制所有行</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>复制键</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>复制所选行</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>复制文字</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>复制值</value>
+  </data>
+  <data name="HillAttackDisplay" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="hill_attack_finished" xml:space="preserve">
+    <value>爬山攻击在{0:00}小时{1:00}分钟{2:00}秒内完成。</value>
+  </data>
+  <data name="hill_attack_testedkeys" xml:space="preserve">
+    <value>经过爬山攻击的测试密钥数：{0}</value>
+  </data>
+  <data name="hill_attack_keyspersecond" xml:space="preserve">
+    <value>经过测试的密钥（每秒爬坡）：{0}</value>
+  </data>
+  <data name="ChooseAlgorithmCaption" xml:space="preserve">
+    <value>算法</value>
+  </data>
+  <data name="ChooseAlgorithmList1" xml:space="preserve">
+    <value>爬山</value>
+  </data>
+  <data name="ChooseAlgorithmList2" xml:space="preserve">
+    <value>字典与遗传</value>
+  </data>
+  <data name="ChooseAlgorithmTooltip" xml:space="preserve">
+    <value>选择应使用的算法。</value>
+  </data>
+  <data name="RestartsCaption" xml:space="preserve">
+    <value>重新启动</value>
+  </data>
+  <data name="RestartsTooltip" xml:space="preserve">
+    <value>选择爬山算法重新开始的频率。</value>
+  </data>
+  <data name="SelectAlgorithmGroup" xml:space="preserve">
+    <value>攻击类型</value>
+  </data>
+  <data name="no_cuda" xml:space="preserve">
+    <value>找不到启用CUDA的设备或CUDA驱动程序。</value>
+  </data>
+  <data name="KeysPerSecLabel" xml:space="preserve">
+    <value>键/秒：</value>
+  </data>
+  <data name="TotalKeysLabel" xml:space="preserve">
+    <value>经过测试的按键：</value>
+  </data>
+  <data name="UseSpacesCaption" xml:space="preserve">
+    <value>使用空间</value>
+  </data>
+  <data name="UseSpacesTooltip" xml:space="preserve">
+    <value>使用包含空格字符的语言统计信息</value>
+  </data>
+  <data name="KeyOutputCaption" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="KeyOutputTooltip" xml:space="preserve">
+    <value>已恢复密钥的输出</value>
+  </data>
+</root>

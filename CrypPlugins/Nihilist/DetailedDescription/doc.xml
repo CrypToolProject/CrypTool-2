@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">
+    The Nihilist cipher is a manually operated symmetric encryption cipher originally used by Russian Nihilists in the 1880s.
+  </introduction>
+  <introduction lang="zh-CN">虚无主义密码是一种手动操作的对称加密密码，最初由俄国虚无主义者在1880年代使用。</introduction>
+  <introduction lang="ru">Шифр Нигилиста - это симметричный шифрованный шифр с ручным управлением, первоначально используемый русскими нигилистами в 1880-х годах.</introduction>
+  <introduction lang="de-DE">
+    Die Nihilist-Verschlüsselung ist ein symmetrisches Verschlüsselungsverfahren, das ursprünglich von den Russischen Nihilisten im späten 19. Jahrhundert verwendet wurde.
+  </introduction>
+  <usage lang="en">
+    After dragging the Nihilist component onto the workspace, you need to specify a data source that represents the text to be encrypted or decrypted. This data source is mandatory.
+    <newline />
+    In the component settings you can decide whether you want to encrypt or decrypt, and you can define the two mandatory keywords.
+  </usage>
+  <usage lang="zh-CN">将Nihilist组件拖到工作区后，您需要指定一个数据源，该数据源表示要加密或解密的文本。此数据源是必需的。在组件设置中，您可以决定要加密还是解密，还可以定义两个必需关键字。</usage>
+  <usage lang="ru">После перетаскивания компонента Nihilist в рабочую область вам нужно указать источник данных, который представляет текст, который должен быть зашифрован или дешифрован. Этот источник данных является обязательным. В настройках компонента вы можете решить, хотите ли вы шифровать или дешифровать, и вы можете определить два обязательных ключевых слова.</usage>
+  <usage lang="de-DE">
+    Nachdem Sie die Nihilist-Komponente auf den Arbeitsbereich gezogen haben, müssen Sie eine Datenquelle definieren, die die zu verschlüsselnden oder entschlüsselnden Daten repräsentiert. Diese Datenquelle ist notwendig.
+    <newline />
+    In den Einstellungen für die Komponente können Sie entscheiden, ob Sie verschlüsseln oder entschlüsseln wollen, und Sie können die notwendigen Schlüsselworte definieren.
+  </usage>
+  <references>
+    <linkReference>
+      <link url="http://en.wikipedia.org/wiki/Nihilist_cipher" lang="en" />
+      <caption lang="en">Nihilist in Wikipedia</caption>
+      <link url="http://en.wikipedia.org/wiki/Nihilist_cipher" lang="de-DE" />
+      <caption lang="de-DE">Nihilist in Wikipedia (englisch)</caption>
+    </linkReference>
+  </references>
+</documentation>

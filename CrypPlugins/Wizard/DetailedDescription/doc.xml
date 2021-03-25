@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <usage lang="en">
+    The CrypTool 2 Wizard is – beside of the Workspace Manager and the Crypto Tutorials – one of the most important utility in CrypTool 2. The Wizard was developed especially to faciliate the entry into CrypTool 2 of new and/or inexperienced users. Therefore, the Wizard provides an assistant, which makes it step-by-step possible to configure and call up easily, predefined templates. This offers you as the user the advantage, to navigate clearly through the wide amount of templates of CrypTool 2. At the same time you don't have to bother about the complexity in configuration and interaction between components of quiet a few templates.
+    <newline /><newline />
+    The easiest way to call up the Wizard is in the Startcenter. Pressing the button "Wizard" in the section "Main functions" opens 
+    a new Wizard tab. The Wizard can also be called in the dropdown menu of the "New" button in the "File" section of the "Home" ribbon, which is located in the top left corner of the CrypTool 2 window.
+    <newline /><newline /><img src="Wizard/DetailedDescription/Images/Figure3.png" />    
+    Figure 1: Homepage of the Wizard
+    <newline /><newline />
+    The Wizard opens, as can be seen in Figure 1, in a new tab in the CrypTool 2 window, likewise a workspace or the Startcenter. The Wizard will always open with the main page. On the left side of the page are checkboxes in order to choose the category of the desired template. Descriptions of the chosen category are displayed in the center of the page. Down on the right side are navigation controls to return to the previous page, to proceed to the next or to cancel and close the Wizard.
+    <newline /><newline />
+    The Wizard was designed as a kind of decision tree offering the template, which is closest to your problem, task or target. While the seperations in the beginning are more rough – like the question whether should something be decrypted or analyzed – the decisions getting with every page more and more fine-grained. In the best case the Wizard provides on the last page the template which does what you've been looking for.
+    <newline />
+    In the further extending configuration settings may be necessary. Should problems arise here please read the documentation of the components which were used in the template.
+    <newline /><newline /><img src="Wizard/DetailedDescription/Images/Figure2.png" />    
+    Figure 2: Visualization of the decision path
+    <newline /><newline />
+    In the lower part of the page, the path through the decision tree is represented graphically, as can be ssen in Figure 2. Double-clicking on a segment of the path leads back to that step.
+    <newline /><newline />
+    Depending on the choosen template, either the Wizard will open the template in a new workspace or the most important information will be summarized on a further page. In case of the later one, the Wizard will provide a button in the upper right corner which opens the corresponding template as a new workspace with the configurations.
+    <newline /><newline />
+    Settings
+    <newline /><newline />
+    In the global settings of CrypTool 2 it is possible in the menu option "Wizard" to do configurations. In the option "Run templates automatically" can be set, if opened templates in new workspaces should immediately be started by the Wizard. In the option "Show animations" the animations which occur when the Wizard page is changed can be deactivated.
+  </usage>
+  <usage lang="zh-CN">除了Workspace Manager和Crypto Tutorials之外，CrypTool 2向导还是CrypTool 2中最重要的实用程序之一。该向导的开发目的是为了便于新手和/或经验不足的用户进入CrypTool 2。因此，向导提供了一个助手，可以逐步配置和调用预定义的模板。这为您提供了一个优势，使您可以轻松浏览大量CrypTool 2模板。与此同时，您不必担心配置复杂和安静的几个模板组件之间交互的麻烦。调用向导的最简单方法是在Startcenter中。按下“主要功能”部分中的“向导”按钮，将打开一个新的向导标签。也可以在“主页”功能区“文件”部分的“新建”按钮的下拉菜单中调用该向导，该功能位于CrypTool 2窗口的左上角。图1：向导的主页如图1所示，向导将在CrypTool 2窗口的新选项卡中打开，同样是工作区或Startcenter。向导将始终在主页上打开。在页面的左侧是复选框，以便选择所需模板的类别。所选类别的说明显示在页面中央。导航控件的右侧下方是返回到上一页，前进到下一页或取消并关闭向导的导航控件。向导被设计为提供模板的一种决策树，该模板最接近您的问题，任务或目标。尽管开始时的分隔比较粗糙-例如是否应该解密或分析某些问题-每页得到的决策越来越细。在最佳情况下，向导会在最后一页上提供执行您一直在寻找的模板。在进一步扩展中，可能需要进行设置。如果此处出现问题，请阅读模板中使用的组件的文档。图2：可视化的决策路径在页面的下部，以图形方式显示了决策树的路径，如图2所示。双击路径的一部分即可返回该步骤。根据选择的模板，向导将在新的工作区中打开模板，或者最重要的信息将在进一步的页面中概述。对于后一种情况，向导将在右上角提供一个按钮，该按钮将打开相应的模板作为具有配置的新工作区。设置在CrypTool 2的全局设置中，可以在菜单选项“向导”中进行配置。如果应立即由向导启动在新工作区中打开的模板，则可以在选项“自动运行模板”中进行设置。在选项“显示动画”中，可以禁用更改向导页面时出现的动画。</usage>
+  <usage lang="ru">Мастер CrypTool 2 - рядом с Диспетчером Workspace и Crypto Tutorials - одной из самых важных функций в CrypTool 2. Мастер был разработан специально для облегчения входа в CrypTool 2 новых и / или неопытных пользователей. Поэтому мастер предоставляет помощника, который позволяет поэтапно настраивать и вызывать легко предопределенные шаблоны. Это дает вам преимущество пользователя, чтобы четко прорисоваться через большое количество шаблонов CrypTool 2. В то же время вам не нужно беспокоиться о сложности конфигурации и взаимодействия между компонентами тихих нескольких шаблонов. Самый простой способ вызвать мастер - в Startcenter. Нажатие кнопки «Мастер» в разделе «Основные функции» открывает новую вкладку «Мастер». Мастер также можно вызвать в раскрывающемся меню кнопки «Создать» в разделе «Файл» на ленте «Главная», которая расположена в верхнем левом углу окна CrypTool 2. Рисунок 1: Домашняя страница мастера Мастер открывает, как показано на рисунке 1, на новой вкладке в окне CrypTool 2, а также в рабочей области или в Startcenter. Мастер всегда будет открываться с главной страницы. В левой части страницы установлены флажки, чтобы выбрать категорию нужного шаблона. Описания выбранной категории отображаются в центре страницы. Вправо с правой стороны находятся элементы управления навигацией, чтобы вернуться на предыдущую страницу, перейти к следующему или отменить и закрыть мастер. Мастер был разработан как своего рода дерево решений, предлагающее шаблон, который ближе всего к вашей проблеме, задаче или цели. В то время как различия в начале более грубые - как вопрос, нужно ли что-то расшифровать или проанализировать, - решения, получаемые с каждой страницы все более мелкозернистыми. В лучшем случае Мастер предоставляет на последней странице шаблон, который делает то, что вы искали. В дальнейшем могут потребоваться дополнительные настройки конфигурации. Если возникнут проблемы, прочитайте документацию по компонентам, которые были использованы в шаблоне. Рисунок 2: Визуализация пути решения В нижней части страницы путь через дерево решений представлен графически, как это может быть ssen на рисунке 2. Двойной щелчок по сегменту пути возвращает к этому шагу. В зависимости от выбранного шаблона либо Мастер откроет шаблон в новом рабочем пространстве, либо наиболее важная информация будет представлена ​​на следующей странице. В случае более позднего, Мастер предоставит кнопку в верхнем правом углу, которая откроет соответствующий шаблон в качестве нового рабочего пространства с конфигурациями. Настройки В глобальных настройках CrypTool 2 в меню «Мастер» можно выполнить настройки. В опции «Запустить шаблоны автоматически» можно установить, если открытые шаблоны в новых рабочих пространствах должны быть немедленно запущены мастером. В опции «Показать анимации» анимации, которые происходят при изменении страницы мастера, могут быть деактивированы.</usage>
+  <usage lang="de-DE">
+    
+    Der CrypTool 2 Wizard (dt. Zauberer) ist – neben dem Workspace Manager und den Krypo-Tutorien – eine der Kernkomponenten von CrypTool 2. Der Wizard wurde speziell dafür entwickelt, neuen und/oder unerfahrenen Nutzern den Einstieg in CrypTool 2 zu erleichtern. Dazu stellt der Wizard einen Assistenten bereit, mit dem es schrittweise möglich ist, schnell vordefinierte Arbeitsbereiche (sogenannte Templates, zu deutsch: Vorlagen) zu konfigurieren und aufzurufen. Dies bietet Ihnen als Nutzer den Vorteil, dass Sie übersichtlicher durch die große Anzahl von Komponenten und Vorlagen von CrypTool 2 navigieren können. Gleichzeitig bleibt Ihnen die teilweise recht hohe Komplexität an Konfigurationen und Wechselwirkung zwischen Komponenten mancher Vorlagen erspart.
+    <newline /><newline />
+    Aufzurufen ist der Wizard am einfachsten über das Startcenter. In der Rubrik "Hauptfunktionen" öffnet ein Druck auf die Schaltfläche "Wizard" einen neuen Wizard-Reiter. Ebenfalls aufrufbar ist der Wizard im Ausklapp Menü der "Neu"-Schaltfläche, in der Rubrik "Datei" des "Home"-Ribbons. Dieser befindet sich in der oberen, linken Ecke des CrypTool 2 Fensters.
+    <newline /><newline /><img src="Wizard/DetailedDescription/Images/Figure3.png" />    
+    Abbildung 1: Startseite des Wizards
+    <newline /><newline />
+    Der Wizard öffnet sich, wie in Abbildung 1 zu sehen, in einem neuen Reiter im CrypTool 2 Fenster – ähnlich wie ein Arbeitsbereich oder das Startcenter. Der Wizard öffnet sich stets mit der Startseite.
+
+    Am linken Rand jeder Seite befinden sich Kontrollkästchen, sogenannte "Checkboxen" mit dem Namen einer Kategorie oder Unterkategorie. Mit Hilfe dieser Kontrollkästchen kann eine Auswahl getroffen werden, um die Kategorie der gesuchten Vorlage mit jeder Seite weiter einzugrenzen.  
+
+    Im Zentrum der Seite ist eine Beschreibung der gewählten Kategorie. Im unteren Teil, am rechten Rand der Seite befinden sich Navigationselemente, mit denen zur vorherigen zurückgesprungen, die nächste Seite aufgerufen oder der laufende Vorgang abgebrochen werden kann.
+    <newoine /><newline />
+    Der Wizard wurde dabei so konzipiert, dass man sich wie in einer Art Entscheidungsbaum jener Vorlage annähert, welche dem eigenen Problem/Aufgabe/Ziel am nächsten kommt. Während am Anfang noch grobe Unterteilungen getroffen werden, wie z.B. ob etwas verschlüsselt oder analysiert werden soll, werden die Entscheidungen mit jeder Seite feingranularer. Am Ende wird im günstigsten Fall die Vorlage erreicht, welche gesucht wurde.<newline />
+    Im weiteren Verlauf können dann Konfigurationseinstellungen notwendig werden. 
+    Sollten an dieser Stelle Probleme autreten, müssen die Hilfeseiten der Komponenten der Vorlage zu Rate gezogen werden.
+    <newline /><newline /><img src="Wizard/DetailedDescription/Images/Figure2.png" /> 
+    Abbildung 2: Visualisierung des Entscheidungspfades  
+    <newline /><newline />
+    Im unteren Bereich des Fensters wird der Pfad durch den Entscheidungsbaum grafisch dargstellt, wie in Abbildung 2 zu sehen. Mit einem Doppelklick auf ein Segment des Pfades, kann an diese Stelle im Baum zurück gesprungen werden.
+    <newline /><newline />
+    Abhängig von der gewählten Vorlage, wird im letzten Schritt entweder ein Arbeitsbereich mit den entsprechenden Konfigurationen aufgerufen, oder eine weitere Seite im Wizard, die die wichtigsten Informationen grafisch zusammenfasst. Sollte Letzteres der Fall sein, bietet eine Schaltfläche in der rechten oberen Ecke weiterhin die Möglichkeit, einen Arbeitsbereich mit der entsprechenden Vorlage und den Konfigurationen aufzurufen.
+    <newline /><newline />
+    Eintstellungen
+    <newline /><newline />
+    In den globalen Einstellungen von CrypTool 2 kann man unter dem Menüpunkt "Wizard" Einstellungen für den Wizard vornehmen. Unter "Vorlagen automatisch ausführen" kann eingestellt werden, ob im letzten Schritt der neue Arbeitsbereich mit der Vorlage vom Wizard gestartet werden soll oder nicht.
+    Im Menü-Punkt "Animationen anzeigen" können die Animationen beim Wechsel der Seiten deaktiviert werden.
+
+  
+
+  </usage>
+  <settings lang="en"></settings>
+  <settings lang="de-DE"></settings>
+  <references>
+    <bookReference>
+      <author>Simone Sauer</author>
+      <name lang="en">Bachelor Thesis</name>
+      <name lang="de-DE">Bachelorarbeit</name>
+    </bookReference>
+  </references>
+</documentation>

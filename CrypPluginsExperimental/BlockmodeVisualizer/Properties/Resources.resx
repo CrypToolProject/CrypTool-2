@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="action_select" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="action_select_tooltip" xml:space="preserve">
+    <value>The action defines if the input data will be encrypted or decrypted.</value>
+  </data>
+  <data name="ad_caption" xml:space="preserve">
+    <value>Associated data</value>
+  </data>
+  <data name="ad_tooltip" xml:space="preserve">
+    <value>The CCM and GCM mode can use so-called associated data for authentication additionally to the input data.</value>
+  </data>
+  <data name="ansix923" xml:space="preserve">
+    <value>ANSI X.923</value>
+  </data>
+  <data name="authentication_error" xml:space="preserve">
+    <value>The message could not be authenticated!</value>
+  </data>
+  <data name="blockmode_select" xml:space="preserve">
+    <value>Mode of Operation</value>
+  </data>
+  <data name="blockmode_select_tooltip" xml:space="preserve">
+    <value>For encryption and decryption the mode of operation for the selected blockcipher can be chosen.</value>
+  </data>
+  <data name="cbc" xml:space="preserve">
+    <value>Cipher Block Chaining Mode (CBC)</value>
+  </data>
+  <data name="ccm" xml:space="preserve">
+    <value>Counter with CBC-MAC Mode (CCM)</value>
+  </data>
+  <data name="cfb" xml:space="preserve">
+    <value>Cipher Feedback Mode (CFB)</value>
+  </data>
+  <data name="ctr" xml:space="preserve">
+    <value>Counter Mode (CTR)</value>
+  </data>
+  <data name="datasegment_length_input" xml:space="preserve">
+    <value>Data segment length (in byte)</value>
+  </data>
+  <data name="datasegment_length_input_tooltip" xml:space="preserve">
+    <value>For the CFB mode only a part of the ciphertext, the so-called data segment, will be used for the next block. Its length must not exceed the blocksize of the selected blockcipher.</value>
+  </data>
+  <data name="data_segment_overflow_warning" xml:space="preserve">
+    <value>The length of the data segment is too long. The actual length is: </value>
+  </data>
+  <data name="decrypt" xml:space="preserve">
+    <value>Decryption</value>
+  </data>
+  <data name="ecb" xml:space="preserve">
+    <value>Electronic Codebook Mode (ECB)</value>
+  </data>
+  <data name="encrypt" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="gcm" xml:space="preserve">
+    <value>Galois/Counter Mode (GCM)</value>
+  </data>
+  <data name="icontrol_caption" xml:space="preserve">
+    <value>Blockcipher</value>
+  </data>
+  <data name="icontrol_tooltip" xml:space="preserve">
+    <value>The selected blockcipher will be used in the chosen mode of operation for encryption or decryption.</value>
+  </data>
+  <data name="iso10126" xml:space="preserve">
+    <value>ISO 10126</value>
+  </data>
+  <data name="iv_caption" xml:space="preserve">
+    <value>Initialization vector</value>
+  </data>
+  <data name="iv_tooltip" xml:space="preserve">
+    <value>Every mode of operation but the ECB mode needs an initializing value for its first block or the counter.</value>
+  </data>
+  <data name="key_caption" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="key_tooltip" xml:space="preserve">
+    <value>The key will be used for the selected blockcipher. Its length is determined by the chosen blockcipher.</value>
+  </data>
+  <data name="long_ad_warning" xml:space="preserve">
+    <value>The provided associated data are too long and have been trimmed: </value>
+  </data>
+  <data name="long_input_warning" xml:space="preserve">
+    <value>The provided input text is too long and has been trimmed: </value>
+  </data>
+  <data name="long_iv_warning" xml:space="preserve">
+    <value>The provided initialization vector is too long and has been trimmed: </value>
+  </data>
+  <data name="long_key_warning" xml:space="preserve">
+    <value>The provided key is too long and has been trimmed: </value>
+  </data>
+  <data name="missing_blockcipher_warning" xml:space="preserve">
+    <value>No blockcipher selected. Encryption or decryption not possible!</value>
+  </data>
+  <data name="none" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="ofb" xml:space="preserve">
+    <value>Output Feedback Mode (OFB)</value>
+  </data>
+  <data name="onezeros" xml:space="preserve">
+    <value>1-0-Padding</value>
+  </data>
+  <data name="padding_select" xml:space="preserve">
+    <value>Padding</value>
+  </data>
+  <data name="padding_select_tooltip" xml:space="preserve">
+    <value>The padding extends the input text if it's too short. The ECB and CBC mode require an input whose length is a multiple of the blockcipher's blocksize.</value>
+  </data>
+  <data name="pkcs7" xml:space="preserve">
+    <value>PKCS #7</value>
+  </data>
+  <data name="plugin_caption" xml:space="preserve">
+    <value>Blockmode Visualizer</value>
+  </data>
+  <data name="plugin_tooltip" xml:space="preserve">
+    <value>The Blockmode Visualizer can execute symmetric blockciphers in different modes of operation and visualize their operating principles graphically.</value>
+  </data>
+  <data name="short_ad_warning" xml:space="preserve">
+    <value>The provided associated data are too short and have been padded with zeros: </value>
+  </data>
+  <data name="short_input_warning" xml:space="preserve">
+    <value>The input text is too short and has been padded with zeros: </value>
+  </data>
+  <data name="short_iv_warning" xml:space="preserve">
+    <value>The provided initialization vector is too short and has been padded with zeros: </value>
+  </data>
+  <data name="short_key_warning" xml:space="preserve">
+    <value>The provided key is too short and has been padded with zeros: </value>
+  </data>
+  <data name="not_yet_implemented_exception" xml:space="preserve">
+    <value>The selected blockmode is not yet implemented.</value>
+  </data>
+  <data name="tag_input_caption" xml:space="preserve">
+    <value>Authentication tag input</value>
+  </data>
+  <data name="tag_input_tooltip" xml:space="preserve">
+    <value>This input accepts the message authentication tag for authenticating the message in CCM or GCM mode only.</value>
+  </data>
+  <data name="tag_length" xml:space="preserve">
+    <value>Tag length (in byte)</value>
+  </data>
+  <data name="tag_length_overflow_warning" xml:space="preserve">
+    <value>The length of the message authentication tag exceeds the blocksize. The actual length is: </value>
+  </data>
+  <data name="tag_length_tooltip" xml:space="preserve">
+    <value>The length of the message authentication tag must not exceed the blocksize of the selected blockcipher.</value>
+  </data>
+  <data name="tag_output_caption" xml:space="preserve">
+    <value>Authentication tag output</value>
+  </data>
+  <data name="tag_output_tooltip" xml:space="preserve">
+    <value>The message authentication tag will be generated in the CCM or GCM mode only.</value>
+  </data>
+  <data name="text_input_caption" xml:space="preserve">
+    <value>Input text</value>
+  </data>
+  <data name="text_input_tooltip" xml:space="preserve">
+    <value>This input accepts the plaintext for encryption respectively the ciphertext for decryption.</value>
+  </data>
+  <data name="text_output_caption" xml:space="preserve">
+    <value>Output text</value>
+  </data>
+  <data name="text_output_tooltip" xml:space="preserve">
+    <value>This output displays the ciphertext after encryption respectively the plaintext after decryption.</value>
+  </data>
+  <data name="xts" xml:space="preserve">
+    <value>XEX with tweak and ciphertext stealing (XTS)</value>
+  </data>
+  <data name="zeros" xml:space="preserve">
+    <value>Zeros</value>
+  </data>
+  <data name="pres_headline_conjunction" xml:space="preserve">
+    <value> in the </value>
+  </data>
+  <data name="pres_headline_cbc" xml:space="preserve">
+    <value>CBC</value>
+  </data>
+  <data name="pres_headline_ccm" xml:space="preserve">
+    <value>CCM</value>
+  </data>
+  <data name="pres_headline_cfb" xml:space="preserve">
+    <value>CFB</value>
+  </data>
+  <data name="pres_headline_ctr" xml:space="preserve">
+    <value>CTR</value>
+  </data>
+  <data name="pres_headline_decryption" xml:space="preserve">
+    <value> decryption</value>
+  </data>
+  <data name="pres_headline_ecb" xml:space="preserve">
+    <value>ECB</value>
+  </data>
+  <data name="pres_headline_encryption" xml:space="preserve">
+    <value> encryption</value>
+  </data>
+  <data name="pres_headline_gcm" xml:space="preserve">
+    <value>GCM</value>
+  </data>
+  <data name="pres_headline_mode" xml:space="preserve">
+    <value> mode</value>
+  </data>
+  <data name="pres_headline_ofb" xml:space="preserve">
+    <value>OFB</value>
+  </data>
+  <data name="pres_headline_xts" xml:space="preserve">
+    <value>XTS</value>
+  </data>
+</root>

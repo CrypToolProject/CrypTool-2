@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">DES Cipher</title>
+  <title lang="zh">DES密码</title>
+  <title lang="ru">шифра</title>
+  <summary lang="en">Usage of the <i>DES</i> cipher</summary>
+  <summary lang="zh">DES密码的用法</summary>
+  <summary lang="ru">Использование шифрования DES</summary>
+  <description lang="en">The Data Encryption Standard (DES) is a 64-bit block cipher that uses shared secret encryption. It was selected by the National Bureau of Standards as an official Federal Information Processing Standard (FIPS) for the United States in 1976 and which has subsequently enjoyed widespread use internationally. It is based on a symmetric-key algorithm that uses a 56-bit key. The algorithm was initially controversial because of classified design elements, a relatively short key length, and suspicions about a National Security Agency (NSA) backdoor. DES consequently came under intense academic scrutiny which motivated the modern understanding of block ciphers and their cryptanalysis.<newline /><newline />
+DES is now considered to be insecure for many applications. This is chiefly due to the 56-bit key size being too small; in January, 1999, distributed.net and the Electronic Frontier Foundation collaborated to publicly break a DES key in 22 hours and 15 minutes (see chronology). There are also some analytical results which demonstrate theoretical weaknesses in the cipher, although they are infeasible to mount in practice. The algorithm is believed to be practically secure in the form of Triple DES, although there are theoretical attacks. In recent years, the cipher has been superseded by the Advanced Encryption Standard (AES). Furthermore, DES has been withdrawn as a standard by the National Institute of Standards and Technology (formerly the National Bureau of Standards).<newline /><newline />
+In some documentation, a distinction is made between DES as a standard and DES the algorithm which is referred to as the DEA (the Data Encryption Algorithm). When spoken, "DES" is either spelled out as an abbreviation (/ˌdiːˌiːˈɛs/), or pronounced as a one-syllable acronym (/ˈdɛz/).<newline /><newline />
+Source: <external ref="http://en.wikipedia.org/wiki/Data_Encryption_Standard" /></description>
+  <description lang="zh">数据加密标准（DES）是使用共享秘密加密的64位块密码。 1976年，它被美国国家标准局（National Standards of Standards）选为美国的正式联邦信息处理标准（FIPS），随后在国际上得到广泛使用。它基于使用56位密钥的对称密钥算法。该算法最初是有争议的，原因是设计元素分类，密钥长度相对较短以及对国家安全局（NSA）后门程序的怀疑。因此，DES受到了严格的学术审查，这激发了对分组密码及其密码分析的现代理解。现在认为DES对于许多应用程序都是不安全的。这主要是由于56位密钥大小太小。在1999年1月，distributed.net和电子前沿基金会合作，在22小时15分钟内公开破解了DES密钥（请参阅年表）。还有一些分析结果证明了密码学的理论缺陷，尽管在实践中不可行。尽管存在理论上的攻击，但该算法以三重DES的形式被认为是安全的。近年来，该密码已被高级加密标准（AES）取代。此外，国家标准与技术研究所（以前的国家标准局）已将DES撤消为标准。在某些文档中，在作为标准的DES和称为DEA（数据加密算法）的算法DES之间有所区别。说话时，“ DES”要么拼写为缩写（/ ˌdiːˌiːˈɛs /），要么发音为一个单音节的缩写（/ ˈdɛz /）。资源：</description>
+  <description lang="ru">Стандарт шифрования данных (DES) - это 64-разрядный блочный шифр, который использует шифрование с общим секретным кодом. Он был выбран Национальным бюро стандартов в качестве официального федерального стандарта обработки информации (FIPS) для Соединенных Штатов в 1976 году и впоследствии получил широкое распространение на международном уровне. Он основан на алгоритме с симметричным ключом, который использует 56-битный ключ. Алгоритм был изначально спорным из-за классифицированных элементов дизайна, относительно короткой длины ключа и подозрений в бэкдоре Агентства национальной безопасности (NSA). DES, следовательно, подвергался интенсивному академическому изучению, которое мотивировало современное понимание блочных шифров и их криптоанализ. DES теперь считается небезопасным для многих приложений. Это связано главным образом с тем, что размер 56-битного ключа слишком мал; в январе 1999 года Distributed.net и Electronic Frontier Foundation сотрудничали, чтобы публично разбить ключ DES в течение 22 часов и 15 минут (см. хронологию). Имеются также некоторые аналитические результаты, которые демонстрируют теоретические недостатки в шифре, хотя они практически невозможно использовать на практике. Считается, что алгоритм практически безопасен в виде Triple DES, хотя есть теоретические атаки. В последние годы шифр был заменен Стандартом расширенного шифрования (AES). Кроме того, DES был отозван в качестве стандарта Национальным институтом стандартов и технологий (ранее Национальным бюро стандартов). В некоторых документах делается различие между DES как стандартом, а DES - алгоритмом, который называется DEA (Алгоритм шифрования данных). Когда говорят, «DES» либо произносится как аббревиатура (/ ˌdiːˌiːɛs /), либо произносится как аббревиатура с одним слогом (/ dɛz /). Источник:</description>
+  <keywords>symmetric, standard, 56, NSA</keywords>
+  <keywords lang="zh">对称，标准，56</keywords>
+  <keywords lang="ru">симметричный, стандартный, 56, NSA</keywords>
+  <title lang="de">DES-Chiffre</title>
+  <summary lang="de">Benutzung der <i>DES</i>-Chiffre</summary>
+  <description lang="de">Der Data Encryption Standard (DES) ist ein weit verbreiteter symmetrischer Verschlüsselungsalgorithmus (64-Bit-Blockchiffre).<newline /><newline />
+Der DES-Algorithmus wurde als offizieller Standard für die US-Regierung (FIPS 46) im Jahr 1976 bestätigt und wird seither international vielfach eingesetzt. Seine Entstehungsgeschichte hat wegen der Beteiligung der NSA am Design des Algorithmus immer wieder Anlass zu Spekulationen über seine Sicherheit gegeben. Heute wird DES aufgrund der verwendeten Schlüssellänge von nur 56 Bits für viele Anwendungen als nicht ausreichend sicher erachtet.<newline /><newline />
+Die Schlüssellänge kann durch Mehrfachanwendung des DES jedoch auf einfache Weise vergrößert werden. Als Triple-DES, auch als TDES, 3DES oder DESede bezeichnet, wird der DES weiterhin, zum Beispiel von Banken in Chipkartenanwendungen, eingesetzt, obwohl der TDES als offizieller Standard für die USA durch den Advanced Encryption Standard (AES) abgelöst wurde.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Data_Encryption_Standard" /></description>
+  <keywords lang="de">symmetrisch</keywords>
+  <icon file="DES.png" />
+  <relevantPlugins>
+    <plugin name="DES" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel (hex) (DES-Blockgröße ist 8 Bytes; von jedem werden nur 7 Bits verwendet)" />
+    <replacement key="$Message Encoder$" value="Nachrichten-Codierer" />
+    <replacement key="$Message Decoder$" value="Nachrichten-Decodierer" />
+    <replacement key="$Key Decoder$" value="Schlüssel-Decodierer" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$text$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
+    <replacement key="$memo$" value="Mit dieser Komponente können Sie einen beliebigen Text, der in die Komponente {\b Klartext} auf der linken Seite eingegeben werden muss, mit der {\b DES}-Komponente verschlüsseln. Der resultierende verschlüsselte Text wird in der Komponente {\b Geheimtext} auf der rechten Seite angezeigt, nachdem die Vorlage durch Klicken der &quot;Starten&quot;-Schaltfläche ausgeführt wurde. Die {\b DES}-Komponente arbeitet mit binären Werten, d.h. Bytes. Daher wird der eingegebene Text zuerst mit der Komponente {\b Nachrichten-Decodierer} in Bytes konvertiert. Mit den gegebenen Einstellungen wird der Text im ASCII-Format interpretiert. Die so erhaltenen Bytes werden mit {\b DES} verschlüsselt und man erhält eine weitere Bytefolge. Diese wird dann mit Hilfe der {\b Nachrichten-Codierer}-Komponente ins hexadezimale Format konvertiert und ausgegeben.\line\line Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in die Komponente {\b Klartext} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat in der Komponente {\b Nachrichten-Decodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b DES}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format in der Komponente {\b Nachrichten-Codierer} muss auf Text und die Kodierung auf &quot;ASCII&quot; gesetzt werden.\line\line Wenn die TripleDES-Variante von {\b DES} ausgewählt ist, muss der Schlüssel auch angepasst werden. Während {\b DES} einen Schlüssel bestehend aus 8 Bytes verlangt, braucht TripleDES einen Schlüssel von entweder 16 oder 24 Bytes." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Key$" value="密钥（十六进制）（DES块大小为8个字节；每个仅使用7位）" />
+    <replacement key="$Message Encoder$" value="讯息编码器" />
+    <replacement key="$Message Decoder$" value="讯息解码器" />
+    <replacement key="$Key Decoder$" value="密钥解码器" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$text$" value="弗朗兹（Franz）乘坐一辆完全残破的出租车在巴伐利亚州内搜寻。" />
+    <replacement key="$memo$" value="使用此组件，您可以使用{\b DES}组件加密必须在左侧的{\b Klartext}组件中输入的所有文本。在通过单击“开始”按钮执行模板之后，生成的加密文本将显示在右侧的{\b密文}组件中。 {\b DES}组件使用二进制值，即字节。因此，首先使用组件{\b Message Decoder}将输入的文本转换为字节。使用给定的设置，文本将以ASCII格式解释。用{\b DES}加密以此方式获得的字节，您将获得另一个字节序列。然后借助{\b Message Encoder}组件将其转换为十六进制格式并输出\Line \line此模板还可用于解密消息。为此，必须首先将加密的十六进制值复制到{\b Klartext}组件中。然后必须进行以下调整：（1）组件{\b消息解码器}中的输入格式必须设置为“十六进制”； （2）在{\b DES}组件中，必须将操作设置为“解密”； （3）必须将组件{\b Message Encoder}中的格式设置为文本，并将编码设置为“ ASCII”。\Line \line如果选择了{\b DES}的TripleDES变体，则密钥还必须被调整。 {\b DES}需要一个包含8个字节的密钥，而TripleDES需要一个16或24个字节的密钥。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Key$" value="Ключ (шестнадцатеричный) (размер блока DES составляет 8 байтов, для каждого используется только 7 бит)" />
+    <replacement key="$Message Encoder$" value="Новости кодировщик" />
+    <replacement key="$Message Decoder$" value="декодер сообщений" />
+    <replacement key="$Key Decoder$" value="Ключ-декодер" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$text$" value="Франц охотится на полностью забытое такси через Баварию." />
+    <replacement key="$memo$" value="Этот компонент позволяет вам кодировать любой текст, который необходимо ввести в компонент {\b plain text} с левой стороны, используя компонент {\b DES}. Полученный зашифрованный текст отображается в компоненте {\b Ciphertext} справа после запуска шаблона, нажав кнопку «Пуск». Компонент {\b DES} работает с двоичными значениями, то есть байтами. Поэтому исходный текст сначала преобразуется в байты с помощью компонента {\b Message Decoder}. С заданными настройками текст интерпретируется в формате ASCII. Результирующие байты зашифровываются с помощью {\b DES} и вы получаете очередную последовательность байтов. Затем он будет преобразован в шестнадцатеричный формат с помощью компонента {\b message-encoder}. \Line \line Этот шаблон также можно использовать для дешифрования сообщений. Для этого зашифрованные шестнадцатеричные значения сначала должны быть скопированы в компонент {\b plaintext}. Затем необходимо выполнить следующие настройки: (1) Формат ввода в компоненте {\b декодер сообщений} должен быть установлен в &amp;quot;шестнадцатеричный&amp;quot;; (2) В компоненте {\b DES} действие должно быть установлено на «Расшифровка»; (3) Формат в компоненте {\b Message Encoder} должен быть установлен в текст и кодировка на «ASCII». \Line \line Если выбран вариант TripleDES {\b DES}, тогда также должен быть установлен ключ быть адаптированным. В то время как для {\b DES} требуется ключ, состоящий из 8 байтов, TripleDES нужен ключ из 16 или 24 байтов." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Key$" value="Key (hex) (DES blocksize is 8 byte; from each byte only 7 bits are used as key)" />
+    <replacement key="$Message Encoder$" value="Message Encoder" />
+    <replacement key="$Message Decoder$" value="Message Decoder" />
+    <replacement key="$Key Decoder$" value="Key Decoder" />
+    <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$text$" value="The quick brown fox jumps over the lazy dog." />
+    <replacement key="$memo$" value="With this template you can use the {\b DES} component to encrypt an arbitrary text entered in the component {\b Plaintext} on the left side. The resulting encrypted text is displayed in the component {\b Ciphertext} on the right side after pressing the Play button. The {\b DES} component works on binary values, i.e. bytes. Thus, the input text is first converted to bytes with the component {\b Message decoder}. With the current settings, it is interpreted as ASCII. The resulting bytes are then encrypted with {\b DES}, yielding another sequence of bytes. These bytes are then simply printed as hexadecimal values with the help of the component {\b Message encoder}.\line\line Note that you can also decrypt messages with this template. To do so, first copy the encrypted hexadecimal values to the {\b Plaintext}. Then change the following: (1) Set Input format of the {\b Message decoder} to Hexadecimal; (2) Set Action of {\b DES} to Decrypt; (3) Set Format of the {\b Message encoder} to Text and the Encoding to ASCII.\line\line Also note that checking the TripleDES variant in the {\b DES} component will require you to adjust the key as well. While the {\b DES} algorithm needs a key of 8 bytes size, the TripleDES algorithm needs a key of either 16 or 24 bytes." />
+  </replacements>
+</sample>

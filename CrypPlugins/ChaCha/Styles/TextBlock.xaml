@@ -1,0 +1,16 @@
+﻿<ResourceDictionary x:Class="CrypTool.Plugins.ChaChaVisualizationV2.Styles.TextBlock"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ShiftLabel" TargetType="{x:Type TextBlock}">
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="8" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="Text" Value="&lt;&lt;&lt;" />
+    </Style>
+    <Style x:Key="ShiftSubscript" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="8" />
+    </Style>
+</ResourceDictionary>

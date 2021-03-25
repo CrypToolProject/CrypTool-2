@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="CrypTool.NLFSR.NLFSRPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:properties="clr-namespace:CrypTool.NLFSR.Properties"
+    Height="Auto" Width="Auto" Margin="0" Background="White" BorderBrush="Black" BorderThickness="1">
+
+    <Viewbox Stretch="Uniform">
+        <Grid Background="White" Margin="0" Width="Auto" Height="Auto">
+            <Grid Background="White" Margin="5" Width="Auto" Height="Auto">
+                <Grid Height="Auto" Width="Auto" Margin="0,0,0,0" Name="myGrid" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <Label Content="{x:Static properties:Resources.No_Quickwatch_data_right_now_}" Name="infoText" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+    </Viewbox>
+
+</UserControl>

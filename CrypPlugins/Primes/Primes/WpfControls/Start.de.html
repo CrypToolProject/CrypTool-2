@@ -1,0 +1,183 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+	<head>
+		<title></title>
+		<style type="text/css">
+		  body
+		  {
+		  	font-family:Arial,Verdana,Georgia;
+		  	font-size:smaller;
+            background-color: #EBEFF6;
+		  }
+		</style>
+	</head>
+	<body>
+	<h2>Herzlich Willkommen in der Welt der Primzahlen</h2>
+
+	<p align="justify">
+
+  Diese Anwendung gibt einen Überblick über die Eigenschaften und Methoden der Primzahlen.<br />
+  Eine Primzahl ist eine natürliche Zahl >= 2, die nur durch 1 und sich selbst ohne Rest teilbar ist.
+  Primzahlen sind also eine Teilmenge der natürlichen Zahlen und dadurch etwas sehr Besonderes, dass sich jede andere natürliche
+  Zahl eindeutig als ein Produkt von Primzahlen darstellen lässt.<br />
+  Viele Mathematiker haben sich über Jahrhunderte mit Primzahlen und deren Eigenschaften beschäftigt und doch sind
+  längst nicht alle Fragen zu diesen elementaren Bausteinen der natürlichen Zahlen beantwortet.
+  Eine besondere Rolle spielen die Primzahlen insbesondere in der Kryptographie.
+  Wenn Sie eine Bestellung in einem Onlineshop tätigen oder über Homebanking eine Überweisung abschicken, dann verhindert ein
+  Paar von zwei sehr großen Primzahlen, dass Andere Ihre Konto- oder Kreditkartennummer mitlesen können.<br /><br />
+  Diese Anwendung gliedert sich in fünf Gruppen, die Sie links im Navigationsbaum aufrufen können. Außerdem nutzt diese Anwendung die Möglichkeiten von Vektorgrafiken,
+  so dass Sie grafische Darstellungen frei zoomen können.<br /><br />
+
+  <hr /><br />
+  Unter der Gruppierung <strong>Faktorisierung</strong> finden Sie Funktionen, um die Primfaktoren
+  einer natürlichen Zahl zu berechnen. Der 1. Hauptsatz der Zahlentheorie (von Gauß) besagt, dass jede
+  natürliche Zahl eindeutig als Produkt von Primzahlen beschrieben werden kann. So kann z.B. die Zahl 6 geschrieben werden als 6 = 2 * 3 oder 3 * 2. <br />
+  Die beiden Primzahlen 2 und 3 sind also die Bausteine der Zahl 6 (bezüglich der Multiplikation). Diese Schreibweise ist eindeutig, was bedeutet,
+  dass es keine andere Möglichkeit gibt, 6 als Produkt von Primzahlen aufzuschreiben. Das Ergebnis einer Faktorisierung heißt "Primfaktorzerlegung".
+  <br /><br />
+
+  <ul>
+
+  <li>
+  Die erste Funktion ist die <a href="exec://Factor_Bf">Probedivision</a>. Dies ist die einfachste, aber auch die
+  ineffizienteste Methode, die Primfaktorzerlegung zu einer Zahl zu finden – sofern die Zahlen etwas größer werden.
+  Die Primfaktoren einer Zahl werden hierbei durch Ausprobieren gesucht und in einem Faktorbaum dargestellt.
+  <br /><br />
+  </li>
+
+  <li>
+  Das <a href="exec://Factor_QS">quadratische Sieb</a> ist eines der schnellsten Verfahren zur Faktorisierung einer Zahl.
+  Hier werden mathematische Erkenntnisse eingesetzt, die auf den französischen Mathematiker
+  Pierre de Fermat zurück gehen. Das Verfahren ist relativ aufwändig und zum Verständnis benötigt
+  man eine gewisse Einarbeitungszeit. In der Hilfe zum quadratischen Sieb ist darum ein Beispiel aufgeführt.
+  <br /><br />
+  </li>
+
+  </ul>
+
+  <hr /><br />
+
+  Unter <strong>Primzahltests</strong> finden sich drei Verfahren, mit denen überprüft werden kann, ob
+  eine natürliche Zahl eine Primzahl ist. Beim Kryptosystem RSA werden heutzutage zwei
+  Primzahlen mit über 150 Dezimalstellen benötigt, und um diese zu finden (und zwar möglich immer wieder andere),
+  werden Primzahltests eingesetzt.
+
+  <ul>
+
+  <li>
+  <a href="exec://Primetest_Sieve">Das Sieb des Eratosthenes</a> wurde von den Griechen etwa 200 Jahre v. Chr. erfunden.
+  Es ist ein sehr einfaches Verfahren, mit dem nicht nur geprüft werden kann, ob eine Zahl eine Primzahl ist, sondern das
+  gleichzeitig eine Liste mit Primzahlen generiert.
+  <br /><br />
+  </li>
+
+  <li>
+  Der <a href="exec://Primetest_Miller">Miller-Rabin-Test</a> ist ein heute sehr häufig eingesetzter Primzahltest. Auch er geht auf die Mathematik von
+  Pierre de Fermat zurück. Das besondere am Miller-Rabin-Test ist, dass sich das Verfahren in seltenen Fällen irren kann und eine Zahl
+  als Primzahl ausgibt, obwohl sie keine Primzahl ist.
+  <br /><br />
+  </li>
+
+  <li>
+  <a href="exec://Primetest_Sieve">Das Sieb des Atkin</a> wurde von dem Mathematiker Atkin entwickelt und ist eine Optimierung des Sieb des Eratosthenes.
+  </li>
+
+  </ul>
+
+  <hr /><br />
+
+  Unter <a href="exec://Primesgeneration">Erzeugung von Primzahlen</a> können Sie mit quadratischen Formeln experimentieren.
+  Einige quadratische Formeln generieren mehr Primzahlen, andere weniger.
+  Aber keine quadratische Formel generiert für alle natürlichen Werte von x nur
+  Primzahlen als Funktionswert. Die berühmte Formel – x<sup>2</sup> + x + 41 – stammt von Leonhard Euler und
+  hat für die Eingabe von x = 0 ... 39 ausschließlich Primzahlen als Ergebnis.
+  <br /><br />
+
+  <hr /><br />
+  In der Funktionsgruppe <strong>Verteilung der Primzahlen</strong> werden einige grafische Darstellungen zur Verteilung der Primzahlen in den natürlichen Zahlen gezeigt.
+  <br />Folgende Funktionen stehen zur Verfügung:
+
+  <ul>
+
+  <li>
+  <a href="exec://PrimeDistrib_Numberline">Auf der Zahlgeraden</a> werden die natürlichen Zahlen als Punkte dargestellt. Jede Primzahl ist ein blauer Punkt, alle anderen Zahlen
+  sind schwarze Punkte. Fährt man mit der Maus über eine Zahl, werden verschiedene Eigenschaften angezeigt und
+  verschiedene, in der Zahlentheorie wichtige Funktionen berechnet.
+  <br /><br />
+  </li>
+
+  <li>
+  <a href="exec://PrimeDistrib_Numberrec">Im Zahlengitter</a> werden die natürlichen Zahlen in einem Gitter dargestellt. Jede Primzahl ist als rotes Quadrat dargestellt.
+  Die Anzahl der Zeilen und Spalten des Zahlengitters können mit der Maus verändert werden (bis zu einer Maximalbreite von 100 Zahlen),
+  so dass sich verschiedene Muster ergeben. Auch hier wird immer angezeigt, welche Zahl zu der Stelle im Gitter gehört,
+  wo sich die Maus gerade befindet.
+  <br /><br />
+  </li>
+
+  <li>
+  Unter <a href="exec://Graph">Anzahl der Primzahlen</a> werden die Funktionsgraphen dreier Funktionen gezeichnet, die jeweils die Anzahl der Primzahlen
+  bis zu einer gegebenen natürlichen Zahl ermitteln. Zwei der Funktionen, die von Carl Friedrich Gauß entdeckt wurden,
+  sind Abschätzungen. Sie berechnen die Anzahl also nicht exakt, „raten“ den Wert aber schon sehr genau.
+  Die dritte Funktion zählt die Primzahlen genau ab. Der zugehörige Funktionsgraph sieht aus wie eine Treppe,
+  darum wird die Funktion auch als "Treppenfunktion" bezeichnet. Die Treppenfunktion ist zeitaufwändig in der Berechnung.
+  <br /><br />
+  </li>
+
+  <li>
+  Der Mathematiker Stanisław Ulam trug während eines Vortrages aus Langeweile die natürlichen Zahlen beginnend bei 1 in
+  Form einer Spirale auf ein kariertes Blatt ein und kreiste alle Primzahlen ein. Das überraschende Ergebnis ist,
+  dass sich sehr viele Primzahlen auf diagonalen Geraden in dieser Spirale befinden. Diese Spirale ist eine der berühmtesten Darstellungen
+  für die Verteilung der Primzahlen. Sie wird – nach ihrem Entdecker – <a href="exec://PrimeDistrib_Ulam">Ulam-Spriale</a> genannt.
+  <br /><br />
+  </li>
+  
+  </ul>
+
+  <hr /><br />
+
+  In der Funktionsgruppe <strong>Zahlentheorie</strong> werden einige zahlentheoretische Funktionen vorgestellt, die in der Kryptographie eine
+  große Rolle spielen.
+  <br />In den folgenden vier Abschnitten können Sie diese zahlentheoretischen Aspekte untersuchen: 
+
+  <ul>
+
+  <li>
+  Im Abschnitt <a href="exec://PowerMod">Potenzieren</a> wird die Berechnung von Potenzen in Restklassenringen graphisch dargestellt.
+  Diese spielen in vielen kryptographischen Verfahren eine wichtige Rolle (z.B. RSA), da sie schnell berechnet werden können, aber für die Umkehrung,
+  nämlich die Berechnung des diskreten Logarithmus, keine effizienten Algorithmen bekannt sind.
+  <br /><br />
+  </li>
+
+  <li>
+  Im Abschnitt <a href="exec://NumberTheoryFunctions">Zahlentheoretische Funktionen</a> können Sie die Werte mehrerer zahlentheoretischer Funktionen
+  tabellarisch auflisten.
+  <br /><br />
+  </li>
+
+  <li>
+  <a href="exec://PrimitivRoot">Primitivwurzeln</a> spielen in der Kryptographie eine wichtige Rolle.
+  Wenn zwei Kommunikationspartner vertraulich Informationen
+  austauschen möchten und dazu mit einem symmetrischen Verfahren verschlüsseln wollen, müssen beide einen so
+  genannten "Sessionkey" aushandeln, den sonst niemand kennen darf. Wird dieser Schlüssel über einen
+  öffentlichen Kanal ausgetauscht, dann muss sichergestellt sein, dass kein Dritter Kenntnis über diesen
+  Schlüssel erlangt. Um dies zu gewährleisten, wenden die Kommunikationspartner das
+  <a href="http://de.wikipedia.org/wiki/Diffie-Hellman-Schl%C3%BCsselaustausch" target="_blank">Diffie-Hellman-Verfahren</a> an,
+  das die Eigenschaften von Primitivwurzeln nutzt.
+  <br /><br />
+  </li>
+
+  <li>
+  Die <a href="exec://PrimeDistrib_Goldbach">Goldbach-Vermutung</a> lautet: Jede gerade Zahl größer als 2 kann als Summe zweier Primzahlen geschrieben werden.
+  Sie wurde 1742 von dem Mathematiker Christian Goldbach in einem Brief an Leonhard Euler aufgestellt.
+  Viele Mathematiker haben versucht, die Vermutung zu beweisen oder zu widerlegen, aber bis heute ist dies niemandem gelungen.
+  Sie gehört zu den großen, bisher ungelösten Problemen der Mathematik. 
+  Dieser Abschnitt vermittelt einen graphischen Zugang zur Goldbach-Vermutung.
+  <br /><br />
+  </li>
+
+  </ul>
+
+  </p>
+
+  </body>
+</html>

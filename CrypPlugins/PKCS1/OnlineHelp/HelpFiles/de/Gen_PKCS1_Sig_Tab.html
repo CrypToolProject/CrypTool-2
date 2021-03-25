@@ -1,0 +1,35 @@
+﻿<h2>Signatur generieren</h2>
+In diesem Tab wird die komplette PKCS#1-Signatur erstellt. Die Signatur hat folgende Struktur: '00' '01' PS '00' HI HD. </br>
+Im Einzelnen bedeutet dies:
+<ul>
+<li>
+<strong>'00'</strong> 
+Einleitender Nullblock (8 Bit). Dadurch wird gewährleistet dass der numerische Wert der Signatur kleiner ist als das 
+<a href="help://KeyGen_ModulusSize">RSA-Modul.</a>
+</li>
+<li>
+<strong>'01'</strong>
+Block Type. Dieser Block gibt an, ob es sich um eine Operation mit dem privaten oder öffentlichen Schlüssel handelt. 
+Da bei Signaturerzeugung der private Schlüssel benutzt wird, ist dieser Wert '01' (hexadezimale Darstellung: 0x01).
+</li>
+<li>
+<strong>PS</strong>
+Paddingstring. Der Paddingstring besteht aus einer Anzahl von Blöcken mit dem Wert 0xFF (hexadezimale Darstellung). 
+Die Länge ergibt sich, indem man von der Länge des <a href="help://KeyGen_ModulusSize">RSA-Moduls</a> 
+die Länge des <a href="help://Gen_Datablock_Tab">Datenblocks</a> und der drei Blöcke '00', '01', '00' subtrahiert.
+</li>
+<li>
+<strong>'00'</strong>
+Nullblock. Dieser Block markiert das Ende des Paddingstrings und den Anfang des Datenblocks.
+</li>
+<li>
+<strong>HI</strong>
+Hash-Identifier. Der erste Teil des <a href="help://Gen_Datablock_Tab">Datenblock</a>. Hier sind Informationen wie z.B. der verwendete 
+Hashfunktion in ASN.1-codierter Form enthalten.
+</li>
+<li>
+<strong>HD</strong>
+Hashdigest (Hashwert). In dem zweiten Teil des <a href="help://Gen_Datablock_Tab">Datenblock</a> ist der generierte Hashwert enthalten.
+</li>
+
+</ul>

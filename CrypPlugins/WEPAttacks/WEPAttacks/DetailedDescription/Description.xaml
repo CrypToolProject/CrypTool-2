@@ -1,0 +1,172 @@
+﻿<FlowDocument PagePadding="5,0,5,0" AllowDrop="True" NumberSubstitution.CultureSource="User" Background="White" Name="flowDoc"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:misc="clr-namespace:CrypTool.PluginBase.Miscellaneous;assembly=CrypPluginBase">
+    <Paragraph Margin="0,0,0,0" TextAlignment="Center" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span FontWeight="Bold" FontSize="16" xml:lang="de-de">
+            <Span.TextDecorations>
+                <TextDecoration Location="Underline" />
+            </Span.TextDecorations> Using the "Attacks on the WEP protocol" plugin
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">This plugin simulates three attacks against the secret key, which is used within the</Span>
+        <Span FontStyle="Italic" xml:lang="de-de">Wired Equivalent Privacy</Span>
+        <Span xml:lang="de-de">(WEP) protocol for encryption and decryption (for a short introduction into this WEP protocol, please have a
+            look at the description tab of the "WEP protocol" plugin). The three attacks are the</Span>
+        <misc:DescriptionHyperlink NavigateUri="http://www.drizzle.com/~aboba/IEEE/rc4_ksaproc.pdf">"FMS attack"</misc:DescriptionHyperlink>
+        <Span xml:lang="de-de">,</Span>
+        <misc:DescriptionHyperlink NavigateUri="http://www.netstumbler.org/f50/aircrack-yet-another-wep-cracking-tool-linux-11878/index2.html">"KoreK attack"</misc:DescriptionHyperlink>
+        <Span xml:lang="de-de">and the</Span>
+        <misc:DescriptionHyperlink NavigateUri="http://eprint.iacr.org/2007/120.pdf">"PTW attack"</misc:DescriptionHyperlink>
+        <Span xml:lang="de-de">: Three different attacks with different fundamentals and different probabilities of success.</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">You can choose the attack</Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">- either in the</Span>
+        <Span FontStyle="Italic" xml:lang="de-de">Algorithm Settings</Span>
+        <Span xml:lang="de-de">(within the drop-down menu "Kind of attack"):</Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="190" Height="190" Source="/WEPAttacks;Component/DetailedDescription/Images/AtotWEPp_AS_KOA.jpg"/>
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">- or by right clicking on the plugin in the editor:
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="240" Height="170" Source="/WEPAttacks;Component/DetailedDescription/Images/AtotWEPp_rightClick_KOA.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">If this plugin has been successful with the selected attack, you will be informed about
+            this in the "QuickwatchPresentation" area:</Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="315" Height="419" Source="/WEPAttacks;Component/DetailedDescription/Images/AtotWEPp_QP_SUC.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">and in the message area at the bottom of the screen.</Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">There are a few more things in the "QuickwatchPresentation" area. The first line shows
+            you if an attack is currently running, and, if an attack is running, which one it is (e.g. in the image above,
+            the "FMS attack" is running). The second line shows how many packets has been read by this plugin ("Sniffed
+            packets").
+        </Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The third line shows you, how many packets have been used for the analysis
+            ("Used packets"). The "FMS attack" and also the "KoreK attack" uses only some special encrypted data packets.
+            The "FMS attack" searches for special Initialisation Vectors (IV), the "KoreK attack" has some additional
+            conditions, which decide whether the packet is used for analysis or not. Within the "PTW attack", every packet
+            is used for the analysis.
+        </Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The text box within the "QuickwatchPresentation" area shows you the current state of the
+            analysis. The first column is the number of the key byte (beginning at "00"), and the following columns are
+            the potential key bytes with their corresponding ranking in brackets. If you choose to run a "PTW attack", the
+            presentation within this text box is a bit different. There are no columns any more, but one line, in which
+            the currently most voted value for each key byte is shown. So, the first value represents the potential first
+            key byte, the second value the potential second key byte and so on.
+        </Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The key bytes are always shown in hexadecimal notation. If the key has been reconstructed
+            successfully, this key will be presented to you in the normal ASCII notation, too.
+        </Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">Now let's have a look on how you can use this plugin. It's part
+            of a prepared workspace, which you can find in the CrypTool 2.0 SampleProjects folder. It's called
+            "AttackWEP-01.cte" and provides the following workflow:
+        </Span>
+    </Paragraph>
+    
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The packets, which are created from the "Internet frame generator" plugin (IFG),
+            are delivered to the "WEP protocol" plugin, which encrypts the packets according to the WEP protocol.
+            These encrypted packets are then delivered to this "Attacks on the WEP protocol" plugin, which
+            simulates the selected attack against the key, which has been used for encryption.
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The following plugins are involved in the chain (besides the above mentioned
+            ones): The "TextInput" plugin, the "Number Input" plugin, the "Multiplexer" plugin and the
+            "IncDec" plugin. The "TextInput" provides the key for the "WEP protocol" plugin.
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <InlineUIContainer>
+            <Image Width="522" Height="266" Source="/WEPAttacks;Component/DetailedDescription/Images/SW_AWEP.jpg" />
+        </InlineUIContainer>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">The packets, which are encrypted within the "WEP protocol" plugin, are then
+            delivered to this plugin. It tries to recover the key, which has been used for the encryption.
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">If the recovery of this key has not been successful with the number of packets
+            adjusted in the IFG plugin, this plugin provides the value "false" at one of it's output. This
+            value goes to the "Multiplexer" plugin, which decides whether the number provided by the "IncDec"
+            plugin will be forwarded or not. If the value, provided by this plugin, is "false", the
+            "Multiplexer" plugin will forward the incremented integer value. This incremented value is also
+            forwarded to the IFG plugin, which will then create the requested packet in the requested amount
+            once again. If the value provided from this plugin is "true", the "Multiplexer" plugin will
+            forward nothing, and the chain stops working.
+        </Span>
+    </Paragraph>
+
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333" />
+    <Paragraph Margin="0,0,0,0" TextAlignment="Left" FontFamily="Verdana" FontSize="13.3333333333333">
+        <Span xml:lang="de-de">So this workflow is a loop, which doesn't stop until the key has been recovered
+            successfully.
+        </Span>
+    </Paragraph>
+
+</FlowDocument>

@@ -1,0 +1,255 @@
+﻿<UserControl x:Class="Sigaba.Rotor3"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="876" d:DesignWidth="257">
+    <Canvas>
+    <Border BorderBrush="Black" Height="874" Width="255" BorderThickness="8">
+        <StackPanel Orientation="Horizontal" Background="LightGray">
+
+            <StackPanel>
+                <Border BorderBrush="Black" Height="33" Width="33" BorderThickness="4" Canvas.Left="510" Canvas.Top="60">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock7" Text="A" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock1" Text="B" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock2" Text="C" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock3" Text="D" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock4" Text="E" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock5" Text="F" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock6" Text="G" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock8" Text="H" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock9" Text="I" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock10" Text="J" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock11" Text="K" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock12" Text="L" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock13" Text="M" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock14" Text="N" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock15" Text="O" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock16" Text="P" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock17" Text="Q" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock18" Text="R" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock19" Text="S" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock20" Text="T" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock21" Text="U" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock22" Text="V" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock23" Text="W" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock24" Text="X" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock25" Text="Y" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock26" Text="Z" TextAlignment="Center" Width="25" />
+                </Border>
+            </StackPanel>
+            <Canvas Name="LineCanvas" Width="173">
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="33">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="66">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="99">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="132">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="165">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="198">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="231">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="264">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="297">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="330">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="363">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="396">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="429">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="462">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="495">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="528">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="561">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="594">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="627">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="660">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="693">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="726">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="759">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="792">
+
+                </Line>
+                <Line X1="0" X2="173" Y1="17" Y2="17" Stroke="Black" StrokeThickness="3" Canvas.Top="825">
+
+                </Line>
+            </Canvas>
+            <StackPanel>
+                <Border BorderBrush="Black" Height="33" Width="33" BorderThickness="4" Canvas.Left="510" Canvas.Top="60">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock27" Text="A" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock28" Text="B" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock29" Text="C" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock30" Text="D" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock31" Text="E" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock32" Text="F" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock33" Text="G" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock34" Text="H" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock35" Text="I" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock36" Text="J" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock37" Text="K" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock38" Text="L" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock39" Text="M" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock40" Text="N" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock41" Text="O" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock42" Text="P" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock43" Text="Q" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock44" Text="R" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock45" Text="S" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock46" Text="T" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock47" Text="U" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock48" Text="V" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock49" Text="W" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock50" Text="X" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock51" Text="Y" TextAlignment="Center" Width="25" />
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="4" Canvas.Left="510" Canvas.Top="60" Height="33" Width="33">
+                    <TextBlock Background="Orange" FontSize="19" Height="25" Name="textBlock52" Text="Z" TextAlignment="Center" Width="25" />
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+    </Canvas>
+</UserControl>

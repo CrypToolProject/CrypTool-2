@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Whirlpool</title>
+  <title lang="zh">惠而浦</title>
+  <title lang="ru">джакузи</title>
+  <summary lang="en">Usage of the <i>Whirlpool</i> hash function</summary>
+  <summary lang="zh">惠而浦哈希函数的用法</summary>
+  <summary lang="ru">Использование хеш-функции Whirlpool</summary>
+  <description lang="en">This template shows the usage of the <i>Whirlpool</i> hash function.</description>
+  <description lang="zh">该模板显示了Whirlpool哈希函数的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование хеш-функции Whirlpool.</description>
+  <keywords>Hash, Rijmen, patent, 512</keywords>
+  <keywords lang="zh">哈希，押韵，专利，512</keywords>
+  <keywords lang="ru">Хеш, Rhymes, патент, 512</keywords>
+  <title lang="de">Whirlpool</title>
+  <summary lang="de">Benutzung der <i>Whirlpool</i>-Hash-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Whirlpool</i>-Hash-Funktion.</description>
+  <keywords lang="de">hash</keywords>
+  <icon file="Whirlpool.png" />
+  <relevantPlugins>
+    <plugin name="WPHash" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Hash$" value="Hashwert" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Hash$" value="哈希值" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Hash$" value="Hashwert" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Input$" value="Input" />
+    <replacement key="$Hash$" value="Hash Value" />
+  </replacements>
+</sample>

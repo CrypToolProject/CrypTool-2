@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CrypTool.PluginBase.AuthorAttribute" Collapsed="true">
+    <Position X="36.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAgAAAACAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AuthorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.ContextMenuAttribute" Collapsed="true">
+    <Position X="40.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAgAAAgACAAACEAAAAAAAAA=</HashCode>
+      <FileName>ContextMenuAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.DynamicProperty" Collapsed="true">
+    <Position X="38.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAQAgAAAAAAA=</HashCode>
+      <FileName>DynamicProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.DynamicPropertyInfoAttribute" Collapsed="true">
+    <Position X="40.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAABIAAABEAAAAAAAAAAAAA=</HashCode>
+      <FileName>DynamicProperty.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.EditorSpecificPluginAttribute" Collapsed="true">
+    <Position X="45.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EditorSpecificPluginAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.EditorSpecificPluginInfo" Collapsed="true">
+    <Position X="36.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQAAQAAACAE=</HashCode>
+      <FileName>EditorSpecificPluginAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.ContextMenuEntry" Collapsed="true">
+    <Position X="42" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>EditorSpecificPluginAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.StatusEventArgs" Collapsed="true">
+    <Position X="42" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.GuiLogEventArgs" Collapsed="true">
+    <Position X="43.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAEABAAAEAAAAAAAAAAQAAAAAIAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.PluginProgressEventArgs" Collapsed="true">
+    <Position X="42" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.PluginChangedEventArgs" Collapsed="true">
+    <Position X="36.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAABAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.ChangeDisplayLevelEventArgs" Collapsed="true">
+    <Position X="38.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.ProjectTitleChangedEventArgs" Collapsed="true">
+    <Position X="43.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.PluginExtension" Collapsed="true">
+    <Position X="38.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAARAAAQAAAAAEAAAQACAAAgEIAAIAAAAAAKA=</HashCode>
+      <FileName>PluginExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.PluginInfoAttribute" Collapsed="true">
+    <Position X="40.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAACAAAAAAAAgAAAAAAAAgCAAAAAAAAAA=</HashCode>
+      <FileName>PluginInfoAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.PropertyInfoAttribute" Collapsed="true">
+    <Position X="45.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACQABAgAACAACBAgCAAAAABAAAA=</HashCode>
+      <FileName>PropertyInfoAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.PropertySaveOrderAttribute" Collapsed="true">
+    <Position X="36.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PropertySaveOrderAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.RibbonBarAttribute" Collapsed="true">
+    <Position X="40.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEABAAAAAAAAAAAAAAAAAgAAAgACAAACAEAAAAIAAE=</HashCode>
+      <FileName>RibbonBarAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.TaskPaneAttribute" Collapsed="true">
+    <Position X="43.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEABAAAAAQAAAAQCAAAABgAAAkACAAAiAEAAAAAACE=</HashCode>
+      <FileName>TaskPaneAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Cryptography.EncryptionExtension" Collapsed="true">
+    <Position X="38.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cryptography\EncryptionExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Cryptography.EncryptionTypeAttribute" Collapsed="true">
+    <Position X="40.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cryptography\EncryptionTypeAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Editor.DragDropDataObject" Collapsed="true">
+    <Position X="36.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Editor\DragDropDataObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Editor.EditorExtension" Collapsed="true">
+    <Position X="42" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Editor\EditorExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Editor.EditorInfoAttribute" Collapsed="true">
+    <Position X="43.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Editor\EditorInfoAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.IO.CrypToolStream" Collapsed="true">
+    <Position X="43.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAAQAIoGEAAIABgAAQgABAQAEAQAAHIACA=</HashCode>
+      <FileName>IO\CrypToolStream.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Miscellaneous.DescriptionHyperlink" Collapsed="true">
+    <Position X="45.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Miscellaneous\DescriptionHyperlink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Miscellaneous.EventsHelper" Collapsed="true">
+    <Position X="42" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEQAAAAAAAAAAAAgEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Miscellaneous\EventsHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Validation.IntegerRule" Collapsed="true">
+    <Position X="45.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAECAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Validation\IntegerRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CrypTool.PluginBase.Validation.RegExRule" Collapsed="true">
+    <Position X="38.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Validation\RegExRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="CrypTool.PluginBase.Analysis.IAnalysisMisc" Collapsed="true">
+    <Position X="20.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analysis\IAnalysisMisc.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.Analysis.IStatistic" Collapsed="true">
+    <Position X="16" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Analysis\IStatistic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.IPlugin">
+    <Position X="17" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACgAAIAACAAAQQgAAAAAEAAAACAAAAAsAAAAAACAAA=</HashCode>
+      <FileName>IPlugin.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.ISettings">
+    <Position X="14.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISettings.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.Cryptography.IEncryption" Collapsed="true">
+    <Position X="20.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cryptography\IEncryption.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.Cryptography.IHash" Collapsed="true">
+    <Position X="20.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cryptography\IHash.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.Generator.IGenerator" Collapsed="true">
+    <Position X="14.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generator\IGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.Generator.IGeneratorMisc" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generator\IGeneratorMisc.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.Generator.IKeyGenerator" Collapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generator\IKeyGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.Generator.IRandomNumberGenerator" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Generator\IRandomNumberGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.IO.IInput" Collapsed="true">
+    <Position X="20.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IO\IInput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.IO.IOutput" Collapsed="true">
+    <Position X="20.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IO\IOutput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CrypTool.PluginBase.IO.IThroughput" Collapsed="true">
+    <Position X="18" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IO\IThroughput.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="CrypTool.PluginBase.Direction" Collapsed="true">
+    <Position X="40.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.DisplayLevel" Collapsed="true">
+    <Position X="42" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAQAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.QuickWatchFormat" Collapsed="true">
+    <Position X="42" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAAAACAEAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.ControlType" Collapsed="true">
+    <Position X="38.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gUQAAAAAAAIAAAAAAAAAEAAAAEAAAACAAAAAAgQABAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.ContextMenuControlType" Collapsed="true">
+    <Position X="36.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.NotificationLevel" Collapsed="true">
+    <Position X="40.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAYAAAAAAABAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.ValidationType" Collapsed="true">
+    <Position X="43.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAQAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.EncodingTypes" Collapsed="true">
+    <Position X="45.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEBgAAAEAAAAAAAAAIAAARAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.DisplayPluginMode" Collapsed="true">
+    <Position X="43.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.Cryptography.EncryptionType" Collapsed="true">
+    <Position X="38.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQABAAEAAAAAAAAAAAAAAAAAAAAAAAgAACAAAAA=</HashCode>
+      <FileName>Cryptography\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CrypTool.PluginBase.Cryptography.EncryptionAlgorithmAction" Collapsed="true">
+    <Position X="36.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cryptography\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="CrypTool.PluginBase.StatusChangedEventHandler" Collapsed="true">
+    <Position X="40.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.GuiLogNotificationEventHandler" Collapsed="true">
+    <Position X="42" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.PluginProgressChangedEventHandler" Collapsed="true">
+    <Position X="45.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.SelectedPluginChangedHandler" Collapsed="true">
+    <Position X="38.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.ChangeDisplayLevelHandler" Collapsed="true">
+    <Position X="36.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.ProjectTitleChangedHandler" Collapsed="true">
+    <Position X="36.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.OpenProjectFileHandler" Collapsed="true">
+    <Position X="43.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.EditorSpecificPluginsChanged" Collapsed="true">
+    <Position X="40.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="CrypTool.PluginBase.DynamicPropertiesChanged" Collapsed="true">
+    <Position X="38.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Delegates.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

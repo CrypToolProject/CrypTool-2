@@ -1,0 +1,213 @@
+﻿<UserControl x:Class="HexBox.HexBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:HexBox="clr-namespace:HexBox;assembly="
+             mc:Ignorable="d" 
+             
+             >
+    <UserControl.Resources>
+        
+        <Style  TargetType="Border" x:Key="border2" >
+        <Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="BorderBrush" Value="LightSeaGreen"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Background" Value="#FFC8DCF5"/>
+        <Setter Property="Margin" Value="0 5 0 0"/>
+    </Style>
+
+</UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ToolBarTray Name="toolbar">
+            <ToolBar Background="Transparent" >
+                <Button Name ="newFile" Click="New_Button_Click" ToolTip="{x:Static HexBox:Properties.Resources.New}" >
+                    <Image Source="/HexBox;component/Icons/NewDocument_32x32.png" Width="16" Height="16" />
+                </Button>
+                <Button Name ="openFileButton" Click="Open_Button_Click" ToolTip="{x:Static HexBox:Properties.Resources.Open}" >
+                    <Image Source="/HexBox;component/Icons/OpenHH.png"  Width="16" Height="16" />
+                </Button>
+                <Button Name ="saveAs" Click="Save_As_Button_Click" ToolTip="{x:Static HexBox:Properties.Resources.SaveAs}" >
+                    <Image Source="/HexBox;component/Icons/SaveAsHH.png" Width="16" Height="16" />
+                </Button>
+                <Button Name="save" Click="Save_Button_Click" ToolTip="{x:Static HexBox:Properties.Resources.Save}" >
+                    <Image Source="/HexBox;component/Icons/SaveHH.png" Width="16" Height="16" />
+                </Button>
+            </ToolBar>
+            <!--<ToolBar>
+                <Button Name="Copy" Click="Copy_Click_HexBoxField">
+                    Copy
+                </Button>
+                <Button Name="Paste" Click="Paste_Click_HexBoxField">
+                    Paste
+                </Button>
+                <Button Name="extract" Click="Cut_Click_HexBoxField">
+                    Cut
+                </Button>
+            </ToolBar>
+            
+            <ToolBar>
+                <Button Name="Copy2" Click="Copy_Click_ASCIIFild">
+                    Copy
+                </Button>
+                <Button Name="Paste2" Click="Paste_Click_ASCIIFild">
+                    Paste
+                </Button>
+                <Button Name="Extract2" Click="Cut_Click_ASCIIFild">
+                    Cut
+                </Button>
+            </ToolBar>-->
+            <ToolBar>
+                <CheckBox Name="insertCheck" ToolTip="{x:Static HexBox:Properties.Resources.Insert}" Content="{x:Static HexBox:Properties.Resources.Insert}" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <DockPanel Grid.Row="1">
+        <ScrollBar DockPanel.Dock="Right"  Name="fileSlider" Orientation="Vertical"  VerticalAlignment="Stretch" ></ScrollBar>
+            
+            <ScrollViewer x:Name="scoview" MouseDown="scoview_MouseDown" VerticalScrollBarVisibility="Hidden" Focusable="False" DockPanel.Dock="Top">
+                <DockPanel  Name="mainPanel"   >
+                    <Border Style="{StaticResource border2}" DockPanel.Dock="Left" Height="{x:Static HexBox:Constants._heightOfNOR}" Margin="5" VerticalAlignment="Top">
+                        <Grid MinWidth="70" Name="gridid" Height="Auto" Width="70" Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="20" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource border2}" Height="{x:Static HexBox:Constants._heightOfNOR}" DockPanel.Dock="Right" Margin="5" VerticalAlignment="Top" MinWidth="130" >
+                <Canvas Name="canvas2"  Background="Transparent" Margin="5">
+
+                    <Rectangle Name="cursor2"  Width="10" Height="20" Fill="GreenYellow" Opacity="80" Focusable="True" Canvas.Left="0" Canvas.Top="0" >
+                        <Rectangle.Style>
+                            <Style TargetType="{x:Type Rectangle}">
+                                <Style.Resources>
+                                    <Storyboard x:Key="FadeBlack" RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                           From="0.0" To="1.0"  Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                           From="1.0" To="0.0"  Duration="0:0:0.2" BeginTime="0:0:0.2"/>
+                                    </Storyboard>
+                                    <Storyboard x:Key="FadeRed">
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                           From="0.0" To="1.0"  Duration="0:0:1"/>
+                                    </Storyboard>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="LostFocus">
+                                        <BeginStoryboard Storyboard="{StaticResource FadeRed}"/>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="GotFocus">
+                                        <BeginStoryboard Storyboard="{StaticResource FadeBlack}"/>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Rectangle.Style>
+
+                    </Rectangle>
+
+                </Canvas>
+            </Border>
+                    <Border Style="{StaticResource border2}" VerticalAlignment="Top" MinWidth="340" Height="{x:Static HexBox:Constants._heightOfNOR}"   DockPanel.Dock="Top" Margin="5" Padding="5">
+
+                        <Canvas Name="canvas1" HorizontalAlignment="Center" Width="340" Height="{x:Static HexBox:Constants._heightOfNOR}"  Background="Transparent" >
+
+                    <Rectangle Name="cursor" Width="10" Height="20" Fill="Yellow" Opacity="40" Focusable="True" Canvas.Left="0"  Canvas.Top="0"  >
+                        <Rectangle.InputBindings>
+                            <KeyBinding Command="Help" Key="A" Modifiers="Ctrl"></KeyBinding>
+                        </Rectangle.InputBindings>
+                        <Rectangle.Style>
+                            <Style TargetType="{x:Type Rectangle}">
+                                <Style.Resources>
+                                    <Storyboard x:Key="FadeBlack" RepeatBehavior="Forever">
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                           From="0.0" To="1.0"  Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                           From="1.0" To="0.0"  Duration="0:0:0.2" BeginTime="0:0:0.2"/>
+                                    </Storyboard>
+                                    <Storyboard x:Key="FadeRed">
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" 
+                                           From="0.0" To="1.0"  Duration="0:0:1"/>
+                                    </Storyboard>
+                                </Style.Resources>
+                                <Style.Triggers>
+                                    <EventTrigger RoutedEvent="LostFocus">
+                                        <BeginStoryboard Storyboard="{StaticResource FadeRed}"/>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="GotFocus">
+                                        <BeginStoryboard Storyboard="{StaticResource FadeBlack}"/>
+                                    </EventTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Rectangle.Style>
+                    </Rectangle>
+                    
+                </Canvas>
+                
+            </Border>
+                </DockPanel>
+            </ScrollViewer> 
+            
+        </DockPanel>
+        <Border Style="{StaticResource border2}"  Height="20"  MinWidth="382" Margin="5" Grid.Row="2" >
+            <ToolBarPanel Orientation="Horizontal" MinWidth="672">
+                <TextBlock Text="{x:Static HexBox:Properties.Resources.Line}" />
+                <Border  Width="5"  />
+                <TextBox Name="Line" Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap" >
+
+                </TextBox>
+                <Border  Name="separator1" Width="5"  />
+                <TextBlock Text="{x:Static HexBox:Properties.Resources.Column}" />
+                <Border  Width="5"  />
+                <TextBox Name="Column" Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap" >
+
+                </TextBox>
+                <Border  Width="5"  />
+                <TextBlock Text="{x:Static HexBox:Properties.Resources.File}" />
+                <Border  Width="5"  />
+                <TextBox Name="FileName" MinWidth="500" Background="Transparent" BorderThickness="0" IsReadOnly="True" TextWrapping="Wrap" >
+
+                </TextBox>
+            </ToolBarPanel>
+        </Border>
+    </Grid>
+    
+</UserControl>

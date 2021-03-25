@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en">   
+The BB84 Photonbase Generator is part of the BB84 protocol implemented in CrypTool 2. It simulates the device that creates a sequence of photon bases which
+are used for encoding and decoding of photons. These bases are represented by chars put together as one string. The symbol '+' describes a base of one horizontal
+and one vertical photon filter and 'x' a base of two diagonal filters.
+  </introduction>
+  <introduction lang="zh-CN">BB84光子库生成器是CrypTool 2中实现的BB84协议的一部分。它模拟了创建光子库序列的设备，该序列用于光子的编码和解码。这些基数由字符组成，并作为一个字符串组合在一起。符号“ +”表示一个水平和一个垂直光子滤波器的基数，符号“ x”表示两个对角线滤波器的基数。</introduction>
+  <introduction lang="ru">Генератор фотобазы BB84 является частью протокола BB84, реализованного в CrypTool 2. Он имитирует устройство, которое создает последовательность фотонных баз, которые используются для кодирования и декодирования фотонов. Эти базы представлены символами, объединенными как одна строка. Символ «+» описывает основание одного горизонтального и одного вертикального фотонного фильтра, а «х» - основание двух диагональных фильтров.</introduction>
+  <introduction lang="de-DE">  
+Der BB84-Photonenbasis-Generator ist Teil des in CrypTool 2 implementierten BB84-Protokolls. Er stellt das Gerät dar, welches eine Reihe von Photonenbasen erzeugt, 
+mit deren Hilfe Photonen codiert oder decodiert werden können. Diese Basen werden durch Chars beschrieben, die zusammen als ein String ausgegeben werden. 
+Das Zeichen '+' ist hierbei eine Photonenbasis aus einem horizontalen und einem vertikalen Filter, 'x' eine Basis aus zwei diagonalen Filtern.  
+  </introduction>
+  <usage lang="en">
+  To create a base string the plugin first needs to know how many bases are needed. This amount of bases can either be changed in the setting of the plugin, or the input 
+  connector named "Input length" must be used. In the second case a text input can be used -- the plugin will then count all characters, and set this as the amount of
+  bases -- or number input to set the amount directly. When running the plugin a string of the defined length filled with random 'x' and 'x' characters will be
+  created and sent to the "Base output" connector.
+  For correct usage of the BB84 protocol this plugin can be used along with the BB84 Photon Encoder, the BB84 Photon Decoder, and the BB84-Man-In-The-Middle. 
+  </usage>
+  <usage lang="zh-CN">要创建基字符串，插件首先需要知道需要多少个基。可以在插件的设置中更改此数量的基数，或者必须使用名为“输入长度”的输入连接器。在第二种情况下，可以使用文本输入-插件将计算所有字符，并将其设置为基数-或输入数字以直接设置基数。运行插件时，将创建一个定义长度的字符串，该字符串将填充随机的“ x”和“ x”字符，并将其发送到“基本输出”连接器。为了正确使用BB84协议，可以将此插件与BB84光子编码器，BB84光子解码器和BB84中间人一起使用。</usage>
+  <usage lang="ru">Чтобы создать базовую строку, плагин сначала должен знать, сколько баз необходимо. Это количество оснований может быть изменено в настройке плагина, или должен использоваться входной разъем с именем «Длина ввода». Во втором случае можно использовать текстовый ввод - плагин затем подсчитывает все символы и устанавливает это как количество оснований - или ввод количества, чтобы напрямую установить сумму. При запуске плагина создается строка определенной длины, заполненная случайными символами «x» и «x», и отправляется на разъем «Base output». Для правильного использования протокола BB84 этот плагин можно использовать вместе с Photon Encoder BB84, декодером Phot84 для BB84 и BB84-Man-In-The-Middle.</usage>
+  <usage lang="de-DE">
+  Um den Basis-String ausgeben zu können, muss das Plugin zunächst die Anzahl der zu generiernden Basen wissen. Hierzu steht wahlweise ein Setting bereit, 
+  in welchem die Anzahl eingestellt werden kann, oder es muss der Eingabekonnektor mit der Bezeichnung "Längeneingabe" benutzt werden. In letzterem Fall wird,
+  wenn ein Textfeld an den Konnektor angebunden wird, die Anzahl der enthaltenen Zeichen als Stringlänge festgelegt. Wird hingegen eine Zahleneingabe gewählt, 
+  wird die eingegebene Zahl direkt als Länge verwendet. Wird das Plugin ausgeführt, wird ein String mit der festgelegten Größe zufällig mit 'x'- und '+'-Zeichen gefüllt und 
+  über den Konnektor "Basenausgabe" ausgegeben.
+  Innerhalb des BB84-Protokolls kann dieses Plugin im Zusammenhang mit dem BB84-Photonencodierer, dem BB84-Photonendecodierer und dem BB84-Mittelsmann verwendet werden.
+  </usage>
+  <presentation lang="en">
+  No presentation is implemented for this plugin.
+  </presentation>
+  <presentation lang="zh-CN">此插件未实现任何演示。</presentation>
+  <presentation lang="ru">Для этого плагина не выполняется презентация.</presentation>
+  <presentation lang="de-DE">
+  Für dieses Plugin ist keine Präsentation implementiert.
+  </presentation>
+  <references>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/BB84" />
+      <caption lang="en">BB84 (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Quantenschlüsselaustausch#BB84-Protokoll" />
+      <caption lang="de-DE">BB84 (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link lang="en" url="http://en.wikipedia.org/wiki/Quantum_key_distribution" />
+      <caption lang="en">Quantum key distribution (Wikipedia)</caption>
+      <link lang="de-DE" url="http://de.wikipedia.org/wiki/Quantenschlüsselaustausch" />
+      <caption lang="de-DE">Quantenschlüsselaustausch (Wikipedia)</caption>
+    </linkReference>
+  </references>
+</documentation>

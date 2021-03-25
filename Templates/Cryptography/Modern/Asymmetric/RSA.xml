@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">RSA Cipher</title>
+  <title lang="zh">RSA密码</title>
+  <title lang="ru">RSA Cipher</title>
+  <summary lang="en">Usage of the <i>RSA</i> cipher</summary>
+  <summary lang="zh">RSA密码的用法</summary>
+  <summary lang="ru">Использование шифрования RSA</summary>
+  <description lang="en">In cryptography, RSA (which stands for Rivest, Shamir and Adleman who first publicly described it) is an algorithm for public-key cryptography. It is the first algorithm known to be suitable for signing as well as encryption, and was one of the first great advances in public key cryptography. RSA is widely used in electronic commerce protocols, and is believed to be sufficiently secure given sufficiently long keys and the use of up-to-date implementations.<newline /><newline />
+Source: <external ref="http://en.wikipedia.org/wiki/RSA" /></description>
+  <description lang="zh">在加密技术中，RSA（代表Rivest，Shamir和Adleman首次公开描述它）是一种用于公钥加密的算法。它是已知的第一个适用于签名和加密的算法，并且是公钥密码学的第一个重大进步。 RSA在电子商务协议中被广泛使用，并且被认为在足够长的密钥和使用最新实现的情况下是足够安全的。资源：</description>
+  <description lang="ru">В криптографии RSA (которая стоит за Rivest, Shamir и Adleman, которые впервые публично описали ее), является алгоритмом криптографии с открытым ключом. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции, и считается, что он достаточно безопасен, учитывая достаточно длинные ключи и использование современных реализаций. Источник:</description>
+  <keywords>Adleman, asymmetric, PKI, public key, Rivest, Shamir</keywords>
+  <keywords lang="zh">Adleman，不对称，PKI，公钥，Rivest，Shamir</keywords>
+  <keywords lang="ru">Adleman, асимметричный, PKI, открытый ключ, Rivest, Shamir</keywords>
+  <title lang="de">RSA-Chiffre</title>
+  <summary lang="de">Benutzung der <i>RSA</i>-Chiffre</summary>
+  <description lang="de">RSA ist ein asymmetrisches Kryptosystem, das sowohl zur Verschlüsselung als auch zur digitalen Signatur verwendet werden kann. Es verwendet ein Schlüsselpaar, bestehend aus einem privaten Schlüssel, der zum Entschlüsseln oder Signieren von Daten verwendet wird, und einem öffentlichen Schlüssel, mit dem man verschlüsselt oder Signaturen prüft. Der private Schlüssel wird geheimgehalten und kann nur mit extrem hohem Aufwand aus dem öffentlichen Schlüssel berechnet werden.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/RSA-Kryptosystem" /></description>
+  <keywords lang="de">asymmetrisch, öffentlicher Schlüssel</keywords>
+  <icon file="RSA.png" />
+  <relevantPlugins>
+    <plugin name="RSA" />
+    <plugin name="RSAKeyGenerator" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$RSA Encryption$" value="RSA-Verschlüsselung" />
+    <replacement key="$RSA Decryption$" value="RSA-Entschlüsselung" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$RSAKeyGenerator$" value="RSA-Schlüsselgenerator" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$RSA Encryption$" value="RSA加密" />
+    <replacement key="$RSA Decryption$" value="RSA解密" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$RSAKeyGenerator$" value="RSA密钥生成器" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$RSA Encryption$" value="шифрование RSA" />
+    <replacement key="$RSA Decryption$" value="RSA дешифрования" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$RSAKeyGenerator$" value="генератор ключа RSA" />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Decrypted Ciphertext$" value="Decrypted Ciphertext" />
+    <replacement key="$RSA Encryption$" value="RSA Encryption" />
+    <replacement key="$RSA Decryption$" value="RSA Decryption" />
+    <replacement key="$StringEncoder$" value="String Encoder" />
+    <replacement key="$RSAKeyGenerator$" value="RSA KeyGenerator" />
+  </replacements>
+</sample>

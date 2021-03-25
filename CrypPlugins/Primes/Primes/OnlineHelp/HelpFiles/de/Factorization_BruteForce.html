@@ -1,0 +1,15 @@
+﻿<h2>Faktorisierung durch Probedivision</h2>
+
+Die Probedivision ist ein sehr intuitives Verfahren zur Faktorisierung.
+Man beginnt damit, die Zahl durch 2 zu teilen. Ist die Zahl ohne Rest durch 2 teilbar,
+teilt man das Ergebnis nochmals durch 2. Damit f&auml;hrt man solange fort, bis das Ergebnis nicht mehr ohne Rest durch 2 teilbar ist.
+Im n&auml;chsten Schritt teilt man solange durch 3 bis das Ergebnis der Division nicht mehr ohne Rest durch 3 teilbar ist.
+So f&auml;hrt man mit den n&auml;chsten Zahlen fort, bis das Ergebnis der Division schlie&szlig;lich eine Primzahl ist.<br />
+Gleichzeitig ist es das Verfahren mit der schlechtesten Laufzeit, verglichen mit anderen Faktorisierungsmethoden.
+Die Probedivision ist eine Art Brute-Force-Verfahren. Auch wenn man nur Primzahlen als Teiler nimmt, statt alle n&auml;chsten Zahlen, ist es nur unwesentlich schneller.
+Die Faktorisierung einer Zahl mit zwei sehr gro&szlig;en Primfaktoren, wie sie beim RSA-Verfahren verwendet werden, w&uuml;rde sehr lange dauern.
+Hier werden heute Dezimalzahlen mit 300 Stellen und mehr verwendet. Die Probedivision br&auml;uchte dazu l&auml;nger als das Universum alt ist.
+<br />
+In dieser Implementierung ist der Probedivision ein moderner Primalitätstest (der Miller-Rabin-Test) vorgeschaltet, der schnell feststellen kann, ob die zu untersuchende Zahl eine Primzahl ist. Die aufwändige Probedivision wird nur dann ausgeführt, wenn festgestellt wurde, dass die zu untersuchende Zahl keine Primzahl ist.
+<p />
+Link: <a href="http://de.wikipedia.org/wiki/Probedivision" target="_blank">http://de.wikipedia.org/wiki/Probedivision</a>

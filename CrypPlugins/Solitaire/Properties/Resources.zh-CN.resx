@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>纸牌</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>小说《密码学》中的纸牌密码</value>
+  </data>
+  <data name="InputStringCaption" xml:space="preserve">
+    <value>文字输入</value>
+  </data>
+  <data name="InputStringTooltip" xml:space="preserve">
+    <value>输入要处理的字符串</value>
+  </data>
+  <data name="PasswordCaption" xml:space="preserve">
+    <value>关键字输入</value>
+  </data>
+  <data name="PasswordTooltip" xml:space="preserve">
+    <value>输入将用来生成初始牌组的关键字</value>
+  </data>
+  <data name="DeckstateCaption" xml:space="preserve">
+    <value>甲板状态输入</value>
+  </data>
+  <data name="DeckstateTooltip" xml:space="preserve">
+    <value>输入甲板状态，序列从上到下代表甲板。每张卡都用一个数字表示，最高的两个是小丑。用逗号分隔卡，例如“ 1,2,3,4”。卡的最大数量为54。</value>
+  </data>
+  <data name="OutputStringCaption" xml:space="preserve">
+    <value>文字输出</value>
+  </data>
+  <data name="OutputStringTooltip" xml:space="preserve">
+    <value>使用接龙密码处理后的字符串</value>
+  </data>
+  <data name="InitialDeckCaption" xml:space="preserve">
+    <value>初始甲板</value>
+  </data>
+  <data name="InitialDeckTooltip" xml:space="preserve">
+    <value>使用的初始卡座。</value>
+  </data>
+  <data name="FinalDeckCaption" xml:space="preserve">
+    <value>最终甲板</value>
+  </data>
+  <data name="FinalDeckTooltip" xml:space="preserve">
+    <value>生成最后一个密钥流字母后的卡片组。</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>流输出</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>用于加密或解密文本的流。</value>
+  </data>
+  <data name="ActionTypeCaption" xml:space="preserve">
+    <value>动作类型</value>
+  </data>
+  <data name="ActionTypeTooltip" xml:space="preserve">
+    <value>选择是加密还是解密</value>
+  </data>
+  <data name="GenerationTypeCaption" xml:space="preserve">
+    <value>甲板生成</value>
+  </data>
+  <data name="GenerationTypeTooltip" xml:space="preserve">
+    <value>选择初始卡组的生成方法：-升序：以升序对卡片进行排序（从最低开始）。 -降序：以降序对卡片进行排序（从最高位开始）。 -给定状态：使用输入的甲板状态-关键字：根据关键字生成初始甲板-随机：随机生成初始甲板</value>
+  </data>
+  <data name="NumberOfCardsCaption" xml:space="preserve">
+    <value>牌</value>
+  </data>
+  <data name="NumberOfCardsTooltip" xml:space="preserve">
+    <value>选择卡组中的卡数。正常设置为54张纸牌，正常为52张纸牌和2张百搭牌，这也是最大纸牌数。最低设置为3张卡，一张卡和2个小丑。</value>
+  </data>
+  <data name="StreamTypeCaption" xml:space="preserve">
+    <value>流产生</value>
+  </data>
+  <data name="StreamTypeTooltip" xml:space="preserve">
+    <value>选择流生成：-自动：自动生成密码流，并显示最终结果。 -手动：可以手动执行五个不同步骤。每步更改后的卡将以粗体打印。</value>
+  </data>
+  <data name="ActionTypeList1" xml:space="preserve">
+    <value>加密</value>
+  </data>
+  <data name="ActionTypeList2" xml:space="preserve">
+    <value>解密</value>
+  </data>
+  <data name="GenerationTypeList1" xml:space="preserve">
+    <value>上升</value>
+  </data>
+  <data name="GenerationTypeList2" xml:space="preserve">
+    <value>降序</value>
+  </data>
+  <data name="GenerationTypeList3" xml:space="preserve">
+    <value>给定状态</value>
+  </data>
+  <data name="GenerationTypeList4" xml:space="preserve">
+    <value>关键词</value>
+  </data>
+  <data name="GenerationTypeList5" xml:space="preserve">
+    <value>随机</value>
+  </data>
+  <data name="StreamTypeList1" xml:space="preserve">
+    <value>自动</value>
+  </data>
+  <data name="StreamTypeList2" xml:space="preserve">
+    <value>手册</value>
+  </data>
+  <data name="labelAutomatic" xml:space="preserve">
+    <value>自动</value>
+  </data>
+  <data name="labelCipherStream" xml:space="preserve">
+    <value>密码流</value>
+  </data>
+  <data name="labelDeck" xml:space="preserve">
+    <value>甲板</value>
+  </data>
+  <data name="labelInitialize" xml:space="preserve">
+    <value>初始化</value>
+  </data>
+  <data name="labelInputText" xml:space="preserve">
+    <value>输入文本</value>
+  </data>
+  <data name="labelOutputText" xml:space="preserve">
+    <value>密文</value>
+  </data>
+  <data name="labelStep1" xml:space="preserve">
+    <value>步骤1</value>
+  </data>
+  <data name="labelStep2" xml:space="preserve">
+    <value>第2步</value>
+  </data>
+  <data name="labelStep3" xml:space="preserve">
+    <value>第三步</value>
+  </data>
+  <data name="labelStep4" xml:space="preserve">
+    <value>第四步</value>
+  </data>
+  <data name="labelStep5" xml:space="preserve">
+    <value>第5步</value>
+  </data>
+</root>

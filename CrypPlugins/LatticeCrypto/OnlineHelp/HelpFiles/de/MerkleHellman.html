@@ -1,0 +1,41 @@
+﻿<h2>Merkle-Hellman-Kryptosystem</h2>
+<p>
+    Das
+    Merkle-Hellman-Kryptosystem (benannt nach Ralph Merkle und 
+    Martin Hellman) entstand 1987 neben dem RSA-Kryptosystem als eines der ersten 
+    asymmetrischen Kryptosystem überhaupt. Es zeichnete sich dadurch aus, dass es 
+    relativ leicht zu verstehen ist. Von diesen beiden setzte sich allerdings nur RSA durch, da 
+    Merkle-Hellman schon bald eindrucksvoll mithilfe von Gittern gebrochen werden konnte.</p>
+<p>Das Merkle-Hellman-Kryptosystem basiert auf dem Rucksackproblem, genauer gesagt 
+    dem Teilsummenproblem. Gegeben ist eine Menge N an Objekten mit dem jeweiligen 
+    Gewicht wj und einer Kapazitätsbeschränkung c. Das Ziel ist, genauso wie beim 
+    allgemeinen Rucksackproblem, eine Maximierung. Das Merkle-Hellman-Kryptosystem 
+    basiert auf dem Teilsummenproblem, verlangt allerdings eine zusätzliche 
+    Einschränkung. Das Ergebnis muss dem exakten Gewicht c entsprechen. Das 
+    Rucksackproblem gehört zu den NP-vollständigen Problemen.</p>
+<p>Das Rucksackproblem kann man sich leicht anhand eines Beispiels verbildlichen: 
+    Angenommen ein Dieb bricht nachts in ein Geschäft ein und sieht verschiedene 
+    Wertgegenstände in den Regalen liegen. Sein Rucksack trägt nur ein begrenztes 
+    Gewicht. Da er den Gesamtwert seines Diebesgutes maximieren möchte, und seinen 
+    Rucksack voll machen möchte, muss er sich genau überlegen, welche Gegenstände er 
+    mitnimmt.</p>
+<p>
+    Idee des Kryptosystems: Der private Schlüssel ist eine stark 
+    ansteigende Menge an Gewichten. Der Besitzer dieses Schlüssels hat es sehr 
+    leicht, das Teilsummenproblem für eine bestimmte Kapazitätsgröße zu lösen, denn 
+    er muss die Gewichte nur nacheinander absteigend nach Größe prüfen. Um das 
+    einfache Rucksackproblem zu einem schweren zu transformieren, werden zwei große 
+    Zahlen q und w generiert mit ggT(q, w) = 1. Es muss weiter eine Zahl k geben, 
+    sodass k * w = 1 mod q. Dies garantiert ein multiplikatives Inverses für w, 
+    welches für die Dechiffrierung benötigt wird. Dieses schwere Rucksackproblem ist 
+    der öffentliche Schlüssel.
+</p>
+<p>Für den Angriff wird eine quadratische Gittermatrix aufgestellt und mit LLL 
+    reduziert:</p>
+<img src="ImgMerkleHellman" />
+
+<br/>
+<p>Quellenangaben:</p>
+<p>[MH78] Merkle, R. C. ; Hellman, M. E.: Hiding Information and Signatures in Trapdoor
+Knapsacks. In: IEEE Transactions on Information theory 24 (1978), Nr. 5,
+S. 525–530</p>

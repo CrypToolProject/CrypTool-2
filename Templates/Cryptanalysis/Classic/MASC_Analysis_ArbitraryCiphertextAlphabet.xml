@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Monoalphabetic Substitution Analyzer with Arbitrary Ciphertext Alphabet</title>
+  <title lang="zh">具有任意密文字母的单字母替代分析器</title>
+  <title lang="ru">Моноалфавитный анализатор замещений с произвольным алфавитом Ciphertext</title>
+  <summary lang="en">Cryptanalysis of the monoalphabetic substitution cipher with an arbitrary ciphertext alphabet</summary>
+  <summary lang="zh">具有任意密文字母的单字母替换密码的密码分析</summary>
+  <summary lang="ru">Криптоанализ моноалфавитного шифрования замещения с произвольным алфавитом шифрованного текста</summary>
+  <description lang="en">This template shows the cryptanalysis of the monoalphabetic substitution cipher. A sample plaintext is entered in the text input. After starting the workspace, the Substitution component encrypts the plaintext using the given ciphertext alphabet. The resulting ciphertext is then fed into the Monoalphabetic Substitution Analyzer, that tries to recover the original plaintext.</description>
+  <description lang="zh">该模板显示了单字母替换密码的密码分析。在文本输入中输入样本纯文本。启动工作空间后，“替换”组件使用给定的密文字母对明文进行加密。然后，将所得的密文输入到Monoalphabetic替代分析器中，该分析器尝试恢复原始的明文。</description>
+  <description lang="ru">Этот шаблон показывает криптоанализ моноалфавитного шифрования замещения. В текстовый ввод вводится образец открытого текста. После запуска рабочей области компонент Substitution шифрует открытый текст, используя данный алфавит зашифрованного текста. Полученный зашифрованный текст затем подается в анализатор моноалфавитного замещения, который пытается восстановить исходный текст.</description>
+  <keywords>Monoalphabetic Substitution Cipher, Frequencies, Dictionary Attack, Analysis, Alphabet, MASC</keywords>
+  <keywords lang="zh">单字母替代密码，频率，字典攻击，分析，字母，MASC</keywords>
+  <keywords lang="ru">Моноалфавитный шифр замещения, частоты, атака словаря, анализ, алфавит, MASC</keywords>
+  <title lang="de">Angriff auf die monoalphabetische Substitution mit beliebigem Geheimtextalphabet</title>
+  <summary lang="de">Angriff auf die monoalphabetische Substitution mit einem beliebigen Geheimtextalphabet</summary>
+  <description lang="de">Dieses Template zeigt die Kryptoanalyse der monoalphabetischen Substitution. Ein Beispiel-Klartext ist bereits in die Texteingabebox eingetragen. Nachdem die Vorlage gestartet wurde, wird der Klartext mit der Substitutions-Komponente und dem angegebenen Geheimtextalphabet verschlüsselt. Der resultierende Geheimtext wird an die Analysekomponente weitergeleitet. Diese versucht dann, den Klartext wieder herzustellen.</description>
+  <keywords lang="de">monoalphabetische Substitution, Häufigkeiten, Wörterbuch, Analyse, MASC</keywords>
+  <icon file="AnalysisMonoalphabeticSubstitution.png" />
+  <relevantPlugins>
+    <plugin name="AnalysisMonoalphabeticSubstitution" />
+    <plugin name="Substitution" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Plaintext alphabet$" value="Klartextalphabet" />
+    <replacement key="$Ciphertext alphabet$" value="Geheimtextalphabet" />
+    <replacement key="$ToUpper$" value="Großbuchstaben" />
+    <replacement key="$Substitution$" value="Substitution" />
+    <replacement key="$Output of the plaintext alphabet$" value="Ausgabe des Klartextalphabets" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Cryptanalysis$" value="Kryptoanalyse des Geheimtextes" />
+    <replacement key="$Output of the key$" value="Ausgabe des Schlüssels" />
+    <replacement key="$Recovered plaintext$" value="Ermittelter Klartext" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man Geheimtexte brechen kann, deren Zeichen mit beliebigen Zeichen monoalphabetisch substituiert wurden.\line Zunächst wird ein Beispielklartext mit Hilfe der Substitutions-Komponente, welches das Klartext- und Geheimtextalphabet nutzt, verschlüsselt.\line Danach wird der Geheimext mittels der Komponente 'Monoalphabetischen Substitutionsanalyse' gebrochen.\line Als Ergebnis werden der Klartext, das Klartext-Alphabet und der Schlüssel ausgegeben." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Plaintext alphabet$" value="纯文本字母" />
+    <replacement key="$Ciphertext alphabet$" value="密文字母" />
+    <replacement key="$ToUpper$" value="大写字母" />
+    <replacement key="$Substitution$" value="替代" />
+    <replacement key="$Output of the plaintext alphabet$" value="纯文本字母的输出" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Cryptanalysis$" value="密文的密码分析" />
+    <replacement key="$Output of the key$" value="密钥发行" />
+    <replacement key="$Recovered plaintext$" value="确定的纯文本" />
+    <replacement key="$memo$" value="此模板显示了如何破坏字符被单字母替换为任何字符的密文\Line首先，示例文本使用替换组件加密，该替换组件使用明文和密文字母\Line然后使用密文对密文进行加密\单行替换结果\单行，明文字母和键被输出。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Plaintext alphabet$" value="Klartextalphabet" />
+    <replacement key="$Ciphertext alphabet$" value="зашифрованный алфавит" />
+    <replacement key="$ToUpper$" value="прописные" />
+    <replacement key="$Substitution$" value="подмена" />
+    <replacement key="$Output of the plaintext alphabet$" value="Вывод текстового алфавита" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Cryptanalysis$" value="Криптоанализ зашифрованного текста" />
+    <replacement key="$Output of the key$" value="Проблема с ключом" />
+    <replacement key="$Recovered plaintext$" value="Определенный открытый текст" />
+    <replacement key="$memo plaintext$" value="Этот шаблон показывает, как разбивать символы зашифрованного текста, которые были моноалфавитно заменены любыми символами.\line Сначала образец открытого текста шифруется с использованием компонента замещения, в котором используется алфавит открытого текста и зашифрованного текста.\line Затем секретный текст разбивается с использованием компонента «Анализ моноалфавитного замещения». \line В результате отображается открытый текст, алфавит открытого текста и ключ." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$Plaintext alphabet$" value="Plaintext alphabet" />
+    <replacement key="$Ciphertext alphabet$" value="Ciphertext alphabet" />
+    <replacement key="$ToUpper$" value="ToUpper" />
+    <replacement key="$Substitution$" value="Substitution" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$Cryptanalysis$" value="Cryptanalysis of the ciphertext" />
+    <replacement key="$Output of the plaintext alphabet$" value="Output of the plaintext alphabet" />
+    <replacement key="$Output of the key$" value="Output of the key" />
+    <replacement key="$Recovered plaintext$" value="Recovered plaintext" />
+    <replacement key="$memo plaintext$" value="This template shows how to break ciphertexts that have been monoalphabetically substituted with arbitrary symbols.\line First, an example plaintext is encrypted using the substitution component that uses the given plaintext alphabet and ciphertext alphabet.\line Then, the ciphertext is broken using the component 'Monoalphabetic Substitution Analysis'. \line As a result, the plaintext, the plaintext alphabet, and the key are shown." />
+  </replacements>
+</sample>

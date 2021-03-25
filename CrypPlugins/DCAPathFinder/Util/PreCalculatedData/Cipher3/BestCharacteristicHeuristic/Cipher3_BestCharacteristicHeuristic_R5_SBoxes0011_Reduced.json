@@ -1,0 +1,125 @@
+{
+  "Round": 5,
+  "ActiveSBoxes": [
+    true,
+    true,
+    false,
+    false
+  ],
+  "IsFirst": false,
+  "IsLast": true,
+  "IsBeforeLast": false,
+  "Probability": 0.0072612762451171875,
+  "InputDifference": 34,
+  "ExpectedDifference": 34,
+  "Characteristics": [
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        34,
+        3,
+        17,
+        48,
+        34
+      ],
+      "OutputDifferentials": [
+        17,
+        3,
+        34,
+        48
+      ],
+      "Probability": 0.002780914306640625
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        34,
+        48,
+        34,
+        48,
+        34
+      ],
+      "OutputDifferentials": [
+        34,
+        48,
+        34,
+        48
+      ],
+      "Probability": 0.002780914306640625
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        34,
+        3,
+        4368,
+        224,
+        34
+      ],
+      "OutputDifferentials": [
+        17,
+        14,
+        8736,
+        48
+      ],
+      "Probability": 0.00023174285888671875
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        34,
+        48,
+        8736,
+        224,
+        34
+      ],
+      "OutputDifferentials": [
+        34,
+        224,
+        8736,
+        48
+      ],
+      "Probability": 0.00023174285888671875
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        34,
+        3,
+        4352,
+        192,
+        34
+      ],
+      "OutputDifferentials": [
+        17,
+        12,
+        8704,
+        48
+      ],
+      "Probability": 0.00061798095703125
+    },
+    {
+      "$type": "DCAPathFinder.Logic.Cipher3.Cipher3Characteristic, DCAPathFinder",
+      "InputDifferentials": [
+        34,
+        48,
+        8704,
+        192,
+        34
+      ],
+      "OutputDifferentials": [
+        34,
+        192,
+        8704,
+        48
+      ],
+      "Probability": 0.00061798095703125
+    }
+  ],
+  "UnfilteredPairList": [],
+  "FilteredPairList": [],
+  "EncrypedPairList": [],
+  "SearchPolicy": 0,
+  "AbortingPolicy": 1,
+  "SelectedAlgorithm": 2
+}

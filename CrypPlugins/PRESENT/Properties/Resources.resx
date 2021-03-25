@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>PRESENT</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>PRESENT is an ultra-lightweight block cipher</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>Data to be encrypted or decrypted.</value>
+  </data>
+  <data name="InputKeyCaption" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="InputKeyTooltip" xml:space="preserve">
+    <value>Must be 10 or 16 byte.</value>
+  </data>
+  <data name="InputIVCaption" xml:space="preserve">
+    <value>Initialization vector</value>
+  </data>
+  <data name="InputIVTooltip" xml:space="preserve">
+    <value>IV to be used in chaining modes (CBC,CFB,OFB). It must be the same size as the block length (8 bytes).</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>Output stream</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>Encrypted or decrypted output data</value>
+  </data>
+  <data name="ActionCaption" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ActionTooltip" xml:space="preserve">
+    <value>Do you want the input data to be encrypted or decrypted?</value>
+  </data>
+  <data name="ModeCaption" xml:space="preserve">
+    <value>Chaining Mode</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Select the block cipher mode of operation.</value>
+  </data>
+  <data name="PaddingCaption" xml:space="preserve">
+    <value>Padding Mode</value>
+  </data>
+  <data name="PaddingTooltip" xml:space="preserve">
+    <value>Select a mode to fill partial data blocks.</value>
+  </data>
+  <data name="ActionList1" xml:space="preserve">
+    <value>Encrypt</value>
+  </data>
+  <data name="ActionList2" xml:space="preserve">
+    <value>Decrypt</value>
+  </data>
+  <data name="ModeList1" xml:space="preserve">
+    <value>Electronic Code Book (ECB)</value>
+  </data>
+  <data name="ModeList2" xml:space="preserve">
+    <value>Cipher Block Chaining (CBC)</value>
+  </data>
+  <data name="ModeList3" xml:space="preserve">
+    <value>Cipher Feedback (CFB)</value>
+  </data>
+  <data name="ModeList4" xml:space="preserve">
+    <value>Output feedback (OFB)</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Add_Roundkey" xml:space="preserve">
+    <value>Add Roundkey</value>
+  </data>
+  <data name="animation_speed" xml:space="preserve">
+    <value>animation speed</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Assign</value>
+  </data>
+  <data name="A_top_level_algorithmic_description_of_PRESENT" xml:space="preserve">
+    <value>A top-level algorithmic description of PRESENT:</value>
+  </data>
+  <data name="bit_group_sbox" xml:space="preserve">
+    <value>bit group {0} (bits {1:d2},{2:d2},{3:d2},{4:d2}) sbox : {5} -&gt; {6}</value>
+  </data>
+  <data name="bit_group_xor" xml:space="preserve">
+    <value>bit group {0} (bits {1:d2},{2:d2},{3:d2},{4:d2}) key xor : {5} XOR {6} = {7}</value>
+  </data>
+  <data name="Data_" xml:space="preserve">
+    <value>Data (8 byte):</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="Encrypted_to" xml:space="preserve">
+    <value>Encrypted 0x{0:x16} to 0x{1:x16}</value>
+  </data>
+  <data name="Encryption" xml:space="preserve">
+    <value>Encryption</value>
+  </data>
+  <data name="Encryption_Data" xml:space="preserve">
+    <value>Encryption: Data = 0x{0:x16}</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Finished</value>
+  </data>
+  <data name="Finished_generating_32_roundkeys" xml:space="preserve">
+    <value>Finished generating 32 roundkeys</value>
+  </data>
+  <data name="Key_" xml:space="preserve">
+    <value>Key (10 byte):</value>
+  </data>
+  <data name="Key_Extraction" xml:space="preserve">
+    <value>Key Extraction</value>
+  </data>
+  <data name="Key_Schedule" xml:space="preserve">
+    <value>Key Schedule</value>
+  </data>
+  <data name="Key_Schedule_" xml:space="preserve">
+    <value>Key Schedule : Key = 0x{0:x16}{1:x4}</value>
+  </data>
+  <data name="Key_Shift" xml:space="preserve">
+    <value>Key_Shift</value>
+  </data>
+  <data name="Key_XOR" xml:space="preserve">
+    <value>Key_XOR</value>
+  </data>
+  <data name="Key_XOR_" xml:space="preserve">
+    <value>Key XOR (0x{1:x16} -&gt; 0x{2:x16})</value>
+  </data>
+  <data name="next_round" xml:space="preserve">
+    <value>next round</value>
+  </data>
+  <data name="next_step" xml:space="preserve">
+    <value>next step</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="passing_leftmost_4_bits" xml:space="preserve">
+    <value>passing leftmost 4 bits through S-box ({0} -&gt; {1})</value>
+  </data>
+  <data name="pause_resume" xml:space="preserve">
+    <value>pause/resume animation</value>
+  </data>
+  <data name="Permutation" xml:space="preserve">
+    <value>Permutation</value>
+  </data>
+  <data name="picking_the_64_left_most_bits" xml:space="preserve">
+    <value>picking the 64 leftmost bits as roundkey {0} (0x{1:x16})</value>
+  </data>
+  <data name="previous_round" xml:space="preserve">
+    <value>previous round</value>
+  </data>
+  <data name="previous_step" xml:space="preserve">
+    <value>previous step</value>
+  </data>
+  <data name="rotate_key_register_61" xml:space="preserve">
+    <value>rotate key register 61 positions to the left (0x{0:x16} {1:x4} -&gt; 0x{2:x16} {3:x4})</value>
+  </data>
+  <data name="Roundcounter_XOR" xml:space="preserve">
+    <value>Roundcounter XOR</value>
+  </data>
+  <data name="Round_" xml:space="preserve">
+    <value>Round:</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Step_" xml:space="preserve">
+    <value>Step:</value>
+  </data>
+  <data name="S_Box" xml:space="preserve">
+    <value>S-Box</value>
+  </data>
+  <data name="The_PRESENT_cipher_is_an_example" xml:space="preserve">
+    <value>The PRESENT cipher is an example of an SP-network and consists of 31 rounds. The block length is 64 bits and two key lengths of 80 and 128 bits are supported - but only the recommended 80-bit key version is implemented here.</value>
+  </data>
+  <data name="Trace" xml:space="preserve">
+    <value>Trace</value>
+  </data>
+  <data name="xor_round_counter" xml:space="preserve">
+    <value>xor round counter with key register : {0} XOR {1} = {2}</value>
+  </data>
+  <data name="PaddingList1" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="PaddingList2" xml:space="preserve">
+    <value>Zeros</value>
+  </data>
+  <data name="PaddingList3" xml:space="preserve">
+    <value>PKCS7</value>
+  </data>
+  <data name="PaddingList4" xml:space="preserve">
+    <value>ANSIX923</value>
+  </data>
+  <data name="PaddingList5" xml:space="preserve">
+    <value>ISO10126</value>
+  </data>
+  <data name="PaddingList6" xml:space="preserve">
+    <value>1-0 padding</value>
+  </data>
+  <data name="AboutText" xml:space="preserve">
+    <value>The visualization of the PRESENT cipher is independent from the data entered in the CT2 workspace. Input data for the presentation can be entered below the tab "Settings".</value>
+  </data>
+  <data name="SettingsInfoText" xml:space="preserve">
+    <value>Here, you can change key and input (plaintext in hex) that are used in the presentation. The visualization encrypts exactly one block, thus, no additional data (like an initialization vector) is needed.</value>
+  </data>
+</root>

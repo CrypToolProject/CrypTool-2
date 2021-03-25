@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
+  <introduction lang="en"> 
+	A virtual machine, which allows to execute encrypted software, qualifies for secret program execution.<newline />
+	If a user wants to get his program executed by a third party without revealing the input, output or the program itself, he can achieve that by encrypting his program (this only works for batch programs without later user interaction). The requirement of not knowing the input or output is not a mandatory one.
+	In both cases the third party receives the encrypted program, which can be executed using the virtual machine. The encrypted result will then be returned to the user.<newline />
+	To be able to execute an encrypted program, homomorphic encryption is used.<newline />
+	The process of executing a program can be described as follows:
+	<enum><item>Generate keys <!-- (<docRef item="CrypTool.Plugins.EncryptedVMKeyGen"/>) --></item><item><b>Assemble and encrypt program code into machine code</b></item><item>Execute the machine code <!-- ((<docRef item="CrypTool.Plugins.EncryptedVMMachine"/>) --></item><item>Decrypt and interpret the result <!-- ((<docRef item="CrypTool.Plugins.EncryptedVMMemoryDisplay"/>) --></item></enum>
+	All these steps are available by using plugins in <i>CrypTool 2</i>.<newline />
+	The used virtual machine is based on <i>ShapeCPU</i> and works in conjunction with <i>SEAL</i> (Simple Encrypted Arithmetic Library), which implements the Fan-Vercauteren homomorphic cryptosystem.
+	
+	<section headline="Assembler">
+	  This plugin assembles given Assembler program code into encrypted machine code.<newline />
+	  The machine's memory holds 52 bit in 4 rows and is only filled with instructions. The lower 8 bit of a row are data, the upper 5 bit are the command. By writing to a row only the data part is overwritten.<newline />
+	  The machine uses an accumulator register, that's the only register besides the program counter which can be written to. It simulates a RISC processor (reduced instruction set computing) and has a load/store architecture.<newline />
+	  You cannot specify any termination of the program. The termination of a program is achieved via specifying the maximum number of cycles to the <i>Machine</i>.<newline />
+	  The assembler doesn't check the validity of memory addresses. Besides these addresses you can use integer operands from 0 - 255.<newline />
+	  A valid program has the following format:<newline />
+	  INITAC &lt; The initial state of the accumulator (integer) &gt;<newline />
+	  INITPC &lt; The starting address of the program code (integer or label) &gt;<newline />
+	  &lt; (labeled) Instructions (up to 4, separated by ;) &gt;<newline /><newline />
+	  Example program:<newline />
+	  INITAC 0<newline />
+	  INITPC start<newline /><newline />
+	  start: L 0;<newline />
+	  XOR 1;<newline />
+	  STa 0;<newline />
+	  end: J end;<newline /><newline />
+	  This program computes 0 XOR 1 and writes the result to the memory address 0.<newline />
+	  Here's a list of all available commands:
+	  <table border="1"><tr><th>Mnemonic</th><th>Parameter</th><th>Description</th></tr><tr><td>L</td><td>Operand</td><td>Akk ← Op</td></tr><tr><td>La</td><td>Address</td><td>Akk ← Mem[Adr]</td></tr><tr><td>STa</td><td>Address</td><td>Mem[Adr] ← Akk</td></tr><tr><td>XOR</td><td>Operand</td><td>Akk ← Akk ⊕ Op</td></tr><tr><td>XORa</td><td>Address</td><td>Akk ← Akk ⊕ Mem[Adr]</td></tr><tr><td>AND</td><td>Operand</td><td>Akk ← Akk ∧ Op</td></tr><tr><td>ANDa</td><td>Address</td><td>Akk ← Akk ∧ Mem[Adr]</td></tr><tr><td>OR</td><td>Operand</td><td>Akk ← Akk ∨ Op</td></tr><tr><td>ORa</td><td>Address</td><td>Akk ← Akk ∨ Mem[Adr]</td></tr><tr><td>ROR</td><td>-</td><td>Akk[i] ← Akk[i-1] (mod 13), Akk[0] ← Carry bit</td></tr><tr><td>ROL</td><td>-</td><td>Akk[i-1] ← Akk[i] (mod 13), Akk[12] ← Carry bit</td></tr><tr><td>CLC</td><td>-</td><td>Carry bit ← 0</td></tr><tr><td>SEC</td><td>-</td><td>Carry bit ← 1</td></tr><tr><td>ADD</td><td>Operand</td><td>Akk ← Akk + Op</td></tr><tr><td>ADDa</td><td>Address</td><td>Akk ← Akk + Mem[Adr]</td></tr><tr><td>CMP</td><td>Operand</td><td>Compares Akk and Op</td></tr><tr><td>CMPa</td><td>Address</td><td>Compares Akk and Mem[Adr]</td></tr><tr><td>BEQ</td><td>Address</td><td>Null bit = 1 ⇒ PC ← Adr</td></tr><tr><td>BMI</td><td>Address</td><td>Overflow bit = 1 ⇒ PC ← Adr</td></tr><tr><td>J</td><td>Address</td><td>PC ← Adr</td></tr></table></section></introduction>
+  <introduction lang="zh-CN">允许执行加密软件的虚拟机有资格执行秘密程序。如果用户希望在不泄露输入，输出或程序本身的情况下让第三方执行其程序，则可以通过对其程序进行加密来实现这一点（这仅适用于批处理程序，而无需以后的用户交互）。不知道输入或输出的要求不是强制性的。在这两种情况下，第三方都会接收加密的程序，该程序可以使用虚拟机执行。然后，加密的结果将返回给用户。为了能够执行加密程序，使用了同态加密。执行程序的过程可以描述如下：生成密钥将程序代码组装并加密为机器代码执行机器代码解密并解释结果所有这些步骤都可以通过使用CrypTool 2中的插件来使用。使用的虚拟机基于ShapeCPU并与SEAL（简单加密算法库）配合使用，后者实现了Fan-Vercauteren同态密码系统。该插件将给定的汇编程序代码汇编成加密的机器代码。机器的存储器在4行中保存52位，并且仅填充指令。一行的低8位是数据，高5位是命令。通过写到一行，仅数据部分被覆盖。机器使用一个累加器寄存器，这是除可写入程序计数器之外的唯一寄存器。它模拟RISC处理器（精简指令集计算），并具有加载/存储架构。您不能指定程序的任何终止。通过指定机器的最大循环次数，可以终止程序。汇编器不检查内存地址的有效性。除了这些地址之外，您还可以使用0到255之间的整数操作数。有效程序的格式如下：INITAC &amp;lt;累加器的初始状态（整数）&amp;gt; INITPC &amp;lt;程序代码的起始地址（整数或标签）&amp;gt; &amp;lt;（指令（最多4个，用;分隔）；&amp;gt;示例程序：INITAC 0 INITPC start start：L 0; XOR 1; STa 0;结束：J结束；该程序计算0 XOR 1并将结果写入内存地址0。这是所有可用命令的列表：MnemonicParameterDescriptionLOperandAkk←OpLaAddressAkk←Mem [Adr] STaAddressMem [Adr]←AkkXOROperandAkk←Akk⊕OpXORaAddressAkk←Akk⊕Mem ←Akk∧OpANDaAddressAkk←Akk∧Mem [Adr] OROperandAkk←Akk∨OpORaAddressAkk←Akk∨Mem [Adr] ROR-Akk [i]←Akk [i-1]（mod 13），Akk [0]←携带bitROL-Akk [i-1]←Akk [i]（mod 13），Akk [12]←进位bitCLC-Carry bit←0SEC-Carry bit←1ADDOperandAkk←Akk + OpADDaAddressAkk←Akk + Mem [Adr] CMPOperandCompares Akk和OpCMPaAddressCompares Akk和Mem [Adr] BEQAddressNull位= 1⇒PC←AdrBMIAddressOverflow位= 1⇒PC←AdrJAddressPC←Adr</introduction>
+  <introduction lang="ru">Виртуальная машина, которая позволяет выполнять зашифрованное программное обеспечение, подходит для выполнения секретной программы. Если пользователь хочет получить свою программу, выполненную третьей стороной, не раскрывая ввод, вывод или сама программа, он может добиться этого, зашифровав свою программу (это работает только для пакетных программ без последующего взаимодействия с пользователем). Требование не знать ввод или вывод не является обязательным. В обоих случаях третья сторона получает зашифрованную программу, которая может быть выполнена с использованием виртуальной машины. Зашифрованный результат будет затем возвращен пользователю. Для выполнения зашифрованной программы используется гомоморфное шифрование. Процесс выполнения программы можно описать следующим образом: Генерировать ключи Собрать и зашифровать программный код в машинный код Выполнить машинный код Расшифровать и интерпретировать результат Все эти шаги доступны с помощью плагинов в CrypTool 2. Используемая виртуальная машина основана на ShapeCPU и работает совместно с SEAL (простая зашифрованная арифметическая библиотека), которая реализует гомоморфную криптосистему Fan-Vercauteren. Этот плагин собирает данный программный код Assembler в зашифрованный машинный код. Память аппарата занимает 52 бит в 4 строках и заполняется только инструкциями. Нижний 8 бит строки - это данные, верхний 5 бит - это команда. При записи в строку только часть данных перезаписывается. Машина использует регистр аккумуляторов, это единственный регистр, кроме счетчика программы, на который можно записать. Он имитирует RISC-процессор (сокращение набора команд) и имеет архитектуру загрузки / хранения. Вы не можете указать какое-либо прекращение программы. Окончание программы достигается путем указания максимального количества циклов на машину. Ассемблер не проверяет правильность адресов памяти. Помимо этих адресов вы можете использовать целочисленные операнды от 0 до 255. Действующая программа имеет следующий формат: INITAC &amp;lt;Начальное состояние аккумулятора (целое число)&amp;gt; INITPC &amp;lt;Начальный адрес программного кода (целое или метка)&amp;gt; &amp;lt;( помечены) Инструкции (до 4, разделенные)&amp;gt; Пример программы: INITAC 0 Начало запуска INITPC: L 0; XOR 1; STa 0; end: J end; Эта программа вычисляет 0 XOR 1 и записывает результат в адрес памяти 0. Ниже приведен список всех доступных команд: MnemonicParameterDescriptionLOperandAkk ← OpLaAddressAkk ← Mem [Adr] STaAddressMem [Adr] ← AkkXOROperandAkk ← Akk ⊕ OpXORaAddressAkk ← Akk ⊕ Mem [Adr] ANDOperandAkk ← Akk ∧ OpANDaAddressAkk ← Akk ∧ Mem [Adr] OROperandAkk ← Akk ∨ OpORaAddressAkk ← Akk ∨ Mem [Adr] ROR-Akk [i] ← Akk [i-1] (mod 13), Akk [0] ← Carry bitROL-Akk [i-1] ← Akk [i] (mod 13), Akk [12] ← Carry bitCLC-Carry bit ← 0SEC-Carry bit ← 1ADDOperandAkk ← Akk + OpADDaAddressAkk ← Akk + Mem [Adr] CMPOperandCompares Akk и OpCMPaAddressCompares Akk и Mem [Adr] BEQAddressNull бит = 1 ⇒ ПК ← AdrBMIAddressOverflow бит = 1 ⇒ ПК ← AdrJAddressPC ← Adr</introduction>
+  <introduction lang="de-DE">
+	Eine verschlüsselt arbeitende virtuelle Maschine erlaubt es, das auszuführende Programm zu verbergen.<newline />
+	Möchte ein Nutzer sein Programm von einer dritten Partei ausführen lassen, ohne dass diese die Eingabe, den Algorithmus oder auch die Ausgabe kennt, so kann er dies durch die Verschlüsselung seines Programms samt Daten erreichen (dies geht nur für Batchprogramme ohne spätere User-Interaktion). Die Forderung nach der Unkenntlichmachung der Eingabe/Ausgabe kann aber auch entfallen.
+	In beiden Fällen erhält die dritte Partei das verschlüsselte Programm und führt es mittels der virtuellen Maschine aus. Das verschlüsselte Ergebnis wird danach an den Nutzer zurückübermittelt.<newline />
+	Die Möglichkeit, ein verschlüsseltes Programm auszuführen, wird durch die Nutzung eines homomorphen Kryptosystems erreicht.<newline />
+	Der Ablauf beim Ausführen eines verschlüsselten Programms sieht wie folgt aus:
+	<enum><item>Schlüsselgenerierung <!-- ((<docRef item="CrypTool.Plugins.EncryptedVMKeyGen"/>) --></item><item><b>Assemblierung und Verschlüsselung des Programmcodes in Maschinencode</b></item><item>Ausführen des Maschinencodes <!-- ((<docRef item="CrypTool.Plugins.EncryptedVMMachine"/>) --></item><item>Entschlüsselung und Interpretation des Ergebnisses <!-- ((<docRef item="CrypTool.Plugins.EncryptedVMMemoryDisplay"/>) --></item></enum>
+	Alle diese Schritte sind einzeln als Plugins im <i>CrypTool 2</i> verfügbar.<newline />
+	Die verschlüsselt arbeitende virtuelle Maschine basiert auf <i>ShapeCPU</i> und wird in Kombination mit der Kryptobibliothek <i>SEAL</i> (Simple Encrypted Arithmetic Library), welche die homomorphe Verschlüsselung nach <i>Fan-Vercauteren</i> umsetzt, genutzt.
+	
+	<section headline="Assembler">
+	  Dieses Plugin assembliert einen gegebenen Assembler in verschlüsselten Maschinencode.
+	  Der Speicher der Maschine hält 52 Bit in 4 Reihen a 13 Bit. Der Inhalt besteht nur aus Instruktionen, deren untere 8 Bit Daten und deren obere 5 Bit Kommandos sind. Beim Überschreiben einer Zeile wird nur der Datenteil überschrieben.<newline />
+	  Die einzigen verwendbaren Register der Maschine sind der Akkumulator sowie der Programmzähler. Die Maschine hat eine RISC- bzw. Load/Store-Architektur.<newline />
+	  Es ist nicht möglich ein Programm zu beenden. Um ein Programm implizit zu beenden wird der <i>Maschine</i> die maximale Anzahl an Zyklen mitgeteilt.<newline />
+	  Der Assembler überprüft nicht die Validität der Speicheradressen. Neben diesen können auch natürliche Zahlen zwischen 0 und 255 als Operand verwendet werden.<newline />
+	  Ein valides Programm besitzt folgendes Format:<newline />
+	  INITAC &lt; Der initiale Status des Akkumulators (als natürliche Zahl) &gt;<newline />
+	  INITPC &lt; Die Startadresse des Programmcodes (als natürliche Zahl oder mit Bezeichner) &gt;<newline />
+	  &lt; (bezeichnete) Instruktionen (bis zu 4, getrennt durch ;) &gt;<newline /><newline />
+	  Beispiel Programm:<newline />
+	  INITAC 0<newline />
+	  INITPC start<newline /><newline />
+	  start: L 0;<newline />
+	  XOR 1;<newline />
+	  STa 0;<newline />
+	  end: J end;<newline /><newline />
+	  Dieses Programm berechnet 0 XOR 1 und schreibt das Ergebnis an der Adresse 0 in den Speicher.<newline />
+	  Hier ist eine Liste aller verfügbaren Kommandos:
+	  <table border="1"><tr><th>Mnemonic</th><th>Parameter</th><th>Beschreibung</th></tr><tr><td>L</td><td>Operand</td><td>Akk ← Op</td></tr><tr><td>La</td><td>Adresse</td><td>Akk ← Mem[Adr]</td></tr><tr><td>STa</td><td>Adresse</td><td>Mem[Adr] ← Akk</td></tr><tr><td>XOR</td><td>Operand</td><td>Akk ← Akk ⊕ Op</td></tr><tr><td>XORa</td><td>Adresse</td><td>Akk ← Akk ⊕ Mem[Adr]</td></tr><tr><td>AND</td><td>Operand</td><td>Akk ← Akk ∧ Op</td></tr><tr><td>ANDa</td><td>Adresse</td><td>Akk ← Akk ∧ Mem[Adr]</td></tr><tr><td>OR</td><td>Operand</td><td>Akk ← Akk ∨ Op</td></tr><tr><td>ORa</td><td>Adresse</td><td>Akk ← Akk ∨ Mem[Adr]</td></tr><tr><td>ROR</td><td>-</td><td>Akk[i] ← Akk[i-1] (mod 13), Akk[0] ← Übertragsbit</td></tr><tr><td>ROL</td><td>-</td><td>Akk[i-1] ← Akk[i] (mod 13), Akk[12] ← Übertragsbit</td></tr><tr><td>CLC</td><td>-</td><td>Übertragsbit ← 0</td></tr><tr><td>SEC</td><td>-</td><td>Übertragsbit ← 1</td></tr><tr><td>ADD</td><td>Operand</td><td>Akk ← Akk + Op</td></tr><tr><td>ADDa</td><td>Adresse</td><td>Akk ← Akk + Mem[Adr]</td></tr><tr><td>CMP</td><td>Operand</td><td>Vergleicht Akk und Op</td></tr><tr><td>CMPa</td><td>Address</td><td>Vergleicht Akk und Mem[Adr]</td></tr><tr><td>BEQ</td><td>Adresse</td><td>Null bit = 1 ⇒ PC ← Adr</td></tr><tr><td>BMI</td><td>Address</td><td>Überlaufsbit = 1 ⇒ PC ← Adr</td></tr><tr><td>J</td><td>Adresse</td><td>PC ← Adr</td></tr></table></section></introduction>
+  <usage lang="en">
+    <section headline="Input">
+	  The program code input can be connected to the <i>File Input</i> plugin. It's also possible to supply the program code via a file by checking the <i>Load from file</i> checkbox and specifying the path to the file.
+	  The encryption parameters as well as the public key are used to encrypt the machine code. These inputs should be connected to the <i>Key Generator</i>.
+    </section>
+    <section headline="Output">
+	  The output is the encrypted machine code. It should be connected to the encrypted virtual <i>Machine</i>.
+    </section>
+    <section headline="Progress bar">
+      <list>
+        <item>0%: Start of the plugin.</item>
+        <item>25%: The input is read.</item>
+        <item>50%: Resolving of labels is finished.</item>
+        <item>60%: The program counter and accumulator are assembled.</item>
+        <item>100%: The program code is assembled.</item>
+      </list>
+    </section>
+  </usage>
+  <usage lang="zh-CN">程序代码输入可以连接到File Input插件。通过选中从文件加载复选框并指定文件路径，也可以通过文件提供程序代码。加密参数以及公共密钥用于对机器代码进行加密。这些输入应连接到密钥生成器。输出是加密的机器代码。它应该连接到加密的虚拟机。 0％：插件启动25％：读取输入50％：标签解析完成60％：程序计数器和累加器已组装100％：程序代码已组装</usage>
+  <usage lang="ru">Ввод кода программы может быть подключен к плагину ввода файлов. Также можно предоставить программный код через файл, установив флажок Загрузить из файла и указав путь к файлу. Параметры шифрования, а также открытый ключ используются для шифрования машинного кода. Эти входы должны быть подключены к генератору ключей. Результатом является зашифрованный машинный код. Он должен быть подключен к зашифрованной виртуальной машине. 0%: начало плагина.25%: вход считывается. 50%: разрешение меток закончено. 60%: счетчик программ и аккумулятор собраны.100%: код программы собран.</usage>
+  <usage lang="de-DE">
+    <section headline="Eingabe">
+	  Für die Eingabe des Programmcodes kann das <i>Texteingabe</i>-Plugin verbunden werden. Alternativ kann der Programmcode durch Auswahl der <i>Aus Datei laden</i> Checkbox mittels Angabe des Pfades aus einer Datei geladen werden.<newline />
+      Die Verschlüsselungsparameter sowie der öffentliche Schlüssel werden zum Verschlüsseln des Maschinencodes genutzt. Diese Eingaben müssen vom <i>Schlüsselgenerator</i> stammen.
+    </section>
+    <section headline="Ausgabe">
+	  Die Ausgabe ist der erzeugte, verschlüsselte Maschinencode. Dieser muss der verschlüsselt arbeitenden <i>Maschine</i> zugeführt werden.
+    </section>
+    <section headline="Fortschrittsanzeige">
+      <list>
+        <item>0%: Start des Plugins.</item>
+        <item>25%: Die Eingabe wurde gelesen.</item>
+        <item>50%: Die Bezeichner sind aufgelöst.</item>
+        <item>60%: Programmzähler und Akkumulator wurden assembliert.</item>
+        <item>100%: Der Programmcode ist in Maschinencode überführt.</item>
+      </list>
+    </section>
+  </usage>
+  <presentation lang="en"></presentation>
+  <presentation lang="de-DE"></presentation>
+  <references>
+    <linkReference>
+      <link url="https://en.wikipedia.org/wiki/Homomorphic_encryption" lang="en" />
+      <caption lang="en">Homomorphic encryption (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Homomorphe_Verschlüsselung" lang="de-DE" />
+      <caption lang="de-DE">Homomorphe Verschlüsselung (Wikipedia)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="http://shapecpu.de/shape-cpu/" />
+      <caption lang="en">ShapeCPU</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://sealcrypto.codeplex.com/" />
+      <caption lang="en">Simple Encrypted Arithmetic Library (SEAL)</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://eprint.iacr.org/2012/144" />
+      <caption lang="en">Somewhat Practical Fully Homomorphic Encryption (Fan-Vercauteren)</caption>
+    </linkReference>
+  </references>
+</documentation>

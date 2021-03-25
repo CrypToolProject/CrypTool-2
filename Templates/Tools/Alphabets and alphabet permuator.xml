@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">Usage of Alphabets and Alphabet Permutator</title>
+  <title lang="zh">字母和字母置换器的用法</title>
+  <title lang="ru"></title>
+  <title lang="de">Benutzung von Alphabeten und Alphabet-Permutierer</title>
+  <summary lang="en">Create a substitution with Alphabets component and Alphabet Permuator component</summary>
+  <summary lang="zh">用Alphabets组件和Alphabet Permuator组件创建替换</summary>
+  <summary lang="ru">Создайте замену с помощью компонента Alphabets и компонента Alpha Permuator</summary>
+  <summary lang="de">Erstellen Sie eine Substitution mit der Alphabets-Komponente und der Alphabet Permuator-Komponente</summary>
+  <description lang="en">This template shows, how to use the <i>Alphabets component</i> and the <i>Alphabet Permutator</i> component to create a ciphertext alphabet for a simple monoalphabetic substitution based on a keyword</description>
+  <description lang="zh">该模板显示了如何使用Alphabets组件和Alphabet Permutator组件为基于关键字的简单单字母替换创建密文字母</description>
+  <description lang="ru">Этот шаблон показывает, как использовать компонент <i> Alphabets </i> и компонент <i> Alphabet Permutator </i> для создания зашифрованного алфавита для простой моноалфавитной замены на основе ключевого слова</description>
+  <description lang="de">Diese Vorlage zeigt, wie man mit der <i>Alphabets-Komponente</i> und die <i> Alphabet-Permutierer </i>-Komponente ein Geheimtext-Alphabet für eine einfache monoalphabetische Substitution, basierend auf einem Schlüsselwort, erstellen kann</description>
+  <keywords>substitution, alphabets,keyword</keywords>
+  <keywords lang="zh">替代字母字母</keywords>
+  <keywords lang="ru">подстановка, алфавиты, ключевое слово</keywords>
+  <keywords lang="de">Substitution, Alphabete, Schlüsselwort</keywords>
+  <icon file="Alphabets and alphabet permuator.gif" />
+  <relevantPlugins>
+    <plugin name="Alphabet" />
+    <plugin name="AlphabetPermutator" />
+  </relevantPlugins>
+  <replacements lang="en">
+    <replacement key="$alphabets$" value="Alphabets" />
+    <replacement key="$Alphabet Permutator$" value="Alphabet Permutator" />
+    <replacement key="$keyword$" value="Keyword" />
+    <replacement key="$plaintext$" value="Plaintext" />
+    <replacement key="$ciphertext$" value="Ciphertext" />
+    <replacement key="$memo$" value="This template shows the usage of the Alphabets component and the Alphabet Permutator component.\line\line The Alphabets component provides a standard alphabet. In this case the uppercase Latin Alphabet is selected.\line\line The Alphabet Permutator uses a given keyword and a given alphabet to create a new (ciphertext) alphabet. The new alphabet is then forwarded to the two Substitution components. These use the given alphabets for encryption and decryption.\line\line In this template here, the ciphertext alphabet is based on the keyword 'KEYWORD'. The keyword is put at the beginning of the ciphertext alphabet, then the other letters of the alphabet are added in alphabetical order. Each letter in the alphabet is only used once, thus, the final resulting ciphertext alphabet is 'KEYWORDABCFGHIJLMNPQSTUVXZ'" />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$alphabets$" value="字母" />
+    <replacement key="$Alphabet Permutator$" value="字母置换器" />
+    <replacement key="$keyword$" value="关键词" />
+    <replacement key="$plaintext$" value="纯文本" />
+    <replacement key="$ciphertext$" value="密文" />
+    <replacement key="$memo$" value="此模板显示了Alphabets组件和Alphabet Permutator组件的用法。\line \line Alphabets组件提供了一个标准字母。在这种情况下，将选择大写的拉丁字母。\line \line字母置换器使用给定的关键字和给定的字母来创建新的（密文）字母。然后将新的字母转发到两个替换组件。它们使用给定的字母进行加密和解密。\line \line在此模板中，密文字母基于关键字“ KEYWORD”。关键字放在密文字母的开头，然后按字母顺序添加字母的其他字母。字母表中的每个字母仅使用一次，因此最终得到的密文字母表为“ KEYWORDABCFGHIJLMNPQSTUVXZ”" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$alphabets$" value="алфавиты" />
+    <replacement key="$Alphabet Permutator$" value="Алфавит-Permutator" />
+    <replacement key="$keyword$" value="Ключевое слово" />
+    <replacement key="$plaintext$" value="Простой текст" />
+    <replacement key="$ciphertext$" value="зашифрованный" />
+    <replacement key="$memo$" value="Этот шаблон показывает использование компонента Alphabets и компонента Alpha Permutator. \line\line Компонент Alphabets предоставляет стандартный алфавит. В этом случае выбран заглавный латинский алфавит. \line\line Алфавитный перестановщик использует заданное ключевое слово и заданный алфавит для создания нового (зашифрованного) алфавита. Новый алфавит затем направляется двум компонентам замещения. Они используют данные алфавиты для шифрования и дешифрования. \line\line В этом шаблоне алфавит зашифрованного текста основан на ключевом слове «KEYWORD». Ключевое слово ставится в начале алфавита зашифрованного текста, затем остальные буквы алфавита добавляются в алфавитном порядке. Каждая буква в алфавите используется только один раз, таким образом, конечный итоговый алфавит зашифрованного текста будет «KEYWORDABCFGHIJLMNPQSTUVXZ»" />
+  </replacements>
+  <replacements lang="de">
+    <replacement key="$alphabets$" value="Alphabete" />
+    <replacement key="$Alphabet Permutator$" value="Alphabet-Permutierer" />
+    <replacement key="$keyword$" value="Schlüsselwort" />
+    <replacement key="$plaintext$" value="Klartext" />
+    <replacement key="$ciphertext$" value="Geheimtext" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt die Verwendung der Alphabets-Komponente und der Alphabet-Permutierer-Komponente. \line\line Die Alphabets-Komponente bietet ein Standardalphabet. In diesem Fall ist das lateinische Alphabet (nur Großbuchstaben) ausgewählt. \line\line Der Alphabet-Permutierer verwendet ein Schlüsselwort und ein Alphabet, um ein neues (Geheimtext-) Alphabet zu erstellen. Das neue Alphabet wird dann an die beiden Substitutionskomponenten weitergeleitet. Diese verwenden die übergebenen Alphabete zur Ver- und Entschlüsselung. \line\line In dieser Vorlage basiert das Geheimtext-Alphabet auf dem Schlüsselwort 'KEYWORD'. Das Schlüsselwort wird am Anfang des Geheimtext-Alphabets eingefügt, und die anderen Buchstaben des Alphabets werden in alphabetischer Reihenfolge hinzugefügt. Jeder Buchstabe im Alphabet wird nur einmal verwendet. Das endgültige Geheimtext-Alphabet ist somit 'KEYWORDABCFGHIJLMNPQSTUVXZ'." />
+  </replacements>
+</sample>

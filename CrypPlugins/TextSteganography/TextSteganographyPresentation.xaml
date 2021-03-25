@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="TextSteganography.TextSteganographyPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             MinHeight="150" MinWidth="250" Background="White">
+    <ScrollViewer>
+        <Grid  Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="135*"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Name="StegoTextBlock" TextWrapping="Wrap" FontSize="16" />
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Name="CBPanel">
+                    <CheckBox Name="CBShowBits" Checked="ShowMessageBits" Unchecked="HideMessageBits"/>
+                    <TextBlock Text="{Loc ShowMessageBitsCB}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

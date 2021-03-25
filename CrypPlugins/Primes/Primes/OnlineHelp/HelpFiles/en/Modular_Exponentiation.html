@@ -1,0 +1,21 @@
+<h2>Modular powers</h2>
+
+Calculating the <strong>powers</strong> of a number in a <a href="http://en.wikipedia.org/wiki/Quotient_ring" target="_blank">residue class ring</a> is a mathematical operation that plays an important role in many cryptographic methods (e.g. RSA). The reason for this is that in a residue class ring the powers of a number can be calculated very fast and easy, whereas the inverse operation, i.e. calculating the discrete logarithm of a number, is very difficult. There are no known efficient algorithms. When the residue class ring is sufficiently big, the discrete logarithm can only be calculated with reasonable efforts, if the prime factors of the modulus are known.
+<p>
+    When considering a sequence of powers in which the <b>exponent ascends</b> while the base and modulus are fixed,
+    the sequence ends up in a cycle as soon as an arbitrary value of the <a href="https://en.wikipedia.org/wiki/Quotient_ring" target="_blank">residue class ring</a> repeats itself.
+	The length of the cycle depends on the chosen base and modulus.
+	The sequence yields all values of the residue class ring (with zero being the exception) if the base is chosen as a <a href="https://en.wikipedia.org/wiki/Primitive_root_modulo_n" target="_blank">primitive root</a>.
+    <br />
+    The properties of these types of sequences are of interest for the <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank">Diffie-Hellman key exchange</a> method.
+</p>
+
+<p>
+	When considering a sequence of powers in which the <b>base ascends</b> while the exponent and modulus are fixed,
+	the cycle length always equals the modulus value.
+	The different sequences differ in their ability to assume different values of the residue class ring, 
+	since the same value can appear multiple times within the same cycle.
+	The characteristic of the sequence depends on the chosen exponent and the modulus.
+	<br />
+	Only sequences which yield all values of the residue class ring are of interest for cryptographic methods like <a href="https://en.wikipedia.org/wiki/RSA_(cryptosystem)" target="_blank">RSA</a>.
+</p>

@@ -1,0 +1,476 @@
+﻿<ResourceDictionary x:Uid="ResourceDictionary_1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary x:Uid="ResourceDictionary_2" Source="Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Uid="Style_1" x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter x:Uid="Setter_1" Property="SnapsToDevicePixels" Value="true" />
+        <Setter x:Uid="Setter_2" Property="OverridesDefaultStyle" Value="true" />
+        <Setter x:Uid="Setter_3" Property="IsTabStop" Value="false" />
+        <Setter x:Uid="Setter_4" Property="Focusable" Value="false" />
+        <Setter x:Uid="Setter_5" Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Uid="ControlTemplate_1" TargetType="{x:Type RepeatButton}">
+                    <Border x:Uid="Border_1" Background="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Uid="ControlTemplate_2" x:Key="TabItemTemplate" TargetType="{x:Type TabItem}">
+        <Border x:Uid="Border" Name="Border" BorderThickness="1" CornerRadius="3" TextBlock.Foreground="Black" Padding="3" HorizontalAlignment="Stretch" Background="{StaticResource HorizontalLightBrush}" BorderBrush="Gray">
+            <DockPanel x:Uid="DockPanel_1" HorizontalAlignment="Center">
+                <TextBlock x:Uid="TextBlock_1" Text="{TemplateBinding Header}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" MaxWidth="200" TextAlignment="Center" HorizontalAlignment="Center" />
+            </DockPanel>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Uid="ControlTemplate_3" x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+        <Border x:Uid="Border_2" Name="Border" 
+                    BorderThickness="1" CornerRadius="2" 
+                    TextBlock.Foreground="Black" TextBlock.TextAlignment="Left" Padding="3" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center">
+            <ContentPresenter x:Uid="ContentPresenter_1" RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"></ContentPresenter>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger x:Uid="Trigger_1" Property="IsMouseOver" Value="True">
+                <Setter x:Uid="Setter_6" TargetName="Border" Property="BorderBrush" Value="LightBlue" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_2" Property="IsPressed" Value="True">
+                <Setter x:Uid="Setter_7" TargetName="Border" Property="Background" Value="#EFEFEF" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Uid="Style_2" x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter x:Uid="Setter_8" Property="SnapsToDevicePixels" Value="true" />
+        <Setter x:Uid="Setter_9" Property="OverridesDefaultStyle" Value="true" />
+        <Setter x:Uid="Setter_10" Property="Height" Value="14" />
+        <Setter x:Uid="Setter_11" Property="Width" Value="14" />
+        <Setter x:Uid="Setter_12" Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Uid="ControlTemplate_4" TargetType="{x:Type Thumb}">
+                    <Ellipse 
+                        x:Uid="Ellipse" Name="Ellipse" 
+                        Fill="{StaticResource NormalBrush}"
+                        Stroke="{StaticResource NormalBorderBrush}"
+                        StrokeThickness="1" />
+                    <ControlTemplate.Triggers>
+                        <Trigger x:Uid="Trigger_3" Property="IsMouseOver" Value="True">
+                            <Setter x:Uid="Setter_13" TargetName="Ellipse" Property="Fill" Value="{StaticResource DarkBrush}" />
+                        </Trigger>
+                        <Trigger x:Uid="Trigger_4" Property="IsEnabled" Value="false">
+                            <Setter x:Uid="Setter_14" TargetName="Ellipse" Property="Fill" Value="{StaticResource DisabledBackgroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Uid="ControlTemplate_5" x:Key="HorizontalSlider" TargetType="{x:Type Slider}">
+        <Grid x:Uid="Grid_1">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Uid="RowDefinition_1" Height="Auto" />
+                <RowDefinition x:Uid="RowDefinition_2" Height="Auto" MinHeight="{TemplateBinding Slider.MinHeight}" />
+                <RowDefinition x:Uid="RowDefinition_3" Height="Auto" />
+            </Grid.RowDefinitions>
+            <TickBar 
+                x:Uid="TopTick" Name="TopTick"
+                SnapsToDevicePixels="True" 
+                Placement="Top"
+                Fill="{StaticResource GlyphBrush}"
+                Height="4"
+                Visibility="Collapsed" />
+            <Border 
+                x:Uid="TrackBackground" Name="TrackBackground"
+                Margin="0"
+                CornerRadius="2" 
+                Height="4"
+                Grid.Row="1"
+                Background="{StaticResource LightBrush}" 
+                BorderBrush="{StaticResource NormalBorderBrush}"
+                BorderThickness="1" />
+            <Track x:Uid="PART_Track" Grid.Row="1" Name="PART_Track">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton x:Uid="RepeatButton_1" Style="{StaticResource SliderButtonStyle}" Command="Slider.DecreaseLarge" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb x:Uid="Thumb_1" Style="{StaticResource SliderThumbStyle}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton x:Uid="RepeatButton_2" Style="{StaticResource SliderButtonStyle}" Command="Slider.IncreaseLarge" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+            <TickBar 
+                x:Uid="BottomTick" Name="BottomTick"
+                SnapsToDevicePixels="True" 
+                Grid.Row="2"
+                Fill="{TemplateBinding Foreground}"
+                Placement="Bottom"
+                Height="4"
+                Visibility="Collapsed" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger x:Uid="Trigger_5" Property="TickPlacement" Value="TopLeft">
+                <Setter x:Uid="Setter_15" TargetName="TopTick" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_6" Property="TickPlacement" Value="BottomRight">
+                <Setter x:Uid="Setter_16" TargetName="BottomTick" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_7" Property="TickPlacement" Value="Both">
+                <Setter x:Uid="Setter_17" TargetName="TopTick" Property="Visibility" Value="Visible" />
+                <Setter x:Uid="Setter_18" TargetName="BottomTick" Property="Visibility" Value="Visible" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Uid="ControlTemplate_6" x:Key="VerticalSlider" TargetType="{x:Type Slider}">
+        <Grid x:Uid="Grid_2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Uid="ColumnDefinition_1" Width="Auto" />
+                <ColumnDefinition x:Uid="ColumnDefinition_2" Width="Auto" MinWidth="{TemplateBinding Slider.MinWidth}" />
+                <ColumnDefinition x:Uid="ColumnDefinition_3" Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TickBar 
+                x:Uid="TickBar_1" Name="TopTick"
+                SnapsToDevicePixels="True" 
+                Placement="Left"
+                Fill="{StaticResource GlyphBrush}"
+                Width="4"
+                Visibility="Collapsed" />
+            <Border 
+                x:Uid="Border_3" Name="TrackBackground"
+                Margin="0"
+                CornerRadius="2" 
+                Width="4"
+                Grid.Column="1"
+                Background="{StaticResource HorizontalLightBrush}" 
+                BorderBrush="{StaticResource HorizontalNormalBorderBrush}"
+                BorderThickness="1" />
+            <Track x:Uid="Track_1" Grid.Column="1" Name="PART_Track">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton x:Uid="RepeatButton_3" Style="{StaticResource SliderButtonStyle}" Command="Slider.DecreaseLarge" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb x:Uid="Thumb_2" Style="{StaticResource SliderThumbStyle}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton x:Uid="RepeatButton_4" Style="{StaticResource SliderButtonStyle}" Command="Slider.IncreaseLarge" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+            <TickBar 
+                x:Uid="TickBar_2" Name="BottomTick"
+                SnapsToDevicePixels="True" 
+                Grid.Column="2"
+                Fill="{TemplateBinding Foreground}"
+                Placement="Right"
+                Width="4"
+                Visibility="Collapsed" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger x:Uid="Trigger_8" Property="TickPlacement" Value="TopLeft">
+                <Setter x:Uid="Setter_19" TargetName="TopTick" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_9" Property="TickPlacement" Value="BottomRight">
+                <Setter x:Uid="Setter_20" TargetName="BottomTick" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_10" Property="TickPlacement" Value="Both">
+                <Setter x:Uid="Setter_21" TargetName="TopTick" Property="Visibility" Value="Visible" />
+                <Setter x:Uid="Setter_22" TargetName="BottomTick" Property="Visibility" Value="Visible" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Uid="Style_3" TargetType="{x:Type Slider}">
+        <Setter x:Uid="Setter_23" Property="SnapsToDevicePixels" Value="true" />
+        <Setter x:Uid="Setter_24" Property="OverridesDefaultStyle" Value="true" />
+        <Style.Triggers>
+            <Trigger x:Uid="Trigger_11" Property="Orientation" Value="Horizontal">
+                <Setter x:Uid="Setter_25" Property="MinWidth" Value="104" />
+                <Setter x:Uid="Setter_26" Property="MinHeight" Value="21" />
+                <Setter x:Uid="Setter_27" Property="Template" Value="{StaticResource HorizontalSlider}" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_12" Property="Orientation" Value="Vertical">
+                <Setter x:Uid="Setter_28" Property="MinWidth" Value="21" />
+                <Setter x:Uid="Setter_29" Property="MinHeight" Value="104" />
+                <Setter x:Uid="Setter_30" Property="Template" Value="{StaticResource VerticalSlider}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Uid="Style_4" TargetType="{x:Type Button}">
+        <Setter x:Uid="Setter_31" Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Uid="ControlTemplate_7" TargetType="{x:Type Button}">
+                    <Border x:Uid="Border_4" Name="Border" 
+                        BorderThickness="1" CornerRadius="2" 
+                        TextBlock.Foreground="Black" TextBlock.TextAlignment="Left" Padding="3" 
+                        HorizontalAlignment="Stretch" Background="{StaticResource NormalBrush}" BorderBrush="{StaticResource NormalBorderBrush}">
+                        <TextBlock x:Uid="btnTextBlock" Text="{TemplateBinding Content}" TextBlock.TextAlignment="Center" Margin="{TemplateBinding Padding}" Name="btnTextBlock">
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger x:Uid="Trigger_13" Property="IsMouseOver" Value="True">
+                            <Setter x:Uid="Setter_32" TargetName="Border" Property="Background" Value="{StaticResource LightBrush}" />
+                        </Trigger>
+                        <Trigger x:Uid="Trigger_14" Property="IsPressed" Value="True">
+                            <Setter x:Uid="Setter_33" TargetName="Border" Property="Background" Value="{StaticResource PressedBrush}" />
+                            <Setter x:Uid="Setter_34" TargetName="Border" Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" />
+                        </Trigger>
+                        <Trigger x:Uid="Trigger_15" Property="IsEnabled" Value="False">
+                            <Setter x:Uid="Setter_35" TargetName="btnTextBlock" Property="Foreground" Value="Gray" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Uid="Style_5" x:Key="{x:Type TabControl}" TargetType="{x:Type TabControl}">
+        <Setter x:Uid="Setter_36" Property="BorderThickness" Value="1" />
+        <Setter x:Uid="Setter_37" Property="BorderBrush" Value="Gray" />
+        <Setter x:Uid="Setter_38" Property="Background" Value="Transparent" />
+        <Setter x:Uid="Setter_39" Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Uid="ControlTemplate_8" TargetType="TabControl">
+                    <Grid x:Uid="Grid_3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Uid="RowDefinition_4" Height="Auto" />
+                            <RowDefinition x:Uid="RowDefinition_5" Height="*" />
+                        </Grid.RowDefinitions>
+                        <TabPanel x:Uid="TabPanel_1" Grid.Row="0" IsItemsHost="true" />
+                        <Border x:Uid="Border_5" BorderThickness="0,0,1,1" BorderBrush="#D0CEBF" Grid.Row="1">
+                            <Border x:Uid="Border_6" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <Border x:Uid="Border_7" Background="{TemplateBinding Background}">
+                                    <ContentPresenter x:Uid="ContentPresenter_2" ContentSource="SelectedContent" />
+                                </Border>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Uid="Style_6" TargetType="TabItem">
+        <Setter x:Uid="Setter_40" Property="BorderThickness" Value="1" />
+        <Setter x:Uid="Setter_41" Property="BorderBrush" Value="Gray" />
+        <Setter x:Uid="Setter_42" Property="Background" Value="{StaticResource NormalBrush}" />
+        <Setter x:Uid="Setter_43" Property="VerticalContentAlignment" Value="Center" />
+        <Setter x:Uid="Setter_44" Property="HorizontalContentAlignment" Value="Center" />
+        <Setter x:Uid="Setter_45" Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Uid="ControlTemplate_9" TargetType="{x:Type TabItem}">
+                    <Border x:Uid="Border_8">
+                        <Grid x:Uid="Grid_4">
+                            <Grid x:Uid="Grid_5">
+                                <Border x:Uid="Border_9" CornerRadius="3,3,0,0" Background="{TemplateBinding Background}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" Padding="5" />
+                            </Grid>
+                            <Border x:Uid="Border_10" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                                <ContentPresenter x:Uid="ContentPresenter_3" ContentSource="Header" 
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger x:Uid="Trigger_16" Property="IsMouseOver" Value="True">
+                <Setter x:Uid="Setter_46" Property="Background" Value="{StaticResource PressedBrush}" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_17" Property="IsSelected" Value="True">
+                <Setter x:Uid="Setter_47" Property="Background" Value="{StaticResource LightBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <ControlTemplate x:Uid="ControlTemplate_10" TargetType="{x:Type Button}" x:Key="simplearrowbtntmpl">
+        <Border x:Uid="Border_11" BorderBrush="Gray" CornerRadius="3" BorderThickness="2" Margin="{TemplateBinding Margin}">
+            <Canvas x:Uid="Canvas_1" Background="Transparent">
+                <Polygon x:Uid="p" Points="4,23 28,23 16,5" Name="p" Width="32">
+                    <Polygon.Fill>
+                        <RadialGradientBrush x:Uid="RadialGradientBrush_1">
+                            <GradientStop x:Uid="GradientStop_1" Offset="-0.4" Color="WhiteSmoke" />
+                            <GradientStop x:Uid="GradientStop_2" Offset="0.15" Color="Gray" />
+                            <GradientStop x:Uid="GradientStop_3" Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+                </Polygon>
+            </Canvas>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger x:Uid="Trigger_18" Property="IsMouseOver" Value="True">
+                <Setter x:Uid="Setter_48" Property="Fill" TargetName="p">
+                    <Setter.Value>
+                        <RadialGradientBrush x:Uid="RadialGradientBrush_2">
+                            <GradientStop x:Uid="GradientStop_4" Offset="-0.1" Color="WhiteSmoke" />
+                            <GradientStop x:Uid="GradientStop_5" Offset="0.38" Color="Gray" />
+                            <GradientStop x:Uid="GradientStop_6" Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger x:Uid="Trigger_19" Property="IsEnabled" Value="False">
+                <Setter x:Uid="Setter_49" TargetName="p" Property="Opacity" Value="0.5" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Uid="ControlTemplate_11" TargetType="{x:Type Button}" x:Key="doublearrowbtntmpl">
+        <Border x:Uid="Border_12" BorderBrush="Gray" CornerRadius="3" BorderThickness="2" Margin="{TemplateBinding Margin}">
+            <Canvas x:Uid="Canvas_2" Background="Transparent">
+                <Polygon x:Uid="p1" Points="4,13 28,13 16,4" Name="p1" Width="32">
+                    <Polygon.Fill>
+                        <RadialGradientBrush x:Uid="RadialGradientBrush_3">
+                            <GradientStop x:Uid="GradientStop_7" Offset="-0.4" Color="WhiteSmoke" />
+                            <GradientStop x:Uid="GradientStop_8" Offset="0.15" Color="Gray" />
+                            <GradientStop x:Uid="GradientStop_9" Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+                </Polygon>
+                <Polygon x:Uid="p2" Points="4,23 28,23 16,13" Name="p2" Width="32">
+                    <Polygon.Fill>
+                        <RadialGradientBrush x:Uid="RadialGradientBrush_4">
+                            <GradientStop x:Uid="GradientStop_10" Offset="-0.4" Color="WhiteSmoke" />
+                            <GradientStop x:Uid="GradientStop_11" Offset="0.15" Color="Gray" />
+                            <GradientStop x:Uid="GradientStop_12" Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+                    </Polygon.Fill>
+
+                </Polygon>
+            </Canvas>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger x:Uid="Trigger_20" Property="IsMouseOver" Value="True">
+                <Setter x:Uid="Setter_50" Property="Fill" TargetName="p1">
+                    <Setter.Value>
+                        <RadialGradientBrush x:Uid="RadialGradientBrush_5">
+                            <GradientStop x:Uid="GradientStop_13" Offset="-0.1" Color="WhiteSmoke" />
+                            <GradientStop x:Uid="GradientStop_14" Offset="0.38" Color="Gray" />
+                            <GradientStop x:Uid="GradientStop_15" Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger x:Uid="Trigger_21" Property="IsEnabled" Value="False">
+                <Setter x:Uid="Setter_51" TargetName="p1" Property="Opacity" Value="0.5" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_22" Property="IsMouseOver" Value="True">
+                <Setter x:Uid="Setter_52" Property="Fill" TargetName="p2">
+                    <Setter.Value>
+                        <RadialGradientBrush x:Uid="RadialGradientBrush_6">
+                            <GradientStop x:Uid="GradientStop_16" Offset="-0.1" Color="WhiteSmoke" />
+                            <GradientStop x:Uid="GradientStop_17" Offset="0.38" Color="Gray" />
+                            <GradientStop x:Uid="GradientStop_18" Offset="1" Color="Black" />
+                        </RadialGradientBrush>
+
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger x:Uid="Trigger_23" Property="IsEnabled" Value="False">
+                <Setter x:Uid="Setter_53" TargetName="p2" Property="Opacity" Value="0.5" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Uid="ControlTemplate_12" x:Key="ExpanderToggleButton" TargetType="ToggleButton">
+        <Border
+            x:Uid="Border_13" Name="Border" 
+            CornerRadius="2"
+            Background="Transparent"
+            BorderBrush="Gray"
+            BorderThickness="1">
+            <Path 
+                x:Uid="Arrow" Name="Arrow"
+                Fill="Black"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Data="M 0 0 L 4 8 L 8 0 Z" />
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger x:Uid="Trigger_24" Property="ToggleButton.IsMouseOver" Value="true">
+                <Setter x:Uid="Setter_54" TargetName="Border" Property="Background" Value="{StaticResource LightBrush}" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_25" Property="IsPressed" Value="true">
+                <Setter x:Uid="Setter_55" TargetName="Border" Property="Background" Value="{StaticResource PressedBrush}" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_26" Property="IsChecked" Value="true">
+                <Setter x:Uid="Setter_56" TargetName="Arrow" Property="Data" Value="M 0 0 L 0 8 L 8 4 Z" />
+            </Trigger>
+            <Trigger x:Uid="Trigger_27" Property="IsEnabled" Value="False">
+                <Setter x:Uid="Setter_57" TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                <Setter x:Uid="Setter_58" TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                <Setter x:Uid="Setter_59" Property="Foreground" Value="{StaticResource DisabledForegroundBrush}" />
+                <Setter x:Uid="Setter_60" TargetName="Arrow" Property="Fill" Value="{StaticResource DisabledForegroundBrush}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Uid="Style_7" TargetType="Expander">
+        <Setter x:Uid="Setter_61" Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Uid="ControlTemplate_13" TargetType="Expander">
+                    <Grid x:Uid="grid" Name="grid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Uid="RowDefinition_6" Height="Auto" />
+                            <RowDefinition x:Uid="ContentRow" Name="ContentRow" Height="0" />
+                        </Grid.RowDefinitions>
+                        <Border 
+                            x:Uid="Border_14" Name="Border" 
+                            Grid.Row="0" 
+                            BorderThickness="1" 
+                            CornerRadius="2,2,0,0" BorderBrush="AliceBlue">
+                            <Grid x:Uid="Grid_6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Uid="ColumnDefinition_4" Width="20" />
+                                    <ColumnDefinition x:Uid="ColumnDefinition_5" Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton
+                                    x:Uid="ToggleButton_1" IsChecked="{Binding Path=IsExpanded,Mode=TwoWay,
+                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                    OverridesDefaultStyle="True" 
+                                    Template="{StaticResource ExpanderToggleButton}" 
+                                    Background="{StaticResource NormalBrush}" />
+                                <TextBlock
+                                    x:Uid="cnt" Name="cnt"
+                                    Grid.Column="1"
+                                    Margin="4" 
+                                    Text="{TemplateBinding Header}" 
+                                    />
+                            </Grid>
+                        </Border>
+                        <Border 
+                            x:Uid="Content" Name="Content" 
+                            Grid.Row="1" 
+                            Background="{StaticResource WindowBackgroundBrush}"
+                            BorderBrush="{StaticResource SolidBorderBrush}" 
+                            BorderThickness="1,0,1,1" 
+                            CornerRadius="0,0,2,2">
+                            <ContentPresenter x:Uid="ContentPresenter_4" Margin="4" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger x:Uid="Trigger_28" Property="IsMouseOver" Value="True">
+                            <Setter x:Uid="Setter_62" TargetName="cnt" Property="Foreground" Value="Blue" />
+                        </Trigger>
+                        <Trigger x:Uid="Trigger_29" Property="IsExpanded" Value="True">
+                            <Setter x:Uid="Setter_63" TargetName="ContentRow" Property="Height" Value="{Binding ElementName=Content,Path=DesiredHeight}" />
+                        </Trigger>
+                        <Trigger x:Uid="Trigger_30" Property="IsEnabled" Value="False">
+                            <Setter x:Uid="Setter_64" TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                            <Setter x:Uid="Setter_65" TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                            <Setter x:Uid="Setter_66" Property="Foreground" Value="{StaticResource DisabledForegroundBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

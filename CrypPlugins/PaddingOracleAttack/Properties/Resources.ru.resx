@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BlocksizeCaption" xml:space="preserve">
+    <value>Размер блока</value>
+  </data>
+  <data name="BlocksizeTooltip" xml:space="preserve">
+    <value>Введите размер используемого блока.</value>
+  </data>
+  <data name="btnAll" xml:space="preserve">
+    <value>Полностью расшифровать</value>
+  </data>
+  <data name="btnAuto" xml:space="preserve">
+    <value>Авто поиск</value>
+  </data>
+  <data name="btnLblP1" xml:space="preserve">
+    <value>Байт изменения</value>
+  </data>
+  <data name="btnLblP1End" xml:space="preserve">
+    <value>Перейти к этапу 2</value>
+  </data>
+  <data name="btnLblP1Init" xml:space="preserve">
+    <value>Послать запрос</value>
+  </data>
+  <data name="btnLblP2" xml:space="preserve">
+    <value>Следующий байт</value>
+  </data>
+  <data name="btnLblP2End" xml:space="preserve">
+    <value>Перейдите к Фазе 3</value>
+  </data>
+  <data name="btnLblP2Init" xml:space="preserve">
+    <value>Начать поиск</value>
+  </data>
+  <data name="btnLblP3Decrypt" xml:space="preserve">
+    <value>Расшифровать байт</value>
+  </data>
+  <data name="btnLblP3End" xml:space="preserve">
+    <value>Восстановить обычный текст</value>
+  </data>
+  <data name="btnLblP3Find" xml:space="preserve">
+    <value>Изменить текущий байт</value>
+  </data>
+  <data name="btnLblP3IncPad" xml:space="preserve">
+    <value>Увеличение заполнения</value>
+  </data>
+  <data name="btnNext" xml:space="preserve">
+    <value>следующий</value>
+  </data>
+  <data name="CipherInputCaption" xml:space="preserve">
+    <value>Входной сигнал Cipher</value>
+  </data>
+  <data name="CipherInputTooltip" xml:space="preserve">
+    <value>Ввод зашифрованного текста</value>
+  </data>
+  <data name="descDone" xml:space="preserve">
+    <value>Восстановлен Plaintext. Атака выполнена успешно.</value>
+  </data>
+  <data name="descFinishAll" xml:space="preserve">
+    <value>Подождите, пока сообщение будет расшифровано.</value>
+  </data>
+  <data name="descP1Done" xml:space="preserve">
+    <value>Фаза 1 закончена! Найдено допустимое дополнение.</value>
+  </data>
+  <data name="descP1Init" xml:space="preserve">
+    <value>Этап 1: найдите сообщение, которое расшифровывает действительное дополнение. Отправьте неизмененное сообщение, чтобы узнать, существует ли уже допустимая прокладка.</value>
+  </data>
+  <data name="descP1Task" xml:space="preserve">
+    <value>Задача: изменить последний байт до тех пор, пока заполнение не будет действительным.</value>
+  </data>
+  <data name="descP2Done" xml:space="preserve">
+    <value>Фаза 2 завершена! Найден первый байт заполнения. Длина прокладки:</value>
+  </data>
+  <data name="descP2DoneSpecial" xml:space="preserve">
+    <value>Фаза 2 завершена! Первые 7 байт не повлияли на заполнение, поэтому длина заполнения должна быть 1!</value>
+  </data>
+  <data name="descP2Init" xml:space="preserve">
+    <value>Этап 2: найдите первый байт заполнения. Измените байты слева направо. Если заполнение становится недействительным, должен быть изменен байт заполнения.</value>
+  </data>
+  <data name="descP2Task" xml:space="preserve">
+    <value>Измененный байт не относится к заполнению. Попробуйте следующий байт!</value>
+  </data>
+  <data name="descP3Dec" xml:space="preserve">
+    <value>Байт расшифрован! Увеличьте заполнение, чтобы продолжить расшифровку.</value>
+  </data>
+  <data name="descP3DecDone" xml:space="preserve">
+    <value>Байт был расшифрован. Увеличьте заполнение, чтобы продолжить расшифровку.</value>
+  </data>
+  <data name="descP3DecPadDone" xml:space="preserve">
+    <value>Все байты заполнения расшифровываются. Увеличьте заполнение, чтобы продолжить расшифровку.</value>
+  </data>
+  <data name="descP3Done" xml:space="preserve">
+    <value>Сообщение было расшифровано! Нажмите, чтобы увидеть исходный текст.</value>
+  </data>
+  <data name="descP3FindDone" xml:space="preserve">
+    <value>Допустимое заполнение найдено! Байт может быть расшифрован.</value>
+  </data>
+  <data name="descP3FindTask" xml:space="preserve">
+    <value>Задача: изменение байта до тех пор, пока сообщение не расшифрует требуемое значение! Если правильное значение найдено, заполнение станет действительным.</value>
+  </data>
+  <data name="descP3Init" xml:space="preserve">
+    <value>Этап 3. Расшифруйте сообщение. Начните с расшифровки байтов заполнения.</value>
+  </data>
+  <data name="descPadIn" xml:space="preserve">
+    <value>Ответ от Oracle Padding</value>
+  </data>
+  <data name="langCheck" xml:space="preserve">
+    <value>английский</value>
+  </data>
+  <data name="PaddingOracleInputCaption" xml:space="preserve">
+    <value>Допустимое заполнение</value>
+  </data>
+  <data name="PaddingOracleInputTooltip" xml:space="preserve">
+    <value>Действительность заполнения</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Заполнение Oracle Attack</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Атакует зашифрованное сообщение с помощью Padding Oracle</value>
+  </data>
+  <data name="ResultOutputCaption" xml:space="preserve">
+    <value>Манипулированный вывод Cipher</value>
+  </data>
+  <data name="ResultOutputTooltip" xml:space="preserve">
+    <value>Выход управляемого шифра</value>
+  </data>
+  <data name="ttBtnAll" xml:space="preserve">
+    <value>Автоматически расшифровывать полное сообщение.</value>
+  </data>
+  <data name="ttBtnAuto" xml:space="preserve">
+    <value>Поиск автоматически для следующего допустимого значения.</value>
+  </data>
+  <data name="ttBtnNext" xml:space="preserve">
+    <value>Выполните следующий шаг.</value>
+  </data>
+  <data name="ttBtnReturn" xml:space="preserve">
+    <value>Отмените последнее выполненное действие.</value>
+  </data>
+  <data name="ttBtnReturnPhase" xml:space="preserve">
+    <value>Вернитесь к началу текущего этапа.</value>
+  </data>
+  <data name="ttCipherBlock" xml:space="preserve">
+    <value>Зашифрованный информационный блок.</value>
+  </data>
+  <data name="ttCorruptedBlock" xml:space="preserve">
+    <value>Поврежденный блок инициализации (оригинал C1 XOR O).</value>
+  </data>
+  <data name="ttDecBlock" xml:space="preserve">
+    <value>Дешифрованный блок инициализации (полностью известен в конце). XORd с исходным инициализационным блоком C1 приводит к открытому тексту P2.</value>
+  </data>
+  <data name="ttOverlayBlock" xml:space="preserve">
+    <value>Наложение используется для изменения блока инициализации.</value>
+  </data>
+  <data name="ttPlainBlock" xml:space="preserve">
+    <value>Полученный открытый текст при XORing D2 с исходным блоком инициализации C1 и O.</value>
+  </data>
+  <data name="ttPrelBlock" xml:space="preserve">
+    <value>Зашифрованный блок инициализации.</value>
+    <comment>Presentation Tooltip for the Preliminary Block</comment>
+  </data>
+  <data name="ttSentRequests" xml:space="preserve">
+    <value>Количество запросов, отправленных на сервер</value>
+  </data>
+  <data name="ttViewByte" xml:space="preserve">
+    <value>Плагин отображает только 8 байтов за раз. Если размер блока превышает 8 байтов, скрытые байты могут отображаться с помощью полосы прокрутки.</value>
+  </data>
+  <data name="ttViewByteDesc" xml:space="preserve">
+    <value>В настоящее время просмотр байтов</value>
+  </data>
+  <data name="lblAttackLogic" xml:space="preserve">
+    <value>Логика атаки</value>
+  </data>
+  <data name="lblComplete" xml:space="preserve">
+    <value>ПОЛНОЕ</value>
+  </data>
+  <data name="lblInput" xml:space="preserve">
+    <value>вход</value>
+  </data>
+  <data name="lblInvalid" xml:space="preserve">
+    <value>ИНВАЛИД</value>
+  </data>
+  <data name="lblOutput" xml:space="preserve">
+    <value>Вывод</value>
+  </data>
+  <data name="lblRequests" xml:space="preserve">
+    <value>Запросы Oracle:</value>
+  </data>
+  <data name="lblValid" xml:space="preserve">
+    <value>ДЕЙСТВУЕТ</value>
+  </data>
+</root>

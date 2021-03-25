@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Analysis" xml:space="preserve">
+    <value>分析</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>作者</value>
+  </data>
+  <data name="email_subject" xml:space="preserve">
+    <value>CrypTool 2-&amp;gt;组件：</value>
+  </data>
+  <data name="PluginManager_TypeLoadException" xml:space="preserve">
+    <value>无法加载组件：</value>
+  </data>
+  <data name="plugin_has_no_icon" xml:space="preserve">
+    <value>无法从组件{0}获取图标。组件无法使用。</value>
+  </data>
+  <data name="plugin_no_algo_settings" xml:space="preserve">
+    <value>组件没有参数。</value>
+  </data>
+  <data name="title" xml:space="preserve">
+    <value>标题</value>
+  </data>
+  <data name="write_email_to_author" xml:space="preserve">
+    <value>写电子邮件给作者。</value>
+  </data>
+  <data name="go_to" xml:space="preserve">
+    <value>去：</value>
+  </data>
+  <data name="Affiliation" xml:space="preserve">
+    <value>联系</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="row_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>row-template.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="table_template" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>table-template.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="fileName_LogMessages" xml:space="preserve">
+    <value>CrypTool-LogMessages.html</value>
+  </data>
+  <data name="HTML_fileFilter" xml:space="preserve">
+    <value>HTML文件（* .html）| * .html</value>
+  </data>
+  <data name="adjusting_selection_both" xml:space="preserve">
+    <value>将算法选择调整为RibbonTab和NavigationPane。</value>
+  </data>
+  <data name="adjusting_selection_navipane" xml:space="preserve">
+    <value>将算法选择调整为NavigationPane。</value>
+  </data>
+  <data name="adjusting_selection_ribbon" xml:space="preserve">
+    <value>将算法选择调整为RibbonTab。</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="missing_plugin_info_attribute" xml:space="preserve">
+    <value>组件{0}上缺少PluginInfoAttribute</value>
+  </data>
+  <data name="main_window_title_prefix" xml:space="preserve">
+    <value>CrypTool {0}-</value>
+  </data>
+  <data name="tutorial_file_not_available" xml:space="preserve">
+    <value>教程文件不可用。</value>
+  </data>
+  <data name="crypTool" xml:space="preserve">
+    <value>加密工具</value>
+  </data>
+  <data name="pluginManager" xml:space="preserve">
+    <value>组件经理</value>
+  </data>
+  <data name="found_new_plugins" xml:space="preserve">
+    <value>找到了新组件：{0}</value>
+  </data>
+  <data name="no_new_plugins_found" xml:space="preserve">
+    <value>找不到新的组件。</value>
+  </data>
+  <data name="plugin_signature" xml:space="preserve">
+    <value>组件签名：未知签名者或未签名</value>
+  </data>
+  <data name="plugin_version" xml:space="preserve">
+    <value>组件版本：</value>
+  </data>
+  <data name="show_plugin_description" xml:space="preserve">
+    <value>显示说明</value>
+  </data>
+  <data name="classic_ciphers" xml:space="preserve">
+    <value>经典密码</value>
+  </data>
+  <data name="show_quick_access_toolbar_below_the_ribbon" xml:space="preserve">
+    <value>_在功能区下方显示快速访问工具栏</value>
+  </data>
+  <data name="started_and_ready" xml:space="preserve">
+    <value>准备好了！</value>
+  </data>
+  <data name="copy_to_clipboard" xml:space="preserve">
+    <value>复制到剪贴板</value>
+  </data>
+  <data name="plugin_has_no_description" xml:space="preserve">
+    <value>该组件没有描述。</value>
+  </data>
+  <data name="no_plugin_info_attribute" xml:space="preserve">
+    <value>组件“ {0}”没有插件信息属性，因此不会添加到GUI。</value>
+  </data>
+  <data name="autostart_enabled" xml:space="preserve">
+    <value>由于命令行选项，工作区已自动启动。</value>
+  </data>
+  <data name="workspace_loading" xml:space="preserve">
+    <value>使用{0}作为工作空间文件并将其加载到编辑器中。</value>
+  </data>
+  <data name="MainWindow_ShowHelpPage_Error_trying_to_open_documentation___0__" xml:space="preserve">
+    <value>尝试打开文档时出错：{0}！</value>
+  </data>
+</root>

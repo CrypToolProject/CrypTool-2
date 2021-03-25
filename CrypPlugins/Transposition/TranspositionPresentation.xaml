@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Transposition.TranspositionPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="Transparent"
+    SnapsToDevicePixels="True" 
+    HorizontalAlignment="Stretch"
+    VerticalAlignment="Stretch"
+    Height="Auto" Width="Auto">
+    <Canvas Name="mycanvas">
+        <StackPanel Width="Auto" Height="Auto" Name="Stack" Orientation="Vertical" Opacity="0.0">
+            <StackPanel Orientation="Horizontal" Name="mainGrid" Height="Auto" Width="Auto"  VerticalAlignment="Center">
+                <WrapPanel Name="mywrap1" Orientation="Horizontal" Width="160"   >
+                </WrapPanel>                
+                <Label Name ="label1" Width="20"></Label>
+                <Grid Name="myGrid"  Height="Auto" Width="Auto"  HorizontalAlignment="Center" VerticalAlignment="Top">
+                </Grid>
+                <Label Name ="label2" Width="20"></Label>
+                <WrapPanel Name="mywrap2" Orientation="Horizontal" Width="160"  >
+                </WrapPanel>
+                <TextBox Visibility="Hidden" Name="textBox1"></TextBox>
+            </StackPanel>
+            <Label Height="10"></Label>
+            <TextBox  Name="textBox2" IsEnabled="False" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="160"></TextBox>
+        </StackPanel>
+        <TextBlock Name="outPut" Background="Transparent" TextWrapping="Wrap" > 
+            
+            
+            
+        </TextBlock>
+    </Canvas>
+</UserControl>

@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="PKCS1.WpfControls.Components.DatablockControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lang="clr-namespace:PKCS1.Resources.lang.Gui"
+     HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <!-- Input (Upper Part) -->
+        <GroupBox Grid.Row="0" Margin="0,0,0,0">
+            <GroupBox.Header>
+                <x:Static Member="lang:DatablockCtrl.genDatablock"></x:Static>
+            </GroupBox.Header>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Left -->
+                <Grid Grid.Column="0">
+                    <Grid Name="innerGridLeft">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>                        
+                            <!-- Text aus Datei laden -->
+                        <RadioButton Grid.Row="0" Margin="5,5,5,5" Name="rbTextfromFile" VerticalAlignment="Top" HorizontalAlignment="Left" Checked="rbTextfromFile_Checked">
+                            <x:Static Member="lang:DatablockCtrl.fileLoad"></x:Static></RadioButton>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Height="20" MinWidth="270" Margin="5,0,5,5" IsReadOnly="True" Name="tbInputFile" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <Button Grid.Column="1" Height="25" Margin="5,0,5,5" Name="bOpenFile" VerticalAlignment="Top" HorizontalAlignment="Left" Click="bOpenFile_Click">
+                                <x:Static Member="lang:DatablockCtrl.fileOpen"></x:Static>
+                            </Button>
+                        </Grid>
+                        <!-- Text eingeben -->
+                        <RadioButton Grid.Row="2" Margin="5,5,5,5" Name="rbTextFromBox" HorizontalAlignment="Left" Checked="rbTextFromBox_Checked">
+                            <x:Static Member="lang:DatablockCtrl.textInput"></x:Static>
+                        </RadioButton>
+                        <TextBox Grid.Row="3" MinHeight="85" MaxWidth="400" Margin="5,0,5,5" Name="tbInputText" TextWrapping="Wrap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <x:Static Member="lang:DatablockCtrl.textDefault"></x:Static>
+                        </TextBox>
+                     </Grid>
+                </Grid>
+
+                <!-- Right -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                        <!-- Choose Hashfunction -->
+                    <SelectableTextBlock Padding="5" Grid.Row="0" HorizontalAlignment="Right" Margin="5,0,5,0" Name="lblChooseHash" VerticalAlignment="Top" Width="125">
+                        <x:Static Member="lang:DatablockCtrl.chooseHashfunction"></x:Static>
+                    </SelectableTextBlock>
+                        <ComboBox Grid.Row="1" Height="20" HorizontalAlignment="Right" Margin="5,0,5,5" Name="cbHashFunc" VerticalAlignment="Top" Width="125" IsEditable="False" SelectionChanged="cbHashFunc_SelectionChanged"/>
+                    <Button Grid.Row="2" Height="25" HorizontalAlignment="Right" Margin="5,5,5,5" Name="bGenerate" VerticalAlignment="Bottom" MinWidth="110" Click="bGenerate_Click">
+                        <x:Static Member="lang:DatablockCtrl.genDatablock"></x:Static>
+                    </Button>
+                </Grid>
+            </Grid>
+        </GroupBox>
+
+        <!-- Result (Lower Part) -->
+        <GroupBox Grid.Row="1" Name="groupBox2"  Margin="0,15,0,0" VerticalAlignment="Bottom">
+            <GroupBox.Header>
+                <x:Static Member="lang:DatablockCtrl.generatedDatablock"></x:Static>
+            </GroupBox.Header>
+            <Grid Name="grid2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                    <SelectableTextBlock Padding="5" Grid.Row="0" Margin="0,5,0,0" Name="lblHashIdent">
+                        <x:Static Member="lang:DatablockCtrl.hi"></x:Static>
+                    </SelectableTextBlock>
+                    <SelectableTextBlock Padding="5" Grid.Row="0" Margin="150,5,0,0" Name="lblHashIdentLength"></SelectableTextBlock>
+                    <TextBox Grid.Row="1" Height="35" Margin="5,0,5,0" Name="tbHashIdent" IsReadOnly="True" TextWrapping="Wrap" MaxWidth="450" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" TextChanged="tbHashIdent_TextChanged"/>
+                    <SelectableTextBlock Padding="5" Grid.Row="2" Margin="0,5,0,0" Name="lblHashDigest">
+                        <x:Static Member="lang:DatablockCtrl.hd"></x:Static>
+                    </SelectableTextBlock>
+                    <SelectableTextBlock Padding="5" Grid.Row="2" Margin="150,5,0,0" Name="lblHashDigestLength"></SelectableTextBlock>
+                    <TextBox Grid.Row="3" Height="35" Margin="5,0,5,0" Name="tbHashDigest" IsReadOnly="True" TextWrapping="Wrap" MaxWidth="450" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" TextChanged="tbHashDigest_TextChanged"/>                
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

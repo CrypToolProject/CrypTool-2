@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4052D76-43F6-4C10-8195-D7DD220708CF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>StandaloneKeySearcher</RootNamespace>
+    <AssemblyName>StandaloneKeySearcher</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>cryptool.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="anonymous.p12" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CrypCloud\CrypCloudCore\CrypCloudCore.csproj">
+      <Project>{5aa65cee-66bf-4b99-b46b-339e15c1a2c4}</Project>
+      <Name>CrypCloudCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypCore\CrypCore.csproj">
+      <Project>{ff5d473c-0716-4d3e-9078-2ebd979f94c6}</Project>
+      <Name>CrypCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPluginBase\CrypPluginBase.csproj">
+      <Project>{25db2b47-a457-4ec2-960b-395ce07ae093}</Project>
+      <Name>CrypPluginBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\Converter\Converter.csproj">
+      <Project>{44570501-a850-4518-a1f1-a8795d91d826}</Project>
+      <Name>Converter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\CostFunction\CostFunction.csproj">
+      <Project>{3c72ff93-48c2-4929-b3b2-83f165aae636}</Project>
+      <Name>CostFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\DES\DES.csproj">
+      <Project>{e3d15a1e-65d0-457a-9894-7f4e36369163}</Project>
+      <Name>DES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\KeySearcher\KeySearcher.csproj">
+      <Project>{0579e099-66b2-43c3-b8a0-43cae4895e68}</Project>
+      <Name>KeySearcher</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\StringDecoder\StringDecoder.csproj">
+      <Project>{a7a16f8b-2616-442f-8b8e-8ad0e2edb7ff}</Project>
+      <Name>StringDecoder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\StringEncoder\StringEncoder.csproj">
+      <Project>{98b733eb-58b4-4fc3-b2a7-ff1e9a75cf25}</Project>
+      <Name>StringEncoder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\TextInput\TextInput.csproj">
+      <Project>{475e8850-4d82-4c5e-ad19-5fda82bc7576}</Project>
+      <Name>TextInput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\CrypPlugins\TextOutput\TextOutput.csproj">
+      <Project>{a5529873-06ea-4e38-8b99-5abd84b20446}</Project>
+      <Name>TextOutput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LibSource\CrypAnalysisViewControl\CrypAnalysisViewControl.csproj">
+      <Project>{4ab9be96-3e34-40cb-9270-a64480c851ee}</Project>
+      <Name>CrypAnalysisViewControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LibSource\KeyTextBox\KeyTextBox.csproj">
+      <Project>{fd4214d8-ffb9-406f-9202-bb5ec0645e8f}</Project>
+      <Name>KeyTextBox</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LibSource\NativeCryptography\NativeCryptography.vcxproj">
+      <Project>{97b06adb-43e4-4320-9ad8-d167421f0644}</Project>
+      <Name>NativeCryptography</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LibSource\OpenCLNet\OpenCLNet.csproj">
+      <Project>{0946e1a6-5488-4711-ad10-d54d6a5d2f32}</Project>
+      <Name>OpenCLNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LibSource\VoluntLib2\VoluntLib2.csproj">
+      <Project>{1b68fdaa-c5a7-4f8a-bd5b-5876e8ac1879}</Project>
+      <Name>VoluntLib2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\WorkspaceManagerModel\WorkspaceManagerModel.csproj">
+      <Project>{c35a6e71-d6fe-478b-a12d-fad54fc4edc9}</Project>
+      <Name>WorkspaceManagerModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WellKnownPeer\WellKnownPeer.csproj">
+      <Project>{b3081095-4b9d-4e5a-a9ee-866c71135878}</Project>
+      <Name>WellKnownPeer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cryptool.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="cryptool.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="vcruntime140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

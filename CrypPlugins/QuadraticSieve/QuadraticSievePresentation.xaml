@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="CrypTool.Plugins.QuadraticSieve.QuadraticSievePresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="White"
+    xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+    Name="Presentation">
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc Time}" ResultListCaption="{Loc Factorlist}" ResultProgressCaption="{Loc Progress}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Start_}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc End_}" x:Name="EndTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Elapsed_}" x:Name="ElapsedTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Remaining_}" x:Name="TimeLeft" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultProgressLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Found_Relations_}" x:Name="FoundRelations" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Needed_Relations_}" x:Name="MaxRelations" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc Cores_used_}" x:Name="CoresUsed" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc State_}" x:Name="Information" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultProgressLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+            <crypanalysisviewcontrol:SectionControl SectionHeaderCaption="{Loc Peer2Peer}" x:Name="Peer2PeerSection"
+                                                    SectionHeaderBackground="#FF099BA7" SectionBackground="#AFAAE1E8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="130" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ScrollViewer Name="peer2peerScrollViewer" HorizontalScrollBarVisibility="Auto" CanContentScroll="True">
+                    </ScrollViewer>
+                    <Label Content="{Loc Local_Sieving_}" Name="localSieving" ClipToBounds="True" FontSize="40" FontStyle="Normal" FontWeight="Bold" FontFamily="Arial" Foreground="Red" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" Visibility="Hidden" />
+
+                    <crypanalysisviewcontrol:SectionViewLabelsControl Grid.Row="1">
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Downloaded_}" x:Name="Downloaded" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Uploaded_}" x:Name="Uploaded" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Active_Peers_}" x:Name="ActivePeers" />
+                        <crypanalysisviewcontrol:ViewLabel Caption="{Loc Queue_}" x:Name="QueueInformation" />
+                    </crypanalysisviewcontrol:SectionViewLabelsControl>
+                </Grid>
+            </crypanalysisviewcontrol:SectionControl>
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalSections>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <ListBox Grid.Row="0"  Background="#AFE2FFCE" Name="factorList" Height="150" HorizontalAlignment="Stretch"/>
+            <Label Grid.Row="1" Background="#AFE2FFCE" Content="" HorizontalAlignment="Stretch" Name="factorInfo" />
+        </Grid>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>

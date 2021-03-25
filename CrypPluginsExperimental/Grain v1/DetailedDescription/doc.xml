@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <introduction lang="en">Grain v1 is one of seven symmetric stream ciphers that was chosen for the final eSTREAM portfolio of the ECRYPT Stream Cipher Project. The cipher is designed to have a low hardware complexity and is based on two shift registers and a non-linear output function. The key size is 80 bits and the size of the initialization vector is 64 bits. No attack faster than brute-force has been identified so far.
+</introduction>
+  <introduction lang="zh-CN">Grain v1是为ECRYPT流密码项目的最终eSTREAM产品组合选择的七个对称流密码之一。该密码被设计为具有较低的硬件复杂度，并且基于两个移位寄存器和一个非线性输出功能。密钥大小为80位，初始化向量的大小为64位。到目前为止，还没有发现比蛮力还要快的攻击。</introduction>
+  <introduction lang="ru">Grain v1 является одним из семи симметричных потоковых шифров, который был выбран для окончательного портфеля eSTREAM проекта ECHREPT Stream Cipher. Шифр имеет низкую аппаратную сложность и основан на двух сдвиговых регистрах и нелинейной функции вывода. Размер ключа - 80 бит, а размер вектора инициализации - 64 бита. До сих пор не было обнаружено атаки быстрее, чем грубая сила.</introduction>
+  <usage lang="en">
+    After dragging the Grain v1 component onto your workspace you will have to connect three text input fields to the connectors on the left side as well as a text output field to the right connector. You will then have to input the key and initialization vector as well as your plaintext (as hex values) in the associated text input fields.
+  </usage>
+  <usage lang="zh-CN">将Grain v1组件拖到工作区后，必须将三个文本输入字段连接到左侧的连接器，以及将文本输出字段连接到右侧的连接器。然后，您将不得不在关联的文本输入字段中输入键和初始化向量以及您的纯文本（十六进制值）。</usage>
+  <usage lang="ru">После перетаскивания компонента Grain v1 в рабочую область вам нужно будет подключить три текстовых поля ввода к разъемам с левой стороны, а также текстовое поле вывода в правый разъем. Затем вам нужно будет ввести ключ и вектор инициализации, а также ваш открытый текст (в виде шестнадцатеричных значений) в соответствующие поля ввода текста.</usage>
+  <presentation lang="en"></presentation>
+  <language culture="de" />
+  <introduction lang="de">Grain v1 ist eine von sieben symmetrischen Stromchiffren, die für das finale eSTREAM Portfolio des ECRYPT Stream Cipher Project gewählt wurden. Die Chiffre ist so entworfen, dass sie eine geringe Hardwarekomplexität aufweist und sie basiert auf zwei Schieberegistern und einer nicht-linearen Ausgabefunktion. Die Schlüssellänge beträgt 80 Bits und die Länge des Initialisierungsvektors ist 64 Bits. Es wurde bisher kein Angriff gefunden, der schneller als Brute-Force ist.
+  </introduction>
+  <usage lang="de">
+    Nachdem Sie die Grain v1 Komponente auf Ihre Arbeitsfläche gezogen haben, müssen Sie drei Texteingabefelder an die Konnektoren auf der linken Seite und ein Textausgabefeld an den Konnektor auf der rechten Seite anbringen. Anschließend müssen Sie den Schlüssel und Initialisierungsvektor, sowie Ihren Klartext (als Hex-Werte) in die dazugehörigen Felder eingeben.
+  </usage>
+  <presentation lang="de"></presentation>
+</documentation>

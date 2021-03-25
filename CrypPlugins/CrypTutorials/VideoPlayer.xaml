@@ -1,0 +1,315 @@
+﻿<UserControl 
+    x:Class="CrypTool.CrypTutorials.VideoPlayer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" RenderTransformOrigin="0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    xmlns:visuals="clr-namespace:CrypTool.CrypTutorials" d:DesignHeight="500" d:DesignWidth="500"
+    xmlns:vlc="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf">
+    <UserControl.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform ScaleX="1" ScaleY="1"/>
+            <SkewTransform AngleX="0" AngleY="0"/>
+            <RotateTransform Angle="0"/>
+            <TranslateTransform x:Name="UserControlToolTipXY" X="0" Y="0"/>
+        </TransformGroup>
+    </UserControl.RenderTransform>
+    <UserControl.Resources>
+        
+        <ControlTemplate x:Key="HorizontalSlider" TargetType="{x:Type Slider}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="{TemplateBinding Slider.MinHeight}"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Name="TrackBackground" Margin="0,0,0,0" CornerRadius="2" Height="15" Grid.Row="1" Background="#ccc"/>
+                <Track Grid.Row="1" Name="PART_Track">
+                    <Track.DecreaseRepeatButton>
+                        <RepeatButton Style="{DynamicResource ResourceKey=SliderButtonStyle}" Command="Slider.DecreaseLarge" />
+                    </Track.DecreaseRepeatButton>
+                    <Track.Thumb>
+                        <Thumb Style="{DynamicResource ResourceKey=SliderThumbStyle}" />
+                    </Track.Thumb>
+                    <Track.IncreaseRepeatButton>
+                        <RepeatButton Style="{DynamicResource ResourceKey=SliderButtonStyle}" Command="Slider.IncreaseLarge" />
+                    </Track.IncreaseRepeatButton>
+                </Track>
+                <TickBar Name="BottomTick" SnapsToDevicePixels="True" Grid.Row="2" Fill="WhiteSmoke" Placement="Bottom" Height="4" Visibility="Collapsed" OpacityMask="White"/>
+            </Grid>
+        </ControlTemplate>
+
+        <Style x:Key="SliderThumbStyle" TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Height" Value="13"/>
+            <Setter Property="Width" Value="13"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Border Name="Ellipse" Background="#999" CornerRadius="2" BorderBrush="WhiteSmoke" BorderThickness="1.5" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Ellipse" Property="Background" Value="#444"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SliderButtonStyle" TargetType="{x:Type RepeatButton}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsTabStop" Value="false"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RepeatButton}">
+                        <Border Background="Transparent" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Slider}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="IsMoveToPointEnabled" Value="True"></Setter>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="MinHeight" Value="15"/>
+                    <Setter Property="Template" Value="{DynamicResource HorizontalSlider}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <ScaleTransform x:Key="FontStretchCondensed" ScaleX="0.5" />
+        <ScaleTransform x:Key="FontStretchExpanded" ScaleX="1" />
+
+        <Style TargetType="Button">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsPlaying}" Value="True">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle Height="15" Width="5" Fill="White"></Rectangle>
+
+                                <Rectangle Height="15" Width="5" Fill="White"></Rectangle>
+                            </StackPanel>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsPlaying}" Value="False">
+                    <Setter Property="Content">
+                        <Setter.Value>
+                            <TextBlock Text="▶" TextAlignment="Center"></TextBlock>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="MinHeight" Value="23"/>
+            <Setter Property="MinWidth" Value="75"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="Border"  
+                            CornerRadius="6" 
+                            BorderThickness="1"
+                            Background="#993a5563">
+                            <ContentPresenter 
+                                Margin="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--<Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DefaultedBorderBrush}" />
+                            </Trigger>-->
+                            <!--
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DefaultedBorderBrush}" />
+                            </Trigger>-->
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#00a8ff" />
+                            </Trigger>
+                            <!--
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource PressedBrush}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PressedBorderBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="Background" Value="{StaticResource DisabledBackgroundBrush}" />
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource DisabledBorderBrush}" />
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <visuals:VolumeConverter x:Key="VolumeConverter"></visuals:VolumeConverter>
+
+        <Style TargetType="Rectangle">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Width" Value="4"/>
+            <Setter Property="Margin" Value="1" />
+            <!--<Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Fill" Value="#00a8ff" />
+                </Trigger>
+            </Style.Triggers>-->
+        </Style>
+
+
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="45"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="LayoutTransform" Value="{StaticResource FontStretchCondensed}" />
+        </Style>
+
+        <Style x:Key="NormalButtonStyle" TargetType="Button">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="OverridesDefaultStyle" Value="true"/>
+            <Setter Property="MinHeight" Value="23"/>
+            <Setter Property="MinWidth" Value="75"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border 
+                            x:Name="Border"  
+                            CornerRadius="6" 
+                            BorderThickness="1"
+                            Background="#993a5563">
+                            <ContentPresenter 
+                                Margin="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="Background" Value="#00a8ff" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Border Background="#dd678a9c" CornerRadius="5">
+        <Grid>
+            <!--<vlc:VlcControl x:Name="myVlcControl"></vlc:VlcControl>-->
+            <Grid x:Name="Root" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <!-- To interactively stop, pause, and play the media, the LoadedBehavior 
+           property of the MediaElement must be set to "Manual". -->
+                <Border CornerRadius="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid>
+                        <Grid.Background>
+                            <VisualBrush Stretch="Uniform">
+                                <VisualBrush.Visual>
+                                    <Image Source="{Binding Path=MyVlcControl.VideoSource, Mode=OneWay}" />
+                                </VisualBrush.Visual>
+                            </VisualBrush >
+                        </Grid.Background>
+                    </Grid>
+                    <!--<MediaElement Name="myMediaElement" Source="{Binding Url}"
+                            LoadedBehavior="Manual" UnloadedBehavior="Stop" Stretch="Uniform" StretchDirection="Both" 
+                            MediaOpened="Element_MediaOpened" MediaEnded="Element_MediaEnded"/>-->
+                </Border>
+
+                <Grid x:Name="Controls" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <!--<Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=Root, Path=IsMouseOver}" Value="true">
+                            <Setter Property="Visibility" Value="Visible"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter Property="Visibility" Value="Collapsed"></Setter>
+                </Style>
+            </Grid.Style>-->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!-- Play button. -->
+                    <Button Grid.Row="1" FontStretch="Normal" FontFamily="Aparajita" Click="PlayClick" Margin="5" Padding="10">
+
+                    </Button>
+
+                    <!-- Pause button.
+            <Button Content="Pause" Click="PauseClick" Margin="5" /> -->
+
+                    <!-- Stop button.
+            <Button FontFamily="Aharoni" Click="StopClick" Margin="5" Padding="10">
+                <TextBlock Text="█" TextAlignment="Center"></TextBlock>
+            </Button> -->
+                    <Border Grid.Row="1" CornerRadius="6" VerticalAlignment="Bottom" Margin="5" Background="#993a5563" Grid.Column="1">
+                        <Grid Height="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="45"></ColumnDefinition>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!-- Seek to slider. Ths slider allows you to jump to different parts of the media playback. -->
+                            <Slider Name="timelineSlider" VerticalAlignment="Center" MouseLeftButtonUp="SeekToMediaPosition" Margin="5,0,0,0"/>
+
+                            <!-- Volume slider. This slider allows a Volume range between 0 and 1. -->
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="1" Margin="8,0,0,0">
+                                
+                                <Rectangle MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Tag="20" 
+                                   Fill="{Binding Path=Volume, ConverterParameter=20, Converter={StaticResource ResourceKey=VolumeConverter}, Mode=OneWay, FallbackValue=#ccc}"></Rectangle>
+                                
+                                <Rectangle MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Tag="40"
+                                   Fill="{Binding Path=Volume, ConverterParameter=40, Converter={StaticResource ResourceKey=VolumeConverter}, Mode=OneWay, FallbackValue=#ccc}"></Rectangle>
+                                
+                                <Rectangle MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Tag="60"
+                                   Fill="{Binding Path=Volume, ConverterParameter=60, Converter={StaticResource ResourceKey=VolumeConverter}, Mode=OneWay, FallbackValue=#ccc}"></Rectangle>
+                                
+                                <Rectangle MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Tag="80"
+                                   Fill="{Binding Path=Volume, ConverterParameter=80, Converter={StaticResource ResourceKey=VolumeConverter}, Mode=OneWay, FallbackValue=#ccc}"></Rectangle>
+                                
+                                <Rectangle MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" Tag="100"
+                                   Fill="{Binding Path=Volume, ConverterParameter=100, Converter={StaticResource ResourceKey=VolumeConverter}, Mode=OneWay, FallbackValue=#ccc}"></Rectangle>
+                            </StackPanel>
+
+                            <Image MouseLeftButtonDown="DoFullscreen" LayoutTransform="{x:Null}" Grid.Column="2" Source="/CrypTutorials;component/full.png" HorizontalAlignment="Center" SnapsToDevicePixels="True" Height="25"></Image>
+
+
+                            <!--<Slider Name="volumeSlider" VerticalAlignment="Center" ValueChanged="ChangeMediaVolume" 
+                Minimum="0" Maximum="1" Value="0.5" Width="70"/>-->
+                        </Grid>
+                    </Border>
+
+                    <!-- Volume slider. This slider allows you to change the speed of the media playback. 
+            <TextBlock Foreground="White" Margin="5"  VerticalAlignment="Center">Speed</TextBlock>
+            <Slider Name="speedRatioSlider" VerticalAlignment="Center" ValueChanged="ChangeMediaSpeedRatio" 
+                    Value="1" Width="70" />-->
+
+                </Grid>
+            </Grid>
+            <Grid x:Name="LoadingVisual" Visibility="Collapsed" Background="#44ffffff">
+                <TextBlock Text="Buffering..." FontSize="100" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <ScaleTransform ScaleY="0.5"></ScaleTransform>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Grid>
+        </Grid>
+        
+    </Border>
+</UserControl>

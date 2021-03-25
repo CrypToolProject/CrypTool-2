@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="inputKeyDescription" xml:space="preserve">
+    <value>Eingabe des Schlüssels, der für die Verschlüsselung verwendet wird</value>
+  </data>
+  <data name="inputKeyName" xml:space="preserve">
+    <value>Schlüsseleingabe</value>
+  </data>
+  <data name="inputTextDescription" xml:space="preserve">
+    <value>Eingabe des Textes, der verschlüsselt werden soll.</value>
+  </data>
+  <data name="inputTextName" xml:space="preserve">
+    <value>Texteingabe</value>
+  </data>
+  <data name="KeysizeCaption" xml:space="preserve">
+    <value>Schlüsselgröße</value>
+  </data>
+  <data name="KeysizeTooltip" xml:space="preserve">
+    <value>Geben Sie die Größe des Schlüssels an.</value>
+  </data>
+  <data name="OutputStreamCaption" xml:space="preserve">
+    <value>Textausgabe</value>
+  </data>
+  <data name="OutputStreamTooltip" xml:space="preserve">
+    <value>Ausgabe des Geheimtextes</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>AES-Visualisierung</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Visualisierung der AES-Verschlüsselung</value>
+  </data>
+  <data name="addKeyButton" xml:space="preserve">
+    <value>Add Key</value>
+  </data>
+  <data name="addKeyExplanation" xml:space="preserve">
+    <value>Der Rundenschlüssel wird addiert, indem die einzelnen Bytes miteinander per XOR verrechnet werden.</value>
+  </data>
+  <data name="autoButton" xml:space="preserve">
+    <value>Auto</value>
+  </data>
+  <data name="encButton" xml:space="preserve">
+    <value>Zur Verschlüsselung</value>
+  </data>
+  <data name="encryptionIntro" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="encryptionIntro1" xml:space="preserve">
+    <value>Verschlüsselung</value>
+  </data>
+  <data name="encTextBlock" xml:space="preserve">
+    <value>Verschlüsselung</value>
+  </data>
+  <data name="endButton" xml:space="preserve">
+    <value>Ende</value>
+  </data>
+  <data name="expansionExplanation" xml:space="preserve">
+    <value>Zuerst werden die letzten vier Bytes des vorherigen Schlüssels genommen und das letzte Byte an den Anfang gestellt.</value>
+  </data>
+  <data name="expansionExplanation1" xml:space="preserve">
+    <value>Jedes Byte wird mit dem entsprechenden Byte aus der S-Box ausgetauscht.</value>
+  </data>
+  <data name="expansionExplanation2" xml:space="preserve">
+    <value>Die Rundenkonstante wird addiert.</value>
+  </data>
+  <data name="expansionExplanation3" xml:space="preserve">
+    <value>Die ersten vier Bytes des vorherigen Schlüssels werden addiert. Das Ergebnis sind die ersten vier Bytes des neuen Schlüssels.</value>
+  </data>
+  <data name="expansionExplanation4" xml:space="preserve">
+    <value>Für Spalte x des neuen Schlüssels wird Spalte x des vorherigen Schlüssels mit Spalte x-1 des neuen Schlüssels per XOR verrechnet.</value>
+  </data>
+  <data name="expansionIntro" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="expansionIntro1" xml:space="preserve">
+    <value>Schlüsselerweiterung</value>
+  </data>
+  <data name="expButton" xml:space="preserve">
+    <value>Zur Expansion</value>
+  </data>
+  <data name="expTextBlock" xml:space="preserve">
+    <value>Expansion</value>
+  </data>
+  <data name="initialRoundTextBlock" xml:space="preserve">
+    <value>Initialrunde</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Intro1_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\Intro1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Intro2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\Intro2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Intro3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\Intro3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="introduction" xml:space="preserve">
+    <value>Advanced Encryption Standard</value>
+  </data>
+  <data name="introduction1" xml:space="preserve">
+    <value>(AES)</value>
+  </data>
+  <data name="introduction2" xml:space="preserve">
+    <value>Visualisierung dieser modernen Blockchiffre</value>
+  </data>
+  <data name="mixColButton" xml:space="preserve">
+    <value>Mix Col.</value>
+  </data>
+  <data name="mixColExplanation" xml:space="preserve">
+    <value>Eine Spalte des aktuellen Zustandes wird genommen und neben der Multiplikationsmatrix platziert.</value>
+  </data>
+  <data name="mixColExplanation1" xml:space="preserve">
+    <value>Danach wird sie mit der Multiplikationsmatrix verrechnet, um die nächste Spalte des nächsten Zustandes zu ermitteln.</value>
+  </data>
+  <data name="playButton" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="prevOperationButton" xml:space="preserve">
+    <value>Vorherige Operation</value>
+  </data>
+  <data name="prevRoundButton" xml:space="preserve">
+    <value>Vorherige Runde</value>
+  </data>
+  <data name="Round1" xml:space="preserve">
+    <value>Runde 1</value>
+  </data>
+  <data name="Round10" xml:space="preserve">
+    <value>Runde 10</value>
+  </data>
+  <data name="Round11" xml:space="preserve">
+    <value>Runde 11</value>
+  </data>
+  <data name="Round12" xml:space="preserve">
+    <value>Runde 12</value>
+  </data>
+  <data name="Round13" xml:space="preserve">
+    <value>Runde13</value>
+  </data>
+  <data name="Round14" xml:space="preserve">
+    <value>Runde14</value>
+  </data>
+  <data name="Round2" xml:space="preserve">
+    <value>Runde 2</value>
+  </data>
+  <data name="Round3" xml:space="preserve">
+    <value>Runde 3</value>
+  </data>
+  <data name="Round4" xml:space="preserve">
+    <value>Runde 4</value>
+  </data>
+  <data name="Round5" xml:space="preserve">
+    <value>Runde 5</value>
+  </data>
+  <data name="Round6" xml:space="preserve">
+    <value>Runde 6</value>
+  </data>
+  <data name="Round7" xml:space="preserve">
+    <value>Runde 7</value>
+  </data>
+  <data name="Round8" xml:space="preserve">
+    <value>Runde 8</value>
+  </data>
+  <data name="Round9" xml:space="preserve">
+    <value>Runde 9</value>
+  </data>
+  <data name="shiftLeftButton" xml:space="preserve">
+    <value>&lt;&lt;</value>
+  </data>
+  <data name="shiftRightButton" xml:space="preserve">
+    <value>&gt;&gt;</value>
+  </data>
+  <data name="shiftRowButton" xml:space="preserve">
+    <value>Shift Row</value>
+  </data>
+  <data name="shiftRowExplanation" xml:space="preserve">
+    <value>Zuerst werden die Zeilen der Matrix nach links verschoben: die erste Zeile um 0, die zweite um 1, die dritte um 2 und die vierte um 3 Spalten. Danach werden die überstehenden Bytes nach rechts übertragen, um wieder eine 4 x 4 Matrix zu bilden.</value>
+  </data>
+  <data name="skipOperationButton" xml:space="preserve">
+    <value>Operation überspringen</value>
+  </data>
+  <data name="skipRoundButton" xml:space="preserve">
+    <value>Runde überspringen</value>
+  </data>
+  <data name="startButton" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="subBytesButton" xml:space="preserve">
+    <value>Sub Bytes</value>
+  </data>
+  <data name="subBytesExplanation" xml:space="preserve">
+    <value>Zuerst wird ein Byte aus der Zustandsmatrix genommen und aufgeteilt.</value>
+  </data>
+  <data name="subBytesExplanation1" xml:space="preserve">
+    <value>Das entsprechende Byte aus der S-Box wird ermittelt und in die Ergebnismatrix übertragen.</value>
+  </data>
+  <data name="resultTextBlock" xml:space="preserve">
+    <value>Ergebnis</value>
+  </data>
+  <data name="introTextBlock" xml:space="preserve">
+    <value>AES ist eine moderne Blockchiffre. Es gibt zwei Eingabewerte: zum einen den Klartext, der verschlüsselt werden soll, und zum anderen den Schlüssel. Nach der Verschlüsselung gibt AES den Geheimtext aus.</value>
+  </data>
+  <data name="introTextBlock1" xml:space="preserve">
+    <value>AES beginnt mit der Schlüsselexpansion, in der die Rundenschlüssel vom Hauptschlüssel abgeleitet werden.
+
+Danach gibt es eine Initialrunde, in der der Hauptschlüssel mit dem Klartext verrechnet wird.
+
+Als nächstes gibt es -- abhängig von der Schlüssellänge -- 9, 11 oder 13 Hauptrunden. Jede Runde besteht aus vier Operationen: "SubBytes", "ShiftRow", "MixColumns" und "AddRoundKey".
+
+Nachdem diese Runden abgeschlossen sind, gibt es noch eine letzte Runde ohne "MixColumns"-Operation.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="intro" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="intro1" xml:space="preserve">
+    <value>Intro</value>
+  </data>
+  <data name="IntroText" xml:space="preserve">
+    <value>Intro</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>Geheimtext</value>
+  </data>
+  <data name="KeyText" xml:space="preserve">
+    <value>Schlüssel</value>
+  </data>
+  <data name="Plaintext" xml:space="preserve">
+    <value>Klartext</value>
+  </data>
+</root>

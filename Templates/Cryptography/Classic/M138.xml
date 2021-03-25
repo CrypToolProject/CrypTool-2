@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <title lang="en">M-138</title>
+  <title lang="zh">M-138</title>
+  <title lang="ru">М-138</title>
+  <summary lang="en">Usage of the M-138</summary>
+  <summary lang="zh">M-138的用途</summary>
+  <summary lang="ru">Использование M-138</summary>
+  <description lang="en">This template shows the usage of the M-138.</description>
+  <description lang="zh">该模板显示了M-138的用法。</description>
+  <description lang="ru">Этот шаблон показывает использование M-138.</description>
+  <keywords>M-138, polyalphabetic, substitution</keywords>
+  <keywords lang="zh">M-138，多字母替代</keywords>
+  <keywords lang="ru">M-138, полиалфавитный, замещение</keywords>
+  <title lang="de">M-138</title>
+  <summary lang="de">Benutzung der M-138</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der M-138.</description>
+  <keywords lang="de">M-138, polyalphabetisch, substitution</keywords>
+  <icon file="M138.png" />
+  <relevantPlugins>
+    <plugin name="M_138" />
+  </relevantPlugins>
+  <replacements lang="de">
+    <replacement key="$plaintext$" value="Klartext" />
+    <replacement key="$ciphertext$" value="Geheimtext" />
+    <replacement key="$key$" value="Schlüssel" />
+    <replacement key="$memo1$" value="Hier werden der Klartext / Geheimtext und der zu verwendende Schlüssel eingegeben." />
+    <replacement key="$memo2$" value="Der resultierende Geheimtext / Klartext wird hier angezeigt." />
+    <replacement key="$memo3$" value="Diese Vorlage zeigt die Verwendung der M-138. In den Einstellungen der Komponente kann ausgewählt werden, was mit ungültigen Zeichen, die nicht von der M-138 unterstützt werden, passieren soll, ob die Komponente ver- oder entschlüsseln soll, wie die Groß- und Kleinschreibung behandelt werden soll und welches Format der Schlüssel hat. In der Präsentationsansicht der Komponente werden die Streifen der M-138 so dargestellt, wie sie in der Maschine tatsächlich erscheinen würden." />
+  </replacements>
+  <replacements lang="zh">
+    <replacement key="$plaintext$" value="纯文本" />
+    <replacement key="$ciphertext$" value="密文" />
+    <replacement key="$key$" value="键" />
+    <replacement key="$memo1$" value="在此输入明文/密文和要使用的密钥。" />
+    <replacement key="$memo2$" value="生成的密文/纯文本显示在此处。" />
+    <replacement key="$memo3$" value="该模板显示了M-138的使用。在组件的设置中，您可以选择M-138不支持的无效字符应该如何处理，是否应加密或解密组件，应如何处理大小写以及密钥应采用哪种格式具有。在组件的显示视图中，显示了M-138上的条带，就像它们实际出现在机器中一样。" />
+  </replacements>
+  <replacements lang="ru">
+    <replacement key="$plaintext$" value="обычный текст" />
+    <replacement key="$ciphertext$" value="шифротекста" />
+    <replacement key="$key$" value="ключ" />
+    <replacement key="$memo1$" value="Здесь вводятся текст открытого текста / зашифрованного текста и ключ, который будет использоваться." />
+    <replacement key="$memo2$" value="Здесь отображается полученный зашифрованный текст / открытый текст." />
+    <replacement key="$memo3$" value="Этот шаблон показывает использование M-138. В настройках компонента вы можете выбрать, что делать с недопустимыми символами, которые не поддерживаются M-138, должен ли компонент шифровать или расшифровывать, как обрабатывать этот случай и формат ключа есть. В представлении представления компонента полоски M-138 отображаются так, как они бы отображались на машине." />
+  </replacements>
+  <replacements lang="en">
+    <replacement key="$plaintext$" value="Plaintext" />
+    <replacement key="$ciphertext$" value="Ciphertext" />
+    <replacement key="$key$" value="Key" />
+    <replacement key="$memo1$" value="Here you provide the plaintext / ciphertext and the key to be used." />
+    <replacement key="$memo2$" value="The resulting ciphertext / plaintext is shown here" />
+    <replacement key="$memo3$" value="This template describes the usage of the M-138. In the component's settings, you can select what should happen to invalid characters not being supported by the M-138, whether to encrypt or decrypt, how to handle capitalization and the format of the key. In the component's visualization, you can see how the strips of the M-138 look like in the actual device." />
+  </replacements>
+</sample>

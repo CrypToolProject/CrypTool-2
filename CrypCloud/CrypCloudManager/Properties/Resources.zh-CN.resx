@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="connected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\connected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="disconnected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\disconnected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\error.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tab_Caption" xml:space="preserve">
+    <value>加密云</value>
+  </data>
+  <data name="_Password_label" xml:space="preserve">
+    <value>密码：</value>
+  </data>
+  <data name="_Email_label" xml:space="preserve">
+    <value>电子邮件：</value>
+  </data>
+  <data name="_Type" xml:space="preserve">
+    <value>工作类型 ：</value>
+  </data>
+  <data name="_BackBtn" xml:space="preserve">
+    <value>背部</value>
+  </data>
+  <data name="_AbortBtn" xml:space="preserve">
+    <value>流产</value>
+  </data>
+  <data name="_WorkspacePath" xml:space="preserve">
+    <value>工作空间：</value>
+  </data>
+  <data name="_NextBtn" xml:space="preserve">
+    <value>下一个</value>
+  </data>
+  <data name="_Password_confirm_label" xml:space="preserve">
+    <value>确认：</value>
+  </data>
+  <data name="_ConnectingError" xml:space="preserve">
+    <value>出了些问题 ：（</value>
+  </data>
+  <data name="_Connecting_label" xml:space="preserve">
+    <value>与服务器的连接。请耐心等待</value>
+  </data>
+  <data name="_CreateAccount_enterAccountData" xml:space="preserve">
+    <value>请在下面输入您的帐户数据。</value>
+  </data>
+  <data name="_CreateAccount_successHeader" xml:space="preserve">
+    <value>帐户申请成功。</value>
+  </data>
+  <data name="_CreateAccount_successText" xml:space="preserve">
+    <value>帐户申请成功。</value>
+  </data>
+  <data name="_CreateAccount_Title" xml:space="preserve">
+    <value>创建一个新账户</value>
+  </data>
+  <data name="_CreateJob_Description_label" xml:space="preserve">
+    <value>描述：</value>
+  </data>
+  <data name="_CreateJob_Header" xml:space="preserve">
+    <value>创造新工作</value>
+  </data>
+  <data name="_CreateJob_Name_label" xml:space="preserve">
+    <value>名称：</value>
+  </data>
+  <data name="_CreateJob_uploadBtn" xml:space="preserve">
+    <value>上载</value>
+  </data>
+  <data name="_CreateJob_WorkspacePath_label" xml:space="preserve">
+    <value>工作空间的路径：</value>
+  </data>
+  <data name="_enterVerificationCode" xml:space="preserve">
+    <value>请输入验证码。</value>
+  </data>
+  <data name="_JobList_btn_createNew" xml:space="preserve">
+    <value>创造新工作</value>
+  </data>
+  <data name="_JobList_btn_delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="_JobList_btn_open" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="_JobList_btn_refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="_JobList_col_Creator" xml:space="preserve">
+    <value>创作者</value>
+  </data>
+  <data name="_JobList_col_Name" xml:space="preserve">
+    <value>工作名称</value>
+  </data>
+  <data name="_JobList_col_Progress" xml:space="preserve">
+    <value>进展</value>
+  </data>
+  <data name="_JobList_Header" xml:space="preserve">
+    <value>CrypCloud –职位列表</value>
+  </data>
+  <data name="_Login_btn_connect" xml:space="preserve">
+    <value>连接</value>
+  </data>
+  <data name="_Login_header" xml:space="preserve">
+    <value>加密云</value>
+  </data>
+  <data name="_Login_link_createNewAccount" xml:space="preserve">
+    <value>创建一个新账户</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>CrypCloud管理器</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>基于P2P的志愿者云解决方案</value>
+  </data>
+  <data name="_Login_link_ForgotPassword" xml:space="preserve">
+    <value>忘记密码</value>
+  </data>
+  <data name="_Login_subheader" xml:space="preserve">
+    <value>基于P2P的志愿者云解决方案</value>
+  </data>
+  <data name="_ResetPW_enterData" xml:space="preserve">
+    <value>在下面输入您的帐户数据以重置密码。</value>
+  </data>
+  <data name="_ResetPW_enterVerificationData" xml:space="preserve">
+    <value>我们已将验证电子邮件发送到该帐户的电子邮件地址。</value>
+  </data>
+  <data name="_ResetPW_Header" xml:space="preserve">
+    <value>重设密码</value>
+  </data>
+  <data name="_ResetPW_successHeader" xml:space="preserve">
+    <value>密码重置成功</value>
+  </data>
+  <data name="_ResetPW_successText" xml:space="preserve">
+    <value>您的密码已重置。您现在可以使用新密码登录。</value>
+  </data>
+  <data name="_verificationCode_label" xml:space="preserve">
+    <value>验证码：</value>
+  </data>
+  <data name="_VerifyBtn" xml:space="preserve">
+    <value>校验</value>
+  </data>
+  <data name="_Username_label" xml:space="preserve">
+    <value>名称：</value>
+  </data>
+  <data name="_JobList_col_Id" xml:space="preserve">
+    <value>工作编号</value>
+  </data>
+  <data name="Stop_Running_Jobs_Before_Logout" xml:space="preserve">
+    <value>注销失败。请停止所有正在运行的作业。</value>
+  </data>
+  <data name="_JobList_bitmask" xml:space="preserve">
+    <value>位掩码：</value>
+  </data>
+  <data name="_JobList_jobDescription" xml:space="preserve">
+    <value>描述：</value>
+  </data>
+  <data name="_JobList_jobName" xml:space="preserve">
+    <value>职务名称：</value>
+  </data>
+  <data name="_JobList_btn_logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="AmountOfWorker_Settings" xml:space="preserve">
+    <value>工人人数：</value>
+  </data>
+  <data name="CrypCloudSettings" xml:space="preserve">
+    <value>加密云</value>
+  </data>
+  <data name="_JobList_btn_download" xml:space="preserve">
+    <value>加载</value>
+  </data>
+  <data name="_JobList_col_Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="_JobList_EpochProgress" xml:space="preserve">
+    <value>时代：</value>
+  </data>
+  <data name="_ResetPW_enterVerificationData_2" xml:space="preserve">
+    <value>请在下面输入验证码和您的新密码。</value>
+  </data>
+  <data name="_Confirm_Job_Deletion_Text" xml:space="preserve">
+    <value>作业将从云中永久删除。结果和进度将丢失。你确定吗？</value>
+  </data>
+  <data name="_Confirm_Job_Deletion_Title" xml:space="preserve">
+    <value>确认删除作业。</value>
+  </data>
+  <data name="_Remember_me" xml:space="preserve">
+    <value>保存登录数据</value>
+  </data>
+  <data name="_JobList_LoggedInAs" xml:space="preserve">
+    <value>登录为：</value>
+  </data>
+  <data name="_infoVerificationCode" xml:space="preserve">
+    <value>验证码已发送到提供的电子邮件地址。</value>
+  </data>
+  <data name="_JobList_helpText" xml:space="preserve">
+    <value>单击打开按钮之一以参加工作。</value>
+  </data>
+  <data name="_JobList_JobId" xml:space="preserve">
+    <value>工作编号：</value>
+  </data>
+  <data name="EnableOpenCL" xml:space="preserve">
+    <value>启用OpenCL</value>
+  </data>
+  <data name="OpenCLDevice" xml:space="preserve">
+    <value>OpenCL设备：</value>
+  </data>
+  <data name="WritePerformanceLog" xml:space="preserve">
+    <value>编写性能日志</value>
+  </data>
+  <data name="_JobList_col_JobSize" xml:space="preserve">
+    <value>尺寸</value>
+  </data>
+  <data name="LogLevel" xml:space="preserve">
+    <value>日志级别：</value>
+  </data>
+  <data name="_Remember_me_tooltip" xml:space="preserve">
+    <value>用户名和密码将加密保存，并在下次启动CrypCloud时恢复。</value>
+  </data>
+  <data name="JobList_btn_delete_tooltip" xml:space="preserve">
+    <value>从CrypCloud删除作业</value>
+  </data>
+  <data name="_JobList_btn_createNew_tooltip" xml:space="preserve">
+    <value>创建一个新作业并将其上传到CrypCloud</value>
+  </data>
+  <data name="_JobList_btn_refresh_tooltip" xml:space="preserve">
+    <value>通过请求邻居对等方的作业列表来刷新作业列表</value>
+  </data>
+  <data name="JobList_btn_download_tooltip" xml:space="preserve">
+    <value>从CrypCloud下载作业</value>
+  </data>
+  <data name="JobList_btn_logout_tooltip" xml:space="preserve">
+    <value>关闭与CrypCloud的连接</value>
+  </data>
+  <data name="JobList_btn_open_tooltip" xml:space="preserve">
+    <value>打开作业以参与计算。要在新打开的工作空间中开始计算，请按“播放”按钮。</value>
+  </data>
+  <data name="_IPAddress" xml:space="preserve">
+    <value>IP地址</value>
+  </data>
+  <data name="_PeerId" xml:space="preserve">
+    <value>对等ID</value>
+  </data>
+  <data name="_Port" xml:space="preserve">
+    <value>港口</value>
+  </data>
+  <data name="anonymous" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\anonymous.p12;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_copyJobInformation" xml:space="preserve">
+    <value>复制工作信息</value>
+  </data>
+  <data name="_JobList_instructions" xml:space="preserve">
+    <value>a）上面的列表包含长时间运行的作业，可以通过运行并行子作业来更快地解决。因此，不同的人可以通过运行相同的工作并在其计算机上计算不同的子工作来做出贡献。 b）在列表中选择一个职位，然后单击“打开”进行贡献。 d）单击“打开”后，将下载相应的作业并在新的CT2工作区选项卡中将其打开。 e）请单击“播放”（F5）以在新选项卡中运行下载的CT2工作区。然后，工作空间中的CrypCloud组件与所有其他参与的贡献者共享结果。如果某个贡献者找到了解决方案，则该解决方案也将与其他所有人共享，并且立即可见。没有有关贡献者本身的信息共享。下面的列表包含此计算机当前连接到的所有对等方（IP地址和端口）。</value>
+  </data>
+  <data name="_Login_anonymous" xml:space="preserve">
+    <value>要在未注册的情况下登录，请使用“匿名/匿名”。</value>
+  </data>
+  <data name="_copy" xml:space="preserve">
+    <value>复制</value>
+  </data>
+  <data name="_JobList_col_Action" xml:space="preserve">
+    <value>行动</value>
+  </data>
+  <data name="CrypCloudSettingsTitle" xml:space="preserve">
+    <value>CrypCloud设置</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>一般</value>
+  </data>
+</root>

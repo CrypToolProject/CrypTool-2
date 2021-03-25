@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppendICVCaption" xml:space="preserve">
+    <value>Добавить контрольную сумму</value>
+  </data>
+  <data name="AppendICVTooltip" xml:space="preserve">
+    <value>Компонент автоматически добавит контрольную сумму.</value>
+  </data>
+  <data name="BarcodeSection" xml:space="preserve">
+    <value>свойства штрих-кода</value>
+  </data>
+  <data name="C128_ICV_DISC" xml:space="preserve">
+    <value>ICV вычисляется из взвешенной суммы (по модулю 103) всех символов.</value>
+  </data>
+  <data name="C128_ICV_LABLE" xml:space="preserve">
+    <value>Значение проверки целостности</value>
+  </data>
+  <data name="C128_STARTEND_DISC" xml:space="preserve">
+    <value>Существует три разных шаблона запуска, которые определяют, каким образом кодируется код. Однако конечный шаблон всегда один и тот же.</value>
+  </data>
+  <data name="C128_STARTEND_LABLE" xml:space="preserve">
+    <value>Начальный и конечный паттерн</value>
+  </data>
+  <data name="C38_ICV_DISC" xml:space="preserve">
+    <value>ICV рассчитывается из взвешенной суммы (по модулю 43) всех символов.</value>
+  </data>
+  <data name="C38_ICV_LABLE" xml:space="preserve">
+    <value>Значение проверки целостности</value>
+  </data>
+  <data name="C38_STARTEND_DISC" xml:space="preserve">
+    <value>Символ «Начало и конец» - это «*». С помощью символа код можно считывать надежно, даже если он считывается назад.</value>
+  </data>
+  <data name="C38_STARTEND_LABLE" xml:space="preserve">
+    <value>Символ начала и конца</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Визуальный кодировщик</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Кодирует различные типы одномерных и двухмерных кодов</value>
+  </data>
+  <data name="DimCodeLabel" xml:space="preserve">
+    <value>Визуальный код</value>
+  </data>
+  <data name="DM_ALIG_DISC" xml:space="preserve">
+    <value>Шаблон выравнивания статический. Он позволяет считывать код при каждом выравнивании.</value>
+  </data>
+  <data name="DM_ALIG_LABLE" xml:space="preserve">
+    <value>Обнаружение выравнивания</value>
+  </data>
+  <data name="DM_COLUMNID_DISC" xml:space="preserve">
+    <value>Этот шаблон помогает читателю легко найти столбец данных в коде.</value>
+  </data>
+  <data name="DM_COLUMNID_LABLE" xml:space="preserve">
+    <value>Идентификатор столбца</value>
+  </data>
+  <data name="EAN13_FIXED_DISC" xml:space="preserve">
+    <value>Фиксированные бары - это, в основном, ориентиры для читателя. Они необходимы, потому что в этих точках меняется кодировка.</value>
+  </data>
+  <data name="EAN13_FIXED_LABLE" xml:space="preserve">
+    <value>Исправлена ​​контрольная точка</value>
+  </data>
+  <data name="EAN13_ICV_DISC" xml:space="preserve">
+    <value>Контрольная сумма рассчитывается с использованием переменной величины веса, умноженной на значение каждого номера в штрих-коде, чтобы сделать сумму (по модулю 10).</value>
+  </data>
+  <data name="EAN13_ICV_LABLE" xml:space="preserve">
+    <value>Значение проверки целостности</value>
+  </data>
+  <data name="EAN8_FIXED_DISC" xml:space="preserve">
+    <value>Фиксированные бары - это, в основном, ориентиры для читателя. Они необходимы, потому что в этих точках меняется кодировка.</value>
+  </data>
+  <data name="EAN8_FIXED_LABLE" xml:space="preserve">
+    <value>Исправлена ​​контрольная точка</value>
+  </data>
+  <data name="EAN8_ICV_DISC" xml:space="preserve">
+    <value>Контрольная сумма рассчитывается с использованием переменной величины веса, умноженной на значение каждого номера в штрих-коде, чтобы сделать сумму (по модулю 10).</value>
+  </data>
+  <data name="EAN8_ICV_LABLE" xml:space="preserve">
+    <value>Значение проверки целостности</value>
+  </data>
+  <data name="EncodingTypeCaption" xml:space="preserve">
+    <value>Тип штрих-кода</value>
+  </data>
+  <data name="EncodingTypeTooltip" xml:space="preserve">
+    <value>Выберите тип штрих-кода</value>
+  </data>
+  <data name="ExplainLabel" xml:space="preserve">
+    <value>объяснение</value>
+  </data>
+  <data name="InputStreamCaption" xml:space="preserve">
+    <value>Входные данные</value>
+  </data>
+  <data name="InputStreamTooltip" xml:space="preserve">
+    <value>Данные, которые вы хотите кодировать в виде штрих-кода.</value>
+  </data>
+  <data name="PictureBytesCaption" xml:space="preserve">
+    <value>Выход изображения</value>
+  </data>
+  <data name="PictureBytesTooltip" xml:space="preserve">
+    <value>Ваш штрих-код как изображение.</value>
+  </data>
+  <data name="QR_ALIG_DISC" xml:space="preserve">
+    <value>Шаблон выравнивания статический. Он позволяет считывать код при каждом выравнивании.</value>
+  </data>
+  <data name="QR_ALIG_LABLE" xml:space="preserve">
+    <value>Обнаружение выравнивания</value>
+  </data>
+  <data name="CODE39_INVALIDE_INPUT" xml:space="preserve">
+    <value>Invalide Input</value>
+  </data>
+  <data name="PDF417_ROWID_DISC" xml:space="preserve">
+    <value>Этот шаблон помогает читателю легко находить разные строки данных в коде.</value>
+  </data>
+  <data name="PDF417_ROWID_LABLE" xml:space="preserve">
+    <value>Идентификатор строки</value>
+  </data>
+  <data name="PDF417_SEPAT_DISC" xml:space="preserve">
+    <value>С помощью шаблона код можно считывать надежно, даже если он считывается с ног на голову или назад.</value>
+  </data>
+  <data name="PDF417_SEPAT_LABLE" xml:space="preserve">
+    <value>Начальный и конечный паттерн</value>
+  </data>
+  <data name="QR_FORMAT_DISC" xml:space="preserve">
+    <value>Здесь, среди прочих, определяется уровень коррекции ошибок. Это указывает, какой процент от кода (7% - 30%) можно восстановить в случае повреждения.</value>
+  </data>
+  <data name="QR_FORMAT_LABLE" xml:space="preserve">
+    <value>Информация о формате</value>
+  </data>
+  <data name="QR_VERSION_DISC" xml:space="preserve">
+    <value>Версия определяет один из 40 предопределенных размеров для QR-кода.</value>
+  </data>
+  <data name="QR_VERSION_LABLE" xml:space="preserve">
+    <value>Информация о версии</value>
+  </data>
+  <data name="QR_NORMAL_DISC" xml:space="preserve">
+    <value>В этой области данные показаны избыточными, поэтому их можно считывать надежно, даже если фрагменты кода покрыты или повреждены.</value>
+  </data>
+  <data name="QR_NORMAL_LABLE" xml:space="preserve">
+    <value>Данные</value>
+  </data>
+  <data name="EAN_INVALIDE_INPUT" xml:space="preserve">
+    <value>Ввод содержит недопустимые символы. Разрешены только цифры.</value>
+  </data>
+</root>

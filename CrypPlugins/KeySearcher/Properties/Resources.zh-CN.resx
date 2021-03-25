@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="An_error_occured_when_trying_to_compile_OpenCL_code__" xml:space="preserve">
+    <value>尝试编译OpenCL代码时发生错误：</value>
+  </data>
+  <data name="Assigning_new_job_with_Guid__0__to_client_" xml:space="preserve">
+    <value>用向导{0}分配新工作给客户！</value>
+  </data>
+  <data name="Best_match___0__with__1_" xml:space="preserve">
+    <value>最佳匹配：{0}与{1}</value>
+  </data>
+  <data name="Brute_force_was_stopped__not_saving_results___" xml:space="preserve">
+    <value>蛮力停止了，没有保存结果...</value>
+  </data>
+  <data name="Bytes_used_not_valid__" xml:space="preserve">
+    <value>使用的字节无效：</value>
+  </data>
+  <data name="Calculating_global_statistics" xml:space="preserve">
+    <value>计算全球统计</value>
+  </data>
+  <data name="Calculating_pattern_" xml:space="preserve">
+    <value>计算块</value>
+  </data>
+  <data name="Calculation_complete_" xml:space="preserve">
+    <value>计算完成。</value>
+  </data>
+  <data name="Chunks_" xml:space="preserve">
+    <value>方块：</value>
+  </data>
+  <data name="Client_disconnected_" xml:space="preserve">
+    <value>客户端已断开连接！</value>
+  </data>
+  <data name="Client_returned_result_of_job_with_Guid__0__" xml:space="preserve">
+    <value>客户返回了Guid {0}的工作结果！</value>
+  </data>
+  <data name="Client_tried_to_connect__but_only_one_client_allowed_" xml:space="preserve">
+    <value>客户端尝试连接，但只允许一个客户端！</value>
+  </data>
+  <data name="Client__0__connected_" xml:space="preserve">
+    <value>客户端{0}已连接！</value>
+  </data>
+  <data name="Connection_lost__Waiting_for_reconnection_to_store_the_results_" xml:space="preserve">
+    <value>连接断开！等待重新连接以存储结果！</value>
+  </data>
+  <data name="ControlMasterTooltip" xml:space="preserve">
+    <value>用于暴力破解</value>
+  </data>
+  <data name="ControlMasterCaption" xml:space="preserve">
+    <value>控制主</value>
+  </data>
+  <data name="CostMasterTooltip" xml:space="preserve">
+    <value>用于成本计算</value>
+  </data>
+  <data name="CostMasterCaption" xml:space="preserve">
+    <value>成本大师</value>
+  </data>
+  <data name="Could_not_store_results__" xml:space="preserve">
+    <value>无法存储结果：</value>
+  </data>
+  <data name="CSEncryptedDataTooltip" xml:space="preserve">
+    <value>来自加密插件的加密数据</value>
+  </data>
+  <data name="CSEncryptedDataCaption" xml:space="preserve">
+    <value>CS加密数据</value>
+  </data>
+  <data name="Current_Chunk_" xml:space="preserve">
+    <value>当前块：</value>
+  </data>
+  <data name="Devices_" xml:space="preserve">
+    <value>设备：</value>
+  </data>
+  <data name="_days_" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="_Machines_" xml:space="preserve">
+    <value>机器</value>
+  </data>
+  <data name="_Users_" xml:space="preserve">
+    <value>用户数</value>
+  </data>
+  <data name="__last_reservation_date_" xml:space="preserve">
+    <value>，最后预订日期</value>
+  </data>
+  <data name="__LeftChildFinished_" xml:space="preserve">
+    <value>，LeftChildFinished</value>
+  </data>
+  <data name="___Bruteforcing_TimeSpan__" xml:space="preserve">
+    <value>&amp;#39;。暴力破解时间跨度：</value>
+  </data>
+  <data name="___RightChildFinished_" xml:space="preserve">
+    <value>，RightChildFinished</value>
+  </data>
+  <data name="AutoconnectPeerToPeerCaption" xml:space="preserve">
+    <value>自动连接网络</value>
+  </data>
+  <data name="AutoconnectPeerToPeerTooltip" xml:space="preserve">
+    <value>如果在没有激活后台连接的情况下启动工作空间，则建立与网络的连接。</value>
+  </data>
+  <data name="StatusKeyButtonCaption" xml:space="preserve">
+    <value>复制状态键</value>
+  </data>
+  <data name="StatusKeyButtonTooltip" xml:space="preserve">
+    <value>将状态键复制到剪贴板。然后可以使用P2PEditor将密钥与作业一起上传。</value>
+  </data>
+  <data name="CoresUsedCaption" xml:space="preserve">
+    <value>使用的磁芯</value>
+  </data>
+  <data name="CoresUsedTooltip" xml:space="preserve">
+    <value>选择应使用多少个内核</value>
+  </data>
+  <data name="CsvPathCaption" xml:space="preserve">
+    <value>选择逗号分隔值文件</value>
+  </data>
+  <data name="CsvPathTooltip" xml:space="preserve">
+    <value>选择要使用的文件夹和csv文件。</value>
+  </data>
+  <data name="EvaluationDatabaseCaption" xml:space="preserve">
+    <value>数据库</value>
+  </data>
+  <data name="EvaluationDatabaseTooltip" xml:space="preserve">
+    <value>评估数据库名称</value>
+  </data>
+  <data name="DefaultPathCaption" xml:space="preserve">
+    <value>默认文件</value>
+  </data>
+  <data name="DefaultPathTooltip" xml:space="preserve">
+    <value>使用默认文件夹％APPDATA％\\ Local \\ CrypTool2</value>
+  </data>
+  <data name="Client__0__tried_to_auth_with_invalid_password" xml:space="preserve">
+    <value>客户端“ {0}”尝试使用无效密码进行身份验证</value>
+  </data>
+  <data name="Aggregate_Statistics_" xml:space="preserve">
+    <value>汇总统计</value>
+  </data>
+  <data name="Current__Information_" xml:space="preserve">
+    <value>当前信息</value>
+  </data>
+  <data name="_Information_" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="DisableUpdateCaption" xml:space="preserve">
+    <value>禁用统计信息更新</value>
+  </data>
+  <data name="DisableUpdateTooltip" xml:space="preserve">
+    <value>禁用统计信息更新</value>
+  </data>
+  <data name="VerbosePeerToPeerDisplayCaption" xml:space="preserve">
+    <value>显示详细信息</value>
+  </data>
+  <data name="VerbosePeerToPeerDisplayTooltip" xml:space="preserve">
+    <value>在快速监视中显示有关网络请求的详细信息。</value>
+  </data>
+  <data name="dummykey" xml:space="preserve">
+    <value>假钥匙</value>
+  </data>
+  <data name="EncryptedDataTooltip" xml:space="preserve">
+    <value>加密插件中的加密数据</value>
+  </data>
+  <data name="Elapsed_" xml:space="preserve">
+    <value>经过时间：</value>
+  </data>
+  <data name="EncryptedDataCaption" xml:space="preserve">
+    <value>加密数据</value>
+  </data>
+  <data name="Ended_bruteforcing_pattern__" xml:space="preserve">
+    <value>完成对密钥模式&amp;#39;的暴力攻击</value>
+  </data>
+  <data name="Endgame_Mode_" xml:space="preserve">
+    <value>残局模式</value>
+  </data>
+  <data name="End_" xml:space="preserve">
+    <value>预计结束时间：</value>
+  </data>
+  <data name="ExternalClientPasswordCaption" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="ExternalClientPasswordTooltip" xml:space="preserve">
+    <value>用于认证外部客户端的密码</value>
+  </data>
+  <data name="Finding_next_leaf_to_calculate" xml:space="preserve">
+    <value>查找下一个要计算的块</value>
+  </data>
+  <data name="Finished_Chunks_" xml:space="preserve">
+    <value>成品块：</value>
+  </data>
+  <data name="GroupEvaluation" xml:space="preserve">
+    <value>评价</value>
+  </data>
+  <data name="GroupExternalClient" xml:space="preserve">
+    <value>外部客户</value>
+  </data>
+  <data name="GroupOpenCL" xml:space="preserve">
+    <value>OpenCL的</value>
+  </data>
+  <data name="GroupPeerToPeer" xml:space="preserve">
+    <value>对等网络</value>
+  </data>
+  <data name="GroupStatisticPath" xml:space="preserve">
+    <value>统计</value>
+  </data>
+  <data name="EvaluationHostCaption" xml:space="preserve">
+    <value>主办</value>
+  </data>
+  <data name="EvaluationHostTooltip" xml:space="preserve">
+    <value>具有评估数据库的数据库主机</value>
+  </data>
+  <data name="incalculable____" xml:space="preserve">
+    <value>无法估量的:-)</value>
+  </data>
+  <data name="InitVectorCaption" xml:space="preserve">
+    <value>初始化向量</value>
+  </data>
+  <data name="Initializing_connection_to_the_peer_to_peer_system" xml:space="preserve">
+    <value>初始化与对等系统的连接</value>
+  </data>
+  <data name="Initializing_distributed_key_pool_tree" xml:space="preserve">
+    <value>初始化分布式密钥池树</value>
+  </data>
+  <data name="InitVectorTooltip" xml:space="preserve">
+    <value>用于加密数据的初始化向量</value>
+  </data>
+  <data name="in_a_galaxy_far__far_away___" xml:space="preserve">
+    <value>在一个遥远的星系中</value>
+  </data>
+  <data name="KeysearcherSettings" xml:space="preserve">
+    <value>关键字搜索器</value>
+  </data>
+  <data name="Keysearcher_Fullstop__Please_Update_your_Version_" xml:space="preserve">
+    <value>Keysearcher无法继续。请更新您的版本。</value>
+  </data>
+  <data name="KeySearcher_must_be_running_to_copy_the_status_key_" xml:space="preserve">
+    <value>KeySearcher必须正在运行才能复制状态键。</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>用于暴力破解的密钥模式</value>
+  </data>
+  <data name="Keys_Per_Chunk_" xml:space="preserve">
+    <value>每块密钥：</value>
+  </data>
+  <data name="Keys_Sec_" xml:space="preserve">
+    <value>键/秒：</value>
+  </data>
+  <data name="Keys_sec_CPU_" xml:space="preserve">
+    <value>密钥/秒（CPU）：</value>
+  </data>
+  <data name="Keys_sec_OpenCL_" xml:space="preserve">
+    <value>密钥/秒（OpenCL）：</value>
+  </data>
+  <data name="Launching_p2p_based_bruteforce_logic___" xml:space="preserve">
+    <value>正在启动基于P2P的蛮力逻辑...</value>
+  </data>
+  <data name="Local_" xml:space="preserve">
+    <value>本地</value>
+  </data>
+  <data name="Global_" xml:space="preserve">
+    <value>全球</value>
+  </data>
+  <data name="Node_was_already_calculated_" xml:space="preserve">
+    <value>块已经计算过了。</value>
+  </data>
+  <data name="NoOpenCLCaption" xml:space="preserve">
+    <value>没有可用的OpenCL</value>
+  </data>
+  <data name="NoOpenCLTooltip" xml:space="preserve">
+    <value>没有可用的OpenCL设备！</value>
+  </data>
+  <data name="No_ressources_to_BruteForce_available__Check_the_KeySearcher_settings_" xml:space="preserve">
+    <value>没有为蛮力分配资源。请检查KeySearcher参数。</value>
+  </data>
+  <data name="Only_using_external_client_to_bruteforce_" xml:space="preserve">
+    <value>仅使用外部客户端进行暴力破解！</value>
+  </data>
+  <data name="OpenCLDeviceCaption" xml:space="preserve">
+    <value>OpenCL设备</value>
+  </data>
+  <data name="OpenCLDeviceTooltip" xml:space="preserve">
+    <value>选择您要使用的OpenCL设备。</value>
+  </data>
+  <data name="OpenCLModeCaption" xml:space="preserve">
+    <value>OpenCL模式</value>
+  </data>
+  <data name="OpenCLModeTooltip" xml:space="preserve">
+    <value>选择您要使用的OpenCL模式。</value>
+  </data>
+  <data name="Overhead_Abs_" xml:space="preserve">
+    <value>开销（绝对值）：</value>
+  </data>
+  <data name="Overhead_Perc_" xml:space="preserve">
+    <value>高架 （％）：</value>
+  </data>
+  <data name="P2P_network_could_not_be_connected_" xml:space="preserve">
+    <value>无法连接到P2P网络。</value>
+  </data>
+  <data name="P2P_network_not_connected_and_autoconnect_disabled__Cannot_compute_job_" xml:space="preserve">
+    <value>P2P网络未连接且自动连接已禁用。无法计算作业。</value>
+  </data>
+  <data name="P2P_network_was_connected_due_to_plugin_setting_" xml:space="preserve">
+    <value>自动连接到P2P网络。</value>
+  </data>
+  <data name="P2P_not_connected_" xml:space="preserve">
+    <value>P2P未连接。</value>
+  </data>
+  <data name="Participants_" xml:space="preserve">
+    <value>参加者：</value>
+  </data>
+  <data name="EvaluationPasswordCaption" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="EvaluationPasswordTooltip" xml:space="preserve">
+    <value>评估数据库密码</value>
+  </data>
+  <data name="Pattern___0__was_reserved_before_it_could_be_reserved_for_this_CrypTool_instance_" xml:space="preserve">
+    <value>块＃{0}已被保留，然后才可以为此CrypTool实例保留。</value>
+  </data>
+  <data name="Per_Chunk_" xml:space="preserve">
+    <value>每块：</value>
+  </data>
+  <data name="PLEASE_UPDATE" xml:space="preserve">
+    <value>请更新</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>关键字搜索器</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>对密文执行强力攻击</value>
+  </data>
+  <data name="PortCaption" xml:space="preserve">
+    <value>港口</value>
+  </data>
+  <data name="PortTooltip" xml:space="preserve">
+    <value>侦听外部客户端的端口。</value>
+  </data>
+  <data name="Processing_results_of_calculation" xml:space="preserve">
+    <value>计算结果</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>进展</value>
+  </data>
+  <data name="Pushing_statistics_to_evaluation_database" xml:space="preserve">
+    <value>将统计信息推送到评估数据库</value>
+  </data>
+  <data name="Ration_" xml:space="preserve">
+    <value>比：</value>
+  </data>
+  <data name="Ready_for_calculation" xml:space="preserve">
+    <value>准备计算</value>
+  </data>
+  <data name="Received_late_job_result_0_from_client_1" xml:space="preserve">
+    <value>从客户“ {1}”收到迟到的工作结果{0}</value>
+  </data>
+  <data name="Received_Link_" xml:space="preserve">
+    <value>收到（链接）：</value>
+  </data>
+  <data name="Received_Payload_" xml:space="preserve">
+    <value>收到（有效载荷）：</value>
+  </data>
+  <data name="Remaining_" xml:space="preserve">
+    <value>剩余时间：</value>
+  </data>
+  <data name="Removed_reservation_of_pattern___0_" xml:space="preserve">
+    <value>删除了块＃{0}的保留</value>
+  </data>
+  <data name="Remove_" xml:space="preserve">
+    <value>去掉：</value>
+  </data>
+  <data name="Requests_" xml:space="preserve">
+    <value>要求</value>
+  </data>
+  <data name="Rereserving_pattern_failed_" xml:space="preserve">
+    <value>保留块失败！</value>
+  </data>
+  <data name="Rereserving_pattern_failed__because_there_is_no_connection_" xml:space="preserve">
+    <value>保留块失败，因为没有到P2P网络的连接。</value>
+  </data>
+  <data name="Rereserving_pattern___0_" xml:space="preserve">
+    <value>保留块＃{0}</value>
+  </data>
+  <data name="Reservation_removed_by_another_node__while_calculating___To_avoid_a_state_in_limbo__proceeding_to_first_available_leaf___" xml:space="preserve">
+    <value>预订已被其他参与者删除。为了避免陷入困境，请继续使用第一个可用的区块...</value>
+  </data>
+  <data name="ResetCaption" xml:space="preserve">
+    <value>重启</value>
+  </data>
+  <data name="ResetTooltip" xml:space="preserve">
+    <value>重设金钥</value>
+  </data>
+  <data name="Retrieve_" xml:space="preserve">
+    <value>检索：</value>
+  </data>
+  <data name="Running_pattern___0__of__1_" xml:space="preserve">
+    <value>正在处理{1}中的块＃{0}</value>
+  </data>
+  <data name="Sent_Link_" xml:space="preserve">
+    <value>发送（链接）：</value>
+  </data>
+  <data name="Sent_Payload_" xml:space="preserve">
+    <value>已发送（有效负载）：</value>
+  </data>
+  <data name="Start_" xml:space="preserve">
+    <value>开始：</value>
+  </data>
+  <data name="Start_bruteforcing_pattern__" xml:space="preserve">
+    <value>对密钥模式&amp;#39;发起暴力攻击</value>
+  </data>
+  <data name="Static_" xml:space="preserve">
+    <value>静态的</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>统计</value>
+  </data>
+  <data name="Status_key___0___has_been_copied_to_clipboard_" xml:space="preserve">
+    <value>状态键“ {0}”已复制到剪贴板。</value>
+  </data>
+  <data name="Store_" xml:space="preserve">
+    <value>商店：</value>
+  </data>
+  <data name="Tested_Bits_" xml:space="preserve">
+    <value>要测试的位：</value>
+  </data>
+  <data name="There_must_be_an_error__because_we_bruteforced_too_much_keys___" xml:space="preserve">
+    <value>数据不一致错误，我们似乎计算出了比预期更多的键...</value>
+  </data>
+  <data name="Top1KeyTooltip" xml:space="preserve">
+    <value>找到最好的钥匙</value>
+  </data>
+  <data name="Top1MessageTooltip" xml:space="preserve">
+    <value>找到最好的消息</value>
+  </data>
+  <data name="Top1KeyCaption" xml:space="preserve">
+    <value>Top1键</value>
+  </data>
+  <data name="Top1MessageCaption" xml:space="preserve">
+    <value>Top1讯息</value>
+  </data>
+  <data name="Top_Ten_" xml:space="preserve">
+    <value>前十</value>
+  </data>
+  <data name="Total_" xml:space="preserve">
+    <value>总：</value>
+  </data>
+  <data name="Total_amount_of_patterns___0___each_containing__1__keys_" xml:space="preserve">
+    <value>块总数：{0}，每个块包含{1}个密钥。</value>
+  </data>
+  <data name="Total_Chunks_" xml:space="preserve">
+    <value>总块数：</value>
+  </data>
+  <data name="Total_Link_" xml:space="preserve">
+    <value>总计（链接）：</value>
+  </data>
+  <data name="Total_Payload_" xml:space="preserve">
+    <value>总计（有效负载）：</value>
+  </data>
+  <data name="Total__Blocks__Tested_" xml:space="preserve">
+    <value>测试的总块数</value>
+  </data>
+  <data name="Total__Blocks__to__Search_" xml:space="preserve">
+    <value>搜索总块数</value>
+  </data>
+  <data name="Total__Keys__Tested_" xml:space="preserve">
+    <value>测试的总键数</value>
+  </data>
+  <data name="Total__Keys__to_Search_" xml:space="preserve">
+    <value>搜索总键</value>
+  </data>
+  <data name="Traffic_" xml:space="preserve">
+    <value>交通</value>
+  </data>
+  <data name="Unable_to_use_peer_to_peer_system_" xml:space="preserve">
+    <value>无法使用对等系统。</value>
+  </data>
+  <data name="Under__Construction_" xml:space="preserve">
+    <value>��正在施工🚧</value>
+  </data>
+  <data name="UpdateTimeCaption" xml:space="preserve">
+    <value>更新间隔（分钟）</value>
+  </data>
+  <data name="UpdateTimeTooltip" xml:space="preserve">
+    <value>设置分钟间隔以更新keysearcher统计信息</value>
+  </data>
+  <data name="Updating_statistic" xml:space="preserve">
+    <value>更新统计</value>
+  </data>
+  <data name="Updating_status_in_DHT" xml:space="preserve">
+    <value>在DHT中更新状态</value>
+  </data>
+  <data name="UseExternalClientCaption" xml:space="preserve">
+    <value>使用外部客户端</value>
+  </data>
+  <data name="UseExternalClientTooltip" xml:space="preserve">
+    <value>如果选中，则允许外部客户端连接到此CrypTool 2实例以支持暴力破解过程（这与p2p分布式计算不同）。</value>
+  </data>
+  <data name="EvaluationUserCaption" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="EvaluationUserTooltip" xml:space="preserve">
+    <value>评估数据库的用户名</value>
+  </data>
+  <data name="UseOpenCLCaption" xml:space="preserve">
+    <value>使用所选设备</value>
+  </data>
+  <data name="UseOpenCLTooltip" xml:space="preserve">
+    <value>如果选中，则选定的OpenCL设备将用于暴力攻击。</value>
+  </data>
+  <data name="Waiting_for_external_client_" xml:space="preserve">
+    <value>等待外部客户！</value>
+  </data>
+  <data name="Work_Items_" xml:space="preserve">
+    <value>工作项目：</value>
+  </data>
+  <data name="Wrong_key_pattern_" xml:space="preserve">
+    <value>按键样式错误！</value>
+  </data>
+  <data name="You_have_to_connect_the_KeySearcher_with_the_Decryption_Control_" xml:space="preserve">
+    <value>您必须向KeySearcher添加解密功能！</value>
+  </data>
+  <data name="StatisticsPresentation_SetCurrentRate" xml:space="preserve">
+    <value>{0：0,0}键/秒</value>
+  </data>
+  <data name="Connection_lost__Waiting_for_reconnect___" xml:space="preserve">
+    <value>连接断开。正在等待重新连接...</value>
+  </data>
+  <data name="KeyPoolTree_" xml:space="preserve">
+    <value>密钥池树</value>
+  </data>
+  <data name="Total__Users_" xml:space="preserve">
+    <value>总用户</value>
+  </data>
+  <data name="_Next_Update_Time___" xml:space="preserve">
+    <value>下次更新时间：</value>
+  </data>
+  <data name="Average__rate_" xml:space="preserve">
+    <value>平均率</value>
+  </data>
+  <data name="Current_Stats_" xml:space="preserve">
+    <value>当前统计</value>
+  </data>
+  <data name="Current__Machines_" xml:space="preserve">
+    <value>目前的机器</value>
+  </data>
+  <data name="Current__rate_" xml:space="preserve">
+    <value>当前利率</value>
+  </data>
+  <data name="Current__Users_" xml:space="preserve">
+    <value>当前用户</value>
+  </data>
+  <data name="Last__Update__Time" xml:space="preserve">
+    <value>最后更新时间：</value>
+  </data>
+  <data name="Percent__Complete_" xml:space="preserve">
+    <value>完成百分比</value>
+  </data>
+  <data name="Top__machine_" xml:space="preserve">
+    <value>顶机</value>
+  </data>
+  <data name="Top__user_" xml:space="preserve">
+    <value>最高用户</value>
+  </data>
+  <data name="Total__Machines_" xml:space="preserve">
+    <value>机器总数</value>
+  </data>
+  <data name="Working__Days_" xml:space="preserve">
+    <value>工作日</value>
+  </data>
+  <data name="HideDeadMachines_" xml:space="preserve">
+    <value>隐藏死机</value>
+  </data>
+  <data name="HideDeadUser_" xml:space="preserve">
+    <value>隐藏死用户</value>
+  </data>
+  <data name="No_OpenCL_Device_available_" xml:space="preserve">
+    <value>没有可用的OpenCL设备</value>
+  </data>
+  <data name="S_t_a_t_i_s_t_i_c_s" xml:space="preserve">
+    <value>统计</value>
+  </data>
+  <data name="Bytes_offset_not_valid__" xml:space="preserve">
+    <value>字节偏移量无效：</value>
+  </data>
+  <data name="Finished_Chunks_Tooltip" xml:space="preserve">
+    <value>本地完成的块总数（此会话中的本地完成的块）</value>
+  </data>
+  <data name="Anonymize_machine_name" xml:space="preserve">
+    <value>匿名机器名称</value>
+  </data>
+  <data name="Enable_using_OpenCL_with_high_load__not_recommended_" xml:space="preserve">
+    <value>启用高负载使用OpenCL（不推荐）</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>键</value>
+  </data>
+  <data name="Machine_name_" xml:space="preserve">
+    <value>机器名称：</value>
+  </data>
+  <data name="Network_" xml:space="preserve">
+    <value>网络：</value>
+  </data>
+  <data name="Number_of_machine_name_characters_to_show_" xml:space="preserve">
+    <value>要显示的机器名称字符数：</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>文本</value>
+  </data>
+  <data name="Use_OpenCL_in_KeySearcher" xml:space="preserve">
+    <value>在KeySearcher中使用OpenCL</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="Combo_characters" xml:space="preserve">
+    <value>{0}个字符</value>
+  </data>
+  <data name="Use_OpenCL_in_KeySearcher_Tooltip" xml:space="preserve">
+    <value>选中此选项可启用KeySearcher来利用OpenCL进行暴力破解。</value>
+  </data>
+  <data name="OpenCLModeList1" xml:space="preserve">
+    <value>低负荷</value>
+  </data>
+  <data name="OpenCLModeList2" xml:space="preserve">
+    <value>正常负载</value>
+  </data>
+  <data name="OpenCLModeList3" xml:space="preserve">
+    <value>高负荷（谨慎使用）</value>
+  </data>
+  <data name="day" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="days" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="hour" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="hours" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="minute" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="minutes" xml:space="preserve">
+    <value>分钟</value>
+  </data>
+  <data name="second" xml:space="preserve">
+    <value>第二</value>
+  </data>
+  <data name="seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="Copy_all" xml:space="preserve">
+    <value>复制所有行</value>
+  </data>
+  <data name="Copy_key" xml:space="preserve">
+    <value>复制键</value>
+  </data>
+  <data name="Copy_line" xml:space="preserve">
+    <value>复制所选行</value>
+  </data>
+  <data name="Copy_text" xml:space="preserve">
+    <value>复制文字</value>
+  </data>
+  <data name="Copy_value" xml:space="preserve">
+    <value>复制值</value>
+  </data>
+  <data name="Abort_Chunks_" xml:space="preserve">
+    <value>中止的块：</value>
+  </data>
+  <data name="Avg_Time_Per_Chunk" xml:space="preserve">
+    <value>平均每块时间：</value>
+  </data>
+  <data name="global_throughput_sec" xml:space="preserve">
+    <value>吞吐量/秒：</value>
+  </data>
+  <data name="JobID_" xml:space="preserve">
+    <value>ID：</value>
+  </data>
+  <data name="JobName" xml:space="preserve">
+    <value>工作：</value>
+  </data>
+  <data name="local_throughput_sec" xml:space="preserve">
+    <value>吞吐量/秒：</value>
+  </data>
+  <data name="settings__caption_numberOfChunks" xml:space="preserve">
+    <value>块数（对数）</value>
+  </data>
+  <data name="settings__caption_useNetwork" xml:space="preserve">
+    <value>启用CrypCloud</value>
+  </data>
+  <data name="settings__tooltip_numberOfChunks" xml:space="preserve">
+    <value>为了分发计算，它将被分成独立的块。</value>
+  </data>
+  <data name="settings__tooltip_useNetwork" xml:space="preserve">
+    <value>使用内部网络“ CrypCloud”来分发此工作空间。</value>
+  </data>
+  <data name="ChunkSizeCaption" xml:space="preserve">
+    <value>块大小</value>
+  </data>
+  <data name="ChunkSizeTooltip" xml:space="preserve">
+    <value>每次由一个对等方计算的密钥数。该值是块大小的平方的指数。</value>
+  </data>
+  <data name="settings__caption_numberOfBlocks" xml:space="preserve">
+    <value>块数</value>
+  </data>
+  <data name="settings__tooltip_numberOfBlocks" xml:space="preserve">
+    <value>输入应将计算拆分为的块数。</value>
+  </data>
+  <data name="Dataspace" xml:space="preserve">
+    <value>数据空间大小：</value>
+  </data>
+  <data name="You_have_to_connect_the_KeySearcher_with_the_Cost_Control_" xml:space="preserve">
+    <value>您必须向KeySearcher添加一个成本函数！</value>
+  </data>
+</root>

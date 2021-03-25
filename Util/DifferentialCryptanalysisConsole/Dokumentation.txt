@@ -1,0 +1,132 @@
+Projekt Interfaces:
+	- .NET Klassenbibliothek
+	- enthält Schnittstellen und Klassen zur Implementierung einer DKA für SPN-basierte Chiffren
+	- IEncryption: Implementiert die anzugreifende Chiffre
+	- IDifferentialCryptanalysis: Implementiert die DKA für eine Chiffre
+ 
+Projekt 3Round16BitSPN:
+	- DKA für Chiffre aus Paper "DIFFERENTIAL CRYPTANALYSIS FOR A 3-ROUND SPN" (Chiffre 2 in CT2)
+	- Klasse "Program" enthält Main-Methode
+
+Projekt EasyOneCiphers:
+	- DKA für Chiffre von Dr. Nils Kopal
+	- Klasse "Program" enthält Main-Methode
+
+Projekt TBCCipherFourCharCount:
+	- Zählt die Anzahl der Charakteristiken für Chiffre 2 in CT2
+	- Klasse "Program" enthält Main-Methode
+
+Projekt TBCCipherFourToyCipher:
+	- DKA für CipherFour aus TBC
+	- Klasse "Program" enthält Main-Methode
+
+Projekt TBCCipherThreeToyCipher:
+	- DKA für CipherThree aus TBC
+	- Klasse "Program" enthält Main-Methode
+	
+Projekt HeysToyCipher:
+	- DKA für Heys ToyCiphers
+	- Klasse "Program" enthält Main-Methode
+	
+Beispielaufrufe:
+
+DataLoader.loadDifferentialAttackRoundConfiguration(Dateiname) : Lädt eine serialisierte Konfiguration
+RefreshPairLists(roundConfig, diffListOfSBox, attack, encryption, pairCount) : aktualisiert die Nachrichten-Paare
+GenerateConfigurationAttack(round, sBoxesToAttack, abortingPolicy, searchPolicy, diffListOfSBox, attack, encryption) : Erzeugt eine Konfiguration zur DKA entsprechend der Parameter
+FilterPairs(roundConfig, diffListOfSBox, attack, encryption, expectedDifferential) : Filtert die Nachrichten-Paare
+RecoverKeyInformation(attack, configuration, encryption) : führt eine Schlüsselwiederherstellung durch
+
+Weitere Aufrufe sind in den Klassen "Programm" der Projekte zu finden
+Weitere Dokumentation ist in der Masterarbeit zu finden
+
+Dateibaum: 
+
+<DIR>	3Round16BitSPN
+			<FILE>	3Round16BitSPN.csproj
+			<FILE>	Analysis.cs
+			<FILE>	App.config
+			<DIR>	Configs
+			<FILE>	DataLoader.cs
+			<FILE>	Encryption.cs
+			<FILE>	packages.config
+			<FILE>	Program.cs
+			<DIR>	Properties
+			<FILE>	_3Round16BitSPNCharacteristic.cs
+			<FILE>	_3Round16BitSPNConfiguration.cs
+			<FILE>	_3Round16BitSPNKeyRecoveryAttack.cs
+<FILE>	Dokumentation.txt
+<DIR>	EasyOneCiphers
+			<FILE>	App.config
+			<FILE>	Cipher16Bit16Analysis.cs
+			<FILE>	Cipher16Bit16Characteristic.cs
+			<FILE>	Cipher16Bit16Configuration.cs
+			<FILE>	Cipher16Bit16DifferentialKeyRecoveryAttack.cs
+			<FILE>	Cipher16Bit16Encryption.cs
+			<FILE>	EasyCipherOne.cs
+			<FILE>	EasyOneCiphers.csproj
+			<FILE>	KeySchedule.cs
+			<FILE>	Program.cs
+			<DIR>	Properties			
+<DIR>	HeysToyCipher
+			<FILE>	Analysis.cs
+			<FILE>	App.config
+			<FILE>	DataLoader.cs
+			<FILE>	Encryption.cs
+			<FILE>	HeysToyCipher.csproj
+			<FILE>	HeysToyCipherCharacteristic.cs
+			<FILE>	HeysToyCipherConfiguration.cs
+			<FILE>	HeysToyCipherKeyRecoveryAttack.cs
+			<FILE>	packages.config
+			<FILE>	Program.cs
+			<DIR>	Properties
+<DIR>	Interfaces
+			<FILE>	AbortingPolicy.cs
+			<FILE>	Characteristic.cs
+			<FILE>	DifferentialAttackLastRoundResult.cs
+			<FILE>	DifferentialAttackRoundConfiguration.cs
+			<FILE>	DifferentialAttackRoundResult.cs
+			<FILE>	DifferentialKeyRecoveryAttack.cs
+			<FILE>	IDifferentialCryptanalysis.cs
+			<FILE>	IEncryption.cs
+			<FILE>	IKey.cs
+			<FILE>	Interfaces.csproj
+			<FILE>	KeyProbability.cs
+			<FILE>	Pair.cs
+			<FILE>	SBoxCharacteristic.cs
+			<FILE>	SearchPolicy.cs
+<DIR>	packages
+			<DIR>	Newtonsoft.Json.12.0.2
+<DIR>	TBCCipherFourCharCount
+			<FILE>	Analysis.cs
+			<FILE>	App.config
+			<FILE>	CipherFourCharacteristic.cs
+			<FILE>	CipherFourConfiguration.cs
+			<FILE>	CipherFourDifferentialKeyRecoveryAttack.cs
+			<FILE>	Program.cs
+			<DIR>	Properties
+			<FILE>	TBCCipherFourCharCount.csproj
+<DIR>	TBCCipherFourToyCipher
+			<FILE>	Analysis.cs
+			<FILE>	App.config
+			<FILE>	CipherFourCharacteristic.cs
+			<FILE>	CipherFourConfiguration.cs
+			<FILE>	CipherFourDifferentialKeyRecoveryAttack.cs
+			<DIR>	Configs
+			<FILE>	DataLoader.cs
+			<FILE>	Encryption.cs
+			<FILE>	packages.config
+			<FILE>	Program.cs
+			<DIR>	Properties
+			<FILE>	TBCCipherFourToyCipher.csproj
+			<FILE>	Utility.cs
+<DIR>	TBCCipherThreeToyCipher
+			<FILE>	Analysis.cs
+			<FILE>	App.config
+			<FILE>	CipherThreeCharacteristic.cs
+			<FILE>	CipherThreeConfiguration.cs
+			<FILE>	CipherThreeDifferentialKeyRecoveryAttack.cs
+			<FILE>	Encryption.cs
+			<FILE>	Program.cs
+			<DIR>	Properties
+			<FILE>	TBCCipherThreeToyCipher.csproj
+<FILE>		   ToyCiphers.sln
