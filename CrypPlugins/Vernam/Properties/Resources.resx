@@ -135,6 +135,9 @@
   <data name="KeyTooltip" xml:space="preserve">
     <value>Secret key </value>
   </data>
+  <data name="NoAlphabetProvided" xml:space="preserve">
+    <value>No alphabet provided. Please provide an alphabet via input or setting.</value>
+  </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Vernam</value>
   </data>

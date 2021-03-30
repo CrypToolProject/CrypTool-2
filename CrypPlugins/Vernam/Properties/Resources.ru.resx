@@ -135,6 +135,9 @@
   <data name="KeyTooltip" xml:space="preserve">
     <value>Секретный ключ</value>
   </data>
+  <data name="NoAlphabetProvided" xml:space="preserve">
+    <value>Алфавит отсутствует. Укажите алфавит с помощью ввода или настройки.</value>
+  </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Вернама</value>
   </data>

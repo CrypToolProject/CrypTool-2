@@ -19,7 +19,7 @@ namespace Vernam.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -111,6 +111,15 @@ namespace Vernam.Properties {
         internal static string KeyTooltip {
             get {
                 return ResourceManager.GetString("KeyTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No alphabet provided. Please provide an alphabet via input or setting. ähnelt.
+        /// </summary>
+        internal static string NoAlphabetProvided {
+            get {
+                return ResourceManager.GetString("NoAlphabetProvided", resourceCulture);
             }
         }
         

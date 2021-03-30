@@ -18,6 +18,7 @@ using System.Windows.Controls;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using System.Text;
+using Vernam.Properties; 
 
 namespace CrypTool.Plugins.Vernam
 {
@@ -33,6 +34,7 @@ namespace CrypTool.Plugins.Vernam
         private string inputString;
         private string outputString;
         private string keyString;
+        private string _alphabet;
 
         #endregion
 
@@ -69,12 +71,15 @@ namespace CrypTool.Plugins.Vernam
         [PropertyInfo(Direction.InputData, "AlphabetInput", "AlphabetInputTooltip", false)]
         public string AlphabetSymbols
         {
-            get { return settings.AlphabetSymbols; }
+            get
+            {
+                return _alphabet;
+            }
             set
             {
-                if (value != settings.AlphabetSymbols)
+                if (value != _alphabet)
                 {
-                    settings.alphabet = value;
+                    _alphabet = value;
                     OnPropertyChanged("AlphabetSymbols");
                 }
             }
@@ -130,7 +135,14 @@ namespace CrypTool.Plugins.Vernam
 
             ProgressChanged(0, 1);
 
-            var alphabet = settings.alphabet;
+            var alphabet = !string.IsNullOrEmpty(_alphabet) ? _alphabet : settings.alphabet;
+
+            if (string.IsNullOrEmpty(alphabet))
+            {
+                GuiLogMessage(Resources.NoAlphabetProvided, NotificationLevel.Error);
+                return;
+            }
+
             var result = new StringBuilder();
             for (var i = 0; i < InputString.Length; i++)
             {

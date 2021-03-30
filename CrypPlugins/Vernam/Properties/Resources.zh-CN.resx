@@ -135,6 +135,9 @@
   <data name="KeyTooltip" xml:space="preserve">
     <value>密钥</value>
   </data>
+  <data name="NoAlphabetProvided" xml:space="preserve">
+    <value>没有提供字母。 请通过输入或设置提供字母。</value>
+  </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>听说过</value>
   </data>

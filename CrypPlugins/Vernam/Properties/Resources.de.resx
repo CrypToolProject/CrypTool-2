@@ -135,6 +135,9 @@
   <data name="KeyTooltip" xml:space="preserve">
     <value>geheimer Schlüssel</value>
   </data>
+  <data name="NoAlphabetProvided" xml:space="preserve">
+    <value>Kein Alphabet angegeben. Bitte geben Sie ein Alphabet per Eingabe oder Einstellung ein.</value>
+  </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Vernam</value>
   </data>
