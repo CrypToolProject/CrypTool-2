@@ -9,6 +9,7 @@ using System.IO.Compression;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Xml;
 
 namespace LanguageStatisticsGenerator
 {        
@@ -29,7 +30,8 @@ namespace LanguageStatisticsGenerator
                 {"nl", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},                       // Dutch
                 {"sv", "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"},                    // Swedish
                 {"pt", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},                       // Portuguese 
-                {"pl", "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ"}               // Polish
+                {"pl", "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ"},              // Polish
+                {"tr", "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ" }                    // Turkish
         };
 
         private ConcurrentQueue<string> _fileQueue = new ConcurrentQueue<string>();
@@ -48,8 +50,8 @@ namespace LanguageStatisticsGenerator
         public uint[,] _freq2;
         public uint[] _freq1;
 
-        public uint _max = 0;
-        public ulong _sum = 0;
+        public uint _max;
+        public ulong _sum;
 
         // create statistics from directory
         public NGrams(string alphabet, string path, bool useSpace)
@@ -66,26 +68,147 @@ namespace LanguageStatisticsGenerator
             _freq2 = new uint[alphabet.Length, alphabet.Length];
             _freq1 = new uint[alphabet.Length];
 
+            if (path.ToUpper().EndsWith("XML"))
+            {
+                ReadInWikipediaXML(path);
+            }
+            else
+            {
+                ReadInGutenbergZips(path);
+            }
+        }
+
+        /// <summary>
+        /// This method parses and reads a dumped wikipedia in xml format
+        /// </summary>
+        /// <param name="path"></param>
+        private void ReadInWikipediaXML(string path)
+        {
+            var startTime = DateTime.Now;
+            Console.WriteLine("Parsing Wikipedia xml file: {0}", path);
+            var letterBuffer = new int[6];
+            long totalValidLetters = 0;
+            long pagesCount = 0;
+
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+            using (var reader = XmlReader.Create(stream))
+            {
+                var textTagFound = false;
+                while (reader.Read())
+                {
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            if (reader.Name.ToUpper().Equals("TEXT"))
+                            {
+                                textTagFound = true;
+
+                            }
+                            break;
+                        case XmlNodeType.Text:
+                            if (textTagFound)
+                            {
+                                var text = reader.Value;
+                                var countCurlyBrackets = 0;
+                                var countSquareBrackets = 0;
+
+                                foreach (var c in text)
+                                {
+                                    var addLetter = char.ToUpper(c);
+                                    switch (addLetter)
+                                    {
+                                        case '{':
+                                            countCurlyBrackets++;
+                                            continue;
+                                        case '}':
+                                            countCurlyBrackets--;
+                                            continue;
+                                        case '[':
+                                            countSquareBrackets++;
+                                            continue;
+                                        case ']':
+                                            countSquareBrackets--;
+                                            continue;
+                                    }
+                                    //we only count alphabet letters and we only count when we are outside of [] and of {}
+                                    if (!_alphabet.Contains(addLetter) || countCurlyBrackets > 0 || countSquareBrackets > 0)
+                                    {
+                                        continue;
+                                    }
+
+                                    totalValidLetters++;
+                                    letterBuffer[0] = letterBuffer[1];
+                                    letterBuffer[1] = letterBuffer[2];
+                                    letterBuffer[2] = letterBuffer[3];
+                                    letterBuffer[3] = letterBuffer[4];
+                                    letterBuffer[4] = letterBuffer[5];
+                                    letterBuffer[5] = _alphabet.IndexOf(addLetter);
+                                    /*if (totalValidLetters > 5)
+                                    {
+                                        _freq6[letterBuffer[0], letterBuffer[1], letterBuffer[2], letterBuffer[3], letterBuffer[4], letterBuffer[5]]++;
+                                    }*/
+                                    if (totalValidLetters > 4)
+                                    {
+                                        _freq5[letterBuffer[0], letterBuffer[1], letterBuffer[2], letterBuffer[3], letterBuffer[4]]++;
+                                    }
+                                    if (totalValidLetters > 3)
+                                    {
+                                        _freq4[letterBuffer[0], letterBuffer[1], letterBuffer[2], letterBuffer[3]]++;
+                                    }
+                                    if (totalValidLetters > 2)
+                                    {
+                                        _freq3[letterBuffer[0], letterBuffer[1], letterBuffer[2]]++;
+                                    }
+                                    if (totalValidLetters > 1)
+                                    {
+                                        _freq2[letterBuffer[0], letterBuffer[1]]++;
+                                    }
+                                    _freq1[_alphabet.IndexOf(addLetter)]++;
+                                }
+                                pagesCount++;
+                                if(pagesCount % 1000 == 0)
+                                {
+                                    Console.Write("\rProcessed a total of {0} pages...", pagesCount);
+                                }
+                            }
+                            break;
+                        default:
+                            textTagFound = false;
+                            break;
+
+                    }
+                }
+            }
+            Console.WriteLine("\rProcessed a total of {0} pages with a total of {1} valid letters in {2}", pagesCount, totalValidLetters, DateTime.Now - startTime);
+        }
+
+        /// <summary>
+        /// This method starts workers who walk over a directory, parse all zip files and expect them containing Gutenberg library txt files
+        /// </summary>
+        /// <param name="path"></param>
+        private void ReadInGutenbergZips(string path)
+        {
             Console.WriteLine("Creating files list");
             string[] files = Directory.GetFiles(path, "*.zip", SearchOption.AllDirectories);
             Console.WriteLine("Files list created");
-            
-            foreach(var file in files)
+
+            foreach (var file in files)
             {
                 _fileQueue.Enqueue(file);
             }
 
             Console.WriteLine("Starting worker tasks");
-            List<Task> tasks = new List<Task>();
-            int totalFiles = _fileQueue.Count;
-            for (int i = 0; i < WORKERS; i++)
+            var tasks = new List<Task>();
+            var totalFiles = _fileQueue.Count;
+            for (var i = 0; i < WORKERS; i++)
             {
-                var task = Task.Run(() => ProcessBookFiles(i, totalFiles));
+                var id = i;
+                var task = Task.Run(() => ProcessGutenbergBookZipFiles(id, totalFiles));
                 tasks.Add(task);
                 while (task.Status != TaskStatus.Running)
                 {
                     Thread.Sleep(10);
-                }                
+                }
             }
             Console.WriteLine("Worker tasks started");
 
@@ -99,7 +222,7 @@ namespace LanguageStatisticsGenerator
             GC.WaitForFullGCComplete();
         }
 
-        public void ProcessBookFiles(int taskId, int totalFiles)
+        public void ProcessGutenbergBookZipFiles(int taskId, int totalFiles)
         {
             Console.WriteLine("Task {0} started", taskId);
             DateTime startTime = DateTime.Now;
@@ -165,7 +288,7 @@ namespace LanguageStatisticsGenerator
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(string.Format("Exception during reading of {0}: ", ex.Message));
+                        Console.WriteLine("Exception during reading of {0}: ", ex.Message);
                         continue;
                     }
 

@@ -205,6 +205,15 @@ namespace CrypTool.PluginBase.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Turkish ähnelt.
+        /// </summary>
+        public static string LanguageTR {
+            get {
+                return ResourceManager.GetString("LanguageTR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die No data available yet! ähnelt.
         /// </summary>
         public static string No_data_available_yet {

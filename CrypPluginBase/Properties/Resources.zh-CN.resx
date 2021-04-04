@@ -187,4 +187,7 @@
   <data name="LanguageSV" xml:space="preserve">
     <value>瑞典</value>
   </data>
+  <data name="LanguageTR" xml:space="preserve">
+    <value>土耳其</value>
+  </data>
 </root>

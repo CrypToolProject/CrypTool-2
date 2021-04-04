@@ -33,7 +33,8 @@ namespace CrypTool.PluginBase.Utils
             Dutch,
             Swedish,
             Portuguese,
-            Polish
+            Polish,
+            Turkish
         }
 
         /// <summary>
@@ -59,6 +60,7 @@ namespace CrypTool.PluginBase.Utils
                     Resources.LanguageSV,
                     Resources.LanguagePT,
                     Resources.LanguagePL,
+                    Resources.LanguageTR
                 };
             }
         }
@@ -85,7 +87,8 @@ namespace CrypTool.PluginBase.Utils
                     "nl",
                     "sv",
                     "pt",
-                    "pl"
+                    "pl",
+                    "tr"
                 };
             }
         }
@@ -164,7 +167,8 @@ namespace CrypTool.PluginBase.Utils
             {"nl", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},                       // Dutch
             {"sv", "ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ"},                    // Swedish
             {"pt", "ABCDEFGHIJKLMNOPQRSTUVWXYZ"},                       // Portuguese 
-            {"pl", "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ"}               // Polish
+            {"pl", "AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŹŻ"},              // Polish
+            {"tr", "ABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ" }                    // Turkish
         };
 
         /// <summary>

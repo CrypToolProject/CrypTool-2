@@ -177,4 +177,7 @@
   <data name="LanguageSV" xml:space="preserve">
     <value>Schwedisch</value>
   </data>
+  <data name="LanguageTR" xml:space="preserve">
+    <value>Türkisch</value>
+  </data>
 </root>
