@@ -390,7 +390,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
-                State matrix
+                State-Matrix
                 </TextBlock>
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Column="0" Grid.Row="0" Name="keyBorder1">
                     <TextBlock Text="" Name="keyTextBlock1"  TextAlignment="Center"/>

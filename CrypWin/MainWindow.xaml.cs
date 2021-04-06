@@ -1477,9 +1477,15 @@ namespace CrypTool.CrypWin
                         case ComponentCategory.ToolsMisc:
                             cont = new GUIContainerElementsForPlugins(type, pia, navPaneItemTools, navListBoxToolsMisc, Properties.Resources.Misc);
                             break;
+
                         case ComponentCategory.DECRYPTProjectComponent:
+#if SHOW_DECRYPT_COMPONENTS
                             cont = new GUIContainerElementsForPlugins(type, pia, navPaneItemDECRYPTProject, navListBoxDECRYPTProject, Properties.Resources.DECRYPTProject);
+#else
+                            cont = null;
+#endif
                             break;
+
                         default:
                             GuiLogMessage(string.Format("Category {0} of plugin {1} not handled in CrypWin", attr.Category, pia.Caption), NotificationLevel.Error);
                             break;
@@ -1862,7 +1868,7 @@ namespace CrypTool.CrypWin
                         this.Visibility = Visibility.Visible;
                         this.Show();
 
-                        #region Gui-Stuff
+#region Gui-Stuff
                         Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
                         Version version = AssemblyHelper.GetVersion(assembly);
                         OnGuiLogNotificationOccuredTS(this, new GuiLogEventArgs(Resource.CrypTool + " " + version.ToString() + Resource.started_and_ready, null, NotificationLevel.Info));
@@ -1871,7 +1877,7 @@ namespace CrypTool.CrypWin
                         AppRibbon.Items.Refresh();
                         splashWindow.Close();
                         Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-                        #endregion Gui-Stuff
+#endregion Gui-Stuff
 
                         InitDebug();
 
@@ -2155,9 +2161,9 @@ namespace CrypTool.CrypWin
             }
         }
 
-        #endregion Init
+#endregion Init
 
-        #region Editor
+#region Editor
 
         private IEditor AddEditorDispatched(Type type)
         {
@@ -2521,9 +2527,9 @@ namespace CrypTool.CrypWin
         {
             Settings.Default.defaultEditor = ActiveEditor.GetType().FullName;
         }
-        #endregion Editor
+#endregion Editor
 
-        #region DragDrop, NaviPaneMethods
+#region DragDrop, NaviPaneMethods
 
         private void navPaneItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -2602,7 +2608,7 @@ namespace CrypTool.CrypWin
         {
             naviPane.IsExpanded = true;
         }
-        # endregion OnPluginClicked, DragDrop, NaviPaneMethods
+#endregion OnPluginClicked, DragDrop, NaviPaneMethods
 
         void MainWindow_Closing(object sender, CancelEventArgs e)
         {
@@ -3153,7 +3159,7 @@ namespace CrypTool.CrypWin
         }
     }
 
-    # region helper class
+#region helper class
 
     public class VisibilityToMarginHelper : IValueConverter
     {
@@ -3178,19 +3184,19 @@ namespace CrypTool.CrypWin
     /// 
     public class GUIContainerElementsForPlugins
     {
-        # region shared
+#region shared
         public readonly Type Plugin;
         public readonly PluginInfoAttribute PluginInfo;
-        # endregion shared
+#endregion shared
 
-        # region naviPane
+#region naviPane
         public readonly PaneItem PaneItem;
         public readonly ListBox ListBox;
-        # endregion naviPane
+#endregion naviPane
 
-        # region ribbon
+#region ribbon
         public readonly string GroupName;
-        # endregion ribbon
+#endregion ribbon
 
         public GUIContainerElementsForPlugins(Type plugin, PluginInfoAttribute pluginInfo, PaneItem paneItem, ListBox listBox, string groupName)
         {
@@ -3201,5 +3207,5 @@ namespace CrypTool.CrypWin
             this.GroupName = groupName;
         }
     }
-    # endregion helper class
+#endregion helper class
 }

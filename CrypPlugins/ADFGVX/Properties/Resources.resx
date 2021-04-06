@@ -169,7 +169,7 @@
     <value>Cipher used in WW1, combining substitution and transposition</value>
   </data>
   <data name="RandomMatrixCaption" xml:space="preserve">
-    <value>Random keys</value>
+    <value>Generate random passwords</value>
   </data>
   <data name="RandomMatrixTooltip" xml:space="preserve">
     <value>Create random substitution matrix and transposition key</value>

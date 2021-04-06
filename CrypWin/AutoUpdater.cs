@@ -44,7 +44,7 @@ namespace CrypTool.CrypWin
         public event GuiLogNotificationEventHandler OnGuiLogNotificationOccured;
         public enum State { Idle, Checking, UpdateAvailable, Downloading, UpdateReady };
             
-        private static AutoUpdater autoUpdater = null;        
+        private static AutoUpdater autoUpdater = null;
         private const string XmlPath = "https://www.cryptool.org/ct2download/Builds/CT2_Versions.xml";
         private readonly string TempPath = DirectoryHelper.DirectoryLocalTemp;
 

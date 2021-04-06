@@ -157,13 +157,13 @@
       <item lang="en" content="Encrypt">
         <pluginSetter plugin="$Vigenère dec$" property="Action">1</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <pluginSetter plugin="$Vigenère dec$" property="Action">0</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">0</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -240,13 +240,13 @@
       <item lang="en" content="Encrypt">
         <pluginSetter plugin="$Decrypt$" property="Action">1</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <pluginSetter plugin="$Decrypt$" property="Action">0</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">0</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -538,13 +538,13 @@
       <item lang="en" content="Encrypt">
         <pluginSetter plugin="$ADFGVX_Decrypt$" property="Action">1</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <pluginSetter plugin="$ADFGVX_Decrypt$" property="Action">0</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">0</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -693,13 +693,13 @@
       <item lang="en" content="Encrypt">
         <pluginSetter plugin="$Transposition (Decryption)$" property="Action">1</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">1个</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
         <pluginSetter plugin="$Transposition (Decryption)$" property="Action">0</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">0</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>

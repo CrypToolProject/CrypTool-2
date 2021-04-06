@@ -169,7 +169,7 @@
     <value>Chiffre, die im 1. Weltkrieg zum Einsatz kam, Kombination aus Substitution und Transposition</value>
   </data>
   <data name="RandomMatrixCaption" xml:space="preserve">
-    <value>Zufallsschlüssel</value>
+    <value>Zufällige Kennwörter generieren</value>
   </data>
   <data name="RandomMatrixTooltip" xml:space="preserve">
     <value>Erzeuge zufällige Substitutions-Matrix und Transpositions-Schlüssel</value>

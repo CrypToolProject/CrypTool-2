@@ -175,7 +175,7 @@
     <value>First, the last four bytes of the previous key are taken. Afterwards, the last byte is placed at the front.</value>
   </data>
   <data name="expansionExplanation1" xml:space="preserve">
-    <value>Every byte is exchanged with the corresponding byte from the S-box.</value>
+    <value>Every byte in the state matrix is exchanged with the corresponding byte from the S-box.</value>
   </data>
   <data name="expansionExplanation2" xml:space="preserve">
     <value>A round constant is added.</value>

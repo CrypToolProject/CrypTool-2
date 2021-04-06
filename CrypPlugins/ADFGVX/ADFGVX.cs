@@ -230,8 +230,6 @@ namespace CrypTool.ADFGVX
                 case ADFGVXSettings.ActionEnum.Decrypt:
                     decrypt();
                     break;
-                default:
-                    break;
             }
         }
 

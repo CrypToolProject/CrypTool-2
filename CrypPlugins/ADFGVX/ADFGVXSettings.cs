@@ -14,6 +14,7 @@
    limitations under the License.
 */
 
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,6 +36,13 @@ namespace CrypTool.ADFGVX
         private const string CIPHER_ALPHABET5 = "ADFGX";
         private const string CIPHER_ALPHABET6 = "ADFGVX";
         private const string CIPHER_ALPHABET7 = "ADFGVXZ";
+
+        private CipherTypeEnum cipherType = CipherTypeEnum.ADFGVX;
+        private ActionEnum selectedAction = ActionEnum.Encrypt;
+        private string substitutionPass = string.Empty;
+        private string substitutionMatrix = string.Empty;
+        private string transpositionPass = string.Empty;
+        private string cleanTranspositionPass = string.Empty;
 
         public string Alphabet
         {
@@ -114,9 +122,14 @@ namespace CrypTool.ADFGVX
             Debug.Assert(sb.Length == Alphabet.Length, "Matrix length != Alphabet length");
         }
 
-        private void rebuildTranspositionCleanPassword()
+        private void RebuildTranspositionCleanPassword()
         {
             string value = TranspositionPass.ToUpperInvariant();
+            //if no transposition password was given, we use a default password of A, meaning, we have no transposition
+            if(string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+            {
+                value = "A";
+            }
 
             // remove characters not part of alphabet
             List<char> cleanPassword = new List<char>();
@@ -138,7 +151,7 @@ namespace CrypTool.ADFGVX
                 newColumnOrder[i] = column;
                 keyChars[column] = (char)0; // make sure the same character won't be found again
             }
-            this.KeyColumnOrder = newColumnOrder;
+            KeyColumnOrder = newColumnOrder;
 
             // build nice looking string for output (note: column numbers start with 0 in array, but 1 in string)
             StringBuilder keyWord = new StringBuilder();
@@ -150,7 +163,7 @@ namespace CrypTool.ADFGVX
                     keyWord.Append("-" + (newColumnOrder[i]+1));
                 }
             }
-            this.CleanTranspositionPass = keyWord.ToString();
+            CleanTranspositionPass = keyWord.ToString();
         }
 
         private void updateAlphabet()
@@ -158,17 +171,17 @@ namespace CrypTool.ADFGVX
             switch (cipherType)
             {
                 case CipherTypeEnum.ADFGX:
-                    this.Alphabet = ALPHABET25;
-                    this.CipherAlphabet = CIPHER_ALPHABET5;
+                    Alphabet = ALPHABET25;
+                    CipherAlphabet = CIPHER_ALPHABET5;
                     break;
                 case CipherTypeEnum.ADFGVX:
                 default:
-                    this.Alphabet = ALPHABET36;
-                    this.CipherAlphabet = CIPHER_ALPHABET6;
+                    Alphabet = ALPHABET36;
+                    CipherAlphabet = CIPHER_ALPHABET6;
                     break;
                 case CipherTypeEnum.ADFGVXZ:
-                    this.Alphabet = ALPHABET49;
-                    this.CipherAlphabet = CIPHER_ALPHABET7;
+                    Alphabet = ALPHABET49;
+                    CipherAlphabet = CIPHER_ALPHABET7;
                     break;
             }
 
@@ -179,37 +192,33 @@ namespace CrypTool.ADFGVX
 
         #region Algorithm settings properties (visible in the Settings pane)
 
-        private ActionEnum selectedAction = ActionEnum.Encrypt;
-
-        [ContextMenu("ActionCaption", "ActionTooltip", 1, ContextMenuControlType.ComboBox, new int[] { 1, 2 }, "ActionList1", "ActionList2")]
         [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "ActionList1", "ActionList2" })]
         public ActionEnum Action
         {
             get
             {
-                return this.selectedAction;
+                return selectedAction;
             }
             set
             {
                 if (value != selectedAction)
                 {
-                    this.selectedAction = value;
+                    selectedAction = value;
                     OnPropertyChanged("Action");
                 }
             }
         }
 
-        private CipherTypeEnum cipherType = CipherTypeEnum.ADFGVX;
 
         [TaskPane("CipherVariantCaption", "CipherVariantTooltip", null, 2, false, ControlType.ComboBox, new string[] { "CipherTypeList1", "CipherTypeList2", "CipherTypeList3" })]
         public CipherTypeEnum CipherType
         {
-            get { return this.cipherType; }
+            get { return cipherType; }
             set
             {
                 if (value != cipherType)
                 {
-                    this.cipherType = value;
+                    cipherType = value;
                     OnPropertyChanged("CipherType");
 
                     updateAlphabet();
@@ -217,25 +226,21 @@ namespace CrypTool.ADFGVX
             }
         }
 
-        private string substitutionPass = string.Empty;
-
         [TaskPane("SubstitutionPassCaption", "SubstitutionPassTooltip", null, 3, false, ControlType.TextBox)]
         public string SubstitutionPass
         {
-            get { return this.substitutionPass; }
+            get { return substitutionPass; }
             set
             {
                 if (value != substitutionPass)
                 {
-                    this.substitutionPass = value;
+                    substitutionPass = value;
                     OnPropertyChanged("SubstitutionPass");
 
                     rebuildSubstitutionMatrix();
                 }
             }
         }
-
-        private string substitutionMatrix = string.Empty;
 
         [TaskPane("SubstitutionMatrixCaption", "SubstitutionMatrixTooltip", null, 4, false, ControlType.TextBoxReadOnly)]
         public string SubstitutionMatrix
@@ -245,47 +250,29 @@ namespace CrypTool.ADFGVX
             {
                 if (value != substitutionMatrix)
                 {
-                    this.substitutionMatrix = value;
+                    substitutionMatrix = value;
                     OnPropertyChanged("SubstitutionMatrix");    
                 }
             }
         }
 
-        [TaskPane("StandardMatrixCaption", "StandardMatrixTooltip", null, 5, false, ControlType.Button)]
-        public void ResetKeyButton()
-        {
-            SubstitutionPass = string.Empty;
-            TranspositionPass = string.Empty;
-        }
 
-        [TaskPane("RandomMatrixCaption", "RandomMatrixTooltip", null, 6, false, ControlType.Button)]
-        public void RandomKeyButton()
-        {
-            SubstitutionPass = createRandomPassword();
-            TranspositionPass = createRandomPassword();
-        }
-
-        private string transpositionPass = string.Empty;
-
-        [TaskPane("TranspositionPassCaption", "TranspositionPassTooltip", null, 7, false, ControlType.TextBox)]
+        [TaskPane("TranspositionPassCaption", "TranspositionPassTooltip", null, 5, false, ControlType.TextBox)]
         public string TranspositionPass
         {
-            get { return this.transpositionPass; }
+            get { return transpositionPass; }
             set
             {
                 if (value != transpositionPass)
                 {
-                    this.transpositionPass = value;
+                    transpositionPass = value;
                     OnPropertyChanged("TranspositionPass");
-
-                    rebuildTranspositionCleanPassword();
+                    RebuildTranspositionCleanPassword();
                 }
             }
         }
 
-        private string cleanTranspositionPass = string.Empty;
-
-        [TaskPane("CleanTranspositionPassCaption", "CleanTranspositionPassTooltip", null, 8, false, ControlType.TextBoxReadOnly)]
+        [TaskPane("CleanTranspositionPassCaption", "CleanTranspositionPassTooltip", null, 6, false, ControlType.TextBoxReadOnly)]
         public string CleanTranspositionPass
         {
             get { return cleanTranspositionPass; }
@@ -297,6 +284,20 @@ namespace CrypTool.ADFGVX
                     OnPropertyChanged("CleanTranspositionPass");
                 }
             }
+        }
+
+        [TaskPane("RandomMatrixCaption", "RandomMatrixTooltip", null, 7, false, ControlType.Button)]
+        public void RandomKeyButton()
+        {
+            SubstitutionPass = createRandomPassword();
+            TranspositionPass = createRandomPassword();
+        }
+
+        [TaskPane("StandardMatrixCaption", "StandardMatrixTooltip", null, 8, false, ControlType.Button)]
+        public void ResetKeyButton()
+        {
+            SubstitutionPass = string.Empty;
+            TranspositionPass = string.Empty;
         }
 
         // Not a user setting, but used by ADFGVX processing

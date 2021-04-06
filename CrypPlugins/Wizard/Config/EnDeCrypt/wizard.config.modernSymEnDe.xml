@@ -56,7 +56,7 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">0044</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
@@ -69,7 +69,7 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">1404</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -188,7 +188,7 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">0044</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
@@ -201,7 +201,7 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">1404</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -311,7 +311,7 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">0044</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
@@ -324,7 +324,7 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">1404</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -433,7 +433,7 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">0044</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
@@ -446,7 +446,7 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">1404</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -565,7 +565,7 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">0044</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
@@ -578,7 +578,7 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">1404</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>
@@ -696,7 +696,7 @@
         <!-- Set output format of the message encoder to Hexadecimal -->
         <pluginSetter plugin="$Message Encoder$" property="PresentationFormatSetting">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="加密">0044</item>
+      <item lang="zh-CN" content="加密"/>
       <item lang="ru" content="шифровать" />
       <item lang="de" content="Verschlüsseln" />
       <item lang="en" content="Decrypt">
@@ -709,7 +709,7 @@
         <!-- Set Encoding of the message encoder to ASCII -->
         <pluginSetter plugin="$Message Encoder$" property="Encoding">4</pluginSetter>
       </item>
-      <item lang="zh-CN" content="解密">1404</item>
+      <item lang="zh-CN" content="解密"/>
       <item lang="ru" content="расшифровывать" />
       <item lang="de" content="Entschlüsseln" />
     </comboBox>

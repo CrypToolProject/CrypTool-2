@@ -175,7 +175,7 @@
     <value>Zuerst werden die letzten vier Bytes des vorherigen Schlüssels genommen und das letzte Byte an den Anfang gestellt.</value>
   </data>
   <data name="expansionExplanation1" xml:space="preserve">
-    <value>Jedes Byte wird mit dem entsprechenden Byte aus der S-Box ausgetauscht.</value>
+    <value>Jedes Byte der State-Matrix wird mit dem entsprechenden Byte aus der S-Box ausgetauscht.</value>
   </data>
   <data name="expansionExplanation2" xml:space="preserve">
     <value>Die Rundenkonstante wird addiert.</value>

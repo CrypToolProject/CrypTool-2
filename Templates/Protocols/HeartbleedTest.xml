@@ -43,7 +43,7 @@
     <replacement key="$Heartbeat active$" value="Heartbeat aktiv" />
     <replacement key="$Find HB Header$" value="Finde HB-Header" />
     <replacement key="$desc1$" value="\fs23 {\b Heartbeat und Heartbleed}\line Heartbleed ist eine gefährliche Sicherheitslücke in der Heartbeat-Implementierung der weitverbreiteten OpenSSL-Bibliothek. Sie ermöglicht dem Angreifer, Teile des Speichers auf dem Server auszulesen und so an geschützte Informationen zu gelangen.\line\line Weitere Informationen: {\b http://heartbleed.com/}" />
-    <replacement key="$desc2$" value="\fs23 {\b Was zeigt diese Vorlage?}\line Diese Vorlage testet, ob ein Server die Heartbeat-Funktion unterstützt und, falls ja, ob die Implementierung anfällig für den Heartbleed-Bug ist. Für Testzwecke werden sowohl ein anfälliger Server ({\b heartbleed.ais.uni-kassel.de}) als auch ein nicht anfälliger Server ({\b www.cryptool.org}) zur Verfügung gestellt.\line\line {\b Wie funktioniert diese Vorlage?}\line Zuerst wird eine SSL-ClientHello-Nachricht an den ausgewählten Server geschickt. Nachdem der Server mit einer ServerHello-Nachricht geantwortet hat, wird eine manipulierte Heartbeat-Nachricht an den Server geschickt. Abhängig von der Antwort des Servers kann man nun feststellen, ob Heartbeat aktiviert ist oder nicht, und ebenso, ob die verwendete Implementierung anfällig ist oder nicht." />
+    <replacement key="$desc2$" value="\fs23 {\b Was zeigt diese Vorlage?}\line Diese Vorlage testet, ob ein Server die Heartbeat-Funktion unterstützt und, falls ja, ob die Implementierung anfällig für den Heartbleed-Bug ist. Für Testzwecke werden sowohl ein anfälliger Server ({\b heartbleed.datcom-unibw.de}) als auch ein nicht anfälliger Server ({\b www.cryptool.org}) zur Verfügung gestellt.\line\line {\b Wie funktioniert diese Vorlage?}\line Zuerst wird eine SSL-ClientHello-Nachricht an den ausgewählten Server geschickt. Nachdem der Server mit einer ServerHello-Nachricht geantwortet hat, wird eine manipulierte Heartbeat-Nachricht an den Server geschickt. Abhängig von der Antwort des Servers kann man nun feststellen, ob Heartbeat aktiviert ist oder nicht, und ebenso, ob die verwendete Implementierung anfällig ist oder nicht." />
   </replacements>
   <replacements lang="zh">
     <replacement key="$ClientHello Message$" value="ClientHello消息" />
@@ -67,7 +67,7 @@
     <replacement key="$Heartbeat active$" value="心跳活跃" />
     <replacement key="$Find HB Header$" value="查找HB标头" />
     <replacement key="$desc1$" value="\fs23 {\b Heartbeat and Heartbleed} \line Heartbleed是广泛使用的OpenSSL库的心跳实现中的一个危险漏洞。它使攻击者能够读取服务器上部分内存，从而访问受保护的信息\Line \line更多信息：{\b http://heartbleed.com/}" />
-    <replacement key="$desc2$" value="\fs23 {\b此模板显示什么？} \line此模板测试服务器是否支持Heartbeat功能，如果支持，则测试实现是否容易受到Heartbleed错误的影响。为了测试目的，同时提供了易受攻击的服务器（{\b heartbleed.ais.uni-kassel.de}）和不易受攻击的服务器（{\b www.cryptool.org}）。该模板如何工作？} \第一行，一条SSL ClientHello消息发送到所选服务器。服务器回复ServerHello消息后，会将经过操作的心跳消息发送到服务器。现在，根据服务器的响应，您可以确定心跳是否已激活，以及所使用的实现是否易受攻击。" />
+    <replacement key="$desc2$" value="\fs23 {\b此模板显示什么？} \line此模板测试服务器是否支持Heartbeat功能，如果支持，则测试实现是否容易受到Heartbleed错误的影响。为了测试目的，同时提供了易受攻击的服务器（{\b heartbleed.datcom-unibw.de}）和不易受攻击的服务器（{\b www.cryptool.org}）。该模板如何工作？} \第一行，一条SSL ClientHello消息发送到所选服务器。服务器回复ServerHello消息后，会将经过操作的心跳消息发送到服务器。现在，根据服务器的响应，您可以确定心跳是否已激活，以及所使用的实现是否易受攻击。" />
   </replacements>
   <replacements lang="ru">
     <replacement key="$ClientHello Message$" value="сообщение привет клиента" />
@@ -91,7 +91,7 @@
     <replacement key="$Heartbeat active$" value="Heartbeat aktiv" />
     <replacement key="$Find HB Header$" value="Найти заголовок HB" />
     <replacement key="$desc1$" value="\fs23 {\b Heartbeat и Heartbleed} \line Heartbleed - опасная дыра в безопасности при использовании широко используемой библиотеки OpenSSL. Он позволяет злоумышленнику читать части хранилища на сервере и получать защищенную информацию. \Line \line Для получения дополнительной информации: {\b http://heartbleed.com/}" />
-    <replacement key="$desc2$" value="\fs23 {\b Что отображает этот шаблон?} \line Этот шаблон проверяет, поддерживает ли сервер функцию heartbeat, и если да, то является ли реализация уязвимой для исправленной ошибки. В целях тестирования предоставляются как уязвимый сервер ({\b heartbleed.ais.uni-kassel.de}), так и небезопасный сервер ({\b www.cryptool.org}). \Line \line {\b Как работает этот шаблон?} \Line Сначала сообщение SSL ClientHello отправляется на выбранный сервер. После того как сервер отвечает сообщением ServerHello, на сервер отправляется сообщение о вредоносном сердцебиении. В зависимости от ответа сервера теперь можно определить, включено ли сердцебиение или нет, а также то, является ли используемая реализация уязвимой или нет." />
+    <replacement key="$desc2$" value="\fs23 {\b Что отображает этот шаблон?} \line Этот шаблон проверяет, поддерживает ли сервер функцию heartbeat, и если да, то является ли реализация уязвимой для исправленной ошибки. В целях тестирования предоставляются как уязвимый сервер ({\b heartbleed.datcom-unibw.de}), так и небезопасный сервер ({\b www.cryptool.org}). \Line \line {\b Как работает этот шаблон?} \Line Сначала сообщение SSL ClientHello отправляется на выбранный сервер. После того как сервер отвечает сообщением ServerHello, на сервер отправляется сообщение о вредоносном сердцебиении. В зависимости от ответа сервера теперь можно определить, включено ли сердцебиение или нет, а также то, является ли используемая реализация уязвимой или нет." />
   </replacements>
   <replacements lang="en">
     <replacement key="$ClientHello Message$" value="ClientHello Message" />
@@ -107,7 +107,7 @@
     <replacement key="$reverse$" value="reverse" />
     <replacement key="$Init with False$" value="Init with False" />
     <replacement key="$Handle Heartbeat Answer$" value="Handle Heartbeat Answer" />
-    <replacement key="$HeartbeatAnswer$" value="Heartbeat Answer" />
+<replacement key="$HeartbeatAnswer$" value="Heartbeat Answer" />
     <replacement key="$HeartbleedState$" value="HeartBleedState" />
     <replacement key="$chk Heartbleed$" value="chk Heartbleed" />
     <replacement key="$length$" value="length" />
@@ -115,6 +115,6 @@
     <replacement key="$Heartbeat active$" value="Heartbeat active" />
     <replacement key="$Find HB Header$" value="Find HB header" />
     <replacement key="$desc1$" value="\fs23 {\b Heartbeat and Heartbleed}\line Heartbleed is a serious vulnerability within the Heartbeat implementation of the commonly used OpenSSL library. It allows to read the memory of the server in order to steal protected information from it.\line\line Visit {\b http://heartbleed.com/} for more information." />
-    <replacement key="$desc2$" value="\fs23 {\b What does this template do?}\line This template tests if a server supports the Heartbeat feature and whether the implementation is vulnerable to the heartbleed bug. For testing purposes we are providing both, a vulnerable server ({\b heartbleed.ais.uni-kassel.de}) and a not vulnerable server ({\b www.cryptool.org}).\line\line {\b How does this template work?}\line First, the template sends an SSL-ClientHello message to the choosen server. After the server answered with a ServerHello message, the template sends a manipulated Heartbeat message. Depending on the server's answer the template can now see whether Heartbeat is enabled or not. Also it can see if the implementation is vulnerable." />
+    <replacement key="$desc2$" value="\fs23 {\b What does this template do?}\line This template tests if a server supports the Heartbeat feature and whether the implementation is vulnerable to the heartbleed bug. For testing purposes we are providing both, a vulnerable server ({\b heartbleed.datcom-unibw.de}) and a not vulnerable server ({\b www.cryptool.org}).\line\line {\b How does this template work?}\line First, the template sends an SSL-ClientHello message to the choosen server. After the server answered with a ServerHello message, the template sends a manipulated Heartbeat message. Depending on the server's answer the template can now see whether Heartbeat is enabled or not. Also it can see if the implementation is vulnerable." />
   </replacements>
 </sample>
