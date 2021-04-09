@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Startcenter.MainFunctionButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="135" d:DesignWidth="500">
+    <StackPanel>
+        <StackPanel.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="15,7,10,10"/>
+                <Setter Property="Width" Value="50"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Background" Value="AliceBlue"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                            <Border CornerRadius="5" Background="{TemplateBinding Background}" Name="button">
+                                <Grid>
+                                    <Border BorderThickness="1,0,1,1" BorderBrush="Black" CornerRadius="{Binding ElementName=button, Path=CornerRadius}">
+                                        <Border.Effect>
+                                            <BlurEffect Radius="2" KernelType="Gaussian"/>
+                                        </Border.Effect>
+                                    </Border>
+                                    <Border BorderThickness="0,1,0,0" BorderBrush="White" Margin="2" Opacity="0.7" CornerRadius="{Binding ElementName=button, Path=CornerRadius}">
+                                        <Border.Effect>
+                                            <BlurEffect Radius="2" KernelType="Gaussian"/>
+                                        </Border.Effect>
+                                    </Border>
+                                    <ContentPresenter TextBlock.FontSize="{TemplateBinding FontSize}" TextBlock.FontFamily="{TemplateBinding FontFamily}" TextBlock.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}"></ContentPresenter>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        From="AliceBlue" To="#80A1CA" Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                        Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                        From="#80A1CA" To="AliceBlue"  Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </StackPanel.Resources>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"  Click="WorkspaceButton_Click">
+                <Button.Content>
+                    <Image Source="pack://application:,,,/Startcenter;component/images/WorkspaceManagerIcon.ico" Stretch="Uniform" />
+                </Button.Content>
+            </Button>
+            <TextBlock Grid.Column="1" Text="{Loc Create_a_new_workspace_with_the_graphical_editor_}" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Click="WizardButton_Click">
+                <Button.Content>
+                    <Image Source="pack://application:,,,/Startcenter;component/images/wizard.png" />
+                </Button.Content>
+            </Button>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="{Loc Use_the_wizard_to_easily_try_some_CrypTool_2_0_features_}" TextWrapping="Wrap" />
+        </Grid>
+    </StackPanel>
+</UserControl>
