@@ -746,19 +746,19 @@
                                 <dc:RibbonBar Header="{Loc RBHeader_Extras}" DockPanel.Dock="Right" ToolTip="{Loc Management_functions_for_CrypTool_2_}" x:Name="ribbonManagement" Padding="7" ResizeOrderIndex="6" >
                                     <dc:ButtonDropDown ImagePosition="Top" Height="70" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="HO" Command="cw:CrypWinCommands.Startcenter" ToolTip="{Loc Startcenter_Tooltip}">
                                         <dc:ButtonDropDown.Image>
-                                            <Image Source="/Startcenter;component/startcenter.png" Height="40" Width="40" />
+                                            <Image Source="pack://application:,,,/Startcenter;component/images/startcenter.png" Height="40" Width="40" />
                                         </dc:ButtonDropDown.Image>
                                         <dc:ButtonDropDown.ImageSmall>
-                                            <Image Source="/Startcenter;component/startcenter.png" Height="16" Width="16"/>
+                                            <Image Source="pack://application:,,,/Startcenter;component/images/startcenter.png" Height="16" Width="16"/>
                                         </dc:ButtonDropDown.ImageSmall>
                                     </dc:ButtonDropDown>
 
                                     <dc:ButtonDropDown ImagePosition="Top" Height="70" Style="{DynamicResource AppMenuCommandButton}" dc:Ribbon.KeyTip="HO" Command="cw:CrypWinCommands.CrypToolStore" ToolTip="{Loc CrypToolStore_Tooltip}">
                                         <dc:ButtonDropDown.Image>
-                                            <Image Source="/CrypToolStore;component/icon.png" Height="40" Width="40" />
+                                            <Image Source="pack://application:,,,/CrypToolStore;component/icon.png" Height="40" Width="40" />
                                         </dc:ButtonDropDown.Image>
                                         <dc:ButtonDropDown.ImageSmall>
-                                            <Image Source="/CrypToolStore;component/icon.png" Height="16" Width="16"/>
+                                            <Image Source="pack://application:,,,/CrypToolStore;component/icon.png" Height="16" Width="16"/>
                                         </dc:ButtonDropDown.ImageSmall>
                                     </dc:ButtonDropDown>
 
