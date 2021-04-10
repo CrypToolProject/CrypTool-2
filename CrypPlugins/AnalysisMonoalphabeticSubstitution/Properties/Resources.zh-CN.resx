@@ -399,4 +399,25 @@
   <data name="KeyOutputTooltip" xml:space="preserve">
     <value>已恢复密钥的输出</value>
   </data>
+  <data name="Bigrams" xml:space="preserve">
+    <value>比格勒姆斯</value>
+  </data>
+  <data name="GramsTypeCaption" xml:space="preserve">
+    <value>克类型：</value>
+  </data>
+  <data name="GramsTypeTooltip" xml:space="preserve">
+    <value>定义在密码分析过程中要在成本函数中使用的n-gram大小。</value>
+  </data>
+  <data name="Pentagrams" xml:space="preserve">
+    <value>五角星</value>
+  </data>
+  <data name="Tetragrams" xml:space="preserve">
+    <value>四卦</value>
+  </data>
+  <data name="Trigrams" xml:space="preserve">
+    <value>卦</value>
+  </data>
+  <data name="Unigrams" xml:space="preserve">
+    <value>字母组合</value>
+  </data>
 </root>

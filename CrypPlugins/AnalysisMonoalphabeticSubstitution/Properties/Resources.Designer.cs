@@ -106,6 +106,15 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Bigrams ähnelt.
+        /// </summary>
+        public static string Bigrams {
+            get {
+                return ResourceManager.GetString("Bigrams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Case sensitive ähnelt.
         /// </summary>
         public static string CaseSensitiveCaption {
@@ -442,6 +451,24 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Grams type: ähnelt.
+        /// </summary>
+        public static string GramsTypeCaption {
+            get {
+                return ResourceManager.GetString("GramsTypeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Defines the n-gram size, which should be used in the cost function during the cryptanalysis. ähnelt.
+        /// </summary>
+        public static string GramsTypeTooltip {
+            get {
+                return ResourceManager.GetString("GramsTypeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Hillclimbing attack finished in {0:00} hours, {1:00} minutes, {2:00} seconds. ähnelt.
         /// </summary>
         public static string hill_attack_finished {
@@ -609,6 +636,15 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution.Properties {
         public static string no_reference_text {
             get {
                 return ResourceManager.GetString("no_reference_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Pentagrams ähnelt.
+        /// </summary>
+        public static string Pentagrams {
+            get {
+                return ResourceManager.GetString("Pentagrams", resourceCulture);
             }
         }
         
@@ -820,6 +856,15 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tetragrams ähnelt.
+        /// </summary>
+        public static string Tetragrams {
+            get {
+                return ResourceManager.GetString("Tetragrams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Text ähnelt.
         /// </summary>
         public static string TextHeader {
@@ -861,6 +906,24 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution.Properties {
         public static string TreatmentInvalidCharsTooltip {
             get {
                 return ResourceManager.GetString("TreatmentInvalidCharsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Trigrams ähnelt.
+        /// </summary>
+        public static string Trigrams {
+            get {
+                return ResourceManager.GetString("Trigrams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unigrams ähnelt.
+        /// </summary>
+        public static string Unigrams {
+            get {
+                return ResourceManager.GetString("Unigrams", resourceCulture);
             }
         }
         

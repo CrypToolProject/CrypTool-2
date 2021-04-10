@@ -403,4 +403,25 @@ werden soll.</value>
   <data name="ChooseAlphabetCaption" xml:space="preserve">
     <value>Sprache</value>
   </data>
+  <data name="Bigrams" xml:space="preserve">
+    <value>Bigramme</value>
+  </data>
+  <data name="GramsTypeCaption" xml:space="preserve">
+    <value>Gramm-Typ:</value>
+  </data>
+  <data name="GramsTypeTooltip" xml:space="preserve">
+    <value>Definiert die n-Gramm-Größe, die während der Kryptoanalyse in der Kostenfunktion verwendet werden soll.</value>
+  </data>
+  <data name="Pentagrams" xml:space="preserve">
+    <value>Pentagramme</value>
+  </data>
+  <data name="Tetragrams" xml:space="preserve">
+    <value>Tetragramme</value>
+  </data>
+  <data name="Trigrams" xml:space="preserve">
+    <value>Trigramme</value>
+  </data>
+  <data name="Unigrams" xml:space="preserve">
+    <value>Unigramme</value>
+  </data>
 </root>

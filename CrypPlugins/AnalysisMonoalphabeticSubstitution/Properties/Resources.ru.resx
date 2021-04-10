@@ -401,4 +401,25 @@
   <data name="KeyOutputTooltip" xml:space="preserve">
     <value>Выход восстановленного ключа</value>
   </data>
+  <data name="Bigrams" xml:space="preserve">
+    <value>Биграммы</value>
+  </data>
+  <data name="GramsTypeCaption" xml:space="preserve">
+    <value>Тип грамма:</value>
+  </data>
+  <data name="GramsTypeTooltip" xml:space="preserve">
+    <value>Определяет размер n-граммов, который будет использоваться в функции стоимости во время криптоанализа.</value>
+  </data>
+  <data name="Pentagrams" xml:space="preserve">
+    <value>Пентаграммы</value>
+  </data>
+  <data name="Tetragrams" xml:space="preserve">
+    <value>Тетраграммы</value>
+  </data>
+  <data name="Trigrams" xml:space="preserve">
+    <value>Триграммы</value>
+  </data>
+  <data name="Unigrams" xml:space="preserve">
+    <value>Униграммы</value>
+  </data>
 </root>

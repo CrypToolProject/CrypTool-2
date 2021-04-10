@@ -32,6 +32,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         private int treatmentInvalidChars = 0;
         private int chooseAlgorithm = 0;
         private int restarts = 100;
+        private int _gramsType = 4; // Pentagrams
 
         #endregion
 
@@ -87,7 +88,26 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
             set { useSpaces = value; }
         }
 
-        [TaskPane("TreatmentInvalidCharsCaption", "TreatmentInvalidCharsTooltip", "AdvancedSettingsGroup", 2, false, ControlType.ComboBox, new string[] { "ChooseInvalidCharsList1","ChooseInvalidCharsList2", "ChooseInvalidCharsList3"})]
+        [TaskPane("GramsTypeCaption", "GramsTypeTooltip", "AlphabetGroup", 3, false, ControlType.ComboBox,
+            new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentragrams" })]
+        public int GramsType
+        {
+            get
+            {
+                return _gramsType;
+            }
+            set
+            {
+                if (value != _gramsType)
+                {
+                    _gramsType = value;
+                    OnPropertyChanged("GramsType");
+                }
+            }
+        }
+
+
+        [TaskPane("TreatmentInvalidCharsCaption", "TreatmentInvalidCharsTooltip", "AdvancedSettingsGroup", 4, false, ControlType.ComboBox, new string[] { "ChooseInvalidCharsList1","ChooseInvalidCharsList2", "ChooseInvalidCharsList3"})]
         public int TreatmentInvalidChars
         {
             get { return treatmentInvalidChars; }

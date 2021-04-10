@@ -14,13 +14,10 @@
    limitations under the License.
 */
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using CrypTool.PluginBase;
 using System.ComponentModel;
-using CrypTool.PluginBase.IO;
 using CrypTool.PluginBase.Miscellaneous;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -165,7 +162,9 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
 
             // Set alphabets
             string lang = LanguageStatistics.LanguageCode(settings.Language);
-            grams = new Tetragrams(lang, settings.UseSpaces);
+
+            // create language statics
+            grams = LanguageStatistics.CreateGrams(settings.Language, (LanguageStatistics.GramsType)(settings.GramsType + 1), settings.UseSpaces);
 
             plaintextalphabet = grams.Alphabet;
             ciphertextalphabet = String.IsNullOrEmpty(CiphertextAlphabet)
