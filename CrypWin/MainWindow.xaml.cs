@@ -1574,27 +1574,31 @@ namespace CrypTool.CrypWin
                 {
                     var editorInfo = type.GetEditorInfoAttribute();
                     if (editorInfo != null && !editorInfo.ShowAsNewButton)
-                        continue;
-
-                    Type typeClosure = type;
-                    this.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                     {
-                        ButtonDropDown btn = new ButtonDropDown();
-                        btn.Header = typeClosure.GetPluginInfoAttribute().Caption;
-                        btn.ToolTip = typeClosure.GetPluginInfoAttribute().ToolTip;
-                        btn.Image = typeClosure.GetImage(0);
-                        btn.Tag = typeClosure;
-                        btn.IsCheckable = true;
-                        if ((Settings.Default.useDefaultEditor && typeClosure.FullName == Settings.Default.defaultEditor)
-                            || (!Settings.Default.useDefaultEditor && typeClosure.FullName == Settings.Default.preferredEditor))
+                        continue;
+                    }
+
+                    var typeClosure = type;
+                    Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    {
+                        var button = new ButtonDropDown();
+                        button.Header = typeClosure.GetPluginInfoAttribute().Caption;
+                        button.ToolTip = typeClosure.GetPluginInfoAttribute().ToolTip;
+                        var image  = typeClosure.GetImage(0);
+                        image.Height = 35;
+                        button.Image = image;
+                        button.Tag = typeClosure;
+                        button.IsCheckable = true;
+                        if (Settings.Default.useDefaultEditor && typeClosure.FullName == Settings.Default.defaultEditor
+                            || !Settings.Default.useDefaultEditor && typeClosure.FullName == Settings.Default.preferredEditor)
                         {
-                            btn.IsChecked = true;
-                            ((Image)buttonDropDownNew.Image).Source = ((Image)btn.Image).Source;
+                            button.IsChecked = true;
+                            ((Image)buttonDropDownNew.Image).Source = ((Image)button.Image).Source;
                         }
 
-                        btn.Click += buttonEditor_Click;
+                        button.Click += buttonEditor_Click;
                         //buttonDropDownEditor.Items.Add(btn);
-                        buttonDropDownNew.Items.Add(btn);
+                        buttonDropDownNew.Items.Add(button);
                         AvailableEditors.Add(typeClosure);
                     }, null);
                 }
