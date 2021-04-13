@@ -89,7 +89,7 @@ namespace CrypTool.AnalysisMonoalphabeticSubstitution
         }
 
         [TaskPane("GramsTypeCaption", "GramsTypeTooltip", "AlphabetGroup", 3, false, ControlType.ComboBox,
-            new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentragrams" })]
+            new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentagrams" })]
         public int GramsType
         {
             get

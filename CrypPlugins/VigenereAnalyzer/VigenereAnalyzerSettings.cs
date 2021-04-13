@@ -144,7 +144,7 @@ namespace CrypTool.VigenereAnalyzer
         }
 
         [TaskPane("GramsTypeCaption", "GramsTypeTooltip", null, 6, false, ControlType.ComboBox,
-            new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentragrams" })]
+            new string[] { "Unigrams", "Bigrams", "Trigrams", "Tetragrams", "Pentagrams" })]
         public int GramsType
         {
             get

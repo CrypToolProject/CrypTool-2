@@ -406,7 +406,7 @@ Using plaintext alphabet now also as ciphertext alphabet.</value>
     <value>Bigrams</value>
   </data>
   <data name="GramsTypeCaption" xml:space="preserve">
-    <value>Grams type:</value>
+    <value>Type of n-grams</value>
   </data>
   <data name="GramsTypeTooltip" xml:space="preserve">
     <value>Defines the n-gram size, which should be used in the cost function during the cryptanalysis.</value>

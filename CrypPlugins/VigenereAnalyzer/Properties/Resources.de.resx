@@ -184,7 +184,7 @@
     <value>Deutsch</value>
   </data>
   <data name="GramsTypeCaption" xml:space="preserve">
-    <value>Gramm-Typ:</value>
+    <value>Art der n-Gramme</value>
   </data>
   <data name="GramsTypeTooltip" xml:space="preserve">
     <value>Definiert die n-Gramm-Größe, die während der Kryptoanalyse in der Kostenfunktion verwendet werden soll.</value>

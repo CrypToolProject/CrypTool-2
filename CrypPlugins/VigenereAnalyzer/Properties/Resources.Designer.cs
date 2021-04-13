@@ -259,7 +259,7 @@ namespace CrypTool.VigenereAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Grams type: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type of n-grams ähnelt.
         /// </summary>
         public static string GramsTypeCaption {
             get {

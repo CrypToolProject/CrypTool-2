@@ -405,7 +405,7 @@
     <value>Биграммы</value>
   </data>
   <data name="GramsTypeCaption" xml:space="preserve">
-    <value>Тип грамма:</value>
+    <value>Тип грамма</value>
   </data>
   <data name="GramsTypeTooltip" xml:space="preserve">
     <value>Определяет размер n-граммов, который будет использоваться в функции стоимости во время криптоанализа.</value>

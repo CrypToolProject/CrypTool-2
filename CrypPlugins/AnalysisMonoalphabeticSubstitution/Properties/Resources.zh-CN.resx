@@ -403,7 +403,7 @@
     <value>比格勒姆斯</value>
   </data>
   <data name="GramsTypeCaption" xml:space="preserve">
-    <value>克类型：</value>
+    <value>克类型</value>
   </data>
   <data name="GramsTypeTooltip" xml:space="preserve">
     <value>定义在密码分析过程中要在成本函数中使用的n-gram大小。</value>
