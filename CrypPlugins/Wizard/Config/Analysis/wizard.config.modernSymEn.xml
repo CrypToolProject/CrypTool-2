@@ -619,28 +619,4 @@ Wählen Sie diesen Punkt, um einen Geheimtext, der mit dem SDES-Algorithmus vers
       </sampleViewer>
     </input>
   </category>
-  <!-- Twofish input -->
-  <!--
-  <input image="Twofish" >
-    <name lang="en" >Twofish</name>
-    <description lang="en" >
-      Twofish is a symmetric modern algorithm to encrypt plaintext or to decrypt ciphertext... (add instead some really helpful text).
-    </description>
-  </input>-->
-  <!-- Trivium input -->
-  <!--
-  <input image="Trivium" >
-    <name lang="en" >Trivium</name>
-    <description lang="en" >
-      Trivium is a symmetric modern algorithm to encrypt plaintext or to decrypt ciphertext... (add instead some really helpful text).
-    </description>
-  </input>-->
-  <!-- TEA input -->
-  <!--
-  <input image="TEA" >
-    <name lang="en" >TEA</name>
-    <description lang="en" >
-      TEA is a symmetric modern algorithm to encrypt plaintext or to decrypt ciphertext... (add instead some really helpful text).
-    </description>
-  </input>-->
 </category>

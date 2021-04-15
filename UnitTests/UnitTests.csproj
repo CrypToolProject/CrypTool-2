@@ -189,7 +189,6 @@
     <Compile Include="ScytaleTest.cs" />
     <Compile Include="SHATest.cs" />
     <Compile Include="SosemanukTest.cs" />
-    <Compile Include="StegoLSBTest.cs" />
     <Compile Include="TemplateAndPluginTests\PluginTestScenario.cs" />
     <Compile Include="TemplateAndPluginTests\TemplateAndPluginTests.cs" />
     <Compile Include="TemplateAndPluginTests\TemplateXMLTest.cs" />
@@ -200,7 +199,6 @@
     <Compile Include="TigerTest.cs" />
     <Compile Include="TranspositionTest.cs" />
     <Compile Include="TriviumTest.cs" />
-    <Compile Include="TwofishTest.cs" />
     <Compile Include="VigenereTest.cs" />
     <Compile Include="WhirlpoolTest.cs" />
     <Compile Include="WizardConfigTest.cs" />

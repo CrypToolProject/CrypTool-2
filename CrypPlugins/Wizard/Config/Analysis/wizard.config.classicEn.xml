@@ -178,7 +178,7 @@ Zij Vgpyüywafoscw swe „IBHC“, lrx Xarl „kpkeaivzv“. Zqrx Gwykec-Vutobzw
       <item content="Englisch" lang="de" />
       <item content="Deutsch" lang="de" />
     </comboBox>
-    <comboBox plugin="$Vigenere Analyzer$;Vigenère" property="Mode" defaultValue="0" width="20%" alignment="Left">
+    <comboBox plugin="$Vigenere Analyzer$" property="Mode" defaultValue="0" width="20%" alignment="Left">
       <description lang="en">Vigenère mode:</description>
       <description lang="zh-CN">Vigenère模式：</description>
       <description lang="ru">Режим Vigenère:</description>
@@ -266,7 +266,7 @@ Wählen Sie diesen Punkt, um einen mit der Enigma verschlüsselten Text zu analy
       <defaultvalue lang="zh-CN">KSBWQUMKVUXBMDWTXAYBBIKVHVFGAJROQUWPWXFBYSREIFGKNWDVTUDNBHAGGOONSZERHJAQOQFDDCLPWCXCNJHHNGIHLYXNJCVAQHMJJPDMJQRCMEYHQDKMJOMDUQNGKQCHSXMQWSSCHDMJVDUHSWFUZVSLVHJHHLLFGNYBSJFJFNDGQXYBCLYBODQKDJGIILQUPZJCJUTNZTADMZUPOVUTAYYIRMJTGBOCPGYUZSCYXJTTQZIFQYFNJPAVVAPVMZSDOFAMPCSMFDULBUKPRVRJAUEEHOTGIWOKAYVMOJENPTTNUICXB</defaultvalue>
       <defaultvalue lang="ru">KSBWQUMKVUXBMDWTXAYBBIKVHVFGAJROQUWPWXFBYSREIFGKNWDVTUDNBHAGGOONSZERHJAQOQFDDCLPWCXCNJHHNGIHLYXNJCVAQHMJJPDMJQRCMEYHQDKMJOMDUQNGKQCHSXMQWSSCHDMJVDUHSWFUZVSLVHJHHLLFGNYBSJFJFNDGQXYBCLYBODQKDJGIILQUPZJCJUTNZTADMZUPOVUTAYYIRMJTGBOCPGYUZSCYXJTTQZIFQYFNJPAVVAPVMZSDOFAMPCSMFDULBUKPRVRJAUEEHOTGIWOKAYVMOJENPTTNUICXB</defaultvalue>
     </inputBox>
-    <loadSample title="Enigma Analyzer" file="Cryptanalysis\Classic\Enigma_Analyzer.cwm" />
+    <loadSample title="Enigma Analyzer" file="Cryptanalysis\Classic\Enigma_GilloglyAttack.cwm" />
   </input>
   <!-- Playfair input -->
   <!--
