@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,6 +11,24 @@ namespace Tests.TemplateAndPluginTests
 {   
     public static class TestHelpers
     {
+        private static readonly string[] Subfolders =
+        {
+            "",
+            "CrypPlugins",
+            "Lib",
+        };
+
+        static TestHelpers()
+        {
+            SetAssemblyPaths();
+        }
+
+        public static void SetAssemblyPaths()
+        {
+            var currentDomain = AppDomain.CurrentDomain;
+            currentDomain.AssemblyResolve += LoadAssembly;
+        }
+
         public static void TestFail(int number)
         {
             Assert.Fail(string.Format("Test {0} failed!", number));
@@ -132,5 +151,31 @@ namespace Tests.TemplateAndPluginTests
             return "";
         }
 
+        /// <summary>
+        /// Loads assemblies defined by subfolders definition
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        private static Assembly LoadAssembly(object sender, ResolveEventArgs args)
+        {
+            var folderPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            foreach (var subfolder in Subfolders)
+            {
+                var assemblyPath = Path.Combine(folderPath, Path.Combine(subfolder, new AssemblyName(args.Name).Name + ".dll"));
+                if (File.Exists(assemblyPath))
+                {
+                    var assembly = Assembly.LoadFrom(assemblyPath);
+                    return assembly;
+                }
+                assemblyPath = Path.Combine(folderPath, (Path.Combine(subfolder, new AssemblyName(args.Name).Name + ".exe")));
+                if (File.Exists(assemblyPath))
+                {
+                    var assembly = Assembly.LoadFrom(assemblyPath);
+                    return assembly;
+                }
+            }
+            return null;
+        }
     }
 }

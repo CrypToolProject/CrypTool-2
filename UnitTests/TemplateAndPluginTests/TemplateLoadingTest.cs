@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2018 Nils Kopal <Nils.Kopal<AT>Uni-Kassel.de>
+   Copyright 2018-2021 Nils Kopal <Nils.Kopal<AT>Uni-Kassel.de>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Tests.TemplateAndPluginTests;
 using WorkspaceManager.Model;
 
 namespace UnitTests
@@ -26,8 +27,10 @@ namespace UnitTests
     [TestClass]
     public class TemplateLoadingTest
     {
+        
         public TemplateLoadingTest()
         {
+            TestHelpers.SetAssemblyPaths();
         }
 
         /// <summary>
@@ -54,8 +57,8 @@ namespace UnitTests
             {
                 try
                 {
-                    ModelPersistance modelPersistance = new ModelPersistance();
-                    WorkspaceModel workspaceModel = modelPersistance.loadModel(template);
+                    var modelPersistance = new ModelPersistance();
+                    var workspaceModel = modelPersistance.loadModel(template);
                     foreach (PluginModel pluginModel in workspaceModel.GetAllPluginModels())
                     {
                         if (pluginModel.Plugin == null)
@@ -70,6 +73,6 @@ namespace UnitTests
                     Assert.Fail(String.Format("Exception during loading of template {0}: {1}", template, ex.Message));
                 }
             }
-        }   
+        }
     }
 }
