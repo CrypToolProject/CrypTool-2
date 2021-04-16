@@ -212,6 +212,7 @@
     <Compile Include="ViewModel\StartViewModel.cs" />
     <Compile Include="ViewModel\StateMatrixInitViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\XorViewModel.cs" />
     <Compile Include="View\ActionViewBase.cs" />
     <Compile Include="View\ChaChaHash.xaml.cs">
       <DependentUpon>ChaChaHash.xaml</DependentUpon>
@@ -230,6 +231,9 @@
     </Compile>
     <Compile Include="View\StateMatrixInit.xaml.cs">
       <DependentUpon>StateMatrixInit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Xor.xaml.cs">
+      <DependentUpon>Xor.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +357,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\StateMatrixInit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Xor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

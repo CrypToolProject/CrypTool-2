@@ -56,6 +56,7 @@ namespace CrypTool.Plugins.ChaCha
         private static readonly byte[] TAU = Encoding.ASCII.GetBytes("expand 16-byte k");
 
         private CStreamWriter outputWriter;
+        private CStreamWriter keystreamOutputWriter;
 
         #endregion Private Variables
 
@@ -127,6 +128,15 @@ namespace CrypTool.Plugins.ChaCha
             }
         }
 
+        [PropertyInfo(Direction.OutputData, "KeystreamOutputStreamCaption", "KeystreamOutputStreamTooltip", false)]
+        public ICrypToolStream KeystreamOutputStream
+        {
+            get
+            {
+                return keystreamOutputWriter;
+            }
+        }
+
         #endregion ICrypComponent I/O
 
         #region ChaCha Cipher methods
@@ -140,7 +150,8 @@ namespace CrypTool.Plugins.ChaCha
         /// <param name="settings">Chosen Settings in the Plugin workspace. Includes Rounds and Version property.</param>
         /// <param name="input">Input stream</param>
         /// <param name="output">Output stream</param>
-        private void Xcrypt(byte[] key, byte[] iv, ulong initialCounter, ChaChaSettings settings, ICrypToolStream input, CStreamWriter output)
+        /// <param name="keystreamWriter">Keystream Output stream</param>
+        private void Xcrypt(byte[] key, byte[] iv, ulong initialCounter, ChaChaSettings settings, ICrypToolStream input, CStreamWriter output, CStreamWriter keystreamOutput)
         {
             if (!(key.Length == 32 || key.Length == 16))
             {
@@ -187,9 +198,16 @@ namespace CrypTool.Plugins.ChaCha
                 InsertCounter(ref state, blockCounter, settings.Version);
                 ChaChaHash(ref state, settings.Rounds);
 
-                byte[] stateBytes = ByteUtil.ToByteArray(state);
-                byte[] c = ByteUtil.XOR(stateBytes, inputBytes, read);
+                byte[] keystream = ByteUtil.ToByteArray(state);
+                keystreamOutput.Write(keystream);
+                byte[] c = ByteUtil.XOR(keystream, inputBytes, read);
                 output.Write(c);
+
+                // Don't add to InputMessage during diffusion run because it won't
+                // return a different list during the diffusion run.
+                if (!DiffusionExecution) InputMessage.AddRange(inputBytes.Take(read));
+                Keystream.AddRange(keystream.Take(read));
+                Output.AddRange(c);
 
                 blockCounter++;
 
@@ -200,6 +218,9 @@ namespace CrypTool.Plugins.ChaCha
             output.Flush();
             output.Close();
             output.Dispose();
+            keystreamOutput.Flush();
+            keystreamOutput.Close();
+            keystreamOutput.Dispose();
         }
 
         /// <summary>
@@ -495,11 +516,13 @@ namespace CrypTool.Plugins.ChaCha
                 OnPropertyChanged(ChaChaPresentationViewModel.RESET_VISUALIZATION);
                 ClearIntermediateResults();
                 outputWriter = new CStreamWriter();
+                keystreamOutputWriter = new CStreamWriter();
                 // If InitialCounter is not set by user, it defaults to zero.
                 // Since maximum initial counter by any version is 64-bit, we cast it to UInt64.
                 ulong initialCounter = (ulong)InitialCounter;
-                Xcrypt(InputKey, InputIV, initialCounter, settings, InputStream, outputWriter);
+                Xcrypt(InputKey, InputIV, initialCounter, settings, InputStream, outputWriter, keystreamOutputWriter);
                 OnPropertyChanged("OutputStream");
+                OnPropertyChanged("KeystreamOutputStream");
             }
 
             ExecutionFinished = true;
@@ -652,6 +675,12 @@ namespace CrypTool.Plugins.ChaCha
             QRStepDiffusion.Clear();
             QROutput.Clear();
             QROutputDiffusion.Clear();
+
+            InputMessage.Clear();
+            Keystream.Clear();
+            KeystreamDiffusion.Clear();
+            Output.Clear();
+            OutputDiffusion.Clear();
         }
 
         private List<uint[]> _stateDiffusion; public List<uint[]> OriginalStateDiffusion
@@ -768,6 +797,53 @@ namespace CrypTool.Plugins.ChaCha
             }
         }
 
+        private List<byte> _inputMessage; public List<byte> InputMessage
+        {
+            get
+            {
+                if (_inputMessage == null) _inputMessage = new List<byte>();
+                return _inputMessage;
+            }
+        }
+
+        private List<byte> _keystreamDiffusion; public List<byte> KeystreamDiffusion
+        {
+            get
+            {
+                if (_keystreamDiffusion == null) _keystreamDiffusion = new List<byte>();
+                return _keystreamDiffusion;
+            }
+        }
+
+        private List<byte> _keystream; public List<byte> Keystream
+        {
+            get
+            {
+                if (DiffusionExecution) return KeystreamDiffusion;
+                if (_keystream == null) _keystream = new List<byte>();
+                return _keystream;
+            }
+        }
+
+        private List<byte> _outputDiffusion; public List<byte> OutputDiffusion
+        {
+            get
+            {
+                if (_outputDiffusion == null) _outputDiffusion = new List<byte>();
+                return _outputDiffusion;
+            }
+        }
+
+        private List<byte> _output; public List<byte> Output
+        {
+            get
+            {
+                if (DiffusionExecution) return OutputDiffusion;
+                if (_output == null) _output = new List<byte>();
+                return _output;
+            }
+        }
+
         #endregion Intermediate values from cipher execution
 
         #region Public Variables / Binding Properties
@@ -817,7 +893,7 @@ namespace CrypTool.Plugins.ChaCha
         {
             DiffusionExecution = true;
             ClearDiffusionResults();
-            Xcrypt(diffusionKey, diffusionIv, diffusionInitialCounter, (ChaChaSettings)Settings, InputStream, new CStreamWriter());
+            Xcrypt(diffusionKey, diffusionIv, diffusionInitialCounter, (ChaChaSettings)Settings, InputStream, new CStreamWriter(), new CStreamWriter());
             DiffusionExecution = false;
         }
 
@@ -828,6 +904,8 @@ namespace CrypTool.Plugins.ChaCha
             LittleEndianStateDiffusion.Clear();
             QRInputDiffusion.Clear();
             QROutputDiffusion.Clear();
+            KeystreamDiffusion.Clear();
+            OutputDiffusion.Clear();
         }
 
         #endregion Public Variables / Binding Properties

@@ -60,8 +60,8 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <Viewbox Style="{StaticResource UniformViewbox}" Grid.Row="0" Grid.ColumnSpan="2">
-                <RichTextBox Width="{Binding ElementName=Root, Path=ActualWidth}" Style="{StaticResource RichText}">
+            <Viewbox Style="{StaticResource UniformViewbox}" Grid.Row="0">
+                <RichTextBox Width="{Binding ElementName=Root, Path=ActualWidth}" Style="{StaticResource RichText}" FontSize="13">
                     <FlowDocument>
                         <Paragraph>
                             <Run Text="{Loc DiffusionDescription1}"/>
@@ -81,7 +81,7 @@
 
             <!--#region Diffusion input -->
 
-            <Viewbox Grid.Row="1" Grid.Column="0" Style="{StaticResource UniformViewbox}">
+            <Viewbox Grid.Row="1" Grid.Column="0" Style="{StaticResource UniformViewbox}" Grid.ColumnSpan="2">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -155,7 +155,7 @@
             </Viewbox>
             <!--#endregion-->
 
-            <Grid Grid.Row="1" Grid.Column="1" Name="Root2">
+            <Grid Grid.Row="0" Grid.Column="1" Name="Root2">
                 <Viewbox Style="{StaticResource UniformViewbox}">
                     <RichTextBox Style="{StaticResource RichText}" Width="{Binding ElementName=Root2, Path=ActualWidth}">
                         <FlowDocument>

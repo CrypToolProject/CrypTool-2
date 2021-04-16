@@ -95,6 +95,44 @@
                 </Grid>
                 <!--#endregion-->
 
+                <Grid Grid.Column="0" Visibility="{Binding RoundsStep, Converter={StaticResource BooleanToVisibility}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="20,0" RenderTransformOrigin="0.5, 0.5">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-3" />
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Viewbox Margin="3">
+                            <TextBox Style="{StaticResource Text}" Text="{Loc ChaChaHashStateLabel}" />
+                        </Viewbox>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Column="0" Style="{StaticResource MatrixVisualizationGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="20,0" RenderTransformOrigin="0.5, 0.5">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-3" />
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Viewbox Margin="3">
+                            <TextBox Style="{StaticResource Text}" Text="{Loc ChaChaHashRoundsFinalStateLabel}" />
+                        </Viewbox>
+                    </Border>
+                </Grid>
+
                 <!--#region State Matrix -->
                 <Border Style="{StaticResource MatrixBorder}" Grid.Row="0" Grid.Column="0">
                     <Grid Grid.Row="0" Grid.Column="0" Name="StateMatrix">
@@ -1635,6 +1673,25 @@
                         </Border.RenderTransform>
                         <Viewbox Margin="3">
                             <TextBox Style="{StaticResource Text}" Text="{Loc ChaChaHashOriginalStateLabel}" />
+                        </Viewbox>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Column="1" Style="{StaticResource MatrixVisualizationGrid}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Margin="20,0" RenderTransformOrigin="0.5, 0.5">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-3" />
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Viewbox Margin="3">
+                            <TextBox Style="{StaticResource Text}" Text="{Loc ChaChaHashAdditionStateLabel}" />
                         </Viewbox>
                     </Border>
                 </Grid>

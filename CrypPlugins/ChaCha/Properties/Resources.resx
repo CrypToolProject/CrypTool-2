@@ -126,6 +126,9 @@
   <data name="ChaChaCaption" xml:space="preserve">
     <value>ChaCha</value>
   </data>
+  <data name="ChaChaHashAdditionStateLabel" xml:space="preserve">
+    <value>State After All Rounds + Original State</value>
+  </data>
   <data name="ChaChaHashName" xml:space="preserve">
     <value>ChaCha Hash</value>
   </data>
@@ -168,8 +171,17 @@
   <data name="ChaChaHashOriginalStateLabel" xml:space="preserve">
     <value>Original State</value>
   </data>
+  <data name="ChaChaHashRoundsFinalStateLabel" xml:space="preserve">
+    <value>State After All Rounds</value>
+  </data>
+  <data name="ChaChaHashStateLabel" xml:space="preserve">
+    <value>State Matrix</value>
+  </data>
   <data name="ChaChaHashTitle" xml:space="preserve">
     <value>ChaCha Hash Function</value>
+  </data>
+  <data name="ChaChaStartInstructions" xml:space="preserve">
+    <value>To enter the visualization, the workspace needs to be started. Press "Play" above to do this. You can then navigate through the visualization with the buttons in the top-left corner.</value>
   </data>
   <data name="ChaChaTooltip" xml:space="preserve">
     <value>A stream cipher based on Salsa20 and used in TLS. Developed by Daniel J. Bernstein.</value>
@@ -208,7 +220,7 @@ A well designed cipher should have 50% of all ciphertext bits flipped if any bit
 Use the button in the top-right corner to toggle between showing only the XOR or both values.</value>
   </data>
   <data name="DiffusionFlippedBits" xml:space="preserve">
-    <value>Flipped Bits:</value>
+    <value>Flipped bits:</value>
   </data>
   <data name="DiffusionIVLabel1" xml:space="preserve">
     <value>Input initialization vector (hex):</value>
@@ -261,6 +273,12 @@ Use the button in the top-right corner to toggle between showing only the XOR or
   <data name="IVValidationErrorMessage" xml:space="preserve">
     <value>IV must be 64-bit in DJB version or 96-bit in IETF version</value>
   </data>
+  <data name="KeystreamOutputStreamCaption" xml:space="preserve">
+    <value>Keystream</value>
+  </data>
+  <data name="KeystreamOutputStreamTooltip" xml:space="preserve">
+    <value>The internally generated keystream. The output is generated via input XOR keystream.</value>
+  </data>
   <data name="KeyValidationErrorMessage" xml:space="preserve">
     <value>Key must be 128-bit or 256-bit</value>
   </data>
@@ -290,7 +308,7 @@ Use the button in the top-right corner to toggle between showing only the XOR or
   </data>
   <data name="OverviewIntro1" xml:space="preserve">
     <value>ChaCha is a stream cipher.
-It generates a pseudorandom stream of bits (keystream) and then encrypts the input message by performing a XOR bitwise operation on it with this keystream.</value>
+It generates a pseudorandom stream of bits (keystream) and then encrypts the input message by performing a bitwise XOR operation on it with this keystream.</value>
   </data>
   <data name="OverviewIntro2" xml:space="preserve">
     <value>The keystream is created by first generating keystream blocks of 512 bits and concatenating them until the keystream size is equal or larger than the input.
@@ -445,6 +463,15 @@ To generate the keystream, ChaCha uses for each keystream block a 512 bit state 
   </data>
   <data name="VersionTooltip" xml:space="preserve">
     <value>Select which version you want to use. They only differ in their counter and IV size. DJB version uses a 64-bit counter and a 64-bit IV. IETF version uses a 32-bit counter and a 96-bit IV.</value>
+  </data>
+  <data name="XorInputLabel" xml:space="preserve">
+    <value>Input message:</value>
+  </data>
+  <data name="XorKeystreamLabel" xml:space="preserve">
+    <value>Keystream:</value>
+  </data>
+  <data name="XorOutputLabel" xml:space="preserve">
+    <value>Output:</value>
   </data>
   <data name="XorToggle" xml:space="preserve">
     <value>Toggle XOR</value>

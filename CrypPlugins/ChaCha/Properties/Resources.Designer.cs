@@ -88,6 +88,15 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to State After All Rounds + Original State.
+        /// </summary>
+        public static string ChaChaHashAdditionStateLabel {
+            get {
+                return ResourceManager.GetString("ChaChaHashAdditionStateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ChaCha Hash.
         /// </summary>
         public static string ChaChaHashName {
@@ -124,7 +133,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(0,4,8,12).
+        ///   Looks up a localized string similar to QR(0,4,8,12).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelColumn1 {
             get {
@@ -133,7 +142,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(1,5,9,13).
+        ///   Looks up a localized string similar to QR(1,5,9,13).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelColumn2 {
             get {
@@ -142,7 +151,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(2,6,10,14).
+        ///   Looks up a localized string similar to QR(2,6,10,14).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelColumn3 {
             get {
@@ -151,7 +160,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(3,7,11,15).
+        ///   Looks up a localized string similar to QR(3,7,11,15).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelColumn4 {
             get {
@@ -160,7 +169,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(0,5,10,15).
+        ///   Looks up a localized string similar to QR(0,5,10,15).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelDiagonal1 {
             get {
@@ -169,7 +178,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(1,6,11,12).
+        ///   Looks up a localized string similar to QR(1,6,11,12).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelDiagonal2 {
             get {
@@ -178,7 +187,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(2,7,8,13).
+        ///   Looks up a localized string similar to QR(2,7,8,13).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelDiagonal3 {
             get {
@@ -187,7 +196,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quarterround(3,4,9,14).
+        ///   Looks up a localized string similar to QR(3,4,9,14).
         /// </summary>
         public static string ChaChaHashNavigationQrLabelDiagonal4 {
             get {
@@ -214,11 +223,38 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to State After All Rounds.
+        /// </summary>
+        public static string ChaChaHashRoundsFinalStateLabel {
+            get {
+                return ResourceManager.GetString("ChaChaHashRoundsFinalStateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State Matrix.
+        /// </summary>
+        public static string ChaChaHashStateLabel {
+            get {
+                return ResourceManager.GetString("ChaChaHashStateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ChaCha Hash Function.
         /// </summary>
         public static string ChaChaHashTitle {
             get {
                 return ResourceManager.GetString("ChaChaHashTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To enter the visualization, the workspace needs to be started. Press &quot;Play&quot; above to do this. You can then navigate through the visualization with the buttons in the top-left corner..
+        /// </summary>
+        public static string ChaChaStartInstructions {
+            get {
+                return ResourceManager.GetString("ChaChaStartInstructions", resourceCulture);
             }
         }
         
@@ -319,7 +355,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Flipped Bits:.
+        ///   Looks up a localized string similar to Flipped bits:.
         /// </summary>
         public static string DiffusionFlippedBits {
             get {
@@ -481,6 +517,24 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Keystream.
+        /// </summary>
+        public static string KeystreamOutputStreamCaption {
+            get {
+                return ResourceManager.GetString("KeystreamOutputStreamCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The internally generated keystream. The output is generated via input XOR keystream..
+        /// </summary>
+        public static string KeystreamOutputStreamTooltip {
+            get {
+                return ResourceManager.GetString("KeystreamOutputStreamTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key must be 128-bit or 256-bit.
         /// </summary>
         public static string KeyValidationErrorMessage {
@@ -563,7 +617,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to ChaCha is a stream cipher.
-        ///It generates a pseudorandom stream of bits (keystream) and then encrypts the input message by performing a XOR bitwise operation on it with this keystream..
+        ///It generates a pseudorandom stream of bits (keystream) and then encrypts the input message by performing a bitwise XOR operation on it with this keystream..
         /// </summary>
         public static string OverviewIntro1 {
             get {
@@ -771,7 +825,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The 512-bit (128-byte) ChaCha state can be interpreted as a 4x4 matrix, where each entry consists of 4 bytes. The state entries consist of the parameters you can see below. They will be encoded before insertion into the state matrix..
+        ///   Looks up a localized string similar to The 512-bit (128-byte) ChaCha state can be interpreted as a 4x4 matrix, where each entry consists of 4 bytes. The state entries consist of the parameters you can see below. They are encoded before insertion into the state matrix..
         /// </summary>
         public static string StateMatrixDescription1 {
             get {
@@ -780,7 +834,7 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On the next page we will pass this initialized state matrix to the ChaCha hash function to generate our first keystream block..
+        ///   Looks up a localized string similar to On the next page, this initialized state matrix is passed to the ChaCha hash function to generate the first block of the keystream..
         /// </summary>
         public static string StateMatrixDescription6 {
             get {
@@ -1028,6 +1082,33 @@ namespace CrypTool.Plugins.ChaCha.Properties {
         public static string VersionTooltip {
             get {
                 return ResourceManager.GetString("VersionTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input message:.
+        /// </summary>
+        public static string XorInputLabel {
+            get {
+                return ResourceManager.GetString("XorInputLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keystream:.
+        /// </summary>
+        public static string XorKeystreamLabel {
+            get {
+                return ResourceManager.GetString("XorKeystreamLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output:.
+        /// </summary>
+        public static string XorOutputLabel {
+            get {
+                return ResourceManager.GetString("XorOutputLabel", resourceCulture);
             }
         }
         

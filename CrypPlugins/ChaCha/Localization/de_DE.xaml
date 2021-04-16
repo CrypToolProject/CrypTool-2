@@ -154,11 +154,11 @@
                     <RichTextBox>
                         <FlowDocument>
                             <Paragraph>
-                                Um einen Schlüsselstromblock zu generieren verwenden wir die-ChaCha Hashfunktion. Die ChaCha-Hashfunktion besteht aus
+                                Um einen Schlüsselstromblock zu generieren, verwenden wir die ChaCha-Hashfunktion. Die ChaCha-Hashfunktion besteht aus
                                 <Run Text="{Binding Settings.Rounds, FallbackValue=R}" /> Runden.
                                 <LineBreak />
                                 Während jeder Runde benutzen wir die Viertelrunde-Funktion viermal (deshalb der Name
-                                <Italic>Viertelrunde</Italic>). Sie modifiziert vier Einträge in der Zustandsmatrix. Das bedeutet das nach jeder Runde alle Einträge in der Zustandsmatrix verändert worden sind.
+                                <Italic>Viertelrunde</Italic>). Sie modifiziert vier Einträge in der Zustandsmatrix. Das bedeutet, dass nach jeder Runde alle Einträge in der Zustandsmatrix verändert worden sind.
                                 <LineBreak />
                                 In einer ungeraden Runde (Runde 1, 3, ...) iterieren wir durch alle Spalten. Deshalb werden ungerade Runden auch
                                 <Italic>Spaltenrunden</Italic> genannt. In einer geraden Runde (Runde 2, 4, ...) iterieren wir durch alle Diagonalen. Deshalb werden gerade Runden auch

@@ -126,6 +126,9 @@
   <data name="ChaChaCaption" xml:space="preserve">
     <value>ChaCha</value>
   </data>
+  <data name="ChaChaHashAdditionStateLabel" xml:space="preserve">
+    <value>Anfangszustand + Zustand nach allen Runden</value>
+  </data>
   <data name="ChaChaHashName" xml:space="preserve">
     <value>ChaCha-Hash</value>
   </data>
@@ -168,8 +171,17 @@
   <data name="ChaChaHashOriginalStateLabel" xml:space="preserve">
     <value>Anfangszustand</value>
   </data>
+  <data name="ChaChaHashRoundsFinalStateLabel" xml:space="preserve">
+    <value>Zustand nach allen Runden</value>
+  </data>
+  <data name="ChaChaHashStateLabel" xml:space="preserve">
+    <value>Zustandsmatrix</value>
+  </data>
   <data name="ChaChaHashTitle" xml:space="preserve">
     <value>ChaCha-Hashfunktion</value>
+  </data>
+  <data name="ChaChaStartInstructions" xml:space="preserve">
+    <value>Um zu beginnen, muss die Arbeitsfläche gestartet werden. Drücke "Start" in der Leiste oben, um dies zu tun. Dann kann durch die Visualisierung navigiert werden mit den Knöpfen oben links.</value>
   </data>
   <data name="ChaChaTooltip" xml:space="preserve">
     <value>Eine Stromchiffre, die in TLS eingesetzt wird und auf Salsa20 basiert. Entwickelt von Daniel J. Bernstein.</value>
@@ -190,15 +202,18 @@
     <value>Auf dieser Seite kann ein zweiter Wert für Schlüssel, IV und Blockzähler eingegeben werden.</value>
   </data>
   <data name="DiffusionDescription2" xml:space="preserve">
-    <value>Die ChaCha-Chiffre wird dann auch mit diesen Werten ausgeführt um die Diffusionscharakteristik der Chiffre zu visualisieren. Die Werte vom zweiten Chiffrendurchlauf (mit den zweiten Werten) werden unter den Werten des ersten Durchlaufs angezeigt. Unterschiedliche Hexwerte werden rot markiert. Auf der rechten Seite ist hierfür ein Beispiel zu sehen.</value>
+    <value>Die ChaCha-Chiffre wird dann auch mit diesen Werten ausgeführt, um die Diffusionscharakteristik der Chiffre zu visualisieren.
+Die Werte vom zweiten Chiffrendurchlauf (mit den zweiten Werten) werden unter den Werten des ersten Durchlaufs angezeigt.
+Unterschiedliche Hexwerte werden rot markiert. Auf der rechten Seite ist hierfür ein Beispiel zu sehen.</value>
   </data>
   <data name="DiffusionDescription3" xml:space="preserve">
-    <value>Da für das Studium der Diffusionscharakteristik die Unterschiede der Werte von zwei Durchläufen interessanter sind als die tatsächlichen Werte, ist es auch möglich explizit die Differenz (XOR) einzugeben.
+    <value>Da für das Studium der Diffusions-Charakteristik die Unterschiede der Werte von zwei Durchläufen interessanter sind als die tatsächlichen Werte, ist es auch möglich, explizit die Differenz (XOR) einzugeben.
 Mit dem Knopf in der oberen rechten Ecke ist es möglich, zwischen der XOR-Anzeige und der Anzeige beider Werte umzuschalten.
 Das kann im Beispiel ausprobiert werden. Drücke den Knopf und die Anzeige im Beispiel schaltet sich um.</value>
   </data>
   <data name="DiffusionDescription4" xml:space="preserve">
-    <value>In der Seite über die ChaCha-Hashfunktion wird auch die Anzahl der geflippten Bits angezeigt. Eine sichere Chiffre sollte 50% aller Bits im Geheimtext flippen, wenn ein Bit im Klartext geflippt wurde und vice versa.</value>
+    <value>In der Seite über die ChaCha-Hashfunktion wird auch die Anzahl der geflippten Bits angezeigt. 
+Eine sichere Chiffre sollte im Durchschnitt rund 50 % aller Bits im Geheimtext flippen, wenn ein Bit im Klartext geflippt wurde und vice versa.</value>
   </data>
   <data name="DiffusionExampleCaption" xml:space="preserve">
     <value>Beispiel wie die Diffusion visualisiert wird.
@@ -258,6 +273,12 @@ Benutze den Knopf oben rechts um zwischen XOR-Anzeige und Anzeige beider Werte u
   <data name="IVValidationErrorMessage" xml:space="preserve">
     <value>IV muss 64-bit in der DJB-Version oder 96-bit in der IETF-Version sein</value>
   </data>
+  <data name="KeystreamOutputStreamCaption" xml:space="preserve">
+    <value>Schlüsselstrom</value>
+  </data>
+  <data name="KeystreamOutputStreamTooltip" xml:space="preserve">
+    <value>Der intern generierte Schlüsselstrom. Der Ausgabetext wird durch Eingabetext XOR Schlüsselstrom generiert.</value>
+  </data>
   <data name="KeyValidationErrorMessage" xml:space="preserve">
     <value>Schlüssel muss 128-bit oder 256-bit sein</value>
   </data>
@@ -286,7 +307,7 @@ Benutze den Knopf oben rechts um zwischen XOR-Anzeige und Anzeige beider Werte u
     <value>Konstanten (128-bit)</value>
   </data>
   <data name="OverviewIntro1" xml:space="preserve">
-    <value>ChaCha ist eine Stromchiffre. Sie generiert einen pseudozufälligen Strom an Bits (Schlüsselstrom) und verschlüsselt den Klartext mithilfe einer bitweisen XOR Operation mit dem Schlüsselstrom.</value>
+    <value>ChaCha ist eine Stromchiffre. Sie generiert einen pseudozufälligen Strom an Bits (Schlüsselstrom) und verschlüsselt den Klartext mithilfe einer bitweisen XOR-Operation mit dem Schlüsselstrom.</value>
   </data>
   <data name="OverviewIntro2" xml:space="preserve">
     <value>Der Schlüsselstrom wird in Blöcken generiert. Jeder Block ist 512-bit groß. Es werden solange Blöcke generiert, bis der Schlüsselstrom größer oder gleich der Länge des Klartextes ist.
@@ -317,7 +338,7 @@ ChaCha benutzt eine Hashfunktion zusammen mit einem 512-bit Zustand, der aus fol
     <value>Durch Anwendung der ChaCha-Hashfunktion entsteht aus einem 512-bit Zustand ein Schlüsselstromblock.</value>
   </data>
   <data name="OverviewOutro2" xml:space="preserve">
-    <value>Das führt uns zu folgenden Schritten um eine Nachricht M mit ChaCha zu verschlüsseln:</value>
+    <value>Das führt uns zu folgenden Schritten, um eine Nachricht mit ChaCha zu verschlüsseln:</value>
   </data>
   <data name="OverviewOutroStep1" xml:space="preserve">
     <value>Zustandsmatrix initialisieren</value>
@@ -326,7 +347,7 @@ ChaCha benutzt eine Hashfunktion zusammen mit einem 512-bit Zustand, der aus fol
     <value>Schlüsselstrom generieren</value>
   </data>
   <data name="OverviewOutroStep3" xml:space="preserve">
-    <value>M XOR Schlüsselstrom</value>
+    <value>Nachricht XOR Schlüsselstrom</value>
   </data>
   <data name="OverviewRemark" xml:space="preserve">
     <value>Bemerkung: Weil XOR die inverse Operation zu sich selbst ist, verläuft das Entschlüsseln von Nachrichten gleich ab.</value>
@@ -356,7 +377,7 @@ ChaCha benutzt eine Hashfunktion zusammen mit einem 512-bit Zustand, der aus fol
     <value>Schlüssel</value>
   </data>
   <data name="StateMatrixDescription1" xml:space="preserve">
-    <value>Der 512-bit (128-Byte) ChaCha-Zustand kann als 4x4 Matrix interpretiert werden, in der jeder Eintrag aus vier Bytes besteht. Die Einträge werden aus den Parametern, die unten zu sehen sind, aufgebaut. Diese Einträge werden kodiert bevor sie in die Matrix eingefügt werden.</value>
+    <value>Der 512-bit (64-byte) ChaCha-Zustand kann als 4x4 Matrix interpretiert werden, in der jeder Eintrag aus vier Bytes besteht. Die Einträge werden aus den Parametern, die unten zu sehen sind, aufgebaut. Diese Einträge werden kodiert, bevor sie in die Matrix eingefügt werden.</value>
   </data>
   <data name="StateMatrixDescription6" xml:space="preserve">
     <value>Auf der nächsten Seite wird dieser initialisierte Zustand der ChaCha-Hashfunktion übergeben um den ersten Schlüsselstromblock zu generieren.</value>
@@ -442,7 +463,16 @@ ChaCha benutzt eine Hashfunktion zusammen mit einem 512-bit Zustand, der aus fol
   <data name="VersionTooltip" xml:space="preserve">
     <value>Wähle die Version aus. Die Versionen unterscheiden sich lediglich in der Größe des Zählers und Initialisierungsvektors. Die DJB Version benutzt einen 64-bit Zähler und einen 64-bit IV. Die IETF Version benutzt einen 32-bit Zähler und einen 96-bit IV.</value>
   </data>
+  <data name="XorInputLabel" xml:space="preserve">
+    <value>Eingabetext:</value>
+  </data>
+  <data name="XorKeystreamLabel" xml:space="preserve">
+    <value>Schlüsselstrom:</value>
+  </data>
+  <data name="XorOutputLabel" xml:space="preserve">
+    <value>Ausgabetext:</value>
+  </data>
   <data name="XorToggle" xml:space="preserve">
-    <value>XOR Anzeige</value>
+    <value>XOR-Anzeige</value>
   </data>
 </root>

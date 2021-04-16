@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace CrypTool.Plugins.ChaCha.ViewModel
 {
-    internal class ChaChaHashViewModel : ActionViewModelBase, INavigation, ITitle
+    internal class ChaChaHashViewModel : ActionViewModelBase, INavigation, ITitle, IDiffusion
     {
         public ChaChaHashViewModel(ChaChaPresentationViewModel chachaPresentationViewModel) : base(chachaPresentationViewModel)
         {
@@ -191,7 +191,8 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
                     StateActionCreator.HideLittleEndian();
                 });
 
-                Seq(() => {
+                Seq(() =>
+                {
                     RoundsStep = false;
                     CurrentRoundIndex = Settings.Rounds - 1;
                     CurrentQRIndex = 3;

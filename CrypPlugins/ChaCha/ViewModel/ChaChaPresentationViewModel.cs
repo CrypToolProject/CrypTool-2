@@ -11,6 +11,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
     internal class ChaChaPresentationViewModel : ViewModelBase, IChaCha
     {
         public static string RESET_VISUALIZATION = "RESET_VISUALIZATION";
+
         public ChaChaPresentationViewModel(ChaCha chaCha)
         {
             ChaCha = chaCha;
@@ -21,6 +22,7 @@ namespace CrypTool.Plugins.ChaCha.ViewModel
             Pages.Add(new DiffusionViewModel(this));
             Pages.Add(new StateMatrixInitViewModel(this));
             Pages.Add(new ChaChaHashViewModel(this));
+            Pages.Add(new XorViewModel(this));
 
             // Set starting page
             CurrentPage = Pages[0];
