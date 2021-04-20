@@ -139,7 +139,7 @@
     <value>Zweites verschlüsseltes Bild</value>
   </data>
   <data name="InvalidInput" xml:space="preserve">
-    <value>Eingabedatum ist ein {0}. Die Visualle-Kryptographie-Komponente kann nur Bilder und Texte verschlüsseln</value>
+    <value>Eingabedatum ist ein {0}. Die Visualle-Kryptografi-Komponente kann nur Bilder und Texte verschlüsseln</value>
   </data>
   <data name="NoPlaintextInputProvided" xml:space="preserve">
     <value>Kein Klartext gegeben</value>
@@ -172,10 +172,10 @@
     <value>Text oder Bild das verschlüsselt werden soll</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Visuelle Kryptographie</value>
+    <value>Visuelle Kryptografi</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Komponente, welche erlaubt, Texte und Bilder mit Visueller Kryptographie zu verschlüsseln</value>
+    <value>Komponente, welche erlaubt, Texte und Bilder mit Visueller Kryptografi zu verschlüsseln</value>
   </data>
   <data name="ThresholdCaption" xml:space="preserve">
     <value>Schwellenwert</value>

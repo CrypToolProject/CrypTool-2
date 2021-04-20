@@ -382,7 +382,7 @@ namespace Primes.OnlineHelp.HelpFiles {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die &lt;h2&gt;Die Erzeugung von Primzahlen&lt;/h2&gt;
         ///
-        ///Primzahlen sind für die Kryptographie von großer Bedeutung.
+        ///Primzahlen sind für die Kryptografi von großer Bedeutung.
         ///So wird das Schlüsselpaar für das RSA-Verfahren mit zwei großen Primzahlen erzeugt.&lt;br /&gt;
         ///Der Dialog teilt sich in zwei Funktionsbereiche.
         ///Zum einen können beliebig viele und beliebig große Primzahlen generiert werden.

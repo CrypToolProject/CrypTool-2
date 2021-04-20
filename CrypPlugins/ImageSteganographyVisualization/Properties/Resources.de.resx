@@ -286,7 +286,7 @@
     <value>Die Prozedur codiert Daten auf eine Weise, die so subtil ist, dass die Änderungen nicht bemerkt werden können.</value>
   </data>
   <data name="Intro0Text4" xml:space="preserve">
-    <value>Steganographie kann mit Kryptographie kombiniert werden, um mehr Sicherheit zu gewährleisten bei vertraulichen Daten.</value>
+    <value>Steganographie kann mit Kryptografi kombiniert werden, um mehr Sicherheit zu gewährleisten bei vertraulichen Daten.</value>
   </data>
   <data name="Intro1Text1" xml:space="preserve">
     <value>Dieses Diagramm zeigt, wie das Steganographie Verfahren normalerweise über einen unsicheren Kommunikationskanal funktioniert.</value>

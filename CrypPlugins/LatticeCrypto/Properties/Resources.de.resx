@@ -121,7 +121,7 @@
     <value>Gitterbasierte Kryptoanalyse</value>
   </data>
   <data name="FL_F_cryptography" xml:space="preserve">
-    <value>Gitterbasierte Kryptographie</value>
+    <value>Gitterbasierte Kryptografi</value>
   </data>
   <data name="FL_F_problems" xml:space="preserve">
     <value>Gitterbasierte Probleme</value>
@@ -148,9 +148,9 @@
     <value>Gitterbasierte Angriffe\ RSA (Angriff auf stereotype Nachrichten)</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Gitterbasierte Kryptographie</value>
+    <value>Gitterbasierte Kryptografi</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Verwendung von Gittern in der Kryptographie</value>
+    <value>Verwendung von Gittern in der Kryptografi</value>
   </data>
 </root>
