@@ -124,16 +124,16 @@
     <value>Verwende diese Sprache für die Kostenfunktion.</value>
   </data>
   <data name="AnalysisMode" xml:space="preserve">
-    <value>Analyse Modus:</value>
+    <value>Analyse-Modus:</value>
   </data>
   <data name="AnalysisModeCaption" xml:space="preserve">
-    <value>Analysemodus</value>
+    <value>Analyse-Modus</value>
   </data>
   <data name="AnalysisModeTooltip" xml:space="preserve">
     <value>Welcher Kryptoanalysemodus soll ausgeführt werden?</value>
   </data>
   <data name="AnalysisStep" xml:space="preserve">
-    <value>Analyseschritt:</value>
+    <value>Analyse-Schritt:</value>
   </data>
   <data name="AnalysisTypeGroup" xml:space="preserve">
     <value>Analyseverfahren</value>
