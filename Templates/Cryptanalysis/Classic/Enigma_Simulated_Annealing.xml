@@ -12,7 +12,7 @@
   <keywords>Machine, Turing, World War, Rotor, Attack, Analysis, Analyzer, Breaker</keywords>
   <keywords lang="zh">机，图灵，第二次世界大战，转子，攻击，分析，分析仪，破碎机</keywords>
   <keywords lang="ru">Машина, Тьюринг, Мировая Война, Ротор, Атака, Анализ, Анализатор, Выключатель</keywords>
-  <title lang="de">Enigma Hillclimbing Angriff</title>
+  <title lang="de">Enigma-Angriff mit Simulated Annealing</title>
   <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit Simulated Annealing</summary>
   <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
   <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
@@ -27,7 +27,7 @@
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$Crib$" value="Crib" />
     <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$Key$" value="Schlüssel Einstellungen" />
+    <replacement key="$Key$" value="Schlüssel-Einstellungen" />
     <replacement key="$memo$" value="Dieses Beispiel zeigt einen simulierten Simulated-Anneling-Angriff, der von George Lasry entwickelt wurde. Es ist eine Erweiterung des Angriffs von Sullivan und Weierud. Für jede mögliche Rotoreinstellung (Reihenfolge, Ringeinstellungen und Rotorstartpositionen) wird ein simulierter Simulated-Annealing-Angriff angewendet, um die Steckerbrett-Einstellungen wiederherzustellen. Er verwendet n-Gramm-Statistiken. Dieser Angriff ist langsamer als der von Sullivan und Weirerud, aber er ist effektiver für kürzere Nachrichten (z.B. mit 50 Buchstaben) oder wenn der Geheimtext viele fehlerhafte Symbole enthält. Es wird empfohlen, zuerst alle auf Ringe auf Z einzustellen und dann einen ersten Lauf auszuführen, der erfolgreich sein kann, wenn keine mittlerere Rotorweiterschaltung vorliegt, und andernfalls eine vollständige Suche (A bis Z) der richtigen Ringeinstellungen durchzuführen. Wenn keiner dieser Läufe erfolgreich ist, kann der Angriff ausgeführt werden, bei dem eine vollständige Suche (von A bis Z) nach dem rechten und dem mittleren Rotor durchgeführt wird, was aber lange dauern kann." />
   </replacements>
   <replacements lang="zh">
