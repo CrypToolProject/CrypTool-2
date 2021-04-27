@@ -7,6 +7,6 @@
   <summary lang="en">This folder contains templates that demonstrate classical cryptographical algorithms.</summary>
   <summary lang="zh">该文件夹包含演示经典密码算法的模板。</summary>
   <summary lang="ru">Эта папка содержит шаблоны, демонстрирующие классические криптографические алгоритмы.</summary>
-  <summary lang="de">Dieses Verzeichnis enthält Vorlagen, die klassische kryptographische Verfahren demonstrieren.</summary>
+  <summary lang="de">Dieses Verzeichnis enthält Vorlagen, die klassische kryptografische Verfahren demonstrieren.</summary>
   <icon file="dir.png" />
 </directory>

@@ -52,7 +52,7 @@ RSA is widely used in electronic commerce protocols, and is believed to be secur
       </description>
       <description lang="zh-CN">RSA是用于加密明文或解密密文的非对称（公钥）算法。 RSA代表Rivest，Shamir和Adleman，他们首先公开描述了它。它是已知的第一个适用于签名和加密的算法，并且是公钥密码学的第一个重大进步。 RSA被广泛用于电子商务协议中，并且被认为具有足够长的密钥并使用最新的实现是安全的。</description>
       <description lang="ru">RSA - это асимметричный (открытый ключ) алгоритм для шифрования открытого текста или для дешифрования зашифрованного текста. RSA означает Ривеста, Шамира и Адлемана, которые впервые публично описали его. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции, и считается, что он защищен при использовании достаточно длинных ключей и использовании современных реализаций.</description>
-      <description lang="de">RSA ist ein asymmetrisches Verschlüsselungsverfahren. RSA steht für Rivest, Shamir und Adleman, die dieses Verfahren zum ersten Mal öffentlich beschrieben. Es ist der erste Algorithmus, der sowohl zur Signierung als auch für die Verschlüsselung benutzt werden konnte und war einer der ersten großen Fortschritte in der Public-Key-Kryptographie.
+      <description lang="de">RSA ist ein asymmetrisches Verschlüsselungsverfahren. RSA steht für Rivest, Shamir und Adleman, die dieses Verfahren zum ersten Mal öffentlich beschrieben. Es ist der erste Algorithmus, der sowohl zur Signierung als auch für die Verschlüsselung benutzt werden konnte und war einer der ersten großen Fortschritte in der Public-Key-Kryptografie.
 RSA ist in kommerziellen Protokollen weit verbreitet und gilt bei genügend langen Schlüsseln und unter Verwendung aktueller Implementierungen als sicher.
 </description>
       <headline lang="en">RSA Attack</headline>
@@ -115,7 +115,7 @@ Klicken Sie auf 'Weiter', um eine große Zahl in ihre Faktoren zu zerlegen.
       <description lang="en">MD5 (Message-Digest algorithm 5) is a widely used cryptographic hash function with a 128-bit (16-byte) hash value.</description>
       <description lang="zh-CN">MD5（消息摘要算法5）是具有128位（16字节）哈希值的广泛使用的密码哈希函数。</description>
       <description lang="ru">MD5 (алгоритм Message-Digest 5) - широко используемая криптографическая хеш-функция с 128-битным (16-байтовым) значением хэш-функции.</description>
-      <description lang="de">MD5 (Message-Digest algorithm 5) ist eine weit verbreitete kryptographische Hash-Funktion mit einem 128-Bit-Hashwert (16 Bytes).</description>
+      <description lang="de">MD5 (Message-Digest algorithm 5) ist eine weit verbreitete kryptografische Hash-Funktion mit einem 128-Bit-Hashwert (16 Bytes).</description>
       <headline lang="en">MD5</headline>
       <headline lang="zh-CN">MD5</headline>
       <headline lang="ru">MD5</headline>

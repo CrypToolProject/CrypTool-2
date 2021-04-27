@@ -24,7 +24,7 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/RSA-Kryptosystem" /></descri
     <plugin name="RSAKeyGenerator" />
   </relevantPlugins>
   <replacements lang="de">
-    <replacement key="$memo$" value="In der Kryptographie ist RSA (was für Rivest, Shamir und Adleman steht) ein Algorithmus für die Kryptographie mit öffentlichem Schlüssel (Asymmetrische Kryptographie). Es ist der erste bekannte Algorithmus, der sowohl für das Signieren als auch für die Verschlüsselung geeignet ist, und war einer der ersten großen Fortschritte in der Kryptographie mit öffentlichen Schlüsseln. RSA wird häufig in Protokollen für den elektronischen Handel verwendet und gilt bei ausreichend langen Schlüsseln und der Verwendung aktueller Implementierungen als ausreichend sicher." />
+    <replacement key="$memo$" value="In der Kryptografie ist RSA (was für Rivest, Shamir und Adleman steht) ein Algorithmus für die Kryptografie mit öffentlichem Schlüssel (Asymmetrische Kryptografie). Es ist der erste bekannte Algorithmus, der sowohl für das Signieren als auch für die Verschlüsselung geeignet ist, und war einer der ersten großen Fortschritte in der Kryptografie mit öffentlichen Schlüsseln. RSA wird häufig in Protokollen für den elektronischen Handel verwendet und gilt bei ausreichend langen Schlüsseln und der Verwendung aktueller Implementierungen als ausreichend sicher." />
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$StringEncoder$" value="String-Codierer" />

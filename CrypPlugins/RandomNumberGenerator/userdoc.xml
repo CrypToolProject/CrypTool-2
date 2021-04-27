@@ -106,8 +106,8 @@
       Его код основан на реализации веб-страницы «Розеттский камень», подробности смотрите в <ref id="SubtractiveGenerator" />.
     </section></introduction>
   <introduction lang="de-DE">
-    Der Begriff der Zufälligkeit spielt in wachsendem Maße nicht nur in der Informatik eine Rolle, sondern auch in der modernen Kryptographie. Zufallsdaten werden in der Kryptographie für verschiedene Zwecke benötigt. Unter anderem spielen sie eine wichtige Rolle bei der Schlüsselgenerierung asymmetrischer Verschlüsselungsverfahren.
-    Zufallsdaten werden mit Hilfe eines sogenannten Pseudozufallsgenerators erzeugt. Ein Pseudozufallsgenerator mag ein statistisch durchaus brauchbares Verhalten besitzen, kryptographisch jedoch unzumutbare Sicherheitsmängel aufweisen. Um für kryptographische Zwecke einsetzbar zu sein, reicht es nicht, dass die produzierten Folgen alle möglichen statistischen Tests bestehen, sondern es muss jeweils für die als nächstes produzierte Zufallszahl eine gewisse Form der Unvorhersagbarkeit vorliegen.
+    Der Begriff der Zufälligkeit spielt in wachsendem Maße nicht nur in der Informatik eine Rolle, sondern auch in der modernen Kryptografie. Zufallsdaten werden in der Kryptografie für verschiedene Zwecke benötigt. Unter anderem spielen sie eine wichtige Rolle bei der Schlüsselgenerierung asymmetrischer Verschlüsselungsverfahren.
+    Zufallsdaten werden mit Hilfe eines sogenannten Pseudozufallsgenerators erzeugt. Ein Pseudozufallsgenerator mag ein statistisch durchaus brauchbares Verhalten besitzen, kryptografisch jedoch unzumutbare Sicherheitsmängel aufweisen. Um für kryptografische Zwecke einsetzbar zu sein, reicht es nicht, dass die produzierten Folgen alle möglichen statistischen Tests bestehen, sondern es muss jeweils für die als nächstes produzierte Zufallszahl eine gewisse Form der Unvorhersagbarkeit vorliegen.
     Zusammengefasst heißt das:
     <list><item>
         Die Zahlen müssen "zufällig" aussehen. Das bedeutet, sie müssen alle statistischen Tests bezüglich Zufälligkeit bestehen (z.B. soll die Anzahl von erzeugten Einsen und Nullen fast gleich groß sein).
@@ -119,9 +119,9 @@
     Ein Pseudozufallsgenerator (auch Pseudozufallszahlengenerator genannt) ist ein Algorithmus, der ausgehend von einem geheimen Startwert Z[0] - der "Saat" - eine zyklische Folge (Z[n]) von p Zahlen (Periodenlänge) erzeugt.
     Für jemanden, der nicht die Saat Z[0] kennt, erscheint die Sequenz Z[i], Z[i+1], ..., Z[i+p] wie eine Folge von zufälligen Zahlen.
     <section headline="Random.Random">
-      Der Random.Random Generator ist der in .NET eingebaute nicht-kryptographische Zufallszahlengenerator. Für Details siehe <ref id="randomrandom" />.
+      Der Random.Random Generator ist der in .NET eingebaute nicht-kryptografische Zufallszahlengenerator. Für Details siehe <ref id="randomrandom" />.
     </section><section headline="RNGCryptoServiceProvider">
-      Der Random.Random Generator ist der in .NET eingebaute kryptographische Zufallszahlengenerator. Für Details siehe <ref id="rngcryptoservice" />.
+      Der Random.Random Generator ist der in .NET eingebaute kryptografische Zufallszahlengenerator. Für Details siehe <ref id="rngcryptoservice" />.
     </section><section headline="X^2 modulo N Generator">
       Der X-Quadrat modulo N (X^2 mod N)-Generator <ref id="x2modn" /> ist ein Algorithmus zur Erzeugung einer Folge von scheinbar zufälligen ganzen Zahlen (X[i]) gemäß der rekursiven Rechenvorschrift:<newline /><newline />
       X[0] := Geheimer Saatwert, mit X[0]*X[0] &gt; N<newline />

@@ -14,7 +14,7 @@
   <introduction lang="zh-CN">PKCS（公共密钥密码学标准）是RSA实验室自1991年以来开发的一套公共密钥密码学标准。其目的是支持非对称密码系统的开发和使用。 PKCS＃5标准描述了基于密码的密钥派生，它允许从可能不太安全的密钥中生成非常安全的密钥。通过使用salt值和哈希函数的迭代应用程序，可以增强生成的密钥以抵抗字典攻击和彩虹表攻击。</introduction>
   <introduction lang="ru">PKCS (общедоступные криптографические стандарты) представляет собой набор стандартов для криптографии с открытым ключом, разработанный RSA Laboratories с 1991 года. Их цель - поддерживать разработку и использование асимметричных криптосистем. В стандарте PKCS # 5 описывается вывод на основе пароля, который позволяет генерировать очень безопасный ключ из, возможно, не столь безопасного ключа. Используя значение соли и итерированное приложение хэш-функции, сгенерированный ключ затвердевает от атак со словарями и атак с радужными таблицами.</introduction>
   <introduction lang="de-DE">
-    PKCS (Public-Key Cryptography Standards; deutsch Kryptographiestandards für öffentliche Schlüssel) bezeichnet eine Reihe von kryptographischen Spezifikationen, die von den RSA-Laboratorien ab 1991 entwickelt wurden, 
+    PKCS (Public-Key Cryptography Standards; deutsch Kryptografiestandards für öffentliche Schlüssel) bezeichnet eine Reihe von kryptografischen Spezifikationen, die von den RSA-Laboratorien ab 1991 entwickelt wurden, 
     um die Entwicklung und Verbreitung asymmetrischer Kryptosysteme zu beschleunigen.
     <newline /><newline />
     Im PKCS#5-Standard wird unter anderem beschrieben, wie man ausgehend von einem möglicherweise unsicheren Schlüsselwort einen sehr sicheren Schlüssel generieren kann.

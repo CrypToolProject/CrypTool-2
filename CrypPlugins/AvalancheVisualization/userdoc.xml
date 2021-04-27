@@ -23,7 +23,7 @@
   <introduction lang="zh-CN">雪崩效应是良好的加密算法和散列函数应具有的特性。雪崩效果属性用作测量反应的参数，该反应是输入文本或键对生成的输出的最小变化。换句话说，明文的细微变化应导致密文的显着变化。雪崩效应很强，表明输入的单个位更改在整个加密过程或哈希函数中迅速传播，从而在密码或哈希值中产生了一定程度的随机性。重点是，两个略有不同的输入应该产生彼此尽可能不同的结果。因此，密码分析者很难破解该算法。这就是为什么它是安全算法应具有的高度期望的特性。该插件试图以一种说明性的方式提供对雪崩效应属性的理解。为此，您可以更改输入，然后检查所选算法的此属性的强度。</introduction>
   <introduction lang="ru">Эффект лавины - это хороший алгоритм шифрования, который должен проявляться. Свойство свойства лавинности используется в качестве параметра для измерения реакции, минимальное изменение входного текста или клавиши на сгенерированном выходе. Другими словами, небольшие изменения в открытом тексте должны приводить к существенному изменению зашифрованного текста. Сильный лавинный эффект указывает на то, что однократное изменение бит на входе быстро распространяется по всему процессу шифрования или хеш-функции, создавая определенную степень случайности в шифра или хеш-значении. Все дело в том, что два слегка разных входа должны давать результаты как можно более разные друг от друга. Следовательно, это затрудняет криптоаналитикам для разрушения алгоритма. Вот почему это очень желаемое свойство, которое должны иметь алгоритмы безопасности. Плагин стремится дать иллюстрацию понимание свойства эффекта лавины. Для этого вы можете внести изменения ввода и впоследствии проверить, насколько сильно это свойство для выбранного алгоритма.</introduction>
   <introduction lang="de-DE">
-    Der Avalanche-Effekt (Lawineneffekt) bezeichnet eine Eigenschaft, welche gute kryptographische Algorithmen sowie Hash-Funktionen aufweisen. <ref id="Wikipedia" /><newline /><newline />
+    Der Avalanche-Effekt (Lawineneffekt) bezeichnet eine Eigenschaft, welche gute kryptografische Algorithmen sowie Hash-Funktionen aufweisen. <ref id="Wikipedia" /><newline /><newline />
     Der Avalanche-Effekt wird als Parameter zur Messung der Auswirkung einer minimalen Eingabeänderung auf die Ausgabe benutzt.
     <newline />
     In anderen Worten, kleine Veränderungen im Klartext sollen zu einer großen Veränderung im Chiffretext führen.
@@ -194,7 +194,7 @@
     <linkReference id="Wikipedia">
       <link url="https://en.wikipedia.org/wiki/Avalanche_effect" lang="en" />
       <caption lang="en">Avalanche effect (Wikipedia)</caption>
-      <link url="https://de.wikipedia.org/wiki/Lawineneffekt_(Kryptographie)" lang="de-DE" />
+      <link url="https://de.wikipedia.org/wiki/Lawineneffekt_(Kryptografie)" lang="de-DE" />
       <caption lang="de-DE">Avalanche-Effekt (Wikipedia)</caption>
     </linkReference>
   </references>

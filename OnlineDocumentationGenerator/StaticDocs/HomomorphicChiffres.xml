@@ -3,7 +3,7 @@
   <language culture="en" />
   <language culture="de-DE" />
 
-  <name lang="de-DE">Homomorphe Chiffren und ihre Bedeutung in der Kryptographie</name>
+  <name lang="de-DE">Homomorphe Chiffren und ihre Bedeutung in der Kryptografie</name>
   <name lang="en">Homomorphic Ciphers and their Importance in Cryptography</name>
 
   <description lang="en">
@@ -250,7 +250,7 @@
     <newline/><newline/>
 
     Das wohl bekannteste Kryptosystem mit homomorphen Eigenschaften ist das von Paillier <ref id="Paillier"/>. Wir sehen zunächst, wie die Schlüsselerzeugung, die Verschlüsselung und die Entschlüsselung funktionieren, und zeigen dann, dass das Paillier-Kryptosystem homomorphe Eigenschaften besitzt.
-    In CrypTool 2 (CT2) ist das <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>-Kryptosystem implementiert. Unter den fertigen Vorlagen finden sich Methoden zur Erzeugung der kryptographischen Schlüssel (<docRef item="CrypTool.Plugins.Paillier.PaillierKeyGenerator">Paillier Key Generator</docRef>), ein Beispiel für eine Ver- und Entschlüsselung mittels Paillier (Paillier Text), sowie Beispiele, die die homomorphen Eigenschaften von Paillier anwenden (Paillier Addition, Paillier Blinding und Paillier Voting).
+    In CrypTool 2 (CT2) ist das <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>-Kryptosystem implementiert. Unter den fertigen Vorlagen finden sich Methoden zur Erzeugung der kryptografischen Schlüssel (<docRef item="CrypTool.Plugins.Paillier.PaillierKeyGenerator">Paillier Key Generator</docRef>), ein Beispiel für eine Ver- und Entschlüsselung mittels Paillier (Paillier Text), sowie Beispiele, die die homomorphen Eigenschaften von Paillier anwenden (Paillier Addition, Paillier Blinding und Paillier Voting).
     <newline/>
     <img src="OnlineDocumentationGenerator/StaticDocs/Images/CT2-Paillier.png"/>
 
@@ -319,7 +319,7 @@
     <newline/><newline/><newline/><newline/>
     <section headline="Anwendungen">
       <newline/><newline/>
-      Die homomorphe Eigenschaft von Paillier lässt sich dazu verwenden, um verschlüsselte Werte zu addieren oder verschlüsselte Werte mit unverschlüsselten Werten zu multiplizieren (dies entspricht einer wiederholten Anwendung der Addition). Damit werden homomorphe Chiffren zu einer wichtigen Funktion in vielen kryptographischen Anwendungen. Ein aktueller Überblick (2020) über solche Anwendungen findet sich in <ref id="YLindell"/>.
+      Die homomorphe Eigenschaft von Paillier lässt sich dazu verwenden, um verschlüsselte Werte zu addieren oder verschlüsselte Werte mit unverschlüsselten Werten zu multiplizieren (dies entspricht einer wiederholten Anwendung der Addition). Damit werden homomorphe Chiffren zu einer wichtigen Funktion in vielen kryptografischen Anwendungen. Ein aktueller Überblick (2020) über solche Anwendungen findet sich in <ref id="YLindell"/>.
       <newline/><newline/>
 
       <enum>
@@ -400,7 +400,7 @@
       <link lang="en" url="https://www.CrypTool.org/en/jCrypTool"/>
       <caption lang="en">JCrypTool — The cryptography e-learning platform</caption>
       <link lang="de-DE" url="https://www.CrypTool.org/de/jCrypTool"/>
-      <caption lang="de">JCrypTool — E-Learning-Plattform für Kryptographie</caption>
+      <caption lang="de">JCrypTool — E-Learning-Plattform für Kryptografie</caption>
     </linkReference>
 
   </references>

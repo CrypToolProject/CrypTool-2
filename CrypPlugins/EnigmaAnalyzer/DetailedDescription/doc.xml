@@ -83,7 +83,7 @@
     Der zu verschlüsselnde Text wird über eine Tastatur Buchstabe für Buchstabe eingegeben, woraufhin der verschlüsselte Buchstabe an einem mit dem entsprechenden Buchstaben
     versehenen aufleuchtenden Lämpchen abgelesen werden kann.
     <newline /><newline />
-    Die kryptographische Sicherheit der Enigma beruht auf der Verwendung von mehreren Rotoren, von denen jeder einzelne eine monoalphabetische Substitution darstellt.
+    Die kryptografische Sicherheit der Enigma beruht auf der Verwendung von mehreren Rotoren, von denen jeder einzelne eine monoalphabetische Substitution darstellt.
     Die Rotoren sind in der Enigma hintereinander angeordnet und ein eingegebener Buchstabe wird dadurch nacheinander den entsprechenden Substitutionen unterworfen.
     Nach jedem eingegebenen Buchstaben drehen sich die Rotoren nach einem vorgegebenen Muster weiter und ändern somit die sich ergebende Gesamtsubstitution.
     <newline /><newline />

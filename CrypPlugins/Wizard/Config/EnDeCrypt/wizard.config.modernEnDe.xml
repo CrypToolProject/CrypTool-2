@@ -54,7 +54,7 @@ RSA is widely used in electronic commerce protocols, and is believed to be secur
       <description lang="ru">RSA - это асимметричный (открытый ключ) алгоритм для шифрования открытого текста или для дешифрования зашифрованного текста. RSA означает Ривеста, Шамира и Адлемана, которые впервые публично описали его. Это первый алгоритм, который, как известно, подходит для подписи, а также шифрования, и стал одним из первых достижений в криптографии с открытым ключом. RSA широко используется в протоколах электронной коммерции, и считается, что он защищен при использовании достаточно длинных ключей и использовании современных реализаций.</description>
       <description lang="de">RSA ist ein asymmetrischer (Public-Key) Algorithmus, um Klartext zu verschlüsseln oder Geheimtext zu entschlüsseln.
 RSA steht für Rivest, Shamir und Adleman, die dieses Verfahren zum ersten Mal öffentlich beschrieben.
-Es ist der erste Algorithmus der sowohl für Signierung als auch für Verschlüsselung benutzt werden konnte, und er war einer der ersten großen Fortschritte in der Public-Key-Kryptographie.
+Es ist der erste Algorithmus der sowohl für Signierung als auch für Verschlüsselung benutzt werden konnte, und er war einer der ersten großen Fortschritte in der Public-Key-Kryptografie.
 RSA ist in kommerziellen Protokollen weit verbreitet und gilt bei genügend langen Schlüsseln und unter Verwendung aktueller Implementierungen als sicher.
       </description>
       <headline lang="en">RSA</headline>

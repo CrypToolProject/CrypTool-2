@@ -19,7 +19,7 @@
   <introduction lang="de-DE">
     CypherMatrix ist ein Verfahren zum Verschlüsseln und Hashen von Daten. Es wurde 1998 von E.E. Schnoor patentiert. Er hat explizit die uneingeschränkte Nutzung im CrypTool-Projekt erlaubt.
     <newline />
-    Der Name CypherMatrix beruht darauf, dass das Verfahren eine Matrix als Ergebnis erzeugt. Der Urheber schrieb CypherMatrix mit "y", weil das hier vorgestellte Verfahren als Zeichen - ungeachtet moderner Techniken - nur Bytes verwendet und so an die Kryptographie vergangener Jahrhunderte erinnern soll.
+    Der Name CypherMatrix beruht darauf, dass das Verfahren eine Matrix als Ergebnis erzeugt. Der Urheber schrieb CypherMatrix mit "y", weil das hier vorgestellte Verfahren als Zeichen - ungeachtet moderner Techniken - nur Bytes verwendet und so an die Kryptografie vergangener Jahrhunderte erinnern soll.
     <newline /><newline />
     In CrypTool 2 ist es zu Lernzwecken als experimentelles Verfahren implementiert.
     <newline /><newline />

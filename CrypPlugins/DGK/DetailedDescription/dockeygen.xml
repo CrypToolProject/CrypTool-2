@@ -9,7 +9,7 @@
     Das DGK-Kryptosystem ist ein homomorphes Verschlüsselungsverfahren, das 2007 von I. Damgård, M. Geisler und H. Krøigaard vorgestellt wurde.
     <newline /><newline />
     Die homomorphen Eigenschaften von DGK und weitere <b>Referenzen</b> werden in der Onlinehilfe der <docRef item="CrypTool.Plugins.DGK.DGK">DGK-Komponente</docRef> und
-    im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptographie" (in der Online-Hilfe unter "Allgemein") genauer erläutert.
+    im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptografie" (in der Online-Hilfe unter "Allgemein") genauer erläutert.
     <newline /><newline />
     Diese Komponente generiert einen zufälligen öffentlichen und privaten Schlüssel für das DGK-Verschlüsselungsverfahren.
   </introduction>

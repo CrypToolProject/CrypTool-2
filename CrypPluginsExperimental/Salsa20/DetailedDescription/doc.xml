@@ -21,7 +21,7 @@
   <language culture="de-DE" />
   <introduction lang="de-DE">
     Salsa20 ist eine von sieben symmetrischen Stromchiffren, die für das finale eSTREAM Portfolio des ECRYPT Stream Cipher Project gewählt wurden.
-    Sie benötigt einen 64 Bits Initialisierungsvektor und entweder einen 128 oder 256 Bits Schlüssel. Die Chiffre basiert auf einer starken kryptographischen
+    Sie benötigt einen 64 Bits Initialisierungsvektor und entweder einen 128 oder 256 Bits Schlüssel. Die Chiffre basiert auf einer starken kryptografischen
     Hash-Funktion und das Bytelimit für den generierten Schlüsselstrom aus jedem IV beträgt 2^70. Es wurde bisher kein Angriff gefunden, der schneller als Brute-Force ist.
   </introduction>
   <usage lang="de-DE">

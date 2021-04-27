@@ -87,10 +87,10 @@
       wird dann schließlich am Ausgang der Komponente als Datenstrom bereitgestellt.
       <newline /><newline /></section><section headline="Kryptographischer Modus">
       Blockverschlüsselungsverfahren unterteilen die Eingabedaten in Blöcke festgelegter Größen und
-      wenden die Ver-/Entschlüsselungsfunktion dann fortlaufend auf diese Blöcke an. Der "kryptographische Modus", in dem
+      wenden die Ver-/Entschlüsselungsfunktion dann fortlaufend auf diese Blöcke an. Der "kryptografische Modus", in dem
       eine Blockchiffre betrieben wird, gibt an, wie die Ergebnisse der Ver- bzw. Entschlüsselung aufeinanderfolgender Blöcke
       miteinander kombiniert werden, um z.B. größere Sicherheit oder Fehlertoleranz zu erzielen. Die AES-Komponente bietet
-      die kryptographischen Modi ECB (Electronic Code Book), CBC (Cipher Block Chaining), CFB (Cipher Feedback) und OFB (Output Feedback)
+      die kryptografischen Modi ECB (Electronic Code Book), CBC (Cipher Block Chaining), CFB (Cipher Feedback) und OFB (Output Feedback)
       an, die in den Einstellungen ausgewählt werden können.
       <newline />
       Beim ECB-Modus wird dabei jeder Block separat verschlüsselt. Bei den anderen Modi hingegen

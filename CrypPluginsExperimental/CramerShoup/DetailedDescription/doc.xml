@@ -19,7 +19,7 @@
     Das Verfahren ist das erste asymmetrisches Verfahren, das gegenüber von Chosen Chiffretext Attacks (CCA) sicher ist ohne Random Oracle Model.
     Bei einem CCA-sicheren Verfahren kann der Angreifer den Chiffretext entschlüsseln lassen.
     Jedoch ist es nicht möglich während der Entschlüsselungsanfrage, den Chiffretext anhand gewonnener Informationen zu entschlüsseln.
-    Ein Random Oracle Model wird in der Kryptographie genutzt um (ideale) Hashfunktion zumodullieren.
+    Ein Random Oracle Model wird in der Kryptografie genutzt um (ideale) Hashfunktion zumodullieren.
     Dabei kann es zu Problem führen, wenn eine reale Hashfunktion verwendet wird.
     Dieses Verfahren wurde von Ronald Cramer und Victor Shoup im Jahr 1998 vorgestellt.
     Die Unterschied zwischen Cramer-Shoup und ElGamal sind Erweiterung des Chiffretext um Verifizierung, dadurch kommt ein drei mal so länger Chiffretext zustande.

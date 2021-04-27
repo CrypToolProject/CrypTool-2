@@ -13,7 +13,7 @@
   <introduction lang="zh-CN">RIPEMD（RACE完整性基元评估消息摘要）是一种加密哈希函数，由Hans Dobbertin，Antoon Bosselaers和Bart Preneel于1996年发布。RIPEMD-160是原始RIPEMD的改进版本。它从其任意长度的输入中计算出160位（20字节）长度的哈希值。 RIPEMD-160在512位的块上运行，并执行两个并行功能，每个功能有5个回合。该算法针对32位处理器进行了优化，并由加密程序TrueCrypt和数字货币比特币的地址生成使用。</introduction>
   <introduction lang="ru">RIPEMD (дайджест оценки примитивов при оценке целостности RACE) - это криптографическая хэш-функция, опубликованная Хансом Доббертином, Antoon Bosselaers и Bart Preneel в 1996 году. RIPEMD-160 - улучшенная версия оригинального RIPEMD. Он вычисляет хеш-значение длиной 160 бит (20 байтов) от его ввода произвольной длины. RIPEMD-160 работает на блоках по 512 бит и выполняет две параллельные функции, каждая с 5 раундами. Алгоритм оптимизирован для 32-разрядных процессоров и используется программой шифрования TrueCrypt и в генерации адресов цифровой валюты Bitcoin.</introduction>
   <introduction lang="de-DE">
-    RIPEMD (RACE Integrity Primitives Evaluation Message Digest) ist eine kryptographische Hash-Funktion und wurde 1996 von Hans Dobbertin, Antoon Bosselaers und Bart Preneel veröffenlicht.
+    RIPEMD (RACE Integrity Primitives Evaluation Message Digest) ist eine kryptografische Hash-Funktion und wurde 1996 von Hans Dobbertin, Antoon Bosselaers und Bart Preneel veröffenlicht.
     RIPEMD-160 ist eine verbesserte Version von RIPEMD, und generiert für Eingaben beliebiger Länge einen Hashwert mit einer Länge von 160 Bits (20 Bytes).
     RIPEMD-160 arbeitet auf 512-Bit-Blöcken und führt zwei parallele Funktionen mit jeweils fünf Runden aus. 
     Der Algorithmus ist optimiert für 32-Bit-Prozessoren und wird unter anderem in dem Verschlüsselungsprogramm TrueCrypt und in der Adressgenerierung der Internetwährung Bitcoin eingesetzt.

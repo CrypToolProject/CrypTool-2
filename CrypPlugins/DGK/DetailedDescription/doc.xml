@@ -23,7 +23,7 @@
     <newline /><newline />
     Das sind dieselben homomorphen Eigenschaften wie beim <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier-Kryptosystem</docRef>.
     <newline /><newline />
-    Die homomorphen Eigenschaften von DGK und weitere <b>Referenzen</b> werden im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptographie" (in der Online-Hilfe unter "Allgemein") genauer erläutert. Dort finden Sie auch einen generellen Überblick über homomorphe Chiffren.
+    Die homomorphen Eigenschaften von DGK und weitere <b>Referenzen</b> werden im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptografie" (in der Online-Hilfe unter "Allgemein") genauer erläutert. Dort finden Sie auch einen generellen Überblick über homomorphe Chiffren.
   </introduction>
   <usage lang="en">
     The DGK cryptosystem is a homomorphic cryptosystem, that was presented by I. Damgård, M. Geisler, and M. Krøigaard in 2007.

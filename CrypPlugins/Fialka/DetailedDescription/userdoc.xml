@@ -142,7 +142,7 @@
     <newline /><newline />
     Die Eingabe in die Chiffriermaschine geschieht über die aus 30 Tasten bestehende Tastatur. Wenn eine Taste gedrückt wird, geht ein elektrisches Signal von der Taste durch mehrere elektromechanische Komponenten
     der Maschine bis zu deren Ausgang.
-    Die kryptographische Sicherheit der Fialka basiert auf der Verwendung mehrerer Rotoren, wobei jeder einzelne Rotor eine monoalphabetische Substitution realisiert.
+    Die kryptografische Sicherheit der Fialka basiert auf der Verwendung mehrerer Rotoren, wobei jeder einzelne Rotor eine monoalphabetische Substitution realisiert.
     Die Maschine enthält einen Lochkartenleser, mit dem man die feste Permutation des Eingabealphabets mittels einer Lochkarte eingeben kann.
     Die Ausgabe wird auf einen Papierstreifen gedruckt.
     Wenn ein Zeichen verschlüsselt wurde, rotieren die Rotoren in neue Positionen und implementieren daher im nächsten Schritt eine neue Permutation.

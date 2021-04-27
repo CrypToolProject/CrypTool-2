@@ -15,7 +15,7 @@
     <introduction lang="de-DE">
         ChaCha ist eine Familie von 256-bit Stromchiffren die 2008 von Daniel J. Bernstein entwickelt wurde. Sie basiert auf der Salsa20-Familie. Der Fokus bei der Entwicklung lag auf eine erhöhte Diffusion per Runde ohne die Zeit pro Runde zu verringern <ref id="ChaChaSpecification" />. <newline />
         Intern wird ein 512-bit Zustand benutzt um Schlüsselstromblöcke zu generieren. Diese bilden den Schlüsselstrom. Eine XOR Operation mit diesem ver- bzw. entschlüsselt dann eine Nachricht. <newline />
-        ChaCha wird im Transport Layer Security Protokoll (TLS) seit 2014 eingesetzt und ist somit sehr relevant für die moderne angewandte Kryptographie <ref id="GoogleSecurityBlog" />. <newline />
+        ChaCha wird im Transport Layer Security Protokoll (TLS) seit 2014 eingesetzt und ist somit sehr relevant für die moderne angewandte Kryptografie <ref id="GoogleSecurityBlog" />. <newline />
         Es existieren zwei Versionen. Die originale Version von Bernstein unterstützt 64-bit Blockzähler und 64-bit Initialisierungsvektoren. Die Internet Engineering Task Force (IEF) hat dieses Design leicht abgewandelt. Ihre Version benutzt 32-bit Blockzähler und 96-bit Initialisierungsvektoren <ref id="RFC8439" />.
     </introduction>
 

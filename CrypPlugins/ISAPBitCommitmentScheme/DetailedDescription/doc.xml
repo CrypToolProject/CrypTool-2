@@ -6,7 +6,7 @@
   <language culture="de" />
   <introduction lang="en">
     <!-- Goals of the chapter:
-       - Beschreibung des kryptographischen Verfahrens 
+       - Beschreibung des kryptografischen Verfahrens 
        - Beschreibung der Geschichte des Verfahrens
        - Keine komplette mathematische Beschreibung
        - Einsatzfelder des Verfahrens
@@ -44,7 +44,7 @@
     ISAP-CS ist ein uneingeschränkt bindendes und inhaltsverbergendes Bit-Commitment-Verfahren, das von
     Frederik Armknecht, Carsten Elsner und Martin Schmidt als Machbarkeitsstudie für die
     Anwendbarkeit der analytischen Zahlentheorie (insbesondere der diophantischen Approximation) beim
-    Entwurf kryptographischer Systeme entwickelt wurde.
+    Entwurf kryptografischer Systeme entwickelt wurde.
     Das System und die Nachweise seiner Sicherheit basieren auf der Theorie des
     <i>inhomogenen simultanen diophantischen Approximationsproblems</i>
     (<i>inhomogeneous simultaneous diophantine approximation problem</i>, ISAP):

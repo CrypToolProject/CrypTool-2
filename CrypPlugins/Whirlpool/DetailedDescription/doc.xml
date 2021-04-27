@@ -16,13 +16,13 @@
   <introduction lang="zh-CN">Whirlpool是由密码学家Vincent Rijmen和Paulo SLM Barreto在2000年设计的一种密码哈希函数。Whirlpool算法从其输入中计算出512位（64字节）长度的哈希值。输入的最大长度为2 ^ 256位。尚不知道惠而浦的安全漏洞。惠而浦是免专利的，并且不受使用限制。 NESSIE项目建议使用该哈希，ISO和IEC还采用了该哈希作为联合ISO / IEC 10118-3国际标准的一部分。</introduction>
   <introduction lang="ru">Whirlpool - это криптографическая хеш-функция, разработанная криптографами Винсент Риймен и Паулу SLM Barreto в 2000 году. Алгоритм Whirlpool вычисляет хеш-значение длиной 512 бит (64 байта) от его ввода. Вход может составлять до 2 ^ 256 бит в длину. Никаких слабых мест безопасности Whirlpool пока не известно. Whirlpool не имеет патентных прав и не подвергается каким-либо ограничениям использования. Хэш был рекомендован проектом NESSIE, также был принят ИСО и МЭК в рамках совместного международного стандарта ISO / IEC 10118-3.</introduction>
   <introduction lang="de-DE">
-    Whirlpool ist eine kryptographische Hash-Funktion und wurde 2000 von den Kryptographen Vincent Rijmen und Paulo S. L. M. Barreto entworfen.
+    Whirlpool ist eine kryptografische Hash-Funktion und wurde 2000 von den Kryptographen Vincent Rijmen und Paulo S. L. M. Barreto entworfen.
     Der Whirlpool-Algorithmus berechnet für Eingaben mit einer Länge von bis zu 2^256 Bit einen Hashwert mit einer Länge von 512 Bits (64 Bytes).
     Bislang sind keine Schwächen des Algorithmus bekannt.
     <newline />
     Whirlpool ist patentfrei und unterliegt keinen Nutzungsbeschränkungen.
     <newline />
-    Whirlpool gehört zu den vom Projekt NESSIE empfohlenen kryptographischen Algorithmen und wurde von der ISO mit ISO/IEC 10118-3:2004 standardisiert.
+    Whirlpool gehört zu den vom Projekt NESSIE empfohlenen kryptografischen Algorithmen und wurde von der ISO mit ISO/IEC 10118-3:2004 standardisiert.
   </introduction>
   <usage lang="en">
     The Whirlpool component expects the data of which to calculate the hash value either as a byte array on the input labeled "Input Data" or as a data stream on the input labeled "Input Stream".

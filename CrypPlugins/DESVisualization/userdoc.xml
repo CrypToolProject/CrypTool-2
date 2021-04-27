@@ -69,7 +69,7 @@
   <presentation lang="de-DE">
     Der Fokus der Komponente liegt auf seinem Präsentationsmodus. Hier werden die Struktur und die verschiedenen Operationen innerhalb des Algorithmus visualisiert.
     Dadurch soll das Verständnis der DES-Verschlüsselung gefördert werden. Dieses Plugin kann somit bevorzugt in der Lehre angewendet werden, um einen leichteren Einstieg in
-    kryptographische Grundoperationen, zum Beispiel Permutationen und S-Boxen, zu ermöglichen. Zusätzlich werden anhand von grafischen Darstellungen die allgemeine Struktur des DES
+    kryptografische Grundoperationen, zum Beispiel Permutationen und S-Boxen, zu ermöglichen. Zusätzlich werden anhand von grafischen Darstellungen die allgemeine Struktur des DES
     und seine Funktionsweise veranschaulicht. Somit können die Eigenschaften des DES mit seinen Vor- und Nachteilen verdeutlicht werden, ohne rein mathematische Definitionen und Beweise anzuführen.
     Mithilfe des Plugins lassen sich ebenfalls wichtige Grundbausteine von Blockchiffren sowie Feistelchiffren in Aktion betrachten. Dazu gehört das Feistel-Netzwerk und der
     damit verbundene Key-Schedule-Algorithmus.

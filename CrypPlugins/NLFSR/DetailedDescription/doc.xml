@@ -23,7 +23,7 @@
     Im Gegensatz zur LFSR-Komponente, bei der die Rückkopplungsfunktion aus der XOR-Verknüpfung gewisser Bits des Schieberegisters besteht, ist die Rückkopplungsfunktion beim NLFSR eine
     beliebige boolesche Funktion über den Bits des Schieberegisters.
     <newline /><newline />
-    Rückgekoppelte Schieberegister kommen in der Kryptographie häufig bei der Erzeugung von Pseudozufallszahlen zum Einsatz.
+    Rückgekoppelte Schieberegister kommen in der Kryptografie häufig bei der Erzeugung von Pseudozufallszahlen zum Einsatz.
   </introduction>
   <usage lang="en">
     Enter the feedback function as a string at the corresponding input or in the settings of the component.

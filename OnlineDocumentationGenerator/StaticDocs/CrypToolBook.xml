@@ -29,7 +29,7 @@
   </description>
 
   <description lang="de-DE">
-    In diesem kostenlosen, über 500 Seiten umfassenden Buch <ref id="BOOK"/>, das mit den CT-Programmen ausgeliefert wird, finden Sie eher mathematisch orientierte Informationen über das Lernen, Experimentieren und Nutzen von kryptographischen Verfahren. Die 12. Auflage ist ein umfangreiches Update des Buches.<newline/>
+    In diesem kostenlosen, über 500 Seiten umfassenden Buch <ref id="BOOK"/>, das mit den CT-Programmen ausgeliefert wird, finden Sie eher mathematisch orientierte Informationen über das Lernen, Experimentieren und Nutzen von kryptografischen Verfahren. Die 12. Auflage ist ein umfangreiches Update des Buches.<newline/>
     <newline/>
     Die Hauptkapitel wurden von verschiedenen Autoren verfasst und sind in sich abgeschlossen.<newline/>
     <newline/>
@@ -37,15 +37,15 @@
     <b>Im zweiten Kapitel wird</b> – aus didaktischen Gründen – eine ausführliche Übersicht über Papier- und Bleistiftverfahren gegeben.<newline/>
     <b>Kapitel 3</b> widmet sich ausführlich dem faszinierenden Thema der Primzahlen.<newline/>
     <b>In Kapitel 4</b> wird anhand vieler Beispiele bis hin zum RSA-Verfahren in die modulare Arithmetik und die elementare Zahlentheorie eingeführt.<newline/>
-    <b>Kapitel 5</b> liefert Einblicke in die mathematischen Konzepte und Ideen hinter der modernen Kryptographie.<newline/>
+    <b>Kapitel 5</b> liefert Einblicke in die mathematischen Konzepte und Ideen hinter der modernen Kryptografie.<newline/>
     <b>Kapitel 6</b> gibt einen Überblick zum Stand der Attacken gegen moderne Hashalgorithmen und widmet sich dann kurz den digitalen Signaturen: Sie sind unverzichtbarer Bestandteil von E-Business-Anwendungen.<newline/>
-    <b>Kapitel 7</b> stellt Elliptische Kurven vor: Insbesondere bei der Implementierung in Hardware bietet Elliptische-Kurven-Kryptographie eine sehr effiziente Alternative zur RSA-basierten Signatur-Generierung.<newline/>
+    <b>Kapitel 7</b> stellt Elliptische Kurven vor: Insbesondere bei der Implementierung in Hardware bietet Elliptische-Kurven-Kryptografie eine sehr effiziente Alternative zur RSA-basierten Signatur-Generierung.<newline/>
     <b>Kapitel 8</b> führt in die Boolesche Algebra ein. Diese ist Grundlage der meisten modernen, symmetrischen Verschlüsselungsverfahren, die auf Bitströmen und Bitblöcken operieren. Prinzipielle Konstruktionsmethoden dieser Verfahren werden beschrieben und in SageMath implementiert.<newline/>
     <b>Kapitel 9</b> stellt homomorphe Kryptofunktionen vor, die insbesondere im Cloud-Umfeld an Bedeutung gewinnen.<newline/>
     <b>Kapitel 10</b> gibt einen breiten Überblick und Vergleich über die zur Zeit besten Algorithmen für (a) das Berechnen diskreter Logarithmen in verschiedenen Gruppen, für (b) das Faktorisierungsproblem und für (c) Elliptische Kurven. Dieser Überblick wurde zusammengestellt, nachdem ein provozierender Vortrag auf der Black Hat-Konferenz 2013 für Verunsicherung sorgte, weil er die Fortschritte bei endlichen Körpern mit kleiner Charakteristik fälschlicherweise auf Körper extrapolierte, die in der Realität verwendet werden.<newline/>
-    <b>Kapitel 11</b> diskutiert die Gefahren für bestehende kryptographische Verfahren und stellt alternative Forschungsansätze (Post-Quantum-Kryptographie) für eine langfristige kryptographische Sicherheit vor.<newline/>
+    <b>Kapitel 11</b> diskutiert die Gefahren für bestehende kryptografische Verfahren und stellt alternative Forschungsansätze (Post-Quantum-Kryptografie) für eine langfristige kryptografische Sicherheit vor.<newline/>
     <newline/>
-    Außerdem befindet sich im <b>Anhang</b> eine Auflistung zu Filmen und Büchern, in denen Kryptographie explizit eine Rolle spielt.<newline/>
+    Außerdem befindet sich im <b>Anhang</b> eine Auflistung zu Filmen und Büchern, in denen Kryptografie explizit eine Rolle spielt.<newline/>
     <newline/>
     Viele Algorithmen sind anhand kleiner lauffähiger Codebeispiele in Python und SageMath oder anhand einer der CrypTool-Versionen erläutert.
   </description>

@@ -92,7 +92,7 @@
       verschlüsselt und besteht
       aus zwei Geheimtextblöcken. Der zweite Block <b>C2</b> enthält den Klartext, den der Angreifer ermitteln möchte. Der
       erste Block dient nur als Initialisierungvektor (IV) und enthält keinen zugrundeliegenden Klartext, für den sich der Angreifer
-      interessiert. Nur der Client und der Server kennen den kryptographischen Schlüssel, der zu Verschlüsselung
+      interessiert. Nur der Client und der Server kennen den kryptografischen Schlüssel, der zu Verschlüsselung
       benutzt wurde. Bevor die Nachricht den Server erreicht, wird sie vom Angreifer abgefangen. Der Angreifer ist in der Lage,
       die Geheimtextblöcke zu modifizieren und Nachrichten zum Server zu schicken. Bei Erhalt einer Nachricht, entschlüsselt der
       Server diese zunächst im CBC-Modus und überprüft anschließend das Padding. Das Ergebnis dieser Überprüfung wird

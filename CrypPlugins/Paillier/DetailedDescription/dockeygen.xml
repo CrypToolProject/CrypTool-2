@@ -16,7 +16,7 @@
   <introduction lang="de-DE">
     Das Paillier-Kryptosystem ist ein probabilistisches asymmetrisches Kryptosystem.
     <newline /><newline />
-    Die homomorphen Eigenschaften von Paillier und weitere <b>Referenzen</b> werden in der Onlinehilfe der <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>-Komponente und im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptographie" genauer erläutert.
+    Die homomorphen Eigenschaften von Paillier und weitere <b>Referenzen</b> werden in der Onlinehilfe der <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>-Komponente und im <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal> "Homomorphe Chiffren und ihre Bedeutung in der Kryptografie" genauer erläutert.
     <newline /><newline />
     Diese Komponente generiert den öffentlichen und den privaten Schlüssel des Paillier-Kryptosystems, die als Eingaben für die <docRef item="CrypTool.Plugins.Paillier.Paillier">Paillier</docRef>-Komponente verwendet werden können.
   </introduction>

@@ -26,7 +26,7 @@
 
   <description lang="de-DE">
     <section headline="Grundlagen und Hintergrund">
-      Für kryptographische Verfahren und Anwendungen eignen sich keine durch Anwender spezifizierte Schlüssel, da diese in der Regel nicht den Anforderungen genügen. Mit Schlüsselgenerierungs-Funktionen (Key Derivation Function, KDF) können Schlüssel mit pseudozufälligen Zeichen generiert werden. Ein wesentlicher Bestandteil einer KDF ist eine Pseudozufallsfunktion (Pseudorandom Function, PRF). PRFs basieren häufig auf Hashfunktionen oder Stromchiffren.
+      Für kryptografische Verfahren und Anwendungen eignen sich keine durch Anwender spezifizierte Schlüssel, da diese in der Regel nicht den Anforderungen genügen. Mit Schlüsselgenerierungs-Funktionen (Key Derivation Function, KDF) können Schlüssel mit pseudozufälligen Zeichen generiert werden. Ein wesentlicher Bestandteil einer KDF ist eine Pseudozufallsfunktion (Pseudorandom Function, PRF). PRFs basieren häufig auf Hashfunktionen oder Stromchiffren.
       <newline />
       Eine PRF generiert Zeichenketten mit pseudozufälligen Zeichen. Das Ziel einer Hashfunktion ist allerdings nicht die Generierung von pseudozufälligen Zeichenketten. Essentiell für eine PRF ist ein geheimer Schlüssel (Bemerkung: Der geheime Schlüssel ist nicht das SKM oder eine Saat).<newline /><newline />
     </section>

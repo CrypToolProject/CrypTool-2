@@ -32,7 +32,7 @@
     <newline /><newline />
     Die homomorphen Eigenschaften von Paillier und weitere <b>Referenzen</b> werden beschrieben in der Onlinehilfe im
     <internal ref="../Common/Homomorphic Ciphers and their Importance in Cryptography_de.html">Tutorial</internal>
-    "Homomorphe Chiffren und ihre Bedeutung in der Kryptographie" (in der Online-Hilfe unter "Allgemein").
+    "Homomorphe Chiffren und ihre Bedeutung in der Kryptografie" (in der Online-Hilfe unter "Allgemein").
   </introduction>
   <usage lang="en">
     The component has several operation modes, that can be selected in the settings. Depending on the selected mode, the component requires different inputs.

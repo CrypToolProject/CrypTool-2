@@ -18,7 +18,7 @@
   <keywords lang="ru">протокол, bennet, brassard, 1984, фотон, фотоны, поляризация, свет, квант, физика, alice, bob</keywords>
   <title lang="de">BB84-Schlüsselaustausch</title>
   <summary lang="de">Anwenden des <i>B84-Schlüsselaustauschs</i></summary>
-  <description lang="de">Das BB84-Protokoll stellt eines der modernsten kryptographischen Verfahren auf Basis der Quantenphysik dar. Mit Hilfe von polarisierten Photonen wird ein Schlüssel über einen öffentlichen, 
+  <description lang="de">Das BB84-Protokoll stellt eines der modernsten kryptografischen Verfahren auf Basis der Quantenphysik dar. Mit Hilfe von polarisierten Photonen wird ein Schlüssel über einen öffentlichen, 
   unsicheren Kanal ausgetauscht. Dieser Schlüssel kann im Anschluss für die Anwendung einer symmetrischen Chiffre verwendet werden. <newline /><newline />
   Quelle: <external ref="http://de.wikipedia.org/wiki/Quantenschl%C3%BCsselaustausch" /></description>
   <keywords lang="de">protokoll, schlüssel, photonen, polarisation, licht, quanten, physik, alice, bob</keywords>

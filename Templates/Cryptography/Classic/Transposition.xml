@@ -15,8 +15,8 @@ Source: <external ref="http://en.wikipedia.org/wiki/Transposition_cipher" /></de
   <keywords lang="ru">перестановка</keywords>
   <title lang="de">Transpositions-Chiffre</title>
   <summary lang="de">Benutzung der <i>Transpositions</i>-Chiffre</summary>
-  <description lang="de">In der Kryptographie ist die Transposition eine der beiden grundlegenden Verschlüsselungsklassen. Dabei werden die Zeichen einer Botschaft (des Klartextes) umsortiert. Jedes Zeichen bleibt zwar unverändert erhalten, jedoch wird die Stelle, an der es steht, geändert. Dies steht im Gegensatz zu der Klasse der (monoalphabetischen oder polyalphabetischen) Substitution, bei der jedes Zeichen des Klartextes zwar seinen Platz behält, jedoch durch ein anderes Zeichen ersetzt („substituiert“) wird.<newline /><newline />
-Quelle: <external ref="http://de.wikipedia.org/wiki/Transposition_(Kryptographie)" /></description>
+  <description lang="de">In der Kryptografie ist die Transposition eine der beiden grundlegenden Verschlüsselungsklassen. Dabei werden die Zeichen einer Botschaft (des Klartextes) umsortiert. Jedes Zeichen bleibt zwar unverändert erhalten, jedoch wird die Stelle, an der es steht, geändert. Dies steht im Gegensatz zu der Klasse der (monoalphabetischen oder polyalphabetischen) Substitution, bei der jedes Zeichen des Klartextes zwar seinen Platz behält, jedoch durch ein anderes Zeichen ersetzt („substituiert“) wird.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Transposition_(Kryptografie)" /></description>
   <keywords lang="de">Transposition</keywords>
   <icon file="Transposition.png" />
   <relevantPlugins>
