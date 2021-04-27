@@ -12,7 +12,7 @@
   <keywords>hkdf, kkpf, KKDF, kdf, hash, key derivation function, random</keywords>
   <keywords lang="zh">hkdf，kkpf，KKDF，kdf，哈希，密钥派生函数，随机</keywords>
   <keywords lang="ru">hkdf, kkpf, KKDF, kdf, хэш, функция деривации ключа</keywords>
-  <title lang="de">KDF Performance Vergleich (ohne Präsentation)</title>
+  <title lang="de">KDF-Performance-Vergleich (ohne Präsentation)</title>
   <summary lang="de">Vergleich von 3 verschiedenen Schlüsselgenerierungs-Funktionen (Key Derivation Functions, KDFs). Alle 3 KDFs (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) werden direkt ausgeführt (und NICHT zusätzlich Schritt-für-Schritt durch eine Präsentation erklärt).</summary>
   <description lang="de">Diese Vorlage zeigt, wie die 3 verschiedenen Key Derivation Functions funktionieren (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) und wie schnell diese sind.</description>
   <keywords lang="de">hkdf, kkpf, KKDF, kdf, hash, schlüsselgenerierungs-funktion, key derivation function, zufall</keywords>

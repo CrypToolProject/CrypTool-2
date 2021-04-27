@@ -12,7 +12,7 @@
   <keywords>advanced, Daemen, Rijmen, standard, Rijndael, symmetric, keysearcher, Attack, Analysis</keywords>
   <keywords lang="zh">高级，Daemen，Rijmen，标准，Rijndael，对称，keysearcher，攻击，分析</keywords>
   <keywords lang="ru">продвинутый, Daemen, Rijmen, стандарт, Rijndael, симметричный, keyearcher, Attack, Analysis</keywords>
-  <title lang="de">AES Known-Plaintext-Analyse (1)</title>
+  <title lang="de">AES-Known-Plaintext-Analyse (1)</title>
   <summary lang="de">Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes</summary>
   <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Abschnittes des Klartextes (Crib). Der <i>KeySearcher</i> erhält hierzu einen verschlüsselten Text als Eingabe und probiert alle Schlüssel des angegebenen Schlüsselraumes. Die resultierenden Klartexte werden dann mit dem Crib verglichen und der Klartext, der dem Crib am besten entspricht, wird ausgegeben.</description>
   <keywords lang="de">symmetrisch, Daemen, Rijmen, Standard, Rijndael, Keysearcher, Angriff</keywords>

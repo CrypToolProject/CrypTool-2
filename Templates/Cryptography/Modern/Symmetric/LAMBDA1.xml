@@ -9,7 +9,7 @@
   <description lang="zh">该模板显示了LAMBDA1分组密码的用法。一种基于数据加密标准的算法，该算法于1980年代在德国东部开发。操作模式是密码反馈模式（CFB）。</description>
   <keywords>Block Cipher, DDR, GDR</keywords>
   <keywords lang="zh">分组密码，DDR，GDR</keywords>
-  <title lang="de">LAMBDA1 Blockchiffre</title>
+  <title lang="de">LAMBDA1-Blockchiffre</title>
   <summary lang="de">Benutzung des Plugins <i>LAMBDA1</i></summary>
   <description lang="de">Diese Vorlage zeigt die mögliche Benutzung der <i>LAMBDA1</i>-Blockchiffre. Der Algorithmus basiert auf dem Data Encryption Standard (DES) und wurde in den 1980ern in der DDR entwickelt.
   Das Plugin nutzt den Cipher Feedback Mode (CFB).</description>
@@ -27,7 +27,7 @@
     <replacement key="$IV" value="B18748F0 339A30C6 " />
     <replacement key="$StringDecoder" value="Text-Dekodierer" />
     <replacement key="$HexDecoder" value="Hex-Dekodierer" />
-    <replacement key="$Plugin" value="LAMBDA1 Blockchiffre" />
+    <replacement key="$Plugin" value="LAMBDA1-Blockchiffre" />
     <replacement key="$HexEncoder" value="Ausgabe-Enkodierer" />
     <replacement key="$OutputData" value="Ausgabe" />
     <replacement key="$Text" value="Diese Vorlage zeigt die Benutzung der Blockchiffre {\b LAMBDA1}. Beliebige Daten (in diesem Fall Text) können in das Textfeld {\b Eingabedaten} eingegeben werden. Diese werden dann mit dem Algorithmus {\b LAMBDA1} im Cipher Feedback Mode (CFB) verschlüsselt. Der {\b Initialisierungsvektor} kann angegeben werden. Der resultierende Geheimtext wird im Feld {\b Ausgabedaten} auf der rechten Seite in hexadezimaler Darstellung ausgegeben. Unvollständige Blöcke werden mit Nullen aufgefüllt. \line\line Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in das Feld {\b Eingabedaten} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat im Feld {\b Text-Dekodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b LAMBDA1}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format im Feld {\b Ausgabe-Enkodierer} muss auf Text und die Kodierung auf den Wert des ursprünglichen Klartexts gesetzt werden." />

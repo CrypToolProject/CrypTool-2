@@ -8,7 +8,7 @@
   <description lang="zh">这是一种文本隐写术技术，其中秘密消息使用零宽度空格隐藏在另一个文本中。</description>
   <keywords lang="en">Steganography, Text Steganography, Zero width spaces</keywords>
   <keywords lang="zh">隐写术，文字隐写术，零宽度空间</keywords>
-  <title lang="de">Text Steganographie mit Leerzeichen ohne Breite</title>
+  <title lang="de">Text-Steganographie mit Leerzeichen ohne Breite</title>
   <summary lang="de">Geheime Nachrichten in einem Text verstecken und wieder extrahieren</summary>
   <description lang="de">Das ist eine Text-Steganographie-Technik, die eine geheime Nachricht in einem Text versteckt, indem sie Leerzeichen nutzt, die keine Breite haben</description>
   <keywords lang="de">Steganographie, Text-Steganographie, Leerzeichen ohne Breite</keywords>

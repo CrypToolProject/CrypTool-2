@@ -12,9 +12,9 @@
   <keywords>http, request, webserver, protocol, web, browser, internet</keywords>
   <keywords lang="zh">http，请求，Web服务器，协议，Web，浏览器，互联网</keywords>
   <keywords lang="ru">http, request, webserver, protocol, web, browser, internet</keywords>
-  <title lang="de">HTTP Anfrage</title>
-  <summary lang="de">Mache eine HTTP Anfrage an einen Webserver</summary>
-  <description lang="de">Diese Vorlage zeigt wie eine HTTP Anfrage an einen Webserver gemacht werden kann.</description>
+  <title lang="de">HTTP-Anfrage</title>
+  <summary lang="de">Mache eine HTTP-Anfrage an einen Webserver</summary>
+  <description lang="de">Diese Vorlage zeigt wie eine HTTP-Anfrage an einen Webserver gemacht werden kann.</description>
   <keywords lang="de">HTTP, Anfrage, Webserver, Protokoll, Netz, Browser,Internet</keywords>
   <icon file="HTTPRequest.png" />
   <relevantPlugins>

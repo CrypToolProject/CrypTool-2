@@ -8,7 +8,7 @@
   <description lang="zh">这是一种文本隐写术技术，其中通过将封面文本中的消息字母更改为大写字母来隐藏秘密消息。</description>
   <keywords lang="en">Steganography, Text Steganography, Capital letters</keywords>
   <keywords lang="zh">隐写术，文字隐写术，大写字母</keywords>
-  <title lang="de">Text Steganographie mit Großbuchstaben</title>
+  <title lang="de">Text-Steganographie mit Großbuchstaben</title>
   <summary lang="de">Geheime Nachrichten in einem Text verstecken und wieder extrahieren</summary>
   <description lang="de">Das ist eine Text-Steganographie Technik, wo eine geheime Nachricht in einem Text versteckt wird indem die Buchstaben der geheimen Nachricht im Covertext großgeschrieben werden.</description>
   <keywords lang="de">Steganographie, Text-Steganographie, Großbuchstaben</keywords>

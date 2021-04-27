@@ -12,7 +12,7 @@
   <keywords>message, digest, Hash, Rivest</keywords>
   <keywords lang="zh">信息，摘要，哈希，Rivest</keywords>
   <keywords lang="ru">сообщение, дайджест, Hash, Rivest</keywords>
-  <title lang="de">SHA-1 Kollision</title>
+  <title lang="de">SHA-1-Kollision</title>
   <summary lang="de">Zeigt eine Kollision der <i>SHA-1</i>-Hash-Funktion</summary>
   <description lang="de">Diese Vorlage zeigt eine Kollision der <i>SHA-1</i>-Hash-Funktion.</description>
   <keywords lang="de">hash</keywords>

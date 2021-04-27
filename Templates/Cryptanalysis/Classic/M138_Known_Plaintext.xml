@@ -12,7 +12,7 @@
   <keywords>M-138, Known-Plaintext, Known Plaintext, M138</keywords>
   <keywords lang="zh">M-138，已知明文，已知明文，M138</keywords>
   <keywords lang="ru">М-138, Известный-Обычный, Известный Plaintext, M138</keywords>
-  <title lang="de">Known-Plaintext Angriff auf M-138</title>
+  <title lang="de">Known-Plaintext-Angriff auf M-138</title>
   <summary lang="de">Kryptoanalyse der <i>M-138</i> mit Hilfe eines Known-Plaintext Angriffs</summary>
   <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>M-138</i> mit einem Known-Plaintext Angriff.</description>
   <keywords lang="de">M-138, M138, Known-Plaintext, Bekannter Klartext</keywords>

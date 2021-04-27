@@ -12,7 +12,7 @@
   <keywords>hash, blockhash, image, hamming, equality, comparison, smooth</keywords>
   <keywords lang="zh">哈希，blockhash，图像，汉明，相等，比较，平滑</keywords>
   <keywords lang="ru">хеш, блокхаш, изображение, хамминг, равенство, сравнение, плавное</keywords>
-  <title lang="de">BildHash -- Weichzeichnungs-Vergleich</title>
+  <title lang="de">BildHash – Weichzeichnungs-Vergleich</title>
   <summary lang="de">Vergleich eines Bildes mit einer weichgezeichneten Version des gleichen Bildes, ihre Hamming-Distanz und prozentuale Gleichheit</summary>
   <description lang="de">Diese Vorlage erzeugt einen Blockhash zu einem gewählten Bild. Das gleiche Bild wird dann weich gezeichnet und wiederum dessen Hash berechnet. Diese beiden Hashes und ihre Unterschiede werden dargestellt. Außerdem berechnet diese Vorlage auch die Hamming-Distanz zwischen den beiden Hashes und gibt die prozentuale Gleichheit der beiden Bilder an.</description>
   <keywords lang="de">hash, blockhash, image, hamming, gleichheit, vergleich, weich</keywords>

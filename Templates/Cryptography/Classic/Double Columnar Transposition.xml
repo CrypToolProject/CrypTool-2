@@ -12,7 +12,7 @@
   <summary lang="ru">Использование шифра <i> Transposition </i> для построения двухколоночного шифра транспонирования</summary>
   <description lang="ru">Этот шаблон показывает, как построить двухколоночную транспозицию с использованием двух компонентов транспонирования. Во-первых, открытый текст шифруется с использованием одного ключевого слова. Затем промежуточный зашифрованный текст шифруется с использованием второго ключевого слова. После этого два ключевых слова используются для дополнительной расшифровки окончательного зашифрованного текста.</description>
   <keywords lang="ru">перестановка, Doppelwürfel</keywords>
-  <title lang="de">Doppelte Spaltentranspositionschiffre</title>
+  <title lang="de">Doppelte Spaltentranspositions-Chiffre</title>
   <summary lang="de">Benutzung der <i>Transpositions</i>-Chiffre um eine doppelte Spaltentransposition zu bauen</summary>
   <description lang="de">Diese Vorlage zeigt, wie eine doppelte Spaltentransposition mithilfe von zwei Transpositionschiffre-Komponenten erstellt wird. Zunächst wird der Klartext mit einem Schlüsselwort verschlüsselt. Anschließend wird der Zwischen-Geheimtext mit einem zweiten Schlüsselwort verschlüsselt. Danach werden die beiden Schlüsselwörter verwendet, um den endgültigen Geheimtext wieder zu entschlüsseln.</description>
   <keywords lang="de">Transposition, Doppelte Spaltentransposition, Doppelwürfel</keywords>

@@ -8,7 +8,7 @@
   <description lang="zh">这是一种文本隐写术技术，其中，通过在封面文本中标记消息的字母来隐藏秘密消息的位。</description>
   <keywords lang="en">Steganography, Text Steganography, Marking letters</keywords>
   <keywords lang="zh">隐写术，文字隐写术，标记字母</keywords>
-  <title lang="de">Text Steganographie mit Zeichenmarkierung (binärer Modus)</title>
+  <title lang="de">Text-Steganographie mit Zeichenmarkierung (binärer Modus)</title>
   <summary lang="de">Geheime Nachrichten in einem Text verstecken und wieder extrahieren</summary>
   <description lang="de">Das ist eine Text-Steganographie-Technik, die die Bits einer geheimen Nachricht in einem Text versteckt, indem die Buchstaben der geheimen Nachricht im Covertext entsprechend markiert werden.</description>
   <keywords lang="de">Steganographie, Text-Steganographie, Buchstaben markieren</keywords>

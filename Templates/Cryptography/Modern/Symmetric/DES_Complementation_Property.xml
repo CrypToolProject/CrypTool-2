@@ -12,7 +12,7 @@
   <keywords>DES, complementation</keywords>
   <keywords lang="zh">DES，互补</keywords>
   <keywords lang="ru">DES, дополнение</keywords>
-  <title lang="de">DES Komplement-Eigenschaft</title>
+  <title lang="de">DES-Komplement-Eigenschaft</title>
   <summary lang="de">Zeigt die Komplement-Eigenschaft der <i>DES</i>-Chiffre</summary>
   <description lang="de">Durch die Komplement-Eigenschaft lässt sich mit einem Chosen-Plaintext-Angriff bei einer vollständigen Schlüsselsuche der Suchraum des DES auf 2^55 Schlüssel halbieren. Diese Vorlage zeigt diese Eigenschaft des DES.</description>
   <keywords lang="de">DES, Komplement</keywords>

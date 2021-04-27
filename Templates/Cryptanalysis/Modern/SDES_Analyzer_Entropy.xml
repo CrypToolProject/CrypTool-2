@@ -12,7 +12,7 @@
   <keywords>advanced, standard, NIST, Rijndael, Daemen, Rijmen, symmetric, keysearcher, Attack, Analysis</keywords>
   <keywords lang="zh">高级，标准，NIST，Rijndael，Daemen，Rijmen，对称，keysearcher，攻击，分析</keywords>
   <keywords lang="ru">продвинутый, стандартный, NIST, Rijndael, Daemen, Rijmen, симметричный, keyearcher, Attack, Analysis</keywords>
-  <title lang="de">SDES Analyse per Entropie</title>
+  <title lang="de">SDES-Analyse per Entropie</title>
   <summary lang="de">Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion</summary>
   <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion.</description>
   <keywords lang="de">symmetrisch, NIST, Rijndael, Daemen, Rijmen, Standard, Keysearcher, Angriff</keywords>

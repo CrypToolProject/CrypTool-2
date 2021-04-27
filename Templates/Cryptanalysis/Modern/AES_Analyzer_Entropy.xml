@@ -12,7 +12,7 @@
   <keywords>advanced, standard, NIST, Rijndael, Daemen, Rijmen, symmetric, keysearcher, Attack, Analysis</keywords>
   <keywords lang="zh">高级，标准，NIST，Rijndael，Daemen，Rijmen，对称，keysearcher，攻击，分析</keywords>
   <keywords lang="ru">продвинутый, стандартный, NIST, Rijndael, Daemen, Rijmen, симметричный, keyearcher, Attack, Analysis</keywords>
-  <title lang="de">AES Analyse per Entropie (1)</title>
+  <title lang="de">AES-Analyse per Entropie (1)</title>
   <summary lang="de">Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion</summary>
   <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion. Der <i>KeySearcher</i> erhält hierzu einen verschlüsselten Text als Eingabe und probiert alle Schlüssel des angegebenen Schlüsselraumes. Die resultierenden Klartexte werden mittels der Entropie-Funktion bewertet, und der Klartext mit der besten Bewertung wird ausgegeben.</description>
   <keywords lang="de">symmetrisch, NIST, Rijndael, Daemen, Rijmen, Standard, Keysearcher, Angriff</keywords>
