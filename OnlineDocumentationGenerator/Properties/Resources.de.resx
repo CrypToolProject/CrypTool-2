@@ -214,7 +214,7 @@
     <value>Protokolle</value>
   </data>
   <data name="Category_Steganography" xml:space="preserve">
-    <value>Steganographie</value>
+    <value>Steganografie</value>
   </data>
   <data name="Category_ToolsBoolean" xml:space="preserve">
     <value>Werkzeuge - Boolean</value>
@@ -296,7 +296,7 @@
     <value>Protokolle</value>
   </data>
   <data name="Category_FL_Steganography" xml:space="preserve">
-    <value>Steganographie</value>
+    <value>Steganografie</value>
   </data>
   <data name="Category_FL_ToolsBoolean" xml:space="preserve">
     <value>Werkzeuge\ Boolean</value>

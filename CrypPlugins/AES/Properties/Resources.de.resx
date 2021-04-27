@@ -140,7 +140,7 @@
     <value>AES-Sklave</value>
   </data>
   <data name="CryptoAlgorithmCaption" xml:space="preserve">
-    <value>Kryptographischer Algorithmus</value>
+    <value>Kryptografischer Algorithmus</value>
   </data>
   <data name="CryptoAlgorithmTooltip" xml:space="preserve">
     <value>Welchen symmetrischen Algorithmus wollen Sie verwenden?</value>

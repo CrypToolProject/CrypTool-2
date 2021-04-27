@@ -10,7 +10,7 @@
   </introduction>
   <introduction lang="zh-CN">该组件实现了文本隐写术，该隐匿术将秘密消息隐藏在封面文本内，有关隐写术的更多信息，请参见。可以使用多种技术隐藏秘密消息。这包括：使用零宽度空格，大写字母和用特殊字符标记字母。</introduction>
   <introduction lang="de-DE">
-    Diese Komponente implementiert Text-Steganographie, die eine geheime Nachricht in einem Covertext versteckt. Weitere Informationen zur Steganographie finden Sie unter <ref id="steganographywiki" />. <newline />
+    Diese Komponente implementiert Text-Steganografie, die eine geheime Nachricht in einem Covertext versteckt. Weitere Informationen zur Steganografie finden Sie unter <ref id="steganographywiki" />. <newline />
     Die geheime Nachricht kann mit verschiedenen Verfahren versteckt werden. Dies umfasst: Verwenden von Leerzeichen ohne Breite, Großbuchstaben und Markieren von Buchstaben mit Sonderzeichen.
   </introduction>
   <usage lang="en">
@@ -58,8 +58,8 @@
     <linkReference id="steganographywiki">
       <link url="https://en.wikipedia.org/wiki/Steganography" lang="en" />
       <caption lang="en">Steganography (Wikipedia)</caption>
-      <link url="https://de.wikipedia.org/wiki/Steganographie" lang="de-DE" />
-      <caption lang="de-DE">Steganographie (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Steganografie" lang="de-DE" />
+      <caption lang="de-DE">Steganografie (Wikipedia)</caption>
     </linkReference>
   </references>
 </documentation>

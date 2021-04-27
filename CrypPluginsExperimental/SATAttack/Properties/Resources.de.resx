@@ -289,7 +289,7 @@
     <value>Eingabestrom</value>
   </data>
   <data name="InputStreamTooltip" xml:space="preserve">
-    <value>Verbinden Sie den Eingabestrom mit einer Texteingabe-Komponente, in der der ANSI-C-Code einer kryptographischen Funktion steht.</value>
+    <value>Verbinden Sie den Eingabestrom mit einer Texteingabe-Komponente, in der der ANSI-C-Code einer kryptografischen Funktion steht.</value>
   </data>
   <data name="InputVariablesSizeFailureString" xml:space="preserve">
     <value>Die Ermittlung der Größe der Eingabevariablen ist fehlgeschlagen.</value>

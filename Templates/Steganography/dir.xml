@@ -3,10 +3,10 @@
   <name lang="en">Steganography</name>
   <name lang="zh">隐写术</name>
   <name lang="ru">стеганография</name>
-  <name lang="de">Steganographie</name>
+  <name lang="de">Steganografie</name>
   <summary lang="en">The folder "Steganography" contains templates that demonstrate steganographical protocols.</summary>
   <summary lang="zh">文件夹“ Steganography”包含用于演示隐写协议的模板。</summary>
   <summary lang="ru">В папке «Стеганография» содержатся шаблоны, демонстрирующие стеганографические протоколы.</summary>
-  <summary lang="de">Das Verzeichnis "Steganographie" enthält Vorlagen, die steganographische Protokolle demonstrieren.</summary>
+  <summary lang="de">Das Verzeichnis "Steganografie" enthält Vorlagen, die steganografische Protokolle demonstrieren.</summary>
   <icon file="Steganography.png" />
 </directory>

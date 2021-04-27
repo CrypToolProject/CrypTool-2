@@ -193,7 +193,7 @@
     <value>LLL-Algorithmus</value>
   </data>
   <data name="titleMainWindow" xml:space="preserve">
-    <value>Lernprogramm zur gitterbasierten Kryptografi</value>
+    <value>Lernprogramm zur gitterbasierten Kryptografie</value>
   </data>
   <data name="errorNoLatticeEntered" xml:space="preserve">
     <value>Bitte geben Sie ein neues Gitter ein.</value>
@@ -364,7 +364,7 @@
     <value>Obere Schranke für minimalen Vektor (Hermite-Konstante)</value>
   </data>
   <data name="LatticeSettings" xml:space="preserve">
-    <value>Gitterbasierte Kryptografi</value>
+    <value>Gitterbasierte Kryptografie</value>
   </data>
   <data name="labelDensity" xml:space="preserve">
     <value>Gitterdichte / Rel. zur optimalen Dichte:</value>
@@ -556,10 +556,10 @@
     <value>Modus:</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Gitterbasierte Kryptografi</value>
+    <value>Gitterbasierte Kryptografie</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Gitterbasierte Kryptografi</value>
+    <value>Gitterbasierte Kryptografie</value>
   </data>
   <data name="content" xml:space="preserve">
     <value>Inhalt</value>

@@ -382,7 +382,7 @@ namespace Primes.OnlineHelp.HelpFiles {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die &lt;h2&gt;Die Erzeugung von Primzahlen&lt;/h2&gt;
         ///
-        ///Primzahlen sind für die Kryptografi von großer Bedeutung.
+        ///Primzahlen sind für die Kryptografie von großer Bedeutung.
         ///So wird das Schlüsselpaar für das RSA-Verfahren mit zwei großen Primzahlen erzeugt.&lt;br /&gt;
         ///Der Dialog teilt sich in zwei Funktionsbereiche.
         ///Zum einen können beliebig viele und beliebig große Primzahlen generiert werden.
@@ -412,7 +412,7 @@ namespace Primes.OnlineHelp.HelpFiles {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die &lt;h2&gt;Erzeugung zufälliger Primzahlen&lt;/h2&gt;
         ///
-        ///Primzahlen werden in kryptographischen Verfahren wie RSA verwendet. Das RSA-Schlüsselpaar wird aus zwei sehr großen Primzahlen gebildet.
+        ///Primzahlen werden in kryptografischen Verfahren wie RSA verwendet. Das RSA-Schlüsselpaar wird aus zwei sehr großen Primzahlen gebildet.
         ///Diese Zahlen werden zufällig bestimmt. &lt;br /&gt;
         ///Der Dialog erzeugt jeweils 10 zufällige Primzahlen mit 20, 50 oder 100 Stellen. Außerdem können Primzahlen mit bis zu 500 Stellen mit dem Modul &lt;a href=&quot;help://Generation_RandomNTimesM&quot; &gt;&quot;n x m-stellig&quot;&lt;/a&gt; erzeugt werden.
         /// ähnelt.
@@ -530,7 +530,7 @@ namespace Primes.OnlineHelp.HelpFiles {
         /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die &lt;h2&gt;Modulare Potenzen&lt;/h2&gt;
         ///
-        ///Die Berechnung von &lt;strong&gt;Potenzen&lt;/strong&gt; einer Zahl in einem &lt;a href=&quot;http://de.wikipedia.org/wiki/Restklassenring&quot; target=&quot;_blank&quot;&gt;Restklassenring&lt;/a&gt; spielt in vielen kryptographischen Verfahren eine wichtige Rolle (z.B. RSA). Der Grund hierfür ist, dass Potenzen in Restklassenringen sehr schnell berechnet werden können, aber für die Umkehrung, nämlich die Berechnung des diskreten Logarithmus, keine effizienten Algorithmen bekannt sind und diese in großen Ringen nur dann  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///Die Berechnung von &lt;strong&gt;Potenzen&lt;/strong&gt; einer Zahl in einem &lt;a href=&quot;http://de.wikipedia.org/wiki/Restklassenring&quot; target=&quot;_blank&quot;&gt;Restklassenring&lt;/a&gt; spielt in vielen kryptografischen Verfahren eine wichtige Rolle (z.B. RSA). Der Grund hierfür ist, dass Potenzen in Restklassenringen sehr schnell berechnet werden können, aber für die Umkehrung, nämlich die Berechnung des diskreten Logarithmus, keine effizienten Algorithmen bekannt sind und diese in großen Ringen nur dann  [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string Modular_Exponentiation {
             get {

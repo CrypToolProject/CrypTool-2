@@ -253,7 +253,7 @@
     <value>Setze die Wartezeit zwischen der Ausführung von Funktionen (in Millisekunden)</value>
   </data>
   <data name="Steganography_Label" xml:space="preserve">
-    <value>Steganographie:</value>
+    <value>Steganografie:</value>
   </data>
   <data name="Symmetricblock_Label" xml:space="preserve">
     <value>Symmetrisch (Block):</value>

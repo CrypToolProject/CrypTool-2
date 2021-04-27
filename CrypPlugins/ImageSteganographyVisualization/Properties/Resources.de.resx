@@ -277,7 +277,7 @@
     <value>Geben Sie die geheime Nachricht ein, die im Bild versteckt werden soll</value>
   </data>
   <data name="Intro0Text1" xml:space="preserve">
-    <value>Steganographie ist das Verfahren zum Verstecken geheimer Daten in nicht-geheimen Dateien, um die Tatsache zu verbergen, dass eine geheime Nachricht übermittelt wird.</value>
+    <value>Steganografie ist das Verfahren zum Verstecken geheimer Daten in nicht-geheimen Dateien, um die Tatsache zu verbergen, dass eine geheime Nachricht übermittelt wird.</value>
   </data>
   <data name="Intro0Text2" xml:space="preserve">
     <value>Der Begriff kombiniert die griechischen Wörter steganós, was versteckt bedeutet, und graph, was Schreiben bedeutet.</value>
@@ -286,10 +286,10 @@
     <value>Die Prozedur codiert Daten auf eine Weise, die so subtil ist, dass die Änderungen nicht bemerkt werden können.</value>
   </data>
   <data name="Intro0Text4" xml:space="preserve">
-    <value>Steganographie kann mit Kryptografi kombiniert werden, um mehr Sicherheit zu gewährleisten bei vertraulichen Daten.</value>
+    <value>Steganografie kann mit Kryptografie kombiniert werden, um mehr Sicherheit zu gewährleisten bei vertraulichen Daten.</value>
   </data>
   <data name="Intro1Text1" xml:space="preserve">
-    <value>Dieses Diagramm zeigt, wie das Steganographie Verfahren normalerweise über einen unsicheren Kommunikationskanal funktioniert.</value>
+    <value>Dieses Diagramm zeigt, wie das Steganografie Verfahren normalerweise über einen unsicheren Kommunikationskanal funktioniert.</value>
   </data>
   <data name="Intro1Text2" xml:space="preserve">
     <value>Die geheime Nachricht kann verschlüsselt (Geheimtext) oder Klartext sein.</value>
@@ -379,10 +379,10 @@
     <value>Modus</value>
   </data>
   <data name="ModeList1" xml:space="preserve">
-    <value>LSB Steganographie</value>
+    <value>LSB Steganografie</value>
   </data>
   <data name="ModeList2" xml:space="preserve">
-    <value>BPCS Steganographie</value>
+    <value>BPCS Steganografie</value>
   </data>
   <data name="ModeTooltip" xml:space="preserve">
     <value>Wählen Sie einen Modus aus</value>
@@ -424,7 +424,7 @@
     <value>Ebene: </value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Bildsteganographie</value>
+    <value>Bild-Steganografie</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Eine geheime Nachricht in einem Bild verstecken</value>
@@ -478,10 +478,10 @@
     <value>Los geht's</value>
   </data>
   <data name="SteganographyLabel" xml:space="preserve">
-    <value>Steganographie</value>
+    <value>Steganografie</value>
   </data>
   <data name="SteganographyModelLabel" xml:space="preserve">
-    <value>Steganographie Model</value>
+    <value>Steganografie Model</value>
   </data>
   <data name="StegModelUrl" xml:space="preserve">
     <value>images/model_de.png</value>

@@ -582,7 +582,7 @@ Nachricht- und Schlüsseländerungen können wie folgt erfolgen:</value>
     <value>Anleitung</value>
   </data>
   <data name="InstructionsPrepDescription" xml:space="preserve">
-    <value>Die Verfahren unter der Kategorie "Aufbereitete Verfahren" sind innerhalb des Avalanche-Plugins implementiert. Deshalb kann das Plugin nicht nur die Veränderungen beim Endergebnis der kryptographischen Funktion (letzter Schritt) anzeigen, sondern auch für alle Zwischenschritte.</value>
+    <value>Die Verfahren unter der Kategorie "Aufbereitete Verfahren" sind innerhalb des Avalanche-Plugins implementiert. Deshalb kann das Plugin nicht nur die Veränderungen beim Endergebnis der kryptografischen Funktion (letzter Schritt) anzeigen, sondern auch für alle Zwischenschritte.</value>
   </data>
   <data name="ShowChangeTitleAES" xml:space="preserve">
     <value>Anzeige veränderter Eingabedaten AES-</value>

@@ -256,7 +256,7 @@
     <value>DKA-ToyCipher</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Diese Komponente enthält verschiedene symmetrische Blockchiffren zur Verschlüsselung. Die Chiffren sind sehr einfach und kurz, um an ihnen kryptographische Prinzipien oder kryptoanalytische Verfahren demonstrieren zu können.</value>
+    <value>Diese Komponente enthält verschiedene symmetrische Blockchiffren zur Verschlüsselung. Die Chiffren sind sehr einfach und kurz, um an ihnen kryptografische Prinzipien oder kryptoanalytische Verfahren demonstrieren zu können.</value>
   </data>
   <data name="TablePermutationInput" xml:space="preserve">
     <value>Position in Eingabe</value>

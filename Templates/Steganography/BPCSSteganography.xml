@@ -9,11 +9,11 @@
   <description lang="zh">位平面复杂度分段（BPCS）是一种隐匿术技术，用于在封面图像中隐藏秘密消息，该技术可以隐藏容量比传统隐秘术技术更高的秘密消息，而无需以人眼可察觉的方式更改图像眼。</description>
   <keywords>Steganography, BPCS, Image steganography</keywords>
   <keywords lang="zh">隐写术，BPCS，图像隐写术</keywords>
-  <title lang="de">Bild-Steganographie mit BPCS</title>
+  <title lang="de">Bild-Steganografie mit BPCS</title>
   <summary lang="de">Geheime Nachrichten in Bilder verstecken und wieder extrahieren</summary>
-  <description lang="de">Die Bit Plane Complexity Segmentation (BPCS) ist eine Steganographietechnik, mit der eine geheime Nachricht in einem Bild versteckt wird. Diese Technik kann geheime Nachrichten verstecken
-  mit einer höheren Kapazität als die klassischen Steganographietechniken, ohne das Bild auf eine Weise zu verändern, die für das menschliche Auge wahrnehmbar ist</description>
-  <keywords lang="de">Steganographie, BPCS, Bild-Steganographie</keywords>
+  <description lang="de">Die Bit Plane Complexity Segmentation (BPCS) ist eine Steganografietechnik, mit der eine geheime Nachricht in einem Bild versteckt wird. Diese Technik kann geheime Nachrichten verstecken
+  mit einer höheren Kapazität als die klassischen Steganografietechniken, ohne das Bild auf eine Weise zu verändern, die für das menschliche Auge wahrnehmbar ist</description>
+  <keywords lang="de">Steganografie, BPCS, Bild-Steganografie</keywords>
   <icon file="ImageSteganography.png" />
   <relevantPlugins>
     <plugin name="ImageSteganographyVisualization" />

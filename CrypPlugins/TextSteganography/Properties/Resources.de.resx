@@ -130,40 +130,40 @@
     <value>Wählen Sie die Aktion</value>
   </data>
   <data name="CoverTextCaption" xml:space="preserve">
-    <value>Cover Text</value>
+    <value>Cover-Text</value>
   </data>
   <data name="CoverTextTooltip" xml:space="preserve">
     <value>Text, in dem die geheime Nachricht versteckt wird</value>
   </data>
   <data name="DotAbove" xml:space="preserve">
-    <value>Punkt über dem Buchstabe</value>
+    <value>Punkt über dem Buchstaben</value>
   </data>
   <data name="DotUnder" xml:space="preserve">
-    <value>Punkt unter dem Buchstabe</value>
+    <value>Punkt unter dem Buchstaben</value>
   </data>
   <data name="MarkingCaption" xml:space="preserve">
     <value>Markierung</value>
   </data>
   <data name="MarkingTooltip" xml:space="preserve">
-    <value>Wählen Sie aus wie die Buchstaben markiert werden sollen</value>
+    <value>Wählen Sie aus, wie die Buchstaben markiert werden sollen</value>
   </data>
   <data name="ModeCaption" xml:space="preserve">
     <value>Modus</value>
   </data>
   <data name="ModeTooltip" xml:space="preserve">
-    <value>Wählen Sie welchen Modus für das Verstecken/Extrahieren benutzt werden soll</value>
+    <value>Wählen Sie aus, welcher Modus für das Verstecken/Extrahieren benutzt werden soll</value>
   </data>
   <data name="NotAllMessageHidden1" xml:space="preserve">
-    <value>Die geheime Nachricht konnte nicht komplett versteckt werden, da nicht alle Buchstaben der Nachricht in geordneter Weise im Cover Text gefunden wurden.</value>
+    <value>Die geheime Nachricht konnte nicht komplett versteckt werden, da nicht alle Buchstaben der Nachricht in geordneter Weise im Cover-Text gefunden wurden.</value>
   </data>
   <data name="NotAllMessageHidden2" xml:space="preserve">
-    <value>Die geheime Nachricht konnte nicht komplett versteckt werden, da die Länge des Cover Texts kürzer als die Anzahl der Bits der geheimen Nachricht </value>
+    <value>Die geheime Nachricht konnte nicht komplett versteckt werden, da die Länge des Cover-Texts kürzer als die Anzahl der Bits der geheimen Nachricht ist</value>
   </data>
   <data name="OffsetTooltip" xml:space="preserve">
-    <value>Geben Sie einen Index ein, wo die Leerzeichen hinzugefügt werden sollen. Dieser Wert soll zwisch 0 und der Länge des Covertexts liegen. </value>
+    <value>Geben Sie einen Index an, an welcher Stelle die Leerzeichen hinzugefügt werden sollen. Dieser Wert muss zwisch 0 und der Länge des Covertexts liegen. </value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Text Steganographie</value>
+    <value>Text-Steganografie</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Geheime Nachricht in Text verstecken</value>
@@ -184,10 +184,10 @@
     <value> Nachrichtenbits anzeigen</value>
   </data>
   <data name="StegoTextCaption" xml:space="preserve">
-    <value>Steg Text</value>
+    <value>Steganografie-Text</value>
   </data>
   <data name="StegoTextTooltip" xml:space="preserve">
-    <value>Cover Text kodiert mit der geheimen Nachricht </value>
+    <value>Cover-Text, kodiert mit der geheimen Nachricht </value>
   </data>
   <data name="ZeroWidthText" xml:space="preserve">
     <value>Leerzeichen ohne Breite, die in der Textausgabe nicht angezeigt werden. </value>

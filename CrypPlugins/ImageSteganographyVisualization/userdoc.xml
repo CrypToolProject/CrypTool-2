@@ -23,7 +23,7 @@
   <usage lang="de-DE">
     Die Komponente benötigt zwei Eingaben für den Versteckprozess: eine geheime Nachricht und ein Coverbild in dem die Nachricht versteckt werden kann. Um die geheime Nachricht einzugeben, benötigen Sie eine Texteingabekomponente. Für das Coverbild können Sie ein Bild mithilfe einer Dateieingabekomponente von Ihrem Computer hochladen.
     Die Ausgabe hier ist das Stego-Bild, daher kann die Bildausgabekomponente verwendet werden um das Bild anzuzeigen, oder Sie können die Dateiausgabekomponente verwenden wenn Sie das Stego-Bild speichern möchten. <newline />
-    Beim Extrahieren einer Nachricht benötigt die Komponente nur das Stego-Bild als Eingabe. Dies kann wiederum ein Bild sein, das von Ihrem Computer hochgeladen wurde, oder die Ausgabe einer Steganographie Komponente, die für das Verstecken einer Nachricht in einem Bild benutzt wurde. Die Ausgabe hier ist die extrahierte geheime Nachricht, die unter Verwendung einer Textausgabekomponente angezeigt werden kann.<newline />
+    Beim Extrahieren einer Nachricht benötigt die Komponente nur das Stego-Bild als Eingabe. Dies kann wiederum ein Bild sein, das von Ihrem Computer hochgeladen wurde, oder die Ausgabe einer Steganografie Komponente, die für das Verstecken einer Nachricht in einem Bild benutzt wurde. Die Ausgabe hier ist die extrahierte geheime Nachricht, die unter Verwendung einer Textausgabekomponente angezeigt werden kann.<newline />
     Wenn Sie diese Komponente benutzen möchten, können Sie auswählen welches Verfahren für das Verstecken und Extrahieren der geheimen Nachricht benutzt werden soll (LSB oder BPCS).
   </usage>
   <presentation lang="en">
@@ -49,7 +49,7 @@
   <presentation lang="de-DE">
     Nach der Ausführung des Modells wird unter der Annahme, dass die Präsentation in den Einstellungen aktiviert ist, die Hauptmenüansicht angezeigt. Das Hauptmenü hilft Ihnen beim Navigieren zwischen den verschiedenen verfügbaren Ansichten, die dabei helfen den Prozess zu visualisieren und ihn besser zu verstehen.
     <newline /><section headline="Einführung:">
-     Diese Ansicht gibt eine Einführung in das Thema Steganographie und erläutert das Konzept der in den Einstellungen gewählten Technik (LSB oder BPCS).
+     Diese Ansicht gibt eine Einführung in das Thema Steganografie und erläutert das Konzept der in den Einstellungen gewählten Technik (LSB oder BPCS).
     </section><newline /><section headline="Bits für den Versteckprozess auswählen:">
       Diese Ansicht ist nur im LSB-Modus vorhanden. In dieser Ansicht können Sie auswählen, welche Bits zum Verstecken der geheimen Nachricht verwendet werden sollen. Jede Bitsgruppe zeigt einen der RGB-Farbkanäle. Standardmäßig sind die LSBs bereits´ausgewählt. Die Schaltflächen der ausgewählten Bits haben eine cyan Hintergrundfarbe. Um ein Bit auszuwählen/abzuwählen, müssen Sie nur auf die Schaltfläche des entsprechenden Bits klicken und es wird aktiviert/deaktiviert.
       Damit die Änderungen vorgenommen werden können, muss der Button "Änderungen übernehmen" in der unteren Leiste geklickt werden. Wenn die Präsentation aktiviert ist, wird kein Versteckvorgang durchgeführt, bis die Bits in dieser Ansicht ausgewählt werden und den Button "Änderungen übernehmen" angeklickt wird.
@@ -66,13 +66,13 @@
     <linkReference id="steganographywiki">
       <link url="https://en.wikipedia.org/wiki/Steganography" lang="en" />
       <caption lang="en">Steganography (Wikipedia)</caption>
-      <link url="https://de.wikipedia.org/wiki/Steganographie" lang="de-DE" />
-      <caption lang="de-DE">Steganographie (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Steganografie" lang="de-DE" />
+      <caption lang="de-DE">Steganografie (Wikipedia)</caption>
     </linkReference>
     <linkReference id="bpcswiki">
       <link url="https://en.wikipedia.org/wiki/BPCS-steganography" />
       <caption lang="en">BPCS-steganography (Wikipedia)</caption>
-      <caption lang="de">BPCS-Steganographie (Wikipedia)</caption>
+      <caption lang="de">BPCS-Steganografie (Wikipedia)</caption>
     </linkReference>
   </references>
 </documentation>
