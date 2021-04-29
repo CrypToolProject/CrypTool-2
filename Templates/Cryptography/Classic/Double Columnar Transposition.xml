@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <title lang="en">Double Columnar Transposition Cipher</title>
+  <description lang="en">This template shows, how to build a double columnar transposition by using two Transposition components. First, the plaintext is encrypted using one keyword. Then, the intermediate ciphertext is encrypted using a second keyword. After that, the two keywords are used to additionally decrypt the final ciphertext.</description>
+  <keywords>Transposition, Double Columnar Transposition, Doppelwürfel</keywords>
   <title lang="zh">双列换位密码</title>
   <summary lang="en">Usage of the <i>Transposition</i> cipher to build a double columnar transposition cipher</summary>
   <summary lang="zh">使用换位密码构建双列式换位密码</summary>
-  <description lang="en">This template shows, how to build a double columnar transposition by using two Transposition components. First, the plaintext is encrypted using one keyword. Then, the intermediate ciphertext is encrypted using a second keyword. After that, the two keywords are used to additionally decrypt the final ciphertext.</description>
   <description lang="zh">该模板显示了如何通过使用两个Transposition组件来构建双列式换位。首先，使用一个关键字对明文进行加密。然后，使用第二关键字对中间密文进行加密。之后，使用这两个关键字来另外解密最终密文。</description>
-  <keywords>Transposition, Double Columnar Transposition, Doppelwürfel</keywords>
   <keywords lang="zh">换位，双柱状换位，双立方体</keywords>
   <title lang="ru">Двойной Шифр ​​Транспозиции</title>
   <summary lang="ru">Использование шифра <i> Transposition </i> для построения двухколоночного шифра транспонирования</summary>
   <description lang="ru">Этот шаблон показывает, как построить двухколоночную транспозицию с использованием двух компонентов транспонирования. Во-первых, открытый текст шифруется с использованием одного ключевого слова. Затем промежуточный зашифрованный текст шифруется с использованием второго ключевого слова. После этого два ключевых слова используются для дополнительной расшифровки окончательного зашифрованного текста.</description>
   <keywords lang="ru">перестановка, Doppelwürfel</keywords>
-  <title lang="de">Doppelte Spaltentranspositions-Chiffre</title>
+  <title lang="de">Doppelte Spaltentransposition</title>
   <summary lang="de">Benutzung der <i>Transpositions</i>-Chiffre um eine doppelte Spaltentransposition zu bauen</summary>
-  <description lang="de">Diese Vorlage zeigt, wie eine doppelte Spaltentransposition mithilfe von zwei Transpositionschiffre-Komponenten erstellt wird. Zunächst wird der Klartext mit einem Schlüsselwort verschlüsselt. Anschließend wird der Zwischen-Geheimtext mit einem zweiten Schlüsselwort verschlüsselt. Danach werden die beiden Schlüsselwörter verwendet, um den endgültigen Geheimtext wieder zu entschlüsseln.</description>
   <keywords lang="de">Transposition, Doppelte Spaltentransposition, Doppelwürfel</keywords>
   <icon file="Transposition.png" />
   <relevantPlugins>

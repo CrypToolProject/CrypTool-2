@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <title lang="en">M-138 Partially-Known Plaintext Attack</title>
+  <description lang="en">This template shows the cryptanalysis of the <i>M-138</i> using a partially-known plaintext attack.</description>
+  <keywords>M-138, Hill-Climbing, Partially-Known Plaintext</keywords>
   <title lang="zh">M-138部分已知的纯文本攻击</title>
+  <description lang="zh">该模板显示了使用部分已知的纯文本攻击对M-138进行的密码分析。</description>
+  <keywords lang="zh">M-138，爬山，部分已知的纯文本</keywords>
   <title lang="ru">M-138 Частично известная атака обычного текста</title>
   <summary lang="en">Cryptanalysis of the <i>M-138</i> using a Partially-Known Plaintext Attack</summary>
   <summary lang="zh">使用部分已知的纯文本攻击对M-138进行密码分析</summary>
   <summary lang="ru">Криптоанализ М-138 с использованием частично известного атака с обычным текстом</summary>
-  <description lang="en">This template shows the cryptanalysis of the <i>M-138</i> using a Partially-Known Plaintext attack.</description>
-  <description lang="zh">该模板显示了使用部分已知的纯文本攻击对M-138进行的密码分析。</description>
   <description lang="ru">Этот шаблон показывает криптоанализ M-138 с использованием частично известной атаки Plaintext.</description>
-  <keywords>M-138, Hill-Climbing, Partially-Known Plaintext</keywords>
-  <keywords lang="zh">M-138，爬山，部分已知的纯文本</keywords>
   <keywords lang="ru">M-138, Hill-Climbing, частично известный обыденный текст</keywords>
   <title lang="de">Partially-Known-Plaintext-Angriff auf M-138</title>
   <summary lang="de">Kryptoanalyse der <i>M-138</i> mit Hilfe eines Partially-Known-Plaintext Angriffs</summary>

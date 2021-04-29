@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <title lang="en">Image steganography with LSB</title>
-  <title lang="zh">用LSB进行图像隐写术</title>
+  <title lang="en">Image Steganography with LSB</title>
   <summary lang="en">Hide and extract messages with LSB Steganography</summary>
   <summary lang="zh">使用LSB隐藏术隐藏和提取消息</summary>
   <description lang="en">In Steganography, LSB is one of the most used techniques to hide a secret message in an image, in this plugin a secret message can be hidden in
   an image using only LSB as default, or with the visualization component you can choose which bits to be used to hide the message and then extract it</description>
-  <description lang="zh">在隐写术中，LSB是在图像中隐藏秘密消息的最常用技术之一，在此插件中，可以仅使用LSB作为默认值将秘密消息隐藏在图像中，或者使用可视化组件选择要隐藏的位用于隐藏消息然后提取消息</description>
   <keywords>Steganography, LSB, Image steganography</keywords>
+  <title lang="zh">用LSB进行图像隐写术</title>
+  <description lang="zh">在隐写术中，LSB是在图像中隐藏秘密消息的最常用技术之一，在此插件中，可以仅使用LSB作为默认值将秘密消息隐藏在图像中，或者使用可视化组件选择要隐藏的位用于隐藏消息然后提取消息</description>
   <keywords lang="zh">隐写术，LSB，图像隐写术</keywords>
   <title lang="de">Bild-Steganografie mit LSB</title>
   <summary lang="de">Geheime Nachrichten in Bilder verstecken und wieder extrahieren</summary>

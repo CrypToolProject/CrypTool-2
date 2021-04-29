@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <title lang="en">M-138 Ciphertext Only Attack</title>
+  <title lang="en">M-138 Ciphertext-Only Attack</title>
+  <description lang="en">This template shows the cryptanalysis of the <i>M-138</i> using a ciphertext-only attack.</description>
+  <keywords>M-138, Hill-Climbing, Ciphertext only</keywords>
   <title lang="zh">M-138仅密文攻击</title>
+  <description lang="zh">该模板显示了仅使用密文攻击的M-138密码分析。</description>
+  <keywords lang="zh">M-138，爬山，仅密文</keywords>
   <title lang="ru">M-138 Только шифрованный текст</title>
   <summary lang="en">Cryptanalysis of the <i>M-138</i> using a Ciphertext only Attack</summary>
   <summary lang="zh">使用仅密文攻击对M-138进行密码分析</summary>
   <summary lang="ru">Криптоанализ M-138 с использованием только атаки Ciphertext</summary>
-  <description lang="en">This template shows the cryptanalysis of the <i>M-138</i> using a Ciphertext only attack.</description>
-  <description lang="zh">该模板显示了仅使用密文攻击的M-138密码分析。</description>
   <description lang="ru">Этот шаблон показывает криптоанализ M-138 с использованием атаки только Ciphertext.</description>
-  <keywords>M-138, Hill-Climbing, Ciphertext only</keywords>
-  <keywords lang="zh">M-138，爬山，仅密文</keywords>
   <keywords lang="ru">M-138, Hill-Climbing, только Ciphertext</keywords>
   <title lang="de">Ciphertext-only-Angriff auf M-138</title>
   <summary lang="de">Kryptoanalyse der <i>M-138</i> mit Hilfe eines Ciphertext-Only Angriffs</summary>

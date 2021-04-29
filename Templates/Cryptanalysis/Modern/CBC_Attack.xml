@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <title lang="en">CBC-Attack</title>
+  <title lang="en">CBC Attack</title>
+  <description lang="en">This template shows an attack on the cipher block chaining (CBC) mode of block ciphers. Blocks are replaced by arbitrary content.</description>
+  <keywords>Cipher Block Chaining, Attack, Mode, Analysis</keywords>
   <title lang="zh">CBC攻击</title>
+  <description lang="zh">该模板显示了对分组密码的密码块链接（CBC）模式的攻击。块被任意内容替换。</description>
+  <keywords lang="zh">密码块链接，攻击，模式，分析</keywords>
   <title lang="ru">CBC-атака</title>
   <summary lang="en">This template shows an attack on the cipher block chaining (CBC) mode of block ciphers.</summary>
   <summary lang="zh">该模板显示了对分组密码的密码块链接（CBC）模式的攻击。</summary>
   <summary lang="ru">Этот шаблон показывает атаку на режим блокировки блока шифрования (CBC) блочных шифров.</summary>
-  <description lang="en">This template shows an attack on the cipher block chaining (CBC) mode of block ciphers. Blocks are replaced by arbitrary content.</description>
-  <description lang="zh">该模板显示了对分组密码的密码块链接（CBC）模式的攻击。块被任意内容替换。</description>
   <description lang="ru">Этот шаблон показывает атаку на режим блокировки блока шифрования (CBC) блочных шифров. Блоки заменяются произвольным контентом.</description>
-  <keywords>Cipher Block Chaining, Attack, Mode, Analysis</keywords>
-  <keywords lang="zh">密码块链接，攻击，模式，分析</keywords>
   <keywords lang="ru">Цепочка блоков шифрования, атака, режим, анализ</keywords>
   <title lang="de">CBC-Angriff</title>
   <summary lang="de">Diese Vorlage zeigt einen Angriff auf den Cipher Block Chaining (CBC) Modus von Blockchiffren.</summary>

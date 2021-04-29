@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <title lang="en">ADFGVX Dictionary Attack</title>
+  <description lang="en">This template shows how a dictionary attack can be implemented and carried out in CrypTool 2 using a dictionary and the ADFGVX cipher.<newline /><newline />The result of this template is the ciphertext that was encrypted with the ADFGVX cipher, but with the transposition undone. In order to get the actual plaintext from this text, it has to be decrypted with another ADFGVX component, that uses the same substitution password and as transposition the identical permutation. The identical transposition is achieved by using "A" as transposition password.</description>
+  <keywords>ADFGX, World War, Telegraphy, Polybius, Square, Column, Row, Polybios, Dictionary, Attack, Analysis</keywords>
   <title lang="zh">ADFGVX词典攻击</title>
+  <description lang="zh">该模板显示了如何使用字典和ADFGVX密码在CrypTool 2中实施和实施字典攻击。此模板的结果是使用ADFGVX密码加密但未进行转置的密文。为了从该文本中获取实际的纯文本，必须使用另一个ADFGVX组件对其进行解密，该组件使用相同的替换密码并转置相同的排列。通过使用“ A”作为换位密码可以实现相同的换位。</description>
+  <keywords lang="zh">ADFGX，世界大战，电报，波利比乌斯，广场，列，行，Polybios，字典，攻击，分析</keywords>
   <title lang="ru">ADFGVX словарная атака</title>
   <summary lang="en">Attack on the <i>ADFGVX</i> cipher</summary>
   <summary lang="zh">攻击ADFGVX密码</summary>
   <summary lang="ru">Атака на шифр <i>ADFGVX</i></summary>
-  <description lang="en">This template shows how a dictionary attack can be implemented and carried out in CrypTool 2 using a dictionary and the ADFGVX cipher.<newline /><newline />The result of this template is the ciphertext that was encrypted with the ADFGVX cipher, but with the transposition undone. In order to get the actual plaintext from this text, it has to be decrypted with another ADFGVX component, that uses the same substitution password and as transposition the identical permutation. The identical transposition is achieved by using "A" as transposition password.</description>
-  <description lang="zh">该模板显示了如何使用字典和ADFGVX密码在CrypTool 2中实施和实施字典攻击。此模板的结果是使用ADFGVX密码加密但未进行转置的密文。为了从该文本中获取实际的纯文本，必须使用另一个ADFGVX组件对其进行解密，该组件使用相同的替换密码并转置相同的排列。通过使用“ A”作为换位密码可以实现相同的换位。</description>
   <description lang="ru">Этот шаблон показывает, как атака словаря может быть реализована и реализована в CrypTool 2 с использованием словаря и шифрования ADFGVX. Результатом этого шаблона является зашифрованный текст, который был зашифрован с помощью шифрования ADFGVX, но с отменой переноса. Чтобы получить фактический текст из этого текста, он должен быть расшифрован другим компонентом ADFGVX, который использует один и тот же пароль подстановки и как транспонирование идентичную перестановку. Точная транспозиция достигается с помощью «А» в качестве пароля перестановки.</description>
-  <keywords>ADFGX, World War, Telegraphy, Polybius, Square, Column, Row, Polybios, Dictionary, Attack, Analysis</keywords>
-  <keywords lang="zh">ADFGX，世界大战，电报，波利比乌斯，广场，列，行，Polybios，字典，攻击，分析</keywords>
   <keywords lang="ru">ADFGX, мировая война, телеграфия, полибий, площадь, колонка, ряд, полибиос, словарь, атака, анализ</keywords>
   <title lang="de">Wörterbuchangriff auf die ADFGVX-Chiffre</title>
   <summary lang="de">Angriff auf die <i>ADFGVX</i>-Chiffre mit Hilfe eines Wörterbuchs</summary>
-  <description lang="de">Diese Vorlage zeigt, wie in CrypTool 2 ein Wörterbuchangriff mit Hilfe eines Wörterbuchs und der ADFGVX-Chiffre implementiert und durchgeführt werden kann.<newline /><newline />Das Resultat dieser Vorlage ist der mit der ADFGVX-Chiffre verschlüsselte Geheimtext, bei dem die Transposition rückgängig gemacht wurde. Um daraus den tatsächlichen Klartext zu rekonstruieren, muss er noch mit einer ADFGVX-Komponente entschlüsselt werden, die dasselbe Substitutionspasswort verwendet, aber die identische Transposition benutzt. Dies kann dadurch erreicht werden, dass als Transpositionspasswort "A" eingestellt wird.</description>
   <keywords lang="de">Weltkrieg, Reihe, Spalte, Quadrat, Wörterbuch, Analyse</keywords>
   <icon file="ADFGX_dictionary_attack.png" />
   <relevantPlugins>

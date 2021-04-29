@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <title lang="en">Blind Signature RSA</title>
+  <title lang="en">Blind Signature with RSA</title>
+  <description lang="en">In this template a three party scenario of a blind signature is demonstrated. Charlie signs a message from Alice so that Bob can verify the message received from Alice. Here, RSA is used for the signature.</description>
+  <keywords>RSA, blind, signature, hash</keywords>
   <title lang="zh">盲签名RSA</title>
+  <description lang="zh">在此模板中，演示了盲人签名的三方方案。查理在爱丽丝（Alice）上签名，以便鲍勃（Bob）可以验证从爱丽丝（Alice）收到的消息。此处，RSA用于签名。</description>
+  <keywords lang="zh">RSA，盲目，签名，哈希</keywords>
   <title lang="ru">Слепая подпись RSA</title>
   <summary lang="en">Usage of the <i>Blind Signature</i> with RSA</summary>
   <summary lang="zh">RSA使用盲签名</summary>
   <summary lang="ru">Использование <i>Слепой подписи</i> с RSA</summary>
-  <description lang="en">In this template a three party scenario of a blind signature is demonstrated. Charlie signs a message from Alice so that Bob can verify the message received from Alice. Here, RSA is used for the signature.</description>
-  <description lang="zh">在此模板中，演示了盲人签名的三方方案。查理在爱丽丝（Alice）上签名，以便鲍勃（Bob）可以验证从爱丽丝（Alice）收到的消息。此处，RSA用于签名。</description>
   <description lang="ru">В этом шаблоне демонстрируется трехсторонний сценарий слепой подписи. Чарли подписывает сообщение от Алисы, чтобы Боб мог проверить сообщение, полученное от Алисы. Здесь RSA используется для подписи.</description>
-  <keywords>RSA, blind, signature, hash</keywords>
-  <keywords lang="zh">RSA，盲目，签名，哈希</keywords>
   <keywords lang="ru">RSA, слепой, подпись, хэш</keywords>
   <title lang="de">Blinde Signatur RSA</title>
   <summary lang="de">Benutzung der <i>Blinden Signatur</i> mit RSA</summary>

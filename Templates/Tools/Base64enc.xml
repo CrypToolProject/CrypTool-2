@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <title lang="en">Text Encoding (E.g. Base64)</title>
-  <title lang="zh">文字编码（例如Base64）</title>
-  <title lang="ru">Текстовое кодирование (например, Base64)</title>
+  <title lang="en">Text Encoding (e.g. Base64)</title>
   <summary lang="en">
     <i>Encoding text</i> in different formats (base64, hexadecimal, ...)</summary>
   <summary lang="zh">以不同格式（base64，十六进制等）编码文本</summary>
   <summary lang="ru">Кодирование текста в разных форматах (base64, шестнадцатеричный, ...)</summary>
   <description lang="en">With this template different encoding techniques can be demonstrated. With the current parameters, the inputted text (ASCII) is encoded to base64 [1]. To do so, the inputted text is first encoded to bytes according to the ASCII character encoding [2]. These bytes are then encoded with base64 (and output as text).<newline />
-For different encodings, the paramters of the <b>Decoder</b> and/or <b>Encoder</b> components need to be adjusted. Currently, the <b>Decoder</b> component supports input in the follwing formats: <i>text</i>, <i>binary</i> [3], <i>octal</i> [4], <i>decimal</i> [5], <i>hexadecimal</i> [6] and <i>base64</i> [1]. The <b>Encoder</b> component supports the same formats for the output. Whenever text is selected, a character encoding is additional required, i.e. how characters are encoded in bytes. Both components support the following character encodings: <i>UTF-7</i> [7], <i>UTF-8</i> [8], <i>UTF-16</i> [9], <i>UTF-32</i> [10], <i>ASCII</i> [2], <i>ISO8859-15</i> [11] and <i>Windows-1252</i> [12].<newline /><newline />
+For different encodings, the parameters of the <b>Decoder</b> and/or <b>Encoder</b> components need to be adjusted. Currently, the <b>Decoder</b> component supports input in the following formats: <i>text</i>, <i>binary</i> [3], <i>octal</i> [4], <i>decimal</i> [5], <i>hexadecimal</i> [6] and <i>base64</i> [1]. The <b>Encoder</b> component supports the same formats for the output. Whenever text is selected, a character encoding is required in addition, i.e. how characters are encoded in bytes. Both components support the following character encodings: <i>UTF-7</i> [7], <i>UTF-8</i> [8], <i>UTF-16</i> [9], <i>UTF-32</i> [10], <i>ASCII</i> [2], <i>ISO8859-15</i> [11] and <i>Windows-1252</i> [12].<newline /><newline />
 Sources:<newline />
  [1] <external ref="http://en.wikipedia.org/wiki/Base64" /><newline />
  [2] <external ref="http://en.wikipedia.org/wiki/ASCII" /><newline />
@@ -22,10 +20,12 @@ Sources:<newline />
 [10] <external ref="http://en.wikipedia.org/wiki/UTF-32" /><newline />
 [11] <external ref="http://en.wikipedia.org/wiki/ISO8859-15" /><newline />
 [12] <external ref="http://en.wikipedia.org/wiki/Windows-1252" /></description>
-  <description lang="zh">使用此模板，可以演示不同的编码技术。使用当前参数，将输入的文本（ASCII）编码为base64 [1]。为此，首先根据ASCII字符编码[2]将输入的文本编码为字节。这些字节然后使用base64编码（并以文本形式输出）。对于不同的编码，需要调整解码器和/或编码器组件的参数。当前，解码器组件支持以下格式的输入：文本，二进制[3]，八进制[4]，十进制[5]，十六进制[6]和base64 [1]。编码器组件支持相同的输出格式。无论何时选择文本，都需要附加字符编码，即，如何以字节为单位编码字符。这两个组件均支持以下字符编码：UTF-7 [7]，UTF-8 [8]，UTF-16 [9]，UTF-32 [10]，ASCII [2]，ISO8859-15 [11]和Windows- 1252 [12]。来源：[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]</description>
-  <description lang="ru">С помощью этого шаблона можно продемонстрировать различные методы кодирования. С текущими параметрами введенный текст (ASCII) кодируется в base64 [1]. Для этого введенный текст сначала кодируется в байты в соответствии с кодировкой символов ASCII [2]. Затем эти байты кодируются с помощью base64 (и выводятся как текст). Для разных кодировок необходимо отрегулировать параметры компонентов декодера и / или кодировщика. В настоящее время компонент декодера поддерживает ввод в следующих форматах: текст, двоичный [3], восьмеричный [4], десятичный [5], шестнадцатеричный [6] и base64 [1]. Компонент Encoder поддерживает те же форматы для вывода. Всякий раз, когда текст выбран, требуется кодировка символов, то есть как символы кодируются в байтах. Оба компонента поддерживают следующие кодировки символов: UTF-7 [7], UTF-8 [8], UTF-16 [9], UTF-32 [10], ASCII [2], ISO8859-15 [11] и Windows- 1252 [12]. Источники: [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]</description>
   <keywords>Encoding, Decoding, Character, Base64, ASCII, UTF, HEX, ISO8859, 1252</keywords>
+  <title lang="zh">文字编码（例如Base64）</title>
+  <description lang="zh">使用此模板，可以演示不同的编码技术。使用当前参数，将输入的文本（ASCII）编码为base64 [1]。为此，首先根据ASCII字符编码[2]将输入的文本编码为字节。这些字节然后使用base64编码（并以文本形式输出）。对于不同的编码，需要调整解码器和/或编码器组件的参数。当前，解码器组件支持以下格式的输入：文本，二进制[3]，八进制[4]，十进制[5]，十六进制[6]和base64 [1]。编码器组件支持相同的输出格式。无论何时选择文本，都需要附加字符编码，即，如何以字节为单位编码字符。这两个组件均支持以下字符编码：UTF-7 [7]，UTF-8 [8]，UTF-16 [9]，UTF-32 [10]，ASCII [2]，ISO8859-15 [11]和Windows- 1252 [12]。来源：[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]</description>
   <keywords lang="zh">编码，解码，字符，Base64，ASCII，UTF，HEX，ISO8859、1252</keywords>
+  <title lang="ru">Текстовое кодирование (например, Base64)</title>
+  <description lang="ru">С помощью этого шаблона можно продемонстрировать различные методы кодирования. С текущими параметрами введенный текст (ASCII) кодируется в base64 [1]. Для этого введенный текст сначала кодируется в байты в соответствии с кодировкой символов ASCII [2]. Затем эти байты кодируются с помощью base64 (и выводятся как текст). Для разных кодировок необходимо отрегулировать параметры компонентов декодера и / или кодировщика. В настоящее время компонент декодера поддерживает ввод в следующих форматах: текст, двоичный [3], восьмеричный [4], десятичный [5], шестнадцатеричный [6] и base64 [1]. Компонент Encoder поддерживает те же форматы для вывода. Всякий раз, когда текст выбран, требуется кодировка символов, то есть как символы кодируются в байтах. Оба компонента поддерживают следующие кодировки символов: UTF-7 [7], UTF-8 [8], UTF-16 [9], UTF-32 [10], ASCII [2], ISO8859-15 [11] и Windows- 1252 [12]. Источники: [1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12]</description>
   <keywords lang="ru">Кодирование, декодирование, символ, Base64, ASCII, UTF, HEX, ISO8859, 1252</keywords>
   <title lang="de">Textcodierung (z.B. Base-64)</title>
   <summary lang="de">

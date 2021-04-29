@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <title lang="en">Homophonic Substitution Cipher and Nomenclature – Encryption</title>
+  <description lang="en">This template shows how to perform a homophonic encryption and to use a nomenclature as key with the <i>subsitution</i> component.</description>
+  <keywords>substitution, monoalphabetic, homophone, nomenclature</keywords>
   <title lang="zh">谐音替代密码和命名法-加密</title>
   <summary lang="en">Encrypt texts using the <i>substitution</i> component for homophonic ciphers and nomenclatures</summary>
   <summary lang="zh">使用用于谐音密码和命名法的替换组件加密文本</summary>
-  <description lang="en">This template shows how to use the <i>subsitution</i> component in order to perform a homophonic encryption and to use a nomenclature as key.</description>
   <description lang="zh">该模板显示了如何使用替换组件来执行谐音加密并使用命名法作为密钥。</description>
-  <keywords>substitution, monoalphabetic, homophone, nomenclature</keywords>
   <keywords lang="zh">替代，单字母，同音词，命名</keywords>
   <title lang="de">Homophone Substitutions-Chiffre und Nomenklatur – Verschlüsselung</title>
+  <description lang="de">Diese Vorlage zeigt, wie man mit Hilfe der <i>Substitutions-Komponente</i> homophone Verschlüsselungen durchführen und Nomenklaturen als Schlüssel nutzen kann.</description>
   <summary lang="de">Benutzung des <i>Substitutions-Plugins</i> für homophone Verschlüsselungen und Nomenklaturen</summary>
-  <description lang="de">Diese Vorlage zeigt, wie man die <i>Substitutions-Komponente</i> nutzen kann, um homophone Verschlüsselungen durchzuführen und auch Nomenklaturen als Schlüssel zu benutzen.</description>
   <keywords lang="de">Substitution, monoalphabetisch, homophon, Nomenklatur</keywords>
   <icon file="substitution.png" />
   <relevantPlugins>

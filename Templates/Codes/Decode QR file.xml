@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <title lang="en">Decode QR Code File</title>
+  <description lang="en">Decodes a picture file which contains a QR code.</description>
+  <keywords>qr, qrcode, code</keywords>
   <title lang="zh">解码QR码文件</title>
+  <description lang="zh">解码包含QR码的图片文件。</description>
+  <keywords lang="zh">qr，qrcode，代码</keywords>
   <title lang="ru">Декодировать файл QR-кода</title>
-  <title lang="de">Decodiere QR-Code-Datei</title>
   <summary lang="en">Decodes a QR code file</summary>
   <summary lang="zh">解码QR码文件</summary>
   <summary lang="ru">Декодирует файл QR-кода</summary>
   <summary lang="de">Decodiert eine QR-Code-Datei</summary>
-  <description lang="en">Decodes a picture file which contains a QR code.</description>
-  <description lang="zh">解码包含QR码的图片文件。</description>
   <description lang="ru">Декодирует файл изображения, содержащий QR-код.</description>
-  <description lang="de">Decodiert eine Bild-Datei, die einen QR-Code enthält.</description>
-  <keywords>qr, qrcode, code</keywords>
-  <keywords lang="zh">qr，qrcode，代码</keywords>
   <keywords lang="ru">qr, qrcode, код</keywords>
+  <title lang="de">QR-Code-Datei decodieren</title>
+  <description lang="de">Decodiert eine Bild-Datei, die einen QR-Code enthält.</description>
   <icon file="Decode QR file.png" />
   <relevantPlugins>
     <plugin name="VisualDecoder" />

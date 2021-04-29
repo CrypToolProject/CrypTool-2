@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <title lang="en">ISBN-13 Check</title>
+  <description lang="en">This template shows the checking of an ISBN-13 number.</description>
+  <keywords>isbn, book, code, international standard book number</keywords>
   <title lang="zh">ISBN-13检查</title>
+  <description lang="zh">该模板显示了对ISBN-13号的检查。</description>
+  <keywords lang="zh">isbn，书籍，代码，国际标准书籍编号</keywords>
   <title lang="ru">Проверка ISBN-13</title>
   <summary lang="en">Checking an ISBN-13 number (International Standard Book Number)</summary>
   <summary lang="zh">检查ISBN-13号（国际标准书号）</summary>
   <summary lang="ru">Проверка номера ISBN-13 (Международный стандартный номер книги)</summary>
-  <description lang="en">This template shows the checking of an ISBN-13 number.</description>
-  <description lang="zh">该模板显示了对ISBN-13号的检查。</description>
   <description lang="ru">Этот шаблон показывает проверку номера ISBN-13.</description>
-  <keywords>isbn, book, code, international standard book number</keywords>
-  <keywords lang="zh">isbn，书籍，代码，国际标准书籍编号</keywords>
   <keywords lang="ru">isbn, книга, код, международный стандартный номер книги</keywords>
   <title lang="de">ISBN-13-Überprüfung</title>
   <summary lang="de">Überprüfung einer ISBN-13 Nummer (Internationale Standardbuchnummer)</summary>
-  <description lang="de">Diese Vorlage zeigt die Überprüfung einer ISBN-13 Nummer.</description>
+  <description lang="de">Diese Vorlage zeigt die Überprüfung einer ISBN-13-Nummer.</description>
   <keywords lang="de">Buch, isbn, Internationale Standardbuchnummer</keywords>
   <icon file="ISBN-13.png" />
   <relevantPlugins>

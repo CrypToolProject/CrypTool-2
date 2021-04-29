@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
   <title lang="en">ADFGVX Heuristic Analysis</title>
+  <description lang="en">For centuries, news, especially in times of war, transmitted encrypted - including during the First World War in Germany. The news analyst Fritz Nebel developed the ADFGVX book in two steps in order to encrypt radio messages from the army. The first variant contained the letters ADFGX, later the V was added as the sixth letter. With this template, ADFGVX messages can be decrypted thanks to the heuristic method Simulated Annealing.</description>
+  <keywords>ADFGVX, Lasry, Simulated Annealing</keywords>
   <title lang="zh">ADFGVX启发式分析</title>
   <summary lang="en">Heuristic analysis of <i>ADFGVX</i> with simulated annealing</summary>
   <summary lang="zh">模拟退火的ADFGVX启发式分析</summary>
-  <description lang="en">For centuries, news, especially in times of war, transmitted encrypted - including during the First World War in Germany. The news analyst Fritz Nebel developed the ADFGVX book in two steps in order to encrypt radio messages from the army. The first variant contained the letters ADFGX, later the V was added as the sixth letter. With this template, ADFGVX messages can be decrypted thanks to the heuristic method Simulated Annealing.</description>
   <description lang="zh">几个世纪以来，新闻，特别是在战争时期，都是以加密方式传输的，包括在德国第一次世界大战期间。新闻分析师弗里茨·内贝尔（Fritz Nebel）分两步开发了ADFGVX书，以加密来自陆军的无线电消息。第一个变体包含字母ADFGX，后来将V添加为第六个字母。使用此模板，借助启发式方法“模拟退火”可以解密ADFGVX消息。</description>
-  <keywords>ADFGVX, Lasry, Simulated Annealing</keywords>
   <keywords lang="zh">ADFGVX，Lasry，模拟退火</keywords>
   <title lang="de">ADFGVX heuristische Analyse</title>
   <summary lang="de">Heuristische Analyse der <i>ADFGVX</i> mit Simulated Annealing</summary>

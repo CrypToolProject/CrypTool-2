@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <title lang="en">Text steganography with capital letters (binary mode)</title>
+  <title lang="en">Text Steganography with Capital Letters (binary mode)</title>
+  <description lang="en">This is a text steganography technique where a secret message is hidden by changing the letters of the message in the cover text to uppercase.</description>
+  <keywords>Steganography, Text Steganography, Capital letters</keywords>
   <title lang="zh">带有大写字母的文字隐写术（二进制模式）</title>
   <summary lang="en">Hide and extract a message in and from another text</summary>
   <summary lang="zh">隐藏和提取其他文本中的消息</summary>
-  <description lang="en">This is a text steganography technique where a secret message is hidden by changing the letters of the message in the cover text to uppercase.</description>
   <description lang="zh">这是一种文本隐写术技术，其中通过将封面文本中的消息字母更改为大写字母来隐藏秘密消息。</description>
-  <keywords lang="en">Steganography, Text Steganography, Capital letters</keywords>
   <keywords lang="zh">隐写术，文字隐写术，大写字母</keywords>
   <title lang="de">Text-Steganografie mit Großbuchstaben (binärer Modus)</title>
   <summary lang="de">Geheime Nachrichten in einem Text verstecken und wieder extrahieren</summary>
