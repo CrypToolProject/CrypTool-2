@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -48,21 +49,30 @@ namespace TemplateEditor
         public MainWindow()
         {
             InitializeComponent();
-
-            var templateFolderDialog = new FolderBrowserDialog();
-            templateFolderDialog.Description = "Please select your template directory.";
-            templateFolderDialog.SelectedPath = Directory.GetCurrentDirectory();
-            if (templateFolderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            var templateFolder = Directory.GetCurrentDirectory() + @"\Templates";
+            if (!Directory.Exists(templateFolder))
             {
-                _templateDir = templateFolderDialog.SelectedPath;
-                LoadTemplates(".");
-                AllTemplatesList.DataContext = _templates;
-                AllTemplatesList2.DataContext = _templates;
+                var templateFolderDialog = new FolderBrowserDialog();
+                templateFolderDialog.Description = "Template directory not found. Please select your template directory.";
+                templateFolderDialog.SelectedPath = Directory.GetCurrentDirectory();
+                if (templateFolderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    _templateDir = templateFolderDialog.SelectedPath;                   
+                }
+                else
+                {
+                    Close();
+                    return;
+                }
             }
             else
             {
-                Close();
+                _templateDir = templateFolder;
             }
+            
+            LoadTemplates(".");
+            AllTemplatesList.DataContext = _templates;
+            AllTemplatesList2.DataContext = _templates;
         }
 
         private Dictionary<string, List<string>> GetAllKeywords()

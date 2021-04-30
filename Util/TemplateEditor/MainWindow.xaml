@@ -141,7 +141,7 @@
                                                             <TextBlock Text="Key"></TextBlock>
                                                         </GridViewColumn.Header>
                                                     </GridViewColumn>
-                                                    <GridViewColumn Width="250">
+                                                    <GridViewColumn Width="Auto">
                                                         <GridViewColumn.CellTemplate>
                                                             <DataTemplate>
                                                                 <TextBlock Text="{Binding Value}"></TextBlock>
