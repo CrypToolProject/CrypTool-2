@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Path = System.IO.Path;
 
 namespace TemplateEditor
@@ -31,6 +24,9 @@ namespace TemplateEditor
                                                                                                    typeof (MainWindow),
                                                                                                    new PropertyMetadata(
                                                                                                        true));
+
+        private List<Replacement> _deletedReplacements = new List<Replacement>();
+        private List<Replacement> _addedReplacements = new List<Replacement>();
 
         public bool IsOverview
         {
@@ -198,7 +194,20 @@ namespace TemplateEditor
 
                 var localizedTemplateData = ((KeyValuePair<string, LocalizedTemplateData>)LanguageBox.SelectedItem).Value;
                 TitleTextBox.Text = localizedTemplateData.Title;
+                SummaryTextBox.Text = localizedTemplateData.Summary;
                 DescriptionTextBox.Text = localizedTemplateData.Description;
+
+                ReplacementsListView.Items.Clear();
+                _addedReplacements.Clear();
+                _deletedReplacements.Clear();
+
+                if (localizedTemplateData.Replacements != null)
+                {
+                    foreach (var replacement in localizedTemplateData.Replacements)
+                    {
+                        ReplacementsListView.Items.Add(replacement);
+                    }
+                }
 
                 KeywordsListBox.Items.Clear();
                 if (localizedTemplateData.Keywords != null)
@@ -212,6 +221,72 @@ namespace TemplateEditor
             finally
             {
                 IsDirty = false;
+            }
+        }
+
+        private void AddNewReplacementButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (AllTemplatesList2.SelectedItem == null)
+            {
+                return;
+            }                            
+            var id = new InputDialog(true);
+            var res = id.ShowDialog();
+            if (res.HasValue && res.Value)
+            {
+                var localizedTemplateData = ((KeyValuePair<string, LocalizedTemplateData>)LanguageBox.SelectedItem).Value;
+                var replacement = new Replacement() { Key = id.InputBox.Text, Value = id.InputBox2.Text };
+                localizedTemplateData.Replacements.Add(replacement);
+                ReplacementsListView.Items.Add(replacement);
+                _addedReplacements.Add(replacement);
+                IsDirty = true;
+            }             
+        }
+        private void EditSelectedReplacement_Click(object sender, RoutedEventArgs e)
+        {
+            if (AllTemplatesList2.SelectedItem == null)
+            {
+                return;            
+            }
+
+            var oldreplacement = (Replacement)ReplacementsListView.Items.GetItemAt(ReplacementsListView.SelectedIndex);            
+            var localizedTemplateData = ((KeyValuePair<string, LocalizedTemplateData>)LanguageBox.SelectedItem).Value;
+
+            var id = new InputDialog(true);
+            id.InputBox.Text = oldreplacement.Key;
+            id.InputBox2.Text = oldreplacement.Value;
+
+            var res = id.ShowDialog();
+            if (res.HasValue && res.Value)
+            {                
+                var replacement = new Replacement() { Key = id.InputBox.Text, Value = id.InputBox2.Text };
+                
+                localizedTemplateData.Replacements.Add(replacement);
+                localizedTemplateData.Replacements.Remove(oldreplacement);
+
+                _addedReplacements.Add(replacement);
+                _deletedReplacements.Add(oldreplacement);
+
+                ReplacementsListView.Items.Add(replacement);
+                ReplacementsListView.Items.Remove(oldreplacement);                               
+                
+                IsDirty = true;
+            }
+        }
+        private void DeleteSelectedReplacement_Click(object sender, RoutedEventArgs e)
+        {
+            if (AllTemplatesList2.SelectedItem == null)
+            {
+                return;
+            }
+            if (ReplacementsListView.SelectedIndex >= 0)
+            {
+                var replacement = (Replacement)ReplacementsListView.Items.GetItemAt(ReplacementsListView.SelectedIndex);
+                var localizedTemplateData = ((KeyValuePair<string, LocalizedTemplateData>)LanguageBox.SelectedItem).Value;
+                _deletedReplacements.Add(replacement);
+                localizedTemplateData.Replacements.Remove(replacement);
+                ReplacementsListView.Items.Remove(replacement);
+                IsDirty = true;
             }
         }
 
@@ -304,6 +379,7 @@ namespace TemplateEditor
                     }
                     var md = tempInfo.LocalizedTemplateData[localizedTemplateData.Key];
                     md.Title = TitleTextBox.Text;
+                    md.Summary = SummaryTextBox.Text;
                     md.Description = DescriptionTextBox.Text;
                     md.Lang = localizedTemplateData.Key;
                     md.Keywords = new List<string>();
@@ -316,8 +392,12 @@ namespace TemplateEditor
                     }
                 }
 
+                _deletedReplacements.Clear();
+                _addedReplacements.Clear();
+
                 tempInfo.Save();
                 UpdateTemplatesList();
+                
             }
             IsDirty = false;
         }
@@ -381,8 +461,42 @@ namespace TemplateEditor
             IsDirty = true;
         }
 
+        private void OpenInCT2_Click(object sender, RoutedEventArgs e)
+        {
+            var tempInfo = AllTemplatesList2.SelectedItem as TemplateInfo;
+            if(tempInfo == null)
+            {
+                return;
+            }
+            try
+            {
+                Process.Start(tempInfo.FullCWMPath);
+            }
+            catch (Exception)
+            {
+                //do nothing if it can't be opened
+            }
+        }
+
         private void RevertButton_Click(object sender, RoutedEventArgs e)
         {
+            var result = System.Windows.MessageBox.Show("Do you really want to revert all changes you made?", "Revert changes?", MessageBoxButton.YesNo);
+            if(result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            if (AllTemplatesList2.SelectedItem != null)
+            {
+                //revert all replacements
+                var localizedTemplateData = ((KeyValuePair<string, LocalizedTemplateData>)LanguageBox.SelectedItem).Value;                
+                localizedTemplateData.Replacements.AddRange(_deletedReplacements);
+
+                foreach (var r in _addedReplacements)
+                {
+                    localizedTemplateData.Replacements.Remove(r);
+                }
+            }
             LanguageBox_SelectionChanged(null, null);
             IsDirty = false;
         }

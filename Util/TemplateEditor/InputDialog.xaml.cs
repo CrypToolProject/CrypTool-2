@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace TemplateEditor
 {
@@ -18,9 +7,15 @@ namespace TemplateEditor
     /// </summary>
     public partial class InputDialog : Window
     {
-        public InputDialog()
-        {
+        public InputDialog(bool showTwoInputs = false)
+        {            
             InitializeComponent();
+            if (showTwoInputs)
+            {
+                Height = 170;
+                InputBox2.Visibility = Visibility.Visible;
+                Label2.Visibility = Visibility.Visible;
+            }
             InputBox.Focus();
         }
 

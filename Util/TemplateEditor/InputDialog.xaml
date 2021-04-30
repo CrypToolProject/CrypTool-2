@@ -6,11 +6,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Please input a string!" />
         <TextBox Name="InputBox" Grid.Row="1"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" VerticalAlignment="Bottom">
+        <Label Content="Please input a 2nd string!" Grid.Row="2" Visibility="Collapsed" Name="Label2" />
+        <TextBox Name="InputBox2" Grid.Row="3" Visibility="Collapsed"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="4" VerticalAlignment="Bottom">
             <Button Content="Cancel" IsCancel="True" Margin="5" />
             <Button Content="OK" IsDefault="True" Margin="5" Click="Button_Click" />
         </StackPanel>

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
@@ -10,7 +9,9 @@ namespace TemplateEditor
 {
     public class TemplateInfo
     {
+        public string FileName { get; set; }
         public string FilePath { get; set; }
+        public string FullCWMPath { get; set; }
         public string XMLPath { get; set; }
         public string IconFile
         {
@@ -130,9 +131,9 @@ namespace TemplateEditor
 
         public TemplateInfo(string templateDir, string templateFilePath)
         {
-            FilePath = templateFilePath;
+            FilePath = templateFilePath;            
             var cwmFile = Path.Combine(templateDir, templateFilePath);
-            if ((Path.GetExtension(cwmFile).ToLower() != ".cwm") && (Path.GetExtension(cwmFile).ToLower() != ".component"))
+            if (Path.GetExtension(cwmFile).ToLower() != ".cwm")
             {
                 throw new Exception(string.Format("{0} not a valid template!", templateFilePath));
             }
@@ -140,9 +141,10 @@ namespace TemplateEditor
             {
                 throw new Exception(string.Format("Template {0} does not exist!", cwmFile));
             }
+            FullCWMPath = Path.GetFullPath(cwmFile);
 
-            //var xmlFile = cwmFile.Substring(0, cwmFile.Length - 3) + "xml";
             var xmlFile = Path.Combine(Path.GetDirectoryName(cwmFile), Path.GetFileNameWithoutExtension(cwmFile)) + ".xml";
+            FileName = Path.GetFileName(Path.GetFileNameWithoutExtension(cwmFile)) + ".xml";
             XMLPath = xmlFile;
             HasMetadata = false;
             if (File.Exists(xmlFile))
@@ -170,6 +172,13 @@ namespace TemplateEditor
                             desc = desc.Substring(desc.IndexOf('>')+1);
                             desc = desc.Substring(0, desc.LastIndexOf('<'));
                             LocalizedTemplateData[lang].Description = desc;
+                            break;
+                        case "summary":
+                            CreateTemplateDataEntryForLang(lang);
+                            var summary = element.ToString(SaveOptions.None);
+                            summary = summary.Substring(summary.IndexOf('>') + 1);
+                            summary = summary.Substring(0, summary.LastIndexOf('<'));
+                            LocalizedTemplateData[lang].Summary = summary;
                             break;
                         case "icon":
                             if (element.Attribute("file") != null)
@@ -202,6 +211,25 @@ namespace TemplateEditor
                                 LocalizedTemplateData[lang].Keywords.Add(keyword.Trim());
                             }
                             break;
+                        case "replacements":
+                            foreach (var replacement in element.Elements("replacement"))
+                            {
+                                if (!string.IsNullOrEmpty(replacement.Attribute("key").Value) &&
+                                    !string.IsNullOrEmpty(replacement.Attribute("value").Value))
+                                {
+                                    if (LocalizedTemplateData[lang].Replacements == null)
+                                    {
+                                        LocalizedTemplateData[lang].Replacements = new List<Replacement>();
+                                    }
+                                    
+                                    LocalizedTemplateData[lang].Replacements.Add(new Replacement() 
+                                    { 
+                                        Key = replacement.Attribute("key").Value, 
+                                        Value = replacement.Attribute("value").Value 
+                                    });
+                                }
+                            }
+                            break;
                     }
                 }
             }
@@ -219,8 +247,27 @@ namespace TemplateEditor
         public void Save()
         {
             XElement xml = new XElement("sample");
+            XComment comment;
+
+            comment = new XComment("-------------------------------------------------");
+            xml.Add(comment);
+            comment = new XComment(string.Format("File name: {0}", FileName));
+            xml.Add(comment);
+            comment = new XComment(string.Format("Last edited: {0}", DateTime.Now.ToString("yyyy/MM/dd")));
+            xml.Add(comment);
+            comment = new XComment("-------------------------------------------------");
+            xml.Add(comment);
+
+
             foreach (var data in LocalizedTemplateData.Values)
             {
+                comment = new XComment("-------------------------------------------------");
+                xml.Add(comment);
+                comment = new XComment(string.Format("Language '{0}' starts here:", data.Lang));
+                xml.Add(comment);
+                comment = new XComment("-------------------------------------------------");
+                xml.Add(comment);
+
                 if (data.Lang != null && data.Title != null)
                 {
                     var title = new XElement("title");
@@ -229,7 +276,12 @@ namespace TemplateEditor
                     xml.Add(title);
                 }
 
-                if (data.Description != null)
+                if (!string.IsNullOrEmpty(data.Summary))
+                {
+                    xml.Add(XElement.Parse(string.Format("<summary lang=\"{0}\">{1}</summary>", data.Lang, data.Summary)));
+                }
+
+                if (!string.IsNullOrEmpty(data.Description))
                 {
                     xml.Add(XElement.Parse(string.Format("<description lang=\"{0}\">{1}</description>", data.Lang, data.Description)));
                 }
@@ -244,7 +296,28 @@ namespace TemplateEditor
                     keywords.SetValue(data.AllKeywords);
                     xml.Add(keywords);
                 }
+
+                if ((data.Replacements != null) && (data.Replacements.Count() > 0))
+                {
+                    var replacements = new XElement("replacements");                  
+                    replacements.SetAttributeValue("lang", data.Lang);                    
+                    foreach (var replacementKeyValue in data.Replacements)
+                    {
+                        var replacement = new XElement("replacement");
+                        replacement.SetAttributeValue("key", replacementKeyValue.Key);
+                        replacement.SetAttributeValue("value", replacementKeyValue.Value);
+                        replacements.Add(replacement);
+                    }
+                    xml.Add(replacements);
+                }
             }
+
+            comment = new XComment("-------------------------------------------------");
+            xml.Add(comment);
+            comment = new XComment(string.Format("The general section starts here:"));
+            xml.Add(comment);
+            comment = new XComment("-------------------------------------------------");
+            xml.Add(comment);
 
             if (IconFile != null)
             {

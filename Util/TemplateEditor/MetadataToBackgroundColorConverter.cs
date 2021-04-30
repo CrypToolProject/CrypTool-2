@@ -22,10 +22,13 @@ namespace TemplateEditor
                     return Brushes.Red;
                 }
 
-                bool hasEngKeywords = true;
+                var hasEngKeywords = true;
                 foreach (var localizedTemp in tempInfo.LocalizedTemplateData.Values)
                 {
-                    if (localizedTemp.Lang == null || localizedTemp.Title == null || localizedTemp.Description == null)
+                    if (string.IsNullOrEmpty(localizedTemp.Lang)  || 
+                        string.IsNullOrEmpty(localizedTemp.Title) || 
+                        string.IsNullOrEmpty(localizedTemp.Summary) ||
+                        string.IsNullOrEmpty(localizedTemp.Description))
                     {
                         return Brushes.Yellow;
                     }

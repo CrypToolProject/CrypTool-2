@@ -1,7 +1,7 @@
 ﻿<Window x:Class="TemplateEditor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Template Editor" Height="650" Width="1040" WindowState="Maximized" xmlns:my="clr-namespace:TemplateEditor" >
+        Title="Template Editor" Height="850" Width="1040" WindowState="Maximized" xmlns:my="clr-namespace:TemplateEditor" >
     <Window.Resources>
         <my:TrueToVisibleConverter x:Key="TrueToVisibleConverter" />
         <my:FalseToVisibleConverter x:Key="FalseToVisibleConverter" />
@@ -91,6 +91,7 @@
                                     </ComboBox>
                                     <Button Content="Add Language" Margin="5" Click="AddLanguageButton_Click" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}"/>
                                     <Button Content="Delete Language" Margin="5" Click="DeleteLanguageButton_Click" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}"/>
+                                    <Button Content="Open in CT2" Margin="5" Click="OpenInCT2_Click" IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=my:MainWindow, AncestorLevel=1}, Path=IsDirty, Converter={StaticResource NegationConverter}}"/>
                                 </StackPanel>
                             </GroupBox.Header>
                             <StackPanel Orientation="Vertical">
@@ -102,21 +103,65 @@
                                     <Label Content="Title: "/>
                                     <TextBox Grid.Column="1" Name="TitleTextBox" TextChanged="TextChanged" />
                                 </Grid>
+                                <Label Content="Summary: " />
+                                <TextBox Name="SummaryTextBox" TextWrapping="Wrap" AcceptsReturn="True" Height="100" Margin="40,0,0,0" TextChanged="TextChanged"  ScrollViewer.VerticalScrollBarVisibility="Auto" />
                                 <Label Content="Description: " />
-                                <TextBox Name="DescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" Height="200" Margin="40,0,0,0" TextChanged="TextChanged" />
+                                <TextBox Name="DescriptionTextBox" TextWrapping="Wrap" AcceptsReturn="True" Height="100" Margin="40,0,0,0" TextChanged="TextChanged"  ScrollViewer.VerticalScrollBarVisibility="Auto" />
                                 <Label Content="Keywords: " />
                                 <Grid Margin="40,0,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <ListBox Name="KeywordsListBox" />
+                                    <ListBox Name="KeywordsListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="100"/>
                                     <StackPanel Orientation="Vertical" Grid.Column="1">
                                         <Button Content="Add Known Keywords" Margin="5" Click="AddKnownKeywordButton_Click" />
                                         <Button Content="Add New Keyword" Margin="5" Click="AddNewKeywordButton_Click" />
-                                        <Button Content="Delete Selected Keywords" Margin="5" Click="DeleteKeywordButton_Click" />
+                                        <Button Content="Delete Selected Keyword" Margin="5" Click="DeleteKeywordButton_Click" />
                                     </StackPanel>
                                 </Grid>
+
+                                <Label Content="Replacements: " />
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ListView  Name="ReplacementsListView"  ScrollViewer.VerticalScrollBarVisibility="Auto" Height="250">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridView.Columns>
+                                                    <GridViewColumn Width="150">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Key}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                        <GridViewColumn.Header>
+                                                            <TextBlock Text="Key"></TextBlock>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="250">
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Value}"></TextBlock>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                        <GridViewColumn.Header>
+                                                            <TextBlock Text="Value"></TextBlock>
+                                                        </GridViewColumn.Header>
+                                                    </GridViewColumn>
+                                                </GridView.Columns>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                                        <Button Content="Add New Replacement" Margin="5" Click="AddNewReplacementButton_Click" />
+                                        <Button Content="Edit Selected Replacement" Margin="5" Click="EditSelectedReplacement_Click" />
+                                        <Button Content="Delete Selected Replacement" Margin="5" Click="DeleteSelectedReplacement_Click" />
+                                    </StackPanel>
+                                </Grid>
+
                             </StackPanel>
                         </GroupBox>
                     
@@ -126,7 +171,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <ListBox Name="RelevantPluginsListBox"/>
+                                <ListBox Name="RelevantPluginsListBox" ScrollViewer.VerticalScrollBarVisibility="Auto" Height="100"/>
                                 <StackPanel Orientation="Vertical" Grid.Column="1">
                                     <Button Content="Add" Margin="5" Click="PluginAddButton_Click" />
                                     <Button Content="Delete" Margin="5" Click="PluginDeleteButton_Click" />                                    
