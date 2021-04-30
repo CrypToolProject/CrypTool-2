@@ -1,58 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: HMAC.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">HMAC</title>
-  <title lang="zh">HMAC</title>
-  <title lang="ru">HMAC</title>
   <summary lang="en">Usage of the <i>HMAC</i> hash function</summary>
-  <summary lang="zh">HMAC哈希函数的用法</summary>
-  <summary lang="ru">Использование хеш-функции HMAC</summary>
   <description lang="en">This template shows the usage of the <i>HMAC</i> hash function.</description>
-  <description lang="zh">该模板显示了HMAC哈希函数的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование хеш-функции HMAC.</description>
   <keywords>hash</keywords>
-  <keywords lang="zh">杂凑</keywords>
-  <keywords lang="ru">гашиш</keywords>
-  <title lang="de">HMAC</title>
-  <summary lang="de">Benutzung eines <i>HMAC</i>, mit dem der Empfänger die Nachricht auf Integrität und auf Authentizität des Senders überprüfen kann</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung eines <i>HMAC</i>, mit dem der Empfänger die Nachricht auf Integrität und auf Authentizität des Senders überprüfen kann.</description>
-  <keywords lang="de">hash</keywords>
-  <icon file="HMAC.png" />
-  <relevantPlugins>
-    <plugin name="Concatenate" />
-    <plugin name="HMAC" />
-    <plugin name="MD5" />
-    <plugin name="Xor" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$IPAD constant$" value="IPAD-Konstante" />
-    <replacement key="$OPAD constant$" value="OPAD-Konstante" />
-    <replacement key="$Converter$" value="Konvertierer" />
-    <replacement key="$Message$" value="Nachricht" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$HMAC key$" value="HMAC-Schlüssel" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die HMAC-Komponente.\line Die obere Hälfte des Arbeitsbereiches besteht aus einer Zusammenstellung von Komponenten, die den MD5-HMAC &quot;von Hand&quot; berechnen. Die Bezeichnungen dieser individuellen Komponenten geben an, welchen Teil des ausgegebenen HMAC-Wertes sie berechnen. Damit die Komponenten ein korrektes Resultat berechnen können, muss der gewählte HMAC-Schlüssel genau 64 Bytes groß sein, da die Variablen ipad und opad bei der HMAC-Berechnung durch XOR-Verknüpfung des Schlüssels mit den entsprechenden Konstanten IPAD und OPAD gebildet werden. Dies wird durch die XOR-Komponente bewerkstelligt, die im Falle eines zu kurzen Schlüssels diesen wiederholen würde, um auf die entsprechende Länge der Eingabe zu kommen. Bei der Berechnung des HMAC wäre dieses Verhalten jedoch unerwünscht.\line In der unteren Hälfte des Arbeitsbereiches kommt die eigenständige HMAC-Komponente zum Einsatz, mit deren Ergebnis man die Korrektheit der Berechnung des HMAC-Wertes mit MD5 und einer Schlüssellänge von 64 Bytes in der oberen Hälfte überprüfen kann. Diese Komponente kann auch die HMAC-Werte bei der Verwendung anderer Hash-Algorithmen und Schlüssellängen berechnen." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$IPAD constant$" value="iPad常数" />
-    <replacement key="$OPAD constant$" value="OPAD常数" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Message$" value="信息" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$HMAC key$" value="HMAC密钥" />
-    <replacement key="$memo$" value="此模板演示了HMAC组件\行工作区的上半部分包含一个组件的汇编，这些组件可“手动”计算MD5-HMAC。这些单独组件的名称指示它们计算的HMAC值的哪一部分。为了使组件能够计算出正确的结果，所选的HMAC密钥的大小必须恰好为64个字节，因为在iHMAC计算中，变量ipad和opad是通过将密钥与相应的常数IPAD和OPAD进行XOR运算而形成的。这是由XOR组件完成的，如果键太短，则将对其进行重复操作以达到适当的输入长度。 \Line在工作区的下半部分，使用独立的HMAC组件，其结果是使用MD5计算HMAC值的正确性，并且密钥长度为64字节。上半部分可以检查。使用其他哈希算法和密钥长度时，此组件还可以计算HMAC值。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$IPAD constant$" value="постоянная IPAD" />
-    <replacement key="$OPAD constant$" value="UP-Constant" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Message$" value="сообщение" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$HMAC key$" value="ключ HMAC" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует компонент HMAC. \Line Верхняя половина рабочей области представляет собой набор компонентов, которые вычисляют MD5-HMAC «вручную». Имена этих отдельных компонентов указывают, какая часть выводимого значения HMAC вычисляется. Для того чтобы компоненты вычислили правильный результат, выбранный ключ HMAC должен быть ровно 64 байта, так как переменные ipad и opad формируются в вычислении HMAC путем XORing ключа с соответствующими константами IPAD и OPAD. Это выполняется компонентом XOR, который в случае слишком короткого нажатия клавиши повторяет это, чтобы получить соответствующую длину ввода. Тем не менее, это поведение было бы нежелательным при вычислении HMAC. \Line В нижней половине рабочей области используется автономный компонент HMAC, который дает правильность вычисления значения HMAC с MD5 и длиной ключа 64 байта в HMAC верхняя половина может проверить. Этот компонент также может вычислять значения HMAC с использованием других алгоритмов хеширования и длин ключей." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$IPAD constant$" value="IPAD constant" />
     <replacement key="$OPAD constant$" value="OPAD constant" />
@@ -63,4 +21,65 @@
     <replacement key="$HMAC key$" value="HMAC key" />
     <replacement key="$memo$" value="This workspace demonstrates the HMAC component.\line The top half of the workspace consists of an arrangement of other existing components to calculate an MD5-HMAC &quot;manually&quot;. These individual components are labelled to show which part of the final HMAC output they generate. In order for this arrangement to generate a correct result, the HMAC key chosen must have a length of exactly 64 bytes. This is the case because the ipad and opad variables in the HMAC computation are created by XORing the key with the corresponding IPAD and OPAD constants, an operation which is represented here through use of the XOR cipher component. This cipher component however repeats its key input before XORing key and plaintext input if the key input is smaller than the plaintext, an operation which is not done when calculating an HMAC.\line In the lower half of the workspace there is the self-contained HMAC component, which can be used to verify the top half's result for HMAC using MD5 with key length 64 and to compute HMACs using different hash algorithms and key lengths." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">HMAC</title>
+  <summary lang="zh">HMAC哈希函数的用法</summary>
+  <description lang="zh">该模板显示了HMAC哈希函数的用法。</description>
+  <keywords lang="zh">杂凑</keywords>
+  <replacements lang="zh">
+    <replacement key="$IPAD constant$" value="iPad常数" />
+    <replacement key="$OPAD constant$" value="OPAD常数" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$Message$" value="信息" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$HMAC key$" value="HMAC密钥" />
+    <replacement key="$memo$" value="此模板演示了HMAC组件\行工作区的上半部分包含一个组件的汇编，这些组件可“手动”计算MD5-HMAC。这些单独组件的名称指示它们计算的HMAC值的哪一部分。为了使组件能够计算出正确的结果，所选的HMAC密钥的大小必须恰好为64个字节，因为在iHMAC计算中，变量ipad和opad是通过将密钥与相应的常数IPAD和OPAD进行XOR运算而形成的。这是由XOR组件完成的，如果键太短，则将对其进行重复操作以达到适当的输入长度。 \Line在工作区的下半部分，使用独立的HMAC组件，其结果是使用MD5计算HMAC值的正确性，并且密钥长度为64字节。上半部分可以检查。使用其他哈希算法和密钥长度时，此组件还可以计算HMAC值。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">HMAC</title>
+  <summary lang="ru">Использование хеш-функции HMAC</summary>
+  <description lang="ru">Этот шаблон показывает использование хеш-функции HMAC.</description>
+  <keywords lang="ru">гашиш</keywords>
+  <replacements lang="ru">
+    <replacement key="$IPAD constant$" value="постоянная IPAD" />
+    <replacement key="$OPAD constant$" value="UP-Constant" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$Message$" value="сообщение" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$HMAC key$" value="ключ HMAC" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует компонент HMAC. \Line Верхняя половина рабочей области представляет собой набор компонентов, которые вычисляют MD5-HMAC «вручную». Имена этих отдельных компонентов указывают, какая часть выводимого значения HMAC вычисляется. Для того чтобы компоненты вычислили правильный результат, выбранный ключ HMAC должен быть ровно 64 байта, так как переменные ipad и opad формируются в вычислении HMAC путем XORing ключа с соответствующими константами IPAD и OPAD. Это выполняется компонентом XOR, который в случае слишком короткого нажатия клавиши повторяет это, чтобы получить соответствующую длину ввода. Тем не менее, это поведение было бы нежелательным при вычислении HMAC. \Line В нижней половине рабочей области используется автономный компонент HMAC, который дает правильность вычисления значения HMAC с MD5 и длиной ключа 64 байта в HMAC верхняя половина может проверить. Этот компонент также может вычислять значения HMAC с использованием других алгоритмов хеширования и длин ключей." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">HMAC</title>
+  <summary lang="de">Benutzung eines <i>HMAC</i>, mit dem der Empfänger die Nachricht auf Integrität und auf Authentizität des Senders überprüfen kann</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung eines <i>HMAC</i>, mit dem der Empfänger die Nachricht auf Integrität und auf Authentizität des Senders überprüfen kann.</description>
+  <keywords lang="de">hash</keywords>
+  <replacements lang="de">
+    <replacement key="$IPAD constant$" value="IPAD-Konstante" />
+    <replacement key="$OPAD constant$" value="OPAD-Konstante" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$Message$" value="Nachricht" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$HMAC key$" value="HMAC-Schlüssel" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die HMAC-Komponente.\line Die obere Hälfte des Arbeitsbereiches besteht aus einer Zusammenstellung von Komponenten, die den MD5-HMAC &quot;von Hand&quot; berechnen. Die Bezeichnungen dieser individuellen Komponenten geben an, welchen Teil des ausgegebenen HMAC-Wertes sie berechnen. Damit die Komponenten ein korrektes Resultat berechnen können, muss der gewählte HMAC-Schlüssel genau 64 Bytes groß sein, da die Variablen ipad und opad bei der HMAC-Berechnung durch XOR-Verknüpfung des Schlüssels mit den entsprechenden Konstanten IPAD und OPAD gebildet werden. Dies wird durch die XOR-Komponente bewerkstelligt, die im Falle eines zu kurzen Schlüssels diesen wiederholen würde, um auf die entsprechende Länge der Eingabe zu kommen. Bei der Berechnung des HMAC wäre dieses Verhalten jedoch unerwünscht.\line In der unteren Hälfte des Arbeitsbereiches kommt die eigenständige HMAC-Komponente zum Einsatz, mit deren Ergebnis man die Korrektheit der Berechnung des HMAC-Wertes mit MD5 und einer Schlüssellänge von 64 Bytes in der oberen Hälfte überprüfen kann. Diese Komponente kann auch die HMAC-Werte bei der Verwendung anderer Hash-Algorithmen und Schlüssellängen berechnen." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="HMAC.png" />
+  <relevantPlugins>
+    <plugin name="Concatenate" />
+    <plugin name="HMAC" />
+    <plugin name="MD5" />
+    <plugin name="Xor" />
+  </relevantPlugins>
 </sample>

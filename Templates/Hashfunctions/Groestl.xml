@@ -1,39 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Groestl.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Grøstl</title>
-  <title lang="zh">Grøstl</title>
-  <title lang="ru">grostler</title>
   <summary lang="en">Usage of the <i>Grøstl</i> hash function</summary>
-  <summary lang="zh">Grøstl哈希函数的用法</summary>
-  <summary lang="ru">Использование хеш-функции Grøstl</summary>
   <description lang="en">This template shows the usage of the <i>Grøstl</i> hash function.</description>
-  <description lang="zh">该模板显示了Grøstl哈希函数的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование хеш-функции Grøstl.</description>
   <keywords>Grøstl, Groestl, Grostl, Gröstl, digest</keywords>
-  <keywords lang="zh">Grøstl，Groestl，Grostl，Gröstl，摘要</keywords>
-  <keywords lang="ru">Grøstl, Groestl, Grostl, Gröstl, дайджест</keywords>
-  <title lang="de">Grøstl</title>
-  <summary lang="de">Benutzung der <i>Grøstl</i>-Hash-Funktion</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Grøstl</i>-Hash-Funktion.</description>
-  <keywords lang="de">Grøstl, Groestl, Grostl, Gröstl, digest</keywords>
-  <icon file="Grøstl.png" />
-  <relevantPlugins>
-    <plugin name="Groestl" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Input$" value="Eingabe" />
-    <replacement key="$Hash value$" value="Hashwert" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Input$" value="输入" />
-    <replacement key="$Hash value$" value="哈希值" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Input$" value="вход" />
-    <replacement key="$Hash value$" value="Hashwert" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Input$" value="Input" />
     <replacement key="$Hash value$" value="Hash value" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">Grøstl</title>
+  <summary lang="zh">Grøstl哈希函数的用法</summary>
+  <description lang="zh">该模板显示了Grøstl哈希函数的用法。</description>
+  <keywords lang="zh">Grøstl，Groestl，Grostl，Gröstl，摘要</keywords>
+  <replacements lang="zh">
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Hash value$" value="哈希值" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">grostler</title>
+  <summary lang="ru">Использование хеш-функции Grøstl</summary>
+  <description lang="ru">Этот шаблон показывает использование хеш-функции Grøstl.</description>
+  <keywords lang="ru">Grøstl, Groestl, Grostl, Gröstl, дайджест</keywords>
+  <replacements lang="ru">
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Hash value$" value="Hashwert" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Grøstl</title>
+  <summary lang="de">Benutzung der <i>Grøstl</i>-Hash-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Grøstl</i>-Hash-Funktion.</description>
+  <keywords lang="de">Grøstl, Groestl, Grostl, Gröstl, digest</keywords>
+  <replacements lang="de">
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Hash value$" value="Hashwert" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Grøstl.png" />
+  <relevantPlugins>
+    <plugin name="Groestl" />
+  </relevantPlugins>
 </sample>

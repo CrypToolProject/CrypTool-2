@@ -1,59 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: PRESENT.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">PRESENT Cipher</title>
-  <title lang="zh">当前密码</title>
-  <title lang="ru">НАСТОЯЩИЙ Шифр</title>
   <summary lang="en">Usage of the <i>PRESENT</i> cipher</summary>
-  <summary lang="zh">当前密码的用法</summary>
-  <summary lang="ru">Использование шифрования PRESENT</summary>
   <description lang="en">This template shows the usage of the <i>PRESENT</i> cipher.</description>
-  <description lang="zh">该模板显示了PRESENT密码的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование шифрования PRESENT.</description>
   <keywords>symmetric</keywords>
-  <keywords lang="zh">对称的</keywords>
-  <keywords lang="ru">симметричный</keywords>
-  <title lang="de">PRESENT-Chiffre</title>
-  <summary lang="de">Benutzung der <i>PRESENT</i>-Chiffre</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>PRESENT</i>-Chiffre.</description>
-  <keywords lang="de">symmetrisch</keywords>
-  <icon file="PRESENT.png" />
-  <relevantPlugins>
-    <plugin name="PRESENT" />
-    <plugin name="RandomNumberGenerator" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Random Key$" value="Zufallsschlüssel" />
-    <replacement key="$Random IV$" value="Zufalls-IV" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$PRESENT Encrypt$" value="PRESENT-Verschlüsselung" />
-    <replacement key="$PRESENT Decrypt$" value="PRESENT-Entschlüsselung" />
-    <replacement key="$text$" value="In cryptography, a cipher is an algorithm for performing encryption or decryption  a series of well-defined steps that can be followed as a procedure. An alternative, less common term is encipherment. In non-technical usage, a cipher is the same thing as a code; however, the concepts are distinct in cryptography. In classical cryptography, ciphers were distinguished from codes. Codes operated by substituting according to a large codebook which linked a random string of characters or numbers to a word or phrase. For example, UQJHSE could be the code for Proceed to the following coordinates. When using a cipher the original information is known as plaintext, and the encrypted form as ciphertext. The ciphertext message contains all the information of the plaintext message, but is not in a format readable by a human or computer without the proper mechanism to decrypt it; it should resemble random gibberish to those not intended to read it.&#xD;&#xA;&#xD;&#xA;[source http://en.wikipedia.org/wiki/Cipher]" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Random Key$" value="随机密钥" />
-    <replacement key="$Random IV$" value="随机IV" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$PRESENT Encrypt$" value="当前加密" />
-    <replacement key="$PRESENT Decrypt$" value="当前解密" />
-    <replacement key="$text$" value="在密码术中，密码是一种用于执行加密或解密的算法-一系列明确定义的步骤可以作为一个过程来遵循。另一个不太常见的术语是加密。在非技术用途中，“密码”与“代码”是相同的东西；但是，这些概念在密码学中是不同的。在经典密码学中，密码与代码有所区别。通过根据大型密码簿替换的代码，该密码簿将字符或数字的随机字符串链接到单词或短语。例如，“ UQJHSE”可以是“继续到以下坐标”的代码。使用密码时，原始信息称为明文，而加密形式则称为密文。密文消息包含明文消息的所有信息，但是在没有适当的解密机制的情况下，它不是人或计算机可读的格式。对于那些不打算阅读的人，它应该类似于随机的胡言乱语。 [来源http://en.wikipedia.org/wiki/Cipher]" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Random Key$" value="случайный ключ" />
-    <replacement key="$Random IV$" value="Случайная IV" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$PRESENT Encrypt$" value="НАСТОЯЩЕЕ шифрование" />
-    <replacement key="$PRESENT Decrypt$" value="ПРИСУТСТВИЕ расшифровки" />
-    <replacement key="$text$" value="В криптографии шифр представляет собой алгоритм для выполнения шифрования или дешифрования - ряд четко определенных шагов, которые могут выполняться как процедура. Альтернативным, менее распространенным термином является шифрование. В нетехническом использовании «шифр» - это то же самое, что и «код»; однако в криптографии эти понятия различны. В классической криптографии шифры отличались от кодов. Коды управляются заменой в соответствии с большой кодовой книгой, которая связывает случайную строку символов или чисел со словом или фразой. Например, «UQJHSE» может быть кодом для «Перейти к следующим координатам». При использовании шифрования исходная информация называется открытым текстом, а зашифрованная форма - зашифрованным. Сообщение зашифрованного текста содержит всю информацию открытого текстового сообщения, но не находится в формате, который читается человеком или компьютером без надлежащего механизма для его расшифровки; он должен напоминать случайную бред для тех, кто не предназначен для чтения. [источник http://en.wikipedia.org/wiki/Cipher]" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -65,4 +22,66 @@
     <replacement key="$PRESENT Decrypt$" value="PRESENT Decrypt" />
     <replacement key="$text$" value="In cryptography, a cipher is an algorithm for performing encryption or decryption  a series of well-defined steps that can be followed as a procedure. An alternative, less common term is encipherment. In non-technical usage, a cipher is the same thing as a code; however, the concepts are distinct in cryptography. In classical cryptography, ciphers were distinguished from codes. Codes operated by substituting according to a large codebook which linked a random string of characters or numbers to a word or phrase. For example, UQJHSE could be the code for Proceed to the following coordinates. When using a cipher the original information is known as plaintext, and the encrypted form as ciphertext. The ciphertext message contains all the information of the plaintext message, but is not in a format readable by a human or computer without the proper mechanism to decrypt it; it should resemble random gibberish to those not intended to read it.&#xD;&#xA;&#xD;&#xA;[source http://en.wikipedia.org/wiki/Cipher]" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">当前密码</title>
+  <summary lang="zh">当前密码的用法</summary>
+  <description lang="zh">该模板显示了PRESENT密码的用法。</description>
+  <keywords lang="zh">对称的</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Random Key$" value="随机密钥" />
+    <replacement key="$Random IV$" value="随机IV" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$PRESENT Encrypt$" value="当前加密" />
+    <replacement key="$PRESENT Decrypt$" value="当前解密" />
+    <replacement key="$text$" value="在密码术中，密码是一种用于执行加密或解密的算法-一系列明确定义的步骤可以作为一个过程来遵循。另一个不太常见的术语是加密。在非技术用途中，“密码”与“代码”是相同的东西；但是，这些概念在密码学中是不同的。在经典密码学中，密码与代码有所区别。通过根据大型密码簿替换的代码，该密码簿将字符或数字的随机字符串链接到单词或短语。例如，“ UQJHSE”可以是“继续到以下坐标”的代码。使用密码时，原始信息称为明文，而加密形式则称为密文。密文消息包含明文消息的所有信息，但是在没有适当的解密机制的情况下，它不是人或计算机可读的格式。对于那些不打算阅读的人，它应该类似于随机的胡言乱语。 [来源http://en.wikipedia.org/wiki/Cipher]" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">НАСТОЯЩИЙ Шифр</title>
+  <summary lang="ru">Использование шифрования PRESENT</summary>
+  <description lang="ru">Этот шаблон показывает использование шифрования PRESENT.</description>
+  <keywords lang="ru">симметричный</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Random Key$" value="случайный ключ" />
+    <replacement key="$Random IV$" value="Случайная IV" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$PRESENT Encrypt$" value="НАСТОЯЩЕЕ шифрование" />
+    <replacement key="$PRESENT Decrypt$" value="ПРИСУТСТВИЕ расшифровки" />
+    <replacement key="$text$" value="В криптографии шифр представляет собой алгоритм для выполнения шифрования или дешифрования - ряд четко определенных шагов, которые могут выполняться как процедура. Альтернативным, менее распространенным термином является шифрование. В нетехническом использовании «шифр» - это то же самое, что и «код»; однако в криптографии эти понятия различны. В классической криптографии шифры отличались от кодов. Коды управляются заменой в соответствии с большой кодовой книгой, которая связывает случайную строку символов или чисел со словом или фразой. Например, «UQJHSE» может быть кодом для «Перейти к следующим координатам». При использовании шифрования исходная информация называется открытым текстом, а зашифрованная форма - зашифрованным. Сообщение зашифрованного текста содержит всю информацию открытого текстового сообщения, но не находится в формате, который читается человеком или компьютером без надлежащего механизма для его расшифровки; он должен напоминать случайную бред для тех, кто не предназначен для чтения. [источник http://en.wikipedia.org/wiki/Cipher]" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">PRESENT-Chiffre</title>
+  <summary lang="de">Benutzung der <i>PRESENT</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>PRESENT</i>-Chiffre.</description>
+  <keywords lang="de">symmetrisch</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Random Key$" value="Zufallsschlüssel" />
+    <replacement key="$Random IV$" value="Zufalls-IV" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$PRESENT Encrypt$" value="PRESENT-Verschlüsselung" />
+    <replacement key="$PRESENT Decrypt$" value="PRESENT-Entschlüsselung" />
+    <replacement key="$text$" value="In cryptography, a cipher is an algorithm for performing encryption or decryption  a series of well-defined steps that can be followed as a procedure. An alternative, less common term is encipherment. In non-technical usage, a cipher is the same thing as a code; however, the concepts are distinct in cryptography. In classical cryptography, ciphers were distinguished from codes. Codes operated by substituting according to a large codebook which linked a random string of characters or numbers to a word or phrase. For example, UQJHSE could be the code for Proceed to the following coordinates. When using a cipher the original information is known as plaintext, and the encrypted form as ciphertext. The ciphertext message contains all the information of the plaintext message, but is not in a format readable by a human or computer without the proper mechanism to decrypt it; it should resemble random gibberish to those not intended to read it.&#xD;&#xA;&#xD;&#xA;[source http://en.wikipedia.org/wiki/Cipher]" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="PRESENT.png" />
+  <relevantPlugins>
+    <plugin name="PRESENT" />
+    <plugin name="RandomNumberGenerator" />
+  </relevantPlugins>
 </sample>

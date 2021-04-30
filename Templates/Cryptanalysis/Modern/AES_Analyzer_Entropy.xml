@@ -1,57 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: AES_Analyzer_Entropy.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">AES Analysis Using Entropy (1)</title>
-  <title lang="zh">使用熵的AES分析（1）</title>
-  <title lang="ru">Анализ AES с использованием энтропии (1)</title>
   <summary lang="en">Cryptanalysis of <i>AES</i> using the <i>KeySearcher</i> component and an entropy function</summary>
-  <summary lang="zh">使用KeySearcher组件和熵函数对AES进行密码分析</summary>
-  <summary lang="ru">Криптоанализ AES с использованием компонента KeySearcher и энтропийной функции</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>AES</i> algorithm using the <i>KeySearcher</i> component and an entropy function. The <i>KeySearcher</i> gets an encrypted text as input and tries all keys of the given keyspace. The resulting plaintexts are evaluated with the entropy function and the plaintext with the best score is sent to the output.</description>
-  <description lang="zh">该模板显示了使用KeySearcher组件和熵函数对AES算法进行的密码分析。 KeySearcher获取加密的文本作为输入，并尝试给定键空间的所有键。使用熵函数评估所得的明文，并将得分最高的明文发送到输出。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма AES с использованием компонента KeySearcher и энтропийной функции. KeySearcher получает зашифрованный текст в качестве входных данных и пробует все ключи данного пространства ключей. Получаемые в результате открытые тексты оцениваются с помощью функции энтропии, и на вывод направляется открытый текст с наилучшим результатом.</description>
   <keywords>advanced, standard, NIST, Rijndael, Daemen, Rijmen, symmetric, keysearcher, Attack, Analysis</keywords>
-  <keywords lang="zh">高级，标准，NIST，Rijndael，Daemen，Rijmen，对称，keysearcher，攻击，分析</keywords>
-  <keywords lang="ru">продвинутый, стандартный, NIST, Rijndael, Daemen, Rijmen, симметричный, keyearcher, Attack, Analysis</keywords>
-  <title lang="de">AES-Analyse per Entropie (1)</title>
-  <summary lang="de">Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion. Der <i>KeySearcher</i> erhält hierzu einen verschlüsselten Text als Eingabe und probiert alle Schlüssel des angegebenen Schlüsselraumes. Die resultierenden Klartexte werden mittels der Entropie-Funktion bewertet, und der Klartext mit der besten Bewertung wird ausgegeben.</description>
-  <keywords lang="de">symmetrisch, NIST, Rijndael, Daemen, Rijmen, Standard, Keysearcher, Angriff</keywords>
-  <icon file="AES.png" />
-  <relevantPlugins>
-    <plugin name="AES" />
-    <plugin name="CostFunction" />
-    <plugin name="KeySearcher" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
-    <replacement key="$Key$" value="Bester gefundener Schlüssel" />
-    <replacement key="$StringDecoder$" value="String-Dekodierer" />
-    <replacement key="$Converter$" value="Konvertierer" />
-    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man einen mit AES verschlüsselten Text mittels Brute-Force-Suche angreifen kann.\line Die Schlüsselsucher-Komponente durchsucht einen Teilraum des AES-Schlüsselraums und nutzt die Entropie der entschlüsselten Klartexte, um den richtigen zu finden\line Der Klartext, welcher die geringste Entropie hat, wird in der Bestenliste an erster Stelle stehen.\line Als Eingabe erhält der Schlüsselsucher einen Geheimtext, welcher hex-codiert eingegeben wurde." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$Key$" value="最佳发现钥匙" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-    <replacement key="$memo$" value="此模板显示了如何使用蛮力搜索来攻击用AES加密的文本\Line密钥查找器组件搜索AES密钥空间的子空间，并使用解密后的纯文本的熵来找到正确的文本\line熵最低的将位于最佳熵的列表的顶部。\线关键字查找器接收到一个密文作为输入，并以十六进制编码形式输入。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$Key$" value="Найден лучший ключ" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как использовать поиск Brute Force для атаки на AES-зашифрованный текст.\line Компонент поиска ключей ищет подпространство в пространстве ключей AES и использует энтропию дешифрованного открытого текста, чтобы найти правильную строку.\line Открытый текст с наименьшей энтропией будет занимать первое место в таблице лидеров.\line В качестве входных данных ключ поиска получает зашифрованный текст, который был введен в шестнадцатеричном коде." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Plaintext$" value="Plaintext" />
@@ -62,4 +21,64 @@
     <replacement key="$KeySearcher$" value="KeySearcher" />
     <replacement key="$memo$" value="This template shows how to use a brute-force search to attack an AES-encrypted text. \line The Keysearcher component searches a subspace of the AES keyspace and uses the entropy of the decrypted plaintexts to find the correct one.\line The plaintext that has the lowest entropy will rank first in the bestlist. \line As input, the Keysearcher receives a ciphertext, which was entered hex-encoded." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">使用熵的AES分析（1）</title>
+  <summary lang="zh">使用KeySearcher组件和熵函数对AES进行密码分析</summary>
+  <description lang="zh">该模板显示了使用KeySearcher组件和熵函数对AES算法进行的密码分析。 KeySearcher获取加密的文本作为输入，并尝试给定键空间的所有键。使用熵函数评估所得的明文，并将得分最高的明文发送到输出。</description>
+  <keywords lang="zh">高级，标准，NIST，Rijndael，Daemen，Rijmen，对称，keysearcher，攻击，分析</keywords>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$Key$" value="最佳发现钥匙" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$KeySearcher$" value="关键搜索" />
+    <replacement key="$memo$" value="此模板显示了如何使用蛮力搜索来攻击用AES加密的文本\Line密钥查找器组件搜索AES密钥空间的子空间，并使用解密后的纯文本的熵来找到正确的文本\line熵最低的将位于最佳熵的列表的顶部。\线关键字查找器接收到一个密文作为输入，并以十六进制编码形式输入。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Анализ AES с использованием энтропии (1)</title>
+  <summary lang="ru">Криптоанализ AES с использованием компонента KeySearcher и энтропийной функции</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма AES с использованием компонента KeySearcher и энтропийной функции. KeySearcher получает зашифрованный текст в качестве входных данных и пробует все ключи данного пространства ключей. Получаемые в результате открытые тексты оцениваются с помощью функции энтропии, и на вывод направляется открытый текст с наилучшим результатом.</description>
+  <keywords lang="ru">продвинутый, стандартный, NIST, Rijndael, Daemen, Rijmen, симметричный, keyearcher, Attack, Analysis</keywords>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$Key$" value="Найден лучший ключ" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$KeySearcher$" value="ключ поиска" />
+    <replacement key="$memo$" value="Этот шаблон показывает, как использовать поиск Brute Force для атаки на AES-зашифрованный текст.\line Компонент поиска ключей ищет подпространство в пространстве ключей AES и использует энтропию дешифрованного открытого текста, чтобы найти правильную строку.\line Открытый текст с наименьшей энтропией будет занимать первое место в таблице лидеров.\line В качестве входных данных ключ поиска получает зашифрованный текст, который был введен в шестнадцатеричном коде." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">AES-Analyse per Entropie (1)</title>
+  <summary lang="de">Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion. Der <i>KeySearcher</i> erhält hierzu einen verschlüsselten Text als Eingabe und probiert alle Schlüssel des angegebenen Schlüsselraumes. Die resultierenden Klartexte werden mittels der Entropie-Funktion bewertet, und der Klartext mit der besten Bewertung wird ausgegeben.</description>
+  <keywords lang="de">symmetrisch, NIST, Rijndael, Daemen, Rijmen, Standard, Keysearcher, Angriff</keywords>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Key$" value="Bester gefundener Schlüssel" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man einen mit AES verschlüsselten Text mittels Brute-Force-Suche angreifen kann.\line Die Schlüsselsucher-Komponente durchsucht einen Teilraum des AES-Schlüsselraums und nutzt die Entropie der entschlüsselten Klartexte, um den richtigen zu finden\line Der Klartext, welcher die geringste Entropie hat, wird in der Bestenliste an erster Stelle stehen.\line Als Eingabe erhält der Schlüsselsucher einen Geheimtext, welcher hex-codiert eingegeben wurde." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="CostFunction" />
+    <plugin name="KeySearcher" />
+  </relevantPlugins>
 </sample>

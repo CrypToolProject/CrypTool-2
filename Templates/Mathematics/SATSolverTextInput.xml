@@ -1,47 +1,66 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: SATSolverTextInput.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">SAT Solver (Text Input)</title>
-  <title lang="zh">SAT解算器（文本输入）</title>
-  <title lang="ru">SAT Solver (ввод текста)</title>
   <summary lang="en">Usage of the <i>SAT Solver</i> with text input</summary>
-  <summary lang="zh">SAT解算器与文本输入的配合使用</summary>
-  <summary lang="ru">Использование SAT Solver с текстовым вводом</summary>
   <description lang="en">This template shows how to use the <i>SAT Solver</i> with text input.</description>
-  <description lang="zh">该模板显示了如何在文本输入中使用SAT解算器。</description>
-  <description lang="ru">Этот шаблон показывает, как использовать SAT Solver с текстовым вводом.</description>
   <keywords>satsolver, sat, solver</keywords>
-  <keywords lang="zh">坐姿求解器坐着</keywords>
-  <keywords lang="ru">сатсольвер, сидел, решатель</keywords>
-  <title lang="de">SAT-Solver (Texteingabe)</title>
-  <summary lang="de">Benutzung des <i>SAT Solver</i> mit Texteingabe</summary>
-  <description lang="de">Diese Vorlage zeigt, wie der <i>SAT-Solver</i> mit Texteingabe verwendet wird.</description>
-  <keywords lang="de">satsolver, sat, solver, erfüllbarkeit</keywords>
-  <icon file="SATSolver.png" />
-  <relevantPlugins>
-    <plugin name="SATSolver" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$String Encoder$" value="String-Kodierer" />
-    <replacement key="$Text Input$" value="Texteingabe" />
-    <replacement key="$Text Output$" value="Textausgabe" />
-    <replacement key="$SAT Solver$" value="SAT-Solver" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$String Encoder$" value="字符串编码器" />
-    <replacement key="$Text Input$" value="文字输入" />
-    <replacement key="$Text Output$" value="文字输出" />
-    <replacement key="$SAT Solver$" value="SAT求解器" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$String Encoder$" value="Строка кодировщик" />
-    <replacement key="$Text Input$" value="ввод текста" />
-    <replacement key="$Text Output$" value="вывод текста" />
-    <replacement key="$SAT Solver$" value="СБ-Solver" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$String Encoder$" value="String Encoder" />
     <replacement key="$Text Input$" value="Text Input" />
     <replacement key="$Text Output$" value="Text Output" />
     <replacement key="$SAT Solver$" value="SAT Solver" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">SAT解算器（文本输入）</title>
+  <summary lang="zh">SAT解算器与文本输入的配合使用</summary>
+  <description lang="zh">该模板显示了如何在文本输入中使用SAT解算器。</description>
+  <keywords lang="zh">坐姿求解器坐着</keywords>
+  <replacements lang="zh">
+    <replacement key="$String Encoder$" value="字符串编码器" />
+    <replacement key="$Text Input$" value="文字输入" />
+    <replacement key="$Text Output$" value="文字输出" />
+    <replacement key="$SAT Solver$" value="SAT求解器" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">SAT Solver (ввод текста)</title>
+  <summary lang="ru">Использование SAT Solver с текстовым вводом</summary>
+  <description lang="ru">Этот шаблон показывает, как использовать SAT Solver с текстовым вводом.</description>
+  <keywords lang="ru">сатсольвер, сидел, решатель</keywords>
+  <replacements lang="ru">
+    <replacement key="$String Encoder$" value="Строка кодировщик" />
+    <replacement key="$Text Input$" value="ввод текста" />
+    <replacement key="$Text Output$" value="вывод текста" />
+    <replacement key="$SAT Solver$" value="СБ-Solver" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">SAT-Solver (Texteingabe)</title>
+  <summary lang="de">Benutzung des <i>SAT Solver</i> mit Texteingabe</summary>
+  <description lang="de">Diese Vorlage zeigt, wie der <i>SAT-Solver</i> mit Texteingabe verwendet wird.</description>
+  <keywords lang="de">satsolver, sat, solver, erfüllbarkeit</keywords>
+  <replacements lang="de">
+    <replacement key="$String Encoder$" value="String-Kodierer" />
+    <replacement key="$Text Input$" value="Texteingabe" />
+    <replacement key="$Text Output$" value="Textausgabe" />
+    <replacement key="$SAT Solver$" value="SAT-Solver" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SATSolver.png" />
+  <relevantPlugins>
+    <plugin name="SATSolver" />
+  </relevantPlugins>
 </sample>

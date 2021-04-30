@@ -1,78 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Scytale_ExhaustiveKeySearch.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Scytale Brute-Force Analysis</title>
-  <title lang="zh">Scytale蛮力分析</title>
-  <title lang="ru">Scytale Brute-Force Analysis</title>
   <summary lang="en">Cryptanalysis of the <i>Scytale</i> using brute-force</summary>
-  <summary lang="zh">使用蛮力对Scytale进行密码分析</summary>
-  <summary lang="ru">Криптоанализ Scytale с использованием грубой силы</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>Scytale</i> using brute-force.</description>
-  <description lang="zh">该模板显示了使用蛮力对Scytale进行的密码分析。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ Scytale с использованием грубой силы.</description>
   <keywords>Sparta, Greek, Wood, Transposition, diameter, rod, Skytale, Attack, Analysis</keywords>
-  <keywords lang="zh">斯巴达，希腊语，木，换位，直径，杆，天空传奇，攻击，分析</keywords>
-  <keywords lang="ru">Sparta, Греческий, Дерево, Транспонирование, диаметр, стержень, Skytale, Атака, Анализ</keywords>
-  <title lang="de">Skytale Brute-Force-Analyse</title>
-  <summary lang="de">Kryptoanalyse der <i>Skytale</i> mit Brute-Force</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Skytale</i> mit Brute-Force.</description>
-  <keywords lang="de">Griechenland, Holz, Stab, Durchmesser, Skytale, Angriff</keywords>
-  <icon file="Scytale_ExhaustiveKeySearch.png" />
-  <relevantPlugins>
-    <plugin name="Comparators" />
-    <plugin name="Contains" />
-    <plugin name="CrypToolDictionary" />
-    <plugin name="Gate" />
-    <plugin name="IncDec" />
-    <plugin name="Scytale" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$All possible plaintexts$" value="Alle möglichen Klartexte" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$Scytale$" value="Skytale" />
-    <replacement key="$Dictionary$" value="Wörterbuch" />
-    <replacement key="$Converter$" value="Konvertierer" />
-    <replacement key="$Contains$" value="Enthält" />
-    <replacement key="$Gate$" value="Gatter" />
-    <replacement key="$KeyGate$" value="Schlüssel-Gatter" />
-    <replacement key="$PlaintextGate$" value="Klartext-Gatter" />
-    <replacement key="$Max sticksize$" value=" Max. Stabgröße" />
-    <replacement key="$Found sticksize$" value="gefundene Stabgröße" />
-    <replacement key="$memo$" value="\fs18{\fs21\b &quot;Skytale Ciphertext-Only-Angriff&quot;}\line Diese Vorlage führt einen Brute-Force Ciphertext-Only-Angriff auf die Skytale-Chiffre durch. Das Grundprinzip hierbei ist, dass für alle Stabgrößen von 1 bis zu einem vorgegebenen Wert (Max. Stabgröße) eine Entschlüsselung durchgeführt wird und die entschlüsselten Texte in der Komponente &quot;Alle möglichen Klartexte&quot; gesammelt werden. Außerdem wird getestet, ob eine Mindestanzahl von Wörtern des entschlüsselten Textes in einem Wörterbuch vorkommen (mit der &quot;Enthält&quot;-Komponente). Werden Wörter gefunden, so kann man mit hoher Wahrscheinlichkeit davon ausgehen, dass der korrekte Klartext gefunden wurde, und der Text wird zusätzlich an die Komponente &quot;Entschlüsselter Geheimtext&quot; geschickt.\line {\fs20\b\ul Funktionsweise:}\line Der verschlüsselte Text wird an die Skytale-Komponente geschickt. Die Stabgröße für die Skytale wird von 1 bis zum Wert, der in der Komponente &quot;Max. Stabgröße&quot; angegeben ist, in einer Schleife inkrementiert. Die Schleife wird mit einer Inkrementier-Komponente (i++) und einem Gatter realisiert. Solange das Gatter den Wert WAHR vom Vergleicher (i &lt; Max. Stabgröße) erhält, wird die Schleife durchlaufen. Für jede Stabgröße der Skytale wird damit eine Entschlüsselung durchgeführt und die Klartexte in der Komponente &quot;Alle möglichen Klartexte&quot; gesammelt. Die &quot;Enthält&quot;-Komponente testet für jeden Klartext, ob eine gewisse Anzahl seiner Worte in einem Wörterbuch stehen. Ist dies der Fall, so schickt die &quot;Enthält&quot;-Komponente den Wert WAHR an das Klartext-Gatter und damit wird der aktuell entschlüsselte Klartext an die Komponente &quot;Entschlüsselter Geheimtext&quot; durchgelassen." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$All possible plaintexts$" value="各种明文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Scytale$" value="天空传说" />
-    <replacement key="$Dictionary$" value="字典" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Contains$" value="包含" />
-    <replacement key="$Gate$" value="门" />
-    <replacement key="$KeyGate$" value="钥匙门" />
-    <replacement key="$PlaintextGate$" value="纯文字门" />
-    <replacement key="$Max sticksize$" value="最高Stabgröße" />
-    <replacement key="$Found sticksize$" value="找到杆尺寸" />
-    <replacement key="$memo$" value="\fs18 {\fs21 \b“仅Skytale密文攻击”} \line此模板对Skytale密码执行仅蛮力密文攻击。此处的基本原理是，对从1到指定值（最大棒尺寸）的所有棒尺寸执行解密，并将解码后的文本收集在“所有可能的明文”组件中。此外，还测试了字典中是否存在最少数量的解密文本单词（带有“包含”组件）。如果找到了单词，则很有可能找到了正确的明文，并且该文本也被发送到“解密的密文”组件。\Line {\fs20 \b \ul它的工作方式：} \line文本将发送到Skytale组件。 Skytale的杆尺寸从1循环增加到“最大杆尺寸”组件中给定的值。该循环由一个增量组件（i ++）和一个门实现。只要门从比较器接收到值TRUE（i &amp;lt;最大棒尺寸），循环就会进行。对于Skytale的每个标尺大小，都会执行解密，并将明文收集在“所有可能的明文”组件中。 “包含”组件针对每个纯文本测试词典中是否有一定数量的单词。如果是这种情况，则“包含”组件将值TRUE发送到明文门，从而允许当前解密的明文进入“解密密文”组件。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$All possible plaintexts$" value="Все возможные простые тексты" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Scytale$" value="Skytale" />
-    <replacement key="$Dictionary$" value="словарь" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Contains$" value="содержит" />
-    <replacement key="$Gate$" value="ворота" />
-    <replacement key="$KeyGate$" value="Основные ворота" />
-    <replacement key="$PlaintextGate$" value="Plaintext ворота" />
-    <replacement key="$Max sticksize$" value="Максимальный размер бара" />
-    <replacement key="$Found sticksize$" value="найденный размер бара" />
-    <replacement key="$memo$" value="\fs18 {\fs21 \b &amp;quot;Skytale Ciphertext Only Attack&amp;quot;} \line Этот шаблон выполняет атаку только для шифрованного текста на шифрованном Skytale. Основной принцип здесь заключается в том, что дешифрование выполняется для всех размеров бара от 1 до заданного значения (максимальный размер бара), а дешифрованные тексты собираются в компоненте «Все возможные простые тексты». Кроме того, проверяется, существует ли минимальное количество расшифрованного текста в словаре (с компонентом «содержит»). Если слова найдены, весьма вероятно, что был найден правильный текстовый текст, а текст также отправлен компоненту «расшифрованный зашифрованный текст». \Line {\fs20 \b \ul Как это работает:} \line Зашифрованный Текст отправляется компоненту Skytale. Размер палки для Skytale увеличивается от 1 до значения, указанного в компоненте «Макс. Размер бара» в цикле. Цикл реализуется с инкрементным компонентом (i ++) и затвором. Пока ворота получают значение TRUE от компаратора (i &amp;lt;максимальный размер бара), цикл перемещается. Для каждого размера штриха Skytale выполняется дешифрование, а простые тексты собираются в компоненте «все возможные простые тексты». «Содержит» компонентные тесты для каждого открытого текста, есть ли определенное количество его слов в словаре. Если это так, то компонент «содержит» отправляет значение TRUE в столбец открытого текста, и, таким образом, текущий расшифрованный открытый текст передается компоненту «расшифрованный зашифрованный текст»." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -89,4 +27,85 @@
     <replacement key="$Found sticksize$" value="found sticksize" />
     <replacement key="$memo$" value="\fs18{\fs21\b &quot;Scytale ciphertext-only attack&quot;}\line This sample performs a brute-force ciphertext-only attack on the Scytale cipher. The basic principle is that for each sticksize from one to a predefined value (max sticksize) a trial decryption is done, and all the decryptions are collected in the &quot;All possible plaintexts&quot; textoutput component. Additionally, it checks if a certain amount of words (see &quot;Contains&quot;) from the decrypted text are found in a dictionary. If the words are found it can be assumed with a high probability, that this is the correct decryption and the decrypted text is additionally forwarded to the &quot;Decrypted Ciphertext&quot; component.\line {\fs20\b\ul How it works:}\line The encrypted text is forwarded to the Scytale component. The sticksize for the Scytale is incremented from 1 to the value given in &quot;Max sticksize&quot; in a loop. The loop is realized with the incrementer (i++) and the Gate. As long as the Gate is provided with a TRUE value from the comparator (i &lt; Max sticksize) component, the loop is running. For each sitcksize the Scytale is therefore performing a trial decryption which in turn are collected in the textoutput &quot;All possible plaintexts&quot;. Additionally, the &quot;Contains&quot; component checks for each trial decryption if there are a number of words from the trial decryption found in a dictionary. If this is the case, the Contains component assigns TRUE to the PlaintextGate and therefore the current decryption is assigned to the &quot;Decrypted Ciphertext&quot; component." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">Scytale蛮力分析</title>
+  <summary lang="zh">使用蛮力对Scytale进行密码分析</summary>
+  <description lang="zh">该模板显示了使用蛮力对Scytale进行的密码分析。</description>
+  <keywords lang="zh">斯巴达，希腊语，木，换位，直径，杆，天空传奇，攻击，分析</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$All possible plaintexts$" value="各种明文" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Scytale$" value="天空传说" />
+    <replacement key="$Dictionary$" value="字典" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$Contains$" value="包含" />
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$KeyGate$" value="钥匙门" />
+    <replacement key="$PlaintextGate$" value="纯文字门" />
+    <replacement key="$Max sticksize$" value="最高Stabgröße" />
+    <replacement key="$Found sticksize$" value="找到杆尺寸" />
+    <replacement key="$memo$" value="\fs18 {\fs21 \b“仅Skytale密文攻击”} \line此模板对Skytale密码执行仅蛮力密文攻击。此处的基本原理是，对从1到指定值（最大棒尺寸）的所有棒尺寸执行解密，并将解码后的文本收集在“所有可能的明文”组件中。此外，还测试了字典中是否存在最少数量的解密文本单词（带有“包含”组件）。如果找到了单词，则很有可能找到了正确的明文，并且该文本也被发送到“解密的密文”组件。\Line {\fs20 \b \ul它的工作方式：} \line文本将发送到Skytale组件。 Skytale的杆尺寸从1循环增加到“最大杆尺寸”组件中给定的值。该循环由一个增量组件（i ++）和一个门实现。只要门从比较器接收到值TRUE（i &amp;lt;最大棒尺寸），循环就会进行。对于Skytale的每个标尺大小，都会执行解密，并将明文收集在“所有可能的明文”组件中。 “包含”组件针对每个纯文本测试词典中是否有一定数量的单词。如果是这种情况，则“包含”组件将值TRUE发送到明文门，从而允许当前解密的明文进入“解密密文”组件。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Scytale Brute-Force Analysis</title>
+  <summary lang="ru">Криптоанализ Scytale с использованием грубой силы</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ Scytale с использованием грубой силы.</description>
+  <keywords lang="ru">Sparta, Греческий, Дерево, Транспонирование, диаметр, стержень, Skytale, Атака, Анализ</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$All possible plaintexts$" value="Все возможные простые тексты" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Scytale$" value="Skytale" />
+    <replacement key="$Dictionary$" value="словарь" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$Contains$" value="содержит" />
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$KeyGate$" value="Основные ворота" />
+    <replacement key="$PlaintextGate$" value="Plaintext ворота" />
+    <replacement key="$Max sticksize$" value="Максимальный размер бара" />
+    <replacement key="$Found sticksize$" value="найденный размер бара" />
+    <replacement key="$memo$" value="\fs18 {\fs21 \b &amp;quot;Skytale Ciphertext Only Attack&amp;quot;} \line Этот шаблон выполняет атаку только для шифрованного текста на шифрованном Skytale. Основной принцип здесь заключается в том, что дешифрование выполняется для всех размеров бара от 1 до заданного значения (максимальный размер бара), а дешифрованные тексты собираются в компоненте «Все возможные простые тексты». Кроме того, проверяется, существует ли минимальное количество расшифрованного текста в словаре (с компонентом «содержит»). Если слова найдены, весьма вероятно, что был найден правильный текстовый текст, а текст также отправлен компоненту «расшифрованный зашифрованный текст». \Line {\fs20 \b \ul Как это работает:} \line Зашифрованный Текст отправляется компоненту Skytale. Размер палки для Skytale увеличивается от 1 до значения, указанного в компоненте «Макс. Размер бара» в цикле. Цикл реализуется с инкрементным компонентом (i ++) и затвором. Пока ворота получают значение TRUE от компаратора (i &amp;lt;максимальный размер бара), цикл перемещается. Для каждого размера штриха Skytale выполняется дешифрование, а простые тексты собираются в компоненте «все возможные простые тексты». «Содержит» компонентные тесты для каждого открытого текста, есть ли определенное количество его слов в словаре. Если это так, то компонент «содержит» отправляет значение TRUE в столбец открытого текста, и, таким образом, текущий расшифрованный открытый текст передается компоненту «расшифрованный зашифрованный текст»." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Skytale Brute-Force-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>Skytale</i> mit Brute-Force</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Skytale</i> mit Brute-Force.</description>
+  <keywords lang="de">Griechenland, Holz, Stab, Durchmesser, Skytale, Angriff</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$All possible plaintexts$" value="Alle möglichen Klartexte" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Scytale$" value="Skytale" />
+    <replacement key="$Dictionary$" value="Wörterbuch" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$Contains$" value="Enthält" />
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$KeyGate$" value="Schlüssel-Gatter" />
+    <replacement key="$PlaintextGate$" value="Klartext-Gatter" />
+    <replacement key="$Max sticksize$" value=" Max. Stabgröße" />
+    <replacement key="$Found sticksize$" value="gefundene Stabgröße" />
+    <replacement key="$memo$" value="\fs18{\fs21\b &quot;Skytale Ciphertext-Only-Angriff&quot;}\line Diese Vorlage führt einen Brute-Force Ciphertext-Only-Angriff auf die Skytale-Chiffre durch. Das Grundprinzip hierbei ist, dass für alle Stabgrößen von 1 bis zu einem vorgegebenen Wert (Max. Stabgröße) eine Entschlüsselung durchgeführt wird und die entschlüsselten Texte in der Komponente &quot;Alle möglichen Klartexte&quot; gesammelt werden. Außerdem wird getestet, ob eine Mindestanzahl von Wörtern des entschlüsselten Textes in einem Wörterbuch vorkommen (mit der &quot;Enthält&quot;-Komponente). Werden Wörter gefunden, so kann man mit hoher Wahrscheinlichkeit davon ausgehen, dass der korrekte Klartext gefunden wurde, und der Text wird zusätzlich an die Komponente &quot;Entschlüsselter Geheimtext&quot; geschickt.\line {\fs20\b\ul Funktionsweise:}\line Der verschlüsselte Text wird an die Skytale-Komponente geschickt. Die Stabgröße für die Skytale wird von 1 bis zum Wert, der in der Komponente &quot;Max. Stabgröße&quot; angegeben ist, in einer Schleife inkrementiert. Die Schleife wird mit einer Inkrementier-Komponente (i++) und einem Gatter realisiert. Solange das Gatter den Wert WAHR vom Vergleicher (i &lt; Max. Stabgröße) erhält, wird die Schleife durchlaufen. Für jede Stabgröße der Skytale wird damit eine Entschlüsselung durchgeführt und die Klartexte in der Komponente &quot;Alle möglichen Klartexte&quot; gesammelt. Die &quot;Enthält&quot;-Komponente testet für jeden Klartext, ob eine gewisse Anzahl seiner Worte in einem Wörterbuch stehen. Ist dies der Fall, so schickt die &quot;Enthält&quot;-Komponente den Wert WAHR an das Klartext-Gatter und damit wird der aktuell entschlüsselte Klartext an die Komponente &quot;Entschlüsselter Geheimtext&quot; durchgelassen." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Scytale_ExhaustiveKeySearch.png" />
+  <relevantPlugins>
+    <plugin name="Comparators" />
+    <plugin name="Contains" />
+    <plugin name="CrypToolDictionary" />
+    <plugin name="Gate" />
+    <plugin name="IncDec" />
+    <plugin name="Scytale" />
+  </relevantPlugins>
 </sample>

@@ -1,76 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: DictionaryAttack.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Dictionary Attack on a Password Hash Value</title>
-  <title lang="zh">字典对密码哈希值的攻击</title>
-  <title lang="ru">Словарь Атака на хеш-значение пароля</title>
   <summary lang="en">Implementation of a dictionary attack on a password hash value</summary>
-  <summary lang="zh">对密码哈希值实施字典攻击</summary>
-  <summary lang="ru">Внедрение атаки на словарь</summary>
   <description lang="en">This template shows how a dictionary attack on a password hash value can be implemented and carried out in CrypTool 2.</description>
-  <description lang="zh">该模板显示了如何在CrypTool 2中实施和执行针对密码哈希值的字典攻击。</description>
-  <description lang="ru">Этот шаблон показывает, как атака словаря на значение хеш-пароля может быть реализована и реализована в CrypTool 2.</description>
   <keywords>hash, attack, dictionary, SHA256, pre-image</keywords>
-  <keywords lang="zh">哈希，攻击，字典，SHA256，原像</keywords>
-  <keywords lang="ru">хэш, атака, словарь, SHA256, предварительный просмотр</keywords>
-  <title lang="de">Wörterbuch-Angriff auf einen Passwort-Hash-Wert</title>
-  <summary lang="de">Durchführung eines Wörterbuch-Angriffes auf einen Passwort-Hash-Wert</summary>
-  <description lang="de">Diese Vorlage zeigt, wie ein Wörterbuch-Angriff auf einen Passwort-Hash-Wert in CrypTool 2 implementiert und ausgeführt werden kann.</description>
-  <keywords lang="de">Hash, Angriff, Wörterbuch, SHA256, Urbild</keywords>
-  <icon file="DictionaryAttack.png" />
-  <relevantPlugins>
-    <plugin name="ArrayIndexer" />
-    <plugin name="CrypToolDictionary" />
-    <plugin name="Gate" />
-    <plugin name="LengthOf" />
-    <plugin name="Progress" />
-    <plugin name="SHA" />
-    <plugin name="StreamComparator" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Dictionary$" value="Wörterbuch" />
-    <replacement key="$Count$" value="Zähler" />
-    <replacement key="$Length$" value="Länge" />
-    <replacement key="$Select word$" value="Wähle Wort" />
-    <replacement key="$Gate$" value="Gatter" />
-    <replacement key="$String Decoder$" value="String-Kodierer" />
-    <replacement key="$Comparator$" value="Datenstrom-Vergleicher" />
-    <replacement key="$Actual search password$" value="Momentan analysiertes Passwort" />
-    <replacement key="$Found password$" value="Gefundenes Passwort" />
-    <replacement key="$Found index$" value="Gefundener Index" />
-    <replacement key="$Progress$" value="Teil des Suchraums" />
-    <replacement key="$Test password - Hash-value (HEX)$" value="Test-Passwort (angegeben als Hash-Wert in Hex)" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie ein Wörterbuch-Angriff mit CrypTool 2 durchgefürt werden kann.\line\line Das Wörterbuch wird durch eine Zahl indiziert. Dieser Index wird solange erhöht, bis das korrekte Passwort gefunden wurde.\line\line Von jedem Wörterbucheintrag wird der Hashwert berechnet und mit dem Hashwert des zu testenden Passwortes verglichen.\line\line Das gefundene Passwort und sein Index werden schliesslich in den Komponenten &quot;Gefundenes Passwort&quot; und &quot;Gefundener Index&quot; ausgegeben. \line\line Um die Ausführung zu beschleunigen, minimieren Sie einfach die beiden Textausgabe-Komponenten &quot;Momentan analysiertes Passwort&quot; und %quot;Gefundener Index&quot;.\line\line Die Ausführung terminiert nicht nur bei 100% Fortschritt sondern genau dann, wenn das Passwort gefunden wurde -- daher kann CrypTool 2 auch weniger als 100% Fortschritt anzeigen, wenn das Passwort gefunden wurde." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Dictionary$" value="字典" />
-    <replacement key="$Count$" value="计数器" />
-    <replacement key="$Length$" value="长" />
-    <replacement key="$Select word$" value="选择单词" />
-    <replacement key="$Gate$" value="门" />
-    <replacement key="$String Decoder$" value="字符串编码器" />
-    <replacement key="$Comparator$" value="数据流比较器" />
-    <replacement key="$Actual search password$" value="当前正在分析的密码" />
-    <replacement key="$Found password$" value="找到密码" />
-    <replacement key="$Found index$" value="找到索引" />
-    <replacement key="$Progress$" value="搜索空间的一部分" />
-    <replacement key="$Test password - Hash-value (HEX)$" value="测试密码（指定为十六进制的哈希值）" />
-    <replacement key="$memo$" value="此模板演示了如何使用CrypTool 2进行字典攻击。\line \line字典由数字索引。该索引会增加，直到找到正确的密码为止。\Line \line为每个字典条目计算哈希值，并将其与要测试的密码的哈希值进行比较。\Line \line找到的密码及其索引最终存储在组件中找到密码“和”找到索引“被输出。 \line \line为了加快执行速度，只需最小化两个文本输出组件“当前分析的密码”和％“找到索引”。\line \line执行不仅终止于100％的进度，而且恰好在该时间终止找到密码-因此，如果找到密码，CrypTool 2也可以显示少于100％的进度。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Dictionary$" value="словарь" />
-    <replacement key="$Count$" value="счетчик" />
-    <replacement key="$Length$" value="долго" />
-    <replacement key="$Select word$" value="Выберите слово" />
-    <replacement key="$Gate$" value="ворота" />
-    <replacement key="$String Decoder$" value="Строка кодировщик" />
-    <replacement key="$Comparator$" value="поток компаратор" />
-    <replacement key="$Actual search password$" value="Текущий анализируемый пароль" />
-    <replacement key="$Found password$" value="найден пароль" />
-    <replacement key="$Found index$" value="Найденный индекс" />
-    <replacement key="$Progress$" value="Часть пространства поиска" />
-    <replacement key="$Test password - Hash-value (HEX)$" value="Пароль проверки (задан как хэш-значение в шестнадцатеричном формате)" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, как выполнять атаку словаря с помощью CrypTool 2. \line \line Словарь индексируется числом. Этот индекс будет увеличен до тех пор, пока не будет найден правильный пароль. \Line \line. Из каждой словарной статьи вычисляется значение хэша и сравнивается с хэш-значением проверяемого пароля. \Line \line Найденный пароль и его индекс, наконец, хранятся в компонентах &amp;quot; «Найденный пароль» и «Найденный индекс». \line\line Чтобы ускорить выполнение, просто скройте два текстовых выходных компонента «Текущий анализируемый пароль» и «Найденный индекс». \line\line Выполнение не заканчивается со 100% -ным прогрессом, но когда пароль найден -- поэтому CrypTool 2 также может показывать прогресс менее 100%, если пароль был найден." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Dictionary$" value="Dictionary" />
     <replacement key="$Count$" value="Count" />
@@ -86,4 +26,83 @@
     <replacement key="$Test password - Hash-value (HEX)$" value="Test password (given as hash value in hex)" />
     <replacement key="$memo$" value="This template shows how a dictionary attack can be built using CrypTool 2.\line\line The dictionary is indexed using a number. This number is incremented until the correct password is found.\line\line All entries of the dictionary will be hashed and tested against the hash of the test password.\line\line Finally, the found password and the corresponding index are visible in the textboxes &quot;Found password&quot; and &quot;Found index&quot;. \line\line To speed up the execution just minimize the two text output components &quot;Current analyzed password&quot; and &quot;Found index&quot;.\line\line Execution does not onlyterminate at 100% progress, but when the password is found -- so CrypTool 2 can also show less than 100% progress if the password was found." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">字典对密码哈希值的攻击</title>
+  <summary lang="zh">对密码哈希值实施字典攻击</summary>
+  <description lang="zh">该模板显示了如何在CrypTool 2中实施和执行针对密码哈希值的字典攻击。</description>
+  <keywords lang="zh">哈希，攻击，字典，SHA256，原像</keywords>
+  <replacements lang="zh">
+    <replacement key="$Dictionary$" value="字典" />
+    <replacement key="$Count$" value="计数器" />
+    <replacement key="$Length$" value="长" />
+    <replacement key="$Select word$" value="选择单词" />
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$String Decoder$" value="字符串编码器" />
+    <replacement key="$Comparator$" value="数据流比较器" />
+    <replacement key="$Actual search password$" value="当前正在分析的密码" />
+    <replacement key="$Found password$" value="找到密码" />
+    <replacement key="$Found index$" value="找到索引" />
+    <replacement key="$Progress$" value="搜索空间的一部分" />
+    <replacement key="$Test password - Hash-value (HEX)$" value="测试密码（指定为十六进制的哈希值）" />
+    <replacement key="$memo$" value="此模板演示了如何使用CrypTool 2进行字典攻击。\line \line字典由数字索引。该索引会增加，直到找到正确的密码为止。\Line \line为每个字典条目计算哈希值，并将其与要测试的密码的哈希值进行比较。\Line \line找到的密码及其索引最终存储在组件中找到密码“和”找到索引“被输出。 \line \line为了加快执行速度，只需最小化两个文本输出组件“当前分析的密码”和％“找到索引”。\line \line执行不仅终止于100％的进度，而且恰好在该时间终止找到密码-因此，如果找到密码，CrypTool 2也可以显示少于100％的进度。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Словарь Атака на хеш-значение пароля</title>
+  <summary lang="ru">Внедрение атаки на словарь</summary>
+  <description lang="ru">Этот шаблон показывает, как атака словаря на значение хеш-пароля может быть реализована и реализована в CrypTool 2.</description>
+  <keywords lang="ru">хэш, атака, словарь, SHA256, предварительный просмотр</keywords>
+  <replacements lang="ru">
+    <replacement key="$Dictionary$" value="словарь" />
+    <replacement key="$Count$" value="счетчик" />
+    <replacement key="$Length$" value="долго" />
+    <replacement key="$Select word$" value="Выберите слово" />
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$String Decoder$" value="Строка кодировщик" />
+    <replacement key="$Comparator$" value="поток компаратор" />
+    <replacement key="$Actual search password$" value="Текущий анализируемый пароль" />
+    <replacement key="$Found password$" value="найден пароль" />
+    <replacement key="$Found index$" value="Найденный индекс" />
+    <replacement key="$Progress$" value="Часть пространства поиска" />
+    <replacement key="$Test password - Hash-value (HEX)$" value="Пароль проверки (задан как хэш-значение в шестнадцатеричном формате)" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, как выполнять атаку словаря с помощью CrypTool 2. \line \line Словарь индексируется числом. Этот индекс будет увеличен до тех пор, пока не будет найден правильный пароль. \Line \line. Из каждой словарной статьи вычисляется значение хэша и сравнивается с хэш-значением проверяемого пароля. \Line \line Найденный пароль и его индекс, наконец, хранятся в компонентах &amp;quot; «Найденный пароль» и «Найденный индекс». \line\line Чтобы ускорить выполнение, просто скройте два текстовых выходных компонента «Текущий анализируемый пароль» и «Найденный индекс». \line\line Выполнение не заканчивается со 100% -ным прогрессом, но когда пароль найден -- поэтому CrypTool 2 также может показывать прогресс менее 100%, если пароль был найден." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Wörterbuch-Angriff auf einen Passwort-Hash-Wert</title>
+  <summary lang="de">Durchführung eines Wörterbuch-Angriffes auf einen Passwort-Hash-Wert</summary>
+  <description lang="de">Diese Vorlage zeigt, wie ein Wörterbuch-Angriff auf einen Passwort-Hash-Wert in CrypTool 2 implementiert und ausgeführt werden kann.</description>
+  <keywords lang="de">Hash, Angriff, Wörterbuch, SHA256, Urbild</keywords>
+  <replacements lang="de">
+    <replacement key="$Dictionary$" value="Wörterbuch" />
+    <replacement key="$Count$" value="Zähler" />
+    <replacement key="$Length$" value="Länge" />
+    <replacement key="$Select word$" value="Wähle Wort" />
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$String Decoder$" value="String-Kodierer" />
+    <replacement key="$Comparator$" value="Datenstrom-Vergleicher" />
+    <replacement key="$Actual search password$" value="Momentan analysiertes Passwort" />
+    <replacement key="$Found password$" value="Gefundenes Passwort" />
+    <replacement key="$Found index$" value="Gefundener Index" />
+    <replacement key="$Progress$" value="Teil des Suchraums" />
+    <replacement key="$Test password - Hash-value (HEX)$" value="Test-Passwort (angegeben als Hash-Wert in Hex)" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, wie ein Wörterbuch-Angriff mit CrypTool 2 durchgefürt werden kann.\line\line Das Wörterbuch wird durch eine Zahl indiziert. Dieser Index wird solange erhöht, bis das korrekte Passwort gefunden wurde.\line\line Von jedem Wörterbucheintrag wird der Hashwert berechnet und mit dem Hashwert des zu testenden Passwortes verglichen.\line\line Das gefundene Passwort und sein Index werden schliesslich in den Komponenten &quot;Gefundenes Passwort&quot; und &quot;Gefundener Index&quot; ausgegeben. \line\line Um die Ausführung zu beschleunigen, minimieren Sie einfach die beiden Textausgabe-Komponenten &quot;Momentan analysiertes Passwort&quot; und %quot;Gefundener Index&quot;.\line\line Die Ausführung terminiert nicht nur bei 100% Fortschritt sondern genau dann, wenn das Passwort gefunden wurde -- daher kann CrypTool 2 auch weniger als 100% Fortschritt anzeigen, wenn das Passwort gefunden wurde." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="DictionaryAttack.png" />
+  <relevantPlugins>
+    <plugin name="ArrayIndexer" />
+    <plugin name="CrypToolDictionary" />
+    <plugin name="Gate" />
+    <plugin name="LengthOf" />
+    <plugin name="Progress" />
+    <plugin name="SHA" />
+    <plugin name="StreamComparator" />
+  </relevantPlugins>
 </sample>

@@ -1,58 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Salted-MD5-Hash-Stream-Comparing.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">MD5 Salted Hash Comparison</title>
-  <title lang="zh">MD5盐渍哈希比较</title>
-  <title lang="ru">Сравнение MD5 соленых хешей</title>
   <summary lang="en">Creation of a hash value using a salt value</summary>
-  <summary lang="zh">使用盐值创建哈希值</summary>
-  <summary lang="ru">Создание хэш-значения с использованием значения соли</summary>
   <description lang="en">This template shows how a hash value is created using a salt value. The created value is compared to a given MD5 hash value which was created using the same salt value.</description>
-  <description lang="zh">该模板显示了如何使用盐值创建哈希值。将创建的值与使用相同盐值创建的给定MD5哈希值进行比较。</description>
-  <description lang="ru">Этот шаблон показывает, как создается значение хэша с использованием значения соли. Созданное значение сравнивается с данным значением хэш х MD5, которое было создано с использованием того же значения соли.</description>
   <keywords>message, digest, Hash, salt</keywords>
-  <keywords lang="zh">信息，摘要，哈希，盐</keywords>
-  <keywords lang="ru">сообщение, дайджест, хэш, соль</keywords>
-  <title lang="de">MD5 Salted-Hash-Vergleich</title>
-  <summary lang="de">Erstellen eines Hash-Wertes mittels eines Salt-Wertes</summary>
-  <description lang="de">Diese Vorlage zeigt, wie ein Hash-Wert mittels eines Salt-Wertes erstellt wird. Der erstellte Hash-Wert wird mit einem gegebenen MD5 Hash-Wert, welcher mit demselben Salt-Wert erstellt wurde, verglichen.</description>
-  <keywords lang="de">hash, Salz</keywords>
-  <icon file="MD5.png" />
-  <relevantPlugins>
-    <plugin name="BooleanOutput" />
-    <plugin name="Concatenate" />
-    <plugin name="MD5" />
-    <plugin name="StreamComparator" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Password$" value="Passwort" />
-    <replacement key="$Text Output$" value="Textausgabe" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Hash Value$" value="Hashwert" />
-    <replacement key="$Comparator$" value="Vergleicher" />
-    <replacement key="$Result$" value="Ergebnis" />
-    <replacement key="$StringDecoder$" value="String-Dekodierer" />
-    <replacement key="$Hash$" value="Kopie des Hashwertes. Hier variieren ändert Vergleichsergebnis" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Password$" value="密码" />
-    <replacement key="$Text Output$" value="文字输出" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Hash Value$" value="哈希值" />
-    <replacement key="$Comparator$" value="比较器" />
-    <replacement key="$Result$" value="结果" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Hash$" value="哈希值的副本。改变这里会改变比较结果" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Password$" value="пароль" />
-    <replacement key="$Text Output$" value="вывод текста" />
-    <replacement key="$Concatenate$" value="Konkatenation" />
-    <replacement key="$Hash Value$" value="Hashwert" />
-    <replacement key="$Comparator$" value="компаратор" />
-    <replacement key="$Result$" value="результат" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Hash$" value="Копировать значение хеша. Изменение здесь изменяет результат сравнения" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Password$" value="Password" />
     <replacement key="$Text Output$" value="Text Output" />
@@ -63,4 +21,65 @@
     <replacement key="$StringDecoder$" value="String Decoder" />
     <replacement key="$Hash$" value="Copy of hash. Change this to change the comparison result." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">MD5盐渍哈希比较</title>
+  <summary lang="zh">使用盐值创建哈希值</summary>
+  <description lang="zh">该模板显示了如何使用盐值创建哈希值。将创建的值与使用相同盐值创建的给定MD5哈希值进行比较。</description>
+  <keywords lang="zh">信息，摘要，哈希，盐</keywords>
+  <replacements lang="zh">
+    <replacement key="$Password$" value="密码" />
+    <replacement key="$Text Output$" value="文字输出" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Hash Value$" value="哈希值" />
+    <replacement key="$Comparator$" value="比较器" />
+    <replacement key="$Result$" value="结果" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$Hash$" value="哈希值的副本。改变这里会改变比较结果" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Сравнение MD5 соленых хешей</title>
+  <summary lang="ru">Создание хэш-значения с использованием значения соли</summary>
+  <description lang="ru">Этот шаблон показывает, как создается значение хэша с использованием значения соли. Созданное значение сравнивается с данным значением хэш х MD5, которое было создано с использованием того же значения соли.</description>
+  <keywords lang="ru">сообщение, дайджест, хэш, соль</keywords>
+  <replacements lang="ru">
+    <replacement key="$Password$" value="пароль" />
+    <replacement key="$Text Output$" value="вывод текста" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Hash Value$" value="Hashwert" />
+    <replacement key="$Comparator$" value="компаратор" />
+    <replacement key="$Result$" value="результат" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$Hash$" value="Копировать значение хеша. Изменение здесь изменяет результат сравнения" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">MD5 Salted-Hash-Vergleich</title>
+  <summary lang="de">Erstellen eines Hash-Wertes mittels eines Salt-Wertes</summary>
+  <description lang="de">Diese Vorlage zeigt, wie ein Hash-Wert mittels eines Salt-Wertes erstellt wird. Der erstellte Hash-Wert wird mit einem gegebenen MD5 Hash-Wert, welcher mit demselben Salt-Wert erstellt wurde, verglichen.</description>
+  <keywords lang="de">hash, Salz</keywords>
+  <replacements lang="de">
+    <replacement key="$Password$" value="Passwort" />
+    <replacement key="$Text Output$" value="Textausgabe" />
+    <replacement key="$Concatenate$" value="Konkatenation" />
+    <replacement key="$Hash Value$" value="Hashwert" />
+    <replacement key="$Comparator$" value="Vergleicher" />
+    <replacement key="$Result$" value="Ergebnis" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$Hash$" value="Kopie des Hashwertes. Hier variieren ändert Vergleichsergebnis" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="MD5.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="Concatenate" />
+    <plugin name="MD5" />
+    <plugin name="StreamComparator" />
+  </relevantPlugins>
 </sample>

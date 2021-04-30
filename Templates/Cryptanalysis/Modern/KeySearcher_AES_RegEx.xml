@@ -1,54 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: KeySearcher_AES_RegEx.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">AES Known-Plaintext Analysis (2)</title>
-  <title lang="zh">AES已知明文分析（2）</title>
-  <title lang="ru">AES Известный-простой анализ (2)</title>
   <summary lang="en">Cryptanalysis of <i>AES</i> using the <i>KeySearcher</i> component and a known plaintext</summary>
-  <summary lang="zh">使用KeySearcher组件和已知的明文对AES进行密码分析</summary>
-  <summary lang="ru">Криптоанализ AES с использованием компонента KeySearcher и известного открытого текста</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>AES</i> algorithm using the <i>KeySearcher</i> component and a known piece of plaintext (crib). For this purpose, a given plaintext is encrypted with <i>AES</i> and the resulting ciphertext is sent to the <i>Keysearcher</i>. The <i>KeySearcher</i> now tries all keys of the given keyspace and matches the resulting plaintexts against the crib. The plaintext that best matches the crib is sent to the output and should be identical to the original paintext.</description>
-  <description lang="zh">该模板显示了使用KeySearcher组件和已知的明文（crib）对AES算法进行的密码分析。为此，将使用AES对给定的明文进行加密，并将所得的密文发送到Keysearcher。现在，KeySearcher尝试给定键空间的所有键，并将所得的纯文本与婴儿床匹配。与婴儿床最匹配的纯文本发送到输出，并且应与原始paintext相同。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма AES с использованием компонента KeySearcher и известного фрагмента открытого текста (crib). Для этой цели данный открытый текст зашифрован с помощью AES, и полученный зашифрованный текст отправляется в Keysearcher. Теперь KeySearcher пробует все ключи данного пространства ключей и сопоставляет полученные текстовые файлы с кроваткой. Исходный текст, который лучше всего соответствует кроватке, отправляется на выход и должен быть идентичен оригинальному текстуре.</description>
   <keywords>advanced, Daemen, Rijmen, Rijndael, asymmetric, NIST, regex, regular expression, keysearcher, Attack, Analysis</keywords>
-  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，不对称，NIST，正则表达式，正则表达式，keysearcher，攻击，分析</keywords>
-  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, асимметричный, NIST, регулярное выражение, регулярное выражение, keyearcher, Attack, Analysis</keywords>
-  <title lang="de">AES-Known-Plaintext-Analyse (2)</title>
-  <summary lang="de">Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Abschnittes des Klartextes (Crib). Hierzu wird ein gegebener Klartext mit <i>AES</i> verschlüsselt und der entstehende Geheimtext an den <i>Keysearcher</i> weitergeleitet. Der <i>KeySearcher</i> probiert nun alle Schlüssel des angegebenen Schlüsselraumes und vergleicht die resultierenden Klartexte mit dem Crib. Der Klartext, der dem Crib am besten entspricht, wird ausgegeben und sollte dem ursprünglichen Klartext entsprechen.</description>
-  <keywords lang="de">asymmetrisch, Rijmen, Rijndael, NIST, regex, regulärer Ausdruck, Keysearcher, Angriff</keywords>
-  <icon file="AES.png" />
-  <relevantPlugins>
-    <plugin name="AES" />
-    <plugin name="CostFunction" />
-    <plugin name="KeySearcher" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
-    <replacement key="$StringDecoder$" value="String-Dekodierer" />
-    <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung eines regulären Ausdruckes als Kostenfunktion für die Schlüsselsucher-Komponente. Es wird angenommen, dass man vom empfangenen Geheimtext nur weiss, dass er mit dem Wort &quot;CrypTool&quot; endet." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-    <replacement key="$memo$" value="该模板演示了正则表达式作为关键字查找器组件的成本函数的使用。假设仅知道接收到的密文以单词“ CrypTool”结尾。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует использование регулярного выражения в качестве функции затрат для компонента поиска ключа. Предполагается, что из полученного зашифрованного текста известно только, что он заканчивается словом «CrypTool»." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Plaintext$" value="Plaintext" />
@@ -58,4 +20,61 @@
     <replacement key="$KeySearcher$" value="KeySearcher" />
     <replacement key="$memo$" value="This sample shows the usage of a regular expression as the cost function for the KeySearcher. Assume, that you receive the ciphertext and you know only, that it ends with &quot;CrypTool&quot;." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">AES已知明文分析（2）</title>
+  <summary lang="zh">使用KeySearcher组件和已知的明文对AES进行密码分析</summary>
+  <description lang="zh">该模板显示了使用KeySearcher组件和已知的明文（crib）对AES算法进行的密码分析。为此，将使用AES对给定的明文进行加密，并将所得的密文发送到Keysearcher。现在，KeySearcher尝试给定键空间的所有键，并将所得的纯文本与婴儿床匹配。与婴儿床最匹配的纯文本发送到输出，并且应与原始paintext相同。</description>
+  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，不对称，NIST，正则表达式，正则表达式，keysearcher，攻击，分析</keywords>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$KeySearcher$" value="关键搜索" />
+    <replacement key="$memo$" value="该模板演示了正则表达式作为关键字查找器组件的成本函数的使用。假设仅知道接收到的密文以单词“ CrypTool”结尾。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">AES Известный-простой анализ (2)</title>
+  <summary lang="ru">Криптоанализ AES с использованием компонента KeySearcher и известного открытого текста</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма AES с использованием компонента KeySearcher и известного фрагмента открытого текста (crib). Для этой цели данный открытый текст зашифрован с помощью AES, и полученный зашифрованный текст отправляется в Keysearcher. Теперь KeySearcher пробует все ключи данного пространства ключей и сопоставляет полученные текстовые файлы с кроваткой. Исходный текст, который лучше всего соответствует кроватке, отправляется на выход и должен быть идентичен оригинальному текстуре.</description>
+  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, асимметричный, NIST, регулярное выражение, регулярное выражение, keyearcher, Attack, Analysis</keywords>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$KeySearcher$" value="ключ поиска" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует использование регулярного выражения в качестве функции затрат для компонента поиска ключа. Предполагается, что из полученного зашифрованного текста известно только, что он заканчивается словом «CrypTool»." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">AES-Known-Plaintext-Analyse (2)</title>
+  <summary lang="de">Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Klartextes</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>AES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und eines bekannten Abschnittes des Klartextes (Crib). Hierzu wird ein gegebener Klartext mit <i>AES</i> verschlüsselt und der entstehende Geheimtext an den <i>Keysearcher</i> weitergeleitet. Der <i>KeySearcher</i> probiert nun alle Schlüssel des angegebenen Schlüsselraumes und vergleicht die resultierenden Klartexte mit dem Crib. Der Klartext, der dem Crib am besten entspricht, wird ausgegeben und sollte dem ursprünglichen Klartext entsprechen.</description>
+  <keywords lang="de">asymmetrisch, Rijmen, Rijndael, NIST, regex, regulärer Ausdruck, Keysearcher, Angriff</keywords>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung eines regulären Ausdruckes als Kostenfunktion für die Schlüsselsucher-Komponente. Es wird angenommen, dass man vom empfangenen Geheimtext nur weiss, dass er mit dem Wort &quot;CrypTool&quot; endet." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="CostFunction" />
+    <plugin name="KeySearcher" />
+  </relevantPlugins>
 </sample>

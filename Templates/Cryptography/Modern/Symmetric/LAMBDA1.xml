@@ -1,51 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: LAMBDA1.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">LAMBDA1 Block Cipher</title>
-  <title lang="zh">LAMBDA1分组密码</title>
   <summary lang="en"> Example usage of the <i>LAMBDA1</i> plugin</summary>
-  <summary lang="zh">LAMBDA1插件的用法示例</summary>
   <description lang="en">This template shows the usage of the <i>LAMBDA1</i> block cipher. An algorithm based on the Data Encryption Standard, which was developed in Eastern Germany in the 1980s.
   The mode of operation is Cipher Feedback Mode (CFB).</description>
-  <description lang="zh">该模板显示了LAMBDA1分组密码的用法。一种基于数据加密标准的算法，该算法于1980年代在德国东部开发。操作模式是密码反馈模式（CFB）。</description>
   <keywords>Block Cipher, DDR, GDR</keywords>
-  <keywords lang="zh">分组密码，DDR，GDR</keywords>
-  <title lang="de">LAMBDA1-Blockchiffre</title>
-  <summary lang="de">Benutzung des Plugins <i>LAMBDA1</i></summary>
-  <description lang="de">Diese Vorlage zeigt die mögliche Benutzung der <i>LAMBDA1</i>-Blockchiffre. Der Algorithmus basiert auf dem Data Encryption Standard (DES) und wurde in den 1980ern in der DDR entwickelt.
-  Das Plugin nutzt den Cipher Feedback Mode (CFB).</description>
-  <keywords lang="de">Maschine, DDR</keywords>
-  <icon file="LAMBDA1.png" />
-  <relevantPlugins>
-    <plugin name="LAMBDA1" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$InputData" value="Eingabedaten" />
-    <replacement key="$Message" value="FRANZ JAGT IM KOMPLETT VERWAHRLOSTEN TAXI QUER DURCH BAYERN." />
-    <replacement key="$InputKey" value="Schlüssel" />
-    <replacement key="$Key" value="2206FCF3 405C6642 26F39E76 7F8B4354 63F2AA7D FD27F792 DCE1EC22 181782DA" />
-    <replacement key="$InputIV" value="Initialisierungsvektor " />
-    <replacement key="$IV" value="B18748F0 339A30C6 " />
-    <replacement key="$StringDecoder" value="Text-Dekodierer" />
-    <replacement key="$HexDecoder" value="Hex-Dekodierer" />
-    <replacement key="$Plugin" value="LAMBDA1-Blockchiffre" />
-    <replacement key="$HexEncoder" value="Ausgabe-Enkodierer" />
-    <replacement key="$OutputData" value="Ausgabe" />
-    <replacement key="$Text" value="Diese Vorlage zeigt die Benutzung der Blockchiffre {\b LAMBDA1}. Beliebige Daten (in diesem Fall Text) können in das Textfeld {\b Eingabedaten} eingegeben werden. Diese werden dann mit dem Algorithmus {\b LAMBDA1} im Cipher Feedback Mode (CFB) verschlüsselt. Der {\b Initialisierungsvektor} kann angegeben werden. Der resultierende Geheimtext wird im Feld {\b Ausgabedaten} auf der rechten Seite in hexadezimaler Darstellung ausgegeben. Unvollständige Blöcke werden mit Nullen aufgefüllt. \line\line Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in das Feld {\b Eingabedaten} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat im Feld {\b Text-Dekodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b LAMBDA1}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format im Feld {\b Ausgabe-Enkodierer} muss auf Text und die Kodierung auf den Wert des ursprünglichen Klartexts gesetzt werden." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$InputData" value="输入数据" />
-    <replacement key="$Message" value="弗兰兹狩猎在整个巴伐利亚的出租车上。" />
-    <replacement key="$InputKey" value="键" />
-    <replacement key="$Key" value="2206FCF3 405C6642 26F39E76 7F8B4354 63F2AA7D FD27F792 DCE1EC22 181782DA" />
-    <replacement key="$InputIV" value="初始服务商" />
-    <replacement key="$IV" value="B18748F0 339A30C6" />
-    <replacement key="$StringDecoder" value="文字解码器" />
-    <replacement key="$HexDecoder" value="十六进制解码器" />
-    <replacement key="$Plugin" value="LAMBDA1分组密码" />
-    <replacement key="$HexEncoder" value="输出编码器" />
-    <replacement key="$OutputData" value="输出" />
-    <replacement key="$Text" value="该模板显示了分组密码{\b LAMBDA1}的用法。可以在文本字段{\b输入数据}中输入任何数据（在这种情况下为文本）。然后，在密码反馈模式（CFB）中使用{\b LAMBDA1}算法对其进行加密。可以指定{\b初始化向量}。生成的密文以十六进制格式显示在右侧的字段{\b Output Data}中。不完整的块用零填充。 \line \line此模板还可用于解密消息。为此，必须首先将加密的十六进制值复制到字段{\b input data}中。然后必须进行以下调整：（1）{\b Text-Decoder}字段中的输入格式必须设置为“ Hexadecimal”； （2）在{\b LAMBDA1}组件中，必须将操作设置为“解密”； （3）必须将字段{\b Output Encoder}中的格式设置为text，并将编码设置为原始纯文本的值。" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$InputData" value="Input data" />
     <replacement key="$Message" value="THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG." />
@@ -60,4 +26,54 @@
     <replacement key="$OutputData" value="Output" />
     <replacement key="$Text" value="This template shows an example usage of the block cipher {\b LAMBDA1}. Arbitrary data (in this case text) can be encrypted. Type the message in the text box {\b Input data} on the left side. It is then encrypted with the {\b LAMBDA1} algorithm in Cipher Feedback Mode (CFB). The {\b initialization vector} can be specified. The resulting encrypted text is displayed as hexadecimal string in the box {\b Output} on the right side. Incomplete blocks are padded with zeros.\line\line Note that you can also decrypt messages with this template. To do so, first copy the encrypted hexadecimal values to the box {\b Input data}. Then change the following: (1) Set Input format of the {\b Input decoder} to Hexadecimal; (2) Set Action of the {\b LAMBDA1} to Decrypt; (3) Set Format of the {\b Output encoder} to Text and the Encoding to the value of the original plaintext." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">LAMBDA1分组密码</title>
+  <summary lang="zh">LAMBDA1插件的用法示例</summary>
+  <description lang="zh">该模板显示了LAMBDA1分组密码的用法。一种基于数据加密标准的算法，该算法于1980年代在德国东部开发。操作模式是密码反馈模式（CFB）。</description>
+  <keywords lang="zh">分组密码，DDR，GDR</keywords>
+  <replacements lang="zh">
+    <replacement key="$InputData" value="输入数据" />
+    <replacement key="$Message" value="弗兰兹狩猎在整个巴伐利亚的出租车上。" />
+    <replacement key="$InputKey" value="键" />
+    <replacement key="$Key" value="2206FCF3 405C6642 26F39E76 7F8B4354 63F2AA7D FD27F792 DCE1EC22 181782DA" />
+    <replacement key="$InputIV" value="初始服务商" />
+    <replacement key="$IV" value="B18748F0 339A30C6" />
+    <replacement key="$StringDecoder" value="文字解码器" />
+    <replacement key="$HexDecoder" value="十六进制解码器" />
+    <replacement key="$Plugin" value="LAMBDA1分组密码" />
+    <replacement key="$HexEncoder" value="输出编码器" />
+    <replacement key="$OutputData" value="输出" />
+    <replacement key="$Text" value="该模板显示了分组密码{\b LAMBDA1}的用法。可以在文本字段{\b输入数据}中输入任何数据（在这种情况下为文本）。然后，在密码反馈模式（CFB）中使用{\b LAMBDA1}算法对其进行加密。可以指定{\b初始化向量}。生成的密文以十六进制格式显示在右侧的字段{\b Output Data}中。不完整的块用零填充。 \line \line此模板还可用于解密消息。为此，必须首先将加密的十六进制值复制到字段{\b input data}中。然后必须进行以下调整：（1）{\b Text-Decoder}字段中的输入格式必须设置为“ Hexadecimal”； （2）在{\b LAMBDA1}组件中，必须将操作设置为“解密”； （3）必须将字段{\b Output Encoder}中的格式设置为text，并将编码设置为原始纯文本的值。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">LAMBDA1-Blockchiffre</title>
+  <summary lang="de">Benutzung des Plugins <i>LAMBDA1</i></summary>
+  <description lang="de">Diese Vorlage zeigt die mögliche Benutzung der <i>LAMBDA1</i>-Blockchiffre. Der Algorithmus basiert auf dem Data Encryption Standard (DES) und wurde in den 1980ern in der DDR entwickelt.
+  Das Plugin nutzt den Cipher Feedback Mode (CFB).</description>
+  <keywords lang="de">Maschine, DDR</keywords>
+  <replacements lang="de">
+    <replacement key="$InputData" value="Eingabedaten" />
+    <replacement key="$Message" value="FRANZ JAGT IM KOMPLETT VERWAHRLOSTEN TAXI QUER DURCH BAYERN." />
+    <replacement key="$InputKey" value="Schlüssel" />
+    <replacement key="$Key" value="2206FCF3 405C6642 26F39E76 7F8B4354 63F2AA7D FD27F792 DCE1EC22 181782DA" />
+    <replacement key="$InputIV" value="Initialisierungsvektor " />
+    <replacement key="$IV" value="B18748F0 339A30C6 " />
+    <replacement key="$StringDecoder" value="Text-Dekodierer" />
+    <replacement key="$HexDecoder" value="Hex-Dekodierer" />
+    <replacement key="$Plugin" value="LAMBDA1-Blockchiffre" />
+    <replacement key="$HexEncoder" value="Ausgabe-Enkodierer" />
+    <replacement key="$OutputData" value="Ausgabe" />
+    <replacement key="$Text" value="Diese Vorlage zeigt die Benutzung der Blockchiffre {\b LAMBDA1}. Beliebige Daten (in diesem Fall Text) können in das Textfeld {\b Eingabedaten} eingegeben werden. Diese werden dann mit dem Algorithmus {\b LAMBDA1} im Cipher Feedback Mode (CFB) verschlüsselt. Der {\b Initialisierungsvektor} kann angegeben werden. Der resultierende Geheimtext wird im Feld {\b Ausgabedaten} auf der rechten Seite in hexadezimaler Darstellung ausgegeben. Unvollständige Blöcke werden mit Nullen aufgefüllt. \line\line Diese Vorlage kann auch zur Entschlüsselung von Nachrichten verwendet werden. Dazu müssen zuerst die verschlüsselten hexadezimalen Werte in das Feld {\b Eingabedaten} kopiert werden. Dann müssen folgende Anpassungen vorgenommen werden: (1) Das Eingabeformat im Feld {\b Text-Dekodierer} muss auf &quot;Hexadezimal&quot; gesetzt werden; (2) In der {\b LAMBDA1}-Komponente muss die Aktion auf &quot;Entschlüsselung&quot; gesetzt werden; (3) Das Format im Feld {\b Ausgabe-Enkodierer} muss auf Text und die Kodierung auf den Wert des ursprünglichen Klartexts gesetzt werden." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="LAMBDA1.png" />
+  <relevantPlugins>
+    <plugin name="LAMBDA1" />
+  </relevantPlugins>
 </sample>

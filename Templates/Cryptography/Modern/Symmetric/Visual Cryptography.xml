@@ -1,30 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Visual Cryptography.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Visual Cryptography</title>
   <summary lang="en">Usage of the <i>Visual Cryptography</i> component</summary>
   <description lang="en">
 	This template shows how to use the Visual Cryptography component to encrypt a text using visual cryptography.
   </description>
   <keywords>encryption, decryption, visual, Naor, Shamir</keywords>
-  
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Visuelle Kryptography</title>
   <summary lang="de">Anwendung der Visuellen Kryptografie</summary>
   <description lang="de">
 	Diese Vorlage beschreibt wie die Visuelle-Kryptografie-Komponente in CrypTool 2 benutzt werden kann.
   </description>
   <keywords lang="de">Verschlüsselung, Entschlüsselung, Visuell, Naor, Shamir</keywords>
-  
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="VisualCryptography.png" />
-  
   <relevantPlugins>
     <plugin name="Visual Cryptography" />
   </relevantPlugins>
-  
-  <replacements lang="de">
-    <!-- todo -->
-  </replacements>
-  
-  <replacements lang="en">
-    <!-- todo -->
-  </replacements>
 </sample>

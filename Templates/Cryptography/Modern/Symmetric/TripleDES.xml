@@ -1,58 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: TripleDES.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Triple DES Cipher</title>
-  <title lang="zh">三重DES密码</title>
-  <title lang="ru">Triple DES Cipher</title>
   <summary lang="en">Usage of the <i>DES</i> cipher for Triple DES</summary>
-  <summary lang="zh">三重DES的DES密码用法</summary>
-  <summary lang="ru">Использование DES-шифрования для Triple DES</summary>
   <description lang="en">This template shows the usage of the <i>DES</i> cipher for Triple DES.</description>
-  <description lang="zh">此模板显示了用于三重DES的DES密码的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование DES-шифрования для Triple DES.</description>
   <keywords>symmetric, standard, 56, NSA</keywords>
-  <keywords lang="zh">对称，标准，56</keywords>
-  <keywords lang="ru">симметричный, стандартный, 56, NSA</keywords>
-  <title lang="de">Triple-DES-Chiffre</title>
-  <summary lang="de">Benutzung der <i>DES</i>-Chiffre für Triple-DES</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>DES</i>-Chiffre für Triple-DES.</description>
-  <keywords lang="de">symmetrisch</keywords>
-  <icon file="TripleDES.png" />
-  <relevantPlugins>
-    <plugin name="DES" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext (Hex)" />
-    <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$StringDecoder$" value="String-Decodierer" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$DES Encrypt$" value="DES Verschlüsselung" />
-    <replacement key="$DES Decrypt$" value="DES Entschlüsselung" />
-    <replacement key="$text$" value="Hallo, Welt! Dies ist ein Test!" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文（十六进制）" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$DES Encrypt$" value="DES加密" />
-    <replacement key="$DES Decrypt$" value="DES解密" />
-    <replacement key="$text$" value="你好，世界！这是一个测试！" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="Шифрованный текст (Hex)" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$DES Encrypt$" value="Шифрование DES" />
-    <replacement key="$DES Decrypt$" value="Дешифрование DES" />
-    <replacement key="$text$" value="Привет мир! Это тест!" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext (Hex)" />
@@ -64,4 +22,65 @@
     <replacement key="$DES Decrypt$" value="DES Decrypt" />
     <replacement key="$text$" value="Hello world! This is a test!" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">三重DES密码</title>
+  <summary lang="zh">三重DES的DES密码用法</summary>
+  <description lang="zh">此模板显示了用于三重DES的DES密码的用法。</description>
+  <keywords lang="zh">对称，标准，56</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文（十六进制）" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$DES Encrypt$" value="DES加密" />
+    <replacement key="$DES Decrypt$" value="DES解密" />
+    <replacement key="$text$" value="你好，世界！这是一个测试！" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Triple DES Cipher</title>
+  <summary lang="ru">Использование DES-шифрования для Triple DES</summary>
+  <description lang="ru">Этот шаблон показывает использование DES-шифрования для Triple DES.</description>
+  <keywords lang="ru">симметричный, стандартный, 56, NSA</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="Шифрованный текст (Hex)" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$DES Encrypt$" value="Шифрование DES" />
+    <replacement key="$DES Decrypt$" value="Дешифрование DES" />
+    <replacement key="$text$" value="Привет мир! Это тест!" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Triple-DES-Chiffre</title>
+  <summary lang="de">Benutzung der <i>DES</i>-Chiffre für Triple-DES</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>DES</i>-Chiffre für Triple-DES.</description>
+  <keywords lang="de">symmetrisch</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext (Hex)" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$StringDecoder$" value="String-Decodierer" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$DES Encrypt$" value="DES Verschlüsselung" />
+    <replacement key="$DES Decrypt$" value="DES Entschlüsselung" />
+    <replacement key="$text$" value="Hallo, Welt! Dies ist ein Test!" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="TripleDES.png" />
+  <relevantPlugins>
+    <plugin name="DES" />
+  </relevantPlugins>
 </sample>

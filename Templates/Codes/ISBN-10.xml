@@ -1,50 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: ISBN-10.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">ISBN-10 Check</title>
-  <title lang="zh">ISBN-10检查</title>
-  <title lang="ru">Проверка ISBN-10</title>
   <summary lang="en">Checking an ISBN-10 number (International Standard Book Number)</summary>
-  <summary lang="zh">检查ISBN-10号（国际标准书号）</summary>
-  <summary lang="ru">Проверка номера ISBN-10 (Международный стандартный номер книги)</summary>
   <description lang="en">This template shows the checking of an ISBN-10 number.</description>
-  <description lang="zh">该模板显示了对ISBN-10号的检查。</description>
-  <description lang="ru">Этот шаблон показывает проверку номера ISBN-10.</description>
   <keywords>isbn, book, code, international standard book number</keywords>
-  <keywords lang="zh">isbn，书籍，代码，国际标准书籍编号</keywords>
-  <keywords lang="ru">isbn, книга, код, международный стандартный номер книги</keywords>
-  <title lang="de">ISBN-10-Überprüfung</title>
-  <summary lang="de">Überprüfung einer ISBN-10 Nummer (Internationale Standardbuchnummer)</summary>
-  <description lang="de">Diese Vorlage zeigt die Überprüfung einer ISBN-10 Nummer.</description>
-  <keywords lang="de">Buch, isbn, Internationale Standardbuchnummer</keywords>
-  <icon file="ISBN-10.png" />
-  <relevantPlugins>
-    <plugin name="BooleanOutput" />
-    <plugin name="Comparators" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Substring$" value="Teilstring" />
-    <replacement key="$Replace$" value="Ersetzen" />
-    <replacement key="$ISBN-10 code$" value="ISBN-10-Code" />
-    <replacement key="$valid$" value="gültig" />
-    <replacement key="$Comparator$" value="Vergleicher" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man eine ISBN-10 Nummer mit CrypTool 2 überprüfen kann.\line\line ISBN-10 = { Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9},\line wobei Zn die Ziffer an der n-ten Position des Codes ist.\line\line {\b Die Überprüfung geschieht durch:}\line\line {\b 1)} Multiplikation aller Ziffern mit ihrer Position und Addition der Ergebnisse:\line CHECKSM = 1 * Z1 + 2 * Z2 + 3 * Z3 + 4 * Z4 + 5 * Z5 + 6 * Z6 + 7 * Z7 + 8 * Z8 + 9 * Z9\line\line {\b 2)} Überprüfung, ob CHECKSM == Z10\line\line Z10 ist die in der ISBN-Nummer enthaltene Prüfsumme.\line Wenn die berechnete Prüfsumme gleich Z10 ist, dann ist die ISBN-Nummer gültig.\line\line Diese Vorlage extrahiert zuerst alle Ziffern mit Zeichenketten-Operationen. Danach werden die Prüfsummen berechnet und zuletzt wird diese mit der in der ISBN-Nummer angegebenen Prüfsumme verglichen. Wenn sich als Prüfsumme 10 ergibt, so wird als Zeichen in der Prüfsumme das X verwendet." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Substring$" value="子串" />
-    <replacement key="$Replace$" value="更换" />
-    <replacement key="$ISBN-10 code$" value="ISBN-10-代码" />
-    <replacement key="$valid$" value="有效" />
-    <replacement key="$Comparator$" value="比较器" />
-    <replacement key="$memo$" value="此模板显示了如何使用CrypTool 2检查ISBN-10编号。\line \line ISBN-10 = {Z1，Z2，Z3，Z4，Z5，Z6，Z7，Z8，Z9}，\行，其中Zn是数字位于代码的第n个位置\Line \line {\b通过以下方式完成检查：} \line \line {\b 1）}将所有数字与其位置相乘并加上结果：\line CHECKSM = 1 * Z1 + 2 * Z2 + 3 * Z3 + 4 * Z4 + 5 * Z5 + 6 * Z6 + 7 * Z7 + 8 * Z8 + 9 * Z9 \line \line {\b 2）}检查是否CHECKSM == Z10 \line \line Z10是ISBN编号中包含的校验和\Line如果计算出的校验和等于Z10，则ISBN编号有效\Line \line此模板首先使用字符串运算提取所有数字。然后计算校验和，最后将其与ISBN号中指定的校验和进行比较。如果校验和为10，则X用作校验和中的字符。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Substring$" value="подстрока" />
-    <replacement key="$Replace$" value="замещать" />
-    <replacement key="$ISBN-10 code$" value="ISBN-10-код" />
-    <replacement key="$valid$" value="действительный" />
-    <replacement key="$Comparator$" value="компаратор" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как проверить номер ISBN-10 с помощью CrypTool 2. \line \line ISBN-10 = {Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9}, где Zn - Номер находится в n-й позиции кода. \Line \line {\b Проверка выполняется:} \line \line {\b 1}} Умножение всех цифр с их положением и добавлением результатов: \line CHECKSM = 1 * Z1 + 2 * Z2 + 3 * Z3 + 4 * Z4 + 5 * Z5 + 6 * Z6 + 7 * Z7 + 8 * Z8 + 9 * Z9 \line \line {\b 2)} Проверить, если CHECKSM == Z10 \line \line Z10 - контрольная сумма, содержащаяся в номере ISBN. \Line Если вычисленная контрольная сумма равна Z10, тогда номер ISBN действителен. \Line \line Этот шаблон сначала извлекает все цифры с помощью строковых операций. Затем контрольные суммы вычисляются и, наконец, сравниваются с контрольной суммой, указанной в номере ISBN. Если контрольная сумма равна 10, тогда X используется как символ контрольной суммы." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Substring$" value="Substring" />
     <replacement key="$Replace$" value="Replace" />
@@ -53,4 +19,57 @@
     <replacement key="$Comparator$" value="Comparator" />
     <replacement key="$memo$" value="This template shows how an ISBN-10 check is build using CrypTool 2\line\line ISBN-10 = { Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9}\line where Zn is the digit at the n-th  position in the code.\line\line {\b The check is done by:}\line\line {\b 1)} Multiplying all digits with their positions and summing the results:\line CHECKSM = 1 * Z1 + 2 * Z2 + 3 * Z3 + 4 * Z4 + 5 * Z5 + 6 * Z6 + 7 * Z7 + 8 * Z8 + 9 * Z9\line\line {\b 2)} Check if CHECKSM == Z10\line\line Z10 is the checksum within the ISBN-number.\line If the calculated checksum equal to Z10 then the ISBN code is valid.\line\line This template first extracts all numbers using string operations. After that it calculates the checksum and finally it compares the calculated checksum with the one which is part of the ISBN code. If the checksum is 10 an X is used for the representation of the 10." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">ISBN-10检查</title>
+  <summary lang="zh">检查ISBN-10号（国际标准书号）</summary>
+  <description lang="zh">该模板显示了对ISBN-10号的检查。</description>
+  <keywords lang="zh">isbn，书籍，代码，国际标准书籍编号</keywords>
+  <replacements lang="zh">
+    <replacement key="$Substring$" value="子串" />
+    <replacement key="$Replace$" value="更换" />
+    <replacement key="$ISBN-10 code$" value="ISBN-10-代码" />
+    <replacement key="$valid$" value="有效" />
+    <replacement key="$Comparator$" value="比较器" />
+    <replacement key="$memo$" value="此模板显示了如何使用CrypTool 2检查ISBN-10编号。\line \line ISBN-10 = {Z1，Z2，Z3，Z4，Z5，Z6，Z7，Z8，Z9}，\行，其中Zn是数字位于代码的第n个位置\Line \line {\b通过以下方式完成检查：} \line \line {\b 1）}将所有数字与其位置相乘并加上结果：\line CHECKSM = 1 * Z1 + 2 * Z2 + 3 * Z3 + 4 * Z4 + 5 * Z5 + 6 * Z6 + 7 * Z7 + 8 * Z8 + 9 * Z9 \line \line {\b 2）}检查是否CHECKSM == Z10 \line \line Z10是ISBN编号中包含的校验和\Line如果计算出的校验和等于Z10，则ISBN编号有效\Line \line此模板首先使用字符串运算提取所有数字。然后计算校验和，最后将其与ISBN号中指定的校验和进行比较。如果校验和为10，则X用作校验和中的字符。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Проверка ISBN-10</title>
+  <summary lang="ru">Проверка номера ISBN-10 (Международный стандартный номер книги)</summary>
+  <description lang="ru">Этот шаблон показывает проверку номера ISBN-10.</description>
+  <keywords lang="ru">isbn, книга, код, международный стандартный номер книги</keywords>
+  <replacements lang="ru">
+    <replacement key="$Substring$" value="подстрока" />
+    <replacement key="$Replace$" value="замещать" />
+    <replacement key="$ISBN-10 code$" value="ISBN-10-код" />
+    <replacement key="$valid$" value="действительный" />
+    <replacement key="$Comparator$" value="компаратор" />
+    <replacement key="$memo$" value="Этот шаблон показывает, как проверить номер ISBN-10 с помощью CrypTool 2. \line \line ISBN-10 = {Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9}, где Zn - Номер находится в n-й позиции кода. \Line \line {\b Проверка выполняется:} \line \line {\b 1}} Умножение всех цифр с их положением и добавлением результатов: \line CHECKSM = 1 * Z1 + 2 * Z2 + 3 * Z3 + 4 * Z4 + 5 * Z5 + 6 * Z6 + 7 * Z7 + 8 * Z8 + 9 * Z9 \line \line {\b 2)} Проверить, если CHECKSM == Z10 \line \line Z10 - контрольная сумма, содержащаяся в номере ISBN. \Line Если вычисленная контрольная сумма равна Z10, тогда номер ISBN действителен. \Line \line Этот шаблон сначала извлекает все цифры с помощью строковых операций. Затем контрольные суммы вычисляются и, наконец, сравниваются с контрольной суммой, указанной в номере ISBN. Если контрольная сумма равна 10, тогда X используется как символ контрольной суммы." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">ISBN-10-Überprüfung</title>
+  <summary lang="de">Überprüfung einer ISBN-10 Nummer (Internationale Standardbuchnummer)</summary>
+  <description lang="de">Diese Vorlage zeigt die Überprüfung einer ISBN-10 Nummer.</description>
+  <keywords lang="de">Buch, isbn, Internationale Standardbuchnummer</keywords>
+  <replacements lang="de">
+    <replacement key="$Substring$" value="Teilstring" />
+    <replacement key="$Replace$" value="Ersetzen" />
+    <replacement key="$ISBN-10 code$" value="ISBN-10-Code" />
+    <replacement key="$valid$" value="gültig" />
+    <replacement key="$Comparator$" value="Vergleicher" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie man eine ISBN-10 Nummer mit CrypTool 2 überprüfen kann.\line\line ISBN-10 = { Z1, Z2, Z3, Z4, Z5, Z6, Z7, Z8, Z9},\line wobei Zn die Ziffer an der n-ten Position des Codes ist.\line\line {\b Die Überprüfung geschieht durch:}\line\line {\b 1)} Multiplikation aller Ziffern mit ihrer Position und Addition der Ergebnisse:\line CHECKSM = 1 * Z1 + 2 * Z2 + 3 * Z3 + 4 * Z4 + 5 * Z5 + 6 * Z6 + 7 * Z7 + 8 * Z8 + 9 * Z9\line\line {\b 2)} Überprüfung, ob CHECKSM == Z10\line\line Z10 ist die in der ISBN-Nummer enthaltene Prüfsumme.\line Wenn die berechnete Prüfsumme gleich Z10 ist, dann ist die ISBN-Nummer gültig.\line\line Diese Vorlage extrahiert zuerst alle Ziffern mit Zeichenketten-Operationen. Danach werden die Prüfsummen berechnet und zuletzt wird diese mit der in der ISBN-Nummer angegebenen Prüfsumme verglichen. Wenn sich als Prüfsumme 10 ergibt, so wird als Zeichen in der Prüfsumme das X verwendet." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="ISBN-10.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="Comparators" />
+  </relevantPlugins>
 </sample>

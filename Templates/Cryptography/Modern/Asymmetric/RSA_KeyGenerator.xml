@@ -1,35 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: RSA_KeyGenerator.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">RSA Key Generator</title>
-  <title lang="zh">RSA密钥生成器</title>
-  <title lang="ru">Генератор ключей RSA</title>
   <summary lang="en">Usage of the <i>RSA Key Generator</i></summary>
-  <summary lang="zh">RSA密钥生成器的用法</summary>
-  <summary lang="ru">Использование генератора ключей RSA</summary>
   <description lang="en">The RSA Key Generator generates random prime numbers p and q and the public key (N,e) and the private key d.</description>
-  <description lang="zh">RSA密钥生成器生成随机质数p和q以及公共密钥（N，e）和私有密钥d。</description>
-  <description lang="ru">Генератор ключей RSA генерирует случайные простые числа p и q и открытый ключ (N, e) и закрытый ключ d.</description>
   <keywords>Adleman, Shamir, PKI, Rivest, public key, asymmetric</keywords>
+  <replacements lang="en">
+    <replacement key="$RSAKeyGenerator$" value="RSA KeyGenerator" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">RSA密钥生成器</title>
+  <summary lang="zh">RSA密钥生成器的用法</summary>
+  <description lang="zh">RSA密钥生成器生成随机质数p和q以及公共密钥（N，e）和私有密钥d。</description>
   <keywords lang="zh">Adleman，Shamir，PKI，Rivest，公钥，非对称</keywords>
+  <replacements lang="zh">
+    <replacement key="$RSAKeyGenerator$" value="RSA密钥生成器" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Генератор ключей RSA</title>
+  <summary lang="ru">Использование генератора ключей RSA</summary>
+  <description lang="ru">Генератор ключей RSA генерирует случайные простые числа p и q и открытый ключ (N, e) и закрытый ключ d.</description>
   <keywords lang="ru">Adleman, Shamir, PKI, Rivest, открытый ключ, асимметричный</keywords>
+  <replacements lang="ru">
+    <replacement key="$RSAKeyGenerator$" value="генератор ключа RSA" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">RSA-Schlüsselgenerator</title>
   <summary lang="de">Benutzung des <i>RSA-Schüsselgenerators</i></summary>
   <description lang="de">Der RSA-Schlüsselgenerator generiert zufällig Primzahlen p und q sowie den öffentlichen Schlüssel (N,e) und den privaten Schlüssel d.</description>
   <keywords lang="de">Adleman, Shamir, PKI, Rivest, public key, asymmetrisch, öffentlicher Schlüssel</keywords>
+  <replacements lang="de">
+    <replacement key="$RSAKeyGenerator$" value="RSA-Schlüsselgenerator" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="RSA_KeyGenerator.png" />
   <relevantPlugins>
     <plugin name="RSAKeyGenerator" />
   </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$RSAKeyGenerator$" value="RSA-Schlüsselgenerator" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$RSAKeyGenerator$" value="RSA密钥生成器" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$RSAKeyGenerator$" value="генератор ключа RSA" />
-  </replacements>
-  <replacements lang="en">
-    <replacement key="$RSAKeyGenerator$" value="RSA KeyGenerator" />
-  </replacements>
 </sample>

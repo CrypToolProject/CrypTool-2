@@ -1,27 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: SHA-1 Collision.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">SHA-1 Collision</title>
-  <title lang="zh">SHA-1碰撞</title>
-  <title lang="ru">SHA-1 Столкновение</title>
   <summary lang="en">Shows a collision of the <i>SHA-1</i> hash function</summary>
-  <summary lang="zh">显示SHA-1哈希函数的冲突</summary>
-  <summary lang="ru">Показывает столкновение хэш-функции SHA-1</summary>
   <description lang="en">This template shows a collision of the <i>SHA-1</i> hash function.</description>
-  <description lang="zh">此模板显示SHA-1哈希函数的冲突。</description>
-  <description lang="ru">Этот шаблон показывает столкновение хэш-функции SHA-1.</description>
   <keywords>message, digest, Hash, Rivest</keywords>
-  <keywords lang="zh">信息，摘要，哈希，Rivest</keywords>
-  <keywords lang="ru">сообщение, дайджест, Hash, Rivest</keywords>
-  <title lang="de">SHA-1-Kollision</title>
-  <summary lang="de">Zeigt eine Kollision der <i>SHA-1</i>-Hash-Funktion</summary>
-  <description lang="de">Diese Vorlage zeigt eine Kollision der <i>SHA-1</i>-Hash-Funktion.</description>
-  <keywords lang="de">hash</keywords>
-  <keywords lang="de">collision</keywords>
-  <keywords lang="de">pdf</keywords>
-  <icon file="SHA1.png" />
-  <relevantPlugins>
-    <plugin name="SHA" />
-  </relevantPlugins>
   <replacements lang="en">
     <replacement key="$good$" value="good.pdf (hex-encoded data)" />
     <replacement key="$bad$" value="bad.pdf (hex-encoded data)" />
@@ -33,6 +22,13 @@
     <replacement key="$hashequal$" value="Hashes equal?" />
     <replacement key="$infotext$" value="On February, 23rd 2017 a collision attack on SHA-1 was presented by researchers from the national research institute for mathematics and computer science in the Netherlands (CWI) and the Google Research Security, Privacy and Anti-abuse Group.\line \line The researchers succeeded in creating a practical attack on the SHA-1 hash algorithm (collision attack) as well as creating an actual SHA-1 hash collision. They published two pdf files (good.pdf and bad.pdf) with different contents but same SHA-1 hash value.\line \line Our template shows this collision. The pdf files are shown hex-encoded (good.pdf and bad.pdf) in the input components. First, we decode the files from hex-strings to binary using String Decoders. Then, we compare the binary values with a stream comparator. In parallel, we compute the two SHA-1 hash values of both files and compare the hash values, again using a Stream Comparator. One can see that the contents of the files are different ('Data equal?' is red) and that the hash values are equal ('Hashes equal?' is green).\line \line Once a hash collision is found, cryptologists consider the hash function as broken/dead. Thus, SHA-1 can be considered as dead and should not be used for security measures any more.\line \line Website of the researchers of the attack: https://shattered.io/\line Research paper on the attack: https://shattered.io/static/shattered.pdf\line " />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">SHA-1碰撞</title>
+  <summary lang="zh">显示SHA-1哈希函数的冲突</summary>
+  <description lang="zh">此模板显示SHA-1哈希函数的冲突。</description>
+  <keywords lang="zh">信息，摘要，哈希，Rivest</keywords>
   <replacements lang="zh">
     <replacement key="$good$" value="good.pdf（十六进制编码数据）" />
     <replacement key="$bad$" value="bad.pdf（十六进制编码数据）" />
@@ -44,6 +40,13 @@
     <replacement key="$hashequal$" value="哈希值相等？" />
     <replacement key="$infotext$" value="2017年2月23日，荷兰国家数学和计算机科学研究院（CWI）和Google研究安全，隐私和反滥用小组的研究人员提出了对SHA-1的碰撞攻击。研究人员成功地对SHA-1哈希算法创建了实际的攻击（冲突攻击），并创建了实际的SHA-1哈希冲突。他们发布了两个pdf文件（good.pdf和bad.pdf），它们的内容不同，但SHA-1哈希值相同。\line \line我们的模板显示了这种冲突。 pdf文件在输入组件中显示为十六进制编码（good.pdf和bad.pdf）。首先，我们使用字符串解码器将文件从十六进制字符串解码为二进制。然后，我们使用流比较器比较二进制值。并行地，我们再次使用Stream Comparator计算两个文件的两个SHA-1哈希值并比较哈希值。可以看到文件的内容不同（“数据等于？”是红色的），并且哈希值相等（“哈希等于？”是绿色的）。\line \line一旦发现哈希冲突，密码学家就会考虑哈希函数为坏/死。因此，SHA-1可以被视为已失效，并且不应再用于安全措施。\line \line攻击研究人员的网站：https://shattered.io/\line攻击研究论文：https ：//shattered.io/static/shattered.pdf \line" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">SHA-1 Столкновение</title>
+  <summary lang="ru">Показывает столкновение хэш-функции SHA-1</summary>
+  <description lang="ru">Этот шаблон показывает столкновение хэш-функции SHA-1.</description>
+  <keywords lang="ru">сообщение, дайджест, Hash, Rivest</keywords>
   <replacements lang="ru">
     <replacement key="$good$" value="good.pdf (данные с шестнадцатеричным кодированием)" />
     <replacement key="$bad$" value="bad.pdf (данные с шестнадцатеричным кодированием)" />
@@ -55,6 +58,13 @@
     <replacement key="$hashequal$" value="Хэши равны?" />
     <replacement key="$infotext$" value="23 февраля 2017 года столкновение с нападением на SHA-1 было представлено исследователями из Национального исследовательского института математики и информатики в Нидерландах (CWI) и группы Google Research Security, Privacy and Anti-abuse. \Line \line исследователям удалось создать практическую атаку на хэш-алгоритм SHA-1 (атака столкновения), а также создать фактическое хэш-столкновение SHA-1. Они опубликовали два pdf-файла (good.pdf и bad.pdf) с различным содержимым, но одно и то же значение хэша SHA-1. \Line \line Наш шаблон показывает это столкновение. PDF-файлы показаны шестнадцатеричным (good.pdf и bad.pdf) во входных компонентах. Во-первых, мы декодируем файлы из шестнадцатеричных строк в двоичные с помощью String Decoders. Затем мы сравниваем двоичные значения с компаратором потока. Параллельно мы вычисляем два значения хэша SHA-1 обоих файлов и сравниваем хэш-значения, снова используя Компаратор потоков. Можно видеть, что содержимое файлов отличается («Данные равны?» Красные) и что значения хэша равны («Хеши равны?» - зеленый). \Line \line Как только обнаружено столкновение хэшей, криптологи считают хеш-функция как сломанная / мертвая. Таким образом, SHA-1 можно считать мертвым и больше не следует использовать для мер безопасности. \Line \line Веб-сайт исследователей атаки: https://shattered.io/\line Исследовательский документ о нападении: https : //shattered.io/static/shattered.pdf \линия" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">SHA-1-Kollision</title>
+  <summary lang="de">Zeigt eine Kollision der <i>SHA-1</i>-Hash-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt eine Kollision der <i>SHA-1</i>-Hash-Funktion.</description>
+  <keywords lang="de">hash, collision, pdf</keywords>
   <replacements lang="de">
     <replacement key="$good$" value="good.pdf (Hex-codierte Daten)" />
     <replacement key="$bad$" value="bad.pdf (Hex-codierte Daten)" />
@@ -66,4 +76,11 @@
     <replacement key="$hashequal$" value="Hash gleich?" />
     <replacement key="$infotext$" value="Am 23. Februar 2017 präsentierten Forscher des nationalen Forschungsinstituts für Mathematik und Informatik in den Niederlanden (CWI) sowie der Google Research Security, Privacy and Anti-abuse-Gruppe einen Kollisionsangriff auf SHA-1. Den Forschern gelang es, einen praktischen Angriff auf den SHA-1-Hash-Algorithmus (Kollisionsangriff) zu erstellen und eine SHA-1-Hash-Kollision zu erzeugen. Sie veröffentlichten zwei pdf-Dateien (good.pdf und bad.pdf) mit verschiedenen Inhalten, aber den gleichen SHA-1 Hash-Werten.\line \line Unsere Vorlage zeigt diese Kollision. Die pdf-Dateien sind hex-codiert (good.pdf und bad.pdf). Zuerst dekodieren wir die Dateien mit String-Dekodierern. Dann vergleichen wir die binäre Repräsentation der Inhalte. Parallel dazu berechnen wir die beiden SHA-1-Hash-Werte beider Dateien und vergleichen diese Hash-Werte. Man kann sehen, dass der Inhalt der Dateien unterschiedlich ist ('Daten gleich?' ist rot) und dass die Hash-Werte gleich sind ('Hash gleich?' ist grün).\line \line Kryptologen betrachten eine Hash-Funktion als gebrochen/tot, wenn nur eine einzige Hash-Kollision gefunden wurde. Somit sollte SHA-1 nicht mehr für Sicherheitsmaßnahmen verwendet werden.\line \line Webseite der Forscher des Angriffs: https://shattered.io/\line Forschungsarbeit zum Angriff: https://shattered.io/static/shattered.pdf\line " />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SHA1.png" />
+  <relevantPlugins>
+    <plugin name="SHA" />
+  </relevantPlugins>
 </sample>

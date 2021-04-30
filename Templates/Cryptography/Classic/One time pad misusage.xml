@@ -1,53 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: One time pad misusage.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">One-Time Pad Misusage</title>
-  <title lang="zh">一次性垫误用</title>
-  <title lang="ru">Однократная пауза</title>
   <summary lang="en">Misusage of the One-time Pad</summary>
-  <summary lang="zh">一次性垫误用</summary>
-  <summary lang="ru">Неправильное использование одноразовой панели</summary>
   <description lang="en">This template shows why the One-time Pad should always be used only once. </description>
-  <description lang="zh">此模板显示了为什么一次性垫板应始终仅使用一次。</description>
-  <description lang="ru">Этот шаблон показывает, почему One-time Pad всегда следует использовать только один раз.</description>
-  <keywords>One-time pad,XOR,OTP,perfect security,misusage</keywords>
-  <keywords lang="zh">一次性垫，异或，OTP，完美的安全性，误用</keywords>
-  <keywords lang="ru">Одна временная панель, XOR, совершенная защита, неправильное использование</keywords>
-  <title lang="de">One-time-Pad-Fehlbenutzung</title>
-  <summary lang="de">Fehlbenutzung des One-time-Pads</summary>
-  <description lang="de">Diese Vorlage zeigt, warum ein One-time-Pad immer nur genau einmal benutzt werden sollte und nicht öfter.</description>
-  <keywords lang="de">One-time pad,OTP,perfekte Sicherheit,XOR,Fehlbenutzung</keywords>
-  <icon file="One time pad misusagepng" />
-  <relevantPlugins>
-    <plugin name="Xor" />
-    <plugin name="PictureOutput" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$StringDecoder$" value="String-Decodierer" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$concat$" value="Konaktenation" />
-    <replacement key="$One Time Pad$" value="One-Time-Pad" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert, warum ein {\b One-Time-Pad} immer nur einmal verwendet werden sollte.\line\line Die Klartexte A und B werden beide mit demselben OTP verschlüsselt:\line\line Geheimtext A = Klartext A XOR One-Time-Pad\line Geheimtext B = Klartext B XOR One-Time-Pad\line\line Werden beide Geheimtext unabhängig voneinander analysiert, so gewinnt man keine Informationen über die Klartexte. Aber wenn der Angreifer Geheimtext A und Geheimtext B mit XOR verknüpft, gewinnt er viele Informationen.\line\line Dies kann man sich durch Betrachtung der Gleichungen leicht erklären:\line\line Geheimtext A XOR Geheimtext B = (Klartext A XOR One-Time-Pad) XOR (Klartext B XOR-One-Time Pad) = Klartext A XOR Klartext B\line\line Wird ein OTP zweimal benutzt, kann ein Angreifer diesen eliminieren und Informationen über beide Klartexte erlangen.\line\line Es ist also eine schlechte Idee, einen One-Time-Pad mehr als einmal zu benutzen." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$concat$" value="Konaktenation" />
-    <replacement key="$One Time Pad$" value="一次性垫" />
-    <replacement key="$memo$" value="此模板演示了为什么{\b One-Time-Pad}只能使用一次\Line \line纯文本A和B都使用相同的OTP加密：\line \line密文A =纯文本A XOR One- Time-Pad \line密文B =纯文本B XOR One-Time-Pad \line \line如果单独分析两个密文，则不会获得有关纯文本的信息。但是，如果攻击者使用XOR将密文A和密文B链接在一起，他将获得很多信息。\Line \line这可以通过查看以下公式轻松地解释：\line \line密文A XOR密文B =（纯文本A XOR一次性-Pad）XOR（明文B XOR-一次性键盘）=明文A XOR明文B \line \line如果两次使用OTP，攻击者可以消除它并获得有关两种明文的信息。一个一次性垫子不止一次的坏主意。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$concat$" value="Konaktenatio" />
-    <replacement key="$One Time Pad$" value="One-time-Pad" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, почему одноразовый столбец {\b можно использовать только один раз. \Line \line Открытые тексты A и B оба зашифрованы с помощью одного и того же OTP: \line \line ciphertext A = plaintext A XOR One-time-Pad \line Ciphertext B = plaintext B XOR One-Time-Pad \line \line Если оба зашифрованного текста анализируются независимо, информация об открытом тексте не получается. Но если злоумышленник связывает зашифрованный текст A и зашифрованный текст B с XOR, он получает много информации. \Line \line Об этом легко понять, рассматривая уравнения: \line \line ciphertext A XOR ciphertext B = (plaintext A XOR одноразовый -PAD) XOR (plaintext B XOR-One-Time Pad) = открытый текст XOR plaintext B \line \line Если OTP используется дважды, злоумышленник может его устранить и получить информацию об обоих открытых текстах. \Line \line Таким образом, это один плохая идея использовать одноразовый блок более одного раза." />
-  </replacements>
+  <keywords>One-time pad, XOR, OTP, perfect security, misusage</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -57,4 +20,60 @@
     <replacement key="$One Time Pad$" value="One-time Pad" />
     <replacement key="$memo$" value="This template shows why the {\b One-time Pad} should always be used only once.\line\line Plaintext A and plaintext B are both encrypted using the same one-time pad:\line\line Encrypted_A = Plaintext_A XOR One-time Pad\line Encrypted_B = Plaintext_B XOR One-time Pad\line\line Both cipertexts analysed independently do not offer any information if the attacker has not the one-time pad. But if the attacker combines Encrypted_A and Encrypted_B using the XOR-function, he can reveal a huge amount of information.\line\line This can easily be explained by looking at the equations:\line\line Encrypted_A XOR Encrypted_B = (Plaintext_A XOR One-time Pad) XOR (Plaintext_B XOR One-time Pad) = Plaintext_A XOR Plaintext_B\line\line Thus using a one-time pad twice an attacker may remove the one-time pad completely from both ciphertexts and gain information about both plaintexts.\line\line So using a one-time pad more than once is a bad idea :-)" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">一次性垫误用</title>
+  <summary lang="zh">一次性垫误用</summary>
+  <description lang="zh">此模板显示了为什么一次性垫板应始终仅使用一次。</description>
+  <keywords lang="zh">一次性垫，异或，OTP，完美的安全性，误用</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$concat$" value="Konaktenation" />
+    <replacement key="$One Time Pad$" value="一次性垫" />
+    <replacement key="$memo$" value="此模板演示了为什么{\b One-Time-Pad}只能使用一次\Line \line纯文本A和B都使用相同的OTP加密：\line \line密文A =纯文本A XOR One- Time-Pad \line密文B =纯文本B XOR One-Time-Pad \line \line如果单独分析两个密文，则不会获得有关纯文本的信息。但是，如果攻击者使用XOR将密文A和密文B链接在一起，他将获得很多信息。\Line \line这可以通过查看以下公式轻松地解释：\line \line密文A XOR密文B =（纯文本A XOR一次性-Pad）XOR（明文B XOR-一次性键盘）=明文A XOR明文B \line \line如果两次使用OTP，攻击者可以消除它并获得有关两种明文的信息。一个一次性垫子不止一次的坏主意。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Однократная пауза</title>
+  <summary lang="ru">Неправильное использование одноразовой панели</summary>
+  <description lang="ru">Этот шаблон показывает, почему One-time Pad всегда следует использовать только один раз.</description>
+  <keywords lang="ru">Одна временная панель, XOR, совершенная защита, неправильное использование</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$concat$" value="Konaktenatio" />
+    <replacement key="$One Time Pad$" value="One-time-Pad" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, почему одноразовый столбец {\b можно использовать только один раз. \Line \line Открытые тексты A и B оба зашифрованы с помощью одного и того же OTP: \line \line ciphertext A = plaintext A XOR One-time-Pad \line Ciphertext B = plaintext B XOR One-Time-Pad \line \line Если оба зашифрованного текста анализируются независимо, информация об открытом тексте не получается. Но если злоумышленник связывает зашифрованный текст A и зашифрованный текст B с XOR, он получает много информации. \Line \line Об этом легко понять, рассматривая уравнения: \line \line ciphertext A XOR ciphertext B = (plaintext A XOR одноразовый -PAD) XOR (plaintext B XOR-One-Time Pad) = открытый текст XOR plaintext B \line \line Если OTP используется дважды, злоумышленник может его устранить и получить информацию об обоих открытых текстах. \Line \line Таким образом, это один плохая идея использовать одноразовый блок более одного раза." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">One-time-Pad-Fehlbenutzung</title>
+  <summary lang="de">Fehlbenutzung des One-time-Pads</summary>
+  <description lang="de">Diese Vorlage zeigt, warum ein One-time-Pad immer nur genau einmal benutzt werden sollte und nicht öfter.</description>
+  <keywords lang="de">One-time pad, OTP, perfekte Sicherheit, XOR, Fehlbenutzung</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$StringDecoder$" value="String-Decodierer" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$concat$" value="Konaktenation" />
+    <replacement key="$One Time Pad$" value="One-Time-Pad" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert, warum ein {\b One-Time-Pad} immer nur einmal verwendet werden sollte.\line\line Die Klartexte A und B werden beide mit demselben OTP verschlüsselt:\line\line Geheimtext A = Klartext A XOR One-Time-Pad\line Geheimtext B = Klartext B XOR One-Time-Pad\line\line Werden beide Geheimtext unabhängig voneinander analysiert, so gewinnt man keine Informationen über die Klartexte. Aber wenn der Angreifer Geheimtext A und Geheimtext B mit XOR verknüpft, gewinnt er viele Informationen.\line\line Dies kann man sich durch Betrachtung der Gleichungen leicht erklären:\line\line Geheimtext A XOR Geheimtext B = (Klartext A XOR One-Time-Pad) XOR (Klartext B XOR-One-Time Pad) = Klartext A XOR Klartext B\line\line Wird ein OTP zweimal benutzt, kann ein Angreifer diesen eliminieren und Informationen über beide Klartexte erlangen.\line\line Es ist also eine schlechte Idee, einen One-Time-Pad mehr als einmal zu benutzen." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="One time pad misusagepng" />
+  <relevantPlugins>
+    <plugin name="Xor" />
+    <plugin name="PictureOutput" />
+  </relevantPlugins>
 </sample>

@@ -1,51 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: SDES_Analyzer_Entropy.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">SDES Analysis Using Entropy</title>
-  <title lang="zh">使用熵的SDES分析</title>
-  <title lang="ru">Анализ SDES с использованием энтропии</title>
   <summary lang="en">Cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component and an entropy function</summary>
-  <summary lang="zh">使用KeySearcher组件和熵函数对SDES算法进行密码分析</summary>
-  <summary lang="ru">Криптоанализ алгоритма SDES с использованием компонента KeySearcher и энтропийной функции</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component and an entropy function.</description>
-  <description lang="zh">该模板显示了使用KeySearcher组件和熵函数对SDES算法进行的密码分析。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма SDES с использованием компонента KeySearcher и энтропийной функции.</description>
   <keywords>advanced, standard, NIST, Rijndael, Daemen, Rijmen, symmetric, keysearcher, Attack, Analysis</keywords>
-  <keywords lang="zh">高级，标准，NIST，Rijndael，Daemen，Rijmen，对称，keysearcher，攻击，分析</keywords>
-  <keywords lang="ru">продвинутый, стандартный, NIST, Rijndael, Daemen, Rijmen, симметричный, keyearcher, Attack, Analysis</keywords>
-  <title lang="de">SDES-Analyse per Entropie</title>
-  <summary lang="de">Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion.</description>
-  <keywords lang="de">symmetrisch, NIST, Rijndael, Daemen, Rijmen, Standard, Keysearcher, Angriff</keywords>
-  <icon file="SDES.png" />
-  <relevantPlugins>
-    <plugin name="CostFunction" />
-    <plugin name="KeySearcher" />
-    <plugin name="SDES" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
-    <replacement key="$Key$" value="Bester gefundener Schlüssel" />
-    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
-    <replacement key="$StringDecoder$" value="String-Dekodierer" />
-    <replacement key="$StringEncoder$" value="String-Kodierer" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$Key$" value="最佳发现钥匙" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$Key$" value="Найден лучший ключ" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
@@ -54,4 +19,58 @@
     <replacement key="$StringDecoder$" value="String Decoder" />
     <replacement key="$StringEncoder$" value="String Encoder" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">使用熵的SDES分析</title>
+  <summary lang="zh">使用KeySearcher组件和熵函数对SDES算法进行密码分析</summary>
+  <description lang="zh">该模板显示了使用KeySearcher组件和熵函数对SDES算法进行的密码分析。</description>
+  <keywords lang="zh">高级，标准，NIST，Rijndael，Daemen，Rijmen，对称，keysearcher，攻击，分析</keywords>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$Key$" value="最佳发现钥匙" />
+    <replacement key="$KeySearcher$" value="关键搜索" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Анализ SDES с использованием энтропии</title>
+  <summary lang="ru">Криптоанализ алгоритма SDES с использованием компонента KeySearcher и энтропийной функции</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма SDES с использованием компонента KeySearcher и энтропийной функции.</description>
+  <keywords lang="ru">продвинутый, стандартный, NIST, Rijndael, Daemen, Rijmen, симметричный, keyearcher, Attack, Analysis</keywords>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$Key$" value="Найден лучший ключ" />
+    <replacement key="$KeySearcher$" value="ключ поиска" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">SDES-Analyse per Entropie</title>
+  <summary lang="de">Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente und einer Entropie-Funktion.</description>
+  <keywords lang="de">symmetrisch, NIST, Rijndael, Daemen, Rijmen, Standard, Keysearcher, Angriff</keywords>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Key$" value="Bester gefundener Schlüssel" />
+    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+    <replacement key="$StringEncoder$" value="String-Kodierer" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SDES.png" />
+  <relevantPlugins>
+    <plugin name="CostFunction" />
+    <plugin name="KeySearcher" />
+    <plugin name="SDES" />
+  </relevantPlugins>
 </sample>

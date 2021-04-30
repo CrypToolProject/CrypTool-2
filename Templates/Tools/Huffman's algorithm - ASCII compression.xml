@@ -1,55 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Huffman's algorithm - ASCII compression.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Huffman's Algorithm (ASCII)</title>
-  <title lang="zh">霍夫曼算法（ASCII）</title>
-  <title lang="de">Huffman-Algorithmus (ASCII)</title>
-  <title lang="ru">Алгоритм Хаффмана (ASCII)</title>
   <summary lang="en">Usage of <i>Huffman</i> to compress an ASCII encoded text</summary>
-  <summary lang="zh">使用Huffman压缩ASCII编码的文本</summary>
-  <summary lang="de">Benutzung des <i>Huffman-Algorithmus</i> um ASCII-encodierten Text zu komprimieren.</summary>
-  <summary lang="ru">Использование Хаффмана для сжатия ASCII-кодированного текста</summary>
   <description lang="en">This template shows how the <i>Huffman</i> component can be used to compress an ASCII encoded text.</description>
-  <description lang="zh">此模板显示了如何使用霍夫曼组件压缩ASCII编码的文本。</description>
-  <description lang="de">Diese Vorlage zeigt, wie man die <i>Huffman</i>-Komponente benutzen kann, um ASCII-encodierten Text zu komprimieren.</description>
-  <description lang="ru">Этот шаблон показывает, как компонент Huffman можно использовать для сжатия ASCII-кодированного текста.</description>
-  <keywords lang="en">Huffman, ascii, compression</keywords>
-  <keywords lang="zh">霍夫曼，ASCII，压缩</keywords>
-  <keywords lang="de">packen, komprimieren, zip, Kompression</keywords>
-  <keywords lang="ru">Хаффман, ascii, сжатие</keywords>
-  <icon file="Huffman.png" />
-  <relevantPlugins>
-    <plugin name="Huffman" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Uncompressed text$" value="Unkomprimierter Text" />
-    <replacement key="$ASCII bytes$" value="ASCII-Bytes" />
-    <replacement key="$Compress$" value="Komprimiere" />
-    <replacement key="$Decompress$" value="Dekomprimiere" />
-    <replacement key="$ASCII string$" value="ASCII-String" />
-    <replacement key="$Decompressed text$" value="Dekomprimierter Text" />
-    <replacement key="$memo1$" value="In diesem Beispiel wird ein ASCII-kodierter Text von 100.000 Bytes auf eine Größe von 54.546 Bytes mit einer Kompressionsrate von 45% komprimiert." />
-    <replacement key="$memo2$" value="Die Code-Tabelle zeigt, dass häufiger vorkommende Zeichen kürzere Codeworte erhalten." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Uncompressed text$" value="未压缩的文字" />
-    <replacement key="$ASCII bytes$" value="ASCII字节" />
-    <replacement key="$Compress$" value="压缩" />
-    <replacement key="$Decompress$" value="Dekomprimiere" />
-    <replacement key="$ASCII string$" value="ASCII字符串" />
-    <replacement key="$Decompressed text$" value="解压后的文字" />
-    <replacement key="$memo1$" value="在此示例中，100,000字节的ASCII编码文本被压缩为54,546字节，压缩率为45％。" />
-    <replacement key="$memo2$" value="代码表显示，出现频率更高的字符具有较短的代码字。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Uncompressed text$" value="Несжатый текст" />
-    <replacement key="$ASCII bytes$" value="ASCII-байты" />
-    <replacement key="$Compress$" value="сжимать" />
-    <replacement key="$Decompress$" value="Dekomprimiere" />
-    <replacement key="$ASCII string$" value="ASCII-строка" />
-    <replacement key="$Decompressed text$" value="Декомпрессированный текст" />
-    <replacement key="$memo1$" value="В этом примере сжатый ASCII текст в 100 000 байт сжимается до 54 546 байт при степени сжатия 45%." />
-    <replacement key="$memo2$" value="В таблице кодов показано, что более распространенные символы получают более короткие кодовые слова." />
-  </replacements>
+  <keywords>Huffman, ascii, compression</keywords>
   <replacements lang="en">
     <replacement key="$Uncompressed text$" value="Uncompressed text" />
     <replacement key="$ASCII bytes$" value="ASCII bytes" />
@@ -60,4 +21,62 @@
     <replacement key="$memo1$" value="In this example, we are compressing ASCII encoded text from 100,000 bytes to 54,546 bytes with a 45% compression rate." />
     <replacement key="$memo2$" value="As we can see from the code table, more frequent characters have shorter codewords." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">霍夫曼算法（ASCII）</title>
+  <summary lang="zh">使用Huffman压缩ASCII编码的文本</summary>
+  <description lang="zh">此模板显示了如何使用霍夫曼组件压缩ASCII编码的文本。</description>
+  <keywords lang="zh">霍夫曼，ASCII，压缩</keywords>
+  <replacements lang="zh">
+    <replacement key="$Uncompressed text$" value="未压缩的文字" />
+    <replacement key="$ASCII bytes$" value="ASCII字节" />
+    <replacement key="$Compress$" value="压缩" />
+    <replacement key="$Decompress$" value="Dekomprimiere" />
+    <replacement key="$ASCII string$" value="ASCII字符串" />
+    <replacement key="$Decompressed text$" value="解压后的文字" />
+    <replacement key="$memo1$" value="在此示例中，100,000字节的ASCII编码文本被压缩为54,546字节，压缩率为45％。" />
+    <replacement key="$memo2$" value="代码表显示，出现频率更高的字符具有较短的代码字。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Huffman-Algorithmus (ASCII)</title>
+  <summary lang="de">Benutzung des <i>Huffman-Algorithmus</i> um ASCII-encodierten Text zu komprimieren.</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man die <i>Huffman</i>-Komponente benutzen kann, um ASCII-encodierten Text zu komprimieren.</description>
+  <keywords lang="de">packen, komprimieren, zip, Kompression</keywords>
+  <replacements lang="de">
+    <replacement key="$Uncompressed text$" value="Unkomprimierter Text" />
+    <replacement key="$ASCII bytes$" value="ASCII-Bytes" />
+    <replacement key="$Compress$" value="Komprimiere" />
+    <replacement key="$Decompress$" value="Dekomprimiere" />
+    <replacement key="$ASCII string$" value="ASCII-String" />
+    <replacement key="$Decompressed text$" value="Dekomprimierter Text" />
+    <replacement key="$memo1$" value="In diesem Beispiel wird ein ASCII-kodierter Text von 100.000 Bytes auf eine Größe von 54.546 Bytes mit einer Kompressionsrate von 45% komprimiert." />
+    <replacement key="$memo2$" value="Die Code-Tabelle zeigt, dass häufiger vorkommende Zeichen kürzere Codeworte erhalten." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Алгоритм Хаффмана (ASCII)</title>
+  <summary lang="ru">Использование Хаффмана для сжатия ASCII-кодированного текста</summary>
+  <description lang="ru">Этот шаблон показывает, как компонент Huffman можно использовать для сжатия ASCII-кодированного текста.</description>
+  <keywords lang="ru">Хаффман, ascii, сжатие</keywords>
+  <replacements lang="ru">
+    <replacement key="$Uncompressed text$" value="Несжатый текст" />
+    <replacement key="$ASCII bytes$" value="ASCII-байты" />
+    <replacement key="$Compress$" value="сжимать" />
+    <replacement key="$Decompress$" value="Dekomprimiere" />
+    <replacement key="$ASCII string$" value="ASCII-строка" />
+    <replacement key="$Decompressed text$" value="Декомпрессированный текст" />
+    <replacement key="$memo1$" value="В этом примере сжатый ASCII текст в 100 000 байт сжимается до 54 546 байт при степени сжатия 45%." />
+    <replacement key="$memo2$" value="В таблице кодов показано, что более распространенные символы получают более короткие кодовые слова." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Huffman.png" />
+  <relevantPlugins>
+    <plugin name="Huffman" />
+  </relevantPlugins>
 </sample>

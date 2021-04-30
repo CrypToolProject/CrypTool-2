@@ -1,52 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: vcard.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">VCard</title>
-  <title lang="zh">电子名片</title>
-  <title lang="ru">VCard</title>
   <summary lang="en">Creating a VCard</summary>
-  <summary lang="zh">创建一个VCard</summary>
-  <summary lang="ru">Создание VCard</summary>
   <description lang="en">This template shows the creating of a VCard.</description>
-  <description lang="zh">该模板显示了VCard的创建。</description>
-  <description lang="ru">Этот шаблон показывает создание VCard.</description>
   <keywords>vcard qrcode</keywords>
-  <keywords lang="zh">电子名片二维码</keywords>
-  <keywords lang="ru">vcard qrcode</keywords>
-  <title lang="de">VCard</title>
-  <summary lang="de">Erstellung einer VCard</summary>
-  <description lang="de">Diese Vorlage zeigt die Erstellung einer VCard.</description>
-  <keywords lang="de">vcard qrcode</keywords>
-  <icon file="vcard.png" />
-  <relevantPlugins>
-    <plugin name="VisualEncoder" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Visual Encoder$" value="Visueller Kodierer" />
-    <replacement key="$Template$" value="Vorlage" />
-    <replacement key="$forename$" value="Vorname" />
-    <replacement key="$surname$" value="Nachname" />
-    <replacement key="$home phone$" value="Telefon (privat)" />
-    <replacement key="$working phone$" value="Telefon (geschäftlich)" />
-    <replacement key="$email$" value="E-Mail" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Visual Encoder$" value="视觉编码器" />
-    <replacement key="$Template$" value="模板" />
-    <replacement key="$forename$" value="名字" />
-    <replacement key="$surname$" value="姓" />
-    <replacement key="$home phone$" value="电话（私人）" />
-    <replacement key="$working phone$" value="电话（业务）" />
-    <replacement key="$email$" value="电子邮件" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
-    <replacement key="$Template$" value="представление" />
-    <replacement key="$forename$" value="имя" />
-    <replacement key="$surname$" value="фамилия" />
-    <replacement key="$home phone$" value="Телефон (частный)" />
-    <replacement key="$working phone$" value="Телефон (бизнес)" />
-    <replacement key="$email$" value="E-Mail" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Visual Encoder$" value="Visual Encoder" />
     <replacement key="$Template$" value="Template" />
@@ -56,4 +20,59 @@
     <replacement key="$working phone$" value="Working phone" />
     <replacement key="$email$" value="Email" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">电子名片</title>
+  <summary lang="zh">创建一个VCard</summary>
+  <description lang="zh">该模板显示了VCard的创建。</description>
+  <keywords lang="zh">电子名片二维码</keywords>
+  <replacements lang="zh">
+    <replacement key="$Visual Encoder$" value="视觉编码器" />
+    <replacement key="$Template$" value="模板" />
+    <replacement key="$forename$" value="名字" />
+    <replacement key="$surname$" value="姓" />
+    <replacement key="$home phone$" value="电话（私人）" />
+    <replacement key="$working phone$" value="电话（业务）" />
+    <replacement key="$email$" value="电子邮件" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">VCard</title>
+  <summary lang="ru">Создание VCard</summary>
+  <description lang="ru">Этот шаблон показывает создание VCard.</description>
+  <keywords lang="ru">vcard qrcode</keywords>
+  <replacements lang="ru">
+    <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
+    <replacement key="$Template$" value="представление" />
+    <replacement key="$forename$" value="имя" />
+    <replacement key="$surname$" value="фамилия" />
+    <replacement key="$home phone$" value="Телефон (частный)" />
+    <replacement key="$working phone$" value="Телефон (бизнес)" />
+    <replacement key="$email$" value="E-Mail" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">VCard</title>
+  <summary lang="de">Erstellung einer VCard</summary>
+  <description lang="de">Diese Vorlage zeigt die Erstellung einer VCard.</description>
+  <keywords lang="de">vcard qrcode</keywords>
+  <replacements lang="de">
+    <replacement key="$Visual Encoder$" value="Visueller Kodierer" />
+    <replacement key="$Template$" value="Vorlage" />
+    <replacement key="$forename$" value="Vorname" />
+    <replacement key="$surname$" value="Nachname" />
+    <replacement key="$home phone$" value="Telefon (privat)" />
+    <replacement key="$working phone$" value="Telefon (geschäftlich)" />
+    <replacement key="$email$" value="E-Mail" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="vcard.png" />
+  <relevantPlugins>
+    <plugin name="VisualEncoder" />
+  </relevantPlugins>
 </sample>

@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: EncryptedVM_Mem.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Encrypted VM (Machine Code Output)</title>
-  <title lang="zh">加密的VM（机器代码输出）</title>
-  <title lang="ru">Зашифрованная виртуальная машина (выход машинного кода)</title>
   <summary lang="en">Usage of the <i>Encrypted VM</i> component showing the machine code of a program.</summary>
-  <summary lang="zh">使用加密的VM组件显示程序的机器代码。</summary>
-  <summary lang="ru">Использование зашифрованного компонента VM, показывающего машинный код программы.</summary>
   <description lang="en">
 	A virtual machine, which allows to execute encrypted software, qualifies for secret program execution.<newline />
 	If a user wants to get his program executed by a third party without revealing the input, output or the program itself, he can achieve that by encrypting his program (this only works for batch programs without later user interaction). The requirement of not knowing the input or output is not a mandatory one.
@@ -13,11 +16,24 @@
 	To be able to execute an encrypted program, homomorphic encryption is used.<newline /><newline />
 	This template demonstrates the usage and the inner workings of the <i>Encrypted VM</i> component by outputting the machine code of a program.
   </description>
-  <description lang="zh">允许执行加密软件的虚拟机有资格执行秘密程序。如果用户希望在不泄露输入，输出或程序本身的情况下让第三方执行其程序，则可以通过对其程序进行加密来实现这一点（这仅适用于批处理程序，而无需以后的用户交互）。不知道输入或输出的要求不是强制性的。在这两种情况下，第三方都会接收加密的程序，该程序可以使用虚拟机执行。然后，加密的结果将返回给用户。为了能够执行加密程序，使用了同态加密。该模板通过输出程序的机器代码来演示Encrypted VM组件的用法和内部工作原理。</description>
-  <description lang="ru">Виртуальная машина, которая позволяет выполнять зашифрованное программное обеспечение, подходит для выполнения секретной программы. Если пользователь хочет получить свою программу, выполненную третьей стороной, не раскрывая ввод, вывод или сама программа, он может добиться этого, зашифровав свою программу (это работает только для пакетных программ без последующего взаимодействия с пользователем). Требование не знать ввод или вывод не является обязательным. В обоих случаях третья сторона получает зашифрованную программу, которая может быть выполнена с использованием виртуальной машины. Зашифрованный результат будет затем возвращен пользователю. Для выполнения зашифрованной программы используется гомоморфное шифрование. Этот шаблон демонстрирует использование и внутреннюю работу компонента Encrypted VM путем вывода машинного кода программы.</description>
   <keywords>he, homomorphic encryption, fv, fan-vercauteren, seal, simple encrypted arithmetic library, encryption, secret program execution, assembler, program, execution, secret</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">加密的VM（机器代码输出）</title>
+  <summary lang="zh">使用加密的VM组件显示程序的机器代码。</summary>
+  <description lang="zh">允许执行加密软件的虚拟机有资格执行秘密程序。如果用户希望在不泄露输入，输出或程序本身的情况下让第三方执行其程序，则可以通过对其程序进行加密来实现这一点（这仅适用于批处理程序，而无需以后的用户交互）。不知道输入或输出的要求不是强制性的。在这两种情况下，第三方都会接收加密的程序，该程序可以使用虚拟机执行。然后，加密的结果将返回给用户。为了能够执行加密程序，使用了同态加密。该模板通过输出程序的机器代码来演示Encrypted VM组件的用法和内部工作原理。</description>
   <keywords lang="zh">他，同态加密，fv，fan-vercauteren，密封，简单加密的算术库，加密，秘密程序执行，汇编器，程序，执行，秘密</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Зашифрованная виртуальная машина (выход машинного кода)</title>
+  <summary lang="ru">Использование зашифрованного компонента VM, показывающего машинный код программы.</summary>
+  <description lang="ru">Виртуальная машина, которая позволяет выполнять зашифрованное программное обеспечение, подходит для выполнения секретной программы. Если пользователь хочет получить свою программу, выполненную третьей стороной, не раскрывая ввод, вывод или сама программа, он может добиться этого, зашифровав свою программу (это работает только для пакетных программ без последующего взаимодействия с пользователем). Требование не знать ввод или вывод не является обязательным. В обоих случаях третья сторона получает зашифрованную программу, которая может быть выполнена с использованием виртуальной машины. Зашифрованный результат будет затем возвращен пользователю. Для выполнения зашифрованной программы используется гомоморфное шифрование. Этот шаблон демонстрирует использование и внутреннюю работу компонента Encrypted VM путем вывода машинного кода программы.</description>
   <keywords lang="ru">он, гомоморфное шифрование, fv, fan-vercauteren, печать, простая зашифрованная арифметическая библиотека, шифрование, секретное выполнение программы, сборщик, программа, выполнение, секрет</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Verschlüsselte VM (Ausgabe des Maschinencodes)</title>
   <summary lang="de">Benutzung der <i>Encrypted VM</i> Komponente, welche die Ausgabe des Maschinencodes eines Programms zeigt.</summary>
   <description lang="de">
@@ -28,13 +44,12 @@
 	Diese Vorlage zeigt an einem einfachen Beispiel, wie Teile der <i>Encrypted VM</i>-Komponente funktionieren und wie der Maschinencode eines Programms aussieht.
   </description>
   <keywords lang="de">he, homomorphe verschlüsselung, fv, fan-vercauteren, seal, simple encrypted arithmetic library, verschlüsselung, vertrauliche programmausführung, assembler, programm, ausführung, geheim, vertraulich</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="EncryptedVM.png" />
   <relevantPlugins>
-    <!--<plugin name="EncryptedVMKeyGen" />
-    <plugin name="EncryptedVMAssembler" />
-    <plugin name="EncryptedVMMachine" />
-    <plugin name="EncryptedVMMemoryDisplay" />-->
     <plugin name="TextInput" />
     <plugin name="TextOutput" />
   </relevantPlugins>
-  <icon file="EncryptedVM.png" />
 </sample>

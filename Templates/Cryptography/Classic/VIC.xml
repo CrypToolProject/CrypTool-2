@@ -1,20 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: VIC.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">VIC Cipher</title>
-  <title lang="zh">VIC密码</title>
   <summary lang="en">Usage of the <i>VIC</i> cipher</summary>
-  <summary lang="zh">VIC密码的用法</summary>
   <description lang="en">
   The VIC cipher was a pencil and paper cipher used by the Soviet spy Reino Häyhänen, codenamed "VICTOR". <newline />
   If the cipher were to be given a modern technical name, it would be known as a "straddling bipartite monoalphabetic substitution superenciphered by modified double transposition."However, by general classification it is part of the Nihilist family of ciphers. 
   Source: <external ref="https://en.wikipedia.org/wiki/VIC_cipher" /></description>
-  <description lang="zh">VIC密码是苏联间谍ReinoHäyhänen使用的铅笔和纸密码，代号为“ VICTOR”。如果要给该密码起一个现代的技术名称，它将被称为“通过修饰的双置换而跨过的跨界二元单字母取代。”但是，按一般分类，它是Nihilist密码家族的一部分。资源：</description>
   <keywords>VIC, VICTOR, Substitution, monoalphabetic substitution, straddling checkerboard, transposition, columnar transposition</keywords>
-  <keywords lang="zh">VIC，VICTOR，替代，单字母替代，跨界棋盘格，换位，柱状换位</keywords>
-  <icon file="VCI.png" />
-  <relevantPlugins>
-    <plugin name="VIC" />
-  </relevantPlugins>
   <replacements lang="en">
     <replacement key="$dateTextBox$" value="Date in a continental format." />
     <replacement key="$date$" value="391945" />
@@ -38,6 +37,13 @@
     <replacement key="$outputTextBox$" value="Output of the VIC cipher. Enciphered/Plain text" />
     <replacement key="$memo$" value="This is a template showcasing the usage of the VIC cipher.     As you can see, VIC cipher needs to have 5 different      inputs for the key and one for the plaintext. Please,     read all the captions for the keys to make sure you enter the key parts in correct format." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">VIC密码</title>
+  <summary lang="zh">VIC密码的用法</summary>
+  <description lang="zh">VIC密码是苏联间谍ReinoHäyhänen使用的铅笔和纸密码，代号为“ VICTOR”。如果要给该密码起一个现代的技术名称，它将被称为“通过修饰的双置换而跨过的跨界二元单字母取代。”但是，按一般分类，它是Nihilist密码家族的一部分。资源：</description>
+  <keywords lang="zh">VIC，VICTOR，替代，单字母替代，跨界棋盘格，换位，柱状换位</keywords>
   <replacements lang="zh">
     <replacement key="$dateTextBox$" value="日期以大陆格式显示。" />
     <replacement key="$date$" value="391945" />
@@ -61,4 +67,11 @@
     <replacement key="$outputTextBox$" value="VIC密码的输出。加密/明文" />
     <replacement key="$memo$" value="这是一个模板，展示了VIC密码的用法。如您所见，VIC密码需要5个不同的密钥输入和1个明文输入。请阅读所有键的标题，以确保您以正确的格式输入键部分。" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="VCI.png" />
+  <relevantPlugins>
+    <plugin name="VIC" />
+  </relevantPlugins>
 </sample>

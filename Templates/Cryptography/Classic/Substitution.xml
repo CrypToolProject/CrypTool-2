@@ -1,51 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Substitution.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Substitution Cipher</title>
-  <title lang="zh">替代密码</title>
-  <title lang="ru">Замена Cipher</title>
   <summary lang="en">Usage of the <i>Substitution</i> cipher</summary>
-  <summary lang="zh">替代密码的用法</summary>
-  <summary lang="ru">Использование шифрования замещения</summary>
   <description lang="en">In cryptography, a substitution cipher is a method of encryption by which units of plaintext are replaced with ciphertext according to a regular system; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing an inverse substitution. Substitution ciphers can be compared with transposition ciphers. In a transposition cipher, the units of the plaintext are rearranged in a different and usually quite complex order, but the units themselves are left unchanged. By contrast, in a substitution cipher, the units of the plaintext are retained in the same sequence in the ciphertext, but the units themselves are altered.<newline /><newline />
 Source: <external ref="http://en.wikipedia.org/wiki/Substitution_cipher" /></description>
-  <description lang="zh">在密码术中，替换密码是一种加密方法，通过该方法，可以根据常规系统将明文单元替换为密文。 “单位”可以是单个字母（最常见），成对的字母，字母的三元组，上述的混合物，等等。接收者通过执行反向替换来解密文本。可以将替换密码与换位密码进行比较。在换位密码中，明文的单位以不同且通常非常复杂的顺序重新排列，但单位本身保持不变。相反，在替代密码中，明文的单位在密码文中以相同的顺序保留，但是单位本身被更改。资源：</description>
-  <description lang="ru">В криптографии шифр замещения является методом шифрования, посредством которого единицы открытого текста заменяются зашифрованным текстом в соответствии с обычной системой; «единицами» могут быть одиночные буквы (наиболее распространенные), пары букв, триплеты букв, смеси выше и т. д. Приемник расшифровывает текст, выполняя обратную замену. Цифры замещения можно сравнить с шифрами транспонирования. В шифре транспонирования единицы открытого текста перегруппированы в другом и обычно довольно сложном порядке, но сами единицы остаются неизменными. Напротив, в замещающем шифре единицы открытого текста сохраняются в одной и той же последовательности в зашифрованном тексте, но сами единицы изменяются. Источник:</description>
   <keywords>Substitution, monoalphabetic, MASC</keywords>
-  <keywords lang="zh">替代，单字母，MASC</keywords>
-  <keywords lang="ru">подмена, MASC</keywords>
-  <title lang="de">Substitutions-Chiffre</title>
-  <summary lang="de">Benutzung der <i>Substitutions</i>-Chiffre</summary>
-  <description lang="de">Als monoalphabetische Substitution [von griechisch: μόνο (mono) = „einzig“ und αλφάβητο (alphabeto) = „Alphabet“ sowie von lateinisch: substituere = „ersetzen“] bezeichnet man in der Kryptografie Verschlüsselungsverfahren, bei denen nur ein einziges (festes) Alphabet zur Verschlüsselung, also zur Umwandlung des Klartextes in den Geheimtext, verwendet wird.<newline /><newline />
-Quelle: <external ref="http://de.wikipedia.org/wiki/Monoalphabetische_Substitution" /></description>
-  <keywords lang="de">Substitution, monoalphabetisch, MASC</keywords>
-  <icon file="Substitution.png" />
-  <relevantPlugins>
-    <plugin name="Substitution" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$Source Alphabet$" value="Quellalphabet" />
-    <replacement key="$Destination Alphabet$" value="Zielalphabet" />
-    <replacement key="$text$" value="Als monoalphabetische Substitution (von griechisch: μόνο (mono) = „einzig“ und αλφάβητο (alphabeto) = „Alphabet“ sowie von lateinisch: substituere = „ersetzen“) bezeichnet man in der Kryptografie, also in dem Wissenschaftszweig der Kryptologie, der sich mit den Geheimschriften befasst, Verschlüsselungsverfahren, bei der nur ein einziges (festes) Alphabet zur Verschlüsselung, also zur Umwandlung des Klartextes in den Geheimtext, verwendet wird.&#xD;&#xA;&#xD;&#xA;Source: http://de.wikipedia.org/wiki/Monoalphabetische_Substitution" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Source Alphabet$" value="Quellalphabet" />
-    <replacement key="$Destination Alphabet$" value="目标字母" />
-    <replacement key="$text$" value="单字母替换（源自希腊语：μόνο（mono）=“ only”和αλφάβητο（alphabeto）=“ alphabet”以及来自拉丁语：substitere =“ replace”）用于密码学中，即用于处理密码学的科学领域处理密文，一种加密方法，其中仅使用一个（固定）字母进行加密，即将纯文本转换为密文。资料来源：http://de.wikipedia.org/wiki/Monoalphabetische_Substitution" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Source Alphabet$" value="Quellalphabet" />
-    <replacement key="$Destination Alphabet$" value="Целевой алфавит" />
-    <replacement key="$text$" value="Как моноалфавитная замена (от греческого: μόνο (моно) = «только» и αλφάβητο (alphabeto) = «алфавит», а также от латинского: substitere = «replace») называется криптографией, то есть в области науки криптологии, которая имеет дело с шифры, метод шифрования, в котором для шифрования используется только один (фиксированный) алфавит, поэтому преобразование обычного текста используется в зашифрованном тексте. Источник: http://en.wikipedia.org/wiki/Monoalphabetische_Substitution" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -54,4 +20,57 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/Monoalphabetische_Substituti
     <replacement key="$Destination Alphabet$" value="Destination Alphabet" />
     <replacement key="$text$" value="In cryptography, a substitution cipher is a method of encryption by which units of plaintext are replaced with ciphertext, according to a regular system; the &quot;units&quot; may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing an inverse substitution.&#xD;&#xA;&#xD;&#xA;Source: http://en.wikipedia.org/wiki/Substitution_cipher" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">替代密码</title>
+  <summary lang="zh">替代密码的用法</summary>
+  <description lang="zh">在密码术中，替换密码是一种加密方法，通过该方法，可以根据常规系统将明文单元替换为密文。 “单位”可以是单个字母（最常见），成对的字母，字母的三元组，上述的混合物，等等。接收者通过执行反向替换来解密文本。可以将替换密码与换位密码进行比较。在换位密码中，明文的单位以不同且通常非常复杂的顺序重新排列，但单位本身保持不变。相反，在替代密码中，明文的单位在密码文中以相同的顺序保留，但是单位本身被更改。资源：</description>
+  <keywords lang="zh">替代，单字母，MASC</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Source Alphabet$" value="Quellalphabet" />
+    <replacement key="$Destination Alphabet$" value="目标字母" />
+    <replacement key="$text$" value="单字母替换（源自希腊语：μόνο（mono）=“ only”和αλφάβητο（alphabeto）=“ alphabet”以及来自拉丁语：substitere =“ replace”）用于密码学中，即用于处理密码学的科学领域处理密文，一种加密方法，其中仅使用一个（固定）字母进行加密，即将纯文本转换为密文。资料来源：http://de.wikipedia.org/wiki/Monoalphabetische_Substitution" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Замена Cipher</title>
+  <summary lang="ru">Использование шифрования замещения</summary>
+  <description lang="ru">В криптографии шифр замещения является методом шифрования, посредством которого единицы открытого текста заменяются зашифрованным текстом в соответствии с обычной системой; «единицами» могут быть одиночные буквы (наиболее распространенные), пары букв, триплеты букв, смеси выше и т. д. Приемник расшифровывает текст, выполняя обратную замену. Цифры замещения можно сравнить с шифрами транспонирования. В шифре транспонирования единицы открытого текста перегруппированы в другом и обычно довольно сложном порядке, но сами единицы остаются неизменными. Напротив, в замещающем шифре единицы открытого текста сохраняются в одной и той же последовательности в зашифрованном тексте, но сами единицы изменяются. Источник:</description>
+  <keywords lang="ru">подмена, MASC</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Source Alphabet$" value="Quellalphabet" />
+    <replacement key="$Destination Alphabet$" value="Целевой алфавит" />
+    <replacement key="$text$" value="Как моноалфавитная замена (от греческого: μόνο (моно) = «только» и αλφάβητο (alphabeto) = «алфавит», а также от латинского: substitere = «replace») называется криптографией, то есть в области науки криптологии, которая имеет дело с шифры, метод шифрования, в котором для шифрования используется только один (фиксированный) алфавит, поэтому преобразование обычного текста используется в зашифрованном тексте. Источник: http://en.wikipedia.org/wiki/Monoalphabetische_Substitution" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Substitutions-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Substitutions</i>-Chiffre</summary>
+  <description lang="de">Als monoalphabetische Substitution [von griechisch: μόνο (mono) = „einzig“ und αλφάβητο (alphabeto) = „Alphabet“ sowie von lateinisch: substituere = „ersetzen“] bezeichnet man in der Kryptografie Verschlüsselungsverfahren, bei denen nur ein einziges (festes) Alphabet zur Verschlüsselung, also zur Umwandlung des Klartextes in den Geheimtext, verwendet wird.<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Monoalphabetische_Substitution" /></description>
+  <keywords lang="de">Substitution, monoalphabetisch, MASC</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Source Alphabet$" value="Quellalphabet" />
+    <replacement key="$Destination Alphabet$" value="Zielalphabet" />
+    <replacement key="$text$" value="Als monoalphabetische Substitution (von griechisch: μόνο (mono) = „einzig“ und αλφάβητο (alphabeto) = „Alphabet“ sowie von lateinisch: substituere = „ersetzen“) bezeichnet man in der Kryptografie, also in dem Wissenschaftszweig der Kryptologie, der sich mit den Geheimschriften befasst, Verschlüsselungsverfahren, bei der nur ein einziges (festes) Alphabet zur Verschlüsselung, also zur Umwandlung des Klartextes in den Geheimtext, verwendet wird.&#xD;&#xA;&#xD;&#xA;Source: http://de.wikipedia.org/wiki/Monoalphabetische_Substitution" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Substitution.png" />
+  <relevantPlugins>
+    <plugin name="Substitution" />
+  </relevantPlugins>
 </sample>

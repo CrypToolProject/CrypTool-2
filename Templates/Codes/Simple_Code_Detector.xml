@@ -1,44 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Simple_Code_Detector.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Simple Detection of Optical Codes</title>
-  <title lang="zh">简单检测光学代码</title>
-  <title lang="ru">Простое обнаружение оптических кодов</title>
   <summary lang="en">Usage of the <i>Optical Code Detector</i></summary>
-  <summary lang="zh">光学代码检测器的用途</summary>
-  <summary lang="ru">Использование оптического кодового детектора</summary>
   <description lang="en">This template shows the usage of the <i>Simple Code Detector</i>.</description>
-  <description lang="zh">该模板显示了简单代码检测器的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование простого кодового детектора.</description>
   <keywords>Simple Code Detector, qr code</keywords>
-  <keywords lang="zh">简单代码检测器，二维码</keywords>
-  <keywords lang="ru">Простой кодовый детектор, код qr</keywords>
-  <title lang="de">Einfache Erkennung optischer Codes</title>
-  <summary lang="de">Benutzung der einfachen <i>Code-Erkennung</i></summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Code-Erkennung</i> für optische Codes.</description>
-  <keywords lang="de">Einfache Code Erkennung, QR Code, Code</keywords>
-  <icon file="Simple_Code_Detector.png" />
-  <relevantPlugins>
-    <plugin name="VisualDecoder" />
-    <plugin name="Webcam" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Visual Decoder$" value="Visueller Dekodierer" />
-    <replacement key="$Camera$" value="Kamera" />
-    <replacement key="$TextOutput$" value="Textausgabe" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Visual Decoder$" value="视觉解码器" />
-    <replacement key="$Camera$" value="相机" />
-    <replacement key="$TextOutput$" value="文字输出" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Visual Decoder$" value="Визуальный декодер" />
-    <replacement key="$Camera$" value="камера" />
-    <replacement key="$TextOutput$" value="вывод текста" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Visual Decoder$" value="Visual Decoder" />
     <replacement key="$Camera$" value="Camera" />
     <replacement key="$TextOutput$" value="Text Output" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">简单检测光学代码</title>
+  <summary lang="zh">光学代码检测器的用途</summary>
+  <description lang="zh">该模板显示了简单代码检测器的用法。</description>
+  <keywords lang="zh">简单代码检测器，二维码</keywords>
+  <replacements lang="zh">
+    <replacement key="$Visual Decoder$" value="视觉解码器" />
+    <replacement key="$Camera$" value="相机" />
+    <replacement key="$TextOutput$" value="文字输出" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Простое обнаружение оптических кодов</title>
+  <summary lang="ru">Использование оптического кодового детектора</summary>
+  <description lang="ru">Этот шаблон показывает использование простого кодового детектора.</description>
+  <keywords lang="ru">Простой кодовый детектор, код qr</keywords>
+  <replacements lang="ru">
+    <replacement key="$Visual Decoder$" value="Визуальный декодер" />
+    <replacement key="$Camera$" value="камера" />
+    <replacement key="$TextOutput$" value="вывод текста" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Einfache Erkennung optischer Codes</title>
+  <summary lang="de">Benutzung der einfachen <i>Code-Erkennung</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Code-Erkennung</i> für optische Codes.</description>
+  <keywords lang="de">Einfache Code Erkennung, QR Code, Code</keywords>
+  <replacements lang="de">
+    <replacement key="$Visual Decoder$" value="Visueller Dekodierer" />
+    <replacement key="$Camera$" value="Kamera" />
+    <replacement key="$TextOutput$" value="Textausgabe" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Simple_Code_Detector.png" />
+  <relevantPlugins>
+    <plugin name="VisualDecoder" />
+    <plugin name="Webcam" />
+  </relevantPlugins>
 </sample>

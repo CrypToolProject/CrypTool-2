@@ -1,85 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: RC4.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">RC4 Cipher</title>
-  <title lang="zh">RC4密码</title>
-  <title lang="ru">RC4 Cipher</title>
   <summary lang="en">Usage of the <i>RC4</i> cipher</summary>
-  <summary lang="zh">RC4密码的用法</summary>
-  <summary lang="ru">Использование шифрования RC4</summary>
   <description lang="en">This template shows the usage of the <i>RC4</i> cipher.</description>
-  <description lang="zh">此模板显示RC4密码的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование шифрования RC4.</description>
   <keywords>Rivest, Ron, block, symmetric</keywords>
-  <keywords lang="zh">Rivest，Ron，块，对称</keywords>
-  <keywords lang="ru">Ривест, Рон, блок, симметричный</keywords>
-  <title lang="de">RC4-Chiffre</title>
-  <summary lang="de">Benutzung der <i>RC4</i>-Chiffre</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>RC4</i>-Chiffre.</description>
-  <keywords lang="de">Blockchiffre, symmetrisch</keywords>
-  <icon file="RC4.png" />
-  <relevantPlugins>
-    <plugin name="RC4" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Sender$" value="Sender" />
-    <replacement key="$Receiver$" value="Empfänger" />
-    <replacement key="$Sender Key$" value="Sender-Schlüssel" />
-    <replacement key="$Receiver Key$" value="Empfänger-Schlüssel" />
-    <replacement key="$Sender Message$" value="Sender-Nachricht (Klartext)" />
-    <replacement key="$Receiver Message$" value="Empfänger-Nachricht (entschlüsselt)" />
-    <replacement key="$RC4 Encrypt$" value="RC4 Verschlüsselung" />
-    <replacement key="$RC4 Decrypt$" value="RC4 Entschlüsselung" />
-    <replacement key="$Hex to Bytes$" value="Hex -&gt; Bytes" />
-    <replacement key="$Keystream$" value="Schlüsselstrom" />
-    <replacement key="$Converter$" value="Konvertierer" />
-    <replacement key="$Encryption$" value="Verschlüsselung" />
-    <replacement key="$Decryption$" value="Entschlüsselung" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$Transmitted Message (ASCII)$" value="Übertragene Nachricht (ASCII)" />
-    <replacement key="$Transmitted Message (Hex)$" value="Übertragene Nachricht (Hex)" />
-    <replacement key="$Transmission Channel$" value="Übertragungskanal" />
-    <replacement key="$text$" value="Eine geheime Nachricht für mich selbst.&#xD;&#xA;Dies ist ein Test.&#xD;&#xA;Nachrichten verschicken macht Spaß." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Sender$" value="发件人" />
-    <replacement key="$Receiver$" value="接收者" />
-    <replacement key="$Sender Key$" value="发射钥匙" />
-    <replacement key="$Receiver Key$" value="收件人密钥" />
-    <replacement key="$Sender Message$" value="发件人消息（纯文本）" />
-    <replacement key="$Receiver Message$" value="收件人消息（已解密）" />
-    <replacement key="$RC4 Encrypt$" value="RC4加密" />
-    <replacement key="$RC4 Decrypt$" value="RC4解密" />
-    <replacement key="$Hex to Bytes$" value="十六进制-&amp;gt;字节" />
-    <replacement key="$Keystream$" value="密钥流" />
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Encryption$" value="加密" />
-    <replacement key="$Decryption$" value="解密" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$Transmitted Message (ASCII)$" value="传送的讯息（ASCII）" />
-    <replacement key="$Transmitted Message (Hex)$" value="发送的消息（十六进制）" />
-    <replacement key="$Transmission Channel$" value="传输通道" />
-    <replacement key="$text$" value="给自己的秘密讯息，这是一种考验。发送消息很有趣。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Sender$" value="отправитель" />
-    <replacement key="$Receiver$" value="приемник" />
-    <replacement key="$Sender Key$" value="Передатчик-ключ" />
-    <replacement key="$Receiver Key$" value="приемник ключ" />
-    <replacement key="$Sender Message$" value="Сообщение отправителя (обычный текст)" />
-    <replacement key="$Receiver Message$" value="Сообщение получателя (расшифрованное)" />
-    <replacement key="$RC4 Encrypt$" value="Шифрование RC4" />
-    <replacement key="$RC4 Decrypt$" value="Расшифровка RC4" />
-    <replacement key="$Hex to Bytes$" value="Hex -&amp;gt; Bytes" />
-    <replacement key="$Keystream$" value="ключ тока" />
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Encryption$" value="кодирование" />
-    <replacement key="$Decryption$" value="дешифрование" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$Transmitted Message (ASCII)$" value="Передано сообщение (ASCII)" />
-    <replacement key="$Transmitted Message (Hex)$" value="Передано сообщение (Hex)" />
-    <replacement key="$Transmission Channel$" value="канал передачи" />
-    <replacement key="$text$" value="Секретное сообщение для себя. Это тест. Отправить сообщения - это весело." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Sender$" value="Sender" />
     <replacement key="$Receiver$" value="Receiver" />
@@ -100,4 +31,92 @@
     <replacement key="$Transmission Channel$" value="Transmission Channel" />
     <replacement key="$text$" value="A secret Message to myself.&#xD;&#xA;This is a test.&#xD;&#xA;Sending messages is kind of fun." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">RC4密码</title>
+  <summary lang="zh">RC4密码的用法</summary>
+  <description lang="zh">此模板显示RC4密码的用法。</description>
+  <keywords lang="zh">Rivest，Ron，块，对称</keywords>
+  <replacements lang="zh">
+    <replacement key="$Sender$" value="发件人" />
+    <replacement key="$Receiver$" value="接收者" />
+    <replacement key="$Sender Key$" value="发射钥匙" />
+    <replacement key="$Receiver Key$" value="收件人密钥" />
+    <replacement key="$Sender Message$" value="发件人消息（纯文本）" />
+    <replacement key="$Receiver Message$" value="收件人消息（已解密）" />
+    <replacement key="$RC4 Encrypt$" value="RC4加密" />
+    <replacement key="$RC4 Decrypt$" value="RC4解密" />
+    <replacement key="$Hex to Bytes$" value="十六进制-&amp;gt;字节" />
+    <replacement key="$Keystream$" value="密钥流" />
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$Encryption$" value="加密" />
+    <replacement key="$Decryption$" value="解密" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$Transmitted Message (ASCII)$" value="传送的讯息（ASCII）" />
+    <replacement key="$Transmitted Message (Hex)$" value="发送的消息（十六进制）" />
+    <replacement key="$Transmission Channel$" value="传输通道" />
+    <replacement key="$text$" value="给自己的秘密讯息，这是一种考验。发送消息很有趣。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">RC4 Cipher</title>
+  <summary lang="ru">Использование шифрования RC4</summary>
+  <description lang="ru">Этот шаблон показывает использование шифрования RC4.</description>
+  <keywords lang="ru">Ривест, Рон, блок, симметричный</keywords>
+  <replacements lang="ru">
+    <replacement key="$Sender$" value="отправитель" />
+    <replacement key="$Receiver$" value="приемник" />
+    <replacement key="$Sender Key$" value="Передатчик-ключ" />
+    <replacement key="$Receiver Key$" value="приемник ключ" />
+    <replacement key="$Sender Message$" value="Сообщение отправителя (обычный текст)" />
+    <replacement key="$Receiver Message$" value="Сообщение получателя (расшифрованное)" />
+    <replacement key="$RC4 Encrypt$" value="Шифрование RC4" />
+    <replacement key="$RC4 Decrypt$" value="Расшифровка RC4" />
+    <replacement key="$Hex to Bytes$" value="Hex -&amp;gt; Bytes" />
+    <replacement key="$Keystream$" value="ключ тока" />
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$Encryption$" value="кодирование" />
+    <replacement key="$Decryption$" value="дешифрование" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$Transmitted Message (ASCII)$" value="Передано сообщение (ASCII)" />
+    <replacement key="$Transmitted Message (Hex)$" value="Передано сообщение (Hex)" />
+    <replacement key="$Transmission Channel$" value="канал передачи" />
+    <replacement key="$text$" value="Секретное сообщение для себя. Это тест. Отправить сообщения - это весело." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">RC4-Chiffre</title>
+  <summary lang="de">Benutzung der <i>RC4</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>RC4</i>-Chiffre.</description>
+  <keywords lang="de">Blockchiffre, symmetrisch</keywords>
+  <replacements lang="de">
+    <replacement key="$Sender$" value="Sender" />
+    <replacement key="$Receiver$" value="Empfänger" />
+    <replacement key="$Sender Key$" value="Sender-Schlüssel" />
+    <replacement key="$Receiver Key$" value="Empfänger-Schlüssel" />
+    <replacement key="$Sender Message$" value="Sender-Nachricht (Klartext)" />
+    <replacement key="$Receiver Message$" value="Empfänger-Nachricht (entschlüsselt)" />
+    <replacement key="$RC4 Encrypt$" value="RC4 Verschlüsselung" />
+    <replacement key="$RC4 Decrypt$" value="RC4 Entschlüsselung" />
+    <replacement key="$Hex to Bytes$" value="Hex -&gt; Bytes" />
+    <replacement key="$Keystream$" value="Schlüsselstrom" />
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$Encryption$" value="Verschlüsselung" />
+    <replacement key="$Decryption$" value="Entschlüsselung" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$Transmitted Message (ASCII)$" value="Übertragene Nachricht (ASCII)" />
+    <replacement key="$Transmitted Message (Hex)$" value="Übertragene Nachricht (Hex)" />
+    <replacement key="$Transmission Channel$" value="Übertragungskanal" />
+    <replacement key="$text$" value="Eine geheime Nachricht für mich selbst.&#xD;&#xA;Dies ist ein Test.&#xD;&#xA;Nachrichten verschicken macht Spaß." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="RC4.png" />
+  <relevantPlugins>
+    <plugin name="RC4" />
+  </relevantPlugins>
 </sample>

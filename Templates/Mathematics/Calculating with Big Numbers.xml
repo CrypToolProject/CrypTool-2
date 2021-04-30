@@ -1,32 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Calculating with Big Numbers.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Calculating with Big Numbers</title>
-  <title lang="zh">用大数计算</title>
-  <title lang="ru">Расчет с большими числами</title>
-  <title lang="de">Rechnen mit großen Zahlen</title>
   <summary lang="en">This template shows, how to calculate with big numbers</summary>
-  <summary lang="zh">该模板显示如何进行大数计算</summary>
-  <summary lang="ru">Расчет расстояния Левенштейн</summary>
-  <summary lang="de">Diese Vorlage zeigt, wie man mit großen Zahlen rechnet</summary>
   <description lang="en">In this template, an equation is calculated using math components. It also shows, how to enter big numbers into a NumberInput component.</description>
-  <description lang="zh">在此模板中，使用数学组件来计算方程式。它还显示了如何在NumberInput组件中输入大数字。</description>
-  <description lang="de">In dieser Vorlage wird eine Gleichung mit mathematischen Komponenten berechnet. Es wird auch gezeigt, wie große Zahlen in eine Zahleneingabe-Komponente eingegeben werden können.</description>
-  <description lang="ru">В этом шаблоне уравнение рассчитывается с использованием математических компонентов. Также показано, как вводить большие числа в компонент NumberInput.</description>
   <keywords>mathematics, calculation, big numbers, modulo, power</keywords>
-  <keywords lang="zh">数学，计算，大数，模，幂</keywords>
-  <keywords lang="ru">математика, расчет, большие числа, По модулю, потенция</keywords>
-  <keywords lang="de">Mathematik, Berechnung, große Zahlen, Modulo , Potenz</keywords>
-  <icon file="math.png" />
-  <replacements lang="de">
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie mit großen Zahlen gerechnet wird. \line \line Der Workspace berechnet das Ergebnis der Gleichung\line \line R = ((W + X) · Y) · Z mod M\line \line Zuerst wird W + X berechnet \line Dann multipliziert der Workspace das Ergebnis mit Y.\line Schließlich wird das Ergebnis zur mit Z modulo M potenziert.\line \line Wie zu sehen ist, ist es mit den Zahleneingabekomponenten auch möglich, große Zahlen unter Verwendung von Gleichungen einzugeben, z.B. W = 2^23-1." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$memo$" value="该模板显示了如何进行大量计算。 \line \line工作空间计算公式的结果\line \line R =（（W + X）·Y）·Z mod M \line \line首先计算W + X \line然后工作空间将结果乘以Y最后，将结果提高到Z模M的幂。\line \line可以看到，使用数字输入组件，还可以使用公式输入大数字，例如W = 2 ^ 23-1。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$memo$" value="Этот шаблон показывает, как рассчитать с большими числами.\line \line Рабочая область вычисляет результат уравнения\line \line R = ((W + X) * Y) ^ Z mod M\line \line Во-первых, он вычисляет W + X.\line Затем он умножает результат на Y.\line Наконец, он поднимает результат до степени Z по модулю М.\line \line Как можно видеть, с компонентами ввода чисел можно также вводить большие числа, используя уравнения, например, W = 2^23-1." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$memo$" value="This template shows, how to calculate with big numbers.\line \line The workspace computes the result of the equation\line \line R = ((W+X) * Y)^Z mod M\line \line First, it computes W+X.\line Then, it multiplies the result with Y.\line Finally, it rises the result to the power of Z modulo M.\line \line As can be seen, with the Number Input components, it is possible to also enter big numbers using equations, e.g. W=2^23-1." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">用大数计算</title>
+  <summary lang="zh">该模板显示如何进行大数计算</summary>
+  <description lang="zh">在此模板中，使用数学组件来计算方程式。它还显示了如何在NumberInput组件中输入大数字。</description>
+  <keywords lang="zh">数学，计算，大数，模，幂</keywords>
+  <replacements lang="zh">
+    <replacement key="$memo$" value="该模板显示了如何进行大量计算。 \line \line工作空间计算公式的结果\line \line R =（（W + X）·Y）·Z mod M \line \line首先计算W + X \line然后工作空间将结果乘以Y最后，将结果提高到Z模M的幂。\line \line可以看到，使用数字输入组件，还可以使用公式输入大数字，例如W = 2 ^ 23-1。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Расчет с большими числами</title>
+  <summary lang="ru">Расчет расстояния Левенштейн</summary>
+  <description lang="ru">В этом шаблоне уравнение рассчитывается с использованием математических компонентов. Также показано, как вводить большие числа в компонент NumberInput.</description>
+  <keywords lang="ru">математика, расчет, большие числа, По модулю, потенция</keywords>
+  <replacements lang="ru">
+    <replacement key="$memo$" value="Этот шаблон показывает, как рассчитать с большими числами.\line \line Рабочая область вычисляет результат уравнения\line \line R = ((W + X) * Y) ^ Z mod M\line \line Во-первых, он вычисляет W + X.\line Затем он умножает результат на Y.\line Наконец, он поднимает результат до степени Z по модулю М.\line \line Как можно видеть, с компонентами ввода чисел можно также вводить большие числа, используя уравнения, например, W = 2^23-1." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Rechnen mit großen Zahlen</title>
+  <summary lang="de">Diese Vorlage zeigt, wie man mit großen Zahlen rechnet</summary>
+  <description lang="de">In dieser Vorlage wird eine Gleichung mit mathematischen Komponenten berechnet. Es wird auch gezeigt, wie große Zahlen in eine Zahleneingabe-Komponente eingegeben werden können.</description>
+  <keywords lang="de">Mathematik, Berechnung, große Zahlen, Modulo, Potenz</keywords>
+  <replacements lang="de">
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie mit großen Zahlen gerechnet wird. \line \line Der Workspace berechnet das Ergebnis der Gleichung\line \line R = ((W + X) · Y) · Z mod M\line \line Zuerst wird W + X berechnet \line Dann multipliziert der Workspace das Ergebnis mit Y.\line Schließlich wird das Ergebnis zur mit Z modulo M potenziert.\line \line Wie zu sehen ist, ist es mit den Zahleneingabekomponenten auch möglich, große Zahlen unter Verwendung von Gleichungen einzugeben, z.B. W = 2^23-1." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="math.png" />
 </sample>

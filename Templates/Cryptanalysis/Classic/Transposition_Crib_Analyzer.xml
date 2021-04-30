@@ -1,48 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Transposition_Crib_Analyzer.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Transposition Crib Analysis</title>
-  <title lang="zh">换位婴儿床分析</title>
-  <title lang="ru">Анализ кросс-позиции</title>
   <summary lang="en">Cryptanalysis of the <i>Transposition</i> cipher using a crib</summary>
-  <summary lang="zh">使用婴儿床对换位密码进行密码分析</summary>
-  <summary lang="ru">Криптоанализ шифрования транспонирования с помощью кроватки</summary>
   <description lang="en">This template shows the cryptanalysis of the single <i>Transposition</i> cipher with the <i>Transposition Analyzer</i> using a crib. It is a known-plaintext attack, as a part of the plaintext is known in advance.</description>
-  <description lang="zh">该模板显示了使用婴儿床使用转置分析器对单个转置密码进行的密码分析。这是一种已知明文攻击，因为事先知道了明文的一部分。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ одиночного Transposition cipher с Transposition Analyzer с помощью кроватки. Это атака известного текста, поскольку часть открытого текста известна заранее.</description>
   <keywords>Transposition, Crib, Permutation, Attack, Analysis</keywords>
-  <keywords lang="zh">换位，婴儿床，排列，攻击，分析</keywords>
-  <keywords lang="ru">Транспонирование, Кроватка, Перестановка, Атака, Анализ</keywords>
-  <title lang="de">Transposition Crib-Analyse</title>
-  <summary lang="de">Kryptoanalyse der <i>Transpositionsverschlüsselung</i> mit einem Crib</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der einstufigen <i>Transpositionsverschlüsselung</i> mit der Komponente <i>Transpositions-Analyse</i> unter Verwendung einer Crib, also eine Form der Known-Plaintext-Analyse.</description>
-  <keywords lang="de">Transposition, Crib, Permutation, Angriff</keywords>
-  <icon file="Transposition.png" />
-  <relevantPlugins>
-    <plugin name="CostFunction" />
-    <plugin name="Transposition" />
-    <plugin name="TranspositionAnalyser" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
-    <replacement key="$TranspositionAnalyser$" value="Transpositions-Analyse" />
-    <replacement key="$Crib$" value="Crib" />
-    <replacement key="$Converter$" value="Konvertierer" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
-    <replacement key="$TranspositionAnalyser$" value="换位分析" />
-    <replacement key="$Crib$" value="婴儿床" />
-    <replacement key="$Converter$" value="转换器" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$TranspositionAnalyser$" value="Транспозиций-анализ" />
-    <replacement key="$Crib$" value="детская кроватка" />
-    <replacement key="$Converter$" value="преобразование" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Revealed Plaintext$" value="Revealed Plaintext" />
@@ -50,4 +18,55 @@
     <replacement key="$Crib$" value="Crib" />
     <replacement key="$Converter$" value="Converter" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">换位婴儿床分析</title>
+  <summary lang="zh">使用婴儿床对换位密码进行密码分析</summary>
+  <description lang="zh">该模板显示了使用婴儿床使用转置分析器对单个转置密码进行的密码分析。这是一种已知明文攻击，因为事先知道了明文的一部分。</description>
+  <keywords lang="zh">换位，婴儿床，排列，攻击，分析</keywords>
+  <replacements lang="zh">
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Revealed Plaintext$" value="解密的纯文本" />
+    <replacement key="$TranspositionAnalyser$" value="换位分析" />
+    <replacement key="$Crib$" value="婴儿床" />
+    <replacement key="$Converter$" value="转换器" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Анализ кросс-позиции</title>
+  <summary lang="ru">Криптоанализ шифрования транспонирования с помощью кроватки</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ одиночного Transposition cipher с Transposition Analyzer с помощью кроватки. Это атака известного текста, поскольку часть открытого текста известна заранее.</description>
+  <keywords lang="ru">Транспонирование, Кроватка, Перестановка, Атака, Анализ</keywords>
+  <replacements lang="ru">
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Revealed Plaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$TranspositionAnalyser$" value="Транспозиций-анализ" />
+    <replacement key="$Crib$" value="детская кроватка" />
+    <replacement key="$Converter$" value="преобразование" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Transposition Crib-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>Transpositionsverschlüsselung</i> mit einem Crib</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der einstufigen <i>Transpositionsverschlüsselung</i> mit der Komponente <i>Transpositions-Analyse</i> unter Verwendung einer Crib, also eine Form der Known-Plaintext-Analyse.</description>
+  <keywords lang="de">Transposition, Crib, Permutation, Angriff</keywords>
+  <replacements lang="de">
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Revealed Plaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$TranspositionAnalyser$" value="Transpositions-Analyse" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Converter$" value="Konvertierer" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Transposition.png" />
+  <relevantPlugins>
+    <plugin name="CostFunction" />
+    <plugin name="Transposition" />
+    <plugin name="TranspositionAnalyser" />
+  </relevantPlugins>
 </sample>

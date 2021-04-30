@@ -1,21 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: NFSFactorizer.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Factorization with NFSFactorizer</title>
-  <title lang="zh">使用NFSFactorizer进行因式分解</title>
-  <title lang="ru">Факторизация с помощью NFSFactorizer</title>
   <summary lang="en">Usage of the <i>NFSFactorizer</i></summary>
-  <summary lang="zh">NFSFactorizer的用法</summary>
-  <summary lang="ru">Использование NFSFactorizer</summary>
   <description lang="en">This template shows the usage of the <i>NFSFactorizer</i> (GNFS).</description>
-  <description lang="zh">该模板显示了NFSFactorizer（GNFS）的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование NFSFactorizer (GNFS).</description>
   <keywords>Prime, sieve, Factorization, ggnfs, yafu</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">使用NFSFactorizer进行因式分解</title>
+  <summary lang="zh">NFSFactorizer的用法</summary>
+  <description lang="zh">该模板显示了NFSFactorizer（GNFS）的用法。</description>
   <keywords lang="zh">素数，筛子，分解，ggnfs，yafu</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Факторизация с помощью NFSFactorizer</title>
+  <summary lang="ru">Использование NFSFactorizer</summary>
+  <description lang="ru">Этот шаблон показывает использование NFSFactorizer (GNFS).</description>
   <keywords lang="ru">Prime, сито, факторизация, ggnfs, yafu</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Faktorisierung mit dem NFSFactorizer</title>
   <summary lang="de">Benutzung des <i>NFSFactorizer</i></summary>
   <description lang="de">Diese Vorlage zeigt die Benutzung des <i>NFSFactorizer</i>.</description>
   <keywords lang="de">Primzahl, Faktorisierung, Zerlegung, Sieb</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="NFSFactorizer.png" />
   <relevantPlugins>
     <plugin name="NFSFactorizer" />

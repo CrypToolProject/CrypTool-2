@@ -1,26 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Friedman Test.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Friedman Test for Classical Ciphers</title>
-  <title lang="zh">弗里德曼古典密码测验</title>
-  <title lang="de">Friedman-Test für klassische Chiffren</title>
-  <title lang="ru">Тест Friedman для классических шифров</title>
   <summary lang="en">Usage of the <i>Friedman Test</i> for classical ciphers</summary>
-  <summary lang="zh">弗里德曼测验对经典密码的使用</summary>
-  <summary lang="de">Benutzung des <i>Friedman-Tests</i> für klassische Chiffren</summary>
-  <summary lang="ru">Использование <i>теста Friedman</i> для классических шифров</summary>
   <description lang="en">This template shows the usage of the <i>Friedman Test</i> for classical ciphers.</description>
-  <description lang="zh">该模板显示了弗里德曼测试对经典密码的使用。</description>
-  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>Friedman-Tests</i> für klassische Chiffren.</description>
-  <description lang="ru">Этот шаблон показывает использование <i> теста Friedman </i> для классических шифров.</description>
   <keywords>Friedman Test, Frequencies, Attack, Analysis</keywords>
-  <keywords lang="zh">弗里德曼测试，频率，攻击，分析</keywords>
-  <keywords lang="de">Friedman-Test, Häufigkeiten, Angriff, Analyse</keywords>
-  <keywords lang="ru">Тест Friedman, частоты, атака, анализ</keywords>
-  <icon file="Friedman Test.png" />
-  <relevantPlugins>
-    <plugin name="FrequencyTest" />
-    <plugin name="FriedmanTest" />
-  </relevantPlugins>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$FrequencyTest$" value="Frequency Test" />
@@ -29,6 +19,13 @@
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$memo$" value="The Friedman test (sometimes known as the kappa test) was invented during the 1920s by William F. Friedman, who used the index of coincidence, which measures the unevenness of the cipher letter frequencies to break the cipher. The Friedman test can distuingish between plaintext (or monoalphabetically encrypted text) and polyalphabetically encrypted text.\line \line This template shows the usage of the Friedman Test component. Here, plaintext and ciphertext (encrypted with the Vigenère cipher) are given to Frequency Analysis components. Then, the frequencies are forwared to Friedman Test components. The result of the Friedman Test are shown in the TextOutput components." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">弗里德曼古典密码测验</title>
+  <summary lang="zh">弗里德曼测验对经典密码的使用</summary>
+  <description lang="zh">该模板显示了弗里德曼测试对经典密码的使用。</description>
+  <keywords lang="zh">弗里德曼测试，频率，攻击，分析</keywords>
   <replacements lang="zh">
     <replacement key="$Plaintext$" value="纯文本" />
     <replacement key="$FrequencyTest$" value="频率测试" />
@@ -37,6 +34,13 @@
     <replacement key="$Ciphertext$" value="密文" />
     <replacement key="$memo$" value="弗里德曼测验（有时称为kappa测验）是由威廉·弗里德曼（William F. Friedman）在1920年代发明的，他使用巧合指数来测量密文字母频率的不均匀性来破译密码。 Friedman测试可以区分纯文本（或单字母加密的文本）和多字母加密的文本。\line \line此模板显示Friedman Test组件的用法。在此，频率分析组件将使用明文和密文（用Vigenère密码加密）。然后，将频率发送给Friedman Test组件。弗里德曼测试的结果显示在TextOutput组件中。" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Friedman-Test für klassische Chiffren</title>
+  <summary lang="de">Benutzung des <i>Friedman-Tests</i> für klassische Chiffren</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung des <i>Friedman-Tests</i> für klassische Chiffren.</description>
+  <keywords lang="de">Friedman-Test, Häufigkeiten, Angriff, Analyse</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$FrequencyTest$" value="Häufigkeits-Analyse" />
@@ -45,6 +49,13 @@
     <replacement key="$Ciphertext$" value="Geheimtext" />
     <replacement key="$memo$" value="Der Friedman-Test (manchmal auch als Kappa-Test bekannt) wurde in den 1920er Jahren von William F. Friedman erfunden, der den Konizidenzindex verwendete, der die Ungleichmäßigkeit der Häufigkeiten der Geheimtextbuchstaben misst. Der Friedman-Test kann zwischen Klartext (oder monoalphabetisch verschlüsseltem Text) und polyalphabetisch verschlüsseltem Text unterscheiden.\line \line Diese Vorlage zeigt die Verwendung der Friedman-Test-Komponente. Hier werden Klartext und Geheimtext (verschlüsselt mit der Vigenère-Chiffre) an Häufigkeitsanalyse-Komponenten übergeben. Dann werden die Häufigkeiten an Friedman-Test-Komponenten weitergeleitet. Das Ergebnis des Friedman-Tests wird in den Textausgabe-Komponenten angezeigt." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Тест Friedman для классических шифров</title>
+  <summary lang="ru">Использование <i>теста Friedman</i> для классических шифров</summary>
+  <description lang="ru">Этот шаблон показывает использование <i> теста Friedman </i> для классических шифров.</description>
+  <keywords lang="ru">Тест Friedman, частоты, атака, анализ</keywords>
   <replacements lang="ru">
     <replacement key="$Plaintext$" value="обычный текст" />
     <replacement key="$FrequencyTest$" value="тест частоты" />
@@ -53,4 +64,12 @@
     <replacement key="$Ciphertext$" value="шифротекста" />
     <replacement key="$memo$" value="Тест Фридмана (иногда известный как тест Каппа) был изобретен в 1920-х годах Уильямом Фридманом, который использовал индекс совпадения, который измеряет неравномерность частот букв шифра для его взлома. Тест Фридмана может различать открытый текст (или текст, зашифрованный по алфавиту) и текст, зашифрованный по алфавиту.\line \line Этот шаблон показывает использование компонента Friedman Test. Здесь открытый текст и зашифрованный текст (зашифрованные с помощью шифра Vigenère) передаются компонентам частотного анализа. Затем частоты передаются на компоненты теста Фридмана. Результат теста Фридмана показан в компонентах TextOutput." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Friedman Test.png" />
+  <relevantPlugins>
+    <plugin name="FrequencyTest" />
+    <plugin name="FriedmanTest" />
+  </relevantPlugins>
 </sample>

@@ -1,25 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Zodiac-408.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Zodiac-408 Analysis</title>
-  <title lang="zh">Zodiac-408分析</title>
-  <title lang="ru">Зодиак-408 Анализ</title>
-  <title lang="de">Zodiac-408-Analyse</title>
   <summary lang="en">Cryptanalysis of the Zodiac-408 cipher using the <i>Homophonic Substitution Analyzer</i></summary>
-  <summary lang="zh">使用同声置换分析仪对Zodiac-408密码进行密码分析</summary>
-  <summary lang="ru">Криптоанализ шифра Zodiac-408 с использованием <i>анализатора гомофонического замещения</i></summary>
-  <summary lang="de">Kryptanalyse der Zodiac-408-Chiffre mit der <i>Homophonen Substitutionsanalyse</i></summary>
   <description lang="en">This sample demonstrates how to use the <i>Homophonic Substitution Analyzer</i> to break the Zodiac-408 cipher.</description>
-  <description lang="zh">此示例演示如何使用同声替换分析器来破坏Zodiac-408密码。</description>
-  <description lang="ru">В этом примере показано, как использовать <i>анализатор гомофонического замещения</i>, чтобы взломать шифр Zodiac-408.</description>
-  <description lang="de">In diesem Beispiel wird veranschaulicht, wie die <i>Homophonen Substitutionsanalyse</i> verwendet wird, um die Zodiac-408-Chiffre zu brechen.</description>
   <keywords>Zodiac, serial killer, murderer, homophone, homophonic, substitution, mono alphabetic</keywords>
-  <keywords lang="zh">生肖，连环杀手，凶手，同音，同音，替代，单字母</keywords>
-  <keywords lang="ru">Зодиак, серийный убийца, убийца, гомофон, гомофон, замещение, моноалфавит</keywords>
-  <keywords lang="de">Zodiac, Tierkreiszeichen, Serienmörder, Mörder, Homophon, Substitution, mono alphabetisch</keywords>
-  <icon file="Zodiac-408.png" />
-  <relevantPlugins>
-    <plugin name="HomophonicSubstitutionAnalyzer" />
-  </relevantPlugins>
   <replacements lang="en">
     <replacement key="$ciphertext$" value="Z-408 Message" />
     <replacement key="$analyzer$" value="Homophonic Substitution Analyzer" />
@@ -29,6 +20,13 @@
     <replacement key="$dictionary$" value="Dictionary" />
     <replacement key="$memo$" value="{\b Cryptanalysis of the Zodiac-408 cipher}\line\line &quot;Zodiac Killer&quot; is the pseudonym of a serial killer who operated in Northern California. The killer's identity remains unknown. Zodiac murdered victims in Benicia, Vallejo, Lake Berryessa, and San Francisco between December 1968 and October 1969. Four men and three women between the ages of 16 and 29 were targeted. The killer originated the name &quot;Zodiac&quot; in a series of taunting messages sent to the local Bay Area press. These messages included four cryptograms (or ciphertexts). Of the four cryptograms sent, only one (Zodiac-408) has been definitively solved. Source: https://en.wikipedia.org/wiki/Zodiac_Killer\line\line This template allows to break the Zodiac-408 message (using the &quot;Homophonic Substitution Analyzer&quot;) either automatically or interactively. The interactive (semi-automatic) mode is selected by default in the analyzer's settings.\line\line After starting the template's workspace the first time (by clicking the Play button), the analyzer needs some time to load huge pentagram language statistics and to fill the ciphertext and the plaintext areas with letters.\line\line In the semi-automatic mode, the 3 buttons &quot;Analyze/Stop&quot;, &quot;Reset locked letters&quot;, and &quot;Find/Lock words&quot; within the analyzer component are enabled. To start the analysis process click on the &quot;Analyze&quot; button. After some time, the auto-locker will automatically lock already revealed words. You can stop (&quot;Stop&quot;) and restart (&quot;Analyze&quot;) the analysis process at any time. When the analysis is stopped, you can also lock and unlock single letters of the revealed plaintext by yourself with a left mouse button click. After locking a letter with the left mouse button, you can change letters using the right mouse button: Each click on the right mouse button shows the next valid letter; clicking the right mouse button plus Shift selects the previous letter in the plaintext alphabet." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">Zodiac-408分析</title>
+  <summary lang="zh">使用同声置换分析仪对Zodiac-408密码进行密码分析</summary>
+  <description lang="zh">此示例演示如何使用同声替换分析器来破坏Zodiac-408密码。</description>
+  <keywords lang="zh">生肖，连环杀手，凶手，同音，同音，替代，单字母</keywords>
   <replacements lang="zh">
     <replacement key="$ciphertext$" value="Z-408留言" />
     <replacement key="$analyzer$" value="谐音替代分析仪" />
@@ -38,6 +36,13 @@
     <replacement key="$dictionary$" value="字典" />
     <replacement key="$memo$" value="{\b十二生肖408密码的密码分析} \line \line“十二生肖杀手”是在北加州工作的连环杀手的化名。凶手的身份仍然未知。黄道带在1968年12月至1969年10月之间在贝尼西亚，瓦尔莱霍，贝里耶萨湖和旧金山谋杀了受害者。目标是16岁至29岁之间的四男三女。凶手在发送给当地湾区新闻界的一系列嘲讽消息中起源于“十二生肖”这个名字。这些消息包括四个密码（或密文）。在发送的四个密码中，只有一个（Zodiac-408）已被确定地解决。来源：https://zh.wikipedia.org/wiki/Zodiac_Killer\line\line此模板允许自动或交互中断Zodiac-408消息（使用“谐音替代分析器”）。默认情况下，在分析器的设置中选择了交互式（半自动）模式。\line \line首次启动模板的工作区（通过单击“播放”按钮）后，分析器需要一些时间来加载庞大的五角星语言统计数据并加载到\line \line在半自动模式下，启用了分析器组件中的3个按钮“分析/停止”，“重置锁定的字母”和“查找/锁定单词”。要开始分析过程，请单击“分析”按钮。一段时间后，自动储物柜将自动锁定已经显示的单词。您可以随时停止（“停止”）并重新启动（“分析”）分析过程。当分析停止时，您也可以通过单击鼠标左键来锁定和解锁显示的纯文本的单个字母。使用鼠标左键锁定字母后，可以使用鼠标右键更改字母：每次单击鼠标右键都会显示下一个有效字母；单击鼠标右键，然后按Shift键，可以选择纯文本字母中的前一个字母。" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Зодиак-408 Анализ</title>
+  <summary lang="ru">Криптоанализ шифра Zodiac-408 с использованием <i>анализатора гомофонического замещения</i></summary>
+  <description lang="ru">В этом примере показано, как использовать <i>анализатор гомофонического замещения</i>, чтобы взломать шифр Zodiac-408.</description>
+  <keywords lang="ru">Зодиак, серийный убийца, убийца, гомофон, гомофон, замещение, моноалфавит</keywords>
   <replacements lang="ru">
     <replacement key="$ciphertext$" value="Z-408 сообщение" />
     <replacement key="$analyzer$" value="Анализатор гомофонического замещения" />
@@ -47,6 +52,13 @@
     <replacement key="$dictionary$" value="толковый словарь" />
     <replacement key="$memo$" value="{\b Криптоанализ шифра Зодиак-408} \line \line Убийца Зодиака - это псевдоним неопознанного серийного убийцы, который работал в Северной Калифорнии, по крайней мере, с конца 1960-х до начала 1970-х годов. Личность убийцы остается неизвестной. Зодиак убил жертв в Бенисии, Вальехо, озере Беррисса и Сан-Франциско в период с декабря 1968 года по октябрь 1969 года. Четверо мужчин и три женщины в возрасте от 16 до 29 лет стали жертвами. Убийца создал имя «Зодиак» в серии насмешливых писем, отправленных в местную бухту. Эти буквы включали четыре криптограммы (или шифры). Из четырех отправленных криптограмм только одна была окончательно решена. Источник: https://en.wikipedia.org/wiki/Zodiac_Killer \line\line В этом шаблоне мы показываем, как можно сломать букву Zodiac-408, которая уже была решена, автоматически с помощью «Гомофонического анализатора замещения». \line\line Чтобы проанализировать шифр в так называемом полуавтоматическом режиме анализа, вы должны запустить рабочее пространство, используя кнопку запуска. После запуска рабочей области анализатору требуется некоторое время для загрузки статистики языка пентаграммы. Когда зашифрованный текст и открытый текст заполнены буквами, вы можете запустить процесс анализа, нажав кнопку «Анализировать»; кнопка. Через некоторое время автоблокировка автоматически заблокирует обнаруженные слова. Вы можете остановить и начать процесс анализа. Когда анализ остановлен, вы также можете блокировать и разблокировать буквы, используя левую кнопку мыши. Вы также можете менять буквы, используя правую кнопку мыши, а также клавиши Shift и правую кнопку мыши." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Zodiac-408-Analyse</title>
+  <summary lang="de">Kryptanalyse der Zodiac-408-Chiffre mit der <i>Homophonen Substitutionsanalyse</i></summary>
+  <description lang="de">In diesem Beispiel wird veranschaulicht, wie die <i>Homophonen Substitutionsanalyse</i> verwendet wird, um die Zodiac-408-Chiffre zu brechen.</description>
+  <keywords lang="de">Zodiac, Tierkreiszeichen, Serienmörder, Mörder, Homophon, Substitution, mono alphabetisch</keywords>
   <replacements lang="de">
     <replacement key="$ciphertext$" value="Z-408-Nachricht" />
     <replacement key="$analyzer$" value="Homophone Substitutionsanalyse" />
@@ -56,4 +68,11 @@
     <replacement key="$dictionary$" value="Wörterbuch" />
     <replacement key="$memo$" value="{\b Kryptoanalyse der Zodiac-408-Chiffre} \line\line Der Zodiac Killer ist das Pseudonym eines nicht identifizierten Serienmörders, der mindestens in den späten 1960ern bis Anfang der 1970er Jahre in Nordkalifornien agierte. Die Identität des Mörders bleibt unbekannt. Der Mörder tötete zwischen Dezember 1968 und Oktober 1969 in Benicia, Vallejo, Lake Berryessa und San Francisco mehrere Opfer. Vier Männer und drei Frauen im Alter von 16 bis 29 Jahren wurden von ihm ins Visier genommen. Der Mörder hat den Namen &quot;Zodiac&quot; in einer Reihe spöttischer Briefe, die an die örtliche Bay Area-Presse geschickt wurden, genutzt. Diese Briefe enthielten vier Kryptogramme. Von den vier gesendeten Kryptogrammen wurde nur eines beweisbar gelöst. Quelle: https://en.wikipedia.org/wiki/Zodiac_Killer \line\line In dieser Vorlage zeigen wir, wie Sie die bereits gelösten Chiffre automatisch mit der Zeile &quot;Homophonen Substitutionsanalyse&quot; brechen können.\line\line Um die Chiffre im sogenannten halbautomatischen Analysemodus zu analysieren, müssen Sie den Arbeitsbereich über den Start-Button starten. Nach dem Starten des Arbeitsbereichs benötigt die Analyse einige Zeit, um die Sprachstatistiken (Pentagramme) zu laden. Wenn der Chiffretext und der Klartext mit Buchstaben gefüllt sind, können Sie den Analyseprozess starten, indem Sie auf &quot;Analysieren&quot; klicken. Nach einiger Zeit sperrt der Auto-Locker automatisch offenbarte Wörter. Sie können den Analyseprozess anhalten und neustarten. Wenn die Analyse gestoppt ist, können Sie Buchstaben auch mit der linken Maustaste sperren und entsperren. Sie können Buchstaben auch mit der rechten Maustaste und mit der Umschalttaste und der rechten Maustaste manuell ändern." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Zodiac-408.png" />
+  <relevantPlugins>
+    <plugin name="HomophonicSubstitutionAnalyzer" />
+  </relevantPlugins>
 </sample>

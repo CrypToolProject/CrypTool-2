@@ -1,55 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Hill.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Hill Cipher</title>
-  <title lang="zh">希尔密码</title>
-  <title lang="ru">Хилл Шифр</title>
   <summary lang="en">Usage of the <i>Hill</i> cipher</summary>
-  <summary lang="zh">希尔密码的用法</summary>
-  <summary lang="ru">Использование шифрования Хилла</summary>
   <description lang="en">This template shows the usage of the <i>Hill</i> cipher.</description>
-  <description lang="zh">该模板显示了Hill密码的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование шифрования Hill.</description>
   <keywords>Matrix, linear, algebra, polygraphic</keywords>
-  <keywords lang="zh">矩阵，线性，代数，测谎</keywords>
-  <keywords lang="ru">Матрица, линейная, алгебра, полиграфическая</keywords>
-  <title lang="de">Hill-Chiffre</title>
-  <summary lang="de">Benutzung der <i>Hill</i>-Chiffre</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Hill</i>-Chiffre.</description>
-  <keywords lang="de">Matrix, Lineare, Algebra, polygraphisch</keywords>
-  <icon file="Hill.png" />
-  <relevantPlugins>
-    <plugin name="Hill" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$plaintext$" value="Klartext" />
-    <replacement key="$ciphertext$" value="Geheimtext" />
-    <replacement key="$decryptedciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$hillmatrix$" value="Hill-Matrix" />
-    <replacement key="$converter$" value="Konvertierer" />
-    <replacement key="$splitchars$" value="Trennzeichen" />
-    <replacement key="$split$" value="Trennen" />
-    <replacement key="$hillcipher$" value="Hill-Chiffre" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$plaintext$" value="纯文本" />
-    <replacement key="$ciphertext$" value="密文" />
-    <replacement key="$decryptedciphertext$" value="解密密文" />
-    <replacement key="$hillmatrix$" value="希尔矩阵" />
-    <replacement key="$converter$" value="转换器" />
-    <replacement key="$splitchars$" value="定界符" />
-    <replacement key="$split$" value="分离" />
-    <replacement key="$hillcipher$" value="希尔密码" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$plaintext$" value="обычный текст" />
-    <replacement key="$ciphertext$" value="шифротекста" />
-    <replacement key="$decryptedciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$hillmatrix$" value="Hill-Matrix" />
-    <replacement key="$converter$" value="преобразование" />
-    <replacement key="$splitchars$" value="сепаратор" />
-    <replacement key="$split$" value="отдельный" />
-    <replacement key="$hillcipher$" value="Hill-значный" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$plaintext$" value="Plaintext" />
     <replacement key="$ciphertext$" value="Ciphertext" />
@@ -60,4 +21,62 @@
     <replacement key="$split$" value="Split" />
     <replacement key="$hillcipher$" value="Hill Cipher" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">希尔密码</title>
+  <summary lang="zh">希尔密码的用法</summary>
+  <description lang="zh">该模板显示了Hill密码的用法。</description>
+  <keywords lang="zh">矩阵，线性，代数，测谎</keywords>
+  <replacements lang="zh">
+    <replacement key="$plaintext$" value="纯文本" />
+    <replacement key="$ciphertext$" value="密文" />
+    <replacement key="$decryptedciphertext$" value="解密密文" />
+    <replacement key="$hillmatrix$" value="希尔矩阵" />
+    <replacement key="$converter$" value="转换器" />
+    <replacement key="$splitchars$" value="定界符" />
+    <replacement key="$split$" value="分离" />
+    <replacement key="$hillcipher$" value="希尔密码" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Хилл Шифр</title>
+  <summary lang="ru">Использование шифрования Хилла</summary>
+  <description lang="ru">Этот шаблон показывает использование шифрования Hill.</description>
+  <keywords lang="ru">Матрица, линейная, алгебра, полиграфическая</keywords>
+  <replacements lang="ru">
+    <replacement key="$plaintext$" value="обычный текст" />
+    <replacement key="$ciphertext$" value="шифротекста" />
+    <replacement key="$decryptedciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$hillmatrix$" value="Hill-Matrix" />
+    <replacement key="$converter$" value="преобразование" />
+    <replacement key="$splitchars$" value="сепаратор" />
+    <replacement key="$split$" value="отдельный" />
+    <replacement key="$hillcipher$" value="Hill-значный" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Hill-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Hill</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Hill</i>-Chiffre.</description>
+  <keywords lang="de">Matrix, Lineare, Algebra, polygraphisch</keywords>
+  <replacements lang="de">
+    <replacement key="$plaintext$" value="Klartext" />
+    <replacement key="$ciphertext$" value="Geheimtext" />
+    <replacement key="$decryptedciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$hillmatrix$" value="Hill-Matrix" />
+    <replacement key="$converter$" value="Konvertierer" />
+    <replacement key="$splitchars$" value="Trennzeichen" />
+    <replacement key="$split$" value="Trennen" />
+    <replacement key="$hillcipher$" value="Hill-Chiffre" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Hill.png" />
+  <relevantPlugins>
+    <plugin name="Hill" />
+  </relevantPlugins>
 </sample>

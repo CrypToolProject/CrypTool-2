@@ -1,56 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Factorization.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Factorization with Trial Division (Brute-Force)</title>
-  <title lang="zh">尝试除法分解（Brute-Force）</title>
-  <title lang="ru">Факторизация с пробным подразделением (грубая сила)</title>
   <summary lang="en">Usage of the <i>Factorization with Trial Division (brute-force)</i></summary>
-  <summary lang="zh">分解试验中因式分解的使用（强力）</summary>
-  <summary lang="ru">Использование факторизации с пробным подразделением (грубая сила)</summary>
   <description lang="en">This template shows the usage of the <i>Factorization with Trial Division (brute-force)</i>.</description>
-  <description lang="zh">此模板显示分解试验中的因式分解（强力）的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование факторизации с пробным подразделением (грубая сила).</description>
   <keywords>factorization, factorisation, factor</keywords>
-  <keywords lang="zh">分解因子分解</keywords>
-  <keywords lang="ru">факторизация, факторизация, фактор</keywords>
-  <title lang="de">Faktorisierung mit Probedivision (Brute-Force)</title>
-  <summary lang="de">Benutzung der <i>Faktorisierung mit Probedivision</i> (Brute-Force)</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Faktorisierung mit Probedivision</i> (Brute-Force).</description>
-  <keywords lang="de">faktorisierung, faktor</keywords>
-  <icon file="Factorization.png" />
-  <relevantPlugins>
-    <plugin name="Factorizer" />
-    <plugin name="Gate" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Number Input$" value="Zahleneingabe" />
-    <replacement key="$Gate$" value="Gatter" />
-    <replacement key="$Factorizer$" value="Faktorisierer" />
-    <replacement key="$Prime factors$" value="Primfaktoren" />
-    <replacement key="$Remainders$" value="Reste" />
-    <replacement key="$memo1$" value="Diese Vorlage demonstriert die beiden Betriebsarten der Komponente Brute-Force-Faktorisierung:\line\line {\b Modus 1: Bestimme kleinsten Primfaktor}\line In dieser Betriebsart sucht die Komponente nur den kleinsten Primfaktor der eingegebenen Zahl. Sie stellt den gefundenen Faktor und den zugehörigen (möglicherweise noch zusammengesetzten) Rest an seinen Ausgängen zur Verfügung. In diesem Beispiel wird der Rest über das Gatter an den Eingang des Faktorisierers zurückgeführt und in dieser Schleife wird die Zahl schliesslich komplett in Primfaktoren zerlegt.\line\line {\b Modus 2: Bestimme alle Primfaktoren}\line In dieser Betriebsart versucht die Komponente die Zahl in einem Durchgang komplett zu faktorisieren. Wenn sie fertig ist (oder das Brute-Force-Limit erreicht wurde), gibt sie die gefundenen Faktoren als Array von Zahlen aus." />
-    <replacement key="$memo2$" value="Bestimme kleinsten Primfaktor" />
-    <replacement key="$memo3$" value="Bestimme alle Primfaktoren" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Number Input$" value="输入数字" />
-    <replacement key="$Gate$" value="门" />
-    <replacement key="$Factorizer$" value="分解器" />
-    <replacement key="$Prime factors$" value="主要原因" />
-    <replacement key="$Remainders$" value="休息" />
-    <replacement key="$memo1$" value="此模板演示了组件蛮力分解的两种操作模式：\line \line {\b模式1：确定最小素数} \line在此操作模式下，组件仅搜索输入数字的最小素数。它在输出中提供找到的因数以及相关的（可能仍是合并的）余数。在此示例中，其余部分通过门反馈到分解器的输入，并在此循环中将数字最终完全分解为素数\Line \line {\b模式2：确定所有素数} \line在此操作模式下，组件尝试一口气将数字完全分解。完成后（或已达到蛮力限制），它将找到的因子输出为数字数组。" />
-    <replacement key="$memo2$" value="找到最小的素因数" />
-    <replacement key="$memo3$" value="找到所有主要因素" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Number Input$" value="ввод номера" />
-    <replacement key="$Gate$" value="ворота" />
-    <replacement key="$Factorizer$" value="Faktorisierer" />
-    <replacement key="$Prime factors$" value="Primfaktoren" />
-    <replacement key="$Remainders$" value="отдых" />
-    <replacement key="$memo1$" value="В этом шаблоне демонстрируются два режима компонента «Компоновка грубой силы»: \line \line {\b mode 1: set smallest prime factor} \line В этом режиме компонент ищет только наименьший простой коэффициент введенного числа. Он обеспечивает найденный множитель и связанный (возможно, все еще составной) остаток на своих выходах. В этом примере остаток возвращается на вход факторизатора через затвор, и в этом цикле число окончательно полностью разлагается на простые множители. \Line \line {\b mode 2: Определение всех простых факторов} \line В этом режиме компонент пытается полностью разбить число за один раз. Когда это будет сделано (или достигнут предел грубой силы), он выводит найденные факторы в виде массива чисел." />
-    <replacement key="$memo2$" value="Определите наименьший простой коэффициент" />
-    <replacement key="$memo3$" value="Определить все основные факторы" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Number Input$" value="Number Input" />
     <replacement key="$Gate$" value="Gate" />
@@ -61,4 +21,63 @@
     <replacement key="$memo2$" value="Determine smallest prime factor" />
     <replacement key="$memo3$" value="Determine all prime factors" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">尝试除法分解（Brute-Force）</title>
+  <summary lang="zh">分解试验中因式分解的使用（强力）</summary>
+  <description lang="zh">此模板显示分解试验中的因式分解（强力）的用法。</description>
+  <keywords lang="zh">分解因子分解</keywords>
+  <replacements lang="zh">
+    <replacement key="$Number Input$" value="输入数字" />
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$Factorizer$" value="分解器" />
+    <replacement key="$Prime factors$" value="主要原因" />
+    <replacement key="$Remainders$" value="休息" />
+    <replacement key="$memo1$" value="此模板演示了组件蛮力分解的两种操作模式：\line \line {\b模式1：确定最小素数} \line在此操作模式下，组件仅搜索输入数字的最小素数。它在输出中提供找到的因数以及相关的（可能仍是合并的）余数。在此示例中，其余部分通过门反馈到分解器的输入，并在此循环中将数字最终完全分解为素数\Line \line {\b模式2：确定所有素数} \line在此操作模式下，组件尝试一口气将数字完全分解。完成后（或已达到蛮力限制），它将找到的因子输出为数字数组。" />
+    <replacement key="$memo2$" value="找到最小的素因数" />
+    <replacement key="$memo3$" value="找到所有主要因素" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Факторизация с пробным подразделением (грубая сила)</title>
+  <summary lang="ru">Использование факторизации с пробным подразделением (грубая сила)</summary>
+  <description lang="ru">Этот шаблон показывает использование факторизации с пробным подразделением (грубая сила).</description>
+  <keywords lang="ru">факторизация, факторизация, фактор</keywords>
+  <replacements lang="ru">
+    <replacement key="$Number Input$" value="ввод номера" />
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$Factorizer$" value="Faktorisierer" />
+    <replacement key="$Prime factors$" value="Primfaktoren" />
+    <replacement key="$Remainders$" value="отдых" />
+    <replacement key="$memo1$" value="В этом шаблоне демонстрируются два режима компонента «Компоновка грубой силы»: \line \line {\b mode 1: set smallest prime factor} \line В этом режиме компонент ищет только наименьший простой коэффициент введенного числа. Он обеспечивает найденный множитель и связанный (возможно, все еще составной) остаток на своих выходах. В этом примере остаток возвращается на вход факторизатора через затвор, и в этом цикле число окончательно полностью разлагается на простые множители. \Line \line {\b mode 2: Определение всех простых факторов} \line В этом режиме компонент пытается полностью разбить число за один раз. Когда это будет сделано (или достигнут предел грубой силы), он выводит найденные факторы в виде массива чисел." />
+    <replacement key="$memo2$" value="Определите наименьший простой коэффициент" />
+    <replacement key="$memo3$" value="Определить все основные факторы" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Faktorisierung mit Probedivision (Brute-Force)</title>
+  <summary lang="de">Benutzung der <i>Faktorisierung mit Probedivision</i> (Brute-Force)</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Faktorisierung mit Probedivision</i> (Brute-Force).</description>
+  <keywords lang="de">faktorisierung, faktor</keywords>
+  <replacements lang="de">
+    <replacement key="$Number Input$" value="Zahleneingabe" />
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$Factorizer$" value="Faktorisierer" />
+    <replacement key="$Prime factors$" value="Primfaktoren" />
+    <replacement key="$Remainders$" value="Reste" />
+    <replacement key="$memo1$" value="Diese Vorlage demonstriert die beiden Betriebsarten der Komponente Brute-Force-Faktorisierung:\line\line {\b Modus 1: Bestimme kleinsten Primfaktor}\line In dieser Betriebsart sucht die Komponente nur den kleinsten Primfaktor der eingegebenen Zahl. Sie stellt den gefundenen Faktor und den zugehörigen (möglicherweise noch zusammengesetzten) Rest an seinen Ausgängen zur Verfügung. In diesem Beispiel wird der Rest über das Gatter an den Eingang des Faktorisierers zurückgeführt und in dieser Schleife wird die Zahl schliesslich komplett in Primfaktoren zerlegt.\line\line {\b Modus 2: Bestimme alle Primfaktoren}\line In dieser Betriebsart versucht die Komponente die Zahl in einem Durchgang komplett zu faktorisieren. Wenn sie fertig ist (oder das Brute-Force-Limit erreicht wurde), gibt sie die gefundenen Faktoren als Array von Zahlen aus." />
+    <replacement key="$memo2$" value="Bestimme kleinsten Primfaktor" />
+    <replacement key="$memo3$" value="Bestimme alle Primfaktoren" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Factorization.png" />
+  <relevantPlugins>
+    <plugin name="Factorizer" />
+    <plugin name="Gate" />
+  </relevantPlugins>
 </sample>

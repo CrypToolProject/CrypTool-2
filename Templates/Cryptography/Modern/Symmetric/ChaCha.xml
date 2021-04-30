@@ -1,5 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: ChaCha.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">ChaCha Cipher</title>
   <summary lang="en">Usage of the <i>ChaCha</i> cipher</summary>
   <description lang="en">
@@ -8,7 +15,31 @@
   This template includes an in-depth visualization of the encryption and decryption process and features both current versions of the cipher: The original version by DJB with a 64-bit counter and a 64-bit initialization vector and the modified version by the Internet Engineering Task Force (IETF) with a 32-bit counter and a 96-bit initialization vector. The version can be chosen in the component's settings.
   </description>
   <keywords>encryption, decryption, stream cipher</keywords>
-  
+  <replacements lang="en">
+    <replacement key="$plaintext$" value="Plaintext" />
+    <replacement key="$ciphertext$" value="Ciphertext" />
+    <replacement key="$decrypted$" value="Decrypted ciphertext" />
+    <replacement key="$key$" value="Key" />
+    <replacement key="$plaintextvalue$" value="The quick brown fox jumps over the lazy dog." />
+    <replacement key="$iv$" value="Initialization vector (IV)" />
+    <replacement key="$decode$" value="String decoder" />
+    <replacement key="$encode$" value="String encoder" />
+    <replacement key="$chacha_enc$" value="ChaCha (Encryption)" />
+    <replacement key="$chacha_dec$" value="ChaCha (Decryption)" />
+    <replacement key="$counter$" value="Initial block counter (optional)" />
+    <replacement key="$keydesc$" value="You can use 256-bit and 128-bit keys with ChaCha. A 128-bit key will be expanded into a 256-bit key by concatenating the key with itself." />
+    <replacement key="$ivdesc$" value="The original version by DJB uses a 64-bit IV and the IETF version uses a 96-bit IV. In the settings tab of the ChaCha component, you can select which version you want to use." />
+    <replacement key="$counterdesc1$" value="You can optionally set your own start counter (initial block counter) here. The first keystream block will then be initialized with this counter. The default is 0." />
+    <replacement key="$counterdesc2$" value="In the DJB version, you can use a counter up to 64-bit. In the IETF version, the counter is limited to 32-bit." />
+    <replacement key="$generaldesc1$" value="This template shows how you can use the ChaCha component to en- and decrypt messages. ChaCha is a refinement of the Salsa20 cipher." />
+    <replacement key="$generaldesc2$" value="Initially, a default plaintext, a 256-bit secret key and 64-bit initialization vector are provided." />
+    <replacement key="$generaldesc3$" value="Pressing on &quot;Play&quot; starts the cipher execution and you can see the ciphertext at the upper-right text output." />
+    <replacement key="$generaldesc4$" value="In the settings, you can chose the version which affects the IV size and if the ChaCha hash function should be run 8, 12 or 20 times per keystream block." />
+    <replacement key="$generaldesc5$" value="Since ChaCha uses a keystream and bitwise XOR operation to create the ciphertext, decryption works exactly the same as encryption. This is why there is no setting for en- or decryption. If the ciphertext with the same key and IV and the same settings are provided, the output will be the decrypted ciphertext. This can be observed in the bottom component and the text output on the right. " />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">ChaCha-Chiffre</title>
   <summary lang="de">Anwendung der ChaCha-Chiffre</summary>
   <description lang="de">
@@ -17,56 +48,33 @@
   Dieses Template beinhaltet eine detaillierte Visualisierung des Ver- und Entschlüsselungsprozesses sowie beide existierende Versionen der Chiffre: Die originale Version von DJB mit einem 64-bit Zähler und einem 64-bit Initialisierungsvektor und die modifizierte Version der Internet Engineering Task Force (IETF) mit einem 32-bit Zähler und einem 96-bit Initialisierungsvektor. Die Version kann in den Komponenten-Einstellungen ausgewählt werden.
   </description>
   <keywords lang="de">verschlüsselung, entschlüsselung, strom chiffre</keywords>
-  
-  <icon file="ChaCha.png" />
-  
-  <relevantPlugins>
-    <plugin name="ChaCha" />
-  </relevantPlugins>
-  
   <replacements lang="de">
     <replacement key="$plaintext$" value="Klartext" />
     <replacement key="$ciphertext$" value="Geheimtext" />
-	<replacement key="$decrypted$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$decrypted$" value="Entschlüsselter Geheimtext" />
     <replacement key="$key$" value="Schlüssel" />
     <replacement key="$plaintextvalue$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
-	<replacement key="$iv$" value="Initialisierungsvektor (IV)" />
-	<replacement key="$decode$" value="String-Decodierer" />
-	<replacement key="$encode$" value="String-Encodierer" />
-	<replacement key="$chacha_enc$" value="ChaCha (Verschlüsselung)" />
-	<replacement key="$chacha_dec$" value="ChaCha (Entschlüsselung)" />
-	<replacement key="$counter$" value="Initialer Blockzähler" />
-	<replacement key="$keydesc$" value="ChaCha unterstützt 128-bit und 256-bit Schlüssel. Ein 128-bit Schlüssel wird durch Verkettung mit sich selbst zu einem 256-bit Schlüssel erweitert." />
-	<replacement key="$ivdesc$" value="Die originale Version von DJB benutzt einen 64-bit IV, während die IETF-Version einen 96-bit IV benutzt. In den Einstellungen der ChaCha-Komponente kann die Version ausgewählt werden." />
-	<replacement key="$counterdesc1$" value="Hier kann optional der initiale Blockzähler gesetzt werden. Der Standardwert ist 0." />
-	<replacement key="$counterdesc2$" value="In der DJB-Version kann der Counter bis zu 64-bit groß sein. In der IETF-Version ist der Counter limitiert auf 32-bit." />
-	<replacement key="$generaldesc1$" value="Dieses Template zeigt die Anwendung der ChaCha-Chiffre zum Ver- und Entschlüsseln von Nachrichten. ChaCha ist eine Verbesserung gegenüber Salsa20." />
-	<replacement key="$generaldesc2$" value="Ein Klartext, ein 256-bit Schlüssel und ein 64-bit Initialisierungsvektor sind bereits voreingestellt." />
-	<replacement key="$generaldesc3$" value="Die Ver- und Entschlüsselung startet, wenn oben auf &quot;Start&quot; gedrückt wird. Der Geheimtext kann dann oben rechts in der Textausgabe abgelesen werden." />
-	<replacement key="$generaldesc4$" value="In den Einstellungen kann die Version (beeinflusst IV und Zählergröße) und die Anzahl der Runden ausgewählt werden."/>
-	<replacement key="$generaldesc5$" value="Weil ChaCha einen Schlüsselstrom mit XOR verwendet um den Geheimtext zu generieren und XOR die inverse Operation zu sich selbst ist, funktioniert die Entschlüsselung genau wie die Verschlüsselung. Deshalb gibt es keine separate Einstellung für Ver- oder Entschlüsselung. Wenn der Geheimtext mit dem selben Schlüssel und IV und den selben Einstellungen eingegeben wird, wird der Klartext ausgegeben. Dies kann in der unteren Komponente zusammen mit der Textausgabe rechts beobachtet werden." />
+    <replacement key="$iv$" value="Initialisierungsvektor (IV)" />
+    <replacement key="$decode$" value="String-Decodierer" />
+    <replacement key="$encode$" value="String-Encodierer" />
+    <replacement key="$chacha_enc$" value="ChaCha (Verschlüsselung)" />
+    <replacement key="$chacha_dec$" value="ChaCha (Entschlüsselung)" />
+    <replacement key="$counter$" value="Initialer Blockzähler" />
+    <replacement key="$keydesc$" value="ChaCha unterstützt 128-bit und 256-bit Schlüssel. Ein 128-bit Schlüssel wird durch Verkettung mit sich selbst zu einem 256-bit Schlüssel erweitert." />
+    <replacement key="$ivdesc$" value="Die originale Version von DJB benutzt einen 64-bit IV, während die IETF-Version einen 96-bit IV benutzt. In den Einstellungen der ChaCha-Komponente kann die Version ausgewählt werden." />
+    <replacement key="$counterdesc1$" value="Hier kann optional der initiale Blockzähler gesetzt werden. Der Standardwert ist 0." />
+    <replacement key="$counterdesc2$" value="In der DJB-Version kann der Counter bis zu 64-bit groß sein. In der IETF-Version ist der Counter limitiert auf 32-bit." />
+    <replacement key="$generaldesc1$" value="Dieses Template zeigt die Anwendung der ChaCha-Chiffre zum Ver- und Entschlüsseln von Nachrichten. ChaCha ist eine Verbesserung gegenüber Salsa20." />
+    <replacement key="$generaldesc2$" value="Ein Klartext, ein 256-bit Schlüssel und ein 64-bit Initialisierungsvektor sind bereits voreingestellt." />
+    <replacement key="$generaldesc3$" value="Die Ver- und Entschlüsselung startet, wenn oben auf &quot;Start&quot; gedrückt wird. Der Geheimtext kann dann oben rechts in der Textausgabe abgelesen werden." />
+    <replacement key="$generaldesc4$" value="In den Einstellungen kann die Version (beeinflusst IV und Zählergröße) und die Anzahl der Runden ausgewählt werden." />
+    <replacement key="$generaldesc5$" value="Weil ChaCha einen Schlüsselstrom mit XOR verwendet um den Geheimtext zu generieren und XOR die inverse Operation zu sich selbst ist, funktioniert die Entschlüsselung genau wie die Verschlüsselung. Deshalb gibt es keine separate Einstellung für Ver- oder Entschlüsselung. Wenn der Geheimtext mit dem selben Schlüssel und IV und den selben Einstellungen eingegeben wird, wird der Klartext ausgegeben. Dies kann in der unteren Komponente zusammen mit der Textausgabe rechts beobachtet werden." />
   </replacements>
-  
-  <replacements lang="en">
-    <replacement key="$plaintext$" value="Plaintext" />
-    <replacement key="$ciphertext$" value="Ciphertext" />
-    <replacement key="$decrypted$" value="Decrypted ciphertext" />
-	<replacement key="$key$" value="Key" />
-    <replacement key="$plaintextvalue$" value="The quick brown fox jumps over the lazy dog." />
-	<replacement key="$iv$" value="Initialization vector (IV)" />
-	<replacement key="$decode$" value="String decoder" />
-	<replacement key="$encode$" value="String encoder" />
-	<replacement key="$chacha_enc$" value="ChaCha (Encryption)" />
-	<replacement key="$chacha_dec$" value="ChaCha (Decryption)" />
-	<replacement key="$counter$" value="Initial block counter (optional)" />
-	<replacement key="$keydesc$" value="You can use 256-bit and 128-bit keys with ChaCha. A 128-bit key will be expanded into a 256-bit key by concatenating the key with itself." />
-	<replacement key="$ivdesc$" value="The original version by DJB uses a 64-bit IV and the IETF version uses a 96-bit IV. In the settings tab of the ChaCha component, you can select which version you want to use." />
-	<replacement key="$counterdesc1$" value="You can optionally set your own start counter (initial block counter) here. The first keystream block will then be initialized with this counter. The default is 0." />
-	<replacement key="$counterdesc2$" value="In the DJB version, you can use a counter up to 64-bit. In the IETF version, the counter is limited to 32-bit." />
-	<replacement key="$generaldesc1$" value="This template shows how you can use the ChaCha component to en- and decrypt messages. ChaCha is a refinement of the Salsa20 cipher." />
-	<replacement key="$generaldesc2$" value="Initially, a default plaintext, a 256-bit secret key and 64-bit initialization vector are provided." />
-	<replacement key="$generaldesc3$" value="Pressing on &quot;Play&quot; starts the cipher execution and you can see the ciphertext at the upper-right text output." />
-	<replacement key="$generaldesc4$" value="In the settings, you can chose the version which affects the IV size and if the ChaCha hash function should be run 8, 12 or 20 times per keystream block."/>
-	<replacement key="$generaldesc5$" value="Since ChaCha uses a keystream and bitwise XOR operation to create the ciphertext, decryption works exactly the same as encryption. This is why there is no setting for en- or decryption. If the ciphertext with the same key and IV and the same settings are provided, the output will be the decrypted ciphertext. This can be observed in the bottom component and the text output on the right. " />
-  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="ChaCha.png" />
+  <relevantPlugins>
+    <plugin name="ChaCha" />
+  </relevantPlugins>
 </sample>

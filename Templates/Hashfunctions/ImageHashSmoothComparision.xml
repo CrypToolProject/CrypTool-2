@@ -1,74 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: ImageHashSmoothComparision.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">ImageHash – Smooth Comparison</title>
-  <title lang="zh">ImageHash –平滑比较</title>
-  <title lang="ru">ImageHash - плавное сравнение</title>
   <summary lang="en">Compares an image with a smoothed version of the same image, including their hamming distance and equality percentage</summary>
-  <summary lang="zh">将图像与同一图像的平滑版本进行比较，包括汉明距离和相等百分比</summary>
-  <summary lang="ru">Сравнивает изображение с сглаженной версией одного и того же изображения, в том числе их расстояние от хамминга и процент равенства</summary>
   <description lang="en">This template generates a blockhash of an image. Then, the same image is smoothed and also hashed. These hashed images and their differences are shown. This template also calculates the hamming distance between the two calculated hashes and the equality of the two images in percent.</description>
-  <description lang="zh">该模板生成图像的块哈希。然后，对同一图像进行平滑处理并进行哈希处理。显示了这些哈希图像及其差异。该模板还计算两个计算的哈希值之间的汉明距离，以及两个图像的均等度（以百分比为单位）。</description>
-  <description lang="ru">Этот шаблон генерирует блочную запись изображения. Затем одно и то же изображение сглаживается и хэшируется. Эти хешированные изображения и их отличия показаны. Этот шаблон также вычисляет расстояние между двумя рассчитанными хэшем и равенство двух изображений в процентах.</description>
   <keywords>hash, blockhash, image, hamming, equality, comparison, smooth</keywords>
-  <keywords lang="zh">哈希，blockhash，图像，汉明，相等，比较，平滑</keywords>
-  <keywords lang="ru">хеш, блокхаш, изображение, хамминг, равенство, сравнение, плавное</keywords>
-  <title lang="de">BildHash – Weichzeichnungs-Vergleich</title>
-  <summary lang="de">Vergleich eines Bildes mit einer weichgezeichneten Version des gleichen Bildes, ihre Hamming-Distanz und prozentuale Gleichheit</summary>
-  <description lang="de">Diese Vorlage erzeugt einen Blockhash zu einem gewählten Bild. Das gleiche Bild wird dann weich gezeichnet und wiederum dessen Hash berechnet. Diese beiden Hashes und ihre Unterschiede werden dargestellt. Außerdem berechnet diese Vorlage auch die Hamming-Distanz zwischen den beiden Hashes und gibt die prozentuale Gleichheit der beiden Bilder an.</description>
-  <keywords lang="de">hash, blockhash, image, hamming, gleichheit, vergleich, weich</keywords>
-  <icon file="ImageHash.png" />
-  <relevantPlugins>
-    <plugin name="ImageHash" />
-    <plugin name="HammingDistance" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$File Input$" value="Dateieingabe" />
-    <replacement key="$Image Equality$" value="Übereinstimmung der Bilder" />
-    <replacement key="$Original Image$" value="Originales Bild" />
-    <replacement key="$Original Hash Value$" value="Originaler Hashwert" />
-    <replacement key="$Original Hash Image$" value="Originales Hashbild" />
-    <replacement key="$Processed Image$" value="Bearbeitetes Bild" />
-    <replacement key="$Processed Hash Value$" value="Bearbeiteter Hashwert" />
-    <replacement key="$Processed Hash Image$" value="Bearbeitetes Hashbild" />
-    <replacement key="$Hamming Distance$" value="Hamming-Abstand" />
-    <replacement key="$ImageProcessor$" value="Bildbearbeitung" />
-    <replacement key="$ImageHash$" value="Bildhash" />
-    <replacement key="$Differences of Hashed Images$" value="Unterschiede in den Hashbildern" />
-    <replacement key="$value$" value="Wert" />
-    <replacement key="$memo$" value="{\b Was zeigt diese Vorlage?}\line\line Diese Vorlage lädt ein Bild und zeigt es an. Das Bild wird geglättet und das Resultat wird ebenfalls angezeigt. Dann wird von beiden Bildern der Hashwert berechnet. Der Hashwert wird sowohl als Bild als auch als hexadezimaler Wert angezeigt. Im nächsten Schritt wird der Unterschied zwischen den beiden Hashbildern berechnet und dargestellt. Auf der rechten Seite wird die Hamming-Distanz zwischen den beiden Hashwerten berechnet. Dieser gibt an, an wievielen Pixeln sich die Hashbilder unterscheiden. Außerdem wird die Übereinstimmung der Bilder in Prozent berechnet.\line\line {\b Wie arbeitet diese Vorlage?}\line\line Vom ausgewählten Bild wird mit der Bildhash-Komponente der Hashwert bestimmt. Das Eingabebild wird mit der Bildbearbeitungs-Komponente geglättet und anschließend davon der Hashwert berechent. Die beiden Hashbilder werden dann mit der Bildbearbeitungs-Komponente XOR-verknüpft. Die Hamming-Distanz-Komponente ermittelt die Anzahl der verschiedenen Pixel. Diese Anzahl wird von 1024 abgezogen und das Ergebnis als Eingabe für eine Fortschritts-Komponente verwendet, die dann die Gleichheit der Bilder in Prozent angibt." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$File Input$" value="档案输入" />
-    <replacement key="$Image Equality$" value="匹配图片" />
-    <replacement key="$Original Image$" value="原始图片" />
-    <replacement key="$Original Hash Value$" value="原始哈希值" />
-    <replacement key="$Original Hash Image$" value="哈什比尔德原件" />
-    <replacement key="$Processed Image$" value="编辑的图片" />
-    <replacement key="$Processed Hash Value$" value="处理的哈希值" />
-    <replacement key="$Processed Hash Image$" value="编辑的哈希图像" />
-    <replacement key="$Hamming Distance$" value="汉明距离" />
-    <replacement key="$ImageProcessor$" value="图像编辑" />
-    <replacement key="$ImageHash$" value="图像哈希" />
-    <replacement key="$Differences of Hashed Images$" value="哈希图像的差异" />
-    <replacement key="$value$" value="值" />
-    <replacement key="$memo$" value="{\b此模板显示什么？} \line \line此模板加载并显示图像。图像被平滑并显示结果。然后，从两个图像中计算出哈希值。哈希值既显示为图像，也显示为十六进制值。在下一步中，将计算并显示两个哈希图像之间的差异。在右侧，计算两个哈希值之间的汉明距离。这指示散列图像相差多少像素。此外，图像的对应关系以百分比计算\Line \line {\b此模板如何工作？} \Line \line使用图像哈希组件确定所选图像的哈希值。使用图像处理组件对输入图像进行平滑处理，然后从中计算出哈希值。然后，将两个哈希图像与图像处理组件进行XOR链接。汉明距离分量确定不同像素的数量。从1024中减去该数字，并将结果用作进度组件的输入，然后该组件将以百分比表示图像的相等性。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$File Input$" value="входной файл" />
-    <replacement key="$Image Equality$" value="Совместить фотографии" />
-    <replacement key="$Original Image$" value="Исходники Bild" />
-    <replacement key="$Original Hash Value$" value="Исходное значение хэш-функции" />
-    <replacement key="$Original Hash Image$" value="Оригинальная Hashbild" />
-    <replacement key="$Processed Image$" value="Отредактированное изображение" />
-    <replacement key="$Processed Hash Value$" value="Измененное значение хэша" />
-    <replacement key="$Processed Hash Image$" value="Отредактированный хеш-образ" />
-    <replacement key="$Hamming Distance$" value="расстояние Хэмминга" />
-    <replacement key="$ImageProcessor$" value="обработка изображений" />
-    <replacement key="$ImageHash$" value="Bildhash" />
-    <replacement key="$Differences of Hashed Images$" value="Различия в хэш-картинках" />
-    <replacement key="$value$" value="значение" />
-    <replacement key="$memo$" value="{\b Что показывает этот шаблон?} \line \line Этот шаблон загружает изображение и отображает его. Изображение сглаживается, и результат также отображается. Затем вычисляется хэш-значение обоих изображений. Значение хеш отображается как как изображение, так и как шестнадцатеричное значение. На следующем шаге вычисляется и отображается разница между двумя хэш-изображениями. С правой стороны вычисляется расстояние Хэмминга между двумя значениями хеширования. Это указывает, сколько пикселей хэш-изображения отличаются друг от друга. Кроме того, совпадение изображений рассчитывается как процент. \Line \line {\b Как работает этот шаблон?} \Line \line Выбранное изображение используется для определения хэш-значения с помощью хэш-компонента изображения. Входное изображение сглаживается компонентом обработки изображений, а затем вычисляется значение хэш-функции. Два хэш-изображения затем XORed с компонентом обработки изображений. Компонент расстояния Хэмминга определяет количество разных пикселей. Это число вычитается из 1024, а результат используется как вход для компонента прогресса, что указывает на равенство изображений в процентах." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$File Input$" value="File Input" />
     <replacement key="$Image Equality$" value="Image Equality" />
@@ -85,4 +27,81 @@
     <replacement key="$value$" value="value" />
     <replacement key="$memo$" value="{\b What does this template do?}\line\line This template loads one picture and displays it. This picture is smoothed and this new picture also displayed. Then the hash of both is calculated. Both this hash as text and the hashed pictures are displayed. In the next step the difference of the hashed images is shown. On the right side the hamming distance between the two hashes is calculated. It tells how meny pixels differ. Moreover the Image Equality is calculated in percent.\line\line {\b How does this template work?}\line\line The chosen input image is hashed via the ImageHash component. The same image is smoothed via the ImageProcessor component and hashed afterwards. These to images are Xor-connected via the ImageProcessor. The hamming distance component calculates the differing pixel amount. This amount is subtracted from 1024 and put into a progress component, together with 1024. This shows the Image Equality in percent." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">ImageHash –平滑比较</title>
+  <summary lang="zh">将图像与同一图像的平滑版本进行比较，包括汉明距离和相等百分比</summary>
+  <description lang="zh">该模板生成图像的块哈希。然后，对同一图像进行平滑处理并进行哈希处理。显示了这些哈希图像及其差异。该模板还计算两个计算的哈希值之间的汉明距离，以及两个图像的均等度（以百分比为单位）。</description>
+  <keywords lang="zh">哈希，blockhash，图像，汉明，相等，比较，平滑</keywords>
+  <replacements lang="zh">
+    <replacement key="$File Input$" value="档案输入" />
+    <replacement key="$Image Equality$" value="匹配图片" />
+    <replacement key="$Original Image$" value="原始图片" />
+    <replacement key="$Original Hash Value$" value="原始哈希值" />
+    <replacement key="$Original Hash Image$" value="哈什比尔德原件" />
+    <replacement key="$Processed Image$" value="编辑的图片" />
+    <replacement key="$Processed Hash Value$" value="处理的哈希值" />
+    <replacement key="$Processed Hash Image$" value="编辑的哈希图像" />
+    <replacement key="$Hamming Distance$" value="汉明距离" />
+    <replacement key="$ImageProcessor$" value="图像编辑" />
+    <replacement key="$ImageHash$" value="图像哈希" />
+    <replacement key="$Differences of Hashed Images$" value="哈希图像的差异" />
+    <replacement key="$value$" value="值" />
+    <replacement key="$memo$" value="{\b此模板显示什么？} \line \line此模板加载并显示图像。图像被平滑并显示结果。然后，从两个图像中计算出哈希值。哈希值既显示为图像，也显示为十六进制值。在下一步中，将计算并显示两个哈希图像之间的差异。在右侧，计算两个哈希值之间的汉明距离。这指示散列图像相差多少像素。此外，图像的对应关系以百分比计算\Line \line {\b此模板如何工作？} \Line \line使用图像哈希组件确定所选图像的哈希值。使用图像处理组件对输入图像进行平滑处理，然后从中计算出哈希值。然后，将两个哈希图像与图像处理组件进行XOR链接。汉明距离分量确定不同像素的数量。从1024中减去该数字，并将结果用作进度组件的输入，然后该组件将以百分比表示图像的相等性。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">ImageHash - плавное сравнение</title>
+  <summary lang="ru">Сравнивает изображение с сглаженной версией одного и того же изображения, в том числе их расстояние от хамминга и процент равенства</summary>
+  <description lang="ru">Этот шаблон генерирует блочную запись изображения. Затем одно и то же изображение сглаживается и хэшируется. Эти хешированные изображения и их отличия показаны. Этот шаблон также вычисляет расстояние между двумя рассчитанными хэшем и равенство двух изображений в процентах.</description>
+  <keywords lang="ru">хеш, блокхаш, изображение, хамминг, равенство, сравнение, плавное</keywords>
+  <replacements lang="ru">
+    <replacement key="$File Input$" value="входной файл" />
+    <replacement key="$Image Equality$" value="Совместить фотографии" />
+    <replacement key="$Original Image$" value="Исходники Bild" />
+    <replacement key="$Original Hash Value$" value="Исходное значение хэш-функции" />
+    <replacement key="$Original Hash Image$" value="Оригинальная Hashbild" />
+    <replacement key="$Processed Image$" value="Отредактированное изображение" />
+    <replacement key="$Processed Hash Value$" value="Измененное значение хэша" />
+    <replacement key="$Processed Hash Image$" value="Отредактированный хеш-образ" />
+    <replacement key="$Hamming Distance$" value="расстояние Хэмминга" />
+    <replacement key="$ImageProcessor$" value="обработка изображений" />
+    <replacement key="$ImageHash$" value="Bildhash" />
+    <replacement key="$Differences of Hashed Images$" value="Различия в хэш-картинках" />
+    <replacement key="$value$" value="значение" />
+    <replacement key="$memo$" value="{\b Что показывает этот шаблон?} \line \line Этот шаблон загружает изображение и отображает его. Изображение сглаживается, и результат также отображается. Затем вычисляется хэш-значение обоих изображений. Значение хеш отображается как как изображение, так и как шестнадцатеричное значение. На следующем шаге вычисляется и отображается разница между двумя хэш-изображениями. С правой стороны вычисляется расстояние Хэмминга между двумя значениями хеширования. Это указывает, сколько пикселей хэш-изображения отличаются друг от друга. Кроме того, совпадение изображений рассчитывается как процент. \Line \line {\b Как работает этот шаблон?} \Line \line Выбранное изображение используется для определения хэш-значения с помощью хэш-компонента изображения. Входное изображение сглаживается компонентом обработки изображений, а затем вычисляется значение хэш-функции. Два хэш-изображения затем XORed с компонентом обработки изображений. Компонент расстояния Хэмминга определяет количество разных пикселей. Это число вычитается из 1024, а результат используется как вход для компонента прогресса, что указывает на равенство изображений в процентах." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">BildHash – Weichzeichnungs-Vergleich</title>
+  <summary lang="de">Vergleich eines Bildes mit einer weichgezeichneten Version des gleichen Bildes, ihre Hamming-Distanz und prozentuale Gleichheit</summary>
+  <description lang="de">Diese Vorlage erzeugt einen Blockhash zu einem gewählten Bild. Das gleiche Bild wird dann weich gezeichnet und wiederum dessen Hash berechnet. Diese beiden Hashes und ihre Unterschiede werden dargestellt. Außerdem berechnet diese Vorlage auch die Hamming-Distanz zwischen den beiden Hashes und gibt die prozentuale Gleichheit der beiden Bilder an.</description>
+  <keywords lang="de">hash, blockhash, image, hamming, gleichheit, vergleich, weich</keywords>
+  <replacements lang="de">
+    <replacement key="$File Input$" value="Dateieingabe" />
+    <replacement key="$Image Equality$" value="Übereinstimmung der Bilder" />
+    <replacement key="$Original Image$" value="Originales Bild" />
+    <replacement key="$Original Hash Value$" value="Originaler Hashwert" />
+    <replacement key="$Original Hash Image$" value="Originales Hashbild" />
+    <replacement key="$Processed Image$" value="Bearbeitetes Bild" />
+    <replacement key="$Processed Hash Value$" value="Bearbeiteter Hashwert" />
+    <replacement key="$Processed Hash Image$" value="Bearbeitetes Hashbild" />
+    <replacement key="$Hamming Distance$" value="Hamming-Abstand" />
+    <replacement key="$ImageProcessor$" value="Bildbearbeitung" />
+    <replacement key="$ImageHash$" value="Bildhash" />
+    <replacement key="$Differences of Hashed Images$" value="Unterschiede in den Hashbildern" />
+    <replacement key="$value$" value="Wert" />
+    <replacement key="$memo$" value="{\b Was zeigt diese Vorlage?}\line\line Diese Vorlage lädt ein Bild und zeigt es an. Das Bild wird geglättet und das Resultat wird ebenfalls angezeigt. Dann wird von beiden Bildern der Hashwert berechnet. Der Hashwert wird sowohl als Bild als auch als hexadezimaler Wert angezeigt. Im nächsten Schritt wird der Unterschied zwischen den beiden Hashbildern berechnet und dargestellt. Auf der rechten Seite wird die Hamming-Distanz zwischen den beiden Hashwerten berechnet. Dieser gibt an, an wievielen Pixeln sich die Hashbilder unterscheiden. Außerdem wird die Übereinstimmung der Bilder in Prozent berechnet.\line\line {\b Wie arbeitet diese Vorlage?}\line\line Vom ausgewählten Bild wird mit der Bildhash-Komponente der Hashwert bestimmt. Das Eingabebild wird mit der Bildbearbeitungs-Komponente geglättet und anschließend davon der Hashwert berechent. Die beiden Hashbilder werden dann mit der Bildbearbeitungs-Komponente XOR-verknüpft. Die Hamming-Distanz-Komponente ermittelt die Anzahl der verschiedenen Pixel. Diese Anzahl wird von 1024 abgezogen und das Ergebnis als Eingabe für eine Fortschritts-Komponente verwendet, die dann die Gleichheit der Bilder in Prozent angibt." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="ImageHash.png" />
+  <relevantPlugins>
+    <plugin name="ImageHash" />
+    <plugin name="HammingDistance" />
+  </relevantPlugins>
 </sample>

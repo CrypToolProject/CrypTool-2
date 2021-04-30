@@ -1,43 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: RandomNumberGenerators.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Random Number Generators</title>
-  <title lang="zh">随机数发生器</title>
-  <title lang="ru">Генераторы случайных чисел</title>
   <summary lang="en">Shows different random number generators.</summary>
-  <summary lang="zh">显示不同的随机数生成器。</summary>
-  <summary lang="ru">Показывает генератора случайных чисел.</summary>
   <description lang="en">Shows different random number generators. There are different algorithms available, such as the X^2 mod n or the linear congruence generator.</description>
-  <description lang="zh">显示不同的随机数生成器。有各种可用的算法，例如X ^ 2 mod n或线性同余生成器。</description>
-  <description lang="ru">Показывает генератора случайных чисел.</description>
-  <keywords lang="en">random number generator, random numbers, random, prng</keywords>
-  <keywords lang="zh">随机数发生器，随机数，随机，prng</keywords>
-  <keywords lang="ru">случайные числа</keywords>
-  <title lang="de">Zufallszahlengeneratoren</title>
-  <summary lang="de">Zeigt verschiedene Zufallszahlengeneratoren.</summary>
-  <description lang="de">Zeigt verschiedene Zufallszahlengeneratoren. Es stehen verschiedene Algorithmen wie beispielsweise der X^2 mod n oder der lineare Kongruenzgenerator zur Verfügung.</description>
-  <keywords lang="de">Zufallszahlengenerator, Zufallszahlen, Zufall, Random, PRNG, ZZ, ZZG</keywords>
-  <icon file="RandomNumberGenerators.png" />
-  <relevantPlugins>
-    <plugin name="RandomNumberGenerator" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$random number generator$" value="Zufallszahlengenerator" />
-    <replacement key="$output$" value="Zufallsbytes" />
-    <replacement key="$memo$" value="Dieses Template zeigt, wie man in CrypTool 2 Zufallszahlen erzeugen kann.\line Hierfür wird die Zufallszahlengenerator-Komponente benötigt.\line In den Einstellungen der Komponente können verschiedene Generatoren ausgewählt werden.\line Details zu den einzelnen Generatoren stehen in der Hilfe des Zufallszahlengenerators.\line Auch können verschiedene Ausgabedatentypen (Byte Array, CrypToolStream, Zahl und ZahlenArray) ausgewählt werden. " />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$random number generator$" value="随机数发生器" />
-    <replacement key="$output$" value="随机字节" />
-    <replacement key="$memo$" value="此模板显示了如何在CrypTool 2中生成随机数。\line为此需要使用随机数生成器组件。\Line在组件设置中可以选择各种生成器。\各生成器的行详细信息可以在随机数生成器的帮助下找到。 \line也可以选择不同的输出数据类型（字节数组，CrypToolStream，数字和数字数组）。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$random number generator$" value="Генератор случайных чисел" />
-    <replacement key="$output$" value="случайные байты" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как создавать случайные числа в CrypTool 2.\line Для этого требуется компонент генератора случайных чисел. \line В настройках компонента могут быть выбраны различные генераторы. \line Детали отдельных генераторов доступны с помощью генератора случайных чисел. \line Кроме того, могут быть выбраны различные типы выходных данных (Byte Array, CrypToolStream, Number и NumberArray)." />
-  </replacements>
+  <keywords>random number generator, random numbers, random, prng</keywords>
   <replacements lang="en">
     <replacement key="$random number generator$" value="RandomNumberGenerator" />
     <replacement key="$output$" value="Random bytes" />
     <replacement key="$memo$" value="This template shows how to create random numbers in CrypTool 2.\line This requires the RandomNumberGenerator component. \line Different random number generators can be selected in the component's settings. \line Details of the individual generators are available in the online help of the RandomNumberGenerator component. \line Also, different output data types (Byte Array, CrypToolStream, Number, and NumberArray) can be selected." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">随机数发生器</title>
+  <summary lang="zh">显示不同的随机数生成器。</summary>
+  <description lang="zh">显示不同的随机数生成器。有各种可用的算法，例如X ^ 2 mod n或线性同余生成器。</description>
+  <keywords lang="zh">随机数发生器，随机数，随机，prng</keywords>
+  <replacements lang="zh">
+    <replacement key="$random number generator$" value="随机数发生器" />
+    <replacement key="$output$" value="随机字节" />
+    <replacement key="$memo$" value="此模板显示了如何在CrypTool 2中生成随机数。\line为此需要使用随机数生成器组件。\Line在组件设置中可以选择各种生成器。\各生成器的行详细信息可以在随机数生成器的帮助下找到。 \line也可以选择不同的输出数据类型（字节数组，CrypToolStream，数字和数字数组）。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Генераторы случайных чисел</title>
+  <summary lang="ru">Показывает генератора случайных чисел.</summary>
+  <description lang="ru">Показывает генератора случайных чисел.</description>
+  <keywords lang="ru">случайные числа</keywords>
+  <replacements lang="ru">
+    <replacement key="$random number generator$" value="Генератор случайных чисел" />
+    <replacement key="$output$" value="случайные байты" />
+    <replacement key="$memo$" value="Этот шаблон показывает, как создавать случайные числа в CrypTool 2.\line Для этого требуется компонент генератора случайных чисел. \line В настройках компонента могут быть выбраны различные генераторы. \line Детали отдельных генераторов доступны с помощью генератора случайных чисел. \line Кроме того, могут быть выбраны различные типы выходных данных (Byte Array, CrypToolStream, Number и NumberArray)." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Zufallszahlengeneratoren</title>
+  <summary lang="de">Zeigt verschiedene Zufallszahlengeneratoren.</summary>
+  <description lang="de">Zeigt verschiedene Zufallszahlengeneratoren. Es stehen verschiedene Algorithmen wie beispielsweise der X^2 mod n oder der lineare Kongruenzgenerator zur Verfügung.</description>
+  <keywords lang="de">Zufallszahlengenerator, Zufallszahlen, Zufall, Random, PRNG, ZZ, ZZG</keywords>
+  <replacements lang="de">
+    <replacement key="$random number generator$" value="Zufallszahlengenerator" />
+    <replacement key="$output$" value="Zufallsbytes" />
+    <replacement key="$memo$" value="Dieses Template zeigt, wie man in CrypTool 2 Zufallszahlen erzeugen kann.\line Hierfür wird die Zufallszahlengenerator-Komponente benötigt.\line In den Einstellungen der Komponente können verschiedene Generatoren ausgewählt werden.\line Details zu den einzelnen Generatoren stehen in der Hilfe des Zufallszahlengenerators.\line Auch können verschiedene Ausgabedatentypen (Byte Array, CrypToolStream, Zahl und ZahlenArray) ausgewählt werden. " />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="RandomNumberGenerators.png" />
+  <relevantPlugins>
+    <plugin name="RandomNumberGenerator" />
+  </relevantPlugins>
 </sample>

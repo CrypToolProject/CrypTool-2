@@ -1,55 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Paillier.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Paillier Cipher (Number Input)</title>
-  <title lang="zh">Paillier密码（数字输入）</title>
-  <title lang="ru">Шифр Пайлера (ввод номера)</title>
   <summary lang="en">Usage of the <i>Pailler</i> cipher with number input</summary>
-  <summary lang="zh">带有数字输入的Pailler密码的用法</summary>
-  <summary lang="ru">Использование шифра Pailler с вводным номером</summary>
   <description lang="en">This template shows the usage of the <i>Pailler</i> cipher with numbers.</description>
-  <description lang="zh">此模板显示带有数字的Pailler密码的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование шифра Pailler с числами.</description>
   <keywords>homomorphic, Damgard, Eurocrypt, Jurik, Paillier, asymmetric</keywords>
-  <keywords lang="zh">同态，Damgard，Eurocrypt，Jurik，Paillier，不对称</keywords>
-  <keywords lang="ru">гомоморфный, Damgard, Eurocrypt, Jurik, Paillier, асимметричный</keywords>
-  <title lang="de">Paillier-Chiffre (Zahleneingabe)</title>
-  <summary lang="de">Benutzung der <i>Paillier</i>-Chiffre mit Zahleneingabe</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Paillier</i>-Chiffre mit Zahlen.</description>
-  <keywords lang="de">homomorph, asymmetrisch</keywords>
-  <icon file="Paillier.png" />
-  <relevantPlugins>
-    <plugin name="BooleanOutput" />
-    <plugin name="Comparators" />
-    <plugin name="Paillier" />
-    <plugin name="PaillierKeyGenerator" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$KeyGenerator$" value="Schlüsselgenerator" />
-    <replacement key="$Encrypt$" value="Verschlüsselung" />
-    <replacement key="$Decrypt$" value="Entschlüsselung" />
-    <replacement key="$TextOutput$" value="Textausgabe" />
-    <replacement key="$BooleanOutput$" value="Boolesche Ausgabe" />
-    <replacement key="$Comparator$" value="Vergleicher" />
-    <replacement key="$Input$" value="Eingabe" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$KeyGenerator$" value="密钥生成器" />
-    <replacement key="$Encrypt$" value="加密" />
-    <replacement key="$Decrypt$" value="解密" />
-    <replacement key="$TextOutput$" value="文字输出" />
-    <replacement key="$BooleanOutput$" value="布尔输出" />
-    <replacement key="$Comparator$" value="比较器" />
-    <replacement key="$Input$" value="输入" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$KeyGenerator$" value="генератор ключей" />
-    <replacement key="$Encrypt$" value="кодирование" />
-    <replacement key="$Decrypt$" value="дешифрование" />
-    <replacement key="$TextOutput$" value="вывод текста" />
-    <replacement key="$BooleanOutput$" value="Логический вывод" />
-    <replacement key="$Comparator$" value="компаратор" />
-    <replacement key="$Input$" value="вход" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$KeyGenerator$" value="KeyGenerator" />
     <replacement key="$Encrypt$" value="Encrypt" />
@@ -59,4 +20,62 @@
     <replacement key="$Comparator$" value="Comparator" />
     <replacement key="$Input$" value="Input" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">Paillier密码（数字输入）</title>
+  <summary lang="zh">带有数字输入的Pailler密码的用法</summary>
+  <description lang="zh">此模板显示带有数字的Pailler密码的用法。</description>
+  <keywords lang="zh">同态，Damgard，Eurocrypt，Jurik，Paillier，不对称</keywords>
+  <replacements lang="zh">
+    <replacement key="$KeyGenerator$" value="密钥生成器" />
+    <replacement key="$Encrypt$" value="加密" />
+    <replacement key="$Decrypt$" value="解密" />
+    <replacement key="$TextOutput$" value="文字输出" />
+    <replacement key="$BooleanOutput$" value="布尔输出" />
+    <replacement key="$Comparator$" value="比较器" />
+    <replacement key="$Input$" value="输入" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Шифр Пайлера (ввод номера)</title>
+  <summary lang="ru">Использование шифра Pailler с вводным номером</summary>
+  <description lang="ru">Этот шаблон показывает использование шифра Pailler с числами.</description>
+  <keywords lang="ru">гомоморфный, Damgard, Eurocrypt, Jurik, Paillier, асимметричный</keywords>
+  <replacements lang="ru">
+    <replacement key="$KeyGenerator$" value="генератор ключей" />
+    <replacement key="$Encrypt$" value="кодирование" />
+    <replacement key="$Decrypt$" value="дешифрование" />
+    <replacement key="$TextOutput$" value="вывод текста" />
+    <replacement key="$BooleanOutput$" value="Логический вывод" />
+    <replacement key="$Comparator$" value="компаратор" />
+    <replacement key="$Input$" value="вход" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Paillier-Chiffre (Zahleneingabe)</title>
+  <summary lang="de">Benutzung der <i>Paillier</i>-Chiffre mit Zahleneingabe</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Paillier</i>-Chiffre mit Zahlen.</description>
+  <keywords lang="de">homomorph, asymmetrisch</keywords>
+  <replacements lang="de">
+    <replacement key="$KeyGenerator$" value="Schlüsselgenerator" />
+    <replacement key="$Encrypt$" value="Verschlüsselung" />
+    <replacement key="$Decrypt$" value="Entschlüsselung" />
+    <replacement key="$TextOutput$" value="Textausgabe" />
+    <replacement key="$BooleanOutput$" value="Boolesche Ausgabe" />
+    <replacement key="$Comparator$" value="Vergleicher" />
+    <replacement key="$Input$" value="Eingabe" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Paillier.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="Comparators" />
+    <plugin name="Paillier" />
+    <plugin name="PaillierKeyGenerator" />
+  </relevantPlugins>
 </sample>

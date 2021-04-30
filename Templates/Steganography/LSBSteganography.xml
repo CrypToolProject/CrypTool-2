@@ -1,44 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: LSBSteganography.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Image Steganography with LSB</title>
   <summary lang="en">Hide and extract messages with LSB Steganography</summary>
-  <summary lang="zh">使用LSB隐藏术隐藏和提取消息</summary>
   <description lang="en">In Steganography, LSB is one of the most used techniques to hide a secret message in an image, in this plugin a secret message can be hidden in
   an image using only LSB as default, or with the visualization component you can choose which bits to be used to hide the message and then extract it</description>
   <keywords>Steganography, LSB, Image steganography</keywords>
-  <title lang="zh">用LSB进行图像隐写术</title>
-  <description lang="zh">在隐写术中，LSB是在图像中隐藏秘密消息的最常用技术之一，在此插件中，可以仅使用LSB作为默认值将秘密消息隐藏在图像中，或者使用可视化组件选择要隐藏的位用于隐藏消息然后提取消息</description>
-  <keywords lang="zh">隐写术，LSB，图像隐写术</keywords>
-  <title lang="de">Bild-Steganografie mit LSB</title>
-  <summary lang="de">Geheime Nachrichten in Bilder verstecken und wieder extrahieren</summary>
-  <description lang="de">In der Steganografie ist LSB eine der am häufigsten verwendeten Techniken, um eine geheime Nachricht in einem Bild zu verstecken.
-  In diesem Plugin kann eine geheime Nachricht standardmäßig mit LSB in ein Bild versteckt werden, oder mit der Visualisierungskomponente können Sie auswählen,
-  welche Bits zum Verstecken der Nachricht verwendet werden sollen, und diese dann extrahieren /&gt;</description>
-  <keywords lang="de">Steganografie, LSB, Bild-Steganografie</keywords>
-  <icon file="ImageSteganography.png" />
-  <relevantPlugins>
-    <plugin name="ImageSteganographyVisualization" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$secretmessage$" value="Geheime Nachricht" />
-    <replacement key="$coverimage$" value="Coverbild" />
-    <replacement key="$lsbhide$" value="LSB verstecken" />
-    <replacement key="$stegoimage$" value="Stego Bild" />
-    <replacement key="$lsbextract$" value="LSB extrahieren" />
-    <replacement key="$extractedmessage$" value="Extrahierte Nachricht" />
-    <replacement key="$secretmessagetext$" value="Hallo, dies ist eine geheime Nachricht!" />
-    <replacement key="$memotext$" value="Diese Vorlage demonstriert Bild-Steganografie mithilfe der LSB-Methode. Bitmasken können in den Einstellungen oder mithilfe der Ansicht &quot;Bits auswählen&quot; (2) wenn die Präsentation aktiviert ist. Die Bitmasken geben an, welche Bits zum Verstecken der Nachricht verwendet werden (1 = ausgewählt, 0 = nicht ausgewählt). Wenn Sie mehr Bits auswählen, können Sie eine höhere Versteckkapazität erzielen, und weniger Pixel werden von den Änderungen betroffen. Dies kann jedoch zu einer Verzerrung des Bildes führen. Daher können die anderen Ansichten verwendet werden, um die besten Einstellungen basierend auf den Eingaben zu vergleichen und auszuwählen. Nachdem Sie den Versteckprozess ausgeführt haben, können Sie die Pixel zwischen dem Original und dem Coverbild in der Pixelkonvertierung Ansicht (3) vergleichen. In der Übersicht (4) finden Sie Informationen zum Bild und zur Versteckkapazität." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$secretmessage$" value="秘密讯息" />
-    <replacement key="$coverimage$" value="封面图片" />
-    <replacement key="$lsbhide$" value="隐藏LSB" />
-    <replacement key="$stegoimage$" value="剑灵图片" />
-    <replacement key="$lsbextract$" value="提取LSB" />
-    <replacement key="$extractedmessage$" value="提取的消息" />
-    <replacement key="$secretmessagetext$" value="您好，这是一条秘密讯息！" />
-    <replacement key="$memotext$" value="该模板演示了使用LSB方法的图像隐写术。演示激活后，可以在设置中或使用“选择位”视图（2）设置位掩码。位掩码指示哪些位用于隐藏消息（1 =选中，0 =未选中）。如果选择更多位，则可以具有更大的隐藏容量，并且更少像素将受到更改的影响。但是，这会使图像失真。因此，其他视图可用于根据输入来比较和选择最佳设置。执行隐藏过程之后，可以在像素转换视图（3）中比较原始图像和封面图像之间的像素。在概述（4）中，您将找到有关图像和隐藏容量的信息。" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$secretmessage$" value="Secret message" />
     <replacement key="$coverimage$" value="Cover image" />
@@ -49,4 +22,47 @@
     <replacement key="$secretmessagetext$" value="Hi, this is a secret message!" />
     <replacement key="$memotext$" value="This template demonstrates image steganography using the LSB technique. Bitmasks can be chosen from the settings or from the presentation if it is activated using the &quot;Choose bits&quot; view (2). The bitmasks indicate which bits are used to hide the message (1 = chosen, 0 = not chosen). When you choose more bits, you can achieve a higher hiding capacity and less pixels are affected by the changes, but this can result in a distortion of the image. Therefore the other views can be used to compare and choose the best settings based on the provided inputs. After executing the hiding process, you can compare the pixels between the original and the cover image in the pixel conversion view (3). In the overview (4) you can find information about the image and hiding capacity.  " />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">用LSB进行图像隐写术</title>
+  <summary lang="zh">使用LSB隐藏术隐藏和提取消息</summary>
+  <description lang="zh">在隐写术中，LSB是在图像中隐藏秘密消息的最常用技术之一，在此插件中，可以仅使用LSB作为默认值将秘密消息隐藏在图像中，或者使用可视化组件选择要隐藏的位用于隐藏消息然后提取消息</description>
+  <keywords lang="zh">隐写术，LSB，图像隐写术</keywords>
+  <replacements lang="zh">
+    <replacement key="$secretmessage$" value="秘密讯息" />
+    <replacement key="$coverimage$" value="封面图片" />
+    <replacement key="$lsbhide$" value="隐藏LSB" />
+    <replacement key="$stegoimage$" value="剑灵图片" />
+    <replacement key="$lsbextract$" value="提取LSB" />
+    <replacement key="$extractedmessage$" value="提取的消息" />
+    <replacement key="$secretmessagetext$" value="您好，这是一条秘密讯息！" />
+    <replacement key="$memotext$" value="该模板演示了使用LSB方法的图像隐写术。演示激活后，可以在设置中或使用“选择位”视图（2）设置位掩码。位掩码指示哪些位用于隐藏消息（1 =选中，0 =未选中）。如果选择更多位，则可以具有更大的隐藏容量，并且更少像素将受到更改的影响。但是，这会使图像失真。因此，其他视图可用于根据输入来比较和选择最佳设置。执行隐藏过程之后，可以在像素转换视图（3）中比较原始图像和封面图像之间的像素。在概述（4）中，您将找到有关图像和隐藏容量的信息。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Bild-Steganografie mit LSB</title>
+  <summary lang="de">Geheime Nachrichten in Bilder verstecken und wieder extrahieren</summary>
+  <description lang="de">In der Steganografie ist LSB eine der am häufigsten verwendeten Techniken, um eine geheime Nachricht in einem Bild zu verstecken.
+  In diesem Plugin kann eine geheime Nachricht standardmäßig mit LSB in ein Bild versteckt werden, oder mit der Visualisierungskomponente können Sie auswählen,
+  welche Bits zum Verstecken der Nachricht verwendet werden sollen, und diese dann extrahieren /&gt;</description>
+  <keywords lang="de">Steganografie, LSB, Bild-Steganografie</keywords>
+  <replacements lang="de">
+    <replacement key="$secretmessage$" value="Geheime Nachricht" />
+    <replacement key="$coverimage$" value="Coverbild" />
+    <replacement key="$lsbhide$" value="LSB verstecken" />
+    <replacement key="$stegoimage$" value="Stego Bild" />
+    <replacement key="$lsbextract$" value="LSB extrahieren" />
+    <replacement key="$extractedmessage$" value="Extrahierte Nachricht" />
+    <replacement key="$secretmessagetext$" value="Hallo, dies ist eine geheime Nachricht!" />
+    <replacement key="$memotext$" value="Diese Vorlage demonstriert Bild-Steganografie mithilfe der LSB-Methode. Bitmasken können in den Einstellungen oder mithilfe der Ansicht &quot;Bits auswählen&quot; (2) wenn die Präsentation aktiviert ist. Die Bitmasken geben an, welche Bits zum Verstecken der Nachricht verwendet werden (1 = ausgewählt, 0 = nicht ausgewählt). Wenn Sie mehr Bits auswählen, können Sie eine höhere Versteckkapazität erzielen, und weniger Pixel werden von den Änderungen betroffen. Dies kann jedoch zu einer Verzerrung des Bildes führen. Daher können die anderen Ansichten verwendet werden, um die besten Einstellungen basierend auf den Eingaben zu vergleichen und auszuwählen. Nachdem Sie den Versteckprozess ausgeführt haben, können Sie die Pixel zwischen dem Original und dem Coverbild in der Pixelkonvertierung Ansicht (3) vergleichen. In der Übersicht (4) finden Sie Informationen zum Bild und zur Versteckkapazität." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="ImageSteganography.png" />
+  <relevantPlugins>
+    <plugin name="ImageSteganographyVisualization" />
+  </relevantPlugins>
 </sample>

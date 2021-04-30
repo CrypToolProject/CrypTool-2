@@ -1,25 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Blowfish.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Blowfish Cipher</title>
-  <title lang="zh">河豚密码</title>
-  <title lang="de">Blowfish-Chiffre</title>
-  <title lang="ru">Шифр Blowfish</title>
   <summary lang="en">Usage of the <i>Blowfish</i> cipher</summary>
-  <summary lang="zh">河豚密码的用法</summary>
-  <summary lang="de">Benutzung der <i>Blowfish</i>-Chiffre</summary>
-  <summary lang="ru">Использование шифра <i> Blowfish </i></summary>
   <description lang="en">This template shows how to encrypt and decrypt using the Blowfish cipher.</description>
-  <description lang="zh">该模板显示了如何使用Blowfish密码进行加密和解密。</description>
-  <description lang="de">Diese Vorlage zeigt, wie Sie Text mit Blowfish ver- und entschlüsseln.</description>
-  <description lang="ru">Этот шаблон показывает, как зашифровать и расшифровать с помощью шифра Blowfish.</description>
   <keywords>symmetric, block, cipher, Bruce Schneier</keywords>
-  <keywords lang="zh">对称，块，密码，Bruce Schneier</keywords>
-  <keywords lang="de">symmetrisch, Block, Chiffre, Bruce Schneier</keywords>
-  <keywords lang="ru">симметричный, блок, шифр, Брюс Шнайер</keywords>
-  <icon file="Blowfish.png" />
-  <relevantPlugins>
-    <plugin name="Blowfish" />
-  </relevantPlugins>
   <replacements lang="en">
     <replacement key="$plaintext$" value="Plaintext" />
     <replacement key="$plaintext_dec$" value="Plaintext (decrypted)" />
@@ -32,6 +23,13 @@
     <replacement key="$tweak$" value="Tweak" />
     <replacement key="$memo$" value="This template encrypts text with Blowfish (one of 3 encryption algorithms of the Blowfish component).\line\line You can enter any text into the &quot;Plaintext&quot; component on the left. The encrypted text is shown in the &quot;Ciphertext&quot; component, on the right after you clicked the &quot;Start&quot; button. In the same workflow, the ciphertext is then decrypted again and displayed in the right &quot;Plaintext (decrypted)&quot; component." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">河豚密码</title>
+  <summary lang="zh">河豚密码的用法</summary>
+  <description lang="zh">该模板显示了如何使用Blowfish密码进行加密和解密。</description>
+  <keywords lang="zh">对称，块，密码，Bruce Schneier</keywords>
   <replacements lang="zh">
     <replacement key="$plaintext$" value="纯文本" />
     <replacement key="$plaintext_dec$" value="纯文本（已解密）" />
@@ -44,6 +42,13 @@
     <replacement key="$tweak$" value="调整" />
     <replacement key="$memo$" value="此模板使用Blowfish（Blowfish组件的3种加密算法之一）对文本进行加密。\line \line您可以在左侧的“ Plaintext”组件中输入任何文本。单击“开始”按钮后，加密的文本显示在右侧的“密文”组件中。在相同的工作流程中，密文然后再次解密，并显示在右侧的“明文（已解密）”组件中。" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Blowfish-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Blowfish</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt, wie Sie Text mit Blowfish ver- und entschlüsseln.</description>
+  <keywords lang="de">symmetrisch, Block, Chiffre, Bruce Schneier</keywords>
   <replacements lang="de">
     <replacement key="$plaintext$" value="Klartext" />
     <replacement key="$plaintext_dec$" value="Klartext (entschlüsselt)" />
@@ -56,6 +61,13 @@
     <replacement key="$tweak$" value="Tweak" />
     <replacement key="$memo$" value="Diese Vorlage verschlüsselt Text mit Blowfish (einer von 3 Verschlüsselungs-Algorithmen in der Blowfish-Komponente).\line\line\line Sie können einen beliebigen Text in die Komponente &quot;Klartext&quot; auf der linken Seite eingegeben. Der verschlüsselte Text wird in der Komponente &quot;Geheimtext&quot; auf der rechten Seite angezeigt, nachdem Sie auf die Schaltfläche &quot;Starten&quot; geklickt haben. Im gleichen Workflow wird der Geheimtext danach wieder entschlüsselt und in der rechten &quot;Klartext (entschlüsselt)&quot;-Komponente angezeigt." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Шифр Blowfish</title>
+  <summary lang="ru">Использование шифра <i> Blowfish </i></summary>
+  <description lang="ru">Этот шаблон показывает, как зашифровать и расшифровать с помощью шифра Blowfish.</description>
+  <keywords lang="ru">симметричный, блок, шифр, Брюс Шнайер</keywords>
   <replacements lang="ru">
     <replacement key="$plaintext$" value="Простой текст" />
     <replacement key="$plaintext_dec$" value="Открытый текст (расшифрованный)" />
@@ -68,4 +80,11 @@
     <replacement key="$tweak$" value="Tweak" />
     <replacement key="$memo$" value="Этот шаблон шифрует текст с помощью Blowfish (один из 3 алгоритмов шифрования в компоненте Blowfish).\line\line\line Вы можете вставить любой текст в компонент «Открытый текст». вошел слева. Зашифрованный текст хранится в компоненте «зашифрованный текст». отображается справа после нажатия кнопки «Пуск» нажали. В том же рабочем процессе зашифрованный текст затем снова дешифруется и отображается в правом компоненте «открытого текста»." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Blowfish.png" />
+  <relevantPlugins>
+    <plugin name="Blowfish" />
+  </relevantPlugins>
 </sample>

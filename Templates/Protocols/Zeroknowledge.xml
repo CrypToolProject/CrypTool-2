@@ -1,63 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Zeroknowledge.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Zero Knowledge Protocol</title>
-  <title lang="zh">零知识协议</title>
-  <title lang="ru">Протокол нулевого знания</title>
   <summary lang="en">Usage of the <i>Zero Knowledge protocol</i></summary>
-  <summary lang="zh">零知识协议的用法</summary>
-  <summary lang="ru">Использование протокола Zero Knowledge</summary>
   <description lang="en">This template shows the <i>Zero Knowledge protocol</i>.</description>
-  <description lang="zh">此模板显示零知识协议。</description>
-  <description lang="ru">Этот шаблон показывает протокол Zero Knowledge.</description>
   <keywords>zero knowledge</keywords>
-  <keywords lang="zh">零知识</keywords>
-  <keywords lang="ru">нулевые знания</keywords>
-  <title lang="de">Zero Knowledge-Protokoll</title>
-  <summary lang="de">Benutzung des <i>Zero Knowledge-Protokoll</i></summary>
-  <description lang="de">Diese Vorlage zeigt das <i>Zero Knowledge-Protokoll</i>.</description>
-  <keywords lang="de">zero knowledge</keywords>
-  <icon file="Zeroknowledge.png" />
-  <relevantPlugins>
-    <plugin name="BooleanOutput" />
-    <plugin name="ZeroKnowledgeChecked" />
-    <plugin name="ZeroKnowledgeChecker" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Dummy Init$" value="Dummy-Init" />
-    <replacement key="$Zero Knowledge Prover$" value="Zero Knowledge-Beweiser" />
-    <replacement key="$Zero Knowledge Verifier$" value="Zero Knowledge-Verifizierer" />
-    <replacement key="$Victor is convinced$" value="Victor ist überzeugt?" />
-    <replacement key="$Probability$" value="Wahrscheinlichkeit" />
-    <replacement key="$victor$" value="{\b Victor}\line\line will überprüfen ({\b verify}), ob Peggy das Geheimnis kennt" />
-    <replacement key="$peggy$" value="{\b Peggy}\line\line will Victor beweisen ({\b prove}), dass sie das Geheimnis kennt" />
-    <replacement key="$memo1$" value="Konnte Peggy Victor davon überzeugen, dass  sie das Geheimnis kennt?" />
-    <replacement key="$memo2$" value="Wahrscheinlichkeit, dass Peggy Victor überzeugen kann, wenn sie das Geheimnis nicht kennt" />
-    <replacement key="$memo3$" value="Das {\b Zero Knowledge-Protokoll} kann mit Hilfe eines Beispiels visualisiert werden.\line\line Ein Gebäude hat 5 Eingänge, die alle durch einen Gang zu verschlossenen Türen führen (schwarz). Alle Türen können mit demselben Schlüssel geöffnet werden. Hinter den Türen ist ein weiterer Gang, der die 5 Eingänge verbindet.\line\line Peggy will Victor davon überzeugen, dass sie den Schlüssel besitzt, ohne Victor den Schlüssel zeigen zu müssen. Dazu führen sie die folgenden Schritte durch:\line\line Victor wartet am Punkt A. Peggy wählt einen der 5 Eingänge zufällig aus, geht hinein und wartet vor der verschlossenen Tür. Von Punkt A aus kann Victor nicht sehen, welchen Eingang Peggy ausgewählt hat.\line\line Victor geht dann zu Punkt B, von wo aus er zwar die Eingänge sehen kann, aber nicht, vor welcher Tür Peggy wartet. Victor wählt dann zufällig einen der 5 Eingänge und ruft Peggy dessen Nummer zu, damit sie das Gebäude durch diesen verlassen soll.\line\line Falls Peggy den Schlüssel besitzt, kann sie die Tür aufschließen, in den gemeinsamen Gang gehen, dann die Tür, deren Nummer Victor gerufen hat, aufschließen und durch diese das Gebäude verlassen. Victor sieht sie durch den Eingang herauskommen, den er angegeben hat und kann schlussfolgern, dass Peggy entweder den Schlüssel hat oder dass sie zufällig dieselbe Tür gewählt hat wie er.\line\line Falls Peggy den Schlüssel nicht hat, muss sie das Gebäude durch denselben Eingang verlassen, durch den sie hineingegangen ist. Wenn Victor einen anderen Eingang angegeben hat, weiss er nun, dass Peggy keinen Schlüssel hat. Kommt sie durch den richtigen Eingang heraus, muss er wieder folgern, dass sie entweder den Schlüssel hat oder durch Zufall den richtigen Eingang gewählt hat.\line\line Die Wahrscheinlichkeit, dass Peggy denselben Eingang wie Victor wählt, ist bei n Türen 1/n. Wenn diese Prozedur m mal wiederholt wird, so kann die Wahrscheinlichkeit, dass Peggy Victor fälschlicherweise davon überzeugen kann, dass sie den Schlüssel hat, weiter minimiert werden zu (1/n)^m." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Dummy Init$" value="虚拟初始化" />
-    <replacement key="$Zero Knowledge Prover$" value="零知识证据" />
-    <replacement key="$Zero Knowledge Verifier$" value="零知识验证者" />
-    <replacement key="$Victor is convinced$" value="维克托确信吗？" />
-    <replacement key="$Probability$" value="可能性" />
-    <replacement key="$victor$" value="{\b Victor} \line \line想检查（{\b verify}）Peggy是否知道秘密" />
-    <replacement key="$peggy$" value="{\b Peggy} \line \line维克多（Victor）想要证明（{\b证明}）她知道秘密" />
-    <replacement key="$memo1$" value="佩吉是否说服维克托她知道这个秘密？" />
-    <replacement key="$memo2$" value="如果佩吉不知道秘密，她就能说服维克多的可能性" />
-    <replacement key="$memo3$" value="可以借助示例将{\b零知识协议}可视化\线\线建筑物有5个入口，所有这些入口都通过走廊通向上锁的门（黑色）。所有的门都可以用同一把钥匙打开。门后是连接5个入口的另一条走廊\线\线Peggy想要说服Victor她有钥匙，而不必向Victor显示钥匙。为此，请执行以下步骤：\line \line Victor正在A点等待。Peggy随机选择5个入口之一，进入并在锁着的门前等待。维克多从A点看不到佩吉选择了哪个入口，线\行维克托去了B点，从那里他可以看到入口，但佩奇正等着前面的那扇门。然后，维克多（Victor）随机拨打5个入口之一，并拨打佩吉（Peggy）的电话，以便她通过此号码离开建筑物。维克多（Victor）打电话给他的电话，通过它解锁并离开建筑物。维克多（Victor）看到她从他指示的入口出来，可以得出结论，佩吉（Peggy）拥有钥匙，或者她不小心选择了与他一样的门\Line \line如果Peggy没有钥匙，她必须通过同一扇门进入建筑物离开她进入的入口。如果维克多（Victor）指示其他入口，他现在知道佩吉（Peggy）没有钥匙。如果她从正确的入口出来，他必须得出结论，她要么有钥匙，要么偶然选择了正确的入口\Line \line佩吉选择与维克多相同入口的概率为1 / n（n门） 。如果重复此过程m次，则可以将Peggy错误地说服Victor拥有钥匙的可能性进一步降低到（1 / n）^ m。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Dummy Init$" value="Манекен-Init" />
-    <replacement key="$Zero Knowledge Prover$" value="Нулевые знания" />
-    <replacement key="$Zero Knowledge Verifier$" value="Zero Knowledge-Verifizierer" />
-    <replacement key="$Victor is convinced$" value="Виктор убежден?" />
-    <replacement key="$Probability$" value="вероятность" />
-    <replacement key="$victor$" value="{\b Victor} \line \line хочет проверить ({\b verify}), если Пегги знает секрет" />
-    <replacement key="$peggy$" value="{\b Peggy} \line \line хочет доказать Виктору ({\b доказать}), что она знает секрет" />
-    <replacement key="$memo1$" value="Могла ли Пегги убедить Виктора, что она знает секрет?" />
-    <replacement key="$memo2$" value="Вероятность того, что Пегги может убедить Виктора, если она не знает тайны" />
-    <replacement key="$memo3$" value="Протокол {\b Zero Knowledge Protocol} можно визуализировать с помощью примера: \line \line Здание имеет 5 входов, все из которых проходят через коридор к закрытым дверям (черный). Все двери можно открыть одним и тем же ключом. За дверями находится еще один коридор, соединяющий пять входов. \Line \line Пегги хочет убедить Виктора, что она владеет ключом, не указывая ключу Виктора. Для этого выполните следующие действия: \line \line Виктор ждет в точке A. Пегги случайно выбирает один из 5 входов, входит и ждет перед запертой дверью. Из точки А Виктор не может видеть, какую запись пегги выбрал. \Line \line Виктор затем переходит в точку B, откуда он может видеть входы, но не там, где ждет Пегги. Затем Виктор случайно набирает один из 5 входов и называет номер Пегги, чтобы позволить ей покинуть здание. \Line \line Если Пегги владеет ключом, она может открыть дверь, пойти в общую прихожую, затем открыть дверь. чей номер Виктор позвонил, разблокировать и оставить через это здание. Виктор видит, как она проходит через вход, который он указал, и делает вывод, что Пегги имеет ключ или случайно выбрала ту же дверь, что и он. \Line \line Если Пегги не имеет ключа, она должна пройти через здание оставить тот же вход, через который она вошла. Если Виктор указал другой вход, он теперь знает, что у Пегги нет ключа. Если он выходит через правый вход, он должен снова вывести, что он либо имеет ключ, либо случайно выбрал правильный вход. \Line \line Вероятность того, что Пегги выбирает тот же вход, что и Виктор, - 1 / n на n дверях , Если эта процедура повторяется m раз, вероятность того, что Пегги может ошибочно убедить Виктора, что она имеет ключ, может быть сведена к минимуму до (1 / n) ^ m." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Dummy Init$" value="Dummy Init" />
     <replacement key="$Zero Knowledge Prover$" value="Zero Knowledge Prover" />
@@ -70,4 +23,70 @@
     <replacement key="$memo2$" value="Probability, that Peggy can convince Victor by chance, if she doesn't know the secret" />
     <replacement key="$memo3$" value="The {\b Zero Knowledge Protocol} can be visualized with an example:\line\line A building has 5 entries that lead, through a hallway, to a closed door (black). All doors can be opened with the same key. Behind the doors is another hallway that connects the 5 entries.\line\line Peggy wants to convince Victor that she has the key without showing the key to Victor. They go through the following steps:\line\line Victor waits at point A. Peggy randomly chooses one of the five entries, enters into it and waits in front of the locked door. From point A, Victor can not see which entry Peggy chose.\line\line Victor then goes to point B, from where he can see the five entries, but not in front of which door Peggy is waiting. Victor then randomly selects one of the entries through which he wishes Peggy to leave and shouts its number.\line\line If Peggy has the key, she can unlock the door, enter the common hallway, unlock the door to the entry that Victor announced and leave through it. Victor sees her coming out through the entry he chose and must conclude that Peggy either has the key or that she chose the right entry by luck.\line\line If Peggy has no key, she must leave through the same entry that she entered. If Victor announced a different entry, he now knows that Peggy has no key. If she comes out through the right entry, Victor again must conclude that she either has the key or chose the right entry by luck.\line\line The probability that Peggy enters into the entry that Victor will choose is 1/n, where n is the number of entries. By repeating this procedure m times, the probability that Peggy can convince Victor by luck that she has the key, while not having it, can be further minimized to (1/n)^m." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">零知识协议</title>
+  <summary lang="zh">零知识协议的用法</summary>
+  <description lang="zh">此模板显示零知识协议。</description>
+  <keywords lang="zh">零知识</keywords>
+  <replacements lang="zh">
+    <replacement key="$Dummy Init$" value="虚拟初始化" />
+    <replacement key="$Zero Knowledge Prover$" value="零知识证据" />
+    <replacement key="$Zero Knowledge Verifier$" value="零知识验证者" />
+    <replacement key="$Victor is convinced$" value="维克托确信吗？" />
+    <replacement key="$Probability$" value="可能性" />
+    <replacement key="$victor$" value="{\b Victor} \line \line想检查（{\b verify}）Peggy是否知道秘密" />
+    <replacement key="$peggy$" value="{\b Peggy} \line \line维克多（Victor）想要证明（{\b证明}）她知道秘密" />
+    <replacement key="$memo1$" value="佩吉是否说服维克托她知道这个秘密？" />
+    <replacement key="$memo2$" value="如果佩吉不知道秘密，她就能说服维克多的可能性" />
+    <replacement key="$memo3$" value="可以借助示例将{\b零知识协议}可视化\线\线建筑物有5个入口，所有这些入口都通过走廊通向上锁的门（黑色）。所有的门都可以用同一把钥匙打开。门后是连接5个入口的另一条走廊\线\线Peggy想要说服Victor她有钥匙，而不必向Victor显示钥匙。为此，请执行以下步骤：\line \line Victor正在A点等待。Peggy随机选择5个入口之一，进入并在锁着的门前等待。维克多从A点看不到佩吉选择了哪个入口，线\行维克托去了B点，从那里他可以看到入口，但佩奇正等着前面的那扇门。然后，维克多（Victor）随机拨打5个入口之一，并拨打佩吉（Peggy）的电话，以便她通过此号码离开建筑物。维克多（Victor）打电话给他的电话，通过它解锁并离开建筑物。维克多（Victor）看到她从他指示的入口出来，可以得出结论，佩吉（Peggy）拥有钥匙，或者她不小心选择了与他一样的门\Line \line如果Peggy没有钥匙，她必须通过同一扇门进入建筑物离开她进入的入口。如果维克多（Victor）指示其他入口，他现在知道佩吉（Peggy）没有钥匙。如果她从正确的入口出来，他必须得出结论，她要么有钥匙，要么偶然选择了正确的入口\Line \line佩吉选择与维克多相同入口的概率为1 / n（n门） 。如果重复此过程m次，则可以将Peggy错误地说服Victor拥有钥匙的可能性进一步降低到（1 / n）^ m。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Протокол нулевого знания</title>
+  <summary lang="ru">Использование протокола Zero Knowledge</summary>
+  <description lang="ru">Этот шаблон показывает протокол Zero Knowledge.</description>
+  <keywords lang="ru">нулевые знания</keywords>
+  <replacements lang="ru">
+    <replacement key="$Dummy Init$" value="Манекен-Init" />
+    <replacement key="$Zero Knowledge Prover$" value="Нулевые знания" />
+    <replacement key="$Zero Knowledge Verifier$" value="Zero Knowledge-Verifizierer" />
+    <replacement key="$Victor is convinced$" value="Виктор убежден?" />
+    <replacement key="$Probability$" value="вероятность" />
+    <replacement key="$victor$" value="{\b Victor} \line \line хочет проверить ({\b verify}), если Пегги знает секрет" />
+    <replacement key="$peggy$" value="{\b Peggy} \line \line хочет доказать Виктору ({\b доказать}), что она знает секрет" />
+    <replacement key="$memo1$" value="Могла ли Пегги убедить Виктора, что она знает секрет?" />
+    <replacement key="$memo2$" value="Вероятность того, что Пегги может убедить Виктора, если она не знает тайны" />
+    <replacement key="$memo3$" value="Протокол {\b Zero Knowledge Protocol} можно визуализировать с помощью примера: \line \line Здание имеет 5 входов, все из которых проходят через коридор к закрытым дверям (черный). Все двери можно открыть одним и тем же ключом. За дверями находится еще один коридор, соединяющий пять входов. \Line \line Пегги хочет убедить Виктора, что она владеет ключом, не указывая ключу Виктора. Для этого выполните следующие действия: \line \line Виктор ждет в точке A. Пегги случайно выбирает один из 5 входов, входит и ждет перед запертой дверью. Из точки А Виктор не может видеть, какую запись пегги выбрал. \Line \line Виктор затем переходит в точку B, откуда он может видеть входы, но не там, где ждет Пегги. Затем Виктор случайно набирает один из 5 входов и называет номер Пегги, чтобы позволить ей покинуть здание. \Line \line Если Пегги владеет ключом, она может открыть дверь, пойти в общую прихожую, затем открыть дверь. чей номер Виктор позвонил, разблокировать и оставить через это здание. Виктор видит, как она проходит через вход, который он указал, и делает вывод, что Пегги имеет ключ или случайно выбрала ту же дверь, что и он. \Line \line Если Пегги не имеет ключа, она должна пройти через здание оставить тот же вход, через который она вошла. Если Виктор указал другой вход, он теперь знает, что у Пегги нет ключа. Если он выходит через правый вход, он должен снова вывести, что он либо имеет ключ, либо случайно выбрал правильный вход. \Line \line Вероятность того, что Пегги выбирает тот же вход, что и Виктор, - 1 / n на n дверях , Если эта процедура повторяется m раз, вероятность того, что Пегги может ошибочно убедить Виктора, что она имеет ключ, может быть сведена к минимуму до (1 / n) ^ m." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Zero Knowledge-Protokoll</title>
+  <summary lang="de">Benutzung des <i>Zero Knowledge-Protokoll</i></summary>
+  <description lang="de">Diese Vorlage zeigt das <i>Zero Knowledge-Protokoll</i>.</description>
+  <keywords lang="de">zero knowledge</keywords>
+  <replacements lang="de">
+    <replacement key="$Dummy Init$" value="Dummy-Init" />
+    <replacement key="$Zero Knowledge Prover$" value="Zero Knowledge-Beweiser" />
+    <replacement key="$Zero Knowledge Verifier$" value="Zero Knowledge-Verifizierer" />
+    <replacement key="$Victor is convinced$" value="Victor ist überzeugt?" />
+    <replacement key="$Probability$" value="Wahrscheinlichkeit" />
+    <replacement key="$victor$" value="{\b Victor}\line\line will überprüfen ({\b verify}), ob Peggy das Geheimnis kennt" />
+    <replacement key="$peggy$" value="{\b Peggy}\line\line will Victor beweisen ({\b prove}), dass sie das Geheimnis kennt" />
+    <replacement key="$memo1$" value="Konnte Peggy Victor davon überzeugen, dass  sie das Geheimnis kennt?" />
+    <replacement key="$memo2$" value="Wahrscheinlichkeit, dass Peggy Victor überzeugen kann, wenn sie das Geheimnis nicht kennt" />
+    <replacement key="$memo3$" value="Das {\b Zero Knowledge-Protokoll} kann mit Hilfe eines Beispiels visualisiert werden.\line\line Ein Gebäude hat 5 Eingänge, die alle durch einen Gang zu verschlossenen Türen führen (schwarz). Alle Türen können mit demselben Schlüssel geöffnet werden. Hinter den Türen ist ein weiterer Gang, der die 5 Eingänge verbindet.\line\line Peggy will Victor davon überzeugen, dass sie den Schlüssel besitzt, ohne Victor den Schlüssel zeigen zu müssen. Dazu führen sie die folgenden Schritte durch:\line\line Victor wartet am Punkt A. Peggy wählt einen der 5 Eingänge zufällig aus, geht hinein und wartet vor der verschlossenen Tür. Von Punkt A aus kann Victor nicht sehen, welchen Eingang Peggy ausgewählt hat.\line\line Victor geht dann zu Punkt B, von wo aus er zwar die Eingänge sehen kann, aber nicht, vor welcher Tür Peggy wartet. Victor wählt dann zufällig einen der 5 Eingänge und ruft Peggy dessen Nummer zu, damit sie das Gebäude durch diesen verlassen soll.\line\line Falls Peggy den Schlüssel besitzt, kann sie die Tür aufschließen, in den gemeinsamen Gang gehen, dann die Tür, deren Nummer Victor gerufen hat, aufschließen und durch diese das Gebäude verlassen. Victor sieht sie durch den Eingang herauskommen, den er angegeben hat und kann schlussfolgern, dass Peggy entweder den Schlüssel hat oder dass sie zufällig dieselbe Tür gewählt hat wie er.\line\line Falls Peggy den Schlüssel nicht hat, muss sie das Gebäude durch denselben Eingang verlassen, durch den sie hineingegangen ist. Wenn Victor einen anderen Eingang angegeben hat, weiss er nun, dass Peggy keinen Schlüssel hat. Kommt sie durch den richtigen Eingang heraus, muss er wieder folgern, dass sie entweder den Schlüssel hat oder durch Zufall den richtigen Eingang gewählt hat.\line\line Die Wahrscheinlichkeit, dass Peggy denselben Eingang wie Victor wählt, ist bei n Türen 1/n. Wenn diese Prozedur m mal wiederholt wird, so kann die Wahrscheinlichkeit, dass Peggy Victor fälschlicherweise davon überzeugen kann, dass sie den Schlüssel hat, weiter minimiert werden zu (1/n)^m." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Zeroknowledge.png" />
+  <relevantPlugins>
+    <plugin name="BooleanOutput" />
+    <plugin name="ZeroKnowledgeChecked" />
+    <plugin name="ZeroKnowledgeChecker" />
+  </relevantPlugins>
 </sample>

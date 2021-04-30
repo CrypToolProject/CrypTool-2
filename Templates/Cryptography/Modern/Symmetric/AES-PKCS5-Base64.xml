@@ -1,67 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: AES-PKCS5-Base64.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">AES (ECB) with PKCS#5</title>
-  <title lang="zh">带有PKCS＃5的AES（ECB）</title>
-  <title lang="ru">AES (ECB) с PKCS № 5</title>
   <summary lang="en">Usage of the <i>AES</i> cipher, where the session key is generated from a password using <i>PKCS#5</i> and the ciphertext is encoded in base64</summary>
-  <summary lang="zh">AES密码的用法，其中使用PKCS＃5从密码生成会话密钥，并且密文以base64编码</summary>
-  <summary lang="ru">Использование шифрования AES, в котором ключ сеанса генерируется из пароля с использованием PKCS # 5, а зашифрованный текст кодируется в base64</summary>
   <description lang="en">In this sample we provide a quick way to encrypt plaintext with AES [1] by using a simple password (which is converted to an AES key by using PKCS#5 [2]). The result is base64-encoded for easy copy and paste e.g. to an email. Decryption is also possible with this template: The encrypted base64-encoded text needs to be copied to the <b>Input</b> component. Then the AES <b>component</b> needs to be switched to "Decrypt" and the <b>Switch</b> component must be set to <i>True</i>. With the help of the <b>Switch</b> component, the data takes a different path, i.e. for decryption we first need to base64 decode it, while when encrypting we encode it in base64 after encryption.
   <newline /><newline />
 Sources:<newline />
 [1] <external ref="http://en.wikipedia.org/wiki/Advanced_Encryption_Standard" /><newline />
 [2] <external ref="http://tools.ietf.org/html/rfc2898" /></description>
-  <description lang="zh">在此示例中，我们提供了一种使用简单密码（通过使用PKCS＃5 [2]转换为AES密钥）和AES [1]加密明文的快速方法。结果经过base64编码，可轻松复制和粘贴到例如电子邮件中。使用此模板也可以解密：加密的base64编码的文本需要复制到Input组件。然后，需要将AES组件切换为“解密”，并且将Switch组件设置为True。在Switch组件的帮助下，数据采用了不同的路径，即，对于解密，我们首先需要对base64进行解码，而在加密时，加密后我们将其编码为base64。资料来源：[1] [2]</description>
-  <description lang="ru">В этом примере мы предлагаем быстрый способ шифрования открытого текста с помощью AES [1] с помощью простого пароля (который преобразуется в ключ AES с помощью PKCS # 5 [2]). Результат кодируется base64 для удобства копирования и вставки, например, в электронную почту. Расшифровка также возможна с помощью этого шаблона: Зашифрованный текст с кодировкой base64 необходимо скопировать в компонент Input. Затем компонент AES должен быть переключен на «Расшифровать», а компонент Switch должен быть установлен на «Истина». С помощью компонента Switch данные берут другой путь, то есть для дешифрования нам сначала нужно выполнить декодирование base64, а при шифровании мы кодируем его в base64 после шифрования. Источники: [1] [2]</description>
   <keywords>advanced, Daemen, Rijmen, Rijndael, symmetric, nist, pkcs, password, base64</keywords>
-  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist，pkcs，密码，base64</keywords>
-  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, симметричный, nist, pkcs, пароль, base64</keywords>
-  <title lang="de">AES (ECB) mit PKCS#5</title>
-  <summary lang="de">Benutzung der <i>AES</i>-Chiffre, wobei der Sitzungsschlüssel per <i>PKCS#5</i> aus einem Passwort erzeugt wird und der Geheimtext in Base-64 ausgegeben wird</summary>
-  <description lang="de">Mit dieser Vorlage ist es möglich, einen Eingabetext mit Hilfe eines Passwortes zu verschlüsseln. Für die Verschlüsselung wird AES [1] verwendet; und um aus dem Passwort einen geeigneten AES-Schlüssel zu generieren, wird PKCS#5 [2] verwendet. Das verschlüsselte Ergebnis wird in textueller Form als Base-64-Codierung ausgegeben – dadurch kann die Ausgabe sehr einfach z.B. in eine E-Mail kopiert werden.<newline /><newline />
-	  Auch das Entschlüsseln einer solchen Nachricht ist mit dieser Vorlage möglich: Der Base-64-codierte Text muss dafür in die <b>Input</b>-Komponente kopiert werden. Danach muss die AES-<b>Komponente</b> auf "Entschlüsseln" und die <b>Switch</b>-Komponente auf <i>Wahr</i> geschaltet werden. Mit Hilfe der <b>Switch</b>-Komponente wird der Datenpfad für das Ver- bzw. Entschlüsseln jeweils entsprechend angepasst: Bei der Entschlüsselung muss die Eingabe zunächst Base-64-decodiert und bei der Verschlüsselung muss die Ausgabe noch Base-64-codiert werden.
-  <newline /><newline />
-Quellen:<newline />
-[1] <external ref="http://de.wikipedia.org/wiki/Advanced_Encryption_Standard" /><newline />
-[2] <external ref="http://tools.ietf.org/html/rfc2898" /></description>
-  <keywords lang="de">Daemen, Rijmen, Rijndael, symmetrisch, nist, pkcs, password, base64</keywords>
-  <icon file="AES.png" />
-  <relevantPlugins>
-    <plugin name="AES" />
-    <plugin name="BooleanInput" />
-    <plugin name="Gate" />
-    <plugin name="PKCS5" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Input$" value="Eingabe" />
-    <replacement key="$Output$" value="Asugabe" />
-    <replacement key="$Gate$" value="Gatter" />
-    <replacement key="$Switch$" value="Schalter" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$StringDecoder$" value="String-Decodierer" />
-    <replacement key="$Password$" value="Passwort" />
-    <replacement key="$memo$" value="Diese Vorlage bietet die Möglichkeit, einen Klartext mit einem einfachen Passwort mittels AES schnell und einfach zu verschlüsseln. Hierbei wird das Passwort durch PKCS5 in einen AES-Schlüssel konvertiert. Das Ergebnis ist Base64-kodiert, um z.B. einfach mit Copy &amp; Paste in eine E-Mail kopiert werden zu können. Die Entschlüsselung ist mit dieser Vorlage auch möglich: Der verschlüsselte, Base64-kodierte Text muss in die Komponente {\b Eingabe} kopiert werden. Dann muss die {\b AES}-Komponente auf &quot;Entschlüsselung&quot; gestellt werden und die {\b Schalter}-Komponente auf {\b Wahr}. Durch das Umschalten der {\b Schalter}-Komponente nehmen die Daten einen anderen Pfad, denn für die Entschlüsselung müssen sie zuerst Base64-dekodiert werden, während sie bei der Verschlüsselung erst danach Base64-kodiert werden." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Input$" value="输入" />
-    <replacement key="$Output$" value="春日部" />
-    <replacement key="$Gate$" value="门" />
-    <replacement key="$Switch$" value="开关" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$Password$" value="密码" />
-    <replacement key="$memo$" value="该模板提供了使用AES使用简单密码快速轻松地加密纯文本的可能性。密码由PKCS5转换为AES密钥。结果经过Base64编码，因此可以轻松地使用复制和粘贴将其复制到电子邮件中。使用此模板也可以解密：必须将加密的Base64编码文本复制到组件{\b Input}中。然后必须将{\b AES}组件设置为“解密”，并将{\b switch}组件设置为{\b true}。通过切换{\b switch}组件，数据采用了不同的路径，因为对于解密，必须首先对其进行Base64解码，而对于加密，则仅对其进行Base64编码。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Input$" value="вход" />
-    <replacement key="$Output$" value="Asugabe" />
-    <replacement key="$Gate$" value="ворота" />
-    <replacement key="$Switch$" value="переключатель" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$Password$" value="пароль" />
-    <replacement key="$memo$" value="Этот шаблон обеспечивает возможность быстрого и простого шифрования простого текста с помощью простого пароля с использованием AES. Здесь пароль преобразуется PKCS5 в ключ AES. В результате Base64-кодируется, так что его можно легко скопировать в электронное письмо с помощью Copy &amp;amp; Paste. Расшифровка также возможна с помощью этого шаблона: закодированный закодированный текст base64 должен быть скопирован в компонент {\b input}. Затем компонент {\b AES} должен быть установлен на «дешифрование» и компонент {\b switch} на {\b true}. Переключая компонент {\b switch}, данные имеют другой путь, потому что для дешифрования они должны сначала быть декодированы Base64, тогда как для шифрования они будут кодироваться Base64 впоследствии." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Input$" value="Input" />
     <replacement key="$Output$" value="Output" />
@@ -72,4 +25,70 @@ Quellen:<newline />
     <replacement key="$Password$" value="Password" />
     <replacement key="$memo$" value="In this sample we provide a quick way to encrypt plaintext with AES by using a simple password (which is converted to an AES key by using PKCS5). The result is base64-encoded for easy copy&amp;paste e.g. to an email. Decryption is also possible with this template: The encrypted base64-encoded text needs to be copied to the {\b Input} component. Then the {\b AES} component needs to be switched to &quot;Decrypt&quot; and the {\b Switch} component must be set to True. With the help of the {\b Switch} component, the data takes a different path, i.e. for decryption we first need to base64-decode it, while when encrypting we encode it in base64 after encryption." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">带有PKCS＃5的AES（ECB）</title>
+  <summary lang="zh">AES密码的用法，其中使用PKCS＃5从密码生成会话密钥，并且密文以base64编码</summary>
+  <description lang="zh">在此示例中，我们提供了一种使用简单密码（通过使用PKCS＃5 [2]转换为AES密钥）和AES [1]加密明文的快速方法。结果经过base64编码，可轻松复制和粘贴到例如电子邮件中。使用此模板也可以解密：加密的base64编码的文本需要复制到Input组件。然后，需要将AES组件切换为“解密”，并且将Switch组件设置为True。在Switch组件的帮助下，数据采用了不同的路径，即，对于解密，我们首先需要对base64进行解码，而在加密时，加密后我们将其编码为base64。资料来源：[1] [2]</description>
+  <keywords lang="zh">高级，Daemen，Rijmen，Rijndael，对称，nist，pkcs，密码，base64</keywords>
+  <replacements lang="zh">
+    <replacement key="$Input$" value="输入" />
+    <replacement key="$Output$" value="春日部" />
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$Switch$" value="开关" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$Password$" value="密码" />
+    <replacement key="$memo$" value="该模板提供了使用AES使用简单密码快速轻松地加密纯文本的可能性。密码由PKCS5转换为AES密钥。结果经过Base64编码，因此可以轻松地使用复制和粘贴将其复制到电子邮件中。使用此模板也可以解密：必须将加密的Base64编码文本复制到组件{\b Input}中。然后必须将{\b AES}组件设置为“解密”，并将{\b switch}组件设置为{\b true}。通过切换{\b switch}组件，数据采用了不同的路径，因为对于解密，必须首先对其进行Base64解码，而对于加密，则仅对其进行Base64编码。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">AES (ECB) с PKCS № 5</title>
+  <summary lang="ru">Использование шифрования AES, в котором ключ сеанса генерируется из пароля с использованием PKCS # 5, а зашифрованный текст кодируется в base64</summary>
+  <description lang="ru">В этом примере мы предлагаем быстрый способ шифрования открытого текста с помощью AES [1] с помощью простого пароля (который преобразуется в ключ AES с помощью PKCS # 5 [2]). Результат кодируется base64 для удобства копирования и вставки, например, в электронную почту. Расшифровка также возможна с помощью этого шаблона: Зашифрованный текст с кодировкой base64 необходимо скопировать в компонент Input. Затем компонент AES должен быть переключен на «Расшифровать», а компонент Switch должен быть установлен на «Истина». С помощью компонента Switch данные берут другой путь, то есть для дешифрования нам сначала нужно выполнить декодирование base64, а при шифровании мы кодируем его в base64 после шифрования. Источники: [1] [2]</description>
+  <keywords lang="ru">продвинутый, Daemen, Rijmen, Rijndael, симметричный, nist, pkcs, пароль, base64</keywords>
+  <replacements lang="ru">
+    <replacement key="$Input$" value="вход" />
+    <replacement key="$Output$" value="Asugabe" />
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$Switch$" value="переключатель" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$Password$" value="пароль" />
+    <replacement key="$memo$" value="Этот шаблон обеспечивает возможность быстрого и простого шифрования простого текста с помощью простого пароля с использованием AES. Здесь пароль преобразуется PKCS5 в ключ AES. В результате Base64-кодируется, так что его можно легко скопировать в электронное письмо с помощью Copy &amp;amp; Paste. Расшифровка также возможна с помощью этого шаблона: закодированный закодированный текст base64 должен быть скопирован в компонент {\b input}. Затем компонент {\b AES} должен быть установлен на «дешифрование» и компонент {\b switch} на {\b true}. Переключая компонент {\b switch}, данные имеют другой путь, потому что для дешифрования они должны сначала быть декодированы Base64, тогда как для шифрования они будут кодироваться Base64 впоследствии." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">AES (ECB) mit PKCS#5</title>
+  <summary lang="de">Benutzung der <i>AES</i>-Chiffre, wobei der Sitzungsschlüssel per <i>PKCS#5</i> aus einem Passwort erzeugt wird und der Geheimtext in Base-64 ausgegeben wird</summary>
+  <description lang="de">Mit dieser Vorlage ist es möglich, einen Eingabetext mit Hilfe eines Passwortes zu verschlüsseln. Für die Verschlüsselung wird AES [1] verwendet; und um aus dem Passwort einen geeigneten AES-Schlüssel zu generieren, wird PKCS#5 [2] verwendet. Das verschlüsselte Ergebnis wird in textueller Form als Base-64-Codierung ausgegeben – dadurch kann die Ausgabe sehr einfach z.B. in eine E-Mail kopiert werden.<newline /><newline />
+	  Auch das Entschlüsseln einer solchen Nachricht ist mit dieser Vorlage möglich: Der Base-64-codierte Text muss dafür in die <b>Input</b>-Komponente kopiert werden. Danach muss die AES-<b>Komponente</b> auf "Entschlüsseln" und die <b>Switch</b>-Komponente auf <i>Wahr</i> geschaltet werden. Mit Hilfe der <b>Switch</b>-Komponente wird der Datenpfad für das Ver- bzw. Entschlüsseln jeweils entsprechend angepasst: Bei der Entschlüsselung muss die Eingabe zunächst Base-64-decodiert und bei der Verschlüsselung muss die Ausgabe noch Base-64-codiert werden.
+  <newline /><newline />
+Quellen:<newline />
+[1] <external ref="http://de.wikipedia.org/wiki/Advanced_Encryption_Standard" /><newline />
+[2] <external ref="http://tools.ietf.org/html/rfc2898" /></description>
+  <keywords lang="de">Daemen, Rijmen, Rijndael, symmetrisch, nist, pkcs, password, base64</keywords>
+  <replacements lang="de">
+    <replacement key="$Input$" value="Eingabe" />
+    <replacement key="$Output$" value="Asugabe" />
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$Switch$" value="Schalter" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$StringDecoder$" value="String-Decodierer" />
+    <replacement key="$Password$" value="Passwort" />
+    <replacement key="$memo$" value="Diese Vorlage bietet die Möglichkeit, einen Klartext mit einem einfachen Passwort mittels AES schnell und einfach zu verschlüsseln. Hierbei wird das Passwort durch PKCS5 in einen AES-Schlüssel konvertiert. Das Ergebnis ist Base64-kodiert, um z.B. einfach mit Copy &amp; Paste in eine E-Mail kopiert werden zu können. Die Entschlüsselung ist mit dieser Vorlage auch möglich: Der verschlüsselte, Base64-kodierte Text muss in die Komponente {\b Eingabe} kopiert werden. Dann muss die {\b AES}-Komponente auf &quot;Entschlüsselung&quot; gestellt werden und die {\b Schalter}-Komponente auf {\b Wahr}. Durch das Umschalten der {\b Schalter}-Komponente nehmen die Daten einen anderen Pfad, denn für die Entschlüsselung müssen sie zuerst Base64-dekodiert werden, während sie bei der Verschlüsselung erst danach Base64-kodiert werden." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="AES.png" />
+  <relevantPlugins>
+    <plugin name="AES" />
+    <plugin name="BooleanInput" />
+    <plugin name="Gate" />
+    <plugin name="PKCS5" />
+  </relevantPlugins>
 </sample>

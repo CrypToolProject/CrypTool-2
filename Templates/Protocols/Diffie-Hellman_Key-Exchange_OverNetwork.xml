@@ -1,54 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Diffie-Hellman_Key-Exchange_OverNetwork.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Diffie-Hellman Key-Exchange over Network</title>
-  <title lang="zh">网络上的Diffie-Hellman密钥交换</title>
-  <title lang="ru">Diffie-Hellman Key-Exchange через сеть</title>
   <summary lang="en">Usage of the <i>Diffie–Hellman key exchange</i> using network components</summary>
-  <summary lang="zh">通过网络组件使用Diffie-Hellman密钥交换</summary>
-  <summary lang="ru">Использование обмена ключами Диффи-Хеллмана с использованием сетевых компонентов</summary>
   <description lang="en">Diffie–Hellman key exchange is a specific method of exchanging cryptographic keys.
   It is one of the earliest practical examples of key exchange implemented within the field of cryptography.
   The Diffie–Hellman key exchange method allows two parties that have no prior knowledge of each other to jointly establish a shared secret key over an insecure communications channel.
   This key can then be used to encrypt subsequent communications using a symmetric key cipher.<newline /><newline />
   Source: <external ref="http://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" /></description>
-  <description lang="zh">Diffie-Hellman密钥交换是交换加密密钥的一种特定方法。它是在密码学领域内实现的密钥交换的最早实用示例之一。 Diffie-Hellman密钥交换方法允许彼此不具有先验知识的两方通过不安全的通信通道共同建立共享的秘密密钥。然后可以使用对称密钥密码将此密钥用于加密后续的通信。资源：</description>
-  <description lang="ru">Обмен ключами Диффи-Хеллмана - это особый метод обмена криптографическими ключами. Это один из самых ранних практических примеров обмена ключами, реализованных в области криптографии. Метод обмена ключами Диффи-Хеллмана позволяет двум сторонам, не имеющим предварительного знания друг друга, совместно создавать общий секретный ключ по небезопасному каналу связи. Затем этот ключ можно использовать для шифрования последующих сообщений с использованием симметричного ключа. Источник:</description>
   <keywords>protocol, color, colour, alice, bob, eve, network</keywords>
-  <keywords lang="zh">协议，颜色，颜色，爱丽丝，鲍勃，夏娃，网络</keywords>
-  <keywords lang="ru">протокол, цвет, цвет, alice, bob, eve, network</keywords>
-  <title lang="de">Diffie-Hellman-Schlüsselaustausch über Netzwerk</title>
-  <summary lang="de">Anwenden des <i>Diffie-Hellman-Schlüsselaustauschs</i> mit Netzwerkkomponenten</summary>
-  <description lang="de">Der Diffie-Hellman-Schlüsselaustausch oder Diffie-Hellman-Merkle-Schlüsselaustausch ist ein Protokoll aus dem Bereich der Kryptografie. Mit ihm erzeugen zwei Kommunikationspartner einen geheimen Schlüssel, den nur diese beiden kennen.
-  Dieser Schlüssel wird üblicherweise verwendet, um verschlüsselte Nachrichten mittels eines symmetrischen Kryptosystems zu übertragen.<newline /><newline />
-  Quelle: <external ref="http://de.wikipedia.org/wiki/Diffie-Hellman-Schlüsselaustausch" /></description>
-  <keywords lang="de">protokoll, schlüssel, alice, bob, eve, Netzwerk</keywords>
-  <icon file="Diffie-Hellman_Key-Exchange_OverNetwork.png" />
-  <relevantPlugins>
-    <plugin name="NetworkInput" />
-    <plugin name="NetworkReceiver" />
-    <plugin name="PrimesGenerator" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Converter$" value="Konvertierer" />
-    <replacement key="$Secure Key$" value="Sicherer Schlüssel" />
-    <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$Sender$" value="Sender" />
-    <replacement key="$Receiver$" value="Empfänger" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Converter$" value="转换器" />
-    <replacement key="$Secure Key$" value="安全钥匙" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$Sender$" value="发件人" />
-    <replacement key="$Receiver$" value="接收者" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Converter$" value="преобразование" />
-    <replacement key="$Secure Key$" value="Защитный ключ" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$Sender$" value="отправитель" />
-    <replacement key="$Receiver$" value="приемник" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Converter$" value="Converter" />
     <replacement key="$Secure Key$" value="Secure Key" />
@@ -56,4 +22,57 @@
     <replacement key="$Sender$" value="Sender" />
     <replacement key="$Receiver$" value="Receiver" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">网络上的Diffie-Hellman密钥交换</title>
+  <summary lang="zh">通过网络组件使用Diffie-Hellman密钥交换</summary>
+  <description lang="zh">Diffie-Hellman密钥交换是交换加密密钥的一种特定方法。它是在密码学领域内实现的密钥交换的最早实用示例之一。 Diffie-Hellman密钥交换方法允许彼此不具有先验知识的两方通过不安全的通信通道共同建立共享的秘密密钥。然后可以使用对称密钥密码将此密钥用于加密后续的通信。资源：</description>
+  <keywords lang="zh">协议，颜色，颜色，爱丽丝，鲍勃，夏娃，网络</keywords>
+  <replacements lang="zh">
+    <replacement key="$Converter$" value="转换器" />
+    <replacement key="$Secure Key$" value="安全钥匙" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$Sender$" value="发件人" />
+    <replacement key="$Receiver$" value="接收者" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Diffie-Hellman Key-Exchange через сеть</title>
+  <summary lang="ru">Использование обмена ключами Диффи-Хеллмана с использованием сетевых компонентов</summary>
+  <description lang="ru">Обмен ключами Диффи-Хеллмана - это особый метод обмена криптографическими ключами. Это один из самых ранних практических примеров обмена ключами, реализованных в области криптографии. Метод обмена ключами Диффи-Хеллмана позволяет двум сторонам, не имеющим предварительного знания друг друга, совместно создавать общий секретный ключ по небезопасному каналу связи. Затем этот ключ можно использовать для шифрования последующих сообщений с использованием симметричного ключа. Источник:</description>
+  <keywords lang="ru">протокол, цвет, цвет, alice, bob, eve, network</keywords>
+  <replacements lang="ru">
+    <replacement key="$Converter$" value="преобразование" />
+    <replacement key="$Secure Key$" value="Защитный ключ" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$Sender$" value="отправитель" />
+    <replacement key="$Receiver$" value="приемник" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Diffie-Hellman-Schlüsselaustausch über Netzwerk</title>
+  <summary lang="de">Anwenden des <i>Diffie-Hellman-Schlüsselaustauschs</i> mit Netzwerkkomponenten</summary>
+  <description lang="de">Der Diffie-Hellman-Schlüsselaustausch oder Diffie-Hellman-Merkle-Schlüsselaustausch ist ein Protokoll aus dem Bereich der Kryptografie. Mit ihm erzeugen zwei Kommunikationspartner einen geheimen Schlüssel, den nur diese beiden kennen.
+  Dieser Schlüssel wird üblicherweise verwendet, um verschlüsselte Nachrichten mittels eines symmetrischen Kryptosystems zu übertragen.<newline /><newline />
+  Quelle: <external ref="http://de.wikipedia.org/wiki/Diffie-Hellman-Schlüsselaustausch" /></description>
+  <keywords lang="de">protokoll, schlüssel, alice, bob, eve, Netzwerk</keywords>
+  <replacements lang="de">
+    <replacement key="$Converter$" value="Konvertierer" />
+    <replacement key="$Secure Key$" value="Sicherer Schlüssel" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$Sender$" value="Sender" />
+    <replacement key="$Receiver$" value="Empfänger" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Diffie-Hellman_Key-Exchange_OverNetwork.png" />
+  <relevantPlugins>
+    <plugin name="NetworkInput" />
+    <plugin name="NetworkReceiver" />
+    <plugin name="PrimesGenerator" />
+  </relevantPlugins>
 </sample>

@@ -1,39 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: SHA256.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">SHA-256</title>
-  <title lang="zh">SHA-256</title>
-  <title lang="ru">SHA-256</title>
   <summary lang="en">Usage of the <i>SHA-256</i> hash function</summary>
-  <summary lang="zh">SHA-256哈希函数的用法</summary>
-  <summary lang="ru">Использование хэш-функции SHA-256</summary>
   <description lang="en">This template shows the usage of the <i>SHA-256</i> hash function.</description>
-  <description lang="zh">该模板显示了SHA-256哈希函数的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование хэш-функции SHA-256.</description>
   <keywords>Hash, nist, secure, 256</keywords>
-  <keywords lang="zh">哈希，nist，安全，256</keywords>
-  <keywords lang="ru">Хэш, nist, secure, 256</keywords>
-  <title lang="de">SHA-256</title>
-  <summary lang="de">Benutzung der <i>SHA-256</i>-Hash-Funktion</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>SHA-256</i>-Hash-Funktion.</description>
-  <keywords lang="de">hash</keywords>
-  <icon file="SHA256.png" />
-  <relevantPlugins>
-    <plugin name="SHA" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Message$" value="Nachricht" />
-    <replacement key="$Hash$" value="Hashwert" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Message$" value="信息" />
-    <replacement key="$Hash$" value="哈希值" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Message$" value="сообщение" />
-    <replacement key="$Hash$" value="Hashwert" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Message$" value="Message" />
     <replacement key="$Hash$" value="Hash Value" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">SHA-256</title>
+  <summary lang="zh">SHA-256哈希函数的用法</summary>
+  <description lang="zh">该模板显示了SHA-256哈希函数的用法。</description>
+  <keywords lang="zh">哈希，nist，安全，256</keywords>
+  <replacements lang="zh">
+    <replacement key="$Message$" value="信息" />
+    <replacement key="$Hash$" value="哈希值" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">SHA-256</title>
+  <summary lang="ru">Использование хэш-функции SHA-256</summary>
+  <description lang="ru">Этот шаблон показывает использование хэш-функции SHA-256.</description>
+  <keywords lang="ru">Хэш, nist, secure, 256</keywords>
+  <replacements lang="ru">
+    <replacement key="$Message$" value="сообщение" />
+    <replacement key="$Hash$" value="Hashwert" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">SHA-256</title>
+  <summary lang="de">Benutzung der <i>SHA-256</i>-Hash-Funktion</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>SHA-256</i>-Hash-Funktion.</description>
+  <keywords lang="de">hash</keywords>
+  <replacements lang="de">
+    <replacement key="$Message$" value="Nachricht" />
+    <replacement key="$Hash$" value="Hashwert" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SHA256.png" />
+  <relevantPlugins>
+    <plugin name="SHA" />
+  </relevantPlugins>
 </sample>

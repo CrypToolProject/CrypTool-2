@@ -1,39 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Fialka_M_125_3_PROTON_II.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Fialka M-125-3 PROTON II</title>
-  <title lang="zh">菲亚卡M-125-3 PROTON II</title>
-  <title lang="ru">Fialka M-125-3 PROTON II</title>
   <summary lang="en">Usage of the <i>Fialka M-125-3</i> with PROTON II rotors</summary>
-  <summary lang="zh">Fialka M-125-3与PROTON II转子一起使用</summary>
-  <summary lang="ru">Использование Fialka M-125-3 с роторами PROTON II</summary>
   <description lang="en">This template shows the usage of the Fialka cipher machine.</description>
-  <description lang="zh">该模板显示了Fialka密码机的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование шифровальной машины Fialka.</description>
   <keywords>Fialka, Proton</keywords>
-  <keywords lang="zh">质子菲亚卡</keywords>
-  <keywords lang="ru">Fialka, Proton</keywords>
-  <title lang="de">Fialka M-125-3 PROTON II</title>
-  <summary lang="de">Benutzung der <i>Fialka M-125-3</i> mit PROTON II-Rotoren</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der Chiffriermaschine Fialka.</description>
-  <keywords lang="de">Fialka, Proton</keywords>
-  <icon file="FialkaRot.png" />
-  <relevantPlugins>
-    <plugin name="Fialka" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">菲亚卡M-125-3 PROTON II</title>
+  <summary lang="zh">Fialka M-125-3与PROTON II转子一起使用</summary>
+  <description lang="zh">该模板显示了Fialka密码机的用法。</description>
+  <keywords lang="zh">质子菲亚卡</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Fialka M-125-3 PROTON II</title>
+  <summary lang="ru">Использование Fialka M-125-3 с роторами PROTON II</summary>
+  <description lang="ru">Этот шаблон показывает использование шифровальной машины Fialka.</description>
+  <keywords lang="ru">Fialka, Proton</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Fialka M-125-3 PROTON II</title>
+  <summary lang="de">Benutzung der <i>Fialka M-125-3</i> mit PROTON II-Rotoren</summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung der Chiffriermaschine Fialka.</description>
+  <keywords lang="de">Fialka, Proton</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="FialkaRot.png" />
+  <relevantPlugins>
+    <plugin name="Fialka" />
+  </relevantPlugins>
 </sample>

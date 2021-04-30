@@ -1,51 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Enigma_TuringBombe.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Enigma Turing Bombe Attack</title>
-  <title lang="zh">谜图灵庞贝攻击</title>
-  <title lang="ru">Энигма Тьюринг Бомба Атака</title>
   <summary lang="en">Cryptanalysis of the <i>Enigma</i> cipher</summary>
-  <summary lang="zh">谜密码的密码分析</summary>
-  <summary lang="ru">Криптоанализ шифрования Enigma</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>Enigma</i> cipher.</description>
-  <description lang="zh">该模板显示了对Enigma密码的密码分析。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Enigma.</description>
   <keywords>Machine, Turing, World War, Rotor, Attack, Analysis, Analyzer, Breaker</keywords>
-  <keywords lang="zh">机，图灵，第二次世界大战，转子，攻击，分析，分析仪，破碎机</keywords>
-  <keywords lang="ru">Машина, Тьюринг, Мировая Война, Ротор, Атака, Анализ, Анализатор, Выключатель</keywords>
-  <title lang="de">Enigma-Analyse mit Turing-Bombe</title>
-  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit der Turing-Bombe</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
-  <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
-  <icon file="Enigma_Analyzer.png" />
-  <relevantPlugins>
-    <plugin name="Enigma" />
-    <plugin name="FrequencyTest" />
-    <plugin name="FriedmanTest" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$EnigmaAnalyzer$" value="Enigma-Analyse" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Crib$" value="Crib" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$Key$" value="Schlüssel Einstellungen" />
-    <replacement key="$memo$" value="Dieses Beispiel zeigt eine softwarebasierte Turing-Bombe (https://en.wikipedia.org/wiki/Bombe). Die Bombe wurde von Alan Turing und Gordon Welchman entwickelt, wobei frühere Arbeiten polnischer Kryptoanalytiker vor dem Zweiten Weltkrieg genutzt wurden. Bei einem Chiffretext und einem Kinderbett (einem Segment aus bekanntem oder erratenem Klartext) können die ursprünglichen Schlüsseleinstellungen - die Rotorreihenfolge, die Ringeinstellungen und Startpositionen sowie die Plugboard-Einstellungen - wiederhergestellt werden. Im Gegensatz zur ursprünglichen Bombe, die bei einem Umsatz des mittleren Rotors nicht wirksam war, unterstützt diese softwarebasierte Implementierung Krippen mit einem Umsatz des mittleren Rotors sowie einem Umsatz des linken Rotors. Es wird empfohlen, zuerst die Bombe mit allen auf Z eingestellten Ringen zu testen, um einen schnellen ersten Lauf zu erzielen. Dies ist erfolgreich, wenn kein mittlerer Rotorumsatz erzielt wurde, und andernfalls eine vollständige Suche (A bis Z) der richtigen Ringeinstellungen zu ermöglichen . Wenn keiner dieser Läufe erfolgreich ist, kann die Bombe ausgeführt werden, wobei eine vollständige Suche (von A bis Z) sowohl für den rechten als auch für den mittleren Rotor angegeben wird. Die Startposition für das Kinderbett in der Nachricht oder ein Bereich von Positionen kann angegeben werden. Da Enigma einen Brief nicht für sich selbst verschlüsseln / entschlüsseln kann, sind nicht alle Positionen für die Krippe gültig und es werden nur gültige Positionen getestet." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$EnigmaAnalyzer$" value="谜题分析" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Crib$" value="婴儿床" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Key$" value="按键设定" />
-    <replacement key="$memo$" value="此示例显示了基于软件的图灵炸弹（https://en.wikipedia.org/wiki/Bombe）。该炸弹是艾伦·图灵（Alan Turing）和戈登·韦尔奇曼（Gordon Welchman）使用第二次世界大战之前波兰密码分析家的先前工作开发的。如果是密文和儿童床（一段已知或猜测的纯文本），则可以恢复原始的按键设置-转子顺序，铃声设置和开始位置以及插板设置。与最初的炸弹（对中转头销售无效）相反，这种基于软件的实现支持中转头销售以及左转头销售的管理。建议先将所有环都设置为Z的炸弹进行测试，以便快速进行首次运行。如果未实现平均转子周转，则此操作成功，否则可能会完全搜索（A到Z）正确的齿圈设置。如果这些运行均未成功，则可以执行炸弹检查，从右到右分别进行全面搜索（从A到Z）。可以指定婴儿床在消息中的起始位置或一系列位置。由于Enigma无法为其自身加密/解密字母，因此并非所有位置都对婴儿床有效，并且仅测试了有效位置。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$EnigmaAnalyzer$" value="Энигма-анализ" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Crib$" value="Crib" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Key$" value="Настройки клавиш" />
-    <replacement key="$memo$" value="Этот пример демонстрирует программную бомбу Тьюринга (https://en.wikipedia.org/wiki/Bombe). Бомба была разработана Аланом Тьюрингом и Гордоном Велчманом на основе предыдущих работ польских криптоаналитиков до Второй мировой войны. Учитывая зашифрованный текст и шпаргалку (сегмент известного или предполагаемого открытого текста), можно восстановить исходные ключевые настройки - порядок ротора, настройки кольца и начальные положения, а также настройки коммутационной панели. В отличие от оригинальной Bombe, которая не была эффективна при обороте среднего ротора, эта программная реализация поддерживает шпаргалки с оборотом среднего ротора, а также с оборотом левого ротора. Рекомендуется сначала протестировать Bombe со всеми кольцами, установленными на Z, для быстрого начального запуска, который будет успешным в случае отсутствия оборота среднего ротора, и в противном случае позволяет выполнить полный поиск (от A до Z) правильных настроек кольца. . Если ни один из этих прогонов не увенчается успехом, можно запустить Bombe, указав полный поиск (от A до Z) как для правого, так и для среднего роторов. Можно указать начальную позицию для шпаргалки внутри сообщения или диапазон позиций. Обратите внимание, что, поскольку Enigma не может зашифровать / расшифровать письмо самому себе, не все позиции для шпаргалки допустимы, и проверяются только допустимые позиции." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$EnigmaAnalyzer$" value="Enigma Analyzer" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -55,4 +20,58 @@
     <replacement key="$Key$" value="Key Settings" />
     <replacement key="$memo$" value="This example demonstrates a software-based Turing Bombe (https://en.wikipedia.org/wiki/Bombe). The Bombe was developed by Alan Turing and Gordon Welchman, leveraging previous work by Polish cryptanalysts before WW II. Given a ciphertext, and a crib (a segment of known or guessed plaintext), the original key settings - the rotor order, ring settings, and starting positions, as well as the plugboard settings, can be recovered. Unlike the original Bombe, which was not effective in case of turnover of the middle rotor, this software-based implementation supports cribs with a turnover of the middle rotor, as well as a turnover of the left rotor. It is recommended to first test the Bombe with all rings set to Z, for a fast initial run, that will succeed in case there was no middle rotor turnover, and otherwise allow for a full search (A to Z) of the right ring settings. If neither of those runs succeeds, the Bombe can be run specifying a full search (A to Z) for both the right and middle rotors. The starting position for the crib inside the message, or a range of positions, may be specified. Note that since Enigma cannot encrypt/decrypt a letter to itself, not all positions for the crib are valid, and only valid positions are tested." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">谜图灵庞贝攻击</title>
+  <summary lang="zh">谜密码的密码分析</summary>
+  <description lang="zh">该模板显示了对Enigma密码的密码分析。</description>
+  <keywords lang="zh">机，图灵，第二次世界大战，转子，攻击，分析，分析仪，破碎机</keywords>
+  <replacements lang="zh">
+    <replacement key="$EnigmaAnalyzer$" value="谜题分析" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Crib$" value="婴儿床" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Key$" value="按键设定" />
+    <replacement key="$memo$" value="此示例显示了基于软件的图灵炸弹（https://en.wikipedia.org/wiki/Bombe）。该炸弹是艾伦·图灵（Alan Turing）和戈登·韦尔奇曼（Gordon Welchman）使用第二次世界大战之前波兰密码分析家的先前工作开发的。如果是密文和儿童床（一段已知或猜测的纯文本），则可以恢复原始的按键设置-转子顺序，铃声设置和开始位置以及插板设置。与最初的炸弹（对中转头销售无效）相反，这种基于软件的实现支持中转头销售以及左转头销售的管理。建议先将所有环都设置为Z的炸弹进行测试，以便快速进行首次运行。如果未实现平均转子周转，则此操作成功，否则可能会完全搜索（A到Z）正确的齿圈设置。如果这些运行均未成功，则可以执行炸弹检查，从右到右分别进行全面搜索（从A到Z）。可以指定婴儿床在消息中的起始位置或一系列位置。由于Enigma无法为其自身加密/解密字母，因此并非所有位置都对婴儿床有效，并且仅测试了有效位置。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Энигма Тьюринг Бомба Атака</title>
+  <summary lang="ru">Криптоанализ шифрования Enigma</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Enigma.</description>
+  <keywords lang="ru">Машина, Тьюринг, Мировая Война, Ротор, Атака, Анализ, Анализатор, Выключатель</keywords>
+  <replacements lang="ru">
+    <replacement key="$EnigmaAnalyzer$" value="Энигма-анализ" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Key$" value="Настройки клавиш" />
+    <replacement key="$memo$" value="Этот пример демонстрирует программную бомбу Тьюринга (https://en.wikipedia.org/wiki/Bombe). Бомба была разработана Аланом Тьюрингом и Гордоном Велчманом на основе предыдущих работ польских криптоаналитиков до Второй мировой войны. Учитывая зашифрованный текст и шпаргалку (сегмент известного или предполагаемого открытого текста), можно восстановить исходные ключевые настройки - порядок ротора, настройки кольца и начальные положения, а также настройки коммутационной панели. В отличие от оригинальной Bombe, которая не была эффективна при обороте среднего ротора, эта программная реализация поддерживает шпаргалки с оборотом среднего ротора, а также с оборотом левого ротора. Рекомендуется сначала протестировать Bombe со всеми кольцами, установленными на Z, для быстрого начального запуска, который будет успешным в случае отсутствия оборота среднего ротора, и в противном случае позволяет выполнить полный поиск (от A до Z) правильных настроек кольца. . Если ни один из этих прогонов не увенчается успехом, можно запустить Bombe, указав полный поиск (от A до Z) как для правого, так и для среднего роторов. Можно указать начальную позицию для шпаргалки внутри сообщения или диапазон позиций. Обратите внимание, что, поскольку Enigma не может зашифровать / расшифровать письмо самому себе, не все позиции для шпаргалки допустимы, и проверяются только допустимые позиции." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Enigma-Analyse mit Turing-Bombe</title>
+  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit der Turing-Bombe</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
+  <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
+  <replacements lang="de">
+    <replacement key="$EnigmaAnalyzer$" value="Enigma-Analyse" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Crib$" value="Crib" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel Einstellungen" />
+    <replacement key="$memo$" value="Dieses Beispiel zeigt eine softwarebasierte Turing-Bombe (https://en.wikipedia.org/wiki/Bombe). Die Bombe wurde von Alan Turing und Gordon Welchman entwickelt, wobei frühere Arbeiten polnischer Kryptoanalytiker vor dem Zweiten Weltkrieg genutzt wurden. Bei einem Chiffretext und einem Kinderbett (einem Segment aus bekanntem oder erratenem Klartext) können die ursprünglichen Schlüsseleinstellungen - die Rotorreihenfolge, die Ringeinstellungen und Startpositionen sowie die Plugboard-Einstellungen - wiederhergestellt werden. Im Gegensatz zur ursprünglichen Bombe, die bei einem Umsatz des mittleren Rotors nicht wirksam war, unterstützt diese softwarebasierte Implementierung Krippen mit einem Umsatz des mittleren Rotors sowie einem Umsatz des linken Rotors. Es wird empfohlen, zuerst die Bombe mit allen auf Z eingestellten Ringen zu testen, um einen schnellen ersten Lauf zu erzielen. Dies ist erfolgreich, wenn kein mittlerer Rotorumsatz erzielt wurde, und andernfalls eine vollständige Suche (A bis Z) der richtigen Ringeinstellungen zu ermöglichen . Wenn keiner dieser Läufe erfolgreich ist, kann die Bombe ausgeführt werden, wobei eine vollständige Suche (von A bis Z) sowohl für den rechten als auch für den mittleren Rotor angegeben wird. Die Startposition für das Kinderbett in der Nachricht oder ein Bereich von Positionen kann angegeben werden. Da Enigma einen Brief nicht für sich selbst verschlüsseln / entschlüsseln kann, sind nicht alle Positionen für die Krippe gültig und es werden nur gültige Positionen getestet." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Enigma_Analyzer.png" />
+  <relevantPlugins>
+    <plugin name="Enigma" />
+    <plugin name="FrequencyTest" />
+    <plugin name="FriedmanTest" />
+  </relevantPlugins>
 </sample>

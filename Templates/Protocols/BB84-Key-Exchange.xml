@@ -1,58 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: BB84-Key-Exchange.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">BB84 Key Exchange</title>
-  <title lang="zh">BB84密钥交换</title>
-  <title lang="ru">BB84 ключевой обмен</title>
   <summary lang="en">Usage of the <i>BB84 Key Exchange</i></summary>
-  <summary lang="zh">BB84密钥交换的用法</summary>
-  <summary lang="ru">Использование BB84 Key Exchange</summary>
   <description lang="en">BB84 Key Exchange is a photon-based method of exchanging cryptographic keys.
   It is one of the earliest practical examples of key exchange implemented within the field of cryptography.
   The BB84-Protocol is one of the most recent cryptographic procedures on the base of quantum physics. A key is sent through unsecure channel via polarized photons.  
   This key can then be used to encrypt subsequent communications using a symmetric key cipher.<newline /><newline />
   Source: <external ref="http://en.wikipedia.org/wiki/BB84" /></description>
-  <description lang="zh">BB84密钥交换是一种基于光子的交换密钥的方法。它是在密码学领域内实现的密钥交换的最早实用示例之一。 BB84协议是基于量子物理学的最新密码学程序之一。密钥通过偏振光子通过不安全通道发送。然后可以使用对称密钥密码将此密钥用于加密后续的通信。资源：</description>
-  <description lang="ru">BB84 Key Exchange - основанный на фотоне метод обмена криптографическими ключами. Это один из самых ранних практических примеров обмена ключами, реализованных в области криптографии. Протокол BB84 является одной из самых последних криптографических процедур на основе квантовой физики. Ключ отправляется через незащищенный канал через поляризованные фотоны. Затем этот ключ можно использовать для шифрования последующих сообщений с использованием симметричного ключа. Источник:</description>
   <keywords>protocol, bennet, brassard, 1984, photon, photons, polarization, light, quantum, physics, alice, bob</keywords>
-  <keywords lang="zh">协议，本尼特，布拉德，1984，光子，光子，极化，光，量子，物理，爱丽丝，鲍勃</keywords>
-  <keywords lang="ru">протокол, bennet, brassard, 1984, фотон, фотоны, поляризация, свет, квант, физика, alice, bob</keywords>
-  <title lang="de">BB84-Schlüsselaustausch</title>
-  <summary lang="de">Anwenden des <i>B84-Schlüsselaustauschs</i></summary>
-  <description lang="de">Das BB84-Protokoll stellt eines der modernsten kryptografischen Verfahren auf Basis der Quantenphysik dar. Mit Hilfe von polarisierten Photonen wird ein Schlüssel über einen öffentlichen, 
-  unsicheren Kanal ausgetauscht. Dieser Schlüssel kann im Anschluss für die Anwendung einer symmetrischen Chiffre verwendet werden. <newline /><newline />
-  Quelle: <external ref="http://de.wikipedia.org/wiki/Quantenschl%C3%BCsselaustausch" /></description>
-  <keywords lang="de">protokoll, schlüssel, photonen, polarisation, licht, quanten, physik, alice, bob</keywords>
-  <icon file="BB84-Key-Exchange.png" />
-  <relevantPlugins>
-    <plugin name="BB84KeyGenerator" />
-    <plugin name="BB84PhotonDecoder" />
-    <plugin name="BB84PhotonEncoder" />
-    <plugin name="BB84PhotonbaseGenerator" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Initial key$" value="Initialschlüssel" />
-    <replacement key="$Shared key$" value="Gemeinsamer Schlüssel" />
-    <replacement key="$Received key$" value="Empfangener Schlüssel" />
-    <replacement key="$BB84PhotonEncoder$" value="BB84-Photonenkodierer" />
-    <replacement key="$BB84PhotonDecoder$" value="BB84-Photonendekodierer" />
-    <replacement key="$BB84KeyGenerator$" value="BB84-Schlüsselgenerator" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Initial key$" value="首字母缩略词" />
-    <replacement key="$Shared key$" value="公钥" />
-    <replacement key="$Received key$" value="收到密钥" />
-    <replacement key="$BB84PhotonEncoder$" value="BB84-Photonenkodierer" />
-    <replacement key="$BB84PhotonDecoder$" value="BB84-光子烯" />
-    <replacement key="$BB84KeyGenerator$" value="BB84密钥生成器" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Initial key$" value="Initialschlüssel" />
-    <replacement key="$Shared key$" value="Общий ключ" />
-    <replacement key="$Received key$" value="Полученный ключ" />
-    <replacement key="$BB84PhotonEncoder$" value="BB84-Photonenkodierer" />
-    <replacement key="$BB84PhotonDecoder$" value="BB84-Photonendekodierer" />
-    <replacement key="$BB84KeyGenerator$" value="генератор BB84 ключ" />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Initial key$" value="Initial key" />
     <replacement key="$Shared key$" value="Shared key" />
@@ -61,4 +23,61 @@
     <replacement key="$BB84PhotonDecoder$" value="BB84 Photon Decoder" />
     <replacement key="$BB84KeyGenerator$" value="BB84 Key Generator" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">BB84密钥交换</title>
+  <summary lang="zh">BB84密钥交换的用法</summary>
+  <description lang="zh">BB84密钥交换是一种基于光子的交换密钥的方法。它是在密码学领域内实现的密钥交换的最早实用示例之一。 BB84协议是基于量子物理学的最新密码学程序之一。密钥通过偏振光子通过不安全通道发送。然后可以使用对称密钥密码将此密钥用于加密后续的通信。资源：</description>
+  <keywords lang="zh">协议，本尼特，布拉德，1984，光子，光子，极化，光，量子，物理，爱丽丝，鲍勃</keywords>
+  <replacements lang="zh">
+    <replacement key="$Initial key$" value="首字母缩略词" />
+    <replacement key="$Shared key$" value="公钥" />
+    <replacement key="$Received key$" value="收到密钥" />
+    <replacement key="$BB84PhotonEncoder$" value="BB84-Photonenkodierer" />
+    <replacement key="$BB84PhotonDecoder$" value="BB84-光子烯" />
+    <replacement key="$BB84KeyGenerator$" value="BB84密钥生成器" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">BB84 ключевой обмен</title>
+  <summary lang="ru">Использование BB84 Key Exchange</summary>
+  <description lang="ru">BB84 Key Exchange - основанный на фотоне метод обмена криптографическими ключами. Это один из самых ранних практических примеров обмена ключами, реализованных в области криптографии. Протокол BB84 является одной из самых последних криптографических процедур на основе квантовой физики. Ключ отправляется через незащищенный канал через поляризованные фотоны. Затем этот ключ можно использовать для шифрования последующих сообщений с использованием симметричного ключа. Источник:</description>
+  <keywords lang="ru">протокол, bennet, brassard, 1984, фотон, фотоны, поляризация, свет, квант, физика, alice, bob</keywords>
+  <replacements lang="ru">
+    <replacement key="$Initial key$" value="Initialschlüssel" />
+    <replacement key="$Shared key$" value="Общий ключ" />
+    <replacement key="$Received key$" value="Полученный ключ" />
+    <replacement key="$BB84PhotonEncoder$" value="BB84-Photonenkodierer" />
+    <replacement key="$BB84PhotonDecoder$" value="BB84-Photonendekodierer" />
+    <replacement key="$BB84KeyGenerator$" value="генератор BB84 ключ" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">BB84-Schlüsselaustausch</title>
+  <summary lang="de">Anwenden des <i>B84-Schlüsselaustauschs</i></summary>
+  <description lang="de">Das BB84-Protokoll stellt eines der modernsten kryptografischen Verfahren auf Basis der Quantenphysik dar. Mit Hilfe von polarisierten Photonen wird ein Schlüssel über einen öffentlichen, 
+  unsicheren Kanal ausgetauscht. Dieser Schlüssel kann im Anschluss für die Anwendung einer symmetrischen Chiffre verwendet werden. <newline /><newline />
+  Quelle: <external ref="http://de.wikipedia.org/wiki/Quantenschl%C3%BCsselaustausch" /></description>
+  <keywords lang="de">protokoll, schlüssel, photonen, polarisation, licht, quanten, physik, alice, bob</keywords>
+  <replacements lang="de">
+    <replacement key="$Initial key$" value="Initialschlüssel" />
+    <replacement key="$Shared key$" value="Gemeinsamer Schlüssel" />
+    <replacement key="$Received key$" value="Empfangener Schlüssel" />
+    <replacement key="$BB84PhotonEncoder$" value="BB84-Photonenkodierer" />
+    <replacement key="$BB84PhotonDecoder$" value="BB84-Photonendekodierer" />
+    <replacement key="$BB84KeyGenerator$" value="BB84-Schlüsselgenerator" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="BB84-Key-Exchange.png" />
+  <relevantPlugins>
+    <plugin name="BB84KeyGenerator" />
+    <plugin name="BB84PhotonDecoder" />
+    <plugin name="BB84PhotonEncoder" />
+    <plugin name="BB84PhotonbaseGenerator" />
+  </relevantPlugins>
 </sample>

@@ -1,63 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: WEP_Attack.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">WEP Attack</title>
-  <title lang="zh">WEP攻击</title>
-  <title lang="ru">Атака WEP</title>
   <summary lang="en">Attacking the WiFi protocol <i>WEP</i></summary>
-  <summary lang="zh">攻击WiFi协议WEP</summary>
-  <summary lang="ru">Атака на Wi-Fi-протокол WEP</summary>
   <description lang="en">This template shows how to attack the WiFi protocol <i>WEP</i>.</description>
-  <description lang="zh">该模板显示了如何攻击WiFi协议WEP。</description>
-  <description lang="ru">Этот шаблон показывает, как атаковать протокол WEP WiFi.</description>
   <keywords>wired, equivalent, privacy, WEP, wifi, wlan</keywords>
-  <keywords lang="zh">有线，等效，隐私，WEP，wifi，无线局域网</keywords>
-  <keywords lang="ru">проводной, эквивалентный, конфиденциальность, WEP, wifi, wlan</keywords>
-  <title lang="de">WEP-Angriff</title>
-  <summary lang="de">Durchführen eines Angriffs gegen das WiFi-Protokoll <i>WEP</i></summary>
-  <description lang="de">Diese Vorlage zeigt die Durchführung eines Angriffs gegen das WiFi-Protokoll <i>WEP</i>.</description>
-  <keywords lang="de">wired, equivalent, privacy, WEP, wifi, wlan</keywords>
-  <icon file="WEP_Attack.png" />
-  <relevantPlugins>
-    <plugin name="BooleanInput" />
-    <plugin name="Gate" />
-    <plugin name="IncDec" />
-    <plugin name="Internet_frame_generator" />
-    <plugin name="WEP" />
-    <plugin name="WEPAttacks" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Iframe Generator$" value="IP-Frame-Generator" />
-    <replacement key="$WEP protocol$" value="WEP-Protokoll" />
-    <replacement key="$Attack WEP$" value="Angriff auf das WEP-Protokoll" />
-    <replacement key="$StringEncoder$" value="String-Kodierer" />
-    <replacement key="$false$" value="falsch" />
-    <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$Gate$" value="Gatter" />
-    <replacement key="$memo1$" value="Generiere 10K Arp-Pakete und &quot;sende&quot; sie mit dem WEP-Protokoll und dem angegebenen Schlüssel verschlüsselt." />
-    <replacement key="$memo2$" value="Wenn der Angriff noch nicht genügend Schlüssel hat, erhöhe den Zähler und empfange nochmals 10K Pakete." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Iframe Generator$" value="IP帧生成器" />
-    <replacement key="$WEP protocol$" value="WEP协议" />
-    <replacement key="$Attack WEP$" value="攻击WEP协议" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$false$" value="不正确" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$Gate$" value="门" />
-    <replacement key="$memo1$" value="生成10K Arp数据包，并使用WEP协议和指定的密钥对它们进行“发送”加密。" />
-    <replacement key="$memo2$" value="如果攻击还没有足够的密钥，请增加计数器并接收另外的10K数据包。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Iframe Generator$" value="IP-Frame-генератор" />
-    <replacement key="$WEP protocol$" value="WEP-Protokoll" />
-    <replacement key="$Attack WEP$" value="Атака на протокол WEP" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$false$" value="фальшивый" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$Gate$" value="ворота" />
-    <replacement key="$memo1$" value="Создавайте 10K Arp-пакеты и «отправляйте» их зашифрованные с использованием протокола WEP и указанного ключа." />
-    <replacement key="$memo2$" value="Если в атаке недостаточно ключей, увеличьте счетчик и получите еще 10K пакетов." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Iframe Generator$" value="Iframe Generator" />
     <replacement key="$WEP protocol$" value="WEP protocol" />
@@ -69,4 +22,70 @@
     <replacement key="$memo1$" value="Generate 10K Arp packets and &quot;send&quot; it using the WEP protocol with the given Key." />
     <replacement key="$memo2$" value="If the attack does not have enough keys, increment the counter to get another 10K packets." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">WEP攻击</title>
+  <summary lang="zh">攻击WiFi协议WEP</summary>
+  <description lang="zh">该模板显示了如何攻击WiFi协议WEP。</description>
+  <keywords lang="zh">有线，等效，隐私，WEP，wifi，无线局域网</keywords>
+  <replacements lang="zh">
+    <replacement key="$Iframe Generator$" value="IP帧生成器" />
+    <replacement key="$WEP protocol$" value="WEP协议" />
+    <replacement key="$Attack WEP$" value="攻击WEP协议" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$false$" value="不正确" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$Gate$" value="门" />
+    <replacement key="$memo1$" value="生成10K Arp数据包，并使用WEP协议和指定的密钥对它们进行“发送”加密。" />
+    <replacement key="$memo2$" value="如果攻击还没有足够的密钥，请增加计数器并接收另外的10K数据包。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Атака WEP</title>
+  <summary lang="ru">Атака на Wi-Fi-протокол WEP</summary>
+  <description lang="ru">Этот шаблон показывает, как атаковать протокол WEP WiFi.</description>
+  <keywords lang="ru">проводной, эквивалентный, конфиденциальность, WEP, wifi, wlan</keywords>
+  <replacements lang="ru">
+    <replacement key="$Iframe Generator$" value="IP-Frame-генератор" />
+    <replacement key="$WEP protocol$" value="WEP-Protokoll" />
+    <replacement key="$Attack WEP$" value="Атака на протокол WEP" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$false$" value="фальшивый" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$Gate$" value="ворота" />
+    <replacement key="$memo1$" value="Создавайте 10K Arp-пакеты и «отправляйте» их зашифрованные с использованием протокола WEP и указанного ключа." />
+    <replacement key="$memo2$" value="Если в атаке недостаточно ключей, увеличьте счетчик и получите еще 10K пакетов." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">WEP-Angriff</title>
+  <summary lang="de">Durchführen eines Angriffs gegen das WiFi-Protokoll <i>WEP</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Durchführung eines Angriffs gegen das WiFi-Protokoll <i>WEP</i>.</description>
+  <keywords lang="de">wired, equivalent, privacy, WEP, wifi, wlan</keywords>
+  <replacements lang="de">
+    <replacement key="$Iframe Generator$" value="IP-Frame-Generator" />
+    <replacement key="$WEP protocol$" value="WEP-Protokoll" />
+    <replacement key="$Attack WEP$" value="Angriff auf das WEP-Protokoll" />
+    <replacement key="$StringEncoder$" value="String-Kodierer" />
+    <replacement key="$false$" value="falsch" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$Gate$" value="Gatter" />
+    <replacement key="$memo1$" value="Generiere 10K Arp-Pakete und &quot;sende&quot; sie mit dem WEP-Protokoll und dem angegebenen Schlüssel verschlüsselt." />
+    <replacement key="$memo2$" value="Wenn der Angriff noch nicht genügend Schlüssel hat, erhöhe den Zähler und empfange nochmals 10K Pakete." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="WEP_Attack.png" />
+  <relevantPlugins>
+    <plugin name="BooleanInput" />
+    <plugin name="Gate" />
+    <plugin name="IncDec" />
+    <plugin name="Internet_frame_generator" />
+    <plugin name="WEP" />
+    <plugin name="WEPAttacks" />
+  </relevantPlugins>
 </sample>

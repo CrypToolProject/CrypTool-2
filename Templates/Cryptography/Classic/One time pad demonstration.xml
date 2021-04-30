@@ -1,52 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: One time pad demonstration.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">One-Time Pad Demo</title>
-  <title lang="zh">一次性演示</title>
-  <title lang="ru">Демо-версия One-time Pad</title>
   <summary lang="en">Usage of the <i>One-time pad</i></summary>
-  <summary lang="zh">一次性垫的使用</summary>
-  <summary lang="ru">Использование одноразовой прокладки</summary>
   <description lang="en">This template shows the usage of the <i>One-time pad</i>.</description>
-  <description lang="zh">此模板显示一次性垫的用法。</description>
-  <description lang="ru">Этот шаблон показывает использование одноразового пэда.</description>
-  <keywords>One-time pad,OTP, XOR, perfect security</keywords>
-  <keywords lang="zh">一次性垫，OTP，XOR，完美的安全性</keywords>
-  <keywords lang="ru">Одна временная панель,OTP, XOR, совершенная защита</keywords>
-  <title lang="de">One-Time-Pad-Demo</title>
-  <summary lang="de">Benutzung eines <i>One-Time-Pads</i></summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung eines <i>One-Time-Pads</i>.</description>
-  <keywords lang="de">One-time pad,OTP,perfekte Sicherheit,XOR</keywords>
-  <icon file="One time pad demonstration.png" />
-  <relevantPlugins>
-    <plugin name="Xor" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$StringEncoder$" value="String-Codierer" />
-    <replacement key="$StringDecoder$" value="String-Decodierer" />
-    <replacement key="$One time pad$" value="One-Time-Pad" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung eines One-Time-Pads (OTP). Der Klartext und der verwendete OTP sind links oben zu sehen. Der verschlüsselte Geheimtext wird rechts oben dargestellt.\line Unten wird mit zwei weiteren XOR-Verknüpfungen gezeigt, dass man durch die Verwendung eines anderen OTPs jeden beliebigen Klartext aus dem Geheimtext generieren kann. Diese Klartexte scheinen dann ebenso korrekt entschlüsselt worden zu sein, haben aber mit der ursprünglichen Nachricht nichts zu tun." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$StringEncoder$" value="字符串编码器" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-    <replacement key="$One time pad$" value="一次性垫" />
-    <replacement key="$memo$" value="此模板演示一次性垫（OTP）的用法。可以在左上角看到纯文本和所用的OTP。加密的密文显示在右上角\下面的行显示了另外两个XOR操作，您可以使用另一个OTP从密文生成任何纯文本。这些明文然后似乎已被正确解密，但与原始消息无关。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$StringEncoder$" value="Строка кодировщик" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-    <replacement key="$One time pad$" value="One-Time-Pad" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует использование одноразовой панели (OTP). Обычный текст и используемый OTP можно увидеть в левом верхнем углу. Зашифрованный зашифрованный текст показан в правом верхнем углу. \Line Ниже показано еще двумя ссылками XOR, которые могут генерировать любой открытый текст из зашифрованного текста с помощью другого OTP. Эти простые тексты, похоже, были декодированы так же правильно, но не имеют никакого отношения к исходному сообщению." />
-  </replacements>
+  <keywords>One-time pad, OTP, XOR, perfect security</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -56,4 +20,59 @@
     <replacement key="$One time pad$" value="One-time pad" />
     <replacement key="$memo$" value="This sample demonstrates a one-time pad (OTP). The plaintext and the pad being used are shown at the top left. The resulting ciphertext is shown at the top right.\line At the bottom there are two additional XOR operations to demonstrate, that you can generate any plaintext by choosing a different pad. This output may look correctly decrypted, but has nothing to do with the actual message." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">一次性演示</title>
+  <summary lang="zh">一次性垫的使用</summary>
+  <description lang="zh">此模板显示一次性垫的用法。</description>
+  <keywords lang="zh">一次性垫，OTP，XOR，完美的安全性</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$StringEncoder$" value="字符串编码器" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+    <replacement key="$One time pad$" value="一次性垫" />
+    <replacement key="$memo$" value="此模板演示一次性垫（OTP）的用法。可以在左上角看到纯文本和所用的OTP。加密的密文显示在右上角\下面的行显示了另外两个XOR操作，您可以使用另一个OTP从密文生成任何纯文本。这些明文然后似乎已被正确解密，但与原始消息无关。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Демо-версия One-time Pad</title>
+  <summary lang="ru">Использование одноразовой прокладки</summary>
+  <description lang="ru">Этот шаблон показывает использование одноразового пэда.</description>
+  <keywords lang="ru">Одна временная панель, OTP, XOR, совершенная защита</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$StringEncoder$" value="Строка кодировщик" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+    <replacement key="$One time pad$" value="One-Time-Pad" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует использование одноразовой панели (OTP). Обычный текст и используемый OTP можно увидеть в левом верхнем углу. Зашифрованный зашифрованный текст показан в правом верхнем углу. \Line Ниже показано еще двумя ссылками XOR, которые могут генерировать любой открытый текст из зашифрованного текста с помощью другого OTP. Эти простые тексты, похоже, были декодированы так же правильно, но не имеют никакого отношения к исходному сообщению." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">One-Time-Pad-Demo</title>
+  <summary lang="de">Benutzung eines <i>One-Time-Pads</i></summary>
+  <description lang="de">Diese Vorlage zeigt die Benutzung eines <i>One-Time-Pads</i>.</description>
+  <keywords lang="de">One-time pad, OTP, perfekte Sicherheit, XOR</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$StringEncoder$" value="String-Codierer" />
+    <replacement key="$StringDecoder$" value="String-Decodierer" />
+    <replacement key="$One time pad$" value="One-Time-Pad" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung eines One-Time-Pads (OTP). Der Klartext und der verwendete OTP sind links oben zu sehen. Der verschlüsselte Geheimtext wird rechts oben dargestellt.\line Unten wird mit zwei weiteren XOR-Verknüpfungen gezeigt, dass man durch die Verwendung eines anderen OTPs jeden beliebigen Klartext aus dem Geheimtext generieren kann. Diese Klartexte scheinen dann ebenso korrekt entschlüsselt worden zu sein, haben aber mit der ursprünglichen Nachricht nichts zu tun." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="One time pad demonstration.png" />
+  <relevantPlugins>
+    <plugin name="Xor" />
+  </relevantPlugins>
 </sample>

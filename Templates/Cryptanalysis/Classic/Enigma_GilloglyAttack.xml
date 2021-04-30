@@ -1,51 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Enigma_GilloglyAttack.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Enigma Gillogly Attack</title>
-  <title lang="zh">谜吉洛利攻击</title>
-  <title lang="ru">Загадка Gillogly Атака</title>
   <summary lang="en">Cryptanalysis of the <i>Enigma</i> cipher</summary>
-  <summary lang="zh">谜密码的密码分析</summary>
-  <summary lang="ru">Криптоанализ шифрования Enigma</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>Enigma</i> cipher.</description>
-  <description lang="zh">该模板显示了对Enigma密码的密码分析。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Enigma.</description>
   <keywords>Machine, Turing, World War, Rotor, Attack, Analysis, Analyzer, Breaker</keywords>
-  <keywords lang="zh">机，图灵，第二次世界大战，转子，攻击，分析，分析仪，破碎机</keywords>
-  <keywords lang="ru">Машина, Тьюринг, Мировая Война, Ротор, Атака, Анализ, Анализатор, Выключатель</keywords>
-  <title lang="de">Enigma-Analyse mit Gillogly-Angriff</title>
-  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit dem Gillogly-Angriff</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
-  <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
-  <icon file="Enigma_Analyzer.png" />
-  <relevantPlugins>
-    <plugin name="Enigma" />
-    <plugin name="FrequencyTest" />
-    <plugin name="FriedmanTest" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$EnigmaAnalyzer$" value="Enigma-Analyse" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$FrequencyTest$" value="Frequenz-Test" />
-    <replacement key="$Key$" value="Schlüssel Einstellungen" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert den von James Gillogly in der Cryptologia Jahrgang XIX, Nummer 4, vorgestellten kryptoanalytischen Algorithmus: http://members.fortunecity.com/jpeschel/gillog1.htm\line Die verwendete Nachricht ist ein kurzer deutscher Satz. Die Analyse kann über die Optionen in den Einstellungen der Komponente kontrolliert werden. Abhängig davon, welche Suchmethode für die Steckerverbindungen gewählt wurde, wird der Algorithmus die Nachricht korrekt entschlüsseln (log2-Trigramm-Summe als Kostenfunktion bei der Identifizierung des nächsten Steckers), oder ein Stecker wird falsch sein (Koinzidenzindex). Der Grund hierfür ist der zu kurze Text, der verlässliche Resultate mit dem Koinzidenzindex verhindert." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$EnigmaAnalyzer$" value="谜题分析" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$FrequencyTest$" value="频率测试" />
-    <replacement key="$Key$" value="按键设定" />
-    <replacement key="$memo$" value="此模板演示了James Gillogly在Cryptologia第XIX卷第4期：http://members.fortunecity.com/jpeschel/gillog1.htm\line中提出的密码分析算法。所使用的消息为德语简短句子。可以通过组件设置中的选项来控制分析。根据为插头连接选择的搜索方法，该算法将正确解码消息（在标识下一个插头时，log2 trigram sum作为成本函数），或者一个插头将出错（符合指数）。这样做的原因是文本太短，这妨碍了巧合索引的可靠结果。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$EnigmaAnalyzer$" value="Энигма-анализ" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$FrequencyTest$" value="тест частоты" />
-    <replacement key="$Key$" value="Настройки клавиш" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует криптоаналитический алгоритм, представленный Джеймсом Гиллоглы в Cryptologia, том XIX, номер 4: http://members.fortunecity.com/jpeschel/gillog1.htm\line. Используемое сообщение - короткое немецкое предложение. Анализ можно контролировать с помощью параметров в настройках компонента. В зависимости от того, какой метод поиска был выбран для подключений подключений, алгоритм будет правильно расшифровывать сообщение (сумма log2-триграмм как функция стоимости при идентификации следующего штепселя), или вилка будет неправильной (индекс совпадения). Причиной этого является слишком короткий текст, который предотвращает надежные результаты с индексом совпадения." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$EnigmaAnalyzer$" value="Enigma Analyzer" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -55,4 +20,58 @@
     <replacement key="$Key$" value="Key Settings" />
     <replacement key="$memo$" value="This sample demonstrates the cryptanalysis algorithm proposed by James Gillogly in Cryptologia volume XIX, Number 4: http://members.fortunecity.com/jpeschel/gillog1.htm\line The given message is a short German message. You can control the analysis with the options given in the in the plugin's settings. Depending on which plug search method you choose, the algorithm will decipher the message correctly (log-trigram sum as cost function for identifying the next plug) or one plug will be wrong (index of coincidences for detecting plugs). This is because the text is too short to deliver reliable results with the index of coincidences." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">谜吉洛利攻击</title>
+  <summary lang="zh">谜密码的密码分析</summary>
+  <description lang="zh">该模板显示了对Enigma密码的密码分析。</description>
+  <keywords lang="zh">机，图灵，第二次世界大战，转子，攻击，分析，分析仪，破碎机</keywords>
+  <replacements lang="zh">
+    <replacement key="$EnigmaAnalyzer$" value="谜题分析" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$FrequencyTest$" value="频率测试" />
+    <replacement key="$Key$" value="按键设定" />
+    <replacement key="$memo$" value="此模板演示了James Gillogly在Cryptologia第XIX卷第4期：http://members.fortunecity.com/jpeschel/gillog1.htm\line中提出的密码分析算法。所使用的消息为德语简短句子。可以通过组件设置中的选项来控制分析。根据为插头连接选择的搜索方法，该算法将正确解码消息（在标识下一个插头时，log2 trigram sum作为成本函数），或者一个插头将出错（符合指数）。这样做的原因是文本太短，这妨碍了巧合索引的可靠结果。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Загадка Gillogly Атака</title>
+  <summary lang="ru">Криптоанализ шифрования Enigma</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ шифрования Enigma.</description>
+  <keywords lang="ru">Машина, Тьюринг, Мировая Война, Ротор, Атака, Анализ, Анализатор, Выключатель</keywords>
+  <replacements lang="ru">
+    <replacement key="$EnigmaAnalyzer$" value="Энигма-анализ" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$FrequencyTest$" value="тест частоты" />
+    <replacement key="$Key$" value="Настройки клавиш" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует криптоаналитический алгоритм, представленный Джеймсом Гиллоглы в Cryptologia, том XIX, номер 4: http://members.fortunecity.com/jpeschel/gillog1.htm\line. Используемое сообщение - короткое немецкое предложение. Анализ можно контролировать с помощью параметров в настройках компонента. В зависимости от того, какой метод поиска был выбран для подключений подключений, алгоритм будет правильно расшифровывать сообщение (сумма log2-триграмм как функция стоимости при идентификации следующего штепселя), или вилка будет неправильной (индекс совпадения). Причиной этого является слишком короткий текст, который предотвращает надежные результаты с индексом совпадения." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Enigma-Analyse mit Gillogly-Angriff</title>
+  <summary lang="de">Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine mit dem Gillogly-Angriff</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>Enigma</i>-Chiffriermaschine.</description>
+  <keywords lang="de">Maschine, Turing, Weltkrieg, Rotor, Angriff, Analyse, Analyzer, Breaker</keywords>
+  <replacements lang="de">
+    <replacement key="$EnigmaAnalyzer$" value="Enigma-Analyse" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$FrequencyTest$" value="Frequenz-Test" />
+    <replacement key="$Key$" value="Schlüssel Einstellungen" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert den von James Gillogly in der Cryptologia Jahrgang XIX, Nummer 4, vorgestellten kryptoanalytischen Algorithmus: http://members.fortunecity.com/jpeschel/gillog1.htm\line Die verwendete Nachricht ist ein kurzer deutscher Satz. Die Analyse kann über die Optionen in den Einstellungen der Komponente kontrolliert werden. Abhängig davon, welche Suchmethode für die Steckerverbindungen gewählt wurde, wird der Algorithmus die Nachricht korrekt entschlüsseln (log2-Trigramm-Summe als Kostenfunktion bei der Identifizierung des nächsten Steckers), oder ein Stecker wird falsch sein (Koinzidenzindex). Der Grund hierfür ist der zu kurze Text, der verlässliche Resultate mit dem Koinzidenzindex verhindert." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Enigma_Analyzer.png" />
+  <relevantPlugins>
+    <plugin name="Enigma" />
+    <plugin name="FrequencyTest" />
+    <plugin name="FriedmanTest" />
+  </relevantPlugins>
 </sample>

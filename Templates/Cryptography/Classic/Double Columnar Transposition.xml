@@ -1,57 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Double Columnar Transposition.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Double Columnar Transposition Cipher</title>
+  <summary lang="en">Usage of the <i>Transposition</i> cipher to build a double columnar transposition cipher</summary>
   <description lang="en">This template shows, how to build a double columnar transposition by using two Transposition components. First, the plaintext is encrypted using one keyword. Then, the intermediate ciphertext is encrypted using a second keyword. After that, the two keywords are used to additionally decrypt the final ciphertext.</description>
   <keywords>Transposition, Double Columnar Transposition, Doppelwürfel</keywords>
-  <title lang="zh">双列换位密码</title>
-  <summary lang="en">Usage of the <i>Transposition</i> cipher to build a double columnar transposition cipher</summary>
-  <summary lang="zh">使用换位密码构建双列式换位密码</summary>
-  <description lang="zh">该模板显示了如何通过使用两个Transposition组件来构建双列式换位。首先，使用一个关键字对明文进行加密。然后，使用第二关键字对中间密文进行加密。之后，使用这两个关键字来另外解密最终密文。</description>
-  <keywords lang="zh">换位，双柱状换位，双立方体</keywords>
-  <title lang="ru">Двойной Шифр ​​Транспозиции</title>
-  <summary lang="ru">Использование шифра <i> Transposition </i> для построения двухколоночного шифра транспонирования</summary>
-  <description lang="ru">Этот шаблон показывает, как построить двухколоночную транспозицию с использованием двух компонентов транспонирования. Во-первых, открытый текст шифруется с использованием одного ключевого слова. Затем промежуточный зашифрованный текст шифруется с использованием второго ключевого слова. После этого два ключевых слова используются для дополнительной расшифровки окончательного зашифрованного текста.</description>
-  <keywords lang="ru">перестановка, Doppelwürfel</keywords>
-  <title lang="de">Doppelte Spaltentransposition</title>
-  <summary lang="de">Benutzung der <i>Transpositions</i>-Chiffre um eine doppelte Spaltentransposition zu bauen</summary>
-  <keywords lang="de">Transposition, Doppelte Spaltentransposition, Doppelwürfel</keywords>
-  <icon file="Transposition.png" />
-  <relevantPlugins>
-    <plugin name="Transposition" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Key$" value="Schlüssel 1" />
-    <replacement key="$Key2$" value="Schlüssel 2" />
-    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
-    <replacement key="$Transposition (Encryption)$" value="Transposition (Verschlüsselung)" />
-    <replacement key="$Transposition (Decryption)$" value="Transposition (Entschlüsselung)" />
-    <replacement key="$text$" value="AXSINGLEXCOLUMNARXTRANSPOSITIONXCOULDXBEXATTACKEDXBYXGUESSINGXPOSSIBLEXCOLUMNXLENGTHSYXWRITINGXTHEXMESSAGEXOUTXINXITSXCOLUMNSXXXBUTXINXTHEXWRONGXORDERYXASXTHEXKEYXISXNOTXYETXKNOWNXXYXANDXTHENXLOOKINGXFORXPOSSIBLEXANAGRAMSXXTHUSXTOXMAKEXITXSTRONGERYXAXDOUBLEXTRANSPOSITIONXWASXOFTENXUSEDXXTHISXISXSIMPLYXAXCOLUMNARXTRANSPOSITIONXAPPLIEDXTWICEXXTHEXSAMEXKEYXCANXBEXUSEDXFORXBOTHXTRANSPOSITIONSYXORXTWOXDIFFERENTXKEYSXCANXBEXUSEDX" />
-    <replacement key="$memo$" value="Diese Vorlage zeigt, wie eine doppelte Transpositionsverschlüsselung unter Verwendung von zwei Transpositionskomponenten erstellt werden kann.\line\line Zunächst wird der Klartext mit dem ersten Schlüsselwort mit der ersten Transpositionskomponente verschlüsselt. Anschließend wird der Text erneut mit dem zweiten Schlüsselwort mit der zweiten Transpositionskomponente verschlüsselt. Schließlich wird der Geheimtext in der Geheimtext-Textausgabe-Komponente angezeigt.\line\line Die Entschlüsselung wird ebenfalls angezeigt. Dazu wird zuerst mit dem zweiten Schlüsselwort und dann mit dem ersten Schlüsselwort entschlüsselt. Der entschlüsselte Klartext wird in der &quot;Entschlüsselten Geheimtext&quot;-Textausgabe-Komponente angezeigt." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Key$" value="关键1" />
-    <replacement key="$Key2$" value="键2" />
-    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
-    <replacement key="$Transposition (Encryption)$" value="换位（加密）" />
-    <replacement key="$Transposition (Decryption)$" value="换位（解密）" />
-    <replacement key="$text$" value="AXSINGLEXCOLUMNARXTRANSPOSITIONXCOULDXBEXATTACKEDXBYXGUESSINGXPOSSIBLEXCOLUMNXLENGTHSYXWRITINGXTHEXMESSAGEXOUTXINXITSXCOLUMNSXXXBUTXINXTHEXWRONGXORDERYXASXTHEXKEYXISXNOTXYETXKNOWNXXYXANDXTHENXLOOKINGXFORXPOSSIBLEXANAGRAMSXXTHUSXTOXMAKEXITXSTRONGERYXAXDOUBLEXTRANSPOSITIONXWASXOFTENXUSEDXXTHISXISXSIMPLYXAXCOLUMNARXTRANSPOSITIONXAPPLIEDXTWICEXXTHEXSAMEXKEYXCANXBEXUSEDXFORXBOTHXTRANSPOSITIONSYXORXTWOXDIFFERENTXKEYSXCANXBEXUSEDX" />
-    <replacement key="$memo$" value="此模板显示了如何使用两个换位组件来创建双重换位加密：\Line \line首先，使用第一个换位组件的first关键字对明文进行加密。然后，使用带有第二换位成分的第二关键字对文本进行重新加密。最后，密文显示在密文输出组件中。\Line \line还显示解密。为此，首先使用第二个关键字，然后使用第一个关键字进行解密。解密的纯文本显示在“解密的密文”文本输出组件中。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$Key2$" value="ключ 2" />
-    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
-    <replacement key="$Transposition (Encryption)$" value="Транспонирование (шифрование)" />
-    <replacement key="$Transposition (Decryption)$" value="Транспонирование (дешифрование)" />
-    <replacement key="$text$" value="AXSINGLEXCOLUMNARXTRANSPOSITIONXCOULDXBEXATTACKEDXBYXGUESSINGXPOSSIBLEXCOLUMNXLENGTHSYXWRITINGXTHEXMESSAGEXOUTXINXITSXCOLUMNSXXXBUTXINXTHEXWRONGXORDERYXASXTHEXKEYXISXNOTXYETXKNOWNXXYXANDXTHENXLOOKINGXFORXPOSSIBLEXANAGRAMSXXTHUSXTOXMAKEXITXSTRONGERYXAXDOUBLEXTRANSPOSITIONXWASXOFTENXUSEDXXTHISXISXSIMPLYXAXCOLUMNARXTRANSPOSITIONXAPPLIEDXTWICEXXTHEXSAMEXKEYXCANXBEXUSEDXFORXBOTHXTRANSPOSITIONSYXORXTWOXDIFFERENTXKEYSXCANXBEXUSEDX" />
-    <replacement key="$memo$" value="Этот шаблон показывает, как можно построить двухколонный шифр транспонирования, используя два компонента транспонирования.\line\line Во-первых, открытый текст шифруется с использованием первого ключевого слова с первым компонентом транспозиции. Затем текст снова шифруется с использованием второго ключевого слова со вторым компонентом транспозиции. Наконец, зашифрованный текст отображается в зашифрованном текстовом компоненте TextOutput \line\line Расшифровка также показана. Это делается, сначала расшифровав, используя второе ключевое слово, а затем расшифровав, используя первое ключевое слово. Расшифрованный открытый текст отображается в «Расшифрованном зашифрованном виде» Компонент TextOutput." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -63,4 +22,64 @@
     <replacement key="$text$" value="AXSINGLEXCOLUMNARXTRANSPOSITIONXCOULDXBEXATTACKEDXBYXGUESSINGXPOSSIBLEXCOLUMNXLENGTHSYXWRITINGXTHEXMESSAGEXOUTXINXITSXCOLUMNSXXXBUTXINXTHEXWRONGXORDERYXASXTHEXKEYXISXNOTXYETXKNOWNXXYXANDXTHENXLOOKINGXFORXPOSSIBLEXANAGRAMSXXTHUSXTOXMAKEXITXSTRONGERYXAXDOUBLEXTRANSPOSITIONXWASXOFTENXUSEDXXTHISXISXSIMPLYXAXCOLUMNARXTRANSPOSITIONXAPPLIEDXTWICEXXTHEXSAMEXKEYXCANXBEXUSEDXFORXBOTHXTRANSPOSITIONSYXORXTWOXDIFFERENTXKEYSXCANXBEXUSEDX" />
     <replacement key="$memo$" value="This template shows, how a double columnar transposition cipher can be built using two transposition components.\line\line First, the plaintext is encrypted using the first keyword with the first Transposition component. Then, the text is encrypted again using the second keyword with the second Transposition component. Finally, the ciphertext is shown in the ciphertext TextOutput component\line\line The decryption is also shown. It is done, by first decrypting using the second keyword and then decrypting using the first keyword. The decrypted plaintext is shown in the &quot;Decrypted ciphertext&quot; TextOutput component." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">双列换位密码</title>
+  <summary lang="zh">使用换位密码构建双列式换位密码</summary>
+  <description lang="zh">该模板显示了如何通过使用两个Transposition组件来构建双列式换位。首先，使用一个关键字对明文进行加密。然后，使用第二关键字对中间密文进行加密。之后，使用这两个关键字来另外解密最终密文。</description>
+  <keywords lang="zh">换位，双柱状换位，双立方体</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Key$" value="关键1" />
+    <replacement key="$Key2$" value="键2" />
+    <replacement key="$Decrypted Ciphertext$" value="解密密文" />
+    <replacement key="$Transposition (Encryption)$" value="换位（加密）" />
+    <replacement key="$Transposition (Decryption)$" value="换位（解密）" />
+    <replacement key="$text$" value="AXSINGLEXCOLUMNARXTRANSPOSITIONXCOULDXBEXATTACKEDXBYXGUESSINGXPOSSIBLEXCOLUMNXLENGTHSYXWRITINGXTHEXMESSAGEXOUTXINXITSXCOLUMNSXXXBUTXINXTHEXWRONGXORDERYXASXTHEXKEYXISXNOTXYETXKNOWNXXYXANDXTHENXLOOKINGXFORXPOSSIBLEXANAGRAMSXXTHUSXTOXMAKEXITXSTRONGERYXAXDOUBLEXTRANSPOSITIONXWASXOFTENXUSEDXXTHISXISXSIMPLYXAXCOLUMNARXTRANSPOSITIONXAPPLIEDXTWICEXXTHEXSAMEXKEYXCANXBEXUSEDXFORXBOTHXTRANSPOSITIONSYXORXTWOXDIFFERENTXKEYSXCANXBEXUSEDX" />
+    <replacement key="$memo$" value="此模板显示了如何使用两个换位组件来创建双重换位加密：\Line \line首先，使用第一个换位组件的first关键字对明文进行加密。然后，使用带有第二换位成分的第二关键字对文本进行重新加密。最后，密文显示在密文输出组件中。\Line \line还显示解密。为此，首先使用第二个关键字，然后使用第一个关键字进行解密。解密的纯文本显示在“解密的密文”文本输出组件中。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Двойной Шифр ​​Транспозиции</title>
+  <summary lang="ru">Использование шифра <i> Transposition </i> для построения двухколоночного шифра транспонирования</summary>
+  <description lang="ru">Этот шаблон показывает, как построить двухколоночную транспозицию с использованием двух компонентов транспонирования. Во-первых, открытый текст шифруется с использованием одного ключевого слова. Затем промежуточный зашифрованный текст шифруется с использованием второго ключевого слова. После этого два ключевых слова используются для дополнительной расшифровки окончательного зашифрованного текста.</description>
+  <keywords lang="ru">перестановка, Doppelwürfel</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$Key2$" value="ключ 2" />
+    <replacement key="$Decrypted Ciphertext$" value="Расшифрованный зашифрованный текст" />
+    <replacement key="$Transposition (Encryption)$" value="Транспонирование (шифрование)" />
+    <replacement key="$Transposition (Decryption)$" value="Транспонирование (дешифрование)" />
+    <replacement key="$text$" value="AXSINGLEXCOLUMNARXTRANSPOSITIONXCOULDXBEXATTACKEDXBYXGUESSINGXPOSSIBLEXCOLUMNXLENGTHSYXWRITINGXTHEXMESSAGEXOUTXINXITSXCOLUMNSXXXBUTXINXTHEXWRONGXORDERYXASXTHEXKEYXISXNOTXYETXKNOWNXXYXANDXTHENXLOOKINGXFORXPOSSIBLEXANAGRAMSXXTHUSXTOXMAKEXITXSTRONGERYXAXDOUBLEXTRANSPOSITIONXWASXOFTENXUSEDXXTHISXISXSIMPLYXAXCOLUMNARXTRANSPOSITIONXAPPLIEDXTWICEXXTHEXSAMEXKEYXCANXBEXUSEDXFORXBOTHXTRANSPOSITIONSYXORXTWOXDIFFERENTXKEYSXCANXBEXUSEDX" />
+    <replacement key="$memo$" value="Этот шаблон показывает, как можно построить двухколонный шифр транспонирования, используя два компонента транспонирования.\line\line Во-первых, открытый текст шифруется с использованием первого ключевого слова с первым компонентом транспозиции. Затем текст снова шифруется с использованием второго ключевого слова со вторым компонентом транспозиции. Наконец, зашифрованный текст отображается в зашифрованном текстовом компоненте TextOutput \line\line Расшифровка также показана. Это делается, сначала расшифровав, используя второе ключевое слово, а затем расшифровав, используя первое ключевое слово. Расшифрованный открытый текст отображается в «Расшифрованном зашифрованном виде» Компонент TextOutput." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Doppelte Spaltentransposition</title>
+  <summary lang="de">Benutzung der <i>Transpositions</i>-Chiffre um eine doppelte Spaltentransposition zu bauen</summary>
+  <keywords lang="de">Transposition, Doppelte Spaltentransposition, Doppelwürfel</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Key$" value="Schlüssel 1" />
+    <replacement key="$Key2$" value="Schlüssel 2" />
+    <replacement key="$Decrypted Ciphertext$" value="Entschlüsselter Geheimtext" />
+    <replacement key="$Transposition (Encryption)$" value="Transposition (Verschlüsselung)" />
+    <replacement key="$Transposition (Decryption)$" value="Transposition (Entschlüsselung)" />
+    <replacement key="$text$" value="AXSINGLEXCOLUMNARXTRANSPOSITIONXCOULDXBEXATTACKEDXBYXGUESSINGXPOSSIBLEXCOLUMNXLENGTHSYXWRITINGXTHEXMESSAGEXOUTXINXITSXCOLUMNSXXXBUTXINXTHEXWRONGXORDERYXASXTHEXKEYXISXNOTXYETXKNOWNXXYXANDXTHENXLOOKINGXFORXPOSSIBLEXANAGRAMSXXTHUSXTOXMAKEXITXSTRONGERYXAXDOUBLEXTRANSPOSITIONXWASXOFTENXUSEDXXTHISXISXSIMPLYXAXCOLUMNARXTRANSPOSITIONXAPPLIEDXTWICEXXTHEXSAMEXKEYXCANXBEXUSEDXFORXBOTHXTRANSPOSITIONSYXORXTWOXDIFFERENTXKEYSXCANXBEXUSEDX" />
+    <replacement key="$memo$" value="Diese Vorlage zeigt, wie eine doppelte Transpositionsverschlüsselung unter Verwendung von zwei Transpositionskomponenten erstellt werden kann.\line\line Zunächst wird der Klartext mit dem ersten Schlüsselwort mit der ersten Transpositionskomponente verschlüsselt. Anschließend wird der Text erneut mit dem zweiten Schlüsselwort mit der zweiten Transpositionskomponente verschlüsselt. Schließlich wird der Geheimtext in der Geheimtext-Textausgabe-Komponente angezeigt.\line\line Die Entschlüsselung wird ebenfalls angezeigt. Dazu wird zuerst mit dem zweiten Schlüsselwort und dann mit dem ersten Schlüsselwort entschlüsselt. Der entschlüsselte Klartext wird in der &quot;Entschlüsselten Geheimtext&quot;-Textausgabe-Komponente angezeigt." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Transposition.png" />
+  <relevantPlugins>
+    <plugin name="Transposition" />
+  </relevantPlugins>
 </sample>

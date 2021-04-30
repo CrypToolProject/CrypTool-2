@@ -1,21 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Speck.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Speck Cipher</title>
-  <title lang="zh">斑点密码</title>
   <summary lang="en">Usage of the <i>Speck</i> cipher</summary>
-  <summary lang="zh">斑点密码的用法</summary>
   <description lang="en">This template shows how to encrypt and decrypt with 10 variants of the modern block cipher family <i>Speck</i>.</description>
-  <description lang="zh">该模板显示了如何使用现代分组密码族Speck的10个变体进行加密和解密。</description>
   <keywords>block cipher, symmetric, speck</keywords>
-  <keywords lang="zh">分组密码，对称，斑点</keywords>
-  <title lang="de">Speck-Chiffre</title>
-  <summary lang="de">Benutzung der <i>Speck</i>-Chiffre</summary>
-  <description lang="de">Diese Vorlage zeigt, wie man mit den 10 Varianten der modernen Blockchiffrierfamilie <i>Speck</i> ver- und entschlüsseln kann.</description>
-  <keywords lang="de">blockchiffre, symmetrisch, speck</keywords>
-  <icon file="Speck.png" />
-  <relevantPlugins>
-    <plugin name="Speck" />
-  </relevantPlugins>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -25,6 +20,13 @@
     <replacement key="$Stringcoder$" value="Hex to text" />
     <replacement key="$memo$" value="{\b Encryption and Decryption with Speck Cipher} \line\line In this template, any input in the text input component with the subtitle {\b Plaintext / Ciphertext} (in the upper left corner) is encrypted using the Speck cipher. For the encryption, Speck needs a key (in the component with the subtitle {\b Key}) and – depending on the selected chaining mode – an initialization vector (in the component with the subtitle {\b Initialization vector}). \line\line The output (encrypted or decrypted text) is displayed in the component with the subtitle {\b Ciphertext / Plaintext} (in the upper right corner). \line\line Speck works on blocks of bytes. All inputs and outputs are in hexadecimal form. To convert the textual representation, the input and output of the Speck component are converted with appropriate decoders and encoders. The block length for plaintext and ciphertext varies from 32 bit (8 hex characters) to 128 bit (32 hex characters). The key is at least as long as a data block and varies between 64 and 256 bits. \line\line The template is preconfigured to encode inputs in CBC mode with Speck32/64. By adjusting the settings of the Speck component, the template can also be used for other block concatenation or padding modes. Overall 10 variants of Speck are offered. \line\line See: https://en.wikipedia.org/wiki/Speck_(cipher) \line\line {\b Example inputs and expected results}: \line\line Speck32/64: Blockmode=CBC-Mode, Action=Encrypt, Padding=Zeros \line Plaintext=4C6974, IV=80AF127A , Key=0001080910111819 \line expected Ciphertext=EC0D3CEF \line\line Speck48/72: Blockmode=CFB-Mode, Action=Encrypt, Padding=Zeros \line Plaintext=72616C6C7920, IV=80AF127A6C79, Key=00010208090A101112 \line expected Ciphertext=CBD1B27EF141 \line\line (For testing please adjust mode and plaintext or mode, plaintext, IV and key)" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">斑点密码</title>
+  <summary lang="zh">斑点密码的用法</summary>
+  <description lang="zh">该模板显示了如何使用现代分组密码族Speck的10个变体进行加密和解密。</description>
+  <keywords lang="zh">分组密码，对称，斑点</keywords>
   <replacements lang="zh">
     <replacement key="$Plaintext$" value="纯文本" />
     <replacement key="$Ciphertext$" value="密文" />
@@ -34,6 +36,13 @@
     <replacement key="$Stringcoder$" value="十六进制文本" />
     <replacement key="$memo$" value="{\b用Speck密码进行加密和解密} \line \line在此模板中，文本输入组件中带有副标题{\b Plaintext / Ciphertext}（在左上角）的任何输入都使用Speck密码进行了加密。为了进行加密，Speck需要一个密钥（在带有副标题{\b Key}的组件中）和（取决于所选的链接模式）一个初始化向量（在具有副标题{\b Initialization vector}的组件中）。 \line \line输出（加密或解密的文本）以副标题{\b Ciphertext / Plaintext}（在右上角）显示在组件中。 \line \line Speck适用于字节块。所有输入和输出均为十六进制形式。为了转换文本表示形式，使用适当的解码器和编码器转换Speck组件的输入和输出。明文和密文的块长度从32位（8个十六进制字符）到128位（32个十六进制字符）不等。密钥至少与数据块一样长，并且在64位和256位之间变化。 \line \line模板已预先配置为使用Speck32 / 64在CBC模式下对输入进行编码。通过调整Speck组件的设置，该模板还可用于其他块级联或填充模式。总共提供10个Speck变体。 \line \line请参阅：https://en.wikipedia.org/wiki/Speck_(cipher）\line \line {\b示例输入和预期结果}：\line \line Speck32 / 64：Blockmode = CBC-Mode，动作=加密，填充=零\line纯文本= 4C6974，IV = 80AF127A，密钥= 0001080910111819 \线期望的密文= EC0D3CEF \线性\线Speck48 / 72：Blockmode = CFB模式，动作=加密，填充=零\line纯文本= 72616C6C7920，IV = 80AF127A6C79，键= 00010208090A101112 \line期望的密文= CBD1B27EF141 \line \line（用于测试，请调整模式和明文或模式，明文，IV和键）" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Speck-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Speck</i>-Chiffre</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man mit den 10 Varianten der modernen Blockchiffrierfamilie <i>Speck</i> ver- und entschlüsseln kann.</description>
+  <keywords lang="de">blockchiffre, symmetrisch, speck</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
@@ -43,4 +52,11 @@
     <replacement key="$Stringcoder$" value="Hex zu Text" />
     <replacement key="$memo$" value="{\b Verschlüsselung und Entschlüsselung mit der Speck-Chiffre} \line\line In dieser Vorlage wird jede Eingabe in der Texteingabekomponente mit der Unterschrift {\b Klartext / Geheimtext} (in der oberen linken Ecke) mit der Speck-Chiffre verschlüsselt. Für die Verschlüsselung benötigt Speck einen Schlüssel (in der Komponente mit der Unterschrift {\b Schlüssel}) und – je nach gewähltem Verkettungsmodus – einen Initialisierungsvektor (in der Komponente mit der Unterschrift {\b Initialisierungsvektor}). \line\line Die Ausgabe (Geheimtext oder Klartext) wird in der Komponente mit der Unterschrift {\b Geheimtext / Klartext} (in der oberen rechten Ecke) angezeigt. \line\line Alle Ein- und Ausgaben erfolgen in hexadezimaler Form. Um die textuelle Darstellung zu konvertieren, werden die Ein- und Ausgabe der Speck-Komponente mit entsprechenden Decodern und Encodern umgewandelt. Die Blocklänge für Klartext und Geheimtext variiert von 32 bit (8 Hexzeichen) bis 128 bit (32 Hexzeichen). Der Schlüssel ist mindestens so lang wie ein Datenblock und variiert zwischen 64 und 256 bit. \line\line Die Vorlage ist vorkonfiguriert, um Eingaben im CBC-Modus mit Speck32/64 zu kodieren. Durch Anpassung der Einstellungen der Speck-Komponente kann die Vorlage auch für andere Blockverkettungs- und Padding-modi verwendet werden. Insgesamt werden 10 Varianten von Speck angeboten. \line\line Siehe: https://en.wikipedia.org/wiki/Speck_(cipher) \line\line {\b Beispielhafte Eingaben und erwartete Ergebnisse}: \line\line Speck32/64: Betriebsmodus=CBC-Mode, Aktion=Verschlüsseln, Padding=Nullen \line Klartext=4C6974, IV=80AF127A, Schlüssel=0001080910111819 \line erwarteter Geheimtext=EC0D3CEF \line\line Speck48/72: Betriebsmodus=CFB-Mode, Aktion=Verschlüsseln, Padding=Nullen \line Klartext=72616C6C7920, IV=80AF127A6C79, Schlüssel=00010208090A101112 \line erwarteter Geheimtext=CBD1B27EF141 \line\line (Zum Testen bitte Modus und Klartext bzw. Modus, Klartext, IV und Schlüssel anpassen)" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Speck.png" />
+  <relevantPlugins>
+    <plugin name="Speck" />
+  </relevantPlugins>
 </sample>

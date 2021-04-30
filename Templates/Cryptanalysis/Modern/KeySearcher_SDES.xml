@@ -1,49 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: KeySearcher_SDES.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">SDES Brute-Force Analysis</title>
-  <title lang="zh">SDES蛮力分析</title>
-  <title lang="ru">Анализ грубой силы SDES</title>
   <summary lang="en">Cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component</summary>
-  <summary lang="zh">使用KeySearcher组件对SDES算法进行密码分析</summary>
-  <summary lang="ru">Криптоанализ алгоритма SDES с использованием компонента KeySearcher</summary>
   <description lang="en">This template shows the cryptanalysis of the <i>SDES</i> algorithm using the <i>KeySearcher</i> component.</description>
-  <description lang="zh">该模板显示了使用KeySearcher组件对SDES算法进行的密码分析。</description>
-  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма SDES с использованием компонента KeySearcher.</description>
-  <keywords>SDES,symmetric, keysearcher, Attack, Analysis</keywords>
-  <keywords lang="zh">SDES，对称，keysearcher，攻击，分析</keywords>
-  <keywords lang="ru">SDES, стандартный, продвинутый, DES, образование, пример, симметричный, keyearcher, Attack, Analysis</keywords>
-  <title lang="de">SDES Brute-Force-Analyse</title>
-  <summary lang="de">Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente</summary>
-  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente.</description>
-  <keywords lang="de">SDES, DES, symmetrisch, Keysearcher, Angriff, Analyse</keywords>
-  <icon file="SDES.png" />
-  <relevantPlugins>
-    <plugin name="CostFunction" />
-    <plugin name="KeySearcher" />
-    <plugin name="SDES" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
-    <replacement key="$StringDecoder$" value="String-Dekodierer" />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$KeySearcher$" value="关键搜索" />
-    <replacement key="$StringDecoder$" value="字符串解码器" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$KeySearcher$" value="ключ поиска" />
-    <replacement key="$StringDecoder$" value="Строка декодера" />
-  </replacements>
+  <keywords>SDES, symmetric, keysearcher, Attack, Analysis</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Key$" value="Key" />
     <replacement key="$KeySearcher$" value="KeySearcher" />
     <replacement key="$StringDecoder$" value="String Decoder" />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">SDES蛮力分析</title>
+  <summary lang="zh">使用KeySearcher组件对SDES算法进行密码分析</summary>
+  <description lang="zh">该模板显示了使用KeySearcher组件对SDES算法进行的密码分析。</description>
+  <keywords lang="zh">SDES，对称，keysearcher，攻击，分析</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$KeySearcher$" value="关键搜索" />
+    <replacement key="$StringDecoder$" value="字符串解码器" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Анализ грубой силы SDES</title>
+  <summary lang="ru">Криптоанализ алгоритма SDES с использованием компонента KeySearcher</summary>
+  <description lang="ru">Этот шаблон показывает криптоанализ алгоритма SDES с использованием компонента KeySearcher.</description>
+  <keywords lang="ru">SDES, стандартный, продвинутый, DES, образование, пример, симметричный, keyearcher, Attack, Analysis</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$KeySearcher$" value="ключ поиска" />
+    <replacement key="$StringDecoder$" value="Строка декодера" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">SDES Brute-Force-Analyse</title>
+  <summary lang="de">Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente</summary>
+  <description lang="de">Diese Vorlage zeigt die Kryptoanalyse der <i>SDES</i>-Verschlüsselung mittels der <i>KeySearcher</i>-Komponente.</description>
+  <keywords lang="de">SDES, DES, symmetrisch, Keysearcher, Angriff, Analyse</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$KeySearcher$" value="Schlüsselsuche" />
+    <replacement key="$StringDecoder$" value="String-Dekodierer" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="SDES.png" />
+  <relevantPlugins>
+    <plugin name="CostFunction" />
+    <plugin name="KeySearcher" />
+    <plugin name="SDES" />
+  </relevantPlugins>
 </sample>

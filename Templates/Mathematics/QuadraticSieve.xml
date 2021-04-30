@@ -1,49 +1,68 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: QuadraticSieve.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Factorization with Quadratic Sieve (QS)</title>
-  <title lang="zh">二次筛（QS）分解</title>
-  <title lang="ru">Факторизация с квадратичным ситом (QS)</title>
   <summary lang="en">Usage of the <i>Quadratic Sieve</i></summary>
-  <summary lang="zh">二次筛的用途</summary>
-  <summary lang="ru">Использование квадратного сита</summary>
   <description lang="en">The quadratic sieve algorithm (QS) is a modern integer factorization algorithm and, in practice, the fastest method known for numbers with up to ca. 100 decimal digits. For bigger numbers, the general number field sieve (GNFS) is faster, but also considerably more complex than the quadratic sieve. It is a general-purpose factorization algorithm, meaning that its running time depends solely on the size of the integer to be factored, and not on special structure or properties. It was invented by Carl Pomerance in 1981 as an improvement to Schroeppel's linear sieve.<newline /><newline />
 Source: <external ref="http://en.wikipedia.org/wiki/Quadratic_sieve" /></description>
-  <description lang="zh">二次筛算法（QS）是一种现代的整数分解算法，在实践中，它是最快的方法，已知数字最多为ca。 100个十进制数字。对于更大的数字，通用数字场筛（GNFS）更快，但比二次筛复杂得多。它是一种通用的分解算法，这意味着其运行时间仅取决于要分解的整数的大小，而不取决于特殊的结构或属性。它是由Carl Pomerance在1981年发明的，是对Schroeppel线性筛的改进。资源：</description>
-  <description lang="ru">Алгоритм квадратичного сита (QS) представляет собой современный алгоритм целочисленной факторизации и, на практике, самый быстрый метод, известный для чисел с точностью до ок. 100 десятичных цифр. Для больших чисел общее полевое сито (GNFS) выполняется быстрее, но также значительно сложнее, чем квадратичное сито. Это универсальный алгоритм факторизации, означающий, что его время работы зависит только от размера целочисленного числа, которое нужно учитывать, а не от специальной структуры или свойств. Он был изобретен Карлом Померансом в 1981 году как улучшение линейного сита Schroeppel. Источник:</description>
   <keywords>Prime, sieve, Factorization, msieve</keywords>
-  <keywords lang="zh">素数，筛子，因式分解，msieve</keywords>
-  <keywords lang="ru">Прайм, сито, факторизация</keywords>
-  <title lang="de">Faktorisierung mit Quadratischem Sieb (QS)</title>
-  <summary lang="de">Benutzung des <i>Quadratischen Siebs</i></summary>
-  <description lang="de">Das Quadratische Sieb ist ein Begriff aus dem Bereich Zahlentheorie der Mathematik und bezeichnet einen der schnellsten bekannten Algorithmen zur Faktorisierung großer natürlicher Zahlen. Es ist ein allgemeines Faktorisierungsverfahren, d.h. die Laufzeit hängt nur von der Größe der zu faktorisierenden Zahl ab und nicht von speziellen Eigenschaften der Zahl (bzw. ihrer Teiler). Für Zahlen mit bis ca. 100 Dezimalstellen ist es das schnellste (allgemeine) Faktorisierungsverfahren. Für größere Zahlen ist das Zahlkörpersieb (GNFS) schneller. Die Laufzeit zum Faktorisieren einer Zahl n ist (unter einigen als wahrscheinlich geltenden Annahmen) in der Größenordnung von exp( sqrt ( ln n * ln ln n ) ).<newline /><newline />
-Quelle: <external ref="http://de.wikipedia.org/wiki/Quadratisches_Sieb" /></description>
-  <keywords lang="de">Primzahl, Faktorisierung, Zerlegung, quadratisch, Sieb, msieve</keywords>
-  <icon file="QuadraticSieve.png" />
-  <relevantPlugins>
-    <plugin name="QuadraticSieve" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Number Input$" value="Eingabe: Zu faktorisierende Zahl" />
-    <replacement key="$QuadraticSieve$" value="Quadratisches Sieb" />
-    <replacement key="$Output$" value="Ausgabe: Alle Faktoren, einer pro Zeile" />
-    <replacement key="$memo$" value="Oben in der Eingabekomponente können Sie eine beliebige Zahl eingeben. Diese Zahl wird bei der Ausführung dieses Arbeitsbereichs (Play-Taste) durch die Komponente &quot;Quadratisches Sieb&quot; faktorisiert. Das Ergebnis wird in der Ausgabekomponente rechts angezeigt. \line \line Zahlen können auch als mathematischer Ausdruck eingegeben werden, z.B. 2^20+13. \line Wenn das Ergebnis des mathematischen Ausdrucks ein Bruch ist, wird nur der ganzzahlige Teil verwendet, z. (2^3-1)/2 = 7 / 2 = 3. \line \line Die hier in der Vorlage als Beispiel angegebene Zahl (2^304-1)/2 hat eine Länge von 303 Bits und besteht aus 5 Faktoren. Nach dem schnellen Abspalten der beiden zuerst gefundenen, kleinen Faktoren wird die meiste Zeit (ca. 15 Minuten) dafür benötigt, die 291-Bit-lange zusammengesetzte Zahl (38353 ... 78743) zu faktorisierten." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Number Input$" value="输入：要分解的数字" />
-    <replacement key="$QuadraticSieve$" value="方形筛" />
-    <replacement key="$Output$" value="输出：所有因素，每行一个" />
-    <replacement key="$memo$" value="您可以在输入组件的顶部输入任何数字。执行此工作区时（“播放”按钮），此数字由“平方筛”组件进行分解。结果显示在右侧的输出组件中。 \line \line数字也可以作为数学表达式输入，例如2 ^ 20 + 13。 \line如果数学表达式的结果是小数，则仅使用整数部分，例如（2 ^ 3-1）/ 2 = 7/2 =3。\line \line在模板中作为示例给出的数字（2 ^ 304-1）/ 2的长度为303位，由5个因子组成。快速分解出首先发现的两个小因素后，需要大部分时间（大约15分钟）来分解291位长的复合数（38353 ... 78743）。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Number Input$" value="ввод номера" />
-    <replacement key="$QuadraticSieve$" value="Квадратное сито" />
-    <replacement key="$Output$" value="Выход: все факторы, по одному на линию" />
-    <replacement key="$memo$" value="Введите число, указанное выше, после того, как вы запустили рабочую область. Результат выводится на выходе компонента «Квадратный экран» и отображается в компоненте вывода текста. \Line \line Номера также могут быть введены в виде математического выражения, например, 2 ^ 20 + 13. \Line Если значение математического выражения представляет собой долю , используется только целочисленная часть, например (2 ^ 3-1) / 2 = 7/2 = 3." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Number Input$" value="Input: Number to be factorized" />
     <replacement key="$QuadraticSieve$" value="Quadratic Sieve" />
     <replacement key="$Output$" value="Output: All factors, one per line" />
     <replacement key="$memo$" value="Above in the input component, you can enter any number. This number will be factorized by the quadratic sieve component when executing this workspace (Play button). The result will be shown in the output component on the right.\line\line Numbers can also be entered as a mathematical expression, e.g. 2^20+13.\line If the result of the mathematical expression is a fraction, only the integer part is used, e.g. (2^3-1)/2 = 7 / 2 = 3.\line \line The given number is (2^304-1)/2 which is 303 digits long and has 5 factors. After quickly splitting off the two small factors which are found first, most of the time (about 15 minutes) is used to factorize the 291 bit composite (38353...78743)." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">二次筛（QS）分解</title>
+  <summary lang="zh">二次筛的用途</summary>
+  <description lang="zh">二次筛算法（QS）是一种现代的整数分解算法，在实践中，它是最快的方法，已知数字最多为ca。 100个十进制数字。对于更大的数字，通用数字场筛（GNFS）更快，但比二次筛复杂得多。它是一种通用的分解算法，这意味着其运行时间仅取决于要分解的整数的大小，而不取决于特殊的结构或属性。它是由Carl Pomerance在1981年发明的，是对Schroeppel线性筛的改进。资源：</description>
+  <keywords lang="zh">素数，筛子，因式分解，msieve</keywords>
+  <replacements lang="zh">
+    <replacement key="$Number Input$" value="输入：要分解的数字" />
+    <replacement key="$QuadraticSieve$" value="方形筛" />
+    <replacement key="$Output$" value="输出：所有因素，每行一个" />
+    <replacement key="$memo$" value="您可以在输入组件的顶部输入任何数字。执行此工作区时（“播放”按钮），此数字由“平方筛”组件进行分解。结果显示在右侧的输出组件中。 \line \line数字也可以作为数学表达式输入，例如2 ^ 20 + 13。 \line如果数学表达式的结果是小数，则仅使用整数部分，例如（2 ^ 3-1）/ 2 = 7/2 =3。\line \line在模板中作为示例给出的数字（2 ^ 304-1）/ 2的长度为303位，由5个因子组成。快速分解出首先发现的两个小因素后，需要大部分时间（大约15分钟）来分解291位长的复合数（38353 ... 78743）。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Факторизация с квадратичным ситом (QS)</title>
+  <summary lang="ru">Использование квадратного сита</summary>
+  <description lang="ru">Алгоритм квадратичного сита (QS) представляет собой современный алгоритм целочисленной факторизации и, на практике, самый быстрый метод, известный для чисел с точностью до ок. 100 десятичных цифр. Для больших чисел общее полевое сито (GNFS) выполняется быстрее, но также значительно сложнее, чем квадратичное сито. Это универсальный алгоритм факторизации, означающий, что его время работы зависит только от размера целочисленного числа, которое нужно учитывать, а не от специальной структуры или свойств. Он был изобретен Карлом Померансом в 1981 году как улучшение линейного сита Schroeppel. Источник:</description>
+  <keywords lang="ru">Прайм, сито, факторизация</keywords>
+  <replacements lang="ru">
+    <replacement key="$Number Input$" value="ввод номера" />
+    <replacement key="$QuadraticSieve$" value="Квадратное сито" />
+    <replacement key="$Output$" value="Выход: все факторы, по одному на линию" />
+    <replacement key="$memo$" value="Введите число, указанное выше, после того, как вы запустили рабочую область. Результат выводится на выходе компонента «Квадратный экран» и отображается в компоненте вывода текста. \Line \line Номера также могут быть введены в виде математического выражения, например, 2 ^ 20 + 13. \Line Если значение математического выражения представляет собой долю , используется только целочисленная часть, например (2 ^ 3-1) / 2 = 7/2 = 3." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Faktorisierung mit Quadratischem Sieb (QS)</title>
+  <summary lang="de">Benutzung des <i>Quadratischen Siebs</i></summary>
+  <description lang="de">Das Quadratische Sieb ist ein Begriff aus dem Bereich Zahlentheorie der Mathematik und bezeichnet einen der schnellsten bekannten Algorithmen zur Faktorisierung großer natürlicher Zahlen. Es ist ein allgemeines Faktorisierungsverfahren, d.h. die Laufzeit hängt nur von der Größe der zu faktorisierenden Zahl ab und nicht von speziellen Eigenschaften der Zahl (bzw. ihrer Teiler). Für Zahlen mit bis ca. 100 Dezimalstellen ist es das schnellste (allgemeine) Faktorisierungsverfahren. Für größere Zahlen ist das Zahlkörpersieb (GNFS) schneller. Die Laufzeit zum Faktorisieren einer Zahl n ist (unter einigen als wahrscheinlich geltenden Annahmen) in der Größenordnung von exp( sqrt ( ln n * ln ln n ) ).<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Quadratisches_Sieb" /></description>
+  <keywords lang="de">Primzahl, Faktorisierung, Zerlegung, quadratisch, Sieb, msieve</keywords>
+  <replacements lang="de">
+    <replacement key="$Number Input$" value="Eingabe: Zu faktorisierende Zahl" />
+    <replacement key="$QuadraticSieve$" value="Quadratisches Sieb" />
+    <replacement key="$Output$" value="Ausgabe: Alle Faktoren, einer pro Zeile" />
+    <replacement key="$memo$" value="Oben in der Eingabekomponente können Sie eine beliebige Zahl eingeben. Diese Zahl wird bei der Ausführung dieses Arbeitsbereichs (Play-Taste) durch die Komponente &quot;Quadratisches Sieb&quot; faktorisiert. Das Ergebnis wird in der Ausgabekomponente rechts angezeigt. \line \line Zahlen können auch als mathematischer Ausdruck eingegeben werden, z.B. 2^20+13. \line Wenn das Ergebnis des mathematischen Ausdrucks ein Bruch ist, wird nur der ganzzahlige Teil verwendet, z. (2^3-1)/2 = 7 / 2 = 3. \line \line Die hier in der Vorlage als Beispiel angegebene Zahl (2^304-1)/2 hat eine Länge von 303 Bits und besteht aus 5 Faktoren. Nach dem schnellen Abspalten der beiden zuerst gefundenen, kleinen Faktoren wird die meiste Zeit (ca. 15 Minuten) dafür benötigt, die 291-Bit-lange zusammengesetzte Zahl (38353 ... 78743) zu faktorisierten." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="QuadraticSieve.png" />
+  <relevantPlugins>
+    <plugin name="QuadraticSieve" />
+  </relevantPlugins>
 </sample>

@@ -1,49 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Avalanche (Modern Ciphers).xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Avalanche (Modern Ciphers)</title>
-  <title lang="zh">雪崩（现代密码）</title>
-  <title lang="ru">Лавина (современные шифры)</title>
   <summary lang="en">This template demonstrates the Avalanche effect in modern ciphers.</summary>
-  <summary lang="zh">该模板演示了现代密码中的雪崩效应。</summary>
-  <summary lang="ru">Этот шаблон демонстрирует эффект лавины в современных шифрах.</summary>
   <description lang="en">This template shows how the Avalanche Visualization component can be used to demonstrate the Avalanche effect in modern ciphers.</description>
-  <description lang="zh">该模板显示了雪崩可视化组件如何用于演示现代密码中的雪崩效应。</description>
-  <description lang="ru">Этот шаблон показывает, как компонент визуализации лавины можно использовать для демонстрации эффекта лавины в современных шифрах.</description>
   <keywords>Avalanche, Analysis, modern</keywords>
-  <keywords lang="zh">雪崩，分析，现代</keywords>
-  <keywords lang="ru">Лавина, анализ, современный</keywords>
-  <title lang="de">Avalanche (moderne Verschlüsselungsverfahren)</title>
-  <summary lang="de">Diese Vorlage demonstriert den Avalanche-Effekt bei modernen Verschlüsselungsverfahren.</summary>
-  <description lang="de">Diese Vorlage zeigt, wie man mit der Komponente 'Avalanche-Visualisierung' den Avalanche-Effekt bei modernen Verschlüsselungsverfahren demonstrieren kann.</description>
-  <keywords lang="de">Avalanche, Analyse, moderne</keywords>
-  <icon file="Avalanche.PNG" />
-  <relevantPlugins>
-    <plugin name="AvalancheVisualization" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Avalanche Visualization$" value="Avalanche-Visualisierung" />
-    <replacement key="$Sender Key$" value="Sender-Schlüssel" />
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$String Decoder$" value="String-Dekodierer" />
-    <replacement key="$Generated Data$" value="Generierte Daten" />
-    <replacement key="$Memo$" value="Diese Vorlage veranschaulicht den Avalanche-Effekt bei modernen Verschlüsselungsverfahren.\line\line Nach &quot;Starten&quot; wird der aus den Eingaben resultierende Geheimtext angezeigt. Verändern Sie nun die Eingabe, erhalten Sie einen entsprechenden neuen Geheimtext (Die Eingabe besteht in diesem Fall aus dem Klartext und dem Sender-Schlüssel. Bei anderen Verfahren wird noch eine zusätzliche Eingabe benötigt, z.B. ein IV bei der Achterbahn-Chiffre). Anschließend werden beide Geheimtexte hinsichtlich des Avalanche-Effekts verglichen. Auf der Präsentation sind neben dem Wert des Avalanche-Effekts auch andere relevante statistische Daten zu finden." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Avalanche Visualization$" value="雪崩可视化" />
-    <replacement key="$Sender Key$" value="发射钥匙" />
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$String Decoder$" value="字符串解码器" />
-    <replacement key="$Generated Data$" value="产生的数据" />
-    <replacement key="$Memo$" value="此模板说明了现代加密方法中的雪崩效应\Line \line在“开始”之后，将显示条目产生的密文。如果现在更改条目，您将收到一个相应的新密文（在这种情况下，该条目包括纯文本和发送器密钥。使用其他方法，还需要一个附加的条目，例如过山车密码的IV）。然后比较两个密文的雪崩效应。除了雪崩效应的值外，还可以在演示文稿中找到其他相关的统计数据。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Avalanche Visualization$" value="Avalanche визуализация" />
-    <replacement key="$Sender Key$" value="Передатчик-ключ" />
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$String Decoder$" value="Строка декодера" />
-    <replacement key="$Generated Data$" value="Сгенерированные данные" />
-    <replacement key="$Memo$" value="Этот шаблон иллюстрирует эффект лавины в современных методах шифрования. \Line \line После «Пуск» отображается зашифрованный текст, полученный из записей. Если вы измените ввод, вы получите соответствующий новый шифротекст (в этом случае вход состоит из открытого текста и ключа отправителя.) Другие методы требуют дополнительного ввода, например, IV на шифре американских горках). Впоследствии оба зашифрованных текста сравниваются с лавинным эффектом. В дополнение к значению лавинного эффекта на презентации можно найти другие соответствующие статистические данные." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Avalanche Visualization$" value="Avalanche Visualization" />
     <replacement key="$Sender Key$" value="Sender Key" />
@@ -52,4 +19,56 @@
     <replacement key="$Generated Data$" value="Generated Data" />
     <replacement key="$Memo$" value="This template helps visualize the avalanche effect on modern ciphers.\line\line After pressing &quot;Play&quot; the initial ciphertext resulting from the input feed is shown (In this case the input feed consists of plaintext and key. Other ciphers might require a third entry such as an IV. For instance in the Achterbahn cipher). If you modify any of the input entries you will get a new corresponding ciphertext. Subsequently, the two ciphertexts obtained are compared and their avalanche effect values are shown. Besides the value of the avalanche effect itself other relevant statistical data is displayed." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">雪崩（现代密码）</title>
+  <summary lang="zh">该模板演示了现代密码中的雪崩效应。</summary>
+  <description lang="zh">该模板显示了雪崩可视化组件如何用于演示现代密码中的雪崩效应。</description>
+  <keywords lang="zh">雪崩，分析，现代</keywords>
+  <replacements lang="zh">
+    <replacement key="$Avalanche Visualization$" value="雪崩可视化" />
+    <replacement key="$Sender Key$" value="发射钥匙" />
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$String Decoder$" value="字符串解码器" />
+    <replacement key="$Generated Data$" value="产生的数据" />
+    <replacement key="$Memo$" value="此模板说明了现代加密方法中的雪崩效应\Line \line在“开始”之后，将显示条目产生的密文。如果现在更改条目，您将收到一个相应的新密文（在这种情况下，该条目包括纯文本和发送器密钥。使用其他方法，还需要一个附加的条目，例如过山车密码的IV）。然后比较两个密文的雪崩效应。除了雪崩效应的值外，还可以在演示文稿中找到其他相关的统计数据。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Лавина (современные шифры)</title>
+  <summary lang="ru">Этот шаблон демонстрирует эффект лавины в современных шифрах.</summary>
+  <description lang="ru">Этот шаблон показывает, как компонент визуализации лавины можно использовать для демонстрации эффекта лавины в современных шифрах.</description>
+  <keywords lang="ru">Лавина, анализ, современный</keywords>
+  <replacements lang="ru">
+    <replacement key="$Avalanche Visualization$" value="Avalanche визуализация" />
+    <replacement key="$Sender Key$" value="Передатчик-ключ" />
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$String Decoder$" value="Строка декодера" />
+    <replacement key="$Generated Data$" value="Сгенерированные данные" />
+    <replacement key="$Memo$" value="Этот шаблон иллюстрирует эффект лавины в современных методах шифрования. \Line \line После «Пуск» отображается зашифрованный текст, полученный из записей. Если вы измените ввод, вы получите соответствующий новый шифротекст (в этом случае вход состоит из открытого текста и ключа отправителя.) Другие методы требуют дополнительного ввода, например, IV на шифре американских горках). Впоследствии оба зашифрованных текста сравниваются с лавинным эффектом. В дополнение к значению лавинного эффекта на презентации можно найти другие соответствующие статистические данные." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Avalanche (moderne Verschlüsselungsverfahren)</title>
+  <summary lang="de">Diese Vorlage demonstriert den Avalanche-Effekt bei modernen Verschlüsselungsverfahren.</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man mit der Komponente 'Avalanche-Visualisierung' den Avalanche-Effekt bei modernen Verschlüsselungsverfahren demonstrieren kann.</description>
+  <keywords lang="de">Avalanche, Analyse, moderne</keywords>
+  <replacements lang="de">
+    <replacement key="$Avalanche Visualization$" value="Avalanche-Visualisierung" />
+    <replacement key="$Sender Key$" value="Sender-Schlüssel" />
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$String Decoder$" value="String-Dekodierer" />
+    <replacement key="$Generated Data$" value="Generierte Daten" />
+    <replacement key="$Memo$" value="Diese Vorlage veranschaulicht den Avalanche-Effekt bei modernen Verschlüsselungsverfahren.\line\line Nach &quot;Starten&quot; wird der aus den Eingaben resultierende Geheimtext angezeigt. Verändern Sie nun die Eingabe, erhalten Sie einen entsprechenden neuen Geheimtext (Die Eingabe besteht in diesem Fall aus dem Klartext und dem Sender-Schlüssel. Bei anderen Verfahren wird noch eine zusätzliche Eingabe benötigt, z.B. ein IV bei der Achterbahn-Chiffre). Anschließend werden beide Geheimtexte hinsichtlich des Avalanche-Effekts verglichen. Auf der Präsentation sind neben dem Wert des Avalanche-Effekts auch andere relevante statistische Daten zu finden." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Avalanche.PNG" />
+  <relevantPlugins>
+    <plugin name="AvalancheVisualization" />
+  </relevantPlugins>
 </sample>

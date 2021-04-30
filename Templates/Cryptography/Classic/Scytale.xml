@@ -1,48 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Scytale.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Scytale Cipher</title>
-  <title lang="zh">镰状密码</title>
-  <title lang="ru">Scytale Cipher</title>
   <summary lang="en">Usage of the <i>Scytale</i> cipher</summary>
-  <summary lang="zh">Scytale密码的用法</summary>
-  <summary lang="ru">Использование шифрования Scytale</summary>
   <description lang="en">In cryptography, a scytale (/ˈskɪtəliː/, rhymes approximately with Italy; also transliterated skytale, Greek σκυτάλη "baton") is a tool used to perform a transposition cipher, consisting of a cylinder with a strip of parchment wound around it on which is written a message. The ancient Greeks, and the Spartans in particular, are said to have used this cipher to communicate during military campaigns. The recipient uses a rod of the same diameter on which he wraps the parchment to read the message. It has the advantage of being fast and not prone to mistakes—a necessary property when on the battlefield. It can, however, be easily broken. Since the strip of parchment hints strongly at the method, the ciphertext would have to be transferred to something less suggestive, somewhat reducing the advantage noted.<newline /><newline />
 Source: <external ref="http://en.wikipedia.org/wiki/Scytale" /></description>
-  <description lang="zh">在密码术中，短剑（/ ˈskɪtəliː /，大约与意大利押韵；也有音译的空话，希腊语σκυτάλη“ baton”）是一种用于执行换位密码的工具，它由圆柱体和缠有羊皮纸条的圆柱体组成。写了一条消息。据说古希腊人，特别是斯巴达人，在军事战役中使用这种密码进行交流。收件人使用一根直径相同的棒，将其包裹在羊皮纸上，以阅读消息。它的优点是速度快，不容易出错，这是在战场上必不可少的特性。但是，它很容易损坏。由于羊皮纸条强烈暗示了该方法，因此密文必须转移到不太暗示的东西上，从而在某种程度上降低了所指出的优势。资源：</description>
-  <description lang="ru">В криптографии, scytale (/ skɪtəliː /, рифмуется примерно с Италией, также транслитерированная skytale, греческая σκυτάλη «baton») - это инструмент, используемый для выполнения шифрования транспонирования, состоящий из цилиндра с полоской пергамента, намотанной вокруг него, на которой написал сообщение. Говорят, что древние греки и спартанцы использовали этот шифр для общения во время военных кампаний. Получатель использует стержень того же диаметра, на который он обертывает пергамент, чтобы прочитать сообщение. Преимущество состоит в том, чтобы быть быстрым и не подверженным ошибкам - необходимым свойством, когда на поле битвы. Однако его можно легко сломать. Поскольку полоска пергамента сильно указывает на метод, зашифрованный текст должен быть перенесен на что-то менее наводящее на размышления, несколько уменьшая указанное преимущество. Источник:</description>
   <keywords>Sparta, Wood, Greek, Transposition, diameter, rod</keywords>
-  <keywords lang="zh">斯巴达，木材，希腊文，换位，直径，杆</keywords>
-  <keywords lang="ru">Спарта, Дерево, Греческий, Транспонирование, диаметр, стержень</keywords>
-  <title lang="de">Skytale-Chiffre</title>
-  <summary lang="de">Benutzung der <i>Skytale</i>-Chiffre</summary>
-  <description lang="de">Die Skytale (griech.: „scytale“; σκυτάλη, [sky'talə]: ‚Stock‘, ‚Stab‘) ist das älteste bekannte militärische Verschlüsselungsverfahren. Von den Spartanern wurden bereits vor mehr als 2500 Jahren geheime Botschaften nicht im Klartext übermittelt. Zur Verschlüsselung diente ein (Holz-)Stab mit einem bestimmten Durchmesser (Skytale).<newline /><newline />
-Quelle: <external ref="http://de.wikipedia.org/wiki/Skytale" /></description>
-  <keywords lang="de">Griechenland, Holz, Durchmesser, Stab, Skytale</keywords>
-  <icon file="Scytale.png" />
-  <relevantPlugins>
-    <plugin name="Scytale" />
-  </relevantPlugins>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$Scytale$" value="Skytale" />
-    <replacement key="$Key$" value="Schlüssel" />
-    <replacement key="$message$" value="Dies ist eine geheime Botschaft." />
-  </replacements>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$Ciphertext$" value="密文" />
-    <replacement key="$Scytale$" value="天空传说" />
-    <replacement key="$Key$" value="键" />
-    <replacement key="$message$" value="这是一个秘密信息。" />
-  </replacements>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="обычный текст" />
-    <replacement key="$Ciphertext$" value="шифротекста" />
-    <replacement key="$Scytale$" value="Skytale" />
-    <replacement key="$Key$" value="ключ" />
-    <replacement key="$message$" value="Это секретное сообщение." />
-  </replacements>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
@@ -50,4 +19,54 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/Skytale" /></description>
     <replacement key="$Key$" value="Key" />
     <replacement key="$message$" value="This is a secret message." />
   </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">镰状密码</title>
+  <summary lang="zh">Scytale密码的用法</summary>
+  <description lang="zh">在密码术中，短剑（/ ˈskɪtəliː /，大约与意大利押韵；也有音译的空话，希腊语σκυτάλη“ baton”）是一种用于执行换位密码的工具，它由圆柱体和缠有羊皮纸条的圆柱体组成。写了一条消息。据说古希腊人，特别是斯巴达人，在军事战役中使用这种密码进行交流。收件人使用一根直径相同的棒，将其包裹在羊皮纸上，以阅读消息。它的优点是速度快，不容易出错，这是在战场上必不可少的特性。但是，它很容易损坏。由于羊皮纸条强烈暗示了该方法，因此密文必须转移到不太暗示的东西上，从而在某种程度上降低了所指出的优势。资源：</description>
+  <keywords lang="zh">斯巴达，木材，希腊文，换位，直径，杆</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$Ciphertext$" value="密文" />
+    <replacement key="$Scytale$" value="天空传说" />
+    <replacement key="$Key$" value="键" />
+    <replacement key="$message$" value="这是一个秘密信息。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Scytale Cipher</title>
+  <summary lang="ru">Использование шифрования Scytale</summary>
+  <description lang="ru">В криптографии, scytale (/ skɪtəliː /, рифмуется примерно с Италией, также транслитерированная skytale, греческая σκυτάλη «baton») - это инструмент, используемый для выполнения шифрования транспонирования, состоящий из цилиндра с полоской пергамента, намотанной вокруг него, на которой написал сообщение. Говорят, что древние греки и спартанцы использовали этот шифр для общения во время военных кампаний. Получатель использует стержень того же диаметра, на который он обертывает пергамент, чтобы прочитать сообщение. Преимущество состоит в том, чтобы быть быстрым и не подверженным ошибкам - необходимым свойством, когда на поле битвы. Однако его можно легко сломать. Поскольку полоска пергамента сильно указывает на метод, зашифрованный текст должен быть перенесен на что-то менее наводящее на размышления, несколько уменьшая указанное преимущество. Источник:</description>
+  <keywords lang="ru">Спарта, Дерево, Греческий, Транспонирование, диаметр, стержень</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="обычный текст" />
+    <replacement key="$Ciphertext$" value="шифротекста" />
+    <replacement key="$Scytale$" value="Skytale" />
+    <replacement key="$Key$" value="ключ" />
+    <replacement key="$message$" value="Это секретное сообщение." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Skytale-Chiffre</title>
+  <summary lang="de">Benutzung der <i>Skytale</i>-Chiffre</summary>
+  <description lang="de">Die Skytale (griech.: „scytale“; σκυτάλη, [sky'talə]: ‚Stock‘, ‚Stab‘) ist das älteste bekannte militärische Verschlüsselungsverfahren. Von den Spartanern wurden bereits vor mehr als 2500 Jahren geheime Botschaften nicht im Klartext übermittelt. Zur Verschlüsselung diente ein (Holz-)Stab mit einem bestimmten Durchmesser (Skytale).<newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Skytale" /></description>
+  <keywords lang="de">Griechenland, Holz, Durchmesser, Stab, Skytale</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$Scytale$" value="Skytale" />
+    <replacement key="$Key$" value="Schlüssel" />
+    <replacement key="$message$" value="Dies ist eine geheime Botschaft." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Scytale.png" />
+  <relevantPlugins>
+    <plugin name="Scytale" />
+  </relevantPlugins>
 </sample>

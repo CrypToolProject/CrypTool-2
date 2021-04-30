@@ -1,21 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: CypherMatrix_enc-dec.xml-->
+  <!--Last edited: 2021.04.30-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">CypherMatrix Cipher</title>
-  <title lang="zh">密码矩阵密码</title>
-  <title lang="ru">CypherMatrix Cipher</title>
   <summary lang="en">Usage of the <i>CypherMatrix</i> cipher</summary>
-  <summary lang="zh">CypherMatrix密码的用法</summary>
-  <summary lang="ru">Использование шифрования CypherMatrix</summary>
   <description lang="en">This template shows how to use <i>CypherMatrix</i> en-/decryption.</description>
-  <description lang="zh">该模板显示了如何使用CypherMatrix加密/解密。</description>
-  <description lang="ru">Этот шаблон показывает, как использовать шифрование CypherMatrix.</description>
   <keywords>CypherMatrix, Schnoor</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">密码矩阵密码</title>
+  <summary lang="zh">CypherMatrix密码的用法</summary>
+  <description lang="zh">该模板显示了如何使用CypherMatrix加密/解密。</description>
   <keywords lang="zh">施诺尔CypherMatrix</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">CypherMatrix Cipher</title>
+  <summary lang="ru">Использование шифрования CypherMatrix</summary>
+  <description lang="ru">Этот шаблон показывает, как использовать шифрование CypherMatrix.</description>
   <keywords lang="ru">CypherMatrix, Schnoor</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">CypherMatrix-Chiffre</title>
   <summary lang="de">Benutzung der <i>CypherMatrix</i>-Chiffre</summary>
   <description lang="de">Diese Vorlage zeigt die Verwendung der <i>CypherMatrix</i>-Ver-/Entschlüsselung.</description>
   <keywords lang="de">CypherMatrix, Schnoor</keywords>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="CypherMatrix.png" />
   <relevantPlugins>
     <plugin name="CypherMatrix" />
