@@ -29,6 +29,9 @@ namespace TemplateEditor
         private List<Replacement> _deletedReplacements = new List<Replacement>();
         private List<Replacement> _addedReplacements = new List<Replacement>();
 
+        private string _selectedLanuage = null;
+
+
         public bool IsOverview
         {
             get { return (bool) GetValue(IsOverviewProperty); }
@@ -189,7 +192,24 @@ namespace TemplateEditor
                 LanguageBox.Items.Add(localization);
             }
 
+            if (_selectedLanuage != null)
+            {
+                var index = 0;
+                foreach(var keyValuePair in LanguageBox.Items)
+                {
+                    var language = ((KeyValuePair<string, LocalizedTemplateData>)keyValuePair).Key;
+
+                    if (_selectedLanuage.Equals(language))
+                    {
+                        break; 
+                    }
+                    index++;
+                }
+                LanguageBox.SelectedIndex = index;
+                return;
+            }            
             LanguageBox.SelectedIndex = 0;
+            
         }
 
         private void LanguageBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -231,6 +251,10 @@ namespace TemplateEditor
             finally
             {
                 IsDirty = false;
+                if (LanguageBox.SelectedItem != null)
+                {
+                    _selectedLanuage = ((KeyValuePair<string, LocalizedTemplateData>)LanguageBox.SelectedItem).Key;
+                }
             }
         }
 
