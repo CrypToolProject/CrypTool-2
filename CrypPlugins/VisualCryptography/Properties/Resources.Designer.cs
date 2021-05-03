@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CrypTool.Plugins.VisualCryptography.Properties {
+namespace VisualEncoder.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CrypTool.Plugins.VisualCryptography.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CrypTool.Plugins.VisualCryptography.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VisualEncoder.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,169 +61,367 @@ namespace CrypTool.Plugins.VisualCryptography.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Characters per Row ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Append Checksum ähnelt.
         /// </summary>
-        internal static string CharactersPerRowCaption {
+        internal static string AppendICVCaption {
             get {
-                return ResourceManager.GetString("CharactersPerRowCaption", resourceCulture);
+                return ResourceManager.GetString("AppendICVCaption", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die How many characters should appear in a single row of text? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The Component will automatically append a checksum. ähnelt.
         /// </summary>
-        internal static string CharactersPerRowTooltip {
+        internal static string AppendICVTooltip {
             get {
-                return ResourceManager.GetString("CharactersPerRowTooltip", resourceCulture);
+                return ResourceManager.GetString("AppendICVTooltip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Could not read image: {0} ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die properties of barcode ähnelt.
         /// </summary>
-        internal static string CouldNotReadImage {
+        internal static string BarcodeSection {
             get {
-                return ResourceManager.GetString("CouldNotReadImage", resourceCulture);
+                return ResourceManager.GetString("BarcodeSection", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Image 1 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The ICV is calculated from a weighted
+        ///sum (modulo 103) of all the characters. ähnelt.
         /// </summary>
-        internal static string Image1Caption {
+        internal static string C128_ICV_DISC {
             get {
-                return ResourceManager.GetString("Image1Caption", resourceCulture);
+                return ResourceManager.GetString("C128_ICV_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die First encrypted image part ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Integrity Check Value ähnelt.
         /// </summary>
-        internal static string Image1Tooltip {
+        internal static string C128_ICV_LABLE {
             get {
-                return ResourceManager.GetString("Image1Tooltip", resourceCulture);
+                return ResourceManager.GetString("C128_ICV_LABLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Image 2 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die There are three distinct start patterns 
+        ///that determine in which way the
+        ///code was encoded. However, the 
+        ///end pattern is always the same. ähnelt.
         /// </summary>
-        internal static string Image2Caption {
+        internal static string C128_STARTEND_DISC {
             get {
-                return ResourceManager.GetString("Image2Caption", resourceCulture);
+                return ResourceManager.GetString("C128_STARTEND_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Second encrypted image part ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start and End Pattern ähnelt.
         /// </summary>
-        internal static string Image2Tooltip {
+        internal static string C128_STARTEND_LABLE {
             get {
-                return ResourceManager.GetString("Image2Tooltip", resourceCulture);
+                return ResourceManager.GetString("C128_STARTEND_LABLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Input data is a {0}. The Visual Cryptography component can only encrypt images and strings ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The ICV is calculated from a weighted
+        ///sum (modulo 43) of all the characters. ähnelt.
         /// </summary>
-        internal static string InvalidInput {
+        internal static string C38_ICV_DISC {
             get {
-                return ResourceManager.GetString("InvalidInput", resourceCulture);
+                return ResourceManager.GetString("C38_ICV_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No plaintext input provided ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Integrity Check Value ähnelt.
         /// </summary>
-        internal static string NoPlaintextInputProvided {
+        internal static string C38_ICV_LABLE {
             get {
-                return ResourceManager.GetString("NoPlaintextInputProvided", resourceCulture);
+                return ResourceManager.GetString("C38_ICV_LABLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Diagonal ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The Start and End Symbol is a &apos;*&apos;. 
+        ///With the aid of the symbol, the
+        ///code can be read reliably, even if
+        ///it is read backwards. ähnelt.
         /// </summary>
-        internal static string Pattern_Diagonal {
+        internal static string C38_STARTEND_DISC {
             get {
-                return ResourceManager.GetString("Pattern_Diagonal", resourceCulture);
+                return ResourceManager.GetString("C38_STARTEND_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Horizontal ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start and End Symbol ähnelt.
         /// </summary>
-        internal static string Pattern_Horizontal {
+        internal static string C38_STARTEND_LABLE {
             get {
-                return ResourceManager.GetString("Pattern_Horizontal", resourceCulture);
+                return ResourceManager.GetString("C38_STARTEND_LABLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Horizontal and diagonal ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalide Input ähnelt.
         /// </summary>
-        internal static string Pattern_HorizontalDiagonal {
+        internal static string CODE39_INVALIDE_INPUT {
             get {
-                return ResourceManager.GetString("Pattern_HorizontalDiagonal", resourceCulture);
+                return ResourceManager.GetString("CODE39_INVALIDE_INPUT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Horizontal and vertical ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Visual code ähnelt.
         /// </summary>
-        internal static string Pattern_HorizontalVertical {
+        internal static string DimCodeLabel {
             get {
-                return ResourceManager.GetString("Pattern_HorizontalVertical", resourceCulture);
+                return ResourceManager.GetString("DimCodeLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Horizontal, vertical, and diagonal ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The alignment pattern is static.  
+        ///It enables to read the code at 
+        ///every alignment. ähnelt.
         /// </summary>
-        internal static string Pattern_HorizontalVerticalDiagonal {
+        internal static string DM_ALIG_DISC {
             get {
-                return ResourceManager.GetString("Pattern_HorizontalVerticalDiagonal", resourceCulture);
+                return ResourceManager.GetString("DM_ALIG_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Vertical ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alignment Detection ähnelt.
         /// </summary>
-        internal static string Pattern_Vertical {
+        internal static string DM_ALIG_LABLE {
             get {
-                return ResourceManager.GetString("Pattern_Vertical", resourceCulture);
+                return ResourceManager.GetString("DM_ALIG_LABLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Vertical and diagonal ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die This pattern helps the reader to easily  
+        ///find the different data column in the code. ähnelt.
         /// </summary>
-        internal static string Pattern_VerticalDiagonal {
+        internal static string DM_COLUMNID_DISC {
             get {
-                return ResourceManager.GetString("Pattern_VerticalDiagonal", resourceCulture);
+                return ResourceManager.GetString("DM_COLUMNID_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Plaintext ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Column Identificator ähnelt.
         /// </summary>
-        internal static string PlaintextCaption {
+        internal static string DM_COLUMNID_LABLE {
             get {
-                return ResourceManager.GetString("PlaintextCaption", resourceCulture);
+                return ResourceManager.GetString("DM_COLUMNID_LABLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Text or Image to be encrypted ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The input contains invalid characters. Only Digits are allowed. ähnelt.
         /// </summary>
-        internal static string PlaintextTooltip {
+        internal static string EAN_INVALIDE_INPUT {
             get {
-                return ResourceManager.GetString("PlaintextTooltip", resourceCulture);
+                return ResourceManager.GetString("EAN_INVALIDE_INPUT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Visual Cryptography ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The fixed Bars are mainly orientations
+        ///points for the reader. 
+        ///They are necessary, because the
+        ///encoding changes at these points. ähnelt.
+        /// </summary>
+        internal static string EAN13_FIXED_DISC {
+            get {
+                return ResourceManager.GetString("EAN13_FIXED_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fixed Reference Point ähnelt.
+        /// </summary>
+        internal static string EAN13_FIXED_LABLE {
+            get {
+                return ResourceManager.GetString("EAN13_FIXED_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The checksum is calculated taking a 
+        ///varying weight value times the value 
+        ///of each number in the barcode to 
+        ///make a sum (modulo 10). ähnelt.
+        /// </summary>
+        internal static string EAN13_ICV_DISC {
+            get {
+                return ResourceManager.GetString("EAN13_ICV_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Integrity Check Value ähnelt.
+        /// </summary>
+        internal static string EAN13_ICV_LABLE {
+            get {
+                return ResourceManager.GetString("EAN13_ICV_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The fixed Bars are mainly orientations
+        ///points for the reader. 
+        ///They are necessary, because the
+        ///encoding changes at these points. ähnelt.
+        /// </summary>
+        internal static string EAN8_FIXED_DISC {
+            get {
+                return ResourceManager.GetString("EAN8_FIXED_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fixed Reference Point ähnelt.
+        /// </summary>
+        internal static string EAN8_FIXED_LABLE {
+            get {
+                return ResourceManager.GetString("EAN8_FIXED_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The checksum is calculated taking a 
+        ///varying weight value times the value 
+        ///of each number in the barcode to 
+        ///make a sum (modulo 10). ähnelt.
+        /// </summary>
+        internal static string EAN8_ICV_DISC {
+            get {
+                return ResourceManager.GetString("EAN8_ICV_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Integrity Check Value ähnelt.
+        /// </summary>
+        internal static string EAN8_ICV_LABLE {
+            get {
+                return ResourceManager.GetString("EAN8_ICV_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type of Barcode ähnelt.
+        /// </summary>
+        internal static string EncodingTypeCaption {
+            get {
+                return ResourceManager.GetString("EncodingTypeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choose a Barcodetype ähnelt.
+        /// </summary>
+        internal static string EncodingTypeTooltip {
+            get {
+                return ResourceManager.GetString("EncodingTypeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Explanation ähnelt.
+        /// </summary>
+        internal static string ExplainLabel {
+            get {
+                return ResourceManager.GetString("ExplainLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Input Data ähnelt.
+        /// </summary>
+        internal static string InputStreamCaption {
+            get {
+                return ResourceManager.GetString("InputStreamCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The data you want to encode as a barcode. ähnelt.
+        /// </summary>
+        internal static string InputStreamTooltip {
+            get {
+                return ResourceManager.GetString("InputStreamTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die This pattern helps the reader to easily  
+        ///find the different data rows in the code. ähnelt.
+        /// </summary>
+        internal static string PDF417_ROWID_DISC {
+            get {
+                return ResourceManager.GetString("PDF417_ROWID_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Row  Identificator ähnelt.
+        /// </summary>
+        internal static string PDF417_ROWID_LABLE {
+            get {
+                return ResourceManager.GetString("PDF417_ROWID_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die With the aid of the pattern, the
+        ///code can be read reliably, even if
+        ///it is read upside down or 
+        ///backwards. ähnelt.
+        /// </summary>
+        internal static string PDF417_SEPAT_DISC {
+            get {
+                return ResourceManager.GetString("PDF417_SEPAT_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Start and End Pattern ähnelt.
+        /// </summary>
+        internal static string PDF417_SEPAT_LABLE {
+            get {
+                return ResourceManager.GetString("PDF417_SEPAT_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Picture output ähnelt.
+        /// </summary>
+        internal static string PictureBytesCaption {
+            get {
+                return ResourceManager.GetString("PictureBytesCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Your Barcode as a picture. ähnelt.
+        /// </summary>
+        internal static string PictureBytesTooltip {
+            get {
+                return ResourceManager.GetString("PictureBytesTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Visual Encoder ähnelt.
         /// </summary>
         internal static string PluginCaption {
             get {
@@ -232,7 +430,7 @@ namespace CrypTool.Plugins.VisualCryptography.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Component, which allows to encrypt a text or an image using visual cryptography ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Encodes various types of one and two dimensional codes ähnelt.
         /// </summary>
         internal static string PluginTooltip {
             get {
@@ -241,38 +439,83 @@ namespace CrypTool.Plugins.VisualCryptography.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Threshold ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The alignment pattern is static.  
+        ///It enables to read the code at 
+        ///every alignment. ähnelt.
         /// </summary>
-        internal static string ThresholdCaption {
+        internal static string QR_ALIG_DISC {
             get {
-                return ResourceManager.GetString("ThresholdCaption", resourceCulture);
+                return ResourceManager.GetString("QR_ALIG_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Threshold, which is used to convert the gray value of the image to a black or white pixel ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Alignment Detection ähnelt.
         /// </summary>
-        internal static string ThresholdTooltip {
+        internal static string QR_ALIG_LABLE {
             get {
-                return ResourceManager.GetString("ThresholdTooltip", resourceCulture);
+                return ResourceManager.GetString("QR_ALIG_LABLE", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Visual pattern ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Here among others, the Error Correction
+        ///Level is determined. This indicates what 
+        ///percentage of the code (7% - 30%) can be
+        ///recovered in case of damage. ähnelt.
         /// </summary>
-        internal static string VisualPatternCaption {
+        internal static string QR_FORMAT_DISC {
             get {
-                return ResourceManager.GetString("VisualPatternCaption", resourceCulture);
+                return ResourceManager.GetString("QR_FORMAT_DISC", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Which visual pattern should be used? ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Format Informations ähnelt.
         /// </summary>
-        internal static string VisualPatternTooltip {
+        internal static string QR_FORMAT_LABLE {
             get {
-                return ResourceManager.GetString("VisualPatternTooltip", resourceCulture);
+                return ResourceManager.GetString("QR_FORMAT_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die In this area, the data is shown  
+        ///redundant, so that it can be read 
+        ///reliably even if  pieces of code  
+        ///are covered or damaged. ähnelt.
+        /// </summary>
+        internal static string QR_NORMAL_DISC {
+            get {
+                return ResourceManager.GetString("QR_NORMAL_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Data ähnelt.
+        /// </summary>
+        internal static string QR_NORMAL_LABLE {
+            get {
+                return ResourceManager.GetString("QR_NORMAL_LABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The version specifies one of 40 pre-
+        ///defined sizes for the QR code. ähnelt.
+        /// </summary>
+        internal static string QR_VERSION_DISC {
+            get {
+                return ResourceManager.GetString("QR_VERSION_DISC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Version Informations ähnelt.
+        /// </summary>
+        internal static string QR_VERSION_LABLE {
+            get {
+                return ResourceManager.GetString("QR_VERSION_LABLE", resourceCulture);
             }
         }
     }

@@ -1,15 +1,14 @@
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("VisualCryptography")]
+[assembly: AssemblyTitle("VisualEncoder")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("VisualCryptography")]
+[assembly: AssemblyCompany("CrypTool 2 Team")]
+[assembly: AssemblyProduct("VisualEncoder")]
 [assembly: AssemblyCopyright("Copyright © CrypTool 2 Team")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
