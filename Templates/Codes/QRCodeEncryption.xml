@@ -2,31 +2,31 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: QRCodeEncryption.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.02-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">QR Code Encryption</title>
-  <summary lang="en">Usage of the <i>QR Code</i> Encryption</summary>
-  <description lang="en">This template shows the usage of the <i>QR Code</i> Encryption and Decryption with an 256-Bit AES Key and an 128-Bit IV.</description>
+  <summary lang="en">Encrypt a <i>QR code</i> read from the camera</summary>
+  <description lang="en">This template encrypts and decrypts a <i>QR code</i> read life from the camera using an 256-bit AES key and an 128-bit IV.</description>
   <keywords>QR Code Encryption</keywords>
   <replacements lang="en">
     <replacement key="$Camera$" value="Camera" />
     <replacement key="$Visual Decoder$" value="Visual Decoder" />
     <replacement key="$Visual Encoder$" value="Visual Encoder" />
-    <replacement key="$Encrypted QR Code$" value="Encrypted QR Code" />
-    <replacement key="$Decrypted QR Code$" value="Decrypted QR Code" />
     <replacement key="$Converter$" value="Converter" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
     <replacement key="$Key$" value="Key" />
-    <replacement key="$AES Key$" value="AES Key" />
-    <replacement key="$Random Key$" value="Random Key" />
-    <replacement key="$Random Number$" value="Random Number" />
-    <replacement key="$Random Prime$" value="Random Prime" />
-    <replacement key="$Random number for AES-Key$" value="Random number for AES-Key" />
     <replacement key="$Encryption$" value="Encryption" />
     <replacement key="$Decryption$" value="Decryption" />
+    <replacement key="$Encrypted QR Code$" value="Encrypted QR code" />
+    <replacement key="$Decrypted QR Code$" value="Decrypted QR code" />
+    <replacement key="$AES Key$" value="AES key" />
+    <replacement key="$Random Key$" value="Random key" />
+    <replacement key="$Random Number$" value="Random number" />
+    <replacement key="$Random Prime$" value="Random prime" />
+    <replacement key="$Random number for AES-Key$" value="Random number for AES key" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -79,9 +79,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">QR-Code-Verschlüsselung</title>
-  <summary lang="de">Benutzung der <i>QR-Code</i>-Verschlüsselung</summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>QR-Code</i>-Verschlüsselung und -Entschlüsselung mit einem 256-Bit AES-Schlüssel und einem 128-Bit IV.</description>
+  <title lang="de">QR-Code verschlüsseln</title>
+  <summary lang="de">Verschlüsselt einen <i>QR-Code</i>, der von der Kamera eingelesen wird</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man einen <i>QR-Code</i> ver- und entschlüsselt, der life von der Kamera eingelesen wird. Zur Verschlüsselung wird ein 256-bit AES-Schlüssel und ein 128-bit IV benutzt.</description>
   <keywords lang="de">QR Code Verschlüsselung</keywords>
   <replacements lang="de">
     <replacement key="$Camera$" value="Kamera" />

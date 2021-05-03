@@ -691,6 +691,24 @@ namespace CrypTool.CrypWin.SettingsTabs.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Show status bar ähnelt.
+        /// </summary>
+        public static string ShowStatusBar {
+            get {
+                return ResourceManager.GetString("ShowStatusBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enables/disables the CrypTool 2 status bar ähnelt.
+        /// </summary>
+        public static string ShowStatusBarTooltip {
+            get {
+                return ResourceManager.GetString("ShowStatusBarTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Start CT2 as singleton application (Global setting: a change of the setting here has no effect. 
         ///It has to be manually edited in CrypWin.exe.config file in the CT2 installation directory). ähnelt.
         /// </summary>

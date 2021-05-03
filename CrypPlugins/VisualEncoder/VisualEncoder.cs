@@ -23,6 +23,7 @@ using System.Windows.Threading;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using CrypTool.Plugins.VisualEncoder.Encoders;
+using CrypTool.Plugins.VisualEncoder.Model;
 
 namespace CrypTool.Plugins.VisualEncoder
 {
@@ -103,7 +104,16 @@ namespace CrypTool.Plugins.VisualEncoder
             ProgressChanged(0, 1);
             if (InputStream != null && InputStream.Length >= 1)
             {
-                var dimCode = codeTypeHandler[settings.EncodingType].Encode(InputStream, settings);
+                DimCodeEncoderItem dimCode = null;
+                try
+                {
+                    dimCode = codeTypeHandler[settings.EncodingType].Encode(InputStream, settings);
+                }
+                catch (Exception ex)
+                {
+                    GuiLogMessage(ex.Message, NotificationLevel.Error);
+                    return;
+                }
                 if (dimCode != null) //input is valid
                 {
                     //update Presentation

@@ -2,22 +2,22 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Decode QR file.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.02-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Decode QR Code File</title>
-  <summary lang="en">Decodes a QR code file</summary>
-  <description lang="en">Decodes a picture file which contains a QR code.</description>
+  <title lang="en">QR Code File Decoding</title>
+  <summary lang="en">Decode a QR code stored in a picture file</summary>
+  <description lang="en">This template decodes a picture file which contains a QR code with the Visual Decoder component.</description>
   <keywords>qr, qrcode, code</keywords>
   <replacements lang="en">
-    <replacement key="$File Input$" value="File Input" />
     <replacement key="$Converter$" value="Converter" />
     <replacement key="$Visual Decoder$" value="Visual Decoder" />
-    <replacement key="$Text Output$" value="Text Output" />
-    <replacement key="$Picture Output$" value="Picture Output" />
-    <replacement key="$memo$" value="Selecting a jpg or png file with a QR code within the &quot;File Input&quot; component will output the picture contained in the file on the &quot;Picture Output&quot; component and the text content of the QR code on the &quot;Text Output&quot; component." />
+    <replacement key="$File Input$" value="Picture file as input" />
+    <replacement key="$Text Output$" value="Decoded text from QR code" />
+    <replacement key="$Picture Output$" value="Picture output" />
+    <replacement key="$memo$" value="Within the &quot;File Input&quot; component you can select a jpg or png file with a QR code. There are two outputs: the picture contained in the file in the &quot;Picture Output&quot; component, and the text content of the QR code in the &quot;Text Output&quot; component." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -54,14 +54,14 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">QR-Code-Datei decodieren</title>
   <summary lang="de">Decodiert eine QR-Code-Datei</summary>
-  <description lang="de">Decodiert eine Bild-Datei, die einen QR-Code enthält.</description>
+  <description lang="de">Diese Vorlage decodiert mit der Komponente Visual Decoder eine Bilddatei, die einen QR-Code enthält. Als Ausgabe werden das Bild und dessen Inhalt als Text angezeigt.</description>
   <replacements lang="de">
-    <replacement key="$File Input$" value="Dateieingabe" />
     <replacement key="$Converter$" value="Konvertierer" />
     <replacement key="$Visual Decoder$" value="Visueller Decodierer" />
-    <replacement key="$Text Output$" value="Textausgabe" />
     <replacement key="$Picture Output$" value="Bildausgabe" />
-    <replacement key="$memo$" value="Wählen Sie in der Komponente &quot;Dateieingabe&quot; eine JPG- oder PNG-Datei mit einem QR-Code aus. In der Komponente &quot;Bildausgabe&quot; wird diese Bilddatei dargestellt und der im QR-Code codierte Inhalt wird in der Komponente &quot;Textausgabe&quot; angezeigt." />
+    <replacement key="$memo$" value="In der Komponente &quot;Dateieingabe&quot; können Sie eine JPG- oder PNG-Datei auswählen, die einen QR-Code anzeigt. Die Ausgabe zeigt zum einen in der Komponente &quot;Bildausgabe&quot; diese Bilddatei an, zum anderen den im QR-Code codierten Text-Inhalt in der Komponente &quot;Textausgabe&quot;." />
+    <replacement key="$File Input$" value="Bilddatei als Eingabe" />
+    <replacement key="$Text Output$" value="Decodierter Text aus dem QR-Code" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Calculating with Big Numbers.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.03-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -48,4 +48,7 @@
   <!--The general section starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="math.png" />
+  <relevantPlugins>
+    <plugin name="NumberOperations" />
+  </relevantPlugins>
 </sample>

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Base64enc.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.03-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -99,4 +99,8 @@ Quellen:<newline />
   <!--The general section starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="enc.png" />
+  <relevantPlugins>
+    <plugin name="StringEncoder" />
+    <plugin name="StringDecoder" />
+  </relevantPlugins>
 </sample>

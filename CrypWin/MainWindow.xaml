@@ -459,7 +459,7 @@
         <BitmapImage x:Key="CrypToolIcon" UriSource="images/CrypTool.ico"/>
         <BitmapImage x:Key="cloudConnected" UriSource="images/cloud-connected.png"/>
         <BitmapImage x:Key="cloudDisconnected" UriSource="images/cloud-disconnected.png"/>
-        <con:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></con:BooleanToVisibilityConverter>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 
         <Storyboard x:Key="P2PBigIconImageRotateStoryboard">
             <DoubleAnimation Storyboard.TargetName="P2PBigIconImageRotate" Storyboard.TargetProperty="Angle" By="360" Duration="00:00:10" BeginTime="00:00:00" RepeatBehavior="Forever"/>
@@ -532,7 +532,7 @@
         <KeyBinding Command="cw:CrypWinCommands.ShowHideLog" Gesture="Ctrl + L"/>
     </dc:RibbonWindow.InputBindings>
     <DockPanel LastChildFill="True">
-        <StatusBar Name="statusBar" DockPanel.Dock="Bottom" Height="22" MouseDoubleClick="statusBar_MouseDoubleClick">
+        <StatusBar Name="statusBar" DockPanel.Dock="Bottom" Height="22" MouseDoubleClick="statusBar_MouseDoubleClick" Visibility="{Binding Source={x:Static properties:Settings.Default}, Path=ShowStatusBar,Converter={StaticResource ResourceKey=BooleanToVisibilityConverter}}">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <DockPanel LastChildFill="True"/>

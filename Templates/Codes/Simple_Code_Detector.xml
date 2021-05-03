@@ -2,19 +2,19 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Simple_Code_Detector.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.03-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Simple Detection of Optical Codes</title>
-  <summary lang="en">Usage of the <i>Optical Code Detector</i></summary>
-  <description lang="en">This template shows the usage of the <i>Simple Code Detector</i>.</description>
+  <title lang="en">Detection of Optical Codes</title>
+  <summary lang="en">Decode simple optical codes read from the camera</summary>
+  <description lang="en">This template shows the usage of the <i>Visual Decoder</i>.</description>
   <keywords>Simple Code Detector, qr code</keywords>
   <replacements lang="en">
     <replacement key="$Visual Decoder$" value="Visual Decoder" />
     <replacement key="$Camera$" value="Camera" />
-    <replacement key="$TextOutput$" value="Text Output" />
+    <replacement key="$TextOutput$" value="Decoded text from optical code" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -43,14 +43,15 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Einfache Erkennung optischer Codes</title>
-  <summary lang="de">Benutzung der einfachen <i>Code-Erkennung</i></summary>
-  <description lang="de">Diese Vorlage zeigt die Benutzung der <i>Code-Erkennung</i> für optische Codes.</description>
+  <title lang="de">Optische Codes erkennen</title>
+  <summary lang="de">Erkennt einfache optische Codes, die von der Kamera eingelesen werden</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man die Komponente <i>Visual Decoder</i> zur Erkennung von optischen Codes nutzt.</description>
   <keywords lang="de">Einfache Code Erkennung, QR Code, Code</keywords>
   <replacements lang="de">
-    <replacement key="$Visual Decoder$" value="Visueller Dekodierer" />
     <replacement key="$Camera$" value="Kamera" />
-    <replacement key="$TextOutput$" value="Textausgabe" />
+    <replacement key="$TextOutput$" value="Decodierter Text aus dem optischen Code" />
+    <replacement key="$memo$" value="Die Komponente &quot;Visueller Decodierer&quot; kann 13 verschiedene visuelle Codes erkennen. In dieser Vorlage wird der visuelle Code über eine angeschlossene Kamera eingelesen.\line \line In den Einstellungen der Komponente kann ausgewählt werden, ob der visuelle Code automatisch erkannt werden soll oder ob nur einer der 13 Codes detektiert werden soll. In diesem Fall ist die Erkennung schneller." />
+    <replacement key="$Visual Decoder$" value="Visueller Decodierer" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

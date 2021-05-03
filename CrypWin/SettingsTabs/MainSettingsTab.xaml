@@ -44,6 +44,7 @@
                     </ComboBox>
                 </Grid>
                 <CheckBox IsEnabled="True" Content="{Loc WriteLogFile}" ToolTip="{Loc WriteLogFileTooltip}" Style="{StaticResource ResourceKey=settingsStyle}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=WriteLogFile, Mode=TwoWay}" />
+                <CheckBox IsEnabled="True" Content="{Loc ShowStatusBar}" ToolTip="{Loc ShowStatusBarTooltip}" Style="{StaticResource ResourceKey=settingsStyle}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=ShowStatusBar, Mode=TwoWay}" />
                 <Label Content="{Loc PowerModeLabelContent}" FontWeight="Bold" Margin="0,10,0,0" />
                 <CheckBox Content="{Loc SavePowerContent}" ToolTip="{Loc SavePowerToolTip}" Style="{StaticResource ResourceKey=settingsStyle}" IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=StopWorkspaces, Mode=TwoWay}" />
                 <Label Content="{Loc BackgroundingLabelContent}" FontWeight="Bold" Margin="0,10,0,0" />
@@ -75,6 +76,7 @@
 
                 <Label Content="{Loc ResetCrypTool2Label}" FontWeight="Bold" />
                 <Button Name="ResetCrypTool2Button" Content="{Loc ResetCrypTool2Button}" Click="ResetCrypTool2Button_Click" HorizontalAlignment="Left" Style="{StaticResource ResourceKey=settingsStyle}"/>
+                
             </StackPanel>
         </ScrollViewer>
     </Grid>

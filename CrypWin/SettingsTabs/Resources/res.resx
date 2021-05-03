@@ -364,4 +364,10 @@ It has to be manually edited in CrypWin.exe.config file in the CT2 installation 
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
   </data>
+  <data name="ShowStatusBar" xml:space="preserve">
+    <value>Show status bar</value>
+  </data>
+  <data name="ShowStatusBarTooltip" xml:space="preserve">
+    <value>Enables/disables the CrypTool 2 status bar</value>
+  </data>
 </root>

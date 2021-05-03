@@ -132,7 +132,7 @@ gewichteten Summe (Modulo 103)
 aller Buchstaben.</value>
   </data>
   <data name="C128_ICV_LABLE" xml:space="preserve">
-    <value>Integrität Prüfziffer</value>
+    <value>Integrität-Prüfziffer</value>
   </data>
   <data name="C128_STARTEND_DISC" xml:space="preserve">
     <value>Es gibt drei unterschiedliche
@@ -141,7 +141,7 @@ welche benutzt wurde. Das Endmuster ist
 immer gleich.</value>
   </data>
   <data name="C128_STARTEND_LABLE" xml:space="preserve">
-    <value>Start- und Endmuster</value>
+    <value>Start- und Endemuster</value>
   </data>
   <data name="C38_ICV_DISC" xml:space="preserve">
     <value>Die Prüfziffer berechnet sich aus einer
@@ -149,7 +149,7 @@ gewichteten Summe (Modulo 43)
 aller Buchstaben.</value>
   </data>
   <data name="C38_ICV_LABLE" xml:space="preserve">
-    <value>Integrität Prüfziffer</value>
+    <value>Integrität-Prüfziffer</value>
   </data>
   <data name="C38_STARTEND_DISC" xml:space="preserve">
     <value>Das Start- und Endesymbol ist ein '*'.
@@ -175,14 +175,14 @@ er falsch herum liegt.</value>
 zuverlässig auslesen werden.</value>
   </data>
   <data name="DM_ALIG_LABLE" xml:space="preserve">
-    <value>Ausrichtung Erkennung</value>
+    <value>Ausrichtungs-Erkennung</value>
   </data>
   <data name="DM_COLUMNID_DISC" xml:space="preserve">
     <value>Dieses Muster hilft dem Reader die 
 verschiedenen Datenspalten zu finden.</value>
   </data>
   <data name="DM_COLUMNID_LABLE" xml:space="preserve">
-    <value>Spalten Identifizierer</value>
+    <value>Spalten-Identifizierer</value>
   </data>
   <data name="EAN13_FIXED_DISC" xml:space="preserve">
     <value>Die Balken sind Orientierungs-Punkte
@@ -201,7 +201,7 @@ der Ziffern im Code (Modulo 10)
 berechnet.</value>
   </data>
   <data name="EAN13_ICV_LABLE" xml:space="preserve">
-    <value>Integrität Prüfziffer</value>
+    <value>Integrität-Prüfziffer</value>
   </data>
   <data name="EAN8_FIXED_DISC" xml:space="preserve">
     <value>Die Balken sind Orientierungs-Punkte
@@ -220,7 +220,7 @@ der Ziffern im Code (Modulo 10)
 berechnet.</value>
   </data>
   <data name="EAN8_ICV_LABLE" xml:space="preserve">
-    <value>Integrität Prüfziffer</value>
+    <value>Integrität-Prüfziffer</value>
   </data>
   <data name="EncodingTypeCaption" xml:space="preserve">
     <value>Art des visuellen Codes</value>
@@ -232,13 +232,13 @@ berechnet.</value>
     <value>Erklärung</value>
   </data>
   <data name="InputStreamCaption" xml:space="preserve">
-    <value>Eingabe Daten</value>
+    <value>Eingabe-Daten</value>
   </data>
   <data name="InputStreamTooltip" xml:space="preserve">
     <value>Daten, die als Barcode codierte werden sollen.</value>
   </data>
   <data name="PictureBytesCaption" xml:space="preserve">
-    <value>Bild Ausgabe</value>
+    <value>Bild-Ausgabe</value>
   </data>
   <data name="PictureBytesTooltip" xml:space="preserve">
     <value> Barcode als Bild</value>
@@ -249,7 +249,7 @@ berechnet.</value>
 zuverlässig auslesen werden.</value>
   </data>
   <data name="QR_ALIG_LABLE" xml:space="preserve">
-    <value>Ausrichtung Erkennung</value>
+    <value>Ausrichtungs-Erkennung</value>
   </data>
   <data name="CODE39_INVALIDE_INPUT" xml:space="preserve">
     <value>Ungültige Eingabe</value>
@@ -273,7 +273,7 @@ zuverlässig auslesen werden.</value>
     <value>Hier wird unter anderem festgelegt, 
 welches Error Correction Level benutzt
 wird. Dieses gibt an, wie viel Prozent 
-des Codes(7% - 30%)  beschädigt oder 
+des Codes (7% - 30%)  beschädigt oder 
 verdeckt sein darf, um den Inhalt
 noch eindeutig lesen zu können.</value>
   </data>

@@ -41,31 +41,67 @@
                             </Expander.Header>
                         </Expander>
                     </Border>
-                    
-                    <Border BorderThickness="1" BorderBrush="Black" Background="#FF479308" Grid.Column="3">
-                           <Canvas Name="legendBox" Background="#AFE2FFCE" Margin="0,0,0,0">
-                            <Canvas Name="legend1" Visibility="Hidden" >
-                                    <Label  Margin="20,10,0,0" Name="lable1"/>
-                                    <Ellipse Height="10" Margin="5,17,0,0" Name="ellipse1" Width="10" />
-                                <TextBlock Margin="5,30,0,0" Name="disc1"  FontSize="10" />
-                                </Canvas>
-                                <Canvas Name="legend2" Visibility="Hidden">
-                                    <Label Margin="20,110,0,0" Name="lable2" />
-                                <Ellipse Height="10" Margin="5,117,0,0" Name="ellipse2"  Width="10" />
-                                <TextBlock Name="disc2" Margin="5,130,0,0"  FontSize="10" />
 
-                            </Canvas>
-                            <Canvas Name="legend3" Visibility="Hidden">
-                                    <Label Margin="20,210,0,0" Name="lable3" />
-                                    <Ellipse Height="10" Margin="5,217,0,0" Name="ellipse3" Width="10" />
-                                <TextBlock  Margin="5,230,0,0"  FontSize="10" Name="disc3" />
-                                </Canvas>
-                            <Canvas Name="legend4" Visibility="Hidden">
-                                    <Label  Margin="20,310,0,0" Name="lable4" />
-                                    <Ellipse Height="10" Margin="5,317,0,0" Name="ellipse4" Width="10" />
-                                <TextBlock  Margin="5,330,0,0" Name="disc4"   FontSize="10"/>
-                                </Canvas>
-                            </Canvas>
+                    <Border BorderThickness="1" BorderBrush="Black" Background="#FF479308" Grid.Column="3">
+                        <StackPanel Orientation="Vertical" Background="#AFE2FFCE">
+                            <StackPanel.Resources>
+                                <Style TargetType="{x:Type Grid}">
+                                    <Setter Property="Margin" Value="5,10,5,5"/>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Grid Name="legend1" Visibility="Hidden" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="27"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Ellipse Height="10" VerticalAlignment="Center" HorizontalAlignment="Center" Name="ellipse1" Width="10" Grid.Row="0" Grid.Column="0" />
+                                <Label Name="lable1" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Name="disc1" FontSize="10" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            </Grid>
+                            <Grid Name="legend2" Visibility="Hidden" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="27"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Ellipse Height="10" VerticalAlignment="Center" HorizontalAlignment="Center" Name="ellipse2" Width="10" Grid.Row="0" Grid.Column="0" />
+                                <Label Name="lable2" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Name="disc2" FontSize="10" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            </Grid>
+                            <Grid Name="legend3" Visibility="Hidden" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="27"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Ellipse Height="10" VerticalAlignment="Center" HorizontalAlignment="Center" Name="ellipse3" Width="10" Grid.Row="0" Grid.Column="0" />
+                                <Label Name="lable3" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Name="disc3" FontSize="10" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            </Grid>
+                            <Grid Name="legend4" Visibility="Hidden" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="27"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Ellipse Height="10" VerticalAlignment="Center" HorizontalAlignment="Center" Name="ellipse4" Width="10" Grid.Row="0" Grid.Column="0" />
+                                <Label Name="lable4" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"/>
+                                <TextBlock Name="disc4" FontSize="10" Grid.Row="1" Grid.ColumnSpan="2"/>
+                            </Grid>
+                        </StackPanel>
                     </Border>
                     <StackPanel Grid.Column="4">
                         <Image Visibility="Hidden" Name="ExplImage" />

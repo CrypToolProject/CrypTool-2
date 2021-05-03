@@ -2,25 +2,25 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: ADFGVX_Analyzer.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.03-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">ADFGVX Heuristic Analysis</title>
-  <summary lang="en">Heuristic analysis of <i>ADFGVX</i> with simulated annealing</summary>
-  <description lang="en">For centuries, news, especially in times of war, transmitted encrypted - including during the First World War in Germany. The news analyst Fritz Nebel developed the ADFGVX book in two steps in order to encrypt radio messages from the army. The first variant contained the letters ADFGX, later the V was added as the sixth letter. With this template, ADFGVX messages can be decrypted thanks to the heuristic method Simulated Annealing.</description>
+  <summary lang="en">Heuristic analysis of the <i>ADFGVX</i> cipher with simulated annealing</summary>
+  <description lang="en">With this template, ADFGVX messages can be decrypted in a ciphertext-only attack thanks to the heuristic method simulated annealing.  The the ADFGVX cipher was developed by the signal officer Fritz Nebel in order to encrypt radio messages from the army in World War 2. His first variant contained the five letters ADFGX, later the V was added as the sixth letter.</description>
   <keywords>ADFGVX, Lasry, Simulated Annealing</keywords>
   <replacements lang="en">
-    <replacement key="$textbox$" value="Enter the encrypted messages in the input mask, you can also enter several messages together. In the settings of the ADFGVX analysis component, for example, you can select which separator is used between the messages or which letters contain the encrypted messages. \line\line The assumed key length of the transposition and the natural language of the messages are also specified. In addition, the number of restarts and the number of parallel threads can be set. About the deviation can be regulated, from when automatically the transposition result is passed on to the monoalphabetische substitution analysis. \line\line The messages are accepted by the ADFGVX analysis component and simulated annealing reverses the transposition. The result is passed to the mono-alphabetical substitution analysis, which completely decrypts the message. \line\line By double-clicking on a selected row in the ADFGVX analysis component, any intermediate result from the bestlist can be passed on to the substitution analysis. \line\line Detailed information about ADFGVX or Simulated Annealing can be found here: \line https://en.wikipedia.org/wiki/ADFGX \line https://en.wikipedia.org/wiki/Simulated_Annealing" />
-    <replacement key="$messages$" value="Decrypted messages" />
     <replacement key="$adfgvxAnalyzer$" value="ADFGVX Analyzer" />
-    <replacement key="$adfgvxAnalyzerTranspositionkey$" value="Transpositionkey" />
     <replacement key="$adfgvxAnalyzerLogger$" value="Complete log" />
     <replacement key="$monoAnalyzer$" value="Monoalphabetic Substitution Analyzer" />
-    <replacement key="$monoAnalyzerKey$" value="Substitutionkey" />
-    <replacement key="$monoAnalyzerAlphabet$" value="Substitutionalphabet" />
     <replacement key="$monoAnalyzerResult$" value="Result of the substitution" />
+    <replacement key="$adfgvxAnalyzerTranspositionkey$" value="Transposition key" />
+    <replacement key="$monoAnalyzerKey$" value="Substitution key" />
+    <replacement key="$monoAnalyzerAlphabet$" value="Substitution alphabet" />
+    <replacement key="$messages$" value="Encrypted message" />
+    <replacement key="$memo$" value="The encrypted message is given in the Text Input component. You can also enter several messages together. In the settings of the ADFGVX analysis component, you can select for example which separator is used between the messages or which letters are contained in the encrypted messages. \line\line Further, the assumed key length of the transposition and the natural language of the message are also specified. In addition, the number of restarts and the number of parallel threads can be set. From when the transposition result is automatically passed on to the monoalphabetic substitution analyzer is regulated via the deviation. \line\line The message is performed by the ADFGVX analysis component which uses simulated annealing to first reverse the transposition. The result is passed to the monoalphabetic substitution analyzer, which completes the decryption of the message. \line\line By double-clicking on a selected row in the ADFGVX analysis component, any intermediate result from its bestlist can be passed on to the substitution analysis. \line\line Detailed information about ADFGVX or simulated annealing can be found here: \line https://en.wikipedia.org/wiki/ADFGX \line https://en.wikipedia.org/wiki/Simulated_Annealing" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -30,7 +30,6 @@
   <description lang="zh">几个世纪以来，新闻，特别是在战争时期，都是以加密方式传输的，包括在德国第一次世界大战期间。新闻分析师弗里茨·内贝尔（Fritz Nebel）分两步开发了ADFGVX书，以加密来自陆军的无线电消息。第一个变体包含字母ADFGX，后来将V添加为第六个字母。使用此模板，借助启发式方法“模拟退火”可以解密ADFGVX消息。</description>
   <keywords lang="zh">ADFGVX，Lasry，模拟退火</keywords>
   <replacements lang="zh">
-    <replacement key="$textbox$" value="在输入掩码中输入加密的消息，也可以一起输入几条消息。在ADFGVX分析组件的设置中，例如，选择在消息之间使用哪个分隔符或加密的消息包含哪些字母\Line \line还指定了转置的假定键长和消息的自然语言。另外，可以设置重启次数和并行线程数。该偏差可用于调节转座结果何时自动转发到单字母替代分析。 \line \line ADFGVX分析组件接收到消息，并使用模拟退火反转转置。结果将传递到单字母替换分析，该分析将完全解密消息。 \line \line通过双击ADFGVX-Analyze.Komponente中的选定行，可以将最佳列表中的每个中间结果传递到替换分析中。 \line \line关于ADFGVX或模拟退火的详细信息可以在这里找到：\line https://de.wikipedia.org/wiki/ADFGX \line https://de.wikipedia.org/wiki/Simulated_Annealing" />
     <replacement key="$messages$" value="加密邮件" />
     <replacement key="$adfgvxAnalyzer$" value="ADFGVX分析组件" />
     <replacement key="$adfgvxAnalyzerTranspositionkey$" value="移调键" />
@@ -39,24 +38,25 @@
     <replacement key="$monoAnalyzerKey$" value="替代键" />
     <replacement key="$monoAnalyzerAlphabet$" value="替代字母" />
     <replacement key="$monoAnalyzerResult$" value="替换结果" />
+    <replacement key="$memo$" value="在输入掩码中输入加密的消息，也可以一起输入几条消息。在ADFGVX分析组件的设置中，例如，选择在消息之间使用哪个分隔符或加密的消息包含哪些字母\Line \line还指定了转置的假定键长和消息的自然语言。另外，可以设置重启次数和并行线程数。该偏差可用于调节转座结果何时自动转发到单字母替代分析。 \line \line ADFGVX分析组件接收到消息，并使用模拟退火反转转置。结果将传递到单字母替换分析，该分析将完全解密消息。 \line \line通过双击ADFGVX-Analyze.Komponente中的选定行，可以将最佳列表中的每个中间结果传递到替换分析中。 \line \line关于ADFGVX或模拟退火的详细信息可以在这里找到：\line https://de.wikipedia.org/wiki/ADFGX \line https://de.wikipedia.org/wiki/Simulated_Annealing" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">ADFGVX heuristische Analyse</title>
-  <summary lang="de">Heuristische Analyse der <i>ADFGVX</i> mit Simulated Annealing</summary>
-  <description lang="de">Seit Jahrhunderten werden Nachrichten, vor allem in Kriegszeiten, verschlüsselt übermittelt – so auch während des Ersten Weltkrieges in Deutschland. Der Nachrichtenoffizier Fritz Nebel entwickelte die ADFGVX-Chiffre in zwei Schritten, um Funksprüche des Heeres zu verschlüsseln. Die erste Variante beinhaltete die Buchstaben ADFGX, später kam das V als sechster Buchstabe hinzu. Mit diesem Template können ADFGVX Nachrichten, dank dem heuristischen Verfahren Simulated Annealing, entschlüsselt werden.</description>
+  <summary lang="de">Führt mit Simulated Annealing eine heuristische Analyse der <i>ADFGVX</i>-Chiffre durch</summary>
+  <description lang="de">Mit dieser Vorlage können ADFGVX-Nachrichten mit dem heuristischen Verfahren Simulated Annealing entschlüsselt werden (Ciphertext-only-Angriff). Die ADFGVX-Chiffre wurde von dem Nachrichtenoffizier Fritz Nebel entwickelt, um im Ersten Weltkrieg Funksprüche des Heeres zu verschlüsseln. Seine erste Variante beinhaltete die fünf Buchstaben ADFGX, später kam das V als sechster Buchstabe hinzu.</description>
   <keywords lang="de">ADFGVX, Lasry, Simulated Annealing</keywords>
   <replacements lang="de">
-    <replacement key="$textbox$" value="Geben Sie die verschlüsselten Nachrichten in die Eingabemaske ein, es können auch mehrere Nachrichten zusammen eingegeben werden. In den Einstellungen der ADFGVX-Analyse-Komponente wählt man zum Beispiel aus, welches Trennzeichen zwischen den Nachrichten benutzt wird oder welche Buchstaben die Verschlüsselten Nachrichten enthalten.\line\line Weiter wird die angenommene Schlüssellänge der Transposition sowie die natürliche Sprache der Nachrichten angegeben. Zusätzlich können die Anzahl der Neustarts und die Anzahl der parallelen Threads eingestellt werden. Über die Abweichung kann reguliert werden, ab wann automatisch das Transpositionsergebnis an die Monoalphabetische Substitutionsanalyse weitergereicht wird. \line\line Die Nachrichten werden von der ADFGVX-Analyse-Komponente entgegen genommen und mittels Simulated Annealing wird die Transposition rückgängig gemacht. Das Ergebnis wird an die Monoalphabetische Substitutionsanalyse weitergereicht, womit die Nachricht vollständig entschlüsselt wird. \line\line Durch einen Doppelklick auf eine selektierte Zeile in der ADFGVX-Analyse.Komponente kann jedes Zwischenergebnis aus der Bestenliste an die Substitutionsanalyse weitergereicht werden. \line\line Detailierte Informationen zur ADFGVX oder Simulated Annealing können unter anderem hier nachgelesen werden: \line https://de.wikipedia.org/wiki/ADFGX \line https://de.wikipedia.org/wiki/Simulated_Annealing" />
-    <replacement key="$messages$" value="Verschlüsselte Nachrichten" />
-    <replacement key="$adfgvxAnalyzer$" value="ADFGVX-Analyse-Komponente" />
     <replacement key="$adfgvxAnalyzerTranspositionkey$" value="Transpositionsschlüssel" />
     <replacement key="$adfgvxAnalyzerLogger$" value="Vollständiger Log" />
-    <replacement key="$monoAnalyzer$" value="Monoalphabetische Substitutionsanalyse" />
     <replacement key="$monoAnalyzerKey$" value="Substitutionsschlüssel" />
     <replacement key="$monoAnalyzerAlphabet$" value="Substitutionsalphabet" />
     <replacement key="$monoAnalyzerResult$" value="Ergebnis der Substitution" />
+    <replacement key="$adfgvxAnalyzer$" value="ADFGVX-Analyse" />
+    <replacement key="$monoAnalyzer$" value="Monoalphabetische Substitutions-Analyse" />
+    <replacement key="$messages$" value="Verschlüsselte Nachricht" />
+    <replacement key="$memo$" value="Die verschlüsselte Nachricht steht in der Texteingabe. Man kann darin auch mehrere Nachrichten zusammen eingeben. In den Einstellungen der ADFGVX-Analyse-Komponente kann man einstellen, welches Trennzeichen zwischen den Nachrichten benutzt wird oder welche Buchstaben die verschlüsselten Nachrichten enthalten.\line\line Weiter wird die angenommene Schlüssellänge der Transposition sowie die Klartext-Sprache der Nachricht angegeben. Zusätzlich können die Anzahl der Neustarts und die Anzahl der parallelen Threads eingestellt werden. Über die Abweichung kann reguliert werden, ab wann automatisch das Transpositionsergebnis an die Monoalphabetische Substitutions-Analyse weitergereicht wird. \line\line Die Nachricht wird von der ADFGVX-Analyse-Komponente entgegen genommen und mittels Simulated Annealing wird zuerst die Transposition rückgängig gemacht. Das Ergebnis wird an die Monoalphabetische Substitutionsanalyse weitergereicht, womit die Nachricht vollständig entschlüsselt wird. \line\line Durch Doppelklick auf eine selektierte Zeile in der ADFGVX-Analyse kann jedes Zwischenergebnis aus der Bestenliste an die Substitutionsanalyse weitergereicht werden. \line\line Detailierte Informationen zu ADFGVX und Simulated Annealing können unter anderem hier nachgelesen werden: \line https://de.wikipedia.org/wiki/ADFGX \line https://de.wikipedia.org/wiki/Simulated_Annealing" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

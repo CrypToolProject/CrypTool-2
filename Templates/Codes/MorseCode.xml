@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: MorseCode.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.03-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -12,12 +12,12 @@
   <description lang="en">This template shows how a text is encoded to a morse code and how a morse code is decoded to a text.</description>
   <keywords>morse code</keywords>
   <replacements lang="en">
-    <replacement key="$Cleartext to send$" value="Cleartext to send" />
     <replacement key="$Morse Encoder$" value="Morse Encoder" />
     <replacement key="$Morse Decoder$" value="Morse Decoder" />
-    <replacement key="$Morse Code$" value="Morse Code" />
-    <replacement key="$Decoded Morse Code$" value="Decoded Morse Code" />
-    <replacement key="$memo$" value="This template demonstrates the usage of the Morse Code component.\line\line The component &quot;Morse Encoder&quot; encodes the given text into a morse code sequence. &quot;Morse Decoder&quot; decodes the given morse code from the &quot;Morse Encoder&quot; to clear text." />
+    <replacement key="$Cleartext to send$" value="Plaintext to be sent" />
+    <replacement key="$Morse Code$" value="Morse code" />
+    <replacement key="$Decoded Morse Code$" value="Decoded morse code" />
+    <replacement key="$memo$" value="This template demonstrates the usage of the Morse Code components.\line\line The component &quot;Morse Encoder&quot; encodes the given text into a morse code sequence. &quot;Morse Decoder&quot; decodes the given morse code from the &quot;Morse Encoder&quot; to plaintext." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -53,16 +53,16 @@
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Morsecode</title>
-  <summary lang="de">Zeigt, wie ein Morsecode codiert und decodiert wird</summary>
+  <summary lang="de">Zeigt, wie Morsecode erstellt und decodiert wird</summary>
   <description lang="de">Diese Vorlage zeigt die Codierung eines Textes in einen Morsecode und die Decodierung eines Morsecodes in einen Text.</description>
   <keywords lang="de">Morsecode</keywords>
   <replacements lang="de">
     <replacement key="$Cleartext to send$" value="Zu sendender Klartext" />
-    <replacement key="$Morse Encoder$" value="Morse-Kodierer" />
-    <replacement key="$Morse Decoder$" value="Morse-Dekodierer" />
-    <replacement key="$Morse Code$" value="Morse-Code" />
-    <replacement key="$Decoded Morse Code$" value="Decodierter Morse-Code" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Morse-Code-Komponente.\line\line Die Komponente &quot;Morse-Kodierer&quot; konvertiert den eingegebenen Text in eine Folge von Morsezeichen. &quot;Morse-Dekodierer&quot; verwandelt den Morse-Code vom &quot;Morse-Kodierer&quot; wieder in den Klartext zurück." />
+    <replacement key="$Morse Code$" value="Morsecode" />
+    <replacement key="$Decoded Morse Code$" value="Decodierter Morsecode" />
+    <replacement key="$Morse Encoder$" value="Morse-Codierer" />
+    <replacement key="$Morse Decoder$" value="Morse-Decodierer" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Morse-Komponenten.\line\line Die Komponente &quot;Morse-Codierer&quot; konvertiert den eingegebenen Text in eine Folge von Morsezeichen. &quot;Morse-Decodierer&quot; verwandelt den Morse-Code vom &quot;Morse-Codierer&quot; wieder in den Klartext zurück." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

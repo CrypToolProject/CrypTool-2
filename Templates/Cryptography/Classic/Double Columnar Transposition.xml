@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: Double Columnar Transposition.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.03-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -63,6 +63,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Doppelte Spaltentransposition</title>
   <summary lang="de">Benutzung der <i>Transpositions</i>-Chiffre um eine doppelte Spaltentransposition zu bauen</summary>
+  <description lang="de">Diese Vorlage zeigt, wie eine doppelte Spaltentransposition mithilfe von zwei Transpositionschiffre-Komponenten erstellt wird. Zunächst wird der Klartext mit einem Schlüsselwort verschlüsselt. Anschließend wird der Zwischen-Geheimtext mit einem zweiten Schlüsselwort verschlüsselt. Danach werden die beiden Schlüsselwörter verwendet, um den endgültigen Geheimtext wieder zu entschlüsseln.</description>
   <keywords lang="de">Transposition, Doppelte Spaltentransposition, Doppelwürfel</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />

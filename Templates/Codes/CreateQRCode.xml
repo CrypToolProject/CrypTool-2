@@ -2,19 +2,19 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CreateQRCode.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.02-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Create QR Code</title>
-  <summary lang="en">Create a <i>QR Code</i></summary>
-  <description lang="en">This template shows how to create a <i>QR-Code</i>.</description>
+  <title lang="en">QR Code Creation</title>
+  <summary lang="en">Create a <i>QR code</i></summary>
+  <description lang="en">This template shows how to create a <i>QR code</i>.</description>
   <keywords>qr, qrcode, code</keywords>
   <replacements lang="en">
-    <replacement key="$Text Input$" value="Text Input" />
     <replacement key="$Visual Encoder$" value="Visual Encoder" />
-    <replacement key="$text$" value="This template will create a QR Code and explain how the code is constructed." />
+    <replacement key="$text$" value="This template creates a QR code and explains how the code is constructed." />
+    <replacement key="$Text Input$" value="Text to be encoded" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -44,12 +44,12 @@
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">QR-Code erstellen</title>
-  <summary lang="de">Erstelle einen <i>QR-Code</i></summary>
+  <summary lang="de">Erstellt einen <i>QR-Code</i></summary>
   <description lang="de">Diese Vorlage zeigt, wie man einen <i>QR-Code</i> erstellt.</description>
   <replacements lang="de">
-    <replacement key="$Text Input$" value="Texteingabe" />
     <replacement key="$Visual Encoder$" value="Visueller Codierer" />
-    <replacement key="$text$" value="Dieses Template erklärt, wie man einen Text in einem QR-Code codieren kann." />
+    <replacement key="$Text Input$" value="Zu codierender Text" />
+    <replacement key="$text$" value="Diese Vorlage codiert einen Text in einem QR-Code. Textänderungen werden nach dem Start direkt umgesetzt. Klickt man in der Komponente &quot;Visueller Codierer&quot; auf &quot;Erklärung&quot;, werden die verschieden-farbig markierten Bestandteile des QR-Codes erklärt." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

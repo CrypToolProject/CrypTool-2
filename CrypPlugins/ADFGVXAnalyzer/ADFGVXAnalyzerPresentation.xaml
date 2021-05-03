@@ -14,7 +14,7 @@
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc EndLabel}" x:Name="EndTime" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc ElapsedLabel}" x:Name="ElapsedTime" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc KeysLabel}" x:Name="Keys" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc MessageLabel}" x:Name="MessageCount" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc MessagesLabel}" x:Name="MessageCount" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc KeyLengthLabel}" x:Name="CurrentAnalysedKeylength" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
 

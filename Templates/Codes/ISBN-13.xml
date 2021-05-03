@@ -2,14 +2,14 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: ISBN-13.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.02-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">ISBN-13 Check</title>
   <summary lang="en">Checking an ISBN-13 number (International Standard Book Number)</summary>
-  <description lang="en">This template shows the checking of an ISBN-13 number.</description>
+  <description lang="en">This template shows how to check an ISBN-13 number.</description>
   <keywords>isbn, book, code, international standard book number</keywords>
   <replacements lang="en">
     <replacement key="$Substring$" value="Substring" />
@@ -52,9 +52,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">ISBN-13-Überprüfung</title>
+  <title lang="de">ISBN-13-Nummer überprüfen</title>
   <summary lang="de">Überprüfung einer ISBN-13 Nummer (Internationale Standardbuchnummer)</summary>
-  <description lang="de">Diese Vorlage zeigt die Überprüfung einer ISBN-13-Nummer.</description>
+  <description lang="de">Diese Vorlage zeigt, wie man Schritt-für-Schritt eine ISBN-13 Nummer überprüft.</description>
   <keywords lang="de">Buch, isbn, Internationale Standardbuchnummer</keywords>
   <replacements lang="de">
     <replacement key="$Substring$" value="Teilstring" />

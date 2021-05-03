@@ -2,14 +2,14 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: vcard.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.03-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">VCard</title>
-  <summary lang="en">Creating a VCard</summary>
-  <description lang="en">This template shows the creating of a VCard.</description>
+  <title lang="en">vCard</title>
+  <summary lang="en">Create a vCard</summary>
+  <description lang="en">This template shows how to create a vCard. A vCard is a virtual business card which implements the vCard specification. vCards can be scanned and imported into e.g. an email client's address book.</description>
   <keywords>vcard qrcode</keywords>
   <replacements lang="en">
     <replacement key="$Visual Encoder$" value="Visual Encoder" />
@@ -19,6 +19,7 @@
     <replacement key="$home phone$" value="Home phone" />
     <replacement key="$working phone$" value="Working phone" />
     <replacement key="$email$" value="Email" />
+    <replacement key="$memo$" value="This template allows to create a vCard stored in a QR code. A vCard is a virtual business card which can be imported e.g. in an email client's address book. To create your own vCard you may change the data shown in the text inputs here.\line\line See Wikipedia: https://en.wikipedia.org/wiki/VCard" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -55,9 +56,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">VCard</title>
-  <summary lang="de">Erstellung einer VCard</summary>
-  <description lang="de">Diese Vorlage zeigt die Erstellung einer VCard.</description>
+  <title lang="de">vCard</title>
+  <summary lang="de">Erstellung einer vCard</summary>
+  <description lang="de">Diese Vorlage zeigt, wie man eine vCard erstellt. Eine vCard ist eine virtuelle Visitenkarte, die der vCard-Spezifikation entspricht. vCards können gescannt und z.B. direkt in das Adressbuch eines E-Mail-Programms aufgenommen werden.</description>
   <keywords lang="de">vcard qrcode</keywords>
   <replacements lang="de">
     <replacement key="$Visual Encoder$" value="Visueller Kodierer" />
@@ -67,6 +68,7 @@
     <replacement key="$home phone$" value="Telefon (privat)" />
     <replacement key="$working phone$" value="Telefon (geschäftlich)" />
     <replacement key="$email$" value="E-Mail" />
+    <replacement key="$memo$" value="Diese Vorlage erlaubt die Erstellung einer vCard in Form eines QR-Codes. Eine vCard ist eine virtuelle Visitenkarte, die z.B. direkt in das Adressbuch eines Email-Clients importiert werden kann. Um eine eigene vCard zu erstellen, können die hier angegebenen Daten einfach verändert werden.\line\line Siehe Wikipedia: https://de.wikipedia.org/wiki/VCard" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

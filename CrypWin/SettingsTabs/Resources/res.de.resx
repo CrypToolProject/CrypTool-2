@@ -364,4 +364,10 @@ Sie muss manuell in der Datei CrypWin.exe.config im Installationsverzeichnis von
   <data name="Warning" xml:space="preserve">
     <value>Warnung</value>
   </data>
+  <data name="ShowStatusBar" xml:space="preserve">
+    <value>Zeige Statusleiste</value>
+  </data>
+  <data name="ShowStatusBarTooltip" xml:space="preserve">
+    <value>Statusleiste von CrypTool 2 ein-/ausschalten</value>
+  </data>
 </root>
