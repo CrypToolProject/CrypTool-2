@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: rsa_signed_qrcode.xml-->
-  <!--Last edited: 2021.05.02-->
+  <!--Last edited: 2021.05.04-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -103,11 +103,7 @@
     <replacement key="$RSA Key Generator$" value="RSA-Schlüsselgenerator" />
     <replacement key="$RSA Decrypt$" value="RSA-Entschlüsselung" />
     <replacement key="$Signed Hash$" value="Signierter Hash" />
-    <replacement key="$Base64 Encoder$" value="Base64-Kodierer" />
-    <replacement key="$Base64 Decoder$" value="Base64-Dekodierer" />
     <replacement key="$minus hashlength$" value="minus Hashlänge" />
-    <replacement key="$Visual Encoder$" value="Visueller Kodierer" />
-    <replacement key="$Visual Decoder$" value="Visueller Dekodierer" />
     <replacement key="$Length$" value="Länge" />
     <replacement key="$Valid?$" value="Gültig?" />
     <replacement key="$Comparator$" value="Vergleicher" />
@@ -115,6 +111,10 @@
     <replacement key="$Read Signed QR-Code$" value="Lese signierten QR-Code" />
     <replacement key="$Create Signed QR-Code$" value="Erzeuge signierten QR-Code" />
     <replacement key="$memo$" value="Diese Vorlage zeigt einen QR-Code, dessen Authentizität mit RSA gewährleistet wird.\line\line Die Authentifizierung wird durch die folgenden Schritte erreicht:\line Zuerst wird ein Hashwert der Nachricht, die im QR-Code enthalten sein wird, generiert. Dieser Hashwert wird dann mit dem privaten RSA-Schlüssel verschlüsselt und ins Base64-Format konvertiert, um nicht-druckbare Zeichen zu vermeiden. Schließlich wird der &quot;signierte&quot; Hashwert an die Nachricht angehängt und davon der QR-Code gebildet.\line Der Empfänger des QR-Codes entschlüsselt den &quot;signierten&quot; Hashwert mit dem öffentlichen RSA-Schlüssel. Dann generiert er seinen eigenen Hashwert von der Nachricht und vergleicht schließlich die beiden Hashwerte. Sind sie identisch, so gilt der QR-Code als authentisch." />
+    <replacement key="$Base64 Encoder$" value="Base64-Codierer" />
+    <replacement key="$Base64 Decoder$" value="Base64-Decodierer" />
+    <replacement key="$Visual Encoder$" value="Visueller Codierer" />
+    <replacement key="$Visual Decoder$" value="Visueller Decodierer" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

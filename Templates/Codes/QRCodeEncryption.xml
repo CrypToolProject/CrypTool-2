@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: QRCodeEncryption.xml-->
-  <!--Last edited: 2021.05.02-->
+  <!--Last edited: 2021.05.04-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -85,8 +85,6 @@
   <keywords lang="de">QR Code Verschlüsselung</keywords>
   <replacements lang="de">
     <replacement key="$Camera$" value="Kamera" />
-    <replacement key="$Visual Decoder$" value="Visueller Dekodierer" />
-    <replacement key="$Visual Encoder$" value="Visueller Kodierer" />
     <replacement key="$Encrypted QR Code$" value="Verschlüsselter QR-Code" />
     <replacement key="$Decrypted QR Code$" value="Entschlüsselter QR-Code" />
     <replacement key="$Converter$" value="Konvertierer" />
@@ -99,6 +97,8 @@
     <replacement key="$Random number for AES-Key$" value="Zufallszahl für AES-Schlüssel" />
     <replacement key="$Encryption$" value="Verschlüsselung" />
     <replacement key="$Decryption$" value="Entschlüsselung" />
+    <replacement key="$Visual Decoder$" value="Visueller Decodierer" />
+    <replacement key="$Visual Encoder$" value="Visueller Codierer" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

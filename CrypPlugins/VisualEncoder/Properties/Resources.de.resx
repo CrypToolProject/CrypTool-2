@@ -132,7 +132,7 @@ gewichteten Summe (Modulo 103)
 aller Buchstaben.</value>
   </data>
   <data name="C128_ICV_LABLE" xml:space="preserve">
-    <value>Integrität-Prüfziffer</value>
+    <value>Integritäts-Prüfziffer</value>
   </data>
   <data name="C128_STARTEND_DISC" xml:space="preserve">
     <value>Es gibt drei unterschiedliche
@@ -149,7 +149,7 @@ gewichteten Summe (Modulo 43)
 aller Buchstaben.</value>
   </data>
   <data name="C38_ICV_LABLE" xml:space="preserve">
-    <value>Integrität-Prüfziffer</value>
+    <value>Integritäts-Prüfziffer</value>
   </data>
   <data name="C38_STARTEND_DISC" xml:space="preserve">
     <value>Das Start- und Endesymbol ist ein '*'.
@@ -171,7 +171,7 @@ er falsch herum liegt.</value>
   </data>
   <data name="DM_ALIG_DISC" xml:space="preserve">
     <value>Mit Hilfe dieses Musters kann der Code
--- unabhängig von seiner Ausrichtung --
+– unabhängig von seiner Ausrichtung –
 zuverlässig auslesen werden.</value>
   </data>
   <data name="DM_ALIG_LABLE" xml:space="preserve">
@@ -201,7 +201,7 @@ der Ziffern im Code (Modulo 10)
 berechnet.</value>
   </data>
   <data name="EAN13_ICV_LABLE" xml:space="preserve">
-    <value>Integrität-Prüfziffer</value>
+    <value>Integritäts-Prüfziffer</value>
   </data>
   <data name="EAN8_FIXED_DISC" xml:space="preserve">
     <value>Die Balken sind Orientierungs-Punkte
@@ -220,7 +220,7 @@ der Ziffern im Code (Modulo 10)
 berechnet.</value>
   </data>
   <data name="EAN8_ICV_LABLE" xml:space="preserve">
-    <value>Integrität-Prüfziffer</value>
+    <value>Integritäts-Prüfziffer</value>
   </data>
   <data name="EncodingTypeCaption" xml:space="preserve">
     <value>Art des visuellen Codes</value>
@@ -274,7 +274,7 @@ zuverlässig auslesen werden.</value>
 welches Error Correction Level benutzt
 wird. Dieses gibt an, wie viel Prozent 
 des Codes (7% - 30%)  beschädigt oder 
-verdeckt sein darf, um den Inhalt
+verdeckt sein dürfen, um den Inhalt
 noch eindeutig lesen zu können.</value>
   </data>
   <data name="QR_FORMAT_LABLE" xml:space="preserve">
@@ -292,7 +292,7 @@ QR-Code an.</value>
     <value>In diesem Bereich werden die Daten  
 redundant dargestellt, so dass auch 
 zuverlässig ausgelesen werden kann,
-wenn Teile des Codes verdeckt sind</value>
+wenn Teile des Codes verdeckt sind.</value>
   </data>
   <data name="QR_NORMAL_LABLE" xml:space="preserve">
     <value>Daten</value>

@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: CreateQRCode.xml-->
-  <!--Last edited: 2021.05.02-->
+  <!--Last edited: 2021.05.04-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -15,6 +15,7 @@
     <replacement key="$Visual Encoder$" value="Visual Encoder" />
     <replacement key="$text$" value="This template creates a QR code and explains how the code is constructed." />
     <replacement key="$Text Input$" value="Text to be encoded" />
+    <replacement key="$memo$" value="With this template, you can create a QR code, which contains a user-defined text.\line\line To change the QR code's text, enter a text in the &quot;Text to be encoded&quot; Text Input component." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -27,6 +28,7 @@
     <replacement key="$Text Input$" value="文字输入" />
     <replacement key="$Visual Encoder$" value="视觉编码器" />
     <replacement key="$text$" value="该模板说明了如何在QR码中编码文本。" />
+    <replacement key="$memo$" value="使用此模板，您可以创建一个QR码，其中包含用户定义的文本。\line\line 要更改QR码的文本，请在“要编码的文本”文本输入组件中输入一个文本。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'ru' starts here:-->
@@ -39,6 +41,7 @@
     <replacement key="$Text Input$" value="ввод текста" />
     <replacement key="$Visual Encoder$" value="Визуальный кодировщик" />
     <replacement key="$text$" value="Этот шаблон объясняет, как закодировать текст в QR-коде." />
+    <replacement key="$memo$" value="С помощью этого шаблона вы можете создать QR-код, который содержит определенный пользователем текст. \line\line Чтобы изменить текст QR-кода, введите текст в компонент ввода текста «Текст для кодирования»." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -50,6 +53,7 @@
     <replacement key="$Visual Encoder$" value="Visueller Codierer" />
     <replacement key="$Text Input$" value="Zu codierender Text" />
     <replacement key="$text$" value="Diese Vorlage codiert einen Text in einem QR-Code. Textänderungen werden nach dem Start direkt umgesetzt. Klickt man in der Komponente &quot;Visueller Codierer&quot; auf &quot;Erklärung&quot;, werden die verschieden-farbig markierten Bestandteile des QR-Codes erklärt." />
+    <replacement key="$memo$" value="Mit dieser Vorlage können Sie einen QR-Code erstellen, der einen benutzerdefinierten Text enthält.\line\line Um den Text des QR-Codes zu ändern, geben Sie einen Text in die Texteingabekomponente &quot;Zu codierender Text&quot; ein." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
