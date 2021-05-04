@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: ADFGVX.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.04-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -18,6 +18,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/ADFGVX_cipher" /></descripti
     <replacement key="$Decrypted_Ciphertext$" value="Decrypted Ciphertext" />
     <replacement key="$ADFGVX_Encrypt$" value="ADFGVX Encrypt" />
     <replacement key="$ADFGVX_Decrypt$" value="ADFGVX Decrypt" />
+    <replacement key="$memo$" value="In this template, a text is first encrypted with the ADFGVX cipher. Then the ciphertext is decrypted again. \line\line In order to be able to encrypt and decrypt correctly, both ADFGVX components must have the same substitution and transposition key set in the settings. If random keys were generated in the settings for encryption, these keys must be copied into the settings of the second ADFGVX component before decryption." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -32,6 +33,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/ADFGVX_cipher" /></descripti
     <replacement key="$Decrypted_Ciphertext$" value="解密密文" />
     <replacement key="$ADFGVX_Encrypt$" value="ADFGVX加密" />
     <replacement key="$ADFGVX_Decrypt$" value="ADFGVX解密" />
+    <replacement key="$memo$" value="在此模板中，首先使用ADFGVX密码对文本进行加密。然后再次对密文进行解密。 \line\line 为了能够正确加密和解​​密，两个ADFGVX组件必须在设置中设置相同的替换键和换位键。如果在加密设置中生成了随机密钥，则在解密之前必须将这些密钥复制到第二个ADFGVX组件的设置中。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'ru' starts here:-->
@@ -46,6 +48,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/ADFGVX_cipher" /></descripti
     <replacement key="$Decrypted_Ciphertext$" value="Расшифрованный зашифрованный текст" />
     <replacement key="$ADFGVX_Encrypt$" value="Шифрование ADFGVX" />
     <replacement key="$ADFGVX_Decrypt$" value="Расшифровка ADFGVX" />
+    <replacement key="$memo$" value="В этом шаблоне текст сначала шифруется шифром ADFGVX. Затем зашифрованный текст снова расшифровывается. \line\line Для правильного шифрования и дешифрования оба компонента ADFGVX должны иметь одинаковые ключи подстановки и транспонирования, заданные в настройках. Если в настройках шифрования были сгенерированы случайные ключи, эти ключи необходимо скопировать в настройки второго компонента ADFGVX перед дешифровкой." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -62,6 +65,7 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/ADFGX" /></description>
     <replacement key="$Decrypted_Ciphertext$" value="Entschlüsselter Geheimtext" />
     <replacement key="$ADFGVX_Encrypt$" value="ADFGVX Verschlüsselung" />
     <replacement key="$ADFGVX_Decrypt$" value="ADFGVX Entschlüsselung" />
+    <replacement key="$memo$" value="In dieser Vorlage wird ein Text zuerst mit der ADFGVX-Verschlüsselung verschlüsselt. Dann wird der Geheimtext entschlüsselt. \line\line Um korrekt verschlüsseln und entschlüsseln zu können, müssen für beide ADFGVX-Komponenten in den Einstellungen die selben Substitutions- und Transpositionsschlüssel festgelegt sein. Wenn in den Einstellungen für die Verschlüsselung zufällige Schlüssel generiert wurden, müssen diese Schlüssel vor der Entschlüsselung in die Einstellungen der zweiten ADFGVX-Komponente kopiert werden." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

@@ -2,14 +2,14 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: KDF_Performance_Comparison_withPres.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.04-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">KDF Performance Comparison (with Presentation)</title>
-  <summary lang="en">Shows the comparison of 3 different key derivation functions (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256). All KDFs will be explained step by step.</summary>
-  <description lang="en">This template shows how the 3 different key derivation functions (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) work and how fast they are.</description>
+  <summary lang="en">Shows the comparison of three different key derivation functions (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256). All KDFs will be explained step by step.</summary>
+  <description lang="en">This template shows how the three different key derivation functions (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) work and how fast they are.</description>
   <keywords>hkdf, kkpf, KKDF, kdf, hash, key derivation function, random</keywords>
   <replacements lang="en">
     <replacement key="$KKPFSHA256Caption$" value="KKDF SHA-256" />
@@ -86,8 +86,8 @@
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">KDF-Performance-Vergleich (mit Präsentation)</title>
-  <summary lang="de">Vergleich von 3 verschiedenen Schlüsselgenerierungs-funktionen (Key Derivation Functions, KDFs). Alle 3 KDFs (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) werden Schritt-für-Schritt durch eine Präsentation erklärt.</summary>
-  <description lang="de">Diese Vorlage zeigt, wie die 3 verschiedenen Key Derivation Functions funktionieren (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) und wie schnell diese sind.</description>
+  <summary lang="de">Vergleich von drei verschiedenen Schlüsselgenerierungs-Funktionen (Key Derivation Functions, KDFs). Alle 3 KDFs (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) werden Schritt-für-Schritt durch eine Präsentation erklärt.</summary>
+  <description lang="de">Diese Vorlage zeigt, wie die drei verschiedenen Key Derivation Functions funktionieren (KKDF SHA-256, KKDF SHAKE256, HKDF SHA-256) und wie schnell diese sind.</description>
   <keywords lang="de">hkdf, kkpf, kkdf, kdf, hash, schlüsselgenerierungs-funktion, key derivation function, zufall</keywords>
   <replacements lang="de">
     <replacement key="$KKPFSHA256Caption$" value="KKDF SHA-256" />

@@ -2,13 +2,13 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: ChaChaPresentation.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.05.04-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">ChaCha Cipher (Presentation)</title>
-  <summary lang="en">Usage of the <i>ChaCha</i> cipher</summary>
+  <summary lang="en">This template shows the <i>ChaCha</i> cipher in fullscreen (presentation)</summary>
   <description lang="en">
   ChaCha is a 256-bit stream cipher developed by Daniel J. Bernstein (DJB) in 2008. It is a refinement of the Salsa cipher by the same author.
   
@@ -30,12 +30,11 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">ChaCha-Chiffre</title>
-  <summary lang="de">Anwendung der ChaCha-Chiffre</summary>
-  <description lang="de">
-  ChaCha ist eine 256-bit Stromchiffre, die 2008 von Daniel J. Bernstein (DJB) entwickelt wurde. Sie basiert auf der Salsa-Chiffre des selben Autors.
+  <title lang="de">ChaCha-Chiffre (Präsentation)</title>
+  <summary lang="de">Dieses Template zeigt die <i>ChaCha</i>-Chiffre im Vollbildmodus (Präsentation)</summary>
+  <description lang="de">ChaCha ist eine 256-bit Stromchiffre, die 2008 von Daniel J. Bernstein (DJB) entwickelt wurde. Sie basiert auf der Salsa-Chiffre des selben Autors.
   
-  Dieses Template beinhaltet eine detaillierte Visualisierung des Ver- und Entschlüsselungsprozesses sowie beide existierende Versionen der Chiffre: Die originale Version von DJB mit einem 64-bit Zähler und einem 64-bit Initialisierungsvektor und die modifizierte Version der Internet Engineering Task Force (IETF) mit einem 32-bit Zähler und einem 96-bit Initialisierungsvektor. Die Version kann in den Komponenten-Einstellungen ausgewählt werden.
+Dieses Template beinhaltet eine detaillierte Visualisierung des Ver- und Entschlüsselungsprozesses sowie beide existierende Versionen der Chiffre: Die originale Version von DJB mit einem 64-bit Zähler und einem 64-bit Initialisierungsvektor und die modifizierte Version der Internet Engineering Task Force (IETF) mit einem 32-bit Zähler und einem 96-bit Initialisierungsvektor. Die Version kann in den Komponenten-Einstellungen ausgewählt werden.
   </description>
   <keywords lang="de">verschlüsselung, entschlüsselung, strom chiffre</keywords>
   <replacements lang="de">
