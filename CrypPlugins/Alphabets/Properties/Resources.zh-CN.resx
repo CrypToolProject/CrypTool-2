@@ -121,7 +121,7 @@
     <value>字母</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>字母插件</value>
+    <value>允许创建各种字母</value>
   </data>
   <data name="AlphabetOutputCaption" xml:space="preserve">
     <value>字母输出</value>

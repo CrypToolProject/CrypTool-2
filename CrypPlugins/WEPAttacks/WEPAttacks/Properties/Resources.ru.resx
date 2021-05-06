@@ -145,7 +145,7 @@
     <value>Атаки по протоколу WEP</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Атаки по протоколу WEP</value>
+    <value>Реализует различные атаки на протокол WEP.</value>
   </data>
   <data name="SuccessCaption" xml:space="preserve">
     <value>успех</value>

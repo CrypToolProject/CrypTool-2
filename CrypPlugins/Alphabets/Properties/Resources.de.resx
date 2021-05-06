@@ -121,7 +121,7 @@
     <value>Alphabete</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Alphabet-Plugin</value>
+    <value>Ermöglicht die Erstellung verschiedener Alphabete</value>
   </data>
   <data name="AlphabetOutputCaption" xml:space="preserve">
     <value>Alphabet-Ausgabe</value>

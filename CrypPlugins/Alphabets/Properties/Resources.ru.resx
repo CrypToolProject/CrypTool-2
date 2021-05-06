@@ -121,7 +121,7 @@
     <value>алфавиты</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Плагин Alphabets</value>
+    <value>Позволяет создавать различные алфавиты</value>
   </data>
   <data name="AlphabetOutputCaption" xml:space="preserve">
     <value>Алфавитный вывод</value>

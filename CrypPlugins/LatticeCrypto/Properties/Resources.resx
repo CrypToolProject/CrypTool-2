@@ -148,7 +148,7 @@
     <value>Lattice-based cryptanalysis\ RSA (Coppersmith's attack)</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Lattice-based cryptography</value>
+    <value>Lattice-based Cryptography</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Lattices and their use in cryptography</value>

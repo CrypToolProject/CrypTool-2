@@ -145,7 +145,7 @@
     <value>对WEP协议的攻击</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>对WEP协议的攻击</value>
+    <value>对WEP协议实施不同的攻击</value>
   </data>
   <data name="SuccessCaption" xml:space="preserve">
     <value>成功</value>

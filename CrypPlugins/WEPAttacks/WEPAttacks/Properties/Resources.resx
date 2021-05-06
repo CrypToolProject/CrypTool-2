@@ -142,10 +142,10 @@
     <value>Decrypted frames</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Attacks on the WEP protocol</value>
+    <value>Attacks on the WEP Protocol</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>Attacks on the WEP protocol</value>
+    <value>Implements different attacks on the WEP protocol</value>
   </data>
   <data name="SuccessCaption" xml:space="preserve">
     <value>Success</value>

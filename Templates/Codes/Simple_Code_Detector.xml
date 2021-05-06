@@ -15,6 +15,7 @@
     <replacement key="$Visual Decoder$" value="Visual Decoder" />
     <replacement key="$Camera$" value="Camera" />
     <replacement key="$TextOutput$" value="Decoded text from optical code" />
+	<replacement key="$memo$" value="The component &quot;Visual Decoder&quot; can recognize 13 different visual codes. In this template, the visual code is read in via a connected camera. \line\line In the component settings, you can select whether the visual code should be recognized automatically or whether only one of the 13 codes should be detected. In the second case the detection is faster." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -27,6 +28,7 @@
     <replacement key="$Visual Decoder$" value="视觉解码器" />
     <replacement key="$Camera$" value="相机" />
     <replacement key="$TextOutput$" value="文字输出" />
+	<replacement key="$memo$" value="组件“ Visual Decoder”是可视的。可以识别13种不同的视觉代码。在此模板中，可视代码通过连接的摄像机读取。 \line\ line在组件设置中，您可以选择是自动识别视觉代码还是仅检测13种代码之一。在第二种情况下，检测速度更快。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'ru' starts here:-->
@@ -39,6 +41,7 @@
     <replacement key="$Visual Decoder$" value="Визуальный декодер" />
     <replacement key="$Camera$" value="камера" />
     <replacement key="$TextOutput$" value="вывод текста" />
+	<replacement key="$memo$" value="Компонент «Визуальный декодер» может распознавать 13 различных визуальных кодов. В этом шаблоне визуальный код считывается через подключенную камеру. \line\line В настройках компонента вы можете выбрать, должен ли визуальный код распознаваться автоматически или должен быть обнаружен только один из 13 кодов. Во втором случае обнаружение происходит быстрее." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->

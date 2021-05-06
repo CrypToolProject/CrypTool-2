@@ -163,14 +163,14 @@ namespace Startcenter
         {
             SolidColorBrush bg = Brushes.Transparent;
 
-            foreach (var file in info.GetFiles().Where(x => (x.Extension.ToLower() == ".cwm") || (x.Extension.ToLower() == ".component")))
+            foreach (var file in info.GetFiles().Where(x => (x.Extension.ToLower() == ".cwm")))
             {
                 if (file.Name.StartsWith("."))
                 {
                     continue;
                 }
-                StringBuilder copyTextBuilder = new StringBuilder();
-                bool component = (file.Extension.ToLower() == ".component");
+                StringBuilder copytextBuilder = new StringBuilder();
+                
                 string title = null;
                 Span summary1 = new Span();
                 Span summary2 = new Span();
@@ -187,7 +187,7 @@ namespace Startcenter
                         {
                             title = titleElement.Value;
                             //add title to text for copy context menu
-                            copyTextBuilder.AppendLine(title);                           
+                            copytextBuilder.AppendLine(title);                           
                         }
 
                         var summaryElement = XMLHelper.GetGlobalizedElementFromXML(xml, "summary");
@@ -198,8 +198,8 @@ namespace Startcenter
                             summary2.Inlines.Add(new Bold(XMLHelper.ConvertFormattedXElement(summaryElement)));
 
                             //add summary to text for copy context menu
-                            copyTextBuilder.AppendLine();
-                            copyTextBuilder.AppendLine(XMLHelper.ConvertFormattedXElementToString(summaryElement));  
+                            copytextBuilder.AppendLine();
+                            copytextBuilder.AppendLine(XMLHelper.ConvertFormattedXElementToString(summaryElement));  
                         }
                         if (descriptionElement != null && descriptionElement.Value.Length > 1) 
                         {
@@ -218,10 +218,10 @@ namespace Startcenter
                             summary2.Inlines.Add(Properties.Resources.Category + StripTemplatesPath(file.Directory.FullName));
 
                             //add description to text for copy context menu
-                            copyTextBuilder.AppendLine();
-                            copyTextBuilder.AppendLine(XMLHelper.ConvertFormattedXElementToString(descriptionElement));
-                            copyTextBuilder.AppendLine();
-                            copyTextBuilder.AppendLine(Properties.Resources.Category + StripTemplatesPath(file.Directory.FullName));
+                            copytextBuilder.AppendLine();
+                            copytextBuilder.AppendLine(XMLHelper.ConvertFormattedXElementToString(descriptionElement));
+                            copytextBuilder.AppendLine();
+                            copytextBuilder.AppendLine(Properties.Resources.Category + StripTemplatesPath(file.Directory.FullName));
                         }
 
                         if (xml.Element("icon") != null && xml.Element("icon").Attribute("file") != null)
@@ -259,12 +259,12 @@ namespace Startcenter
                 
                 if ((title == null) || (title.Trim() == ""))
                 {
-                    title = component ? file.Name : Path.GetFileNameWithoutExtension(file.Name).Replace("-", " ").Replace("_", " ");
+                    title = Path.GetFileNameWithoutExtension(file.Name).Replace("-", " ").Replace("_", " ");
                 }             
 
                 if (summary1.Inlines.Count == 0)
                 {
-                    string desc = component ? Properties.Resources.This_is_a_standalone_component_ : Properties.Resources.This_is_a_WorkspaceManager_file_;
+                    string desc = Properties.Resources.This_is_a_WorkspaceManager_file_;
                     summary1.Inlines.Add(new Run(desc));
                     summary2.Inlines.Add(new Run(desc));
                 }
@@ -288,7 +288,7 @@ namespace Startcenter
                 else
                 {
                     var ext = file.Extension.Remove(0, 1);
-                    if (!component && ComponentInformations.EditorExtension.ContainsKey(ext))
+                    if (ComponentInformations.EditorExtension.ContainsKey(ext))
                     {
                         Type editorType = ComponentInformations.EditorExtension[ext];
                         image = editorType.GetImage(0).Source;
@@ -301,7 +301,9 @@ namespace Startcenter
                     Filename = file,
                 });
 
-                ListBoxItem searchItem = CreateTemplateListBoxItem(file, title, summary1, image);
+                var copytext = copytextBuilder.ToString();
+
+                ListBoxItem searchItem = CreateTemplateListBoxItem(file, title, summary1, image, copytext);
 
                 if (internationalizedKeywords.Count > 0)
                 {
@@ -328,7 +330,7 @@ namespace Startcenter
                 //adding context menu for copying the description text to this template entry                
                 menuItem = new MenuItem();
                 menuItem.Header = Properties.Resources.CopyDescription;
-                menuItem.Tag = copyTextBuilder.ToString();
+                menuItem.Tag = copytext;
                 menuItem.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(ContextMenu_CopyClick));
                 item.ContextMenu.Items.Add(menuItem);
                 
@@ -364,9 +366,8 @@ namespace Startcenter
             {
                 //when user clicks on the "open template" entry of the context menu
                 //we invoke the double click on the item, thus, opening the template
-                MenuItem menuItem = (MenuItem)((RoutedEventArgs)eventArgs).Source;
-                CTTreeViewItem cTTreeViewItem = (CTTreeViewItem)menuItem.Tag;
-                TemplateItemDoubleClick(cTTreeViewItem, null);
+                var menuItem = (MenuItem)((RoutedEventArgs)eventArgs).Source;
+                TemplateItemDoubleClick(menuItem.Tag, null);
             }
             catch (Exception)
             {
@@ -393,7 +394,7 @@ namespace Startcenter
             }
         }
 
-        private ListBoxItem CreateTemplateListBoxItem(FileInfo file, string title, Inline tooltip, ImageSource imageSource)
+        private ListBoxItem CreateTemplateListBoxItem(FileInfo file, string title, Inline tooltip, ImageSource imageSource, string copytext)
         {
             Image image = new Image();
             image.Source = imageSource;
@@ -416,8 +417,22 @@ namespace Startcenter
             navItem.Content = stackPanel;
             navItem.Tag = new KeyValuePair<string, string>(file.FullName, title);
 
-
             navItem.MouseDoubleClick += TemplateItemDoubleClick;
+
+            //adding context menu for opening template
+            navItem.ContextMenu = new ContextMenu();
+            MenuItem menuItem = new MenuItem();
+            menuItem.Header = Properties.Resources.OpenTemplate;
+            menuItem.Tag = navItem;
+            menuItem.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(ContextMenu_OpenTemplateClick));
+            navItem.ContextMenu.Items.Add(menuItem);
+            //adding context menu for copying the description text to this template entry                
+            menuItem = new MenuItem();
+            menuItem.Header = Properties.Resources.CopyDescription;
+            menuItem.Tag = copytext;
+            menuItem.AddHandler(MenuItem.ClickEvent, new RoutedEventHandler(ContextMenu_CopyClick));
+            navItem.ContextMenu.Items.Add(menuItem);
+
             if (tooltip != null)
             {
                 var tooltipBlock = new TextBlock(tooltip) {TextWrapping = TextWrapping.Wrap, MaxWidth = 400};
@@ -466,14 +481,17 @@ namespace Startcenter
 
         private void TemplateSearchInputChanged(object sender, TextChangedEventArgs e)
         {
-            List<string> searchWords = new List<string>();
-            List<string> hitSearchWords = new List<string>();
+            var searchWords = new List<string>();
+            var hitSearchWords = new List<string>();
 
             var searchWordsArray = SearchTextBox.Text.ToLower().Split(new char[] { ',', ' ' });
             foreach (var searchword in searchWordsArray)
             {
                 var sw = searchword.Trim();
-                if (sw != "" && !searchWords.Contains(sw)) searchWords.Add(sw);
+                if (!string.IsNullOrEmpty(sw) && !searchWords.Contains(sw))
+                {
+                    searchWords.Add(sw);
+                }
             }
 
             if (searchWords.Count == 0)
@@ -487,27 +505,27 @@ namespace Startcenter
             TemplatesListBox.Visibility = Visibility.Visible;
             TemplatesTreeView.Visibility = Visibility.Collapsed;
             
-            int templateFoundCounter = 0;
+            var templateFoundCounter = 0;
 
             foreach (ListBoxItem item in TemplatesListBox.Items)
             {
-                TextBlock textBlock = (TextBlock)((Panel)item.Content).Children[1];
-                string title = (string)textBlock.Tag;
+                var textBlock = (TextBlock)((Panel)item.Content).Children[1];
+                var title = (string)textBlock.Tag;
 
                 // search template title for the search words
                 hitSearchWords.Clear();
                 SearchForHitWords(searchWords, hitSearchWords, new List<string>() { title });
 
-                bool allSearchWordsFound = hitSearchWords.Count == searchWords.Count;
+                var allSearchWordsFound = hitSearchWords.Count == searchWords.Count;
 
                 // if the template title doesn't contain all search words, search also the keywords
                 if (!allSearchWordsFound)
                 {
-                    List<string> keywords = SearchMatchingKeywords(item, searchWords, hitSearchWords);
+                    var keywords = SearchMatchingKeywords(item, searchWords, hitSearchWords);
                     allSearchWordsFound = hitSearchWords.Count == searchWords.Count;
                     if (allSearchWordsFound)
                     {
-                        title += " (" + String.Join(", ", keywords) + ")";
+                        title += " (" + string.Join(", ", keywords) + ")";
                     }
                 }
 
@@ -525,9 +543,9 @@ namespace Startcenter
                 if (allSearchWordsFound)
                 {
                     textBlock.Inlines.Clear();
-                    int begin = 0;
-                    int length;
-                    int end = IndexOfFirstHit(title, searchWordsArray, begin, out length);
+                    var begin = 0;
+                    var length = 0;
+                    var end = IndexOfFirstHit(title, searchWordsArray, begin, out length);
                     while (end != -1)
                     {
                         textBlock.Inlines.Add(title.Substring(begin, end - begin));
@@ -562,18 +580,30 @@ namespace Startcenter
 
         private List<string> SearchMatchingKeywords(ListBoxItem item, List<string> searchWords, List<string> hitSearchWords)
         {
-            List<string> hitKeyWords = new List<string>();
+            var hitKeyWords = new List<string>();
 
             var tag = ((System.Collections.ArrayList)((FrameworkElement)item.Content).Tag);
 
             if (tag.Count == 2)
             {
                 var internationalizedKeywords = (Dictionary<string, List<string>>)tag[1];
-                List<string> langs = new List<string>() { CultureInfo.CurrentCulture.TextInfo.CultureName, CultureInfo.CurrentCulture.TwoLetterISOLanguageName };
-                if (!langs.Contains("en")) langs.Add("en"); // check english keywords in any case
+                var langs = new List<string>() 
+                { 
+                    CultureInfo.CurrentCulture.TextInfo.CultureName, 
+                    CultureInfo.CurrentCulture.TwoLetterISOLanguageName 
+                };
+                if (!langs.Contains("en"))
+                {
+                    langs.Add("en"); // check english keywords in any case
+                }
                 foreach (var lang in langs)
-                    if(lang!=null && internationalizedKeywords.ContainsKey(lang))
-                        SearchForHitWords(searchWords, hitSearchWords, internationalizedKeywords[lang], hitKeyWords);
+                {
+                    if (lang == null || !internationalizedKeywords.ContainsKey(lang))
+                    {
+                        continue;
+                    }
+                    SearchForHitWords(searchWords, hitSearchWords, internationalizedKeywords[lang], hitKeyWords);
+                }
             }
 
             return hitKeyWords;
@@ -585,11 +615,19 @@ namespace Startcenter
             {
                 if (hitSearchWords.Contains(searchWord)) continue;
                 foreach (var word in words)
+                {
                     if (word.ToLower().Contains(searchWord.ToLower()))
                     {
-                        if (hitWords != null && !hitWords.Contains(word)) hitWords.Add(word);
-                        if (!hitSearchWords.Contains(searchWord)) hitSearchWords.Add(searchWord);
+                        if (hitWords != null && !hitWords.Contains(word))
+                        {
+                            hitWords.Add(word);
+                        }
+                        if (!hitSearchWords.Contains(searchWord))
+                        {
+                            hitSearchWords.Add(searchWord);
+                        }
                     }
+                }
             }
         }
 
@@ -684,9 +722,11 @@ namespace Startcenter
                     {
                         SetTreeViewItems(((ItemsControl)obj).ItemContainerGenerator.ContainerFromItem(obj2), expand);
 
-                        TreeViewItem item = obj2 as TreeViewItem;
+                        var item = obj2 as TreeViewItem;
                         if (item != null)
+                        {
                             item.IsExpanded = expand;
+                        }
                     }
                 }
             }
@@ -696,7 +736,6 @@ namespace Startcenter
     public class TemplateOpenEventArgs : EventArgs
     {
         public TabInfo Info { get; set; }
-
         public Type Type { get; set; }
     }
 }

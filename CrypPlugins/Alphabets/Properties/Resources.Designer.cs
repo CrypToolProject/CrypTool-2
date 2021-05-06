@@ -322,7 +322,7 @@ namespace CrypTool.Alphabets.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Alphabets Plugin ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Allows the creation of different alphabets ähnelt.
         /// </summary>
         public static string PluginTooltip {
             get {

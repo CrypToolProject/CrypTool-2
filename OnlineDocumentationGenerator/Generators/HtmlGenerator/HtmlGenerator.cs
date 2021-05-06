@@ -521,7 +521,10 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         private static string GenerateLanguageSelectionCodeBase(IEnumerable<string> availableLanguages, Dictionary<string, string[]> langdata, string lang)
         {
-            var langs = availableLanguages.Select(new Func<string, string>(l =>
+            var languagesList = availableLanguages.ToList();
+            languagesList.Sort();
+
+            var langs = languagesList.Select(new Func<string, string>(l =>
             {
                 string s = string.Format("<img src=\"{0}\" border=\"0\"/>&nbsp;{1}", langdata[l][0], _languagePresentationString[l]);
                 if (l != lang) s = string.Format("<a href=\"{0}\">{1}</a>", langdata[l][1], s);
