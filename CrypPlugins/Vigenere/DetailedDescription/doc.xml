@@ -12,7 +12,7 @@
     The Vigenère cipher was invented by Blaise de Vigenère in the 16th century and was deemed undecipherable for a long time. The cipher is consequently also known as "Le Chiffre indéchiffrable".
     <newline /><newline />
     The Vigenère cipher uses a keyword to decide, which of several substitution alphabets will be used to encrypt a letter from the plaintext.
-    The subsitution alphabets that are used by Vigenère are the 26 shifts of the standard alphabet:
+    The substitution alphabets that are used by Vigenère are the 26 shifts of the standard alphabet:
     <newline /><newline />
     ABCDEFGHIJKLMNOPQRSTUVWXYZ<newline />
     BCDEFGHIJKLMNOPQRSTUVWXYZA<newline />

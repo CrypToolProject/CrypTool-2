@@ -6,16 +6,16 @@
   
   <introduction lang="en">
     Visual cryptography is a method of encryption which allows to encrypt data (e.g. text and images) in such a way that the decrypted information appears as a visual image.<newline/><newline/>
-    The first visual encryption algorithm was invented by Moni Naor und Adi Shamir in 1994 <ref id="NaorShamir"/><ref id="wikipedia"/>. It is a visual secret sharing method, where a plaintext image is divided into n ciphertext images.
+    The first visual encryption algorithm was invented by Moni Naor und Adi Shamir in 1994 <ref id="NaorShamir"/><ref id="wikipedia"/>. It is a visual secret-sharing method, where a plaintext image is divided into n ciphertext images.
     An arbitrary subset of ciphertext images of size n - 1 is not enough to reveal the plaintext image.
     To reveal the plaintext image, all ciphertext images have to be combined.
   </introduction>
 
   <introduction lang="de-DE">
-	  Visuelle Kryptographie ist ein Verschlüsselungsverfahren, mit dem Daten (z. B. Text und Bilder) so verschlüsselt werden können, dass die entschlüsselten Informationen als visuelles Bild angezeigt werden.<newline /> <newline />
-	  Der erste visuelle Verschlüsselungsalgorithmus wurde 1994 von Moni Naor und Adi Shamir erfunden. <Ref id = "NaorShamir" /> <ref id = "wikipedia" />. Es ist eine visuelle secret sharing-Methode, bei der ein Klartextbild in n Geheimtextbilder unterteilt wird. 
-	  Eine beliebige Teilmenge von Geheimtextbildern der Größe n - 1 reicht nicht aus, um das Klartextbild wiederherzustellen. 
-	  Um das Klartextbild anzuzeigen, müssen alle Geheimtextbilder kombiniert werden. 
+	  Visuelle Kryptografie ist ein Verschlüsselungsverfahren, mit dem Daten (z. B. Text und Bilder) so verschlüsselt werden können, dass die entschlüsselten Informationen als visuelles Bild angezeigt werden.<newline /> <newline />
+	  Der erste visuelle Verschlüsselungsalgorithmus wurde 1994 von Moni Naor und Adi Shamir erfunden. <Ref id = "NaorShamir" /> <ref id = "wikipedia" />. Es ist eine visuelle Secret-Sharing-Methode, bei der ein Klartextbild in n Geheimtextbilder unterteilt wird.
+    Eine beliebige Teilmenge von Geheimtextbildern der Größe n - 1 reicht nicht aus, um das Klartextbild wiederherzustellen.
+    Um das Klartextbild anzuzeigen, müssen alle Geheimtextbilder kombiniert werden. 
   </introduction>
 
   <introduction lang="ru">
@@ -55,7 +55,7 @@
   </usage>
 
   <usage lang="de-DE">
-	  Die Visuelle-Kryptographie-Komponente verschlüsselt einen bestimmten Text und erstellt zwei Geheimtextbilder (Bild 1 und Bild 2), die zur Entschlüsselung kombiniert werden müssen. Der grundlegende Algorithmus basiert hier auf der Idee von Naor und Shamir <ref id = "NaorShamir" /> <ref id = "wikipedia" />. <newline />
+	  Die Visuelle-Kryptografie-Komponente verschlüsselt einen bestimmten Text und erstellt zwei Geheimtextbilder (Bild 1 und Bild 2), die zur Entschlüsselung kombiniert werden müssen. Der grundlegende Algorithmus basiert hier auf der Idee von Naor und Shamir <ref id = "NaorShamir" /> <ref id = "wikipedia" />. <newline />
     <newline />
     Für die Verschlüsselung wird intern eine Schriftart verwendet, die ASCII-Zeichen unterstützt. Zunächst wird ein internes Bild erzeugt, das den Klartext als Bild enthält.
     Dann wird das interne Bild unter Verwendung eines Zufallsschlüsselstroms von Bits verschlüsselt, die von einem kryptografisch sicheren Zufallszahlengenerator (einem .net RNGCryptoServiceProvider) erzeugt werden.
@@ -71,7 +71,7 @@
     Im Folgenden werden die Kombinationen zum Erstellen weißer Pixel angezeigt: <newline />
     <img src = "VisualCryptography/images/black_combinations.png" /> <newline />
     <newline />
-    Die Visuelle-Kryptographie-Komponente ermöglicht die Verwendung aller oben gezeigten Muster in beliebigen Kombinationen. Um die zu verwendenden Muster zu ändern, muss die Einstellung "Visuelles Muster" der Komponente geändert werden. <newline />
+    Die Visuelle-Kryptografie-Komponente ermöglicht die Verwendung aller oben gezeigten Muster in beliebigen Kombinationen. Um die zu verwendenden Muster zu ändern, muss die Einstellung "Visuelles Muster" der Komponente geändert werden. <newline />
     <newline />
     Mit der Einstellung "Zeichen pro Zeile" können Sie festlegen, wie viele Zeichen im Klartextbild in einer Textzeile gedruckt werden sollen.
  </usage>
@@ -125,7 +125,7 @@
   </presentation>
   
   <presentation lang="de-DE">
-	  Die Visualisierung der Visuallen-Kryptographie-Komponente ermöglicht es, beide Geheimtextbilder übereinander zu verschieben. Wenn beide Bilder perfekt übereinander ausgerichtet sind, wird das Klartextbild sichtbar.
+	  Die Visualisierung der Visuellen-Kryptografie-Komponente ermöglicht es, beide Geheimtextbilder übereinander zu verschieben. Wenn beide Bilder perfekt übereinander ausgerichtet sind, wird das Klartextbild sichtbar.
   </presentation>
   
   <presentation lang="ru">

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CharactersPerRowCaption" xml:space="preserve">
-    <value>Characters per Row</value>
+    <value>Characters per row</value>
   </data>
   <data name="CharactersPerRowTooltip" xml:space="preserve">
     <value>How many characters should appear in a single row of text?</value>
@@ -169,7 +169,7 @@
     <value>Plaintext</value>
   </data>
   <data name="PlaintextTooltip" xml:space="preserve">
-    <value>Text or Image to be encrypted</value>
+    <value>Text or image to be encrypted</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>Visual Cryptography</value>

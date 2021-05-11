@@ -61,7 +61,7 @@ namespace CrypTool.Plugins.VisualCryptography.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Characters per Row ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Characters per row ähnelt.
         /// </summary>
         internal static string CharactersPerRowCaption {
             get {
@@ -214,7 +214,7 @@ namespace CrypTool.Plugins.VisualCryptography.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Text or Image to be encrypted ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Text or image to be encrypted ähnelt.
         /// </summary>
         internal static string PlaintextTooltip {
             get {
