@@ -34,7 +34,7 @@ namespace CrypTool.VigenereAnalyzer
 
     [Author("Nils Kopal", "Nils.Kopal@Uni-Kassel.de", "Uni Kassel", "https://www.ais.uni-kassel.de")]
     [PluginInfo("CrypTool.VigenereAnalyzer.Properties.Resources",
-    "PluginCaption", "PluginTooltip", "", "VigenereAnalyzer/icon.png")]
+    "PluginCaption", "PluginTooltip", "VigenereAnalyzer/DetailedDescription/doc.xml", "VigenereAnalyzer/icon.png")]
     [ComponentCategory(ComponentCategory.CryptanalysisSpecific)]
     public class VigenereAnalyzer : ICrypComponent
     {                

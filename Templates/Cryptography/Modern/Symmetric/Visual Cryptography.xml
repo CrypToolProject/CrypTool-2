@@ -27,6 +27,6 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <icon file="VisualCryptography.png" />
   <relevantPlugins>
-    <plugin name="Visual Cryptography" />
+    <plugin name="VisualCryptography" />
   </relevantPlugins>
 </sample>
