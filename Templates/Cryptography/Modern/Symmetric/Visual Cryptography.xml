@@ -16,10 +16,10 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Visuelle Kryptography</title>
-  <summary lang="de">Anwendung der Visuellen Kryptografie</summary>
+  <title lang="de">Visuelle Kryptografie</title>
+  <summary lang="de">Anwendung der visuellen Kryptografie</summary>
   <description lang="de">
-	Diese Vorlage beschreibt wie die Visuelle-Kryptografie-Komponente in CrypTool 2 benutzt werden kann.
+	Diese Vorlage beschreibt, wie die Visuelle-Kryptografie-Komponente in CrypTool 2 benutzt werden kann.
   </description>
   <keywords lang="de">Verschlüsselung, Entschlüsselung, Visuell, Naor, Shamir</keywords>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
