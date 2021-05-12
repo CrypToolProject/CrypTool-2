@@ -4,7 +4,7 @@ Dear CrypTool 2 users,
 
 CrypTool 2 (CT2) is a free, open-source e-learning software about cryptography and cryptanalysis with a visual user interface. CT2 is used in schools, universities, companies, and administrations all over the world since more than 10 years.
 
-In April 2021, we published the release "2021.1", which is the first one this year and a major functional update. The last CT2 release was published in April 2020.
+In May 2021, we published the release "2021.1", which is the first one this year and a major functional update. The last CT2 release was published in April 2020.
 
 In this new release of CT2, the Workspace Manager allows undo and redo of component settings. Some modern ciphers are added, e.g. ChaCha, and new steganography components are implemented.
 We introduced visual cryptography for the first time in CrypTool 2. Of course, many bugs, typos, etc. were fixed. 
@@ -21,7 +21,7 @@ We hope that you have as much fun using CT2 as we have creating it!
 Stay safe and healthy!
 
 Sincerely yours,
-The CrypTool 2 Developer Team, April 2021
+The CrypTool 2 Developer Team, May 2021
 
 ------------------
 Changelog summary:
