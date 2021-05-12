@@ -379,15 +379,18 @@ namespace CrypTool.CrypWin
         /// </summary>
         private void FixSettingsByDeletingThem()
         {
-            var localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var fixedFile = localApplicationData + @"\CrypTool2\fixed_settings.txt";
-            if (!File.Exists(fixedFile))
+            try
             {
+                var localApplicationData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                var fixedFile = localApplicationData + @"\CrypTool2\fixed_settings.txt";
+                if (File.Exists(fixedFile))
+                {
+                    return;
+                }
                 var folder = localApplicationData + @"\CrypTool2";
                 if (Directory.Exists(folder))
                 {
                     Directory.Delete(folder, true);
-                    Directory.CreateDirectory(folder);
                 }
                 folder = localApplicationData + @"\CrypTool_2_Team";
                 if (Directory.Exists(folder))
@@ -399,10 +402,18 @@ namespace CrypTool.CrypWin
                 {
                     Directory.Delete(folder, true);
                 }
+                //create new empty CrypTool2 folder
+                folder = localApplicationData + @"\CrypTool2";
+                Directory.CreateDirectory(folder);
+
                 var stream = File.Create(fixedFile);
                 stream.Close();
             }
-        }
+            catch (Exception ex)
+            {
+                GuiLogMessage(string.Format("Exception occured during FixSettingsByDeletingThem: {0}", ex.Message), NotificationLevel.Error);
+            }
+        }        
 
         /// <summary>
         /// Sets the callback for the validation check of tls certificates
