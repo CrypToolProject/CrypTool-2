@@ -23,6 +23,13 @@ namespace CrypTool.Plugins.MorseCode
 {
     public class MorseCodeSettings : ISettings
     {        
+        public enum CodeType
+        {
+            International_ITU,
+            American_Morse,
+            Continental,
+            Navy            
+        }
         public enum ActionType
         {
             Encode = 0,
@@ -33,14 +40,30 @@ namespace CrypTool.Plugins.MorseCode
 
         #region Private Variables
 
+        private CodeType _codeType = CodeType.International_ITU;
         private ActionType _action;
         private int _frequency = 600;
-        
+
         #endregion
 
         #region TaskPane Settings
 
-        [TaskPane("ActionCaption", "ActionTooltip", null, 0, false, ControlType.ComboBox, new string[] { "Encode", "Decode", "Play" })]
+        [TaskPane("CodeCaption", "CodeTooltip", null, 0, false, ControlType.ComboBox, new string[] { "International (ITU)", "American", "Continental", "Navy" })]
+        public CodeType Code
+        {
+            get { return _codeType; }
+            set
+            {
+                if (value != _codeType)
+                {
+                    _codeType = value;
+                    OnPropertyChanged("CodeType");
+                    Initialize(); // we call this to show and hide settings
+                }
+            }
+        }
+
+        [TaskPane("ActionCaption", "ActionTooltip", null, 1, false, ControlType.ComboBox, new string[] { "Encode", "Decode", "Play" })]
         public ActionType Action
         {
             get { return _action; }
@@ -55,7 +78,7 @@ namespace CrypTool.Plugins.MorseCode
             }
         }
 
-        [TaskPane("FrequencyCaption", "FrequencyTooltip", null, 1, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 300, 1200)]
+        [TaskPane("FrequencyCaption", "FrequencyTooltip", null, 2, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 300, 1200)]
         public int Frequency
         {
             get { return _frequency; }

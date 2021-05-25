@@ -105,6 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encoders.cs" />
     <Compile Include="MorseCode.cs" />
     <Compile Include="MorseCodeSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
