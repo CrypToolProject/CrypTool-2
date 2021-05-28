@@ -16,8 +16,8 @@
     <replacement key="$Morse Decoder$" value="Morse Decoder" />
     <replacement key="$Cleartext to send$" value="Plaintext to be sent" />
     <replacement key="$Morse Code$" value="Morse code" />
-    <replacement key="$Decoded Morse Code$" value="Decoded morse code" />
-    <replacement key="$memo$" value="This template demonstrates the usage of the Morse Code components.\line\line The component &quot;Morse Encoder&quot; encodes the given text into a morse code sequence. &quot;Morse Decoder&quot; decodes the given morse code from the &quot;Morse Encoder&quot; to plaintext." />
+    <replacement key="$Decoded Morse Code$" value="Decoded Morse code" />
+    <replacement key="$memo$" value="This template demonstrates the usage of the Morse Code components.\line\line The component &quot;Morse Encoder&quot; encodes the given text into a morse code sequence. &quot;Morse Decoder&quot; decodes the given morse code from the &quot;Morse Encoder&quot; to plaintext.\line\line Both Morse code components are set to the International Morse Code\line Besides that, they also support the American Morse code, the Continental Morse code, and the Navy Morse code." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -32,7 +32,7 @@
     <replacement key="$Morse Decoder$" value="摩尔斯解码器" />
     <replacement key="$Morse Code$" value="摩尔斯电码" />
     <replacement key="$Decoded Morse Code$" value="分度器莫尔斯电码" />
-    <replacement key="$memo$" value="此模板演示了摩尔斯电码组件的用法\Line \line“摩尔斯编码器”组件将输入的文本转换为摩尔斯电码序列。 “摩尔斯解码器”将摩尔斯电码从“摩尔斯编码器”转换回纯文本。" />
+    <replacement key="$memo$" value="此模板演示了摩尔斯电码组件的用法\Line \line“摩尔斯编码器”组件将输入的文本转换为摩尔斯电码序列。 “摩尔斯解码器”将摩尔斯电码从“摩尔斯编码器”转换回纯文本。 \line \line 这两个摩尔斯代码组件都设置为国际摩尔斯代码\line，此外，它们还支持美国摩尔斯代码，美国大陆摩尔斯代码和海军摩尔斯代码。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'ru' starts here:-->
@@ -47,7 +47,7 @@
     <replacement key="$Morse Decoder$" value="Морзе декодер" />
     <replacement key="$Morse Code$" value="Азбука Морзе" />
     <replacement key="$Decoded Morse Code$" value="Дезодорант Морзе-код" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует использование компонента кода Морзе. \Line \line Компонент Morse Encoder преобразует входной текст в последовательность кодов Морзе. «Морзе-декодер» возвращает код Морзе из «Морзе-кодера» обратно в обычный текст." />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует использование компонента кода Морзе. \line \line Компонент Morse Encoder преобразует входной текст в последовательность кодов Морзе. «Морзе-декодер» возвращает код Морзе из «Морзе-кодера» обратно в обычный текст. \line \line Оба компонента кода Морзе установлены на Международный код Морзе \line. Кроме того, они также поддерживают американский код Морзе, континентальный код Морзе и код Морзе ВМС." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
@@ -62,7 +62,7 @@
     <replacement key="$Decoded Morse Code$" value="Decodierter Morsecode" />
     <replacement key="$Morse Encoder$" value="Morse-Codierer" />
     <replacement key="$Morse Decoder$" value="Morse-Decodierer" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Morse-Komponenten.\line\line Die Komponente &quot;Morse-Codierer&quot; konvertiert den eingegebenen Text in eine Folge von Morsezeichen. &quot;Morse-Decodierer&quot; verwandelt den Morse-Code vom &quot;Morse-Codierer&quot; wieder in den Klartext zurück." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Verwendung der Morse-Komponenten.\line\line Die Komponente &quot;Morse-Codierer&quot; konvertiert den eingegebenen Text in eine Folge von Morsezeichen. &quot;Morse-Decodierer&quot; verwandelt den Morse-Code vom &quot;Morse-Codierer&quot; wieder in den Klartext zurück. \line\line Beide Morsecode-Komponenten sind auf den internationalen Morsecode eingestellt.\line Außerdem unterstützen sie den amerikanischen Morsecode, den kontinentalen Morsecode und den Navy-Morsecode." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
