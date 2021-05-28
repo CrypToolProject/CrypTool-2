@@ -84,9 +84,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// <param name="ciphertext"></param>
         /// <param name="ciphertextFormat"></param>
         /// <param name="separator"></param>
-        /// <param name="costFactorMultiplicator"></param>
-        /// <param name="fixedTemperature"></param>
-        public void AddCiphertext(string ciphertext, CiphertextFormat ciphertextFormat, char separator, int costFactorMultiplicator, int fixedTemperature, bool useNulls)
+        /// <param name="temperature"></param>
+        public void AddCiphertext(string ciphertext, CiphertextFormat ciphertextFormat, char separator, int temperature, bool useNulls)
         {
             _ciphertext = ciphertext;
             _separator = separator;
@@ -105,8 +104,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             AnalyzerConfiguration.MaxWordLength = 10;
             AnalyzerConfiguration.WordCountToFind = 3;
             AnalyzerConfiguration.Separator = separator;
-            AnalyzerConfiguration.CostFunctionMultiplicator = costFactorMultiplicator;
-            AnalyzerConfiguration.FixedTemperature = fixedTemperature;
+            AnalyzerConfiguration.FixedTemperature = temperature;
             AnalyzerConfiguration.UseNulls = useNulls;
             _hillClimber = new HillClimber(AnalyzerConfiguration);
             _hillClimber.Grams = _grams;
@@ -1506,24 +1504,30 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         {
                             switch (ngramsize)
                             {
+                                //we normalize the statistic values between 0 and 10_000_000
+                                //then, a starting temperature of 10_000 is a good value for the simulated annealing
                                 default:
                                 case 6:
                                     Hexagrams hexaGrams = new Hexagrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    hexaGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, hexaGrams);
                                     loaded = true;
                                     break;
                                 case 5:
                                     Pentagrams pentaGrams = new Pentagrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    pentaGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, pentaGrams);
                                     loaded = true;
                                     break;
                                 case 4:
                                     Tetragrams quadGrams = new Tetragrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    quadGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, quadGrams);
                                     loaded = true;
                                     break;
                                 case 3:
                                     Trigrams triGrams = new Trigrams(LanguageStatistics.LanguageCode(language), useSpaces);
+                                    triGrams.Normalize(10_000_000);
                                     NGramCache.Add(key, triGrams);
                                     loaded = true;
                                     break;                                                                    

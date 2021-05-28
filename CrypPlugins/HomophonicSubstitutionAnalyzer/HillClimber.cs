@@ -47,11 +47,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         /// Attacks the homophone substitution using hillclimbing
         /// </summary>        
         public void Execute()
-        {          
+        {
             //0) initialize everything            
             Random random = new Random(Guid.NewGuid().GetHashCode());
             SimulatedAnnealing simulatedAnnealing = new SimulatedAnnealing(AnalyzerConfiguration.FixedTemperature);
-            KeyLetterDistributor keyLetterDistributor = new KeyLetterDistributor();            
+            KeyLetterDistributor keyLetterDistributor = new KeyLetterDistributor();
             HomophoneMapping[] bestkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
             double bestkeycost = double.MinValue;
             globalbestkey = new HomophoneMapping[AnalyzerConfiguration.Keylength];
@@ -64,12 +64,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             var numbers = new List<int>();
             keyLetterDistributor.Init(AnalyzerConfiguration.KeyLetterLimits);
             for (var i = 0; i < AnalyzerConfiguration.Keylength; i++)
-            {                
-                numbers.Add(keyLetterDistributor.GetNextLetter());             
+            {
+                numbers.Add(keyLetterDistributor.GetNextLetter());
             }
             if (AnalyzerConfiguration.UseNulls)
             {
-                for(var i = 0; i < 2; i++)
+                for (var i = 0; i < 2; i++)
                 {
                     numbers.Add(Tools.MapIntoNumberSpace("#", AnalyzerConfiguration.PlaintextMapping)[0]); //we use the #-symbol as null
                 }
@@ -96,7 +96,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     runkey[i].PlainLetter = numbers[rnd];
                     numbers.RemoveAt(rnd);
                 }
-            }            
+            }
 
             int noglobalbestcounter = 0;
             int nullsymbol = AnalyzerConfiguration.UseNulls ? Tools.MapIntoNumberSpace("#", AnalyzerConfiguration.PlaintextMapping)[0] : -1;
@@ -105,12 +105,14 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             var plaintext = DecryptHomophonicSubstitution(runkey);
             do
             {
+
+
                 //3.1) permutate key                
                 for (var i = 0; i < AnalyzerConfiguration.Keylength - 1; i++)
                 {
                     for (var j = i + 1; j < AnalyzerConfiguration.Keylength; j++)
                     {
-                        if (AnalyzerConfiguration.LockedHomophoneMappings[i] != -1 || 
+                        if (AnalyzerConfiguration.LockedHomophoneMappings[i] != -1 ||
                             AnalyzerConfiguration.LockedHomophoneMappings[j] != -1 ||
                             runkey[i].PlainLetter == runkey[j].PlainLetter)
                         {
@@ -128,16 +130,12 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         DecryptHomophonicSubstitutionInPlace(plaintext, runkey, i, j);
 
                         // compute cost value to rate the key (fitness)
-                        var costvalue = Grams.CalculateCost(plaintext.ToIntegerList(nullsymbol)) * AnalyzerConfiguration.CostFunctionMultiplicator;
-                        
-                        if (simulatedAnnealing.AcceptWithConstantTemperature(costvalue, bestkeycost))
+                        var costvalue = Grams.CalculateCost(plaintext.ToIntegerList(nullsymbol));
+
+                        if (simulatedAnnealing.AcceptWithTemperature(costvalue, bestkeycost))
                         {
-                            //stay on the "better key"
-                            //if (costvalue > bestkeycost)
-                            //{
-                                bestkeycost = costvalue;
-                                bestkey = CreateDeepKeyCopy(runkey);
-                            //}
+                            bestkeycost = costvalue;
+                            bestkey = CreateDeepKeyCopy(runkey);
                         }
                         else
                         {
@@ -152,7 +150,8 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                     {
                         return;
                     }
-                }                            
+                }               
+
                 //3.2) Check, if we have a new global best one
                 if (bestkeycost > globalbestkeycost)
                 {
@@ -191,7 +190,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
                         noglobalbestcounter = 0;
                     }
                 }
-                
+
 
                 //3.3) update progress in ui
                 if (DateTime.Now > lastUpdateTime.AddSeconds(1))
@@ -208,7 +207,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             //set final progress to 1.0
             if (Progress != null && !_stop)
             {
-                Progress.Invoke(this, new ProgressChangedEventArgs() { Percentage = 1, Terminated = true});
+                Progress.Invoke(this, new ProgressChangedEventArgs() { Percentage = 1, Terminated = true });
             }
             _stop = true;
         }
@@ -495,7 +494,6 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         public List<LetterLimits> KeyLetterLimits { get; set; }
         public int[] LockedHomophoneMappings { get; set; }
         public Text Ciphertext { get; private set; }
-        public double CostFunctionMultiplicator { get; set; }
         public double FixedTemperature { get; set; }
         public char Separator { get; set; }
         public bool UseNulls { get; set; }

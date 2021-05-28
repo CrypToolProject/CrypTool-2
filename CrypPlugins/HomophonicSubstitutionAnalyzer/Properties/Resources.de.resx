@@ -168,9 +168,6 @@
   <data name="Copy_value" xml:space="preserve">
     <value>Wert kopieren</value>
   </data>
-  <data name="CostFactorMultiplicatorCaption" xml:space="preserve">
-    <value>Kostenfaktor-Multiplikator</value>
-  </data>
   <data name="CostValue_0" xml:space="preserve">
     <value>Kostenwert: {0}</value>
   </data>
@@ -193,7 +190,7 @@
     <value>Wörter suchen/fixieren</value>
   </data>
   <data name="FixedTemperatureCaption" xml:space="preserve">
-    <value>Feste Temperatur</value>
+    <value>Temperatur</value>
   </data>
   <data name="FullAutomatic" xml:space="preserve">
     <value>Automatisch</value>

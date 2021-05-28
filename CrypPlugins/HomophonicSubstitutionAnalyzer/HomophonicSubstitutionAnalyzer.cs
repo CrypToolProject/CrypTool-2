@@ -150,7 +150,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             }
             string ciphertext = HandleLinebreaks(Ciphertext, out List<int> linebreakPositions);
             _presentation.LoadLangStatistics(_settings.Language, _settings.UseSpaces, _settings.UseNulls);
-            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.CostFactorMultiplicator, _settings.FixedTemperature, _settings.UseNulls);            
+            _presentation.AddCiphertext(ciphertext, _settings.CiphertextFormat, separator, _settings.Temperature, _settings.UseNulls);            
             _presentation.AnalyzerConfiguration.PlaintextAlphabet = LanguageStatistics.Alphabet(LanguageStatistics.LanguageCode(_settings.Language), _settings.UseSpaces);
             if (_settings.UseNulls)
             {

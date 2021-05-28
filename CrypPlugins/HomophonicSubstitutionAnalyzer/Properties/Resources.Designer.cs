@@ -223,15 +223,6 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Cost factor multiplicator ähnelt.
-        /// </summary>
-        internal static string CostFactorMultiplicatorCaption {
-            get {
-                return ResourceManager.GetString("CostFactorMultiplicatorCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Cost value: {0} ähnelt.
         /// </summary>
         internal static string CostValue_0 {
@@ -295,7 +286,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Fixed temperature ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Temperature ähnelt.
         /// </summary>
         internal static string FixedTemperatureCaption {
             get {

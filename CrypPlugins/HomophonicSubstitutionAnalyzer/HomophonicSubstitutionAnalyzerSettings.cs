@@ -69,8 +69,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private AnalysisMode _analysisMode;
         private int _cycles = 50000;
         private int _restarts = 1000;
-        private int _costFunctionMultiplicator = 500000;
-        private int _fixedTemperature = 15000;
+        private int _temperature = 15000;
         private bool _useNulls = false;
         private bool _keepLinebreaks = false;
         private string _letterLimits = string.Empty;
@@ -192,18 +191,11 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
             set { _restarts = value; }
         }
 
-        [TaskPane("CostFactorMultiplicatorCaption", "CostFactorMultiplicatorTooltip", "AlgorithmSettingsGroup", 12, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
-        public int CostFactorMultiplicator
-        {
-            get { return _costFunctionMultiplicator; }
-            set { _costFunctionMultiplicator = value; }
-        }
-
         [TaskPane("FixedTemperatureCaption", "FixedTemperatureTooltip", "AlgorithmSettingsGroup", 13, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
-        public int FixedTemperature
+        public int Temperature
         {
-            get { return _fixedTemperature; }
-            set { _fixedTemperature = value; }
+            get { return _temperature; }
+            set { _temperature = value; }
         }
 
         public string LetterLimits

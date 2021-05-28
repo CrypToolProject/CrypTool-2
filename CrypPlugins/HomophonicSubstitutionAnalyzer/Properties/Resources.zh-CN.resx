@@ -168,9 +168,6 @@
   <data name="Copy_value" xml:space="preserve">
     <value>复制值</value>
   </data>
-  <data name="CostFactorMultiplicatorCaption" xml:space="preserve">
-    <value>成本因素乘数</value>
-  </data>
   <data name="CostValue_0" xml:space="preserve">
     <value>成本值：{0}</value>
   </data>

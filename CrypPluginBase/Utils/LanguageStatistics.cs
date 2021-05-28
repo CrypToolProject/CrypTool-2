@@ -387,12 +387,16 @@ namespace CrypTool.PluginBase.Utils
     /// </summary>
     public abstract class Grams
     {        
+        public float MaxValue { get; protected set; }
+
+        public bool IsNormalized { get; private set; }
+
         public Grams(string language, bool useSpaces)
         {
             string filename = string.Format("{0}-{1}gram-nocs{2}.gz", language, GramSize(), useSpaces ? "-sp" : "");
             try
             {
-                LoadGZ(filename);
+                LoadGZ(filename);               
             }
             catch (FileNotFoundException fileNotFoundException)
             {
@@ -483,6 +487,20 @@ namespace CrypTool.PluginBase.Utils
                 addLetterIndicies[i] = addValue;
             }
         }
+
+        /// <summary>
+        /// Normalizes this Unigrams between 0 and maxValue
+        /// Throws an exception, if it has already been normalized
+        /// </summary>
+        public virtual void Normalize(float maxValue)
+        {
+            if (IsNormalized)
+            {
+                throw new InvalidOperationException("This Gram object has already been normalized!");
+            }
+            IsNormalized = true;
+        }
+
     }
 
     public class Unigrams : Grams
@@ -498,6 +516,14 @@ namespace CrypTool.PluginBase.Utils
             var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[])file.LoadFrequencies(1);
             Alphabet = file.Alphabet;
+            MaxValue = float.MinValue;
+            foreach (var value in Frequencies)
+            {
+                if (value > MaxValue)
+                {
+                    MaxValue = value;
+                }
+            }
         }
 
         public override double CalculateCost(int[] text)
@@ -563,8 +589,37 @@ namespace CrypTool.PluginBase.Utils
         {
             return LanguageStatistics.GramsType.Unigrams;
         }
-      
+
+        public override void Normalize(float maxValue)
+        {
+            base.Normalize(maxValue);
+            var adjustValue = MaxValue * maxValue;
+            for (var a = 0; a < Alphabet.Length; a++)
+            {
+                Frequencies[a] = adjustValue / Frequencies[a];
+            }
+        }
     }
+
+    public class NormalizedUnigrams : Unigrams
+    {
+        public NormalizedUnigrams(string language, bool useSpaces = false) : base(language)
+        {
+
+        }
+
+        public override void LoadGZ(string filename)
+        {
+            base.LoadGZ(filename);
+            Normalize();
+        }
+
+        public void Normalize()
+        {
+
+        }
+    }
+
 
     public class Bigrams : Grams
     {
@@ -579,6 +634,14 @@ namespace CrypTool.PluginBase.Utils
             var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,])file.LoadFrequencies(2);
             Alphabet = file.Alphabet;
+            MaxValue = float.MinValue;
+            foreach (var value in Frequencies)
+            {
+                if (value > MaxValue)
+                {
+                    MaxValue = value;
+                }
+            }
         }
 
         public override double CalculateCost(int[] text)
@@ -653,6 +716,16 @@ namespace CrypTool.PluginBase.Utils
             return LanguageStatistics.GramsType.Bigrams;
         }
 
+        public override void Normalize(float maxValue)
+        {
+            base.Normalize(maxValue);
+            var adjustValue = MaxValue * maxValue;
+            for (var a = 0; a < Alphabet.Length; a++)
+                for (var b = 0; b < Alphabet.Length; b++)
+                {
+                    Frequencies[a, b] = adjustValue / Frequencies[a, b];
+                }
+        }
     }
 
     public class Trigrams : Grams
@@ -668,6 +741,14 @@ namespace CrypTool.PluginBase.Utils
             var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,])file.LoadFrequencies(3);
             Alphabet = file.Alphabet;
+            MaxValue = float.MinValue;
+            foreach (var value in Frequencies)
+            {
+                if (value > MaxValue)
+                {
+                    MaxValue = value;
+                }
+            }
         }
 
         public override double CalculateCost(int[] text)
@@ -750,6 +831,17 @@ namespace CrypTool.PluginBase.Utils
             return LanguageStatistics.GramsType.Trigrams;
         }
 
+        public override void Normalize(float maxValue)
+        {
+            base.Normalize(maxValue);
+            var adjustValue = MaxValue * maxValue;
+            for (var a = 0; a < Alphabet.Length; a++)
+                for (var b = 0; b < Alphabet.Length; b++)
+                    for (var c = 0; c < Alphabet.Length; c++)
+                    {
+                        Frequencies[a, b, c] = adjustValue / Frequencies[a, b, c];
+                    }
+        }
     }
 
     public class Tetragrams : Grams
@@ -765,6 +857,14 @@ namespace CrypTool.PluginBase.Utils
             var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,,])file.LoadFrequencies(4);
             Alphabet = file.Alphabet;
+            MaxValue = float.MinValue;
+            foreach (var value in Frequencies)
+            {
+                if (value > MaxValue)
+                {
+                    MaxValue = value;
+                }
+            }
         }
 
         public override double CalculateCost(int[] text)
@@ -855,6 +955,18 @@ namespace CrypTool.PluginBase.Utils
             return LanguageStatistics.GramsType.Tetragrams;
         }
 
+        public override void Normalize(float maxValue)
+        {
+            base.Normalize(maxValue);
+            var adjustValue = MaxValue * maxValue;
+            for (var a = 0; a < Alphabet.Length; a++)
+                for (var b = 0; b < Alphabet.Length; b++)
+                    for (var c = 0; c < Alphabet.Length; c++)
+                        for (var d = 0; d < Alphabet.Length; d++)
+                        {
+                            Frequencies[a, b, c, d] = adjustValue / Frequencies[a, b, c, d];
+                        }
+        }
     }
 
     public class Pentagrams : Grams
@@ -870,6 +982,14 @@ namespace CrypTool.PluginBase.Utils
             var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,,,])file.LoadFrequencies(5);
             Alphabet = file.Alphabet;
+            MaxValue = float.MinValue;
+            foreach (var value in Frequencies)
+            {
+                if (value > MaxValue)
+                {
+                    MaxValue = value;
+                }
+            }
         }
 
         public override double CalculateCost(int[] text)
@@ -910,7 +1030,7 @@ namespace CrypTool.PluginBase.Utils
                 {
                     continue;
                 }
-                value += Frequencies[a, b, c, d, e];
+                value += Frequencies[a, b, c, d, e];                
             }
             return value / end;
         }
@@ -921,7 +1041,7 @@ namespace CrypTool.PluginBase.Utils
         }
 
         public override double CalculateCost(List<int> text)
-        {
+        {            
             int end = text.Count - 4;
             if (end <= 0) return 0;
 
@@ -958,7 +1078,8 @@ namespace CrypTool.PluginBase.Utils
                 {
                     continue;
                 }
-                value += Frequencies[a, b, c, d, e];
+
+                value += Frequencies[a, b, c, d, e];                
             }
             return value / end;
         }
@@ -966,6 +1087,20 @@ namespace CrypTool.PluginBase.Utils
         public override GramsType GramsType()
         {
             return LanguageStatistics.GramsType.Pentragrams;
+        }
+
+        public override void Normalize(float maxValue)
+        {
+            base.Normalize(maxValue);
+            var adjustValue = MaxValue * maxValue;
+            for (var a = 0; a < Alphabet.Length; a++)
+                for (var b = 0; b < Alphabet.Length; b++)
+                    for (var c = 0; c < Alphabet.Length; c++)
+                        for (var d = 0; d < Alphabet.Length; d++)
+                            for (var e = 0; e < Alphabet.Length; e++)
+                            {
+                                Frequencies[a, b, c, d, e] = adjustValue / Frequencies[a, b, c, d, e];
+                            }
         }
     }
 
@@ -982,6 +1117,14 @@ namespace CrypTool.PluginBase.Utils
             var file = new LanguageStatisticsFile(filename);
             Frequencies = (float[,,,,,])file.LoadFrequencies(6);
             Alphabet = file.Alphabet;
+            MaxValue = float.MinValue;
+            foreach (var value in Frequencies)
+            {
+                if (value > MaxValue)
+                {
+                    MaxValue = value;
+                }
+            }
         }
 
         public override double CalculateCost(int[] text)
@@ -1088,8 +1231,21 @@ namespace CrypTool.PluginBase.Utils
             return LanguageStatistics.GramsType.Hexagrams;
         }
 
+        public override void Normalize(float maxValue)
+        {
+            base.Normalize(maxValue);
+            var adjustValue = MaxValue * maxValue;
+            for (var a = 0; a < Alphabet.Length; a++)
+                for (var b = 0; b < Alphabet.Length; b++)
+                    for (var c = 0; c < Alphabet.Length; c++)
+                        for (var d = 0; d < Alphabet.Length; d++)
+                            for (var e = 0; e < Alphabet.Length; e++)
+                                for (var f = 0; f < Alphabet.Length; f++)
+                                {
+                                    Frequencies[a, b, c, d, e, f] = adjustValue / Frequencies[a, b, c, d, e, f];
+                                }
+        }
     }
-
 
     public class LanguageStatisticsFile
     {

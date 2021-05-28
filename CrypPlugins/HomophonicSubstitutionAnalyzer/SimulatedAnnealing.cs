@@ -23,7 +23,7 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         private Random _random = new Random();
         private double _startTemperature = 0;
         private double _currentTemperature = 0;
-        private double _reductionFactor = 0.000001;
+        private double _reductionFactor = 0.0000001;
         private double _stepSize = 0;
 
         public SimulatedAnnealing(double temperature)
@@ -34,19 +34,19 @@ namespace CrypTool.Plugins.HomophonicSubstitutionAnalyzer
         }       
 
         /// <summary>
-        /// Simulated Annealing Acceptance Function – Constant _temperature
+        /// Simulated Annealing Acceptance Function
         /// </summary>
         /// <param name="newKeyScore"></param>
         /// <param name="currentKeyScore"></param>
         /// <returns></returns>
-        public bool AcceptWithConstantTemperature(double newKeyScore, double currentKeyScore)
+        public bool AcceptWithTemperature(double newKeyScore, double currentKeyScore)
         {
             _currentTemperature = _currentTemperature - _stepSize;
             // Always accept better keys
             if (newKeyScore >= currentKeyScore)
             {
                 return true;
-            }
+            }            
             double degradation = -Math.Abs(currentKeyScore - newKeyScore);
             double acceptanceProbability = Math.Exp(degradation / _currentTemperature);
             return acceptanceProbability > 0.0085 && _random.NextDouble() < acceptanceProbability;

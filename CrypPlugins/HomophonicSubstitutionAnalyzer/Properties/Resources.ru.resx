@@ -168,9 +168,6 @@
   <data name="Copy_value" xml:space="preserve">
     <value>Копировать значение</value>
   </data>
-  <data name="CostFactorMultiplicatorCaption" xml:space="preserve">
-    <value>Мультипликатор коэффициента стоимости</value>
-  </data>
   <data name="CostValue_0" xml:space="preserve">
     <value>Стоимость: {0}</value>
   </data>
