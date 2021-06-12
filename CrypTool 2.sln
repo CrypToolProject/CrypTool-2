@@ -492,6 +492,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChaCha", "CrypPlugins\ChaCh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualCryptography", "CrypPlugins\VisualCryptography\VisualCryptography.csproj", "{670A2465-7B18-4914-B96A-228F5A052ED3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIGABA", "CrypPlugins\SIGABA\SIGABA.csproj", "{B77A94C7-0EBB-48DE-B6D5-BFA52EA3A8D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1454,6 +1456,10 @@ Global
 		{670A2465-7B18-4914-B96A-228F5A052ED3}.Debug|x64.Build.0 = Debug|x64
 		{670A2465-7B18-4914-B96A-228F5A052ED3}.Release|x64.ActiveCfg = Release|x64
 		{670A2465-7B18-4914-B96A-228F5A052ED3}.Release|x64.Build.0 = Release|x64
+		{B77A94C7-0EBB-48DE-B6D5-BFA52EA3A8D7}.Debug|x64.ActiveCfg = Debug|x64
+		{B77A94C7-0EBB-48DE-B6D5-BFA52EA3A8D7}.Debug|x64.Build.0 = Debug|x64
+		{B77A94C7-0EBB-48DE-B6D5-BFA52EA3A8D7}.Release|x64.ActiveCfg = Release|x64
+		{B77A94C7-0EBB-48DE-B6D5-BFA52EA3A8D7}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1688,6 +1694,7 @@ Global
 		{F7D32FCB-CC43-4CF6-9694-3D94D0D59277} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{3D890E75-8ACE-4780-8E5B-E7D94052834E} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{670A2465-7B18-4914-B96A-228F5A052ED3} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{B77A94C7-0EBB-48DE-B6D5-BFA52EA3A8D7} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}
