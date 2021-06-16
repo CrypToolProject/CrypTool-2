@@ -61,6 +61,303 @@ namespace CrypTool.Plugins.SIGABA.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Action ähnelt.
+        /// </summary>
+        internal static string ActionCaption {
+            get {
+                return ResourceManager.GetString("ActionCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Selects the machine action ähnelt.
+        /// </summary>
+        internal static string ActionTooltip {
+            get {
+                return ResourceManager.GetString("ActionTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cipher rotor 0 ähnelt.
+        /// </summary>
+        internal static string CipherRotor0Caption {
+            get {
+                return ResourceManager.GetString("CipherRotor0Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cipher rotor 1 ähnelt.
+        /// </summary>
+        internal static string CipherRotor1Caption {
+            get {
+                return ResourceManager.GetString("CipherRotor1Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cipher rotor 2 ähnelt.
+        /// </summary>
+        internal static string CipherRotor2Caption {
+            get {
+                return ResourceManager.GetString("CipherRotor2Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cipher rotor 3 ähnelt.
+        /// </summary>
+        internal static string CipherRotor3Caption {
+            get {
+                return ResourceManager.GetString("CipherRotor3Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cipher rotor 4 ähnelt.
+        /// </summary>
+        internal static string CipherRotor4Caption {
+            get {
+                return ResourceManager.GetString("CipherRotor4Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cipher rotors ähnelt.
+        /// </summary>
+        internal static string CipherRotorGroup {
+            get {
+                return ResourceManager.GetString("CipherRotorGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cipher rotor positions ähnelt.
+        /// </summary>
+        internal static string CipherRotorPositionsCaption {
+            get {
+                return ResourceManager.GetString("CipherRotorPositionsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sets the initial positions of the cipher rotors ähnelt.
+        /// </summary>
+        internal static string CipherRotorPositionsTooltip {
+            get {
+                return ResourceManager.GetString("CipherRotorPositionsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Selection of this cipher rotor ähnelt.
+        /// </summary>
+        internal static string CipherRotorTooltip {
+            get {
+                return ResourceManager.GetString("CipherRotorTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Control rotor 0 ähnelt.
+        /// </summary>
+        internal static string ControlRotor0Caption {
+            get {
+                return ResourceManager.GetString("ControlRotor0Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Control rotor 1 ähnelt.
+        /// </summary>
+        internal static string ControlRotor1Caption {
+            get {
+                return ResourceManager.GetString("ControlRotor1Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Control rotor 2 ähnelt.
+        /// </summary>
+        internal static string ControlRotor2Caption {
+            get {
+                return ResourceManager.GetString("ControlRotor2Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Control rotor 3 ähnelt.
+        /// </summary>
+        internal static string ControlRotor3Caption {
+            get {
+                return ResourceManager.GetString("ControlRotor3Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Control rotor 4 ähnelt.
+        /// </summary>
+        internal static string ControlRotor4Caption {
+            get {
+                return ResourceManager.GetString("ControlRotor4Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Control rotors ähnelt.
+        /// </summary>
+        internal static string ControlRotorGroup {
+            get {
+                return ResourceManager.GetString("ControlRotorGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Control rotor positions ähnelt.
+        /// </summary>
+        internal static string ControlRotorPositionsCaption {
+            get {
+                return ResourceManager.GetString("ControlRotorPositionsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sets the initial positions of the control rotors ähnelt.
+        /// </summary>
+        internal static string ControlRotorPositionsTooltip {
+            get {
+                return ResourceManager.GetString("ControlRotorPositionsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Selection of this control rotor ähnelt.
+        /// </summary>
+        internal static string ControlRotorTooltip {
+            get {
+                return ResourceManager.GetString("ControlRotorTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Decrypt ähnelt.
+        /// </summary>
+        internal static string Decrypt {
+            get {
+                return ResourceManager.GetString("Decrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Encrypt ähnelt.
+        /// </summary>
+        internal static string Encrypt {
+            get {
+                return ResourceManager.GetString("Encrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Index rotor 0 ähnelt.
+        /// </summary>
+        internal static string IndexRotor0Caption {
+            get {
+                return ResourceManager.GetString("IndexRotor0Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Index rotor 1 ähnelt.
+        /// </summary>
+        internal static string IndexRotor1Caption {
+            get {
+                return ResourceManager.GetString("IndexRotor1Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Index rotor 2 ähnelt.
+        /// </summary>
+        internal static string IndexRotor2Caption {
+            get {
+                return ResourceManager.GetString("IndexRotor2Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Index rotor 3 ähnelt.
+        /// </summary>
+        internal static string IndexRotor3Caption {
+            get {
+                return ResourceManager.GetString("IndexRotor3Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Index rotor 4 ähnelt.
+        /// </summary>
+        internal static string IndexRotor4Caption {
+            get {
+                return ResourceManager.GetString("IndexRotor4Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Index rotors ähnelt.
+        /// </summary>
+        internal static string IndexRotorGroup {
+            get {
+                return ResourceManager.GetString("IndexRotorGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Index rotor positions ähnelt.
+        /// </summary>
+        internal static string IndexRotorPositionsCaption {
+            get {
+                return ResourceManager.GetString("IndexRotorPositionsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sets the initial positions of the index rotors ähnelt.
+        /// </summary>
+        internal static string IndexRotorPositionsTooltip {
+            get {
+                return ResourceManager.GetString("IndexRotorPositionsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Selection of this index rotor ähnelt.
+        /// </summary>
+        internal static string IndexRotorTooltip {
+            get {
+                return ResourceManager.GetString("IndexRotorTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Model ähnelt.
+        /// </summary>
+        internal static string ModelCaption {
+            get {
+                return ResourceManager.GetString("ModelCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sets the used SIGABA model ähnelt.
+        /// </summary>
+        internal static string ModelTooltip {
+            get {
+                return ResourceManager.GetString("ModelTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die SIGABA ähnelt.
         /// </summary>
         internal static string PluginCaption {
@@ -70,11 +367,101 @@ namespace CrypTool.Plugins.SIGABA.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die US rotor encryption machine ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The SIGABA is a US rotor encryption machine ähnelt.
         /// </summary>
         internal static string PluginTooltip {
             get {
                 return ResourceManager.GetString("PluginTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Rotor start positions ähnelt.
+        /// </summary>
+        internal static string PositionsGroup {
+            get {
+                return ResourceManager.GetString("PositionsGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Reversed ähnelt.
+        /// </summary>
+        internal static string ReversedCaption {
+            get {
+                return ResourceManager.GetString("ReversedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If this is selected, this rotor is used reversed in the machine ähnelt.
+        /// </summary>
+        internal static string ReversedTooltip {
+            get {
+                return ResourceManager.GetString("ReversedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Unknown symbol handling ähnelt.
+        /// </summary>
+        internal static string UnknownSymbolHandlingCaption {
+            get {
+                return ResourceManager.GetString("UnknownSymbolHandlingCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ignore (leave unmodified) ähnelt.
+        /// </summary>
+        internal static string UnknownSymbolHandlingList1 {
+            get {
+                return ResourceManager.GetString("UnknownSymbolHandlingList1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Remove ähnelt.
+        /// </summary>
+        internal static string UnknownSymbolHandlingList2 {
+            get {
+                return ResourceManager.GetString("UnknownSymbolHandlingList2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Replace with &apos;?&apos; ähnelt.
+        /// </summary>
+        internal static string UnknownSymbolHandlingList3 {
+            get {
+                return ResourceManager.GetString("UnknownSymbolHandlingList3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die What should be done with encountered characters at the input which are not in the alphabet? ähnelt.
+        /// </summary>
+        internal static string UnknownSymbolHandlingTooltip {
+            get {
+                return ResourceManager.GetString("UnknownSymbolHandlingTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use &apos;Z&apos; as space ähnelt.
+        /// </summary>
+        internal static string UseZAsSpaceCaption {
+            get {
+                return ResourceManager.GetString("UseZAsSpaceCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If enabled, spaces are replaced by &apos;Z&apos; during encryption and &apos;Z&apos; is replaced by space during decryption ähnelt.
+        /// </summary>
+        internal static string UseZAsSpaceTooltip {
+            get {
+                return ResourceManager.GetString("UseZAsSpaceTooltip", resourceCulture);
             }
         }
     }

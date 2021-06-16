@@ -118,138 +118,138 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActionCaption" xml:space="preserve">
-    <value>Action</value>
+    <value>Действие</value>
   </data>
   <data name="ActionTooltip" xml:space="preserve">
-    <value>Selects the machine action</value>
+    <value>Выбирает действие алгоритма</value>
   </data>
   <data name="CipherRotor0Caption" xml:space="preserve">
-    <value>Cipher rotor 0</value>
+    <value>Шифровальный ротор 0</value>
   </data>
   <data name="CipherRotor1Caption" xml:space="preserve">
-    <value>Cipher rotor 1</value>
+    <value>Шифровальный ротор 1</value>
   </data>
   <data name="CipherRotor2Caption" xml:space="preserve">
-    <value>Cipher rotor 2</value>
+    <value>Шифровальный ротор 2</value>
   </data>
   <data name="CipherRotor3Caption" xml:space="preserve">
-    <value>Cipher rotor 3</value>
+    <value>Шифровальный ротор 3</value>
   </data>
   <data name="CipherRotor4Caption" xml:space="preserve">
-    <value>Cipher rotor 4</value>
+    <value>Шифровальный ротор 4</value>
   </data>
   <data name="CipherRotorGroup" xml:space="preserve">
-    <value>Cipher rotors</value>
+    <value>Выбор ротора шифра</value>
   </data>
   <data name="CipherRotorPositionsCaption" xml:space="preserve">
-    <value>Cipher rotor positions</value>
+    <value>Шифр положения ротора</value>
   </data>
   <data name="CipherRotorPositionsTooltip" xml:space="preserve">
-    <value>Sets the initial positions of the cipher rotors</value>
+    <value>Устанавливает начальные положения роторов шифров.</value>
   </data>
   <data name="CipherRotorTooltip" xml:space="preserve">
-    <value>Selection of this cipher rotor</value>
+    <value>Выбор этого шифровального ротора</value>
   </data>
   <data name="ControlRotor0Caption" xml:space="preserve">
-    <value>Control rotor 0</value>
+    <value>Управляющий ротор 0</value>
   </data>
   <data name="ControlRotor1Caption" xml:space="preserve">
-    <value>Control rotor 1</value>
+    <value>Управляющий ротор 1</value>
   </data>
   <data name="ControlRotor2Caption" xml:space="preserve">
-    <value>Control rotor 2</value>
+    <value>Управляющий ротор 2</value>
   </data>
   <data name="ControlRotor3Caption" xml:space="preserve">
-    <value>Control rotor 3</value>
+    <value>Управляющий ротор 3</value>
   </data>
   <data name="ControlRotor4Caption" xml:space="preserve">
-    <value>Control rotor 4</value>
+    <value>Управляющий ротор 4</value>
   </data>
   <data name="ControlRotorGroup" xml:space="preserve">
-    <value>Control rotors</value>
+    <value>Выбор управляющего ротора</value>
   </data>
   <data name="ControlRotorPositionsCaption" xml:space="preserve">
-    <value>Control rotor positions</value>
+    <value>Положения управляющего ротора</value>
   </data>
   <data name="ControlRotorPositionsTooltip" xml:space="preserve">
-    <value>Sets the initial positions of the control rotors</value>
+    <value>Устанавливает начальные положения управляющих роторов.</value>
   </data>
   <data name="ControlRotorTooltip" xml:space="preserve">
-    <value>Selection of this control rotor</value>
+    <value>Выбор этого управляющего ротора</value>
   </data>
   <data name="Decrypt" xml:space="preserve">
-    <value>Decrypt</value>
+    <value>Расшифровать</value>
   </data>
   <data name="Encrypt" xml:space="preserve">
-    <value>Encrypt</value>
+    <value>Зашифровать</value>
   </data>
   <data name="IndexRotor0Caption" xml:space="preserve">
-    <value>Index rotor 0</value>
+    <value>Индексный ротор 0</value>
   </data>
   <data name="IndexRotor1Caption" xml:space="preserve">
-    <value>Index rotor 1</value>
+    <value>Индексный ротор 1</value>
   </data>
   <data name="IndexRotor2Caption" xml:space="preserve">
-    <value>Index rotor 2</value>
+    <value>Индексный ротор 2</value>
   </data>
   <data name="IndexRotor3Caption" xml:space="preserve">
-    <value>Index rotor 3</value>
+    <value>Индексный ротор 3</value>
   </data>
   <data name="IndexRotor4Caption" xml:space="preserve">
-    <value>Index rotor 4</value>
+    <value>Индексный ротор 4</value>
   </data>
   <data name="IndexRotorGroup" xml:space="preserve">
-    <value>Index rotors</value>
+    <value>Выбор индексного ротора</value>
   </data>
   <data name="IndexRotorPositionsCaption" xml:space="preserve">
-    <value>Index rotor positions</value>
+    <value>Индекс положения ротора</value>
   </data>
   <data name="IndexRotorPositionsTooltip" xml:space="preserve">
-    <value>Sets the initial positions of the index rotors</value>
+    <value>Устанавливает начальные положения индексных роторов</value>
   </data>
   <data name="IndexRotorTooltip" xml:space="preserve">
-    <value>Selection of this index rotor</value>
+    <value>Выбор этого индексного ротора</value>
   </data>
   <data name="ModelCaption" xml:space="preserve">
-    <value>Model</value>
+    <value>Модель</value>
   </data>
   <data name="ModelTooltip" xml:space="preserve">
-    <value>Sets the used SIGABA model</value>
+    <value>Устанавливает используемую модель РАЗДЕЛ</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>SIGABA</value>
+    <value>СИГАБА</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>The SIGABA is a US rotor encryption machine</value>
+    <value>SIGABA - это американская роторная шифровальная машина.</value>
   </data>
   <data name="PositionsGroup" xml:space="preserve">
-    <value>Rotor start positions</value>
+    <value>Стартовые положения ротора</value>
   </data>
   <data name="ReversedCaption" xml:space="preserve">
-    <value>Reversed</value>
+    <value>Обратный</value>
   </data>
   <data name="ReversedTooltip" xml:space="preserve">
-    <value>If this is selected, this rotor is used reversed in the machine</value>
+    <value>Если это выбрано, этот ротор используется в машине в обратном порядке.</value>
   </data>
   <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
-    <value>Unknown symbol handling</value>
+    <value>Обработка неизвестного символа</value>
   </data>
   <data name="UnknownSymbolHandlingList1" xml:space="preserve">
-    <value>Ignore (leave unmodified)</value>
+    <value>Игнорировать (оставить без изменений)</value>
   </data>
   <data name="UnknownSymbolHandlingList2" xml:space="preserve">
-    <value>Remove</value>
+    <value>Удалять</value>
   </data>
   <data name="UnknownSymbolHandlingList3" xml:space="preserve">
-    <value>Replace with '?'</value>
+    <value>Заменить &amp;#39;?&amp;#39;</value>
   </data>
   <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
-    <value>What should be done with encountered characters at the input which are not in the alphabet?</value>
+    <value>Что делать с встречающимися на входе символами, которых нет в алфавите?</value>
   </data>
   <data name="UseZAsSpaceCaption" xml:space="preserve">
-    <value>Use 'Z' as space</value>
+    <value>Используйте букву Z как пробел</value>
   </data>
   <data name="UseZAsSpaceTooltip" xml:space="preserve">
-    <value>If enabled, spaces are replaced by 'Z' during encryption and 'Z' is replaced by space during decryption</value>
+    <value>Если включено, пробелы заменяются на &amp;quot;Z&amp;quot; во время шифрования, а &amp;quot;Z&amp;quot; заменяется на пробел во время дешифрования.</value>
   </data>
 </root>

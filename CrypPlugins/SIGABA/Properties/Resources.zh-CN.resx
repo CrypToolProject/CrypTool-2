@@ -118,138 +118,138 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActionCaption" xml:space="preserve">
-    <value>Action</value>
+    <value>行动</value>
   </data>
   <data name="ActionTooltip" xml:space="preserve">
-    <value>Selects the machine action</value>
+    <value>选择算法动作</value>
   </data>
   <data name="CipherRotor0Caption" xml:space="preserve">
-    <value>Cipher rotor 0</value>
+    <value>密码转子 0</value>
   </data>
   <data name="CipherRotor1Caption" xml:space="preserve">
-    <value>Cipher rotor 1</value>
+    <value>密码转子1</value>
   </data>
   <data name="CipherRotor2Caption" xml:space="preserve">
-    <value>Cipher rotor 2</value>
+    <value>密码转子2</value>
   </data>
   <data name="CipherRotor3Caption" xml:space="preserve">
-    <value>Cipher rotor 3</value>
+    <value>密码转子3</value>
   </data>
   <data name="CipherRotor4Caption" xml:space="preserve">
-    <value>Cipher rotor 4</value>
+    <value>密码转子 4</value>
   </data>
   <data name="CipherRotorGroup" xml:space="preserve">
-    <value>Cipher rotors</value>
+    <value>密码转子选择</value>
   </data>
   <data name="CipherRotorPositionsCaption" xml:space="preserve">
-    <value>Cipher rotor positions</value>
+    <value>密码转子位置</value>
   </data>
   <data name="CipherRotorPositionsTooltip" xml:space="preserve">
-    <value>Sets the initial positions of the cipher rotors</value>
+    <value>设置密码转子的初始位置</value>
   </data>
   <data name="CipherRotorTooltip" xml:space="preserve">
-    <value>Selection of this cipher rotor</value>
+    <value>这个密码转子的选择</value>
   </data>
   <data name="ControlRotor0Caption" xml:space="preserve">
-    <value>Control rotor 0</value>
+    <value>控制转子 0</value>
   </data>
   <data name="ControlRotor1Caption" xml:space="preserve">
-    <value>Control rotor 1</value>
+    <value>控制转子 1</value>
   </data>
   <data name="ControlRotor2Caption" xml:space="preserve">
-    <value>Control rotor 2</value>
+    <value>控制转子2</value>
   </data>
   <data name="ControlRotor3Caption" xml:space="preserve">
-    <value>Control rotor 3</value>
+    <value>控制转子 3</value>
   </data>
   <data name="ControlRotor4Caption" xml:space="preserve">
-    <value>Control rotor 4</value>
+    <value>控制转子 4</value>
   </data>
   <data name="ControlRotorGroup" xml:space="preserve">
-    <value>Control rotors</value>
+    <value>控制转子选择</value>
   </data>
   <data name="ControlRotorPositionsCaption" xml:space="preserve">
-    <value>Control rotor positions</value>
+    <value>控制转子位置</value>
   </data>
   <data name="ControlRotorPositionsTooltip" xml:space="preserve">
-    <value>Sets the initial positions of the control rotors</value>
+    <value>设置控制转子的初始位置</value>
   </data>
   <data name="ControlRotorTooltip" xml:space="preserve">
-    <value>Selection of this control rotor</value>
+    <value>该控制转子的选择</value>
   </data>
   <data name="Decrypt" xml:space="preserve">
-    <value>Decrypt</value>
+    <value>解密</value>
   </data>
   <data name="Encrypt" xml:space="preserve">
-    <value>Encrypt</value>
+    <value>加密</value>
   </data>
   <data name="IndexRotor0Caption" xml:space="preserve">
-    <value>Index rotor 0</value>
+    <value>索引转子 0</value>
   </data>
   <data name="IndexRotor1Caption" xml:space="preserve">
-    <value>Index rotor 1</value>
+    <value>分度转子 1</value>
   </data>
   <data name="IndexRotor2Caption" xml:space="preserve">
-    <value>Index rotor 2</value>
+    <value>分度转子 2</value>
   </data>
   <data name="IndexRotor3Caption" xml:space="preserve">
-    <value>Index rotor 3</value>
+    <value>分度转子 3</value>
   </data>
   <data name="IndexRotor4Caption" xml:space="preserve">
-    <value>Index rotor 4</value>
+    <value>分度转子 4</value>
   </data>
   <data name="IndexRotorGroup" xml:space="preserve">
-    <value>Index rotors</value>
+    <value>索引转子选择</value>
   </data>
   <data name="IndexRotorPositionsCaption" xml:space="preserve">
-    <value>Index rotor positions</value>
+    <value>索引转子位置</value>
   </data>
   <data name="IndexRotorPositionsTooltip" xml:space="preserve">
-    <value>Sets the initial positions of the index rotors</value>
+    <value>设置索引转子的初始位置</value>
   </data>
   <data name="IndexRotorTooltip" xml:space="preserve">
-    <value>Selection of this index rotor</value>
+    <value>本指标转子的选择</value>
   </data>
   <data name="ModelCaption" xml:space="preserve">
-    <value>Model</value>
+    <value>模型</value>
   </data>
   <data name="ModelTooltip" xml:space="preserve">
-    <value>Sets the used SIGABA model</value>
+    <value>设置使用的 SECTION 模型</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>SIGABA</value>
+    <value>西格巴</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-    <value>The SIGABA is a US rotor encryption machine</value>
+    <value>SIGABA是美国转子加密机</value>
   </data>
   <data name="PositionsGroup" xml:space="preserve">
-    <value>Rotor start positions</value>
+    <value>转子启动位置</value>
   </data>
   <data name="ReversedCaption" xml:space="preserve">
-    <value>Reversed</value>
+    <value>反转</value>
   </data>
   <data name="ReversedTooltip" xml:space="preserve">
-    <value>If this is selected, this rotor is used reversed in the machine</value>
+    <value>如果选择此项，则该转子在机器中反向使用</value>
   </data>
   <data name="UnknownSymbolHandlingCaption" xml:space="preserve">
-    <value>Unknown symbol handling</value>
+    <value>未知符号处理</value>
   </data>
   <data name="UnknownSymbolHandlingList1" xml:space="preserve">
-    <value>Ignore (leave unmodified)</value>
+    <value>忽略（保持不变）</value>
   </data>
   <data name="UnknownSymbolHandlingList2" xml:space="preserve">
-    <value>Remove</value>
+    <value>去掉</value>
   </data>
   <data name="UnknownSymbolHandlingList3" xml:space="preserve">
-    <value>Replace with '?'</value>
+    <value>用。。。来代替 &amp;#39;？&amp;#39;</value>
   </data>
   <data name="UnknownSymbolHandlingTooltip" xml:space="preserve">
-    <value>What should be done with encountered characters at the input which are not in the alphabet?</value>
+    <value>对于输入中遇到的不在字母表中的字符，应该怎么做？</value>
   </data>
   <data name="UseZAsSpaceCaption" xml:space="preserve">
-    <value>Use 'Z' as space</value>
+    <value>使用“Z”作为空格</value>
   </data>
   <data name="UseZAsSpaceTooltip" xml:space="preserve">
-    <value>If enabled, spaces are replaced by 'Z' during encryption and 'Z' is replaced by space during decryption</value>
+    <value>如果启用，则在加密过程中空格将替换为“Z”，而在解密过程中将替换为“Z”</value>
   </data>
 </root>

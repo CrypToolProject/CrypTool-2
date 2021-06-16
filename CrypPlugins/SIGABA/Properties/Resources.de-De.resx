@@ -121,7 +121,7 @@
     <value>Action</value>
   </data>
   <data name="ActionTooltip" xml:space="preserve">
-    <value>Selects the machine action</value>
+    <value>Selects the algorithm action</value>
   </data>
   <data name="CipherRotor0Caption" xml:space="preserve">
     <value>Cipher rotor 0</value>
@@ -139,7 +139,7 @@
     <value>Cipher rotor 4</value>
   </data>
   <data name="CipherRotorGroup" xml:space="preserve">
-    <value>Cipher rotors</value>
+    <value>Cipher rotor selection</value>
   </data>
   <data name="CipherRotorPositionsCaption" xml:space="preserve">
     <value>Cipher rotor positions</value>
@@ -166,7 +166,7 @@
     <value>Control rotor 4</value>
   </data>
   <data name="ControlRotorGroup" xml:space="preserve">
-    <value>Control rotors</value>
+    <value>Control rotor selection</value>
   </data>
   <data name="ControlRotorPositionsCaption" xml:space="preserve">
     <value>Control rotor positions</value>
@@ -176,12 +176,6 @@
   </data>
   <data name="ControlRotorTooltip" xml:space="preserve">
     <value>Selection of this control rotor</value>
-  </data>
-  <data name="Decrypt" xml:space="preserve">
-    <value>Decrypt</value>
-  </data>
-  <data name="Encrypt" xml:space="preserve">
-    <value>Encrypt</value>
   </data>
   <data name="IndexRotor0Caption" xml:space="preserve">
     <value>Index rotor 0</value>
@@ -199,7 +193,7 @@
     <value>Index rotor 4</value>
   </data>
   <data name="IndexRotorGroup" xml:space="preserve">
-    <value>Index rotors</value>
+    <value>Index rotor selection</value>
   </data>
   <data name="IndexRotorPositionsCaption" xml:space="preserve">
     <value>Index rotor positions</value>

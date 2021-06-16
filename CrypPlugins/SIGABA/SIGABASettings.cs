@@ -161,7 +161,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 4, false, ControlType.ComboBox, new string[] { "Ignore", "Remove", "Replace" })]
+        [TaskPane("UnknownSymbolHandlingCaption", "UnknownSymbolHandlingTooltip", null, 4, false, ControlType.ComboBox, new string[] { "UnknownSymbolHandlingList1", "UnknownSymbolHandlingList2", "UnknownSymbolHandlingList3" })]
         public UnknownSymbolHandling UnknownSymbolHandling
         {
             get { return _unknownSymbolHandling; }
@@ -232,7 +232,7 @@ namespace CrypTool.Plugins.SIGABA
 
         #region cipher rotors
 
-        [TaskPane("CipherRotor0Caption", "CipherRotor0Tooltip", "CipherRotorGroup", 8, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("CipherRotor0Caption", "CipherRotorTooltip", "CipherRotorGroup", 8, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor0
         {
             get
@@ -266,7 +266,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("CipherRotor1Caption", "CipherRotor1Tooltip", "CipherRotorGroup", 10, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("CipherRotor1Caption", "CipherRotorTooltip", "CipherRotorGroup", 10, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor1
         {
             get
@@ -300,7 +300,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("CipherRotor2Caption", "CipherRotor2Tooltip", "CipherRotorGroup", 12, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("CipherRotor2Caption", "CipherRotorTooltip", "CipherRotorGroup", 12, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor2
         {
             get
@@ -334,7 +334,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("CipherRotor3Caption", "CipherRotor3Tooltip", "CipherRotorGroup", 14, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("CipherRotor3Caption", "CipherRotorTooltip", "CipherRotorGroup", 14, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor3
         {
             get
@@ -368,7 +368,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("CipherRotor4Caption", "CipherRotor4Tooltip", "CipherRotorGroup", 16, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("CipherRotor4Caption", "CipherRotorTooltip", "CipherRotorGroup", 16, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor CipherRotor4
         {
             get
@@ -406,7 +406,7 @@ namespace CrypTool.Plugins.SIGABA
 
         #region control rotors       
 
-        [TaskPane("ControlRotor0Caption", "ControlRotor0Tooltip", "ControlRotorGroup", 18, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("ControlRotor0Caption", "ControlRotorTooltip", "ControlRotorGroup", 18, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor0
         {
             get
@@ -440,7 +440,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("ControlRotor1Caption", "ControlRotor1Tooltip", "ControlRotorGroup", 20, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("ControlRotor1Caption", "ControlRotorTooltip", "ControlRotorGroup", 20, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor1
         {
             get
@@ -474,7 +474,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("ControlRotor2Caption", "ControlRotor2Tooltip", "ControlRotorGroup", 22, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("ControlRotor2Caption", "ControlRotorTooltip", "ControlRotorGroup", 22, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor2
         {
             get
@@ -508,7 +508,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("ControlRotor3Caption", "ControlRotor3Tooltip", "ControlRotorGroup", 24, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("ControlRotor3Caption", "ControlRotorTooltip", "ControlRotorGroup", 24, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor3
         {
             get
@@ -542,7 +542,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("ControlRotor4Caption", "ControlRotor4Tooltip", "ControlRotorGroup", 26, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("ControlRotor4Caption", "ControlRotorTooltip", "ControlRotorGroup", 26, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public CipherControlRotor ControlRotor4
         {
             get
@@ -580,7 +580,7 @@ namespace CrypTool.Plugins.SIGABA
 
         #region control rotors       
 
-        [TaskPane("IndexRotor0Caption", "IndexRotor0Tooltip", "IndexRotorGroup", 28, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("IndexRotor0Caption", "IndexRotorTooltip", "IndexRotorGroup", 28, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor0
         {
             get
@@ -597,7 +597,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("IndexRotor1Caption", "IndexRotor1Tooltip", "IndexRotorGroup", 29, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("IndexRotor1Caption", "IndexRotorTooltip", "IndexRotorGroup", 29, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor1
         {
             get
@@ -614,7 +614,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("IndexRotor2Caption", "IndexRotor2Tooltip", "IndexRotorGroup", 30, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("IndexRotor2Caption", "IndexRotorTooltip", "IndexRotorGroup", 30, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor2
         {
             get
@@ -631,7 +631,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("IndexRotor3Caption", "IndexRotor3Tooltip", "IndexRotorGroup", 31, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("IndexRotor3Caption", "IndexRotorTooltip", "IndexRotorGroup", 31, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor3
         {
             get
@@ -648,7 +648,7 @@ namespace CrypTool.Plugins.SIGABA
             }
         }
 
-        [TaskPane("IndexRotor4Caption", "IndexRotor4Tooltip", "IndexRotorGroup", 32, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
+        [TaskPane("IndexRotor4Caption", "IndexRotorTooltip", "IndexRotorGroup", 32, false, ControlType.ComboBox, new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" })]
         public IndexRotor IndexRotor4
         {
             get
