@@ -126,41 +126,41 @@ namespace CrypTool.Plugins.SIGABA
             }
             else //we have a keystring which we can use for the configuration of the machine
             {
-                var key = Key.Replace(",", ""); //we allow the usge of comma to separate the individual parts of the key to ease reading
+                var key = Regex.Replace(Key, @"\.|,|;|\s","");//we allow the usge of delimeters and spaces to separate the individual parts of the key to ease reading
                 cipherRotors = GetCipherRotorsFromKey(key);
                 if (cipherRotors == null)
                 {
-                    GuiLogMessage(string.Format("Invalid cipher rotors definition in key: ", Key), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Invalid cipher rotors definition in key: {0}", Key), NotificationLevel.Error);
                     return;
                 }
                 controlRotors = GetControlRotorsFromKey(key);
                 if (controlRotors == null)
                 {
-                    GuiLogMessage(string.Format("Invalid control rotors definition in key: ", Key), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Invalid control rotors definition in key: {0}", Key), NotificationLevel.Error);
                     return;
                 }
                 indexRotors = GetIndexRotorsFromKey(key);
                 if (indexRotors == null)
                 {
-                    GuiLogMessage(string.Format("Invalid index rotors definition in key: ", Key), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Invalid index rotors definition in key: {0}", Key), NotificationLevel.Error);
                     return;
                 }
                 cipherRotorPositions = GetCipherRotorPositionsFromKey(key);
                 if (cipherRotorPositions == null)
                 {
-                    GuiLogMessage(string.Format("Invalid cipher rotor positions definition in key: ", Key), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Invalid cipher rotor positions definition in key: {0}", Key), NotificationLevel.Error);
                     return;
                 }
                 controlRotorPositions = GetControlRotorPositionsFromKey(key);
-                if (cipherRotorPositions == null)
+                if (controlRotorPositions == null)
                 {
-                    GuiLogMessage(string.Format("Invalid control rotor positions definition in key: ", Key), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Invalid control rotor positions definition in key:  {0}", Key), NotificationLevel.Error);
                     return;
                 }
                 indexRotorPositions = GetIndexRotorPositionsFromKey(key);
-                if (cipherRotorPositions == null)
+                if (indexRotorPositions == null)
                 {
-                    GuiLogMessage(string.Format("Invalid index rotor positions definition in key: ", Key), NotificationLevel.Error);
+                    GuiLogMessage(string.Format("Invalid index rotor positions definition in key: {0}", Key), NotificationLevel.Error);
                     return;
                 }
             }
@@ -212,12 +212,19 @@ namespace CrypTool.Plugins.SIGABA
 
         private string GetCipherRotorsFromKey(string key)
         {
-            var cipherRotors = key.Substring(0, 10);
-            if (!Regex.IsMatch(cipherRotors, "[0-9,NR,0-9,NR,0-9,NR,0-9,NR,0-9,NR]"))
+            try
             {
-                return null;
+                var cipherRotors = key.Substring(0, 10);
+                if (Regex.IsMatch(cipherRotors, @"[0-9,NR]{5}$"))
+                {
+                    return cipherRotors;
+                }                
             }
-            return cipherRotors;
+            catch (Exception)
+            {
+                //do nothing
+            }
+            return null;
         }
 
         private string GetCipherRotorsFromSettings()
@@ -238,12 +245,19 @@ namespace CrypTool.Plugins.SIGABA
 
         private string GetControlRotorsFromKey(string key)
         {
-            var controlRotors = key.Substring(10, 10);
-            if (!Regex.IsMatch(controlRotors, "[0-9,NR,0-9,NR,0-9,NR,0-9,NR,0-9,NR]"))
+            try
             {
-                return null;
+                var controlRotors = key.Substring(10, 10);
+                if (Regex.IsMatch(controlRotors, @"[0-9,NR]{5}$"))
+                {
+                    return controlRotors;
+                }
             }
-            return controlRotors;
+            catch (Exception)
+            {
+                //do nothing
+            }
+            return null;
         }
 
         private string GetControlRotorsFromSettings()
@@ -264,12 +278,19 @@ namespace CrypTool.Plugins.SIGABA
 
         private string GetIndexRotorsFromKey(string key)
         {
-            var indexRotors = key.Substring(20, 5);
-            if (!Regex.IsMatch(indexRotors, "[0-4,0-4,0-4,0-4,0-4]"))
+            try
             {
-                return null;
+                var indexRotors = key.Substring(20, 5);
+                if (Regex.IsMatch(indexRotors, "[0-4]{5}$"))
+                {
+                    return indexRotors;
+                }
             }
-            return indexRotors;
+            catch (Exception)
+            {
+                //do nothing
+            }
+            return null;
         }
 
         private string GetIndexRotorsFromSettings()
@@ -286,30 +307,53 @@ namespace CrypTool.Plugins.SIGABA
         private string GetCipherRotorPositionsFromKey(string key)
         {
             var cipherRotorPositions = key.Substring(25, 5);
-            if (!Regex.IsMatch(cipherRotorPositions, "[A-Z,A-Z,A-Z,A-Z,A-Z]"))
+            try
             {
-                return null;
+                if (Regex.IsMatch(cipherRotorPositions, "[A-Z]{5}$"))
+                {
+                    return cipherRotorPositions;
+                }
             }
-            return cipherRotorPositions;
+            catch (Exception)
+            {
+                //do nothing
+            }
+            return null;
         }
 
         private string GetControlRotorPositionsFromKey(string key)
         {
-            var controlRotorPositions = key.Substring(30, 5);
-            if (!Regex.IsMatch(controlRotorPositions, "[A-Z,A-Z,A-Z,A-Z,A-Z]"))
+            try
             {
-                return null;
+                var controlRotorPositions = key.Substring(30, 5);
+                if (Regex.IsMatch(controlRotorPositions, "[A-Z]{5}$"))
+                {
+                    return controlRotorPositions;
+                }
+                return controlRotorPositions;
             }
-            return controlRotorPositions;
+            catch (Exception)
+            {
+                //do nothing
+            }
+            return null;
         }
+
         private string GetIndexRotorPositionsFromKey(string key)
         {
-            var indexRotorPositions = key.Substring(35, 5);
-            if (!Regex.IsMatch(indexRotorPositions, "[0-9,0-9,0-9,0-9,0-9]"))
+            try
             {
-                return null;
+                var indexRotorPositions = key.Substring(35, 5);
+                if (Regex.IsMatch(indexRotorPositions, "[0-9]{5}$"))
+                {
+                    return indexRotorPositions;
+                }
             }
-            return indexRotorPositions;
+            catch (Exception)
+            {
+                //do nothing
+            }
+            return null;
         }
 
         #endregion
