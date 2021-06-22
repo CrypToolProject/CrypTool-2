@@ -210,11 +210,29 @@
   <data name="IndexRotorTooltip" xml:space="preserve">
     <value>本指标转子的选择</value>
   </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>输入</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>输入用于加密的明文或用于解密的密文</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>钥匙</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>加密或解密期间使用的加密密钥</value>
+  </data>
   <data name="ModelCaption" xml:space="preserve">
     <value>模型</value>
   </data>
   <data name="ModelTooltip" xml:space="preserve">
     <value>设置使用的 SECTION 模型</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>输出</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>密文或明文的输出</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>西格巴</value>

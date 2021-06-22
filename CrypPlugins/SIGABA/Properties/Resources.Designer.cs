@@ -340,6 +340,42 @@ namespace CrypTool.Plugins.SIGABA.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Input ähnelt.
+        /// </summary>
+        internal static string InputCaption {
+            get {
+                return ResourceManager.GetString("InputCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Input for plaintext for encryption or ciphertext for decryption ähnelt.
+        /// </summary>
+        internal static string InputTooltip {
+            get {
+                return ResourceManager.GetString("InputTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key ähnelt.
+        /// </summary>
+        internal static string KeyCaption {
+            get {
+                return ResourceManager.GetString("KeyCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Cryptographic key used during encryption or decryption ähnelt.
+        /// </summary>
+        internal static string KeyTooltip {
+            get {
+                return ResourceManager.GetString("KeyTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Model ähnelt.
         /// </summary>
         internal static string ModelCaption {
@@ -354,6 +390,24 @@ namespace CrypTool.Plugins.SIGABA.Properties {
         internal static string ModelTooltip {
             get {
                 return ResourceManager.GetString("ModelTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Output ähnelt.
+        /// </summary>
+        internal static string OutputCaption {
+            get {
+                return ResourceManager.GetString("OutputCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Output for ciphertext or plaintext ähnelt.
+        /// </summary>
+        internal static string OutputTooltip {
+            get {
+                return ResourceManager.GetString("OutputTooltip", resourceCulture);
             }
         }
         

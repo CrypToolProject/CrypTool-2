@@ -210,11 +210,29 @@
   <data name="IndexRotorTooltip" xml:space="preserve">
     <value>Выбор этого индексного ротора</value>
   </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>Ввод открытого текста для шифрования или зашифрованного текста для дешифрования</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Ключ</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Криптографический ключ, используемый во время шифрования или дешифрования</value>
+  </data>
   <data name="ModelCaption" xml:space="preserve">
     <value>Модель</value>
   </data>
   <data name="ModelTooltip" xml:space="preserve">
     <value>Устанавливает используемую модель РАЗДЕЛ</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>Вывод зашифрованного или открытого текста</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>СИГАБА</value>

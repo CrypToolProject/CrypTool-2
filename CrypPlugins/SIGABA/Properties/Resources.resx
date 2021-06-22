@@ -210,11 +210,29 @@
   <data name="IndexRotorTooltip" xml:space="preserve">
     <value>Selection of this index rotor</value>
   </data>
+  <data name="InputCaption" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="InputTooltip" xml:space="preserve">
+    <value>Input for plaintext for encryption or ciphertext for decryption</value>
+  </data>
+  <data name="KeyCaption" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="KeyTooltip" xml:space="preserve">
+    <value>Cryptographic key used during encryption or decryption</value>
+  </data>
   <data name="ModelCaption" xml:space="preserve">
     <value>Model</value>
   </data>
   <data name="ModelTooltip" xml:space="preserve">
     <value>Sets the used SIGABA model</value>
+  </data>
+  <data name="OutputCaption" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="OutputTooltip" xml:space="preserve">
+    <value>Output for ciphertext or plaintext</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>SIGABA</value>
