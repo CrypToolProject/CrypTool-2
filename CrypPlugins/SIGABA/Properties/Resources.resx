@@ -214,7 +214,7 @@
     <value>Input</value>
   </data>
   <data name="InputTooltip" xml:space="preserve">
-    <value>Input for plaintext for encryption or ciphertext for decryption</value>
+    <value>Input of plaintext for encryption or of ciphertext for decryption</value>
   </data>
   <data name="KeyCaption" xml:space="preserve">
     <value>Key</value>
@@ -232,7 +232,7 @@
     <value>Output</value>
   </data>
   <data name="OutputTooltip" xml:space="preserve">
-    <value>Output for ciphertext or plaintext</value>
+    <value>Output of ciphertext or plaintext</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
     <value>SIGABA</value>

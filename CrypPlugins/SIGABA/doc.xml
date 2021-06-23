@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<documentation>
+  <language culture="en" />
+  <language culture="de-DE" />
+  <language culture="ru" />
+  <language culture="zh-CN" />    
+  
+  <introduction lang="en">
+    The SIGABA is an electromechanical encryption device used by the US during WWII and in the 1950s.
+    Also known as ECM Mark II, Converter M-134, as well as CSP-888/889, the SIGABA was considered highly secure, and was employed for strategic communications, such as between Churchill and Roosevelt.
+    The SIGABA encrypts and decrypts with a set of five rotors, and implements irregular stepping, with two additional sets of rotors generating a pseudorandom stepping sequence.
+    Its full keyspace, as used during WWII, was in the order of 95 bit. It is believed that the German codebreaking services were not able to make  any inroads into the cryptanalysis of SIGABA.
+    There were two models of the SIGABA: the CSP-889 and the CSP-2900.
+    <newline/><newline/>
+    The SIGABA component implements both SIGABA models. Using the settings, one can exchange the type of model.
+  </introduction>
+
+  <introduction lang="de">
+    SIGABA ist ein elektromechanisches Verschlüsselungsgerät, das von den USA während des Zweiten Weltkriegs und in den 1950er Jahren verwendet wurde.
+    Auch bekannt als ECM Mark II, Converter M-134 sowie CSP-888/889, galt die SIGABA als sehr sicher und wurde für die strategische Kommunikation, wie zwischen Churchill und Roosevelt, eingesetzt.
+    Der SIGABA verschlüsselt und entschlüsselt mit einem Satz von fünf Rotoren und implementiert unregelmäßiges Fortschalten, wofür zwei zusätzliche Sätze von Rotoren eine pseudozufällige Schrittfolge erzeugen.
+    Der vollständige Schlüsselraum, wie er während des Zweiten Weltkriegs verwendet wurde, lag in der Größenordnung von 95 Bit. Es wird vermutet, dass die deutschen Kryptoanalyse-Dienste keine Angriffsmöglichkeiten auf die SIGABA finden konnten.
+    Es gab zwei Modelle der SIGABA: die CSP-889 und die CSP-2900.
+    <newline/><newline/>
+    Die SIGABA-Komponente implementiert beide SIGABA-Modelle. Über die Einstellungen kann man den Modelltyp austauschen.
+  </introduction>
+
+
+  <introduction lang="ru">
+    SIGABA - это электромеханическое устройство шифрования, которое использовалось США во время Второй мировой войны и 1950-х годов.
+    Также известный как ECM Mark II, Converter M-134 и CSP-888/889, SIGABA считался очень безопасным и использовался для стратегической связи, например, между Черчиллем и Рузвельтом.
+    SIGABA шифрует и дешифрует с помощью набора из пяти роторов и реализует нерегулярную индексацию, для которой два дополнительных набора роторов генерируют псевдослучайную последовательность шагов.
+    Полное пространство ключей, которое использовалось во время Второй мировой войны, было порядка 95 бит. Предполагается, что немецкие службы криптоанализа не смогли найти никаких возможных способов атаки на SIGABA.
+    Было две модели SIGABA: CSP-889 и CSP-2900.
+    <newline/><newline/>
+    Компонент SIGABA реализует обе модели SIGABA. Тип модели можно поменять в настройках.
+  </introduction>    
+
+  <introduction lang="zh-CN">
+    SIGABA 是美国在二战和 1950 年代使用的一种机电加密设备。
+    SIGABA 也被称为 ECM Mark II、Converter M-134 和 CSP-888/889，被认为非常安全，用于战略通信，例如丘吉尔和罗斯福之间的通信。
+    SIGABA 使用一组五个转子进行加密和解密，并实现不规则索引，为此另外两组转子生成一个伪随机步骤序列。
+    二战期间使用的完整密钥空间约为 95 位。假设德国密码分析服务无法找到任何可能的方法来攻击 SIGABA。
+    SIGABA 有两种型号：CSP-889 和 CSP-2900。
+    <newline/><newline/>
+    SIGABA 组件实现了两种 SIGABA 模型。模型类型可以通过设置进行交换。
+  </introduction>
+  
+  <usage lang="en">
+    To use the SIGABA component, only a TextInput component and a TextOutput are needed.
+    The TextInput is used for the input text and the TextOutput is used for the output text.
+    Depending on the setting &quot;Action&quot; of the component, the text is encrypted or decrypted.
+    Using an additional TextInput component, the cryptographic key may be provided to the component using a second input.
+    <newline/>
+    The SIGABA has a total set of 15 rotors. Five rotors are used as cipher rotors, five rotors are used as control rotors and five rotors are used as index rotors.
+    The cipher rotors and the control rotors are interchangeable, and are selected from a set of ten rotors.
+    They can be inserted in the machine in normal and reversed orientation.
+    The five index rotors are not interchangeable with the cipher and control rotors, and they can only be installed in one orientation.
+    Each of the cipher and control rotors has 26 different positions identified by Latin letters.
+    Each of the index rotors has 10 different positions identified by a digit between 0 and 9.
+    <newline/>
+    To change the key of the machine, you can exchange in the settings each of the rotors. You can also define, if a rotor should be used in normal or reversed orientation. Finally, you can define starting positions for all of the rotors.
+    <newline/>
+    If you use an external TextInput to provide a key, you have to use the correct key format.<newline/>
+    Example: 1N6R3R8R7N,0R2R4N5R9R,34021,VYRIV,RCMLL,25137 <newline/>    
+    The first part of the key (&quot;1N6R3R8R7N&quot; in the example) defines the used cipher rotors (N means, the rotor is in normal orientation; R means, it is in reversed orientation).
+    After that, the control rotors (&quot;0R2R4N5R9R&quot; in the example) are defined, followed by the index rotors (&quot;34021&quot; in the example).
+    The last three parts (&quot;VYRIV,RCMLL,25137&quot; in the exampel) define the starting positions of the rotors.
+  </usage>
+
+  <usage lang="de">
+    Um die SIGABA-Komponente zu verwenden, werden nur eine Texteingabe-Komponente und eine Textausgabe-Komponente benötigt.
+    Die Texteingabe wird für den Eingabetext verwendet und die Textausgabe wird für den Ausgabetext verwendet.
+    Je nach Einstellung &quot;Aktion&quot; der Komponente wird der Text verschlüsselt oder entschlüsselt.
+    Mittels einer zusätzlichen Texteingabe-Komponente kann der kryptografische Schlüssel der Komponente extern eingegeben werden.
+    <newline/>
+    Die SIGABA hat einen Gesamtsatz von 15 Rotoren. Fünf Rotoren werden als Chiffrierrotoren verwendet, fünf Rotoren werden als Kontrollrotoren verwendet und fünf Rotoren werden als Indexrotoren verwendet.
+    Die Chiffrierrotoren und die Kontrollrotoren sind austauschbar und werden aus einem Satz von zehn Rotoren ausgewählt.
+    Sie können in normaler und umgekehrter Ausrichtung in die Maschine eingesetzt werden.
+    Die fünf Indexrotoren sind nicht mit den Chiffrier- und Kontrollrotoren austauschbar und können nur in einer Ausrichtung installiert werden.
+    Jeder der Chiffrier- und Kontrollrotoren hat 26 verschiedene Positionen, die durch lateinische Buchstaben gekennzeichnet sind.
+    Jeder der Indexrotoren hat 10 verschiedene Positionen, die durch eine Ziffer zwischen 0 und 9 gekennzeichnet sind.
+    <newline/>
+    Um den Schlüssel der Maschine zu ändern, können Sie in den Einstellungen jeden der Rotoren austauschen. Sie können auch festlegen, ob ein Rotor in normaler oder umgekehrter Ausrichtung verwendet werden soll. Schließlich können Sie für alle Rotoren Startpositionen definieren.
+    <newline/>
+    Wenn Sie eine externe Texteingabe verwenden, um einen Schlüssel bereitzustellen, müssen Sie das richtige Schlüsselformat verwenden.<newline/>
+    Beispiel: 1N6R3R8R7N,0R2R4N5R9R,34021,VYRIV,RCMLL,25137 <newline/>
+    Der erste Teil des Schlüssels (im Beispiel &quot;1N6R3R8R7N&quot;) definiert die verwendeten Chiffrierrotoren (N bedeutet, der Rotor befindet sich in normaler Ausrichtung; R bedeutet, er befindet sich in umgekehrter Ausrichtung).
+    Danach werden die Kontrollrotoren (im Beispiel &quot;0R2R4N5R9R&quot;) definiert, gefolgt von den Indexrotoren (im Beispiel "34021").
+    Die letzten drei Teile (im Beispiel &quot;VYRIV,RCMLL,25137&quot;) definieren die Startpositionen der Rotoren.
+  </usage>
+
+  <usage lang = "ru">
+    Чтобы использовать компонент SIGABA, необходимы только компонент TextInput и TextOutput.
+    TextInput используется для ввода текста, а TextOutput используется для вывода текста.
+    В зависимости от настройки «Действие» компонента текст зашифрован или расшифрован.
+    Используя дополнительный компонент TextInput, криптографический ключ может быть предоставлен компоненту с использованием второго ввода.
+    <newline/>
+    Всего у SIGABA 15 роторов. Пять роторов используются в качестве шифровальных роторов, пять роторов используются в качестве управляющих роторов и пять роторов используются в качестве индексных роторов.
+    Шифровальные роторы и управляющие роторы взаимозаменяемы и выбираются из набора из десяти роторов.
+    Их можно вставлять в машину как в нормальной, так и в обратной ориентации.
+    Пять индексных роторов не взаимозаменяемы с шифровальным и управляющим роторами, и они могут быть установлены только в одной ориентации.
+    Каждый из шифровальных и управляющих роторов имеет 26 различных положений, обозначенных латинскими буквами.
+    Каждый из индексных роторов имеет 10 различных положений, обозначенных цифрой от 0 до 9.
+    <newline/>
+    Чтобы поменять ключ машины, вы можете поменять в настройках каждый из роторов. Вы также можете определить, следует ли использовать ротор в нормальной или обратной ориентации. Наконец, вы можете определить начальные положения для всех роторов.
+    <newline/>
+    Если вы используете внешний TextInput для предоставления ключа, вы должны использовать правильный формат ключа.<newline/>
+    Пример: 1N6R3R8R7N, 0R2R4N5R9R, 34021, VYRIV, RCMLL, 25137 <newline />
+    Первая часть ключа («1N6R3R8R7N» в примере) определяет используемые шифровальные роторы (N означает, что ротор находится в нормальной ориентации; R означает, что он находится в обратной ориентации).
+    После этого определяются управляющие роторы («0R2R4N5R9R» в примере), за которыми следуют индексные роторы («34021» в примере).
+    Последние три части («VYRIV, RCMLL, 25137» в примере) определяют начальные положения роторов.
+  </usage>
+
+  <usage lang="zh-CN">
+    要使用 SIGABA 组件，只需要一个 TextInput 组件和一个 TextOutput 组件。
+    TextInput 用于输入文本，TextOutput 用于输出文本。
+    取决于设置“操作”对于组件，文本被加密或解密。
+    使用附加的 TextInput 组件，可以使用第二个输入将加密密钥提供给该组件。
+    <newline/>
+    SIGABA 共有 15 个转子。五个转子用作密码转子，五个转子用作控制转子，五个转子用作索引转子。
+    密码转子和控制转子可以互换，从一组十个转子中选择。
+    它们可以正常和反向插入机器。
+    五个索引转子不能与密码和控制转子互换，它们只能安装在一个方向。
+    每个密码和控制转子都有 26 个不同的位置，由拉丁字母标识。
+    每个索引转子都有 10 个不同的位置，由 0 到 9 之间的数字标识。
+    <newline/>
+    要更改机器的密钥，您可以在设置中交换每个转子。您还可以定义转子应以正常方向还是反向使用。最后，您可以定义所有转子的起始位置。
+    <newline/>
+    如果使用外部 TextInput 提供密钥，则必须使用正确的密钥格式。<newline/>
+    示例：1N6R3R8R7N,0R2R4N5R9R,34021,VYRIV,RCMLL,25137 <newline/>
+    密钥的第一部分（在示例中为&quot;1N6R3R8R7N&quot;）定义了使用的密码转子（N 表示，转子处于正常方向；R 表示，它处于相反方向）。
+    之后，定义控制转子（在示例中为&quot;0R2R4N5R9R&quot;），然后是索引转子（在示例中为“34021”）。
+    最后三部分(示例中的&quot;VYRIV,RCMLL,25137&quot;)定义了转子的起始位置。
+  </usage>
+
+  <presentation lang="en"/>
+  <presentation lang="de-DE"/>
+  <presentation lang="ru"/>
+  <presentation lang="zh-CN"/>
+     
+  <references>
+    <linkReference id="wikipedia">
+      <link url="https://en.wikipedia.org/wiki/SIGABA" lang="en" />
+      <caption lang="en">SIGABA (Wikipedia)</caption>
+      <link url="https://de.wikipedia.org/wiki/Sigaba" lang="de-DE" />
+      <caption lang="de-DE">SIGABA (Wikipedia)</caption>
+      <link url="https://ru.wikipedia.org/wiki/SIGABA" lang="ru" />
+      <caption lang="ru">SIGABA (Википедия)</caption>
+    </linkReference>  
+  </references>
+</documentation>

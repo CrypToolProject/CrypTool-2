@@ -214,13 +214,13 @@
     <value>Eingabe</value>
   </data>
   <data name="InputTooltip" xml:space="preserve">
-    <value>Eingabe des Klartext für die Verschlüsselung oder des Geheimtexts für die Entschlüsselung</value>
+    <value>Eingabe des Klartexts für die Verschlüsselung oder des Geheimtexts für die Entschlüsselung</value>
   </data>
   <data name="KeyCaption" xml:space="preserve">
     <value>Schlüssel</value>
   </data>
   <data name="KeyTooltip" xml:space="preserve">
-    <value>Kryptografischer Schlüssel der für die Ver- oder Entschlüsselung genutzt wird</value>
+    <value>Kryptografischer Schlüssel, der für die Ver- oder Entschlüsselung genutzt wird</value>
   </data>
   <data name="ModelCaption" xml:space="preserve">
     <value>Modell</value>

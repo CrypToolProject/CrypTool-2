@@ -349,7 +349,7 @@ namespace CrypTool.Plugins.SIGABA.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Input for plaintext for encryption or ciphertext for decryption ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Input of plaintext for encryption or of ciphertext for decryption ähnelt.
         /// </summary>
         internal static string InputTooltip {
             get {
@@ -403,7 +403,7 @@ namespace CrypTool.Plugins.SIGABA.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Output for ciphertext or plaintext ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Output of ciphertext or plaintext ähnelt.
         /// </summary>
         internal static string OutputTooltip {
             get {
