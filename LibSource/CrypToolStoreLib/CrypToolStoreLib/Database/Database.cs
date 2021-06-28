@@ -75,18 +75,20 @@ namespace CrypToolStoreLib.Database
                 this.databaseUser = databaseUser;
                 this.databasePassword = databasePassword;
                 CreateConnections(numberOfConnections);
-                logger.LogText("Connection successfully established", this, Logtype.Info);
+                logger.LogText("Connection objects created", this, Logtype.Info);
                 return true;
             }
             catch (Exception ex)
             {
-                logger.LogText(string.Format("Connection failed with exception: {0}", ex.Message), this, Logtype.Error);
+                logger.LogText(string.Format("Creating the connection objects failed with exception: {0}", ex.Message), this, Logtype.Error);
                 return false;
             }
         }
 
         /// <summary>
-        /// Creates connections to the mysql database
+        /// Creates connections to the mysql database; does NOT connect
+        /// This "fixes" the problem, that when the server is rebootet and the database is not available,
+        /// no connections can be made. Connections are made when they are actually needed now
         /// </summary>
         /// <param name="numberOfConnections"></param>
         private void CreateConnections(int numberOfConnections)
@@ -95,7 +97,6 @@ namespace CrypToolStoreLib.Database
             for (int i = 0; i < connections.Length; i++)
             {
                 connections[i] = new DatabaseConnection(databaseServer, databaseName, databaseUser, databasePassword);
-                connections[i].Connect();
             }
         }
 
@@ -105,7 +106,7 @@ namespace CrypToolStoreLib.Database
         /// </summary>
         /// <returns></returns>
         private DatabaseConnection GetConnection()
-        {                        
+        {
             foreach (DatabaseConnection connection in connections)
             {
                 if (!connection.CurrentlyUsed())
@@ -114,8 +115,8 @@ namespace CrypToolStoreLib.Database
                     return connection;
                 }
             }
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            int i = random.Next(0, connections.Length - 1);
+            var random = new Random();
+            var i = random.Next(0, connections.Length - 1);
             return connections[i];
         }
 
