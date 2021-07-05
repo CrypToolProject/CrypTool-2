@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2018 Nils Kopal <Nils.Kopal<AT>Uni-Kassel.de>
+   Copyright 2021 Nils Kopal <kopal<AT>cryptool.org>
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -34,7 +34,8 @@ namespace CrypToolStoreLib.Server
     public class CrypToolStoreServer
     {        
         private Logger logger = Logger.GetLogger();
-        private ConcurrentBag<ClientHandler> _registeredClientHandlers = new ConcurrentBag<ClientHandler>();
+        private BlockingCollection<ClientHandler> _registeredClientHandlers = new BlockingCollection<ClientHandler>();
+        private BlockingCollection<Task> _handlerTasks = new BlockingCollection<Task>();
 
         /// <summary>
         /// Server key used for the ssl stream
@@ -91,11 +92,19 @@ namespace CrypToolStoreLib.Server
             }
             logger.LogText("Starting listen thread", this, Logtype.Info);
             Running = true;
-            Thread listenThread = new Thread(ListenThread);
+
+            var listenThread = new Thread(ListenThread);
             listenThread.IsBackground = true;
             listenThread.Start();
             Thread.Sleep(1000); //just to let the thread start
             logger.LogText("Listen thread started", this, Logtype.Info);
+
+            var housekeeperThread = new Thread(HousekeeperThread);
+            housekeeperThread.IsBackground = true;
+            housekeeperThread.Start();
+            Thread.Sleep(1000); //just to let the thread start
+            logger.LogText("Housekeeper thread started", this, Logtype.Info);
+
         }
         
         /// <summary>
@@ -112,34 +121,45 @@ namespace CrypToolStoreLib.Server
                 {
                     try
                     {
-                        TcpClient client = TCPListener.AcceptTcpClient();
+                        var client = TCPListener.AcceptTcpClient();
+                        client.ReceiveTimeout = 1000;
+                        client.SendTimeout = 1000;
                         logger.LogText(string.Format("New client connected from IP/Port={0}", client.Client.RemoteEndPoint), this, Logtype.Info);
-                        Task handlertask = new Task(() =>
-                        {
-                            try 
-                            { 
-                                ClientHandler handler = new ClientHandler();
-                                RegisterClientHandler(handler);
-                                handler.CrypToolStoreServer = this;
+                        CancellationToken token;
+                        _handlerTasks.Add(
+                            Task.Run(() =>
+                            {
+                                var handler = new ClientHandler();
                                 try
-                                {                                    
-                                    handler.HandleClient(client);
+                                {
+
+                                    RegisterClientHandler(handler);
+                                    handler.CrypToolStoreServer = this;
+                                    try
+                                    {
+                                        handler.HandleClient(client);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        logger.LogText(string.Format("Exception during handling of client from IP/Port={0} : {1}", client.Client.RemoteEndPoint, ex.Message), this, Logtype.Error);
+                                        logger.LogException(ex, this, Logtype.Error);
+                                    }
                                 }
                                 catch (Exception ex)
                                 {
                                     logger.LogText(string.Format("Exception during handling of client from IP/Port={0} : {1}", client.Client.RemoteEndPoint, ex.Message), this, Logtype.Error);
                                     logger.LogException(ex, this, Logtype.Error);
-                                }                            
-                                UnregisterClientHandler(handler);
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.LogText(string.Format("Exception during handling of client from IP/Port={0} : {1}", client.Client.RemoteEndPoint, ex.Message), this, Logtype.Error);
-                                logger.LogException(ex, this, Logtype.Error);
-                            }    
-                        });                        
-
-                        handlertask.Start();
+                                }
+                                try
+                                {
+                                    UnregisterClientHandler(handler);
+                                }
+                                catch (Exception ex)
+                                {
+                                    logger.LogText(string.Format("Exception during unregistration of client client handler from IP/Port={0}: {1}", client.Client.RemoteEndPoint, ex.Message), this, Logtype.Error);
+                                    logger.LogException(ex, this, Logtype.Error);
+                                }
+                            }, token));
                     }
                     catch (Exception ex)
                     {
@@ -157,6 +177,67 @@ namespace CrypToolStoreLib.Server
                 if (Running)
                 {
                     logger.LogText(string.Format("Exception in ListenThread: {0}", ex.Message), this, Logtype.Error);
+                    logger.LogException(ex, this, Logtype.Error);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Clears tasks that have finished by calling their Dispose method and 
+        /// removing them from the internal list
+        /// </summary>
+        private void HousekeeperThread()
+        {
+            try
+            {
+                var tasksToRemove = new List<Task>();
+                while (Running)
+                {                    
+                    try
+                    {
+                        //find tasks to dispose and remove
+                        //and dispose them
+                        foreach(var task in _handlerTasks)
+                        {
+                            if (task.IsCompleted)
+                            {
+                                try
+                                {
+                                    task.Dispose();
+                                    tasksToRemove.Add(task);
+                                }
+                                catch(Exception ex)
+                                {
+                                    logger.LogText(string.Format("Exception during Disposal of task: {0}", ex.Message), this, Logtype.Error);
+                                    logger.LogException(ex, this, Logtype.Error);
+                                }
+                            }
+                        }
+                        //remove all tasks from the internal list
+                        foreach (var task in tasksToRemove)
+                        {
+                            Task taskToRemove = task;
+                            _handlerTasks.TryTake(out taskToRemove);
+                        }
+                        tasksToRemove.Clear();
+                        Thread.Sleep(1000);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (Running)
+                        {
+                            logger.LogText(string.Format("Exception in ListenThread: {0}", ex.Message), this, Logtype.Error);
+                            logger.LogException(ex, this, Logtype.Error);
+                        }
+                    }
+                }
+                logger.LogText("HousekeeperThread terminated", this, Logtype.Info);
+            }
+            catch (Exception ex)
+            {
+                if (Running)
+                {
+                    logger.LogText(string.Format("Exception in HousekeeperThread: {0}", ex.Message), this, Logtype.Error);
                     logger.LogException(ex, this, Logtype.Error);
                 }
             }
@@ -184,7 +265,8 @@ namespace CrypToolStoreLib.Server
         {
             lock (this)
             {
-                _registeredClientHandlers.TryTake(out handler);
+                ClientHandler removeHandler = handler;
+                _registeredClientHandlers.TryTake(out removeHandler);
             }
         }
 
@@ -279,7 +361,7 @@ namespace CrypToolStoreLib.Server
         public void HandleClient(TcpClient client)
         {
             IPAddress = ((IPEndPoint)client.Client.RemoteEndPoint).Address;
-            using (SslStream sslstream = new SslStream(client.GetStream()))
+            using (var sslstream = new SslStream(client.GetStream()))
             {                
                 //Step 0: Authenticate SSLStream as server
                 sslstream.ReadTimeout = Constants.CLIENTHANDLER_READ_TIMEOUT;
@@ -290,7 +372,7 @@ namespace CrypToolStoreLib.Server
                     while (CrypToolStoreServer.Running && client.Connected && sslstream.CanRead && sslstream.CanWrite)
                     {
                         //Receive message
-                        Message message = ReceiveMessage(sslstream);
+                        var message = ReceiveMessage(sslstream);
                         
                         //Handle received message
                         if (message != null)
@@ -310,10 +392,12 @@ namespace CrypToolStoreLib.Server
                     if (sslstream != null)
                     {
                         sslstream.Close();
+                        sslstream.Dispose();
                     }
                     if (client != null)
                     {
                         client.Close();
+                        client.Dispose();
                     }                   
                     Logger.LogText("Client disconnected", this, Logtype.Info);
                 }
@@ -343,7 +427,7 @@ namespace CrypToolStoreLib.Server
             }
 
             //Step 2: Deserialize message header and get payloadsize
-            MessageHeader header = new MessageHeader();
+            var header = new MessageHeader();
             header.Deserialize(headerbytes);
             int payloadsize = header.PayloadSize;
             if (payloadsize > Constants.SERVER_MESSAGE_MAX_PAYLOAD_SIZE)
