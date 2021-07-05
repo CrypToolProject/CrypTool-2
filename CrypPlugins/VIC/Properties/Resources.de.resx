@@ -118,78 +118,78 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlphabetTypeSwitch" xml:space="preserve">
-    <value>字母</value>
+    <value>Alphabet</value>
   </data>
   <data name="AlphabetTypeSwitchCaption" xml:space="preserve">
-    <value>原始西里尔字母或拉丁字母之间的变化</value>
+    <value>Wechsel zwischen dem ursprünglichen kyrillischen oder lateinischen Alphabet</value>
   </data>
   <data name="ComponentDescription" xml:space="preserve">
-    <value>特工 Reino Häyhänen(Victor=VIC)使用的苏联密码</value>
+    <value>Sowjetische Chiffre verwendet von Agent Reino Häyhänen(Victor=VIC)</value>
   </data>
   <data name="ComponentName" xml:space="preserve">
-    <value>VIC 密码</value>
+    <value>VIC Chiffre</value>
   </data>
   <data name="DateCaption" xml:space="preserve">
-    <value>日期</value>
+    <value>Datum</value>
   </data>
   <data name="DateTooltip" xml:space="preserve">
-    <value>最小长度为 5 的大陆格式日期，例如1945 年 9 月 2 日 = 3.9.1945</value>
+    <value>Datum im kontinentalen Format mit einer Mindestlänge von 5, z.B. 2. September 1945 = 3.9.1945</value>
   </data>
   <data name="EncryptionTypeSwitch" xml:space="preserve">
-    <value>加密/解密</value>
+    <value>Verschlüsseln entschlüsseln</value>
   </data>
   <data name="EncryptionTypeSwitchCaption" xml:space="preserve">
-    <value>加密和解密之间的变化</value>
+    <value>Änderungen zwischen Verschlüsselung und Entschlüsselung</value>
   </data>
   <data name="InitializingStringCaption" xml:space="preserve">
-    <value>初始化字符串</value>
+    <value>Initialisierungsstring</value>
   </data>
   <data name="InitializingStringTooltip" xml:space="preserve">
-    <value>仅由长度为 5 的数字组成的字符串</value>
+    <value>String, der nur aus Ziffern mit einer Länge von 5 besteht</value>
   </data>
   <data name="InvalidNumberError" xml:space="preserve">
-    <value>号码大小无效。数字应大于 0 且小于 33</value>
+    <value>Nummer hat eine ungültige Größe. Zahl sollte größer als 0 und kleiner als 33 sein</value>
   </data>
   <data name="NumberCaption" xml:space="preserve">
-    <value>数字</value>
+    <value>Nummer</value>
   </data>
   <data name="NumberTooltip" xml:space="preserve">
-    <value>1 位或 2 位数字</value>
+    <value>1- oder 2-stellige Zahl</value>
   </data>
   <data name="OutputCaption" xml:space="preserve">
-    <value>输出</value>
+    <value>Ausgabe</value>
   </data>
   <data name="OutputTooltip" xml:space="preserve">
-    <value>VIC 密码的输出</value>
+    <value>Ausgabe der VIC Chiffre</value>
   </data>
   <data name="PasswordCaption" xml:space="preserve">
-    <value>密码</value>
+    <value>Passwort</value>
   </data>
   <data name="PasswordTooltip" xml:space="preserve">
-    <value>单字密码，至少 6 个字符长</value>
+    <value>Ein-Wort-Passwort, mindestens 6 Zeichen lang</value>
   </data>
   <data name="PhraseCaption" xml:space="preserve">
-    <value>短语</value>
+    <value>Phrase</value>
   </data>
   <data name="PhraseTooltip" xml:space="preserve">
-    <value>至少 20 个字母的短语</value>
+    <value>Mindestens eine 20-Buchstaben lange Phrase</value>
   </data>
   <data name="ShortDateError" xml:space="preserve">
-    <value>日期输入太短。最小长度应为 6。</value>
+    <value>Datumseingabe ist zu kurz. Die Mindestlänge sollte 6 betragen.</value>
   </data>
   <data name="ShortInitializingStringError" xml:space="preserve">
-    <value>初始化字符串太短。最小长度应为 5，并且应仅由数字组成。</value>
+    <value>Initialisierungsstring ist zu kurz. Die Mindestlänge sollte 5 betragen und sollte nur aus Zahlen bestehen.</value>
   </data>
   <data name="ShortPasswordException" xml:space="preserve">
-    <value>密码输入太短。最小长度为 6。</value>
+    <value>Passworteingabe ist zu kurz. Mindestlänge ist 6.</value>
   </data>
   <data name="ShortPhraseError" xml:space="preserve">
-    <value>短语太短。最小长度应为 20，不包括空格、数字和标点符号。</value>
+    <value>Satz ist zu kurz. Die Mindestlänge sollte 20 betragen, ohne Leerzeichen, Zahlen und Satzzeichen.</value>
   </data>
   <data name="TextInputCaption" xml:space="preserve">
-    <value>文字 输入</value>
+    <value>Eingabe</value>
   </data>
   <data name="TextInputTooltip" xml:space="preserve">
-    <value>VIC 密码要处理的字符串</value>
+    <value>Eine Zeichenfolge, die von der VIC-Chiffre verarbeitet werden soll</value>
   </data>
 </root>

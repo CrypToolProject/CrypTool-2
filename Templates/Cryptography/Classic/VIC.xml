@@ -2,7 +2,7 @@
 <sample>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--File name: VIC.xml-->
-  <!--Last edited: 2021.04.30-->
+  <!--Last edited: 2021.07.05-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -10,67 +10,124 @@
   <title lang="en">VIC Cipher</title>
   <summary lang="en">Usage of the <i>VIC</i> cipher</summary>
   <description lang="en">
-  The VIC cipher was a pencil and paper cipher used by the Soviet spy Reino Häyhänen, codenamed "VICTOR". <newline />
-  If the cipher were to be given a modern technical name, it would be known as a "straddling bipartite monoalphabetic substitution superenciphered by modified double transposition."However, by general classification it is part of the Nihilist family of ciphers. 
+  The VIC cipher is a pencil and paper cipher used by the Soviet spy Reino Häyhänen, codenamed "VICTOR". <newline />
+  In modern terminology, this cipher is a straddling bipartite monoalphabetic substitution superenciphered by a modified double columnar transposition. The cipher is part of the Nihilist family of ciphers. 
   Source: <external ref="https://en.wikipedia.org/wiki/VIC_cipher" /></description>
-  <keywords>VIC, VICTOR, Substitution, monoalphabetic substitution, straddling checkerboard, transposition, columnar transposition</keywords>
+  <keywords>VIC, VICTOR, substitution, monoalphabetic, straddling checkerboard, columnar transposition</keywords>
   <replacements lang="en">
-    <replacement key="$dateTextBox$" value="Date in a continental format." />
-    <replacement key="$date$" value="391945" />
-    <replacement key="$dateMemo$" value="Date in a continental format means that e.g. 3rd september 1945 is 391945. Minimum length should be 5 digits." />
-    <replacement key="$passwordTextBox$" value="Password" />
-    <replacement key="$password$" value="подумать" />
-    <replacement key="$passwordMemo$" value="Password must consist of at least 7 unique characters." />
-    <replacement key="$phraseTextBox$" value="Phrase of at least 20 characters long excluding spaces and interpunction." />
-    <replacement key="$phrase$" value="Расцветали яблони и груши Поплыли туманы над рекой Выходила на берег Катюша На высокий берег на крутой Выходила на берег Катюша На высокий берег на крутой" />
-    <replacement key="$phraseMemo$" value="Phrase consisting of at least 20 unique letters. A good example also used in the original messages enciphered with VIC cipher is a short passage from a folk song." />
-    <replacement key="$numberTextBox$" value="Number" />
-    <replacement key="$number$" value="12" />
-    <replacement key="$numberMemo$" value="1 or 2 digit number. This number must be between 0 and 33, however optimal value is around 10-13. Originally, agent's number was used." />
-    <replacement key="$initializingStringTextBox$" value="Initalizing string" />
-    <replacement key="$initializingString$" value="53815" />
-    <replacement key="$initializingStringMemo$" value="Initializing String must be consisting only of digits and at least 5 digits long. This string is also inserted to end of the output string at a position determined by the last digit of Date." />
-    <replacement key="$inputTextBox$" value="Plaintext Input" />
-    <replacement key="$input$" value="Калинка, калинка, калинка моя! В саду ягода малинка, малинка моя! Ах, под сосною, под зеленою, Спать положите вы меня! Ай-люли, люли, ай-люли, люли, Спать положите вы меня." />
-    <replacement key="$inputPlaintextMemo$" value="Plaintext/Ciphertext Input to be processed by the VIC cipher" />
-    <replacement key="$componentTextBox$" value="VIC Cipher" />
-    <replacement key="$outputTextBox$" value="Output of the VIC cipher. Enciphered/Plain text" />
-    <replacement key="$memo$" value="This is a template showcasing the usage of the VIC cipher.     As you can see, VIC cipher needs to have 5 different      inputs for the key and one for the plaintext. Please,     read all the captions for the keys to make sure you enter the key parts in correct format." />
+     <replacement key="$plaintext$" value="Plaintext"/>
+     <replacement key="$ciphertext$" value="Ciphertext"/>
+	<replacement key="$date$" value="Date"/>
+	<replacement key="$password$" value="Password"/>
+	<replacement key="$phrase$" value="Phrase"/>
+	<replacement key="$number$" value="Number"/>
+	<replacement key="$initializationstring$" value="Initialization string"/>
+	<replacement key="$memo$" value="This template shows the usage of the VIC cipher. The VIC cipher has 5 different inputs for the key and one for the plaintext.\line
+\line
+The inputs and their recommended formats for the key are:\line
+\line
+{\b Date:} The date has to be in a continental format (numeric), e.g. 3rd September 1945 is formatted to 391945. The minimum length should be 6 digits.\line
+{\b Password:} The password should consist of at least 7 unique characters.\line
+{\b Phrase:} The pass phrase should consist of at least 20 unique letters (exluding spaces and interpunction). This template uses a short passage from a folk song (Katjuscha). This song was also used in the original messages enciphered with the VIC cipher.\line
+{\b Number:} The number should should be between 0 and 33, however the optimal value is between 10 and 13. Originally, the agent's number was used.\line
+{\b Initializing string:} This string should consist only of digits and should be at least 5 digits long. It is inserted at the end of the output string at a position determined by the last digit of the date.\line
+\line
+The VIC cipher internally creates und uses random numbers which are incorporated in the ciphertext. Therefore, every time the template is restarted, the ciphertext is different."/>
+  </replacements>  
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">VIC-Chiffre</title>
+  <summary lang="de">Verwendung der <i>VIC</i>Chiffre</summary>
+  <description lang="de">
+  Die VIC-Chiffre ist eine Bleistift- und Papierchiffre, die vom sowjetischen Spion Reino Häyhänen mit dem Codenamen "VICTOR" verwendet wird. <newline />
+  In der modernen Terminologie ist diese Chiffre eine übergreifende bipartite monoalphabetische Substitution, die durch eine modifizierte doppelte säulenförmige Transposition superchiffriert ist. Die Chiffre ist Teil der nihilistischen Chiffrenfamilie.
+  Quelle: <external ref="https://en.wikipedia.org/wiki/VIC_cipher" /></description>
+  <keywords>VIC, VICTOR, Substitution, monoalphabetisch, Schachbrettmuster, Spaltentransposition</keywords>
+  <replacements lang="de">
+     <replacement key="$plaintext$" value="Klartext"/>
+     <replacement key="$ciphertext$" value="Geheimtext"/>
+	<replacement key="$date$" value="Datum"/>
+	<replacement key="$password$" value="Passwort"/>
+	<replacement key="$phrase$" value="Phrase"/>
+	<replacement key="$number$" value="Zahl"/>
+	<replacement key="$initializationstring$" value="Initialisierungsstring"/>
+	<replacement key="$memo$" value="Diese Vorlage zeigt die Verwendung der VIC-Chiffre. Die VIC-Chiffre hat 5 verschiedene Eingaben für den Schlüssel und eine für den Klartext.\line
+\line
+Die Eingaben und ihre empfohlenen Formate für den Schlüssel sind:\line
+\line
+{\b Datum:} Das Datum muss in einem kontinentalen Format (numerisch) vorliegen, z.B. 3. September 1945 hat das Format 391945. Die Mindestlänge sollte 6 Stellen betragen.\line
+{\b Passwort:} Das Passwort sollte aus mindestens 7 eindeutigen Zeichen bestehen.\line
+{\b Phrase:} Die Passphrase sollte aus mindestens 20 eindeutigen Buchstaben bestehen (ohne Leerzeichen und Interpunktionszeichen). Diese Vorlage verwendet eine kurze Passage aus einem Volkslied (Katjuscha). Dieses Lied wurde auch in den ursprünglichen Nachrichten verwendet, die mit der VIC-Chiffre verschlüsselt wurden.\line
+{\b Nummer:} Die Zahl sollte zwischen 0 und 33 liegen, der optimale Wert liegt jedoch zwischen 10 und 13. Ursprünglich wurde die Nummer des Agenten verwendet.\line
+{\b Initialisierungsstring:} Dieser String sollte nur aus Ziffern bestehen und mindestens 5 Ziffern lang sein. Es wird am Ende des Ausgabestrings an einer Position eingefügt, die durch die letzte Ziffer des Datums bestimmt wird.\line
+\line
+Die VIC-Chiffre erstellt und verwendet intern Zufallszahlen, die in den Geheimtext einfließen. Daher ist der Geheimtext jedes Mal, wenn die Vorlage neu gestartet wird, ein anderer."/>
   </replacements>
+    <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
+  <title lang = "ru"> Шифр ​​ВИК </title>
+  <summary lang = "ru"> Использование шифра <i> VIC </i> </summary>
+  <description lang = "ru">
+  Шифр ВИК - это карандаш и бумажный шифр, который использовал советский разведчик Рейно Хайханен под кодовым названием «ВИКТОР». <newline/>
+  В современной терминологии этот шифр представляет собой двухчастную моноалфавитную замену, зашифрованную путем модифицированного двойного столбчатого транспонирования. Шифр является частью семейства шифров нигилизма.
+  Источник: <external ref = "https://en.wikipedia.org/wiki/VIC_cipher" /> </description>
+  <keywords> VIC, VICTOR, подстановка, моноалфавит, сдвиг в шахматном порядке, столбчатое транспонирование </keywords>
+  <replacements lang = "ru">
+	<replace key = "$plaintext$" value = "Plaintext" />
+	<replace key = "$ciphertext$" value = "Ciphertext" />
+	<replace key = "$date$" value = "Date" />
+	<replace key = "$password$" value = "Пароль" />
+	<replace key = "$phrase$" value = "фраза" />
+	<replace key = "$number$" value = "Number" /> 
+	<replace key = "$initializationstring$" value = "Строка инициализации" />
+	<replace key = "$memo$" value = "Этот шаблон показывает использование шифра VIC. Шифр ​​VIC имеет 5 различных входов для ключа и один для открытого текста. \line
+\line
+Входные данные и их рекомендуемые форматы для ключа: \line
+\line
+{\b Дата:} Дата должна быть в континентальном (числовом) формате, например 3 сентября 1945 года форматируется как 391945. Минимальная длина должна быть 6 цифр. \line
+{\b Пароль:} Пароль должен состоять как минимум из 7 уникальных символов. \line
+{\b Phrase:} Парольная фраза должна состоять как минимум из 20 уникальных букв (без пробелов и вставок). В этом шаблоне используется короткий отрывок из народной песни (Катюща). Эта песня также использовалась в исходных сообщениях, зашифрованных с помощью шифра VIC. \line
+{\b Число:} Число должно быть от 0 до 33, однако оптимальное значение - от 10 до 13. Первоначально использовался номер агента. \line
+{\b Инициализирующая строка:} Эта строка должна состоять только из цифр и состоять не менее чем из 5 цифр. Он вставляется в конец выходной строки в позиции, определяемой последней цифрой даты. \line
+\line
+Шифр VIC внутренне создает и использует случайные числа, которые включены в зашифрованный текст. Следовательно, каждый раз, когда шаблон перезапускается, зашифрованный текст будет другим. "/>
+  </replacements>
+    <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">VIC密码</title>
-  <summary lang="zh">VIC密码的用法</summary>
-  <description lang="zh">VIC密码是苏联间谍ReinoHäyhänen使用的铅笔和纸密码，代号为“ VICTOR”。如果要给该密码起一个现代的技术名称，它将被称为“通过修饰的双置换而跨过的跨界二元单字母取代。”但是，按一般分类，它是Nihilist密码家族的一部分。资源：</description>
-  <keywords lang="zh">VIC，VICTOR，替代，单字母替代，跨界棋盘格，换位，柱状换位</keywords>
+  <title lang="zh-CN">VIC 密码</title>
+  <summary lang="en"><i>VIC</i> 密码的使用</summary>
+  <description lang="zh">
+  VIC 密码是苏联间谍 Reino Häyhänen 使用的铅笔和纸密码，代号为“VICTOR”。 <换行 />
+  在现代术语中，这种密码是一种跨式二分单字母替换，由修改后的双柱状转置进行超加密。该密码是虚无主义密码家族的一部分。
+  来源：<external ref="https://en.wikipedia.org/wiki/VIC_cipher" /></description>
+  <keywords>VIC, VICTOR, 替换, 单字母, 跨棋盘, 柱状换位</keywords>
   <replacements lang="zh">
-    <replacement key="$dateTextBox$" value="日期以大陆格式显示。" />
-    <replacement key="$date$" value="391945" />
-    <replacement key="$dateMemo$" value="大陆格式的日期表示，例如1945年9月3日是391945。最小长度应为5位数字。" />
-    <replacement key="$passwordTextBox$" value="密码" />
-    <replacement key="$password$" value="思考" />
-    <replacement key="$passwordMemo$" value="密码必须至少包含7个唯一字符。" />
-    <replacement key="$phraseTextBox$" value="词组至少20个字符，不包括空格和标点符号。" />
-    <replacement key="$phrase$" value="苹果树和梨花盛开雾在河上漂浮出在卡秋莎河岸上在陡峭的河岸上出在卡秋莎河岸上在陡峭的河岸上" />
-    <replacement key="$phraseMemo$" value="词组至少包含20个唯一字母。在用VIC密码加密的原始消息中也使用的一个很好的例子是一首民歌的简短段落。" />
-    <replacement key="$numberTextBox$" value="数" />
-    <replacement key="$number$" value="12" />
-    <replacement key="$numberMemo$" value="1或2位数字。该数字必须介于0到33之间，但是最佳值为10-13左右。最初使用的是座席号码。" />
-    <replacement key="$initializingStringTextBox$" value="诱人的字符串" />
-    <replacement key="$initializingString$" value="53815" />
-    <replacement key="$initializingStringMemo$" value="初始化字符串必须仅由数字组成，且长度至少为5位。此字符串也将插入到输出字符串的末尾，该位置由Date的最后一位数字确定。" />
-    <replacement key="$inputTextBox$" value="纯文本输入" />
-    <replacement key="$input$" value="卡林卡，卡林卡，我的卡林卡！花园里有一个覆盆子，我的覆盆子！啊，在松树下，在绿色下，你让我入睡！ Ay-lyuli，lyuli，ai-lyuli，lyuli，你让我入睡。" />
-    <replacement key="$inputPlaintextMemo$" value="VIC密码处理的纯文本/密文输入" />
-    <replacement key="$componentTextBox$" value="VIC密码" />
-    <replacement key="$outputTextBox$" value="VIC密码的输出。加密/明文" />
-    <replacement key="$memo$" value="这是一个模板，展示了VIC密码的用法。如您所见，VIC密码需要5个不同的密钥输入和1个明文输入。请阅读所有键的标题，以确保您以正确的格式输入键部分。" />
+	<replacement key="$plaintext$" value="Plaintext"/>
+	<replacement key="$ciphertext$" value="Ciphertext"/>
+	<replacement key="$date$" value="Date"/>
+	<replacement key="$password$" value="密码"/>
+	<replacement key="$phrase$" value="Phrase"/>
+	<replacement key="$number$" value="Number"/>
+	<replacement key="$initializationstring$" value="初始化字符串"/>
+	<replacement key="$memo$" value="此模板显示了 VIC 密码的用法。VIC 密码有 5 种不同的密钥输入和一种用于明文的输入。\line
+\line
+密钥的输入及其推荐格式为：\line
+\line
+{\b 日期：} 日期必须是大陆格式（数字），例如1945 年 9 月 3 日的格式为 391945。最小长度应为 6 位。\line
+{\b 密码：} 密码应至少包含 7 个唯一字符。\line
+{\b 短语：} 密码短语应包含至少 20 个唯一字母（不包括空格和间断符）。该模板使用了民歌 (Katjuscha) 中的一小段。这首歌也被用在用 VIC 密码加密的原始信息中。\line
+{\b Number:} 数字应该在 0 到 33 之间，但最佳值在 10 到 13 之间。最初使用的是代理号。\line
+{\b 初始化字符串：} 此字符串应仅由数字组成，并且长度至少应为 5 位。它被插入到输出字符串的末尾，位置由日期的最后一位数字确定。\line
+\line
+VIC 密码在内部创建并使用包含在密文中的随机数。所以每次重启模板，密文都不一样。"/>
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <icon file="VCI.png" />
+  <icon file="VIC.png" />
   <relevantPlugins>
     <plugin name="VIC" />
   </relevantPlugins>
