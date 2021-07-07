@@ -92,11 +92,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lucene.Net, Version=2.1.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Lucene.Net.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -148,7 +143,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Exceptions.resx</DependentUpon>
     </Compile>
-    <Compile Include="SearchProvider.cs" />
     <Compile Include="UnhandledExceptionDialog.xaml.cs">
       <DependentUpon>UnhandledExceptionDialog.xaml</DependentUpon>
     </Compile>
