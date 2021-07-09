@@ -9,8 +9,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Caesar Cipher</title>
   <summary lang="en">Usage of the <i>Caesar</i> cipher</summary>
-  <description lang="en">In cryptography, a Caesar cipher, also known as a Caesar's cipher, the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a shift of 3, A would be replaced by D, B would become E, and so on. The method is named after Julius Caesar, who used it to communicate with his generals. The encryption step performed by a Caesar cipher is often incorporated as part of more complex schemes, such as the Vigenère cipher, and still has modern application in the ROT13 system. As with all single alphabet substitution ciphers, the Caesar cipher is easily broken and in practice offers essentially no communication security.<newline /><newline />
-Source: <external ref="http://en.wikipedia.org/wiki/Caesar_cipher" /></description>
+  <description lang="en">In cryptography, a Caesar cipher is one of the simplest and most widely known encryption techniques.</description>
   <keywords>Caesar, Julius, monoalphabetic, substitution</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plaintext" />
@@ -18,7 +17,9 @@ Source: <external ref="http://en.wikipedia.org/wiki/Caesar_cipher" /></descripti
     <replacement key="$Alphabet$" value="Alphabet" />
     <replacement key="$Key$" value="Key" />
     <replacement key="$text$" value="The quick brown fox jumps over the lazy dog." />
-    <replacement key="$memo$" value="{\b Description of the cipher}\line\line In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a left shift of 3, D would be replaced by A, E would become B, and so on. The method is named after Julius Caesar, who used it in his private correspondence." />
+    <replacement key="$memo$" value="{\b Description of the cipher}\line\line In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code or Caesar shift, is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a right shift of 3, A would be replaced by D, B would become E, and so on. The method is named after Julius Caesar, who used it in his private correspondence.\line
+\line
+Source: https://en.wikipedia.org/wiki/Caesar_cipher" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -55,8 +56,7 @@ Source: <external ref="http://en.wikipedia.org/wiki/Caesar_cipher" /></descripti
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Caesar-Chiffre</title>
   <summary lang="de">Benutzung der <i>Caesar</i>-Chiffre</summary>
-  <description lang="de">Die Caesar-Verschlüsselung (auch als Caesar-Verschiebung, Verschiebechiffre oder als Einfacher Caesar bezeichnet) ist ein Verschlüsselungsverfahren, das auf der monographischen und monoalphabetischen Substitution basiert. Als eines der einfachsten und unsichersten Verfahren dient es heute hauptsächlich dazu, um Grundprinzipien der Kryptologie anschaulich darzustellen. Bei der Verschlüsselung wird jeder Buchstabe des Klartexts auf einen Geheimtextbuchstaben abgebildet. Diese Abbildung ergibt sich, indem man die Zeichen eines geordneten Alphabets um eine bestimmte Anzahl zyklisch nach rechts verschiebt (rotiert). Die Anzahl der verschobenen Zeichen bildet den Schlüssel, der für die gesamte Verschlüsselung unverändert bleibt.<newline /><newline />
-Quelle: <external ref="http://de.wikipedia.org/wiki/Caesar-Verschlüsselung" /></description>
+  <description lang="de">Die Caesar-Verschlüsselung ist ein Verschlüsselungsverfahren, das auf der monographischen und monoalphabetischen Substitution basiert.</description>
   <keywords lang="de">Cäsar, Caesar, Julius, Monoalphabetisch, Substitution</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
@@ -64,7 +64,9 @@ Quelle: <external ref="http://de.wikipedia.org/wiki/Caesar-Verschlüsselung" /><
     <replacement key="$Alphabet$" value="Alphabet" />
     <replacement key="$Key$" value="Schlüssel" />
     <replacement key="$text$" value="Franz jagt im komplett verwahrlosten Taxi quer durch Bayern." />
-    <replacement key="$memo$" value="{\b Beschreibung der Chiffre}\line\line Die Caesar-Verschlüsselung (auch als Caesar-Chiffre, Caesar-Algorithmus, Caesar-Verschiebung, Verschiebechiffre oder als Einfacher Caesar bezeichnet) ist ein einfaches symmetrisches Verschlüsselungsverfahren, das auf der monographischen und monoalphabetischen Substitution basiert. Als eines der einfachsten und unsichersten Verfahren dient es heute hauptsächlich dazu, Grundprinzipien der Kryptologie anschaulich darzustellen. Der Einfachheit halber werden oftmals nur die 26 Buchstaben des lateinischen Alphabets ohne Unterscheidung von Groß- und Kleinbuchstaben als Alphabet für Klartext und Geheimtext verwendet und Sonderzeichen, Satzzeichen usw. nicht betrachtet." />
+    <replacement key="$memo$" value="{\b Beschreibung der Chiffre}\line\line Die Caesar-Verschlüsselung (auch als Caesar-Chiffre, Caesar-Algorithmus, Caesar-Verschiebung, Verschiebechiffre oder als Einfacher Caesar bezeichnet) ist ein einfaches symmetrisches Verschlüsselungsverfahren, das auf der monographischen und monoalphabetischen Substitution basiert. Als eines der einfachsten und unsichersten Verfahren dient es heute hauptsächlich dazu, Grundprinzipien der Kryptologie anschaulich darzustellen. Der Einfachheit halber werden oftmals nur die 26 Buchstaben des lateinischen Alphabets ohne Unterscheidung von Groß- und Kleinbuchstaben als Alphabet für Klartext und Geheimtext verwendet und Sonderzeichen, Satzzeichen usw. nicht betrachtet.\line
+\line
+Quelle: http://de.wikipedia.org/wiki/Caesar-Verschlüsselung" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

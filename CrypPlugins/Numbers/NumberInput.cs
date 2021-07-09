@@ -199,6 +199,13 @@ namespace CrypTool.Plugins.Numbers
                 return BigInteger.Zero;
             }
             var strNumber = Regex.Replace(settings.Number, @"\s+", "");
+            
+            //if we have only a single minus, we throw a special exception
+            //to avoid showing the user a parsing exception
+            if (strNumber.Equals("-"))
+            {
+                throw new NumberIsMinusSymbolException();
+            }
             return BigIntegerHelper.ParseExpression(strNumber);
         }
 
@@ -291,12 +298,15 @@ namespace CrypTool.Plugins.Numbers
             {
                 return;
             }
-            catch (Exception ex)
+            catch (NumberIsMinusSymbolException)
             {
+                //we have a single minus symbol, thus, ignore exception
+            }
+            catch (Exception ex)
+            {                
                 GuiLogMessage("Invalid Big Number input: " + ex.Message, NotificationLevel.Error);
                 return;
-            }
-            
+            }                        
             ProgressChanged(1.0, 1.0);
         }
 
@@ -338,5 +348,10 @@ namespace CrypTool.Plugins.Numbers
         }
 
         #endregion
+    }
+
+    public class NumberIsMinusSymbolException : Exception
+    {
+
     }
 }
