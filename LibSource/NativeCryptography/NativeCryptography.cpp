@@ -23,8 +23,7 @@ namespace NativeCryptography {
 	 * x = x XOR y 
 	 */
 	inline void xor64(void* x, void* y){
-		((int*)x)[0] ^= ((int*)y)[0]; 
-		((int*)x)[1] ^= ((int*)y)[1];
+		((long*)x)[0] ^= ((long*)y)[0];
 	}
 
 	/*
@@ -32,10 +31,8 @@ namespace NativeCryptography {
 	* x = x XOR y
 	*/
 	inline void xor128(void* x, void* y){
-		((int*)x)[0] ^= ((int*)y)[0];
-		((int*)x)[1] ^= ((int*)y)[1];
-		((int*)x)[2] ^= ((int*)y)[2];
-		((int*)x)[3] ^= ((int*)y)[3];
+		((long*)x)[0] ^= ((long*)y)[0];
+		((long*)x)[1] ^= ((long*)y)[1];
 	}
 
 	/*
