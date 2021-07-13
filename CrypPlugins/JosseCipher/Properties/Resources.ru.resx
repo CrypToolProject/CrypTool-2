@@ -1,0 +1,123 @@
+﻿<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DefaultAlphabet" xml:space="preserve">
+    <value>abcdefghijklmnopqrstuvxyz</value>
+  </data>
+  <data name="Alphabet" xml:space="preserve">
+    <value>Алфавит</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>Алфавит, используемый josses-cipher.</value>
+  </data>
+  <data name="Calculation" xml:space="preserve">
+    <value>Расчет</value>
+  </data>
+  <data name="CalculationStepOutputCaption" xml:space="preserve">
+    <value>Этапы расчета</value>
+  </data>
+  <data name="CalculationStepOutputExplanationDeciphering" xml:space="preserve">
+    <value>Для расшифровки шифротекста "{0}" в "{1}" необходимо выполнить следующие вычислительные действия:</value>
+  </data>
+  <data name="CalculationStepOutputExplanationEnciphering" xml:space="preserve">
+    <value>Открытый текст "{0}" кодируется в "{1}", для этого необходимы следующие шаги вычисления:</value>
+  </data>
+  <data name="CalculationStepOutputTooltip" xml:space="preserve">
+    <value>Вывод для вычислительных шагов процедуры.</value>
+  </data>
+  <data name="Char" xml:space="preserve">
+    <value>Персонажи</value>
+  </data>
+  <data name="CharacterMappingTableTap" xml:space="preserve">
+    <value>Назначение письма</value>
+  </data>
+  <data name="Ciphertext" xml:space="preserve">
+    <value>Шифротекст</value>
+  </data>
+  <data name="DuplicateCharsRemoved" xml:space="preserve">
+    <value>Дублирующие символы в ключе были удалены.</value>
+  </data>
+  <data name="DefaultKeyword" xml:space="preserve">
+    <value>geheim
+</value>
+  </data>
+  <data name="EncipheringInputText" xml:space="preserve">
+    <value>Закрытие {0}</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Индекс</value>
+  </data>
+  <data name="InputAlphabetCaption" xml:space="preserve">
+    <value>Внешний алфавит</value>
+  </data>
+  <data name="InputAlphabetTooltip" xml:space="preserve">
+    <value>Внешний вход для алфавита, используемого шифром Жосса.</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Ввод текста</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Текст для обработки с помощью шифра Жосса.</value>
+  </data>
+  <data name="Keyword" xml:space="preserve">
+    <value>Ключевое слово</value>
+  </data>
+  <data name="KeywordToolTip" xml:space="preserve">
+    <value>Ключевое слово для создания таблицы замены.</value>
+  </data>
+  <data name="KeywordTooShort" xml:space="preserve">
+    <value>Не указано ключевое слово. По умолчанию длина ключа составляет 5 символов.</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Режим</value>
+  </data>
+  <data name="ModeActionDecrypt" xml:space="preserve">
+    <value>Расшифровка</value>
+  </data>
+  <data name="ModeActionEncrypt" xml:space="preserve">
+    <value>Шифрование</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Определяет, используется ли компонент для шифрования или дешифрования.</value>
+  </data>
+  <data name="NumericalRepresentation" xml:space="preserve">
+    <value>Численное представление</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Вывод текста</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Текст после обработки шифром Джосса</value>
+  </data>
+  <data name="Plaintext" xml:space="preserve">
+    <value>Обычный текст</value>
+  </data>
+  <data name="PluginCaption" xml:space="preserve">
+    <value>Josse-Cipher</value>
+  </data>
+  <data name="PluginTooltip" xml:space="preserve">
+    <value>Французский шифр конца 19 века.</value>
+  </data>
+  <data name="ReplacementTableTab" xml:space="preserve">
+    <value>Сменный стол</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Результат</value>
+  </data>
+  <data name="ShowPlayText" xml:space="preserve">
+    <value>Пожалуйста, нажмите "Play", чтобы отобразить визуализацию.</value>
+  </data>
+  <data name="UnknownChar" xml:space="preserve">
+    <value>Введенный текст содержит неизвестные символы ({0}). В дальнейшем процессе они игнорируются.</value>
+  </data>
+</root>

@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="CrypTool.JosseCipher.JosseCipherPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <TabControl>
+        <TabItem Header="Replacement" Name="ReplacementTableTab">
+            <Viewbox Name="ReplacementTableViewBox">
+                <DataGrid Name="ReplacementTable" ItemsSource="{Binding}" />
+            </Viewbox>
+        </TabItem>
+        <TabItem Header="CharacterMapping" Name="CharacterMappingTableTap">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" Name="CharacterMappingScrollViewer">
+                <DataGrid Name="CharacterMapping" ItemsSource="{Binding}" />
+            </ScrollViewer>
+        </TabItem>
+    </TabControl>
+</UserControl>

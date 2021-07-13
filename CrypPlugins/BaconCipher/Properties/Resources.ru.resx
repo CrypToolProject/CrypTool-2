@@ -1,0 +1,113 @@
+﻿<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Alphabet" xml:space="preserve">
+    <value>Алфавит</value>
+  </data>
+  <data name="AlphabetTooLong" xml:space="preserve">
+    <value>Указанный алфавит слишком длинный. Пожалуйста, включите динамическую длину или укажите алфавит, содержащий менее 32 символов.</value>
+  </data>
+  <data name="AlphabetTooltip" xml:space="preserve">
+    <value>Алфавит, используемый беконным шифром.</value>
+  </data>
+  <data name="BaconCipher" xml:space="preserve">
+    <value>Шифр бекона </value>
+  </data>
+  <data name="BaconTooltip" xml:space="preserve">
+    <value>Метод стеганографии Фрэнсиса Бэкона.</value>
+  </data>
+  <data name="CharAlreadyMapped" xml:space="preserve">
+    <value>Алфавит содержит дублирующие символы.</value>
+  </data>
+  <data name="CharCouldNotBeDecoded" xml:space="preserve">
+    <value>Не удалось декодировать символ "{0}".</value>
+  </data>
+  <data name="CodeLength" xml:space="preserve">
+    <value>Длина</value>
+  </data>
+  <data name="CodeLengthCaption" xml:space="preserve">
+    <value>Длина кодового слова</value>
+  </data>
+  <data name="CodeLengthToolTip" xml:space="preserve">
+    <value>Определяет статическую длину кодового слова.</value>
+  </data>
+  <data name="CodeNotMappable" xml:space="preserve">
+    <value>Не удалось полностью расшифровать текст шифра, потому что '{tempCode}' не является частью отображения.</value>
+  </data>
+  <data name="DefaultAlphabet" xml:space="preserve">
+    <value>abcdefghijklmnopqrstuvwxyz</value>
+  </data>
+  <data name="DynamicCodeLengthCaption" xml:space="preserve">
+    <value>Длина слова динамического кода</value>
+  </data>
+  <data name="DynamicCodeLengthToolTip" xml:space="preserve">
+    <value>Если включено динамическое кодирование, для кодирования используется только столько битов, сколько необходимо для размера алфавита. В противном случае для кодирования используется фиксированный размер в 5 бит.</value>
+  </data>
+  <data name="ErrorSplitCipherAlphabet" xml:space="preserve">
+    <value>Не удалось обработать входной алфавит шифротекста. Пожалуйста, используйте разделитель, например: "{0}". Исполнение остановлено!</value>
+  </data>
+  <data name="IgnoringChar" xml:space="preserve">
+    <value>Символ "{0}" игнорируется, поскольку он не является частью алфавита.</value>
+  </data>
+  <data name="InputAlphabetCaption" xml:space="preserve">
+    <value>Внешний алфавит</value>
+  </data>
+  <data name="InputAlphabetTooltip" xml:space="preserve">
+    <value>Внешний вход для алфавита, используемого шифром Бэкона.</value>
+  </data>
+  <data name="InputCipherCharsCaption" xml:space="preserve">
+    <value>Алфавит шифротекста</value>
+  </data>
+  <data name="InputCipherCharsTooltip" xml:space="preserve">
+    <value>Внешний вход для заданного пользователем алфавита шифротекста.</value>
+  </data>
+  <data name="InputTextCaption" xml:space="preserve">
+    <value>Ввод текста</value>
+  </data>
+  <data name="InputTextTooltip" xml:space="preserve">
+    <value>Текст, который будет обрабатываться с помощью шифра Бэкона.</value>
+  </data>
+  <data name="Mode" xml:space="preserve">
+    <value>Режим</value>
+  </data>
+  <data name="ModeDecrypt" xml:space="preserve">
+    <value>Расшифровать</value>
+  </data>
+  <data name="ModeEncrypt" xml:space="preserve">
+    <value>Зашифровать</value>
+  </data>
+  <data name="ModeTooltip" xml:space="preserve">
+    <value>Определяет, используется ли компонент для шифрования или дешифрования.</value>
+  </data>
+  <data name="OutputModeBinary" xml:space="preserve">
+    <value>Бинарные</value>
+  </data>
+  <data name="OutputModeCaption" xml:space="preserve">
+    <value>Режим вывода</value>
+  </data>
+  <data name="OutputModeExternalInput" xml:space="preserve">
+    <value>Алфавит внешнего шифротекста</value>
+  </data>
+  <data name="OutputModeRandomChar" xml:space="preserve">
+    <value>Случайные персонажи</value>
+  </data>
+  <data name="OutputModeToolTip" xml:space="preserve">
+    <value>Указывает, как должен быть выведен сгенерированный код.</value>
+  </data>
+  <data name="OutputTextCaption" xml:space="preserve">
+    <value>Вывод текста</value>
+  </data>
+  <data name="OutputTextTooltip" xml:space="preserve">
+    <value>Текст после его обработки шифром Бэкона</value>
+  </data>
+</root>

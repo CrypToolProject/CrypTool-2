@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+    <icon file="BaconCipher.png" />
+    <relevantPlugins>
+        <plugin name="BaconCipher" />
+        <plugin name="TextInput" />
+        <plugin name="TextOutput" />
+    </relevantPlugins>
+    <title lang="de">Benutzung der <i>Bacon</i> Chiffre</title>
+    <summary lang="de">Einfache Ver- und Entschlüsselung mit der <i>Bacon Chiffre</i></summary>
+    <description lang="de">Diese Vorlage zeigt einen einfachen Codierungs- und Decodierungsungsprozess mit der Bacon-Cipher. Das Verfahren bildet Buchstaben auf einen Code aus zwei Zeichen ab. Dieser Code kann dann beispielsweise in Texte eingebettet werden.</description>
+    <keywords lang="de">Bacon, chiffre, einfach</keywords>
+    <replacements lang="de">
+        <replacement key="$Plaintext$" value="Klartext" />
+        <replacement key="$Alphabet$" value="Alphabet" />
+        <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext"/>
+        <replacement key="$Ciphertext$" value="Geheimtext"/>
+        <replacement key="$CipherAlphabet$" value="Geheimtextalphabet"/>
+        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Bacon Chiffre. Die Komponente wurde nach dem Vorbild der ACA (American Cipher association) entwickelt und unterstützt die Ver- und Entschlüsselung verschiedener Texte mittels eins bilateralen Alphabetes. Über die Einstellungen der Komponente können verschieden Modi der Komponente eingestellt werden. Das bilaterale Alphabet kann über die Texteingabe (Geheimtextalphabet) durch ein Trennzeichen bestimmt werden." />
+    </replacements>
+<!--en-->
+    <title lang="en">Use of the <i>Bacon</i> cipher</title>
+    <summary lang="en">Easy encryption and decryption with the<i>Bacon cipher</i>.</summary>
+    <description lang="en">This template shows a simple encoding and decoding process using the Bacon cipher. The process maps letters to a code of two characters. This code can then be embedded in texts, for example.</description>
+    <keywords lang="en">Bacon, Cipher, simple</keywords>
+    <replacements lang="en">
+        <replacement key="$Plaintext$" value="Plaintext" />
+        <replacement key="$Alphabet$" value="Alphabet" />
+        <replacement key="$encipheredPlaintext$" value="Decrypted plain text"/>
+        <replacement key="$Ciphertext$" value="Ciphertext"/>
+        <replacement key="$CipherAlphabet$" value="Ciphertext alphabet"/>
+        <replacement key="$memo$" value="This template demonstrates how the Bacon cipher works. The component was developed after the model of the ACA (American Cipher association) and supports the encryption and decryption of different texts by means of a bilateral alphabet. Different modes of the component can be set via the component settings. The bilateral alphabet can be determined via the text input (ciphertext alphabet) by a separator character." />
+    </replacements>
+<!--zh-ch-->
+    <title lang="zh">使用 <i>Bacon</i>密码</title>
+    <summary lang="zh">用<i>培根密码</i>轻松进行加密和解密。</summary>
+    <description lang="zh">这个模板显示了一个使用培根密码的简单编码和解码过程。该过程将字母映射为两个字符的代码。然后这个代码可以被嵌入文本中，例如。</description>
+    <keywords lang="zh">培根，密码，简单</keywords>
+    <replacements lang="zh">
+        <replacement key="$Plaintext$" value="纯文本" />
+        <replacement key="$Alphabet$" value="字母表" />
+        <replacement key="$encipheredPlaintext$" value="解密后的纯文本"/>
+        <replacement key="$Ciphertext$" value="密码文本"/>
+        <replacement key="$CipherAlphabet$" value="密文字母表"/>
+        <replacement key="$memo$" value="这个模板展示了培根密码的功能。该组件是按照ACA（美国密码协会）的模式开发的，支持通过双边字母对不同文本进行加密和解密。组件的不同模式可以在组件设置中设定。双边字母表可以通过文本输入（密文字母表）由分离器确定。" />
+    </replacements>
+<!--ru-->
+    <title lang="ru">Использование шифра <i>Bacon</i></title>
+    <summary lang="ru">Легкое шифрование и дешифрование с помощью шифра<i>Bacon</i>.</summary>
+    <description lang="ru">Этот шаблон показывает простой процесс кодирования и декодирования с использованием шифра Бэкона. Этот процесс сопоставляет буквы с кодом из двух символов. Затем этот код может быть внедрен, например, в текст.</description>
+    <keywords lang="ru">Бекон, шифр, простота</keywords>
+    <replacements lang="ru">
+        <replacement key="$Plaintext$" value="Обычный текст" />
+        <replacement key="$Alphabet$" value="Алфавит" />
+        <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст"/>
+        <replacement key="$Ciphertext$" value="Шифротекст"/>
+        <replacement key="$CipherAlphabet$" value="Алфавит шифротекста"/>
+        <replacement key="$memo$" value="Этот шаблон демонстрирует функциональность шифра Bacon. Компонент был разработан по образцу ACA (American Cipher association) и поддерживает шифрование и дешифрование различных текстов с помощью двустороннего алфавита. Различные режимы работы компонента могут быть установлены через настройки компонента. Двусторонний алфавит может быть определен через текстовый вход (алфавит шифротекста) с помощью разделителя." />
+    </replacements>
+</sample>

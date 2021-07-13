@@ -157,12 +157,9 @@ namespace CrypTool.TextInput
             }
             set
             {
-                if (Fonts[value] != _font)
+                if (manualFontSettings && value < Fonts.Count && Fonts[value] != _font)
                 {
-                    if (manualFontSettings)
-                    {
-                        _font = Fonts[value];    
-                    }                    
+                    _font = Fonts[value];
                     OnPropertyChanged("Font");
                 }
             }

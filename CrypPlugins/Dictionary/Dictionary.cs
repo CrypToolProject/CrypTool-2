@@ -184,19 +184,23 @@ namespace Dictionary
                     Stopwatch stopWatch = new Stopwatch();
                     stopWatch.Start();
 
-                    FileStream fs = file.DataFile.OpenRead();
-                    StreamReader sr;
-                    if (file.TextEncoding == null)
-                        sr = new StreamReader(fs);
-                    else
-                        sr = new StreamReader(fs, file.TextEncoding);
-
-                    List<string> list = new List<string>();
-                    while (!sr.EndOfStream)
+                    using(FileStream fs = file.DataFile.OpenRead())
                     {
-                        list.Add(sr.ReadLine());
+                        if (file.TextEncoding == null)
+                        {
+                            using (var sr = new StreamReader(fs))
+                            {
+                                dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                            }
+                        }
+                        else
+                        {
+                            using (var sr = new StreamReader(fs, file.TextEncoding))
+                            {
+                                dicValues.Add(file, sr.ReadToEnd().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                            }
+                        }
                     }
-                    dicValues.Add(file, list.ToArray());
 
                     stopWatch.Stop();
                     // This log msg is shown on init after first using this plugin, even if event subscription

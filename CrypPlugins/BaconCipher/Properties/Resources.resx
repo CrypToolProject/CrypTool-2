@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="BaconCipher" xml:space="preserve">
+        <value>Baconian cipher</value>
+    </data>
+	<data name="BaconTooltip" xml:space="preserve">
+		<value>A steganography method by Francis Bacon.</value>
+	</data>
+    <data name="FirstSet" xml:space="preserve">
+        <value>ABCDEFGHIJKLM</value>
+    </data>
+    <data name="SecondSet" xml:space="preserve">
+        <value>NOPQRSTUVWXYZ</value>
+    </data>
+	<data name="InputTextCaption" xml:space="preserve">
+		<value>Text input</value>
+	</data>
+	<data name="InputTextTooltip" xml:space="preserve">
+		<value>Input a string to be processed by the Bacon cipher</value>
+	</data>
+	<data name="InputAlphabetCaption" xml:space="preserve">
+		<value>External alphabet</value>
+	</data>
+	<data name="InputAlphabetTooltip" xml:space="preserve">
+		<value>External input for the alphabet used by the Bacon cipher.</value>
+	</data>
+	<data name="OutputTextCaption" xml:space="preserve">
+		<value>Text output</value>
+	</data>
+	<data name="OutputTextTooltip" xml:space="preserve">
+		<value>Text after being processed by the Bacon cipher.</value>
+	</data>
+	<data name="IgnoringChar" xml:space="preserve">
+		<value>Ignoring char "{0}" since it is not part of the alphabet.</value>
+	</data>
+    <data name="CodeNotMappable" xml:space="preserve">
+        <value>Could not fully decode since '{tempCode}' is not part of the mapping.</value>
+    </data>
+	<data name="CharCouldNotBeDecoded" xml:space="preserve">
+		<value>Could not decode character "{0}".</value>
+	</data>
+	<data name="CharAlreadyMapped" xml:space="preserve">
+		<value>The alphabet contains duplicate chars.</value>
+	</data>
+    <data name="Alphabet" xml:space="preserve">
+        <value>Alphabet</value>
+    </data>
+	<data name="AlphabetTooltip" xml:space="preserve">
+		<value>Alphabet used by the Bacon cipher.</value>
+	</data>
+	<data name="Mode" xml:space="preserve">
+		<value>Algorithm mode</value>
+	</data>
+    <data name="ModeTooltip" xml:space="preserve">
+        <value>Determine whether the component is in encrypt or decrypt mode.</value>
+    </data>
+	<data name="DynamicCodeLengthCaption" xml:space="preserve">
+		<value>Dynamic code word length</value>
+	</data>
+	<data name="DynamicCodeLengthToolTip" xml:space="preserve">
+		<value>If dynamic code word length is enabled, only as many bits are used for encoding as are necessary for the size of the alphabet. Otherwise, a fixed size of 5 bits is used for encoding.</value>
+	</data>
+	<data name="OutputModeCaption" xml:space="preserve">
+		<value>Output mode</value>
+	</data>
+	<data name="OutputModeToolTip" xml:space="preserve">
+		<value>Specifies how the generated code should be output.</value>
+	</data>
+	<data name="ModeEncrypt" xml:space="preserve">
+		<value>Encipher</value>
+	</data>
+	<data name="ModeDecrypt" xml:space="preserve">
+		<value>Decipher</value>
+	</data>
+	<data name="DefaultAlphabet" xml:space="preserve">
+		<value>abcdefghijklmnopqrstuvwxyz</value>
+	</data>
+	<data name="OutputModeBinary" xml:space="preserve">
+		<value>Binary</value>
+	</data>
+	<data name="OutputModeRandomChar" xml:space="preserve">
+		<value>Random chars</value>
+	</data>
+	<data name="AlphabetTooLong" xml:space="preserve">
+		<value>The given alphabet is too long. Please activate dynamic length or provide a alphabet with less than 32 chars.</value>
+	</data>
+	<data name="CodeLengthCaption" xml:space="preserve">
+		<value>Code word length</value>
+	</data>
+	<data name="CodeLengthToolTip" xml:space="preserve">
+		<value>Determines the static length of the codeword.</value>
+	</data>
+	<data name="CodeLength" xml:space="preserve">
+		<value>Length</value>
+	</data>
+	<data name="InputCipherCharsCaption" xml:space="preserve">
+		<value>Ciphertext alphabet</value>
+	</data>
+	<data name="InputCipherCharsTooltip" xml:space="preserve">
+		<value>External input for custom ciphertext alphabet.</value>
+	</data>
+	<data name="OutputModeExternalInput" xml:space="preserve">
+		<value>External ciphertext alphabet</value>
+	</data>
+	<data name="ErrorSplitCipherAlphabet" xml:space="preserve">
+		<value>Could not parse ciphertext alphabet input. Please use a seperator such as: "{0}". Stopping Execution!</value>
+	</data>
+</root>

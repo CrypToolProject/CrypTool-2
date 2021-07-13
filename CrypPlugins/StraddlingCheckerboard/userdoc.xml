@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+  <language culture="ru"/>
+  <language culture="zh-cn"/>
+
+  <introduction lang="en">
+    The term straddling checkerboard is a combination of the words spread and checkerboard. Straddling means that a single character is mapped onto one or more characters. The method is based on a table, which, like a chessboard, has been supplemented at the edge with unique designations for the individual columns or rows. The term straddling checkerboard refers only to the table shown in the visualisation. The name of the table also became established as the name for the procedure.
+  </introduction>
+
+  <introduction lang="de-DE">
+    Die Bezeichnung Straddling-Checkerboard setzt sich aus den englischen Wörtern für spreizen und Schachbrett zusammen. Spreizen bedeutet dabei, dass ein einzelnes Zeichen auf ein oder mehr Zeichen abgebildet wird. Das Verfahren basiert auf einer Tabelle, die, ähnlich wie ein Schachbrett, am Rand um eindeutige Bezeichnungen für die einzelnen Spalten bzw. Zeilen ergänzt wurde. Der Begriff Straddling-Checkerboard bezeichnet nur die in der Visualisierung dargestellte Tabelle. Die Bezeichnung der Tabelle etablierte sich auch als Name für das Verfahren.
+  </introduction>
+
+  <introduction lang="ru">
+    Термин "шашечная доска" представляет собой комбинацию слов "шашечная доска" и "шашка". Straddling означает, что один символ отображается на один или несколько символов. Метод основан на таблице, которая, подобно шахматной доске, дополнена по краям уникальными метками для отдельных столбцов или строк. Термин "шашечная доска" относится только к таблице, представленной в визуализации. Название таблицы также утвердилось в качестве названия процесса.
+  </introduction>
+
+  <introduction lang="zh-cn">
+    跨栏棋盘这个词是由跨栏和棋盘两个词组合而成。跨越是指单个字符被映射到一个或多个字符上。该方法以一张表格为基础，像棋盘一样，在边缘处为各列或各行补充了独特的标签。术语straddling checkerboard仅指可视化中代表的表格。该表的名称也确立了自己作为该进程的名称。
+  </introduction>
+
+  <usage lang="en">
+    Add the straddling checkerboard component to your workspace. Connect a data source to the input 'text input' and a 'text output' to the output 'text output'.<newline /><newline />
+
+    In order for the encryption or decryption to be carried out successfully, the content of the straddling checkerboard must be made available to the component via the 'Content' setting or via the external 'Content' input. In addition, the naming of the rows and columns must be provided for the construction of the straddling checkerboard. This can be done either via the setting 'Rows and Columns' or via the input 'Rows and Columns'.<newline /><newline />
+
+    Also, select in the settings whether you want to decrypt or encrypt the data from the data source by selecting the Mode setting accordingly.<newline /><newline />
+
+    You can then start the execution of the workspace and the text from the data source will be processed by the straddling checkerboard component.
+  </usage>
+
+  <usage lang="de-DE">
+    Fügen Sie die Straddling-Checkerboard-Komponente Ihrem Arbeitsbereich hinzu. Verbinden Sie eine Datenquelle mit dem Eingang 'Texteingabe' und eine 'Text-Ausgabe' mit dem Ausgang 'Textausgabe'.<newline /><newline />
+
+    Damit die Ver- bzw. Entschlüsselung erfolgreich ausgeführt werden kann, muss der Inhalt des Straddling-Checkerboards über die Einstellung 'Inhalt' oder über den externen Eingang 'Inhalt' für die Komponente bereitgestellt werden. Außerdem muss für den Aufbau des Straddling-Checkerboards die Benennung der Zeilen und Spalten bereitgestellt werden. Dies kann wahlweise über die Einstellung 'Zeilen und Spalten' oder über den Eingang 'Zeilen und Spalten' erfolgen.<newline /><newline />
+
+    Wählen Sie außerdem in den Einstellungen aus, ob Sie die Daten aus der Datenquelle entschlüsseln oder verschlüsseln wollen, indem Sie die Einstellung Modus entsprechend wählen.<newline /><newline />
+
+    Anschließend können Sie die Ausführung des Arbeitsbereichs starten und der Text der Datenquelle wird durch die Straddling-Checkerboard-Komponente verarbeitet.
+  </usage>
+
+  <usage lang="ru">
+    Добавьте компонент "шашечная доска" в рабочее пространство. Подключите источник данных к входу 'text input' и 'text output' к выходу 'text output'.<newline /><newline />
+
+    Для успешного выполнения шифрования или дешифрования содержимое шашки должно быть предоставлено компоненту через настройку 'Content' или через внешний вход 'Content'. Кроме того, для построения шашечной доски необходимо указать названия строк и столбцов. Это можно сделать либо через настройку 'Rows and Columns', либо через вход 'Rows and Columns'.<newline /><newline />
+
+    Кроме того, в настройках выберите, хотите ли вы расшифровать или зашифровать данные из источника данных, выбрав соответствующую настройку Mode.<newline /><newline />
+
+    Затем вы можете запустить выполнение рабочей области, и текст источника данных будет обрабатываться компонентом "шашечки".
+  </usage>
+
+  <usage lang="zh-cn">
+    在你的工作区添加跨栏棋盘组件。将一个数据源连接到输入 "文本输入"，将一个 "文本输出 "连接到输出 "文本输出"。<newline /><newline />
+
+    为了使加密或解密成功运行，必须通过 "内容 "设置或通过外部 "内容 "输入向组件提供跨度棋盘的内容。此外，必须提供行和列的命名，以便建造跨度棋盘。这可以通过 "行和列 "设置或通过 "行和列 "输入来完成。<newline /><newline />
+
+    此外，在设置中，通过选择相应的模式设置，选择是否要从数据源解密或加密数据。<newline /><newline />
+
+    然后你可以开始执行工作区，数据源的文本将由跨栏棋盘组件处理。
+  </usage>
+  
+  <presentation lang="en">
+    The presentation component visualises the straddling checkerboard that is created by the given definition of rows, columns and content. The visualisation adapts during execution if the definition changes.
+  </presentation>
+  
+  <presentation lang="de-DE">
+    Die Präsentation der Komponente stellt visualisiert das Straddling-Checkerboard, dass durch die gegebene Definition der Zeilen, Spalten und des Inhalts erzeugt wird. Die Visualisierung passt sich während der Ausführung an, falls sich die Definition verändert.
+  </presentation>
+
+  <presentationn lang="ru">
+    Компонент презентации визуализирует шашечную доску, которая создается заданным определением строк, столбцов и содержимого. Визуализация адаптируется во время выполнения, если определение меняется.
+  </presentationn>
+
+  <presentation lang="zh-cn">
+    演示组件将由给定的行、列和内容的定义所创建的跨度棋盘可视化。在执行过程中，如果定义发生变化，可视化就会适应。
+  </presentation>
+  
+  <references>
+    <linkReference>
+      <link url="https://kryptografie.de/kryptografie/chiffre/straddling-checkerboard.htm" lang="de-DE"/>
+      <caption lang="de-DE">Erläuterung des Straddling-Checkerboard-Verfahrens mit Implementierung im Web.</caption>
+      <link url="https://kryptografie.de/kryptografie/chiffre/straddling-checkerboard.htm" lang="ru"/>
+      <caption lang="ru">Объяснение шашечного процесса с реализацией в Интернете.</caption>
+      <link url="https://kryptografie.de/kryptografie/chiffre/straddling-checkerboard.htm" lang="en"/>
+      <caption lang="en">Explanation of the straddling checkerboard process with implementation on the web.</caption>
+      <link url="https://kryptografie.de/kryptografie/chiffre/straddling-checkerboard.htm" lang="zh-cn"/>
+      <caption lang="zh-cn">解释跨越式棋盘的过程，并在网上实施。</caption>
+    </linkReference>
+    <linkReference>
+      <link url="https://www.wikiwand.com/en/Straddling_checkerboard" lang="de-DE"/>
+      <caption lang="de-DE">Weitere Informationen über das Straddling-Checkerboard.</caption>
+      <link url="https://www.wikiwand.com/en/Straddling_checkerboard" lang="ru"/>
+      <caption lang="ru">Дополнительная информация о шашечной доске Straddling Checkerboard.</caption>
+      <link url="https://www.wikiwand.com/en/Straddling_checkerboard" lang="en"/>
+      <caption lang="en">More information about the Straddling Checkerboard.</caption>
+      <link url="https://www.wikiwand.com/en/Straddling_checkerboard" lang="zh-cn"/>
+      <caption lang="zh-cn">更多关于跨度棋盘的信息。</caption>
+    </linkReference>
+  </references>
+</documentation>

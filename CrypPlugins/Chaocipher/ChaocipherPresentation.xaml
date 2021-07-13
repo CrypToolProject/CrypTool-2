@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="CrypTool.Chaocipher.ChaocipherPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:p="clr-namespace:CrypTool.Chaocipher.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="820" MinHeight="475" MinWidth="820">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="410"/>
+            <ColumnDefinition MinWidth="410" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="475" />
+        </Grid.RowDefinitions>
+        <Canvas Grid.Column="0" Grid.Row="0" Name="CanvasLeft" Background="CornflowerBlue" />
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <GroupBox Header="{x:Static p:Resources.AnimationControls}" Grid.Row="0">
+                <DockPanel HorizontalAlignment="Center">
+                    <Button Content="{x:Static p:Resources.Back}" Name="Back" Width="100" Height="24"
+                            IsEnabled="False" Click="Back_Click" />
+                    <Button Content="{x:Static p:Resources.Play}" Name="Play" Width="100" Height="24"
+                            Click="Play_Click" />
+                    <Button Content="{x:Static p:Resources.Forward}" Name="Forward" Width="100" Height="24"
+                            IsEnabled="False" Click="Forward_Click" />
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Header="{x:Static p:Resources.Steps}" VerticalContentAlignment="Stretch" Grid.Row="1">
+                <DataGrid Name="Steps" VerticalContentAlignment="Stretch" AllowDrop="False" CanUserSortColumns="False"
+                          CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False"
+                          IsReadOnly="True" />
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

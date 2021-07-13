@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sample>
+    <icon file="JosseCipherAnalyse.png" />
+    <relevantPlugins>
+        <plugin name="JosseCipher" />
+        <plugin name="JosseCipherAnalyzer" />
+        <plugin name="TextInput" />
+        <plugin name="TextOutput" />
+    </relevantPlugins>
+    <title lang="de">Benutzung der <i>Josse-Cipher-Analyse</i>-Komponente
+    </title>
+    <summary lang="de">Einfache Verwendung der <i>Josse-Cipher</i>-Analyse
+    </summary>
+    <description lang="de">Diese Vorlage zeigt das Brechen der Josse-Cipher wahlweise mittels Hillclimbing oder Simmulated Annealing. Dabei können die Verfahren detailiert angepasst werden, um ein besseres Ergebnis zu ermöglichen.</description>
+    <keywords lang="de">Josse Cipher, Französisch, Krieg, Kryptoanalyse, Hillclimbing, Simmulated Annealing</keywords>
+    <replacements lang="de">
+        <replacement key="$Plaintext$" value="Klartext" />
+        <replacement key="$CalculationSteps$" value="Rechenschritte" />
+        <replacement key="$Alphabet$" value="Alphabet" />
+        <replacement key="$key$" value="Schlüssel"/>
+        <replacement key="$Encipher$" value="Verschlüsselung"/>
+        <replacement key="$encipheredText$" value="Entschlüsselter Geheimtext"/>
+        <replacement key="$calculatedKey$" value="Berechneter Schlüssel" />
+        <replacement key="$memo$" value="Diese Komponente bietet eine Analyse für das Josse-Cipher-Verfahren. Dazu wird mittels Hillclimbing versucht, den Text zu entschlüsseln, der in der linken oberen Texteingabe angegeben wurde. Die Texteingabe mit dem Namen 'Schlüssel' wird nur zum Verschlüsseln verwendet. In der Textausgabe 'Berechneter Schlüssel' wird der berechnete Schlüssel des Hillclimbings angezeigt. Es kann vorkommen, dass bei diesem Verfahren ein Schlüssel berechnet wird, der zwar die korrekten Zeichen enthält, jedoch in der falschen Reihenfolge." />
+    </replacements>
+    <!--en-->
+    <title lang="en">Using the <i>Josse Cipher Analysis</i> Component
+    </title>
+    <summary lang="en">Easy use of <i>Josse Cipher</i> analysis.
+    </summary>
+    <description lang="en">This template shows the breaking of the Josse cipher using either Hillclimbing or Simmulated Annealing. The procedures can be adjusted in detail to enable a better result.</description>
+    <keywords lang="en">Josse Cipher, French, war, cryptanalysis, hillclimbing, simmulated annealing</keywords>
+    <replacements lang="en">
+        <replacement key="$Plaintext$" value="Plain text" />
+        <replacement key="$Alphabet$" value="Alphabet" />
+        <replacement key="$key$" value="Key"/>
+        <replacement key="$Encipher$" value="Encipher"/>
+        <replacement key="$encipheredText$" value="Decrypted ciphertext"/>
+        <replacement key="$calculatedKey$" value="Calculated key" />
+        <replacement key="$memo$" value="This component provides an analysis for the Josse cipher method. For this purpose, hillclimbing is used to try to decrypt the text specified in the upper left text input. The text input with the name 'Key' is only used for encrypting. In the text output 'Calculated key' the calculated key of hillclimbing is displayed. It can happen that this procedure calculates a key that contains the correct characters, but in the wrong order." />
+    </replacements>
+    <!-- zh-cn -->
+    <title lang="zh-cn">使用<i>Josse Cipher Analysis</i>组件
+    </title>
+    <summary lang="zh-cn">轻松使用<i>Josse Cipher</i>分析。
+    </summary>
+    <description lang="zh-cn">这个模板展示了使用Hillclimbing或Simmulated Annealing破解Josse密码的过程。这些程序可以在细节上进行调整以获得更好的结果。</description>
+    <keywords lang="zh-cn">乔塞密码，法国，战争，密码分析，爬坡法，模拟退火法</keywords>
+    <replacements lang="zh-cn">
+        <replacement key="$Plaintext$" value="纯文本" />
+        <replacement key="$Alphabet$" value="字母表" />
+        <replacement key="$key$" value="钥匙"/>
+        <replacement key="$Encipher$" value="密码"/>
+        <replacement key="$encipheredText$" value="解密后的密码文本"/>
+        <replacement key="$calculatedKey$" value="计算的关键" />
+        <replacement key="$memo$" value="该组件为Josse密码方法提供分析。为此，Hillclimbing被用来尝试解密左上方文本输入中指定的文本。名称为'密钥'的文本输入只用于加密。在文本输出'Calculated key'中，显示了Hillclimbing计算的密钥。可能发生的情况是，该程序计算的密钥包含正确的字符，但顺序不对。" />
+    </replacements>
+    <!-- ru -->
+    <title lang="ru">Использование компонента <i>Josse Cipher Analysis</i>
+    </title>
+    <summary lang="ru">Простое использование анализа <i>Josse Cipher</i>.
+    </summary>
+    <description lang="ru">Этот шаблон демонстрирует взлом шифра Жосса с помощью метода Hillclimbing или Simmulated Annealing. Процедуры могут быть детально скорректированы для достижения лучшего результата.</description>
+    <keywords lang="ru">Шифр Жосса, Франция, война, криптоанализ, hillclimbing, simmulated annealing</keywords>
+    <replacements lang="ru">
+        <replacement key="$Plaintext$" value="Обычный текст" />
+        <replacement key="$Alphabet$" value="Алфавит" />
+        <replacement key="$key$" value="Ключ"/>
+        <replacement key="$Encipher$" value="Шифр"/>
+        <replacement key="$encipheredText$" value="Расшифрованный шифротекст"/>
+        <replacement key="$calculatedKey$" value="Расчетный ключ" />
+        <replacement key="$memo$" value="Этот компонент предоставляет анализ для метода шифрования Жосса. Для этого используется метод hillclimbing для попытки расшифровать текст, указанный в верхнем левом текстовом входе. Текстовый вход с именем 'Key' используется только для шифрования. В текстовом выводе 'Вычисленный ключ' отображается вычисленный ключ hillclimbing. Может случиться так, что эта процедура вычислит ключ, содержащий правильные символы, но в неправильном порядке." />
+    </replacements>
+</sample>

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+  <language culture="ru"/>
+  <language culture="zh-cn"/>
+
+  <introduction lang="en">
+    Josses Cipher is a cipher invented by Major H. D. Josse (1852-1929). The method was developed in France for the Franco-Prussian War (1870-1871) and was to be used on the battlefields to transmit messages to commanders in a secure manner. The process was studied and described by Rémi Géraud-Stewart and David Naccache in 2020. <ref id="jossecipherpaper" />
+  </introduction>
+
+  <introduction lang="de-DE">
+    Josses Cipher ist eine Verschlüsselung, die von Major H. D. Josse (1852-1929) erfunden wurde. Das Verfahren wurde in Frankreich für den Deutsch-Französischen Krieg (1870-1871) entwickelt und sollte auf den Schlachtfeldern eingesetzt werden, um Nachrichten an die Befehlshaber gesichert zu übermitteln. Das Verfahren wurde von Rémi Géraud-Stewart und David Naccache im Jahr 2020 untersucht und beschrieben. <ref id="jossecipherpaper" />
+  </introduction>
+
+  <introduction lang="ru">
+    Шифр Джосса - это шифр, изобретенный майором Х. Д. Джоссом (1852-1929). Этот метод был разработан во Франции для франко-прусской войны (1870-1871 гг.) и предназначался для использования на полях сражений для безопасной передачи сообщений командирам. Эта процедура была изучена и описана Реми Жеро-Стюартом и Давидом Наккашем в 2020 году. <ref id="jossecipherpaper" />
+  </introduction>
+
+  <introduction lang="zh-cn">
+    乔塞密码是由H.D.乔塞少校（1852-1929）发明的一种密码。该方法是在法国为普法战争（1870-1871）开发的，目的是在战场上以安全的方式向指挥官传递信息。Rémi Géraud-Stewart和David Naccache在2020年研究并描述了该程序。<ref id="jossecipherpaper" />
+  </introduction>
+
+  <usage lang="en">
+    First, add the Josse Cipher component to your workspace. Next, connect a data source to the input 'text input' and a text output component to the output 'text output'. In the component settings, select a keyword that consists of the characters of the alphabet (note: the character 'w' is not part of the alphabet). If the keyword contains duplicate characters, the component will remove them from the second occurrence and issue a corresponding warning.<newline /><newline />
+
+    If you also need a list of the individual calculation steps, additionally connect a text output component with the output 'Calculation steps'. In the settings of the text output component, select the option 'Manual font setting' and choose a mono-space font so that the output is displayed correctly (example for mono-space fonts: Courir New, Consolas or Lucida Console).
+
+    Now start the workspace.
+  </usage>
+
+  <usage lang="de-DE">
+    Fügen Sie zunächste die Josse-Cipher-Komponete Ihrem Arbeitsbereich hinzu. Im nächsten Schritt Verbinden Sie eine Datenquelle mit dem Eingang 'Texteingabe' und eine Textausgabe-Komponete mit dem Ausgang 'Textausgabe'. Wählen Sie in den Einstellungen der Komponente ein Schlüsselwort, das aus den Zeichen des Alphabets besteht (Achtung: Das Zeichen 'w' ist nicht Teil des alphabets). Wenn das Schlüsselwort doppelte Buchstaben enthält, wird die Komponente diese ab dem zweiten Vorkommen entfernen und eine entsprechende Warnung ausgeben.<newline /><newline />
+
+    Wenn Sie außerdem eine Auflistung der einzelnen Rechenschritte benötigen, verbinden Sie zusätzlich eine Textausgabe-Komponete mit dem Ausgang 'Berechnungsschritte'. Wählen Sie in den Einstellungen der Textausgabe-Komponente die Option 'Manuelle Schrift-Einstellung' und wählen Sie eine Mono-Space-Schriftart aus, damit die Ausgabe korrekt angezeigt wird (Beispiel für Mono-Space-Schriftarten: Courir New, Consolas oder Lucida Console).
+
+    Starten Sie nun den Arbeitsbereich.
+  </usage>
+
+  <usage lang="ru">
+    Сначала добавьте компонент шифра Josse в рабочее пространство. На следующем этапе подключите источник данных к входу 'text input' и компонент вывода текста к выходу 'text output'. В настройках компонента выберите ключевое слово, состоящее из символов алфавита (примечание: символ 'w' не является частью алфавита). Если ключевое слово содержит дублирующиеся символы, компонент удалит их из второго вхождения и выдаст соответствующее предупреждение.<newline /><newline />
+
+    Если вам также необходим список отдельных шагов расчета, подключите дополнительный компонент текстового вывода к выводу 'Шаги расчета'. В настройках компонента вывода текста выберите опцию "Ручная установка шрифта" и выберите моноширинный шрифт, чтобы вывод отображался правильно (пример моноширинного шрифта: Courir New, Consolas или Lucida Console).
+
+    Теперь запустите рабочую область.
+  </usage>
+
+  <usage lang="zh-cn">
+    首先，将Josse Cipher组件添加到你的工作区。在下一步，将一个数据源连接到输入 "text input"，将一个文本输出组件连接到输出 "text output"。在组件设置中，选择一个由字母表中的字符组成的关键词（注意：字符'w'不属于字母表的一部分）。如果该关键词包含重复的字符，该组件将从第二次出现的字符中删除，并发出适当的警告。<newline /><newline />
+
+    如果你还需要一个单独的计算步骤的列表，请将一个额外的文本输出组件连接到 "计算步骤 "的输出。在文本输出组件的设置中，选择 "手动字体设置 "选项，并选择一种单空格字体，以便正确显示输出（单空格字体的例子：Courir New, Consolas 或 Lucida Console）。
+
+    现在启动工作区。
+  </usage>
+  
+  <presentation lang="en">
+    The presentation of the component shows in two tabs on the one hand the substitution table that is generated during the execution of the procedure and on the other hand the assignment of the individual letters to the respective digits.
+  </presentation>
+  
+  <presentation lang="de-DE">
+    Die Präsentation der Komponente zeigt in zwei Registerkarten zum Einen die Ersetzungstabelle, die während der Ausführung des Verfahrens erzeugt wird und zum Anderen die Zuordnung der einzelnen Buchstaben zu den jeweiligen Ziffern.
+  </presentation>
+
+  <presentation lang="ru">
+    Представление компонента показывает на двух вкладках, с одной стороны, таблицу замен, которая генерируется во время выполнения процедуры, а с другой - присвоение одиночных букв соответствующим цифрам.
+  </presentation>
+
+  <presentation lang="zh-cn">
+    该组件的演示在两个标签中显示，一方面是在执行程序过程中产生的替换表，另一方面是将单个字母分配给相应的数字。
+  </presentation>
+  
+  <references>
+    <linkReference id="jossecipherpaper">
+      <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="de-DE"/>
+      <caption lang="de-DE">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
+      <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="ru"/>
+      <caption lang="ru">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
+      <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="en"/>
+      <caption lang="en">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
+      <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="zh-cn"/>
+      <caption lang="zh-cn">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
+    </linkReference>
+    
+  </references>
+</documentation>

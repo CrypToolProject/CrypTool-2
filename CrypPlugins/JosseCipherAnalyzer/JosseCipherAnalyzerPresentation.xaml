@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="CrypTool.JosseCipherAnalyzer.JosseCipherAnalyzerPresentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    mc:Ignorable="d" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:CrypTool.JosseCipherAnalyzer.Properties"
+    xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+    d:DesignHeight="263">
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc LocalLabel}" ResultListCaption="{Loc TopTenLabel}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc StartLabel}" x:Name="StartTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc EndLabel}" x:Name="EndTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc ElapsedLabel}" x:Name="ElapsedTime" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc KeysLabel}" x:Name="Keys" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc KeyLengthLabel}" x:Name="CurrentAnalysedKeylength" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+
+        <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding}" ResultItemAction="HandleResultItemAction">
+            <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                <GridView>
+                    <GridViewColumn Header="#" DisplayMemberBinding="{Binding Path=Ranking}" Width="25">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.ScoreHeader}" DisplayMemberBinding="{Binding Path=Value}" Width="50">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.KeyHeader}" DisplayMemberBinding="{Binding Path=Key}" Width="170">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="{x:Static properties:Resources.PlaintextHeader}" DisplayMemberBinding="{Binding Path=Text}" Width="270">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+        </crypanalysisviewcontrol:CrypAnalysisResultListView>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+</UserControl>

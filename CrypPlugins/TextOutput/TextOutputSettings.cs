@@ -250,14 +250,12 @@ namespace TextOutput
             }
             set
             {
-                if (Fonts[value] != _font)
-                {
-                    if (manualFontSettings)
-                    {
-                        _font = Fonts[value];
-                    }
+                if (manualFontSettings && value < Fonts.Count && Fonts[value] != _font)
+                {                    
+                    _font = Fonts[value];                   
                     OnPropertyChanged("Font");
                 }
+                
             }
         }
 
