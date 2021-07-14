@@ -2,10 +2,10 @@
 
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
-  <language culture="en"/>
-  <language culture="de-DE"/>
-  <language culture="ru"/>
-  <language culture="zh-cn"/>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
 
   <introduction lang="en">
     Chaocipher is a cipher designed by John F. Byrne (1880-1960) in 1918. Throughout his life, Byrne tried to sell his cipher to the United States government, but because he kept the way it worked secret, he was unsuccessful. His family donated his papers to the National Cryptologic Museum in the US in 2010, making the process's workings publicly available for the first time. Byrne designed the process in the form of a machine, but his design was never realised.
@@ -15,7 +15,7 @@
     Chaocipher ist eine Verschlüsselung, die von John F. Byrne (1880-1960) im Jahre 1918 entworfen wurde. Sein ganzes Leben lang versuchte Byrne seine Verschlüsselung an die Regierung der USA zu verkaufen, da er aber die Funktionsweise geheim hielt, blieb dies ohne Erfolg. Seine Familie spendete 2010 seine Unterlagen an das National Cryptologic Museum in den USA, wodurch die Funktionsweise des Verfahrens erstmals öffentlich verfügbar wurde. Byrne entwarf das Verfahren in Form einer Maschine, jedoch wurde sein Entwurf nie realisiert.
   </introduction>
 
-  <introduction lang="zh-cn">
+  <introduction lang="zh-CN">
     Chaocipher是由John F. Byrne（1880-1960）在1918年设计的密码。在他的一生中，伯恩试图将他的密码卖给美国政府，但由于他对密码的工作方式保密，所以他没有成功。2010年，他的家人将他的论文捐给了美国国家密码博物馆，使该过程的工作原理首次公开。伯恩以机器的形式设计了这个过程，但他的设计从未实现。
   </introduction>
 
@@ -35,7 +35,7 @@
     Über die Einstellungen der Komponente kann festgelegt werden, wie schnell die Animation in der Präsentation der Komponete dargestellt wird.
   </usage>
 
-  <usage lang="zh-cn">
+  <usage lang="zh-CN">
     将Chaocipher组件添加到你的工作区。然后将一个数据源连接到输入'text input'。同时连接一个文本输出组件到输出'输出文本'。现在，通过输入 "钥匙 "或同名的设置来定义钥匙。该键由用于该程序的左右两片的内容组成。用'；'将各片之间分开。例如，可以使用以下密钥：'abcdefghijklmnopqrstuvwxyz;wmxrafzonhuqtligcyskbjevpd' 。注意，左右两片必须包含相同的字符，只有序列可以互换。
 
     组件的设置可以用来决定动画在组件的演示中的显示速度。
@@ -56,7 +56,7 @@
     Die Präsentation stellt auf der linken Seite die Scheiben dar, die für das Verfahren verwendet werden. Auf der rechten Seite werden im oberen Teil Steuerelemente für die Wiedergabe der Animation dargestellt. Darunter wird eine Liste mit der Beschreibung des aktuellen Schrittes angezeigt. Durch einen Doppelklick auf einen der Schritte springt die Animation zum angeklickten Schritt.
   </presentation>
 
-  <presentation lang="zh-cn">
+  <presentation lang="zh-CN">
     演示文稿在左侧显示用于该程序的切片。在右侧，播放动画的控件显示在上部。在这下面，会显示一个带有当前步骤描述的列表。通过双击其中一个步骤，动画会跳到被点击的步骤。
   </presentation>
 

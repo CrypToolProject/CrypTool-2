@@ -70,7 +70,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
         }
        
         private void GenerateComponentIndexPages()
-        {
+        {            
             foreach (var lang in AvailableLanguages)
             {
                 CultureInfo cultureInfo = CultureInfoHelper.GetCultureInfo(lang);

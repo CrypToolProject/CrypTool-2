@@ -95,10 +95,10 @@ Die VIC-Chiffre erstellt und verwendet intern Zufallszahlen, die in den Geheimte
 Шифр VIC внутренне создает и использует случайные числа, которые включены в зашифрованный текст. Следовательно, каждый раз, когда шаблон перезапускается, зашифрованный текст будет другим. "/>
   </replacements>
     <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'en' starts here:-->
+  <!--Language 'zh' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh-CN">VIC 密码</title>
-  <summary lang="en"><i>VIC</i> 密码的使用</summary>
+  <title lang="zh">VIC 密码</title>
+  <summary lang="zh"><i>VIC</i> 密码的使用</summary>
   <description lang="zh">
   VIC 密码是苏联间谍 Reino Häyhänen 使用的铅笔和纸密码，代号为“VICTOR”。 <换行 />
   在现代术语中，这种密码是一种跨式二分单字母替换，由修改后的双柱状转置进行超加密。该密码是虚无主义密码家族的一部分。

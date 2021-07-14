@@ -2,10 +2,10 @@
 
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
-  <language culture="en"/>
-  <language culture="de-DE"/>
-  <language culture="zh-cn"/>
-  <language culture="ru"/>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
 
   <introduction lang="en">
     The Bacon cipher is a stenographic method used by Francis Bacon (1561-1626). All letters of the alphabet are assigned five-digit combinations of a's and b's to have only two distinguishing features that must be distinguished. Thus, information can be hidden wherever two different states can be represented. <ref id="aca" />
@@ -19,7 +19,7 @@
     Шифр Бэкона - это стеганографический метод, разработанный Фрэнсисом Бэконом (1561-1626). Всем буквам алфавита присваиваются пятизначные комбинации "а" и "б", чтобы иметь только два отличительных признака, которые необходимо различать. Таким образом, информация может быть скрыта везде, где могут быть представлены два различных состояния. <ref id="aca" />
   </introduction>
 
-  <introduction lang="zh-cn">
+  <introduction lang="zh-CN">
     培根密码是弗朗西斯-培根（1561-1626）使用的一种速记方法。所有字母都被分配了五位数的a和b的组合，以便只有两个必须区分的特征。因此，只要能代表两种不同的状态，信息就可以被隐藏。<ref id="aca" />
   </introduction>
 
@@ -53,7 +53,7 @@
     Длина кодового слова: Определяет, какой длины должен быть код для символа открытого текста. Если длина кодового слова недостаточна для кодирования всех символов алфавита, выдается ошибка.<newline />
   </usage>
 
-  <usage lang="zh-cn">
+  <usage lang="zh-CN">
     首先将 "Bacon-Cipher "组件添加到你的工作区。然后用一个数据源连接输入 "Text input"，用一个 "Text output "组件连接输出 "Text output"。然后使用设置中的 "模式 "设置来指定所提供的文本应该被编码还是解码。<newline /><newline />
 
     为了使该组件支持培根方法的变化，该组件提供了一些设置，可以用来影响执行。<newline />
@@ -72,8 +72,8 @@
       <caption lang="ru">Baconian - American Cryptogram Association</caption>
       <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="en"/>
       <caption lang="en">Baconian - American Cryptogram Association</caption>
-      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="zh-cn"/>
-      <caption lang="zh-cn">Baconian - American Cryptogram Association</caption>
+      <link url="https://www.cryptogram.org/downloads/aca.info/ciphers/Baconian.pdf" lang="zh-CN"/>
+      <caption lang="zh-CN">Baconian - American Cryptogram Association</caption>
     </linkReference>
   </references>
 </documentation>

@@ -2,28 +2,28 @@
 
 <!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
 <documentation>
-  <language culture="en"/>
-  <language culture="de-DE"/>
-  <language culture="ru"/>
-  <language culture="zh-cn"/>
+  <language culture="en" />
+  <language culture="zh-CN" />
+  <language culture="ru" />
+  <language culture="de-DE" />
 
-  <introduction lang="en" xml:space="preserve">
+  <introduction lang="en">
     This component offers the possibility to break a ciphertext encrypted by the Josse cipher method by means of a hillclimbing or simulated annealing attack. <ref id="lasry" />
   </introduction>
 
-  <introduction lang="de-DE" xml:space="preserve">
+  <introduction lang="de-DE">
     Diese Komponente bietet die Möglichkeit einen Geheimtext, der durch das Josse-Cipher-Verfahren verschlüsselt wurde mittels eines Hillclimbing- oder Simulated-Annealing-Angriffs zu brechen. <ref id="lasry" />
   </introduction>
 
-  <introduction lang="zh-cn" xml:space="preserve">
+  <introduction lang="zh-CN">
     该组件提供了使用爬坡或模拟退火攻击破解由Josse密码加密的密码文本的能力。<ref id="lasry" />
   </introduction>
 
-  <introduction lang="ru" xml:space="preserve">
+  <introduction lang="ru">
     Этот компонент обеспечивает возможность взлома шифротекста, зашифрованного шифром Жосса, с помощью атаки типа hillclimbing или имитации отжига. <ref id="lasry" />
   </introduction>
 
-  <usage lang="en" xml:space="preserve">
+  <usage lang="en">
     Add the Josse Cipher Analysis component to your workspace. Connect the input 'Text input' to a data source. The data source must provide a ciphertext that has been encrypted by the Josse cipher. In the component's settings, you can select the Simulated-Annealing method under '' to break the encrypted text. Then select the '' and the '' key length according to the key of the cipher text. Then click Play to execute the workspace. It takes some time until a result is provided at the outputs of the component. In the meantime, you can call up the presentation of the component to follow the progress of the analysis there.<newline /><newline />
 
     When the analysis is complete, the results are made available at the outputs of the component.<newline /><newline />
@@ -39,7 +39,7 @@
     Alphabet: Specifies the plaintext or ciphertext alphabet. This setting can also be filled via the optional input.<newline />
   </usage>
 
-  <usage lang="zh-cn" xml:space="preserve">
+  <usage lang="zh-CN">
     将Josse Cipher Analysis组件添加到你的工作区。将输入 "text input "连接到一个数据源。数据源必须提供一个已经被Josse密码加密的密码文本。在该组件的设置中，你可以在""下选择模拟退火法来破解加密文本。然后根据密码文本的密钥选择''和''的密钥长度。然后点击播放来执行工作区。在组件的输出端提供一个结果需要一些时间。同时，你可以到组件的介绍中去看看分析的进展情况。<newline /><newline />
 
     当分析完成后，其结果在组件的输出处提供。<newline /><newline />
@@ -55,7 +55,7 @@
     字母表。指定明文或密文的字母。这个设置也可以通过可选的输入来填写。<newline />
   </usage>
 
-  <usage lang="de-DE" xml:space="preserve">
+  <usage lang="de-DE">
     Fügen Sie die Josse-Cipher-Analyse-Komponente Ihrem Arbeitsbereich hinzu. Verbinden Sie den Eingang 'Texteingabe' mit einer Datenquelle. Die Datenquelle muss einen Geheimtext bereitstellt, der durch die Josse-Cipher verschlüsselt wurde. In den Einstellungen der Komponente kann unter '' das Simulated-Annealing-Verfahren ausgewählt werden, um den verschlüsselten Text zu brechen. Anschließend wählen Sie die '' und die '' Schlüssellänge entsprechend des Schlüssels des Geheimtextes. Klicken Sie anschließend auf Play, um den Arbeitsbereich auszuführen. Es dauert einige Zeit, bis ein Ergebnis an den Ausgängen der Komponente bereit gestellt wird. In der Zwischenzeit können Sie die Präsentation der Komponente aufrufen, um dort den Verlauf der Analyse zu verfolgen.<newline /><newline />
 
     Wenn die Analyse abgeschlossen wurde, werden die Ergebnisse an den Ausgängen der Komponente bereitgestellt.<newline /><newline />
@@ -71,7 +71,7 @@
     Alphabet: Gibt das Klartext- bzw. Geheimtextalphabet an. Diese Einstellung kann auch über den optionalen Eingang befüllt werden.<newline />
   </usage>
 
-  <usage lang="ru" xml:space="preserve">
+  <usage lang="ru">
     Добавьте компонент Josse Cipher Analysis в свое рабочее пространство. Подключите вход 'text input' к источнику данных. Источник данных должен предоставить шифротекст, который был зашифрован шифром Josse. В настройках компонента вы можете выбрать метод Simulated-Annealing в разделе '' для взлома зашифрованного текста. Затем выберите длину ключа '' и '' в соответствии с ключом шифрованного текста. Затем нажмите кнопку play для выполнения рабочей области. Для получения результата на выходах компонента требуется некоторое время. Тем временем вы можете перейти к презентации компонента, чтобы посмотреть, как продвигается анализ.<newline /><newline />
 
     По завершении анализа результаты становятся доступны на выходе компонента.<newline /><newline />
@@ -87,19 +87,19 @@
     Алфавит: Указывает алфавит открытого текста или шифротекста. Эта настройка также может быть заполнена через дополнительный вход.<newline />
   </usage>
   
-  <presentation lang="en" xml:space="preserve">
+  <presentation lang="en">
     The presentation shows some metadata about the analysis in the upper third. In the lower part of the presentation, the key-cleartext combinations are displayed. By double-clicking on an entry in the list, the values are applied to the outputs.
   </presentation>
   
-  <presentation lang="de-DE" xml:space="preserve">
+  <presentation lang="de-DE">
     Die Präsentation zeigt im oberen Drittel einige Metadaten über die Analyse. Im unteren Teil der Präsentation werden die Schlüssel-Klartext-Kombinationen angezeigt. Durch einen Doppelklick auf einen Eintrag in der Liste werden die Werte an den Ausgängen übernommen.
   </presentation>
 
-  <presentation lang="zh-cn" xml:space="preserve">
+  <presentation lang="zh-CN">
     演示文稿在上部三分之一处显示了一些关于分析的元数据。演示文稿的下部显示了密钥/纯文本的组合。通过双击列表中的一个条目，这些值被应用于输出。
   </presentation>
 
-  <presentation lang="ru" xml:space="preserve">
+  <presentation lang="ru">
     В верхней трети презентации отображаются некоторые метаданные об анализе. В нижней части презентации показаны комбинации ключ/простой текст. При двойном щелчке на записи в списке значения применяются к выходам.
   </presentation>
   
@@ -108,7 +108,7 @@
       <caption lang="de-DE">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse"</caption>
       <caption lang="ru">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse"</caption>
       <caption lang="en">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse"</caption>
-      <caption lang="zh-cn">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse"</caption>
+      <caption lang="zh-CN">George Lasry. "Analysis of a Late 19th Century French Cipher Created by Major Josse"</caption>
     </linkReference>
   </references>
 </documentation>

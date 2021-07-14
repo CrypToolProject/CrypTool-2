@@ -599,27 +599,7 @@ namespace CrypTool.PluginBase.Utils
                 Frequencies[a] = adjustValue / Frequencies[a];
             }
         }
-    }
-
-    public class NormalizedUnigrams : Unigrams
-    {
-        public NormalizedUnigrams(string language, bool useSpaces = false) : base(language)
-        {
-
-        }
-
-        public override void LoadGZ(string filename)
-        {
-            base.LoadGZ(filename);
-            Normalize();
-        }
-
-        public void Normalize()
-        {
-
-        }
-    }
-
+    }  
 
     public class Bigrams : Grams
     {
@@ -1111,10 +1091,10 @@ namespace CrypTool.PluginBase.Utils
         public Hexagrams(string language, bool useSpaces = false) : base(language, useSpaces)
         {
         }
-
+        
         public override void LoadGZ(string filename)
         {
-            var file = new LanguageStatisticsFile(filename);
+            var file = new LanguageStatisticsFile(Path.Combine(DirectoryHelper.DirectoryLanguageStatistics, filename));
             Frequencies = (float[,,,,,])file.LoadFrequencies(6);
             Alphabet = file.Alphabet;
             MaxValue = float.MinValue;

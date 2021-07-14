@@ -15,7 +15,7 @@
     The SIGABA component implements both SIGABA models. Using the settings, one can exchange the type of model.
   </introduction>
 
-  <introduction lang="de">
+  <introduction lang="de-DE">
     SIGABA ist ein elektromechanisches Verschlüsselungsgerät, das von den USA während des Zweiten Weltkriegs und in den 1950er Jahren verwendet wurde.
     Auch bekannt als ECM Mark II, Converter M-134 sowie CSP-888/889, galt die SIGABA als sehr sicher und wurde für die strategische Kommunikation, wie zwischen Churchill und Roosevelt, eingesetzt.
     Der SIGABA verschlüsselt und entschlüsselt mit einem Satz von fünf Rotoren und implementiert unregelmäßiges Fortschalten, wofür zwei zusätzliche Sätze von Rotoren eine pseudozufällige Schrittfolge erzeugen.
@@ -68,7 +68,7 @@
     The last three parts (&quot;VYRIV,RCMLL,25137&quot; in the exampel) define the starting positions of the rotors.
   </usage>
 
-  <usage lang="de">
+  <usage lang="de-DE">
     Um die SIGABA-Komponente zu verwenden, werden nur eine Texteingabe-Komponente und eine Textausgabe-Komponente benötigt.
     Die Texteingabe wird für den Eingabetext verwendet und die Textausgabe wird für den Ausgabetext verwendet.
     Je nach Einstellung &quot;Aktion&quot; der Komponente wird der Text verschlüsselt oder entschlüsselt.

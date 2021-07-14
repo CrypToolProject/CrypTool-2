@@ -27,9 +27,6 @@ namespace OnlineDocumentationGenerator.Generators
             {
                 AvailableLanguages.Add(lang);
             }
-
-            //remove zh-CN for chinese since in the online help it is referred to as zh
-            AvailableLanguages.Remove("zh-CN");
         }
 
         /// <summary>

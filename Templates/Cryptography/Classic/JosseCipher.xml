@@ -1,72 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <sample>
-    <icon file="JosseCipher.png" />
-    <relevantPlugins>
-        <plugin name="JosseCipher" />
-        <plugin name="TextInput" />
-        <plugin name="TextOutput" />
-    </relevantPlugins>
-    <title lang="de">Benutzung des <i>Josse-Cipher</i>-Verfahrens</title>
-    <summary lang="de">Einfache Ver- und Entschlüsselung mit dem <i>Josse-Cipher</i>-Verfahren</summary>
-    <description lang="de">Diese Vorlage zeigt einen einfachen Ver- und Entschlüsselungsprozess mit Josses Cipher. Das Verfahren verfügt über eine Fehlerfortpflanzung und wurde erst im Jahre 2020 in einem wissenschaftlichen Artikel beschrieben, obwohl es im Jahre 1870 entwickelt wurde.</description>
-    <keywords lang="de">Josse Cipher, Französisch, Krieg</keywords>
-    <replacements lang="de">
-        <replacement key="$Plaintext$" value="Klartext" />
-        <replacement key="$CalculationSteps$" value="Rechenschritte" />
-        <replacement key="$Alphabet$" value="Alphabet" />
-        <replacement key="$key$" value="Schlüssel"/>
-        <replacement key="$keyDisplay$" value="gehim"/>
-        <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext"/>
-        <replacement key="$Ciphertext$" value="Geheimtext"/>
-        <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Josse-Cipher-Verfahrens. Dieses Verfahren wurde im 19. Jahrhundert entwickelt, jedoch wurde es erst im Jahre 2020 öffentlich zugänglich. Es wird zunächst ein Schlüsselwort in die erste Zeile geschrieben. Das Schlüsselwort kann über die Texteingabe (Schlüssel) oder die Einstellungen der Komponente angegeben werden. Anschließend werden die Zeichen des Alphabetes daruntergeschrieben. Diese können über die Texteingabe (Alphabet) oder die Einstellungen angegeben werden. Somit entsteht die Ersetzungstabelle, die in der Visualisierung der Komponente angezeigt wird." />
-    </replacements>
-<!--en-->
-    <title lang="en">Use of the<i>Josse Cipher</i> procedure</title>
-    <summary lang="en">Simple encryption and decryption with the<i>Josse Cipher</i> method</summary>
-    <description lang="en">This template shows a simple encryption and decryption process using Josses Cipher. The process has error propagation and was only described in a scientific article in 2020, although it was developed in 1870.</description>
-    <keywords lang="en">Josse Cipher, French, War</keywords>
-    <replacements lang="en">
-        <replacement key="$Plaintext$" value="Plaintext" />
-        <replacement key="$CalculationSteps$" value="Calculation steps" />
-        <replacement key="$Alphabet$" value="Alphabet" />
-        <replacement key="$key$" value="Key"/>
-        <replacement key="$keyDisplay$" value="secrt"/>
-        <replacement key="$encipheredPlaintext$" value="Decrypted plain text"/>
-        <replacement key="$Ciphertext$" value="Ciphertext"/>
-        <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="This template demonstrates how the Josse Cipher process works. This method was developed in the 19th century, but it did not become publicly available until 2020. A keyword is first written in the first line. The keyword can be specified via the text input (key) or the component settings. Then the characters of the alphabet are written below it. These can be specified via the text input (alphabet) or the settings. This creates the substitution table that is displayed in the visualization of the component." />
-    </replacements>
-<!--zh-ch-->
-    <title lang="zh">使用 <i>Josse代码</i> 程序</title>
-    <summary lang="zh">用 <i>Josse代码</i> 方法进行简单加密和解密</summary>
-    <description lang="zh">这个模板展示了一个使用乔斯密码的简单加密和解密过程。这个过程有误差传播，在2020年的一篇科学文章中才被描述，尽管它是在1870年开发的。</description>
-    <keywords lang="zh">约瑟法典, 法国, 战争​</keywords>
-    <replacements lang="zh">
-        <replacement key="$Plaintext$" value="纯文本" />
-        <replacement key="$CalculationSteps$" value="计算步骤" />
-        <replacement key="$Alphabet$" value="字母表" />
-        <replacement key="$key$" value="钥匙"/>
-        <replacement key="$keyDisplay$" value="secrt"/>
-        <replacement key="$encipheredPlaintext$" value="解密后的纯文本"/>
-        <replacement key="$Ciphertext$" value="密码文本"/>
-        <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="这个模板展示了Josse Cipher的工作过程。这种方法是在19世纪开发的，但直到2020年才公开使用。一个关键词首先写在第一行。关键字可以通过文本输入（键）或组件设置来指定。然后将字母表中的字符写在下面。这些可以通过文本输入（字母）或设置来指定。这将创建显示在组件的可视化中的替换表。" />
-    </replacements>
-<!--ru-->
-    <title lang="ru">Использование процедуры <i>код Жосса</i></title>
-    <summary lang="ru">Простое шифрование и дешифрование с помощью метода <i>кода Жосса</i></summary>
-    <description lang="ru">В этом шаблоне показан простой процесс шифрования и дешифрования с использованием шифра Жосса. Этот процесс имеет распространение ошибок и был описан в научной статье только в 2020 году, хотя разработан он был в 1870 году.</description>
-    <keywords lang="ru">Кодекс Жосса, Франция, война</keywords>
-    <replacements lang="ru">
-        <replacement key="$Plaintext$" value="Обычный текст" />
-        <replacement key="$CalculationSteps$" value="Этапы расчета" />
-        <replacement key="$Alphabet$" value="Алфавит" />
-        <replacement key="$key$" value="Ключ"/>
-        <replacement key="$keyDisplay$" value="secrt"/>
-        <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст"/>
-        <replacement key="$Ciphertext$" value="Шифротекст"/>
-        <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс Josse Cipher. Этот метод был разработан в 19 веке, но стал общедоступным только в 2020 году. Ключевое слово сначала записывается в первой строке. Ключевое слово может быть задано через текстовый ввод (клавиша) или в настройках компонента. Затем под ним пишутся символы алфавита. Их можно задать с помощью текстового ввода (алфавит) или в настройках. Это создает таблицу замены, которая отображается в визуализации компонента." />
-    </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: JosseCipher.xml-->
+  <!--Last edited: 2021.07.14-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Benutzung des Josse-Cipher-Verfahrens</title>
+  <summary lang="de">Einfache Ver- und Entschlüsselung mit dem <i>Josse-Cipher</i>-Verfahren</summary>
+  <description lang="de">Diese Vorlage zeigt einen einfachen Ver- und Entschlüsselungsprozess mit Josses Cipher. Das Verfahren verfügt über eine Fehlerfortpflanzung und wurde erst im Jahre 2020 in einem wissenschaftlichen Artikel beschrieben, obwohl es im Jahre 1870 entwickelt wurde.</description>
+  <keywords lang="de">Josse Cipher, Französisch, Krieg</keywords>
+  <replacements lang="de">
+    <replacement key="$Plaintext$" value="Klartext" />
+    <replacement key="$CalculationSteps$" value="Rechenschritte" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$key$" value="Schlüssel" />
+    <replacement key="$keyDisplay$" value="gehim" />
+    <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext" />
+    <replacement key="$Ciphertext$" value="Geheimtext" />
+    <replacement key="$example$" value="cryptool" />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Josse-Cipher-Verfahrens. Dieses Verfahren wurde im 19. Jahrhundert entwickelt, jedoch wurde es erst im Jahre 2020 öffentlich zugänglich. Es wird zunächst ein Schlüsselwort in die erste Zeile geschrieben. Das Schlüsselwort kann über die Texteingabe (Schlüssel) oder die Einstellungen der Komponente angegeben werden. Anschließend werden die Zeichen des Alphabetes daruntergeschrieben. Diese können über die Texteingabe (Alphabet) oder die Einstellungen angegeben werden. Somit entsteht die Ersetzungstabelle, die in der Visualisierung der Komponente angezeigt wird." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Use of theJosse Cipher procedure</title>
+  <summary lang="en">Simple encryption and decryption with the<i>Josse Cipher</i> method</summary>
+  <description lang="en">This template shows a simple encryption and decryption process using Josses Cipher. The process has error propagation and was only described in a scientific article in 2020, although it was developed in 1870.</description>
+  <keywords>Josse Cipher, French, War</keywords>
+  <replacements lang="en">
+    <replacement key="$Plaintext$" value="Plaintext" />
+    <replacement key="$CalculationSteps$" value="Calculation steps" />
+    <replacement key="$Alphabet$" value="Alphabet" />
+    <replacement key="$key$" value="Key" />
+    <replacement key="$keyDisplay$" value="secrt" />
+    <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
+    <replacement key="$Ciphertext$" value="Ciphertext" />
+    <replacement key="$example$" value="cryptool" />
+    <replacement key="$memo$" value="This template demonstrates how the Josse Cipher process works. This method was developed in the 19th century, but it did not become publicly available until 2020. A keyword is first written in the first line. The keyword can be specified via the text input (key) or the component settings. Then the characters of the alphabet are written below it. These can be specified via the text input (alphabet) or the settings. This creates the substitution table that is displayed in the visualization of the component." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'zh' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="zh">使用 Josse代码 程序</title>
+  <summary lang="zh">用 <i>Josse代码</i> 方法进行简单加密和解密</summary>
+  <description lang="zh">这个模板展示了一个使用乔斯密码的简单加密和解密过程。这个过程有误差传播，在2020年的一篇科学文章中才被描述，尽管它是在1870年开发的。</description>
+  <keywords lang="zh">约瑟法典, 法国, 战争​</keywords>
+  <replacements lang="zh">
+    <replacement key="$Plaintext$" value="纯文本" />
+    <replacement key="$CalculationSteps$" value="计算步骤" />
+    <replacement key="$Alphabet$" value="字母表" />
+    <replacement key="$key$" value="钥匙" />
+    <replacement key="$keyDisplay$" value="secrt" />
+    <replacement key="$encipheredPlaintext$" value="解密后的纯文本" />
+    <replacement key="$Ciphertext$" value="密码文本" />
+    <replacement key="$example$" value="cryptool" />
+    <replacement key="$memo$" value="这个模板展示了Josse Cipher的工作过程。这种方法是在19世纪开发的，但直到2020年才公开使用。一个关键词首先写在第一行。关键字可以通过文本输入（键）或组件设置来指定。然后将字母表中的字符写在下面。这些可以通过文本输入（字母）或设置来指定。这将创建显示在组件的可视化中的替换表。" />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'ru' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="ru">Использование процедуры код Жосса</title>
+  <summary lang="ru">Простое шифрование и дешифрование с помощью метода <i>кода Жосса</i></summary>
+  <description lang="ru">В этом шаблоне показан простой процесс шифрования и дешифрования с использованием шифра Жосса. Этот процесс имеет распространение ошибок и был описан в научной статье только в 2020 году, хотя разработан он был в 1870 году.</description>
+  <keywords lang="ru">Кодекс Жосса, Франция, война</keywords>
+  <replacements lang="ru">
+    <replacement key="$Plaintext$" value="Обычный текст" />
+    <replacement key="$CalculationSteps$" value="Этапы расчета" />
+    <replacement key="$Alphabet$" value="Алфавит" />
+    <replacement key="$key$" value="Ключ" />
+    <replacement key="$keyDisplay$" value="secrt" />
+    <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст" />
+    <replacement key="$Ciphertext$" value="Шифротекст" />
+    <replacement key="$example$" value="cryptool" />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс Josse Cipher. Этот метод был разработан в 19 веке, но стал общедоступным только в 2020 году. Ключевое слово сначала записывается в первой строке. Ключевое слово может быть задано через текстовый ввод (клавиша) или в настройках компонента. Затем под ним пишутся символы алфавита. Их можно задать с помощью текстового ввода (алфавит) или в настройках. Это создает таблицу замены, которая отображается в визуализации компонента." />
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="JosseCipher.png" />
+  <relevantPlugins>
+    <plugin name="JosseCipher" />
+  </relevantPlugins>
 </sample>
