@@ -9,10 +9,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="de">Benutzung der Josse-Cipher-Analyse-Komponente
     </title>
-  <summary lang="de">Einfache Verwendung der <i>Josse-Cipher</i>-Analyse
-    </summary>
+  <summary lang="de">Einfache Verwendung der <i>Josse-Cipher</i>-Analyse</summary>
   <description lang="de">Diese Vorlage zeigt das Brechen der Josse-Cipher wahlweise mittels Hillclimbing oder Simmulated Annealing. Dabei können die Verfahren detailiert angepasst werden, um ein besseres Ergebnis zu ermöglichen.</description>
-  <keywords lang="de">Josse Cipher, Französisch, Krieg, Kryptoanalyse, Hillclimbing, Simmulated Annealing</keywords>
+  <keywords lang="de">Josse Cipher, Französisch, Krieg, Kryptoanalyse, Hillclimbing, Simulated Annealing</keywords>
   <replacements lang="de">
     <replacement key="$Plaintext$" value="Klartext" />
     <replacement key="$CalculationSteps$" value="Rechenschritte" />
@@ -28,10 +27,9 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="en">Using the Josse Cipher Analysis Component
     </title>
-  <summary lang="en">Easy use of <i>Josse Cipher</i> analysis.
-    </summary>
+  <summary lang="en">Easy use of <i>Josse Cipher</i> analysis</summary>
   <description lang="en">This template shows the breaking of the Josse cipher using either Hillclimbing or Simmulated Annealing. The procedures can be adjusted in detail to enable a better result.</description>
-  <keywords>Josse Cipher, French, war, cryptanalysis, hillclimbing, simmulated annealing</keywords>
+  <keywords>Josse Cipher, French, war, cryptanalysis, hillclimbing, simulated annealing</keywords>
   <replacements lang="en">
     <replacement key="$Plaintext$" value="Plain text" />
     <replacement key="$Alphabet$" value="Alphabet" />
@@ -46,8 +44,7 @@
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="zh">使用Josse Cipher Analysis组件
     </title>
-  <summary lang="zh">轻松使用<i>Josse Cipher</i>分析。
-    </summary>
+  <summary lang="zh">轻松使用<i>Josse Cipher</i>分析</summary>
   <description lang="zh">这个模板展示了使用Hillclimbing或Simmulated Annealing破解Josse密码的过程。这些程序可以在细节上进行调整以获得更好的结果。</description>
   <keywords lang="zh">乔塞密码，法国，战争，密码分析，爬坡法，模拟退火法</keywords>
   <replacements lang="zh">
@@ -63,8 +60,7 @@
   <!--Language 'ru' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <title lang="ru">Использование компонента Josse Cipher Analysis</title>
-  <summary lang="ru">Простое использование анализа <i>Josse Cipher</i>.
-    </summary>
+  <summary lang="ru">Простое использование анализа <i>Josse Cipher</i></summary>
   <description lang="ru">Этот шаблон демонстрирует взлом шифра Жосса с помощью метода Hillclimbing или Simmulated Annealing. Процедуры могут быть детально скорректированы для достижения лучшего результата.</description>
   <keywords lang="ru">Шифр Жосса, Франция, война, криптоанализ, hillclimbing, simmulated annealing</keywords>
   <replacements lang="ru">
