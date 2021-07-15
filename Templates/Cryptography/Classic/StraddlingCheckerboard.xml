@@ -18,7 +18,8 @@
     <replacement key="$key$" value="Schlüssel" />
     <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext" />
     <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Straddling-Checkerboard Verfahrens. Abwandlungen dieses Verfahrens wurden in der Geschichte häufig verwendet. So wurde es zum Beispiel im Kalten Krieg und von Ché Guevara verwendet.         Die Zeilen- und Spaltenbenennung kann bei diesem Verfahren dynamisch angepasst werden. Die Substitution des Klartextzeichens in den Geheimtext entsteht aus der Bezeichnung Zeile+Spalte. Somit entsteht eine Spreizung, da ein Klartextzeichen entweder auf ein oder zwei Zahlen abgebildet wird. Typischerweise wurde bei diesem Verfahren ein Schlüsselwort in die erste Zeile geschriben. Dies wird hier durch den Alphabet-Permutator erreicht." />
+    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Straddling-Checkerboard Verfahrens. Abwandlungen dieses Verfahrens wurden in der Geschichte häufig verwendet. So wurde es zum Beispiel im Kalten Krieg und von Ché Guevara verwendet.\line 
+Die Zeilen- und Spaltenbenennung kann bei diesem Verfahren dynamisch angepasst werden. Die Substitution des Klartextzeichens in den Geheimtext entsteht aus der Bezeichnung Zeile+Spalte. Somit entsteht eine Spreizung, da ein Klartextzeichen entweder auf ein oder zwei Zahlen abgebildet wird. Typischerweise wurde bei diesem Verfahren ein Schlüsselwort in die erste Zeile geschriben. Dies wird hier durch den Alphabet-Permutator erreicht." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'en' starts here:-->
@@ -34,7 +35,8 @@
     <replacement key="$key$" value="Key" />
     <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
     <replacement key="$Ciphertext$" value="Ciphertext" />
-    <replacement key="$memo$" value="This template demonstrates how the straddling checkerboard process works. Variations of this method have been used frequently throughout history. For example, it was used during the Cold War and by Ché Guevara.         The row and column naming can be dynamically adjusted in this procedure. The substitution of the plaintext character into the ciphertext results from the line+column designation. Thus, a spread is created as a plaintext character is mapped to either one or two numbers. Typically, in this procedure, a keyword was written in the first line. This is achieved here by the alphabet permutator." />
+    <replacement key="$memo$" value="This template demonstrates how the straddling checkerboard process works. Variations of this method have been used frequently throughout history. For example, it was used during the Cold War and by Ché Guevara.\line
+The row and column naming can be dynamically adjusted in this procedure. The substitution of the plaintext character into the ciphertext results from the line+column designation. Thus, a spread is created as a plaintext character is mapped to either one or two numbers. Typically, in this procedure, a keyword was written in the first line. This is achieved here by the alphabet permutator." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -51,7 +53,8 @@
     <replacement key="$key$" value="钥匙" />
     <replacement key="$encipheredPlaintext$" value="解密后的纯文本" />
     <replacement key="$Ciphertext$" value="密码文本" />
-    <replacement key="$memo$" value="这个模板展示了跨度格子板的工作过程。这一程序的变种在历史上经常被使用。例如，它在冷战期间和切-格瓦拉使用过。         在这种方法中，行和列的命名可以动态地调整。将明文字符替换成密文是由行+列的指定产生的。因此，当一个明文字符被映射到一个或两个数字时，就产生了一个传播。通常，在这个程序中，在第一行写上一个关键词。这一点在这里是通过字母互换器实现的。" />
+    <replacement key="$memo$" value="这个模板展示了跨度格子板的工作过程。这一程序的变种在历史上经常被使用。例如，它在冷战期间和切-格瓦拉使用过。\line
+在这种方法中，行和列的命名可以动态地调整。将明文字符替换成密文是由行+列的指定产生的。因此，当一个明文字符被映射到一个或两个数字时，就产生了一个传播。通常，在这个程序中，在第一行写上一个关键词。这一点在这里是通过字母互换器实现的。" />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'ru' starts here:-->
@@ -67,7 +70,8 @@
     <replacement key="$key$" value="Ключ" />
     <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст" />
     <replacement key="$Ciphertext$" value="Шифротекст" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс расстановки шашек. Вариации этой процедуры часто использовались на протяжении всей истории человечества. Например, его использовали во время холодной войны и Че Гевара.         В этом методе именование строк и столбцов может быть динамически изменено. Подстановка символа открытого текста в шифротекст происходит на основе обозначения строка+столбец. Таким образом, при сопоставлении символа открытого текста с одним или двумя числами создается спред. Как правило, в этой процедуре ключевое слово записывалось в первой строке. Здесь это достигается с помощью алфавитного перестановочного устройства." />
+    <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс расстановки шашек. Вариации этой процедуры часто использовались на протяжении всей истории человечества. Например, его использовали во время холодной войны и Че Гевара.\line
+В этом методе именование строк и столбцов может быть динамически изменено. Подстановка символа открытого текста в шифротекст происходит на основе обозначения строка+столбец. Таким образом, при сопоставлении символа открытого текста с одним или двумя числами создается спред. Как правило, в этой процедуре ключевое слово записывалось в первой строке. Здесь это достигается с помощью алфавитного перестановочного устройства." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
@@ -76,5 +80,4 @@
   <relevantPlugins>
     <plugin name="StraddlingCheckerboard" />
   </relevantPlugins>
-</sample>lugins>
 </sample>
