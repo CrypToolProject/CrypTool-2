@@ -66,32 +66,11 @@
         <Label Content="{Loc Changelog}" Grid.Row="2" FontSize="16" Visibility="{Binding ElementName=ChangelogBorder, Path=Visibility}" />
         <Border Name="ChangelogBorder" Background="#FFC8DCF5" Grid.Row="3" Visibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="5" BorderBrush="LightSeaGreen" BorderThickness="2" Margin="5">
             <Grid>
-                <ListView Name="ChangelogList" ItemsSource="{Binding}" AlternationCount="2" ItemContainerStyle="{StaticResource alternatingWithBinding}" Background="#00000000" ScrollViewer.CanContentScroll="False">
-                    <ListView.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Click="MenuItem_Click_1" IsEnabled="True" Name="Copy" Header="{Loc Copy_this_row_to_clipboard}" />
-                            <MenuItem Click="MenuItem_Click_1" IsEnabled="True" Name="CopyAll" Header="{Loc Copy_everything_to_clipboard}" />
-                        </ContextMenu>
-                    </ListView.ContextMenu>
-                    <ListView.View>
-                        <GridView AllowsColumnReorder="False">
-                            <GridViewColumn Header="{Loc Date}" DisplayMemberBinding="{Binding Path=PublishingDate}"></GridViewColumn>
-                            <GridViewColumn Header="{Loc Title}" DisplayMemberBinding="{Binding Path=Title}"></GridViewColumn>
-                            <GridViewColumn Header="{Loc Message}">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <HtmlTextBlock:HtmlTextBlock Html="{Binding Path=Message}" TextWrapping="Wrap"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <ScrollViewer Name="ChangelogTextViewer" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Name="ChangelogTextViewer" VerticalScrollBarVisibility="Auto">
                     <HtmlTextBlock:HtmlTextBlock Name="ChangelogText" TextWrapping="Wrap" Margin="5,0,5,0">
                         <HtmlTextBlock:HtmlTextBlock.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Click="MenuItem_Click_2" IsEnabled="True" Header="Copy" />
+                                <MenuItem Click="MenuItem_Click" IsEnabled="True" Header="Copy" />
                             </ContextMenu>
                         </HtmlTextBlock:HtmlTextBlock.ContextMenu>
                     </HtmlTextBlock:HtmlTextBlock>
