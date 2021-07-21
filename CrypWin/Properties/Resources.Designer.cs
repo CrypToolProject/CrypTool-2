@@ -336,7 +336,7 @@ namespace CrypTool.CrypWin.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Release Notes: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Release Notes ähnelt.
         /// </summary>
         internal static string Changelog {
             get {
@@ -363,7 +363,7 @@ namespace CrypTool.CrypWin.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Checking for updates... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Checking for updates ... ähnelt.
         /// </summary>
         internal static string Checking_for_updates___ {
             get {
@@ -716,7 +716,7 @@ namespace CrypTool.CrypWin.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Downloading update... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Downloading update ... ähnelt.
         /// </summary>
         internal static string Downloading_update___ {
             get {
@@ -725,7 +725,7 @@ namespace CrypTool.CrypWin.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Downloading update ({0})... ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Downloading update {0} ... ähnelt.
         /// </summary>
         internal static string Downloading_update___0_____ {
             get {

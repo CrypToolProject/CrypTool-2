@@ -125,13 +125,13 @@
     <value>Kein Update verfügbar</value>
   </data>
   <data name="Checking_for_updates___" xml:space="preserve">
-    <value>Suche nach Updates...</value>
+    <value>Suche nach Updates ...</value>
   </data>
   <data name="Update_available_" xml:space="preserve">
     <value>Updates verfügbar</value>
   </data>
   <data name="Downloading_update___" xml:space="preserve">
-    <value>Lade Update...</value>
+    <value>Lade Update ...</value>
   </data>
   <data name="Update_ready_to_install_" xml:space="preserve">
     <value>Update bereit zur Installation</value>
@@ -311,7 +311,7 @@
     <value>Update verfügbar: {0}</value>
   </data>
   <data name="Downloading_update___0_____" xml:space="preserve">
-    <value>Lade Update ({0})...</value>
+    <value>Lade Update {0} ...</value>
   </data>
   <data name="Restart_and_install_now" xml:space="preserve">
     <value>Jetzt neu starten und installieren...</value>
@@ -596,7 +596,7 @@
     <value>Steganografie</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-    <value>Release Notes:</value>
+    <value>Release Notes</value>
   </data>
   <data name="Can_t_get_unique_ID___0_" xml:space="preserve">
     <value>Kann eindeutige ID nicht feststellen: {0}</value>

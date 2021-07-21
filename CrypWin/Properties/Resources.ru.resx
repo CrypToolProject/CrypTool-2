@@ -125,7 +125,7 @@
     <value>Нет доступных обновлений</value>
   </data>
   <data name="Checking_for_updates___" xml:space="preserve">
-    <value>Проверка обновлений...</value>
+    <value>Проверка обновлений ...</value>
   </data>
   <data name="Update_available_" xml:space="preserve">
     <value>Доступно обновление</value>
@@ -308,7 +308,7 @@
     <value>Доступно обновление: {0}</value>
   </data>
   <data name="Downloading_update___0_____" xml:space="preserve">
-    <value>Загрузка обновления ({0}) ...</value>
+    <value>Загрузка обновления {0} ...</value>
   </data>
   <data name="Restart_and_install_now" xml:space="preserve">
     <value>Перезапустите и установите сейчас</value>
@@ -611,7 +611,7 @@
     <value>стеганография</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-    <value>Примечания к выпуску:</value>
+    <value>Примечания к выпуску</value>
   </data>
   <data name="Can_t_get_unique_ID___0_" xml:space="preserve">
     <value>Не удается получить уникальный идентификатор: {0}</value>

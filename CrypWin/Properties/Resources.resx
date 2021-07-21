@@ -125,13 +125,13 @@
     <value>No update available</value>
   </data>
   <data name="Checking_for_updates___" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>Checking for updates ...</value>
   </data>
   <data name="Update_available_" xml:space="preserve">
     <value>Update available</value>
   </data>
   <data name="Downloading_update___" xml:space="preserve">
-    <value>Downloading update...</value>
+    <value>Downloading update ...</value>
   </data>
   <data name="Update_ready_to_install_" xml:space="preserve">
     <value>Update ready to install</value>
@@ -308,7 +308,7 @@
     <value>Update available: {0}</value>
   </data>
   <data name="Downloading_update___0_____" xml:space="preserve">
-    <value>Downloading update ({0})...</value>
+    <value>Downloading update {0} ...</value>
   </data>
   <data name="Restart_and_install_now" xml:space="preserve">
     <value>Restart and install now</value>
@@ -614,7 +614,7 @@
     <value>Steganography</value>
   </data>
   <data name="Changelog" xml:space="preserve">
-    <value>Release Notes:</value>
+    <value>Release Notes</value>
   </data>
   <data name="Can_t_get_unique_ID___0_" xml:space="preserve">
     <value>Can't get unique ID: {0}</value>
