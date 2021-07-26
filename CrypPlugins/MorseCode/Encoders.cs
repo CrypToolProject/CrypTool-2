@@ -18,7 +18,6 @@ using CrypTool.PluginBase.Miscellaneous;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -28,12 +27,12 @@ namespace MorseCode
     public abstract class MorseEncoder
     {
         /*
-         * 
             The length of a dot is 1 time unit.
             A dash is 3 time units.
             The space between symbols (dots and dashes) of the same letter is 1 time unit.
             The space between letters is 3 time units.
             The space between words is 7 time units.         
+            Found at: https://www.codebug.org.uk/learn/step/541/morse-code-timing-rules/
          */
         const int DIT_TIME = 1;
         const int DAH_TIME = 3;
