@@ -156,4 +156,22 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Кодирует текст в код Морзе или декодирует код Морзе в текст</value>
   </data>
+  <data name="SoundOutputCaption" xml:space="preserve">
+    <value>Вывод звука</value>
+  </data>
+  <data name="SoundOutputTooltip" xml:space="preserve">
+    <value>Здесь выводятся сгенерированные звуковые образцы</value>
+  </data>
+  <data name="TickDurationCaption" xml:space="preserve">
+    <value>Продолжительность тика</value>
+  </data>
+  <data name="TickDurationTooltip" xml:space="preserve">
+    <value>Время «галочки» в миллисекундах</value>
+  </data>
+  <data name="VolumeCaption" xml:space="preserve">
+    <value>Объем</value>
+  </data>
+  <data name="VolumeTooltip" xml:space="preserve">
+    <value>Громкость сгенерированного звука</value>
+  </data>
 </root>

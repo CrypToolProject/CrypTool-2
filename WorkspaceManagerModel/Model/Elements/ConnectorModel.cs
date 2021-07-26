@@ -235,9 +235,13 @@ namespace WorkspaceManager.Model
                     {
                         property = sender.GetType().GetProperty(args.PropertyName);
                     }
-                    object data = property.GetValue(sender, null);
-                                     
-                    LastData = data;
+                    object data = property.GetValue(sender, null);                    
+                    if(data == null)
+                    {
+                        return;
+                    }
+
+                    LastData =  data;
 
                     List<ConnectionModel> outputConnections = OutputConnections;
                     foreach (ConnectionModel connectionModel in outputConnections)

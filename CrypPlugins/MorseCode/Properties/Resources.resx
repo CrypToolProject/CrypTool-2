@@ -156,4 +156,22 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>Encodes a text to Morse code or decodes a Morse code to text</value>
   </data>
+  <data name="SoundOutputCaption" xml:space="preserve">
+    <value>Sound output</value>
+  </data>
+  <data name="SoundOutputTooltip" xml:space="preserve">
+    <value>Generated sound samples are outputted here</value>
+  </data>
+  <data name="TickDurationCaption" xml:space="preserve">
+    <value>Tick duration</value>
+  </data>
+  <data name="TickDurationTooltip" xml:space="preserve">
+    <value>The time of a "tick" in miliseconds</value>
+  </data>
+  <data name="VolumeCaption" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="VolumeTooltip" xml:space="preserve">
+    <value>Volume of the generated audio</value>
+  </data>
 </root>

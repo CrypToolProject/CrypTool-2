@@ -176,5 +176,59 @@ namespace MorseCode.Properties {
                 return ResourceManager.GetString("PluginTooltip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sound output ähnelt.
+        /// </summary>
+        internal static string SoundOutputCaption {
+            get {
+                return ResourceManager.GetString("SoundOutputCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Generated sound samples are outputted here ähnelt.
+        /// </summary>
+        internal static string SoundOutputTooltip {
+            get {
+                return ResourceManager.GetString("SoundOutputTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tick duration ähnelt.
+        /// </summary>
+        internal static string TickDurationCaption {
+            get {
+                return ResourceManager.GetString("TickDurationCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The time of a &quot;tick&quot; in miliseconds ähnelt.
+        /// </summary>
+        internal static string TickDurationTooltip {
+            get {
+                return ResourceManager.GetString("TickDurationTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Volume ähnelt.
+        /// </summary>
+        internal static string VolumeCaption {
+            get {
+                return ResourceManager.GetString("VolumeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Volume of the generated audio ähnelt.
+        /// </summary>
+        internal static string VolumeTooltip {
+            get {
+                return ResourceManager.GetString("VolumeTooltip", resourceCulture);
+            }
+        }
     }
 }

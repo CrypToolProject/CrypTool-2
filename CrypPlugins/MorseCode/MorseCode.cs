@@ -26,8 +26,7 @@ namespace CrypTool.Plugins.MorseCode
     [PluginInfo("MorseCode.Properties.Resources", "PluginCaption", "PluginTooltip", "MorseCode/userdoc.xml", new[] { "MorseCode/icon.png" })]
     [ComponentCategory(ComponentCategory.ToolsCodes)]
     public class MorseCode : ICrypComponent
-    {
-   
+    {      
         /// <summary>
         /// Constructs our mapping and creates our MorseCode object
         /// </summary>
@@ -59,6 +58,14 @@ namespace CrypTool.Plugins.MorseCode
             set;
         }
 
+        [PropertyInfo(Direction.OutputData, "SoundOutputCaption", "SoundOutputTooltip")]
+        public byte[] SoundOutput
+        {
+            get;
+            set;            
+        }
+
+
         #endregion
 
         #region IPlugin Members
@@ -81,6 +88,7 @@ namespace CrypTool.Plugins.MorseCode
         /// </summary>
         public void PreExecution()
         {
+            SoundOutput = null;
             _stopped = false;
         }
 
@@ -132,11 +140,19 @@ namespace CrypTool.Plugins.MorseCode
                         OnPropertyChanged("OutputText");
                         break;
                     case MorseCodeSettings.ActionType.Play:
-                        morseEncoder.Play(InputText, _settings.Frequency, ref _stopped);
+                        OnPropertyChanged("SoundOutput");
+                        morseEncoder.OnWaveFileGenerated += MorseEncoder_OnPlayTone;
+                        morseEncoder.Play(InputText, _settings.Frequency, _settings.TickDuration, _settings.Volume, ref _stopped);                        
                         break;
                 }
             }
             ProgressChanged(1, 1);
+        }
+
+        private void MorseEncoder_OnPlayTone(object sender, WaveEventArgs toneEventArgs)
+        {
+            SoundOutput = toneEventArgs.WaveFile;
+            OnPropertyChanged("SoundOutput");
         }
 
         private void Encoder_OnPluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)

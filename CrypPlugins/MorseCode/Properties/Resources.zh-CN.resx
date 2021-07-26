@@ -156,4 +156,22 @@
   <data name="PluginTooltip" xml:space="preserve">
     <value>将文本编码为莫尔斯电码或将莫尔斯电码解码为文本</value>
   </data>
+  <data name="SoundOutputCaption" xml:space="preserve">
+    <value>声音输出</value>
+  </data>
+  <data name="SoundOutputTooltip" xml:space="preserve">
+    <value>生成的声音样本在此处输出</value>
+  </data>
+  <data name="TickDurationCaption" xml:space="preserve">
+    <value>滴答持续时间</value>
+  </data>
+  <data name="TickDurationTooltip" xml:space="preserve">
+    <value>以毫秒为单位的“滴答”时间</value>
+  </data>
+  <data name="VolumeCaption" xml:space="preserve">
+    <value>体积</value>
+  </data>
+  <data name="VolumeTooltip" xml:space="preserve">
+    <value>生成音频的音量</value>
+  </data>
 </root>

@@ -43,6 +43,8 @@ namespace CrypTool.Plugins.MorseCode
         private CodeType _codeType = CodeType.International_ITU;
         private ActionType _action;
         private int _frequency = 600;
+        private int _tickDuration = 50;
+        private double _volume = 1.0;
 
         #endregion
 
@@ -92,6 +94,34 @@ namespace CrypTool.Plugins.MorseCode
             }
         }
 
+        [TaskPane("TickDurationCaption", "TickDurationTooltip", null, 3, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 50, 250)]
+        public int TickDuration
+        {
+            get { return _tickDuration; }
+            set
+            {
+                if (value != _tickDuration)
+                {
+                    _tickDuration = value;
+                    OnPropertyChanged("TickDuration");
+                }
+            }
+        }
+
+        [TaskPane("VolumeCaption", "VolumeTooltop", null, 4, false, ControlType.Slider, 0, 1.0)]
+        public double Volume
+        {
+            get { return _volume; }
+            set
+            {
+                if (value != _volume)
+                {
+                    _volume = value;
+                    OnPropertyChanged("Volume");
+                }
+            }
+        }
+
         #endregion
 
         #region Events
@@ -100,12 +130,15 @@ namespace CrypTool.Plugins.MorseCode
         {
             if (Action == ActionType.Play)
             {
-                //only show frequency and volume settings for play-mode
                 showSettingsElement("Frequency");
+                showSettingsElement("TickDuration");
+                showSettingsElement("Volume");
             }
             else
             {
                 hideSettingsElement("Frequency");
+                hideSettingsElement("TickDuration");
+                hideSettingsElement("Volume");
             }
         }
 

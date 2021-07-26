@@ -27,14 +27,23 @@ namespace MorseCode
 {
     public abstract class MorseEncoder
     {
-        const int DIT_TIME = 100 / 2;
-        const int DAH_TIME = 300 / 2;
-        const int DIT_DAH_BREAK = 100 / 2;
-        const int LETTER_BREAK = 300 / 2;
-        const int WORD_BREAK = 700 / 2;
+        /*
+         * 
+            The length of a dot is 1 time unit.
+            A dash is 3 time units.
+            The space between symbols (dots and dashes) of the same letter is 1 time unit.
+            The space between letters is 3 time units.
+            The space between words is 7 time units.         
+         */
+        const int DIT_TIME = 1;
+        const int DAH_TIME = 3;
+        const int DIT_DAH_BREAK = 1;
+        const int LETTER_BREAK = 3;
+        const int WORD_BREAK = 7;
 
         protected readonly Dictionary<char, string> _mapping = new Dictionary<char, string>();
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
+        public event EventHandler<WaveEventArgs> OnWaveFileGenerated;
 
         public string Encode(string text)
         {
@@ -109,90 +118,82 @@ namespace MorseCode
                 ProgressChanged(((double)tokennumber) / tokens.Length, 1);
             }
             return builder.ToString();
-        }
+        }       
 
         /// <summary>
         /// Plays the given Morse Code
         /// </summary>
-        public void Play(string code, int frequency, ref bool stopped)
+        public void Play(string code, int frequency, int tickDuration, double volume, ref bool stopped)
         {
-            using (var toneStream = new MemoryStream())
+
+            var dit = new Tone();
+            dit.GenerateSound(volume * 32767, frequency, DIT_TIME * tickDuration);
+
+            var dah = new Tone();
+            dah.GenerateSound(volume * 32767, frequency, DAH_TIME * tickDuration);
+
+            var dit_dah_break = new Tone();
+            dit_dah_break.GenerateSound(0, 0, DIT_DAH_BREAK * tickDuration);
+
+            var letter_break = new Tone();
+            letter_break.GenerateSound(0, 0, LETTER_BREAK * tickDuration);
+
+            var word_break = new Tone();
+            word_break.GenerateSound(0, 0, WORD_BREAK * tickDuration);
+
+            double characterCounter = 0;
+            foreach (char c in code)
             {
-                using (var dataStream = new MemoryStream())
+                using (var toneStream = new MemoryStream())
                 {
-                    var dit = new Tone();
-                    dit.GenerateSound(128, frequency, DIT_TIME);
+                    //create a timespawn for waiting to play the next tone
+                    int waiting_time = 0;
 
-                    var dah = new Tone();
-                    dah.GenerateSound(128, frequency, DAH_TIME);
-
-                    var dit_dah_break = new Tone();
-                    dit_dah_break.GenerateSound(0, 0, DIT_DAH_BREAK);
-
-                    var letter_break = new Tone();
-                    letter_break.GenerateSound(0, 0, LETTER_BREAK);
-
-                    var word_break = new Tone();
-                    word_break.GenerateSound(0, 0, WORD_BREAK);
-
-                    var span = new TimeSpan();
-                    foreach (char c in code)
+                    if (c == '.')
                     {
-                        if (c == '.')
-                        {
-                            dit.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, DIT_TIME));
-                            dit_dah_break.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, DIT_DAH_BREAK));
-                        }
-                        else if (c == '-')
-                        {
-                            dah.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, DAH_TIME));
-                            dit_dah_break.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, DIT_DAH_BREAK));
-                        }
-                        else if (c == '/')
-                        {
-                            word_break.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, WORD_BREAK));
-                        }
-                        else if (c == ' ')
-                        {
-                            letter_break.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, LETTER_BREAK));
-                        }
-                        else if (c == '*')
-                        {
-                            //we add a double break for a *
-                            letter_break.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, LETTER_BREAK));
-                            letter_break.WriteToStream(toneStream);
-                            span = span.Add(new TimeSpan(0, 0, 0, 0, LETTER_BREAK));
-                        }
+                        dit.WriteToStream(toneStream);
+                        waiting_time += DIT_TIME * tickDuration;
+                        dit_dah_break.WriteToStream(toneStream);
+                        waiting_time += DIT_DAH_BREAK * tickDuration;
                     }
-
-                    var wave = new Wave();
-                    wave.DataChunk.Data = toneStream.ToArray();
-                    wave.DataChunk.DwLength = (uint)wave.DataChunk.Data.Length;
-                    wave.RiffHeader.ChunkSize = 36 + wave.DataChunk.DwLength - 8;
-                    wave.WriteToStream(dataStream);
-
-                    var soundPlayer = new SoundPlayer();
-                    soundPlayer.Stream = dataStream;
-                    dataStream.Seek(0, SeekOrigin.Begin);
-                    var end = DateTime.Now.Add(span);
-                    soundPlayer.Play();
-
-                    var start = DateTime.Now;
-                    while (DateTime.Now < end && !stopped)
+                    else if (c == '-')
                     {
-                        double percentage = (DateTime.Now.Ticks - start.Ticks) / (double)(end.Ticks - start.Ticks);
-                        ProgressChanged(percentage, 1);
-                        Thread.Sleep(5);
+                        dah.WriteToStream(toneStream);
+                        waiting_time += DAH_TIME * tickDuration;
+                        dit_dah_break.WriteToStream(toneStream);
+                        waiting_time += DIT_DAH_BREAK * tickDuration;
                     }
-                    soundPlayer.Stop();
-                    ProgressChanged(1, 1);
+                    else if (c == '/')
+                    {
+                        word_break.WriteToStream(toneStream);
+                        waiting_time += WORD_BREAK * tickDuration;
+                    }
+                    else if (c == ' ')
+                    {
+                        letter_break.WriteToStream(toneStream);
+                        waiting_time += LETTER_BREAK * tickDuration;
+                    }
+                    else if (c == '*')
+                    {
+                        //we add a double break for a *
+                        letter_break.WriteToStream(toneStream);
+                        waiting_time += LETTER_BREAK * tickDuration;
+                        letter_break.WriteToStream(toneStream);
+                        waiting_time += LETTER_BREAK * tickDuration;
+                    }
+                 
+                    OnWaveFileGenerated?.Invoke(this, new WaveEventArgs(toneStream.ToArray()));
+
+                    characterCounter++;
+                    double percentageProgress = characterCounter / code.Length;
+                    ProgressChanged(percentageProgress, 1);
+
+                    Thread.Sleep(waiting_time);
+
+                    if (stopped)
+                    {
+                        return;
+                    }
                 }
             }
         }
@@ -231,8 +232,20 @@ namespace MorseCode
         protected void ProgressChanged(double value, double max)
         {
             EventsHelper.ProgressChanged(OnPluginProgressChanged, null, new PluginProgressEventArgs(value, max));
+        }      
+
+        
+    }
+
+    public class WaveEventArgs : EventArgs
+    {
+        public byte[] WaveFile { get; private set; }
+        public WaveEventArgs(byte[] toneValue)
+        {
+            WaveFile = toneValue;
         }
     }
+
 
     public class InternationalMorseEncoder : MorseEncoder
     {

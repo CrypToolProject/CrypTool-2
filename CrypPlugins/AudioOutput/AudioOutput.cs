@@ -31,7 +31,7 @@ namespace CrypTool.Plugins.AudioOutput
         private BufferedWaveProvider provider;
         private WaveInEvent recorder = new WaveInEvent();
 
-        [PropertyInfo(Direction.InputData, "AudioInputCaption", "AudioInputTooltip")]
+        [PropertyInfo(Direction.InputData, "AudioInputCaption", "AudioInputTooltip", true)]
         public byte[] AudioInput
         {
             get;
@@ -43,9 +43,11 @@ namespace CrypTool.Plugins.AudioOutput
             player = new WaveOutEvent();
             provider = new BufferedWaveProvider(recorder.WaveFormat);
             player.DeviceNumber = settings.DeviceChoice;
+            provider.BufferDuration = new TimeSpan(0, 0, 0, 0, settings.BufferSize);
+            provider.DiscardOnBufferOverflow = true;
             player.Init(provider);
             player.Play();
-            provider.BufferDuration = new TimeSpan(0, 0, 0, 0, settings.BufferSize);
+            
         }
 
         public void PostExecution()
@@ -70,8 +72,8 @@ namespace CrypTool.Plugins.AudioOutput
         }
 
         public void Execute()
-        {
-            provider.AddSamples(AudioInput, 0, AudioInput.Length);            
+        {           
+            provider.AddSamples(AudioInput, 0, AudioInput.Length);
         }
      
 
@@ -101,5 +103,5 @@ namespace CrypTool.Plugins.AudioOutput
         {
             EventsHelper.GuiLogMessage(OnGuiLogNotificationOccured, this, new GuiLogEventArgs(p, this, notificationLevel));
         }
-    }
+    }   
 }
