@@ -15,9 +15,12 @@
 */
 using System;
 using System.ComponentModel;
+using System.Threading;
+using System.Windows.Threading;
 using CrypTool.PluginBase;
 using CrypTool.PluginBase.Miscellaneous;
 using NAudio.Wave;
+using OxyPlot;
 
 namespace CrypTool.Plugins.AudioOutput
 {
@@ -30,6 +33,12 @@ namespace CrypTool.Plugins.AudioOutput
         private AudioOutputSettings settings = new AudioOutputSettings();
         private BufferedWaveProvider provider;
         private WaveInEvent recorder = new WaveInEvent();
+        private AudioOutputPresentation _presentation = new AudioOutputPresentation();
+
+        private int _x = 0;
+        private const int STEPS = 8;
+        private const int MAX_POINTS = 8000;
+
 
         [PropertyInfo(Direction.InputData, "AudioInputCaption", "AudioInputTooltip", true)]
         public byte[] AudioInput
@@ -40,19 +49,34 @@ namespace CrypTool.Plugins.AudioOutput
 
         public void PreExecution()
         {
+            ClearPresentation();
             player = new WaveOutEvent();
             provider = new BufferedWaveProvider(recorder.WaveFormat);
             player.DeviceNumber = settings.DeviceChoice;
             provider.BufferDuration = new TimeSpan(0, 0, 0, 0, settings.BufferSize);
             provider.DiscardOnBufferOverflow = true;
             player.Init(provider);
-            player.Play();
-            
+            player.Play();            
         }
 
         public void PostExecution()
         {
             
+        }
+
+        private void ClearPresentation()
+        {
+            _x = 0;
+            _presentation.Points.Clear();
+            //initialize list with 0-value points
+            for (int i = -1 * STEPS * MAX_POINTS * 2; i < 0; i += STEPS * 2)
+            {
+            _presentation.Points.Add(new DataPoint(i, 0));
+            }
+            _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _presentation.Plot.InvalidatePlot(true);
+            }, null);            
         }
 
         public event StatusChangedEventHandler OnPluginStatusChanged;
@@ -68,12 +92,28 @@ namespace CrypTool.Plugins.AudioOutput
 
         public System.Windows.Controls.UserControl Presentation
         {
-            get { return null; }
+            get { return _presentation; }
         }
 
         public void Execute()
-        {           
+        {
             provider.AddSamples(AudioInput, 0, AudioInput.Length);
+            for (int i = 0; i < AudioInput.Length - 2; i += 2 * STEPS)
+            {
+                var value = BitConverter.ToInt16(AudioInput, i);
+
+                _presentation.Points.Add(new DataPoint(_x, value));
+                _x += STEPS;
+            }
+            if (_presentation.Points.Count > MAX_POINTS)
+            {
+                _presentation.Points.RemoveRange(0, _presentation.Points.Count - MAX_POINTS);
+            }
+
+            _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _presentation.Plot.InvalidatePlot(true);
+            }, null);
         }
      
 

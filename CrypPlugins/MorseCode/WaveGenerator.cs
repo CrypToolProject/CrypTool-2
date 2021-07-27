@@ -128,9 +128,9 @@ namespace MorseCode
                     percentageValue = 100 - percentageValue;
                     currentAmplitude = amplitude * (percentageValue / 10);
                 }                
-                var value = (int)(currentAmplitude * Math.Sin(2.0 * Math.PI * (((double)i) / 16000.0 * frequency)));
-                data[i + 1] = (byte)((value & 0xFF00) >> 8);
+                var value = (short)(currentAmplitude * Math.Sin(2.0 * Math.PI * (((double)i) / 16000.0 * frequency)));                    
                 data[i] = (byte)(value & 0x00FF);
+                data[i + 1] = (byte)((value & 0xFF00) >> 8);
             }            
         }
     }

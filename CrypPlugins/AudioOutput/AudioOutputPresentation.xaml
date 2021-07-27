@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="CrypTool.Plugins.AudioOutput.AudioOutputPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:oxy="http://oxyplot.org/wpf"
+             xmlns:local="clr-namespace:CrypTool.Plugins.AudioOutput"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <oxy:Plot Name="Plot">
+        <oxy:Plot.Axes>
+            <oxy:LinearAxis Position="Bottom" IsAxisVisible="False" />
+            <oxy:LinearAxis Position="Left" IsAxisVisible="False" />
+        </oxy:Plot.Axes>
+        <oxy:Plot.Series>
+            <oxy:LineSeries Name="LineSeries"  ItemsSource="{Binding Points}"/>
+        </oxy:Plot.Series>
+    </oxy:Plot>
+</UserControl>
