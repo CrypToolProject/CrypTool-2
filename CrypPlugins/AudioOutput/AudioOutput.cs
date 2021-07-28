@@ -114,6 +114,9 @@ namespace CrypTool.Plugins.AudioOutput
             {
                 _presentation.Plot.InvalidatePlot(true);
             }, null);
+
+            //Now block until sound has been played
+            Thread.Sleep(AudioInput.Length / 2 / 8); //we have 8 samples per millisecond
         }
      
 
