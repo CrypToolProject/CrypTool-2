@@ -19,7 +19,7 @@ namespace CrypTool.Plugins.Numbers.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -453,6 +453,24 @@ namespace CrypTool.Plugins.Numbers.Properties {
         internal static string ShowDigitsTooltip {
             get {
                 return ResourceManager.GetString("ShowDigitsTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Update needs both inputs ähnelt.
+        /// </summary>
+        internal static string UpdateOnlyAtBothInputsChangedCaption {
+            get {
+                return ResourceManager.GetString("UpdateOnlyAtBothInputsChangedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die If this flag is set, the output of the component is only renewed if both number inputs have been updated ähnelt.
+        /// </summary>
+        internal static string UpdateOnlyAtBothInputsChangedTooltip {
+            get {
+                return ResourceManager.GetString("UpdateOnlyAtBothInputsChangedTooltip", resourceCulture);
             }
         }
     }

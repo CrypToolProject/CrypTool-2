@@ -249,4 +249,10 @@
   <data name="ManualFontSettingsTooltip" xml:space="preserve">
     <value>Установите шрифт вручную.</value>
   </data>
+  <data name="UpdateOnlyAtBothInputsChangedCaption" xml:space="preserve">
+    <value>Обновление требует обоих входных данных</value>
+  </data>
+  <data name="UpdateOnlyAtBothInputsChangedTooltip" xml:space="preserve">
+    <value>Если этот флаг установлен, вывод компонента обновляется только в том случае, если были обновлены оба числовых ввода.</value>
+  </data>
 </root>

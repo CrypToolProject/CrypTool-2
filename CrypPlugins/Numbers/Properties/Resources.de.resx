@@ -249,4 +249,10 @@
   <data name="ManualFontSettingsTooltip" xml:space="preserve">
     <value>Stellt die Schrift manuell ein.</value>
   </data>
+  <data name="UpdateOnlyAtBothInputsChangedCaption" xml:space="preserve">
+    <value>Update braucht beide Eingaben</value>
+  </data>
+  <data name="UpdateOnlyAtBothInputsChangedTooltip" xml:space="preserve">
+    <value>Wenn dieses Flag gesetzt ist, wird die Ausgabe der Komponente nur dann erneuert, wenn beide Zahlen-Eingänge aktualisiert wurden</value>
+  </data>
 </root>

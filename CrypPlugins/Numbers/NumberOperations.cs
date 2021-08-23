@@ -62,6 +62,10 @@ namespace CrypTool.Plugins.Numbers
         private NumberSettings settings = new NumberSettings();
         private bool _running = false;
 
+        private bool input1Updated = false;
+        private bool input2Updated = false;
+
+
         #endregion
 
         #region event
@@ -97,6 +101,7 @@ namespace CrypTool.Plugins.Numbers
             set
             {
                 input1 = value;
+                input1Updated = true;
                 OnPropertyChanged("Input1");
             }
         }
@@ -112,6 +117,7 @@ namespace CrypTool.Plugins.Numbers
             set
             {
                 input2 = value;
+                input2Updated = true;
                 OnPropertyChanged("Input2");
             }
         }
@@ -176,6 +182,8 @@ namespace CrypTool.Plugins.Numbers
         {
             input1 = 0;
             input2 = 0;
+            input1Updated = false;
+            input2Updated = false;
             mod = 0;
         }
 
@@ -186,10 +194,17 @@ namespace CrypTool.Plugins.Numbers
         {
             BigInteger result = 0;
             _running = true;
-
+            
             //First checks if both inputs are set
             if (input1 != null)
             {
+                if (settings.UpdateOnlyAtBothInputsChanged && (!input1Updated || !input2Updated))
+                {
+                    return;
+                }
+                input1Updated = false;
+                input2Updated = false;
+
                 ProgressChanged(0.5, 1.0);
 
                 try

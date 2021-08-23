@@ -249,4 +249,10 @@
   <data name="ManualFontSettingsTooltip" xml:space="preserve">
     <value>手动设置字体。</value>
   </data>
+  <data name="UpdateOnlyAtBothInputsChangedCaption" xml:space="preserve">
+    <value>更新需要两个输入</value>
+  </data>
+  <data name="UpdateOnlyAtBothInputsChangedTooltip" xml:space="preserve">
+    <value>如果设置了此标志，则仅当两个数字输入都已更新时才会更新组件的输出</value>
+  </data>
 </root>

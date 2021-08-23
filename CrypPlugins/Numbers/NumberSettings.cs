@@ -50,11 +50,12 @@ namespace CrypTool.Plugins.Numbers
         #region private variables
 
         private NumberOperation operat;
+        private bool updateOnlyAtBothInputsChanged = false;
 
         #endregion
 
         #region taskpane
-      
+
         [TaskPane("OperatCaption", "OperatTooltip", null, 1, false, ControlType.ComboBox, new string[] { 
             "OperatList1", 
             "OperatList2", 
@@ -90,6 +91,20 @@ namespace CrypTool.Plugins.Numbers
                     OnPropertyChanged("Operat");
 
                     changeToCorrectIcon(operat);
+                }
+            }
+        }
+
+        [TaskPane("UpdateOnlyAtBothInputsChangedCaption", "UpdateOnlyAtBothInputsChangedTooltip", null, 2, false, ControlType.CheckBox, "", null)]
+        public bool UpdateOnlyAtBothInputsChanged
+        {
+            get { return updateOnlyAtBothInputsChanged; }
+            set
+            {
+                if (value != updateOnlyAtBothInputsChanged)
+                {
+                    updateOnlyAtBothInputsChanged = value;
+                    OnPropertyChanged("UpdateOnlyAtBothInputsChanged");
                 }
             }
         }

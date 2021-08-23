@@ -249,4 +249,10 @@
   <data name="ManualFontSettingsTooltip" xml:space="preserve">
     <value>Set the font manually.</value>
   </data>
+  <data name="UpdateOnlyAtBothInputsChangedCaption" xml:space="preserve">
+    <value>Update needs both inputs</value>
+  </data>
+  <data name="UpdateOnlyAtBothInputsChangedTooltip" xml:space="preserve">
+    <value>If this flag is set, the output of the component is only renewed if both number inputs have been updated</value>
+  </data>
 </root>
