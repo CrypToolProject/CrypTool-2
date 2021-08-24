@@ -37,26 +37,26 @@ To compute the gematria sum, a table is used, which maps all letters to numbers.
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">Gematria</title>
+  <title lang="zh">数字</title>
   <summary lang="zh">显示如何计算给定文本的双数和</summary>
   <description lang="zh">此模板展示了如何计算给定文本（使用拉丁字母）的数字总和。</description>
-  <keywords>gematria、字母数字、代码、希伯来语</keywords>
+  <keywords>数字,字母数字,代码,希伯来语</keywords>
   <replacements lang="zh">
-	<replacement key="$Text$" value="Text" />
+	<replacement key="$Text$" value="文字" />
 	<replacement key="$String operations$" value="字符串操作" />
 	<replacement key="$Source alphabet$" value="源字母表（拉丁文）" />
-	<replacement key="$Destination alphabet$" value="目标字母表（gematria 数字）" />
-	<replacement key="$Substitution$" value="Substitution" />
-	<replacement key="$Converter$" value="Converter" />
-	<replacement key="$Single Gematria numbers$" value="Single gematria numbers" />
-	<replacement key="$Gate$" value="Gate" />
+	<replacement key="$Destination alphabet$" value="目标字母表（数字）" />
+	<replacement key="$Substitution$" value="替代" />
+	<replacement key="$Converter$" value="转换器" />
+	<replacement key="$Single Gematria numbers$" value="单数" />
+	<replacement key="$Gate$" value="门" />
 	<replacement key="$Array indexer$" value="数组索引器" />
-	<replacement key="$Length$" value="Length" />
-	<replacement key="$Comparators$" value="Comparators" />
+	<replacement key="$Length$" value="长度" />
+	<replacement key="$Comparators$" value="比较器" />
 	<replacement key="$Number operations$" value="数字操作" />
-	<replacement key="$Gematria sum$" value="Gematria sum" />
+	<replacement key="$Gematria sum$" value="数字总和" />
 	<replacement key="$Boolean input$" value="布尔输入" />
-	<replacement key="$memo$" value="{\b Gematria} 是一种字母数字代码，用于根据字母为名称、单词或短语分配数值。根据所使用的密码，单个单词可以产生多个值.\line
+	<replacement key="$memo$" value="{\b 数字} 是一种字母数字代码，用于根据字母为名称、单词或短语分配数值。根据所使用的密码，单个单词可以产生多个值.\line
 \line
 Gematria 是一种希伯来字母数字代码或密码，可能在圣经时代使用，后来被其他文化采用。它仍然广泛用于犹太文化。其他语言和文化中也使用了类似的系统：希腊人 isopsephy，以及后来源自或受希伯来数字、阿拉伯 abjad 数字和英语数字启发的系统。 \line
 \line
@@ -72,20 +72,20 @@ Gematria 是一种希伯来字母数字代码或密码，可能在圣经时代�
   <description lang = "ru"> Этот шаблон показывает, как можно вычислить сумму гематрии заданного текста (с использованием латинских букв). </description>
   <keywords> гематрия, буквенно-цифровой, код, иврит </keywords>
 <replacements lang = "ru">
-	<replacement key = "$ Text $" value = "Text" />
-	<replacement ключа = "$String operations$" value = "Строковые операции" />
+	<replacement key = "$Text$" value = "Текст" />
+	<replacement key = "$String operations$" value = "Строковые операции" />
 	<replacement key = "$Source alphabet$" value = "Исходный алфавит (латиница)" />
 	<replacement key = "$Destination alphabet$" value = "Целевой алфавит (числа гематрии)" />
-	<replacement key = "$Substitution$" value = "Substitution" />
-	<replacement key = "$Converter$" value = "Converter" />
-	<replacement key = "$Single gematria numbers$" value = "Single gematria numbers" />
-	<replacement key = "$Gate$" value = "Gate" />
-	<replacement key = "$Array indexer$" value = "Array indexer" />
-	<replacement key = "$Length$" value = "Length" />
-	<replacement key = "$Comparators$" value = "Comparators" />
-	<replacement key = "$Number operations$" value = "Number operations" />
-	<replacement key = "$Gematria sum$" value = "Gematria sum" />
-	<replacement key = "$Boolean input$" value = "Boolean input" />
+	<replacement key = "$Substitution$" value = "Замена" />
+	<replacement key = "$Converter$" value = "Конвертер" />
+	<replacement key = "$Single gematria numbers$" value = "Одиночные числа гематрии" />
+	<replacement key = "$Gate$" value = "Ворота" />
+	<replacement key = "$Array indexer$" value = "Индексатор массива" />
+	<replacement key = "$Length$" value = "Длина" />
+	<replacement key = "$Comparators$" value = "Компараторы" />
+	<replacement key = "$Number operations$" value = "Числовые операции" />
+	<replacement key = "$Gematria sum$" value = "Сумма гематрии" />
+	<replacement key = "$Boolean input$" value = "Логический ввод" />
 	<replacement key = "$memo$" value = "{\b Гематрия} это буквенно-цифровой код присвоения числового значения имени, слову или фразе в соответствии с их буквами. Одно слово может давать несколько значений в зависимости от используемого шифра. \line
 \line
 Гематрия - это буквенно-цифровой код или шифр на иврите, который, вероятно, использовался в библейские времена, а затем был принят другими культурами. Он до сих пор широко используется в еврейской культуре. Подобные системы использовались и в других языках и культурах: греческая изопсефия, а позднее, производная от еврейской гематрии или вдохновленная ею, арабскими цифрами абджад и английской гематрией. \line
