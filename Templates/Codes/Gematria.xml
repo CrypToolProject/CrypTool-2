@@ -97,32 +97,32 @@ Gematria 是一种希伯来字母数字代码或密码，可能在圣经时代�
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'de' starts here:-->
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Gematria</title>
-  <summary lang="de">Zeigt, wie man eine Gematria-Summe eines Textes berechnet</summary>
-  <description lang="de">Diese Vorlage zeigt, wie die Gematria-Summe eines Textes (mit lateinischen Buchstaben) berechnet werden kann.</description>
-  <keywords>gematria, alphanumerisch, Code, Hebräisch</keywords>
+  <title lang="de">Gematrie</title>
+  <summary lang="de">Zeigt, wie man eine Gematrie-Summe eines Textes berechnet</summary>
+  <description lang="de">Diese Vorlage zeigt, wie die Gematrie-Summe eines Textes (mit lateinischen Buchstaben) berechnet werden kann.</description>
+  <keywords>Gematrie, alphanumerisch, Code, Hebräisch</keywords>
   <replacements lang="de">
 	<replacement key="$Text$" value="Text" />
 	<replacement key="$String operations$" value="Zeichenketten-Operationen" />
 	<replacement key="$Source alphabet$" value="Quellalphabet (Latein)" />
-	<replacement key="$Destination alphabet$" value="Zielalphabet (Gematria-Zahlen)" />
+	<replacement key="$Destination alphabet$" value="Zielalphabet (Gematrie-Zahlen)" />
 	<replacement key="$Substitution$" value="Substitution" />
 	<replacement key="$Converter$" value="Konvertierer" />
-	<replacement key="$Single gematria numbers$" value="Einzelne Gematria-Zahlen" />
+	<replacement key="$Single Gematrie numbers$" value="Einzelne Gematrie-Zahlen" />
 	<replacement key="$Gate$" value="Gate" />
 	<replacement key="$Array-Indexer$" value="Array-Indizierer" />
 	<replacement key="$Length$" value="Length" />
 	<replacement key="$Comparators$" value="Komparatoren" />
 	<replacement key="$Number operations$" value="Zahlenoperationen" />
-	<replacement key="$Gematria sum$" value="Gematria-Summe" />
+	<replacement key="$Gematrie sum$" value="Gematrie-Summe" />
 	<replacement key="$Boolean input$" value="Boolesche Eingabe" />
-	<replacement key="$memo$" value="{\b Gematria} ist ein alphanumerischer Code, der einem Namen, Wort oder Satz anhand seiner Buchstaben einen numerischen Wert zuweist. Ein einzelnes Wort kann je nach verwendeter Chiffre mehrere Werte ergeben .\line
+	<replacement key="$memo$" value="{\b Gematrie} ist ein alphanumerischer Code, der einem Namen, Wort oder Satz anhand seiner Buchstaben einen numerischen Wert zuweist. Ein einzelnes Wort kann je nach verwendeter Chiffre mehrere Werte ergeben .\line
 \line
-Gematria ist ein hebräischer alphanumerischer Code oder eine Chiffre, die wahrscheinlich in biblischen Zeiten verwendet und später von anderen Kulturen übernommen wurde. Es ist immer noch weit verbreitet in der jüdischen Kultur. Ähnliche Systeme wurden in anderen Sprachen und Kulturen verwendet: die Griechen Isopsephy, und später, abgeleitet oder inspiriert von hebräischer Gematria, arabischen Abjad-Zahlen und englische Gematria. \line
+Gematrie ist ein hebräischer alphanumerischer Code oder eine Chiffre, die wahrscheinlich in biblischen Zeiten verwendet und später von anderen Kulturen übernommen wurde. Es ist immer noch weit verbreitet in der jüdischen Kultur. Ähnliche Systeme wurden in anderen Sprachen und Kulturen verwendet: die Griechen Isopsephy, und später, abgeleitet oder inspiriert von hebräischer Gematrie, arabischen Abjad-Zahlen und englische Gematrie. \line
 \line
-Diese Vorlage berechnet die Gematria-Summe eines gegebenen Textes. Im hier gezeigten Beispiel wird der Satz {\b IOSEPHUS IMPERATOR REGNAT AMORE ET TIMORE} verwendet. Der Satz basiert auf dem Motto von Josep I., der von 1705 bis zu seinem Tod im Jahr 1711 Kaiser des Heiligen Römischen Reiches und Herrscher der österreichischen Habsburgermonarchie war.\line
+Diese Vorlage berechnet die Gematrie-Summe eines gegebenen Textes. Im hier gezeigten Beispiel wird der Satz {\b IOSEPHUS IMPERATOR REGNAT AMORE ET TIMORE} verwendet. Der Satz basiert auf dem Motto von Josep I., der von 1705 bis zu seinem Tod im Jahr 1711 Kaiser des Heiligen Römischen Reiches und Herrscher der österreichischen Habsburgermonarchie war.\line
 \line
-Um die Gematria-Summe zu berechnen, wird eine Tabelle verwendet, die alle Buchstaben auf Zahlen abbildet. Dann wird die Summe von all diesen Zahlen berechnet. Die Buchstaben A bis I werden auf 1 bis 9 abgebildet, die Buchstaben K bis S werden auf 10 bis 90 abgebildet und die Buchstaben T bis Z werden auf 100 bis 600 abgebildet. In dem hier genutzten lateinischen Alphabet gibt es keinen Buchstaben J und keinen Buchstaben V." />
+Um die Gematrie-Summe zu berechnen, wird eine Tabelle verwendet, die alle Buchstaben auf Zahlen abbildet. Dann wird die Summe von all diesen Zahlen berechnet. Die Buchstaben A bis I werden auf 1 bis 9 abgebildet, die Buchstaben K bis S werden auf 10 bis 90 abgebildet und die Buchstaben T bis Z werden auf 100 bis 600 abgebildet. In dem hier genutzten lateinischen Alphabet gibt es keinen Buchstaben J und keinen Buchstaben V." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->
