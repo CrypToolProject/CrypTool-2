@@ -1,74 +1,59 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: T9Code.xml-->
-  <!--Last edited: 2021.07.14-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'de' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Benutzung des T9-Codes</title>
-  <summary lang="de">Einfache Kodierung mit dem <i>T9-Code</i></summary>
-  <description lang="de">Diese Vorlage zeigt einen einfachen Kodierungsprozess mit dem T9-Code. Das T9-Code-Verfahren basiert auf der Eingabemethode, die bei älteren Mobiltelefonen zum Einsatz kam und es ermöglichte, durch einmaliges Drücken einer Taste Wörter einzugeben, anstatt durch mehrfaches Drücken die Buchstaben zu wechseln.</description>
-  <keywords lang="de">Handy, Mobile Code, </keywords>
-  <replacements lang="de">
-    <replacement key="$Dictionary$" value="Wörterbuch" />
-    <replacement key="$TextInput$" value="Texteingabe" />
-    <replacement key="$TextOutput$" value="Kodierter Text" />
-    <replacement key="$TextOutput2$" value="Dekodierter Text" />
-    <replacement key="$example$" value="Dies ist ein Text" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des T9-Code-Verfahrens. Geben Sie in das Feld Texteingabe (links oben) einen Text ein, den Sie kodieren möchten. In das Feld Dekodierter Text wird der dekodierte Text ausgegeben. Dieser Text kann von der Eingabe abweichen, da für das dekodieren Sprachstatistiken verwendet werden. In der Wörterbuch Komponente kann ausgewählt werden, welche Wörter zum Dekodieren verwendet werden sollen. Idealerweise stimmt die Sprache des Eingabetextes mit der im Wörterbuch gewählten Sprache überein. Die Sprachstatistiken können in den Einstellungen der T9-Code-Komponente angepasst werden." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'en' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Using the T9-code</title>
-  <summary lang="en">Easy encryption and decryption using the <i>T9-code</i></summary>
-  <description lang="en">This template shows a simple encryption and decryption process using the T9 code. The T9 code process is based on the input method used on older cell phones, which allowed words to be entered by pressing a key once instead of having to change letters by pressing it multiple times.</description>
-  <keywords>mobile phone, mobile code</keywords>
-  <replacements lang="en">
-    <replacement key="$Dictionary$" value="Dictionary" />
-    <replacement key="$TextInput$" value="Text input" />
-    <replacement key="$TextOutput$" value="Coded text" />
-    <replacement key="$TextOutput2$" value="Decoded text" />
-    <replacement key="$example$" value="This is a sample text" />
-    <replacement key="$memo$" value="This template demonstrates how the T9 code process works. In the Text Input field (top left), type a text that you want to encode. In the Decoded Text field, the decoded text is output. This text may differ from the input, because language statistics are used for decoding. In the dictionary component you can select which words should be used for decoding. Ideally, the language of the input text matches the language selected in the dictionary. The language statistics can be adjusted in the settings of the T9 code component." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">使用 T9代码</title>
-  <summary lang="zh">使用 <i> T9代码</i> 轻松进行加密和解密</summary>
-  <description lang="zh">这个模板显示了一个使用T9代码的简单加密和解密过程。T9编码过程是基于老式手机上使用的输入法，允许通过按一次键来输入单词，而不是通过多次按压来改变字母。</description>
-  <keywords lang="zh">移动电话，移动代码</keywords>
-  <replacements lang="zh">
-    <replacement key="$Dictionary$" value="词典" />
-    <replacement key="$TextInput$" value="文本输入" />
-    <replacement key="$TextOutput$" value="编码的文本" />
-    <replacement key="$TextOutput2$" value="расшифрованный текст" />
-    <replacement key="$example$" value="这是一个样本文本" />
-    <replacement key="$memo$" value="这个模板演示了T9编码过程是如何进行的。在文本输入字段（左上角），输入一个你想编码的文本。在解码文本字段中，输出解码后的文本。这个文本可能与输入的不同，因为语言统计被用于解码。在字典组件中，你可以选择哪些词应该被用于解码。理想情况下，输入文本的语言与字典中选择的语言相匹配。语言统计可以在T9代码组件的设置中调整。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Использование кода T9</title>
-  <summary lang="ru">Легкое шифрование и дешифрование с использованием <i>T9 кода</i></summary>
-  <description lang="ru">В этом шаблоне показан простой процесс шифрования и дешифрования с использованием кода T9. Процесс ввода кода T9 основан на методе ввода, используемом в старых мобильных телефонах, который позволял вводить слова, нажав клавишу один раз, а не менять буквы, нажимая ее несколько раз.</description>
-  <keywords lang="ru">мобильный телефон, мобильный код</keywords>
-  <replacements lang="ru">
-    <replacement key="$Dictionary$" value="Словарь" />
-    <replacement key="$TextInput$" value="Ввод текста" />
-    <replacement key="$TextOutput$" value="Кодированный текст" />
-    <replacement key="$TextOutput2$" value="расшифрованный текст" />
-    <replacement key="$example$" value="Это пример текста." />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс кодирования T9. В поле ввода текста (слева вверху) введите текст, который вы хотите закодировать. В поле Декодированный текст выводится декодированный текст. Этот текст может отличаться от входного, поскольку при декодировании используется языковая статистика. В компоненте словаря вы можете выбрать, какие слова должны использоваться для декодирования. В идеале язык входного текста должен совпадать с языком, выбранным в словаре. Языковая статистика может быть настроена в настройках компонента T9-кода." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--The general section starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <icon file="T9Code.png" />
-  <relevantPlugins>
-    <plugin name="T9Code" />
-  </relevantPlugins>
+    <icon file="T9Code.png" />
+    <relevantPlugins>
+        <plugin name="T9Code" />
+        <plugin name="TextInput" />
+        <plugin name="TextOutput" />
+    </relevantPlugins>
+    <title lang="de"><i>T9-Code</i></title>
+    <summary lang="de">Einfache Ver- und Entschlüsselung mit dem <i>T9-Code</i></summary>
+    <description lang="de">Diese Vorlage zeigt einen einfachen Ver- und Entschlüsselungsprozess mit dem T9-Code. Das T9-Code-Verfahren basiert auf der Eingabemethode, die bei älteren Mobiltelefonen zum Einsatz kam und es ermöglichte, durch einmaliges Drücken einer Taste Wörter einzugeben, anstatt durch mehrfaches Drücken die Buchstaben zu wechseln.</description>
+    <keywords lang="de">Handy, Mobile Code, </keywords>
+    <replacements lang="de">
+        <replacement key="$Dictionary$" value="Wörterbuch" />
+        <replacement key="$TextInput$" value="Texteingabe" />
+        <replacement key="$TextOutput$" value="Kodierter Text" />
+        <replacement key="$TextOutput2$" value="Dekodierter Text" />
+        <replacement key="$example$" value="Dies ist ein Text"/>
+        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des T9-Code-Verfahrens. Geben Sie in das Feld Texteingabe (links oben) einen Text ein, den Sie kodieren möchten. In das Feld Dekodierter Text wird der dekodierte Text ausgegeben. Dieser Text kann von der Eingabe abweichen, da für das dekodieren Sprachstatistiken verwendet werden. In der Wörterbuch Komponente kann ausgewählt werden, welche Wörter zum Dekodieren verwendet werden sollen. Idealerweise stimmt die Sprache des Eingabetextes mit der im Wörterbuch gewählten Sprache überein. Die Sprachstatistiken können in den Einstellungen der T9-Code-Komponente angepasst werden." />
+    </replacements>
+
+    <title lang="en"><i>T9 code</i></title>
+    <summary lang="en">Easy encryption and decryption using the <i>T9-code</i></summary>
+    <description lang="en">This template shows a simple encryption and decryption process using the T9 code. The T9 code process is based on the input method used on older cell phones, which allowed words to be entered by pressing a key once instead of having to change letters by pressing it multiple times.</description>
+    <keywords lang="en">mobile phone, mobile code,</keywords>
+    <replacements lang="en">
+        <replacement key="$Dictionary$" value="Dictionary" />
+        <replacement key="$TextInput$" value="Text input" />
+        <replacement key="$TextOutput$" value="Coded text" />
+        <replacement key="$TextOutput2$" value="Decoded text" />
+        <replacement key="$example$" value="This is a sample text"/>
+        <replacement key="$memo$" value="This template demonstrates how the T9 code process works. In the Text Input field (top left), type a text that you want to encode. In the Decoded Text field, the decoded text is output. This text may differ from the input, because language statistics are used for decoding. In the dictionary component you can select which words should be used for decoding. Ideally, the language of the input text matches the language selected in the dictionary. The language statistics can be adjusted in the settings of the T9 code component." />
+    </replacements>
+
+    <title lang="zh"><i>T9代码</i>。</title>
+    <summary lang="zh">使用 <i> T9代码</i>轻松进行加密和解密</summary>
+    <description lang="zh">这个模板显示了一个使用T9代码的简单加密和解密过程。T9编码过程是基于老式手机上使用的输入法，允许通过按一次键来输入单词，而不是通过多次按压来改变字母。</description>
+    <keywords lang="zh">移动电话，移动代码，</keywords>
+    <replacements lang="zh">
+        <replacement key="$Dictionary$" value="词典" />
+        <replacement key="$TextInput$" value="文本输入" />
+        <replacement key="$TextOutput$" value="编码的文本" />
+        <replacement key="$TextOutput2$" value="расшифрованный текст" />
+        <replacement key="$example$" value="这是一个样本文本"/>
+        <replacement key="$memo$" value="这个模板演示了T9编码过程是如何进行的。在文本输入字段（左上角），输入一个你想编码的文本。在解码文本字段中，输出解码后的文本。这个文本可能与输入的不同，因为语言统计被用于解码。在字典组件中，你可以选择哪些词应该被用于解码。理想情况下，输入文本的语言与字典中选择的语言相匹配。语言统计可以在T9代码组件的设置中调整。" />
+    </replacements>
+    <title lang="ru"><i>Т9 код</i></title>
+    <summary lang="ru">Легкое шифрование и дешифрование с использованием <i>T9 кода</i></summary>
+    <description lang="ru">В этом шаблоне показан простой процесс шифрования и дешифрования с использованием кода T9. Процесс ввода кода T9 основан на методе ввода, используемом в старых мобильных телефонах, который позволял вводить слова, нажав клавишу один раз, а не менять буквы, нажимая ее несколько раз.</description>
+    <keywords lang="ru">мобильный телефон, мобильный код</keywords>
+    <restituments lang="ru">
+        <replacement key="$Dictionary$" value="Словарь" />
+        <replacement key="$TextInput$" value="Ввод текста" />
+        <replacement key="$TextOutput$" value="Кодированный текст" />
+        <replacement key="$TextOutput2$" value="расшифрованный текст" />
+        <replacement key="$example$" value="Это пример текста."/>
+        <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс кодирования T9. В поле ввода текста (слева вверху) введите текст, который вы хотите закодировать. В поле Декодированный текст выводится декодированный текст. Этот текст может отличаться от входного, поскольку при декодировании используется языковая статистика. В компоненте словаря вы можете выбрать, какие слова должны использоваться для декодирования. В идеале язык входного текста должен совпадать с языком, выбранным в словаре. Языковая статистика может быть настроена в настройках компонента T9-кода." />
+    </restituments>
 </sample>

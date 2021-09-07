@@ -1,83 +1,69 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <sample>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--File name: StraddlingCheckerboard.xml-->
-  <!--Last edited: 2021.07.14-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'de' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="de">Benutzung des Straddling-Checkerboards</title>
-  <summary lang="de">Einfache Ver- und Entschlüsselung mit dem <i>Straddling-Checkerboard</i></summary>
-  <description lang="de">Diese Vorlage zeigt einen einfachen Ver- und Entschlüsselungsprozess mit dem Straddling-Checkerboard. Das Starddling-Checkerboard-Verfahren verwendet das Verfahren der Spreizung, dabei wird ein Klartextzeichen auf ein oder mehrere Geheimtextzeichen abgebildet.</description>
-  <keywords lang="de">Straddling, Checkerboard, Kalterkrieg, Vatikan, Ché Guevara</keywords>
-  <replacements lang="de">
-    <replacement key="$Plaintext$" value="Klartext" />
-    <replacement key="$RowsAndColumns$" value="Zeilen und Spalten" />
-    <replacement key="$Alphabet$" value="Alphabet" />
-    <replacement key="$key$" value="Schlüssel" />
-    <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext" />
-    <replacement key="$Ciphertext$" value="Geheimtext" />
-    <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Straddling-Checkerboard Verfahrens. Abwandlungen dieses Verfahrens wurden in der Geschichte häufig verwendet. So wurde es zum Beispiel im Kalten Krieg und von Ché Guevara verwendet.\line 
-Die Zeilen- und Spaltenbenennung kann bei diesem Verfahren dynamisch angepasst werden. Die Substitution des Klartextzeichens in den Geheimtext entsteht aus der Bezeichnung Zeile+Spalte. Somit entsteht eine Spreizung, da ein Klartextzeichen entweder auf ein oder zwei Zahlen abgebildet wird. Typischerweise wurde bei diesem Verfahren ein Schlüsselwort in die erste Zeile geschriben. Dies wird hier durch den Alphabet-Permutator erreicht." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'en' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="en">Use of the Straddling Checkerboard</title>
-  <summary lang="en">Easy encryption and decryption with the<i>Straddling Checkerboard</i></summary>
-  <description lang="en">This template shows a simple encryption and decryption process using the straddling checkerboard. The straddling checkerboard process uses the straddling method, where a plaintext character is mapped to one or more ciphertext characters.</description>
-  <keywords>Straddling, Checkerboard, Cold War, Vatican, Ché Guevara</keywords>
-  <replacements lang="en">
-    <replacement key="$Plaintext$" value="Plaintext" />
-    <replacement key="$RowsAndColumns$" value="Rows and columns" />
-    <replacement key="$Alphabet$" value="Alphabet" />
-    <replacement key="$key$" value="Key" />
-    <replacement key="$encipheredPlaintext$" value="Decrypted plain text" />
-    <replacement key="$Ciphertext$" value="Ciphertext" />
-    <replacement key="$memo$" value="This template demonstrates how the straddling checkerboard process works. Variations of this method have been used frequently throughout history. For example, it was used during the Cold War and by Ché Guevara.\line
-The row and column naming can be dynamically adjusted in this procedure. The substitution of the plaintext character into the ciphertext results from the line+column designation. Thus, a spread is created as a plaintext character is mapped to either one or two numbers. Typically, in this procedure, a keyword was written in the first line. This is achieved here by the alphabet permutator." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'zh' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="zh">使用 跨度棋盘。</title>
-  <summary lang="zh">使用<i>跨度棋盘</i>轻松加密和解密
-    </summary>
-  <description lang="zh">这个模板显示了一个简单的加密和解密过程，使用跨度棋盘。Starddling Checkerboard过程使用传播方法，即一个明文字符被映射到一个或多个密文字符。</description>
-  <keywords lang="zh">跨界，棋盘，冷战，梵蒂冈，切-格瓦拉</keywords>
-  <replacements lang="zh">
-    <replacement key="$Plaintext$" value="纯文本" />
-    <replacement key="$RowsAndColumns$" value="行和列" />
-    <replacement key="$Alphabet$" value="字母表" />
-    <replacement key="$key$" value="钥匙" />
-    <replacement key="$encipheredPlaintext$" value="解密后的纯文本" />
-    <replacement key="$Ciphertext$" value="密码文本" />
-    <replacement key="$memo$" value="这个模板展示了跨度格子板的工作过程。这一程序的变种在历史上经常被使用。例如，它在冷战期间和切-格瓦拉使用过。\line
-在这种方法中，行和列的命名可以动态地调整。将明文字符替换成密文是由行+列的指定产生的。因此，当一个明文字符被映射到一个或两个数字时，就产生了一个传播。通常，在这个程序中，在第一行写上一个关键词。这一点在这里是通过字母互换器实现的。" />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--Language 'ru' starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <title lang="ru">Использование шахматной доски.</title>
-  <summary lang="ru">Простое шифрование и дешифрование с помощью<i>шахматной доски</i>.</summary>
-  <description lang="ru">В этом шаблоне показан простой процесс шифрования и дешифрования с использованием шашечной доски. В шашечном процессе используется метод распространения, при котором символ открытого текста сопоставляется с одним или несколькими символами шифротекста.</description>
-  <keywords lang="ru">Растяжка, шашка, холодная война, Ватикан, Че Гевара</keywords>
-  <replacements lang="ru">
-    <replacement key="$Plaintext$" value="Обычный текст" />
-    <replacement key="$RowsAndColumns$" value="Строки и столбцы" />
-    <replacement key="$Alphabet$" value="Алфавит" />
-    <replacement key="$key$" value="Ключ" />
-    <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст" />
-    <replacement key="$Ciphertext$" value="Шифротекст" />
-    <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс расстановки шашек. Вариации этой процедуры часто использовались на протяжении всей истории человечества. Например, его использовали во время холодной войны и Че Гевара.\line
-В этом методе именование строк и столбцов может быть динамически изменено. Подстановка символа открытого текста в шифротекст происходит на основе обозначения строка+столбец. Таким образом, при сопоставлении символа открытого текста с одним или двумя числами создается спред. Как правило, в этой процедуре ключевое слово записывалось в первой строке. Здесь это достигается с помощью алфавитного перестановочного устройства." />
-  </replacements>
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <!--The general section starts here:-->
-  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-  <icon file="StraddlingCheckerboard.png" />
-  <relevantPlugins>
-    <plugin name="StraddlingCheckerboard" />
-  </relevantPlugins>
+    <icon file="StraddlingCheckerboard.png" />
+    <relevantPlugins>
+        <plugin name="StraddlingCheckerboard" />
+        <plugin name="TextInput" />
+        <plugin name="TextOutput" />
+        <plugin name="Alphabet" />
+    </relevantPlugins>
+    <title lang="de"><i>Straddling-Checkerboards</i></title>
+    <summary lang="de">Einfache Ver- und Entschlüsselung mit dem <i>Straddling-Checkerboard</i></summary>
+    <description lang="de">Diese Vorlage zeigt einen einfachen Ver- und Entschlüsselungsprozess mit dem Straddling-Checkerboard. Das Starddling-Checkerboard-Verfahren verwendet das Verfahren der Spreizung, dabei wird ein Klartextzeichen auf ein oder mehrere Geheimtextzeichen abgebildet.</description>
+    <keywords lang="de">Straddling, Checkerboard, Kalterkrieg, Vatikan, Ché Guevara</keywords>
+    <replacements lang="de">
+        <replacement key="$Plaintext$" value="Klartext" />
+        <replacement key="$RowsAndColumns$" value="Zeilen und Spalten" />
+        <replacement key="$Alphabet$" value="Alphabet" />
+        <replacement key="$key$" value="Schlüssel"/>
+        <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext"/>
+        <replacement key="$Ciphertext$" value="Geheimtext"/>
+        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Straddling-Checkerboard Verfahrens. Abwandlungen dieses Verfahrens wurden in der Geschichte häufig verwendet. So wurde es zum Beispiel im Kalten Krieg und von Ché Guevara verwendet.
+        Die Zeilen- und Spaltenbenennung kann bei diesem Verfahren dynamisch angepasst werden. Die Substitution des Klartextzeichens in den Geheimtext entsteht aus der Bezeichnung Zeile+Spalte. Somit entsteht eine Spreizung, da ein Klartextzeichen entweder auf ein oder zwei Zahlen abgebildet wird. Typischerweise wurde bei diesem Verfahren ein Schlüsselwort in die erste Zeile geschriben. Dies wird hier durch den Alphabet-Permutator erreicht." />
+    </replacements>
+<!-- en-->
+    <title lang="en"><i>Straddling-Checkerboards</i></title>
+    <summary lang="en">Easy encryption and decryption with the<i>Straddling Checkerboard</i></summary>
+    <description lang="en">This template shows a simple encryption and decryption process using the straddling checkerboard. The starddling checkerboard process uses the straddling method, where a plaintext character is mapped to one or more ciphertext characters.</description>
+    <keywords lang="en">Straddling, Checkerboard, Cold War, Vatican, Ché Guevara</keywords>
+    <replacements lang="en">
+        <replacement key="$Plaintext$" value="Plain text" />
+        <replacement key="$RowsAndColumns$" value="Rows and columns" />
+        <replacement key="$Alphabet$" value="Alphabet" />
+        <replacement key="$key$" value="Key"/>
+        <replacement key="$encipheredPlaintext$" value="Decrypted plain text"/>
+        <replacement key="$Ciphertext$" value="Ciphertext"/>
+        <replacement key="$memo$" value="This template demonstrates how the straddling checkerboard process works. Variations of this method have been used frequently throughout history. For example, it was used during the Cold War and by Ché Guevara.
+        The row and column naming can be dynamically adjusted in this procedure. The substitution of the plaintext character into the ciphertext results from the line+column designation. Thus, a spread is created as a plaintext character is mapped to either one or two numbers. Typically, in this procedure, a keyword was written in the first line. This is achieved here by the alphabet permutator." />
+    </replacements>
+<!--zh-ch-->
+    <title lang="zh-ch"><i>Straddling-Checkerboards</i>。</title>
+    <summary lang="zh-ch">使用<i>跨度棋盘</i>轻松加密和解密</summary>
+    <description lang="zh-ch">这个模板显示了一个简单的加密和解密过程，使用跨度棋盘。Starddling Checkerboard过程使用传播方法，即一个明文字符被映射到一个或多个密文字符。</description>
+    <keywords lang="zh-ch">跨界，棋盘，冷战，梵蒂冈，切-格瓦拉</keywords>
+    <replacements lang="zh-ch">
+        <replacement key="$Plaintext$" value="纯文本" />
+        <replacement key="$RowsAndColumns$" value="行和列" />
+        <replacement key="$Alphabet$" value="字母表" />
+        <replacement key="$key$" value="钥匙"/>
+        <replacement key="$encipheredPlaintext$" value="解密后的纯文本"/>
+        <replacement key="$Ciphertext$" value="密码文本"/>
+        <replacement key="$memo$" value="这个模板展示了跨度格子板的工作过程。这一程序的变种在历史上经常被使用。例如，它在冷战期间和切-格瓦拉使用过。
+        在这种方法中，行和列的命名可以动态地调整。将明文字符替换成密文是由行+列的指定产生的。因此，当一个明文字符被映射到一个或两个数字时，就产生了一个传播。通常，在这个程序中，在第一行写上一个关键词。这一点在这里是通过字母互换器实现的。" />
+    </replacements>
+<!--ru-->
+    <title lang="ru"><i>Страдающие шашки</i></title>
+    <summary lang="ru">Простое шифрование и дешифрование с помощью<i>шахматной доски</i>.</summary>
+    <description lang="ru">В этом шаблоне показан простой процесс шифрования и дешифрования с использованием шашечной доски. В шашечном процессе используется метод распространения, при котором символ открытого текста сопоставляется с одним или несколькими символами шифротекста.</description>
+    <keywords lang="ru">Растяжка, шашка, холодная война, Ватикан, Че Гевара</keywords>
+    <replacements lang="ru">
+        <replacement key="$Plaintext$" value="Обычный текст" />
+        <replacement key="$RowsAndColumns$" value="Строки и столбцы" />
+        <replacement key="$Alphabet$" value="Алфавит" />
+        <replacement key="$key$" value="Ключ"/>
+        <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст"/>
+        <replacement key="$Ciphertext$" value="Шифротекст"/>
+        <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс расстановки шашек. Вариации этой процедуры часто использовались на протяжении всей истории человечества. Например, его использовали во время холодной войны и Че Гевара.
+        В этом методе именование строк и столбцов может быть динамически изменено. Подстановка символа открытого текста в шифротекст происходит на основе обозначения строка+столбец. Таким образом, при сопоставлении символа открытого текста с одним или двумя числами создается спред. Как правило, в этой процедуре ключевое слово записывалось в первой строке. Здесь это достигается с помощью алфавитного перестановочного устройства." />
+    </replacements>
 </sample>
