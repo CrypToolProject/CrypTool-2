@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- You can edit this file manually or with the Util/CrypDocumentationEditor -->
+<documentation>
+  <language culture="en"/>
+  <language culture="de-DE"/>
+
+  <introduction lang="en">
+	  This component implements a basic blockchain and it´s functionalities.<newline/>
+	  A blockchain is a growing list of records, called blocks, that are linked together using cryptography. Each created block contains the hash value of the previous block, a timestamp, and the transaction data. The result is that already created blocks cannot be changed afterwards, because changing the hash preimage, will result in a change of the hash values. Since the blocks are linked together the previous blocks cannot be changed in any way.
+  </introduction>
+
+  <introduction lang="de-DE">    
+  </introduction>
+
+  <usage lang="en">
+	  <section headline="1. Overview">
+		  In this CT2 component you can learn and test basic blockchain functionalities. The chaining of the component simulates a blockchain with multiple mining instances. Addresses can be created, and coins can be sent from one address to another.
+		  Each blockchain component represents a mining instance and creates a new block.<newline/> 
+		  Combining the component through connectors visualizes the (block)chain.<newline/>
+		  Typically, each mining instance is carried out by an online node. For demonstration purposes the mining node, or mining address, can be chosen from the addresses contained in the user input.<newline/>
+		  <newline/>
+		  The user can adjust different component settings to test different scenarios within the blockchain, by adjusting the mining address, the mining reward and the hash algorithm, as well as the mining difficulty. This component uses SHA-256 as the default hash algorithm, but SHA-1, SHA-512 can also be chosen in the settings.
+	  </section>
+	  <section headline="2. Inputs">
+		  The blockchain component needs multiple inputs:<newline/>
+		  1. The previous block, which is an optional input, connects the blocks to create a chain. If there is no input, the block counts as a genesis block. A genesis block is the first created block within a blockchain and has no hash of a previous block. Since coins are generated each time a block is created, there is only one transaction possible in the genesis block, which is the transaction reward.<newline/>
+		  2. 2. Addresses with a name, public and private key are needed to create the users within the blockchain. First the name, then the three values for N,e and d should be specified. All values are separated with a comma. Public and private keypairs can be generated with the RSA Key Generator component.<newline/>
+		  3. 3. At last the blockchain component needs transaction data.
+		  Transaction data consists of a sender address, a recipient address. Both, sender and recipient address are called by their address name. An amount, which is to be transferred and a signature are also needed. All values are separated with a comma. The signature can be created with the Blockchain Signature Creator component, using the SHA256 hash algorithm.<newline/>
+	  </section>
+	  <section headline="3. Outputs">
+		  Each component has exactly one output. In this output the whole data of the generated block is stored in JSON format.<newline/>
+		  Connecting the block data output of a blockchain component with the block data input of the next blockchain component creates the chain and allows to pass the data through multiple blockchain components.<newline/>
+      </section>
+      <section headline="4. Specifications">
+		  Each transaction consists of a sender address, a recipient address, the amount, which is to be transferred, a timestamp (UTC), the previous transaction hash value, and a signature.<newline/>
+		  Transaction hash calculation<newline/>
+		  <newline/>
+		  After the transaction is created from the transaction input, the hash value is calculated from:<newline/>
+		  <newline/>
+		  TransactionHash = FromAddress.Name.ToString() + <newline/> 
+		  ToAddress.Name.ToString() + Amount.ToString() + Timestamp.ToString()<newline/>
+		  <newline/>
+		  Additionally, the hash value is shortened to a length of 10, to simplify and clear the user experience.<newline/>
+		  The hash value is represented in hexadecimal format.<newline/>
+		  The user can choose between multiple hash algorithms in the component settings. The default hash algorithm is SHA-256, which is also used to verify the signatures.<newline/>
+
+	  </section>
+  </usage>
+
+  <usage lang="de-DE">
+  </usage>
+  
+  <presentation lang="en">
+	  The presentation for this component has two parts.<newline/>
+	  Both parts have a header information at the top, where you can see the hash values, the nonce and mining duration.<newline/>
+	  One part is the transaction protocol, where you can see the transactions and their status, as well as error messages in case a transaction is invalid.<newline/>
+	  The other part is the balance log, which tracks the balance of all addresses specified in the addresses input before.<newline/>
+  </presentation>
+  
+  <presentation lang="de-DE">
+  </presentation>
+  
+  <references>
+  </references>
+</documentation>

@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="CrypTool.Plugins.Blockchain.BlockchainPresentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:crypanalysisviewcontrol="clr-namespace:CrypTool.CrypAnalysisViewControl;assembly=CrypAnalysisViewControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc BlockHeaderUICaption}" ResultListCaption="{Loc TransactionsUICaption}">
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc BlockHashUICaption}" x:Name="BlockHash" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc PrevBlockHashUICaption}" x:Name="PreviousBlockHash" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc TimestampCaption}" x:Name="Timestamp" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc NonceCaption}" x:Name="Nonce" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc TransactionsCaption}" x:Name="Transactions" />
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc FailedTransactionCaption}" x:Name="FailedTransactions" />
+            <!--Empty for layouting purposes:-->
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc HashAlgorithmUICaption}" x:Name="HashAlgorithm"/>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc CurrentHashSpeedUICaption}" x:Name="CurrentHashingSpeed" />
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+        <TabControl Width="Auto">
+            <TabItem Header="{Loc TransactionsUICaption}" Width="Auto">
+                <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding TransactionList}" ResultItemAction="HandleResultItemAction">
+                    <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                        <GridView>
+
+                            <GridViewColumn Header="{Loc FromAddressUICaption}" DisplayMemberBinding="{Binding Path=FromAddress}" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{Loc ToAddressUICaption}" DisplayMemberBinding="{Binding Path=ToAddress}" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{Loc CoinsCaption}" DisplayMemberBinding="{Binding Path=Amount}" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{Loc SignatureTableCaption}" DisplayMemberBinding="{Binding Path=Signature}" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{Loc StatusTableCaption}" DisplayMemberBinding="{Binding Path=Status}" Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                </crypanalysisviewcontrol:CrypAnalysisResultListView>
+            </TabItem>
+            
+            <TabItem Header="{Loc BalanceTableCaption}" Width="Auto">
+                <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding BalanceList}" ResultItemAction="HandleResultItemAction">
+                    <crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                        <GridView>
+
+                            <GridViewColumn Header="{Loc BalanceUINameCaption}" DisplayMemberBinding="{Binding Path=Name}" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="{Loc BalanceTableCaption}" DisplayMemberBinding="{Binding Path=Value}" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
+                </crypanalysisviewcontrol:CrypAnalysisResultListView>
+            </TabItem>
+        </TabControl>
+    </crypanalysisviewcontrol:CrypAnalysisViewControl>
+
+</UserControl>
