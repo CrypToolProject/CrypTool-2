@@ -26,6 +26,8 @@ namespace Factorizer
     [ComponentCategory(ComponentCategory.CryptanalysisGeneric)]
     public class Factorizer : ICrypComponent
     {
+        private bool _stopped = false;
+
         #region IPlugin Members
 
         public event CrypTool.PluginBase.StatusChangedEventHandler OnPluginStatusChanged;
@@ -73,6 +75,7 @@ namespace Factorizer
         public void Execute()
         {
             ProgressChanged(0,1);
+            _stopped = false;
 
             if (InputNumber <= 0)
             {
@@ -87,13 +90,18 @@ namespace Factorizer
                 if (m_Settings.BruteForceLimitEnabled)
                 {
                     bool isFactorized = false;
-                    factors = InputNumber.Factorize(m_Settings.BruteForceLimit, out isFactorized);
+                    factors = InputNumber.Factorize(m_Settings.BruteForceLimit, out isFactorized, ref _stopped);
                     if(!isFactorized)
                         FireOnGuiLogNotificationOccuredEvent(string.Format("Brute force limit of {0} reached, the last factor is still composite.", m_Settings.BruteForceLimit), NotificationLevel.Warning);
                 }
                 else
                 {
-                    factors = InputNumber.Factorize();
+                    factors = InputNumber.Factorize(ref _stopped);
+                }
+
+                if (_stopped)
+                {
+                    return;
                 }
 
                 List<BigInteger> l = new List<BigInteger>();
@@ -145,7 +153,7 @@ namespace Factorizer
                     }
                 }
             }
-
+            _stopped = true;
             ProgressChanged(0, 1);
         }
 
@@ -155,6 +163,7 @@ namespace Factorizer
 
         public void Stop()
         {
+            _stopped = true;
         }
 
         public void Initialize()
