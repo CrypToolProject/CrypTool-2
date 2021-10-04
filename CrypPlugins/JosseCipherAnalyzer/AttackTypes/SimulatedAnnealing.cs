@@ -11,10 +11,11 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
         private char[] Alphabet { get; }
         public string KeyAlphabet { get; }
         private int KeyLength { get; }
-        private int Restarts { get; set;  }
+        private int Restarts { get; set; }
         private ResultEntry _finalResultEntry;
 
-        public SimulatedAnnealing(string alphabet, int keyLength, int restarts, JosseCipherAnalyzerPresentation presentation)
+        public SimulatedAnnealing(string alphabet, int keyLength, int restarts,
+            JosseCipherAnalyzerPresentation presentation)
         {
             Alphabet = alphabet.ToUpper().ToCharArray();
             KeyAlphabet = alphabet.ToUpper();
@@ -37,7 +38,8 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
             {
                 const double alpha = 0.995;
                 const double epsilon = 0.005;
-                var temperature = 400.0;
+                const double initTemperature = 400;
+                var temperature = initTemperature;
                 var nextKey = new char[KeyLength];
                 cipher.BuildDictionaries(bestKey);
                 var initialPlaintext = cipher.Decipher(ciphertext);
@@ -93,7 +95,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
 
                     //cooling process on every iteration
                     temperature *= alpha;
-                    OnProcessChanged(1 - temperature / 400.0);
+                    OnProcessChanged(GetPercentage(initTemperature, temperature, alpha, epsilon));
                 }
 
                 currentKey = (char[])bestKey.Clone();
@@ -103,15 +105,22 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
             return _finalResultEntry;
         }
 
-        private void GenerateNewKey(char[] c, char[] n)
+        private static double GetPercentage(double initTemp, double temp, double alpha, double epsilon)
+        {
+            var steps = Math.Log(initTemp * Math.Log(epsilon, alpha), alpha);
+            return -((Math.Log(temp, alpha) + -Math.Log(initTemp, alpha) - 0) /
+                (steps - 0) * (1 - 0) + 0);
+        }
+
+        private void GenerateNewKey(IReadOnlyList<char> c, IList<char> n)
         {
             var rnd = new Random(Guid.NewGuid().GetHashCode());
             do
             {
-                for (var i = 0; i < c.Length; i++)
+                for (var i = 0; i < c.Count; i++)
                     n[i] = c[i];
-                var i1 = rnd.Next(n.Length);
-                var i2 = rnd.Next(n.Length);
+                var i1 = rnd.Next(n.Count);
+                var i2 = rnd.Next(n.Count);
                 var aux = n[i1];
                 n[i1] = n[i2];
                 // Exchange this letter with a probability
@@ -121,7 +130,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                 }
 
                 n[i2] = aux;
-            } while (n.Distinct().Count() != n.Length);
+            } while (n.Distinct().Count() != n.Count);
         }
 
         private static void Assign(IList<char> c, IReadOnlyList<char> n)
@@ -158,6 +167,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                     {
                         return;
                     }
+
                     //Insert new entry at correct place to sustain order of list:
                     var insertIndex = Presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
                     Presentation.BestList.Insert(insertIndex, entry);
@@ -166,6 +176,7 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                     {
                         Presentation.BestList.RemoveAt(MaxBestListEntries);
                     }
+
                     var ranking = 1;
                     foreach (var e in Presentation.BestList)
                     {

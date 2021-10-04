@@ -125,7 +125,7 @@ namespace CrypTool.JosseCipherAnalyzer
         public void Execute()
         {
             ProgressChanged(0, 1);
-            // Swap key length setting since we to 
+            // Swap key length setting
             if (_settings.KeyLengthTo < _settings.KeyLengthFrom)
             {
                 var temp = _settings.KeyLengthTo;
