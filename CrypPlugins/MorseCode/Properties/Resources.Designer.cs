@@ -79,6 +79,24 @@ namespace MorseCode.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Code type ähnelt.
+        /// </summary>
+        internal static string CodeCaption {
+            get {
+                return ResourceManager.GetString("CodeCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Switches between different types of morse code and tap code ähnelt.
+        /// </summary>
+        internal static string CodeTooltip {
+            get {
+                return ResourceManager.GetString("CodeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Decode ähnelt.
         /// </summary>
         internal static string Decode {
@@ -192,6 +210,15 @@ namespace MorseCode.Properties {
         internal static string SoundOutputTooltip {
             get {
                 return ResourceManager.GetString("SoundOutputTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Tap Code ähnelt.
+        /// </summary>
+        internal static string Tap_Code {
+            get {
+                return ResourceManager.GetString("Tap Code", resourceCulture);
             }
         }
         

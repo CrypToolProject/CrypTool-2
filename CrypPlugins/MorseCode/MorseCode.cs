@@ -117,6 +117,9 @@ namespace CrypTool.Plugins.MorseCode
                     case MorseCodeSettings.CodeType.Navy:
                         morseEncoder = new NavyMorseEncoder();
                         break;
+                    case MorseCodeSettings.CodeType.TapCode:
+                        morseEncoder = new TapCodeEncoder();
+                        break;
                     default:
                     case MorseCodeSettings.CodeType.International_ITU:
                         morseEncoder = new InternationalMorseEncoder();

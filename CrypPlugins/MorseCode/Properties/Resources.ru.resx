@@ -123,6 +123,12 @@
   <data name="ActionTooltip" xml:space="preserve">
     <value>Действие, которое необходимо выполнить</value>
   </data>
+  <data name="CodeCaption" xml:space="preserve">
+    <value>Кодовое искусство</value>
+  </data>
+  <data name="CodeTooltip" xml:space="preserve">
+    <value>Переключение между различными типами кода Морзе и кодами детонации</value>
+  </data>
   <data name="Decode" xml:space="preserve">
     <value>раскодировать</value>
   </data>

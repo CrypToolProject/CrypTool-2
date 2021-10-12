@@ -123,6 +123,12 @@
   <data name="ActionTooltip" xml:space="preserve">
     <value>要做的动作</value>
   </data>
+  <data name="CodeCaption" xml:space="preserve">
+    <value>代码艺术</value>
+  </data>
+  <data name="CodeTooltip" xml:space="preserve">
+    <value>在不同的莫尔斯电码类型和敲击码之间切换</value>
+  </data>
   <data name="Decode" xml:space="preserve">
     <value>解码</value>
   </data>
