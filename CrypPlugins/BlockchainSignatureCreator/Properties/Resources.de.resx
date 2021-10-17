@@ -117,70 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActionCaption" xml:space="preserve">
-    <value>Action</value>
+  <data name="BlockchainSignatureCreatorTooltip" xml:space="preserve">
+    <value>Implementierung einer Signatur Erstellung für Blockchain Komponenten</value>
   </data>
-  <data name="ActionTooltip" xml:space="preserve">
-    <value>The action to be done</value>
+  <data name="BlockchainSignatureCreatorCaption" xml:space="preserve">
+    <value>Blockchain Signatur Generator</value>
   </data>
-  <data name="CodeCaption" xml:space="preserve">
-    <value>Code type</value>
+  <data name="ExceptionMessage" xml:space="preserve">
+    <value>Fehler: {0}</value>
   </data>
-  <data name="CodeTooltip" xml:space="preserve">
-    <value>Switches between different types of morse code and tap code</value>
+  <data name="SignatureCaption" xml:space="preserve">
+    <value>Signatur</value>
   </data>
-  <data name="Decode" xml:space="preserve">
-    <value>Decode</value>
+  <data name="SignatureOutputTooltip" xml:space="preserve">
+    <value>Signature Ausgabe</value>
   </data>
-  <data name="Encode" xml:space="preserve">
-    <value>Encode</value>
+  <data name="TransactionCaption" xml:space="preserve">
+    <value>Transaktion</value>
   </data>
-  <data name="FrequencyCaption" xml:space="preserve">
-    <value>Frequency</value>
-  </data>
-  <data name="FrequencyTooltip" xml:space="preserve">
-    <value>Sets the frequency of the morse tones.</value>
-  </data>
-  <data name="InputTextCaption" xml:space="preserve">
-    <value>Text input</value>
-  </data>
-  <data name="InputTextTooltip" xml:space="preserve">
-    <value>The text to be encoded or decoded</value>
-  </data>
-  <data name="OutputTextCaption" xml:space="preserve">
-    <value>Text output</value>
-  </data>
-  <data name="OutputTextTooltip" xml:space="preserve">
-    <value>The encoded or decoeded text</value>
-  </data>
-  <data name="Play" xml:space="preserve">
-    <value>Play</value>
-  </data>
-  <data name="PluginCaption" xml:space="preserve">
-    <value>Morse Code</value>
-  </data>
-  <data name="PluginTooltip" xml:space="preserve">
-    <value>Encodes a text to Morse code or decodes a Morse code to text</value>
-  </data>
-  <data name="SoundOutputCaption" xml:space="preserve">
-    <value>Sound output</value>
-  </data>
-  <data name="SoundOutputTooltip" xml:space="preserve">
-    <value>Generated sound samples are outputted here</value>
-  </data>
-  <data name="Tap Code" xml:space="preserve">
-    <value>Tap Code</value>
-  </data>
-  <data name="TickDurationCaption" xml:space="preserve">
-    <value>Tick duration</value>
-  </data>
-  <data name="TickDurationTooltip" xml:space="preserve">
-    <value>The time of a "tick" in miliseconds</value>
-  </data>
-  <data name="VolumeCaption" xml:space="preserve">
-    <value>Volume</value>
-  </data>
-  <data name="VolumeTooltip" xml:space="preserve">
-    <value>Volume of the generated audio</value>
+  <data name="TransactionInputTooltip" xml:space="preserve">
+    <value>Eingabedaten fuer Transaktionen (Format: "Sender, Empfaenger, Coins, N, d")</value>
   </data>
 </root>

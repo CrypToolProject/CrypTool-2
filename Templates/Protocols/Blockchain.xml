@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Blockchain.xml-->
+  <!--Last edited: 2021.07.11-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Blockchain</title>
+  <summary lang="en">Usage of the <i>Blockchain</i> Component</summary>
+  <description lang="en">Source: <external ref="http://en.wikipedia.org/wiki/Blockchain" /></description>
+  <keywords>Blockchain, Mining, Bitcoin, Block, Hash</keywords>
+  <replacements lang="en">
+	<replacement key="$blockchain$" value="Blockchain"/>
+	<replacement key="$transaction_input$" value="Transaction input"/>
+	<replacement key="$transaction_format$" value="#From,To,Amount,Signature"/>
+	<replacement key="$transaction$" value="A,B,0.5,1009"/>
+	<replacement key="$address_input$" value="Address input"/>
+	<replacement key="$address_format_and_two_addresses$" value="#Name,N,e,d&#xD;A,2021,5,773&#xD;B,3589,5,2765"/>
+	<replacement key="$memo$" value="This template simulates a blockchain and some of it´s functionalities. The transactions on the top of the interface in the input simulate money transactions from account A to account B. More accounts can be created in the input field at the bottom, using a name, and the three numbers from RSA, which can be generated using the CT2 RSA Key Generator. More settings such as mining reward can be found in the settings area in the template"/>
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Blockchain</title>
+  <summary lang="de">Benutzung der <i>Blockchain</i> Komponente</summary>
+  <description lang="de"><newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Blockchain" /></description>
+  <keywords lang="de">Blockchain, Mining, Bitcoin, Block, Hash</keywords>
+  <replacements lang="de">
+	<replacement key="$blockchain$" value="Blockchain"/>
+	<replacement key="$transaction_input$" value="Transaktion input"/>
+	<replacement key="$transaction_format$" value="#Sender,Empfaenger,Coins,Signatur"/>
+	<replacement key="$transaction$" value="A,B,0.5,1786"/>
+	<replacement key="$address_input$" value="Adressen input"/>
+	<replacement key="$address_format_and_two_addresses$" value="#Name,N,e,d&#xD;A,2021,5,773&#xD;B,3589,5,2765"/>
+	<replacement key="$memo$" value="Diese Vorlage simuliert eine Blockchain und einige ihrer Funktionalitäten. Die Transaktionen oben auf der Oberfläche simulieren Geldtransaktionen von Konto A zu Konto B. Weitere Konten können im Eingabefeld unten mit einem Namen und den drei RSA-Zahlen erstellt werden, die mit dem CT2 RSA Key Generator generiert werden können. Weitere Einstellungen wie z.B. den Mining Reward finden Sie im Einstellungsbereich in der Vorlage."/>
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="" />
+  <relevantPlugins>
+    <plugin name="Blockchain" />
+  </relevantPlugins>
+</sample>

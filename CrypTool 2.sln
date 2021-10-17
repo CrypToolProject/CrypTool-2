@@ -500,6 +500,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StraddlingCheckerboard", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T9Code", "CrypPlugins\T9Code\T9Code.csproj", "{87D702E0-076B-4074-A5CB-236165D4C0E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blockchain", "CrypPlugins\Blockchain\Blockchain.csproj", "{1FB08709-8917-4BCC-A8F5-9EC72130EF73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockchainSignatureCreator", "CrypPlugins\BlockchainSignatureCreator\BlockchainSignatureCreator.csproj", "{F3EEEC66-9C24-4EC6-ADCA-CE4EC220FA8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1478,6 +1482,14 @@ Global
 		{87D702E0-076B-4074-A5CB-236165D4C0E3}.Debug|x64.Build.0 = Debug|x64
 		{87D702E0-076B-4074-A5CB-236165D4C0E3}.Release|x64.ActiveCfg = Release|x64
 		{87D702E0-076B-4074-A5CB-236165D4C0E3}.Release|x64.Build.0 = Release|x64
+		{1FB08709-8917-4BCC-A8F5-9EC72130EF73}.Debug|x64.ActiveCfg = Debug|x64
+		{1FB08709-8917-4BCC-A8F5-9EC72130EF73}.Debug|x64.Build.0 = Debug|x64
+		{1FB08709-8917-4BCC-A8F5-9EC72130EF73}.Release|x64.ActiveCfg = Release|x64
+		{1FB08709-8917-4BCC-A8F5-9EC72130EF73}.Release|x64.Build.0 = Release|x64
+		{F3EEEC66-9C24-4EC6-ADCA-CE4EC220FA8F}.Debug|x64.ActiveCfg = Debug|x64
+		{F3EEEC66-9C24-4EC6-ADCA-CE4EC220FA8F}.Debug|x64.Build.0 = Debug|x64
+		{F3EEEC66-9C24-4EC6-ADCA-CE4EC220FA8F}.Release|x64.ActiveCfg = Release|x64
+		{F3EEEC66-9C24-4EC6-ADCA-CE4EC220FA8F}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1716,6 +1728,8 @@ Global
 		{DFAFC4F2-4262-43D7-94F9-EEACA9A719DA} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{EFF8C49C-5742-42C5-8E7B-FFB8CC615D28} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 		{87D702E0-076B-4074-A5CB-236165D4C0E3} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{1FB08709-8917-4BCC-A8F5-9EC72130EF73} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
+		{F3EEEC66-9C24-4EC6-ADCA-CE4EC220FA8F} = {88B851F6-9E3D-484F-A317-ECED5B98C618}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92042D62-2CDA-4393-9D74-4FB5AC571A2D}

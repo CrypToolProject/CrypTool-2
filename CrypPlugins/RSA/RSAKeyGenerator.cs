@@ -52,6 +52,7 @@ namespace CrypTool.Plugins.RSA
         private BigInteger e;
         private BigInteger d;
         private RSAKeyGeneratorSettings settings = new RSAKeyGeneratorSettings();
+        private bool _stopped = false;
 
         #endregion
         
@@ -146,6 +147,7 @@ namespace CrypTool.Plugins.RSA
         /// </summary>
         public void Execute()
         {
+            _stopped = false;
             BigInteger p;
             BigInteger q;
             BigInteger n;
@@ -316,9 +318,12 @@ namespace CrypTool.Plugins.RSA
                                 expectedtries = 2 * limittries;
 
                                 tries = 0;
-                                p = this.RandomPrimeBits((int)n);
+                                p = RandomPrimeBits((int)n);
                                 tries = limittries;  limittries = expectedtries;
-                                do q = this.RandomPrimeBits((int)n); while (p == q);
+                                do
+                                {
+                                    q = RandomPrimeBits((int)n);
+                                }while (p == q && !_stopped);
                                 break;
 
                             case 1: // n = upper limit for primes
@@ -329,9 +334,12 @@ namespace CrypTool.Plugins.RSA
                                     return;
                                 }
 
-                                p = BigIntegerHelper.RandomPrimeLimit( n + 1 );
+                                p = BigIntegerHelper.RandomPrimeLimit( n + 1 , ref _stopped);
                                 ProgressChanged(0.5, 1.0);
-                                do q = BigIntegerHelper.RandomPrimeLimit(n + 1); while (p == q);
+                                do
+                                {
+                                    q = BigIntegerHelper.RandomPrimeLimit(n + 1, ref _stopped);
+                                } while (p == q && _stopped);
                                 break;
                         }
                     }
@@ -353,7 +361,8 @@ namespace CrypTool.Plugins.RSA
                     {
                         for (int i = 0; i < 1000; i++)
                         {
-                            e = BigIntegerHelper.RandomIntLimit(phi);
+                            if (_stopped) return;
+                            e = BigIntegerHelper.RandomIntLimit(phi, ref _stopped);
                             if(e>=2 && e.GCD(phi) == 1) { E = e; found = true; break; }
                         }
                     }
@@ -432,8 +441,8 @@ namespace CrypTool.Plugins.RSA
                     }
                     break;
             }
-
             ProgressChanged(1.0, 1.0);
+            _stopped = true;
         }
 
         /// <summary>
@@ -448,6 +457,7 @@ namespace CrypTool.Plugins.RSA
         /// </summary>
         public void Stop()
         {
+            _stopped = true;
         }
 
         /// <summary>
@@ -480,7 +490,8 @@ namespace CrypTool.Plugins.RSA
 
             while (true)
             {
-                var p = NextProbablePrime(limit.RandomIntLimit());
+                if (_stopped) return -1;
+                var p = NextProbablePrime(limit.RandomIntLimit(ref _stopped));                
                 if (p < limit) return p;
             }
         }
@@ -493,19 +504,20 @@ namespace CrypTool.Plugins.RSA
             if (n == 3) return 3;
             BigInteger r = n % 6;
             if (r == 3) n += 2;
-            if (r == 1) { if (n.IsProbablePrime()) return n; else n += 4; }
-            
+            if (r == 1) { if (n.IsProbablePrime(ref _stopped)) return n; else n += 4; }
+
             // at this point n mod 6 = 5
-            
+
             while (true)
             {
-                ProgressChanged((int)(tries*100.0/expectedtries),100);
-                if (tries+1 < limittries) tries++;
+                ProgressChanged((int)(tries * 100.0 / expectedtries), 100);
+                if (tries + 1 < limittries) tries++;
 
-                if (n.IsProbablePrime()) return n;
+                if (n.IsProbablePrime(ref _stopped)) return n;
                 n += 2;
-                if (n.IsProbablePrime()) return n;
+                if (n.IsProbablePrime(ref _stopped)) return n;
                 n += 4;
+                if (_stopped) return -1;
             }
         }
 

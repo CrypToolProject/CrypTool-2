@@ -28,7 +28,8 @@ namespace CrypTool.Plugins.MorseCode
             International_ITU,
             American_Morse,
             Continental,
-            Navy            
+            Navy,
+            TapCode
         }
         public enum ActionType
         {
@@ -50,7 +51,7 @@ namespace CrypTool.Plugins.MorseCode
 
         #region TaskPane Settings
 
-        [TaskPane("CodeCaption", "CodeTooltip", null, 0, false, ControlType.ComboBox, new string[] { "International (ITU)", "American", "Continental", "Navy" })]
+        [TaskPane("CodeCaption", "CodeTooltip", null, 0, false, ControlType.ComboBox, new string[] { "International (ITU)", "American", "Continental", "Navy", "Tap Code" })]
         public CodeType Code
         {
             get { return _codeType; }
@@ -108,7 +109,7 @@ namespace CrypTool.Plugins.MorseCode
             }
         }
 
-        [TaskPane("VolumeCaption", "VolumeTooltop", null, 4, false, ControlType.Slider, 0, 1.0)]
+        [TaskPane("VolumeCaption", "VolumeTooltip", null, 4, false, ControlType.Slider, 0, 1.0)]
         public double Volume
         {
             get { return _volume; }

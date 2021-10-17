@@ -44,7 +44,7 @@ namespace MorseCode
         public event PluginProgressChangedEventHandler OnPluginProgressChanged;
         public event EventHandler<WaveEventArgs> OnWaveFileGenerated;
 
-        public string Encode(string text)
+        public virtual string Encode(string text)
         {
             var builder = new StringBuilder();
             var uppertext = text.Trim().ToUpper();
@@ -77,7 +77,7 @@ namespace MorseCode
         /// <summary>
         /// Creates an output containing the text corresponding to the input morse code
         /// </summary>
-        public string Decode(string code)
+        public virtual string Decode(string code)
         {
             var builder = new StringBuilder();
             var tokens = Regex.Replace(code.Trim(), @" +", " ").Split(' ');
@@ -204,7 +204,7 @@ namespace MorseCode
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        private char GetKeyFromValue(string token)
+        protected char GetKeyFromValue(string token)
         {
             foreach (var s in _mapping)
             {
@@ -222,7 +222,7 @@ namespace MorseCode
         /// <param name="stringToCheck"></param>
         /// <param name="stringToSearchFor"></param>
         /// <returns></returns>
-        private int CountStringOccurence(string stringToCheck, string stringToSearchFor)
+        protected int CountStringOccurence(string stringToCheck, string stringToSearchFor)
         {
             var collection = Regex.Matches(stringToCheck, stringToSearchFor);
             return collection.Count;
@@ -250,7 +250,7 @@ namespace MorseCode
     {
         public InternationalMorseEncoder()
         {
-            // Generate our mapping between letters and the morse code
+            // Generate our mapping of letters and the morse code
             // Obtained from http://de.wikipedia.org/wiki/Morsecode
             // We use the ITU standard:
             _mapping.Add(' ', "/");
@@ -320,7 +320,7 @@ namespace MorseCode
     {
         public ContinentalMorseEncoder()
         {
-            // Generate our mapping between letters and the morse code
+            // Generate our mapping of letters and the morse code
             // Obtained from https://earlyradiohistory.us/1912code.htm
             _mapping.Add(' ', "/");
             _mapping.Add('A', ".-");
@@ -375,7 +375,7 @@ namespace MorseCode
     {
         public AmericanMorseEncoder()
         {
-            // Generate our mapping between letters and the morse code
+            // Generate our mapping of letters and the morse code
             // Obtained from https://en.wikipedia.org/wiki/Morse_code#/media/File:Morse_comparison.svg
             _mapping.Add(' ', "/");
             _mapping.Add('A', ".-");
@@ -426,7 +426,7 @@ namespace MorseCode
     {
         public NavyMorseEncoder()
         {
-            // Generate our mapping between letters and the morse code
+            // Generate our mapping of letters and the morse code
             // Obtained from https://earlyradiohistory.us/1912code.htm
             _mapping.Add(' ', "/");
             _mapping.Add('A', "--");
@@ -465,6 +465,203 @@ namespace MorseCode
             _mapping.Add('8', "-...");
             _mapping.Add('9', ".--.");
             _mapping.Add('0', "-..-");
+        }
+    }
+
+    public class TapCodeEncoder : MorseEncoder
+    {
+        public TapCodeEncoder()
+        {
+            // Generate our mapping of letters and the tap code
+            // Based on the description from Wikipedia: https://en.wikipedia.org/wiki/Tap_code
+            _mapping.Add(' ', "/");
+
+            _mapping.Add('A', ". .");
+            _mapping.Add('B', ". ..");
+            _mapping.Add('C', ". ...");
+            _mapping.Add('D', ". ....");
+            _mapping.Add('E', ". .....");
+
+            _mapping.Add('F', ".. .");
+            _mapping.Add('G', ".. ..");
+            _mapping.Add('H', ".. ...");
+            _mapping.Add('I', ".. ....");
+            _mapping.Add('J', ".. .....");
+                               
+            _mapping.Add('L', "... .");
+            _mapping.Add('M', "... ..");
+            _mapping.Add('N', "... ...");
+            _mapping.Add('O', "... ....");
+            _mapping.Add('P', "... .....");
+                               
+            _mapping.Add('Q', ".... .");
+            _mapping.Add('R', ".... ..");
+            _mapping.Add('S', ".... ...");
+            _mapping.Add('T', ".... ....");
+            _mapping.Add('U', ".... .....");
+                               
+            _mapping.Add('V', "..... .");
+            _mapping.Add('W', "..... ..");
+            _mapping.Add('X', "..... ...");
+            _mapping.Add('Y', "..... ....");
+            _mapping.Add('Z', "..... .....");
+        }
+        
+        public override string Encode(string text)
+        {
+            var uppertext = text.Trim().ToUpper();
+
+            //the tap code has C = K
+            uppertext = uppertext.Replace("K", "C");
+            var builder = new StringBuilder();
+            
+            for (var i = 0; i < uppertext.Length; i++)
+            {
+                if (_mapping.ContainsKey(uppertext[i]))
+                {
+                    //we found a corresponding tapp code and put it into the output
+                    builder.Append(_mapping[uppertext[i]]);
+                    builder.Append("  "); //after each letter, we have a longer pause
+                }
+                else if (uppertext[i] == '\r' && uppertext[i + 1] == '\n')
+                {
+                    //we detect a linebreak and put it directly into the output
+                    builder.Append("\r\n");
+                    i++;
+                }
+                else
+                {
+                    //no corresponding morse code exists for the found character
+                    builder.Append("? ");
+                }
+                ProgressChanged(((double)i) / uppertext.Length, 1);
+            }
+            //finally we have to remove the last added space
+            builder.Remove(builder.Length - 1, 1);
+            return builder.ToString();
+        }
+
+        public override string Decode(string code)
+        {
+            var builder = new StringBuilder();
+            var tokens = Regex.Replace(code.Trim(), @" +", " ").Split(' ');
+            int tokennumber = 0;
+
+            var lastToken = string.Empty;
+            bool first = true;
+
+            foreach (var currentToken in tokens)
+            {
+                tokennumber++;
+
+                if (_mapping.ContainsValue(currentToken.Trim()))
+                {     
+                    if(first == false)
+                    {
+                        //we already have a half of a token, but not the second one so we output ?
+                        builder.Append("?");
+                    }
+                    //1. Count leading linebreaks in our currentToken and put them into the output
+                    var count = CountStringOccurence(currentToken.TrimEnd(), "\r\n");
+                    for (int i = 0; i < count; i++)
+                    {
+                        builder.Append("\r\n");
+                    }
+                    //2. Now replace the trimmed token by its corresponding value
+                    builder.Append(GetKeyFromValue(currentToken.Trim()));
+                    //3. Now count trailing linebreaks and put them into the output
+                    count = CountStringOccurence(currentToken.TrimStart(), "\r\n");
+                    for (int i = 0; i < count; i++)
+                    {
+                        builder.Append("\r\n");
+                    }                  
+                    first = true;
+                    continue;
+                }                
+
+                if (!IsValidTapToken(currentToken))
+                {
+                    first = true;
+                    //1. Count leading linebreaks in our token and put them into the output
+                    var count = CountStringOccurence(currentToken.TrimEnd(), "\r\n");
+                    for (int i = 0; i < count; i++)
+                    {
+                        builder.Append("\r\n");
+                    }
+                    //2. Now replace the trimmed token by its corresponding value
+                    builder.Append("?");
+                    //3. Now count trailing linebreaks and put them into the output
+                    count = CountStringOccurence(currentToken.TrimStart(), "\r\n");
+                    for (int i = 0; i < count; i++)
+                    {
+                        builder.Append("\r\n");
+                    }
+                    continue;
+                }
+
+                //here, we create a combined token consisting of two tokens, e.g. ".. ..." 
+                if (first)
+                {
+                    lastToken = currentToken;
+                    first = false;
+                    continue;
+                }
+                else
+                {
+                    first = true;
+                }
+                var combinedToken = lastToken + " " + currentToken;
+
+                if (_mapping.ContainsValue(combinedToken))
+                {
+                    //We have no leading or trailing linebreaks because we directly found the token
+                    //So we do not need to add line breaks
+                    builder.Append(GetKeyFromValue(combinedToken));
+                }
+                else if (combinedToken.StartsWith("\r\n") || combinedToken.EndsWith("\r\n"))
+                {
+                    //1. Count leading linebreaks in our token and put them into the output
+                    var count = CountStringOccurence(combinedToken.TrimEnd(), "\r\n");
+                    for (int i = 0; i < count; i++)
+                    {
+                        builder.Append("\r\n");
+                    }
+                    //2. Now replace the trimmed token by its corresponding value
+                    builder.Append(GetKeyFromValue(combinedToken.Trim()));
+                    //3. Now count trailing linebreaks and put them into the output
+                    count = CountStringOccurence(combinedToken.TrimStart(), "\r\n");
+                    for (int i = 0; i < count; i++)
+                    {
+                        builder.Append("\r\n");
+                    }
+                }
+                else
+                {
+                    //we found a token without linebreaks and we do not have a corresponding
+                    //character value
+                    builder.Append("?");
+                }
+                ProgressChanged(((double)tokennumber) / tokens.Length, 1);
+            }
+            return builder.ToString();
+
+        }
+
+        /// <summary>
+        /// Tap tokens only consists of .
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        private bool IsValidTapToken(string token)
+        {
+            foreach(var c in token)
+            {
+                if(c != '.' && c != '\r' && c != '\n' && c != '/')
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

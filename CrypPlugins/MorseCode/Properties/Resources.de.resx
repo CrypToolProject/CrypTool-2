@@ -123,6 +123,12 @@
   <data name="ActionTooltip" xml:space="preserve">
     <value>Die Aktion die durchgeführt werden soll</value>
   </data>
+  <data name="CodeCaption" xml:space="preserve">
+    <value>Code-Art</value>
+  </data>
+  <data name="CodeTooltip" xml:space="preserve">
+    <value>Schaltet zwischen verschiedenen Morse-Code-Typen und Klopfcode um</value>
+  </data>
   <data name="Decode" xml:space="preserve">
     <value>Decodieren</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="SoundOutputTooltip" xml:space="preserve">
     <value>Generierte Sound-Samples werden hier ausgegeben</value>
+  </data>
+  <data name="Tap Code" xml:space="preserve">
+    <value>Klopfcode</value>
   </data>
   <data name="TickDurationCaption" xml:space="preserve">
     <value>Tick-Dauer</value>

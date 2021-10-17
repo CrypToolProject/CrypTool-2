@@ -599,13 +599,25 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomPrimeMSBSet(int bits)
         {
+            bool stop = false;
+            return RandomPrimeMSBSet(bits, ref stop);
+        }
+
+        /// <summary>
+        /// Returns a random prime with 'bits' bits and the MSB set.
+        /// You need this if you want to create primes with a given bitlength, just
+        /// calling RandomPrimeBits would not guarantee the bitlength of the prime.
+        /// </summary>
+        public static BigInteger RandomPrimeMSBSet(int bits, ref bool stop)
+        {
             if (bits <= 1) throw new ArithmeticException("No primes with this bitcount");
 
             BigInteger limit = ((BigInteger)1) << bits;
 
             while (true)
             {
-                var p = NextProbablePrime(SetBit(RandomIntBits(bits - 1), bits - 1));
+                var p = NextProbablePrime(SetBit(RandomIntBits(bits - 1, ref stop), bits - 1), ref stop);
+                if (stop) return -1;
                 if (p < limit) return p;
             }
         }
@@ -615,7 +627,16 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomIntMSBSet(int bits)
         {
-            return SetBit( RandomIntBits(bits - 1), bits - 1 );
+            bool stop = false;
+            return RandomIntMSBSet(bits, ref stop);
+        }
+
+        /// <summary>
+        /// Returns a random integer with 'bits' bits and the MSB set.
+        /// </summary>
+        public static BigInteger RandomIntMSBSet(int bits, ref bool stop)
+        {
+            return SetBit( RandomIntBits(bits - 1, ref stop), bits - 1 );
         }
 
         /// <summary>
@@ -623,10 +644,21 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomPrimeLimit(this BigInteger limit)
         {
+            bool stop = false;
+            return RandomPrimeLimit(limit, ref stop);
+        }
+
+        /// <summary>
+        /// Returns a random prime less than limit
+        /// </summary>
+        public static BigInteger RandomPrimeLimit(this BigInteger limit, ref bool stop)
+        {
             if (limit <= 2) throw new ArithmeticException("No primes below this limit");
 
-            while( true ) {
-                var p = NextProbablePrime(RandomIntLimit(limit));
+            while( true ) 
+            {
+                var p = NextProbablePrime(RandomIntLimit(limit, ref stop), ref stop);
+                if (stop) return -1;
                 if( p < limit ) return p;
             }
         }
@@ -636,14 +668,32 @@ namespace CrypTool.PluginBase.Miscellaneous
         /// </summary>
         public static BigInteger RandomPrimeBits(int bits)
         {
+            bool stop = false;
+            return RandomPrimeBits(bits, ref stop);
+        }
+
+        /// <summary>
+        /// Returns a random prime less than 2^bits
+        /// </summary>
+        public static BigInteger RandomPrimeBits(int bits, ref bool stop)
+        {
             if (bits < 0) throw new ArithmeticException("Enter a positive bitcount");
-            return RandomPrimeLimit( ((BigInteger)1) << bits );
+            return RandomPrimeLimit(((BigInteger)1) << bits, ref stop);
         }
 
         /// <summary>
         /// Returns a random integer less than limit
         /// </summary>
         public static BigInteger RandomIntLimit(this BigInteger limit)
+        {
+            bool stop = false;
+            return RandomIntLimit(limit, ref stop);
+        }
+
+        /// <summary>
+        /// Returns a random integer less than limit
+        /// </summary>
+        public static BigInteger RandomIntLimit(this BigInteger limit, ref bool stop)
         {
             if (limit <= 0) throw new ArithmeticException("Enter a positive limit");
 
@@ -659,6 +709,10 @@ namespace CrypTool.PluginBase.Miscellaneous
 
             while (true)
             {
+                if (stop)
+                {
+                    return -1;
+                }
                 rng.GetBytes(buffer);
                 buffer[n - 1] &= (byte)mask;
                 var p = new BigInteger(buffer);
@@ -666,16 +720,28 @@ namespace CrypTool.PluginBase.Miscellaneous
             }
         }
 
+        public static BigInteger RandomIntBits(int bits)
+        {
+            bool stop = false;
+            return RandomIntBits(bits, ref stop);
+        }
+
         /// <summary>
         /// Returns a random integer less than 2^bits
         /// </summary>
-        public static BigInteger RandomIntBits(int bits)
+        public static BigInteger RandomIntBits(int bits, ref bool stop)
         {
             if (bits < 0) throw new ArithmeticException("Enter a positive bitcount");
-            return RandomIntLimit( ((BigInteger)1) << bits );
+            return RandomIntLimit( ((BigInteger)1) << bits , ref stop);
         }
 
-        public static BigInteger NextProbablePrime( this BigInteger n )
+        public static BigInteger NextProbablePrime(this BigInteger n)
+        {
+            bool stop = false;
+            return NextProbablePrime(n, ref stop);
+        }
+
+        public static BigInteger NextProbablePrime( this BigInteger n, ref bool stop )
         {
             if (n < 0) throw new ArithmeticException("NextProbablePrime cannot be called on value < 0");
             if (n <= 2) return 2;
@@ -683,16 +749,17 @@ namespace CrypTool.PluginBase.Miscellaneous
             if (n == 3) return 3;
             BigInteger r = n % 6;
             if (r == 3) n += 2;
-            if (r == 1) { if (IsProbablePrime(n)) return n; else n += 4; }
+            if (r == 1) { if (IsProbablePrime(n, ref stop)) return n; else n += 4; }
             
             // at this point n mod 6 = 5
 
             while (true)
             {
-                if (IsProbablePrime(n)) return n;
+                if (IsProbablePrime(n, ref stop)) return n;
                 n += 2;
-                if (IsProbablePrime(n)) return n;
+                if (IsProbablePrime(n, ref stop)) return n;
                 n += 4;
+                if (stop) return -1;
             }
         }
 
@@ -716,15 +783,30 @@ namespace CrypTool.PluginBase.Miscellaneous
                 n -= 4;
             }
         }
-        
+
         public static bool IsProbablePrime(this BigInteger n)
+        {
+            bool stop = false;
+            return IsProbablePrime(n, ref stop);
+        }
+
+        public static bool IsProbablePrime(this BigInteger n, ref bool stop)
         {
             n = BigInteger.Abs(n);
 
             // test small numbers
             
             if (n < smallPrimesLimit) return smallPrimesSet.Contains(n);
-            if (smallPrimes.Any(p => n % p == 0)) return false;
+
+            //if (smallPrimes.Any(p => n % p == 0)) return false;
+            // previous line converted to foreach-loop to allow to stop the search
+            foreach (var p in smallPrimes)
+            {
+                if (n % p == 0 || stop)
+                {
+                    return false;
+                }
+            }      
 
             // perform Miller-Rabin Test
 
@@ -740,17 +822,26 @@ namespace CrypTool.PluginBase.Miscellaneous
                 n < 341550071728321 ? new int[] { 2, 3, 5, 7, 11, 13, 17 } :
                 n < 3825123056546413051 ? new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23 } :
                 /*n < 318665857834031151167461*/ new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37 };
-
-            return tests.All(a => IsStrongPseudoprime(n, a));
+            
+            foreach( var test in tests)
+            {
+                if(!IsStrongPseudoprime(n, test, ref stop))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
 
-        public static bool IsStrongPseudoprime(BigInteger n, BigInteger a)
+        public static bool IsStrongPseudoprime(BigInteger n, BigInteger a, ref bool stop)
         {
             BigInteger d = n - 1;
             int s = 0;
 
-            while ((d & 1) == 0) {
+            while ((d & 1) == 0) 
+            {
+                if (stop) return false;
                 d >>= 1;
                 s++;
             }
@@ -758,7 +849,9 @@ namespace CrypTool.PluginBase.Miscellaneous
             BigInteger t = BigInteger.ModPow(a, d, n);
             if (t == 1) return true;
 
-            while (s > 0) {
+            while (s > 0) 
+            {
+                if (stop) return false;
                 if (t == n - 1) return true;
                 t = BigInteger.ModPow(t, 2, n);
                 s--;
@@ -964,13 +1057,13 @@ namespace CrypTool.PluginBase.Miscellaneous
             }
         }
 
-        public static Dictionary<BigInteger, long> Factorize(this BigInteger n)
+        public static Dictionary<BigInteger, long> Factorize(this BigInteger n, ref bool stop)
         {
             bool isFactorized;
-            return n.Factorize(n, out isFactorized);
+            return n.Factorize(n, out isFactorized, ref stop);
         }
 
-        public static Dictionary<BigInteger, long> Factorize(this BigInteger n, BigInteger limit, out bool isFactorized)
+        public static Dictionary<BigInteger, long> Factorize(this BigInteger n, BigInteger limit, out bool isFactorized, ref bool stop)
         {
             Dictionary<BigInteger, long> factors = new Dictionary<BigInteger, long>();
             BigInteger value = (n < 0) ? -n : n;
@@ -983,15 +1076,19 @@ namespace CrypTool.PluginBase.Miscellaneous
                 return factors;
             }
 
-            if (value.IsProbablePrime())
+            if (value.IsProbablePrime(ref stop))
             {
                 factors[value] = 1;
                 isFactorized = true;
                 return factors;
             }
 
-            for (BigInteger factor = 2; ; factor = (factor + 1).NextProbablePrime())
+            for (BigInteger factor = 2; ; factor = (factor + 1).NextProbablePrime(ref stop))
             {
+                if (stop)
+                {
+                    break;
+                }
                 if (factor * factor > value)
                 {
                     factors[value] = 1;
@@ -1014,6 +1111,10 @@ namespace CrypTool.PluginBase.Miscellaneous
                     {
                         value /= factor;
                         factors[factor]++;
+                        if (stop)
+                        {
+                            break;
+                        }
                     }
                     while (value % factor == 0);
 
@@ -1023,15 +1124,15 @@ namespace CrypTool.PluginBase.Miscellaneous
                         break;
                     }
 
-                    if (value.IsProbablePrime())
+                    if (value.IsProbablePrime(ref stop))
                     {
                         factors[value] = 1;
                         isFactorized = true;
                         break;
                     }
                 }
+                
             }
-
             return factors;
         }
 
@@ -1047,7 +1148,8 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static List<BigInteger> Divisors(this BigInteger n)
         {
-            return Divisors(n.Factorize());
+            bool stop = false;
+            return Divisors(n.Factorize(ref stop));
         }
 
         public static List<BigInteger> Divisors(Dictionary<BigInteger, long> factors)
@@ -1080,12 +1182,14 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static BigInteger SumOfDivisors(this BigInteger n)
         {
-            return Divisors(n.Factorize()).Aggregate(BigInteger.Add);
+            bool stop = false;
+            return Divisors(n.Factorize(ref stop)).Aggregate(BigInteger.Add);
         }
 
         public static BigInteger NumberOfDivisors(this BigInteger n)
         {
-            Dictionary<BigInteger, long> factors = n.Factorize();
+            bool stop = false;
+            Dictionary<BigInteger, long> factors = n.Factorize(ref stop);
             BigInteger result = 1;
 
             foreach (var f in factors.Keys)
@@ -1097,7 +1201,8 @@ namespace CrypTool.PluginBase.Miscellaneous
         public static BigInteger Phi(this BigInteger n)
         {
             if (n == 0) return 0;
-            return Phi(n.Factorize());
+            bool stop = false;
+            return Phi(n.Factorize(ref stop));
         }
 
         public static BigInteger Phi(Dictionary<BigInteger, long> factors)
@@ -1116,20 +1221,38 @@ namespace CrypTool.PluginBase.Miscellaneous
 
         public static BigInteger NumberOfPrimes(BigInteger n)
         {
+            bool stop = false;
+            return NumberOfPrimes(n, ref stop);
+        }
+
+        public static BigInteger NumberOfPrimes(BigInteger n, ref bool stop)
+        {
             BigInteger count = 0;
 
-            for (BigInteger i = 2; i <= n; i = NextProbablePrime(i + 1))
+            for (BigInteger i = 2; i <= n; i = NextProbablePrime(i + 1, ref stop))
+            {
+                if (stop) return -1;
                 count++;
+            }
 
             return count;
         }
 
         public static BigInteger PrimeNumber(BigInteger n)
         {
+            bool stop = false;
+            return PrimeNumber(n, ref stop);
+        }
+
+        public static BigInteger PrimeNumber(BigInteger n, ref bool stop)
+        {
             BigInteger prime = 2;
 
             for (BigInteger i = 0; i < n; i++)
-                prime = NextProbablePrime(prime + 1);
+            {
+                prime = NextProbablePrime(prime + 1, ref stop);
+                if (stop) return -1;
+            }
 
             return prime;
         }        
