@@ -16,7 +16,7 @@
         <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext"/>
         <replacement key="$Ciphertext$" value="Geheimtext"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Chaocipher-Verfahrens. Dieses Verfahren wurde im 20. Jahrhundert entwickelt, jedoch wurde es erst im Jahre 2010 durch die Erben des Erfinders öffentlich zugänglich gemacht. Das Verfahren basiert auf zwei Scheiben, die in der Visualisierung der Komponente dargestellt werden. Auf der rechten Seite der Visualisierung werden die durchgeführten Schritte beschrieben. Die Zeichenanordnungen auf den Scheiben kann über den Schlüssel bestimmt werden." />
+        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise des Chaocipher-Verfahrens.\line\line Dieses Verfahren wurde im 20. Jahrhundert entwickelt, jedoch wurde es erst im Jahre 2010 durch die Erben des Erfinders öffentlich zugänglich gemacht.\line\line Das Verfahren basiert auf zwei Scheiben, die in der Visualisierung der Komponente dargestellt werden. Auf der rechten Seite der Visualisierung werden die durchgeführten Schritte beschrieben. Die Zeichenanordnungen auf den Scheiben kann über den Schlüssel bestimmt werden." />
     </replacements>
 <!--en-->
     <title lang="en">Chaocipher</title>
@@ -29,7 +29,7 @@
         <replacement key="$encipheredPlaintext$" value="Decrypted plain text"/>
         <replacement key="$Ciphertext$" value="Ciphertext"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="This template demonstrates how the Chaocipher process works. This method was developed in the 20th century, but it was only made publicly available in 2010 by the inventor's heirs. The procedure is based on two slices, which are shown in the visualization of the component. On the right side of the visualization the performed steps are described. The character arrangements on the slices can be determined via the key." />
+        <replacement key="$memo$" value="This template demonstrates how the Chaocipher process works.\line\line This method was developed in the 20th century, but it was only made publicly available in 2010 by the inventor's heirs.\line\line The procedure is based on two slices, which are shown in the visualization of the component. On the right side of the visualization the performed steps are described. The character arrangements on the slices can be determined via the key." />
     </replacements>
 <!--zh-ch-->
     <title lang="zh">Chaocipher</title>
@@ -42,7 +42,7 @@
         <replacement key="$encipheredPlaintext$" value="解密后的纯文本"/>
         <replacement key="$Ciphertext$" value="密码文本"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="这个模板展示了Chaocipher的工作过程。这种方法是在20世纪开发的，但直到2010年才由发明者的继承人公开提供。该程序以两个切片为基础，在组件的可视化中显示。在可视化的右侧，描述了所执行的步骤。切片上的字符排列可以通过键来确定。" />
+        <replacement key="$memo$" value="这个模板展示了Chaocipher的工作过程。\line\line 这种方法是在20世纪开发的，但在2010年才由发明者的继承人公开。\line\line 这个过程是基于两个切片，在组件的可视化中显示。在可视化的右侧描述了所执行的步骤。切片上的字符排列可以通过键来确定。" />
     </replacements>
 <!--ru-->
     <title lang="ru">шифр</title>
@@ -55,6 +55,6 @@
         <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст"/>
         <replacement key="$Ciphertext$" value="Шифротекст"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс Chaocipher. Этот метод был разработан в 20 веке, но только в 2010 году наследники изобретателя сделали его общедоступным. Процедура основана на двух срезах, которые показаны в визуализации компонента. В правой части визуализации описаны выполненные шаги. Расположение символов на дисках можно определить с помощью ключа." />
+        <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает процесс Chaocipher.\line\line Этот метод был разработан в 20 веке, но стал общедоступным только в 2010 году благодаря наследникам изобретателя.\line\line Процедура основана на двух срезах, которые показаны в визуализации компонента. В правой части визуализации описаны выполняемые шаги. Расположение символов на срезах можно определить с помощью ключа." />
     </replacements>
 </sample>

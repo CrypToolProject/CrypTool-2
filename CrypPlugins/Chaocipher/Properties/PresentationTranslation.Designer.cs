@@ -142,7 +142,7 @@ namespace CrypTool.Chaocipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In the last pass, the position of the characters does not have to be changed.
+        ///   Looks up a localized string similar to In the last pass, the position of the characters is not changed.
         /// </summary>
         public static string NotPermutateOnLastChar {
             get {

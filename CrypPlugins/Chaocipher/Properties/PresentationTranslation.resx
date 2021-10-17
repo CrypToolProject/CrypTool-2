@@ -118,55 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BringCharToZenith" xml:space="preserve">
-	  <value>Rotate until {0} is at the zenith. Current character at the zenith: {1}</value>
+    <value>Rotate until {0} is at the zenith. Current character at the zenith: {1}</value>
   </data>
   <data name="BringCipherCharToZenith" xml:space="preserve">
-	  <value>Drehe, bis {0} am Zenith steht. Aktuelles Zeichen am Zenith: {1}</value>
+    <value>Drehe, bis {0} am Zenith steht. Aktuelles Zeichen am Zenith: {1}</value>
   </data>
   <data name="CharBroughtToZenith" xml:space="preserve">
-	  <value>The plaintext character {0} is now at the zenith</value>
+    <value>The plaintext character {0} is now at the zenith</value>
   </data>
   <data name="NotPermutateOnLastChar" xml:space="preserve">
-	  <value>In the last pass, the position of the characters does not have to be changed</value>
+    <value>In the last pass, the position of the characters is not changed</value>
   </data>
   <data name="CipherCharBroughtToZenith" xml:space="preserve">
-	  <value>The cipher character {0} is now at the zenith</value>
+    <value>The cipher character {0} is now at the zenith</value>
   </data>
   <data name="PermutateLeftDisk" xml:space="preserve">
-	  <value>Start swapping the characters on the plaintext disk</value>
+    <value>Start swapping the characters on the plaintext disk</value>
   </data>
   <data name="PermutateLeftDiskInsertChar" xml:space="preserve">
-	  <value>Insert the character {0} at the position of the nardir</value>
+    <value>Insert the character {0} at the position of the nardir</value>
   </data>
   <data name="PermutateLeftDiskMoveChars" xml:space="preserve">
-	  <value>Move the character {0} one position counterclockwise</value>
+    <value>Move the character {0} one position counterclockwise</value>
   </data>
   <data name="PermutateLeftDiskRemoveChar" xml:space="preserve">
-	  <value>Remove the character {0} at position {1}</value>
+    <value>Remove the character {0} at position {1}</value>
   </data>
   <data name="PermutateRightDiskInsertChar" xml:space="preserve">
-	  <value>Insert the character {0} at the position of the nardir</value>
+    <value>Insert the character {0} at the position of the nardir</value>
   </data>
   <data name="PermutateRightDisk" xml:space="preserve">
-	  <value>Start swapping the characters on the ciphertext disk</value>
+    <value>Start swapping the characters on the ciphertext disk</value>
   </data>
   <data name="PermutateRightDiskMoveChars" xml:space="preserve">
-	  <value>Move the character {0} one position counterclockwise</value>
+    <value>Move the character {0} one position counterclockwise</value>
   </data>
   <data name="Begin" xml:space="preserve">
-	  <value>Start encoding of "{0}"</value>
+    <value>Start encoding of "{0}"</value>
   </data>
   <data name="End" xml:space="preserve">
-	  <value>End encryption. Cipher text is: {0}</value>
+    <value>End encryption. Cipher text is: {0}</value>
   </data>
   <data name="PermutateRightDiskRemoveChar" xml:space="preserve">
-	  <value>Remove the character {0} at position {1}</value>
+    <value>Remove the character {0} at position {1}</value>
   </data>
   <data name="CharCanNotBeEnciphered" xml:space="preserve">
-	  <value>The character {0} could not be enciphered</value>
+    <value>The character {0} could not be enciphered</value>
   </data>
   <data name="CharCanNotBeDeciphered" xml:space="preserve">
-	  <value>The character {0} could not be deciphered</value>
+    <value>The character {0} could not be deciphered</value>
   </data>
   <data name="Nadir" xml:space="preserve">
     <value>Nadir</value>
@@ -175,6 +175,6 @@
     <value>Zenith</value>
   </data>
   <data name="PermutateRightDiskMoveByOne" xml:space="preserve">
-	  <value>Rotate the ciphertext disk one more position</value>
+    <value>Rotate the ciphertext disk one more position</value>
   </data>
 </root>
