@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*
+   Copyright 2021 CrypTool 2 Team <ct2contact@CrypTool.org>
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -37,6 +52,8 @@ namespace CrypTool.CrypAnalysisViewControl
 
         public List<ViewLabel> ResultHeaderLabels { get; } = new List<ViewLabel>();
 
+        public List<SectionControl> AdditionalHeaders { get; } = new List<SectionControl>();
+
         public List<ViewLabel> ResultProgressLabels { get; } = new List<ViewLabel>();
 
         public List<SectionControl> AdditionalSections { get; } = new List<SectionControl>();
@@ -46,14 +63,13 @@ namespace CrypTool.CrypAnalysisViewControl
             string packUri = @"CrypAnalysisViewControl;component/Themes/Generic.xaml";
             var resourceDictionary = Application.LoadComponent(new Uri(packUri, UriKind.Relative)) as ResourceDictionary;
             Resources.MergedDictionaries.Add(resourceDictionary);
-
             Loaded += CrypAnalysisViewControl_Loaded;
         }
 
         private void CrypAnalysisViewControl_Loaded(object sender, RoutedEventArgs e)
         {
             //Add non-component children as logical children to enable binding:
-            foreach (var element in ResultHeaderLabels.Union<object>(ResultProgressLabels).Union(AdditionalSections))
+            foreach (var element in ResultHeaderLabels.Union<object>(AdditionalHeaders).Union(ResultProgressLabels).Union(AdditionalSections))
             {
                 AddLogicalChild(element);
             }

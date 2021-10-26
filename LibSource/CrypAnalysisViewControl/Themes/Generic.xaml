@@ -36,6 +36,14 @@
                                     <local:SectionViewLabelsControl ItemsSource="{Binding ResultHeaderLabels}" MinHeight="60" />
                                 </local:SectionControl>
 
+                                <ItemsControl ItemsSource="{Binding AdditionalHeaders}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                                
                                 <local:SectionControl SectionBackground="#AFE2FFCE" SectionHeaderBackground="#FF479308" SectionHeaderCaption="{Binding ResultListCaption}">
                                     <ContentPresenter Content="{TemplateBinding Content}" />
                                 </local:SectionControl>
