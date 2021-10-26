@@ -92,7 +92,7 @@ namespace CrypTool.Caesar
           {
             if (isRunning)
             {
-                settings.SetKeyByValue(value, true);
+                settings.SetKeyByValue(value, false);
             }
           }
         }
