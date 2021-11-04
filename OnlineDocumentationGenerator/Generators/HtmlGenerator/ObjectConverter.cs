@@ -349,7 +349,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                                 result.Append(string.Format("<a href=\"{0}\">{1}</a>", reference_internal.Value, linkText));
                             }
                             break;
-                        case "docRef":
+                        case "docRef":                           
                             var itemAttribute = ((XElement)node).Attribute("item");
                             if (itemAttribute != null)
                             {
@@ -357,16 +357,9 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                                 var docPage = GetEntityDocPage(itemAttribute.Value);
                                 if (string.IsNullOrEmpty(linkText))
                                 {
-                                    if (docPage != null)
-                                    {
-                                        linkText = GetEntityName(docPage);
-                                    }
-                                    else
-                                    {
-                                        linkText = itemAttribute.Value;
-                                    }
+                                    linkText = GetEntityName(docPage);
                                 }
-                                
+
                                 int dirLevel = entityDocumentationPage.DocDirPath.Split(Path.PathSeparator).Length;
                                 var d = "";
                                 for (int i = 0; i < dirLevel; i++)
@@ -380,7 +373,7 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
                                 }
                                 else
                                 {
-                                    result.Append(string.Format("<i>{0}</i>", linkText));
+                                    result.Append(string.Format("<b><font color=\"red\">{0}</font></b>", linkText));
                                 }
                             }
                             break;
@@ -475,28 +468,38 @@ namespace OnlineDocumentationGenerator.Generators.HtmlGenerator
 
         private string GetEntityLink(EntityDocumentationPage docPage)
         {
+            if(docPage == null)
+            {
+                return null;
+            }
             var lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (docPage.AvailableLanguages.Contains(lang))
             {
                 return docPage.Localizations[lang].FilePath;
             }
-            else
+            else if (docPage.AvailableLanguages.Contains("en"))
             {
                 return docPage.Localizations["en"].FilePath;
             }
+            return null;
         }
 
         private string GetEntityName(EntityDocumentationPage docPage)
         {
+            if (docPage == null)
+            {
+                return "unknown entity";
+            }
             var lang = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             if (docPage.AvailableLanguages.Contains(lang))
             {
                 return docPage.Localizations[lang].Name;
             }
-            else
+            else if(docPage.AvailableLanguages.Contains("en"))
             {
                 return docPage.Localizations["en"].Name;
             }
+            return "unknown entity";
         }
     }
 }

@@ -298,7 +298,7 @@
     <value>Der beste Klartext der während der Analyse gefunden wurde.</value>
   </data>
   <data name="PluginCaption" xml:space="preserve">
-    <value>Enigma Analyzer</value>
+    <value>Enigma-Analyse</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Komponente zur Kryptoanalyse verschiedener Typen der Enigma-Rotorschlüsselmaschine.</value>
