@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace CrypTool.T9Code.Services
 {
@@ -6,17 +7,20 @@ namespace CrypTool.T9Code.Services
     {
         private static readonly Dictionary<string, string[]> DigitToCharMapping = new Dictionary<string, string[]>
         {
-            {"2", new[] {"a", "ä", "b", "c"}},
-            {"3", new[] {"d", "e", "f"}},
-            {"4", new[] {"g", "h", "i"}},
-            {"5", new[] {"j", "k", "l"}},
-            {"6", new[] {"m", "n", "o", "ö"}},
-            {"7", new[] {"p", "q", "r", "s", "ß"}},
-            {"8", new[] {"t", "u", "ü", "v"}},
-            {"9", new[] {"w", "x", "y", "z"}},
-            {"0", new[] {" "}}
+            { "2", new[] { "a", "ä", "b", "c" } },
+            { "3", new[] { "d", "e", "f" } },
+            { "4", new[] { "g", "h", "i" } },
+            { "5", new[] { "j", "k", "l" } },
+            { "6", new[] { "m", "n", "o", "ö" } },
+            { "7", new[] { "p", "q", "r", "s", "ß" } },
+            { "8", new[] { "t", "u", "ü", "v" } },
+            { "9", new[] { "w", "x", "y", "z" } },
+            { "0", new[] { " " } }
         };
+
         private static Dictionary<string, string> _charToDigitMapping;
+
+        private static readonly StringBuilder StringBuilder = new StringBuilder();
 
         private static Dictionary<string, string> CharToDigitMapping =>
             _charToDigitMapping ?? (_charToDigitMapping = GenerateCharToDigitMapping());
@@ -37,34 +41,17 @@ namespace CrypTool.T9Code.Services
 
         public static string StringToDigit(string letters)
         {
-            var res = string.Empty;
-            foreach (var c in letters.ToLower())
+            StringBuilder.Clear();
+            var lowerLetters = letters.ToLower();
+            foreach (var c in lowerLetters)
             {
-                if (!CharToDigitMapping.ContainsKey(c.ToString()))
+                if (CharToDigitMapping.TryGetValue(c.ToString(), out var value))
                 {
-                    continue;
+                    StringBuilder.Append(value);
                 }
-                res += CharToDigitMapping[c.ToString()];
             }
 
-            return res;
-        }
-
-        public static List<string[]> DigitsToString(string digits)
-        {
-            var res = new List<string[]>();
-            foreach (var digit in digits)
-            {
-                if (!DigitToCharMapping.ContainsKey(digit.ToString()))
-                {
-                    res.Add(new[] { " " });
-                    continue;
-                }
-
-                res.Add(DigitToCharMapping[digit.ToString()]);
-            }
-
-            return res;
+            return StringBuilder.ToString();
         }
     }
 }

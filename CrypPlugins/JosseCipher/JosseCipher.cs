@@ -273,7 +273,7 @@ namespace CrypTool.JosseCipher
             {
                 GuiLogMessage(
                     string.Format(Resources.UnknownChar,
-                        new string(unparsedPlainText.Where(x => !_char2Int.ContainsKey(x)).ToArray())),
+                        new string(unparsedPlainText.Where(x => !_char2Int.ContainsKey(x)).Distinct().ToArray())),
                     NotificationLevel.Warning);
             }
 

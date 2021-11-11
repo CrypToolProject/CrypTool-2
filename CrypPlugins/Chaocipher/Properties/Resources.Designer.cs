@@ -124,7 +124,7 @@ namespace CrypTool.Chaocipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Input.
         /// </summary>
         public static string Input {
             get {
@@ -151,7 +151,7 @@ namespace CrypTool.Chaocipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Schlüssel.
+        ///   Looks up a localized string similar to Key.
         /// </summary>
         public static string KeyCaption {
             get {
@@ -268,7 +268,7 @@ namespace CrypTool.Chaocipher.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Step no..
+        ///   Looks up a localized string similar to No..
         /// </summary>
         public static string StepCount {
             get {

@@ -11,7 +11,7 @@ namespace CrypTool.T9Code.Services
         private Dictionary<int, Grams> _gramsCache =
             new Dictionary<int, Grams>();
 
-        private int _languageIndex;
+        private int? _languageIndex;
 
         private void FillCache()
         {
@@ -20,7 +20,8 @@ namespace CrypTool.T9Code.Services
             {
                 try
                 {
-                    var grams = LanguageStatistics.CreateGrams(_languageIndex, enumValue, false);
+                    if (_languageIndex == null) continue;
+                    var grams = LanguageStatistics.CreateGrams(_languageIndex.Value, enumValue, false);
                     _gramsCache.Add(grams.GramSize(), grams);
                 }
                 catch
@@ -69,7 +70,11 @@ namespace CrypTool.T9Code.Services
 
         public void SetGramLanguage(int language)
         {
-            _gramsCache = new Dictionary<int, Grams>();
+            if (language == _languageIndex)
+            {
+                // We can return early, since language has not changed.
+                return;
+            }
             _languageIndex = language;
             FillCache();
         }

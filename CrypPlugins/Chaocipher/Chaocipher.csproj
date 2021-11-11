@@ -90,8 +90,8 @@
       <DependentUpon>PresentationTranslation.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\AnimationPlayerService.cs" />
@@ -141,20 +141,16 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\PresentationTranslation.ru.resx" />
     <EmbeddedResource Include="Properties\PresentationTranslation.de.resx" />
+    <EmbeddedResource Include="Properties\PresentationTranslation.zh-cn.resx" />
     <EmbeddedResource Include="Properties\PresentationTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\PresentationTranslation.zh-cn.resx">
-      <DependentUpon>PresentationTranslation.resx</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.zh-cn.resx">
-      <DependentUpon>Resources.resx</DependentUpon>
+      <LastGenOutput>PresentationTranslation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-cn.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
