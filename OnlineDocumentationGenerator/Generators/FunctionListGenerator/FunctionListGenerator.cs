@@ -323,14 +323,13 @@ namespace OnlineDocumentationGenerator.Generators.FunctionListGenerator
                 if (!Directory.Exists(OutputDir))
                     Directory.CreateDirectory(OutputDir);
 
-//                 var streamWriter = new StreamWriter(filePath, false, Encoding.GetEncoding("iso-8859-15"));
                 var streamWriter = new StreamWriter(filePath, false, Encoding.GetEncoding("utf-8"));
                 streamWriter.Write(content);
                 streamWriter.Close();
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(string.Format("Error while trying to write file \"{0}\"!\n\nMessage: {1}", filePath, ex.Message));
+                Console.WriteLine("Error while trying to write file: {0}, Message: {1}", filePath, ex.Message);
             }
         }
     }
