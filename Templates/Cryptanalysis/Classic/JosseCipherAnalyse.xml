@@ -35,12 +35,12 @@
         <replacement key="$calculatedKey$" value="Calculated key" />
         <replacement key="$memo$" value="This component provides an analysis for the Josse cipher method. For this purpose, hillclimbing is used to try to decrypt the text specified in the upper left text input. The text input with the name 'Key' is only used for encrypting. In the text output 'Calculated key' the calculated key of hillclimbing is displayed. It can happen that this procedure calculates a key that contains the correct characters, but in the wrong order." />
     </replacements>
-    <!-- zh-cn -->
-    <title lang="zh-cn">Josse Cipher Analysis</title>
-    <summary lang="zh-cn">轻松使用<i>Josse Cipher</i>分析。</summary>
-    <description lang="zh-cn">这个模板展示了使用Hillclimbing或Simmulated Annealing破解Josse密码的过程。这些程序可以在细节上进行调整以获得更好的结果。</description>
-    <keywords lang="zh-cn">乔塞密码，法国，战争，密码分析，爬坡法，模拟退火法</keywords>
-    <replacements lang="zh-cn">
+    <!-- zh -->
+    <title lang="zh">Josse Cipher Analysis</title>
+    <summary lang="zh">轻松使用<i>Josse Cipher</i>分析。</summary>
+    <description lang="zh">这个模板展示了使用Hillclimbing或Simmulated Annealing破解Josse密码的过程。这些程序可以在细节上进行调整以获得更好的结果。</description>
+    <keywords lang="zh">乔塞密码，法国，战争，密码分析，爬坡法，模拟退火法</keywords>
+    <replacements lang="zh">
         <replacement key="$Plaintext$" value="纯文本" />
         <replacement key="$Alphabet$" value="字母表" />
         <replacement key="$key$" value="钥匙"/>

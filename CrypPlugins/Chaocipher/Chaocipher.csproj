@@ -141,7 +141,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\PresentationTranslation.ru.resx" />
     <EmbeddedResource Include="Properties\PresentationTranslation.de.resx" />
-    <EmbeddedResource Include="Properties\PresentationTranslation.zh-cn.resx" />
+    <EmbeddedResource Include="Properties\PresentationTranslation.zh-CN.resx" />
     <EmbeddedResource Include="Properties\PresentationTranslation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PresentationTranslation.Designer.cs</LastGenOutput>
@@ -150,7 +150,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
-    <EmbeddedResource Include="Properties\Resources.zh-cn.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
