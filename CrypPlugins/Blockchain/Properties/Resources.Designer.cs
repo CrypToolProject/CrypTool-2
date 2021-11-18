@@ -133,6 +133,15 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Simulation of blockchain mining process. ähnelt.
+        /// </summary>
+        internal static string BlockchainTooltip {
+            get {
+                return ResourceManager.GetString("BlockchainTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Block hash: ähnelt.
         /// </summary>
         internal static string BlockHashUICaption {
@@ -196,16 +205,7 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Simulation of blockchain mining process. ähnelt.
-        /// </summary>
-        internal static string CrypTool_Plugins_BlockchainTooltip {
-            get {
-                return ResourceManager.GetString("CrypTool.Plugins.BlockchainTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Current hashing speed: ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die hashes/sec.: ähnelt.
         /// </summary>
         internal static string CurrentHashSpeedUICaption {
             get {
@@ -349,6 +349,15 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Invalid address name ähnelt.
+        /// </summary>
+        internal static string InvalidAddressName {
+            get {
+                return ResourceManager.GetString("InvalidAddressName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Invalid or incomplete transactions (Check format) ähnelt.
         /// </summary>
         internal static string InvalidTransactionCaption {
@@ -390,6 +399,24 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         internal static string MiningAddressErrorCaption {
             get {
                 return ResourceManager.GetString("MiningAddressErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mining difficulty: ähnelt.
+        /// </summary>
+        internal static string MiningDifficultyCaption {
+            get {
+                return ResourceManager.GetString("MiningDifficultyCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mining difficulty higher than hash algorithm ähnelt.
+        /// </summary>
+        internal static string MiningDifficultyWarning {
+            get {
+                return ResourceManager.GetString("MiningDifficultyWarning", resourceCulture);
             }
         }
         
@@ -579,6 +606,15 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         internal static string SignatureVerifiedCaption {
             get {
                 return ResourceManager.GetString("SignatureVerifiedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Statistics ähnelt.
+        /// </summary>
+        internal static string StatisticsCaption {
+            get {
+                return ResourceManager.GetString("StatisticsCaption", resourceCulture);
             }
         }
         

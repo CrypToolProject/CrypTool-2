@@ -121,7 +121,7 @@
     <value>Implements a signature creator for blockchain transactions</value>
   </data>
   <data name="BlockchainSignatureCreatorCaption" xml:space="preserve">
-    <value>BlockchainSignatureCreator</value>
+    <value>Blockchain Signature Creator</value>
   </data>
   <data name="ExceptionMessage" xml:space="preserve">
     <value>Exception occured: {0}</value>
@@ -137,5 +137,23 @@
   </data>
   <data name="TransactionInputTooltip" xml:space="preserve">
     <value>Transaction input data (Format: "From address, To address, Amount, N, D")</value>
+  </data>
+  <data name="AmountCaption" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="AmountTooltip" xml:space="preserve">
+    <value>Amount for transaction</value>
+  </data>
+  <data name="RecipientCaption" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="RecipientTooltip" xml:space="preserve">
+    <value>Recipient address data (Name, N, e, d)</value>
+  </data>
+  <data name="SenderCaption" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="SenderTooltip" xml:space="preserve">
+    <value>Sender address data (Name, N, e, d)</value>
   </data>
 </root>

@@ -138,7 +138,7 @@
   <data name="CrypTool.Plugins.BlockchainCaption" xml:space="preserve">
     <value>Blockchain</value>
   </data>
-  <data name="CrypTool.Plugins.BlockchainTooltip" xml:space="preserve">
+  <data name="BlockchainTooltip" xml:space="preserve">
     <value>Simulation of blockchain mining process.</value>
   </data>
   <data name="BlockTooltip" xml:space="preserve">
@@ -304,7 +304,7 @@
     <value>Block header</value>
   </data>
   <data name="CurrentHashSpeedUICaption" xml:space="preserve">
-    <value>Current hashing speed:</value>
+    <value>hashes/sec.:</value>
   </data>
   <data name="FromAddressUICaption" xml:space="preserve">
     <value>Sender</value>
@@ -326,5 +326,17 @@
   </data>
   <data name="GenTransactionWarning" xml:space="preserve">
     <value>Can´t make transactions in genesis block</value>
+  </data>
+  <data name="InvalidAddressName" xml:space="preserve">
+    <value>Invalid address name</value>
+  </data>
+  <data name="MiningDifficultyWarning" xml:space="preserve">
+    <value>Mining difficulty higher than hash algorithm</value>
+  </data>
+  <data name="MiningDifficultyCaption" xml:space="preserve">
+    <value>Mining difficulty:</value>
+  </data>
+  <data name="StatisticsCaption" xml:space="preserve">
+    <value>Statistics</value>
   </data>
 </root>

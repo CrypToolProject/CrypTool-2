@@ -35,7 +35,7 @@ using Newtonsoft.Json.Linq;
 namespace CrypTool.Plugins.Blockchain
 {
 
-    [Author("Eduard Scherf", "eduard.scherf@student.uni-siegen.de", "CrypTool 2 Team", "https://www.CrypTool.org")]
+    [Author("Eduard Scherf", "scherfeduard@gmail.com", "CrypTool 2 Team", "https://www.CrypTool.org")]
     [PluginInfo("CrypTool.Plugins.Blockchain.Properties.Resources", "BlockchainCaption", "BlockchainTooltip", "Blockchain/userdoc.xml", "Blockchain/icon.png")]
     [ComponentCategory(ComponentCategory.Protocols)]
     public class Blockchain : ICrypComponent
@@ -52,7 +52,8 @@ namespace CrypTool.Plugins.Blockchain
         private bool _executing = false;
         public string _hashAlgorithmName = string.Empty;
         private Address _miningAddress;        
-        private HashAlgorithm _hashAlgorithm = null;        
+        private HashAlgorithm _hashAlgorithm = null;
+        private int miningDifficultyLimit = 0;
 
         #endregion
 
@@ -118,6 +119,7 @@ namespace CrypTool.Plugins.Blockchain
                     _presentation.Timestamp.Value = string.Empty;
                     _presentation.Nonce.Value = string.Empty;
                     _presentation.CurrentHashingSpeed.Value = string.Empty;
+                    _presentation.MiningDifficulty.Value = string.Empty;
                     _presentation.TransactionList.Clear();
                     _presentation.BalanceList.Clear();
                 }, null);
@@ -127,6 +129,7 @@ namespace CrypTool.Plugins.Blockchain
 
                 //set the hash algorithm
                 SetHashAlgorithm();
+                VerifyDifficulty();
 
                 //init variables
                 _pendingTransactions.Clear();
@@ -160,6 +163,12 @@ namespace CrypTool.Plugins.Blockchain
                         }
                     }
 
+                    if (_miningAddress == null)
+                    {
+                        _miningAddress = new Address(_settings.Mining_Address);
+                        GuiLogMessage(Properties.Resources.NoValidMiningAddressCaption, NotificationLevel.Warning);
+                    }
+
                     if (_miningAddress != null) {
                         Transaction gen_transaction = new Transaction(miningreward, _miningAddress, _settings.MiningReward, "-", "-", _hashAlgorithm);
                         gen_transaction.Status = Properties.Resources.SuccessfullCaption;
@@ -181,21 +190,27 @@ namespace CrypTool.Plugins.Blockchain
 
                 ProgressChanged(0.5, 1);
 
+                //set mining address
+                foreach (var address in _allAddresses)
+                {
+                    if (_settings.Mining_Address.ToString() == address.Name)
+                    {
+                        _miningAddress = address;
+                    }
+                }
+
+                if(_miningAddress == null)
+                {
+                    _miningAddress = new Address(_settings.Mining_Address);
+                    GuiLogMessage(Properties.Resources.NoValidMiningAddressCaption, NotificationLevel.Warning);
+                }
+
                 //check transaction data
-                
+
                 if (!string.IsNullOrEmpty(Transaction_data))
                 {
                     
                         DateTime now = DateTime.Now;
-
-                        //set mining address
-                        foreach (var address in _allAddresses)
-                        {
-                            if (_settings.Mining_Address.ToString() == address.Name)
-                            {
-                                _miningAddress = address;
-                            }
-                        }
 
                     if (!string.IsNullOrEmpty(PreviousBlock)) {
                         //read transactions
@@ -210,7 +225,7 @@ namespace CrypTool.Plugins.Blockchain
                     }
                     else
                     {
-                            GuiLogMessage(Properties.Resources.GenTransactionWarning, NotificationLevel.Info);
+                            GuiLogMessage(Properties.Resources.GenTransactionWarning, NotificationLevel.Warning);
                             //read transactions
                             ReadTransactions(Transaction_data);
                     }
@@ -220,17 +235,6 @@ namespace CrypTool.Plugins.Blockchain
                 }
                 else
                 {
-                    GuiLogMessage(Properties.Resources.NoTransactionCaption,NotificationLevel.Warning);
-
-                    //set mining address
-                    foreach (var address in _allAddresses)
-                    {
-                        if (_settings.Mining_Address.ToString() == address.Name)
-                        {
-                            _miningAddress = address;
-                        }
-                    }
-
                     if (!string.IsNullOrEmpty(PreviousBlock)) {
                         Stopwatch watch = new Stopwatch();
                         watch.Start();
@@ -281,6 +285,7 @@ namespace CrypTool.Plugins.Blockchain
                     _presentation.Timestamp.Value = latestBlock.Timestamp;
                     _presentation.Nonce.Value = latestBlock.Nonce.ToString("N0");
                     _presentation.HashAlgorithm.Value = _hashAlgorithmName;
+                    _presentation.MiningDifficulty.Value = _settings.MiningDifficulty.ToString();
                 }, null);
 
                 //Serializer
@@ -322,6 +327,7 @@ namespace CrypTool.Plugins.Blockchain
             PreviousBlock = null;
             NextBlock = null;
             Transaction_data = null;
+            UpdateBalanceUI();
         }
 
         public void Initialize()
@@ -373,11 +379,23 @@ namespace CrypTool.Plugins.Blockchain
                     {
                         if (CheckAddresses(line) == true)
                         {
-                            Address newAddress = new Address(data[0]);
-                            newAddress.PublicKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[2]));
-                            newAddress.PrivateKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[3]));
-                            
-                            CreateAddress(newAddress);
+                            if (!(data[0] == "MiningReward")) {
+                                if (!(data[0] == "Mining Belohnung")) {
+                                    Address newAddress = new Address(data[0]);
+                                    newAddress.PublicKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[2]));
+                                    newAddress.PrivateKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[3]));
+
+                                    CreateAddress(newAddress);
+                                }
+                                else
+                                {
+                                    GuiLogMessage(Properties.Resources.InvalidAddressName + " '" + data[0] + "'", NotificationLevel.Warning);
+                                }
+                            }
+                            else
+                            {
+                                GuiLogMessage(Properties.Resources.InvalidAddressName + " '" + data[0] + "'", NotificationLevel.Warning);
+                            }
                         }
                         else
                         {
@@ -711,17 +729,36 @@ namespace CrypTool.Plugins.Blockchain
                 case HashAlgorithms.SHA1:
                     _hashAlgorithm = new SHA1Managed();
                     _hashAlgorithmName = "SHA1";
+                    miningDifficultyLimit = 1;
                     break;
 
                 case HashAlgorithms.SHA256:
                     _hashAlgorithm = new SHA256Managed();
                     _hashAlgorithmName = "SHA256";
+                    miningDifficultyLimit = 256;
                     break;
 
                 case HashAlgorithms.SHA512:
                     _hashAlgorithm = new SHA512Managed();
                     _hashAlgorithmName = "SHA512";
+                    miningDifficultyLimit = 512;
                     break;
+            }
+        }
+
+        public void VerifyDifficulty()
+        {
+            if (_hashAlgorithmName == "SHA1" && miningDifficultyLimit >1)
+            {
+                GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Warning);
+            }
+            if (_hashAlgorithmName == "SHA256" && miningDifficultyLimit > 256)
+            {
+                GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Warning);
+            }
+            if (_hashAlgorithmName == "SHA512" && miningDifficultyLimit > 512)
+            {
+                GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Warning);
             }
         }
 

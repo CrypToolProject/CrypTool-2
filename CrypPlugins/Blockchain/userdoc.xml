@@ -10,11 +10,13 @@
 	  A blockchain is a growing list of records, called blocks, that are linked together using cryptography. Each created block contains the hash value of the previous block, a timestamp, and the transaction data. The result is that already created blocks cannot be changed afterwards, because changing the hash preimage, will result in a change of the hash values. Since the blocks are linked together the previous blocks cannot be changed in any way.
   </introduction>
 
-  <introduction lang="de-DE">    
+  <introduction lang="de-DE">
+	  Diese Komponente implementiert eine grundlegende Blockchain und ihre Funktionalitäten.<newline/>
+	  Eine Blockchain ist eine wachsende Liste von Datensätzen, die Blöcke genannt werden und durch Kryptographie miteinander verbunden sind. Jeder erstellte Block enthält den Hash-Wert des vorherigen Blocks, einen Zeitstempel und die Transaktionsdaten. Dies hat zur Folge, dass bereits erstellte Blöcke nicht nachträglich geändert werden können, da eine Änderung des Hash-Pre-images zu einer Änderung der Hash-Werte führt. Da die Blöcke miteinander verknüpft sind, können die vorherigen Blöcke in keiner Weise verändert werden.
   </introduction>
 
   <usage lang="en">
-	  <section headline="1. Overview">
+	  <section headline="Overview">
 		  In this CT2 component you can learn and test basic blockchain functionalities. The chaining of the component simulates a blockchain with multiple mining instances. Addresses can be created, and coins can be sent from one address to another.
 		  Each blockchain component represents a mining instance and creates a new block.<newline/> 
 		  Combining the component through connectors visualizes the (block)chain.<newline/>
@@ -22,34 +24,97 @@
 		  <newline/>
 		  The user can adjust different component settings to test different scenarios within the blockchain, by adjusting the mining address, the mining reward and the hash algorithm, as well as the mining difficulty. This component uses SHA-256 as the default hash algorithm, but SHA-1, SHA-512 can also be chosen in the settings.
 	  </section>
-	  <section headline="2. Inputs">
+	  <section headline="Inputs">
 		  The blockchain component needs multiple inputs:<newline/>
 		  1. The previous block, which is an optional input, connects the blocks to create a chain. If there is no input, the block counts as a genesis block. A genesis block is the first created block within a blockchain and has no hash of a previous block. Since coins are generated each time a block is created, there is only one transaction possible in the genesis block, which is the transaction reward.<newline/>
 		  2. 2. Addresses with a name, public and private key are needed to create the users within the blockchain. First the name, then the three values for N,e and d should be specified. All values are separated with a comma. Public and private keypairs can be generated with the RSA Key Generator component.<newline/>
 		  3. 3. At last the blockchain component needs transaction data.
 		  Transaction data consists of a sender address, a recipient address. Both, sender and recipient address are called by their address name. An amount, which is to be transferred and a signature are also needed. All values are separated with a comma. The signature can be created with the Blockchain Signature Creator component, using the SHA256 hash algorithm.<newline/>
 	  </section>
-	  <section headline="3. Outputs">
+	  <section headline="Outputs">
 		  Each component has exactly one output. In this output the whole data of the generated block is stored in JSON format.<newline/>
 		  Connecting the block data output of a blockchain component with the block data input of the next blockchain component creates the chain and allows to pass the data through multiple blockchain components.<newline/>
       </section>
-      <section headline="4. Specifications">
-		  Each transaction consists of a sender address, a recipient address, the amount, which is to be transferred, a timestamp (UTC), the previous transaction hash value, and a signature.<newline/>
-		  Transaction hash calculation<newline/>
+	  <section headline="Specifications">
+		  Each transaction consists of a sender address, a recipient address, the amount, which is to be transferred, a timestamp (UTC), the previous transaction hash value, and a signature.<newline/><newline/>
+		  <b>Transaction hash calculation</b><newline/>
 		  <newline/>
 		  After the transaction is created from the transaction input, the hash value is calculated from:<newline/>
 		  <newline/>
-		  TransactionHash = FromAddress.Name.ToString() + <newline/> 
-		  ToAddress.Name.ToString() + Amount.ToString() + Timestamp.ToString()<newline/>
+		  <b>
+			  TransactionHash = FromAddress.Name.ToString() + <newline/>
+			  ToAddress.Name.ToString() + Amount.ToString() + Timestamp.ToString()
+		  </b><newline/>
 		  <newline/>
 		  Additionally, the hash value is shortened to a length of 10, to simplify and clear the user experience.<newline/>
 		  The hash value is represented in hexadecimal format.<newline/>
-		  The user can choose between multiple hash algorithms in the component settings. The default hash algorithm is SHA-256, which is also used to verify the signatures.<newline/>
+		  The user can choose between multiple hash algorithms in the component settings. The default hash algorithm is SHA-256, which is also used to verify the signatures.<newline/><newline/>
+			
+		  <b>Block hash calculation</b><newline/>
+		  The block hash value is calculated from:<newline/><newline/>
 
+		  <b>BlockHash = Timestamp.ToString() + PreviousBlockHash.ToString() + TransactionsHash()</b><newline/><newline/>
+		  <i>Note 1: The previous block hash is “0” for the first block of the blockchain.</i><newline/><newline/>
+		  <i>
+			  Note 2: TransactionsHash() is calculated from the list of transaction within the block.
+			  So the TransactionsHash() exists of the string of the hash values of the single transactions within a block.
+		  </i><newline/><newline/>
+		  <i>Note 3: A transaction to complete the mining reward is also added to the start of the transaction list each time a block is waiting to be mined. This transaction transfers the mining reward to the mining address, which was specified in the component settings.</i><newline/>
+		  <newline/><newline/>
+		  The nonce is a simple integer, which is used to generate multiple hash values from the same transaction, by increasing it by one each time the hash value is not corresponding to the mining difficulty.
+		  The user specified a mining difficulty, which determined the zeros at the beginning of the calculated hash value. Each time an incorrect hash value is calculated, which is not corresponding to the number of zeros at the start of the hash value, the nonce is increased by one and another hash value is calculated until it corresponds with the right number of zeros.
 	  </section>
   </usage>
 
   <usage lang="de-DE">
+	  <section headline="Übersicht">
+		  In dieser CT2-Komponente können Sie grundlegende Blockchain-Funktionalitäten erlernen und testen. Die Verkettung der Komponente simuliert eine Blockchain mit mehreren Mining-Instanzen. Es können Adressen erstellt und Münzen von einer Adresse zu einer anderen gesendet werden.
+		  Jede Blockchain-Komponente stellt eine Mining-Instanz dar und erzeugt einen neuen Block.<newline/>
+		  Die Kombination der Komponenten durch Konnektoren visualisiert die (Block-)Chain.<newline/>
+		  In der Regel wird jede Mining-Instanz von einem Online-Knoten ausgeführt. Zu Demonstrationszwecken kann die Mining-Adresse aus den in der Benutzereingabe enthaltenen Adressen ausgewählt werden.<newline/>
+		  <newline/>
+		  Der Benutzer kann verschiedene Komponenteneinstellungen anpassen, um verschiedene Szenarien innerhalb der Blockchain zu testen, indem er die Mining-Adresse, die Mining-Belohnung und den Hash-Algorithmus sowie die Mining-Schwierigkeit anpasst. Diese Komponente verwendet SHA-256 als Standard-Hash-Algorithmus, aber auch SHA-1 und SHA-512 können in den Einstellungen gewählt werden.
+	  </section>
+	  <section headline="Eingaben">
+		  Die Blockchain-Komponente benötigt mehrere Eingaben:<newline/>
+		  1. Der vorherige Block, der ein optionaler Eingang ist, verbindet die Blöcke, um eine Kette zu bilden. Wenn es keine Eingabe gibt, gilt der Block als Genesis-Block. Ein Genesis-Block ist der erste erstellte Block innerhalb einer Blockchain und hat keinen Hash eines vorherigen Blocks. Da jedes Mal, wenn ein Block erstellt wird, Münzen generiert werden, ist im Genesis-Block nur eine Transaktion möglich, nämlich die Transaktionsbelohnung.<newline/>
+		  2. Zum Anlegen der Nutzer in der Blockchain werden Adressen mit einem Namen, einem öffentlichen und einem privaten Schlüssel benötigt. Zuerst sollte der Name, dann die drei Werte für N, e und d angegeben werden. Alle Werte werden durch ein Komma getrennt. Öffentliche und private Schlüsselpaare können mit der Komponente RSA Key Generator erzeugt werden.<newline/>
+		  3. Schließlich benötigt die Blockchain-Komponente noch Transaktionsdaten.
+		  Transaktionsdaten bestehen aus einer Absenderadresse und einer Empfängeradresse. Sowohl die Absender- als auch die Empfängeradresse werden mit ihrem Adressnamen bezeichnet. Ein Betrag, der überwiesen werden soll und eine Unterschrift werden ebenfalls benötigt. Alle Werte werden durch ein Komma getrennt. Die Signatur kann mit der Komponente Blockchain Signature Creator unter Verwendung des Hash-Algorithmus SHA256 erstellt werden.<newline/>
+	  </section>
+	  <section headline="Ausgaben">
+		  Jede Komponente hat genau einen Ausgang. In diesem Ausgang werden die gesamten Daten des generierten Blocks im JSON-Format gespeichert.<newline/>
+		  Durch die Verbindung des Blockdatenausgangs einer Blockchain-Komponente mit dem Blockdateneingang der nächsten Blockchain-Komponente entsteht die Kette und die Daten können durch mehrere Blockchain-Komponenten geleitet werden.<newline/>
+	  </section>
+	  <section headline="Spezifikationen">
+		  Jede Transaktion besteht aus einer Absenderadresse, einer Empfängeradresse, dem zu überweisenden Betrag, einem Zeitstempel (UTC), dem Hashwert der vorherigen Transaktion und einer Signatur.<newline/><newline/>
+		  <b>Berechnung des Transaktionshashes</b><newline/>
+		  <newline/>
+		  Nachdem die Transaktion aus der Transaktions-Eingabe erstellt wurde, wird der Hash-Wert berechnet aus:<newline/>
+		  <newline/>
+		  <b>
+			  TransactionHash = FromAddress.Name.ToString() + <newline/>
+			  ToAddress.Name.ToString() + Amount.ToString() + Timestamp.ToString()
+		  </b><newline/>
+		  <newline/>
+		  Außerdem wird der Hash-Wert auf eine Länge von 10 gekürzt, um die Benutzererfahrung zu vereinfachen und übersichtlicher zu gestalten.<newline/>
+		  Der Hash-Wert wird im hexadezimalen Format dargestellt.<newline/>
+		  Der Benutzer kann in den Komponenteneinstellungen zwischen mehreren Hash-Algorithmen wählen. Der Standard-Hash-Algorithmus ist SHA-256, der auch zur Überprüfung der Signaturen verwendet wird.<newline/><newline/>
+
+		  <b>Block-Hash-Berechnung</b><newline/>
+		  Der Blockhashwert wird berechnet aus:<newline/><newline/>
+
+		  <b>BlockHash = Timestamp.ToString() + PreviousBlockHash.ToString() + TransactionsHash()</b><newline/><newline/>
+		  <i>Anmerkung 1: Der vorherige Blockhash ist "0" für den ersten Block der Blockchain.</i><newline/><newline/>
+		  <i>
+			  Anmerkung 2: TransactionsHash() wird aus der Liste der Transaktionen innerhalb des Blocks berechnet.
+			  So besteht der TransactionsHash() aus der Zeichenkette der Hashwerte der einzelnen Transaktionen innerhalb eines Blocks.
+		  </i><newline/><newline/>
+		  <i>Hinweis 3: Jedes Mal, wenn ein Block darauf wartet, gemined zu werden, wird am Anfang der Transaktionsliste auch eine Transaktion zur Belohnung hinzugefügt. Diese Transaktion überträgt die Mining-Belohnung an die Mining-Adresse, die in den Komponenteneinstellungen angegeben wurde.</i><newline/>
+		  <newline/><newline/>
+		  Die Nonce ist eine einfache Ganzzahl, die dazu dient, mehrere Hash-Werte aus derselben Transaktion zu erzeugen, indem sie jedes Mal um eins erhöht wird, wenn der Hash-Wert nicht der Mining-Schwierigkeit entspricht.
+		  Der Nutzer gibt eine Mining-Schwierigkeit an, die die Nullen am Anfang des berechneten Hash-Wertes bestimmt. Jedes Mal, wenn ein falscher Hash-Wert berechnet wird, der nicht mit der Anzahl der Nullen am Anfang des Hash-Wertes übereinstimmt, wird die Nonce um eins erhöht und ein weiterer Hash-Wert berechnet, bis er mit der richtigen Anzahl von Nullen übereinstimmt.
+	  </section>
   </usage>
   
   <presentation lang="en">
@@ -60,6 +125,10 @@
   </presentation>
   
   <presentation lang="de-DE">
+	  Die Präsentation für diese Komponente besteht aus zwei Teilen.<newline/>
+	  Beide Teile haben oben einen Header, in dem die Hash-Werte, die Nonce und die Mining-Dauer angegeben sind.<newline/>
+	  Ein Teil ist das Transaktionsprotokoll, in dem Sie die Transaktionen und deren Status sowie Fehlermeldungen im Falle einer ungültigen Transaktion sehen können.<newline/>
+	  Der andere Teil ist das Balance-Protokoll, das den Saldo aller in der Adresseingabe angegebenen Adressen erfasst.<newline/>
   </presentation>
   
   <references>

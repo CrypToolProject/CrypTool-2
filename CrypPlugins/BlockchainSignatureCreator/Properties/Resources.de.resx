@@ -138,4 +138,22 @@
   <data name="TransactionInputTooltip" xml:space="preserve">
     <value>Eingabedaten fuer Transaktionen (Format: "Sender, Empfaenger, Coins, N, d")</value>
   </data>
+  <data name="AmountCaption" xml:space="preserve">
+    <value>Coins</value>
+  </data>
+  <data name="AmountTooltip" xml:space="preserve">
+    <value>Menge an Coins für Transaktion</value>
+  </data>
+  <data name="RecipientCaption" xml:space="preserve">
+    <value>Empfänger</value>
+  </data>
+  <data name="RecipientTooltip" xml:space="preserve">
+    <value>Empfänger Adressen Daten (Name, N, e, d)</value>
+  </data>
+  <data name="SenderCaption" xml:space="preserve">
+    <value>Sender</value>
+  </data>
+  <data name="SenderTooltip" xml:space="preserve">
+    <value>Sender Adressen Daten (Name, N, e, d)</value>
+  </data>
 </root>
