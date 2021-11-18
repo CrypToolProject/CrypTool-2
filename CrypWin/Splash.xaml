@@ -42,22 +42,19 @@
 		        <TextBlock.Effect>
 			        <DropShadowEffect BlurRadius="5" ShadowDepth="0" Opacity="0.5" Color="#FF000000" Direction="180"/>
 		        </TextBlock.Effect>
-                <Run Name="VersionInfoRun" Foreground="#FFFFFFFF"/>
+                <Run FontSize="10" Name="VersionInfoRun" Foreground="#FFFFFFFF"/>
 		        <LineBreak/>
                 <LineBreak/>
-		        <Run Text="{Loc Please_report_any_bugs_you_may_encounter_on_our_website_}" Foreground="#FFFFFFFF"/>
+		        <Run FontSize="10" Text="{Loc Please_report_any_bugs_you_may_encounter_on_our_website_}" Foreground="#FFFFFFFF"/>
 		        <LineBreak/>
-		        <Run Text="{Loc Feel_free_to_contribute_to_this_project_}" Foreground="#FFFFFFFF"/>
-		        <LineBreak/>
-		        <LineBreak/>
-		        <Run Text="{Loc For_more_information_}" Foreground="#FFFFFFFF"/>
-		        <LineBreak/>
-		        <Run Text="{Loc Homepage}" Foreground="#FFFFFFFF"/>
+		        <Run FontSize="10" Text="{Loc Feel_free_to_contribute_to_this_project_}" Foreground="#FFFFFFFF"/>
 		        <LineBreak/>
 		        <LineBreak/>
-                <Hyperlink NavigateUri="https://www.cryptool.org" Foreground="#FFFFFFFF" Click="Hyperlink_Click">https://www.cryptool.org</Hyperlink>		        
+		        <Run FontSize="10" Text="{Loc For_more_information_}" Foreground="#FFFFFFFF"/>
 		        <LineBreak/>
-                <LineBreak/>		        
+		        <Run FontSize="10" Text="{Loc Homepage}" Foreground="#FFFFFFFF"/>
+		        <LineBreak/>
+		        <LineBreak/>	        
 		        <Run Name="logMessage" Text="" Foreground="#FFFFFFFF"/>                
             </TextBlock>
             <Rectangle Width="580" Height="40.7273" Canvas.Left="0" Canvas.Top="132.364" Stretch="Fill" Fill="#FFD13217"/>
