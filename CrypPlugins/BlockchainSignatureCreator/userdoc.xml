@@ -5,16 +5,30 @@
   <language culture="en"/>
   <language culture="de-DE"/>
 
-  <introduction lang="en">    
+  <introduction lang="en"> 
+	  With this component the user can create fully usable transactions for the Blockchain component, already correctly formatted.
   </introduction>
 
   <introduction lang="de-DE">    
+	  Mit dieser Komponente können schon richtig formatierte Transaktionen für die Blockchain Komponente erstellt werden.
   </introduction>
 
   <usage lang="en">
+	  This component needs three inputs:<newline/><newline/>
+	  <b>1.</b> The sender address, in the format: "Name, N, e, d".<newline/>
+	  <b>2.</b> The recipient address, in the format: "Name, N, e, d".<newline/>
+	  <b>3.</b> The amount, which should be transferred between the sender and the recipient.<newline/><newline/>
+	  
+	  The output of this component is the formatted transaction for the blockchain component, which can be copied and pasted in the transaction input of the blockchain component.
   </usage>
 
   <usage lang="de-DE">
+	  Diese Komponente benötigt drei Eingaben:<newline/><newline/>
+	  <b>1.</b> Die Absenderadresse, im Format: "Name, N, e, d".<newline/>
+	  <b>2.</b> Die Empfängeradresse, im Format: "Name, N, e, d".<newline/>
+	  <b>3.</b> Der Betrag, der zwischen dem Absender und dem Empfänger überwiesen werden soll.<newline/><newline/>
+
+	  Die Ausgabe dieser Komponente ist die formatierte Transaktion für die Blockchain-Komponente, die kopiert und in den Transaktions-Input der Blockchain-Komponente eingefügt werden kann.
   </usage>
   
   <presentation lang="en">

@@ -61,7 +61,25 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die BlockchainSignatureCreator ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Amount ähnelt.
+        /// </summary>
+        internal static string AmountCaption {
+            get {
+                return ResourceManager.GetString("AmountCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Amount for transaction ähnelt.
+        /// </summary>
+        internal static string AmountTooltip {
+            get {
+                return ResourceManager.GetString("AmountTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Blockchain Signature Creator ähnelt.
         /// </summary>
         internal static string BlockchainSignatureCreatorCaption {
             get {
@@ -84,6 +102,42 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator.Properties {
         internal static string ExceptionMessage {
             get {
                 return ResourceManager.GetString("ExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Recipient ähnelt.
+        /// </summary>
+        internal static string RecipientCaption {
+            get {
+                return ResourceManager.GetString("RecipientCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Recipient address data (Name, N, e, d) ähnelt.
+        /// </summary>
+        internal static string RecipientTooltip {
+            get {
+                return ResourceManager.GetString("RecipientTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sender ähnelt.
+        /// </summary>
+        internal static string SenderCaption {
+            get {
+                return ResourceManager.GetString("SenderCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sender address data (Name, N, e, d) ähnelt.
+        /// </summary>
+        internal static string SenderTooltip {
+            get {
+                return ResourceManager.GetString("SenderTooltip", resourceCulture);
             }
         }
         

@@ -13,12 +13,19 @@
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc PrevBlockHashUICaption}" x:Name="PreviousBlockHash" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc TimestampCaption}" x:Name="Timestamp" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc NonceCaption}" x:Name="Nonce" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc TransactionsCaption}" x:Name="Transactions" />
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc FailedTransactionCaption}" x:Name="FailedTransactions" />
             <!--Empty for layouting purposes:-->
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc HashAlgorithmUICaption}" x:Name="HashAlgorithm"/>
-            <crypanalysisviewcontrol:ViewLabel Caption="{Loc CurrentHashSpeedUICaption}" x:Name="CurrentHashingSpeed" />
         </crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+        <crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalHeaders>
+            <crypanalysisviewcontrol:SectionControl SectionHeaderCaption="{Loc StatisticsCaption}" SectionHeaderBackground="#FF5C5CFF" SectionBackground="#AFE2E2FF">
+                <crypanalysisviewcontrol:SectionViewLabelsControl>
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc TransactionsCaption}" x:Name="Transactions" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc FailedTransactionCaption}" x:Name="FailedTransactions" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc HashAlgorithmUICaption}" x:Name="HashAlgorithm"/>
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc CurrentHashSpeedUICaption}" x:Name="CurrentHashingSpeed" />
+                    <crypanalysisviewcontrol:ViewLabel Caption="{Loc MiningDifficultyCaption}" x:Name="MiningDifficulty" />
+                </crypanalysisviewcontrol:SectionViewLabelsControl>
+            </crypanalysisviewcontrol:SectionControl>
+        </crypanalysisviewcontrol:CrypAnalysisViewControl.AdditionalHeaders>
         <TabControl Width="Auto">
             <TabItem Header="{Loc TransactionsUICaption}" Width="Auto">
                 <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding TransactionList}" ResultItemAction="HandleResultItemAction">
@@ -64,7 +71,7 @@
                     </crypanalysisviewcontrol:CrypAnalysisResultListView.View>
                 </crypanalysisviewcontrol:CrypAnalysisResultListView>
             </TabItem>
-            
+
             <TabItem Header="{Loc BalanceTableCaption}" Width="Auto">
                 <crypanalysisviewcontrol:CrypAnalysisResultListView ItemsSource="{Binding BalanceList}" ResultItemAction="HandleResultItemAction">
                     <crypanalysisviewcontrol:CrypAnalysisResultListView.View>

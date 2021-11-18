@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sample>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--File name: Blockchain.xml-->
+  <!--Last edited: 2021.07.11-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'en' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="en">Blockchain Address Generator</title>
+  <summary lang="en">Usage of the <i>Blockchain Address Generator</i> Component</summary>
+  <description lang="en">Source: <external ref="http://en.wikipedia.org/wiki/Blockchain" /></description>
+  <keywords>Blockchain, Mining, Bitcoin, Block, Hash</keywords>
+  <replacements lang="en">
+	<replacement key="$name$" value="Eve"/>
+	<replacement key="$address_name$" value="Address name"/>
+	<replacement key="rsa" value="RSA Key Generator"/>
+	<replacement key="memo" value="This template generates an address that can used in the &quot;Blockchain Demo&quot; template.\line\line
+Addresses in this demo template are defined by name. The &quot;RSA Key Generator&quot; component creates a public e,N and a private key d,N. The format used by the blockchain demo template is: address,N,e,d. To use it in the other template, copy the output shown in the &quot;Final address&quot; component and paste it into the &quot;Address input&quot; component of the &quot;Blockchain Demo&quot; template.\line\line
+For demo purposes we decided to use only small RSA parameters (Range = 100 in the RSA Key Generator's settings)."/>
+	<replacement key="final_address" value="Final address"/>
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--Language 'de' starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <title lang="de">Blockchain Address Generator</title>
+  <summary lang="de">Benutzung der <i>Blockchain Address Generator</i> Komponente</summary>
+  <description lang="de"><newline /><newline />
+Quelle: <external ref="http://de.wikipedia.org/wiki/Blockchain" /></description>
+  <keywords lang="de">Blockchain, Mining, Bitcoin, Block, Hash</keywords>
+  <replacements lang="de">
+	<replacement key="$name$" value="Eve"/>
+	<replacement key="$address_name$" value="Adressen Name"/>
+	<replacement key="rsa" value="RSA Key Generator"/>
+	<replacement key="memo" value="This template generates an address that can used in the &quot;Blockchain Demo&quot; template.\line\line
+Addresses in this demo template are defined by name. The &quot;RSA Key Generator&quot; component creates a public e,N and a private key d,N. The format used by the blockchain demo template is: address,N,e,d. To use it in the other template, copy the output shown in the &quot;Final address&quot; component and paste it into the &quot;Address input&quot; component of the &quot;Blockchain Demo&quot; template.\line\line
+For demo purposes we decided to use only small RSA parameters (Range = 100 in the RSA Key Generator's settings)."/>
+	<replacement key="final_address" value="Finale Adresse"/>
+  </replacements>
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--The general section starts here:-->
+  <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <icon file="Blockchain.png" />
+  <relevantPlugins>
+    <plugin name="BlockchainSignatureCreator" />
+  </relevantPlugins>
+</sample>

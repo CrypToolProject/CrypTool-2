@@ -35,12 +35,38 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         private readonly BlockchainSignatureCreatorSettings settings = new BlockchainSignatureCreatorSettings();
 
+        string senderName;
+        string senderN;
+        string senderE;
+        string senderD;
+
+        string recipientName;
+        string recipientN;
+        string recipientE;
+        string recipientD;
+
+        string amount;
+
         #endregion
 
         #region Data Properties
 
-        [PropertyInfo(Direction.InputData, "TransactionCaption", "TransactionInputTooltip")]
-        public string Transaction
+        [PropertyInfo(Direction.InputData, "SenderCaption", "SenderTooltip")]
+        public string Sender
+        {
+            get;
+            set;
+        }
+
+        [PropertyInfo(Direction.InputData, "RecipientCaption", "RecipientTooltip")]
+        public string Recipient
+        {
+            get;
+            set;
+        }
+
+        [PropertyInfo(Direction.InputData, "AmountCaption", "AmountTooltip")]
+        public string Amount
         {
             get;
             set;
@@ -76,19 +102,21 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             try { 
 
             ProgressChanged(0, 1);
-            string transaction = Transaction;
-            var sr = new StringReader(transaction);
-            string line;
+            string sender = Sender;
+            string recipient = Recipient;
+            ReadInput();
+            var sr3 = new StringBuilder();
 
-                while ((line = sr.ReadLine()) != null)
-                {
-                    if (!line.StartsWith("#"))
-                    {
-                        string sig = createSignature(line).ToString();
-                        Signature = sig;
-                        OnPropertyChanged("Signature");
-                    }
-                }
+            BigInteger sig = createSignature(senderName, recipientName, amount, senderN, senderD);
+                sr3.Append(senderName);
+                sr3.Append(",");
+                sr3.Append(recipientName);
+                sr3.Append(",");
+                sr3.Append(amount);
+                sr3.Append(",");
+                sr3.Append(sig);
+                Signature = sr3.ToString();
+            OnPropertyChanged("Signature");               
 
             ProgressChanged(1, 1);
             }
@@ -106,7 +134,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         public void Stop()
         {
-
+            Signature = String.Empty;
         }
 
         public void Initialize()
@@ -148,14 +176,50 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         #region Helper methods
 
-        public BigInteger createSignature(string transaction)
+        public void ReadInput()
         {
-            string[] data = transaction.Split(',');      
-            string from = data[0];
-            string to = data[1];
-            double amount = double.Parse(data[2], CultureInfo.InvariantCulture.NumberFormat);
-            BigInteger N = BigInteger.Parse(data[3]);
-            BigInteger d = BigInteger.Parse(data[4]);
+            string sender = Sender;
+            string recipient = Recipient;
+
+            var sr1 = new StringReader(sender);
+            var sr2 = new StringReader(recipient);
+            string line1;
+            string line2;
+
+            amount = Amount;
+
+            while ((line1 = sr1.ReadLine()) != null)
+            {
+                if (!line1.StartsWith("#"))
+                {
+                    string[] data1 = line1.Split(',');
+                    senderName = data1[0];
+                    senderN = data1[1];
+                    senderE = data1[2];
+                    senderD = data1[3];
+                }
+            }
+
+            while ((line2 = sr2.ReadLine()) != null)
+            {
+                if (!line2.StartsWith("#"))
+                {
+                    string[] data2 = line2.Split(',');
+                    recipientName = data2[0];
+                    recipientN = data2[1];
+                    recipientE = data2[2];
+                    recipientD = data2[3];
+                }
+            }
+        }
+
+        public BigInteger createSignature(string real_from, string real_to, string real_amount, string real_N, string real_d)
+        {    
+            string from = real_from;
+            string to = real_to;
+            double amount = double.Parse(real_amount, CultureInfo.InvariantCulture.NumberFormat);
+            BigInteger N = BigInteger.Parse(real_N);
+            BigInteger d = BigInteger.Parse(real_d);
 
             var preImage = Encoding.UTF8.GetBytes(from + to + amount);          
             SHA256 sha256 = SHA256.Create();
