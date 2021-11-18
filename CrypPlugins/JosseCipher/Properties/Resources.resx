@@ -124,7 +124,7 @@
     <value>The ciphertext "{0}" is decrypted to "{1}".</value>
   </data>
   <data name="ShowPlayText" xml:space="preserve">
-    <value>Please click "Play" to show the visualisation.</value>
+    <value>Please click "Play" to show the visualization.</value>
   </data>
   <data name="DefaultAlphabet" xml:space="preserve">
     <value>abcdefghijklmnopqrstuvxyz</value>
