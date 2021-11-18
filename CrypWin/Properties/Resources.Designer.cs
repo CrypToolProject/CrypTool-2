@@ -1085,7 +1085,7 @@ namespace CrypTool.CrypWin.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die https://www.CrypTool.org/CrypTool2 ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die https://www.cryptool.org/ct2 ähnelt.
         /// </summary>
         internal static string Homepage {
             get {

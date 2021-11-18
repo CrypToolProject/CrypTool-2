@@ -160,6 +160,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.ru.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.zh-CN.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
+    </Compile>
     <Compile Include="TemplatesAnalyzer.cs" />
     <Compile Include="GeneratingWindow.xaml.cs">
       <DependentUpon>GeneratingWindow.xaml</DependentUpon>
@@ -487,6 +492,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CN.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

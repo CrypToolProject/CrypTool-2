@@ -55,7 +55,7 @@
 		        <Run Text="{Loc Homepage}" Foreground="#FFFFFFFF"/>
 		        <LineBreak/>
 		        <LineBreak/>
-                <Hyperlink NavigateUri="http://www.CrypTool.org" Foreground="#FFFFFFFF" Click="Hyperlink_Click">http://www.CrypTool.org</Hyperlink>		        
+                <Hyperlink NavigateUri="https://www.cryptool.org" Foreground="#FFFFFFFF" Click="Hyperlink_Click">https://www.cryptool.org</Hyperlink>		        
 		        <LineBreak/>
                 <LineBreak/>		        
 		        <Run Name="logMessage" Text="" Foreground="#FFFFFFFF"/>                
