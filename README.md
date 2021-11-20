@@ -1,7 +1,7 @@
 # CrypTool 2 
 ## _CrypTool 2 is the modern successor of CrypTool 1, the well-known e-learning platform for cryptography and cryptanalysis_
 
-Visit the official CrypTool website: https://www.cryptool.org
+Visit the official CrypTool website: https://www.cryptool.org/ct2
 
 ## Modern Plug’n’Play Interface / Visual Programming
 
