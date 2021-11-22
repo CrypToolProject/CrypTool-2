@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ScoreHeader" xml:space="preserve">
-    <value>Score</value>
+    <value>Cost value</value>
   </data>
   <data name="PlaintextHeader" xml:space="preserve">
     <value>Plaintext</value>
@@ -127,147 +127,141 @@
     <value>Key</value>
   </data>
   <data name="PluginName" xml:space="preserve">
-	  <value>Josse Cipher Analyzer</value>
+    <value>Josse Cipher Analyzer</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
-	  <value>Cryptanalysis of the Josse Cipher</value>
+    <value>Cryptanalysis of the Josse Cipher</value>
   </data>
   <data name="TopTenLabel" xml:space="preserve">
-	  <value>Top ten</value>
+    <value>Bestlist</value>
   </data>
   <data name="LocalLabel" xml:space="preserve">
-	  <value>Analysis</value>
+    <value>Analysis</value>
   </data>
   <data name="StartLabel" xml:space="preserve">
     <value>Start Time</value>
   </data>
   <data name="EndLabel" xml:space="preserve">
-	  <value>End Time:</value>
+    <value>End Time:</value>
   </data>
   <data name="ElapsedLabel" xml:space="preserve">
-	  <value>Elapsed Time:</value>
+    <value>Elapsed Time:</value>
   </data>
   <data name="KeysLabel" xml:space="preserve">
-	  <value>Keys/second:</value>
-  </data>
-  <data name="MessagesLabel" xml:space="preserve">
-    <value>Number of messages</value>
+    <value>Keys/second:</value>
   </data>
   <data name="KeyLengthLabel" xml:space="preserve">
-	  <value>Key length</value>
+    <value>Key length</value>
   </data>
   <data name="ModeAnalyzerModeHillclimbing" xml:space="preserve">
-	  <value>Hillclimbing</value>
+    <value>Hillclimbing</value>
   </data>
   <data name="AnalyzerMode" xml:space="preserve">
-	  <value>Analyzer mode</value>
+    <value>Analysis Mode</value>
   </data>
   <data name="AnalyzerModeTooltip" xml:space="preserve">
-    <value>The mode which is used to analyse the cipher text.</value>
+    <value>The mode which is used to analyse the ciphertext</value>
   </data>
   <data name="AttackType" xml:space="preserve">
     <value>Attack type</value>
   </data>
   <data name="CostFunctionType" xml:space="preserve">
-	  <value>Cost function</value>
+    <value>Cost function</value>
   </data>
   <data name="CostFunctionTypeTooltip" xml:space="preserve">
-	  <value>Current analyzed keylength:</value>
+    <value>The cost function which is used during the cryptanalysis</value>
   </data>
   <data name="LanguageCaption" xml:space="preserve">
-	  <value>Language</value>
+    <value>Language</value>
   </data>
   <data name="LanguageTooltip" xml:space="preserve">
-	  <value>Select the language used by the n-grams.</value>
+    <value>Sets the language of the cost function</value>
   </data>
   <data name="KeylengthCaption" xml:space="preserve">
-	  <value>Key length</value>
-  </data>
-  <data name="KeylengthTooltip" xml:space="preserve">
-	  <value>Upper bound of the keylength. The value is inclusive.</value>
+    <value>Key length</value>
   </data>
   <data name="UseSpacesCaption" xml:space="preserve">
-	  <value>Use spaces</value>
+    <value>Use spaces</value>
   </data>
   <data name="UseSpacesTooltip" xml:space="preserve">
-	  <value>Specifies whether spaces are used in the cost function. </value>
+    <value>Specifies whether spaces are used </value>
   </data>
   <data name="Key" xml:space="preserve">
-	  <value>Key</value>
+    <value>Key</value>
   </data>
   <data name="CipherTextInput" xml:space="preserve">
-	  <value>Ciphertext</value>
+    <value>Ciphertext</value>
   </data>
   <data name="CipherTextInputTooltip" xml:space="preserve">
-	  <value>Use this input to provide the ciphertext.</value>
+    <value>The ciphertext to be analyzed</value>
   </data>
   <data name="AlphabetInput" xml:space="preserve">
-	  <value>External Alphabet</value>
+    <value>Alphabet</value>
   </data>
   <data name="AlphabetInputTooltip" xml:space="preserve">
-    <value>The alphabet used by Josses  Cipher.</value>
+    <value>The alphabet used during the cryptanalysis</value>
   </data>
   <data name="PlainTextOutput" xml:space="preserve">
-	  <value>Plaintext</value>
+    <value>Plaintext</value>
   </data>
   <data name="PlainTextOutputTooltip" xml:space="preserve">
-	  <value>Output for the deciphered ciphertext.</value>
+    <value>Output for the decrypted ciphertext</value>
   </data>
   <data name="KeyOutput" xml:space="preserve">
-	  <value>Keyword</value>
+    <value>Keyword</value>
   </data>
   <data name="KeyOutputTooltip" xml:space="preserve">
-	  <value>Keyword for creating the replacement table.</value>
+    <value>Keyword found during the cryptanalysis</value>
   </data>
   <data name="Alphabet" xml:space="preserve">
-	  <value>Alphabet</value>
+    <value>Alphabet</value>
   </data>
   <data name="BaseAlphabet" xml:space="preserve">
-	  <value>ABCDEFGHIJKLMNOPQRSTUVXYZ</value>
+    <value>ABCDEFGHIJKLMNOPQRSTUVXYZ</value>
   </data>
   <data name="CFUnigrams" xml:space="preserve">
-	  <value>Unigrams</value>
+    <value>Unigrams</value>
   </data>
   <data name="CFBigrams" xml:space="preserve">
-	  <value>Bigrams</value>
+    <value>Bigrams</value>
   </data>
   <data name="CFTrigrams" xml:space="preserve">
-	  <value>Trigrams</value>
+    <value>Trigrams</value>
   </data>
   <data name="CFTetragrams" xml:space="preserve">
-	  <value>Tetragrams</value>
+    <value>Tetragrams</value>
   </data>
   <data name="CFPentragrams" xml:space="preserve">
-	  <value>Pentragrams</value>
+    <value>Pentragrams</value>
   </data>
   <data name="CFHexagrams" xml:space="preserve">
-	  <value>Hexagrams</value>
+    <value>Hexagrams</value>
   </data>
   <data name="CFIoC" xml:space="preserve">
-	  <value>IoC</value>
+    <value>IoC</value>
   </data>
   <data name="CFEntropy" xml:space="preserve">
-	  <value>Entropy</value>
+    <value>Entropy</value>
   </data>
   <data name="KeylengthToCaption" xml:space="preserve">
-	  <value>Upper bound of keylength</value>
+    <value>Upper bound of keylength</value>
   </data>
   <data name="KeylengthToTooltip" xml:space="preserve">
-	  <value>Stop the analysis after evaluating this keylength.</value>
+    <value>Stop the cryptanalysis after evaluating this keylength</value>
   </data>
   <data name="KeylengthFromCaption" xml:space="preserve">
-	  <value>Lower bound of keylength</value>
+    <value>Lower bound of keylength</value>
   </data>
   <data name="KeylengthFromTooltip" xml:space="preserve">
-	  <value>Start from this keylength when analyzing the given ciphertext.</value>
+    <value>Start from this keylength during the cryptanalysis</value>
   </data>
   <data name="Restarts" xml:space="preserve">
-	  <value>Number of Retries</value>
+    <value>Number of restarts</value>
   </data>
   <data name="RestartsTooltip" xml:space="preserve">
-	  <value>Determines how often a new key is rolled during execution. Higher values provide better results for longer keys.</value>
+    <value>Defines the number of restarts performed by the cryptanalysis algorithms</value>
   </data>
   <data name="ModeAnalyzerModeSimulatedAnnealing" xml:space="preserve">
-	  <value>Simulated annealing</value>
+    <value>Simulated annealing</value>
   </data>
 </root>
