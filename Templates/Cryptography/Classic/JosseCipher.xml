@@ -6,7 +6,7 @@
         <plugin name="TextInput" />
         <plugin name="TextOutput" />
     </relevantPlugins>
-    <title lang="de">Josse-Cipher</title>
+    <title lang="de">Josse-Chiffre</title>
     <summary lang="de">Ver- und Entschlüsselung mit der <i>Josse-Chiffre</i></summary>
     <description lang="de">Diese Vorlage zeigt einen Ver- und Entschlüsselungsprozess mit der Josse-Chiffre. Das Verfahren verfügt über eine Fehlerfortpflanzung und wurde erst im Jahre 2020 in einem wissenschaftlichen Artikel beschrieben, obwohl es 1870 entwickelt wurde.</description>
     <keywords lang="de">Josse-Chiffre, Französisch, Krieg</keywords>
@@ -15,29 +15,29 @@
         <replacement key="$Plaintext$" value="Klartext" />
         <replacement key="$CalculationSteps$" value="Rechenschritte" />
         <replacement key="$Alphabet$" value="Alphabet" />
-        <replacement key="$key$" value="Schlüssel"/>
+        <replacement key="$key$" value="Schlüsselwort"/>
         <replacement key="$keyDisplay$" value="gehim"/>
         <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext"/>
         <replacement key="$Ciphertext$" value="Geheimtext"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Josse-Chiffre. Diese Chiffre wurde 1870 entwickelt, jedoch wurde sie erst im Jahre 2020 öffentlich bekannt.\line\line Die Komponente &quot;Josse-Chiffre&quot; hat drei Eingaben: Text, Schlüsselwort und Alphabet. Hierbei sind die letzten beiden Eingaben optional. Bei der Verschlüsselung wird zunächst ein Schlüsselwort in die erste Zeile einer Ersetzungstabelle geschrieben. Anschließend werden die übrigen Zeichen des Alphabets darunter geschrieben. Die Tabelle wird genutzt, um Klartextbuchstaben in Zahlen umzuwandeln. Diese Zahlen werden dann mittels der Chiffre verschlüsselt. Die Verschlüsselung kann in der Textausgabe &quot;Rechenschritte&quot; nachvollzogen werden. Abschließend werden die resultierenden Zahlen wieder mit Hilfe der Tabelle in Buchstaben umgewandelt. " />
+        <replacement key="$memo$" value="Diese Vorlage demonstriert die Funktionsweise der Josse-Chiffre. Diese Chiffre wurde 1870 entwickelt, wurde aber erst 2020 öffentlich bekannt.\line\line Die Komponente &quot;Josse-Chiffre&quot; hat drei Eingänge: Klartext, Schlüsselwort und Alphabet. Dabei sind die letzten beiden Eingaben optional. Bei der Verschlüsselung wird zunächst ein Schlüsselwort in die erste Zeile einer Ersetzungstabelle geschrieben. Dann werden die restlichen Zeichen des Alphabets darunter geschrieben. Die Tabelle wird verwendet, um Klartextbuchstaben in Zahlen umzuwandeln. Diese Zahlen werden dann mit der Chiffre verschlüsselt. Die Verschlüsselung kann in der Textausgabe &quot;Berechnungsschritte&quot; nachvollzogen werden.\line\line Wenn Sie einen mit Josse verschlüsselten Chiffretext entschlüsseln wollen, dann schreiben Sie den Geheimtext in die Eingabekomponente &quot;Klartext&quot; und schalten in den Einstellungen der beiden &quot;Josse-Chiffre&quot;-Komponenten den Modus zwischen &quot;Verschlüsseln&quot; und &quot;Entschlüsseln&quot; um." />
     </replacements>
 <!--en-->
     <title lang="en">Josse Cipher</title>
-    <summary lang="en">Encryption and decryption with the<i>Josse Cipher</i></summary>
-    <description lang="en">This template shows how to encrypt and decrypt using the Josse cipher. The process has error propagation and was only described in a scientific article in 2020, although it was developed in 1870.</description>
+    <summary lang="en">Encryption and decryption with the <i>Josse Cipher</i></summary>
+    <description lang="en">This template shows how to encrypt and decrypt using the Josse cipher. The process has error propagation and was first described in a scientific article in 2020, although it was developed in 1870.</description>
     <keywords lang="en">Josse Cipher, French, War</keywords>
     <replacements lang="en">
         <replacement key="$Josse-Cipher$" value="Josse Cipher" />	
         <replacement key="$Plaintext$" value="Plaintext" />
         <replacement key="$CalculationSteps$" value="Calculation steps" />
         <replacement key="$Alphabet$" value="Alphabet" />
-        <replacement key="$key$" value="Key"/>
+        <replacement key="$key$" value="Keyword"/>
         <replacement key="$keyDisplay$" value="secrt"/>
         <replacement key="$encipheredPlaintext$" value="Decrypted plaintext"/>
         <replacement key="$Ciphertext$" value="Ciphertext"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="This template demonstrates the operation of the Josse cipher. This cipher was developed in 1870, but it did not become public knowledge until 2020.\line\line The &quot;Josse cipher&quot; component has three inputs: Text, Keyword and Alphabet. Here, the last two inputs are optional. During encryption, a keyword is first written in the first line of a replacement table. Then the remaining characters of the alphabet are written underneath. The table is used to convert plaintext letters into numbers. These numbers are then encrypted using the cipher. The encryption can be traced in the text output &quot;Calculation steps&quot;. Finally, the resulting numbers are converted back into letters using the table. " />
+        <replacement key="$memo$" value="This template demonstrates the operation of the Josse cipher. This cipher was developed in 1870, but it did not become public knowledge until 2020.\line\line The &quot;Josse Cipher&quot; component has three inputs: Plaintext, Keyword and Alphabet. Here, the last two inputs are optional. During encryption, a keyword is first written in the first line of a replacement table. Then the remaining characters of the alphabet are written underneath. The table is used to convert plaintext letters into numbers. These numbers are then encrypted using the cipher. The encryption can be traced in the text output &quot;Calculation steps&quot;. Finally, the resulting numbers are converted back into letters using the table.\line\line If you want to decrypt a ciphertext encrypted with Josse, then put the ciphertext into the input component &quot;Plaintext&quot; and switch in the settings of both &quot;Josse Cipher&quot; components the algorithm mode between &quot;Encrypt&quot; and &quot;Decrypt&quot;." />
     </replacements>
 <!--zh-ch-->
     <title lang="zh">Josse Cipher</title>
@@ -54,7 +54,7 @@
         <replacement key="$encipheredPlaintext$" value="解密后的纯文本"/>
         <replacement key="$Ciphertext$" value="密码文本"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="这个模板展示了乔斯密码的工作原理。这个密码是在1870年开发的，但它直到2020年才成为公众知识。文本、关键词和字母。这里，最后两个输入是可选的。在加密过程中，一个关键词首先被写入替换表的第一行。然后在下面写上字母表中的其余字符。该表用于将明文字母转换成数字。然后用密码对这些数字进行加密。加密的过程可以在文本输出&quot;计算步骤&quot;中追踪到。最后，使用表格将得到的数字转换回字母。" />
+        <replacement key="$memo$" value="这个模板展示了乔斯密码的工作原理。这个密码是在1870年开发的，但直到2020年才成为公共知识。&quot;Josse cipher&quot; 组件有三个输入：明文、关键词和字母。最后两个输入是可选的。在加密过程中，一个关键词首先被写入替换表的第一行。然后在下面写上字母表中的其余字符。该表用于将明文字母转换成数字。然后用密码对这些数字进行加密。加密过程可以在文本输出&quot;计算步骤&quot;中追踪到。如果你想解密一个用Josse加密的密码文本，在输入组件&quot;Plaintext&quot;中写入密码文本，并在两个&quot;Josse cipher-&quot;组件的设置中切换&quot;加密&quot;和&quot;解密&quot;模式。" />
     </replacements>
 <!--ru-->
     <title lang="ru">Жосса Шифра</title>
@@ -71,6 +71,6 @@
         <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст"/>
         <replacement key="$Ciphertext$" value="Шифротекст"/>
         <replacement key="$example$" value="cryptool"/>
-        <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает шифр Жосса. Этот шифр был разработан в 1870 году, но стал достоянием общественности только в 2020 году.\line\line Компонент &quot;шифра Жосса&quot; имеет три входа: Текст, ключевое слово и алфавит. Здесь последние два входа являются необязательными. При шифровании ключевое слово сначала записывается в первую строку таблицы подстановки. Затем под ними пишутся остальные символы алфавита. Таблица используется для преобразования букв открытого текста в цифры. Затем эти числа шифруются с помощью шифра. Шифрование можно проследить в текстовом выводе &quot;Шаги вычисления&quot;. Наконец, полученные числа преобразуются обратно в буквы с помощью таблицы. " />
+        <replacement key="$memo$" value="Этот шаблон демонстрирует, как работает шифр Жосса. Этот шифр был разработан в 1870 году, но стал достоянием общественности только в 2020 году.\line\line Компонент &quot;шифра Жосса&quot; имеет три входа: открытый текст, ключевое слово и алфавит. Последние два входа являются необязательными. При шифровании ключевое слово сначала записывается в первую строку таблицы подстановки. Затем под ними пишутся остальные символы алфавита. Таблица используется для преобразования букв открытого текста в цифры. Затем эти числа шифруются с помощью шифра. Шифрование можно проследить в текстовом выводе &quot;Шаги вычислений&quot;.\line\line Если вы хотите расшифровать шифрованный с помощью Josse текст, запишите его во входной компонент &quot;Обычный текст&quot; и переключите режим между &quot;Шифровать&quot; и &quot;Расшифровать&quot; в настройках двух компонентов &quot;Шифр Josse&quot;." />
     </replacements>
 </sample>

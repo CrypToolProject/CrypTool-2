@@ -8,51 +8,39 @@
   <language culture="de-DE" />
 
   <introduction lang="en">
-    Josses Cipher is a cipher invented by Major H. D. Josse (1852-1929). The method was developed in France for the Franco-Prussian War (1870-1871) and was to be used on the battlefields to transmit messages to commanders in a secure manner. The process was studied and described by Rémi Géraud-Stewart and David Naccache in 2020. <ref id="jossecipherpaper" />
+    The Josse cipher is a cipher invented by Major H. D. Josse (1852-1929). It was developed in France for the Franco-Prussian War (1870-1871) and was used on the battlefield to transmit messages in a secure manner. The cipher was studied and described by Rémi Géraud-Stewart and David Naccache in 2020. <ref id="jossecipherpaper" />. There is also a bachelor thesis in German describing the cipher and its implementation <ref id="weimann_thesis" />.
   </introduction>
 
   <introduction lang="de-DE">
-    Josses Cipher ist eine Verschlüsselung, die von Major H. D. Josse (1852-1929) erfunden wurde. Das Verfahren wurde in Frankreich für den Deutsch-Französischen Krieg (1870-1871) entwickelt und sollte auf den Schlachtfeldern eingesetzt werden, um Nachrichten an die Befehlshaber gesichert zu übermitteln. Das Verfahren wurde von Rémi Géraud-Stewart und David Naccache im Jahr 2020 untersucht und beschrieben. <ref id="jossecipherpaper" />
+    Die Josse-Chiffre ist eine Chiffre, die von Major H. D. Josse (1852-1929) erfunden wurde. Sie wurde in Frankreich für den Deutsch-Französischen Krieg (1870-1871) entwickelt und auf dem Schlachtfeld eingesetzt, um Nachrichten sicher zu übermitteln. Die Chiffre wurde von Rémi Géraud-Stewart und David Naccache im Jahr 2020 untersucht und beschrieben. <ref id="jossecipherpaper" />. Es gibt auch eine Bachelorarbeit auf Deutsch, die die Chiffre und ihre Implementierung beschreibt <ref id="weimann_thesis" />.
   </introduction>
 
   <introduction lang="ru">
-    Шифр Джосса - это шифр, изобретенный майором Х. Д. Джоссом (1852-1929). Этот метод был разработан во Франции для франко-прусской войны (1870-1871 гг.) и предназначался для использования на полях сражений для безопасной передачи сообщений командирам. Эта процедура была изучена и описана Реми Жеро-Стюартом и Давидом Наккашем в 2020 году. <ref id="jossecipherpaper" />
+    Шифр Жосса - это шифр, изобретенный майором Х. Д. Жоссом (1852-1929). Он был разработан во Франции для франко-прусской войны (1870-1871 гг.) и использовался на поле боя для безопасной передачи сообщений. Шифр был изучен и описан Реми Жеро-Стюартом и Давидом Наккашем в 2020 году. <ref id="jossecipherpaper" />. Существует также бакалаврская работа на немецком языке, описывающая шифр и его реализацию<ref id="weimann_thesis" />.
   </introduction>
 
   <introduction lang="zh-CN">
-    乔塞密码是由H.D.乔塞少校（1852-1929）发明的一种密码。该方法是在法国为普法战争（1870-1871）开发的，目的是在战场上以安全的方式向指挥官传递信息。Rémi Géraud-Stewart和David Naccache在2020年研究并描述了该程序。<ref id="jossecipherpaper" />
+    乔塞密码是由H.D.乔塞少校（1852-1929）发明的一种密码。它是在法国为普法战争（1870-1871）开发的，在战场上用于安全地传输信息。Rémi Géraud-Stewart和David Naccache在2020年研究和描述了该密码。<ref id="jossecipherpaper" />。还有一篇德语学士论文描述了该密码及其实现<ref id="weimann_thesis" />。
   </introduction>
 
   <usage lang="en">
-    First, add the Josse Cipher component to your workspace. Next, connect a data source to the input 'text input' and a text output component to the output 'text output'. In the component settings, select a keyword that consists of the characters of the alphabet (note: the character 'w' is not part of the alphabet). If the keyword contains duplicate characters, the component will remove them from the second occurrence and issue a corresponding warning.<newline /><newline />
-
-    If you also need a list of the individual calculation steps, additionally connect a text output component with the output 'Calculation steps'. In the settings of the text output component, select the option 'Manual font setting' and choose a mono-space font so that the output is displayed correctly (example for mono-space fonts: Courir New, Consolas or Lucida Console).
-
-    Now start the workspace.
+    First, add the Josse Cipher component to your workspace. Next, connect a data source to the input 'text input' and a text output component to the output 'text output'. In the component settings, select a keyword that consists of the characters of the alphabet (note: the character 'w' is not part of the alphabet). If the keyword contains duplicate characters, the component removes the second occurrence and shows a corresponding warning.<newline /><newline />
+    If you also want so see a list of the individual calculation steps, additionally connect a text output component with the output 'Calculation steps'. In the settings of the text output component, select the option 'Manual font setting' and choose a mono-spaced font so that the output is displayed correctly. Examples for a mono-spaced font: 'Courier New', 'Consolas', or 'Lucida Console'.
   </usage>
 
   <usage lang="de-DE">
-    Fügen Sie zunächste die Josse-Cipher-Komponete Ihrem Arbeitsbereich hinzu. Im nächsten Schritt Verbinden Sie eine Datenquelle mit dem Eingang 'Texteingabe' und eine Textausgabe-Komponete mit dem Ausgang 'Textausgabe'. Wählen Sie in den Einstellungen der Komponente ein Schlüsselwort, das aus den Zeichen des Alphabets besteht (Achtung: Das Zeichen 'w' ist nicht Teil des alphabets). Wenn das Schlüsselwort doppelte Buchstaben enthält, wird die Komponente diese ab dem zweiten Vorkommen entfernen und eine entsprechende Warnung ausgeben.<newline /><newline />
-
-    Wenn Sie außerdem eine Auflistung der einzelnen Rechenschritte benötigen, verbinden Sie zusätzlich eine Textausgabe-Komponete mit dem Ausgang 'Berechnungsschritte'. Wählen Sie in den Einstellungen der Textausgabe-Komponente die Option 'Manuelle Schrift-Einstellung' und wählen Sie eine Mono-Space-Schriftart aus, damit die Ausgabe korrekt angezeigt wird (Beispiel für Mono-Space-Schriftarten: Courir New, Consolas oder Lucida Console).
-
-    Starten Sie nun den Arbeitsbereich.
+    Fügen Sie zunächst die Komponente Josse-Chiffre Ihrem Arbeitsbereich hinzu. Verbinden Sie dann eine Texteingabekomponente mit dem Eingang "Texteingabe" und eine Textausgabekomponente mit dem Ausgang "Textausgabe". Wählen Sie in den Komponenteneinstellungen ein Schlüsselwort, das aus den Buchstaben des Alphabets besteht (Hinweis: Der Buchstabe 'w' ist nicht Teil des Alphabets). Enthält das Schlüsselwort doppelte Buchstaben, so entfernt die Komponente deren zweite Vorkommen und zeigt eine entsprechende Warnung an.<newline /><newline />
+    Wenn Sie auch eine Liste der einzelnen Berechnungsschritte sehen wollen, schließen Sie zusätzlich eine Textausgabekomponente an dem Ausgang 'Berechnungsschritte' an. Wählen Sie in den Einstellungen der Textausgabekomponente die Option 'Manuelle Schriftart' und wählen Sie eine Mono-Spaced-Schrift, damit die Ausgabe korrekt dargestellt wird. Beispiele für Mono-Spaced-Schriftarten: 'Courier New', 'Consolas' und 'Lucida Console'.
   </usage>
 
   <usage lang="ru">
-    Сначала добавьте компонент шифра Josse в рабочее пространство. На следующем этапе подключите источник данных к входу 'text input' и компонент вывода текста к выходу 'text output'. В настройках компонента выберите ключевое слово, состоящее из символов алфавита (примечание: символ 'w' не является частью алфавита). Если ключевое слово содержит дублирующиеся символы, компонент удалит их из второго вхождения и выдаст соответствующее предупреждение.<newline /><newline />
-
-    Если вам также необходим список отдельных шагов расчета, подключите дополнительный компонент текстового вывода к выводу 'Шаги расчета'. В настройках компонента вывода текста выберите опцию "Ручная установка шрифта" и выберите моноширинный шрифт, чтобы вывод отображался правильно (пример моноширинного шрифта: Courir New, Consolas или Lucida Console).
-
-    Теперь запустите рабочую область.
+    Сначала добавьте компонент Josse Cipher в рабочее пространство. Затем подключите источник данных к входу 'text input' и компонент вывода текста к выходу 'text output'. В настройках компонента выберите ключевое слово, состоящее из символов алфавита (примечание: символ "w" не является частью алфавита). Если ключевое слово содержит дублирующиеся символы, компонент удаляет второе вхождение и показывает соответствующее предупреждение.<newline /><newline />.
+    Если вы хотите также видеть список отдельных шагов расчета, дополнительно подключите компонент вывода текста с выводом 'Шаги расчета'. В настройках компонента вывода текста выберите опцию 'Ручная установка шрифта' и выберите шрифт с моноширинным интервалом, чтобы вывод отображался правильно. Примеры моноширинного шрифта: 'Courier New', 'Consolas' или 'Lucida Console'.
   </usage>
 
   <usage lang="zh-CN">
-    首先，将Josse Cipher组件添加到你的工作区。在下一步，将一个数据源连接到输入 "text input"，将一个文本输出组件连接到输出 "text output"。在组件设置中，选择一个由字母表中的字符组成的关键词（注意：字符'w'不属于字母表的一部分）。如果该关键词包含重复的字符，该组件将从第二次出现的字符中删除，并发出适当的警告。<newline /><newline />
-
-    如果你还需要一个单独的计算步骤的列表，请将一个额外的文本输出组件连接到 "计算步骤 "的输出。在文本输出组件的设置中，选择 "手动字体设置 "选项，并选择一种单空格字体，以便正确显示输出（单空格字体的例子：Courir New, Consolas 或 Lucida Console）。
-
-    现在启动工作区。
+    首先，将Josse Cipher组件添加到你的工作区。接下来，将一个数据源连接到输入 "text input"，将一个文本输出组件连接到输出 "text output"。在组件设置中，选择一个由字母表中的字符组成的关键词（注意：字符'w'不属于字母表的一部分）。如果关键词包含重复的字符，组件会删除第二次出现的字符并显示相应的警告。<newline />newline />
+    如果你还想看到单个计算步骤的列表，可以另外连接一个文本输出组件，输出为 "计算步骤"。在文本输出组件的设置中，选择 "手动字体设置 "选项，并选择一个单行字体，以便正确显示输出。单行字体的例子："Courier New"，"Consolas"，或 "Lucida Console"。
   </usage>
   
   <presentation lang="en">
@@ -82,6 +70,15 @@
       <link url="https://doi.org/10.1080/01611194.2020.1753265" lang="zh-CN"/>
       <caption lang="zh-CN">Rémi Géraud-Stewart, David Naccache. „A French cipher from the late 19thcentury“</caption>
     </linkReference>
-    
+    <linkReference id ="weimann_thesis">
+      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="de-DE"/>
+      <caption lang="de-DE">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>      
+      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="ru"/>
+      <caption lang="ru">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>      
+      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="en"/>
+      <caption lang="en">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>      
+      <link url="https://www.cryptool.org/assets/ctp/documents/BA_Weimann.pdf" lang="zh-CN"/>
+      <caption lang="zh-CN">Niklas Weimann. „Implementierung und Visualisierung verschiedener kryptografischer Handverfahren und Codes in CrypTool 2“. 2021</caption>
+    </linkReference>    
   </references>
 </documentation>

@@ -266,7 +266,6 @@ namespace CrypTool.JosseCipher
         public string Encipher(string unparsedPlainText)
         {
             var res = string.Empty;
-            GuiLogMessage(string.Format(Resources.EncipheringInputText, InputText), NotificationLevel.Debug);
             var count = 0;
             var plainText = unparsedPlainText.Where(x => _char2Int.ContainsKey(x)).ToArray();
             if (plainText.Length != unparsedPlainText.Length)

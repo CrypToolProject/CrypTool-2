@@ -70,7 +70,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The alphabet used by Josses  Cipher. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The alphabet used by the Josse cipher ähnelt.
         /// </summary>
         internal static string AlphabetTooltip {
             get {
@@ -97,7 +97,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The ciphertext &quot;{0}&quot; is decrypted to &quot;{1}&quot;. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The ciphertext &quot;{0}&quot; is decrypted to &quot;{1}&quot; ähnelt.
         /// </summary>
         internal static string CalculationStepOutputExplanationDeciphering {
             get {
@@ -106,7 +106,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The plaintext &quot;{0}&quot; is encoded to &quot;{1}&quot;. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The plaintext &quot;{0}&quot; is encrypted to &quot;{1}&quot; ähnelt.
         /// </summary>
         internal static string CalculationStepOutputExplanationEnciphering {
             get {
@@ -115,7 +115,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Output for the calculation steps of the cipher. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Output for the calculation steps of the cipher ähnelt.
         /// </summary>
         internal static string CalculationStepOutputTooltip {
             get {
@@ -169,7 +169,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Duplicate characters in the key has been removed. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Duplicate characters in the keyword have been removed ähnelt.
         /// </summary>
         internal static string DuplicateCharsRemoved {
             get {
@@ -178,7 +178,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Enciphering {0} ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Encrypting {0} ähnelt.
         /// </summary>
         internal static string EncipheringInputText {
             get {
@@ -205,7 +205,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die External input for the alphabet used by Josses Cipher. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die External input for the alphabet ähnelt.
         /// </summary>
         internal static string InputAlphabetTooltip {
             get {
@@ -223,7 +223,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Text that should be processed with Josses Cipher. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Text that is processed by the Josse cipher ähnelt.
         /// </summary>
         internal static string InputTextTooltip {
             get {
@@ -241,7 +241,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Keyword for creating the replacement table. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Keyword for creating the replacement table ähnelt.
         /// </summary>
         internal static string KeywordToolTip {
             get {
@@ -250,7 +250,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die No keyword specified. A default key length of 5 characters is used. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die No keyword specified. A default key length of 5 characters is used ähnelt.
         /// </summary>
         internal static string KeywordTooShort {
             get {
@@ -259,7 +259,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Algorithm mode ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mode ähnelt.
         /// </summary>
         internal static string Mode {
             get {
@@ -286,7 +286,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Determine whether the component is in encrypt or decrypt mode. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Determines whether the component is in encrypt or decrypt mode ähnelt.
         /// </summary>
         internal static string ModeTooltip {
             get {
@@ -313,7 +313,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Text after being processed with the Josses Cipher. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Text after being processed with the Josse cipher ähnelt.
         /// </summary>
         internal static string OutputTextTooltip {
             get {
@@ -340,7 +340,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die A French cipher from the late 19th century. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die A French cipher from the late 19th century ähnelt.
         /// </summary>
         internal static string PluginTooltip {
             get {
@@ -367,7 +367,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Please click &quot;Play&quot; to show the visualization. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Please click &quot;Play&quot; to show the visualization ähnelt.
         /// </summary>
         internal static string ShowPlayText {
             get {
@@ -376,7 +376,7 @@ namespace CrypTool.JosseCipher.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die The text input contains unknown characters ({0}). They will be ignored in the further process. ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die The input text contains unknown characters ({0}). These are ignored in the further process ähnelt.
         /// </summary>
         internal static string UnknownChar {
             get {
