@@ -184,7 +184,7 @@
     <value>Trigramme</value>
   </data>
   <data name="StartLabel" xml:space="preserve">
-    <value>Startzeit</value>
+    <value>Startzeit:</value>
   </data>
   <data name="PluginTooltip" xml:space="preserve">
     <value>Kryptoanalyse für die Josse-Chiffre</value>
@@ -202,7 +202,7 @@
     <value>Die bei der Kryptoanalyse genutzte Kostenfunktion</value>
   </data>
   <data name="KeyLengthLabel" xml:space="preserve">
-    <value>Schlüssellänge</value>
+    <value>Schlüssellänge:</value>
   </data>
   <data name="KeysLabel" xml:space="preserve">
     <value>Schlüssel/Sekunde:</value>

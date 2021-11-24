@@ -295,7 +295,7 @@ namespace CrypTool.JosseCipherAnalyzer.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Key length ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die Key length: ähnelt.
         /// </summary>
         public static string KeyLengthLabel {
             get {
