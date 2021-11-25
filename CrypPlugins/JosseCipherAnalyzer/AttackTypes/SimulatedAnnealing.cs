@@ -168,6 +168,15 @@ namespace CrypTool.JosseCipherAnalyzer.AttackTypes
                         return;
                     }
 
+                    //check for duplicates
+                    foreach (var e in Presentation.BestList)
+                    {
+                        if (entry.Key.Equals(e.Key))
+                        {
+                            return;
+                        }
+                    }
+
                     //Insert new entry at correct place to sustain order of list:
                     var insertIndex = Presentation.BestList.TakeWhile(e => e.Value > entry.Value).Count();
                     Presentation.BestList.Insert(insertIndex, entry);
