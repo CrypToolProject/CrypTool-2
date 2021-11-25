@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <sample>
-    <icon file="JosseCipherAnalyse.png" />
+    <icon file="JosseCipherAnalyzer.png" />
     <relevantPlugins>
         <plugin name="JosseCipher" />
         <plugin name="JosseCipherAnalyzer" />
@@ -15,7 +15,7 @@
         <replacement key="$Alphabet$" value="Alphabet" />
         <replacement key="$decryptedCiphertext$" value="Entschlüsselter Geheimtext"/>
         <replacement key="$keyword$" value="Schlüsselwort" />
-        <replacement key="$memo$" value="Diese Komponente bietet eine Analyse für die Josse-Chiffre. Dazu wird mittels Hillclimbing versucht, den Text zu entschlüsseln, der in der linken oberen Texteingabe angegeben wurde.\line\line Es kann vorkommen, dass bei diesem Verfahren ein Schlüsselwort berechnet wird, der zwar die korrekten Zeichen enthält, jedoch in der falschen Reihenfolge. Der richtige Schlüssel ist &quot;GEHIM&quot;." />
+        <replacement key="$memo$" value="Diese Komponente bietet eine Analyse für die Josse-Chiffre. Dazu wird mittels Hillclimbing versucht, den Text zu entschlüsseln, der in der linken oberen Texteingabe angegeben wurde.\line\line Es kann vorkommen, dass bei diesem Verfahren ein Schlüsselwort berechnet wird, das zwar die korrekten Zeichen enthält, jedoch in der falschen Reihenfolge. Das richtige Schlüsselwort ist &quot;GEHIM&quot;." />
     </replacements>
     <!--en-->
     <title lang="en">Josse Cipher Analysis</title>
@@ -28,7 +28,7 @@
         <replacement key="$Alphabet$" value="Alphabet" />
         <replacement key="$decryptedCiphertext$" value="Decrypted Ciphertext"/>
         <replacement key="$keyword$" value="Keyword" />
-        <replacement key="$memo$" value="This component provides an analysis for the Josse cipher. For this purpose, hillclimbing is used to try to decrypt the text specified in the upper left text input.\line\line It can happen that this procedure calculates a keyword that contains the correct characters, but in the wrong order. The correct key is &quot;GEHIM&quot;." />
+        <replacement key="$memo$" value="This component provides an analysis for the Josse cipher. For this purpose, hillclimbing is used to try to decrypt the text specified in the upper left text input.\line\line It can happen that this procedure calculates a keyword that contains the correct characters, but in the wrong order. The correct keyword is &quot;GEHIM&quot;." />
     </replacements>
     <!-- zh -->
     <title lang="zh">约瑟密码分析</title>
