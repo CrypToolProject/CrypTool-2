@@ -1,4 +1,19 @@
-﻿using System;
+﻿/*                              
+   Copyright 2010 Nils Kopal, Viktor M.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+using System;
 using System.Linq;
 using System.ComponentModel;
 using System.Threading;
@@ -762,7 +777,7 @@ namespace WorkspaceManager.View.Visuals
             SelectedItems = concat;
         }
 
-        public void AddComponentVisual(PluginModel pluginModel, int mode = 0)
+        public void AddComponentVisual(PluginModel pluginModel)
         {
             if (this.State != BinEditorState.READY)
                 return;
@@ -775,14 +790,7 @@ namespace WorkspaceManager.View.Visuals
             bind.Converter = new SelectionChangedConverter();
             bin.SetBinding(ComponentVisual.IsSelectedProperty, bind);
             bin.PositionDeltaChanged += new EventHandler<PositionDeltaChangedArgs>(ComponentPositionDeltaChanged);
-
-            if (mode == 1)
-            {
-                GeneralTransform g = new ScaleTransform(Settings.Default.WorkspaceManager_EditScale, Settings.Default.WorkspaceManager_EditScale, 0, 0);
-                Point p = g.Transform(new Point(randomNumber(0, (int)(ActualWidth - bin.ActualWidth)), randomNumber(0, (int)(ActualHeight - bin.ActualHeight))));
-                bin.Position = p;
-            }
-
+           
             VisualCollection.Add(bin);
 
             //We initialize the settings after all other procedures have been finsihed, thus, settings, that are set
@@ -832,7 +840,7 @@ namespace WorkspaceManager.View.Visuals
                         }
                     }
                     if (!skip)
-                        AddComponentVisual(pluginModel, 0);
+                        AddComponentVisual(pluginModel);
                 }
 
                 foreach (ConnectionModel connModel in m.GetAllConnectionModels())
@@ -972,7 +980,7 @@ namespace WorkspaceManager.View.Visuals
                         }
                     }
                     if (!skip)
-                        AddComponentVisual(pluginModel, 0);
+                        AddComponentVisual(pluginModel);
                 }
 
                 foreach (ConnectionModel connModel in m.GetAllConnectionModels())
@@ -1045,13 +1053,7 @@ namespace WorkspaceManager.View.Visuals
             Mouse.OverrideCursor = null;
         }
 
-        private static Random random = new Random();
         private UsageStatisticPopup _usagePopup;
-
-        private double randomNumber(int min, int max)
-        {
-            return (double)random.Next(min, max);
-        }
 
         internal void SetFullscreen(ComponentVisual bin, BinComponentState state)
         {
@@ -2346,7 +2348,7 @@ namespace WorkspaceManager.View.Visuals
                 {
                     DragDropDataObject obj = e.Data.GetData("CrypTool.PluginBase.Editor.DragDropDataObject") as DragDropDataObject;
                     PluginModel pluginModel = (PluginModel)Model.ModifyModel(new NewPluginModelOperation(Util.MouseUtilities.CorrectGetPosition(sender as FrameworkElement), 0, 0, DragDropDataObjectToPluginConverter.CreatePluginInstance(obj.AssemblyFullName, obj.TypeFullName)));
-                    AddComponentVisual(pluginModel, 0);
+                    AddComponentVisual(pluginModel);
                     e.Handled = true;
                 }
                 catch (Exception ex)

@@ -14,7 +14,6 @@
    limitations under the License.
 */
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -263,8 +262,9 @@ namespace WorkspaceManager
         {
             if (!executing)
             {
-                PluginModel pluginModel = (PluginModel)WorkspaceSpaceEditorView.Model.ModifyModel(new NewPluginModelOperation(new Point(0, 0), 0, 0, type));
-                WorkspaceSpaceEditorView.AddComponentVisual(pluginModel, 1);
+                var pluginModel = (PluginModel)WorkspaceSpaceEditorView.Model.ModifyModel(new NewPluginModelOperation(new Point(0, 0), 0, 0, type));
+                WorkspaceSpaceEditorView.AddComponentVisual(pluginModel);
+             
             }
         }
 
