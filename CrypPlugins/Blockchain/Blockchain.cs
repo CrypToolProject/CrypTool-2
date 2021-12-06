@@ -108,6 +108,7 @@ namespace CrypTool.Plugins.Blockchain
         {
             _executing = true;
             ProgressChanged(0, 1);
+            ResetInternalLists();
             try
             {
                 _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
@@ -229,9 +230,8 @@ namespace CrypTool.Plugins.Blockchain
                             //read transactions
                             ReadTransactions(Transaction_data);
                     }
-                        //update user interface
-                        UpdateBalanceUI();
-
+                    //update user interface
+                    UpdateBalanceUI();
                 }
                 else
                 {
@@ -316,18 +316,21 @@ namespace CrypTool.Plugins.Blockchain
 
         public void Stop()
         {
-            _executing = false;
-
-            _chain.Clear();
-            _allAddresses.Clear();
-            _failedTransactions.Clear();
-            _pendingTransactions.Clear();
-
+            _executing = false;                              
             _miningAddress = null;
             PreviousBlock = null;
             NextBlock = null;
             Transaction_data = null;
+            ResetInternalLists();
             UpdateBalanceUI();
+        }
+
+        private void ResetInternalLists()
+        {
+            _chain.Clear();
+            _allAddresses.Clear();
+            _failedTransactions.Clear();
+            _pendingTransactions.Clear();            
         }
 
         public void Initialize()
@@ -995,7 +998,7 @@ namespace CrypTool.Plugins.Blockchain
                 ToAddress = toAddress;
                 Amount = amount;
                 Timestamp = DateTime.Now.ToString();
-                Hash = ConvertToHexString(CalculateHash(Encoding.UTF8.GetBytes(FromAddress.Name + ToAddress.Name + Amount + Timestamp), 10, hashAlgorithm));
+                Hash = ConvertToHexString(CalculateHash(Encoding.UTF8.GetBytes(FromAddress.Name + FromAddress.PublicKey + ToAddress.Name + ToAddress.PublicKey + Amount + Timestamp), 10, hashAlgorithm));
                 PrevTransactionHash = prevTransaction;
                 Signature = signature;
                 Note = string.Empty;
@@ -1095,13 +1098,14 @@ namespace CrypTool.Plugins.Blockchain
                 set;
             }
 
-            public (BigInteger, BigInteger) PublicKey
+            public (BigInteger N, BigInteger e) PublicKey
             {
                 get;
                 set;
             }
 
-            public (BigInteger, BigInteger) PrivateKey
+            [JsonIgnore]
+            public (BigInteger N, BigInteger d) PrivateKey
             {
                 get;
                 set;
@@ -1109,7 +1113,7 @@ namespace CrypTool.Plugins.Blockchain
 
             public override string ToString()
             {
-                return Name;
+                return string.Format("{0} (N={1}, e={2})", Name, PublicKey.N, PublicKey.e);
             }
 
         }
