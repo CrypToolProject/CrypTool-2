@@ -201,9 +201,6 @@
   <data name="MiningAddressErrorCaption" xml:space="preserve">
     <value>Mining Adresse ist keine ungueltig</value>
   </data>
-  <data name="MiningRewardCaption" xml:space="preserve">
-    <value>Mining Belohnung</value>
-  </data>
   <data name="NameTableCaption" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -338,5 +335,8 @@
   </data>
   <data name="StatisticsCaption" xml:space="preserve">
     <value>Statistik</value>
+  </data>
+  <data name="BlockIdUICaption" xml:space="preserve">
+    <value>Block-Id:</value>
   </data>
 </root>

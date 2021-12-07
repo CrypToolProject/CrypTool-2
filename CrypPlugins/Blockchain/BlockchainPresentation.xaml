@@ -9,6 +9,7 @@
 
     <crypanalysisviewcontrol:CrypAnalysisViewControl ResultHeaderCaption="{Loc BlockHeaderUICaption}" ResultListCaption="{Loc TransactionsUICaption}">
         <crypanalysisviewcontrol:CrypAnalysisViewControl.ResultHeaderLabels>
+            <crypanalysisviewcontrol:ViewLabel Caption="{Loc BlockIdUICaption}" x:Name="BlockId" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc BlockHashUICaption}" x:Name="BlockHash" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc PrevBlockHashUICaption}" x:Name="PreviousBlockHash" />
             <crypanalysisviewcontrol:ViewLabel Caption="{Loc TimestampCaption}" x:Name="Timestamp" />

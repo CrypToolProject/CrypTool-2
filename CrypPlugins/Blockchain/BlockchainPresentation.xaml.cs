@@ -17,13 +17,7 @@ namespace CrypTool.Plugins.Blockchain
         }
 
         private void HandleResultItemAction(ICrypAnalysisResultListEntry item)
-        {
-            /*
-            if (item is ResultEntry resultItem)
-            {
-                _updateOutputFromUserChoice(resultItem.Key, resultItem.Text);
-            }
-            */
+        {          
         }
     }
 }
