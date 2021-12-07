@@ -34,7 +34,6 @@ using Newtonsoft.Json.Linq;
 
 namespace CrypTool.Plugins.Blockchain
 {
-
     [Author("Eduard Scherf", "scherfeduard@gmail.com", "CrypTool 2 Team", "https://www.CrypTool.org")]
     [PluginInfo("CrypTool.Plugins.Blockchain.Properties.Resources", "BlockchainCaption", "BlockchainTooltip", "Blockchain/userdoc.xml", "Blockchain/icon.png")]
     [ComponentCategory(ComponentCategory.Protocols)]
@@ -102,28 +101,33 @@ namespace CrypTool.Plugins.Blockchain
       
         public void PreExecution()
         {
+            //reset the ui at first run
+            _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+            {
+                _presentation.BlockHash.Value = string.Empty;
+                _presentation.PreviousBlockHash.Value = string.Empty;
+                _presentation.Transactions.Value = string.Empty;
+                _presentation.FailedTransactions.Value = string.Empty;
+                _presentation.Timestamp.Value = string.Empty;
+                _presentation.Nonce.Value = string.Empty;
+                _presentation.CurrentHashingSpeed.Value = string.Empty;
+                _presentation.MiningDifficulty.Value = string.Empty;
+                _presentation.TransactionList.Clear();
+                _presentation.BalanceList.Clear();
+            }, null);
         }
         
         public void Execute()
         {
             _executing = true;
-            ProgressChanged(0, 1);
-            ResetInternalLists();
+            ProgressChanged(0.25, 1);                       
             try
             {
-                _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                {
-                    _presentation.BlockHash.Value = string.Empty;
-                    _presentation.PreviousBlockHash.Value = string.Empty;
-                    _presentation.Transactions.Value = string.Empty;
-                    _presentation.FailedTransactions.Value = string.Empty;
-                    _presentation.Timestamp.Value = string.Empty;
-                    _presentation.Nonce.Value = string.Empty;
-                    _presentation.CurrentHashingSpeed.Value = string.Empty;
-                    _presentation.MiningDifficulty.Value = string.Empty;
-                    _presentation.TransactionList.Clear();
-                    _presentation.BalanceList.Clear();
-                }, null);
+                //reset internal lists
+                _chain.Clear();
+                _allAddresses.Clear();
+                _failedTransactions.Clear();
+                _pendingTransactions.Clear();
 
                 // get addresses from input and create addresses, and set mining address from settings
                 SetAddresses();
@@ -207,7 +211,6 @@ namespace CrypTool.Plugins.Blockchain
                 }
 
                 //check transaction data
-
                 if (!string.IsNullOrEmpty(Transaction_data))
                 {
                     
@@ -221,8 +224,12 @@ namespace CrypTool.Plugins.Blockchain
                         Stopwatch watch = new Stopwatch();
                         watch.Start();
                         MinePendingTransactions(_miningAddress, miningreward);
+                        if (_executing == false) //it can happen, that the user pressed stop while mining
+                        {
+                            return;
+                        }
                         watch.Stop();
-                        time = string.Format(Properties.Resources.TimeSpentCaption, watch.ElapsedMilliseconds);
+                        time = string.Format(Properties.Resources.TimeSpentCaption, watch.ElapsedMilliseconds);                        
                     }
                     else
                     {
@@ -231,6 +238,11 @@ namespace CrypTool.Plugins.Blockchain
                             ReadTransactions(Transaction_data);
                     }
                     //update user interface
+                    _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    {
+                        _presentation.TransactionList.Clear();
+                        _presentation.BalanceList.Clear();
+                    }, null);
                     UpdateBalanceUI();
                 }
                 else
@@ -243,6 +255,11 @@ namespace CrypTool.Plugins.Blockchain
                         time = string.Format(Properties.Resources.TimeSpentCaption, watch.ElapsedMilliseconds);
                     }
                     //update user interface
+                    _presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    {
+                        _presentation.TransactionList.Clear();
+                        _presentation.BalanceList.Clear();
+                    }, null);
                     UpdateBalanceUI();
                 }
                 
@@ -277,7 +294,6 @@ namespace CrypTool.Plugins.Blockchain
                     }
 
                     var latestBlock = GetLatestBlock();
-
                     _presentation.BlockHash.Value = latestBlock.Hash;
                     _presentation.PreviousBlockHash.Value = latestBlock.PreviousHash;
                     _presentation.Transactions.Value = latestBlock.Transactions.Count.ToString();
@@ -292,14 +308,12 @@ namespace CrypTool.Plugins.Blockchain
                 string jsonchain = JsonConvert.SerializeObject(_chain);
                 NextBlock = jsonchain;
 
-
                 //Change properties
                 OnPropertyChanged("Block_data");
                 OnPropertyChanged("NonceLog_data");
                 OnPropertyChanged("BalanceLog_data");
                 OnPropertyChanged("NextBlock");
                 OnPropertyChanged("PreviousBlock");
-
             }
             catch (Exception ex)
             {
@@ -316,21 +330,7 @@ namespace CrypTool.Plugins.Blockchain
 
         public void Stop()
         {
-            _executing = false;                              
-            _miningAddress = null;
-            PreviousBlock = null;
-            NextBlock = null;
-            Transaction_data = null;
-            ResetInternalLists();
-            UpdateBalanceUI();
-        }
-
-        private void ResetInternalLists()
-        {
-            _chain.Clear();
-            _allAddresses.Clear();
-            _failedTransactions.Clear();
-            _pendingTransactions.Clear();            
+            _executing = false;          
         }
 
         public void Initialize()
@@ -376,24 +376,22 @@ namespace CrypTool.Plugins.Blockchain
                 string line;
                 while ((line = stringReader.ReadLine()) != null)
                 {
-                string[] data = line.Split(',');
-
-                    if (!data[0].StartsWith("#"))
+                    if (line.Trim().StartsWith("#"))
                     {
-                        if (CheckAddresses(line) == true)
+                        continue;
+                    }
+                    string[] data = line.Split(',');
+                    if (CheckAddresses(line) == true)
+                    {
+                        if (!(data[0] == "MiningReward"))
                         {
-                            if (!(data[0] == "MiningReward")) {
-                                if (!(data[0] == "Mining Belohnung")) {
-                                    Address newAddress = new Address(data[0]);
-                                    newAddress.PublicKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[2]));
-                                    newAddress.PrivateKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[3]));
+                            if (!(data[0] == "Mining Belohnung"))
+                            {
+                                Address newAddress = new Address(data[0]);
+                                newAddress.PublicKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[2]));
+                                newAddress.PrivateKey = (BigInteger.Parse(data[1]), BigInteger.Parse(data[3]));
 
-                                    CreateAddress(newAddress);
-                                }
-                                else
-                                {
-                                    GuiLogMessage(Properties.Resources.InvalidAddressName + " '" + data[0] + "'", NotificationLevel.Warning);
-                                }
+                                CreateAddress(newAddress);
                             }
                             else
                             {
@@ -402,8 +400,12 @@ namespace CrypTool.Plugins.Blockchain
                         }
                         else
                         {
-                            GuiLogMessage(Properties.Resources.InvalidAddressCaption, NotificationLevel.Warning);
+                            GuiLogMessage(Properties.Resources.InvalidAddressName + " '" + data[0] + "'", NotificationLevel.Warning);
                         }
+                    }
+                    else
+                    {
+                        GuiLogMessage(Properties.Resources.InvalidAddressCaption, NotificationLevel.Warning);
                     }
                 }
 
@@ -486,10 +488,8 @@ namespace CrypTool.Plugins.Blockchain
                         return false;
                     }
                 }
-
             }
             return true;
-
         }
 
         public void CreateTransaction(Transaction transaction)
@@ -676,16 +676,17 @@ namespace CrypTool.Plugins.Blockchain
                 string line;
                 while ((line = stringReader.ReadLine()) != null)
                 {
-                    if (!line.StartsWith("#"))
+                    if (line.Trim().StartsWith("#"))
                     {
-                        if (CheckTransaction(Transaction_data) == true)
-                        {
-                            StringToTransaction(line);
-                        }
-                        else
-                        {
-                            GuiLogMessage(Properties.Resources.InvalidTransactionCaption, NotificationLevel.Warning);
-                        }
+                        continue;
+                    }
+                    if (CheckTransaction(Transaction_data) == true)
+                    {
+                        StringToTransaction(line);
+                    }
+                    else
+                    {
+                        GuiLogMessage(Properties.Resources.InvalidTransactionCaption, NotificationLevel.Warning);
                     }
                 }
             }
@@ -701,12 +702,8 @@ namespace CrypTool.Plugins.Blockchain
             return list[list.Count - 1];
         }
 
-        public bool VerifySignature((BigInteger, BigInteger) pubKey, string from, string to, double amount, string signature)
-        {
-
-            BigInteger N = pubKey.Item1;
-            BigInteger e = pubKey.Item2;
-
+        public bool VerifySignature((BigInteger N, BigInteger e) pubKey, string from, string to, double amount, string signature)
+        {            
             var preImage = Encoding.UTF8.GetBytes(from + to + amount);
             SHA256 sha256 = SHA256.Create();
             var hash = sha256.ComputeHash(preImage);
@@ -717,9 +714,9 @@ namespace CrypTool.Plugins.Blockchain
                 hashBigInt = hashBigInt * BigInteger.MinusOne;
             }
 
-            hashBigInt = BigInteger.ModPow(hashBigInt, BigInteger.One, N);
+            hashBigInt = BigInteger.ModPow(hashBigInt, BigInteger.One, pubKey.N);
             BigInteger signatureBigInt = BigInteger.Parse(signature);
-            BigInteger hashBigInt2 = BigInteger.ModPow(signatureBigInt, e, N);
+            BigInteger hashBigInt2 = BigInteger.ModPow(signatureBigInt, pubKey.e, pubKey.N);
 
             return hashBigInt == hashBigInt2;
         }
@@ -732,7 +729,7 @@ namespace CrypTool.Plugins.Blockchain
                 case HashAlgorithms.SHA1:
                     _hashAlgorithm = new SHA1Managed();
                     _hashAlgorithmName = "SHA1";
-                    miningDifficultyLimit = 1;
+                    miningDifficultyLimit = 160;
                     break;
 
                 case HashAlgorithms.SHA256:
@@ -751,7 +748,7 @@ namespace CrypTool.Plugins.Blockchain
 
         public void VerifyDifficulty()
         {
-            if (_hashAlgorithmName == "SHA1" && miningDifficultyLimit >1)
+            if (_hashAlgorithmName == "SHA1" && miningDifficultyLimit > 160)
             {
                 GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Warning);
             }
@@ -770,7 +767,6 @@ namespace CrypTool.Plugins.Blockchain
             foreach (var address in _allAddresses)
             {
                 var balance = GetBalanceForUI(address);
-
                 Presentation.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
                     _presentation.BalanceList.Add(balance);
@@ -797,12 +793,10 @@ namespace CrypTool.Plugins.Blockchain
                 catch (JsonReaderException jex)
                 {
                     //Exception in parsing json
-                    Console.WriteLine(jex.Message);
                     return false;
                 }
-                catch (Exception ex) //some other exception
+                catch (Exception) //some other exception
                 {
-                    Console.WriteLine(ex.ToString());
                     return false;
                 }
             }
@@ -851,9 +845,7 @@ namespace CrypTool.Plugins.Blockchain
         #endregion
 
         public class Block 
-        {
-            private string log = string.Empty;
-            private readonly List<string> loglist = new List<string>();
+        {            
             public Block(string timestamp, List<Transaction> transactions) 
             {
                 Timestamp = timestamp;
@@ -977,17 +969,6 @@ namespace CrypTool.Plugins.Blockchain
 
                 return count;
             }
-
-            public string getLog()
-            {
-                return log;
-            }
-
-            public List<string> Getloglist()
-            {
-                return loglist;
-            }
-
         }
 
         public class Transaction 
@@ -1059,24 +1040,20 @@ namespace CrypTool.Plugins.Blockchain
                 set;
             }
 
-            public bool Mined
-            {
-                get;
-                set;
-            }
-
             public string PrevTransactionHash
             {
                 get;
                 set;
             }
 
+            [JsonIgnore]
             public string Status
             {
                 get;
                 set;
             }
 
+            [JsonIgnore]
             public string Note
             {
                 get;
