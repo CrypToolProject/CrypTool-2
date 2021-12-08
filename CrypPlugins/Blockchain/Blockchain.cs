@@ -51,8 +51,9 @@ namespace CrypTool.Plugins.Blockchain
         private bool _executing = false;
         public string _hashAlgorithmName = string.Empty;
         private Address _miningAddress;        
-        private HashAlgorithm _hashAlgorithm = null;
-        private int miningDifficultyLimit = 0;
+        private HashAlgorithmWrapper _hashAlgorithmWrapper = null;
+        private int _hashAlgorithmWrapperWidth = 0;        
+        private int _miningDifficultyLimit = 0;
 
         #endregion
 
@@ -134,7 +135,7 @@ namespace CrypTool.Plugins.Blockchain
                 SetAddresses();
 
                 //set the hash algorithm
-                SetHashAlgorithm();
+                CreateHashAlgorithmWrapper();
 
                 //Check, if difficulty is possible
                 if(VerifyDifficulty() == false)
@@ -159,7 +160,7 @@ namespace CrypTool.Plugins.Blockchain
                         {
                             foreach(var transaction in block.Transactions)
                             {
-                                transaction.SetHashAlgorithm(_hashAlgorithm);
+                                transaction.SetHashAlgorithmWrapper(_hashAlgorithmWrapper);
                             }
                         }
                         //check, if the deserialized chain is valid
@@ -186,7 +187,7 @@ namespace CrypTool.Plugins.Blockchain
 
                     foreach (var address in _allAddresses)
                     {
-                        if (_settings.Mining_Address == address.Name)
+                        if (_settings.MiningAddress == address.Name)
                         {
                             _miningAddress = address;
                         }
@@ -194,12 +195,12 @@ namespace CrypTool.Plugins.Blockchain
 
                     if (_miningAddress == null)
                     {
-                        _miningAddress = new Address(_settings.Mining_Address);
+                        _miningAddress = new Address(_settings.MiningAddress);
                         GuiLogMessage(Properties.Resources.NoValidMiningAddressCaption, NotificationLevel.Warning);
                     }
                     else
                     {
-                        Transaction gen_transaction = new Transaction(miningRewardAddress, _miningAddress, _settings.MiningReward, "0", _hashAlgorithm);
+                        Transaction gen_transaction = new Transaction(miningRewardAddress, _miningAddress, _settings.MiningReward, "0", _hashAlgorithmWrapper);
                         gen_transaction.Status = Properties.Resources.SuccessfullCaption;
                         genesisList.Add(gen_transaction);
                     }                                                             
@@ -211,7 +212,7 @@ namespace CrypTool.Plugins.Blockchain
                 //set mining address
                 foreach (var address in _allAddresses)
                 {
-                    if (_settings.Mining_Address.ToString() == address.Name)
+                    if (_settings.MiningAddress.ToString() == address.Name)
                     {
                         _miningAddress = address;
                     }
@@ -219,7 +220,7 @@ namespace CrypTool.Plugins.Blockchain
 
                 if(_miningAddress == null)
                 {
-                    _miningAddress = new Address(_settings.Mining_Address);
+                    _miningAddress = new Address(_settings.MiningAddress);
                     GuiLogMessage(Properties.Resources.NoValidMiningAddressCaption, NotificationLevel.Warning);
                 }
 
@@ -281,14 +282,14 @@ namespace CrypTool.Plugins.Blockchain
 
                     var latestBlock = GetPreviousBlock();
                     _presentation.BlockId.Value = latestBlock.BlockId.ToString();
-                    _presentation.BlockHash.Value = latestBlock.Hash;
-                    _presentation.PreviousBlockHash.Value = latestBlock.PreviousHash;
+                    _presentation.BlockHash.Value = FormatHashString(latestBlock.Hash);
+                    _presentation.PreviousBlockHash.Value = FormatHashString(latestBlock.PreviousHash);
                     _presentation.Transactions.Value = latestBlock.Transactions.Count.ToString();
                     _presentation.FailedTransactions.Value = _failedTransactions.Count.ToString();
                     _presentation.Timestamp.Value = latestBlock.Timestamp;
                     _presentation.Nonce.Value = latestBlock.Nonce.ToString("N0");
                     _presentation.HashAlgorithm.Value = _hashAlgorithmName;
-                    _presentation.MiningDifficulty.Value = _settings.MiningDifficulty.ToString();
+                    _presentation.MiningDifficulty.Value = string.Format("{0} bit", _settings.MiningDifficulty);
                 }, null);
 
                 NextBlock = JsonConvert.SerializeObject(_chain);
@@ -360,7 +361,7 @@ namespace CrypTool.Plugins.Blockchain
                         continue;
                     }
                     string[] data = line.Split(',');
-                    if (CheckAddresses(line) == true)
+                    if (CheckAddress(line) == true)
                     {
                         if (!data[0].Equals(MINING_REWARD_ADDRESS))
                         {                           
@@ -385,7 +386,7 @@ namespace CrypTool.Plugins.Blockchain
 
                 foreach (var address in _allAddresses)
                 {
-                    if (address.Name == _settings.Mining_Address.ToString())
+                    if (address.Name == _settings.MiningAddress.ToString())
                     {
                         SetMiningAddress(address);
                         mining_address_found = true;
@@ -403,7 +404,7 @@ namespace CrypTool.Plugins.Blockchain
         {
             int difficulty = _settings.MiningDifficulty;
             genesisBlock.PreviousHash = "0";
-            genesisBlock.MineBlock(difficulty, ref _executing, _presentation, _hashAlgorithm);
+            genesisBlock.MineBlock(difficulty, ref _executing, _presentation, _hashAlgorithmWrapper);
             _chain.Add(genesisBlock);
         }
 
@@ -414,7 +415,7 @@ namespace CrypTool.Plugins.Blockchain
 
         public void MinePendingTransactions(Address miningRewardAddress, Address miningrewardfromaddress)
         {
-            Transaction transaction = new Transaction(miningrewardfromaddress, miningRewardAddress, _settings.MiningReward, "0", _hashAlgorithm);
+            Transaction transaction = new Transaction(miningrewardfromaddress, miningRewardAddress, _settings.MiningReward, "0", _hashAlgorithmWrapper);
             transaction.Status = Properties.Resources.SuccessfullCaption;
             _pendingTransactions.Add(transaction);
 
@@ -433,7 +434,7 @@ namespace CrypTool.Plugins.Blockchain
                 newBlock.BlockId = previousBlock.BlockId + 1;
                 newBlock.PreviousHash = previousBlock.Hash;
             }
-            newBlock.MineBlock(difficulty, ref _executing, _presentation, _hashAlgorithm);
+            newBlock.MineBlock(difficulty, ref _executing, _presentation, _hashAlgorithmWrapper);
             _chain.Add(newBlock);
         }
 
@@ -478,7 +479,7 @@ namespace CrypTool.Plugins.Blockchain
                 int numberOfZerosInHash = 0;
                 //now, recompute the current blocks hash and compare it to the received one
                 //also, we compute the number of zeros in that hash
-                if (!block.ComputeBlockHashAndCountNumberOfZeros(_hashAlgorithm, out numberOfZerosInHash).Equals(block.Hash))
+                if (!block.ComputeBlockHashAndCountNumberOfZeros(_hashAlgorithmWrapper, out numberOfZerosInHash).Equals(block.Hash))
                 {
                     errorMessage = "Block hash is invalid";
                     return false;
@@ -549,25 +550,6 @@ namespace CrypTool.Plugins.Blockchain
             return new Balance { Address = address, Value = balance };
         }
 
-        public double GetPendingTransactionBalance(Address address)
-        {
-            double balance = 0;
-
-            foreach (var transaction in _pendingTransactions)
-            {
-                if (transaction.FromAddress.Name == address.Name)
-                {
-                    balance -= transaction.Amount;
-                }
-                if (transaction.ToAddress.Name == address.Name)
-                {
-                    balance += transaction.Amount;
-                }
-            }
-
-            return balance;
-        }
-
         public void StringToTransaction(string transactionString)
         {
             string[] data = transactionString.Split(',');
@@ -575,7 +557,7 @@ namespace CrypTool.Plugins.Blockchain
             Address to = null;            
             if (data.Length != 4)
             {
-                GuiLogMessage(Properties.Resources.InvalidTransactionCaption, NotificationLevel.Warning);
+                GuiLogMessage(Properties.Resources.InvalidTransactionCaption + ": " + transactionString, NotificationLevel.Warning);
                 return;
             }
             var amount = double.Parse(data[2], CultureInfo.InvariantCulture.NumberFormat);
@@ -594,7 +576,7 @@ namespace CrypTool.Plugins.Blockchain
 
             if (amount <= 0 )
             {
-                Transaction transaction = new Transaction(from, to, amount, data[3], _hashAlgorithm);
+                Transaction transaction = new Transaction(from, to, amount, data[3], _hashAlgorithmWrapper);
                 _failedTransactions.Add(transaction);
                 transaction.Status = Properties.Resources.InvalidValueCaption;
                 GuiLogMessage(Properties.Resources.NegativeValueCaption, NotificationLevel.Warning);
@@ -603,7 +585,7 @@ namespace CrypTool.Plugins.Blockchain
 
             if(CheckAddressInTransaction(data[0]) == false || CheckAddressInTransaction(data[1]) == false)
             {
-                GuiLogMessage(Properties.Resources.InvalidAddressInTransaction, NotificationLevel.Warning);
+                GuiLogMessage(Properties.Resources.InvalidAddressInTransaction + ": " + transactionString, NotificationLevel.Warning);
                 return;
             }
 
@@ -611,10 +593,8 @@ namespace CrypTool.Plugins.Blockchain
             {
                 if (_pendingTransactions.Count == 0)
                 {
-                    Transaction transaction = new Transaction(from, to, amount, data[3], _hashAlgorithm);
-
-                    bool check = VerifySignature(from.PublicKey, from.Name, to.Name, transaction.Amount, transaction.Signature);
-                    if (check == true)
+                    Transaction transaction = new Transaction(from, to, amount, data[3], _hashAlgorithmWrapper);
+                    if (VerifySignature(from.PublicKey, from.Name, to.Name, transaction.Amount, transaction.Signature))
                     {
                         _pendingTransactions.Add(transaction);
                         transaction.Note = Properties.Resources.SignatureVerifiedCaption;
@@ -624,12 +604,12 @@ namespace CrypTool.Plugins.Blockchain
                     {
                         _failedTransactions.Add(transaction);
                         transaction.Status = Properties.Resources.BadSignatureCaption;
+                        GuiLogMessage(Properties.Resources.BadSignatureInCaption + transaction.FromAddress.Name + Properties.Resources.toCaption1 + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
                     }
                 }
                 else
                 {
-                    Transaction transaction = new Transaction(from, to, amount, GetLatestTransaction(_pendingTransactions).Hash, _hashAlgorithm);
-
+                    Transaction transaction = new Transaction(from, to, amount, GetLatestTransaction(_pendingTransactions).Hash, _hashAlgorithmWrapper);
                     if (VerifySignature(from.PublicKey, from.Name, to.Name, transaction.Amount, transaction.Signature))
                     {
                         _pendingTransactions.Add(transaction);
@@ -648,17 +628,17 @@ namespace CrypTool.Plugins.Blockchain
             {
                 if (_pendingTransactions.Count == 0)
                 {
-                    Transaction transaction = new Transaction(from, to, amount, "0", _hashAlgorithm);
+                    Transaction transaction = new Transaction(from, to, amount, "0", _hashAlgorithmWrapper);
                     _failedTransactions.Add(transaction);
-                    GuiLogMessage(Properties.Resources.InsuffiecientBalanceInCaption + " " + transaction.FromAddress.Name + " " + Properties.Resources.toCaption1 + " " + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
                     transaction.Status = Properties.Resources.InsufficientBalanceCaption;
+                    GuiLogMessage(Properties.Resources.InsuffiecientBalanceInCaption + " " + transaction.FromAddress.Name + " " + Properties.Resources.toCaption1 + " " + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);                    
                 }
                 else
                 {
-                    Transaction transaction = new Transaction(from, to, amount, GetLatestTransaction(_pendingTransactions).Hash,  _hashAlgorithm);
+                    Transaction transaction = new Transaction(from, to, amount, GetLatestTransaction(_pendingTransactions).Hash,  _hashAlgorithmWrapper);
                     _failedTransactions.Add(transaction);
-                    GuiLogMessage(Properties.Resources.InsuffiecientBalanceInCaption + " " + transaction.FromAddress.Name + " " + Properties.Resources.toCaption1 + " " + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);
                     transaction.Status = Properties.Resources.InsufficientBalanceCaption;
+                    GuiLogMessage(Properties.Resources.InsuffiecientBalanceInCaption + " " + transaction.FromAddress.Name + " " + Properties.Resources.toCaption1 + " " + transaction.ToAddress.Name + " " + transaction.Amount + " " + Properties.Resources.CoinCaption, NotificationLevel.Warning);                    
                 }
             }
         }
@@ -698,61 +678,64 @@ namespace CrypTool.Plugins.Blockchain
 
         public bool VerifySignature((BigInteger N, BigInteger e) pubKey, string from, string to, double amount, string signature)
         {            
-            var preImage = Encoding.UTF8.GetBytes(from + to + amount);
-            SHA256 sha256 = SHA256.Create();
-            var hash = sha256.ComputeHash(preImage);
-            BigInteger hashBigInt = new BigInteger(hash);
+            var hash = _hashAlgorithmWrapper.ComputeHash(Encoding.UTF8.GetBytes(from + to + amount));
+            var hashBigInt = new BigInteger(hash);
 
             if (hashBigInt < BigInteger.Zero)
             {
                 hashBigInt = hashBigInt * BigInteger.MinusOne;
             }
-
             hashBigInt = BigInteger.ModPow(hashBigInt, BigInteger.One, pubKey.N);
-            BigInteger signatureBigInt = BigInteger.Parse(signature);
-            BigInteger hashBigInt2 = BigInteger.ModPow(signatureBigInt, pubKey.e, pubKey.N);
-
+            var signatureBigInt = BigInteger.Parse(signature);
+            var hashBigInt2 = BigInteger.ModPow(signatureBigInt, pubKey.e, pubKey.N);
             return hashBigInt == hashBigInt2;
         }
 
-        public void SetHashAlgorithm()
+        private void CreateHashAlgorithmWrapper()
         {
-            switch (_settings.Hash_Algorithm)
+            _hashAlgorithmWrapperWidth = _settings.HashAlgorithmWidth;
+            if (_hashAlgorithmWrapperWidth <= 0)
+            {
+                _hashAlgorithmWrapperWidth = 1;
+                GuiLogMessage("The hash algorithm width is invalid. Use 1 instead", NotificationLevel.Warning);
+            }
+
+            switch (_settings.HashAlgorithm)
             {
                 default:
                 case HashAlgorithms.SHA1:
-                    _hashAlgorithm = new SHA1Managed();
-                    _hashAlgorithmName = "SHA1";
-                    miningDifficultyLimit = 160;
+                    _hashAlgorithmWrapper = new HashAlgorithmWrapper(new SHA1Managed(), _hashAlgorithmWrapperWidth);
+                    _hashAlgorithmName = string.Format("SHA1 ({0} byte)", _hashAlgorithmWrapperWidth);
+                    _miningDifficultyLimit = 160;
                     break;
 
                 case HashAlgorithms.SHA256:
-                    _hashAlgorithm = new SHA256Managed();
-                    _hashAlgorithmName = "SHA256";
-                    miningDifficultyLimit = 256;
+                    _hashAlgorithmWrapper = new HashAlgorithmWrapper(new SHA256Managed(), _hashAlgorithmWrapperWidth);
+                    _hashAlgorithmName = string.Format("SHA256 ({0} byte)", _hashAlgorithmWrapperWidth);
+                    _miningDifficultyLimit = 256;
                     break;
 
                 case HashAlgorithms.SHA512:
-                    _hashAlgorithm = new SHA512Managed();
-                    _hashAlgorithmName = "SHA512";
-                    miningDifficultyLimit = 512;
+                    _hashAlgorithmWrapper = new HashAlgorithmWrapper(new SHA512Managed(), _hashAlgorithmWrapperWidth);
+                    _hashAlgorithmName = string.Format("SHA512 ({0} byte)", _hashAlgorithmWrapperWidth);
+                    _miningDifficultyLimit = 512;
                     break;
-            }
+            }           
         }
 
         public bool VerifyDifficulty()
         {
-            if (_hashAlgorithmName == "SHA1" && miningDifficultyLimit > 160)
+            if (_hashAlgorithmName == "SHA1" && _miningDifficultyLimit > 160)
             {
                 GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Error);
                 return false;
             }
-            if (_hashAlgorithmName == "SHA256" && miningDifficultyLimit > 256)
+            if (_hashAlgorithmName == "SHA256" && _miningDifficultyLimit > 256)
             {
                 GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Error);
                 return false;
             }
-            if (_hashAlgorithmName == "SHA512" && miningDifficultyLimit > 512)
+            if (_hashAlgorithmName == "SHA512" && _miningDifficultyLimit > 512)
             {
                 GuiLogMessage(Properties.Resources.MiningDifficultyWarning, NotificationLevel.Error);
                 return false;
@@ -824,7 +807,7 @@ namespace CrypTool.Plugins.Blockchain
             return false;
         }
 
-        public bool CheckAddresses(string address)
+        public bool CheckAddress(string address)
         {
             if (Regex.IsMatch(address, "[#]?[a-zA-Z]+[,][0-9]+[0-9]+[,][0-9]+[,][0-9]+"))
             {
@@ -835,6 +818,21 @@ namespace CrypTool.Plugins.Blockchain
                 return false;
             }
         }
+
+        /// <summary>
+        /// Reduces the hashString length to 30 characters so it always fits in the UI
+        /// </summary>
+        /// <param name="hashString"></param>
+        /// <returns></returns>
+        public string FormatHashString(string hashString)
+        {
+            if(hashString.Length > 26)
+            {
+                return hashString.Substring(0, 26) + "...";
+            }
+            return hashString;
+        }
+
         #endregion
 
         public class Block 
@@ -849,10 +847,10 @@ namespace CrypTool.Plugins.Blockchain
             /// This method is for the chain verification. It recomputes the hash value the same way the mining method does.
             /// Also, it counts the number of zeros
             /// </summary>
-            /// <param name="hashAlgorithm"></param>
+            /// <param name="hashAlgorithmWrapper"></param>
             /// <param name="numberOfZerosInHashvalue"></param>
             /// <returns></returns>
-            public string ComputeBlockHashAndCountNumberOfZeros(HashAlgorithm hashAlgorithm, out int numberOfZerosInHashvalue)
+            public string ComputeBlockHashAndCountNumberOfZeros(HashAlgorithmWrapper hashAlgorithmWrapper, out int numberOfZerosInHashvalue)
             {
                 byte[] hash;
                 var transactions = CreateTransactionsHashString();
@@ -862,12 +860,12 @@ namespace CrypTool.Plugins.Blockchain
                 Array.Copy(blockPreImageBytes, blockPreImageBytesPlusNonce, blockPreImageBytes.Length);               
                 var nonceBytes = BitConverter.GetBytes(Nonce);
                 Array.Copy(nonceBytes, 0, blockPreImageBytesPlusNonce, blockPreImageBytesPlusNonce.Length - 8, 8);
-                hash = CalculateHash(blockPreImageBytesPlusNonce, 10, hashAlgorithm);
+                hash = hashAlgorithmWrapper.ComputeHash(blockPreImageBytesPlusNonce);
                 numberOfZerosInHashvalue = CountZeros(hash);
                 return ConvertToHexString(hash);
             }
 
-            public void MineBlock(int difficulty, ref bool executing, BlockchainPresentation presentation, HashAlgorithm hashAlgorithm)
+            public void MineBlock(int difficulty, ref bool executing, BlockchainPresentation presentation, HashAlgorithmWrapper hashAlgorithmWrapper)
             {
                 Difficulty = difficulty; //Memorize difficulty used for mining this block
                 byte[] hash;
@@ -884,7 +882,7 @@ namespace CrypTool.Plugins.Blockchain
                     Nonce++;
                     var nonceBytes = BitConverter.GetBytes(Nonce);
                     Array.Copy(nonceBytes, 0, blockPreImageBytesPlusNonce, blockPreImageBytesPlusNonce.Length - 8, 8);
-                    hash = CalculateHash(blockPreImageBytesPlusNonce, 10, hashAlgorithm);
+                    hash = hashAlgorithmWrapper.ComputeHash(blockPreImageBytesPlusNonce);
                     counter++;
 
                     if (DateTime.Now >= updateUITime)
@@ -960,18 +958,6 @@ namespace CrypTool.Plugins.Blockchain
                 set;
             }
 
-            public static byte[] CalculateHash(byte[] preImage, int length = 10, HashAlgorithm algorithm = null)
-            {
-                if (algorithm == null)
-                {
-                    algorithm = new SHA256Managed();
-                }
-                var hash = algorithm.ComputeHash(preImage);
-                var array = new byte[length];
-                Array.Copy(hash, array, length);
-                return array;
-            }
-
             public static int CountZeros(byte[] array)
             {
                 var count = 0;
@@ -1001,9 +987,9 @@ namespace CrypTool.Plugins.Blockchain
 
         public class Transaction 
         {
-            private HashAlgorithm _hashAlgorithm;
+            private HashAlgorithmWrapper _hashAlgorithmWrapper;
 
-            public Transaction(Address fromAddress, Address toAddress, double amount, string signature, HashAlgorithm hashAlgorithm) 
+            public Transaction(Address fromAddress, Address toAddress, double amount, string signature, HashAlgorithmWrapper hashAlgorithmWrapper) 
             {
                 FromAddress = fromAddress;
                 ToAddress = toAddress;
@@ -1011,20 +997,17 @@ namespace CrypTool.Plugins.Blockchain
                 Timestamp = DateTime.Now.ToString();
                 Signature = signature;
                 Note = string.Empty;
-                SetHashAlgorithm(hashAlgorithm);
+                SetHashAlgorithmWrapper(hashAlgorithmWrapper);
             }
 
-            public void SetHashAlgorithm(HashAlgorithm hashAlgorithm)
+            public void SetHashAlgorithmWrapper(HashAlgorithmWrapper hashAlgorithmWrapper)
             {
-                _hashAlgorithm = hashAlgorithm;
+                _hashAlgorithmWrapper = hashAlgorithmWrapper;
             }
 
-            private byte[] CalculateHash(byte[] preImage, int length = 10)
+            private byte[] CalculateHash(byte[] preImage)
             {              
-                var hash = _hashAlgorithm.ComputeHash(preImage);
-                var array = new byte[length];
-                Array.Copy(hash, array, length);
-                return array;
+                return _hashAlgorithmWrapper.ComputeHash(preImage);
             }
 
             private string ConvertToHexString(byte[] array)
@@ -1037,7 +1020,7 @@ namespace CrypTool.Plugins.Blockchain
             {
                 get
                 {
-                    return ConvertToHexString(CalculateHash(Encoding.UTF8.GetBytes(FromAddress.Name + FromAddress.PublicKey + ToAddress.Name + ToAddress.PublicKey + Amount + Timestamp + Signature), 10));
+                    return ConvertToHexString(CalculateHash(Encoding.UTF8.GetBytes(FromAddress.Name + FromAddress.PublicKey + ToAddress.Name + ToAddress.PublicKey + Amount + Timestamp + Signature)));
                 }
             }
 
@@ -1148,6 +1131,35 @@ namespace CrypTool.Plugins.Blockchain
                     }
                     return Address.Name;
                 }
+            }
+        }
+
+        /// <summary>
+        /// The hash algorithm wrapper wraps our hash function and allows to reduce the length
+        /// of the hash value based on the user's choice
+        /// </summary>
+        public class HashAlgorithmWrapper
+        {
+            private HashAlgorithm _hashAlgorithm;
+            private int _hashAlgorithmWidth;
+
+            public HashAlgorithmWrapper(HashAlgorithm hashAlgorithm, int hashAlgorithmWidth)
+            {
+                _hashAlgorithm = hashAlgorithm;
+                _hashAlgorithmWidth = hashAlgorithmWidth;
+            }
+
+            public byte[] ComputeHash(byte[] data)
+            {
+                var hash = _hashAlgorithm.ComputeHash(data);
+                if(hash.Length != _hashAlgorithmWidth)
+                {
+                    //reduce length of hashvalue based on settings
+                    var reduced_hash = new byte[_hashAlgorithmWidth];
+                    Array.Copy(hash, 0, reduced_hash, 0, _hashAlgorithmWidth);
+                    return reduced_hash;
+                }
+                return hash;
             }
         }
     }

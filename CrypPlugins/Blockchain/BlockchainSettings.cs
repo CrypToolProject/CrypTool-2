@@ -27,33 +27,33 @@ namespace CrypTool.Plugins.Blockchain
         SHA512
     }
 
-
     public class BlockchainSettings : ISettings
     {
         #region Private Variables
-
-        private int mining_difficulty = 1;
-        private double miningReward = 1;
-        private string miningAddress = "";
-        private HashAlgorithms hashAlgorithm = HashAlgorithms.SHA256;
+        
+        private HashAlgorithms _hashAlgorithm = HashAlgorithms.SHA256;
+        private int _hashAlgorithmWidth = 10;
+        private int _miningDifficulty = 1;
+        private double _miningReward = 1;
+        private string _miningAddress = "";        
 
         #endregion
 
         #region TaskPane Settings
 
 
-        [TaskPane("Mining difficulty", "Change Mining Difficulty", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, Int32.MaxValue)]
+        [TaskPane("Mining difficulty", "Change Mining Difficulty", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int MiningDifficulty
         {
             get
             {
-                return mining_difficulty;
+                return _miningDifficulty;
             }
             set
             {
-                if (mining_difficulty != value)
+                if (_miningDifficulty != value)
                 {
-                    mining_difficulty = value;
+                    _miningDifficulty = value;
                     OnPropertyChanged("MiningDifficulty");
                 }
             }
@@ -64,48 +64,65 @@ namespace CrypTool.Plugins.Blockchain
         {
             get
             {
-                return miningReward;
+                return _miningReward;
             }
             set
             {
-                if (miningReward != value)
+                if (_miningReward != value)
                 {
-                    miningReward = value;
+                    _miningReward = value;
                     OnPropertyChanged("MiningReward");
                 }
             }
         }
 
         [TaskPane("Mining address", "Change the mining address",null,0,false,ControlType.TextBox)]
-        public string Mining_Address
+        public string MiningAddress
         {
             get
             {
-                return miningAddress;
+                return _miningAddress;
             }
             set
             {
-                if (miningAddress != value)
+                if (_miningAddress != value)
                 {
-                    miningAddress = value;
+                    _miningAddress = value;
                     OnPropertyChanged("Mining_Address");
                 }
             }
         }
 
         [TaskPane("Hash algorithm", "Change the hash algorithm", null, 0, false, ControlType.ComboBox, new string[] {"SHA1","SHA256","SHA512" })]
-        public HashAlgorithms Hash_Algorithm
+        public HashAlgorithms HashAlgorithm
         {
             get
             {
-                return hashAlgorithm;
+                return _hashAlgorithm;
             }
             set
             {
-                if (hashAlgorithm != value)
+                if (_hashAlgorithm != value)
                 {
-                    hashAlgorithm = value;
+                    _hashAlgorithm = value;
                     OnPropertyChanged("Hash_Algorithm");
+                }
+            }
+        }
+
+        [TaskPane("Hash algorithm width", "Change the hash algorithm width (number of used bytes)", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        public int HashAlgorithmWidth
+        {
+            get
+            {
+                return _hashAlgorithmWidth;
+            }
+            set
+            {
+                if (_hashAlgorithmWidth != value)
+                {
+                    _hashAlgorithmWidth = value;
+                    OnPropertyChanged("Hash_AlgorithmWidth");
                 }
             }
         }

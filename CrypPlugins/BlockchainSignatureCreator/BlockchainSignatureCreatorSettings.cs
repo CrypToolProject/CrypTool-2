@@ -19,17 +19,24 @@ using CrypTool.PluginBase.Miscellaneous;
 
 namespace CrypTool.Plugins.BlockchainSignatureCreator
 {
-    // HOWTO: rename class (click name, press F2)
+    public enum HashAlgorithms
+    {
+        SHA1,
+        SHA256,
+        SHA512
+    }
+
     public class BlockchainSignatureCreatorSettings : ISettings
     {
         #region Private Variables
 
-        
+        private HashAlgorithms _hashAlgorithm = HashAlgorithms.SHA256;
+        private int _hashAlgorithmWidth = 10;
 
         #endregion
 
         #region TaskPane Settings
-       
+
 
         #endregion
 
@@ -47,6 +54,40 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
         public void Initialize()
         {
 
+        }
+
+        [TaskPane("Hash algorithm", "Change the hash algorithm", null, 0, false, ControlType.ComboBox, new string[] { "SHA1", "SHA256", "SHA512" })]
+        public HashAlgorithms HashAlgorithm
+        {
+            get
+            {
+                return _hashAlgorithm;
+            }
+            set
+            {
+                if (_hashAlgorithm != value)
+                {
+                    _hashAlgorithm = value;
+                    OnPropertyChanged("Hash_Algorithm");
+                }
+            }
+        }
+
+        [TaskPane("Hash algorithm width", "Change the hash algorithm width (number of used bytes)", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        public int HashAlgorithmWidth
+        {
+            get
+            {
+                return _hashAlgorithmWidth;
+            }
+            set
+            {
+                if (_hashAlgorithmWidth != value)
+                {
+                    _hashAlgorithmWidth = value;
+                    OnPropertyChanged("Hash_AlgorithmWidth");
+                }
+            }
         }
     }
 }

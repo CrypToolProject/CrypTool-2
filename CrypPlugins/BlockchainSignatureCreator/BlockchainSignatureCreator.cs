@@ -33,7 +33,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
     {
         #region Private Variables
 
-        private readonly BlockchainSignatureCreatorSettings settings = new BlockchainSignatureCreatorSettings();
+        private readonly BlockchainSignatureCreatorSettings _settings = new BlockchainSignatureCreatorSettings();
 
         string senderName;
         string senderN;
@@ -46,6 +46,9 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
         string recipientD;
 
         string amount;
+
+        private int _hashAlgorithmWrapperWidth;
+        private HashAlgorithmWrapper _hashAlgorithmWrapper;
 
         #endregion
 
@@ -85,7 +88,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         public ISettings Settings
         {
-            get { return settings; }
+            get { return _settings; }
         }
 
         public UserControl Presentation
@@ -99,15 +102,18 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         public void Execute()
         {
-            try { 
+            try
+            {
+                ProgressChanged(0, 1);
 
-            ProgressChanged(0, 1);
-            string sender = Sender;
-            string recipient = Recipient;
-            ReadInput();
-            var sr3 = new StringBuilder();
+                CreateHashAlgorithmWrapper();
 
-            BigInteger sig = createSignature(senderName, recipientName, amount, senderN, senderD);
+                string sender = Sender;
+                string recipient = Recipient;
+                ReadInput();
+                var sr3 = new StringBuilder();
+
+                BigInteger sig = CreateSignature(senderName, recipientName, amount, senderN, senderD);
                 sr3.Append(senderName);
                 sr3.Append(",");
                 sr3.Append(recipientName);
@@ -116,16 +122,14 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
                 sr3.Append(",");
                 sr3.Append(sig);
                 Signature = sr3.ToString();
-            OnPropertyChanged("Signature");               
+                OnPropertyChanged("Signature");
 
-            ProgressChanged(1, 1);
+                ProgressChanged(1, 1);
             }
             catch (Exception ex)
             {
-                GuiLogMessage(string.Format(BlockchainSignatureCreator.Properties.Resources.ExceptionMessage, ex.Message), NotificationLevel.Error);
+                GuiLogMessage(string.Format(Properties.Resources.ExceptionMessage, ex.Message), NotificationLevel.Error);
             }
-
-
         }
 
         public void PostExecution()
@@ -134,7 +138,6 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         public void Stop()
         {
-            Signature = String.Empty;
         }
 
         public void Initialize()
@@ -213,7 +216,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             }
         }
 
-        public BigInteger createSignature(string real_from, string real_to, string real_amount, string real_N, string real_d)
+        public BigInteger CreateSignature(string real_from, string real_to, string real_amount, string real_N, string real_d)
         {    
             string from = real_from;
             string to = real_to;
@@ -222,8 +225,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             BigInteger d = BigInteger.Parse(real_d);
 
             var preImage = Encoding.UTF8.GetBytes(from + to + amount);          
-            SHA256 sha256 = SHA256.Create();
-            var hash = sha256.ComputeHash(preImage);
+            var hash = _hashAlgorithmWrapper.ComputeHash(preImage);
             BigInteger hashBigInt = new BigInteger(hash);
             
             if (hashBigInt < BigInteger.Zero)
@@ -234,17 +236,59 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             return BigInteger.ModPow(hashBigInt , d , N);    
         }
 
-        public string calculateHash(string stringToHash)
+        private void CreateHashAlgorithmWrapper()
         {
-            var crypt = new System.Security.Cryptography.SHA256Managed();
-            var hash = new System.Text.StringBuilder();
-            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(stringToHash));
-            foreach (byte theByte in crypto)
+            _hashAlgorithmWrapperWidth = _settings.HashAlgorithmWidth;
+            if (_hashAlgorithmWrapperWidth <= 0)
             {
-                hash.Append(theByte.ToString("x2"));
+                _hashAlgorithmWrapperWidth = 1;
+                GuiLogMessage("The hash algorithm width is invalid. Use 1 instead", NotificationLevel.Warning);
             }
-            return hash.ToString();
+            switch (_settings.HashAlgorithm)
+            {
+                default:
+                case HashAlgorithms.SHA1:
+                    _hashAlgorithmWrapper = new HashAlgorithmWrapper(new SHA1Managed(), _hashAlgorithmWrapperWidth);
+                    break;
+
+                case HashAlgorithms.SHA256:
+                    _hashAlgorithmWrapper = new HashAlgorithmWrapper(new SHA256Managed(), _hashAlgorithmWrapperWidth);
+                    break;
+
+                case HashAlgorithms.SHA512:
+                    _hashAlgorithmWrapper = new HashAlgorithmWrapper(new SHA512Managed(), _hashAlgorithmWrapperWidth);
+                    break;
+            }
         }
         #endregion
+    }
+
+    /// <summary>
+    /// The hash algorithm wrapper wraps our hash function and allows to reduce the length
+    /// of the hash value based on the user's choice
+    /// </summary>
+    public class HashAlgorithmWrapper
+    {
+        private HashAlgorithm _hashAlgorithm;
+        private int _hashAlgorithmWidth;
+
+        public HashAlgorithmWrapper(HashAlgorithm hashAlgorithm, int hashAlgorithmWidth)
+        {
+            _hashAlgorithm = hashAlgorithm;
+            _hashAlgorithmWidth = hashAlgorithmWidth;
+        }
+
+        public byte[] ComputeHash(byte[] data)
+        {
+            var hash = _hashAlgorithm.ComputeHash(data);
+            if (hash.Length != _hashAlgorithmWidth)
+            {
+                //reduce length of hashvalue based on settings
+                var reduced_hash = new byte[_hashAlgorithmWidth];
+                Array.Copy(hash, 0, reduced_hash, 0, _hashAlgorithmWidth);
+                return reduced_hash;
+            }
+            return hash;
+        }
     }
 }
