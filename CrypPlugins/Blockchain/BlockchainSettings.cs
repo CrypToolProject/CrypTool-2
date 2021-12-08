@@ -35,7 +35,7 @@ namespace CrypTool.Plugins.Blockchain
         private int _hashAlgorithmWidth = 10;
         private int _miningDifficulty = 1;
         private double _miningReward = 1;
-        private string _miningAddress = "";        
+        private string _miningAddress = string.Empty;        
 
         #endregion
 
@@ -88,7 +88,7 @@ namespace CrypTool.Plugins.Blockchain
                 if (_miningAddress != value)
                 {
                     _miningAddress = value;
-                    OnPropertyChanged("Mining_Address");
+                    OnPropertyChanged("MiningAddress");
                 }
             }
         }
@@ -105,7 +105,7 @@ namespace CrypTool.Plugins.Blockchain
                 if (_hashAlgorithm != value)
                 {
                     _hashAlgorithm = value;
-                    OnPropertyChanged("Hash_Algorithm");
+                    OnPropertyChanged("HashAlgorithm");
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace CrypTool.Plugins.Blockchain
                 if (_hashAlgorithmWidth != value)
                 {
                     _hashAlgorithmWidth = value;
-                    OnPropertyChanged("Hash_AlgorithmWidth");
+                    OnPropertyChanged("HashAlgorithmWidth");
                 }
             }
         }

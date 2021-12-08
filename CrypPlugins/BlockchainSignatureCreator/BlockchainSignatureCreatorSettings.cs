@@ -68,7 +68,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
                 if (_hashAlgorithm != value)
                 {
                     _hashAlgorithm = value;
-                    OnPropertyChanged("Hash_Algorithm");
+                    OnPropertyChanged("HashAlgorithm");
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
                 if (_hashAlgorithmWidth != value)
                 {
                     _hashAlgorithmWidth = value;
-                    OnPropertyChanged("Hash_AlgorithmWidth");
+                    OnPropertyChanged("HashAlgorithmWidth");
                 }
             }
         }
