@@ -122,6 +122,7 @@ namespace CrypTool.Plugins.Blockchain
         public void Execute()
         {
             _executing = true;
+            _miningAddress = null;
             ProgressChanged(0.25, 1);                       
             try
             {
