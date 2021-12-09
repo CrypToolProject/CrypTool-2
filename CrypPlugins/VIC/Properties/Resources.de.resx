@@ -127,7 +127,7 @@
     <value>Sowjetische Chiffre verwendet von Agent Reino Häyhänen(Victor=VIC)</value>
   </data>
   <data name="ComponentName" xml:space="preserve">
-    <value>VIC Chiffre</value>
+    <value>VIC-Chiffre</value>
   </data>
   <data name="DateCaption" xml:space="preserve">
     <value>Datum</value>
@@ -160,7 +160,7 @@
     <value>Ausgabe</value>
   </data>
   <data name="OutputTooltip" xml:space="preserve">
-    <value>Ausgabe der VIC Chiffre</value>
+    <value>Ausgabe der VIC-Chiffre</value>
   </data>
   <data name="PasswordCaption" xml:space="preserve">
     <value>Passwort</value>
