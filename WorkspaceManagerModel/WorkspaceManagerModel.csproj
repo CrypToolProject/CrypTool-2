@@ -115,6 +115,7 @@
     <Compile Include="Model\Tools\ColorHelper.cs" />
     <Compile Include="Model\Tools\ModelPersistance.cs" />
     <Compile Include="Model\Tools\PartialCopyHelper.cs" />
+    <Compile Include="Model\Tools\PropertyRaiser.cs" />
     <Compile Include="Model\Tools\SettingsManager.cs" />
     <Compile Include="Model\Tools\UndoRedoManager.cs" />
     <Compile Include="Model\Tools\ViewHelper.cs" />

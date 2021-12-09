@@ -29,6 +29,7 @@ using System.Numerics;
 using System.Text;
 using WorkspaceManagerModel.Properties;
 using WorkspaceManagerModel.Model.Operations;
+using WorkspaceManagerModel.Model.Tools;
 
 namespace WorkspaceManager.Model
 {
@@ -457,10 +458,11 @@ namespace WorkspaceManager.Model
                             GuiNeedsUpdate = true;
                         }
                         catch (Exception ex)
-                        {
-                            executionEngine.GuiLogMessage(
-                                String.Format(Resources.PluginModel_Execute_An_error_occured_while_executing___0______1_, Name, ex.Message),
-                                NotificationLevel.Error);
+                        {                         
+                            //Raise guilog event of IPlugin to show the exception in regular log and plugin's log
+                            Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.PluginModel_Execute_An_error_occured_while_executing___0______1_, Name, ex.Message), Plugin, NotificationLevel.Error));
+
+                            //set plugin to error state
                             State = PluginModelState.Error;
                             GuiNeedsUpdate = true;
                         }
@@ -645,8 +647,9 @@ namespace WorkspaceManager.Model
                         }
                         catch (Exception ex)
                         {
-                            executionEngine.GuiLogMessage(
-                                String.Format(Resources.PluginModel_Execute_An_error_occured_while_setting_value_of_connector___0___of___1_____2_, connectorModel.Name, Name, ex.Message), NotificationLevel.Error);
+                            //Raise guilog event of IPlugin to show the exception in regular log and plugin's log
+                            Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.PluginModel_Execute_An_error_occured_while_setting_value_of_connector___0___of___1_____2_, connectorModel.Name, Name, ex.Message), Plugin, NotificationLevel.Error));
+
                             State = PluginModelState.Error;
                             GuiNeedsUpdate = true;
                         }
@@ -677,8 +680,9 @@ namespace WorkspaceManager.Model
                     }
                     catch (Exception ex)
                     {
-                        executionEngine.GuiLogMessage(
-                            String.Format(Resources.PluginModel_Execute_An_error_occured_while_executing____0______1__, Name, ex.Message), NotificationLevel.Error);
+                        //Raise guilog event of IPlugin to show the exception in regular log and plugin's log
+                        Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.PluginModel_Execute_An_error_occured_while_executing____0______1__, Name, ex.Message), Plugin, NotificationLevel.Error));
+
                         State = PluginModelState.Error;
                         GuiNeedsUpdate = true;
                     }                    
@@ -709,9 +713,9 @@ namespace WorkspaceManager.Model
             }
             catch (Exception ex)
             {
-                executionEngine.GuiLogMessage(
-                               String.Format(Resources.PluginModel_Execute_An_error_occured_while_executing___0______1_, Name, ex.Message),
-                               NotificationLevel.Error);
+                //Raise guilog event of IPlugin to show the exception in regular log and plugin's log
+                Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.PluginModel_Execute_An_error_occured_while_executing___0______1_, Name, ex.Message), Plugin, NotificationLevel.Error));
+
                 State = PluginModelState.Error;
             }
         }

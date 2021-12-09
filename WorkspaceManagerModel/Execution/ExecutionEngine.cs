@@ -23,7 +23,7 @@ using CrypTool.PluginBase;
 using System.Windows.Threading;
 using CrypTool.PluginBase.Editor;
 using WorkspaceManagerModel.Properties;
-
+using WorkspaceManagerModel.Model.Tools;
 
 namespace WorkspaceManager.Execution
 {
@@ -126,7 +126,8 @@ namespace WorkspaceManager.Execution
                     }
                     catch (Exception ex)
                     {
-                        GuiLogMessage(string.Format(Resources.An_Error_occured_while_pre_0_1, pluginModel.Name, ex.Message), NotificationLevel.Error);
+                        pluginModel.Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.An_Error_occured_while_pre_0_1, pluginModel.Name, ex.Message), pluginModel.Plugin, NotificationLevel.Error));
+                        pluginModel.State = PluginModelState.Error;
                     }
                 }
 
@@ -292,7 +293,8 @@ namespace WorkspaceManager.Execution
                     }
                     catch (Exception ex)
                     {
-                        GuiLogMessage(string.Format(Resources.An_Error_occured_while_stopping_0_1, pluginModel.Name, ex.Message), NotificationLevel.Error);
+                        //Raise guilog event of IPlugin to show the exception in regular log and plugin's log
+                        pluginModel.Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.An_Error_occured_while_stopping_0_1, pluginModel.Name, ex.Message), pluginModel.Plugin, NotificationLevel.Error));
                     }
                     pluginModel.resetEvent.Set();
                 }
@@ -335,7 +337,8 @@ namespace WorkspaceManager.Execution
                     }
                     catch (Exception ex)
                     {
-                        GuiLogMessage(string.Format(Resources.An_Error_occured_while_post_0_1, pluginModel.Name, ex.Message), NotificationLevel.Error);
+                        pluginModel.Plugin.RaiseEvent("OnGuiLogNotificationOccured", new GuiLogEventArgs(string.Format(Resources.An_Error_occured_while_post_0_1, pluginModel.Name, ex.Message), pluginModel.Plugin, NotificationLevel.Error));
+                        pluginModel.State = PluginModelState.Error;
                     }
                 }
             }
