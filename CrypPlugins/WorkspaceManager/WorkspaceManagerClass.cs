@@ -788,59 +788,52 @@ namespace WorkspaceManager
             }
         }
 
-        private DateTime progressTime = DateTime.Now;
-
         private void ExecutionEngine_OnPluginProgressChanged(IPlugin sender, PluginProgressEventArgs args)
         {
             Thread.CurrentThread.CurrentCulture = _currentCulture;
             Thread.CurrentThread.CurrentUICulture = _currentUICulture;
 
-            if (CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_UseGlobalProgressbar) 
+            if (CrypTool.PluginBase.Properties.Settings.Default.WorkspaceManager_UseGlobalProgressbar)
             {
-                if (DateTime.Now >= progressTime.AddSeconds(1))
+                WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
                 {
-                    progressTime = DateTime.Now;
-                    this.WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                    {
-                        WorkspaceSpaceEditorView.Progress = args.Value;                        
-                    }, null);
-                    
-                    if (args.Value == args.Max && _reachedTotalProgress == false)
-                    {
-                        var duration = DateTime.Now - _starttime;
-                        string durationString = string.Empty;
-                        if (duration.TotalDays > 1)
-                        {
-                            durationString = duration.ToString(@"dd\.hh\:mm\:ss")  + " " + Resources.Days;
-                        }
-                        else if (duration.TotalHours > 1)
-                        {
-                            durationString = duration.ToString(@"hh\:mm\:ss") + " " + Resources.Hours;
-                        }
-                        else if (duration.TotalMinutes > 1)
-                        {
-                            durationString = duration.ToString(@"mm\:ss") + " " + Resources.Minutes;
-                        }
-                        else
-                        {
-                            durationString = duration.Seconds + " " + (duration.Seconds == 1 ? Resources.Second : Resources.Seconds);
-                        }
+                    WorkspaceSpaceEditorView.Progress = args.Value;
+                }, null);
 
-                        this.WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
-                        {
-                            WorkspaceSpaceEditorView.ProgressDuration = String.Format(Resources.GlobalProgressBar_Description, durationString);
-                        }, null);
-                        GuiLogMessage(String.Format(Resources.GlobalProgressBar_Description, durationString), NotificationLevel.Info);
-                        _reachedTotalProgress = true;
-                    }
-                    else if(args.Value < args.Max && _reachedTotalProgress == true)
+                if (args.Value == args.Max && _reachedTotalProgress == false)
+                {
+                    var duration = DateTime.Now - _starttime;
+                    string durationString = string.Empty;
+                    if (duration.TotalDays > 1)
                     {
-                        //progress fell down below MAX -> we have a new execution run
-                        _reachedTotalProgress = false;
-                        _starttime = DateTime.Now;
+                        durationString = duration.ToString(@"dd\.hh\:mm\:ss") + " " + Resources.Days;
                     }
+                    else if (duration.TotalHours > 1)
+                    {
+                        durationString = duration.ToString(@"hh\:mm\:ss") + " " + Resources.Hours;
+                    }
+                    else if (duration.TotalMinutes > 1)
+                    {
+                        durationString = duration.ToString(@"mm\:ss") + " " + Resources.Minutes;
+                    }
+                    else
+                    {
+                        durationString = duration.Seconds + " " + (duration.Seconds == 1 ? Resources.Second : Resources.Seconds);
+                    }
+
+                    WorkspaceSpaceEditorView.Dispatcher.Invoke(DispatcherPriority.Normal, (SendOrPostCallback)delegate
+                    {
+                        WorkspaceSpaceEditorView.ProgressDuration = String.Format(Resources.GlobalProgressBar_Description, durationString);
+                    }, null);
+                    GuiLogMessage(String.Format(Resources.GlobalProgressBar_Description, durationString), NotificationLevel.Info);
+                    _reachedTotalProgress = true;
                 }
-                
+                else if (args.Value < args.Max && _reachedTotalProgress == true)
+                {
+                    //progress fell down below MAX -> we have a new execution run
+                    _reachedTotalProgress = false;
+                    _starttime = DateTime.Now;
+                }
             }
         }
 

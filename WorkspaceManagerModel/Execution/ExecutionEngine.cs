@@ -179,11 +179,14 @@ namespace WorkspaceManager.Execution
 
         internal volatile int ExecutionCounter = 0;
 
+        private double _lastfinishedPercentage = 0;
+
         /// <summary>
         /// Called by the GUI-Updater Thread
         /// </summary>
         private void CheckGui()
         {
+            _lastfinishedPercentage = 0;
             try
             {
                 while (true)
@@ -215,7 +218,12 @@ namespace WorkspaceManager.Execution
                         }
                     }
 
-                    ProgressChanged(finishedPercentage/count, 1.0);
+                    if (finishedPercentage != _lastfinishedPercentage)
+                    {
+                        ProgressChanged(finishedPercentage / count, 1.0);
+                        _lastfinishedPercentage = finishedPercentage;
+                    }
+
                     Thread.Sleep(GuiUpdateInterval);
                 }
             }
