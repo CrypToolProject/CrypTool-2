@@ -342,4 +342,58 @@
   <data name="InvalidChain" xml:space="preserve">
     <value>The blockchain is invalid</value>
   </data>
+  <data name="ChangeAddress" xml:space="preserve">
+    <value>Change the mining address</value>
+  </data>
+  <data name="ChangeHashAlgo" xml:space="preserve">
+    <value>Change the hash algorithm</value>
+  </data>
+  <data name="ChangeMiningDifficulty" xml:space="preserve">
+    <value>Change mining difficulty</value>
+  </data>
+  <data name="ChangeReward" xml:space="preserve">
+    <value>Change the mining reward</value>
+  </data>
+  <data name="ChangeWidth" xml:space="preserve">
+    <value>Change the hash algorithm width (number of used bytes)</value>
+  </data>
+  <data name="GenBlockPrevHashCaption" xml:space="preserve">
+    <value>Genesis block previous hash has to be 0</value>
+  </data>
+  <data name="GenBlockPrevIDCaption" xml:space="preserve">
+    <value>Genesis block previous block id has to be 0</value>
+  </data>
+  <data name="HashAlgo" xml:space="preserve">
+    <value>Hash algorithm</value>
+  </data>
+  <data name="HashWidth" xml:space="preserve">
+    <value>Hash algorithm width</value>
+  </data>
+  <data name="HashWidthErrorCaption" xml:space="preserve">
+    <value>The hash algorithm width is invalid. Use 1 instead</value>
+  </data>
+  <data name="InvalidBlockHashCaption" xml:space="preserve">
+    <value>Block hash is invalid</value>
+  </data>
+  <data name="LowZeroesCaption" xml:space="preserve">
+    <value>Number of zeros in block hash is too low</value>
+  </data>
+  <data name="MiningAddress" xml:space="preserve">
+    <value>Mining address</value>
+  </data>
+  <data name="MiningDifficulty" xml:space="preserve">
+    <value>Mining difficulty</value>
+  </data>
+  <data name="MiningReward" xml:space="preserve">
+    <value>Mining reward (in coins)</value>
+  </data>
+  <data name="NoErrorCaption" xml:space="preserve">
+    <value>No Error</value>
+  </data>
+  <data name="PreviousBlockHashWrongCaption" xml:space="preserve">
+    <value>Previous block hash wrong</value>
+  </data>
+  <data name="PreviousBlockIDWrongCaption" xml:space="preserve">
+    <value>Previous block ID wrong</value>
+  </data>
 </root>

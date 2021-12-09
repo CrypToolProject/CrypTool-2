@@ -56,7 +56,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         }
 
-        [TaskPane("Hash algorithm", "Change the hash algorithm", null, 0, false, ControlType.ComboBox, new string[] { "SHA1", "SHA256", "SHA512" })]
+        [TaskPane("HashAlgoCaption", "ChangeAlgoCaption", null, 0, false, ControlType.ComboBox, new string[] { "SHA1", "SHA256", "SHA512" })]
         public HashAlgorithms HashAlgorithm
         {
             get
@@ -73,7 +73,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             }
         }
 
-        [TaskPane("Hash algorithm width", "Change the hash algorithm width (number of used bytes)", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("HashAlgoWidthCaption", "ChangeWidthCaption", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int HashAlgorithmWidth
         {
             get

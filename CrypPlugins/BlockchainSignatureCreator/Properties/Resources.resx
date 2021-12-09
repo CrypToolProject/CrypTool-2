@@ -156,4 +156,19 @@
   <data name="SenderTooltip" xml:space="preserve">
     <value>Sender address data (Name, N, e, d)</value>
   </data>
+  <data name="ChangeAlgoCaption" xml:space="preserve">
+    <value>Change the hash algorithm</value>
+  </data>
+  <data name="ChangeWidthCaption" xml:space="preserve">
+    <value>Verändern Sie de Breite des Hash-Algorithmus</value>
+  </data>
+  <data name="HashAlgoCaption" xml:space="preserve">
+    <value>Hash algorithm</value>
+  </data>
+  <data name="HashAlgoWidthCaption" xml:space="preserve">
+    <value>Hash algorithm width</value>
+  </data>
+  <data name="HashWidthErrorCaption" xml:space="preserve">
+    <value>The hash algorithm width is invalid. Use 1 instead</value>
+  </data>
 </root>

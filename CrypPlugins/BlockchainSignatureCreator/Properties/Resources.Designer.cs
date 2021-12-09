@@ -97,11 +97,56 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change the hash algorithm ähnelt.
+        /// </summary>
+        internal static string ChangeAlgoCaption {
+            get {
+                return ResourceManager.GetString("ChangeAlgoCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Verändern Sie de Breite des Hash-Algorithmus ähnelt.
+        /// </summary>
+        internal static string ChangeWidthCaption {
+            get {
+                return ResourceManager.GetString("ChangeWidthCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Exception occured: {0} ähnelt.
         /// </summary>
         internal static string ExceptionMessage {
             get {
                 return ResourceManager.GetString("ExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hash algorithm ähnelt.
+        /// </summary>
+        internal static string HashAlgoCaption {
+            get {
+                return ResourceManager.GetString("HashAlgoCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hash algorithm width ähnelt.
+        /// </summary>
+        internal static string HashAlgoWidthCaption {
+            get {
+                return ResourceManager.GetString("HashAlgoWidthCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The hash algorithm width is invalid. Use 1 instead ähnelt.
+        /// </summary>
+        internal static string HashWidthErrorCaption {
+            get {
+                return ResourceManager.GetString("HashWidthErrorCaption", resourceCulture);
             }
         }
         

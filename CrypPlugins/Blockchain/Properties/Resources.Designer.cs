@@ -187,6 +187,51 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change the mining address ähnelt.
+        /// </summary>
+        internal static string ChangeAddress {
+            get {
+                return ResourceManager.GetString("ChangeAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change the hash algorithm ähnelt.
+        /// </summary>
+        internal static string ChangeHashAlgo {
+            get {
+                return ResourceManager.GetString("ChangeHashAlgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change mining difficulty ähnelt.
+        /// </summary>
+        internal static string ChangeMiningDifficulty {
+            get {
+                return ResourceManager.GetString("ChangeMiningDifficulty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change the mining reward ähnelt.
+        /// </summary>
+        internal static string ChangeReward {
+            get {
+                return ResourceManager.GetString("ChangeReward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Change the hash algorithm width (number of used bytes) ähnelt.
+        /// </summary>
+        internal static string ChangeWidth {
+            get {
+                return ResourceManager.GetString("ChangeWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die  Coin ähnelt.
         /// </summary>
         internal static string CoinCaption {
@@ -286,11 +331,38 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Genesis block previous hash has to be 0 ähnelt.
+        /// </summary>
+        internal static string GenBlockPrevHashCaption {
+            get {
+                return ResourceManager.GetString("GenBlockPrevHashCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Genesis block previous block id has to be 0 ähnelt.
+        /// </summary>
+        internal static string GenBlockPrevIDCaption {
+            get {
+                return ResourceManager.GetString("GenBlockPrevIDCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Can´t make transactions in genesis block ähnelt.
         /// </summary>
         internal static string GenTransactionWarning {
             get {
                 return ResourceManager.GetString("GenTransactionWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hash algorithm ähnelt.
+        /// </summary>
+        internal static string HashAlgo {
+            get {
+                return ResourceManager.GetString("HashAlgo", resourceCulture);
             }
         }
         
@@ -318,6 +390,24 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         internal static string HashValueTableCaption {
             get {
                 return ResourceManager.GetString("HashValueTableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Hash algorithm width ähnelt.
+        /// </summary>
+        internal static string HashWidth {
+            get {
+                return ResourceManager.GetString("HashWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die The hash algorithm width is invalid. Use 1 instead ähnelt.
+        /// </summary>
+        internal static string HashWidthErrorCaption {
+            get {
+                return ResourceManager.GetString("HashWidthErrorCaption", resourceCulture);
             }
         }
         
@@ -367,6 +457,15 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Block hash is invalid ähnelt.
+        /// </summary>
+        internal static string InvalidBlockHashCaption {
+            get {
+                return ResourceManager.GetString("InvalidBlockHashCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The blockchain is invalid ähnelt.
         /// </summary>
         internal static string InvalidChain {
@@ -403,6 +502,15 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Number of zeros in block hash is too low ähnelt.
+        /// </summary>
+        internal static string LowZeroesCaption {
+            get {
+                return ResourceManager.GetString("LowZeroesCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die milliseconds ähnelt.
         /// </summary>
         internal static string millisCaption {
@@ -412,11 +520,29 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mining address ähnelt.
+        /// </summary>
+        internal static string MiningAddress {
+            get {
+                return ResourceManager.GetString("MiningAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Mining address not an address ähnelt.
         /// </summary>
         internal static string MiningAddressErrorCaption {
             get {
                 return ResourceManager.GetString("MiningAddressErrorCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mining difficulty ähnelt.
+        /// </summary>
+        internal static string MiningDifficulty {
+            get {
+                return ResourceManager.GetString("MiningDifficulty", resourceCulture);
             }
         }
         
@@ -435,6 +561,15 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         internal static string MiningDifficultyWarning {
             get {
                 return ResourceManager.GetString("MiningDifficultyWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mining reward (in coins) ähnelt.
+        /// </summary>
+        internal static string MiningReward {
+            get {
+                return ResourceManager.GetString("MiningReward", resourceCulture);
             }
         }
         
@@ -471,6 +606,15 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         internal static string nextblockTooltip {
             get {
                 return ResourceManager.GetString("nextblockTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Error ähnelt.
+        /// </summary>
+        internal static string NoErrorCaption {
+            get {
+                return ResourceManager.GetString("NoErrorCaption", resourceCulture);
             }
         }
         
@@ -543,6 +687,24 @@ namespace CrypTool.Plugins.Blockchain.Properties {
         internal static string PreviousblockhashCaption {
             get {
                 return ResourceManager.GetString("PreviousblockhashCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Previous block hash wrong ähnelt.
+        /// </summary>
+        internal static string PreviousBlockHashWrongCaption {
+            get {
+                return ResourceManager.GetString("PreviousBlockHashWrongCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Previous block ID wrong ähnelt.
+        /// </summary>
+        internal static string PreviousBlockIDWrongCaption {
+            get {
+                return ResourceManager.GetString("PreviousBlockIDWrongCaption", resourceCulture);
             }
         }
         

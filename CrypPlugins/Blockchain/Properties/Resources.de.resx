@@ -124,10 +124,10 @@
     <value>Alle Adressen (Format: "Name, N, e, d")</value>
   </data>
   <data name="BadSignatureCaption" xml:space="preserve">
-    <value>Ungueltige Signatur</value>
+    <value>Ungültige Signatur</value>
   </data>
   <data name="BadSignatureInCaption" xml:space="preserve">
-    <value>Ungueltige Signatur in: </value>
+    <value>Ungültige Signatur in: </value>
   </data>
   <data name="BalanceTableCaption" xml:space="preserve">
     <value>Coins</value>
@@ -145,7 +145,7 @@
     <value>Gehashte Block Daten</value>
   </data>
   <data name="ChainValidCaption" xml:space="preserve">
-    <value>Gueltige Blockchain? </value>
+    <value>Gültige Blockchain? </value>
   </data>
   <data name="CoinCaption" xml:space="preserve">
     <value>Coin</value>
@@ -178,19 +178,19 @@
     <value>Hashwert</value>
   </data>
   <data name="InsufficientBalanceCaption" xml:space="preserve">
-    <value>Nicht genug Muenzen</value>
+    <value>Nicht genug Münzen</value>
   </data>
   <data name="InsuffiecientBalanceInCaption" xml:space="preserve">
-    <value>Nicht genug Muenzen fuer Transaktion: </value>
+    <value>Nicht genug Münzen fuer Transaktion: </value>
   </data>
   <data name="InvalidAddressCaption" xml:space="preserve">
-    <value>Ungueltige Adresse (input)</value>
+    <value>Ungültige Adresse (input)</value>
   </data>
   <data name="InvalidTransactionCaption" xml:space="preserve">
-    <value>Ungueltige Transaktionen</value>
+    <value>Ungültige Transaktionen</value>
   </data>
   <data name="InvalidValueCaption" xml:space="preserve">
-    <value>Ungueltige Transaktion</value>
+    <value>Ungültige Transaktion</value>
   </data>
   <data name="LineCaption" xml:space="preserve">
     <value>-</value>
@@ -199,19 +199,19 @@
     <value>Millesekunden</value>
   </data>
   <data name="MiningAddressErrorCaption" xml:space="preserve">
-    <value>Mining Adresse ist keine ungueltig</value>
+    <value>Mining Adresse ist keine ungültig</value>
   </data>
   <data name="NameTableCaption" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="NegativeValueCaption" xml:space="preserve">
-    <value>Ungueltige Transaktion (negativer Wert)</value>
+    <value>Ungültige Transaktion (negativer Wert)</value>
   </data>
   <data name="nextblockCaption" xml:space="preserve">
-    <value>Naechster Block</value>
+    <value>Nächster Block</value>
   </data>
   <data name="nextblockTooltip" xml:space="preserve">
-    <value>Ausgabe fuer naechten Block</value>
+    <value>Ausgabe fuer nächsten Block</value>
   </data>
   <data name="NoJSONStringCaption" xml:space="preserve">
     <value>Vorheriger Block Eingabe hat falsches Format</value>
@@ -247,7 +247,7 @@
     <value>Mining Adresse</value>
   </data>
   <data name="SettingsMiningAddressTooltip" xml:space="preserve">
-    <value>Mining Adresse auswaehlen</value>
+    <value>Mining Adresse auswählen</value>
   </data>
   <data name="SignatureCaption" xml:space="preserve">
     <value>Signatur: </value>
@@ -256,7 +256,7 @@
     <value>Signatur</value>
   </data>
   <data name="SignatureVerifiedCaption" xml:space="preserve">
-    <value>Gueltige Signatur</value>
+    <value>Gültige Signatur</value>
   </data>
   <data name="StatusTableCaption" xml:space="preserve">
     <value>Status</value>
@@ -271,13 +271,13 @@
     <value>Zeitstempel: </value>
   </data>
   <data name="ToCaption" xml:space="preserve">
-    <value>Empfaenger:</value>
+    <value>Empfänger:</value>
   </data>
   <data name="toCaption1" xml:space="preserve">
     <value>zu</value>
   </data>
   <data name="ToTableCaption" xml:space="preserve">
-    <value>Empfaenger</value>
+    <value>Empfänger</value>
   </data>
   <data name="TransactionCaption" xml:space="preserve">
     <value>Transaktion</value>
@@ -313,19 +313,19 @@
     <value>Vorheriger Block:</value>
   </data>
   <data name="ToAddressUICaption" xml:space="preserve">
-    <value>Empfaenger</value>
+    <value>Empfänger</value>
   </data>
   <data name="TransactionsUICaption" xml:space="preserve">
     <value>Transaktionen</value>
   </data>
   <data name="InvalidAddressInTransaction" xml:space="preserve">
-    <value>Ungueltige adresse in Transaktion (Format überprüfen)</value>
+    <value>Ungültige Adresse in Transaktion (Format überprüfen)</value>
   </data>
   <data name="GenTransactionWarning" xml:space="preserve">
-    <value>Keine Transaktionen im Genesis Block moeglich</value>
+    <value>Keine Transaktionen im Genesis Block möglich</value>
   </data>
   <data name="InvalidAddressName" xml:space="preserve">
-    <value>Ungueltiger Name in Adresse</value>
+    <value>Ungültiger Name in Adresse</value>
   </data>
   <data name="MiningDifficultyWarning" xml:space="preserve">
     <value>Mining Schwierigkeit ist höher als das Bit Limit des Hash Algorithmus</value>
@@ -338,5 +338,59 @@
   </data>
   <data name="BlockIdUICaption" xml:space="preserve">
     <value>Block-Id:</value>
+  </data>
+  <data name="ChangeAddress" xml:space="preserve">
+    <value>Änderung der Mining-Adresse</value>
+  </data>
+  <data name="ChangeHashAlgo" xml:space="preserve">
+    <value>Änderung des Hash-Algorithmus</value>
+  </data>
+  <data name="ChangeMiningDifficulty" xml:space="preserve">
+    <value>Änderung der Mining-Schwierigkeit</value>
+  </data>
+  <data name="ChangeReward" xml:space="preserve">
+    <value>Veränderung der Mining-Belohnung</value>
+  </data>
+  <data name="ChangeWidth" xml:space="preserve">
+    <value>Änderung der Hash-Algorithmus Breite (Anzahl an Bytes)</value>
+  </data>
+  <data name="GenBlockPrevHashCaption" xml:space="preserve">
+    <value>Genesis Block vorheriger Hash muss 0 sein</value>
+  </data>
+  <data name="GenBlockPrevIDCaption" xml:space="preserve">
+    <value>Genesis Block vorherige ID muss 0 sein</value>
+  </data>
+  <data name="HashAlgo" xml:space="preserve">
+    <value>Hash-Algorithmus</value>
+  </data>
+  <data name="HashWidth" xml:space="preserve">
+    <value>Hash-Algorithmus Breite</value>
+  </data>
+  <data name="HashWidthErrorCaption" xml:space="preserve">
+    <value>Die Hash-Algorithmus Breite is ungültih. Benutzen Sie bitte 1</value>
+  </data>
+  <data name="InvalidBlockHashCaption" xml:space="preserve">
+    <value>Block-Hashwert ist ungültig</value>
+  </data>
+  <data name="LowZeroesCaption" xml:space="preserve">
+    <value>Zu wenige Nullen im Block-Hashwert</value>
+  </data>
+  <data name="MiningAddress" xml:space="preserve">
+    <value>Mining-Adresse</value>
+  </data>
+  <data name="MiningDifficulty" xml:space="preserve">
+    <value>Mining-Schwierigkeit</value>
+  </data>
+  <data name="MiningReward" xml:space="preserve">
+    <value>Mining-Belohnung (In Coins)</value>
+  </data>
+  <data name="NoErrorCaption" xml:space="preserve">
+    <value>Kein Fehler</value>
+  </data>
+  <data name="PreviousBlockHashWrongCaption" xml:space="preserve">
+    <value>Vorheriger Block-Hashwert ist falsch</value>
+  </data>
+  <data name="PreviousBlockIDWrongCaption" xml:space="preserve">
+    <value>Vorherige Block-ID ist falsch</value>
   </data>
 </root>

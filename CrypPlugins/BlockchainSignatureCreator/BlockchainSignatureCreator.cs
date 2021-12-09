@@ -242,7 +242,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             if (_hashAlgorithmWrapperWidth <= 0)
             {
                 _hashAlgorithmWrapperWidth = 1;
-                GuiLogMessage("The hash algorithm width is invalid. Use 1 instead", NotificationLevel.Warning);
+                GuiLogMessage(Properties.Resources.HashWidthErrorCaption, NotificationLevel.Warning);
             }
             switch (_settings.HashAlgorithm)
             {

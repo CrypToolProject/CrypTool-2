@@ -453,12 +453,12 @@ namespace CrypTool.Plugins.Blockchain
                 {                    
                     if(block.PreviousHash != previousBlock.Hash)
                     {
-                        errorMessage = "Previous block hash wrong";
+                        errorMessage = Properties.Resources.PreviousBlockHashWrongCaption;
                         return false;
                     }
                     if (block.BlockId != previousBlock.BlockId + 1)
                     {
-                        errorMessage = "Previous block id wrong";
+                        errorMessage = Properties.Resources.PreviousBlockIDWrongCaption;
                         return false;
                     }
                 }
@@ -467,12 +467,12 @@ namespace CrypTool.Plugins.Blockchain
                 {
                     if (!block.PreviousHash.Equals("0"))
                     {
-                        errorMessage = "Genesis block previous hash has to be 0";
+                        errorMessage = Properties.Resources.GenBlockPrevHashCaption;
                         return false;
                     }
                     if (block.BlockId != 0)
                     {
-                        errorMessage = "Genesis block previous block id has to be 0";
+                        errorMessage = Properties.Resources.GenBlockPrevIDCaption;
                         return false;
                     }
                 }
@@ -482,19 +482,19 @@ namespace CrypTool.Plugins.Blockchain
                 //also, we compute the number of zeros in that hash
                 if (!block.ComputeBlockHashAndCountNumberOfZeros(_hashAlgorithmWrapper, out numberOfZerosInHash).Equals(block.Hash))
                 {
-                    errorMessage = "Block hash is invalid";
+                    errorMessage = Properties.Resources.InvalidBlockHashCaption;
                     return false;
                 }
 
                 //now check, if the hash corresponds to promized difficulty of that block
                 if(numberOfZerosInHash < block.Difficulty)
                 {
-                    errorMessage = "Number of zeros in block hash is too low";
+                    errorMessage = Properties.Resources.LowZeroesCaption;
                     return false;
                 }
                 previousBlock = block;
             }
-            errorMessage = "No error";
+            errorMessage = Properties.Resources.NoErrorCaption;
             return true;
         }      
 
@@ -698,7 +698,7 @@ namespace CrypTool.Plugins.Blockchain
             if (_hashAlgorithmWrapperWidth <= 0)
             {
                 _hashAlgorithmWrapperWidth = 1;
-                GuiLogMessage("The hash algorithm width is invalid. Use 1 instead", NotificationLevel.Warning);
+                GuiLogMessage(Properties.Resources.HashWidthErrorCaption, NotificationLevel.Warning);
             }
 
             switch (_settings.HashAlgorithm)

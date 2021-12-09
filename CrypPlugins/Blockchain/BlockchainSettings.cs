@@ -42,7 +42,7 @@ namespace CrypTool.Plugins.Blockchain
         #region TaskPane Settings
 
 
-        [TaskPane("Mining difficulty", "Change Mining Difficulty", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("MiningDifficulty", "ChangeMiningDifficulty", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int MiningDifficulty
         {
             get
@@ -59,7 +59,7 @@ namespace CrypTool.Plugins.Blockchain
             }
         }
 
-        [TaskPane("Mining reward (in coins)", "Change the mining reward", null, 0, false, ControlType.TextBox)]
+        [TaskPane("MiningReward", "ChangeReward", null, 0, false, ControlType.TextBox)]
         public double MiningReward
         {
             get
@@ -76,7 +76,7 @@ namespace CrypTool.Plugins.Blockchain
             }
         }
 
-        [TaskPane("Mining address", "Change the mining address",null,0,false,ControlType.TextBox)]
+        [TaskPane("MiningAddress", "ChangeAddress",null,0,false,ControlType.TextBox)]
         public string MiningAddress
         {
             get
@@ -93,7 +93,7 @@ namespace CrypTool.Plugins.Blockchain
             }
         }
 
-        [TaskPane("Hash algorithm", "Change the hash algorithm", null, 0, false, ControlType.ComboBox, new string[] {"SHA1","SHA256","SHA512" })]
+        [TaskPane("HashAlgo", "ChangeHashAlgo", null, 0, false, ControlType.ComboBox, new string[] {"SHA1","SHA256","SHA512" })]
         public HashAlgorithms HashAlgorithm
         {
             get
@@ -110,7 +110,7 @@ namespace CrypTool.Plugins.Blockchain
             }
         }
 
-        [TaskPane("Hash algorithm width", "Change the hash algorithm width (number of used bytes)", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
+        [TaskPane("HashWidth", "ChangeWidth", null, 0, false, ControlType.NumericUpDown, ValidationType.RangeInteger, 1, int.MaxValue)]
         public int HashAlgorithmWidth
         {
             get
