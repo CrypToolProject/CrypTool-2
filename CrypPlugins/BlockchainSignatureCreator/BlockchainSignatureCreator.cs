@@ -35,17 +35,15 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         private readonly BlockchainSignatureCreatorSettings _settings = new BlockchainSignatureCreatorSettings();
 
-        string senderName;
-        string senderN;
-        string senderE;
-        string senderD;
+        private string senderName;
+        private string senderN;
+        private string senderE;
+        private string senderD;
 
-        string recipientName;
-        string recipientN;
-        string recipientE;
-        string recipientD;
-
-        string amount;
+        private string recipientName;
+        private string recipientN;
+        private string recipientE;
+        private string recipientD;
 
         private int _hashAlgorithmWrapperWidth;
         private HashAlgorithmWrapper _hashAlgorithmWrapper;
@@ -54,22 +52,22 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
 
         #region Data Properties
 
-        [PropertyInfo(Direction.InputData, "SenderCaption", "SenderTooltip")]
+        [PropertyInfo(Direction.InputData, "SenderCaption", "SenderTooltip", true)]
         public string Sender
         {
             get;
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "RecipientCaption", "RecipientTooltip")]
+        [PropertyInfo(Direction.InputData, "RecipientCaption", "RecipientTooltip", true)]
         public string Recipient
         {
             get;
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "AmountCaption", "AmountTooltip")]
-        public string Amount
+        [PropertyInfo(Direction.InputData, "AmountCaption", "AmountTooltip", true)]
+        public double Amount
         {
             get;
             set;
@@ -111,17 +109,17 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
                 string sender = Sender;
                 string recipient = Recipient;
                 ReadInput();
-                var sr3 = new StringBuilder();
+                var stringBuilder = new StringBuilder();
 
-                BigInteger sig = CreateSignature(senderName, recipientName, amount, senderN, senderD);
-                sr3.Append(senderName);
-                sr3.Append(",");
-                sr3.Append(recipientName);
-                sr3.Append(",");
-                sr3.Append(amount);
-                sr3.Append(",");
-                sr3.Append(sig);
-                Signature = sr3.ToString();
+                BigInteger sig = CreateSignature(senderName, recipientName, Amount, senderN, senderD);
+                stringBuilder.Append(senderName);
+                stringBuilder.Append(",");
+                stringBuilder.Append(recipientName);
+                stringBuilder.Append(",");
+                stringBuilder.Append(Amount.ToString(CultureInfo.InvariantCulture));
+                stringBuilder.Append(",");
+                stringBuilder.Append(sig);
+                Signature = stringBuilder.ToString();
                 OnPropertyChanged("Signature");
 
                 ProgressChanged(1, 1);
@@ -187,9 +185,7 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             var sr1 = new StringReader(sender);
             var sr2 = new StringReader(recipient);
             string line1;
-            string line2;
-
-            amount = Amount;
+            string line2;            
 
             while ((line1 = sr1.ReadLine()) != null)
             {
@@ -216,15 +212,14 @@ namespace CrypTool.Plugins.BlockchainSignatureCreator
             }
         }
 
-        public BigInteger CreateSignature(string real_from, string real_to, string real_amount, string real_N, string real_d)
+        public BigInteger CreateSignature(string real_from, string real_to, double real_amount, string real_N, string real_d)
         {    
             string from = real_from;
             string to = real_to;
-            double amount = double.Parse(real_amount, CultureInfo.InvariantCulture.NumberFormat);
             BigInteger N = BigInteger.Parse(real_N);
             BigInteger d = BigInteger.Parse(real_d);
 
-            var preImage = Encoding.UTF8.GetBytes(from + to + amount);          
+            var preImage = Encoding.UTF8.GetBytes(from + to + real_amount.ToString(CultureInfo.InvariantCulture));          
             var hash = _hashAlgorithmWrapper.ComputeHash(preImage);
             BigInteger hashBigInt = new BigInteger(hash);
             

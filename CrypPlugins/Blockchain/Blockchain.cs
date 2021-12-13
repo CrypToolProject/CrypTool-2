@@ -73,7 +73,7 @@ namespace CrypTool.Plugins.Blockchain
             set;
         }
 
-        [PropertyInfo(Direction.InputData, "AddressesCaption", "AddressesTooltip", false)]
+        [PropertyInfo(Direction.InputData, "AddressesCaption", "AddressesTooltip", true)]
         public string Addresses
         {
             get;
@@ -205,7 +205,7 @@ namespace CrypTool.Plugins.Blockchain
                         gen_transaction.Status = Properties.Resources.SuccessfullCaption;
                         genesisList.Add(gen_transaction);
                     }                                                             
-                    AddGenesisBlock(new Block(generationTime.ToString(), genesisList));               
+                    AddGenesisBlock(new Block(generationTime, genesisList));               
                 }
 
                 ProgressChanged(0.5, 1);
@@ -287,7 +287,7 @@ namespace CrypTool.Plugins.Blockchain
                     _presentation.PreviousBlockHash.Value = FormatHashString(latestBlock.PreviousHash);
                     _presentation.Transactions.Value = latestBlock.Transactions.Count.ToString();
                     _presentation.FailedTransactions.Value = _failedTransactions.Count.ToString();
-                    _presentation.Timestamp.Value = latestBlock.Timestamp;
+                    _presentation.Timestamp.Value = latestBlock.DateTime.ToString();
                     _presentation.Nonce.Value = latestBlock.Nonce.ToString("N0");
                     _presentation.HashAlgorithm.Value = _hashAlgorithmName;
                     _presentation.MiningDifficulty.Value = string.Format("{0} bit", _settings.MiningDifficulty);
@@ -422,7 +422,7 @@ namespace CrypTool.Plugins.Blockchain
 
             int difficulty = _settings.MiningDifficulty;
             DateTime now = DateTime.Now;
-            Block newBlock = new Block(now.ToString(), _pendingTransactions);
+            Block newBlock = new Block(now, _pendingTransactions);
 
             if (string.IsNullOrEmpty(PreviousBlock))
             {
@@ -679,7 +679,7 @@ namespace CrypTool.Plugins.Blockchain
 
         public bool VerifySignature((BigInteger N, BigInteger e) pubKey, string from, string to, double amount, string signature)
         {            
-            var hash = _hashAlgorithmWrapper.ComputeHash(Encoding.UTF8.GetBytes(from + to + amount));
+            var hash = _hashAlgorithmWrapper.ComputeHash(Encoding.UTF8.GetBytes(from + to + amount.ToString(CultureInfo.InvariantCulture)));
             var hashBigInt = new BigInteger(hash);
 
             if (hashBigInt < BigInteger.Zero)
@@ -832,15 +832,15 @@ namespace CrypTool.Plugins.Blockchain
                 return hashString.Substring(0, 26) + "...";
             }
             return hashString;
-        }
+        }        
 
         #endregion
 
         public class Block 
         {            
-            public Block(string timestamp, List<Transaction> transactions) 
+            public Block(DateTime timestamp, List<Transaction> transactions) 
             {
-                Timestamp = timestamp;
+                DateTime = timestamp;
                 Transactions = transactions;
             }
 
@@ -855,7 +855,7 @@ namespace CrypTool.Plugins.Blockchain
             {
                 byte[] hash;
                 var transactions = CreateTransactionsHashString();
-                var blockPreImageString = BlockId.ToString() + Timestamp + PreviousHash + Difficulty.ToString() + transactions;
+                var blockPreImageString = BlockId.ToString() + DateTime.ToUnixTimestamp() + PreviousHash + Difficulty.ToString() + transactions;
                 var blockPreImageBytes = Encoding.UTF8.GetBytes(blockPreImageString);
                 var blockPreImageBytesPlusNonce = new byte[blockPreImageBytes.Length + 8];
                 Array.Copy(blockPreImageBytes, blockPreImageBytesPlusNonce, blockPreImageBytes.Length);               
@@ -871,7 +871,7 @@ namespace CrypTool.Plugins.Blockchain
                 Difficulty = difficulty; //Memorize difficulty used for mining this block
                 byte[] hash;
                 var transactions = CreateTransactionsHashString();
-                var blockPreImageString = BlockId.ToString() + Timestamp + PreviousHash + difficulty + transactions;
+                var blockPreImageString = BlockId.ToString() + DateTime.ToUnixTimestamp() + PreviousHash + difficulty + transactions;
                 var blockPreImageBytes = Encoding.UTF8.GetBytes(blockPreImageString);
                 var blockPreImageBytesPlusNonce = new byte[blockPreImageBytes.Length + 8];
                 Array.Copy(blockPreImageBytes, blockPreImageBytesPlusNonce, blockPreImageBytes.Length);
@@ -935,7 +935,7 @@ namespace CrypTool.Plugins.Blockchain
                 set;
             }
 
-            public string Timestamp
+            public DateTime DateTime
             {
                 get;
                 set;
@@ -995,7 +995,7 @@ namespace CrypTool.Plugins.Blockchain
                 FromAddress = fromAddress;
                 ToAddress = toAddress;
                 Amount = amount;
-                Timestamp = DateTime.Now.ToString();
+                DateTime = DateTime.Now;
                 Signature = signature;
                 Note = string.Empty;
                 SetHashAlgorithmWrapper(hashAlgorithmWrapper);
@@ -1021,7 +1021,7 @@ namespace CrypTool.Plugins.Blockchain
             {
                 get
                 {
-                    return ConvertToHexString(CalculateHash(Encoding.UTF8.GetBytes(FromAddress.Name + FromAddress.PublicKey + ToAddress.Name + ToAddress.PublicKey + Amount + Timestamp + Signature)));
+                    return ConvertToHexString(CalculateHash(Encoding.UTF8.GetBytes(FromAddress.Name + FromAddress.PublicKey + ToAddress.Name + ToAddress.PublicKey + Amount.ToString(CultureInfo.InvariantCulture) + DateTime.ToUnixTimestamp() + Signature)));
                 }
             }
 
@@ -1043,7 +1043,7 @@ namespace CrypTool.Plugins.Blockchain
                 set;
             }
 
-            public string Timestamp
+            public DateTime DateTime
             {
                 get;
                 set;
@@ -1162,6 +1162,13 @@ namespace CrypTool.Plugins.Blockchain
                 }
                 return hash;
             }
+        }
+    }
+    public static class Extensions
+    {
+        public static long ToUnixTimestamp(this DateTime value)
+        {
+            return (long)value.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         }
     }
 }
