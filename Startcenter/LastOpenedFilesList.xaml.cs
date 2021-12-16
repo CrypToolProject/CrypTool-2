@@ -33,18 +33,18 @@ namespace Startcenter
             RecentFileListBox.DataContext = _recentFileInfos;
 
             _recentFileList.ListChanged += delegate
-                                               {
-                                                   try
-                                                   {
-                                                       ReadRecentFileList();
-                                                       RecentFileListBox.DataContext = null;
-                                                       RecentFileListBox.DataContext = _recentFileInfos;
-                                                   }
-                                                   catch (Exception)
-                                                   {
-                                                       //Not critical.. Do nothing
-                                                   }
-                                               };
+            {
+                try
+                {
+                    ReadRecentFileList();
+                    RecentFileListBox.DataContext = null;
+                    RecentFileListBox.DataContext = _recentFileInfos;
+                }
+                catch (Exception)
+                {
+                    //Not critical.. Do nothing
+                }
+            };
         }
 
         private void ReadRecentFileList()
@@ -172,7 +172,11 @@ namespace Startcenter
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _recentFileList.Clear();
+            //noch auf das richtige locale stellen
+            if (_recentFileList.Count > 0 && MessageBox.Show(Properties.Resources.FileListClearQuestion, Properties.Resources.FileListClearQuestionTitle, MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                _recentFileList.Clear();
+            }
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

@@ -141,5 +141,10 @@ namespace CrypTool.Core
                 }
             }
         }
+
+        public int Count
+        {
+            get => recentFiles.Count;
+        }        
     }
 }

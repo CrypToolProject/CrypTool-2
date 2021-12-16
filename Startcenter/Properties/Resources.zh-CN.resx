@@ -249,4 +249,10 @@
   <data name="ExternalResources" xml:space="preserve">
     <value>外部资源</value>
   </data>
+  <data name="FileListClearQuestion" xml:space="preserve">
+    <value>您真的要清除最近打开的文件列表吗？</value>
+  </data>
+  <data name="FileListClearQuestionTitle" xml:space="preserve">
+    <value>清除最近打开的文件列表</value>
+  </data>
 </root>

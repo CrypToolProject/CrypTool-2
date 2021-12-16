@@ -249,4 +249,10 @@
   <data name="ExternalResources" xml:space="preserve">
     <value>External resources</value>
   </data>
+  <data name="FileListClearQuestion" xml:space="preserve">
+    <value>Do you really want to clear the recently opened files list?</value>
+  </data>
+  <data name="FileListClearQuestionTitle" xml:space="preserve">
+    <value>Clear recently opened files list</value>
+  </data>
 </root>

@@ -249,4 +249,10 @@
   <data name="ExternalResources" xml:space="preserve">
     <value>Внешние ресурсы</value>
   </data>
+  <data name="FileListClearQuestion" xml:space="preserve">
+    <value>Вы действительно хотите очистить список недавно открытых файлов?</value>
+  </data>
+  <data name="FileListClearQuestionTitle" xml:space="preserve">
+    <value>Очистить список недавно открытых файлов</value>
+  </data>
 </root>

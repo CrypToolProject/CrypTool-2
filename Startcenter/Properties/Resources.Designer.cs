@@ -19,7 +19,7 @@ namespace Startcenter.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -201,6 +201,24 @@ namespace Startcenter.Properties {
         internal static string ExternalResources {
             get {
                 return ResourceManager.GetString("ExternalResources", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Do you really want to clear the recently opened files list? ähnelt.
+        /// </summary>
+        internal static string FileListClearQuestion {
+            get {
+                return ResourceManager.GetString("FileListClearQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Clear recently opened files list ähnelt.
+        /// </summary>
+        internal static string FileListClearQuestionTitle {
+            get {
+                return ResourceManager.GetString("FileListClearQuestionTitle", resourceCulture);
             }
         }
         
