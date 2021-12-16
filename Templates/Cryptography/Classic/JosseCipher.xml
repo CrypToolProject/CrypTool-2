@@ -13,10 +13,10 @@
     <replacements lang="de">
         <replacement key="$Josse-Cipher$" value="Josse-Chiffre" />
         <replacement key="$Plaintext$" value="Klartext" />
-        <replacement key="$CalculationSteps$" value="Rechenschritte" />
+        <replacement key="$CalculationSteps$" value="Berechnungsschritte" />
         <replacement key="$Alphabet$" value="Alphabet" />
         <replacement key="$key$" value="Schlüsselwort"/>
-        <replacement key="$keyDisplay$" value="gehim"/>
+        <replacement key="$keyDisplay$" value="geheim"/>
         <replacement key="$encipheredPlaintext$" value="Entschlüsselter Klartext"/>
         <replacement key="$Ciphertext$" value="Geheimtext"/>
         <replacement key="$example$" value="cryptool"/>
@@ -33,7 +33,7 @@
         <replacement key="$CalculationSteps$" value="Calculation steps" />
         <replacement key="$Alphabet$" value="Alphabet" />
         <replacement key="$key$" value="Keyword"/>
-        <replacement key="$keyDisplay$" value="secrt"/>
+        <replacement key="$keyDisplay$" value="secret"/>
         <replacement key="$encipheredPlaintext$" value="Decrypted plaintext"/>
         <replacement key="$Ciphertext$" value="Ciphertext"/>
         <replacement key="$example$" value="cryptool"/>
@@ -50,7 +50,7 @@
         <replacement key="$CalculationSteps$" value="计算步骤" />
         <replacement key="$Alphabet$" value="字母表" />
         <replacement key="$key$" value="钥匙"/>
-        <replacement key="$keyDisplay$" value="secrt"/>
+        <replacement key="$keyDisplay$" value="secret"/>
         <replacement key="$encipheredPlaintext$" value="解密后的纯文本"/>
         <replacement key="$Ciphertext$" value="密码文本"/>
         <replacement key="$example$" value="cryptool"/>
@@ -67,7 +67,7 @@
         <replacement key="$CalculationSteps$" value="Этапы расчета" />
         <replacement key="$Alphabet$" value="Алфавит" />
         <replacement key="$key$" value="Ключ"/>
-        <replacement key="$keyDisplay$" value="secrt"/>
+        <replacement key="$keyDisplay$" value="secret"/>
         <replacement key="$encipheredPlaintext$" value="Расшифрованный открытый текст"/>
         <replacement key="$Ciphertext$" value="Шифротекст"/>
         <replacement key="$example$" value="cryptool"/>

@@ -15,7 +15,8 @@
     <replacement key="$Number Input$" value="Number Input" />
     <replacement key="$PrimeTest$" value="PrimeTest" />
     <replacement key="$Is Prime?$" value="Is Prime?" />
-    <replacement key="$memo$" value="Green: true\line Red: false" />
+    <replacement key="$memo$" value="The input integer is tested for its primality.\line
+The test component first tests small prime factors by brute force, and then applies the Miller-Rabin test." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--Language 'zh' starts here:-->
@@ -54,7 +55,8 @@
     <replacement key="$Number Input$" value="Zahleneingabe" />
     <replacement key="$PrimeTest$" value="Primzahltest" />
     <replacement key="$Is Prime?$" value="Ist prim?" />
-    <replacement key="$memo$" value="Grün: wahr\line Rot: falsch" />
+    <replacement key="$memo$" value="Die eingegebene ganze Zahl wird auf ihre Primalität getestet.\line
+Die Testkomponente testet zuerst kleine Primfaktoren per Brute-Force, und wendet danach den Miller-Rabin-Test an." />
   </replacements>
   <!--- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!--The general section starts here:-->

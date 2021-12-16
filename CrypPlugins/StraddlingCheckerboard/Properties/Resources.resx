@@ -130,10 +130,10 @@
     <value>Columns of the straddling checkerboard.</value>
   </data>
   <data name="InputContentCaption" xml:space="preserve">
-	  <value>Content</value>
+    <value>Content</value>
   </data>
   <data name="InputContentTooltip" xml:space="preserve">
-	  <value>External input for the content of the stradling-checkerboard.</value>
+    <value>External input for the content of the stradling-checkerboard.</value>
   </data>
   <data name="InputTextCaption" xml:space="preserve">
     <value>Text input</value>
@@ -172,57 +172,57 @@
     <value>Space character of straddling checkerboard (character needs to be part of the alphabet).</value>
   </data>
   <data name="StraddlingCheckerboard" xml:space="preserve">
-    <value>Straddling-checkerboard</value>
+    <value>Straddling Checkerboard</value>
   </data>
   <data name="StraddlingCheckerboardTooltip" xml:space="preserve">
-	  <value>This component provides an implementation for the straddling checkerboard.</value>
+    <value>This component provides an implementation for the straddling checkerboard.</value>
   </data>
   <data name="ShowPlayText" xml:space="preserve">
-	  <value>Please click "Play" to show the visualisation.</value>
+    <value>Execute the workspace show the visualization.</value>
   </data>
   <data name="ErrorRowColumnIndexOutOfRange" xml:space="preserve">
-	  <value>{0} or {1} out of range.</value>
+    <value>{0} or {1} out of range.</value>
   </data>
   <data name="ValueOutOfRange" xml:space="preserve">
-	  <value>{0} out of index.</value>
+    <value>{0} out of index.</value>
   </data>
   <data name="CouldNotParseValues" xml:space="preserve">
-	  <value>Could not parse values ({0};{1}). Stopping execution!</value>
+    <value>Could not parse values ({0};{1}). Stopping execution!</value>
   </data>
   <data name="DuplicateCharNotAllowed" xml:space="preserve">
-	  <value>Duplicate Characters are not allowed in the straddling checkerboard. Stopping execution!</value>
+    <value>Duplicate Characters are not allowed in the straddling checkerboard. Stopping execution!</value>
   </data>
   <data name="NotEnoughSpace" xml:space="preserve">
-	  <value>Not enough space on the Straddling checkerboard. Stopping execution!</value>
+    <value>Not enough space on the Straddling checkerboard. Stopping execution!</value>
   </data>
   <data name="CharNotInBoard" xml:space="preserve">
-	  <value>Character "{0}" is not part of the straddling checkerboard.</value>
+    <value>Character "{0}" is not part of the straddling checkerboard.</value>
   </data>
   <data name="InputRowsColumnsCaption" xml:space="preserve">
-	  <value>Rows and columns</value>
+    <value>Rows and columns</value>
   </data>
   <data name="InputRowsColumnsTooltip" xml:space="preserve">
-	  <value>Rows and columns separtated by a character.</value>
+    <value>Rows and columns separtated by a character.</value>
   </data>
   <data name="ContentCanNotBeEmpty" xml:space="preserve">
-	  <value>Straddling checkerboard content cannot be empty.</value>
+    <value>Straddling checkerboard content cannot be empty.</value>
   </data>
   <data name="DuplicateCharInColumnNotAllowed" xml:space="preserve">
-	  <value>Column names need to be unique. Stopping Execution!</value>
+    <value>Column names need to be unique. Stopping Execution!</value>
   </data>
   <data name="DuplicateCharInRowNotAllowed" xml:space="preserve">
-	  <value>Row names need to be unique. Stopping Execution!</value>
+    <value>Row names need to be unique. Stopping Execution!</value>
   </data>
   <data name="OnlyNumbersForRows" xml:space="preserve">
-	  <value>Row names need to be unique. Stopping Execution!</value>
+    <value>Row names need to be unique. Stopping Execution!</value>
   </data>
   <data name="OnlyNumbersForColumns" xml:space="preserve">
-	  <value>Column names need to be unique. Stopping Execution!</value>
+    <value>Column names need to be unique. Stopping Execution!</value>
   </data>
   <data name="ContentCaption" xml:space="preserve">
-	  <value>Content</value>
+    <value>Content</value>
   </data>
   <data name="ContentTooltip" xml:space="preserve">
-	  <value>Content of the straddling checkerboard.</value>
+    <value>Content of the straddling checkerboard.</value>
   </data>
 </root>

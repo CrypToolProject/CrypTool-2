@@ -127,13 +127,13 @@
     <value>Spalten</value>
   </data>
   <data name="ColumnsTooltip" xml:space="preserve">
-	  <value>Spalten des Straddling-checkerboards.</value>
+    <value>Spalten des Straddling-checkerboards.</value>
   </data>
   <data name="InputContentCaption" xml:space="preserve">
-	  <value>Inhalt</value>
+    <value>Inhalt</value>
   </data>
   <data name="InputContentTooltip" xml:space="preserve">
-	  <value>Externer Eingang für den Inhalt des Stradling-Checkerboards.</value>
+    <value>Externer Eingang für den Inhalt des Stradling-Checkerboards.</value>
   </data>
   <data name="InputTextCaption" xml:space="preserve">
     <value>Texteingabe</value>
@@ -163,7 +163,7 @@
     <value>Zeilen</value>
   </data>
   <data name="RowsTooltip" xml:space="preserve">
-	  <value>Zeilen des Straddling-Checkerboards.</value>
+    <value>Zeilen des Straddling-Checkerboards.</value>
   </data>
   <data name="SpaceChar" xml:space="preserve">
     <value>Leerzeichensymbol</value>
@@ -172,57 +172,57 @@
     <value>Zeichen, das für das Leerzeichen verwendet wird.</value>
   </data>
   <data name="StraddlingCheckerboard" xml:space="preserve">
-    <value>Straddling Checkerboard</value>
+    <value>Straddling-Checkerboard</value>
   </data>
   <data name="StraddlingCheckerboardTooltip" xml:space="preserve">
-	  <value>Diese Komponente bietet eine Implementierung für das spreizende Schachbrett.</value>
+    <value>Diese Komponente bietet eine Implementierung für das spreizende Schachbrett.</value>
   </data>
   <data name="ShowPlayText" xml:space="preserve">
-	  <value>Bitte klicken Sie auf "Play", um die Visualisierung anzuzeigen.</value>
+    <value>Führen Sie die Arbeitsfläche aus, um die Visualisierung anzuzeigen.</value>
   </data>
   <data name="ErrorRowColumnIndexOutOfRange" xml:space="preserve">
-	  <value>{0} oder {1} außerhalb des gültigen Bereichs.</value>
+    <value>{0} oder {1} außerhalb des gültigen Bereichs.</value>
   </data>
   <data name="ValueOutOfRange" xml:space="preserve">
-	  <value>{0} ist außerhalb des gültigen Bereichs.</value>
+    <value>{0} ist außerhalb des gültigen Bereichs.</value>
   </data>
   <data name="CouldNotParseValues" xml:space="preserve">
-	  <value>Konnte Werte ({0};{1}) nicht parsen. Ausführung wird gestoppt!</value>
+    <value>Konnte Werte ({0};{1}) nicht parsen. Ausführung wird gestoppt!</value>
   </data>
   <data name="DuplicateCharNotAllowed" xml:space="preserve">
-	  <value>Doppelte Zeichen sind im Straddling-Checkerboard nicht erlaubt. Ausführung wird gestoppt!</value>
+    <value>Doppelte Zeichen sind im Straddling-Checkerboard nicht erlaubt. Ausführung wird gestoppt!</value>
   </data>
   <data name="NotEnoughSpace" xml:space="preserve">
-	  <value>Nicht genug Platz auf dem Straddling-Checkerboard. Ausführung wird gestoppen!</value>
+    <value>Nicht genug Platz auf dem Straddling-Checkerboard. Ausführung wird gestoppen!</value>
   </data>
   <data name="CharNotInBoard" xml:space="preserve">
-	  <value>Das Zeichen "{0}" ist nicht Teil des Straddling-Checkerboards.</value>
+    <value>Das Zeichen "{0}" ist nicht Teil des Straddling-Checkerboards.</value>
   </data>
   <data name="InputRowsColumnsCaption" xml:space="preserve">
-	  <value>Zeilen und Spalten</value>
+    <value>Zeilen und Spalten</value>
   </data>
   <data name="InputRowsColumnsTooltip" xml:space="preserve">
     <value>Zeilen und Spalten durch ein Trennzeichen getrennt.</value>
   </data>
   <data name="ContentCanNotBeEmpty" xml:space="preserve">
-	  <value>Der Inhalt des Straddling Checkerboards darf nicht leer sein.</value>
+    <value>Der Inhalt des Straddling Checkerboards darf nicht leer sein.</value>
   </data>
   <data name="DuplicateCharInColumnNotAllowed" xml:space="preserve">
-	  <value>Spaltennamen müssen eindeutig sein. Ausführung stoppen!</value>
+    <value>Spaltennamen müssen eindeutig sein. Ausführung stoppen!</value>
   </data>
   <data name="DuplicateCharInRowNotAllowed" xml:space="preserve">
-	  <value>Zeilennamen müssen eindeutig sein. Ausführung stoppen!</value>
+    <value>Zeilennamen müssen eindeutig sein. Ausführung stoppen!</value>
   </data>
   <data name="OnlyNumbersForRows" xml:space="preserve">
-	  <value>Es sind nur Zahlen als Zeilennamen zulässig. Ausführung stoppen!</value>
+    <value>Es sind nur Zahlen als Zeilennamen zulässig. Ausführung stoppen!</value>
   </data>
   <data name="OnlyNumbersForColumns" xml:space="preserve">
-	  <value>Spaltennamen müssen eindeutig sein.  Ausführung stoppen!</value>
+    <value>Spaltennamen müssen eindeutig sein.  Ausführung stoppen!</value>
   </data>
   <data name="ContentCaption" xml:space="preserve">
-	  <value>Inhalt</value>
+    <value>Inhalt</value>
   </data>
   <data name="ContentTooltip" xml:space="preserve">
-	  <value>Inhalt des Stradling-Checkerboards.</value>
+    <value>Inhalt des Stradling-Checkerboards.</value>
   </data>
 </root>
